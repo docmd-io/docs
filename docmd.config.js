@@ -10,7 +10,7 @@ module.exports = {
     light: 'assets/images/docmd-logo-light.png',
     dark: 'assets/images/docmd-logo-dark.png',
     alt: 'docmd Logo',
-    href: './',
+    href: 'https://docmd.io',
   },
   favicon: 'assets/favicon.ico',
 
