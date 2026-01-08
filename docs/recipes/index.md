@@ -1,5 +1,5 @@
 ---
-title: "Recipes to cook best of docmd"
+title: "Recipes to Cook Best Docs"
 description: "Step-by-step guides for common docmd customizations."
 ---
 

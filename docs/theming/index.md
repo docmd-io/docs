@@ -1,5 +1,5 @@
 ---
-title: "Theming Your docmd Site"
+title: "Theming Your Documentation"
 description: "Learn how to customize the appearance of your docmd site, including themes, modes, custom styles, and icons."
 ---
 

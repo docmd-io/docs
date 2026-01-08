@@ -1,5 +1,5 @@
 ---
-title: "Using Plugins with docmd"
+title: "Using Plugins"
 description: "Extend docmd's functionality with built-in plugins."
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Contributing to docmd"
+title: "Contributing to the Project"
 description: "Learn how you can contribute to the development and improvement of docmd."
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with docmd"
+title: "Getting Started"
 description: "An overview of how to get up and running with docmd for your documentation needs."
 ---
 
