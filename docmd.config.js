@@ -31,7 +31,7 @@ module.exports = {
     defaultCollapsed: false,
   },
   theme: {
-    name: 'sky',            // 'default', 'sky', 'ruby', 'retro'
+    name: 'default',            // 'default', 'sky', 'ruby', 'retro'
     defaultMode: 'light',   // 'light' or 'dark'
     enableModeToggle: true, // Show theme mode toggle button 
     positionMode: 'top',    // 'top' or 'bottom' of header
@@ -74,7 +74,7 @@ module.exports = {
   // --- Navigation ---
   navigation: [
     { title: 'Overview', path: './', icon: 'home' },
-
+    { title: 'Test Lab', path: './test-lab', icon: 'flask-conical' },
     {
       title: 'Getting Started',
       icon: 'rocket',
@@ -84,7 +84,6 @@ module.exports = {
         { title: 'Basic Usage', path: './getting-started/basic-usage', icon: 'play' },
       ],
     },
-
     { title: 'Configuration', path: './configuration', icon: 'settings' },
     {
       title: 'Content',
@@ -113,6 +112,16 @@ module.exports = {
             { title: 'Nested Containers', path: './content/containers/nested-containers', icon: 'folder-tree' },
           ]
         },
+        {
+          title: 'Advanced',
+          path: '',
+          icon: 'server-cog',
+          collapsible: true,
+          children: [
+            { title: 'Client Side Events', path: './content/advanced/client-side-events', icon: 'square-mouse-pointer' },
+          ]
+        },
+        { title: 'API', path: './content/api', icon: 'braces' },
         { title: 'No-Style Pages', path: './content/no-style-pages', icon: 'layout' },
         { title: 'Live Preview', path: './content/live-preview', icon: 'monitor-play' },
       ],
