@@ -74,7 +74,6 @@ module.exports = {
   // --- Navigation ---
   navigation: [
     { title: 'Overview', path: './', icon: 'home' },
-    { title: 'Test Lab', path: './test-lab', icon: 'flask-conical' },
     {
       title: 'Getting Started',
       icon: 'rocket',
