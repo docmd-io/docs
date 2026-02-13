@@ -38,12 +38,11 @@ module.exports = {
     codeHighlight: true,    // Enable code syntax highlighting
     customCss: [],          // Add paths relative to outputDir here
   },
-  customJs: [
-    'assets/js/docmd-image-lightbox.js',
-  ],
+  customJs: [], // Add paths relative to outputDir here
 
   // --- Plugins ---
   plugins: {
+    search : { },
     seo: {
       defaultDescription: 'The minimalist, zero-config documentation generator for Node.js developers.',
       openGraph: {
@@ -61,7 +60,8 @@ module.exports = {
     sitemap: {
       defaultChangefreq: 'weekly',
       defaultPriority: 0.8
-    }
+    },
+    mermaid: {}
   },
 
   // --- Doc Source Link ---
