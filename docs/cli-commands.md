@@ -96,6 +96,24 @@ This provides a fast feedback loop, allowing you to see your changes almost inst
 
 **Note:** The development server starts on port 3000 by default. If port 3000 is already in use, the server will automatically try the next available port (3001, 3002, etc.) until it finds an open port.
 
+## `docmd live`
+
+Builds and launches the browser-based Live Editor.
+
+**Usage:**
+```bash
+docmd live [options]
+```
+
+**Description:**
+This command bundles the core documentation engine into a standalone Single Page Application (SPA) located in the `dist/` folder. It then starts a local server so you can edit Markdown and see the preview instantly without any Node.js server-side rendering.
+
+**Options:**
+
+*   `--build-only`
+    *   **Default:** `false`
+    *   **Description:** Generates the `dist/` folder containing the Live Editor bundle (`docmd-live.js` and `index.html`) but does **not** start the local server. Use this if you want to deploy the editor itself to a static host (like Netlify or GitHub Pages) or embed it in another application.
+
 ## Global Options (Apply to all commands)
 
 *   `--version`

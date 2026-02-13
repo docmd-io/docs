@@ -14,7 +14,7 @@ For using `docmd` as a command-line tool across multiple projects, global instal
 Open your terminal or command prompt and run:
 
 ```bash
-npm install -g @docmd/cli
+npm install -g @docmd/core
 ```
 
 This command downloads `docmd` and makes the `docmd` executable available in your system's PATH.
@@ -35,9 +35,8 @@ Alternatively, you might prefer to install `docmd` as a development dependency f
 
 Navigate to your project's root directory in the terminal and run:
 ```bash
-npm install --save-dev @docmd/cli
+npm install --save-dev @docmd/core
 ```
-*(Or `npm install --save-dev @username/docmd` for a scoped package.)*
 
 When installed locally, `docmd` is not directly available as a global command. You can run it using:
 
@@ -57,6 +56,7 @@ When installed locally, `docmd` is not directly available as a global command. Y
       }
     }
     ```
+
     Then, you can run them like:
     ```bash
     npm run docs:dev
@@ -67,9 +67,12 @@ When installed locally, `docmd` is not directly available as a global command. Y
 
 *   **Permission Errors (EACCES):** If you encounter permission errors during global installation on macOS or Linux, you might need to run the command with `sudo`:
     ```bash
-    sudo npm install -g @docmd/cli
+    sudo npm install -g @docmd/core
     ```
-    However, a better long-term solution is often to [configure npm to use a directory you own](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+*   **Legacy Package:** If you previously installed `@mgks/docmd` or `@docmd/cli`, please uninstall them first to avoid conflicts:
+    ```bash
+    npm uninstall -g @mgks/docmd @docmd/cli
+    ```
 *   **Command Not Found:** If `docmd` is not found after global installation, ensure that the npm global binaries directory is in your system's PATH.
 
 With `docmd` installed, you're ready to move on to [Basic Usage](/getting-started/basic-usage/) to create and manage your documentation site.

@@ -33,6 +33,7 @@ This very documentation site is built using `docmd`!
 *   🔍 **Smart Search:** Built-in, offline-capable full-text search with fuzzy matching and highlighting. No API keys required.
 *   🎨 **Themeable:** Built-in light/dark modes, customizable via CSS variables. Uses `highlight.js` for code blocks.
 *   🧩 **Custom Containers:** Add richer components like callouts, cards, and steps using simple `::: name :::` syntax.
+*   📊 **Diagrams:** Built-in support for **Mermaid.js** diagrams and flowcharts.
 *   ⚙️ **Config-Driven Navigation:** Define your site structure and sidebar navigation in `docmd.config.js`. Supports nested items.
 *   🚀 **Fast Static Build:** Node.js script quickly processes files into optimized HTML & CSS.
 *   💻 **Simple CLI:** Easy-to-use commands (`docmd build`, `docmd init`, `docmd dev`) with clear feedback.
@@ -42,7 +43,7 @@ This very documentation site is built using `docmd`!
 
 1.  **Install `docmd`:**
     ```bash
-    npm install -g @docmd/cli
+    npm install -g @docmd/core
     ```
 2.  **Initialize Your Project:**
     ```bash

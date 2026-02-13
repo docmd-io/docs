@@ -15,9 +15,7 @@ Before deployment, ensure you build your site in production mode:
 docmd build
 ```
 
-This generates optimized HTML, CSS, and assets ready for production use. In production, `docmd` may:
-- Minify CSS and JavaScript assets (future feature)
-- Optimize HTML output
+This generates optimized HTML, CSS, and assets ready for production use.
 
 ## Deployment Options
 
@@ -25,36 +23,7 @@ Since `docmd` generates a standard static site, you can use any static hosting s
 
 ### GitHub Pages
 
-GitHub Pages is a popular and free way to host static sites directly from your GitHub repository. `docmd` sites are perfectly suited for this.
-
-#### Option 1: Deploy from a Branch
-
-1. **Push your source files and built site to GitHub.**
-2. **Go to your repository settings.**
-3. **Navigate to the "Pages" section.**
-4. **Under "Source", select the branch and directory where your built site is located.**
-
-The simplest approach is to choose one of:
-
-*   **Built site in the `docs/` folder on the main branch:**
-    *   Configure `docmd`'s `outputDir` to be `docs` in your `docmd.config.js` (e.g., `outputDir: 'docs'`).
-    *   Select "Deploy from a branch" → "main" → "/docs"
-
-If you set `outputDir: 'docs'`, your `docmd.config.js` for `docmd` itself (when building its own docs) would look like:
-
-```javascript
-// docmd.config.js for docmd's own docs, deploying from /docs on main
-module.exports = {
-  siteTitle: 'docmd Docs',
-  srcDir: 'documentation', // Assuming actual source MD files are NOT in the output 'docs'
-  outputDir: 'docs',
-  // ... other config ...
-};
-```
-
-#### Option 2: GitHub Actions (Recommended)
-
-The most robust and automated way to deploy to GitHub Pages is using a GitHub Actions workflow. This workflow will run `docmd build` and then deploy the resulting `site/` directory.
+The most robust and automated way to deploy to GitHub Pages is using a GitHub Actions workflow.
 
 Create a file at `.github/workflows/deploy-docs.yml` with the following content:
 
@@ -88,11 +57,13 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Install docmd (globally or from devDependencies)
-        run: npm install -g @docmd/cli
+      - name: Install docmd
+        # Ensure you use the core package
+        run: npm install -g @docmd/core
 
       - name: Build site with docmd
-        run: docmd build # Assumes docmd.config.js is in the root and correctly points to srcDir/outputDir
+        # Assumes docmd.config.js is in the root
+        run: docmd build 
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -110,11 +81,11 @@ jobs:
 Then:
 1.  **Enable GitHub Pages in your repository settings**, selecting "GitHub Actions" as the source.
 2.  **Push the workflow file to your repository**.
-3.  On the next push to `main` (or if you manually trigger the workflow), the Action will run, build your `docmd` site, and deploy it. The URL will be something like `https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/`.
+3.  On the next push to `main` (or if you manually trigger the workflow), the Action will run, build your `docmd` site, and deploy it.
 
 ### Other Hosting Options
 
-* **Netlify, Vercel, Cloudflare Pages** - Upload or connect your Git repository and set the build command to your npm script that runs `docmd build`.
+* **Netlify, Vercel, Cloudflare Pages** - Upload or connect your Git repository and set the build command to `npm install -g @docmd/core && docmd build`.
 * **Any Web Server** - Simply upload the contents of the `site/` directory to any web server that can serve static files.
 
 By following these guidelines, you can easily get your `docmd`-powered documentation online and accessible to your users.

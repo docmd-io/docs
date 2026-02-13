@@ -10,7 +10,7 @@ description: "Use docmd inside your own Node.js scripts."
 ## Usage
 
 ```javascript
-const { build, buildLive } = require('@mgks/docmd');
+const { build, buildLive } = require('@docmd/core');
 
 async function main() {
   // 1. Build the Static Site

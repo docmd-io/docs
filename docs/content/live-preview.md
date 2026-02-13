@@ -8,7 +8,7 @@ description: "Run docmd entirely in the browser without a server using the new L
 ::: button Open_Live_Editor https://live.docmd.io color:#007bff
 :::
 
-Starting with version 0.3.4, `docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser** (client-side), opening up possibilities for live editors, CMS previews, and zero-latency feedback loops.
+Starting with version **0.4.0**, `docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser** (client-side), opening up possibilities for live editors, CMS previews, and zero-latency feedback loops.
 
 ## The Live Editor
 
@@ -26,6 +26,21 @@ This command will:
 1.  Bundle the core logic into `dist/docmd-live.js`.
 2.  Copy necessary assets (CSS, templates).
 3.  Start a local static server opening the editor.
+
+### Building for Deployment
+
+If you want to host the Live Editor itself on a static hosting provider (so your team can write docs in the browser), you can generate the assets without starting the local server:
+
+```bash
+docmd live --build-only
+```
+
+This creates a `dist/` directory containing:
+*   `index.html`: The editor entry point.
+*   `docmd-live.js`: The bundled engine.
+*   `assets/`: Themes and styles.
+
+You can simply upload this `dist/` folder to any static host.
 
 ## Embedding docmd in Your Site
 

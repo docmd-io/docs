@@ -49,13 +49,13 @@ Get the latest version of our application.
 
 ::: button Download_Here external:https://github.com/docmd-io/docmd/releases
 ::: button Learn_More #advanced-tabs
-::: button NPM_Package external:https://www.npmjs.com/package/@docmd/cli
+::: button NPM_Package external:https://www.npmjs.com/package/@docmd/core
 
 == tab "Documentation"
 Read our comprehensive documentation.
 
 ::: button View_Getting_Started #basic-usage
-::: button API_Reference external:https://github.com/docmd-io/docmd/wiki
+::: button API_Reference external:https://github.com/docmd-io/docmd
 ::: button View_Examples #advanced-tabs
 
 :::
@@ -68,13 +68,13 @@ Get the latest version of our application.
 
 ::: button Download_Here external:https://github.com/docmd-io/docmd/releases
 ::: button Learn_More #advanced-tabs
-::: button NPM_Package external:https://www.npmjs.com/package/@docmd/cli
+::: button NPM_Package external:https://www.npmjs.com/package/@docmd/core
 
 == tab "Documentation"
 Read our comprehensive documentation.
 
 ::: button View_Getting_Started #basic-usage
-::: button API_Reference external:https://github.com/docmd-io/docmd/wiki
+::: button API_Reference external:https://github.com/docmd-io/docmd
 ::: button View_Examples #advanced-tabs
 
 :::
@@ -152,7 +152,7 @@ Get the latest version for your platform.
 Run the installer and follow the prompts.
 
 ```bash
-install docmd
+npm install -g @docmd/core
 ```
 
 :::
@@ -183,7 +183,7 @@ Get the latest version for your platform.
 Run the installer and follow the prompts.
 
 ```bash
-install docmd
+npm install -g @docmd/core
 ```
 
 :::
