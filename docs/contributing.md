@@ -58,6 +58,25 @@ To set up `docmd` for local development:
    * Follow the existing code style and formatting.
    * Consider running `npm run lint` to check for style issues (if set up).
 
+### File Headers
+All source files in `packages/` must include the standard copyright header. If you create a new file, please copy the header from an existing file.
+
+```javascript
+/*!
+ * --------------------------------------------------------------------
+ * docmd : the minimalist, zero-config documentation generator.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025 docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+```
+
 ### Environment Setup
 
 To enable live change tracking for internal files during development, set the DOCMD_DEV environment variable:
