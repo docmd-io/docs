@@ -39,16 +39,12 @@ With docmd v0.2.0, you can nest containers seamlessly:
 
 ### Nesting Limitations
 
-::: callout error Known Issues
-**Steps ↔ Tabs Incompatibility:** Steps and tabs containers cannot be nested within each other due to parsing complexity. Use them as separate sections instead.
-:::
+## Nesting Limitations
 
-- **Tabs cannot contain tabs** - This prevents infinite recursion
-- **Tabs cannot contain steps** - Due to parsing conflicts with markdown processing
-- **Steps cannot contain tabs** - Due to parsing complexity 
-- **Steps cannot be inside tabs** - Due to container recognition issues
-- **Maximum depth** - While technically unlimited, keep it under 7 levels for readability
-- **Performance** - Very deep nesting may impact rendering performance
+While `docmd` v0.4.x has improved the parser significantly (fixing "greedy" closing tags), there are still logical limits:
+
+1.  **Steps inside Tabs:** This is technically difficult to parse in Markdown. We recommend keeping Steps as top-level elements or inside Cards, but not inside Tabs.
+2.  **Buttons:** Buttons are now **self-closing**. Do not add a `:::` after a button line, or it might close a parent container (like a Card) accidentally.
 
 ## Basic Nesting Examples
 
