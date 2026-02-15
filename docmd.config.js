@@ -31,14 +31,14 @@ module.exports = {
     defaultCollapsed: false,
   },
   theme: {
-    name: 'default',            // 'default', 'sky', 'ruby', 'retro'
+    name: 'default',        // 'default', 'sky', 'ruby', 'retro'
     defaultMode: 'light',   // 'light' or 'dark'
     enableModeToggle: true, // Show theme mode toggle button 
     positionMode: 'top',    // 'top' or 'bottom' of header
     codeHighlight: true,    // Enable code syntax highlighting
     customCss: [],          // Add paths relative to outputDir here
   },
-  customJs: [], // Add paths relative to outputDir here
+  customJs: ['/assets/js/theme-switcher.js'], // Add paths relative to outputDir here
 
   // --- Plugins ---
   plugins: {
@@ -94,7 +94,6 @@ module.exports = {
         { title: 'Frontmatter', path: './content/frontmatter', icon: 'file-text' },
         { title: 'Images & Lightbox', path: './content/images', icon: 'image' },
         { title: 'Search', path: './content/search', icon: 'search' },
-        { title: 'Mermaid Diagrams', path: './content/mermaid', icon: 'network' },
         {
           title: 'Containers',
           path: './content/containers/',
@@ -145,9 +144,11 @@ module.exports = {
       path: './plugins/',
       collapsible: true,
       children: [
+        { title: 'Building Plugins', path: './plugins/building-plugins', icon: 'hammer' },
         { title: 'SEO & Meta', path: './plugins/seo', icon: 'search' },
         { title: 'Analytics', path: './plugins/analytics', icon: 'bar-chart' },
         { title: 'Sitemap', path: './plugins/sitemap', icon: 'map' },
+        { title: 'Mermaid Diagrams', path: './plugins/mermaid', icon: 'network' }
       ],
     },
 
