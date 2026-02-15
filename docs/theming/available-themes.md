@@ -19,6 +19,17 @@ module.exports = {
 };
 ```
 
+## Try the Themes
+
+Click a button below to instantly switch the theme of this website:
+
+<div class="theme-picker" style="display: flex; gap: 10px; margin: 20px 0;">
+    <button onclick="switchDocTheme('default')" class="docmd-button" style="color:#fff;background: #4f4f4f;">Default</button>
+    <button onclick="switchDocTheme('sky')" class="docmd-button" style="color:#fff;background: #0097ff;">Sky</button>
+    <button onclick="switchDocTheme('ruby')" class="docmd-button" style="color:#fff;background: #b30000;">Ruby</button>
+    <button onclick="switchDocTheme('retro')" class="docmd-button" style="color:#fff;background: #0a0a0a; border: 1px solid #0f0;">Retro</button>
+</div>
+
 ## 1. `default` Theme
 
 *   **`theme.name: 'default'`**

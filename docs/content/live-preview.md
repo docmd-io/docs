@@ -5,8 +5,7 @@ description: "Run docmd entirely in the browser without a server using the new L
 
 # Live Preview & Browser Support
 
-::: button Open_Live_Editor https://live.docmd.io color:#007bff
-:::
+::: button "Open Live Editor" https://live.docmd.io color:#007bff
 
 Starting with version **0.4.0**, `docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser** (client-side), opening up possibilities for live editors, CMS previews, and zero-latency feedback loops.
 
