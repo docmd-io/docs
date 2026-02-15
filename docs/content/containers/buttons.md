@@ -5,84 +5,55 @@ description: "How to create stylish, clickable buttons within your documentation
 
 # Buttons
 
-The `button` container allows you to easily create a stylish, clickable button. It's perfect for calls to action, such as linking to a download page, an external resource, or another section of your documentation.
+The `button` container creates a stylish call-to-action button. 
+
+Unlike other containers, **Buttons are self-closing**. You do not need a closing `:::` tag.
 
 ## Usage
 
-The button container is a self-contained component. You provide its text, URL, and an optional color as arguments.
-
-::: callout info Important Notes
-- Container blocks (like `::: button`) should be preceded by a blank line to ensure proper parsing by the markdown processor.
-:::
-
 **Syntax:**
-```bash
-::: button Button_Text /path/to/link color:#hexcode
-::: button Button_Text external:/external-url color:#hexcode
+```markdown
+::: button "Button Text" URL [options]
 ```
 
--   **`Button_Text`**: The text to display on the button. Use underscores (`_`) for spaces.
--   **`/path/to/link`**: The URL the button should link to. For internal links, use relative paths.
--   **`external:/external-url`**: For external links that should open in a new tab, prefix the URL with `external:`.
--   **`[color:#hexcode]`**: (Optional) A custom background color for the button. If omitted, it will use the theme's default link color.
+*   **`"Button Text"`**: The text on the button. Wrap in quotes if it contains spaces.
+*   **`URL`**: The target link.
+    *   Internal: `/docs/intro`
+    *   External: `external:https://google.com` (Opens in new tab)
+    *   Mail: `mailto:support@example.com`
+*   **`[options]`**:
+    *   `color:#hex` (Custom background color)
 
----
+### Examples
 
-## Examples
-
-### Standard Internal Button
-
-This button will use the default theme color and link to a section on the current page.
-
-**Code:**
-```bash
-::: button View_Examples #examples
+**1. Basic Internal Link**
+```markdown
+::: button "Get Started" /getting-started/installation
 ```
+::: button "Get Started" /getting-started/installation
 
-**Rendered Preview:**
-::: button View_Examples #examples
-
-### External Link Button
-
-External links open in a new tab for better user experience.
-
-**Code:**
-```bash
-::: button GitHub_Repository external:https://github.com/docmd-io/docmd
+**2. External Link (New Tab)**
+```markdown
+::: button "View on GitHub" external:https://github.com/docmd-io/docmd
 ```
+::: button "View on GitHub" external:https://github.com/docmd-io/docmd
 
-**Rendered Preview:**
-::: button GitHub_Repository external:https://github.com/docmd-io/docmd
-
-### Button with Custom Color
-
-You can easily override the color for emphasis.
-
-**Code:**
-```bash
-::: button Getting_Started #getting-started color:#28a745
+**3. Custom Color**
+```markdown
+::: button "Download PDF" /assets/docs.pdf color:#ff4757
 ```
+::: button "Download PDF" /assets/docs.pdf color:#ff4757
 
-**Rendered Preview:**
-::: button Getting_Started #getting-started color:#28a745
+### Nesting
+Because buttons are self-closing, they are safe to nest inside Cards, Tabs, or Steps without breaking the parent container.
 
-### Buttons Inside Other Containers
-
-Buttons are flexible and can be placed inside other containers, like cards or callouts, to create powerful components. This nesting is now reliable.
-
-**Code:**
-
-```bash
-::: card Feature Announcement
-Our latest feature is now available! Read the full documentation to learn more about how it works.
-::: button Read_More /path/to/feature/docs/
+```markdown
+::: card Downloads
+Get the latest version:
+::: button "Download v1.0" /download color:#2ecc71
 :::
 ```
-
-**Rendered Preview:**
-
-::: card Feature Announcement
-Our latest feature is now available! Read the full documentation to learn more about how it works.
-
-::: button Learn_More #customization
+::: card Downloads
+Get the latest version:
+::: button "Download v1.0" /download color:#2ecc71
 :::
