@@ -61,7 +61,8 @@ module.exports = {
       defaultChangefreq: 'weekly',
       defaultPriority: 0.8
     },
-    mermaid: {}
+    mermaid: {},
+    llms: {}
   },
 
   // --- Doc Source Link ---
@@ -148,7 +149,8 @@ module.exports = {
         { title: 'SEO & Meta', path: './plugins/seo', icon: 'search' },
         { title: 'Analytics', path: './plugins/analytics', icon: 'bar-chart' },
         { title: 'Sitemap', path: './plugins/sitemap', icon: 'map' },
-        { title: 'Mermaid Diagrams', path: './plugins/mermaid', icon: 'network' }
+        { title: 'Mermaid Diagrams', path: './plugins/mermaid', icon: 'network' },
+        { title: 'LLMs', path: './plugins/llms', icon: 'brain-circuit' }
       ],
     },
 
