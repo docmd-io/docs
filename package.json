@@ -8,6 +8,6 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.4.5"
+    "@docmd/core": "^0.4.6"
   }
 }
