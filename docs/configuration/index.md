@@ -132,7 +132,7 @@ module.exports = {
 *   **Default:** `true`
 *   **Description:** Controls the visibility of the full-text search bar in the header and the generation of the search index. Set to `false` to disable search capabilities entirely.
 
-## `minify`
+### `minify`
 *   **Type:** `Boolean`
 *   **Optional**
 *   **Default:** `true` when running `docmd build`, `false` when running `docmd dev`.
@@ -181,11 +181,14 @@ Configures the behavior of the sidebar.
 
 Configures the visual theme of your site.
 
+::: callout info
+Explore [Available Themes](../theming/available-themes.md) for more detailed setup.
+:::
+
 ### `theme.name`
 *   **Type:** `String`
 *   **Default:** `'default'`
 *   **Description:** Specifies which built-in `docmd` theme to use. Future versions may offer multiple themes like `'classic'`, `'minimalist-pro'`. Each theme would correspond to a CSS file (e.g., `theme-default.css`).
-*   **See Also:** [Available Themes](/theming/available-themes/)
 
 ### `theme.defaultMode`
 *   **Type:** `String`
@@ -224,6 +227,9 @@ Configures the visual theme of your site.
 *   **Example:** `customJs: ['/assets/js/interactive-component.js']`
 
 ## `plugins` (Object)
+::: callout info
+Checkout [Plugins](../plugins/) for more detailed setup.
+:::
 *   **Type:** `Object`
 *   **Default:** `{}`
 *   **Description:** An object to configure and enable plugins. `docmd` ships with core plugins like SEO, Analytics, and Sitemap that you can configure here.
@@ -232,7 +238,6 @@ Configures the visual theme of your site.
     *   `seo: { defaultDescription: '...', openGraph: { ... }, ... }`
     *   `analytics: { googleV4: { measurementId: 'G-XXXXXXXXXX' } }`
     *   `sitemap: { defaultChangefreq: 'weekly', defaultPriority: 0.8 }`
-*   **See Also:** [Plugins](/plugins/)
 
 ## `editLink` (Object, Optional)
 *   **Type:** `Object`
@@ -253,6 +258,9 @@ Configures the visual theme of your site.
     ```
 
 ## `navigation` (Array of Objects)
+::: callout info
+Checkout [Navigation](navigation.md) for more detailed setup.
+:::
 *   **Description:** Defines the sidebar navigation. (Content mostly same as before, but add the `icon` property explanation).
 *   **Navigation Item Properties:**
     *   `title` (String, Required)
