@@ -107,7 +107,7 @@ module.exports = {
             { title: 'Code', path: '/content/syntax/code', icon: 'code' },
             { title: 'Images', path: '/content/syntax/images', icon: 'image' },
             { title: 'Linking', path: '/content/syntax/linking', icon: 'link' },
-            { title: 'Advanced Markdown', path: '/content/syntax/advanced', icon: 'settings-2' },
+            { title: 'Advanced', path: '/content/syntax/advanced', icon: 'settings-2' },
           ]
         },
         { title: 'Frontmatter', path: '/content/frontmatter', icon: 'file-text' },
