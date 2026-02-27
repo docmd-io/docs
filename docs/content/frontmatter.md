@@ -32,7 +32,7 @@ These are the fields that `docmd` active uses to change the behavior of your sit
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | **`noindex`** | Boolean | If `true`, excludes the page from the **Search Index** and adds a `noindex` meta tag to prevent Google/Bing indexing. Useful for drafts or private pages. |
-| **`noStyle`** | Boolean | If `true`, disables the default theme/layout. Used for creating [Landing Pages](/content/no-style-pages). |
+| **`noStyle`** | Boolean | If `true`, disables the default theme/layout. Used for creating [Landing Pages](./no-style-pages.md). |
 
 ### Plugin Specifics
 

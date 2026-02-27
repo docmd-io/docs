@@ -5,19 +5,6 @@ description: "Learn how to use the advanced nested container system to create co
 
 # Nested Containers
 
-::: card Master Container
-
-This is the top level.
-
-   ::: callout warning Inner Zone
-      Be careful in here.
-
-      ::: button "Deep Action" /# color:red
-
-   :::
-
-:::
-
 The advanced nested container system in docmd allows you to create complex, interactive documentation layouts by nesting containers within each other. This powerful feature enables you to build rich, structured content that was previously impossible.
 
 ## Nesting Rules

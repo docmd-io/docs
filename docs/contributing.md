@@ -93,7 +93,7 @@ If the test passes and outputs `✨ ALL SYSTEMS GO`, your code is safe to commit
 ### Copyright Header
 All source files in `packages/` must include the standard copyright header. If you create a new file, please copy the header from an existing file.
 
-```javascript
+```html
 /*!
  * --------------------------------------------------------------------
  * docmd : the minimalist, zero-config documentation generator.

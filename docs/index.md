@@ -72,6 +72,8 @@ Easily highlight information using Callouts.
 You can nest containers inside each other infinitely. Try putting a button inside a card inside a tab!
 :::
 
+::: button "Get Started with docmd" /getting-started/installation
+
 == tab "Diagrams"
 Native support for **Mermaid.js**. Just create a code block with the `mermaid` language tag, and it automatically renders and adapts to your user's Light/Dark mode preference.
 
@@ -88,6 +90,12 @@ graph TD
 
 == tab "Code"
 Automatic syntax highlighting powered by `highlight.js`, complete with one-click copy buttons and themes tailored for optimal contrast.
+
+```javascript
+function hello() {
+  console.log("Hello World");
+}
+```
 
 :::
 
