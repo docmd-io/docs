@@ -27,7 +27,7 @@ module.exports = {
   customJs: ['/assets/js/theme-switcher.js'],
   
   editLink: {
-    enabled: false,
+    enabled: true,
     baseUrl: 'https://github.com/docmd-io/docs/edit/main/docs',
     text: 'Edit this page on GitHub'
   },
