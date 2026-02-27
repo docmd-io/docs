@@ -1,100 +1,70 @@
 ---
 title: "CLI Commands"
-description: "A reference guide to all available docmd command-line interface (CLI) commands and their options."
+description: "A complete reference guide to the docmd command-line interface and its available options."
 ---
 
-# CLI Commands
+# CLI Reference
 
-`docmd` provides a set of commands to help you initialize, build, and preview your documentation site.
+The Command Line Interface (CLI) is the primary way you will interact with `docmd` while building and testing your documentation.
 
 ## `docmd init`
 
-Initializes a new `docmd` project in the current directory.
+Initializes a new `docmd` project in your current directory.
 
 **Usage:**
 ```bash
 docmd init
 ```
 
-**Description:**
-This command creates the basic file and directory structure required for a `docmd` project:
-*   `docs/`: A directory to store your Markdown source files.
-    *   `docs/index.md`: A sample Markdown file.
-*   `docmd.config.js`: The main configuration file for your site, pre-filled with default settings.
-
-If a `docs/` directory or `docmd.config.js` file already exists, `docmd init` will typically warn you and avoid overwriting them to prevent accidental data loss.
-
-**Options:**
-This command currently does not take any options.
-
-## `docmd build`
-
-Builds your static documentation site.
-
-**Usage:**
-```bash
-docmd build [options]
-```
-
-**Description:**
-The `build` command reads your Markdown files from the source directory (specified by `srcDir` in `docmd.config.js`, defaults to `docs/`), processes them along with your `docmd.config.js`, and generates a complete static website in the output directory (specified by `outputDir` in `docmd.config.js`, defaults to `site/`).
-
-The output `site/` directory contains all the HTML, CSS, JavaScript, and other assets needed to deploy your documentation.
-
-By default, the build process will update all assets to ensure you have the latest versions from the docmd package. This ensures your site benefits from the latest improvements and fixes.
-
-**Options:**
-
-*   `-c, --config <path>`
-    *   **Default:** `docmd.config.js` or `config.js`
-    *   **Description:** Specifies the path to the configuration file.
-
-*   `-p, --preserve`
-    *   **Default:** `false`
-    *   **Description:** Preserves existing asset files instead of updating them.
-
-*   `--silent`
-    *   **Default:** `false`
-    *   **Description:** Suppresses most log output in the console. Useful for running in automated environments.
+This command safely generates the necessary boilerplate to get you started without overwriting existing files. It creates:
+* A `docs/` folder containing a sample `index.md` file.
+* An `assets/` folder structure for your custom CSS, JS, and images.
+* A modern `docmd.config.js` file pre-filled with sensible defaults.
+* A `package.json` file with standard build scripts.
 
 ## `docmd dev`
 
-Starts a local development server with live reloading.
+Starts a local development server with hot-reloading.
 
 **Usage:**
 ```bash
 docmd dev [options]
 ```
 
-**Description:**
-The `dev` command is essential for writing and previewing your documentation. It:
-1.  Performs an initial build of your site.
-2.  Starts a local web server (usually on `http://localhost:3000`).
-3.  Watches your source files (`docs/` directory, `docmd.config.js`, and internal `docmd` theme assets) for changes.
-4.  When a change is detected, it automatically rebuilds the necessary parts of your site and triggers a live reload in your browser.
-
-This provides a fast feedback loop, allowing you to see your changes almost instantly.
+This is the command you will use most often. It builds your site into memory, starts a local web server (usually at `http://localhost:3000`), and watches your `docs/` folder and config file. Whenever you save a file, it instantly rebuilds the changes and triggers a live reload in your browser.
 
 **Options:**
+* `-c, --config <path>`: Specify a custom path to your configuration file (defaults to `docmd.config.js`).
+* `-p, --port <number>`: Force the server to start on a specific port. If the port is busy, `docmd` will ask if you want to try the next available one.
 
-*   `-c, --config <path>`
-    *   **Default:** `docmd.config.js` or `config.js`
-    *   **Description:** Specifies the path to the configuration file.
+## `docmd build`
 
-*   `--port <number>`
-    *   **Default:** `3000`
-    *   **Description:** Specifies the port for the development server. If the port is in use, docmd will automatically try the next available one.
-    *   **Example:** `docmd dev --port 8080`
+Compiles your Markdown files into a production-ready static website.
 
-*   `-p, --preserve`
-    *   **Default:** `false`
-    *   **Description:** Preserves existing asset files instead of updating them.
+**Usage:**
+```bash
+docmd build [options]
+```
 
-*   `--silent`
-    *   **Default:** `false`
-    *   **Description:** Suppresses most log output in the console. Useful for running in automated environments.
+This command reads your source directory, processes all Markdown and assets, minifies CSS/JS, and outputs a complete static website into your `site/` folder (or whatever you defined as your `outputDir`). The resulting folder can be uploaded to any static web host.
 
-**Note:** The development server starts on port 3000 by default. If port 3000 is already in use, the server will automatically try the next available port (3001, 3002, etc.) until it finds an open port.
+**Options:**
+* `-c, --config <path>`: Specify a custom configuration file.
+* `--offline`: Optimizes the generated HTML links to end in `/index.html` so the site can be browsed directly from a local hard drive without a web server (using `file:///` protocols).
+
+## `docmd migrate`
+
+Upgrades an older configuration file to the newest architecture.
+
+**Usage:**
+```bash
+docmd migrate
+```
+
+If you are upgrading from an older version of `docmd` that used a "flat" configuration structure, this command will intelligently rewrite your config file to the modern layout. 
+* It creates a safe backup named `docmd.config.legacy.js`.
+* It maps your old settings into the new `layout`, `optionsMenu`, and `footer` objects.
+* It preserves your existing plugins and navigation arrays.
 
 ## `docmd live`
 
@@ -105,22 +75,14 @@ Builds and launches the browser-based Live Editor.
 docmd live [options]
 ```
 
-**Description:**
-This command bundles the core documentation engine into a standalone Single Page Application (SPA) located in the `dist/` folder. It then starts a local server so you can edit Markdown and see the preview instantly without any Node.js server-side rendering.
+This command bundles the core `docmd` engine into a standalone web application. It starts a local server where you can write Markdown in a split-pane view and see the rendered documentation instantly, demonstrating our isomorphic browser engine.
 
 **Options:**
+* `--build-only`: Generates the `dist/` folder containing the Live Editor but does not start the local server. Use this if you want to host the Live Editor itself on a platform like GitHub Pages.
 
-*   `--build-only`
-    *   **Default:** `false`
-    *   **Description:** Generates the `dist/` folder containing the Live Editor bundle (`docmd-live.js` and `index.html`) but does **not** start the local server. Use this if you want to deploy the editor itself to a static host (like Netlify or GitHub Pages) or embed it in another application.
+## Global Options
 
-## Global Options (Apply to all commands)
+These flags can be appended to any command.
 
-*   `--version`
-    *   **Usage:** `docmd --version`
-    *   **Description:** Displays the installed version of `docmd`.
-*   `--help`
-    *   **Usage:** `docmd --help` or `docmd <command> --help` (e.g., `docmd build --help`)
-    *   **Description:** Displays help information for `docmd` or a specific command, including available options.
-
-This reference should help you effectively use `docmd` from your command line. For more detailed explanations of how these commands fit into the workflow, see the [Getting Started > Basic Usage](/getting-started/basic-usage/) guide.
+* `-v, --version`: Displays the currently installed version of `docmd`.
+* `-h, --help`: Displays help information and available options for the CLI.

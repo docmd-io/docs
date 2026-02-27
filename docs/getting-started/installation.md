@@ -1,78 +1,76 @@
 ---
 title: "Installation"
-description: "Learn how to install docmd on your system globally or as a project dependency."
+description: "How to install docmd globally or locally using npm, yarn, or pnpm."
 ---
 
 # Installation
 
-You can install `docmd` using npm (Node Package Manager), which comes with Node.js. If you don't have Node.js and npm installed, please visit [nodejs.org](https://nodejs.org/) to download and install them first (Node.js version 22.x or higher is required for `docmd`).
+`docmd` is a Node.js package. It requires **Node.js v18.0.0 or higher**.
 
-## Global Installation (Recommended for CLI Use)
+## Global Installation (Recommended)
 
-For using `docmd` as a command-line tool across multiple projects, global installation is the most convenient method.
-
-Open your terminal or command prompt and run:
+For most users, installing `docmd` globally provides the best experience. It gives you access to the `docmd` command anywhere in your terminal.
 
 ```bash
 npm install -g @docmd/core
 ```
 
-This command downloads `docmd` and makes the `docmd` executable available in your system's PATH.
-
-### Verify Installation
-After installation, you can verify that `docmd` is installed correctly by running:
+**Verification:**
+Run the following to check if the installation was successful:
 ```bash
 docmd --version
 ```
-This should print the installed version of `docmd`. You can also see available commands with:
+
+## Local Installation
+
+If you prefer to keep dependencies scoped to a specific project (useful for CI/CD pipelines or teams), install it as a dev dependency.
+
 ```bash
-docmd --help
+# npm
+npm install -D @docmd/core
+
+# pnpm
+pnpm add -D @docmd/core
+
+# yarn
+yarn add -D @docmd/core
 ```
 
-## Local Installation (Per Project)
+**Running commands locally:**
+When installed locally, you cannot run `docmd` directly. Instead, use your package manager's runner:
 
-Alternatively, you might prefer to install `docmd` as a development dependency for a specific project. This is useful if you want to lock down a specific version of `docmd` for that project or use it within npm scripts.
-
-Navigate to your project's root directory in the terminal and run:
 ```bash
-npm install --save-dev @docmd/core
+npx docmd dev
+# or
+pnpm docmd dev
 ```
 
-When installed locally, `docmd` is not directly available as a global command. You can run it using:
+## CDN Installation (Browser Only)
 
-*   **`npx` (Recommended):** `npx` is a tool that comes with npm and allows you to execute package binaries.
-    ```bash
-    npx docmd init
-    npx docmd build
-    ```
-*   **NPM Scripts:** Add scripts to your project's `package.json`:
-    ```json
-    // package.json
-    {
-      "scripts": {
-        "docs:init": "docmd init",
-        "docs:dev": "docmd dev",
-        "docs:build": "docmd build"
-      }
-    }
-    ```
+::: callout warning Developer Use Only
+This method is **not** for building documentation sites. It is for developers who want to embed the `docmd` parsing engine inside another web application (like a CMS or Live Preview tool).
+:::
 
-    Then, you can run them like:
-    ```bash
-    npm run docs:dev
-    npm run docs:build
-    ```
+If you are building a React/Vue/Vanilla JS app and want to render `docmd` syntax on the fly without a backend, use the browser build:
 
-## Troubleshooting
+```html
+<!-- 1. Styles -->
+<link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-*   **Permission Errors (EACCES):** If you encounter permission errors during global installation on macOS or Linux, you might need to run the command with `sudo`:
-    ```bash
-    sudo npm install -g @docmd/core
-    ```
-*   **Legacy Package:** If you previously installed `@mgks/docmd` or `@docmd/cli`, please uninstall them first to avoid conflicts:
-    ```bash
-    npm uninstall -g @mgks/docmd @docmd/cli
-    ```
-*   **Command Not Found:** If `docmd` is not found after global installation, ensure that the npm global binaries directory is in your system's PATH.
+<!-- 2. Engine -->
+<script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
+```
 
-With `docmd` installed, you're ready to move on to [Basic Usage](/getting-started/basic-usage/) to create and manage your documentation site.
+See the [Browser API](/advanced/browser-api) guide for implementation details.
+
+## Setup Troubleshooting
+
+::: callout warning Permission Errors
+If you see `EACCES` errors on macOS/Linux during global installation, it means you don't have permission to write to global directories.
+**Fix:** Run `sudo npm install -g @docmd/core`.
+:::
+
+::: callout info Windows Powershell
+If you receive an error about "running scripts is disabled on this system", run this command in PowerShell as Administrator:
+`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+:::

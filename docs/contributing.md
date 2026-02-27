@@ -1,64 +1,96 @@
 ---
-title: "Contributing to the Project"
-description: "Learn how you can contribute to the development and improvement of docmd."
+title: "Contributing"
+description: "Learn how you can contribute to the development, design, and documentation of docmd."
 ---
 
 # Contributing to docmd
 
-Thank you for your interest in contributing to `docmd`! We welcome contributions from the community to help make `docmd` even better. Whether it's reporting a bug, suggesting a feature, improving documentation, or writing code, your help is appreciated.
+First off, thank you for considering contributing to `docmd`! It's people like you that make the open-source community an amazing place to learn, inspire, and create.
 
-## How to Contribute
+We welcome contributions of all kinds, from fixing typos to engineering entirely new plugins.
 
-There are many ways to contribute to `docmd`:
+## Ways to Contribute
 
-*   **Reporting Bugs:** If you find a bug, please open an issue on our [GitHub Issues page](https://github.com/docmd-io/docmd/issues). Provide as much detail as possible, including steps to reproduce, expected behavior, and actual behavior.
-*   **Suggesting Features:** Have ideas for improvements? Open an issue and describe what you'd like to see.
-*   **Improving Documentation:** The documentation you're reading now (this site itself!) is built with `docmd` and lives in the `docs/` directory of the repository.
-*   **Writing Code:** If you're interested in fixing bugs or implementing new features, read on for development setup instructions.
+<div class="docmd-container clear-float">
+  <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+
+::: card 🐛 Bug Reports
+Find something that isn't working right? Open an issue on GitHub. Please include your OS, Node version, and steps to reproduce.
+:::
+
+::: card ✨ Feature Requests
+Have an idea to make docmd better? Open an issue and let's discuss it before you start writing code!
+:::
+
+::: card 📝 Documentation
+This very website is built with docmd! You can contribute by fixing typos, improving recipes, or adding clearer examples.
+:::
+
+::: card 💻 Code Contributions
+Want to get your hands dirty? We happily accept Pull Requests for core engine improvements, UI polish, and new features.
+:::
+
+  </div>
+</div>
 
 ## Development Setup
 
-To set up `docmd` for local development:
+`docmd` is built as a **Monorepo** using `pnpm`. Developing it locally requires a specific workflow to ensure all the internal packages (core, UI, themes, plugins) talk to each other correctly.
 
-1. **Fork the Repository:**
-   Click the "Fork" button on the [docmd GitHub page](https://github.com/docmd-io/docmd) to create your own copy.
+::: steps
 
-2. **Clone Your Fork:**
+1. **Prerequisites**
+   Ensure you have Node.js (v18+) and [pnpm](https://pnpm.io/installation) installed on your machine.
+   ```bash
+   npm install -g pnpm
+   ```
+
+2. **Fork and Clone**
+   Fork the repository on GitHub, then clone your fork locally:
    ```bash
    git clone https://github.com/YOUR_USERNAME/docmd.git
    cd docmd
    ```
 
-3. **Install Dependencies:**
+3. **Install Dependencies**
+   Use `pnpm` to install all dependencies and link the monorepo workspaces together.
    ```bash
-   npm install
+   pnpm install
    ```
 
-### Development Workflow
-
-`docmd` uses Node.js and npm.
-
-1. **Make Your Changes:**
-   * Fix bugs or add features in the `/src` directory.
-   * Add or update tests in the `/tests` directory (if applicable).
-   * Update or add documentation in the `/docs` directory to reflect your changes.
-
-2. **Link for Local Testing:**
-   To use your development version of `docmd` as a global command-line tool on your system:
+4. **Running the Dev Server**
+   We use this documentation site (located in the `docs/` folder) as our primary testing ground. To start the development server and watch for changes in both the documentation *and* the core engine:
    ```bash
-   npm link
+   # Windows (PowerShell)
+   $env:DOCMD_DEV="true"; pnpm run dev
+   
+   # macOS / Linux
+   DOCMD_DEV=true pnpm run dev
    ```
-   This allows you to run `docmd` from any directory and test your changes.
+   *Note: Setting `DOCMD_DEV=true` tells the watcher to monitor the internal templates, UI scripts, and engine logic, automatically rebuilding the site when you edit source files.*
 
-3. **Test Your Changes:**
-   * Run automated tests with `npm test` (if available).
-   * Test your changes by running `docmd build` or `docmd dev` (which will use `docmd` itself to build its own documentation located in `docs/`).
+:::
 
-4. **Code Style:**
-   * Follow the existing code style and formatting.
-   * Consider running `npm run lint` to check for style issues (if set up).
+## Testing Your Changes
 
-### File Headers
+Before submitting a Pull Request, you **must** ensure your changes haven't broken the core engine. `docmd` includes a brutal integration testing suite that verifies HTML generation, path resolutions, and SPA configurations.
+
+To run the test suite:
+
+```bash
+pnpm test
+```
+
+If the test passes and outputs `✨ ALL SYSTEMS GO`, your code is safe to commit!
+
+## Pull Request Guidelines
+
+1. **Create a Branch:** Always branch off of `main` for your work (e.g., `feat/new-search-ui` or `fix/broken-link`).
+2. **Write Clean Code:** Follow the existing coding style. If you are creating a new file in the `packages/` directory, ensure it includes the standard docmd copyright header at the top.
+3. **Commit Messages:** We prefer [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (e.g., `feat: add new button container` or `fix: resolve sidebar scroll issue`).
+4. **Open a PR:** Push your branch to your fork and open a Pull Request against our `main` branch. Provide a clear summary of your changes and reference any related issues.
+
+### Copyright Header
 All source files in `packages/` must include the standard copyright header. If you create a new file, please copy the header from an existing file.
 
 ```javascript
@@ -77,44 +109,6 @@ All source files in `packages/` must include the standard copyright header. If y
  */
 ```
 
-### Environment Setup
-
-To enable live change tracking for internal files during development, set the DOCMD_DEV environment variable:
-
-- **Temporarily:** Run `export DOCMD_DEV=true` in your terminal before starting the dev server.
-- **Permanently:** Add `export DOCMD_DEV=true` to your `~/.zshrc` file and run `source ~/.zshrc`.
-
-### Debugging Build Issues
-
-If you are working on the build process and need to see detailed logs about asset processing or minification, you can run:
-
-```bash
-DOCMD_DEBUG=true docmd build
-```
-
-## Pull Request Process
-
-Once you're satisfied with your changes:
-
-1. **Commit Your Changes:**
-   ```bash
-   git add .
-   git commit -m "Brief description of your changes"
-   ```
-
-2. **Push to Your Fork:**
-   ```bash
-   git push origin main  # or the branch you created
-   ```
-
-3. **Submit a Pull Request:**
-   Go to your fork on GitHub and open a pull request to the `main` branch of the original `docmd-io/docmd` repository. Provide a clear description of your changes.
-
-4. **Code Review:**
-   Maintainers will review your PR and may suggest changes or improvements. Please be responsive to feedback.
-
 ## Code of Conduct
 
-Please be respectful and considerate when interacting with others in the project. We aim to foster an inclusive and welcoming community.
-
-Thank you for helping make `docmd` a great tool for documentation!
+Please note that this project operates with a standard Contributor Code of Conduct. By participating in this project you agree to abide by its terms, ensuring a welcoming and respectful environment for everyone.

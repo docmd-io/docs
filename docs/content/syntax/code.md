@@ -32,14 +32,4 @@ If `copyCode: true` is enabled in your config (default), a copy button will auto
 ## Supported Languages
 Common languages include: `javascript`, `typescript`, `html`, `css`, `bash`, `json`, `python`, `java`, `cpp`, `sql`, `yaml`, `markdown`.
 
-If you do not specify a language, it will render as plain text.
-
-## Mermaid Diagrams
-You can also use code blocks to render diagrams. See [Plugins > Mermaid](/plugins/mermaid) for details.
-
-````markdown
-```mermaid
-graph TD;
-    A-->B;
-```
-````
+If you do not specify a language, it will be rendered as a plain text.

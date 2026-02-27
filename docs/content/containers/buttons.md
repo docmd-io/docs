@@ -1,59 +1,46 @@
 ---
-title: "Container: Buttons"
-description: "How to create stylish, clickable buttons within your documentation for calls to action."
+title: "Buttons"
+description: "Create call-to-action buttons for links, downloads, and external resources."
 ---
 
 # Buttons
 
-The `button` container creates a stylish call-to-action button. 
+Buttons are perfect for "Call to Action" links, such as downloads, sign-ups, or navigating to key sections.
 
-Unlike other containers, **Buttons are self-closing**. You do not need a closing `:::` tag.
+::: callout warning Self-Closing
+The button container is **self-closing**. Do not add a closing `:::` tag, or it may accidentally close parent containers (like Cards).
+:::
 
-## Usage
+## Syntax
 
-**Syntax:**
 ```markdown
-::: button "Button Text" URL [options]
+::: button "Label Text" Link [Options]
 ```
 
-*   **`"Button Text"`**: The text on the button. Wrap in quotes if it contains spaces.
-*   **`URL`**: The target link.
-    *   Internal: `/docs/intro`
-    *   External: `external:https://google.com` (Opens in new tab)
-    *   Mail: `mailto:support@example.com`
-*   **`[options]`**:
-    *   `color:#hex` (Custom background color)
+## Examples
 
-### Examples
+### Internal Links
+Use relative paths to link to other pages in your documentation.
 
-**1. Basic Internal Link**
 ```markdown
 ::: button "Get Started" /getting-started/installation
 ```
 ::: button "Get Started" /getting-started/installation
 
-**2. External Link (New Tab)**
-```markdown
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd
-```
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd
-
-**3. Custom Color**
-```markdown
-::: button "Download PDF" /assets/docs.pdf color:#ff4757
-```
-::: button "Download PDF" /assets/docs.pdf color:#ff4757
-
-### Nesting
-Because buttons are self-closing, they are safe to nest inside Cards, Tabs, or Steps without breaking the parent container.
+### External Links
+Prepend `external:` to the URL to force it to open in a new tab with `target="_blank"`.
 
 ```markdown
-::: card Downloads
-Get the latest version:
-::: button "Download v1.0" /download color:#2ecc71
-:::
+::: button "View Source" external:https://github.com/docmd-io/docmd
 ```
-::: card Downloads
-Get the latest version:
-::: button "Download v1.0" /download color:#2ecc71
-:::
+::: button "View Source" external:https://github.com/docmd-io/docmd
+
+### Custom Colors
+You can customize the button color using a hex code or CSS color name.
+
+```markdown
+::: button "Critical Action" /delete-account color:#ef4444
+::: button "Success" /confirm color:green
+```
+::: button "Critical Action" /delete-account color:#ef4444
+::: button "Success" /confirm color:green

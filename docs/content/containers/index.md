@@ -1,35 +1,48 @@
 ---
 title: "Custom Containers"
-description: "Enhance your documentation with special components like callouts, cards, steps, and tabs using docmd's custom container syntax."
+description: "A gallery of the rich UI components available in docmd."
 ---
 
-`docmd` provides a simple syntax for adding richer, pre-styled components to your Markdown content. These are powered by the `markdown-it-container` plugin.
+# Custom Containers
 
-The general syntax for simple containers like `callout` and `card` is:
+Standard Markdown is great for text, but sometimes you need more. `docmd` extends Markdown with a set of "Containers" to help you structure complex documentation.
 
-```markdown
-::: containerName [optionalTitleOrType]
-Content for the container goes here.
+Use the syntax `::: container_name` to start a block.
+
+<div class="image-gallery" style="display:grid;grid-template-columns:47% 47%;gap:1em 6%;padding:2em 0">
+
+::: card 📣 Callouts
+Semantic highlights for warnings, tips, and important notes.
+::: button "See Types" /content/containers/callouts
 :::
-```
 
-For more complex components like `steps` and `tabs`, we use a more robust and intuitive syntax that relies on standard Markdown, preventing common nesting issues.
+::: card 🗃️ Cards
+Group related content into distinct, framed boxes. Perfect for grids.
+::: button "Card Syntax" /content/containers/cards
+:::
 
-## Advanced Nested Container System
+::: card 📑 Tabs
+Organize content into switchable panes to save vertical space.
+::: button "Tab Examples" /content/containers/tabs
+:::
 
-With docmd v0.2.0, all containers support **seamless nesting** - you can nest any container within any other container to create complex, interactive documentation layouts.
+::: card 🔢 Steps
+Transform ordered lists into beautiful visual timelines.
+::: button "Create Steps" /content/containers/steps
+:::
 
-**New in v0.2.0:** [Learn about nested containers →](./nested-containers)
+::: card 🖱️ Buttons
+Call-to-action links with custom colors and styles.
+::: button "Button API" /content/containers/buttons
+:::
 
-## Available Containers
+::: card ↕️ Collapsible
+Hide advanced details or FAQs inside toggleable accordions.
+::: button "Accordions" /content/containers/collapsible
+:::
 
-Select a container type from the list below or from the sidebar to see detailed usage instructions and examples.
+</div>
 
-- [**Callouts**](./callouts/) - For highlighting important information like notes, tips, and warnings.
-- [**Cards**](./cards/) - For grouping related content into visually distinct blocks.
-- [**Steps**](./steps/) - For presenting a sequence of instructions in a numbered format.
-- [**Tabs**](./tabs/) - For organizing content in a switchable, tabbed interface.
-- [**Buttons**](./buttons/) - For creating stylish, clickable calls to action.
-- [**Nested Containers**](./nested-containers/) - For creating complex, interactive layouts with container nesting.
+## Nesting
 
-These custom containers allow you to create more engaging and structured documentation without needing to write custom HTML or CSS.
+Thanks to our advanced parser, you can nest these containers inside each other infinitely. See [Nested Containers](./nested-containers) for examples.

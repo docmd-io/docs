@@ -1,89 +1,69 @@
 ---
-title: "Container: Collapsible"
-description: "Create accordion-style toggleable sections for FAQs, spoilers, or advanced details."
+title: "Collapsible"
+description: "Create toggleable accordion sections for FAQs and advanced details."
 ---
 
-# Collapsible Container
+# Collapsible
 
-The `collapsible` container creates an accordion-style block that can be toggled open or closed. This is perfect for FAQs, "spoiler" content, or hiding complex details that aren't immediately necessary.
+The `collapsible` container creates an accordion-style toggle. It is perfect for FAQs, spoilers, or hiding complex configuration options that aren't relevant to every reader.
 
-## Usage
+## Syntax
 
-The syntax allows you to define the title and the default state (open or closed).
-
-**Syntax:**
 ```markdown
-::: collapsible [open] Title Text Here
-The hidden content goes here.
+::: collapsible [open] Title Text
+Content goes here.
 :::
 ```
 
--   **`open`**: (Optional) If included, the section will be expanded by default on page load.
--   **`Title Text Here`**: The text displayed on the clickable bar. If omitted, it defaults to "Click to expand".
-
----
+*   **`open`**: (Optional) If present, the section defaults to expanded.
+*   **`Title Text`**: The text shown on the clickable bar. Defaults to "Click to expand".
 
 ## Examples
 
-### Basic Collapsible (Closed by Default)
+### Default (Closed)
+Useful for FAQs or spoilers.
 
-Use this for content that should be hidden initially, like lengthy code examples or optional details.
-
-**Code:**
 ```markdown
-::: collapsible View Advanced Configuration
-Here are the advanced settings for power users:
-*   `memory_limit`: Set the max heap size.
-*   `threads`: Number of worker threads.
+::: collapsible How do I reset my password?
+Go to **Settings > Account** and click "Reset Password".
 :::
 ```
-
-**Rendered Preview:**
-
-::: collapsible View Advanced Configuration
-Here are the advanced settings for power users:
-*   `memory_limit`: Set the max heap size.
-*   `threads`: Number of worker threads.
+::: collapsible How do I reset my password?
+Go to **Settings > Account** and click "Reset Password".
 :::
 
-### Default Open
+### Default (Open)
+Useful for sections that should be visible but optional to hide.
 
-Use the `open` keyword if you want the content visible but capable of being tucked away.
-
-**Code:**
 ```markdown
-::: collapsible open Important Notice
-This content is visible immediately but can be collapsed if it takes up too much space.
+::: collapsible open Prerequisites
+1.  Node.js v18+
+2.  A text editor
 :::
 ```
-
-**Rendered Preview:**
-
-::: collapsible open Important Notice
-This content is visible immediately but can be collapsed if it takes up too much space.
+::: collapsible open Prerequisites
+1.  Node.js v18+
+2.  A text editor
 :::
 
-### FAQ Pattern
+### Nested Content
+You can put anything inside a collapsible, including code blocks.
 
-Collapsibles are ideal for Frequently Asked Questions.
-
-**Code:**
-```markdown
-::: collapsible Is docmd free to use?
-**Yes!** docmd is 100% open-source and free under the MIT license.
-:::
-
-::: collapsible Can I host it on GitHub Pages?
-Absolutely. The `build` command generates static HTML files that work perfectly on GitHub Pages, Netlify, or Vercel.
-:::
+````markdown
+::: collapsible View JSON Response
+```json
+{
+  "status": "success",
+  "data": { "id": 123 }
+}
 ```
-
-**Rendered Preview:**
-
-::: collapsible Is docmd free to use?
-**Yes!** docmd is 100% open-source and free under the MIT license.
 :::
-
-::: collapsible Can I host it on GitHub Pages?
-Absolutely. The `build` command generates static HTML files that work perfectly on GitHub Pages, Netlify, or Vercel.
+````
+::: collapsible View JSON Response
+```json
+{
+  "status": "success",
+  "data": { "id": 123 }
+}
+```
 :::

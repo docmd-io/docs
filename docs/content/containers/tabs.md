@@ -1,212 +1,66 @@
 ---
-title: "Tabs Container"
-description: "Create tabbed content sections with the tabs container for organizing related information."
+title: "Tabs"
+description: "Organize content into switchable tabbed panes."
 ---
 
 # Tabs Container
 
-The tabs container allows you to organize content into multiple tabbed sections, making it easy to present related information in a clean, organized way.
+Tabs are essential for showing alternative content (like code snippets for different languages or instructions for different OSs) without cluttering the page.
 
-## Basic Usage
+## Syntax
 
-```markdown
-::: tabs
-
-== tab "First Tab"
-Content for the first tab goes here.
-
-== tab "Second Tab"
-Content for the second tab goes here.
-
-== tab "Third Tab"
-Content for the third tab goes here.
-
-:::
-```
-
-::: tabs
-
-== tab "First Tab"
-Content for the first tab goes here.
-
-== tab "Second Tab"
-Content for the second tab goes here.
-
-== tab "Third Tab"
-Content for the third tab goes here.
-
-:::
-
-## Tabs with Nested Content
-
-### Tabs with Buttons
+Use `== tab "Name"` to define a new tab pane.
 
 ```markdown
 ::: tabs
 
-== tab "Download"
-Get the latest version of our application.
+    == tab "Tab 1 Name"
+        Content for tab 1.
 
-::: button Download_Here external:https://github.com/docmd-io/docmd/releases
-::: button Learn_More #advanced-tabs
-::: button NPM_Package external:https://www.npmjs.com/package/@docmd/core
-
-== tab "Documentation"
-Read our comprehensive documentation.
-
-::: button View_Getting_Started #basic-usage
-::: button API_Reference external:https://github.com/docmd-io/docmd
-::: button View_Examples #advanced-tabs
+    == tab "Tab 2 Name"
+        Content for tab 2.
 
 :::
 ```
 
+## Example
+
+### Code Switching
+
+````markdown
 ::: tabs
 
-== tab "Download"
-Get the latest version of our application.
+    == tab "JavaScript"
+        ```javascript
+        console.log("Hello World");
+        ```
 
-::: button Download_Here external:https://github.com/docmd-io/docmd/releases
-::: button Learn_More #advanced-tabs
-::: button NPM_Package external:https://www.npmjs.com/package/@docmd/core
-
-== tab "Documentation"
-Read our comprehensive documentation.
-
-::: button View_Getting_Started #basic-usage
-::: button API_Reference external:https://github.com/docmd-io/docmd
-::: button View_Examples #advanced-tabs
-
-:::
-
-### Tabs with Callouts
-
-```markdown
-::: tabs
-
-== tab "Getting Started"
-Welcome to our platform!
-
-::: callout info Welcome
-This is your first time here. Let's get you started!
-:::
-
-::: callout tip Pro Tip
-Check out our quick start guide for the fastest setup.
-:::
-
-== tab "Advanced Features"
-Explore advanced functionality.
-
-::: callout warning Important
-Some features require additional configuration.
-:::
-
-::: callout success Ready
-You're all set to explore advanced features!
-:::
-
-:::
-```
-
-::: tabs
-
-== tab "Getting Started"
-Welcome to our platform!
-
-::: callout info Welcome
-This is your first time here. Let's get you started!
-:::
-
-::: callout tip Pro Tip
-Check out our quick start guide for the fastest setup.
-:::
-
-== tab "Advanced Features"
-Explore advanced functionality.
-
-::: callout warning Important
-Some features require additional configuration.
-:::
-
-::: callout success Ready
-You're all set to explore advanced features!
-:::
-
-:::
-
-## Complex Nested Structure
-
-````bash
-::: tabs
-
-== tab "Nested Card Example"
-::: card Installation Guide
-
-**Download**
-Get the latest version for your platform.
-
-::: button Get_Latest external:https://github.com/docmd-io/docmd/releases
-
-**Install**
-Run the installer and follow the prompts.
-
-```bash
-npm install -g @docmd/core
-```
-
-:::
-
-== tab "Callout Example"
-
-**Configure**
-Set up your preferences.
-
-::: callout warning Configuration
-Don't forget to configure your settings!
-:::
+    == tab "Python"
+        ```python
+        print("Hello World")
+        ```
 
 :::
 ````
 
+**Rendered Output:**
+
 ::: tabs
 
-== tab "Nested Card Example"
-::: card Installation Guide
+    == tab "JavaScript"
+        ```javascript
+        console.log("Hello World");
+        ```
 
-**Download**
-Get the latest version for your platform.
-
-::: button Get_Latest external:https://github.com/docmd-io/docmd/releases
-
-**Install**
-Run the installer and follow the prompts.
-
-```bash
-npm install -g @docmd/core
-```
+    == tab "Python"
+        ```python
+        print("Hello World")
+        ```
 
 :::
 
-== tab "Callout Example"
-
-**Configure**
-Set up your preferences.
-
-::: callout warning Configuration
-Don't forget to configure your settings!
-:::
-
-:::
-
-## Customization
-
-Tabs containers automatically handle:
-
-- **Responsive design** - Works on all screen sizes
-- **Theme integration** - Matches your site's theme
-- **Accessibility** - Proper ARIA labels and keyboard navigation
-- **Smooth transitions** - Elegant tab switching animations
+## Lazy Rendering
+`docmd` is smart. If you put heavy content (like a **Mermaid diagram**) inside a hidden tab, it will wait to render it until the user actually clicks the tab. This keeps your page load fast.
 
 ## Best Practices
 
@@ -218,11 +72,11 @@ Tabs containers automatically handle:
 
 ## Nesting Limitations
 
-::: callout error Important Limitation
-**Steps containers cannot be used inside tabs** due to parsing conflicts. If you need step-by-step instructions within tabs, use regular numbered lists or consider restructuring your content.
-:::
-
 - **Tabs cannot contain tabs** - This prevents infinite recursion
 - **Steps inside tabs not supported** - Use regular ordered lists instead
-- **Maximum depth** - While technically unlimited, keep it under 7 levels for readability
+- **Maximum depth** - While technically unlimited, keep it under 3-4 levels for readability
 - **Performance** - Very deep nesting may impact rendering performance
+
+::: callout warning Steps Inside Tabs
+**Steps containers cannot be used inside tabs** due to parsing conflicts. If you need step-by-step instructions within tabs, use regular numbered lists or consider restructuring your content.
+:::

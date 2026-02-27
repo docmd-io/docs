@@ -7,7 +7,7 @@ description: "Run docmd entirely in the browser without a server using the new L
 
 ::: button "Open Live Editor" https://live.docmd.io color:#007bff
 
-Starting with version **0.4.0**, `docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser** (client-side), opening up possibilities for live editors, CMS previews, and zero-latency feedback loops.
+`docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser** (client-side), opening up possibilities for live editors, CMS previews, and zero-latency feedback loops.
 
 ## The Live Editor
 
@@ -80,6 +80,7 @@ const html = docmd.compile(markdown, config, {
 document.getElementById('preview-frame').srcdoc = html;
 ```
 
-::: callout warning Limitation
-The Live browser build cannot scan your local hard drive for files. Features that rely on file scanning (like automatically generating the Sidebar Navigation based on folder structure) must be passed explicitly via the `config` object or navigation options.
-:::
+## Important Resources
+
+- Check out the [Browser API Guide](/advanced/browser-api/).
+- [Node API](/advanced/node-api/) for embedded documentation.

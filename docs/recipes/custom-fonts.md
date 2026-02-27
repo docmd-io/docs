@@ -1,43 +1,48 @@
 ---
 title: "Recipe: Custom Fonts"
-description: "How to add Google Fonts or custom typefaces to your documentation."
+description: "Personalize your documentation by importing Google Fonts."
 ---
 
 # Adding Custom Fonts
 
-You can easily change the typography of your `docmd` site using CSS variables and a custom stylesheet.
+`docmd` uses CSS variables to manage typography. Changing your site's font is as easy as creating a custom stylesheet.
 
-## 1. Select a Font
-Go to [Google Fonts](https://fonts.google.com) and select the font you want (e.g., "Poppins"). Copy the `@import` URL.
+## 1. Create a CSS File
 
-## 2. Create a Custom CSS File
-Create a file in your project at `assets/css/typography.css`.
+Create a file in your project (e.g., `assets/css/fonts.css`).
+
+Go to [Google Fonts](https://fonts.google.com), find the font you want (like *Inter* or *Fira Code*), and use the `@import` method. Then, assign that font to the docmd root variables.
 
 ```css
-/* assets/css/typography.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* assets/css/fonts.css */
+
+/* Import the fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap');
 
 :root {
-  /* Override the default sans-serif font variable */
-  --font-family-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  /* Override the default sans-serif font */
+  --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Override the monospace (code block) font */
+  --font-family-mono: "Fira Code", monospace;
 }
 ```
 
-## 3. Register in Config
-Add the file to your `docmd.config.js`:
+## 2. Register the Stylesheet
+
+Open your `docmd.config.js` and add the path to your new CSS file in the `theme.customCss` array.
 
 ```javascript
 module.exports = {
   // ...
   theme: {
-    name: 'default',
-    customCss: [
-      '/assets/css/typography.css' // Points to your new file
+    name: 'sky',
+    defaultMode: 'light',
+    customCss:[
+      '/assets/css/fonts.css' // Path is relative to the generated site/ root
     ]
   }
-  // ...
 }
 ```
 
-## 4. Restart
-Run `docmd dev`. Your site will now use Poppins!
+Restart your `docmd dev` server. Your entire site will now use your custom typography!

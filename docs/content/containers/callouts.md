@@ -1,154 +1,80 @@
 ---
-title: "Container: Callouts"
-description: "How to use callouts to highlight important information, warnings, tips, or notes in your documentation."
+title: "Callouts"
+description: "Highlight important information using semantic callout blocks."
 ---
 
 # Callouts
 
-Callouts are perfect for drawing the user's attention to a specific piece of information. They are visually distinct from the regular text and are ideal for tips, warnings, and important notes.
+Callouts allow you to highlight specific information that exists outside the normal flow of text. `docmd` supports five semantic types.
 
-## Usage
+## Syntax
 
-The basic syntax uses the `callout` container name, followed by the callout type.
-
-::: callout info
-Container blocks (like `::: callout`) should be preceded by a blank line to ensure proper parsing by the markdown processor.
-:::
-
-**Syntax:**
 ```markdown
-::: callout type
-The main content of the callout.
+::: callout type Title
+Content goes here.
 :::
 ```
 
-**With Custom Title:**
-```markdown
-::: callout type Custom Title Here
-The main content of the callout.
-:::
-```
+If you omit the title, it defaults to the type name (e.g., "Info").
 
-**Parameters:**
-*   `type`: The type determines the color and styling of the callout. Available types are: `info`, `tip`, `warning`, `danger`, `success`.
-*   `Custom Title Here` (optional): Any text following the type becomes the callout title.
-
-::: callout info Auto Emojis
-Some themes (like Sky) automatically add emojis to callout titles: ℹ️ for info, ⚠️ for warning, 💡 for tip, 🚨 for danger, and ✅ for success.
-:::
-
----
-
-## Examples
+## Available Types
 
 ### Info
+General information or "Did you know?" boxes.
 
-Use the `info` type for general notes or neutral supplementary details.
-
-**Code:**
 ```markdown
-::: callout info
-This is an informational message. It's great for providing context or background information that is helpful but not critical.
+::: callout info Note
+This is a standard informational callout.
 :::
 ```
-
-**Rendered Preview:**
-::: callout info
-This is an informational message. It's great for providing context or background information that is helpful but not critical.
-:::
-
-**With Custom Title:**
-```markdown
-::: callout info Quick Reference
-This callout has a custom title that appears prominently at the top.
-:::
-```
-
-**Rendered Preview:**
-::: callout info Quick Reference
-This callout has a custom title that appears prominently at the top.
+::: callout info Note
+This is a standard informational callout.
 :::
 
 ### Tip
+Best practices and shortcuts.
 
-Use the `tip` type for helpful tips, best practices, or suggestions.
-
-**Code:**
-```markdown
-::: callout tip
-Here's a helpful tip to improve your workflow. Using this shortcut can save you a lot of time!
-:::
-```
-
-**Rendered Preview:**
-::: callout tip
-Here's a helpful tip to improve your workflow. Using this shortcut can save you a lot of time!
-:::
-
-**With Custom Title:**
 ```markdown
 ::: callout tip Pro Tip
-Custom titles help organize your callouts and make them more scannable for readers.
+You can nest other containers inside callouts!
 :::
 ```
-
-**Rendered Preview:**
 ::: callout tip Pro Tip
-Custom titles help organize your callouts and make them more scannable for readers.
+You can nest other containers inside callouts!
 :::
 
 ### Warning
+Things the user should be careful about.
 
-Use the `warning` type to indicate something that requires caution or might lead to unexpected results.
-
-**Code:**
 ```markdown
-::: callout warning
-**Heads up!** Changing this setting can have unintended side effects. Please make sure you understand the consequences before proceeding.
+::: callout warning Caution
+Proceed with care.
 :::
 ```
-
-**Rendered Preview:**
-::: callout warning
-**Heads up!** Changing this setting can have unintended side effects. Please make sure you understand the consequences before proceeding.
+::: callout warning Caution
+Proceed with care.
 :::
 
 ### Danger
+Critical warnings, data loss risks, or errors.
 
-Use the `danger` type for critical information, destructive actions, or security warnings.
-
-**Code:**
 ```markdown
 ::: callout danger
-**Critical!** This action is irreversible and will result in permanent data loss. Do not proceed unless you have a backup.
+**Critical Error:** Do not delete the database file.
 :::
 ```
-
-**Rendered Preview:**
 ::: callout danger
-**Critical!** This action is irreversible and will result in permanent data loss. Do not proceed unless you have a backup.
+**Critical Error:** Do not delete the database file.
 :::
 
-## All Callout Types with Titles
+### Success
+Confirmation of actions or positive outcomes.
 
-Here's a quick reference showing all available callout types with custom titles:
-
-::: callout info Documentation Note
-Use info callouts for neutral supplementary information.
+```markdown
+::: callout success
+Build completed successfully!
 :::
-
-::: callout tip Best Practice
-Use tip callouts for helpful suggestions and best practices.
-:::
-
-::: callout warning Important
-Use warning callouts for actions that require caution.
-:::
-
-::: callout danger Critical Alert
-Use danger callouts for destructive actions or critical warnings.
-:::
-
-::: callout success Task Complete
-Use success callouts to indicate completed tasks or positive outcomes.
+```
+::: callout success
+Build completed successfully!
 :::

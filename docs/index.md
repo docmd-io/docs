@@ -1,64 +1,94 @@
 ---
-title: "Minimalist Markdown Docs Generator"
-description: "Generate beautiful, lightweight static documentation sites directly from your Markdown files with docmd. Zero clutter, just content."
+title: "docmd: The Minimalist Docs Generator"
+description: "Generate beautiful, lightweight, and blazing-fast documentation sites directly from your Markdown files. Zero clutter, just content."
+layout: "full"
 ---
 
-```
+```text
    _                 _ 
  _| |___ ___ _____ _| |
 | . | . |  _|     | . |
 |___|___|___|_|_|_|___|
-
 ```
 
-**Generate beautiful, lightweight static documentation sites directly from your Markdown files. Zero clutter, just content.**
+**Generate beautiful, lightweight documentation sites directly from your Markdown files. Zero clutter, just content.**
 
-`docmd` is a Node.js-based command-line tool that transforms a directory of Markdown files (`.md`) into a clean, fast, and themeable static website. It prioritizes simplicity for the author, leveraging standard Markdown and intuitive configuration, while producing elegant and functional documentation sites.
+`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimized static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
 
-::: callout tip
-This very documentation site is built using `docmd`!
+::: button "Get Started" /getting-started/installation
+::: button "View on GitHub" external:https://github.com/docmd-io/docmd color:#333
+
+## Quick Start
+
+You can have a beautiful documentation site running locally in under a minute. Requires [Node.js](https://nodejs.org/) installed on your machine.
+
+```bash
+# 1. Install docmd globally
+npm install -g @docmd/core
+
+# 2. Initialize a new project in your current directory
+docmd init
+
+# 3. Start the local development server
+docmd dev
+```
+
+Open `http://localhost:3000` in your browser. Any changes you make to the files in the `docs/` folder will instantly update on your screen.
+
+## Why choose docmd?
+
+We believe writing documentation should be as frictionless as possible. You shouldn't need to configure complex JavaScript frameworks just to publish text.
+
+<div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+    
+::: card Seamless SPA Navigation
+We generate static HTML for ultimate SEO and fast initial loads, but once the page is open, `docmd` intercepts navigation to swap content instantly without ever reloading the browser.
 :::
 
-## Core Philosophy
+::: card Zero Configuration
+Run `docmd init` and start writing. Our sensible defaults mean you don't have to touch a configuration file unless you want to customize your branding or layout.
+:::
 
-*   **Markdown First:** Your content lives in standard `.md` files with simple YAML frontmatter.
-*   **Minimal Configuration:** Sensible defaults with straightforward overrides via `docmd.config.js`.
-*   **Lightweight Build:** Fast generation process using Node.js, no complex framework dependencies for the build itself.
-*   **Beautiful Defaults:** Clean, responsive design with light/dark themes and syntax highlighting out-of-the-box.
-*   **Static Output:** Deploy the generated `site/` folder anywhere (GitHub Pages, Netlify, Vercel, etc.).
+::: card Smart Offline Search
+Built-in full-text search with fuzzy matching and keyword highlighting. It runs entirely in the browser using a generated index, meaning it works perfectly even on air-gapped networks.
+:::
 
-## Key Features
+::: card Isomorphic Engine
+`docmd` isn't just a CLI. The exact same rendering engine can run natively inside a web browser, allowing you to embed live documentation previews directly into your own web apps.
+:::
 
-*   📝 **Standard Markdown & Frontmatter:** Write content naturally, define page metadata (title, description) easily.
-*   🔍 **Smart Search:** Built-in, offline-capable full-text search with fuzzy matching and highlighting. No API keys required.
-*   🎨 **Themeable:** Built-in light/dark modes, customizable via CSS variables. Uses `highlight.js` for code blocks.
-*   🧩 **Custom Containers:** Add richer components like callouts, cards, and steps using simple `::: name :::` syntax.
-*   📊 **Diagrams:** Built-in support for **Mermaid.js** diagrams and flowcharts.
-*   ⚙️ **Config-Driven Navigation:** Define your site structure and sidebar navigation in `docmd.config.js`. Supports nested items.
-*   🚀 **Fast Static Build:** Node.js script quickly processes files into optimized HTML & CSS.
-*   💻 **Simple CLI:** Easy-to-use commands (`docmd build`, `docmd init`, `docmd dev`) with clear feedback.
-*   🌐 **Deploy Anywhere:** Generates a standard static `site/` directory.
+</div>
 
-## Get Started Quickly
+## Rich Content Out of the Box
 
-1.  **Install `docmd`:**
-    ```bash
-    npm install -g @docmd/core
-    ```
-2.  **Initialize Your Project:**
-    ```bash
-    cd my-project-docs
-    docmd init
-    ```
-3.  **Write Your Content:**
-    Create `.md` files in the `docs/` directory.
-4.  **Preview Live:**
-    ```bash
-    docmd dev
-    ```
-5.  **Build for Production:**
-    ```bash
-    docmd build
-    ```
+Write naturally. `docmd` extends standard Markdown with intuitive, nestable components to help you structure complex information beautifully.
 
-Dive into the [Getting Started](/getting-started/installation/) guide for more details, or explore the sidebar to learn about specific features.
+::: tabs
+
+== tab "Containers"
+Easily highlight information using Callouts.
+
+::: callout tip Pro Tip
+You can nest containers inside each other infinitely. Try putting a button inside a card inside a tab!
+:::
+
+== tab "Diagrams"
+Native support for **Mermaid.js**. Just create a code block with the `mermaid` language tag, and it automatically renders and adapts to your user's Light/Dark mode preference.
+
+```mermaid
+graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> E[Fix the issue]
+    E --> B
+    C --> F[Deploy]
+    F --> G[End]
+```
+
+== tab "Code"
+Automatic syntax highlighting powered by `highlight.js`, complete with one-click copy buttons and themes tailored for optimal contrast.
+
+:::
+
+Ready to dive in? Check out the [Basic Usage](/getting-started/basic-usage) guide or explore how to [Configure](/configuration/) your site.

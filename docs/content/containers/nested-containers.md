@@ -5,31 +5,24 @@ description: "Learn how to use the advanced nested container system to create co
 
 # Nested Containers
 
+::: card Master Container
+
+This is the top level.
+
+   ::: callout warning Inner Zone
+      Be careful in here.
+
+      ::: button "Deep Action" /# color:red
+
+   :::
+
+:::
+
 The advanced nested container system in docmd allows you to create complex, interactive documentation layouts by nesting containers within each other. This powerful feature enables you to build rich, structured content that was previously impossible.
 
-## Overview
+## Nesting Rules
 
-With docmd v0.2.0, you can nest containers seamlessly:
-
-- **Cards within Tabs** - Organize content into structured sections within tabs
-- **Callouts within Cards** - Add informational content within structured cards
-- **Buttons within Any Container** - Place action buttons in any context
-- **Multiple Levels of Nesting** - Support for complex nested structures up to 7+ levels
-- **Steps for Simple Sequences** - Use steps containers for straightforward, sequential instructions
-
-## Container Nesting Rules
-
-### Supported Nesting Combinations
-
-| Container | Can Nest Inside | Can Contain |
-|-----------|----------------|-------------|
-| **Callouts** | Any container | Any container |
-| **Cards** | Any container | Any container |
-| **Buttons** | Any container | None (self-closing) |
-| **Steps** | Any container (except tabs) | Any container (except tabs) |
-| **Tabs** | Any container (except steps) | Any container (except tabs, steps) |
-
-### Nesting Best Practices
+### Best Practices
 
 1. **Logical Structure** - Nest containers in a way that makes logical sense
 2. **Readability** - Don't nest too deeply (3-4 levels maximum for readability)
@@ -37,29 +30,27 @@ With docmd v0.2.0, you can nest containers seamlessly:
 4. **Content Organization** - Use nesting to organize related content
 5. **Use the Right Tool** - Use steps for simple sequences, cards/tabs for complex content
 
-### Nesting Limitations
+### Limitations
 
-## Nesting Limitations
-
-While `docmd` v0.4.x has improved the parser significantly (fixing "greedy" closing tags), there are still logical limits:
+While `docmd` has improved the parser significantly over the period, there are still logical limits:
 
 1.  **Steps inside Tabs:** This is technically difficult to parse in Markdown. We recommend keeping Steps as top-level elements or inside Cards, but not inside Tabs.
 2.  **Buttons:** Buttons are now **self-closing**. Do not add a `:::` after a button line, or it might close a parent container (like a Card) accidentally.
 
-## Basic Nesting Examples
+## Examples
 
 ### Cards with Nested Content
 
-```bash
+```markdown
 ::: card Installation Guide
 
 Here's how to install the application:
 
-::: callout tip Pro Tip
-Make sure to download the correct version for your platform.
-:::
+   ::: callout tip Pro Tip
+   Make sure to download the correct version for your platform.
+   :::
 
-::: button Download_Now /downloads
+   ::: button "Download Now" /downloads
 
 :::
 ```
@@ -72,182 +63,94 @@ Here's how to install the application:
 Make sure to download the correct version for your platform.
 :::
 
-::: button Download_Now /downloads
+::: button "Download Now" #
 
 :::
 
 ### Tabs with Nested Content
 
-```bash
-::: tabs
-
-== tab "Windows"
-Download the Windows installer (.exe) file.
-
-::: callout tip
-Make sure to run as administrator for best results.
-:::
-
-::: button Download_Windows /downloads/windows
-
-== tab "macOS"
-Download the macOS package (.pkg) file.
-
-::: callout warning
-You may need to allow the app in Security & Privacy settings.
-:::
-
-::: button Download_macOS /downloads/macos
-
-== tab "Linux"
-Download the Linux tarball (.tar.gz) file.
-
-::: button Download_Linux /downloads/linux
-
-:::
-```
-
-::: tabs
-
-== tab "Windows"
-Download the Windows installer (.exe) file.
-
-::: callout tip
-Make sure to run as administrator for best results.
-:::
-
-::: button Download_Windows /downloads/windows
-
-== tab "macOS"
-Download the macOS package (.pkg) file.
-
-::: callout warning
-You may need to allow the app in Security & Privacy settings.
-:::
-
-::: button Download_macOS /downloads/macos
-
-== tab "Linux"
-Download the Linux tarball (.tar.gz) file.
-
-::: button Download_Linux /downloads/linux
-
-:::
-
-## Advanced Nesting Patterns
-
-### Complex Nested Structure
-
-````bash
-::: card Installation Guide
-
-**Download**
-Get the latest version for your platform.
-
-::: button Download_Now /downloads
-
-**Install**
-Run the installer and follow the prompts.
-
-```bash
-install docmd
-```
-
-**Configure**
-Set up your preferences.
-
-::: callout warning Important
-Don't forget to configure your settings!
-:::
-
-:::
-````
-
-::: card Installation Guide
-
-**Download**
-Get the latest version for your platform.
-
-::: button Download_Now /downloads
-
-**Install**
-Run the installer and follow the prompts.
-
-```bash
-install docmd
-```
-
-**Configure**
-Set up your preferences.
-
-::: callout warning Important
-Don't forget to configure your settings!
-:::
-
-:::
-
-### Cards with Multiple Nested Elements
-
 ```markdown
-::: card API Reference
+::: tabs
 
-::: callout info API Key Required
-All API requests require a valid API key.
-:::
+   == tab "Windows"
+      Download the Windows installer (.exe) file.
 
-**Setup Steps**
+      ::: callout tip
+         Make sure to run as administrator for best results.
+      :::
 
-1. Get your API key from the dashboard
-2. Include it in your request headers
-3. Test your connection
+      ::: button "Download Windows" /downloads/windows
 
-::: button Test_API /api/test
+   == tab "macOS"
+      Download the macOS package (.pkg) file.
+
+      ::: callout warning
+         You may need to allow the app in Security & Privacy settings.
+      :::
+
+      ::: button "Download macOS" /downloads/macos
+
+   == tab "Linux"
+      Download the Linux tarball (.tar.gz) file.
+
+      ::: button "Download Linux" /downloads/linux
 
 :::
 ```
 
-::: card API Reference
+::: tabs
 
-::: callout info API Key Required
-All API requests require a valid API key.
+== tab "Windows"
+Download the Windows installer (.exe) file.
+
+::: callout tip
+Make sure to run as administrator for best results.
 :::
 
-**Setup Steps**
+::: button "Download Windows" #
 
-1. Get your API key from the dashboard
-2. Include it in your request headers
-3. Test your connection
+== tab "macOS"
+Download the macOS package (.pkg) file.
 
-::: button Test_API /api/test
+::: callout warning
+You may need to allow the app in Security & Privacy settings.
+:::
+
+::: button "Download macOS" #
+
+== tab "Linux"
+Download the Linux tarball (.tar.gz) file.
+
+::: button "Download Linux" #
 
 :::
 
-## Steps Container
+### Steps Container with Nested Elements
 
 Steps containers are designed for simple, sequential instructions and work well with other containers:
 
-```bash
+```markdown
 ::: steps
 
 1. **Download the Application**
    Get the latest version from our download page.
 
-   ::: button Download_Now /downloads
+   ::: button "Download Now" /downloads
 
 2. **Install the Application**
    Run the installer and follow the setup wizard.
 
    ::: callout tip Pro Tip
-   Check our system requirements page for detailed information.
+      Check our system requirements page for detailed information.
    :::
 
 3. **Configure Settings**
    Set up your preferences and start using the app.
 
    ::: card Configuration
-   - Choose your theme
-   - Set up notifications
-   - Configure integrations
+      - Choose your theme
+      - Set up notifications
+      - Configure integrations
    :::
 
 :::
@@ -258,22 +161,22 @@ Steps containers are designed for simple, sequential instructions and work well 
 1. **Download the Application**
    Get the latest version from our download page.
 
-   ::: button Download_Now /downloads
+   ::: button "Download Now" #
 
 2. **Install the Application**
    Run the installer and follow the setup wizard.
 
    ::: callout tip Pro Tip
-   Check our system requirements page for detailed information.
+      Check our system requirements page for detailed information.
    :::
 
 3. **Configure Settings**
    Set up your preferences and start using the app.
 
    ::: card Configuration
-   - Choose your theme
-   - Set up notifications
-   - Configure integrations
+      - Choose your theme
+      - Set up notifications
+      - Configure integrations
    :::
 
 :::
@@ -293,33 +196,3 @@ Steps containers are designed for simple, sequential instructions and work well 
 - **Test incrementally** - Build complex structures step by step
 - **Use browser dev tools** - Inspect the generated HTML for issues
 - **Use the right container** - Steps for simple sequences, cards/tabs for complex content
-
-## Migration from v0.1.x
-
-### Breaking Changes
-
-- **Container parsing** - The internal parsing system has been optimized for reliability
-- **Nesting behavior** - Most containers support seamless nesting
-
-### What's New
-
-- **Enhanced nesting** - Cards, tabs, callouts, and buttons support seamless nesting
-- **Better performance** - Improved parsing performance for complex structures
-- **Clear limitations** - Well-defined boundaries for what each container can do
-
-### Backward Compatibility
-
-- **Existing syntax** - All existing container syntax remains the same
-- **Enhanced functionality** - New nesting capabilities are additive for supported containers
-
-## Future Container Types
-
-The nested container system is designed to be easily extensible. Future container types that could be added include:
-
-- **Timeline containers** - For chronological content
-- **Changelog containers** - For version history
-- **FAQ containers** - For question-answer content
-- **Gallery containers** - For image collections
-- **Code playground containers** - For interactive code examples
-
-The architecture supports adding new containers by simply defining them in the containers object and implementing their render functions. 

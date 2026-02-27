@@ -1,41 +1,36 @@
 ---
 title: "Deployment"
-description: "Learn how to deploy your docmd-generated static site to various hosting platforms, including GitHub Pages."
+description: "Learn how to deploy your docmd-generated static site to modern hosting platforms like GitHub Pages, Vercel, and Netlify."
 ---
 
-# Deploying Your docmd Site
+# Deploying Your Site
 
-Once you've built your documentation site using `docmd build`, the entire static site is generated into the `site/` directory (or your configured `outputDir`). This `site/` directory contains all the HTML, CSS, JavaScript, and assets needed, making it deployable to any static hosting service.
+Because `docmd` generates a pure, standard static site, you can host your documentation literally anywhere that serves HTML files. 
 
-## Building for Production
-
-Before deployment, ensure you build your site in production mode:
+When you run the build command, `docmd` processes all your Markdown and places the final, production-ready website into your output directory (default: `site/`).
 
 ```bash
 docmd build
 ```
 
-This generates optimized HTML, CSS, and assets ready for production use.
+The contents of this `site/` folder are all you need. Below are guides for deploying to the most popular modern hosting platforms.
 
-## Deployment Options
+::: tabs
 
-Since `docmd` generates a standard static site, you can use any static hosting service. Here are some popular options:
+== tab "GitHub Pages"
+The most robust and automated way to deploy to GitHub Pages is using a **GitHub Actions** workflow. This ensures your site rebuilds automatically every time you push changes to your repository.
 
-### GitHub Pages
-
-The most robust and automated way to deploy to GitHub Pages is using a GitHub Actions workflow.
-
-Create a file at `.github/workflows/deploy-docs.yml` with the following content:
+**1. Create the Workflow File**
+Create a file in your repository at `.github/workflows/deploy-docs.yml` and add the following content:
 
 ```yaml
-name: Deploy docmd docs to GitHub Pages
+name: Deploy docmd to GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # Your default branch
-  workflow_dispatch:   # Allows manual workflow trigger from Actions tab
+    branches: ["main"] # Change this if your default branch is 'master'
+  workflow_dispatch:   # Allows manual triggers
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -54,15 +49,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22' # docmd requires Node 18+
           cache: 'npm'
 
       - name: Install docmd
-        # Ensure you use the core package
         run: npm install -g @docmd/core
 
-      - name: Build site with docmd
-        # Assumes docmd.config.js is in the root
+      - name: Build site
         run: docmd build 
 
       - name: Setup Pages
@@ -71,21 +64,56 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site # This should be your outputDir path
+          path: ./site # Your configured outputDir
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 ```
 
-Then:
-1.  **Enable GitHub Pages in your repository settings**, selecting "GitHub Actions" as the source.
-2.  **Push the workflow file to your repository**.
-3.  On the next push to `main` (or if you manually trigger the workflow), the Action will run, build your `docmd` site, and deploy it.
+**2. Configure Repository Settings**
+Go to your repository settings on GitHub. Navigate to **Pages**, and under "Build and deployment", change the Source to **GitHub Actions**.
 
-### Other Hosting Options
+The next time you push to your `main` branch, your docs will automatically build and publish!
 
-* **Netlify, Vercel, Cloudflare Pages** - Upload or connect your Git repository and set the build command to `npm install -g @docmd/core && docmd build`.
-* **Any Web Server** - Simply upload the contents of the `site/` directory to any web server that can serve static files.
+== tab "Vercel"
+Vercel is an excellent platform for hosting static sites with zero configuration.
 
-By following these guidelines, you can easily get your `docmd`-powered documentation online and accessible to your users.
+1. Push your `docmd` project to a Git repository (GitHub, GitLab, Bitbucket).
+2. Log in to Vercel and click **Add New > Project**.
+3. Import your repository.
+4. Vercel usually detects Node.js projects automatically, but ensure the following settings are applied:
+   * **Framework Preset:** `Other`
+   * **Build Command:** `npm install -g @docmd/core && docmd build`
+   * **Output Directory:** `site`
+5. Click **Deploy**.
+
+== tab "Netlify"
+Netlify provides a seamless deployment experience for static site generators.
+
+1. Push your `docmd` project to a Git repository.
+2. Log in to Netlify and click **Add new site > Import an existing project**.
+3. Connect your Git provider and select your repository.
+4. Configure the build settings:
+   * **Base directory:** *(Leave empty unless your docs are in a subfolder)*
+   * **Build command:** `npm install -g @docmd/core && docmd build`
+   * **Publish directory:** `site`
+5. Click **Deploy site**.
+
+== tab "Traditional Web Server"
+If you are hosting your documentation on a traditional web server (like Apache, Nginx, or an AWS S3 bucket), deployment is as simple as moving files.
+
+1. Run `docmd build` locally or in your CI/CD pipeline.
+2. Copy the entire contents of the generated `site/` folder to your web server's public directory (e.g., `/var/www/html/docs`).
+
+::: callout tip SPA Routing
+`docmd`'s Single Page Application (SPA) router is built to gracefully degrade. You **do not** need to configure complex URL rewrite rules on your server (like you would for React or Vue apps). If a user accesses a URL directly, the static HTML file is served by the server, and the SPA takes over from there.
+:::
+
+:::
+
+## Path Configuration (Subdirectories)
+
+If you are not hosting your documentation at the root of a domain (e.g., you are hosting it at `https://mycompany.com/docs/` instead of `https://docs.mycompany.com/`), you must ensure your `docmd.config.js` reflects this so assets and relative links resolve correctly.
+
+While `docmd` uses highly resilient relative pathing out of the box, always ensure your `siteUrl` is set accurately in your config if you are using plugins like `sitemap` or `seo` that require absolute URLs.

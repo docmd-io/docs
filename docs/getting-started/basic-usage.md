@@ -1,89 +1,91 @@
 ---
 title: "Basic Usage"
-description: "Learn the basic commands to initialize, build, and preview your docmd site."
+description: "A quick-start guide to initializing a project, writing content, and building your site."
 ---
 
 # Basic Usage
 
-Once `docmd` is [installed](/getting-started/installation/), using it involves a few simple commands to manage your documentation project.
+Once you have `docmd` installed, creating a beautiful documentation site takes only a few minutes. This guide walks you through the standard workflow.
 
-## 1. Initialize Your Project (`docmd init`)
+## 1. Initialize the Project
 
-Navigate to the directory where you want to create your documentation project. If the directory doesn't exist, create it first.
+Create a new folder for your documentation and navigate into it using your terminal.
 
 ```bash
-mkdir my-awesome-docs
-cd my-awesome-docs
+mkdir my-docs
+cd my-docs
 ```
 
-Then, run the `init` command:
+Run the initialization command:
 
 ```bash
 docmd init
 ```
 
-This command sets up the basic structure for your `docmd` project:
+`docmd` will scaffold a ready-to-use project. Your directory will now look like this:
 
-*   `docs/`: An empty directory where your Markdown source files will live.
-    *   `docs/index.md`: A sample Markdown file to get you started.
-*   `docmd.config.js`: A configuration file for your site, pre-filled with sensible defaults.
-
-You'll typically edit config file to set your site title and define the navigation structure, and then start adding your `.md` files to the `docs/` directory.
-
-## 2. Add and Structure Content
-
-Create your Markdown (`.md`) files inside the `docs/` directory. You can organize them into subdirectories as needed. For example:
-
-```
-my-awesome-docs/
-├── assets/
-├── docs/
-│   ├── index.md
-│   └── api/
-│       ├── introduction.md
-│       └── endpoints.md
-│   └── guides/
-│       ├── setup.md
-│       └── advanced.md
-└── docmd.config.js
+```text
+my-docs/
+├── assets/                 # Place custom images, CSS, and JS here
+├── docs/                   # Your Markdown files live here
+│   └── index.md            # The homepage of your documentation
+├── docmd.config.js         # The main configuration file
+└── package.json            # Contains helpful NPM scripts
 ```
 
-Each Markdown file should start with YAML frontmatter to define metadata like the page title. See [Content > Frontmatter](/content/frontmatter/) for details.
+## 2. Start the Development Server
 
-## 3. Preview Your Site (`docmd dev`)
+You don't need to build the site blindly. `docmd` includes a blazing-fast development server that updates your browser the moment you save a file.
 
-While you're writing content or configuring your site, you'll want to see a live preview. The `dev` command starts a local development server with live reloading.
-
-In your project's root directory (e.g., `my-awesome-docs/`), run:
+Run the dev command:
 
 ```bash
 docmd dev
 ```
 
-This will:
-1.  Perform an initial build of your site.
-2.  Start a web server, typically at `http://localhost:3000`.
-3.  Watch your `docs/` directory and `docmd.config.js` for changes.
-4.  Automatically rebuild the site and refresh your browser when changes are detected.
+Open your browser to `http://localhost:3000`. You will see your newly generated documentation site. Keep this server running in your terminal while you work.
 
-Open `http://localhost:3000` in your web browser to see your site. Any changes you save to your Markdown files or config file will be reflected live in the browser.
+## 3. Write Your Content
 
-To stop the development server, press `Ctrl+C` in your terminal.
+Open the `docs/` folder in your favorite code editor (like VS Code). 
 
-## 4. Build Your Static Site (`docmd build`)
+`docmd` uses standard Markdown. Any `.md` file you create inside the `docs/` folder will automatically be converted into a web page. 
 
-When you're ready to deploy your documentation or create a production version, use the `build` command:
+Try opening `docs/index.md` and changing the `# Welcome` text. When you save the file, your browser will instantly refresh to show the change.
+
+::: callout tip Organizing Content
+You can create subfolders inside `docs/` (e.g., `docs/api/endpoints.md`). `docmd` will automatically mirror this folder structure when generating your website's URLs.
+:::
+
+## 4. Configure the Sidebar
+
+By default, `docmd` doesn't guess what your navigation should look like. You define it explicitly to maintain perfect control over your users' experience.
+
+Open `docmd.config.js` and locate the `navigation` array. You can add new links, create dropdown categories, and assign SVG icons here.
+
+```javascript
+navigation:[
+  { title: 'Home', path: '/', icon: 'home' },
+  {
+    title: 'Guides',
+    icon: 'book',
+    collapsible: true,
+    children:[
+      { title: 'Quick Start', path: '/quick-start' },
+      { title: 'Advanced', path: '/advanced' }
+    ]
+  }
+]
+```
+
+## 5. Build for Production
+
+When you are ready to share your documentation with the world, stop the development server (press `Ctrl + C` in your terminal) and run the build command:
 
 ```bash
 docmd build
 ```
 
-This command:
-1.  Reads your `docmd.config.js`.
-2.  Processes all `.md` files in your `docs/` directory.
-3.  Generates the complete static HTML, CSS, and JavaScript assets.
-4.  Outputs the entire site into a `site/` directory (by default, configurable in `docmd.config.js`).
+`docmd` will process all your Markdown, generate an offline search index, minify your assets, and output a highly optimized static website into a new folder called `site/`.
 
-The contents of the `site/` directory are all you need to deploy your documentation. You can upload this folder to any static web hosting provider. See [Deployment](/deployment/) for more information.
-
-This covers the fundamental workflow of using `docmd`. Next, you'll want to learn more about [Content](/content/) and [Configuration](/configuration/).
+You can now upload the contents of that `site/` folder to any web host (GitHub Pages, Netlify, Vercel, or a traditional server). See our [Deployment Guide](/deployment) for specific instructions.
