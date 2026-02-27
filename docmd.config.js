@@ -66,16 +66,16 @@ module.exports = {
         {
           title: 'Resources',
           links: [
-            { text: 'Getting Started', url: '/getting-started' },
-            { text: 'Configuration', url: '/configuration' },
+            { text: 'Installation', url: '/getting-started/installation' },
+            { text: 'Configuration', url: '/configuration/general' },
             { text: 'CLI Commands', url: '/cli-commands' }
           ]
         },
         {
           title: 'Ecosystem',
           links: [
-            { text: 'Plugins', url: '/plugins' },
-            { text: 'Themes', url: '/theming' },
+            { text: 'Plugins', url: '/plugins/usage' },
+            { text: 'Themes', url: '/theming/available-themes' },
             { text: 'Live Editor', url: '/content/live-preview' }
           ]
         },
