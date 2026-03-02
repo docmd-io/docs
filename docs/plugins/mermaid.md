@@ -1,9 +1,7 @@
 ---
-title: "Mermaid Diagrams"
+title: "Mermaid Diagrams Plugin"
 description: "Create beautiful diagrams and flowcharts using Mermaid syntax in your docmd documentation."
 ---
-
-# Mermaid Diagrams
 
 Mermaid is a JavaScript-based diagramming and charting tool that uses Markdown-inspired text definitions to create and modify diagrams dynamically. docmd has built-in support for Mermaid diagrams with automatic light/dark theme switching.
 

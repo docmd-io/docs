@@ -3,8 +3,6 @@ title: "Installation"
 description: "How to install docmd globally or locally using npm, yarn, or pnpm."
 ---
 
-# Installation
-
 `docmd` is a Node.js package. It requires **Node.js v18.0.0 or higher**.
 
 ## Global Installation (Recommended)

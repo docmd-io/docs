@@ -3,8 +3,6 @@ title: "Images & Lightbox"
 description: "Adding images, galleries, and enabling lightbox zoom effects."
 ---
 
-# Images & Media
-
 ## Basic Images
 
 Use standard Markdown syntax to embed images. We recommend storing images in your `assets/images/` folder.

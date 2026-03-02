@@ -3,8 +3,6 @@ title: "Programmatic API"
 description: "Programmatic API for building docmd sites from your own scripts."
 ---
 
-# Programmatic API
-
 You can use `docmd` programmatically inside your own Node.js scripts or task runners (Gulp, Grunt, custom CI).
 
 ## Installation

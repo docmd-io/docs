@@ -3,8 +3,6 @@ title: "Steps"
 description: "Create beautiful numbered instruction lists for tutorials."
 ---
 
-# Steps Container
-
 The `steps` container transforms a standard ordered list into a visual timeline of instructions. It is designed for "How-to" guides.
 
 ## Syntax

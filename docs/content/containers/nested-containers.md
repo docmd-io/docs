@@ -3,8 +3,6 @@ title: "Nested Containers"
 description: "Learn how to use the advanced nested container system to create complex, interactive documentation layouts with seamless container nesting."
 ---
 
-# Nested Containers
-
 The advanced nested container system in docmd allows you to create complex, interactive documentation layouts by nesting containers within each other. This powerful feature enables you to build rich, structured content that was previously impossible.
 
 ## Nesting Rules

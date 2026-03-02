@@ -3,8 +3,6 @@ title: "General Configuration"
 description: "Configure the core settings, layout, and appearance of your docmd site."
 ---
 
-# General Configuration
-
 The `docmd.config.js` file is the heart of your project. It exports a JavaScript object that controls everything from your site title to the footer layout.
 
 ## Core Metadata

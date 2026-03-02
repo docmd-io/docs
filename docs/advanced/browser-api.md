@@ -3,8 +3,6 @@ title: "Browser API (Client-Side)"
 description: "How to use the docmd engine directly in the browser to render documentation dynamically without a server."
 ---
 
-# Browser API
-
 `docmd` features an **isomorphic core**. This means the exact same engine that builds your static site in Node.js can also run entirely inside a web browser.
 
 This is powerful for:

@@ -3,8 +3,6 @@ title: "Markdown Syntax"
 description: "Basic formatting guide for docmd: Headings, lists, bold, italic, and more."
 ---
 
-# Markdown Syntax
-
 `docmd` uses standard Markdown syntax. This guide covers the essentials for formatting text.
 
 ## Text Formatting

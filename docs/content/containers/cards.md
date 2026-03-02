@@ -3,8 +3,6 @@ title: "Cards"
 description: "Group content into visually distinct, framed boxes."
 ---
 
-# Cards
-
 Cards are versatile containers used to group related content. They are excellent for creating grid layouts, feature lists, or summarizing sections.
 
 ## Syntax

@@ -1,9 +1,7 @@
 ---
-title: "Using Plugins"
+title: "Extending docmd with Plugins"
 description: "Extend docmd's functionality with built-in integrations."
 ---
-
-# Extending docmd
 
 Plugins allow you to add complex features to your documentation site—like analytics tracking or AI context generation—without bloating the core engine. 
 

@@ -1,78 +1,62 @@
 ---
-title: "Frontmatter"
-description: "How to use YAML frontmatter to define page metadata, SEO settings, and layout options."
+title: "Frontmatter Reference"
+description: "The complete guide to page-level metadata and configuration in docmd."
 ---
 
-# Frontmatter
+Frontmatter allows you to override global settings on a per-page basis. It must be written in YAML format at the very top of your Markdown file.
 
-Every Markdown (`.md`) file in `docmd` uses YAML frontmatter to define metadata. This block must be at the very top of the file, enclosed by triple dashes (`---`).
-
-## Basic Structure
-
-```yaml
----
-title: "Page Title"
-description: "A short summary for SEO and search results."
----
-```
-
-## Supported Fields
-
-These are the fields that `docmd` active uses to change the behavior of your site.
-
-### Core Metadata
-
-| Field | Type | Description |
+## Core Metadata
+| Key | Type | Description |
 | :--- | :--- | :--- |
-| **`title`** | String | **Required.** Sets the HTML `<title>` and the main `<h1>` header of the page. |
-| **`description`**| String | Sets the `<meta name="description">` tag. Crucial for SEO. |
+| `title` | `String` | **Required.** Sets the HTML `<title>` and the primary page header. |
+| `description` | `String` | Sets the meta description for SEO and search results. |
+| `keywords` | `Array` | A list of keywords for the `<meta name="keywords">` tag. |
 
-### Build Behavior
-
-| Field | Type | Description |
+## Visibility & SEO
+| Key | Type | Description |
 | :--- | :--- | :--- |
-| **`noindex`** | Boolean | If `true`, excludes the page from the **Search Index** and adds a `noindex` meta tag to prevent Google/Bing indexing. Useful for drafts or private pages. |
-| **`noStyle`** | Boolean | If `true`, disables the default theme/layout. Used for creating [Landing Pages](./no-style-pages.md). |
+| `noindex` | `Boolean` | Excludes the page from the search index and search engines. |
+| `llms` | `Boolean` | Set to `false` to exclude this page from the `llms.txt` file. |
+| `sitemap` | `Object` | Custom sitemap settings: `priority` (0.0-1.0) and `changefreq` (e.g., `daily`). |
 
-### Plugin Specifics
+## Page Layout
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| `layout` | `String` | Set to `full` to hide the Table of Contents and use the full width. |
+| `hideTitle` | `Boolean` | If `true`, the title is hidden from the sticky top header. |
+| `toc` | `Boolean` | Set to `false` to disable the Table of Contents entirely. |
+| `bodyClass` | `String` | Adds a custom CSS class to the `<body>` tag of this page. |
 
-Plugins look for specific keys in the frontmatter to override global settings.
+## Injection Slots
+Use these keys to add custom HTML/JS to specific pages without changing your global config.
 
-**SEO Plugin:**
-```yaml
-seo:
-  image: "/assets/og-image.png"
-  keywords: ["documentation", "generator"]
-```
+*   **`customHead`**: Injects HTML into the `<head>`.
+*   **`customScripts`**: Injects HTML at the very end of the `<body>`.
 
-**Sitemap Plugin:**
-```yaml
-sitemap:
-  priority: 1.0
-  changefreq: "daily"
-```
-
-**LLM Plugin:**
-```yaml
-llms: false  # Exclude this page from llms.txt
-```
-
-## Example
+## No-Style Mode (`noStyle: true`)
+When `noStyle` is enabled, the docmd layout is removed. You must explicitly opt-in to components:
 
 ```yaml
 ---
-title: "Installation Guide"
-description: "How to install docmd on Windows, Mac, and Linux."
-noindex: false
-seo:
-  keywords: ["install", "setup", "guide"]
+noStyle: true
+components:
+  meta: true      # Injects SEO tags
+  favicon: true   # Injects favicon
+  css: true       # Injects docmd-main.css
+  theme: true     # Injects theme CSS
+  highlight: true # Injects syntax highlighting
+  scripts: true   # Injects docmd-main.js
+  layout: true    # Injects the content-area wrapper
+  sidebar: true   # Injects the navigation sidebar
+  footer: true    # Injects the footer
+  branding: true  # Injects the "Built with docmd" badge
 ---
-
-# Installation
-
-Content starts here...
 ```
 
-::: callout warning Note on Sorting
-`docmd` does not currently use `order` or `date` fields to sort pages. Navigation order is determined strictly by your `docmd.config.js` navigation array.
-:::
+## Plugin Overrides
+### SEO Plugin (`seo`)
+*   `description`: Page-specific social description.
+*   `image`: Social share image URL.
+*   `ogType`: Open Graph type (default: `website`).
+*   `twitterCard`: Twitter card type.
+*   `canonicalUrl`: Sets a custom canonical link.

@@ -3,8 +3,6 @@ title: "Collapsible"
 description: "Create toggleable accordion sections for FAQs and advanced details."
 ---
 
-# Collapsible
-
 The `collapsible` container creates an accordion-style toggle. It is perfect for FAQs, spoilers, or hiding complex configuration options that aren't relevant to every reader.
 
 ## Syntax

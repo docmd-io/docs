@@ -3,8 +3,6 @@ title: "Linking & Referencing"
 description: "A guide to internal cross-linking, external links, and asset referencing."
 ---
 
-# Linking & Referencing
-
 Learn how to connect your pages and link to external resources.
 
 ## Internal Page Links

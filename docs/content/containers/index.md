@@ -3,8 +3,6 @@ title: "Custom Containers"
 description: "A gallery of the rich UI components available in docmd."
 ---
 
-# Custom Containers
-
 Standard Markdown is great for text, but sometimes you need more. `docmd` extends Markdown with a set of "Containers" to help you structure complex documentation.
 
 Use the syntax `::: container_name` to start a block.

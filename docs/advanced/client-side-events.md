@@ -3,8 +3,6 @@ title: Client-Side Events
 description: Hook into the docmd SPA router for custom interactive features.
 ---
 
-# Client-Side Events
-
 `docmd` uses a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the page does not fully reload when navigating, standard `DOMContentLoaded` scripts might not trigger on subsequent page views.
 
 To solve this, `docmd` dispatches a custom event called `docmd:page-mounted` whenever a new page renders.

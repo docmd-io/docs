@@ -3,8 +3,6 @@ title: "CLI Commands"
 description: "A complete reference guide to the docmd command-line interface and its available options."
 ---
 
-# CLI Reference
-
 The Command Line Interface (CLI) is the primary way you will interact with `docmd` while building and testing your documentation.
 
 ## `docmd init`

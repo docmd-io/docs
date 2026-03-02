@@ -3,8 +3,6 @@ title: "Buttons"
 description: "Create call-to-action buttons for links, downloads, and external resources."
 ---
 
-# Buttons
-
 Buttons are perfect for "Call to Action" links, such as downloads, sign-ups, or navigating to key sections.
 
 ::: callout warning Self-Closing

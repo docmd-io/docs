@@ -1,9 +1,7 @@
 ---
-title: "Comparison"
+title: "Comparing Documentation Tools"
 description: "See how docmd stacks up against Docusaurus, MkDocs, Mintlify, and other documentation generators."
 ---
-
-# Comparing Documentation Tools
 
 Choosing the right tool depends on your team's workflow and your project's scale. `docmd` was engineered to fill a specific gap: the space between "too simple" (basic Markdown parsers) and "too heavy" (full React/framework applications).
 

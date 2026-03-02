@@ -3,8 +3,6 @@ title: "Assets Management"
 description: "Learn how to manage and customize your assets (CSS, JavaScript, images) in your docmd site."
 ---
 
-# Assets Management
-
 Managing your custom assets (CSS, JavaScript, images) is an important part of customizing your documentation site. `docmd` provides flexible ways to include and manage these assets.
 
 ## Project Structure

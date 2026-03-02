@@ -1,11 +1,9 @@
 ---
 title: "Building Plugins"
-description: "Learn how to create custom plugins to extend docmd capabilities."
+description: "A guide for developers on how to create and share custom docmd plugins."
 ---
 
-# Building Plugins
-
-`docmd` features a flexible hook-based plugin system. Plugins can modify the Markdown parser, inject HTML tags, manage static assets, or perform actions after the build completes.
+Plugins are the primary way to extend `docmd`. They allow you to hook into the Markdown parser, inject HTML into the layout, and run logic after the build completes.
 
 ## Anatomy of a Plugin
 

@@ -3,8 +3,6 @@ title: "Light & Dark Mode"
 description: "How to configure and manage light and dark themes in your docmd documentation."
 ---
 
-# Light & Dark Mode
-
 `docmd` provides built-in support for light and dark color schemes to enhance readability and user experience. Users can choose their preferred viewing mode, which improves accessibility and reduces eye strain in different lighting conditions.
 
 ## Setting the Default Theme

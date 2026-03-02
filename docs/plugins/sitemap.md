@@ -3,8 +3,6 @@ title: "Sitemap Plugin"
 description: "Automatically generate a sitemap.xml for your docmd site to improve search engine discoverability."
 ---
 
-# Sitemap Plugin (`sitemap`)
-
 The `sitemap` plugin automatically generates a `sitemap.xml` file for your documentation site. This helps search engines discover, crawl, and index your content more effectively, which can improve your site's visibility in search results.
 
 ## Enabling the Plugin

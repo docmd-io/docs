@@ -1,5 +1,5 @@
 ---
-title: "No-Style Page Example"
+title: "docmd : No-Style Page Example"
 description: "An example of a page using the no-style feature"
 noStyle: true
 components:

@@ -3,8 +3,6 @@ title: "Available Themes"
 description: "An overview of the built-in themes provided by docmd."
 ---
 
-# Available Themes
-
 `docmd` allows you to choose from a selection of built-in themes to quickly change the overall look and feel of your documentation site. You can specify the theme in your config file using the `theme.name` property.
 
 ```javascript

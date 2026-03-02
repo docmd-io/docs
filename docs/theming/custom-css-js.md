@@ -3,8 +3,6 @@ title: "Custom Styles & Scripts"
 description: "Learn how to add your own custom CSS and JavaScript to your docmd site for advanced customization."
 ---
 
-# Custom Styles & Scripts
-
 While `docmd` themes provide a solid foundation, you can further tailor the appearance and behavior of your site by injecting custom CSS and JavaScript files. This is configured in your config file.
 
 ## Custom CSS

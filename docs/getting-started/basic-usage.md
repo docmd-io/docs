@@ -3,8 +3,6 @@ title: "Basic Usage"
 description: "A quick-start guide to initializing a project, writing content, and building your site."
 ---
 
-# Basic Usage
-
 Once you have `docmd` installed, creating a beautiful documentation site takes only a few minutes. This guide walks you through the standard workflow.
 
 ## 1. Initialize the Project

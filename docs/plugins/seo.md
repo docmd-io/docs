@@ -3,8 +3,6 @@ title: "SEO & Meta Tags Plugin"
 description: "Configure Search Engine Optimization (SEO) meta tags to improve your docmd site's discoverability."
 ---
 
-# SEO & Meta Tags Plugin (`seo`)
-
 The `seo` plugin automatically generates important meta tags in the `<head>` of your HTML pages. This helps search engines and social media platforms understand, index, and display your content more effectively.
 
 ## Enabling the Plugin

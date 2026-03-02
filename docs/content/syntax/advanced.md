@@ -3,8 +3,6 @@ title: "Advanced Syntax"
 description: "Beyond the basic syntax, docmd supports a variety of advanced Markdown features to help you create richer documentation."
 ---
 
-# Advanced Markdown Capabilities
-
 ## GFM (GitHub Flavored Markdown)
 
 docmd supports GitHub Flavored Markdown extensions including:

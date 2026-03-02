@@ -3,8 +3,6 @@ title: "Search Plugin"
 description: "Configure the offline-capable, full-text search engine."
 ---
 
-# Search Plugin
-
 `docmd` includes a privacy-focused, offline-capable search engine powered by `MiniSearch`. It indexes your content at build time, meaning no external services (like Algolia) are required.
 
 ## Configuration

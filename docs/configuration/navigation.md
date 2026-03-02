@@ -1,9 +1,7 @@
 ---
-title: "Navigation"
+title: "Navigation Configuration"
 description: "Configure your sidebar links, nested groups, icons, and category labels."
 ---
-
-# Navigation Configuration
 
 The sidebar navigation is controlled by the `navigation` array in your `docmd.config.js`. It allows you to define links, nest items into groups, and add visual icons.
 

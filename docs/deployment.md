@@ -1,9 +1,7 @@
 ---
-title: "Deployment"
+title: "Deployment (Deploy Your Website)"
 description: "Learn how to deploy your docmd-generated static site to modern hosting platforms like GitHub Pages, Vercel, and Netlify."
 ---
-
-# Deploying Your Site
 
 Because `docmd` generates a pure, standard static site, you can host your documentation literally anywhere that serves HTML files. 
 

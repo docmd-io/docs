@@ -1,9 +1,7 @@
 ---
-title: "Recipe: Custom Fonts"
+title: "Recipe: Adding Custom Fonts"
 description: "Personalize your documentation by importing Google Fonts."
 ---
-
-# Adding Custom Fonts
 
 `docmd` uses CSS variables to manage typography. Changing your site's font is as easy as creating a custom stylesheet.
 

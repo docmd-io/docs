@@ -3,8 +3,6 @@ title: "Code Blocks"
 description: "How to display code with syntax highlighting, line numbers, and copy buttons."
 ---
 
-# Writing Code
-
 `docmd` includes `highlight.js` for automatic syntax highlighting.
 
 ## Fenced Code Blocks

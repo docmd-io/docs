@@ -1,9 +1,7 @@
 ---
-title: "Recipe: Marketing Landing Page"
+title: "Recipe: Creating a Landing Page"
 description: "How to build a custom landing page using noStyle."
 ---
-
-# Creating a Landing Page
 
 Sometimes you want your `index.html` (the home page) to look completely different from your documentation—like a product marketing page. `docmd` makes this easy with **No-Style Pages**.
 

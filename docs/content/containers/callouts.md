@@ -3,8 +3,6 @@ title: "Callouts"
 description: "Highlight important information using semantic callout blocks."
 ---
 
-# Callouts
-
 Callouts allow you to highlight specific information that exists outside the normal flow of text. `docmd` supports five semantic types.
 
 ## Syntax

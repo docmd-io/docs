@@ -1,9 +1,7 @@
 ---
-title: "Analytics Integration"
+title: "Analytics Integration Plugin"
 description: "Integrate web analytics services like Google Analytics into your docmd site to track visitor traffic."
 ---
-
-# Analytics Integration Plugin
 
 `docmd` allows you to easily integrate popular web analytics services into your documentation site using the built-in analytics plugin. This helps you understand your audience, track page views, and gather insights into how your documentation is being used.
 

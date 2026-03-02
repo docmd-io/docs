@@ -1,9 +1,7 @@
 ---
-title: "Live Preview"
+title: "Live Preview & Browser Support"
 description: "Run docmd entirely in the browser without a server using the new Live architecture."
 ---
-
-# Live Preview & Browser Support
 
 ::: button "Open Live Editor" https://live.docmd.io color:#007bff
 

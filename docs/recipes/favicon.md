@@ -1,9 +1,7 @@
 ---
-title: "Recipe: Custom Favicon"
+title: "Recipe: Adding a Custom Favicon"
 description: "How to add a custom favicon to your documentation site."
 ---
-
-# Adding a Custom Favicon
 
 A favicon is the small icon that appears in the browser tab next to your page title. `docmd` makes it easy to add your own.
 

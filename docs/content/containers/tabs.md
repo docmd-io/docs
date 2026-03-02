@@ -3,8 +3,6 @@ title: "Tabs"
 description: "Organize content into switchable tabbed panes."
 ---
 
-# Tabs Container
-
 Tabs are essential for showing alternative content (like code snippets for different languages or instructions for different OSs) without cluttering the page.
 
 ## Syntax

@@ -3,8 +3,6 @@ title: "Changelogs"
 description: "Create beautiful, timeline-based version history pages."
 ---
 
-# Changelog Container
-
 The `changelog` container formats version history into a clean, vertical timeline. It is specifically designed to parse date/version headers and body content separately.
 
 ## Syntax

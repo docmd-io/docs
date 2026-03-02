@@ -3,8 +3,6 @@ title: "Contributing"
 description: "Learn how you can contribute to the development, design, and documentation of docmd."
 ---
 
-# Contributing to docmd
-
 First off, thank you for considering contributing to `docmd`! It's people like you that make the open-source community an amazing place to learn, inspire, and create.
 
 We welcome contributions of all kinds, from fixing typos to engineering entirely new plugins.
