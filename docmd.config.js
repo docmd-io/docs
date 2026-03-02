@@ -122,7 +122,8 @@ module.exports = {
       collapsible: false,
       children: [
         { title: 'General Settings', path: '/configuration/general', icon: 'sliders-horizontal' },
-        { title: 'Navigation', path: '/configuration/navigation', icon: 'navigation' }
+        { title: 'Navigation', path: '/configuration/navigation', icon: 'navigation' },
+        { title: 'Layout & UI Slots', path: '/configuration/layout-slots', icon: 'layout-dashboard' },
       ],
     },
     { title: 'Live Preview', path: '/content/live-preview', icon: 'monitor-play' },
@@ -168,6 +169,7 @@ module.exports = {
       icon: 'palette',
       collapsible: true,
       children: [
+        { title: 'Customization', path: '/theming/customization', icon: 'wand-sparkles' },
         { title: 'Available Themes', path: '/theming/available-themes', icon: 'layout-grid' },
         { title: 'Light & Dark Mode', path: '/theming/light-dark-mode', icon: 'sun-moon' },
         { title: 'Custom CSS & JS', path: '/theming/custom-css-js', icon: 'file-code' },
@@ -197,6 +199,7 @@ module.exports = {
         { title: 'Landing Page', path: '/recipes/landing-page', icon: 'layout-template' },
         { title: 'Custom Fonts', path: '/recipes/custom-fonts', icon: 'type' },
         { title: 'Favicon', path: '/recipes/favicon', icon: 'image-plus' },
+        { title: 'Writing Guide', path: '/recipes/writing-guide', icon: 'book-open' }
       ],
     },
     {
