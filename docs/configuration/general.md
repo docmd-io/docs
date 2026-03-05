@@ -3,28 +3,28 @@ title: "General Configuration"
 description: "Configure the core settings, layout, and appearance of your docmd site."
 ---
 
-The `docmd.config.js` file is the heart of your project. It exports a JavaScript object that controls everything from your site title to the footer layout.
+The `docmd.config.js` file controls your site. We recommend wrapping your config in `defineConfig` for better IDE autocomplete support.
 
 ## Core Metadata
 
-These settings define the identity of your site.
-
 ```javascript
-module.exports = {
-  siteTitle: 'My Project',
-  siteUrl: 'https://mysite.com', // Crucial for SEO & Sitemap plugins
-  srcDir: 'docs',                // Default: 'docs'
-  outputDir: 'site',             // Default: 'site'
+const { defineConfig } = require('@docmd/core');
+
+module.exports = defineConfig({
+  title: 'My Project',           // Site Title
+  url: 'https://mysite.com',     // Site URL (SEO)
+  src: 'docs',                   // Source directory (default: 'docs')
+  out: 'site',                   // Output directory (default: 'site')
   
   // Branding
   logo: {
-    light: 'assets/logo-dark.png', // Shown in light mode
-    dark: 'assets/logo-light.png', // Shown in dark mode
-    href: '/',                     // Link destination
+    light: 'assets/logo-dark.png',
+    dark: 'assets/logo-light.png',
+    href: '/',
     alt: 'Project Logo'
   },
   favicon: 'assets/favicon.ico'
-}
+});
 ```
 
 ## Layout Architecture
