@@ -1,7 +1,7 @@
 // docmd.config.js (Modern Format)
 // Source file from the docmd project — https://github.com/docmd-io/docs
 
-module.exports = {
+module.exports = defineConfig({
   // --- Core Metadata ---
   siteTitle: 'docmd',
   siteUrl: 'https://docs.docmd.io',
@@ -40,7 +40,7 @@ module.exports = {
     customCss: [],          
   },
 
-  // --- Layout & UI Architecture (NEW in v0.4.8) ---
+  // --- Layout & UI Architecture ---
   layout: {
     spa: true,
     header: { 
@@ -104,6 +104,23 @@ module.exports = {
     llms: {}
   },
 
+  versions: {
+    current: '05',
+    position: 'sidebar-top',
+    all: [
+      {
+        id: '05',
+        dir: 'docs',       // Source folder for this version
+        label: 'v0.5.0 (Latest)'
+      },
+      {
+        id: '04',
+        dir: 'docs-04',    // Source folder for older version
+        label: 'v0.4.0'
+      }
+    ]
+  },
+
   // --- Navigation (Remains Unchanged) ---
   navigation: [
     { title: 'Overview', path: '/', icon: 'home' },
@@ -113,6 +130,7 @@ module.exports = {
       collapsible: false,
       children: [
         { title: 'Installation', path: '/getting-started/installation', icon: 'download' },
+        { title: 'Zero Config', path: '/getting-started/zero-config', icon: 'sparkles' },
         { title: 'Basic Usage', path: '/getting-started/basic-usage', icon: 'play' },
       ],
     },
@@ -123,7 +141,9 @@ module.exports = {
       children: [
         { title: 'General Settings', path: '/configuration/general', icon: 'sliders-horizontal' },
         { title: 'Navigation', path: '/configuration/navigation', icon: 'navigation' },
+        { title: 'Versioning', path: '/configuration/versioning', icon: 'git-branch' },
         { title: 'Layout & UI Slots', path: '/configuration/layout-slots', icon: 'layout-dashboard' },
+        { title: 'Redirects', path: '/configuration/redirects', icon: 'corner-up-right' }
       ],
     },
     { title: 'Live Preview', path: '/content/live-preview', icon: 'monitor-play' },
@@ -220,4 +240,4 @@ module.exports = {
     { title: 'GitHub', path: 'https://github.com/docmd-io/docmd', icon: 'github', external: true },
     { title: 'Discussions', path: 'https://github.com/orgs/docmd-io/discussions', icon: 'message-circle', external: true },
   ],
-};
+});
