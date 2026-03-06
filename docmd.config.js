@@ -20,12 +20,12 @@ module.exports = defineConfig({
   outputDir: 'site',
 
   // --- Features & UX ---
-  minify: true,           
-  autoTitleFromH1: true,  
-  copyCode: true,         
-  pageNavigation: true,   
+  minify: true,
+  autoTitleFromH1: true,
+  copyCode: true,
+  pageNavigation: true,
   customJs: ['/assets/js/theme-switcher.js'],
-  
+
   editLink: {
     enabled: true,
     baseUrl: 'https://github.com/docmd-io/docs/edit/main/docs',
@@ -36,15 +36,15 @@ module.exports = defineConfig({
   theme: {
     name: 'default',
     defaultMode: 'light',
-    codeHighlight: true,    
-    customCss: [],          
+    codeHighlight: true,
+    customCss: [],
   },
 
   // --- Layout & UI Architecture ---
   layout: {
     spa: true,
-    header: { 
-      enabled: true 
+    header: {
+      enabled: true
     },
     sidebar: {
       collapsible: true,
@@ -74,8 +74,9 @@ module.exports = defineConfig({
         {
           title: 'Ecosystem',
           links: [
+            { text: 'Versioning', url: '/configuration/versioning' },
             { text: 'Plugins', url: '/plugins/usage' },
-            { text: 'Themes', url: '/theming/available-themes' },
+            { text: 'Themes', url: '/theming/customization' },
             { text: 'Live Editor', url: '/content/live-preview' }
           ]
         },
@@ -83,7 +84,9 @@ module.exports = defineConfig({
           title: 'Community',
           links: [
             { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', external: true },
-            { text: 'Discussions', url: 'https://github.com/orgs/docmd-io/discussions', external: true }
+            { text: 'Discussions', url: 'https://github.com/orgs/docmd-io/discussions', external: true },
+            { text: 'Contributing', url: '/contributing' },
+            { text: 'Reports & Issues', url: 'https://github.com/docmd-io/docmd/issues', external: true }
           ]
         }
       ]
@@ -93,6 +96,7 @@ module.exports = defineConfig({
   // --- Plugins ---
   plugins: {
     search: {},
+    // pwa: {},
     seo: {
       defaultDescription: 'The minimalist, zero-config documentation generator for Node.js developers.',
       openGraph: { defaultImage: 'assets/images/preview.png' },
@@ -151,14 +155,14 @@ module.exports = defineConfig({
       title: 'Content',
       icon: 'layout-template',
       collapsible: true,
-      children:[
+      children: [
         { title: 'Frontmatter', path: '/content/frontmatter', icon: 'file-text' },
         {
           title: 'Syntax',
           path: '/content/syntax/',
           icon: 'code-xml',
           collapsible: true,
-          children:[
+          children: [
             { title: 'Code', path: '/content/syntax/code', icon: 'code' },
             { title: 'Images', path: '/content/syntax/images', icon: 'image' },
             { title: 'Linking', path: '/content/syntax/linking', icon: 'link' },
@@ -170,7 +174,7 @@ module.exports = defineConfig({
           path: '/content/containers/',
           icon: 'box',
           collapsible: true,
-          children:[
+          children: [
             { title: 'Callouts', path: '/content/containers/callouts', icon: 'megaphone' },
             { title: 'Cards', path: '/content/containers/cards', icon: 'panel-top' },
             { title: 'Steps', path: '/content/containers/steps', icon: 'list-ordered' },
@@ -208,6 +212,7 @@ module.exports = defineConfig({
         { title: 'Analytics', path: '/plugins/analytics', icon: 'bar-chart' },
         { title: 'Sitemap', path: '/plugins/sitemap', icon: 'map' },
         { title: 'Mermaid Diagrams', path: '/plugins/mermaid', icon: 'network' },
+        { title: 'PWA', path: '/plugins/pwa', icon: 'smartphone' },
         { title: 'LLMs', path: '/plugins/llms', icon: 'brain-circuit' }
       ],
     },
@@ -226,7 +231,7 @@ module.exports = defineConfig({
       title: 'Advanced & API',
       icon: 'server-cog',
       collapsible: true,
-      children:[
+      children: [
         { title: 'Client Side Events', path: '/advanced/client-side-events', icon: 'square-mouse-pointer' },
         { title: 'Browser API', path: '/advanced/browser-api', icon: 'globe' },
         { title: 'Node API', path: '/advanced/node-api', icon: 'braces' },
@@ -237,6 +242,15 @@ module.exports = defineConfig({
     { title: 'Deployment', path: '/deployment', icon: 'upload-cloud' },
     { title: 'Contributing', path: '/contributing', icon: 'git-pull-request' },
     { title: 'Comparison', path: '/comparison', icon: 'scale' },
+    {
+      title: 'Release Notes',
+      icon: 'package-check',
+      collapsible: false,
+      children: [
+        { title: '0.5.1', path: '/release-notes/0-5-1' },
+        { title: '0.5.0', path: '/release-notes/0-5-0' },
+      ]
+    },
     { title: 'GitHub', path: 'https://github.com/docmd-io/docmd', icon: 'github', external: true },
     { title: 'Discussions', path: 'https://github.com/orgs/docmd-io/discussions', icon: 'message-circle', external: true },
   ],
