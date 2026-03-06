@@ -23,6 +23,10 @@ module.exports = {
         cardType: 'summary_large_image', // e.g., 'summary', 'summary_large_image'
         // siteUsername: '@ProjectX_Docs', // Your site's Twitter handle
         // creatorUsername: '@YourHandle' // Default author handle (override in frontmatter)
+      },
+      // Block common AI Scrapers from scraping your documentation (v0.5.1+ feature)
+      aiBots: {
+        block: false, // Set to true to automatically inject noindex blocks for GPTBot, ClaudeBot etc.
       }
     },
     // ... other plugins
@@ -30,6 +34,9 @@ module.exports = {
   // ...
 };
 ```
+
+## Automatic Fallbacks (v0.5.1+)
+If you do not explicitly define a `description` in your file's frontmatter, the SEO plugin will smartly analyze the raw markdown content of the page and construct a safe, 150-character excerpt automatically to fulfill standard `<meta>` and Open Graph description tags.
 
 ## Configuration Options
 

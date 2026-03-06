@@ -39,7 +39,8 @@ noindex: true
 
 ## How it Works
 
-1.  **Build Time:** The plugin scans all generated HTML, strips tags, and extracts headings/text into `site/search-index.json`.
+1.  **Build Time:** The plugin scans all generated HTML, strips tags, and extracts headings/text into `site/search-index.json`. 
+    *   **Deep Linking (v0.5.1+)**: It breaks down pages into granular chunks based on header tags (`<h3>`, `<h4>` etc). When a user searches, the results will link them directly to the specific paragraph section containing their match instead of just the top of the page.
 2.  **Runtime:** When a user opens your site, the lightweight index is loaded.
 3.  **Privacy:** All search logic happens locally in the user's browser. No keystrokes are sent to any server.
 

@@ -39,7 +39,7 @@ llms: false
 
 ## Output Example
 
-The generated `llms.txt` will look like this:
+The default `llms.txt` creates an index directory mapping linking to your site's standard pages so AI models can traverse your structure easily:
 
 ```md
 # My Project Documentation
@@ -55,3 +55,8 @@ This is the main description of my project.
 - [Configuration](https://mysite.com/config)
   Reference for config.js options.
 ```
+
+### Deep Context Payload (v0.5.1+)
+In addition to the standard index mapping above, `docmd` natively ships an `llms-full.txt` file payload. This takes every single word, code snippet, and heading from across your entire documentation matrix and concatenates them into one single massive `.txt` readable. 
+
+Users can download this single file and upload it directly into `ChatGPT` or `Claude` to instantiate a 100% native deep-awareness chatbot regarding your framework offline in seconds.
