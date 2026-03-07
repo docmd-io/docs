@@ -1,57 +1,51 @@
 ---
 title: "Customization & Variables"
-description: "Master the look of your docs by overriding CSS variables and targeting component classes."
+description: "A complete reference of docmd's CSS variables and component classes for advanced styling."
 ---
 
-`docmd` uses a "CSS Variable First" architecture. Instead of writing complex CSS rules, you can change the look of your entire site by redefining a few core variables in your `customCss`.
+`docmd` is built using a CSS variable-first architecture. This means you can restyle your entire site by simply overriding a few keys in a `:root` block without writing complex CSS selectors.
 
-## Variables Reference
+## Global Variable Reference
 
-### Core Colors
-| Variable | Usage |
-| :--- | :--- |
-| `--bg-color` | The main page background. |
-| `--text-color` | Standard paragraph text color. |
-| `--text-heading` | Contrast color for H1, H2, etc. |
-| `--link-color` | Color for hyperlinks and active states. |
-| `--border-color` | Standard divider and border color. |
+| Variable | Default (Light) | Default (Dark) | Description |
+| :--- | :--- | :--- | :--- |
+| `--bg-color` | `#ffffff` | `#09090b` | Main page background. |
+| `--text-color` | `#3f3f46` | `#a1a1aa` | Standard body text. |
+| `--text-heading` | `#09090b` | `#fafafa` | Title and Header colors. |
+| `--link-color` | `#068ad5` | `#068ad5` | Primary accent / links. |
+| `--border-color` | `#e4e4e7` | `#27272a` | Dividers and borders. |
+| `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation background. |
+| `--ui-border-radius` | `6px` | `6px` | Rounding for all UI items. |
+| `--sidebar-width` | `260px` | `260px` | Sidebar column width. |
 
-### Visual Polish
-| Variable | Usage |
-| :--- | :--- |
-| `--ui-element-size` | Height and width for utility buttons (32px). |
-| `--ui-radius` | Corner rounding for buttons and cards (6px). |
-| `--sidebar-width` | Width of the navigation column (260px). |
+## Example Override
 
-## CSS Class Reference
+To change your site's primary accent color, add this to your `customCss`:
 
-For advanced styling, you can target these classes in your `customCss`:
+```css
+:root {
+  --link-color: #f43f5e; /* Rose 500 */
+}
 
-| Class | Target Element |
-| :--- | :--- |
-| `.page-header` | The sticky top bar. |
-| `.sidebar-nav` | The navigation tree container. |
-| `.nav-category-label`| Non-clickable menu headers. |
-| `.main-content` | The wrapper for your Markdown content. |
-| `.docmd-heading` | Container for H2-H4 (includes permalink anchor). |
-| `.heading-anchor` | The permalink chain icon. |
-| `.footer-complete` | The advanced multi-column footer. |
+body[data-theme="dark"] {
+  --link-color: #fb7185; /* Rose 400 */
+}
+```
 
-## Plugin Component Styling
-Plugins inject their own classes for targeting:
-*   **Search:** `.docmd-search-modal`, `.search-result-item`.
-*   **Containers:** `.callout`, `.card`, `.docmd-tabs`, `.steps`.
+## Component Targeting
 
-## Adding Custom CSS
+If you need to style specific components, use these top-level classes:
 
-1.  Create a file in your project: `assets/css/brand.css`.
-2.  Add your overrides:
-    ```css
-    :root { --link-color: #ff5733; }
-    ```
-3.  Register it in `docmd.config.js`:
-    ```javascript
-    theme: {
-      customCss: ['assets/css/brand.css']
-    }
-    ```
+*   `.main-content`: The wrapper for all Markdown content.
+*   `.sidebar-nav`: The internal navigation list.
+*   `.page-header`: The top navigation bar.
+*   `.docmd-search-modal`: The search overlay.
+*   `.docmd-tabs`: Tab container components.
+*   `.callout`: The alert/note boxes.
+
+## Troubleshooting specificity
+Most `docmd` styles use low specificity. If your overrides aren't applying, ensure your `customCss` is registered correctly and check if adding a `body` prefix (e.g., `body .main-content`) helps.
+
+::: callout tip
+Because `docmd` uses standard CSS variables, you can ask an AI: *"Give me a professional color palette using --link-color and --bg-color for docmd"*. The model will be able to provide ready-to-paste CSS that integrates perfectly with the built-in themes.
+:::

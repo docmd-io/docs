@@ -3,44 +3,44 @@ title: "Installation"
 description: "How to install docmd globally or locally using npm, yarn, or pnpm."
 ---
 
-`docmd` is a Node.js package. It requires **Node.js v18.0.0 or higher**.
+`docmd` is a Node.js package. It requires **Node.js v18.x or higher** installed on your machine.
 
-## Global Installation (Recommended)
+There are several ways you can deploy `docmd` sites. You can run it on-the-fly without installing, or add it permanently to your long term projects.
 
-For most users, installing `docmd` globally provides the best experience. It gives you access to the `docmd` command anywhere in your terminal.
+## Option 1: Zero-Config (Try it instantly)
+
+Run `docmd` inside any folder containing markdown files. It will automatically read your files, extract their headers and build a nested navigation sidebar. No configuration or formal setup required.
+
+```bash
+npx @docmd/core dev -z    # Start local dev serve
+npx @docmd/core build -z  # Generate production static site
+```
+::: callout warning
+Zero-Config (`-z`) is currently in `beta`. It is fantastic for quick previews, but for production sites, we recommend initializing a standard configuration file for maximum control.
+:::
+
+### Option 2: Project Installation (Recommended)
+For permanent projects, install `docmd` as dependency to lock your versions.
+
+```bash
+# 1. Install locally
+npm install @docmd/core
+
+# 2. Initialize your configuration
+npx docmd init
+
+# 3. Start developing
+npx docmd dev
+```
+
+### Option 3: Global Installation
+Install once and use the `docmd` command anywhere on your machine.
 
 ```bash
 npm install -g @docmd/core
-```
 
-**Verification:**
-Run the following to check if the installation was successful:
-```bash
-docmd --version
-```
-
-## Local Installation
-
-If you prefer to keep dependencies scoped to a specific project (useful for CI/CD pipelines or teams), install it as a dev dependency.
-
-```bash
-# npm
-npm install -D @docmd/core
-
-# pnpm
-pnpm add -D @docmd/core
-
-# yarn
-yarn add -D @docmd/core
-```
-
-**Running commands locally:**
-When installed locally, you cannot run `docmd` directly. Instead, use your package manager's runner:
-
-```bash
-npx docmd dev
-# or
-pnpm docmd dev
+docmd dev        # Start the local dev server
+docmd build      # Generate the production static site
 ```
 
 ## CDN Installation (Browser Only)

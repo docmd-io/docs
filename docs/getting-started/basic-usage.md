@@ -1,89 +1,85 @@
 ---
 title: "Basic Usage"
-description: "A quick-start guide to initializing a project, writing content, and building your site."
+description: "Learn how to initialize a project, organize your markdown files, and build your documentation site."
 ---
 
-Once you have `docmd` installed, creating a beautiful documentation site takes only a few minutes. This guide walks you through the standard workflow.
+Getting started with `docmd` is designed to be instantaneous. This guide explains the core workflow from initialization to final production build.
 
-## 1. Initialize the Project
+## 1. Initialize Your Project
 
-Create a new folder for your documentation and navigate into it using your terminal.
-
-```bash
-mkdir my-docs
-cd my-docs
-```
-
-Run the initialization command:
+To start a new documentation project, create an empty directory and run the `init` command.
 
 ```bash
+mkdir my-guide && cd my-guide
 docmd init
 ```
+### The Project Structure
 
-`docmd` will scaffold a ready-to-use project. Your directory will now look like this:
+After initialization, your project will follow this clean, intuitive structure:
 
-```text
-my-docs/
-├── assets/                 # Place custom images, CSS, and JS here
-├── docs/                   # Your Markdown files live here
-│   └── index.md            # The homepage of your documentation
-├── docmd.config.js         # The main configuration file
-└── package.json            # Contains helpful NPM scripts
-```
+| Folder / File | Purpose |
+| :--- | :--- |
+| `docs/` | **Source Folder.** Put all your `.md` files here. |
+| `assets/` | Static files (images, custom CSS, JS). |
+| `docmd.config.js` | Your site's brain. Branding, navigation, and plugins. |
+| `site/` | **Output Folder.** Generated after you run `docmd build`. |
 
-## 2. Start the Development Server
+## 2. Launching the Preview
 
-You don't need to build the site blindly. `docmd` includes a blazing-fast development server that updates your browser the moment you save a file.
-
-Run the dev command:
+You can see your changes in real-time without building the site. Launch the development server:
 
 ```bash
 docmd dev
 ```
 
-Open your browser to `http://localhost:3000`. You will see your newly generated documentation site. Keep this server running in your terminal while you work.
+*   **URL**: `http://localhost:3000`
+*   **Hot Reload**: Every time you save a `.md` or `.config.js` file, the browser updates instantly.
 
-## 3. Write Your Content
+## 3. Organizing Content
 
-Open the `docs/` folder in your favorite code editor (like VS Code). 
+Every markdown file inside the `docs/` folder becomes a URL. Subfolders are respected automatically.
 
-`docmd` uses standard Markdown. Any `.md` file you create inside the `docs/` folder will automatically be converted into a web page. 
+*   `docs/index.md` → `/` (Home)
+*   `docs/api.md` → `/api`
+*   `docs/guides/setup.md` → `/guides/setup`
 
-Try opening `docs/index.md` and changing the `# Welcome` text. When you save the file, your browser will instantly refresh to show the change.
+> [!TIP]
+> Use standard Markdown syntax. `docmd` will automatically extract the first `H1` header of your file to use as the page title if not specified in the frontmatter.
 
-::: callout tip Organizing Content
-You can create subfolders inside `docs/` (e.g., `docs/api/endpoints.md`). `docmd` will automatically mirror this folder structure when generating your website's URLs.
-:::
+## 4. Configuring Navigation
 
-## 4. Configure the Sidebar
-
-By default, `docmd` doesn't guess what your navigation should look like. You define it explicitly to maintain perfect control over your users' experience.
-
-Open `docmd.config.js` and locate the `navigation` array. You can add new links, create dropdown categories, and assign SVG icons here.
+`docmd` gives you absolute control over the sidebar. Edit the `navigation` array in `docmd.config.js` to structure your site.
 
 ```javascript
 navigation:[
-  { title: 'Home', path: '/', icon: 'home' },
+  { title: 'Introduction', path: '/', icon: 'home' },
   {
-    title: 'Guides',
-    icon: 'book',
-    collapsible: true,
+    title: 'Advanced',
+    icon: 'settings',
+    collapsible: true, // Allow users to collapse this section
     children:[
-      { title: 'Quick Start', path: '/quick-start' },
-      { title: 'Advanced', path: '/advanced' }
+      { title: 'Configuration', path: '/configuration' },
+      { title: 'Plugins', path: '/plugins' }
     ]
   }
 ]
 ```
 
-## 5. Build for Production
+## 5. Building for Production
 
-When you are ready to share your documentation with the world, stop the development server (press `Ctrl + C` in your terminal) and run the build command:
+When you are ready to deploy, run the build command:
 
 ```bash
 docmd build
 ```
 
-`docmd` will process all your Markdown, generate an offline search index, minify your assets, and output a highly optimized static website into a new folder called `site/`.
+This generates a highly optimized Single Page Application (SPA) inside the `site/` directory. It is completely static so you can host it on GitHub Pages, Vercel, Netlify, or even a local USB drive.
 
-You can now upload the contents of that `site/` folder to any web host (GitHub Pages, Netlify, Vercel, or a traditional server). See our [Deployment Guide](/deployment) for specific instructions.
+### Verification Step
+To verify your production build locally, you can use any static server or run:
+```bash
+docmd dev --preserve
+```
+::: callout tip
+The `--preserve` flag prevents the dev server from overwriting your production `site/` folder with dev-mode assets.
+:::

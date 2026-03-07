@@ -12,8 +12,6 @@ This is powerful for:
 
 ## Installation via CDN
 
-
-
 You don't need to install Node.js. You can simply include the scripts and styles from a CDN like `unpkg` or `jsdelivr`.
 
 ```html
@@ -39,7 +37,7 @@ Compiles Markdown text into a complete HTML document string.
 *   `config` (Object): Configuration overrides (same structure as `docmd.config.js`).
 
 **Returns:**
-*   `String`: The full HTML string (including `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`).
+*   `String`: The full HTML string.
 
 ### Example: Live Preview Iframe
 
@@ -52,35 +50,33 @@ The safest way to render the output is inside an `<iframe>` using the `srcdoc` a
     <textarea id="editor"># Hello World</textarea>
     <iframe id="preview" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
 
-    <!-- Load docmd -->
     <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
-
     <script>
         const editor = document.getElementById('editor');
         const preview = document.getElementById('preview');
 
         function update() {
-            // 1. Compile
             const html = docmd.compile(editor.value, {
                 siteTitle: 'My Preview',
                 theme: { name: 'sky', defaultMode: 'light' },
                 layout: { 
-                    spa: false, // Disable SPA router for previews
-                    header: { enabled: false }, // Optional: hide header for clean embed
-                    sidebar: { collapsible: false }
+                    spa: false, 
+                    header: { enabled: false }
                 }
             });
-
-            // 2. Render
             preview.srcdoc = html;
         }
 
         editor.addEventListener('input', update);
-        update(); // Initial render
+        update();
     </script>
 </body>
 </html>
 ```
+
+::: callout tip
+Because `docmd` is isomorphic, an AI agent can build its own documentation "sandbox" directly in the browser during a development session to verify its understanding of your documentation structure without needing to install the CLI.
+:::
 
 ## Advanced: Raw Content (No-Style)
 
@@ -103,5 +99,5 @@ const html = docmd.compile(markdown, { /* config */ });
 
 The Browser API has a few limitations compared to the Node.js CLI:
 
-1.  **No File System Access:** It cannot scan folders to auto-generate navigation. You must provide the `navigation` array explicitly in the config object if you want a sidebar.
-2.  **Plugins:** Some Node.js-specific plugins (like Sitemap generation) will not run. However, client-side plugins (like Mermaid diagrams) work perfectly.
+1.  **No File System Access**: It cannot scan folders to auto-generate navigation. You must provide the `navigation` array explicitly in the config object.
+2.  **Plugins**: Some Node.js-specific plugins (like Sitemap generation) will not run.

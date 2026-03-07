@@ -1,86 +1,56 @@
 ---
 title: "Available Themes"
-description: "An overview of the built-in themes provided by docmd."
+description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Learn how to switch themes with a single config line."
 ---
 
-`docmd` allows you to choose from a selection of built-in themes to quickly change the overall look and feel of your documentation site. You can specify the theme in your config file using the `theme.name` property.
+`docmd` provides a set of professionally designed, light/dark responsive themes. You can switch your entire site's aesthetic by changing a single key in `docmd.config.js`.
+
+## How to Switch Themes
 
 ```javascript
+// docmd.config.js
 module.exports = {
-  // ...
   theme: {
-    name: 'theme-name', // Options: 'default', 'sky', 'ruby', 'retro'
-    defaultMode: 'light', // or 'dark' to set as landing mode
-    // ...
-  },
-  // ...
-};
+    name: 'sky',
+    defaultMode: 'system', // Options: 'light', 'dark', 'system'
+  }
+}
 ```
 
-## Try the Themes
+## Built-in Theme Gallery
 
-Click a button below to instantly switch the theme of this website:
+| Theme | Best For | Vibes |
+| :--- | :--- | :--- |
+| `default` | Low-profile docs | Minimal, lightweight, clean |
+| `sky` | Product Docs | Modern, premium, standard-issue |
+| `ruby` | Brand Identity | Sophisticated, serif headers, vibrant |
+| `retro` | Dev Tools | 80s Terminals, monospace, neon accents |
 
 <div class="theme-picker" style="display: flex; gap: 10px; margin: 20px 0;">
-    <button onclick="switchDocTheme('default')" class="docmd-button" style="color:#fff;background: #4f4f4f;">Default</button>
+    <button onclick="switchDocTheme('default')" class="docmd-button" style="color:#fff;background: #2e2e2e;">Default</button>
     <button onclick="switchDocTheme('sky')" class="docmd-button" style="color:#fff;background: #0097ff;">Sky</button>
-    <button onclick="switchDocTheme('ruby')" class="docmd-button" style="color:#fff;background: #b30000;">Ruby</button>
-    <button onclick="switchDocTheme('retro')" class="docmd-button" style="color:#fff;background: #0a0a0a; border: 1px solid #0f0;">Retro</button>
+    <button onclick="switchDocTheme('ruby')" class="docmd-button" style="color:#fff;background: #960b0b;">Ruby</button>
+    <button onclick="switchDocTheme('retro')" class="docmd-button" style="color:#fff;background: #a95308; border: 1px solid #0ec80e;">Retro</button>
 </div>
 
-## 1. `default` Theme
+### 1. `sky` (Default)
+The gold standard for modern documentation. It features crisp typography, subtle transitions, and high-contrast light/dark modes that match modern SaaS platforms.
 
-*   **`theme.name: 'default'`**
-*   **Description:** The foundation of all docmd themes. This is not a separate theme but the base styling that's always included regardless of which theme you select. It provides:
-    *   Basic layout structure with sidebar and content area
-    *   Essential typography and spacing
-    *   Core styling for documentation elements like code blocks, tables, and custom containers
-    *   Light and dark mode foundation
-*   **When to use:** When you want a minimalist, clean interface without additional styling layers. This is the most lightweight option.
+### 2. `ruby`
+A high-elegance theme using serif typography for headers and a deep, jewel-toned color palette. Perfect for documentation that needs to feel authoritative and premium.
 
-## 2. `sky` Theme
+### 3. `retro`
+A nostalgia-fueled theme inspired by vintage computing. Features include phosphor-green text on black backgrounds (in dark mode), scanline effects, and monospace fonts like Fira Code by default.
 
-*   **`theme.name: 'sky'`** (This is the default if `theme.name` is not specified)
-*   **Description:** A modern theme inspired by popular documentation platforms, with a fresh and airy design. It features:
-    *   A clean, minimalist interface with subtle shadows and rounded corners
-    *   Custom typography with improved readability
-    *   Refined color palette for both light and dark modes
-    *   Enhanced callout and container styles
-    *   Premium documentation feel with careful attention to spacing and contrast
-*   **When to use:** When you want a premium, polished look for your documentation site.
+### 4. `default`
+A total "Blank Slate" theme. Use this if you plan on adding extensive custom CSS and don't want any built-in design layers interfering with your branding.
 
-## 3. `ruby` Theme
+## Theming Architecture
 
-*   **`theme.name: 'ruby'`**
-*   **Description:** An elegant, vibrant theme inspired by the precious gemstone. It features:
-    *   Rich, jewel-toned color palette centered around ruby reds and complementary colors
-    *   Sophisticated typography with serif headings and sans-serif body text
-    *   Distinctive card and callout designs with gem-like faceted styling
-    *   Subtle gradients and depth effects that evoke the brilliance of gemstones
-    *   Luxurious dark mode with deep, rich backgrounds and vibrant accent colors
-*   **When to use:** When you want your documentation to have a distinctive, premium feel with rich colors and elegant typography.
+1.  **CSS Layering**: Themes are additive. Choosing `sky` actually loads the base `default` styles and then overlays the `sky` aesthetic on top.
+2.  **Native dark-mode**: Every theme includes a first-class dark mode implementation.
+3.  **No Refresh**: When users switch themes via the UI, the SPA engine updates the `--docmd-primary` variables instantly without a page reload.
 
-## 4. `retro` Theme
-
-*   **`theme.name: 'retro'`**
-*   **Description:** A nostalgic theme inspired by 1980s-90s computing aesthetics. It features:
-    *   Terminal-style black backgrounds with phosphor green text in dark mode
-    *   Light mode with dark green text on light gray backgrounds
-    *   Monospace typography (Fira Code) for authentic retro feel
-    *   Neon accent colors (cyan, pink, amber) with glow effects
-    *   Animated scanlines and CRT flicker effects
-    *   Terminal-style code blocks with `[TERMINAL]` labels
-    *   Retro-styled containers with pixel-art inspired elements
-    *   Blinking cursor effects on links and active elements
-*   **When to use:** Perfect for developer tools, gaming documentation, tech blogs with vintage computing focus, or anyone wanting a unique, eye-catching retro aesthetic.
-
-## How Themes Work
-
-Each theme consists of CSS files located within `docmd`'s internal assets. When you select a theme name, `docmd` links the corresponding stylesheet in your site's HTML:
-
-- `default` theme uses the base CSS with no additional theme stylesheet
-- `sky` theme loads `docmd-theme-sky.css` with its custom styling on top of the default CSS
-- `ruby` theme loads `docmd-theme-ruby.css` with its custom styling on top of the default CSS
-- `retro` theme loads `docmd-theme-retro.css` with its custom styling on top of the default CSS
-
-You can further customize any chosen theme using the `theme.customCss` option in your config file to add your own overrides or additional styles. See [Custom CSS & JS](/theming/custom-css-js/) for details.
+::: callout tip
+When describing your documentation layout to an AI developer tool, mentioning your theme (e.g., "I'm using the `retro` theme") helps the model suggest custom CSS overrides that align with that specific theme's variable schema.
+:::

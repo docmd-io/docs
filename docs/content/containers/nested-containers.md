@@ -1,183 +1,89 @@
 ---
 title: "Nested Containers"
-description: "Learn how to use the advanced nested container system to create complex, interactive documentation layouts with seamless container nesting."
+description: "Master docmd's recursive parser. Learn how to combine cards, tabs, and callouts to build complex, interactive page layouts."
 ---
 
-The advanced nested container system in docmd allows you to create complex, interactive documentation layouts by nesting containers within each other. This powerful feature enables you to build rich, structured content that was previously impossible.
+One of `docmd`’s most powerful features is its recursive parsing engine. You can nest components inside each other infinitely to create professional, interactive layouts that would otherwise require complex HTML templates.
 
-## Nesting Rules
+## The One Golden Rule
 
-### Best Practices
-
-1. **Logical Structure** - Nest containers in a way that makes logical sense
-2. **Readability** - Don't nest too deeply (3-4 levels maximum for readability)
-3. **Performance** - Complex nesting is supported but keep it reasonable
-4. **Content Organization** - Use nesting to organize related content
-5. **Use the Right Tool** - Use steps for simple sequences, cards/tabs for complex content
-
-### Limitations
-
-While `docmd` has improved the parser significantly over the period, there are still logical limits:
-
-1.  **Steps inside Tabs:** This is technically difficult to parse in Markdown. We recommend keeping Steps as top-level elements or inside Cards, but not inside Tabs.
-2.  **Buttons:** Buttons are now **self-closing**. Do not add a `:::` after a button line, or it might close a parent container (like a Card) accidentally.
-
-## Examples
-
-### Cards with Nested Content
-
-```markdown
-::: card Installation Guide
-
-Here's how to install the application:
-
-   ::: callout tip Pro Tip
-   Make sure to download the correct version for your platform.
-   :::
-
-   ::: button "Download Now" /downloads
-
-:::
-```
-
-::: card Installation Guide
-
-Here's how to install the application:
-
-::: callout tip Pro Tip
-Make sure to download the correct version for your platform.
-:::
-
-::: button "Download Now" #
-
-:::
-
-### Tabs with Nested Content
-
-```markdown
-::: tabs
-
-   == tab "Windows"
-      Download the Windows installer (.exe) file.
-
-      ::: callout tip
-         Make sure to run as administrator for best results.
-      :::
-
-      ::: button "Download Windows" /downloads/windows
-
-   == tab "macOS"
-      Download the macOS package (.pkg) file.
-
-      ::: callout warning
-         You may need to allow the app in Security & Privacy settings.
-      :::
-
-      ::: button "Download macOS" /downloads/macos
-
-   == tab "Linux"
-      Download the Linux tarball (.tar.gz) file.
-
-      ::: button "Download Linux" /downloads/linux
-
-:::
-```
-
-::: tabs
-
-== tab "Windows"
-Download the Windows installer (.exe) file.
-
-::: callout tip
-Make sure to run as administrator for best results.
-:::
-
-::: button "Download Windows" #
-
-== tab "macOS"
-Download the macOS package (.pkg) file.
+While nesting is infinite, remember the **Self-Closing Button Rule**:
 
 ::: callout warning
-You may need to allow the app in Security & Privacy settings.
+Because `::: button` is self-closing, do **not** add a closing `:::` line after it. Doing so will accidentally close the parent container that contains the button.
 :::
 
-::: button "Download macOS" #
+## Example: Interactive Landing Page Block
 
-== tab "Linux"
-Download the Linux tarball (.tar.gz) file.
+You can combine a **Card** for the frame, **Tabs** for technical choices, and **Callouts** for highlighting.
 
-::: button "Download Linux" #
-
+````markdown
+::: card "Developer Quickstart"
+   Choose your preferred environment to begin:
+   ::: tabs
+   == tab "NPM"
+      ```bash
+      npm install -g @docmd/core
+      ```
+      ::: callout success
+         Installation usually takes less than 10 seconds.
+      :::
+   == tab "Manual"
+      Download the binary from GitHub and add it to your PATH.
+      ::: button "GitHub Downloads" external:https://github.com/docmd-io/docmd
+   :::
 :::
+````
 
-### Steps Container with Nested Elements
+## Example: Documenting a Sequential Hack
 
-Steps containers are designed for simple, sequential instructions and work well with other containers:
+Nesting **Tabs** inside **Steps** is a great way to show multi-platform instructions.
 
 ```markdown
 ::: steps
 
-1. **Download the Application**
-   Get the latest version from our download page.
+1. **Select Platform**
+   Choose your operating system below.
 
-   ::: button "Download Now" /downloads
-
-2. **Install the Application**
-   Run the installer and follow the setup wizard.
-
-   ::: callout tip Pro Tip
-      Check our system requirements page for detailed information.
+   ::: tabs
+   == tab "macOS"
+      Run the Homebrew command.
+   == tab "Linux"
+      Use the generic install script.
    :::
 
-3. **Configure Settings**
-   Set up your preferences and start using the app.
-
-   ::: card Configuration
-      - Choose your theme
-      - Set up notifications
-      - Configure integrations
-   :::
+2. **Verify Setup**
+   Check the installation version.
 
 :::
 ```
 
 ::: steps
 
-1. **Download the Application**
-   Get the latest version from our download page.
+1.  **Select Platform**
+    Choose your operating system below.
 
-   ::: button "Download Now" #
+    ::: tabs
+    == tab "macOS"
+    Run the Homebrew command.
+    == tab "Linux"
+    Use the generic install script.
+    :::
 
-2. **Install the Application**
-   Run the installer and follow the setup wizard.
-
-   ::: callout tip Pro Tip
-      Check our system requirements page for detailed information.
-   :::
-
-3. **Configure Settings**
-   Set up your preferences and start using the app.
-
-   ::: card Configuration
-      - Choose your theme
-      - Set up notifications
-      - Configure integrations
-   :::
+2.  **Verify Setup**
+    Check the installation version.
 
 :::
 
-## Troubleshooting
+## Nesting Constraints
 
-### Common Issues
+While the engine is robust, follow these best practices for the best experience:
 
-1. **Container not rendering** - Ensure proper spacing and syntax
-2. **Nested content not showing** - Check for proper closing tags
-3. **Performance issues** - Reduce nesting depth if experiencing slowdowns
+*   **Tabs in Tabs**: Not recommended. It creates "Context Loops" that are difficult for users to navigate on mobile.
+*   **Steps in Tabs**: High syntax conflict. Use standard ordered lists (`1.`) inside tabs instead of the `::: steps` container.
+*   **Indentation**: `docmd` does **not** require indentation for nested blocks, but adding 2 or 4 spaces makes your Markdown much easier for both humans and LLMs to read.
+*   **Performance**: Deep nesting (over 6 levels) is supported but may impact initial build times on extremely large documentation sites.
 
-### Debugging Tips
-
-- **Check syntax** - Ensure all containers have proper opening and closing tags
-- **Verify nesting** - Make sure containers are properly nested
-- **Test incrementally** - Build complex structures step by step
-- **Use browser dev tools** - Inspect the generated HTML for issues
-- **Use the right container** - Steps for simple sequences, cards/tabs for complex content
+::: callout tip
+Nesting helps segment knowledge. When an LLM reads the `llms-full.txt` stream, a nested `callout` inside a `card` tells the model that the tip is specifically scoped to that card's topic, improving the precision of its generation.
+:::

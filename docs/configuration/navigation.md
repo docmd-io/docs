@@ -1,84 +1,72 @@
 ---
 title: "Navigation Configuration"
-description: "Configure your sidebar links, nested groups, icons, and category labels."
+description: "How to structure your sidebar, categorize links, and assign icons for both humans and AI models."
 ---
 
-The sidebar navigation is controlled by the `navigation` array in your `docmd.config.js`. It allows you to define links, nest items into groups, and add visual icons.
+`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimizes the Single Page Application (SPA) experience and provides a clear context map for AI models.
 
-## Basic Structure
+## The Navigation Array
 
-Each item in the array is an object representing a link or a group.
+Each object in the array defines a **Link** or a **Category Group**.
 
 ```javascript
 module.exports = {
   navigation: [
     { title: 'Home', path: '/', icon: 'home' },
-    { title: 'Installation', path: '/guide/install', icon: 'download' }
+    { title: 'Installation', path: '/getting-started/installation', icon: 'download' }
   ]
 }
 ```
 
-## Properties
+## Available Properties
 
-| Property | Type | Description |
-| :--- | :--- | :--- |
-| **`title`** | `String` | **Required.** Text displayed in the sidebar. |
-| **`path`** | `String` | Path to the page relative to your `srcDir`. Starts with `/`. |
-| **`icon`** | `String` | Name of a [Lucide](https://lucide.dev/icons) icon (e.g., `rocket`, `settings`). |
-| **`children`** | `Array` | An array of nested navigation items. |
-| **`collapsible`**| `Boolean` | If `true` (on a parent), allows the user to expand/collapse the group. |
-| **`external`** | `Boolean` | If `true`, opens the link in a new tab. |
+| Property | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| **`title`** | `String` | Yes | The display text. Also used as metadata for search and AI. |
+| **`path`** | `String` | No | Destination URL. Must start with `/` for local markdown. |
+| **`icon`** | `String` | No | name of a [Lucide Icon](https://lucide.dev/icons) (e.g. `rocket`). |
+| **`children`** | `Array` | No | Nested items to create a dropdown or group. |
+| **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed. |
+| **`external`** | `Boolean` | No | If `true`, the link opens in a new tab. |
 
-## Grouping & Nesting
+---
 
-You can nest items infinitely. Groups can be either **Clickable Pages** or **Static Labels**.
+## Organizing Groups
 
-### 1. Clickable Parent (Folder Page)
-If you provide a `path` to a parent item, clicking it will take the user to that page *and* expand the menu.
+You can nest navigation items infinitely. There are two primary ways to organize groups:
+
+### 1. Clickable Group (Folder with Index)
+If the parent has a `path`, clicking the label navigates to that page and expands the children.
 
 ```javascript
 {
-  title: 'Guides',
-  path: '/guides/index', // Clicking "Guides" goes here
+  title: 'Cloud Setup',
+  path: '/cloud/overview', 
   children: [
-    { title: 'Setup', path: '/guides/setup' }
+    { title: 'AWS', path: '/cloud/aws' },
+    { title: 'GCP', path: '/cloud/gcp' }
   ]
 }
 ```
 
-### 2. Static Label (Category Header)
-If you **omit the `path`** (or set it to `'#'`), the item becomes a non-clickable category label. This is useful for grouping related links visually.
+### 2. Static Label (Category Wrapper)
+If you **omit the `path`**, the item becomes a static category header. This is the best way to group related technical sections.
 
 ```javascript
 {
-  title: 'Advanced Settings',
-  icon: 'settings',
-  // No path defined = Label only
+  title: 'Content & Formatting',
+  icon: 'layout',
   children: [
-    { title: 'Theme Config', path: '/config/theme' },
-    { title: 'Plugins', path: '/config/plugins' }
+    { title: 'Syntax Guide', path: '/content/syntax' },
+    { title: 'Containers', path: '/content/containers' }
   ]
 }
 ```
 
-## Icons
+## Icons Integration
 
-`docmd` includes the full **Lucide** icon set. You can use any icon name (kebab-case) in the `icon` property.
+`docmd` comes pre-bundled with the entire **Lucide** icon library. Simply use the icon name in kebab-case. Common examples: `home`, `rocket`, `settings`, `github`, `terminal`, `brain-circuit`.
 
-*   `home` → 🏠
-*   `book-open` → 📖
-*   `rocket` → 🚀
-*   `puzzle` → 🧩
-
-## External Links
-
-You can link to external websites directly from your sidebar.
-
-```javascript
-{ 
-  title: 'GitHub Repo', 
-  path: 'https://github.com/my-project', 
-  icon: 'github',
-  external: true 
-}
-```
+::: callout tip
+When defining navigation, use descriptive `title` keys even if the page content starts with a header. Clear navigation titles allow LLMs (using `llms-full.txt`) to understand the relationships between different parts of your project even without reading the full file.
+:::

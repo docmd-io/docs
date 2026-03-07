@@ -1,19 +1,21 @@
 ---
-title: "Mermaid Diagrams Plugin"
-description: "Create beautiful diagrams and flowcharts using Mermaid syntax in your docmd documentation."
+title: "Mermaid Diagrams"
+description: "Native support for Mermaid.js. Create flowcharts, sequence diagrams, and pie charts directly in your Markdown files."
 ---
 
-Mermaid is a JavaScript-based diagramming and charting tool that uses Markdown-inspired text definitions to create and modify diagrams dynamically. docmd has built-in support for Mermaid diagrams with automatic light/dark theme switching.
+`docmd` includes native, zero-config support for [Mermaid.js](https://mermaid.js.org/). You can create professional diagrams using simple text-based syntax without leaving your Markdown file.
 
-::: callout tip
-All Mermaid diagrams automatically adapt to your site's light/dark theme!
-:::
+## Why use Mermaid in docmd?
 
-## Flowchart
+*   **Zero Scripting**: No need to include external scripts. `docmd` detects the usage and injects the rendering engine automatically.
+*   **Theme Aware**: Diagrams automatically shift colors between **Light** and **Dark** modes to match your site's theme.
+*   **Lazy Loading**: For optimum page speed, diagrams are only initialized once they enter the viewport.
+
+## Examples
+
+### Flowchart
 
 Flowcharts are used to represent workflows or processes. They show the steps as boxes of various kinds, and their order by connecting them with arrows.
-
-**Code:**
 
 ````markdown
 ```mermaid
@@ -24,11 +26,8 @@ graph TD
     D --> E[Fix the issue]
     E --> B
     C --> F[Deploy]
-    F --> G[End]
 ```
 ````
-
-**Rendered Preview:**
 
 ```mermaid
 graph TD
@@ -38,14 +37,11 @@ graph TD
     D --> E[Fix the issue]
     E --> B
     C --> F[Deploy]
-    F --> G[End]
 ```
 
-## Sequence Diagram
+### Sequence Diagram
 
 Sequence diagrams show how processes operate with one another and in what order. They capture the interaction between objects in the context of a collaboration.
-
-**Code:**
 
 ````markdown
 ```mermaid
@@ -63,8 +59,6 @@ sequenceDiagram
     Browser-->>User: Display Page
 ```
 ````
-
-**Rendered Preview:**
 
 ```mermaid
 sequenceDiagram
@@ -85,8 +79,6 @@ sequenceDiagram
 
 Pie charts are circular statistical graphics divided into slices to illustrate numerical proportions.
 
-**Code:**
-
 ````markdown
 ```mermaid
 pie title Browser Usage Statistics
@@ -97,8 +89,6 @@ pie title Browser Usage Statistics
     "Other" : 4.0
 ```
 ````
-
-**Rendered Preview:**
 
 ```mermaid
 pie title Browser Usage Statistics
@@ -112,8 +102,6 @@ pie title Browser Usage Statistics
 ## Git Graph
 
 Git graphs visualize Git branching and merging operations, making it easier to understand version control workflows.
-
-**Code:**
 
 ````markdown
 ```mermaid
@@ -135,8 +123,6 @@ gitGraph
     commit
 ```
 ````
-
-**Rendered Preview:**
 
 ```mermaid
 gitGraph
@@ -174,8 +160,6 @@ xychart-beta
 ```
 ````
 
-**Rendered Preview:**
-
 ```mermaid
 xychart-beta
     title "Sales Revenue by Quarter"
@@ -185,17 +169,6 @@ xychart-beta
     line [45, 55, 75, 80]
 ```
 
-## Best Practices
-
-When using Mermaid diagrams in your documentation:
-
-1. **Keep it Simple**: Start with simple diagrams and add complexity only when needed
-2. **Use Clear Labels**: Make sure all nodes and connections are clearly labeled
-3. **Consider Your Audience**: Adjust the level of detail based on who will read the documentation
-4. **Test Both Themes**: Always check how your diagrams look in both light and dark modes
-5. **Add Context**: Use callouts or text around diagrams to explain what they represent
-
-::: callout info
-Visit the [Official Mermaid Documentation](https://mermaid.js.org/) for more types of Mermaid Diagrams and, detailed syntax and options.
+::: callout tip
+Mermaid diagrams are highly readable by LLMs. When an AI model reads your `llms-full.txt`, it can "see" the logic flow of your diagrams as text, making it much better at explaining complex architectural relationships in your project.
 :::
-

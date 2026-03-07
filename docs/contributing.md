@@ -3,92 +3,59 @@ title: "Contributing"
 description: "Learn how you can contribute to the development, design, and documentation of docmd."
 ---
 
-First off, thank you for considering contributing to `docmd`! It's people like you that make the open-source community an amazing place to learn, inspire, and create.
+We welcome contributions of all kinds—from fixing typos to engineering entirely new plugins.
 
-We welcome contributions of all kinds, from fixing typos to engineering entirely new plugins.
-
-## Ways to Contribute
-
-<div class="docmd-container clear-float">
-  <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-
+::: cards
 ::: card 🐛 Bug Reports
-Find something that isn't working right? Open an issue on GitHub. Please include your OS, Node version, and steps to reproduce.
+Find something broken? Open an issue on GitHub with steps to reproduce.
 :::
-
 ::: card ✨ Feature Requests
-Have an idea to make docmd better? Open an issue and let's discuss it before you start writing code!
+Have an idea? Let's discuss it in an issue before writing code!
 :::
-
-::: card 📝 Documentation
-This very website is built with docmd! You can contribute by fixing typos, improving recipes, or adding clearer examples.
+::: card 💻 Code PRs
+We happily accept Pull Requests for core engine improvements and UI polish.
 :::
-
-::: card 💻 Code Contributions
-Want to get your hands dirty? We happily accept Pull Requests for core engine improvements, UI polish, and new features.
 :::
-
-  </div>
-</div>
 
 ## Development Setup
 
-`docmd` is built as a **Monorepo** using `pnpm`. Developing it locally requires a specific workflow to ensure all the internal packages (core, UI, themes, plugins) talk to each other correctly.
+`docmd` is a **Monorepo** using `pnpm`.
 
 ::: steps
 
-1. **Prerequisites**
-   Ensure you have Node.js (v18+) and [pnpm](https://pnpm.io/installation) installed on your machine.
-   ```bash
-   npm install -g pnpm
-   ```
+1. **Install pnpm**
+   Ensure you have Node.js (v18+) and [pnpm](https://pnpm.io/) installed.
 
-2. **Fork and Clone**
-   Fork the repository on GitHub, then clone your fork locally:
+2. **Clone & Install**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/docmd.git
+   git clone https://github.com/docmd-io/docmd.git
    cd docmd
-   ```
-
-3. **Install Dependencies**
-   Use `pnpm` to install all dependencies and link the monorepo workspaces together.
-   ```bash
    pnpm install
    ```
 
-4. **Running the Dev Server**
-   We use this documentation site (located in the `docs/` folder) as our primary testing ground. To start the development server and watch for changes in both the documentation *and* the core engine:
+3. **Run Dev Server**
+   Start the watcher for both the core engine and this documentation site:
    ```bash
-   # Windows (PowerShell)
-   $env:DOCMD_DEV="true"; pnpm run dev
-   
    # macOS / Linux
    DOCMD_DEV=true pnpm run dev
    ```
-   *Note: Setting `DOCMD_DEV=true` tells the watcher to monitor the internal templates, UI scripts, and engine logic, automatically rebuilding the site when you edit source files.*
 
 :::
 
-## Testing Your Changes
-
-Before submitting a Pull Request, you **must** ensure your changes haven't broken the core engine. `docmd` includes a brutal integration testing suite that verifies HTML generation, path resolutions, and SPA configurations.
-
-To run the test suite:
-
+### Testing
+Ensure your changes haven't broken the core engine by running our integration suite:
 ```bash
 pnpm test
 ```
 
 If the test passes and outputs `✨ ALL SYSTEMS GO`, your code is safe to commit!
 
-## Pull Request Guidelines
+### Pull Request Rules
+1. **Branch off `main`**.
+2. **Conventional Commits**: Use clear prefixes (e.g., `feat:`, `fix:`).
+3. **Copyright Header**: Ensure new files include the standard `docmd` copyright notice.
 
-1. **Create a Branch:** Always branch off of `main` for your work (e.g., `feat/new-search-ui` or `fix/broken-link`).
-2. **Write Clean Code:** Follow the existing coding style. If you are creating a new file in the `packages/` directory, ensure it includes the standard docmd copyright header at the top.
-3. **Commit Messages:** We prefer [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (e.g., `feat: add new button container` or `fix: resolve sidebar scroll issue`).
-4. **Open a PR:** Push your branch to your fork and open a Pull Request against our `main` branch. Provide a clear summary of your changes and reference any related issues.
-
-### Copyright Header
+#### Copyright Header
 All source files in `packages/` must include the standard copyright header. If you create a new file, please copy the header from an existing file.
 
 ```html

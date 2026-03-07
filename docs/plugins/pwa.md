@@ -114,4 +114,6 @@ Browsers restrict Service Workers to `https://` or `localhost`. Use:
 docmd dev
 ```
 
-Open Chrome DevTools → **Application** → **Manifest** and **Service Workers** to view the activated registration in real-time. Safari → **Develop** → **Service Workers** panel works equally well.
+Open Chrome DevTools → **Application** → **Manifest** and **Service Workers** to view the activated registration in real-time.
+
+Safari → **Develop** → **Service Workers** panel works equally well.

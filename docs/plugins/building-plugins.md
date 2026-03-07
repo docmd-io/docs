@@ -3,21 +3,19 @@ title: "Building Plugins"
 description: "A guide for developers on how to create and share custom docmd plugins."
 ---
 
-Plugins are the primary way to extend `docmd`. They allow you to hook into the Markdown parser, inject HTML into the layout, and run logic after the build completes.
+Plugins are the primary way to extend `docmd`. They allow you to hook into the Markdown parser, inject HTML into the layout, and execute logic after builds.
 
 ## Anatomy of a Plugin
 
-A plugin is simply a JavaScript object (or a function returning an object) that exports specific hook functions. You can define plugins inline in your `docmd.config.js` or create them as separate NPM packages.
+A plugin is a JavaScript object exporting specific hook functions.
 
-### Available Hooks
-
-| Hook | Description |
+| Hook | Purpose |
 | :--- | :--- |
-| `markdownSetup(md)` | Access the `markdown-it` instance to add rules or plugins. |
-| `injectHead(config)` | Return HTML string to inject into `<head>`. |
-| `injectBody(config)` | Return HTML string to inject at the end of `<body>`. |
-| `getAssets()` | Return a list of CSS/JS files to copy and inject. |
-| `onPostBuild(context)` | Run logic after the HTML files are generated (e.g., sitemaps). |
+| `markdownSetup(md)` | Access the `markdown-it` instance for custom rules. |
+| `injectHead(config)` | Injects HTML into the `<head>`. |
+| `injectBody(config)` | Injects HTML at the bottom of the `<body>`. |
+| `getAssets()` | Returns a list of CSS/JS files to copy/inject. |
+| `onPostBuild(ctx)` | Executes logic after all HTML is generated. |
 
 ## Creating a Local Plugin
 
@@ -94,3 +92,7 @@ plugins: {
   'docmd-plugin-name': { /* options */ }
 }
 ```
+
+::: callout tip "AI-Generated Plugins 🤖"
+The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks are simple, stateless, and use standard JavaScript objects, an AI Agent can perfectly generate a complete plugin (e.g., for custom Markdown containers or third-party integrations) from a single prompt with minimal errors.
+:::

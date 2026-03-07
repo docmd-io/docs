@@ -1,80 +1,80 @@
 ---
 title: "Tabs"
-description: "Organize content into switchable tabbed panes."
+description: "Organize alternative or dense information into switchable panes. Perfect for multi-language code snippets."
 ---
 
-Tabs are essential for showing alternative content (like code snippets for different languages or instructions for different OSs) without cluttering the page.
+Tabs are the best way to present related but mutually exclusive information (like "npm vs yarn" or "Windows vs macOS" instructions) in a compact, interactive format.
 
 ## Syntax
 
-Use `== tab "Name"` to define a new tab pane.
+The `tabs` container uses a special sub-delimiter: `== tab "Label"`.
 
 ```markdown
 ::: tabs
 
-    == tab "Tab 1 Name"
-        Content for tab 1.
+== tab "Tab Label 1"
+Content for the first tab.
 
-    == tab "Tab 2 Name"
-        Content for tab 2.
+== tab "Tab Label 2"
+Content for the second tab.
 
 :::
 ```
 
-## Example
-
-### Code Switching
+## Detailed Example: Package Managers
 
 ````markdown
 ::: tabs
 
-    == tab "JavaScript"
-        ```javascript
-        console.log("Hello World");
-        ```
+== tab "NPM"
+```bash
+npm install @docmd/core
+```
 
-    == tab "Python"
-        ```python
-        print("Hello World")
-        ```
+== tab "Yarn"
+```bash
+yarn add @docmd/core
+```
+
+== tab "PNPM"
+```bash
+pnpm add @docmd/core
+```
 
 :::
 ````
 
-**Rendered Output:**
-
 ::: tabs
-
-    == tab "JavaScript"
-        ```javascript
-        console.log("Hello World");
-        ```
-
-    == tab "Python"
-        ```python
-        print("Hello World")
-        ```
-
+== tab "NPM"
+```bash
+npm install @docmd/core
+```
+== tab "Yarn"
+```bash
+yarn add @docmd/core
+```
+== tab "PNPM"
+```bash
+pnpm add @docmd/core
+```
 :::
 
-## Lazy Rendering
-`docmd` is smart. If you put heavy content (like a **Mermaid diagram**) inside a hidden tab, it will wait to render it until the user actually clicks the tab. This keeps your page load fast.
+## Advanced Features
 
-## Best Practices
+### Lazy Rendering
+`docmd` implements **Conditional Lazy Rendering**. If a tab contains heavy assets like a **Mermaid.js** diagram or large images, they are only initialized once the user clicks that specific tab. This ensures your initial page load remains blazingly fast.
 
-1. **Clear Labels** - Use descriptive tab names
-2. **Consistent Content** - Keep similar content types in each tab
-3. **Logical Order** - Arrange tabs in a logical sequence
-4. **Not Too Many** - Limit to 5-7 tabs for best usability
-5. **Mobile Friendly** - Consider mobile users when organizing content
+### Sticky Tab State
+The `docmd` SPA router remembers the active tab's index when navigating between similar pages. This creates a cohesive experience for users switching between pages that share the same tab setup.
 
-## Nesting Limitations
+## Technical Constraints
 
-- **Tabs cannot contain tabs** - This prevents infinite recursion
-- **Steps inside tabs not supported** - Use regular ordered lists instead
-- **Maximum depth** - While technically unlimited, keep it under 3-4 levels for readability
-- **Performance** - Very deep nesting may impact rendering performance
+| Constraint | Note |
+| :--- | :--- |
+| **No Tabs-in-Tabs** | To prevent UX loops, tabs cannot be nested inside other tabs. |
+| **Steps-in-Tabs** | High-conflict syntax: If you need steps inside a tab, use a standard ordered list (`1. Step One`). |
+| **Max Tabs** | Recommended maximum of 6 tabs for mobile responsiveness. |
 
-::: callout warning Steps Inside Tabs
-**Steps containers cannot be used inside tabs** due to parsing conflicts. If you need step-by-step instructions within tabs, use regular numbered lists or consider restructuring your content.
+::: callout tip
+When using tabs for code snippets, always include the language in the tab label (e.g., `== tab "JavaScript"`). This allows LLMs to instantly identify the relevant block in the unified `llms-full.txt` stream.
 :::

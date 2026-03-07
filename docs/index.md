@@ -14,88 +14,104 @@ description: "Generate beautiful, lightweight, and blazing-fast documentation si
 
 `docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimized static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
 
-::: button "Get Started" /getting-started/installation
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd color:#333
+::: button "Quick Start" /getting-started/installation
+::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333
+::: button "Explore Features" /getting-started/basic-usage color:#333
 
 ## Quick Start
 
-You can have a beautiful documentation site running locally in under a minute. Requires [Node.js](https://nodejs.org/) installed on your machine.
+**Requires [Node.js](https://nodejs.org/) installed on your machine.**
 
+Deploy a beautiful, searchable documentation site in seconds. No framework knowledge required.
+
+**1. Install `docmd` as dependency in your project to lock your versions.**
 ```bash
-# 1. Install docmd globally
-npm install -g @docmd/core
+npm install @docmd/core     # Install locally (Recommended)
 
-# 2. Initialize a new project in your current directory
-docmd init
+npx docmd init              # Initialize your configuration
+npx docmd dev               # Start developing
+```
 
-# 3. Start the local development server
-docmd dev
+**2. Install Globally**
+```bash
+npm install -g @docmd/core  # Enables docmd to run anywhere on your local machine
+```
+
+**3. You can run `docmd` on-the-fly without installing it or setting up any config.**
+```bash
+npx @docmd/core dev -z      # Start local dev server instantly
 ```
 
 Open `http://localhost:3000` in your browser. Any changes you make to the files in the `docs/` folder will instantly update on your screen.
 
 ## Why choose docmd?
 
-We believe writing documentation should be as frictionless as possible. You shouldn't need to configure complex JavaScript frameworks just to publish text.
+We believe writing documentation should be as frictionless as possible. You shouldn't need to configure complex JavaScript frameworks just to publish text. We also believe that modern tools should be built for **both humans and machines**. That's why `docmd` is arguably the most AI-friendly static documentation generator on the market, ready to be immediately digested by the newest wave of LLMs directly out of the box.
 
 <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-    
-::: card Seamless SPA Navigation
-We generate static HTML for ultimate SEO and fast initial loads, but once the page is open, `docmd` intercepts navigation to swap content instantly without ever reloading the browser.
+
+::: card AI-Native Optimization
+`docmd` transforms your documentation into a structured API for LLMs, allowing them to ingest your entire project context perfectly in single-shot prompts.
 :::
 
-::: card Zero Configuration
-Run `docmd init` and start writing. Our sensible defaults mean you don't have to touch a configuration file unless you want to customize your branding or layout.
+::: card Zero Config & Auto-Routing
+Run `docmd dev -z` in any folder. We automatically scan your directory, extract H1 headers as page titles, and build a nested, collapsible navigation tree instantly. No `config.js` needed to start.
+:::
+
+::: card SPA Performance
+We serve static HTML for maximum SEO and speed. Once loaded, `docmd` transitions between pages as a high-performance Single Page Application, no full browser reloads, just instant content swaps.
 :::
 
 ::: card Smart Offline Search
-Built-in full-text search with fuzzy matching and keyword highlighting. It runs entirely in the browser using a generated index, meaning it works perfectly even on air-gapped networks.
+Built-in full-text search with fuzzy matching and section-deep linking. The entire search index runs in-browser, meaning it works 100% offline and in air-gapped environments.
 :::
 
-::: card Isomorphic Engine
-`docmd` isn't just a CLI. The exact same rendering engine can run natively inside a web browser, allowing you to embed live documentation previews directly into your own web apps.
+::: card Modern & Responsive
+Responsive by design. Includes a beautiful default theme with native Light/Dark mode, sticky versioning, and mobile-optimized sidebars out of the box.
+:::
+
+::: card Isomorphic Rendering
+The same engine that builds your static site can run natively in the browser. Embed live documentation previews or interactive editors directly into your own web applications.
 :::
 
 </div>
 
 ## Rich Content Out of the Box
 
-Write naturally. `docmd` extends standard Markdown with intuitive, nestable components to help you structure complex information beautifully.
+`docmd` supports standard Markdown and extends it with intuitive components for professional structure.
 
 ::: tabs
 
-== tab "Containers"
-Easily highlight information using Callouts.
+== tab "Interactive Components"
+Highlight critical information with Callouts and native Buttons.
 
-::: callout tip Pro Tip
-You can nest containers inside each other infinitely. Try putting a button inside a card inside a tab!
+::: callout tip Performance Tip
+Nest containers inside each other to create complex, usable layouts without touching HTML or CSS.
 :::
 
-::: button "Get Started with docmd" /getting-started/installation
+::: button "Read about Containers" /content/containers/callouts
 
-== tab "Diagrams"
-Native support for **Mermaid.js**. Just create a code block with the `mermaid` language tag, and it automatically renders and adapts to your user's Light/Dark mode preference.
+== tab "Native Diagrams"
+Create professional diagrams using **Mermaid.js** syntax directly in your markdown.
 
 ```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> E[Fix the issue]
-    E --> B
-    C --> F[Deploy]
-    F --> G[End]
+graph LR
+    MD[Markdown] --> Build[docmd Build]
+    Build --> Static[Static HTML]
+    Build --> LLM[llms-full.txt]
 ```
 
-== tab "Code"
-Automatic syntax highlighting powered by `highlight.js`, complete with one-click copy buttons and themes tailored for optimal contrast.
+== tab "Code Precision"
+Automatic syntax highlighting with `highlight.js`, including one-click copy buttons and multi-language support.
 
 ```javascript
-function hello() {
-  console.log("Hello World");
-}
+// docmd.config.js
+export default defineConfig({
+  title: 'My Project',
+  layout: { spa: true }
+});
 ```
 
 :::
 
-Ready to dive in? Check out the [Basic Usage](/getting-started/basic-usage) guide or explore how to [Configure](/configuration/) your site.
+Ready to build? [Install docmd](/getting-started/installation) or see [Zero-Config Mode](/getting-started/zero-config) in action.

@@ -1,9 +1,11 @@
 ---
-title: "Programmatic API"
-description: "Programmatic API for building docmd sites from your own scripts."
+title: "Programmatic Node API"
+description: "Integrate docmd's build engine directly into your custom Node.js scripts and automation pipelines."
 ---
 
-You can use `docmd` programmatically inside your own Node.js scripts or task runners (Gulp, Grunt, custom CI).
+# Programmatic Node API
+
+For advanced workflows, you can import and use the `docmd` build engine directly within your own Node.js scripts. This is ideal for custom CI/CD pipelines, automated documentation generation from source code, or wrapping `docmd` in another tool.
 
 ## Installation
 
@@ -11,34 +13,63 @@ You can use `docmd` programmatically inside your own Node.js scripts or task run
 npm install @docmd/core
 ```
 
-## Usage
+## Core Functions
+
+### `build(configPath, options)`
+The primary build function used by the CLI.
 
 ```javascript
-const { build, buildLive } = require('@docmd/core');
+const { build } = require('@docmd/core');
 
-async function generateDocs() {
+async function run() {
+  await build('./docmd.config.js', {
+    isDev: false,      // Set to true for watch mode logic
+    offline: false,    // Set to true to optimize for file:// access
+    zeroConfig: false  // Set to true to bypass config file detection
+  });
+}
+```
+
+### `buildLive(options)`
+Generates the browser-based **Live Editor** bundle.
+
+```javascript
+const { buildLive } = require('@docmd/core');
+
+async function run() {
+  await buildLive({
+    serve: false,      // true starts a local server; false generates static files
+    port: 3000         // Custom port if serve is true
+  });
+}
+```
+
+## Example: Custom Build Pipeline
+
+You can combine `docmd` with other tools (like `fs-extra`) to create complex build artifacts.
+
+```javascript
+const { build } = require('@docmd/core');
+const fs = require('fs-extra');
+
+async function deployDocs() {
   try {
-    console.log('Starting build...');
+    // 1. Pre-build logic (e.g. generating markdown from code)
+    await generateMarkdownFromJSDoc('./src', './docs/api');
 
-    // 1. Build the Static Site
-    await build('./docmd.config.js', { 
-      isDev: false,      // true = enables hot-reload logic (internal)
-      offline: false     // true = optimize links for file:// access
-    });
+    // 2. Run docmd build
+    await build('./docmd.config.js', { offline: true });
 
-    console.log('Static site generated in ./site');
-
-    // 2. Build the Live Editor (Optional)
-    // Generates the browser-based editor bundle in ./dist
-    await buildLive({
-        serve: false // true = starts local server, false = build only
-    });
-
-  } catch (error) {
-    console.error('Build failed:', error);
-    process.exit(1);
+    // 3. Post-build logic (e.g. moving files to a server folder)
+    await fs.move('./site', '/var/www/html/docs');
+    
+    console.log('Documentation successfully deployed!');
+  } catch (err) {
+    console.error('Build Pipeline Failed:', err);
   }
 }
-
-generateDocs();
 ```
+
+::: callout tip
+The Programmatic API allows AI agents to act as **Documentation Engineers**. An agent can trigger a `docmd build` after modifying content, verify that the `llms-full.txt` was generated correctly, and then handle the deployment—all without human intervention.
+:::

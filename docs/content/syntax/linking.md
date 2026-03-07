@@ -1,52 +1,44 @@
 ---
 title: "Linking & Referencing"
-description: "A guide to internal cross-linking, external links, and asset referencing."
+description: "Master internal cross-linking, external links, and asset referencing."
 ---
 
-Learn how to connect your pages and link to external resources.
+To link to another page, use the **relative path** to the `.md` file.
 
-## Internal Page Links
-
-To link to another page in your documentation, use the **relative path** to the markdown file.
-
-::: callout info Smart Rewriting
-`docmd` automatically converts `.md` extensions to valid HTML links during the build. This ensures links work in your code editor (VS Code) AND on the website.
+::: callout info "Extension Rewriting"
+`docmd` automatically converts `.md` extensions to valid HTML links during the build. This ensures links work in your IDE (VS Code) and on the deployed website.
 :::
-
-**Examples:**
 
 | Goal | Syntax |
 | :--- | :--- |
-| Link to a file in the same folder | `[Read Guide](guide.md)` |
-| Link to a file in a subfolder | `[Read Config](configuration/index.md)` |
-| Link back to parent | `[Go Back](../index.md)` |
+| Same Folder | `[Read Guide](guide.md)` |
+| Subfolder | `[Read Config](configuration/index.md)` |
+| Parent Folder | `[Go Back](../index.md)` |
 
 ## Anchors (Section Linking)
 
-You can link to specific headers on a page using the `#slug`.
+Link to specific headers using the `#slug`.
 
 *   **Same Page:** `[Jump to Top](#linking--referencing)`
-*   **Other Page:** `[See Installation](../getting-started/installation.md#global-installation)`
+*   **Cross Page:** `[See Installation](../getting-started/installation.md#global-installation)`
 
-## External Links
+## External & Protocol Links
 
-Standard URL syntax works for external sites.
+Standard URL syntax works for external sites and protocols.
 
-```markdown
-[Visit Google](https://google.com)
-```
-
-**Protocol Links:**
-*   `[Email Support](mailto:help@docmd.io)`
-*   `[Call Us](tel:+123456789)`
+*   **HTTPS:** `[Visit Google](https://google.com)`
+*   **Email:** `[Email Support](mailto:help@docmd.io)`
+*   **Phone:** `[Call Us](tel:+123456789)`
 
 ## Linking to Assets
 
-To allow users to download files (like PDFs) or view raw assets, place them in your `assets/` folder.
-
-**Important:** When linking to files in `assets/`, `docmd` will **NOT** strip the extension.
+To allow users to download files, place them in your `assets/` folder. `docmd` will **not** strip the extension for files inside this directory.
 
 ```markdown
-[Download PDF](../../assets/manual.pdf)
-[View Raw Config](../../assets/examples/config.js)
+[Download PDF](/assets/manual.pdf)
+[View Raw Config](/assets/examples/config.js)
 ```
+
+::: callout tip "AI Navigation Tip"
+When cross-linking pages, using descriptive link text (like `[Read about PWA configuration](../plugins/pwa.md)`) instead of `[Click here](../plugins/pwa.md)` helps AI models understand the relationship between different technical topics during contextual analysis.
+:::

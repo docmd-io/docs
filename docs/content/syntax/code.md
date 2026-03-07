@@ -1,13 +1,13 @@
 ---
 title: "Code Blocks"
-description: "How to display code with syntax highlighting, line numbers, and copy buttons."
+description: "Document your code with automatic syntax highlighting, line numbers, and copy buttons."
 ---
 
 `docmd` includes `highlight.js` for automatic syntax highlighting.
 
 ## Fenced Code Blocks
 
-Wrap your code in triple backticks (` ``` `) and specify the language.
+Wrap your code in triple backticks and specify the language for the best results.
 
 ````markdown
 ```javascript
@@ -18,16 +18,23 @@ function hello() {
 ````
 
 **Renders as:**
+
 ```javascript
 function hello() {
   console.log("Hello World");
 }
 ```
 
-## Copy Button
-If `copyCode: true` is enabled in your config (default), a copy button will automatically appear on hover in the top-right corner of every code block.
+::: callout tip Copy Button
+If `copyCode: true` is enabled in your config (default), a copy button will automatically appear in the top-right corner of every code block when the user hovers.
+:::
+
+## AI Context Strategy
+
+When documenting code for LLMs:
+1.  **Always specify the language**: This helps AI models parse the block correctly in the `llms-full.txt` payload.
+2.  **Add comments**: Explaining complex logic within the code block helps the AI reason about your implementation during context retrieval.
 
 ## Supported Languages
-Common languages include: `javascript`, `typescript`, `html`, `css`, `bash`, `json`, `python`, `java`, `cpp`, `sql`, `yaml`, `markdown`.
 
-If you do not specify a language, it will be rendered as a plain text.
+`docmd` supports hundreds of languages including: `javascript`, `typescript`, `html`, `css`, `bash`, `json`, `python`, `rust`, `go`, `markdown`, and `yaml`.

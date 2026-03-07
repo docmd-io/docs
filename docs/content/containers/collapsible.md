@@ -16,6 +16,10 @@ Content goes here.
 *   **`open`**: (Optional) If present, the section defaults to expanded.
 *   **`Title Text`**: The text shown on the clickable bar. Defaults to "Click to expand".
 
+::: callout tip
+Even when collapsed in the UI, the content inside a `collapsible` is fully indexed by the `docmd` search engine and included in the `llms-full.txt` payload. This means AI can answer questions using hidden details while the interface remains clean for humans.
+:::
+
 ## Examples
 
 ### Default (Closed)
@@ -45,7 +49,6 @@ Useful for sections that should be visible but optional to hide.
 :::
 
 ### Nested Content
-You can put anything inside a collapsible, including code blocks.
 
 ````markdown
 ::: collapsible View JSON Response

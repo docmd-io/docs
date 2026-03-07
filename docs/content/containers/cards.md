@@ -1,57 +1,72 @@
 ---
 title: "Cards"
-description: "Group content into visually distinct, framed boxes."
+description: "Organize information into framed, visually distinct blocks. Ideal for landing pages and feature grids."
 ---
 
-Cards are versatile containers used to group related content. They are excellent for creating grid layouts, feature lists, or summarizing sections.
+Cards are the primary structural component in `docmd`. They group related content into a bordered box with optional titles, providing clear visual hierarchy.
 
 ## Syntax
 
 ```markdown
-::: card Optional Title
-Card content goes here.
+::: card "Optional Title"
+This is the card body.
 :::
 ```
 
 ## Examples
 
-### Basic Card
-With a title and simple text.
-
+### 1. Feature Highlight
 ```markdown
-::: card Features
-*   Fast Build
-*   Offline Search
-*   No Config
+::: card "Fast Build Times"
+`docmd` uses an asynchronous processing engine that can build hundreds of pages in under a second.
 :::
 ```
-::: card Features
-*   Fast Build
-*   Offline Search
-*   No Config
+::: card "Fast Build Times"
+`docmd` uses an asynchronous processing engine that can build hundreds of pages in under a second.
 :::
 
-### Nested Content
-Cards are structural elements. You can put almost anything inside them, including buttons and code blocks.
+### 2. Complex Content
+Cards can contain any other Markdown elements, including code blocks and buttons.
 
 ````markdown
-::: card Download
-Get the latest version.
+::: card "Quick Install"
+Get the library via your favorite package manager:
 
 ```bash
-npm i -g @docmd/core
+npm install @docmd/core
 ```
 
-::: button "Download Now" /install color:#2563eb
+::: button "Installation Guide" /getting-started/installation
 :::
 ````
-
-::: card Download
-Get the latest version.
+::: card "Quick Install"
+Get the library via your favorite package manager:
 
 ```bash
-npm i -g @docmd/core
+npm install @docmd/core
 ```
 
-::: button "Download Now" /install color:#2563eb
+::: button "Installation Guide" /getting-started/installation
+:::
+
+## Creating Grids
+
+While `docmd` is purely Markdown-driven, you can easily create responsive multi-column layouts using standard HTML wrappers around your cards.
+
+```markdown
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+::: card "Left Column"
+Content for the left side.
+:::
+
+::: card "Right Column"
+Content for the right side.
+:::
+
+</div>
+```
+
+::: callout tip
+Cards act as **Topic Clusters**. When an LLM parses the `llms-full.txt` context, items wrapped in a `card` are treated as a single cohesive unit of information. Use cards to isolate unrelated technical concepts on the same page.
 :::

@@ -1,78 +1,74 @@
 ---
 title: "Callouts"
-description: "Highlight important information using semantic callout blocks."
+description: "Highlight critical information using semantic blocks. Supports Tip, Warning, Danger, and Info types."
 ---
 
-Callouts allow you to highlight specific information that exists outside the normal flow of text. `docmd` supports five semantic types.
+Callouts are used to highlight information that requires the user's immediate attention. `docmd` provides five semantic types, each with its own visual styling and icon.
 
 ## Syntax
 
 ```markdown
-::: callout type Title
-Content goes here.
+::: callout type "Optional Title"
+Your content here.
 :::
 ```
 
-If you omit the title, it defaults to the type name (e.g., "Info").
+| Type | Default Title | Best Used For |
+| :--- | :--- | :--- |
+| `info` | Info | General help or background context. |
+| `tip` | Tip | Best practices, shortcuts, or "Pro-tips". |
+| `warning` | Warning | Actions that might cause minor issues if ignored. |
+| `danger` | Danger | Critical warnings, data loss, or significant errors. |
+| `success` | Success | Confirmation of a completed action. |
 
-## Available Types
+---
 
-### Info
-General information or "Did you know?" boxes.
+## Examples
 
+### 1. Simple Note
 ```markdown
-::: callout info Note
-This is a standard informational callout.
+::: callout info
+This is a standard informational note.
 :::
 ```
-::: callout info Note
-This is a standard informational callout.
+::: callout info
+This is a standard informational note.
 :::
 
-### Tip
-Best practices and shortcuts.
-
+### 2. Custom Title
 ```markdown
-::: callout tip Pro Tip
-You can nest other containers inside callouts!
+::: callout warning "Action Required"
+Please back up your configuration before proceeding with the upgrade.
 :::
 ```
-::: callout tip Pro Tip
-You can nest other containers inside callouts!
+::: callout warning "Action Required"
+Please back up your configuration before proceeding with the upgrade.
 :::
 
-### Warning
-Things the user should be careful about.
+### 3. Rich Content (Nesting)
+Callouts can contain any Markdown content, including code blocks and buttons.
 
-```markdown
-::: callout warning Caution
-Proceed with care.
-:::
+````markdown
+::: callout tip "Try this Shortcut"
+Use the CLI to instantly verify your build:
+
+```bash
+docmd dev --preserve
 ```
-::: callout warning Caution
-Proceed with care.
-:::
 
-### Danger
-Critical warnings, data loss risks, or errors.
-
-```markdown
-::: callout danger
-**Critical Error:** Do not delete the database file.
+::: button "Learn More" /cli-commands
 :::
+````
+::: callout tip "Try this Shortcut"
+Use the CLI to instantly verify your build:
+
+```bash
+docmd dev --preserve
 ```
-::: callout danger
-**Critical Error:** Do not delete the database file.
+
+::: button "Learn More" /cli-commands
 :::
 
-### Success
-Confirmation of actions or positive outcomes.
-
-```markdown
-::: callout success
-Build completed successfully!
-:::
-```
-::: callout success
-Build completed successfully!
+::: callout tip
+For LLMs, callouts act as high-priority anchors. Use a `::: callout danger` block to explicitly document breaking changes or "Gotchas" - AI models are specially tuned to prioritize these blocks in their reasoning.
 :::

@@ -1,56 +1,63 @@
 ---
-title: "Extending docmd with Plugins"
-description: "Extend docmd's functionality with built-in integrations."
+title: "Using Plugins"
+description: "How to enable and configure docmd's powerful plugin ecosystem."
 ---
 
-Plugins allow you to add complex features to your documentation site—like analytics tracking or AI context generation—without bloating the core engine. 
+`docmd` features a modular architecture. While the core engine handles Markdown conversion and routing, specialized features are implemented via plugins.
 
-All core plugins are bundled with `@docmd/core`. You simply enable them in your `docmd.config.js` file.
+## Enabling Core Plugins
 
-## Configuration
-
-Plugins are configured inside the `plugins` object. An empty object `{}` usually enables the plugin with its default settings. To disable a plugin, either remove it or set it to `false`.
+Most official plugins ship bundled with `@docmd/core` and simply need to be enabled in your `docmd.config.js`.
 
 ```javascript
+// docmd.config.js
 module.exports = {
-  // ...
   plugins: {
-    
-    // Generates Meta Tags and Open Graph data
-    seo: {
-      defaultDescription: 'My documentation site',
-      openGraph: { defaultImage: '/assets/og-image.png' }
-    },
-    
-    // Injects Google Analytics
-    analytics: {
-      googleV4: { measurementId: 'G-XXXXXXXXXX' }
-    },
-    
-    // Generates sitemap.xml
-    sitemap: {
-      defaultChangefreq: 'weekly'
-    },
-    
-    // Enables Mermaid.js diagrams
-    mermaid: {},
-    
-    // Offline search (Can also be toggled in layout.optionsMenu)
+    // 1. Search (Built-in offline search)
     search: {},
-    
-    // Generates an llms.txt file for AI agents
-    llms: {} 
+
+    // 2. SEO (Meta tags & canonical URLs)
+    seo: { aiBots: false },
+
+    // 3. PWA (Mobile App support)
+    pwa: { themeColor: '#0097ff' },
+
+    // 4. LLM (AI Context generation)
+    llms: { fullContext: true },
+
+    // 5. Mermaid (Native Diagrams)
+    mermaid: {}
   }
-};
+}
 ```
 
-## How Plugins Work
+## Plugin Lifecycle
 
-Plugins in `docmd` hook into various parts of the build process:
+Plugins hook into different stages of the build process:
+*   **`onPreBuild`**: Modifies the file list or adds files before compilation.
+*   **`onPostBuild`**: Generates secondary artifacts (like `sitemap.xml` or `service-worker.js`).
+*   **`generateMetaTags`**: Injects custom HTML into the `<head>` of every page.
+*   **`generateScripts`**: Injects JavaScript before the closing `</body>` tag.
 
-* They can add meta tags and scripts to the page head
-* They can inject content or scripts at the beginning or end of the page body
-* They can generate additional files in the output directory
-* They can modify the HTML output of pages
+## External Plugins
 
-All plugins are designed to be configurable through your config file, giving you control over their behavior. Explore the sidebar to see the specific configuration options available for each plugin.
+To use a plugin from npm, install it and require it in your config.
+
+```bash
+npm install @docmd/plugin-analytics
+```
+
+```javascript
+// docmd.config.js
+const Analytics = require('@docmd/plugin-analytics');
+
+module.exports = {
+  plugins: {
+    analytics: { googleV4: { measurementId: 'G-XXXX' } }
+  }
+}
+```
+
+::: callout tip
+Our plugin architecture is designed to be **transparent**. Every meta-tag and script injected by a plugin is clearly defined and traceable. This allows AI models to understand exactly how your site's functionality is being extended without guessing.
+:::

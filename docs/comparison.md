@@ -3,44 +3,36 @@ title: "Comparing Documentation Tools"
 description: "See how docmd stacks up against Docusaurus, MkDocs, Mintlify, and other documentation generators."
 ---
 
-Choosing the right tool depends on your team's workflow and your project's scale. `docmd` was engineered to fill a specific gap: the space between "too simple" (basic Markdown parsers) and "too heavy" (full React/framework applications).
+`docmd` was engineered to fill a specific gap: the space between "too simple" (basic Markdown parsers) and "too heavy" (full React/framework applications).
 
 ## Feature Matrix
 
-Here is how `docmd` compares to the industry standards across key metrics.
-
-| Feature | docmd | Docusaurus | MkDocs (Material) | Mintlify |
+| Feature | docmd | Docusaurus | MkDocs | Mintlify |
 | :--- | :--- | :--- | :--- | :--- |
-| **Core Architecture** | Node.js (Isomorphic) | React.js | Python | Proprietary |
+| **Language** | **Node.js** | React.js | Python | Proprietary |
 | **Navigation** | **Instant SPA** | React SPA | Page Reloads | Hosted SPA |
-| **Client JS Payload** | **Tiny (< 20kb)** | Heavy (> 200kb) | Minimal | Medium |
-| **Search Engine** | **Built-in (Offline)** | Algolia (Cloud) | Built-in (Lunr) | Built-in (Cloud) |
-| **Custom Containers** | **Deep Nesting** | MDX / React | Admonitions | MDX |
-| **Setup Time** | **< 1 minute** | ~15 mins | ~10 mins | Instant |
-| **Browser API**| **Yes (Live Editor)** | No | No | No |
+| **Output** | **Static HTML** | React Hydration | Static HTML | Hosted |
+| **JS Payload** | **Tiny (< 20kb)** | Heavy (> 200kb) | Minimal | Medium |
+| **Versioning** | **Easy (Config + Auto)** | Complex (FS) | Plugin (Mike) | Native |
+| **i18n Support** | **In Pipeline** | Native | Theme-based | Beta |
+| **Search** | **Built-in (Offline)** | Algolia (Cloud) | Built-in (Lunr) | Built-in (Cloud) |
+| **PWA** | **Built-in (Plugin)** | Plugin | None | Hosted |
+| **AI Context** | **Built-in (llms.txt)** | Plugin | None | Proprietary |
+| **Setup** | **Instant (-z)** | ~15 mins | ~10 mins | ~5 mins |
 | **Cost** | **Free OSS** | Free OSS | Free OSS | Freemium |
 
 ## The docmd Advantage
 
-If you are trying to decide if `docmd` is right for you, here are the three areas where it truly shines.
+### 1. AI-Centric Architecture
+Unlike traditional generators, `docmd` understands that humans aren't the only ones reading your docs. With the **LLM Plugin**, your site automatically generates `llms.txt` and `llms-full.txt` files. These provide instantly ingestible context for AI agents (like GitHub Copilot, ChatGPT, or custom RAG pipelines), making your project significantly easier for AI to support.
 
-### 1. The "Isomorphic" Engine
-Unlike Docusaurus or MkDocs, which are strictly "Build Tools" that must run on a server or CI/CD pipeline, `docmd` has a modular core. 
-You can run the exact same `docmd` compilation engine directly inside a web browser. This enables features like our Live Editor, allowing you to build CMS interfaces or live preview tools for your users without needing a backend server.
+### 2. Native PWA Logic
+While other tools require complex Service Worker configurations, `docmd` offers a **one-line PWA plugin**. This turns your documentation into an installable mobile/desktop app with intelligent offline caching and background auto-updates out of the box.
 
-### 2. Privacy-First, Offline Search
-Most documentation generators push you toward third-party services like Algolia DocSearch. While Algolia is fantastic for enterprise scale, it requires API keys, crawler configurations, and sends user search data to external servers.
-
-`docmd` includes a production-grade search engine out of the box. It generates a highly optimized local index during the build. This means your documentation is searchable even if the user loses their internet connection, and respects user privacy completely.
-
-### 3. Pure HTML + SPA Speed
-We believe reading documentation shouldn't require downloading a massive JavaScript framework. 
-
-When you build a `docmd` site, it generates pure, semantic HTML. This results in perfect SEO and instant initial page loads. However, once the page is open, our lightweight client-side router takes over. Clicking links feels exactly like a modern React or Next.js app-content swaps instantly without the browser ever flashing or reloading.
+### 3. Balanced Speed (SPA + Static)
+We generate pure static HTML for perfect SEO and initial load speed. However, once loaded, our lightweight SPA router handles all further navigations. This gives you the speed of a React app with the simplicity and SEO of a static site.
 
 ## When to choose something else
 
-We are proud of what `docmd` does, but it isn't for everyone.
-
-* **Choose Docusaurus if:** You need to embed highly interactive, custom React components directly inside your Markdown files, or if you are building a massive corporate portal with extreme internationalization needs.
-* **Choose MkDocs if:** Your entire engineering team strictly works in Python and you want to utilize the existing Python plugin ecosystem.
+*   **Choose Docusaurus if:** You need highly interactive, custom React components embedded directly inside your Markdown (MDX), or have extreme multi-language requirements.
+*   **Choose MkDocs if:** Your team is strictly Python-based and you want to use the existing Python plugin ecosystem (though you'll miss out on SPA features).

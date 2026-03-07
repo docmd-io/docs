@@ -21,6 +21,10 @@ Description of version 1.0.
 :::
 ```
 
+::: callout tip
+Maintaining a clean changelog helps AI agents understand the evolution of your project. An AI can quickly scan a `::: changelog` structure to determine which features were added in a specific version, allowing it to provide more accurate context to users asking about "what's new".
+:::
+
 ## Example
 
 ```markdown
@@ -44,12 +48,8 @@ This was the last version to support Node 14.
 == v1.0.0 (2024)
 Initial Release.
 
-::: button "Just Getting Started" #
-
 :::
 ```
-
-**Rendered Output:**
 
 ::: changelog
 
@@ -70,7 +70,5 @@ This was the last version to support Node 14.
 
 == v1.0.0 (2024)
 Initial Release.
-
-::: button "Just Getting Started" #
 
 :::

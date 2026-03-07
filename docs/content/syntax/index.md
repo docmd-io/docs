@@ -1,6 +1,6 @@
 ---
 title: "Markdown Syntax"
-description: "Basic formatting guide for docmd: Headings, lists, bold, italic, and more."
+description: "Master the basic formatting of docmd: Headings, lists, bold, italic, and more."
 ---
 
 `docmd` uses standard Markdown syntax. This guide covers the essentials for formatting text.
@@ -9,14 +9,12 @@ description: "Basic formatting guide for docmd: Headings, lists, bold, italic, a
 
 | Style | Syntax | Example |
 | :--- | :--- | :--- |
-| **Bold** | `**text**` or `__text__` | **Bold Text** |
-| *Italic* | `*text*` or `_text_` | *Italic Text* |
+| **Bold** | `**text**` | **Bold Text** |
+| *Italic* | `*text*` | *Italic Text* |
 | ~~Strikethrough~~ | `~~text~~` | ~~Deleted Text~~ |
 | `Code` | `` `text` `` | `Inline Code` |
 
-## Common Elements
-
-You can use all standard Markdown elements:
+## Technical Elements
 
 ### Headings
 
@@ -24,110 +22,40 @@ You can use all standard Markdown elements:
 # Heading 1
 ## Heading 2
 ### Heading 3
-...
-###### Heading 6
 ```
 
-### Paragraphs
-
-Just type text. Separate paragraphs with a blank line.
-
-### Lists
-
-*   **Unordered:**
-    ```markdown
-    * Item 1
-    * Item 2
-        * Nested Item 2a
-        * Nested Item 2b
-    + Item 3 (using +)
-    - Item 4 (using -)
-    ```
-*   **Ordered:**
-    ```markdown
-    1. First item
-    2. Second item
-    3. Third item
-        1. Nested ordered item
-    ```
+::: callout tip
+AI models (and search engines) rely heavily on a proper heading hierarchy. Always avoid skipping levels (e.g., jumping from `#` to `###`) to ensure the `llms.txt` and search index can accurately map your documentation's context.
+:::
 
 ### Links
 
 ```markdown
 [Link Text](https://www.example.com)
-[Link with Title](https://www.example.com "Link Title")
-[Relative Link to another page](../section/other-page/)
+[Relative Link](../section/other-page/)
 ```
 
-::: callout info
-For internal links to other documentation pages, use relative paths to the `.md` files. `docmd` will convert these to the correct HTML paths during the build.
-:::
+### Lists
 
-### Images
+*   **Unordered:** Use `*` or `-`.
+*   **Ordered:** Use `1.`, `2.`, etc.
 
-::: callout info
-See [Images & Media](images.md) for more advanced setup.
-:::
+### Blocks
 
-```markdown
-![Alt text for image](/path/to/your/image.jpg "Optional Image Title")
-```
-
-::: callout tip
-Place images in your `docs/` directory (e.g., `docs/images/`) or a similar assets folder that gets copied to your `site/` output.
-:::
-
-### Blockquotes
-
-```markdown
 > This is a blockquote.
-> It can span multiple lines.
-```
 
-### Horizontal Rules
+## Tables
 
-```markdown
----
-***
-___
-```
+| Header 1 | Header 2 |
+| :--- | :--- |
+| Left Align | Center Align |
 
-### Inline Code
+## Advanced HTML
 
-::: callout info
-See [Code Blocks](code.md) for codeblocks and more advanced setup.
-:::
-
-```markdown
-Use `backticks` for inline code like `variableName`.
-```
-
-### Tables (GFM Style)
-
-You can create tables using GitHub Flavored Markdown syntax:
-
-```bash
-| Header 1 | Header 2 | Header 3 |
-| :------- | :------: | -------: |
-| Align L  | Center   | Align R  |
-| Cell 1   | Cell 2   | Cell 3   |
-| Cell 4   | Cell 5   | Cell 6   |
-```
-| Header 1 | Header 2 | Header 3 |
-| :------- | :------: | -------: |
-| Align L  | Center   | Align R  |
-| Cell 1   | Cell 2   | Cell 3   |
-| Cell 4   | Cell 5   | Cell 6   |
-
-## HTML
-
-Because `markdown-it` is configured with `html: true`, you can embed raw HTML directly in your Markdown files. However, use this sparingly, as it can make your content less portable and harder to maintain.
+Because `docmd` is built with `html: true`, you can embed raw HTML directly in your Markdown files for custom styling needs.
 
 ```html
 <div style="color: blue;">
-  This is a blue div rendered directly from HTML.
+  This is a blue div.
 </div>
 ```
-::: callout tip
-For most formatting needs, standard Markdown and `docmd`'s [Custom Containers](../containers/) should suffice.
-:::

@@ -1,44 +1,46 @@
 ---
 title: "Redirects & 404"
-description: "Configure server-less 301 redirects and custom 404 pages."
+description: "Configure instant metadata-based redirects and custom branded 404 error pages for static deployments."
 ---
 
-`docmd` generates static HTML files. Since there is no backend server logic, we simulate redirects and 404s using standard static site techniques.
+In a static environment, there is no server-side logic (like `.htaccess` or Nginx rules) to handle routing. `docmd` solves this by generating native HTML failsafes that handle redirection and error states automatically.
 
-## Redirects
+## Server-less Redirects
 
-You can define rewrite rules to forward users from old URLs to new ones. This is crucial when you rename pages or restructure your docs.
+You can forward traffic from old URLs to new destinations by defining a mapping in the `redirects` object.
 
 ```javascript
-// docmd.config.js
 module.exports = defineConfig({
-  // ...
   redirects: {
-    '/old-setup': '/getting-started/installation',
-    '/api/v1': '/v1/api-reference'
+    '/setup': '/getting-started/installation', // Redirect /setup to new path
+    '/v1/api': '/api-reference'                  // Forward legacy API links
   }
 });
 ```
 
-### How it works
-`docmd` generates a small HTML file at the "old" path (e.g., `site/old-setup/index.html`) containing a `<meta http-equiv="refresh">` tag and a canonical link to the new URL. Search engines treat this similarly to a 301 Redirect.
+### Technical Implementation
+When you define a redirect, `docmd` creates a directory and an `index.html` at the old path containing a `<meta http-equiv="refresh">` tag. This ensures:
+1.  **Humans** are redirected instantly after the page loads.
+2.  **Search Engines** recognize the canonical link to the new content.
+3.  **Analytics** are preserved across the transition.
 
-## Custom 404 Page
+## Branded 404 Pages
 
-If a user navigates to a non-existent link, `docmd` generates a `404.html` file using your site's theme and layout.
+When a user accesses a non-existent URL, most static hosts (Netlify, Vercel, GitHub Pages) look for a `404.html` file in the root. `docmd` automatically generates this file, ensuring that it inherits your theme, sidebar, and Single Page Application (SPA) functionality.
 
-You can customize the text of this page:
+### Customizing the Error Content
+
+You can customize the 404 messaging in your configuration:
 
 ```javascript
 module.exports = defineConfig({
-  // ...
   notFound: {
-    title: 'Page Not Found',
-    content: 'Oops! It looks like this page has been moved or deleted.'
+    title: '404: Lost in the Docs',
+    content: "We couldn't find the page you're looking for. Use the sidebar to find your way back."
   }
 });
 ```
 
 ::: callout tip
-If you are hosting on GitHub Pages or a static server, you should configure your server to serve `404.html` when a file is missing. Most platforms (Netlify, Vercel, GitHub Pages) do this automatically.
+Local development server (`docmd dev`) will automatically serve this custom 404 page whenever a file is missing.
 :::

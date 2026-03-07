@@ -1,46 +1,50 @@
 ---
 title: "Custom Containers"
-description: "A gallery of the rich UI components available in docmd."
+description: "A directory of the interactive UI components available in docmd. Cards, Tabs, Callouts, and more."
 ---
 
-Standard Markdown is great for text, but sometimes you need more. `docmd` extends Markdown with a set of "Containers" to help you structure complex documentation.
+Standard Markdown handles basic text well, but professional documentation often requires richer structure. `docmd` extends Markdown with a set of "Containers" that render into beautiful, responsive UI components.
 
-Use the syntax `::: container_name` to start a block.
+## The Syntax Guide
 
-<div class="image-gallery" style="display:grid;grid-template-columns:47% 47%;gap:1em 6%;padding:2em 0">
+All containers follow a consistent block syntax.
 
-::: card 📣 Callouts
-Semantic highlights for warnings, tips, and important notes.
-::: button "See Types" /content/containers/callouts
+```markdown
+::: type "Optional Title"
+This is the content of the container. 
+It can include **Markdown**, images, and even other containers.
 :::
+```
 
-::: card 🗃️ Cards
-Group related content into distinct, framed boxes. Perfect for grids.
-::: button "Card Syntax" /content/containers/cards
+| Component | Keyword | Usage |
+| :--- | :--- | :--- |
+| **[Callouts](./callouts)** | `callout` | Semantic highlights (tips, warnings) |
+| **[Cards](./cards)** | `card` | Framed content blocks (perfect for grids) |
+| **[Tabs](./tabs)** | `tabs` | Switchable content panes |
+| **[Steps](./steps)** | `steps` | Visual numbered timelines |
+| **[Buttons](./buttons)** | `button` | Styled CTA links |
+| **[Collapsible](./collapsible)**| `collapsible` | Hidden content toggles (Accordions) |
+| **[Changelogs](./changelogs)** | `changelog` | Version and update tracking |
+
+## Why Use Containers?
+
+Containers aren't just for humans. They provide high-level semantic signals to the `docmd` engine and LLMs:
+
+1.  **AI Context**: Highlighting a block as a `callout tip` tells AI models that this specific information is a recommendation. 
+2.  **Layout Control**: Combining `cards` with standard CSS allows you to build complex landing pages entirely in Markdown.
+3.  **Clean Source**: No HTML or Class-soup is required in your markdown files.
+
+## Nesting Components
+
+One of `docmd`'s most powerful features is **Infinite Nesting**. You can place any container inside another, allowing you to build very complex documentation elements purely with simple Markdown syntax.
+
+```markdown
+::: card "Pro Guide"
+    ::: callout warning
+        Reading this out of order may be confusing.
+    :::
+    ::: button "Let's Begin" /start
 :::
+```
 
-::: card 📑 Tabs
-Organize content into switchable panes to save vertical space.
-::: button "Tab Examples" /content/containers/tabs
-:::
-
-::: card 🔢 Steps
-Transform ordered lists into beautiful visual timelines.
-::: button "Create Steps" /content/containers/steps
-:::
-
-::: card 🖱️ Buttons
-Call-to-action links with custom colors and styles.
-::: button "Button API" /content/containers/buttons
-:::
-
-::: card ↕️ Collapsible
-Hide advanced details or FAQs inside toggleable accordions.
-::: button "Accordions" /content/containers/collapsible
-:::
-
-</div>
-
-## Nesting
-
-Thanks to our advanced parser, you can nest these containers inside each other infinitely. See [Nested Containers](./nested-containers) for examples.
+[Read the Nesting Guide →](./nested-containers)

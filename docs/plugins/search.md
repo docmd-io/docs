@@ -1,17 +1,19 @@
 ---
 title: "Search Plugin"
-description: "Configure the offline-capable, full-text search engine."
+description: "Configure docmd's zero-config, privacy-focused offline search engine with section-deep linking."
 ---
 
-`docmd` includes a privacy-focused, offline-capable search engine powered by `MiniSearch`. It indexes your content at build time, meaning no external services (like Algolia) are required.
+Every `docmd` project includes a powerful, full-text search engine built-in. Unlike traditional search tools that require external indexing services or server-side databases, `docmd` search runs **entirely in the user's browser**.
+
+## How it Works
+
+1.  **Build Phase**: `docmd` analyzes your markdown and generates a compressed `search-index.json`.
+2.  **Section Awareness**: We don't just index pages; we index **headers**. If a keyword appears in a specific `###` section, the search result will link the user directly to that section using its permalink.
+3.  **Local Execution**: When a user types, the matching happens instantly in memory using `MiniSearch`. It works perfectly in air-gapped environments or on slow connections.
 
 ## Configuration
 
-The search plugin is enabled by default. You can configure it via the `optionsMenu` in the layout config, or the `plugins` object.
-
-### Enabling/Disabling
-
-To toggle the search button in the UI:
+The search plugin is **active by default**. You can customize its presence via the `layout` object.
 
 ```javascript
 // docmd.config.js
@@ -19,39 +21,36 @@ module.exports = {
   layout: {
     optionsMenu: {
       components: {
-        search: true, // Set to false to hide the search icon
+        search: true // Set to false to remove the search button
       }
     }
   }
 }
 ```
 
-### Excluding Pages
+## Advanced Usage
 
-To prevent specific pages (like drafts or utility pages) from appearing in search results, add `noindex: true` to the frontmatter:
+### Excluding Content
+To prevent a specific page from being indexed (e.g., utility pages), add `noindex` to the frontmatter:
 
 ```yaml
 ---
-title: "Private Draft"
+title: "Private Info"
 noindex: true
 ---
 ```
 
-## How it Works
+### Keyboard Shortcuts
+We've optimized the search experience with native feeling shortcuts:
+*   `Cmd + K` (Mac) or `Ctrl + K` (Windows) to open.
+*   `ESC` to close.
+*   `Arrow Keys` and `Enter` to navigate.
 
-1.  **Build Time:** The plugin scans all generated HTML, strips tags, and extracts headings/text into `site/search-index.json`. 
-    *   **Deep Linking (v0.5.1+)**: It breaks down pages into granular chunks based on header tags (`<h3>`, `<h4>` etc). When a user searches, the results will link them directly to the specific paragraph section containing their match instead of just the top of the page.
-2.  **Runtime:** When a user opens your site, the lightweight index is loaded.
-3.  **Privacy:** All search logic happens locally in the user's browser. No keystrokes are sent to any server.
 
-## Keyboard Shortcuts
+## Privacy First
+Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
 
-*   `Cmd + K` (Mac) or `Ctrl + K` (Windows): Open Search
-*   `Arrow Up/Down`: Navigate results
-*   `Enter`: Select result
-*   `Esc`: Close modal
-
-## Comparison vs. Algolia
+## Comparison
 
 Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. While Algolia is powerful, it introduces friction:
 
@@ -62,5 +61,3 @@ Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. W
 | **Offline** | **Yes** | No |
 | **Cost** | **Free** | Free tier limits or Paid |
 | **Speed** | **Instant** (In-memory) | Fast (Network latency dependent) |
-
-`docmd` creates a frictionless experience: you write the markdown, we handle the discovery.

@@ -1,44 +1,64 @@
 ---
 title: "Buttons"
-description: "Create call-to-action buttons for links, downloads, and external resources."
+description: "Inject call-to-action buttons for internal routing or external resources. No closing tag required."
 ---
 
-Buttons are perfect for "Call to Action" links, such as downloads, sign-ups, or navigating to key sections.
-
-::: callout warning Self-Closing
-The button container is **self-closing**. Do not add a closing `:::` tag, or it may accidentally close parent containers (like Cards).
-:::
+Buttons are used to create prominent links. Unlike most `docmd` containers, the `button` is **self-closing**. You define it on a single line and do not use a closing `:::` tag.
 
 ## Syntax
 
 ```markdown
-::: button "Label Text" Link [Options]
+::: button "Label" Path [Option]
 ```
+
+### Options
+
+| Property | Value | Description |
+| :--- | :--- | :--- |
+| **Path** | `/path` | Relative URL to a page in your docs. |
+| **Path** | `external:URL` | Opens the link in a new tab with `target="_blank"`. |
+| **Color** | `color:#hex` | Custom background color (e.g. `color:#4f46e5`). |
+
 
 ## Examples
 
-### Internal Links
-Use relative paths to link to other pages in your documentation.
-
+### 1. Internal Link
+Use relative paths to link between pages.
 ```markdown
-::: button "Get Started" /getting-started/installation
+::: button "Back to Installation" /getting-started/installation
 ```
-::: button "Get Started" /getting-started/installation
+::: button "Back to Installation" /getting-started/installation
 
-### External Links
-Prepend `external:` to the URL to force it to open in a new tab with `target="_blank"`.
-
+### 2. External Link
+Prepend `external:` to ensure the link opens in a new tab.
 ```markdown
-::: button "View Source" external:https://github.com/docmd-io/docmd
+::: button "View on GitHub" external:https://github.com/docmd-io/docmd
 ```
-::: button "View Source" external:https://github.com/docmd-io/docmd
+::: button "View on GitHub" external:https://github.com/docmd-io/docmd
 
-### Custom Colors
-You can customize the button color using a hex code or CSS color name.
-
+### 3. Styled Branding
+You can use standard CSS colors or Hex codes to match your brand.
 ```markdown
-::: button "Critical Action" /delete-account color:#ef4444
-::: button "Success" /confirm color:green
+::: button "Critical Action" /delete-account color:red
+::: button "Success" /confirm color:#228B22
 ```
-::: button "Critical Action" /delete-account color:#ef4444
-::: button "Success" /confirm color:green
+::: button "Critical Action" ./#delete-account color:crimson
+::: button "Success" ./#confirm color:#228B22
+
+## Troubleshooting: Accidental Over-closing
+Because buttons are self-closing, adding a second `:::` line will actually **close the parent container** (like a Card or a Tab) that the button is sitting inside.
+
+**Incorrect (Will break layout):**
+```markdown
+::: card
+::: button "Click" /path
+:::
+:::
+```
+
+**Correct:**
+```markdown
+::: card
+::: button "Click" /path
+:::
+```

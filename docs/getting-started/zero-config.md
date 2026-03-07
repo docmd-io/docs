@@ -1,9 +1,9 @@
 ---
 title: "Zero-Config Mode"
-description: "Run docmd without any configuration file. Perfect for quick previews."
+description: "Run docmd without any configuration file. Perfect for quick previews and rapid prototyping."
 ---
 
-`docmd` v0.5.0 introduces **Zero-Config Mode**. This allows you to run the documentation engine in any folder without creating a `docmd.config.js` file.
+`docmd` features a high-intelligence auto-detection engine. This allows you to generate professional documentation for any project without writing a single line of configuration.
 
 ## Usage
 
@@ -19,15 +19,20 @@ docmd build -z
 
 ## How It Works
 
-When running in Zero-Config mode, the engine:
-1.  **Smart Directory Detection (v0.5.1+)**: Scans your current directory sequentially for `docs/`, `src/docs/`, or `content/`. If none exist, it falls back to parsing the root directory entirely. 
-2.  **Metadata Extraction (v0.5.1+)**: It attempts to read your project's root `package.json` file. If present, it will automatically populate your documentation site `title` and `description` to perfectly match your npm package names.
-3.  **Auto-Router:** It recursively scans your `.md` files and folders to build the sidebar navigation automatically.
-    *   Folder names become Category labels (capitalized).
-    *   File names (or H1 headers inside them) become Page titles.
-4.  Applies sensible defaults (Default theme, System light/dark mode).
+When running in Zero-Config mode, `docmd` performs the following steps:
 
-## When to use it?
-*   **Quick Previews:** You have a README.md and a few docs in a repo and just want to read them nicely.
-*   **Prototyping:** Starting a new project before deciding on branding.
-*   **Simple Wikis:** Personal knowledge bases that don't need plugins or custom themes.
+1.  **Smart Directory Detection**: It scans your root directory for common documentation folders in this priority: `docs/` → `src/docs/` → `content/`. If none are found, it parses the root directory.
+2.  **Automatic Titling**: It reads your `package.json`. If found, it automatically sets your site `title` and `description` to match your npm package metadata.
+3.  **Recursive Routing**: It scans all folders and Markdown files to build a nested navigation sidebar.
+4.  **Sensible Defaults**: It applies the `default` theme with system-aware light/dark mode and enables the `search` plugin.
+
+## Safety & Performance
+
+Zero-Config in v0.5.1 is engineered for safety:
+
+*   **Recursion Limit**: The engine ignores `node_modules` and hidden folders (like `.git`) and restricts depth to prevent infinite loops in massive projects.
+*   **Bail-out Logic**: If no Markdown files are found after scanning two levels deep, `docmd` will immediately stop and provide a clean CLI warning rather than hanging.
+
+::: callout tip
+Zero-config is excellent for **AI Agents**. Because the structure is predictable and derived from the filesystem, an AI can easily predict where files will be located and update documentation without needing to parse complex configuration schemas.
+:::

@@ -3,7 +3,7 @@ title: "No-Style Pages"
 description: "Create landing pages and custom layouts by disabling the default docmd theme."
 ---
 
-Sometimes you need a page that doesn't look like documentation—for example, a Marketing Landing Page, a Login screen, or a completely custom showcase.
+Sometimes you need a page that looks completely different, like a Marketing Landing Page, a Login screen, or a custom showcase.
 
 `docmd` allows you to disable the standard layout (Sidebar, Header, Footer) on a per-page basis using **Frontmatter**.
 
@@ -17,28 +17,28 @@ title: "Welcome"
 noStyle: true
 components:
   meta: true      # Keep SEO meta tags
-  favicon: true   # Keep the site favicon
-  scripts: false  # Disable docmd's main JS (optional)
+  favicon: true   # Keep site favicon
+  css: true       # Injects basic docmd-main.css
 ---
 
 <!-- Write raw HTML or Markdown below -->
 <div class="hero-section">
   <h1>My Product</h1>
-  <p>The future of something amazing.</p>
+  <p>The future of documentation.</p>
 </div>
 ```
 
 ## Controlling Components
 
-When `noStyle` is active, `docmd` gives you a blank canvas. You can selectively re-enable specific parts of the system using the `components` object:
+When `noStyle` is active, you have a blank canvas. Selectively re-enable specific parts of the system:
 
-| Component | Default (in noStyle) | Description |
-| :--- | :--- | :--- |
-| `meta` | `false` | Injects `<title>`, `<meta name="description">`, and SEO tags. |
-| `favicon` | `false` | Injects the favicon link. |
-| `css` | `false` | Injects `docmd-main.css` (useful if you want to use grid/typography but not layout). |
-| `theme` | `false` | Injects the active theme CSS (e.g., Sky, Retro). |
-| `scripts` | `false` | Injects `docmd-main.js` (needed for toggle buttons, copy code, etc). |
+| Component | Description |
+| :--- | :--- |
+| `meta` | Injects `<title>`, SEO tags, and OpenGraph data. |
+| `favicon` | Injects the site favicon. |
+| `css` | Injects `docmd-main.css` (useful for grid/typography). |
+| `theme` | Injects the active theme colors/overrides. |
+| `scripts` | Injects `docmd-main.js` (needed for buttons/SPA). |
 
 ## Example: Marketing Landing Page
 
@@ -48,19 +48,19 @@ title: "Home"
 noStyle: true
 components:
   meta: true
-  favicon: true
   css: true
 customHead: |
   <style>
     .hero { text-align: center; padding: 100px 20px; }
-    .hero h1 { font-size: 3rem; margin-bottom: 20px; }
   </style>
 ---
 
 <div class="hero">
   <h1>Build Faster.</h1>
-  <p>The ultimate developer tool.</p>
-  
   ::: button "Get Started" /docs/intro color:blue
 </div>
 ```
+
+::: callout tip "AI-Managed Landing Pages 🤖"
+Because `noStyle` pages can accept raw HTML while still being parsed by `docmd`, they are perfect for **AI-generated layouts**. You can prompt an AI: *"Create a landing page for my project using noStyle: true and provide the raw HTML section."* The AI can perfectly integrate with the rest of your build pipeline.
+:::

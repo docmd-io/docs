@@ -1,132 +1,63 @@
 ---
-title: "SEO & Meta Tags Plugin"
-description: "Configure Search Engine Optimization (SEO) meta tags to improve your docmd site's discoverability."
+title: "SEO & Meta Tags"
+description: "Automatic SEO optimization, Open Graph integration, and AI Scraper control for your docmd site."
 ---
 
-The `seo` plugin automatically generates important meta tags in the `<head>` of your HTML pages. This helps search engines and social media platforms understand, index, and display your content more effectively.
+The `seo` plugin ensures your documentation is discoverable by search engines and looks professional when shared on social media. It handles technical meta-tag injection automatically.
 
-## Enabling the Plugin
-
-Add the `seo` plugin to the `plugins` object in your config file:
+## Quick Setup
 
 ```javascript
+// docmd.config.js
 module.exports = {
-  // ...
   plugins: {
     seo: {
-      defaultDescription: 'Discover insightful articles and guides on Project X. Your go-to resource for learning and development.',
+      defaultDescription: 'The official documentation for Project X.',
       openGraph: {
-        // siteName: 'Project X Documentation', // Optional, defaults to config.siteTitle
-        defaultImage: '/assets/images/default-og-image.png', // Absolute path from site root
+        defaultImage: '/assets/og-hero.jpg' // Shown on Twitter/LinkedIn
       },
-      twitter: {
-        cardType: 'summary_large_image', // e.g., 'summary', 'summary_large_image'
-        // siteUsername: '@ProjectX_Docs', // Your site's Twitter handle
-        // creatorUsername: '@YourHandle' // Default author handle (override in frontmatter)
-      },
-      // Block common AI Scrapers from scraping your documentation (v0.5.1+ feature)
       aiBots: {
-        block: false, // Set to true to automatically inject noindex blocks for GPTBot, ClaudeBot etc.
+        block: true // Automatically block common AI scrapers (GPTBot, etc)
       }
-    },
-    // ... other plugins
-  },
-  // ...
-};
+    }
+  }
+}
 ```
 
-## Automatic Fallbacks (v0.5.1+)
-If you do not explicitly define a `description` in your file's frontmatter, the SEO plugin will smartly analyze the raw markdown content of the page and construct a safe, 150-character excerpt automatically to fulfill standard `<meta>` and Open Graph description tags.
+## Automatic Features
 
-## Configuration Options
+### 1. Smart Excerpts
+If you forget to provide a `description` in your file's frontmatter, the SEO plugin automatically constructs a **150-character fallback description** from the beginning of your content. This ensures you never have "empty" snippets in Google search results.
 
-The options in the config file serve as site-wide defaults. For the best results, you should provide specific metadata for each page using frontmatter.
+### 2. AI Scraper Control
+With `aiBots.block: true`, `docmd` injects `noindex` tags targetting 12+ major AI crawler agents (including `GPTBot`, `ClaudeBot`, and `Google-Extended`). This is the easiest way to keep your documentation out of bulk training datasets while remaining visible to humans.
 
-## Frontmatter for SEO
+## Per-Page Overrides
 
-To control SEO on a per-page basis, add a nested `seo` object to your page's frontmatter. This keeps all SEO-related settings organized and prevents conflicts with other frontmatter keys.
+For maximum SEO precision, use the `seo` object in your Markdown frontmatter.
 
 ```yaml
 ---
-title: "Advanced Widget Configuration"
-description: "A detailed guide on configuring advanced settings for the Super Widget."
+title: "Advanced Setup Guide"
 seo:
-  description: "A more specific SEO description for search engines, overriding the main description if needed."
-  image: "/assets/images/widgets/super-widget-social.jpg"
-  ogType: "article"
-  twitterCard: "summary_large_image"
-  twitterCreator: "@widgetMaster"
-  keywords: ["widget", "configuration", "advanced", "performance"]
-  permalink: "https://example.com/docs/widgets/advanced-configuration"
+  description: "Learn how to configure our enterprise-grade security clusters in minutes."
+  image: "/assets/guides/setup-social.png"
   noindex: false
+  keywords: ["security", "cluster", "enterprise"]
 ---
 ```
-
-::: callout info Backward Compatibility
-For backward compatibility, the plugin will still recognize top-level SEO fields like `image`, `ogType`, etc. However, the nested `seo:` structure is the recommended approach.
-:::
-
-### Supported Frontmatter Fields
-
-All fields should be placed inside the `seo:` object.
-
-*   `description` (String): Overrides the main page description for SEO meta tags.
-*   `image` or `ogImage` (String): Path to an image for `og:image` and `twitter:image`.
-*   `ogType` (String): Overrides the default Open Graph type (e.g., `article`, `website`).
-*   `twitterCard` (String): Overrides the default Twitter card type for this page.
-*   `twitterCreator` (String): The Twitter @username of the page's author.
-*   `keywords` (Array of Strings or String): Keywords for the `<meta name="keywords">` tag.
-*   `permalink` or `canonicalUrl` (String): The canonical URL for the page.
-*   `noindex` (Boolean): If `true`, adds `<meta name="robots" content="noindex">` to discourage search engines from indexing this page.
 
 ## Structured Data (LD+JSON)
-
-The SEO plugin can generate [Structured Data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) (LD+JSON), which can enable rich search results. This feature is enabled per-page in your frontmatter.
-
-### Enabling Structured Data
-
-To generate a default LD+JSON block, add `ldJson: true` inside your `seo` frontmatter object.
+`docmd` can automatically generate [Article Schema](https://developers.google.com/search/docs/appearance/structured-data/article) to help Search Engines display rich snippets.
 
 ```yaml
 ---
-title: "My Article"
-description: "An article about something important."
+title: "How to Build a docmd Plugin"
 seo:
   ldJson: true
 ---
 ```
 
-This generates a basic `Article` schema using your page's metadata.
-
-### Customizing Structured Data
-
-For more control, provide an object to `ldJson`. This object will be merged with the default data, allowing you to add or override any properties.
-
-**Example: Customizing schema type and adding an author**
-
-```yaml
----
-title: "Advanced Widget Configuration"
-description: "A detailed guide on configuring advanced settings for the Super Widget."
-seo:
-  image: "/assets/images/widgets/super-widget-social.jpg"
-  ldJson:
-    "@type": "TechArticle"
-    author:
-      "@type": "Person"
-      name: "Jane Doe"
-      url: "https://example.com/authors/jane-doe"
-    datePublished: "2024-01-15"
-    review:
-      "@type": "Review"
-      reviewRating:
-        "@type": "Rating"
-        ratingValue: "5"
-        bestRating: "5"
-      author:
-        "@type": "Person"
-        name: "John Smith"
----
-```
-
-In this example, the schema type is changed to `TechArticle`, and detailed `author`, `datePublished`, and `review` information is added, giving search engines a much richer understanding of your content.
+::: callout tip
+A well-configured SEO plugin helps AI-powered search engines (like SearchGPT or Perplexity) summarize your site accurately. By providing clear descriptions and blocked bots, you control exactly how AI models perceive and source your content online.
+:::
