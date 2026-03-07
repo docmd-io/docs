@@ -144,9 +144,9 @@ module.exports = defineConfig({
       collapsible: false,
       children: [
         { title: 'General Settings', path: '/configuration/general', icon: 'sliders-horizontal' },
+        { title: 'Layout & UI Slots', path: '/configuration/layout-slots', icon: 'layout-dashboard' },
         { title: 'Navigation', path: '/configuration/navigation', icon: 'navigation' },
         { title: 'Versioning', path: '/configuration/versioning', icon: 'git-branch' },
-        { title: 'Layout & UI Slots', path: '/configuration/layout-slots', icon: 'layout-dashboard' },
         { title: 'Redirects', path: '/configuration/redirects', icon: 'corner-up-right' }
       ],
     },
@@ -175,13 +175,13 @@ module.exports = defineConfig({
           icon: 'box',
           collapsible: true,
           children: [
+            { title: 'Buttons', path: '/content/containers/buttons', icon: 'mouse-pointer-click' },
             { title: 'Callouts', path: '/content/containers/callouts', icon: 'megaphone' },
             { title: 'Cards', path: '/content/containers/cards', icon: 'panel-top' },
-            { title: 'Steps', path: '/content/containers/steps', icon: 'list-ordered' },
             { title: 'Tabs', path: '/content/containers/tabs', icon: 'columns-3' },
+            { title: 'Steps', path: '/content/containers/steps', icon: 'list-ordered' },
             { title: 'Collapsible', path: '/content/containers/collapsible', icon: 'chevrons-down' },
             { title: 'Changelogs', path: '/content/containers/changelogs', icon: 'history' },
-            { title: 'Buttons', path: '/content/containers/buttons', icon: 'mouse-pointer-click' },
             { title: 'Nested Containers', path: '/content/containers/nested-containers', icon: 'folder-tree' },
           ]
         },
@@ -224,7 +224,8 @@ module.exports = defineConfig({
         { title: 'Landing Page', path: '/recipes/landing-page', icon: 'layout-template' },
         { title: 'Custom Fonts', path: '/recipes/custom-fonts', icon: 'type' },
         { title: 'Favicon', path: '/recipes/favicon', icon: 'image-plus' },
-        { title: 'Writing Guide', path: '/recipes/writing-guide', icon: 'book-open' }
+        { title: 'Writing Guide', path: '/recipes/writing-guide', icon: 'book-open' },
+        { title: 'AI Optimization', path: '/recipes/ai-optimization', icon: 'bot' },
       ],
     },
     {
@@ -232,9 +233,9 @@ module.exports = defineConfig({
       icon: 'server-cog',
       collapsible: true,
       children: [
-        { title: 'Client Side Events', path: '/advanced/client-side-events', icon: 'square-mouse-pointer' },
         { title: 'Browser API', path: '/advanced/browser-api', icon: 'globe' },
         { title: 'Node API', path: '/advanced/node-api', icon: 'braces' },
+        { title: 'Client Side Events', path: '/advanced/client-side-events', icon: 'square-mouse-pointer' },
       ]
     },
 
