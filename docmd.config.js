@@ -43,6 +43,10 @@ module.exports = defineConfig({
   // --- Layout & UI Architecture ---
   layout: {
     spa: true,
+    /*menubar: {
+      enabled: false,
+      position: 'header', // 'top' or 'header'
+    },*/
     header: {
       enabled: true
     },
@@ -145,6 +149,7 @@ module.exports = defineConfig({
       children: [
         { title: 'General Settings', path: '/configuration/general', icon: 'sliders-horizontal' },
         { title: 'Layout & UI Slots', path: '/configuration/layout-slots', icon: 'layout-dashboard' },
+        { title: 'Menubar', path: '/configuration/menubar', icon: 'menu' },
         { title: 'Navigation', path: '/configuration/navigation', icon: 'navigation' },
         { title: 'Versioning', path: '/configuration/versioning', icon: 'git-branch' },
         { title: 'Redirects', path: '/configuration/redirects', icon: 'corner-up-right' }
@@ -248,6 +253,7 @@ module.exports = defineConfig({
       icon: 'package-check',
       collapsible: false,
       children: [
+        { title: '0.5.2', path: '/release-notes/0-5-2' },
         { title: '0.5.1', path: '/release-notes/0-5-1' },
         { title: '0.5.0', path: '/release-notes/0-5-0' },
       ]
