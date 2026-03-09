@@ -3,16 +3,45 @@ title: "Layout & UI Slots"
 description: "Master the structure of docmd by controlling headers, sidebars, and functional slots."
 ---
 
-`docmd` treats the interface as a series of "Slots." Every major component—from the navigation sidebar to the search bar—can be toggled, moved, or customized.
+A standard `docmd` page is divided into six primary zones:
+1.  **Menubar**: A full-width top navigation bar. (Added in 0.5.2)
+2.  **Header**: Secondary bar containing title and utility buttons.
+3.  **Sidebar**: Left-hand navigation tree.
+4.  **Content Area**: Primary Markdown rendering zone.
+5.  **Table of Contents (TOC)**: Right-hand heading navigation.
+6.  **Footer**: Bottom area for copyright and links.
 
-## Visual Overview
+### Item Properties
 
-A standard `docmd` page is divided into five primary zones:
-1.  **Header**: Top bar containing title and utility buttons.
-2.  **Sidebar**: Left-hand navigation tree.
-3.  **Content Area**: Primary Markdown rendering zone.
-4.  **Table of Contents (TOC)**: Right-hand heading navigation.
-5.  **Footer**: Bottom area for copyright and links.
+The menubar is configured within the `layout` section of your `docmd.config.js`.
+
+```javascript
+module.exports = {
+  layout: {
+    menubar: {
+      enabled: true,
+      position: 'top', // 'top' or 'header'
+      left: [
+        { type: 'title', text: 'Brand', url: '/', icon: 'home' },
+        { text: 'Docs', url: '/docs' },
+        { 
+          type: 'dropdown', 
+          text: 'Resources', 
+          items: [
+            { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', external: true },
+            { text: 'Changelog', url: '/changelog' }
+          ]
+        }
+      ],
+      right: [
+        { text: 'Twitter', url: 'https://twitter.com/docmd', icon: 'twitter' }
+      ]
+    }
+  }
+};
+```
+
+For a deeper dive into menubar layouts, see the [Menubar Configuration](./menubar) page.
 
 ## The Header Slot
 
@@ -41,7 +70,7 @@ The `optionsMenu` bundles **Search**, **Theme Toggle**, and **Sponsor** buttons.
 ```javascript
 layout: {
   optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom'
+    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar' (Added in 0.5.2)
     components: {
       search: true,
       themeSwitch: true,
@@ -50,6 +79,10 @@ layout: {
   }
 }
 ```
+
+::: note "Automatic Container Fallback"
+If the chosen position targets a disabled or missing container (e.g., `'header'` when header is disabled), `docmd` will automatically default to rendering the options menu in `sidebar-top`.
+:::
 
 ## Sidebar & Footer Controls
 
@@ -70,7 +103,7 @@ layout: {
 footer: {
   style: 'complete',
   description: 'The ultimate docs tool.',
-  branding: true,    // Manage docmd branding visibility
+  hideBranding: false, // Set true to hide "Built with docmd"
   columns: [
     {
       title: 'Links',

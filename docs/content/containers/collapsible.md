@@ -14,7 +14,7 @@ Content goes here.
 ```
 
 *   **`open`**: (Optional) If present, the section defaults to expanded.
-*   **`Title Text`**: The text shown on the clickable bar. Defaults to "Click to expand".
+*   **`"Title"`**: The text shown on the clickable bar. Defaults to "Click to expand".
 
 ::: callout tip
 Even when collapsed in the UI, the content inside a `collapsible` is fully indexed by the `docmd` search engine and included in the `llms-full.txt` payload. This means AI can answer questions using hidden details while the interface remains clean for humans.
@@ -26,11 +26,11 @@ Even when collapsed in the UI, the content inside a `collapsible` is fully index
 Useful for FAQs or spoilers.
 
 ```markdown
-::: collapsible How do I reset my password?
+::: collapsible "How do I reset my password?"
 Go to **Settings > Account** and click "Reset Password".
 :::
 ```
-::: collapsible How do I reset my password?
+::: collapsible "How do I reset my password?"
 Go to **Settings > Account** and click "Reset Password".
 :::
 
@@ -38,12 +38,12 @@ Go to **Settings > Account** and click "Reset Password".
 Useful for sections that should be visible but optional to hide.
 
 ```markdown
-::: collapsible open Prerequisites
+::: collapsible open "Prerequisites"
 1.  Node.js v18+
 2.  A text editor
 :::
 ```
-::: collapsible open Prerequisites
+::: collapsible open "Prerequisites"
 1.  Node.js v18+
 2.  A text editor
 :::
@@ -51,7 +51,7 @@ Useful for sections that should be visible but optional to hide.
 ### Nested Content
 
 ````markdown
-::: collapsible View JSON Response
+::: collapsible "View JSON Response"
 ```json
 {
   "status": "success",
@@ -60,7 +60,7 @@ Useful for sections that should be visible but optional to hide.
 ```
 :::
 ````
-::: collapsible View JSON Response
+::: collapsible "View JSON Response"
 ```json
 {
   "status": "success",

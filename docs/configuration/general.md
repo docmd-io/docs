@@ -66,7 +66,7 @@ The Options Menu consolidates utility buttons like **Search**, **Theme Switching
 ```javascript
 layout: {
   optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom'
+    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
     components: {
       search: true,
       themeSwitch: true,
@@ -75,6 +75,10 @@ layout: {
   }
 }
 ```
+
+::: note
+If `optionsMenu.position` is set to `header` or `menubar` but the target container is disabled or null, it automatically falls back to `sidebar-top`.
+:::
 
 ---
 

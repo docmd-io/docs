@@ -55,7 +55,7 @@ We believe writing documentation should be as frictionless as possible. You shou
 :::
 
 ::: card Zero Config & Auto-Routing
-Run `docmd dev -z` in any folder. We automatically scan your directory, extract H1 headers as page titles, and build a nested, collapsible navigation tree instantly. No `config.js` needed to start.
+Run `docmd dev -z` in your project. We automatically scan for a expected documentation folders, extract H1 headers as page titles, and build a nested, collapsible navigation tree instantly. No `config.js` needed to start.
 :::
 
 ::: card SPA Performance
