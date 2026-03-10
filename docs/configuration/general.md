@@ -72,7 +72,7 @@ layout: {
 }
 ```
 
-::: callout tip
+::: callout info
 If `optionsMenu.position` is set to `header` or `menubar` but the target container is disabled or null, it automatically falls back to `sidebar-top`.
 :::
 

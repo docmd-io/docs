@@ -76,7 +76,7 @@ module.exports = {
 
 When positioned in the menubar, the options menu will appear on the **right region** of the menubar.
 
-::: callout note
+::: callout info
 If the `menubar` is disabled or not configured, the options menu automatically falls back to `sidebar-top`.
 :::
 
