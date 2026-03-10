@@ -80,7 +80,7 @@ layout: {
 }
 ```
 
-::: note "Automatic Container Fallback"
+::: callout info "Automatic Container Fallback"
 If the chosen position targets a disabled or missing container (e.g., `'header'` when header is disabled), `docmd` will automatically default to rendering the options menu in `sidebar-top`.
 :::
 
