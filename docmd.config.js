@@ -34,7 +34,7 @@ module.exports = defineConfig({
 
   // --- Theme ---
   theme: {
-    name: 'default',
+    name: 'sky',
     defaultMode: 'light',
     codeHighlight: true,
     customCss: [],
