@@ -43,10 +43,10 @@ module.exports = defineConfig({
   // --- Layout & UI Architecture ---
   layout: {
     spa: true,
-    /*menubar: {
+    menubar: {
       enabled: false,
-      position: 'header', // 'top' or 'header'
-    },*/
+      position: 'top', // 'top' or 'header'
+    },
     header: {
       enabled: true
     },
