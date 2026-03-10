@@ -17,7 +17,7 @@ docmd init
 *   Creates a `docs/` folder with an `index.md`.
 *   Generates a `docmd.config.js` file with recommended defaults.
 *   Sets up a `package.json` with build scripts.
-*   **Safe**: It will not overwrite your existing `docs/` or configuration files.
+*   It does not overwrite your existing `docs/` or configuration files.
 
 ## `docmd dev`
 
@@ -64,6 +64,21 @@ docmd live
 ```
 
 This starts a browser-based environment where you can write Markdown on the left and see the rendered `docmd` UI on the right in real-time. Use `--build-only` to generate a shareable static version of the editor.
+
+## `docmd stop`
+
+Kills all running background development servers.
+
+```bash
+docmd stop
+```
+
+**What it does:**
+
+*   Scans active processes for docmd dev or docmd live instances.
+*   Gracefully terminates all background servers.
+*   Automatically identifies servers even if they were started on automated, non-standard ports.
+*   Designed to find orphaned processes in complex workspace structures.
 
 ::: callout tip
 The `docmd` CLI provides structured stdout and clear error logging, making it highly compatible with **Agentic Workflows**. If you are using an AI agent (like me) to manage your site, we can easily parse the logs from `docmd dev` to identify and fix path errors or configuration mismatches.
