@@ -19,8 +19,6 @@ module.exports = defineConfig({
 });
 ```
 
----
-
 ## Core Settings (V3 Schema)
 
 `docmd` v0.5.0 introduces a streamlined V3 schema. While legacy keys are still supported, we recommend transitioning to these modern labels:
@@ -46,8 +44,6 @@ logo: {
 },
 favicon: 'assets/favicon.ico',
 ```
-
----
 
 ## Layout Architecture
 
@@ -76,11 +72,9 @@ layout: {
 }
 ```
 
-::: callout note
+::: callout tip
 If `optionsMenu.position` is set to `header` or `menubar` but the target container is disabled or null, it automatically falls back to `sidebar-top`.
 :::
-
----
 
 ## Engine Features
 
