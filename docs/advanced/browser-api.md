@@ -58,7 +58,7 @@ The safest way to render the output is inside an `<iframe>` using the `srcdoc` a
         function update() {
             const html = docmd.compile(editor.value, {
                 siteTitle: 'My Preview',
-                theme: { name: 'sky', defaultMode: 'light' },
+                theme: { name: 'sky', appearance: 'light' },
                 layout: { 
                     spa: false, 
                     header: { enabled: false }

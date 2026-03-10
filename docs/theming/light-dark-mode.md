@@ -14,7 +14,7 @@ You specify the starting state of your documentation in `docmd.config.js`.
 module.exports = {
   theme: {
     name: 'sky',
-    defaultMode: 'system' // Options: 'light', 'dark', 'system' (default)
+    appearance: 'system' // Options: 'light', 'dark', 'system' (default)
   }
 }
 ```

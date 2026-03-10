@@ -12,7 +12,7 @@ description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Le
 module.exports = {
   theme: {
     name: 'sky',
-    defaultMode: 'system', // Options: 'light', 'dark', 'system'
+    appearance: 'system', // Options: 'light', 'dark', 'system'
   }
 }
 ```

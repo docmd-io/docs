@@ -35,7 +35,7 @@ module.exports = {
   // ...
   theme: {
     name: 'sky',
-    defaultMode: 'light',
+    appearance: 'light',
     customCss:[
       '/assets/css/fonts.css' // Path is relative to the generated site/ root
     ]
