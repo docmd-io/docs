@@ -9,7 +9,7 @@ The `sitemap` plugin generates a standard `sitemap.xml` file during the build pr
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   siteUrl: 'https://mydocs.com',   // Required for absolute URLs
   plugins: {
     sitemap: {

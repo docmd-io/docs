@@ -36,7 +36,7 @@ To link your assets to every page, add them to your theme configuration:
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   theme: {
     customCss: ['/assets/css/branding.css']
   },

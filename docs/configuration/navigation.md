@@ -10,7 +10,7 @@ description: "How to structure your sidebar, categorize links, and assign icons 
 Each object in the array defines a **Link** or a **Category Group**.
 
 ```javascript
-module.exports = {
+export default {
   navigation: [
     { title: 'Home', path: '/', icon: 'home' },
     { title: 'Installation', path: '/getting-started/installation', icon: 'download' }

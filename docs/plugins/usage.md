@@ -11,7 +11,7 @@ Most official plugins ship bundled with `@docmd/core` and simply need to be enab
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   plugins: {
     // 1. Search (Built-in offline search)
     search: {},
@@ -49,9 +49,9 @@ npm install @docmd/plugin-analytics
 
 ```javascript
 // docmd.config.js
-const Analytics = require('@docmd/plugin-analytics');
+import  from '';
 
-module.exports = {
+export default {
   plugins: {
     analytics: { googleV4: { measurementId: 'G-XXXX' } }
   }

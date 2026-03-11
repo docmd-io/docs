@@ -10,9 +10,9 @@ The `docmd.config.js` file is the central brain of your documentation. It define
 We recommend using the `defineConfig` helper. It provides full IDE autocomplete and type-checking, making it much easier to discover available settings.
 
 ```javascript
-const { defineConfig } = require('@docmd/core');
+import  from '';
 
-module.exports = defineConfig({
+export default defineConfig({
   title: 'My Project',
   url: 'https://docs.myproject.com',
   // ... settings

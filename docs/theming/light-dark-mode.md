@@ -11,7 +11,7 @@ You specify the starting state of your documentation in `docmd.config.js`.
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   theme: {
     name: 'sky',
     appearance: 'system' // Options: 'light', 'dark', 'system' (default)

@@ -21,7 +21,7 @@ my-project/
 Define your versions in the `versions` object.
 
 ```javascript
-module.exports = defineConfig({
+export default defineConfig({
   versions: {
     current: 'v2',           // The version ID built to the root (/)
     position: 'sidebar-top', // Switcher location: 'sidebar-top' or 'sidebar-bottom'

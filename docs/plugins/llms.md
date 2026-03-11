@@ -11,7 +11,7 @@ The plugin is bundled with `@docmd/core` and can be activated with a single line
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   url: 'https://docs.myproject.com', // Required for absolute link generation
   plugins: {
     llms: {} 

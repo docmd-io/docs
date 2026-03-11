@@ -17,7 +17,7 @@ The search plugin is **active by default**. You can customize its presence via t
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   layout: {
     optionsMenu: {
       components: {

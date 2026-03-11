@@ -9,7 +9,7 @@ The `seo` plugin ensures your documentation is discoverable by search engines an
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   plugins: {
     seo: {
       defaultDescription: 'The official documentation for Project X.',

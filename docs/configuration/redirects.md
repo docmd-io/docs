@@ -10,7 +10,7 @@ In a static environment, there is no server-side logic (like `.htaccess` or Ngin
 You can forward traffic from old URLs to new destinations by defining a mapping in the `redirects` object.
 
 ```javascript
-module.exports = defineConfig({
+export default defineConfig({
   redirects: {
     '/setup': '/getting-started/installation', // Redirect /setup to new path
     '/v1/api': '/api-reference'                  // Forward legacy API links
@@ -33,7 +33,7 @@ When a user accesses a non-existent URL, most static hosts (Netlify, Vercel, Git
 You can customize the 404 messaging in your configuration:
 
 ```javascript
-module.exports = defineConfig({
+export default defineConfig({
   notFound: {
     title: '404: Lost in the Docs',
     content: "We couldn't find the page you're looking for. Use the sidebar to find your way back."

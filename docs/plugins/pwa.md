@@ -17,7 +17,7 @@ Add `pwa` under the `plugins` object in `docmd.config.js`:
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   plugins: {
     pwa: {} // That's it. The plugin is now active!
   }
@@ -72,7 +72,7 @@ Simply delete the `pwa` block from your `plugins`. The next time you run `docmd 
 All fields are optional. The defaults are designed for zero-config use.
 
 ```javascript
-module.exports = {
+export default {
   plugins: {
     pwa: {
       // --- Icon Configuration ---

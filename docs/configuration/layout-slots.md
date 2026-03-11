@@ -16,7 +16,7 @@ A standard `docmd` page is divided into six primary zones:
 The menubar is configured within the `layout` section of your `docmd.config.js`.
 
 ```javascript
-module.exports = {
+export default {
   layout: {
     menubar: {
       enabled: true,

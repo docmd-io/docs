@@ -17,13 +17,17 @@ A plugin is a JavaScript object exporting specific hook functions.
 | `getAssets()` | Returns a list of CSS/JS files to copy/inject. |
 | `onPostBuild(ctx)` | Executes logic after all HTML is generated. |
 
+::: callout tip "Async Native Hooks"
+As of `v0.6.0`, all plugin hooks except `markdownSetup` are fully asynchronous. You can `await` database queries or external API fetches directly inside `injectHead()` or `injectBody()`!
+:::
+
 ## Creating a Local Plugin
 
 You can create a plugin file in your project, for example `my-plugin.js`:
 
 ```javascript
 // my-plugin.js
-module.exports = {
+export default {
   // 1. Extend Markdown
   markdownSetup: (md) => {
     // Example: Add a custom container or rule
@@ -31,7 +35,7 @@ module.exports = {
   },
 
   // 2. Inject Styles/Scripts
-  injectHead: (config) => {
+  injectHead: async (config) => { // Hooks can now be fully asynchronous!
     return `<meta name="custom-plugin" content="active">`;
   },
 
@@ -46,7 +50,7 @@ To use it, require it in your `docmd.config.js`:
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   // ...
   plugins: {
     './my-plugin.js': {} // Key is path, Value is options object

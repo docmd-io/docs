@@ -10,7 +10,7 @@ The first step is enabling the native LLM plugin. This generates structured cont
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   plugins: {
     llms: { 
       fullContext: true // Generates llms-full.txt (highly recommended)

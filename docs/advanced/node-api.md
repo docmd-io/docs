@@ -19,7 +19,7 @@ npm install @docmd/core
 The primary build function used by the CLI.
 
 ```javascript
-const { build } = require('@docmd/core');
+import  from '';
 
 async function run() {
   await build('./docmd.config.js', {
@@ -34,7 +34,7 @@ async function run() {
 Generates the browser-based **Live Editor** bundle.
 
 ```javascript
-const { buildLive } = require('@docmd/core');
+import  from '';
 
 async function run() {
   await buildLive({
@@ -49,8 +49,8 @@ async function run() {
 You can combine `docmd` with other tools (like `fs-extra`) to create complex build artifacts.
 
 ```javascript
-const { build } = require('@docmd/core');
-const fs = require('fs-extra');
+import  from '';
+import  from '';
 
 async function deployDocs() {
   try {

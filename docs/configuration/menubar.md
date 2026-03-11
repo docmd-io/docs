@@ -10,7 +10,7 @@ The `menubar` is a top-level navigation component that can be placed either at t
 The menubar is configured within the `layout` section of your `docmd.config.js`.
 
 ```javascript
-module.exports = {
+export default {
   layout: {
     menubar: {
       enabled: true,
@@ -65,7 +65,7 @@ Set `type: 'dropdown'` and provide an `items` array of links.
 You can integrate the search bar and theme toggle into the menubar by setting `optionsMenu.position` to `'menubar'`.
 
 ```javascript
-module.exports = {
+export default {
   layout: {
     optionsMenu: {
       position: 'menubar'

@@ -11,7 +11,7 @@ Use `theme.customCss` to override existing styles or add new ones.
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   theme: {
     customCss: [
       '/assets/css/branding.css' // Path relative to site root
@@ -31,7 +31,7 @@ Use the top-level `customJs` array for scripts that add behavior or integrate 3r
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   customJs: [
     '/assets/js/feedback-widget.js'
   ]

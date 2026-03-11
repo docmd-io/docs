@@ -14,12 +14,17 @@ Thank you for contributing to `docmd`! We appreciate your help in making this to
 - **pnpm**: v10+
 
 ### 2. Setup
-Clone the repository and install all workspace dependencies:
+Clone the repository and run the automated onboarding tool to install dependencies and build the monorepo in one go:
 
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd
-pnpm install
+
+# Standard setup
+pnpm onboard
+
+# Setup + link the "docmd" command globally
+pnpm onboard --link-docmd
 ```
 
 ### 3. Running the Dev Server
@@ -44,9 +49,9 @@ $env:DOCMD_DEV="true"; pnpm run dev
 
 Before submitting, ensure your changes haven't introduced regressions.
 
-1. **Integration Suite:** Run our universal failsafe to test core engine features, versioning, and redirects:
+1. **Verification Suite:** Run our comprehensive failsafe to verify engine integrity, versioning, and plugin lifecycles:
    ```bash
-   pnpm test
+   pnpm verify
    ```
 2. **Conventional Commits:** We follow [Conventional Commits](https://www.conventionalcommits.org/). Use prefixes like `feat:`, `fix:`, or `docs:`.
 3. **Copyright Header:** All new files in `packages/` must include the standard project copyright header. Please copy the header from any existing file in the `src/` directory.
@@ -55,7 +60,7 @@ Before submitting, ensure your changes haven't introduced regressions.
 
 1. **Branch:** Create a branch from `main`.
 2. **Code:** Make your changes.
-3. **Verify:** Run `pnpm test` and ensure it outputs `✨ ALL SYSTEMS GO`.
+3. **Verify:** Run `pnpm verify` and ensure it outputs `🛡️ docmd is ready for production!`.
 4. **Push & Open:** Open a Pull Request against the `main` branch.
 
 ### Copyright Header

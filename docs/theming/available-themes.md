@@ -9,7 +9,7 @@ description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Le
 
 ```javascript
 // docmd.config.js
-module.exports = {
+export default {
   theme: {
     name: 'sky',
     appearance: 'system', // Options: 'light', 'dark', 'system'

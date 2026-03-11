@@ -1,18 +1,61 @@
 ---
 title: "Developer Guide"
-description: "Advanced debugging, testing, and contribution tools for developers working directly on the docmd monorepo."
+description: "Professional automated onboarding, verification, and maintenance workflows for docmd contributors."
 ---
 
-If you are a contributor who has forked the `docmd` monorepo, understanding the internal testing and debugging infrastructure is crucial. While `contributing.md` outlines how to get the project running, this guide details **how** to safely develop and test your changes inside the monorepo architecture. 
+If you are a contributor who has forked the `docmd` monorepo, we provide a suite of **Dev Environment Tools** to ensure your workspace remains clean, consistent, and ready for development. While `contributing.md` outlines the basic setup, this guide details the professional automated workflows available to you. 
+
+## Automated Onboarding & Maintenance
+
+To ensure a seamless developer experience regardless of your system configuration, we provide two primary "one-command" workflows for environmental health.
+
+### Getting Started: `pnpm onboard`
+If you have just forked the repository or pulled new changes that require a clean setup:
+```bash
+pnpm onboard
+```
+
+### Global Linking: `pnpm onboard --link-docmd`
+If you want to make the `docmd` command available everywhere on your system immediately after setup:
+```bash
+pnpm onboard --link-docmd
+```
+**What it does:**
+- Runs a silent `pnpm install` across the entire monorepo.
+- Executes a full `pnpm build` for all core packages and themes.
+- **(Optional)**: Symlinks the `@docmd/core` binary to your system PATH via `npm link`.
+- Displays a confirmation logo once the environment is ready for development.
+
+### Total System Reset: `pnpm reset`
+If your environment becomes unstable, or you need to wipe out all traces of `docmd` for a truly fresh start:
+```bash
+pnpm reset
+```
+**What it does:**
+1. **Stops all background servers**: Automatically runs `pnpm stop`.
+2. **Unlinks Global Binaries**: Aggressively removes `docmd` and `docmd-live` pointers from your system path (both npm and pnpm).
+3. **Deep Clean**: Recursively deletes all `node_modules`, `dist/`, `public/`, `site/`, and TypeScript caches across every package.
+
+## Manual Workflow (Granular Commands)
+
+While the automated commands are recommended, you can run granular tasks as needed from the monorepo root:
+
+| Command | Description |
+| :--- | :--- |
+| `pnpm build` | Compiles all TypeScript packages and bundles the Live Editor. |
+| `pnpm stop` | Scans and kills any running `docmd dev` or `docmd live` processes. |
+| `pnpm clean` | Deletes build artifacts (`dist`, `public`, `site`) and caches. |
+| `pnpm lint` | Runs ESLint and Prettier checks across the workspace. |
+| `pnpm unlink:global` | Safely removes all global symlinks from the system path. |
 
 ## The Universal Failsafe (`failsafe.js`)
 
 Before any release, or when verifying major architectural changes, we rely on the Universal Failsafe.
 
 ```bash
-pnpm test
+pnpm verify
 ```
-*(This triggers `node scripts/failsafe.js`)*
+*(This triggers the automated verification suite with branding and E2E checks)*
 
 ### What does it do?
 `failsafe.js` is an aggressive integration testing script. Instead of relying on mocked unit tests, it:
@@ -24,7 +67,7 @@ pnpm test
 6. **Plugin Installer Testing**: It simulates `docmd add search` and `docmd remove search` on a raw environment to prove regex configuration injection and scaffold fallback schemas never break.
 7. Compiles and executes the Isomorphic `docmd live` editor runtime inside a sandbox Node instance.
 
-**Rule of Thumb:** If you modify core parsers, builders, or installers, run `pnpm test`. If it passes, your code is structurally sound for production releases.
+**Rule of Thumb:** If you modify core parsers, builders, or installers, run `pnpm verify`. If it passes, your code is structurally sound for production releases.
 
 ## The Playground Workspace (`_playground`)
 
@@ -35,7 +78,7 @@ pnpm run dev
 ```
 *(This triggers the Dev Server bound solely to the Playground workspace)*
 
-Any changes you make to the core engine, the theme packages, or the UI layout templates will instantly hot-reload in the playground's browser tab. 
+Any changes you make to the core engine, the theme packages, or the UI layout templates will instantly hot-reload in the playground's browser tab.
 
 ## Testing the CLI (Add / Remove)
 

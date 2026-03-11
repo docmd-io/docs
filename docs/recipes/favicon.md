@@ -24,7 +24,7 @@ my-project/
 Open `docmd.config.js` and update the `favicon` property with the path relative to the output root.
 
 ```javascript
-module.exports = {
+export default {
   // ...
   // Points to site/assets/my-icon.ico
   favicon: '/assets/my-icon.ico', 

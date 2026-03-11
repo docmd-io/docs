@@ -31,7 +31,7 @@ Go to [Google Fonts](https://fonts.google.com), find the font you want (like *In
 Open your `docmd.config.js` and add the path to your new CSS file in the `theme.customCss` array.
 
 ```javascript
-module.exports = {
+export default {
   // ...
   theme: {
     name: 'sky',

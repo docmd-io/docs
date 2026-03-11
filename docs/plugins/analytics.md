@@ -10,7 +10,7 @@ description: "Integrate Google Analytics or other tracking services into your do
 Add the `analytics` plugin to your `plugins` object in `docmd.config.js`.
 
 ```javascript
-module.exports = {
+export default {
   plugins: {
     analytics: {
       // For Google Analytics 4 (Recommended)
