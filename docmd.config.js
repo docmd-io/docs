@@ -233,7 +233,7 @@ module.exports = defineConfig({
       icon: 'server-cog',
       collapsible: true,
       children: [
-        { title: 'Developer Guide', path: '/advanced/developer-guide', icon: 'code-branch' },
+        { title: 'Developer Guide', path: '/advanced/developer-guide', icon: 'git-fork' },
       ]
     },
     {
