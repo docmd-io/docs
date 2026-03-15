@@ -122,7 +122,7 @@
   "icon": "package-check",
   "collapsible": false,
   "children": [
-    { "title": "0.5.4", "path": "/docs-05/release-notes/0-5-4" },
+    { "title": "0.5.4", "path": "/release-notes/0-5-4" },
     { "title": "0.5.3", "path": "/release-notes/0-5-3" },
     { "title": "0.5.2", "path": "/release-notes/0-5-2" },
     { "title": "0.5.1", "path": "/release-notes/0-5-1" },
