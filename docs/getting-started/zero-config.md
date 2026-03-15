@@ -1,40 +1,40 @@
 ---
 title: "Zero-Config Mode"
-description: "Run docmd without any configuration file. Perfect for quick previews and rapid prototyping."
+description: "Execute docmd without a configuration file. Ideal for rapid prototyping and instant documentation previews."
 ---
 
-`docmd` features a high-intelligence auto-detection engine. This allows you to generate professional documentation for any project without writing a single line of configuration.
+`docmd` features an intelligent auto-detection engine that allows you to generate professional documentation for any project without writing a single line of configuration. This "Zero-Config" mode derives structure and metadata directly from your filesystem and project files.
 
 ## Usage
 
-Simply add the `-z` or `--zero-config` flag to your command.
+To activate Zero-Config mode, simply append the `-z` or `--zero-config` flag to your command.
 
 ```bash
-# Start dev server
-docmd dev -z
+# Start the development server instantly
+npx docmd dev -z
 
-# Build static site
-docmd build -z
+# Generate a production-ready static site
+npx docmd build -z
 ```
 
 ## How It Works
 
-When running in Zero-Config mode, `docmd` performs the following steps:
+When executing in Zero-Config mode, `docmd` performs the following automated steps:
 
-1.  **Smart Directory Detection**: It scans your project for one of these documentation folders: `docs/`, `src/docs/`, `documentation/`, or `content/`. If none are found, `docmd` will gracefully exit with a helpful message.
-2.  **Automatic Index Fallback**: If no `index.md` or `README.md` is found in your documentation folder, `docmd` automatically designates the first file it finds as the temporary record for your root domain. No more 404s on fresh projects!
-3.  **Automatic Titling**: It reads your `package.json`. If found, it automatically sets your site `title` and `description` to match your npm package metadata.
-4.  **Recursive Routing**: It scans all folders and Markdown files to build a nested navigation sidebar.
-5.  **Sensible Defaults**: It applies the `default` theme with system-aware light/dark mode and enables the `search` plugin.
+1.  **Directory Detection**: The engine scans your project root for common documentation folders, including: `docs/`, `src/docs/`, `documentation/`, and `content/`. If multiple candidates exist, it prioritizes them in that order.
+2.  **Smart Indexing**: If no `index.md` or `README.md` is found at the root of the source directory, `docmd` automatically designates the first discovered Markdown file as the home page.
+3.  **Metadata Extraction**: If a `package.json` exists in your project, `docmd` extracts the `name` and `description` to automatically set the site title and branding.
+4.  **Automatic Routing**: The engine recursively scans all subdirectories and Markdown files to build a nested, collapsible navigation sidebar instantly.
+5.  **Optimized Defaults**: It applies the premium `default` theme with system-aware Light/Dark mode and enables core features like built-in search.
 
 ## Safety & Performance
 
-Zero-Config is engineered for safety and predictability:
+Zero-Config mode is engineered for speed and predictability:
 
-*   **Context Awareness**: By limiting execution to specific folders, `docmd` avoids accidentally indexing your entire project root (which might contain thousands of unrelated files like logs or build artifacts).
-*   **Recursion Limit**: The engine ignores `node_modules` and hidden folders (like `.git`) and restricts depth to prevent infinite loops.
-*   **Bail-out Logic**: If no candidate directory is found, or if the directory contains no Markdown files, `docmd` will immediately stop and provide a clean CLI warning rather than hanging.
+*   **Scoped Execution**: By targeting specific directories, `docmd` avoids unnecessary indexing of unrelated project files, build artifacts, or large logs.
+*   **Intelligent Exclusion**: The engine automatically ignores `node_modules`, hidden system folders (e.g., `.git`), and typical output directories (`dist/`, `build/`, `site/`).
+*   **Bail-out Protection**: If no valid documentation directory or content is found, `docmd` will provide a clear warning and exit gracefully rather than hanging or generating empty files.
 
-::: callout tip
-Zero-config is excellent for **AI Agents**. Because the structure is predictable and derived from the filesystem, an AI can easily predict where files will be located and update documentation without needing to parse complex configuration schemas.
+::: callout tip "AI-Friendly Architecture"
+Zero-Config mode is highly recommended for **AI-driven development**. Because the documentation structure is strictly derived from the filesystem, AI agents can easily predict file locations and update content without needing to manage complex configuration schemas.
 :::

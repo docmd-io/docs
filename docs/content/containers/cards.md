@@ -1,72 +1,74 @@
 ---
 title: "Cards"
-description: "Organize information into framed, visually distinct blocks. Ideal for landing pages and feature grids."
+description: "Organize information into framed, visually distinct containers. Perfect for feature grids and landing pages."
 ---
 
-Cards are the primary structural component in `docmd`. They group related content into a bordered box with optional titles, providing clear visual hierarchy.
+Cards are the primary structural building blocks in `docmd`. They encapsulate related content into a distinct, bordered frame with optional headers, providing a clear visual hierarchy for your documentation.
 
-## Syntax
+## Syntax Reference
 
 ```markdown
-::: card "Optional Title"
-This is the card body.
+::: card "Optional Header Title"
+This is the primary content area of the card.
 :::
 ```
 
-## Examples
+## Practical Implementation Examples
 
-### 1. Feature Highlight
+### 1. Feature Showcasing
+Use cards to highlight key technical advantages or module capabilities.
 ```markdown
-::: card "Fast Build Times"
-`docmd` uses an asynchronous processing engine that can build hundreds of pages in under a second.
+::: card "Asynchronous Generation"
+The `docmd` core engine utilizes a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
 :::
 ```
-::: card "Fast Build Times"
-`docmd` uses an asynchronous processing engine that can build hundreds of pages in under a second.
+::: card "Asynchronous Generation"
+The `docmd` core engine utilizes a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
 :::
 
-### 2. Complex Content
-Cards can contain any other Markdown elements, including code blocks and buttons.
+### 2. Multi-Component Integration
+Cards can house any standard Markdown elements, including syntax-highlighted code and call-to-action buttons.
 
 ````markdown
-::: card "Quick Install"
-Get the library via your favorite package manager:
+::: card "Instant Localization"
+Prepare your documentation for a global audience using our built-in i18n support.
 
 ```bash
-npm install @docmd/core
+docmd add i18n
 ```
 
-::: button "Installation Guide" /getting-started/installation
+::: button "L10n Strategy Guide" /guides/localization
 :::
 ````
-::: card "Quick Install"
-Get the library via your favorite package manager:
+
+::: card "Instant Localization"
+Prepare your documentation for a global audience using our built-in i18n support.
 
 ```bash
-npm install @docmd/core
+docmd add i18n
 ```
 
-::: button "Installation Guide" /getting-started/installation
+::: button "L10n Strategy Guide" ./#localization
 :::
 
-## Creating Grids
+## Multi-Column Layouts (Grids)
 
-While `docmd` is purely Markdown-driven, you can easily create responsive multi-column layouts using standard HTML wrappers around your cards.
+While authored in Markdown, you can leverage standard HTML wrappers to organize your cards into responsive grids.
 
 ```markdown
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
 
-::: card "Left Column"
-Content for the left side.
+::: card "Primary Node"
+Configuration for the master instance.
 :::
 
-::: card "Right Column"
-Content for the right side.
+::: card "Secondary Node"
+Configuration for redundant slave instances.
 :::
 
 </div>
 ```
 
-::: callout tip
-Cards act as **Topic Clusters**. When an LLM parses the `llms-full.txt` context, items wrapped in a `card` are treated as a single cohesive unit of information. Use cards to isolate unrelated technical concepts on the same page.
+::: callout tip "Semantic Clustering for AI"
+In the `llms-full.txt` stream, content wrapped in a `card` is treated by AI agents as a **Cohesive Topic Cluster**. Utilizing cards to segment unrelated technical concepts on the same page prevents context leakage and ensures that LLM-generated summaries remain logically isolated and accurate.
 :::

@@ -1,89 +1,90 @@
 ---
 title: "Nested Containers"
-description: "Master docmd's recursive parser. Learn how to combine cards, tabs, and callouts to build complex, interactive page layouts."
+description: "Leverage docmd's recursive parser to combine cards, tabs, and callouts into high-fidelity page layouts."
 ---
 
-One of `docmd`’s most powerful features is its recursive parsing engine. You can nest components inside each other infinitely to create professional, interactive layouts that would otherwise require complex HTML templates.
+One of `docmd`’s most powerful technical capabilities is its **Recursive Parsing Engine**. You can nest components within each other infinitely to synthesize complex, interactive documentation blocks that would otherwise require deep HTML knowledge or custom templates.
 
-## The One Golden Rule
+## The Architectural Rule
 
-While nesting is infinite, remember the **Self-Closing Button Rule**:
+While nesting is mathematically infinite, always adhere to the **Self-Closing Component Rule**:
 
-::: callout warning
-Because `::: button` is self-closing, do **not** add a closing `:::` line after it. Doing so will accidentally close the parent container that contains the button.
+::: callout warning "Self-Closing Buttons"
+Because the `::: button` component is self-closing (single line), never add a terminal `:::` line after it. Doing so will inadvertently close the **parent container** housing the button, resulting in a fractured layout.
 :::
 
-## Example: Interactive Landing Page Block
+## Technical Composition Examples
 
-You can combine a **Card** for the frame, **Tabs** for technical choices, and **Callouts** for highlighting.
+### 1. Interactive Resource Block
+Combine a **Card** for structural framing, **Tabs** for environment-specific instructions, and **Callouts** for highlighting critical information.
 
 ````markdown
-::: card "Developer Quickstart"
-   Choose your preferred environment to begin:
+::: card "Monorepo Quickstart"
+Choose your preferred initialization path:
+
    ::: tabs
-   == tab "NPM"
+   == tab "Automated"
       ```bash
-      npm install -g @docmd/core
+      pnpm onboard
       ```
       ::: callout success
-         Installation usually takes less than 10 seconds.
+      This script handles all package installation and build tasks automatically.
       :::
+
    == tab "Manual"
-      Download the binary from GitHub and add it to your PATH.
-      ::: button "GitHub Downloads" external:https://github.com/docmd-io/docmd
+      Manually fetch and link the core engine.
+      ::: button "Go to Developer Guide" /advanced/developer-guide
    :::
 :::
 ````
 
-## Example: Documenting a Sequential Hack
-
-Nesting **Tabs** inside **Steps** is a great way to show multi-platform instructions.
+### 2. Multi-Platform Tutorials
+Nesting **Tabs** inside **Steps** is a professional pattern for providing platform-specific instructions within a standard tutorial sequence.
 
 ```markdown
 ::: steps
 
-1. **Select Platform**
-   Choose your operating system below.
+1. **Environment Setup**
+   Configure your local operating system.
 
    ::: tabs
    == tab "macOS"
-      Run the Homebrew command.
+      Ensure Homebrew is installed and up-to-date.
    == tab "Linux"
-      Use the generic install script.
+      Verify the Presence of `curl` and `bash`.
    :::
 
-2. **Verify Setup**
-   Check the installation version.
+2. **Core Verification**
+   Execute the version check to confirm connectivity.
 
 :::
 ```
 
 ::: steps
 
-1.  **Select Platform**
-    Choose your operating system below.
+1.  **Environment Setup**
+    Configure your local operating system.
 
     ::: tabs
     == tab "macOS"
-    Run the Homebrew command.
+    Ensure Homebrew is installed and up-to-date.
     == tab "Linux"
-    Use the generic install script.
+    Verify the Presence of `curl` and `bash`.
     :::
 
-2.  **Verify Setup**
-    Check the installation version.
+2.  **Core Verification**
+    Execute the version check to confirm connectivity.
 
 :::
 
-## Nesting Constraints
+## Design Constraints
 
-While the engine is robust, follow these best practices for the best experience:
+To maintain both performance and mobile responsiveness, observe the following constraints:
 
-*   **Tabs in Tabs**: Not recommended. It creates "Context Loops" that are difficult for users to navigate on mobile.
-*   **Steps in Tabs**: High syntax conflict. Use standard ordered lists (`1.`) inside tabs instead of the `::: steps` container.
-*   **Indentation**: `docmd` does **not** require indentation for nested blocks, but adding 2 or 4 spaces makes your Markdown much easier for both humans and LLMs to read.
-*   **Performance**: Deep nesting (over 6 levels) is supported but may impact initial build times on extremely large documentation sites.
+*   **Recursive Tabs**: Nesting tabs within other tabs is technically supported but strongly discouraged. It creates navigation "loops" that are visually confusing on smaller viewports.
+*   **Sequential Conflict**: If you require numbered steps within a tab, utilize a standard ordered list (`1. Step Content`) rather than the `::: steps` container to avoid layout conflicts.
+*   **Legibility**: While `docmd` does not strictly require indentation for nested blocks, using a 2 or 4-space indentation significantly improves the human-readability of the Markdown source.
 
-::: callout tip
-Nesting helps segment knowledge. When an LLM reads the `llms-full.txt` stream, a nested `callout` inside a `card` tells the model that the tip is specifically scoped to that card's topic, improving the precision of its generation.
+::: callout tip "Knowledge Segmentation for AI"
+Nesting provides clear **Semantic Boundaries**. When an AI agent parses the `llms-full.txt` stream, a `callout` nested within a `card` explicitly tells the model that the tip is scoped to that card's specific topic, preventing context leakage and improving technical accuracy in generated responses.
 :::

@@ -1,118 +1,117 @@
 ---
-title: "Layout & UI Slots"
-description: "Master the structure of docmd by controlling headers, sidebars, and functional slots."
+title: "Layout & UI Zones"
+description: "Control the interface structure by managing headers, sidebars, and functional UI slots."
 ---
 
-A standard `docmd` page is divided into six primary zones:
-1.  **Menubar**: A full-width top navigation bar. (Added in 0.5.2)
-2.  **Header**: Secondary bar containing title and utility buttons.
-3.  **Sidebar**: Left-hand navigation tree.
-4.  **Content Area**: Primary Markdown rendering zone.
-5.  **Table of Contents (TOC)**: Right-hand heading navigation.
-6.  **Footer**: Bottom area for copyright and links.
+A standard `docmd` page is divided into six primary functional zones:
 
-### Item Properties
+1.  **Menubar**: A full-width top navigation bar for global site links.
+2.  **Header**: The persistent secondary bar containing the page title and utility buttons.
+3.  **Sidebar**: The primary navigation tree (usually on the left).
+4.  **Content Area**: The central Markdown rendering zone, including **Breadcrumbs**.
+5.  **Table of Contents (TOC)**: Right-hand heading navigation for the current page.
+6.  **Footer**: Bottom area for copyright, branding, and site-wide links.
 
-The menubar is configured within the `layout` section of your `docmd.config.js`.
+## Global Components
+
+Most UI zones are configured within the `layout` section of your `docmd.config.js`.
+
+### Menubar
+
+The menubar provides a high-level navigation layer above your documentation.
 
 ```javascript
-export default {
-  layout: {
-    menubar: {
-      enabled: true,
-      position: 'top', // 'top' or 'header'
-      left: [
-        { type: 'title', text: 'Brand', url: '/', icon: 'home' },
-        { text: 'Docs', url: '/docs' },
-        { 
-          type: 'dropdown', 
-          text: 'Resources', 
-          items: [
-            { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', external: true },
-            { text: 'Changelog', url: '/changelog' }
-          ]
-        }
-      ],
-      right: [
-        { text: 'Twitter', url: 'https://twitter.com/docmd', icon: 'twitter' }
-      ]
-    }
+layout: {
+  menubar: {
+    enabled: true,
+    position: 'top', // 'top' (fixed) or 'header' (within content flow)
+    left: [
+      { type: 'title', text: 'Brand', url: '/', icon: 'home' },
+      { text: 'Features', url: '/features' }
+    ],
+    right: [
+      { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', icon: 'github' }
+    ]
   }
-};
+}
 ```
 
-For a deeper dive into menubar layouts, see the [Menubar Configuration](./menubar) page.
+### The Page Header
 
-## The Header Slot
+The header is enabled by default. You can disable it site-wide or hide specific elements via page-level frontmatter.
 
-The header is enabled by default. Control it site-wide in your config:
 ```javascript
 // docmd.config.js
 layout: {
   header: {
-    enabled: true // Set to false to hide the entire top bar
-  }
+    enabled: true // Set to false to hide the entire top header site-wide
+  },
+  breadcrumbs: true // Set to false to hide the breadcrumb trail site-wide
 }
 ```
 
-### Hiding Page Title in Header
-Hiding the title from the sticky header on specific pages is handled via frontmatter:
+**Page-level override (Frontmatter):**
 ```yaml
 ---
-title: "Advanced Guide"
-hideTitle: true
+title: "Special Page"
+hideTitle: true # Hides the title from the sticky header for this specific page
 ---
 ```
 
-## Multi-Functional Options Menu
+## Utility Menus (Options Menu)
 
-The `optionsMenu` bundles **Search**, **Theme Toggle**, and **Sponsor** buttons.
+The `optionsMenu` consolidates core utilities like **Search**, **Theme Toggle**, and **Sponsorship**.
+
 ```javascript
 layout: {
   optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar' (Added in 0.5.2)
+    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
     components: {
-      search: true,
-      themeSwitch: true,
-      sponsor: 'https://github.com/sponsors/yourname'
+      search: true,      // Enable full-text search
+      themeSwitch: true, // Enable Light/Dark mode toggle
+      sponsor: 'https://github.com/sponsors/your-profile'
     }
   }
 }
 ```
 
-::: callout info "Automatic Container Fallback"
-If the chosen position targets a disabled or missing container (e.g., `'header'` when header is disabled), `docmd` will automatically default to rendering the options menu in `sidebar-top`.
+::: callout info "Container Fallback"
+If the chosen position targets a container that is disabled, `docmd` will automatically render the options menu in the `sidebar-top` slot to ensure core utilities remain accessible.
 :::
 
 ## Sidebar & Footer Controls
 
-### Sidebar
+### Sidebar Behavior
 ```javascript
 layout: {
   sidebar: {
-    collapsible: true,      // Adds the toggle icon
-    defaultCollapsed: false, // Initial state
+    enabled: true,
+    collapsible: true,       // Enables the expand/collapse animation
+    defaultCollapsed: false,  // Sets the initial sidebar state
     position: 'left'
   }
 }
 ```
 
-### Footer
-`docmd` offers **minimal** and **complete** layouts.
+### Footer Branding
+`docmd` provides both **minimal** and **complete** layouts for your site footer.
+
 ```javascript
-footer: {
-  style: 'complete',
-  description: 'The ultimate docs tool.',
-  hideBranding: false, // Set true to hide "Built with docmd"
-  columns: [
-    {
-      title: 'Links',
-      links: [{ text: 'GitHub', url: '...' }]
-    }
-  ]
+layout: {
+  footer: {
+    style: 'complete',
+    description: 'Minimalist documentation for modern projects.',
+    branding: true, // Controls the "Built with docmd" badge
+    columns: [
+      {
+        title: 'Community',
+        links: [{ text: 'GitHub', url: '...' }]
+      }
+    ]
+  }
 }
 ```
 
-::: callout tip "AI-Ready Branding 🤖"
-When designing custom layouts using slots, always ensure the **Search** component is accessible in your `optionsMenu`. AI agents frequently look for the search bar as their primary interaction anchor when exploring your interface to find relevant technical information.
+::: callout tip "AI-Optimized Interface"
+When designing custom layouts, ensure the **Search** component is prominent in your `optionsMenu`. AI agents frequently utilize search as a primary anchor when exploring your documentation to locate specific technical context.
 :::

@@ -1,37 +1,37 @@
 ---
-title: "Recipe: Documentation Writing Guide"
-description: "Best practices for writing clear, scannable, and effective documentation with docmd."
+title: "Recipe: Technical Writing Standards"
+description: "Best practices for authoring clear, scannable, and AI-optimized documentation."
 ---
 
-Great documentation isn't just about correct information; it's about how that information is structured. This guide covers the best practices for using `docmd` features to help your readers.
+High-quality documentation is defined by its architectural clarity and scannability. This guide outlines the professional standards for utilizing `docmd` features to optimize the user and machine experience.
 
-## Scannability is Everything
+## Scannability & Semantic Density
 
-Users rarely read documentation line-by-line. They scan for answers.
+Technical users rarely read documentation linearly; they scan for specific solutions.
 
-*   **Use Descriptive Headings:** Instead of "Setup," use "Installing the CLI via NPM."
-*   **Keep Paragraphs Short:** Break up large walls of text into 2-3 sentence chunks.
-*   **Use Bold Text:** Highlight key terms, file paths, or commands so they pop while scanning.
+*   **Descriptive Semantic Headings**: Avoid generic titles. Use "Initializing the Production Pipeline" instead of "Startup."
+*   **Concise Paragraphs**: Encapsulate single concepts into 2-3 sentence blocks to prevent cognitive overload.
+*   **Lexical Emphasis**: Utilize **Bold Text** for key technical terms, file paths, and terminal commands to ensure they remain distinct during rapid scanning.
 
-## Choosing the Right Container
+## Strategy for Interactive Containers
 
-`docmd` provides several containers. Using them correctly improves the user's mental model.
+`docmd` provides specialized UI blocks. Use them intentionally to reinforce your document's mental model.
 
 ### Callouts vs. Cards
-*   **Use Callouts** for "interruptions." Use `tip` for helpful shortcuts, `warning` for things that might break, and `danger` for critical errors.
-*   **Use Cards** for "grouping." Cards are great for feature lists on a homepage or summarizing a large section.
+*   **Callouts (Alerts)**: Use for "Out-of-band" information. `tip` for performance shortcuts, `warning` for cautionary logic, and `danger` for critical breaking changes.
+*   **Cards (Structural Blocks)**: Use for "In-band" content clustering. Cards are ideal for feature summaries on a landing page or grouping related configuration keys.
 
-### Steps for Tutorials
-Whenever you have more than two actions the user must perform in order, use the `::: steps` container. It provides a visual timeline that feels much more encouraging than a plain numbered list.
+### Sequential Workflows
+When documenting a multi-step procedure, always utilize the `::: steps` container. This provides a high-impact visual timeline that is significantly more legible than a standard numbered list for both humans and AI agents.
 
-## Linking Best Practices
+## High-Fidelity Linking
 
-Since `docmd` generates a Single Page Application, navigating between pages is instant.
+`docmd`’s SPA router enables instant, zero-reload navigation. Maintain this experience through reliable referencing:
 
-*   **Use Relative Paths:** Always link using `./file.md` or `../folder/file.md`. This ensures your links work in your code editor (VS Code), on your web server, and even in offline mode.
-*   **Self-Describing Links:** Avoid "Click here." Instead, use "[Read the Installation Guide](/getting-started/installation)."
+*   **Filesystem-Aware Paths**: Always utilize relative paths to your source `.md` files (e.g., `../core/engine.md`). This ensures link integrity across IDEs, local dev servers, and production builds.
+*   **Descriptive Anchors**: Avoid "Read more." Utilize high-fidelity descriptors like "[Analyze the Browser API Reference](/api/browser-api)."
 
-## Organizing Code Blocks
+## Code Block Professionalism
 
-*   **Specify Languages:** Always add the language tag (e.g., ` ```javascript `) to enable syntax highlighting.
-*   **Copy Buttons:** Remember that `docmd` automatically adds a copy button to every code block, so you don't need to ask users to "copy and paste" manually.
+*   **Explicit Language Labeling**: Always specify the language identifier (e.g., ` ```typescript `). This enables both accurate syntax highlighting and reliable AI parsing.
+*   **Automated Portability**: `docmd` automatically attaches interactive copy buttons to every code block; prioritize concise, ready-to-execute snippets to maximize developer utility.

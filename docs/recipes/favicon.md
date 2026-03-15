@@ -1,36 +1,42 @@
 ---
-title: "Recipe: Adding a Custom Favicon"
-description: "How to add a custom favicon to your documentation site."
+title: "Recipe: Implementing Custom Favicons"
+description: "Establish project-wide branding by adding a custom favicon to your build."
 ---
 
-A favicon is the small icon that appears in the browser tab next to your page title. `docmd` makes it easy to add your own.
+The favicon is a critical branding element rendered within the browser tab. `docmd` provides a centralized configuration key to automate the injection and resolution of these assets.
 
-## 1. Prepare your image
-You can use `.ico`, `.png`, or `.svg` files. For the best compatibility, an `.ico` file is recommended.
+## 1. Format Preparation
 
-## 2. Add to Assets
-Place your image file in your project's assets directory.
+While `docmd` supports `.png` and `.svg` sources, utilize an `.ico` bundle for maximum legacy browser compatibility. Ensure your asset is at least 32x32px.
+
+## 2. Asset Staging
+
+Place your processed image within the `assets/` directory of your project source.
 
 ```bash
-# Example structure
+# Recommended Directory Mapping
 my-project/
   ├── assets/
-  │   └── my-icon.ico  <-- Your file here
+  │   └── brand-favicon.ico  <-- Source asset
   ├── docs/
   └── docmd.config.js
 ```
 
-## 3. Update Configuration
-Open `docmd.config.js` and update the `favicon` property with the path relative to the output root.
+## 3. Configuration Binding
+
+Define the `favicon` property within your `docmd.config.js`. The path should reflect the location relative to the final `site/` output root.
 
 ```javascript
 export default {
   // ...
-  // Points to site/assets/my-icon.ico
-  favicon: '/assets/my-icon.ico', 
+  // Maps to site/assets/brand-favicon.ico
+  favicon: '/assets/brand-favicon.ico', 
   // ...
 };
 ```
 
-## 4. Build
-Run `docmd build` (or `docmd dev`). `docmd` will automatically copy your asset file to the site build and link it in the `<head>` of every page.
+## 4. Final Build & Verification
+
+Execute `docmd build`. The engine will automatically:
+1.  Copy the asset to the production build directory.
+2.  Inject high-priority `<link rel="icon">` tags into the `<head>` of every generated HTML page.

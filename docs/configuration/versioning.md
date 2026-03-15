@@ -3,22 +3,22 @@ title: "Versioning"
 description: "Enable multi-version documentation with seamless switching, sticky path preservation, and isolated build directories."
 ---
 
-`docmd` features a native Versioning Engine that allows you to manage and serve multiple versions of your project simultaneously (e.g., `v1.0`, `v2.0`). It automatically handles the URL routing, sidebar updates, and version switching logic.
+`docmd` features a native Versioning Engine that allows you to manage and serve multiple versions of your project simultaneously (e.g., `v1.x`, `v2.x`). The engine automatically handles URL routing, sidebar updates, and switching logic.
 
 ## Directory Organization
 
-To enable versioning, you must organize your documentation into versioned source folders. The most common pattern is keeping the latest version in `docs` and older versions in folders prefixed with `docs-`.
+To enable versioning, organize your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
 
 ```text
 my-project/
-├── docs/           # Version 2 (Main)
-├── docs-v1/        # Version 1 (Legacy)
+├── docs/           # Latest Version (Main)
+├── docs-v1/        # Legacy Version
 ├── docmd.config.js
 ```
 
 ## Configuration
 
-Define your versions in the `versions` object.
+Define your versions within the `versions` object:
 
 ```javascript
 export default defineConfig({
@@ -36,21 +36,21 @@ export default defineConfig({
 ## Core Features
 
 ### 1. Root SEO (The "Current" Version)
-The version specified in `current` is built directly to your output directory root (e.g., `mysite.com/`). This ensures your primary SEO traffic always lands on your most up-to-date information.
+The version designated as `current` is generated directly at your output root (e.g., `mysite.com/`). This ensures your primary search traffic always lands on your most up-to-date documentation.
 
 ### 2. Isolated Sub-directories
-Other versions are automatically built into subfolders matching their `id`.
+Non-current versions are automatically built into subfolders matching their `id`.
 *   `v2 (Current)` → `mysite.com/`
 *   `v1` → `mysite.com/v1/`
 
 ### 3. Sticky Switching (Path Preservation)
-`docmd` smartly preserves the relative path when a user switches versions. If a user is reading `mysite.com/getting-started` and switches to **v1**, they are automatically taken to `mysite.com/v1/getting-started` instead of being dumped back at the home page.
+`docmd` preserves the relative path when a user switches versions. If a user is reading `mysite.com/getting-started` and switches to **v1**, they are automatically redirected to `mysite.com/v1/getting-started` (if the page exists) rather than being returned to the home page.
 
-### 4. Per-Version Assets
-Each version inherits your global `assets/` folder, but `docmd` ensures they are isolated in the build process, preventing styles from older versions from leaking into newer ones.
+### 4. Asset Isolation
+Each version inherits your global `assets/` directory, but `docmd` ensures they are isolated during the build process to prevent style leakage or version conflicts.
 
 ## Best Practices
 
-1.  **Semantic IDs**: Use short, URL-friendly IDs like `v1`, `v2`, or `beta`. These IDs appear directly in your URLs.
-2.  **Navigation Parity**: While you can have different navigation for different versions, keeping your folder structure consistent makes "Sticky Switching" much more effective for your users.
-3.  **One Config to Rule Them All**: You do not need separate configuration files for each version. `docmd` iterates through your `versions.all` array during a single `docmd build` command.
+1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.
+2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximize the effectiveness of "Sticky Switching."
+3.  **Unified Configuration**: You do not need separate config files for each version; `docmd` processes all versions in a single pass.

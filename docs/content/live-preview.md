@@ -1,54 +1,61 @@
 ---
-title: "Live Preview & Browser Support"
-description: "Run docmd entirely in the browser without a server using the new Live architecture."
+title: "Live Preview"
+description: "Run docmd entirely in the browser without a backend server using the Live architecture."
 ---
 
-`docmd` features a modular architecture that separates file system operations from core processing logic. This allows the documentation engine to run **entirely in the browser**, enabling live editors and CMS previews without a server.
+`docmd` features a modular architecture that separates filesystem operations from core processing logic. This enables the documentation engine to run **entirely within the browser**, facilitating live editors and CMS previews without the need for a Node.js backend.
 
 ::: button "Open Live Editor" https://live.docmd.io
 
 ## The Live Editor
 
-The built-in Live Editor provides a split-pane interface where you can write Markdown on the left and see the rendered documentation on the right instantly.
+The built-in Live Editor provides a high-performance, split-pane interface. Author your Markdown in the left pane and observe the rendered output navigate and synchronize in real-time on the right.
 
-### Running Locally
-Launch the editor on your machine:
+### Local Execution
+
+To launch the Live Editor locally within your project:
+
 ```bash
 docmd live
 ```
 
-### Static Deployment
-Generate a standalone version for hosting (e.g., on Vercel or GitHub Pages):
+### Static Distribution
+
+Generate a standalone, static version of the editor for hosting on platforms like Vercel or GitHub Pages:
+
 ```bash
 docmd live --build-only
 ```
-This creates a `dist/` directory containing the `index.html` and `docmd-live.js` engine.
 
----
+This generates a `dist/` directory containing the `index.html` entry point and the bundled `docmd-live.js` isomorphic engine.
 
-## Embedding docmd in Your Site
+## Embedding docmd
 
-Use the browser-compatible bundle to add Markdown preview capabilities to your own applications.
+You can integrate the browser-compatible bundle into your own applications to provide internal Markdown rendering or preview capabilities.
 
-### 1. Include Script and Assets
+### 1. Resource Integration
+
+Include the required CSS and JavaScript bundles from your assets or a CDN:
+
 ```html
 <link rel="stylesheet" href="/assets/css/docmd-main.css">
-<link rel="stylesheet" href="/assets/css/docmd-theme-sky.css">
 <script src="/docmd-live.js"></script>
 ```
 
-### 2. Using the API
-The global `docmd` object exposes the `compile` function.
+### 2. Isomorphic API
+
+The global `docmd` object provides the `compile` method for instantaneous rendering.
 
 ```javascript
-const html = docmd.compile(markdown, {
-  siteTitle: 'My Live Doc',
-  theme: { name: 'sky' }
+const html = await docmd.compile(markdown, {
+  siteTitle: 'Dynamic Preview',
+  theme: { appearance: 'dark' }
 });
 
+// Inject into an iframe for style isolation
 document.getElementById('preview-frame').srcdoc = html;
 ```
 
-::: callout tip "AI Feedback Loops 🤖"
-By leveraging the Live Editor architecture, you can build **AI-Agent sandboxes**. Instead of the AI saving files to disk, it can "post" its suggested edits to a live-compilation buffer, allowing you to preview AI-suggested documentation changes in real-time before approving the commit.
+::: callout tip "AI Feedback Loops"
+The Live architecture is ideal for building **AI-Agent Sandboxes**. Instead of providing an agent with filesystem write access, you can pipe its suggested documentation changes to a live-compilation buffer. This allows you to visually verify AI suggestions in a "ghost" environment before committing changes to your repository.
 :::

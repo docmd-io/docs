@@ -1,53 +1,58 @@
 ---
 title: "Search Plugin"
-description: "Configure docmd's zero-config, privacy-focused offline search engine with section-deep linking."
+description: "Enable high-speed, offline-first full-text search for your documentation using MiniSearch."
 ---
 
-Every `docmd` project includes a powerful, full-text search engine built-in. Unlike traditional search tools that require external indexing services or server-side databases, `docmd` search runs **entirely in the user's browser**.
-
-## How it Works
-
-1.  **Build Phase**: `docmd` analyzes your markdown and generates a compressed `search-index.json`.
-2.  **Section Awareness**: We don't just index pages; we index **headers**. If a keyword appears in a specific `###` section, the search result will link the user directly to that section using its permalink.
-3.  **Local Execution**: When a user types, the matching happens instantly in memory using `MiniSearch`. It works perfectly in air-gapped environments or on slow connections.
+The `@docmd/plugin-search` plugin provides a powerful, client-side search experience for your documentation. It uses [MiniSearch](https://github.com/lucaong/minisearch) to build a lightweight index during the build process, allowing users to find technical information instantly without a server-side database.
 
 ## Configuration
 
-The search plugin is **active by default**. You can customize its presence via the `layout` object.
+Search is enabled by default in most `docmd` templates. You can control its visibility and placement via the `layout` configuration.
 
 ```javascript
-// docmd.config.js
-export default {
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
   layout: {
     optionsMenu: {
+      position: 'header', // 'header', 'sidebar-top', 'sidebar-bottom', or 'menubar'
       components: {
-        search: true // Set to false to remove the search button
+        search: true // Set to false to disable the search plugin entirely
       }
     }
   }
-}
+});
 ```
 
-## Advanced Usage
+## How It Works
 
-### Excluding Content
-To prevent a specific page from being indexed (e.g., utility pages), add `noindex` to the frontmatter:
+### 1. Indexing (Build-time)
+During the `docmd build` process, the search plugin iterates through every page on your site. It extracts the title, headings, and plain-text prose, then compiles this data into a compressed `search-index.json` file. 
+
+*   **Deep Linking**: The indexer automatically registers every heading (`#`, `##`, etc.) as a searchable target.
+*   **Relevancy Boosting**: Titles are given the highest weight, followed by headings, then page content.
+
+### 2. Retrieval (Client-side)
+When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-index.json` is fetched by the browser. Searches are performed locally using fuzzy matching (allowing for small typos) and instant prefix matching.
+
+## Customizing Search Behavior
+
+While the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
 
 ```yaml
 ---
-title: "Private Info"
-noindex: true
+title: "Internal Specification"
+noindex: true # This page will not appear in search results or sitemaps
 ---
 ```
 
-### Keyboard Shortcuts
-We've optimized the search experience with native feeling shortcuts:
-*   `Cmd + K` (Mac) or `Ctrl + K` (Windows) to open.
-*   `ESC` to close.
-*   `Arrow Keys` and `Enter` to navigate.
+## Technical Implementation
 
+The plugin injects a minimalist search modal into the `<body>` of your site. It is designed to be fully accessible (ARIA compliant) and supports keyboard navigation for a native app-like experience.
 
-## Privacy First
+::: callout tip "Search Analytics"
+If you have the [Analytics Plugin](./analytics) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
+:::
 Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
 
 ## Comparison

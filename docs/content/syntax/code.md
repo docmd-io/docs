@@ -1,40 +1,46 @@
 ---
 title: "Code Blocks"
-description: "Document your code with automatic syntax highlighting, line numbers, and copy buttons."
+description: "Document technical implementations with high-fidelity syntax highlighting and interactive copy buttons."
 ---
 
-`docmd` includes `highlight.js` for automatic syntax highlighting.
+`docmd` utilizes `highlight.js` to provide automatic, context-aware syntax highlighting across hundreds of programming languages and configuration formats.
 
-## Fenced Code Blocks
+## Syntax Highlighting
 
-Wrap your code in triple backticks and specify the language for the best results.
+Author your technical examples using standard Markdown fenced code blocks. Always specify the language identifier to ensure the highlight engine applies the correct lexical rules.
 
 ````markdown
 ```javascript
-function hello() {
-  console.log("Hello World");
+function initialize() {
+  console.log("docmd engine active.");
 }
 ```
 ````
 
-**Renders as:**
+**Rendered Result:**
 
 ```javascript
-function hello() {
-  console.log("Hello World");
+function initialize() {
+  console.log("docmd engine active.");
 }
 ```
 
-::: callout tip Copy Button
-If `copyCode: true` is enabled in your config (default), a copy button will automatically appear in the top-right corner of every code block when the user hovers.
+::: callout tip "One-Click Portability"
+When `copyCode: true` is enabled in your configuration (default), a subtle copy button automatically appears in the top-right corner of every code block on hover, allowing users to instantly transfer snippets to their IDE.
 :::
 
-## AI Context Strategy
+## Strategy for AI Context
 
-When documenting code for LLMs:
-1.  **Always specify the language**: This helps AI models parse the block correctly in the `llms-full.txt` payload.
-2.  **Add comments**: Explaining complex logic within the code block helps the AI reason about your implementation during context retrieval.
+When documenting code for consumption by LLMs and AI Agents, adhere to these technical best practices:
 
-## Supported Languages
+1.  **Strict Language Labeling**: Explicitly labeling blocks as `typescript`, `bash`, or `json` ensures the AI parser accurately interprets the block's grammar within the `llms-full.txt` stream.
+2.  **Embedded Intent**: Use inline comments within your code blocks to explain the *why* behind complex logic. This provides the AI with critical reasoning context that simple text outside the block might lack.
 
-`docmd` supports hundreds of languages including: `javascript`, `typescript`, `html`, `css`, `bash`, `json`, `python`, `rust`, `go`, `markdown`, and `yaml`.
+## Language Support Reference
+
+`docmd` provides out-of-the-box support for the most common technical ecosystems, including:
+
+*   **Logic**: `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`.
+*   **Web**: `html`, `css`, `markdown`.
+*   **Data & Shell**: `json`, `yaml`, `bash`, `powershell`, `dockerfile`.
+*   **Documentation**: `mermaid`, `changelog`.

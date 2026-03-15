@@ -1,102 +1,92 @@
 ---
 title: "Building Plugins"
-description: "A guide for developers on how to create and share custom docmd plugins."
+description: "A comprehensive guide to extending docmd with custom logic and interactive features."
 ---
 
-Plugins are the primary way to extend `docmd`. They allow you to hook into the Markdown parser, inject HTML into the layout, and execute logic after builds.
-
-## Anatomy of a Plugin
-
-A plugin is a JavaScript object exporting specific hook functions.
-
-| Hook | Purpose |
-| :--- | :--- |
-| `markdownSetup(md)` | Access the `markdown-it` instance for custom rules. |
-| `injectHead(config)` | Injects HTML into the `<head>`. |
-| `injectBody(config)` | Injects HTML at the bottom of the `<body>`. |
-| `getAssets()` | Returns a list of CSS/JS files to copy/inject. |
-| `onPostBuild(ctx)` | Executes logic after all HTML is generated. |
-
-::: callout tip "Async Native Hooks"
-As of `v0.6.0`, all plugin hooks except `markdownSetup` are fully asynchronous. You can `await` database queries or external API fetches directly inside `injectHead()` or `injectBody()`!
-:::
-
-## Creating a Local Plugin
-
-You can create a plugin file in your project, for example `my-plugin.js`:
-
-```javascript
-// my-plugin.js
-export default {
-  // 1. Extend Markdown
-  markdownSetup: (md) => {
-    // Example: Add a custom container or rule
-    // md.use(require('markdown-it-emoji'));
-  },
-
-  // 2. Inject Styles/Scripts
-  injectHead: async (config) => { // Hooks can now be fully asynchronous!
-    return `<meta name="custom-plugin" content="active">`;
-  },
-
-  // 3. Post-Build Action
-  onPostBuild: async ({ config, pages, outputDir, log }) => {
-    log('Plugin: Build finished! Processed ' + pages.length + ' pages.');
-  }
-};
-```
-
-To use it, require it in your `docmd.config.js`:
-
-```javascript
-// docmd.config.js
-export default {
-  // ...
-  plugins: {
-    './my-plugin.js': {} // Key is path, Value is options object
-  }
-};
-```
+Plugins are the primary extension mechanism for `docmd`. They allow you to inject custom HTML, modify the Markdown parsing logic, and automate post-build tasks. This guide outlines the plugin API and best practices for creating shareable components.
 
 ## Plugin API Reference
 
-### `getAssets()`
-Used to inject client-side scripts or CSS files.
+A `docmd` plugin is a standard JavaScript object (or a module that exports one as default) that implements one or more of the following asynchronous hooks.
+
+| Hook | Description |
+| :--- | :--- |
+| `markdownSetup(md, opts)` | Extend the `markdown-it` instance. Synchronous. |
+| `generateMetaTags(config, page, root)` | Inject `<meta>` or `<link>` tags into the `<head>`. |
+| `generateScripts(config, opts)` | Return an object containing `headScriptsHtml` and `bodyScriptsHtml`. |
+| `getAssets(opts)` | Define external files or CDN scripts to be injected. |
+| `onPostBuild(ctx)` | Run logic after the generation of all HTML files. |
+
+## Creating a Local Plugin
+
+Creating a plugin is as simple as defining a JavaScript file. For example, `my-plugin.js`:
 
 ```javascript
-getAssets: () => {
+// my-plugin.js
+import path from 'path';
+
+export default {
+  // 1. Extend the Markdown Parser
+  markdownSetup: (md, options) => {
+    // Example: Add a rule or use a markdown-it plugin
+  },
+
+  // 2. Inject Page Metadata
+  generateMetaTags: async (config, page, relativePathToRoot) => {
+    return `<meta name="x-build-id" content="${config._buildHash}">`;
+  },
+
+  // 3. Post-Build Automation
+  onPostBuild: async ({ config, pages, outputDir, log, options }) => {
+    log(`Custom Plugin: Verified ${pages.length} pages.`);
+    // Example: Generate a custom manifest or notification
+  }
+};
+```
+
+To enable your plugin, reference its path in your `docmd.config.js`:
+
+```javascript
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
+  plugins: {
+    './plugins/my-plugin.js': {
+      // Your custom options go here
+    }
+  }
+});
+```
+
+## Deep Dive: Asset Injection
+
+The `getAssets()` hook allows your plugin to bundle client-side logic securely.
+
+```javascript
+getAssets: (options) => {
   return [
     {
-      src: path.join(__dirname, 'client-script.js'), // Source file
-      dest: 'assets/js/plugin.js',                   // Destination in site/
-      type: 'js',                                    // 'js' or 'css'
-      location: 'body'                               // 'head' or 'body'
+      url: 'https://cdn.example.com/lib.js', // External CDN script
+      type: 'js',
+      location: 'head'
+    },
+    {
+      src: path.join(__dirname, 'plugin-init.js'), // Local source
+      dest: 'assets/js/plugin-init.js',            // Destination in build/
+      type: 'js',
+      location: 'body'
     }
   ];
 }
 ```
 
-### `onPostBuild({ config, pages, outputDir, log })`
-*   `config`: The full project configuration object.
-*   `pages`: Array of processed page objects `{ outputPath, frontmatter, htmlContent, searchData }`.
-*   `outputDir`: Absolute path to the build output folder.
-*   `log`: Helper function to print messages to the CLI console.
+## Best Practices
 
-## Publishing a Plugin
+1.  **Async/Await**: Always use `async` functions for `onPostBuild` and metadata hooks to prevent blocking the build engine during I/O operations.
+2.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
+3.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
+4.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
 
-To share your plugin with the community:
-1.  Name your package `docmd-plugin-<name>` (recommended).
-2.  Export the plugin object as the default export.
-3.  Publish to NPM.
-
-Users can then install it via `npm install docmd-plugin-name` and add it to their config:
-
-```javascript
-plugins: {
-  'docmd-plugin-name': { /* options */ }
-}
-```
-
-::: callout tip "AI-Generated Plugins 🤖"
-The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks are simple, stateless, and use standard JavaScript objects, an AI Agent can perfectly generate a complete plugin (e.g., for custom Markdown containers or third-party integrations) from a single prompt with minimal errors.
+::: callout tip "AI-Ready Design 🤖"
+The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks use standard JavaScript objects and types without hidden complex class hierarchies, AI agents can generate bug-free custom plugins for you with minimal instruction.
 :::

@@ -1,6 +1,6 @@
 ---
-title: "docmd : No-Style Page Example"
-description: "An example of a page using the no-style feature"
+title: "docmd : Bespoke No-Style Page Demo"
+description: "A functional demonstration of the noStyle architectural feature."
 noStyle: true
 components:
   meta: true
@@ -13,100 +13,83 @@ copyCode: true
 customHead: |
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      background: var(--bg-primary);
+      color: var(--text-primary);
     }
-    .container {
-      max-width: 800px;
+    .demo-container {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 80px 20px;
     }
-    .header {
+    .demo-hero {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
-    .header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #4a6cf7;
+    .demo-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--brand-primary, #4a6cf7);
     }
-    .header p {
-      font-size: 1.2rem;
-      color: #666;
+    .demo-hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
     }
-    .content {
-      background-color: #f8f9fa;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    .demo-card {
+      background: var(--bg-secondary, #f8f9fa);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
-    .button {
+    .demo-button {
       display: inline-block;
-      padding: 12px 24px;
-      background-color: #4a6cf7;
+      padding: 14px 28px;
+      background-color: var(--brand-primary, #4a6cf7);
       color: white;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 8px;
       font-weight: 600;
-      margin-top: 20px;
+      margin-top: 30px;
+      transition: filter 0.2s ease;
     }
-    .button:hover {
-      background-color: #3a5ce4;
-    }
-    [data-theme="dark"] {
-      color-scheme: dark;
-    }
-    [data-theme="dark"] body {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    [data-theme="dark"] .content {
-      background-color: #1e1e1e;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    [data-theme="dark"] .header p {
-      color: #aaa;
+    .demo-button:hover {
+      filter: brightness(1.1);
     }
   </style>
-bodyClass: "no-style-example"
 ---
 
-<div class="container">
-  <div class="header">
-    <h1>No-Style Page Example</h1>
-    <p>This page demonstrates the no-style feature with a custom layout</p>
+<div class="demo-container">
+  <div class="demo-hero">
+    <h1>Bespoke Page Architecture</h1>
+    <p>Demonstrating the absolute layout control enabled via <code>noStyle: true</code>.</p>
   </div>
   
-  <div class="content">
-    <h2>What is this page?</h2>
+  <div class="demo-card">
+    <h2>Logical Foundation</h2>
     <p>
-      This is an example page that uses the <code>noStyle: true</code> frontmatter option to create a completely custom page layout.
-      Unlike regular documentation pages, this page doesn't use the standard docmd layout with sidebar navigation and table of contents.
+      This demonstration utilizes the <code>noStyle: true</code> frontmatter directive to bypass the global documentation layout (Sidebar, Header, and TOC). This provides a "Zero-Friction" canvas for creating marketing landing pages or custom product dashboards.
     </p>
     
-    <h2>How does it work?</h2>
-    <p>
-      The <code>noStyle</code> option tells docmd to use a special template that only includes the components you explicitly request
-      via the <code>components</code> object in frontmatter. This gives you complete control over the page structure.
-    </p>
+    <h3>Enabled System Components</h3>
+    <p>When in No-Style mode, you explicitly opt-in to the documentation engine's core features:</p>
     
-    <h2>Features enabled on this page:</h2>
     <ul>
-      <li><strong>meta</strong>: Meta tags, title, and description for SEO</li>
-      <li><strong>favicon</strong>: The site favicon</li>
-      <li><strong>css</strong>: Basic CSS for markdown content</li>
-      <li><strong>theme</strong>: Theme support for light/dark mode</li>
-      <li><strong>scripts</strong>: JavaScript for functionality</li>
+      <li><strong>SEO Meta Engine</strong>: Structured tags and social graph data are retained.</li>
+      <li><strong>Project Branding</strong>: Global favicon injection remains active.</li>
+      <li><strong>Foundational Typography</strong>: The processed <code>docmd-main.css</code> provides base styling.</li>
+      <li><strong>Theme Synchronization</strong>: Light/Dark mode state is fully preserved.</li>
+      <li><strong>Interactive Capabilities</strong>: The SPA router and component logic remain available.</li>
     </ul>
     
-    <h2>Custom styling</h2>
+    <h3>Technical Implementation</h3>
     <p>
-      This page includes custom CSS in the <code>customHead</code> frontmatter field. This allows you to define page-specific styles
-      without affecting the rest of your site.
+      The layout for this page is authored using standard HTML wrappers and scoped CSS defined within the <code>customHead</code> frontmatter field. This ensures zero CSS leakage to the rest of the documentation site.
     </p>
     
-    <a href="/content/no-style-pages/" class="button">Get Back to No-Style Pages Documentation</a>
+    <a href="/content/no-style-pages/" class="demo-button">Analyze the Implementation Guide →</a>
   </div>
-</div> 
+</div>

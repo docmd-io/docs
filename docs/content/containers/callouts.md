@@ -1,74 +1,75 @@
 ---
 title: "Callouts"
-description: "Highlight critical information using semantic blocks. Supports Tip, Warning, Danger, and Info types."
+description: "Highlight critical warnings, pro-tips, and background context using semantic visual blocks."
 ---
 
-Callouts are used to highlight information that requires the user's immediate attention. `docmd` provides five semantic types, each with its own visual styling and icon.
+Callouts are used to isolate information that requires the reader's immediate attention. `docmd` provides five semantic types, each featuring distinct visual styling and themed iconography.
 
-## Syntax
+## Syntax Reference
 
 ```markdown
 ::: callout type "Optional Title"
-Your content here.
+The technical content or warning goes here.
 :::
 ```
 
-| Type | Default Title | Best Used For |
+### Supported Semantic Types
+
+| Type | Intent | Visual Signal |
 | :--- | :--- | :--- |
-| `info` | Info | General help or background context. |
-| `tip` | Tip | Best practices, shortcuts, or "Pro-tips". |
-| `warning` | Warning | Actions that might cause minor issues if ignored. |
-| `danger` | Danger | Critical warnings, data loss, or significant errors. |
-| `success` | Success | Confirmation of a completed action. |
+| `info` | **General Data** | Contextual background or helpful non-critical info. |
+| `tip` | **Optimization** | Performance shortcuts or "Pro-tips". |
+| `warning`| **Cautionary** | Potential issues or deprecated features to monitor. |
+| `danger` | **Critical** | Risk of data loss, breaking changes, or system failure. |
+| `success`| **Verification** | Confirmation of successful configuration or build. |
 
----
+## Implementation Gallery
 
-## Examples
-
-### 1. Simple Note
+### 1. Minimalist Informational Note
 ```markdown
 ::: callout info
-This is a standard informational note.
+Legacy configuration schemas remain supported but are no longer recommended.
 :::
 ```
 ::: callout info
-This is a standard informational note.
+Legacy configuration schemas remain supported but are no longer recommended.
 :::
 
-### 2. Custom Title
+### 2. High-Priority Alert with Custom Title
 ```markdown
-::: callout warning "Action Required"
-Please back up your configuration before proceeding with the upgrade.
+::: callout warning "Breaking Change Target"
+As of `v0.7.0`, the internal WebSocket RPC system will be officially deprecated.
 :::
 ```
-::: callout warning "Action Required"
-Please back up your configuration before proceeding with the upgrade.
+::: callout warning "Breaking Change Target"
+As of `v0.7.0`, the internal WebSocket RPC system will be officially deprecated.
 :::
 
-### 3. Rich Content (Nesting)
-Callouts can contain any Markdown content, including code blocks and buttons.
+### 3. Rich Content Composition
+Callouts support the full spectrum of Markdown, allowing you to embed buttons and code blocks within the alert.
 
 ````markdown
-::: callout tip "Try this Shortcut"
-Use the CLI to instantly verify your build:
+::: callout tip "Optimized Local Testing"
+Use the preserve flag to maintain build files during dev sessions:
 
 ```bash
 docmd dev --preserve
 ```
 
-::: button "Learn More" /cli-commands
+::: button "CLI Flag Reference" /cli-commands
 :::
 ````
-::: callout tip "Try this Shortcut"
-Use the CLI to instantly verify your build:
+
+::: callout tip "Optimized Local Testing"
+Use the preserve flag to maintain build files during dev sessions:
 
 ```bash
 docmd dev --preserve
 ```
 
-::: button "Learn More" /cli-commands
+::: button "CLI Flag Reference" ./#cli-commands
 :::
 
-::: callout tip
-For LLMs, callouts act as high-priority anchors. Use a `::: callout danger` block to explicitly document breaking changes or "Gotchas" - AI models are specially tuned to prioritize these blocks in their reasoning.
+::: callout tip "Prioritized Logic for AI"
+For LLMs, callouts act as **High-Priority Anchors**. By utilizing `::: callout danger` to document breaking changes or system constraints, you provide a clear signal that the AI model must prioritize this information above surrounding text during its reasoning and generation process.
 :::

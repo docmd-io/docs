@@ -1,51 +1,68 @@
 ---
-title: "SEO & Meta Tags"
-description: "Automatic SEO optimization, Open Graph integration, and AI Scraper control for your docmd site."
+title: "SEO Plugin"
+description: "Optimize your documentation for search engines and control AI crawler access with native meta tag generation."
 ---
 
-The `seo` plugin ensures your documentation is discoverable by search engines and looks professional when shared on social media. It handles technical meta-tag injection automatically.
+The `@docmd/plugin-seo` plugin is responsible for generating high-quality metadata for every page. It ensures your documentation is not only discoverable by human readers on search engines but also correctly interpreted by AI models and social media platforms.
 
-## Quick Setup
+## Global Configuration
+
+Configure site-wide SEO defaults in your `docmd.config.js`.
 
 ```javascript
-// docmd.config.js
-export default {
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
   plugins: {
     seo: {
-      defaultDescription: 'The official documentation for Project X.',
+      defaultDescription: 'Comprehensive documentation for the docmd ecosystem.',
+      aiBots: false, // Set to false to block common AI crawlers (GPTBot, etc.)
       openGraph: {
-        defaultImage: '/assets/og-hero.jpg' // Shown on Twitter/LinkedIn
+        defaultImage: '/assets/og-image.png'
       },
-      aiBots: {
-        block: true // Automatically block common AI scrapers (GPTBot, etc)
+      twitter: {
+        siteUsername: '@docmd_io',
+        cardType: 'summary_large_image'
       }
     }
   }
-}
+});
 ```
 
-## Automatic Features
+## Page-Level Overrides
 
-### 1. Smart Excerpts
-If you forget to provide a `description` in your file's frontmatter, the SEO plugin automatically constructs a **150-character fallback description** from the beginning of your content. This ensures you never have "empty" snippets in Google search results.
-
-### 2. AI Scraper Control
-With `aiBots.block: true`, `docmd` injects `noindex` tags targetting 12+ major AI crawler agents (including `GPTBot`, `ClaudeBot`, and `Google-Extended`). This is the easiest way to keep your documentation out of bulk training datasets while remaining visible to humans.
-
-## Per-Page Overrides
-
-For maximum SEO precision, use the `seo` object in your Markdown frontmatter.
+You can fine-tune SEO settings for individual pages using frontmatter. Page-level settings always take precedence over global defaults.
 
 ```yaml
 ---
-title: "Advanced Setup Guide"
+title: "Advanced Configuration"
+description: "Learn how to master docmd's internal engine."
+noindex: true # Hide this specific page from all search engines
 seo:
-  description: "Learn how to configure our enterprise-grade security clusters in minutes."
-  image: "/assets/guides/setup-social.png"
-  noindex: false
-  keywords: ["security", "cluster", "enterprise"]
+  keywords: ["docmd", "javascript", "ssg"]
+  ogType: "article"
+  canonicalUrl: "https://mysite.com/canonical-path"
+  aiBots: true # Override global block to allow AI access to this page
 ---
 ```
+
+## Core Features
+
+### 1. Smart Description Fallback
+If a description is not provided in the frontmatter or global config, the plugin automatically extracts the first 150 characters of the page's prose to use as the `<meta name="description">`, ensuring every page has basic metadata for search snippets.
+
+### 2. AI Bot Governance
+By setting `aiBots: false`, the plugin injects `noindex` instructions specifically for major AI crawlers (including `GPTBot`, `Claude-Web`, and `Google-Extended`). This allows you to differentiate between traditional search engine indexing and LLM training sessions.
+
+### 3. Canonical Resolution
+The plugin automatically generates `<link rel="canonical">` tags based on your `siteUrl`. It intelligently handles directory indexes, converting `guide/index.html` to a clean `/guide/` canonical URL to prevent duplicate content issues.
+
+### 4. Rich Social Previews
+Native support for Open Graph and Twitter Cards ensures that links to your documentation look professional when shared on platforms like X (Twitter), LinkedIn, and Discord.
+
+::: callout tip "Search Discovery"
+For the best SEO results, ensure your `siteUrl` is defined in the root of your configuration. Without a base URL, the plugin cannot generate absolute canonical links or Open Graph image paths.
+:::
 
 ## Structured Data (LD+JSON)
 `docmd` can automatically generate [Article Schema](https://developers.google.com/search/docs/appearance/structured-data/article) to help Search Engines display rich snippets.
@@ -58,6 +75,6 @@ seo:
 ---
 ```
 
-::: callout tip
+::: callout tip "Structured Data"
 A well-configured SEO plugin helps AI-powered search engines (like SearchGPT or Perplexity) summarize your site accurately. By providing clear descriptions and blocked bots, you control exactly how AI models perceive and source your content online.
 :::

@@ -1,48 +1,52 @@
 ---
-title: "Analytics Integration"
-description: "Integrate Google Analytics or other tracking services into your docmd site."
+title: "Analytics Plugin"
+description: "Integrate Google Analytics 4 or Legacy Universal Analytics and track user interactions automatically."
 ---
 
-`docmd` provides a built-in plugin for web analytics. This allows you to understand your audience and track page views with ease.
+The `@docmd/plugin-analytics` plugin allows you to seamlessly integrate Google Analytics into your documentation. It supports the modern Google Analytics 4 (GA4) standard, legacy Universal Analytics (UA), and includes native event tracking for interaction-heavy documentation sites.
 
-## Enabling Analytics
+## Configuration
 
-Add the `analytics` plugin to your `plugins` object in `docmd.config.js`.
+Enable analytics by adding your tracking credentials to the `plugins` section of `docmd.config.js`.
 
 ```javascript
-export default {
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
   plugins: {
     analytics: {
-      // For Google Analytics 4 (Recommended)
-      googleV4: {
-        measurementId: 'G-XXXXXXXXXX'
+      // 1. Google Analytics 4 (Recommended)
+      googleV4: { 
+        measurementId: 'G-XXXXXXX' 
       },
-      // For Google Universal Analytics (Legacy)
-      googleUA: {
-        trackingId: 'UA-XXXXXXXXX-Y'
-      }
+
+      // 2. Legacy Universal Analytics
+      googleUA: { 
+        trackingId: 'UA-XXXXXXX-X' 
+      },
+
+      // 3. Behavioral Tracking Settings
+      autoEvents: true,  // Track clicks, downloads, and TOC interactions
+      trackSearch: true  // Track search keywords used by readers
     }
   }
-};
+});
 ```
 
-## Configuration Options
+## Tracked Events
 
-### Google Analytics 4 (GA4)
-*   **Key**: `googleV4`
-*   **Requirement**: `measurementId` (String).
-*   **Behavior**: Injects the `gtag.js` snippet into every page.
+When `autoEvents` is enabled, the plugin automatically captures the following user interactions and sends them to your analytics provider:
 
-### Universal Analytics (UA)
-*   **Key**: `googleUA`
-*   **Requirement**: `trackingId` (String).
-*   **Behavior**: Injects the legacy `analytics.js` script.
+*   **External Links**: Track when users depart for external resources.
+*   **File Downloads**: Automatically log clicks on links with the `download` attribute or common file extensions (`.pdf`, `.zip`, `.tar`, etc.).
+*   **Table of Contents (TOC)**: Monitor which sections are most engaging by tracking clicks in the right-hand navigation.
+*   **Heading Anchors**: Log when users click on "permalinks" (heading anchors) to share specific sections.
+*   **Search Queries**: When `trackSearch` is active, keywords are captured (with a 1-second debounce) to help you understand what your users are looking for.
 
-## Important Considerations
+## Technical Details
 
-*   **SPA Tracking**: The `docmd` analytics plugin is SPA-aware. It automatically sends a "Page View" event on every `docmd:page-mounted` trigger, ensuring your metrics are accurate despite the client-side routing.
-*   **Privacy**: Be mindful of local regulations (GDPR/CCPA). You can use [Custom JS](/advanced/client-side-events) to implement custom consent banners.
+The plugin injects the necessary tracking scripts into the `<head>` of every page. Event listeners are attached to the `<body>` using efficient event delegation to ensure zero impact on page load performance or Single Page Application (SPA) transitions.
 
-::: callout tip "AI Bot Tracking 🤖"
-While standard analytics track human visitors, `docmd` sites also generate high traffic from AI crawlers. Use server-side logs or advanced privacy-first analytics (like Plausible or Fathom) if you want to distinguish between human readers and AI-agent context retrieval sessions.
+::: callout info "Privacy & GDPR"
+By default, this plugin does not anonymize IP addresses as that is now handled natively by GA4. If you require advanced cookie consent management, you can manually inject your consent manager scripts using the `customCss` or a custom plugin hook.
 :::

@@ -1,46 +1,48 @@
 ---
 title: "Redirects & 404"
-description: "Configure instant metadata-based redirects and custom branded 404 error pages for static deployments."
+description: "Configure metadata-based redirects and custom branded 404 error pages for static deployments."
 ---
 
-In a static environment, there is no server-side logic (like `.htaccess` or Nginx rules) to handle routing. `docmd` solves this by generating native HTML failsafes that handle redirection and error states automatically.
+In a static hosting environment, there is no server-side logic (such as Nginx rules or `.htaccess` files) to handle dynamic routing. `docmd` addresses this by generating native HTML failsafes that handle redirection and error states automatically.
 
 ## Server-less Redirects
 
-You can forward traffic from old URLs to new destinations by defining a mapping in the `redirects` object.
+You can forward traffic from legacy URLs to new destinations by defining a mapping in the `redirects` object.
 
 ```javascript
 export default defineConfig({
   redirects: {
-    '/setup': '/getting-started/installation', // Redirect /setup to new path
-    '/v1/api': '/api-reference'                  // Forward legacy API links
+    '/setup': '/getting-started/installation', // Short URL to deep link
+    '/v1/api': '/api-reference'                  // Legacy version to modern path
   }
 });
 ```
 
 ### Technical Implementation
-When you define a redirect, `docmd` creates a directory and an `index.html` at the old path containing a `<meta http-equiv="refresh">` tag. This ensures:
-1.  **Humans** are redirected instantly after the page loads.
-2.  **Search Engines** recognize the canonical link to the new content.
-3.  **Analytics** are preserved across the transition.
+
+When a redirect is defined, `docmd` creates an `index.html` file at the legacy path containing a `<meta http-equiv="refresh">` tag. This strategy ensures:
+
+1.  **Seamless Redirection**: Users are forwarded to the new destination instantly after the page loads.
+2.  **SEO Preservation**: Search engines recognize the redirection, helping to maintain link equity.
+3.  **Analytics Tracking**: Page views are captured before the redirect occurs, preserving your traffic data.
 
 ## Branded 404 Pages
 
-When a user accesses a non-existent URL, most static hosts (Netlify, Vercel, GitHub Pages) look for a `404.html` file in the root. `docmd` automatically generates this file, ensuring that it inherits your theme, sidebar, and Single Page Application (SPA) functionality.
+When a user attempts to access a non-existent URL, most static hosting providers (Netlify, Vercel, GitHub Pages) automatically look for a `404.html` file in the root directory. `docmd` generates this file by default, ensuring it inherits your site's theme, sidebar, and SPA functionality.
 
-### Customizing the Error Content
+### Customizing Error Content
 
-You can customize the 404 messaging in your configuration:
+You can personalize the 404 error message within your configuration:
 
 ```javascript
 export default defineConfig({
   notFound: {
-    title: '404: Lost in the Docs',
+    title: '404: Page Not Found',
     content: "We couldn't find the page you're looking for. Use the sidebar to find your way back."
   }
 });
 ```
 
-::: callout tip
-Local development server (`docmd dev`) will automatically serve this custom 404 page whenever a file is missing.
+::: callout tip "Local Development"
+The `docmd dev` server automatically serves your custom 404 page whenever a requested file is missing, allowing you to test the error experience locally.
 :::

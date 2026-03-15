@@ -1,9 +1,9 @@
 ---
 title: "CLI Commands"
-description: "The complete command-line reference for docmd. Create, build, and deploy your documentation with ease."
+description: "The complete command-line interface reference for docmd."
 ---
 
-The `docmd` CLI is designed to be minimalist and intuitive. It handles everything from your initial project scaffolding to production-ready builds.
+The `docmd` CLI provides a set of high-performance commands to manage your documentation lifecycle, from initial scaffolding to production deployment.
 
 ## `docmd init`
 
@@ -13,100 +13,89 @@ Scaffolds a new documentation project in the current directory.
 docmd init
 ```
 
-**What it does:**
-*   Creates a `docs/` folder with an `index.md`.
-*   Generates a `docmd.config.js` file with recommended defaults.
-*   Sets up a `package.json` with build scripts.
-*   It does not overwrite your existing `docs/` or configuration files.
+### Actions
+- Creates a `docs/` directory with a boilerplate `index.md`.
+- Generates a `docmd.config.js` file with recommended defaults.
+- Updates your `package.json` with recommended build scripts.
 
 ## `docmd dev`
 
-Starts a local development server with **Instant Hot Reloading**.
+Starts a high-speed development server with **Instant Hot Reloading**.
 
 ```bash
 docmd dev [options]
 ```
 
-**Options:**
-*   `-z, --zero-config`: **Magic Mode**. If you don't have a config file, `docmd` will automatically detect your project structure and build your site.
-*   `-p, --port <number>`: Specify a manual port (Default: `3000`).
-*   `-c, --config <path>`: Use a non-standard config file path.
+### Options
+- `-p, --port <number>`: Specify a custom port (Default: `3000`).
+- `-z, --zero-config`: Run in auto-detect mode without a configuration file.
+- `-c, --config <path>`: Use a non-standard configuration file path.
 
 ## `docmd build`
 
-Generates a production-ready static website to the `site/` folder.
+Generates a production-ready static website in the `site/` folder.
 
 ```bash
 docmd build [options]
 ```
 
-**Options:**
-*   `--offline`: **File Protocol Friendly**. Rewrites all internal links to end in `.html`. This allow you to browse the site directly from a hard drive (e.g. `file:///Users/me/docs/site/index.html`) without a web server.
-*   `-z, --zero-config`: Build for production using the auto-detection engine.
-*   `-c, --config <path>`: Specify the config file to use.
+### Options
+- `--offline`: **File Protocol Friendly**. Rewrites links to end in `.html`, allowing for direct browsing from the local filesystem (e.g., `file://`).
+- `-z, --zero-config`: Build using auto-detection logic.
+- `-c, --config <path>`: Path to the configuration file (Default: `docmd.config.js`).
 
-## `docmd add`
+## `docmd live`
 
-Installs a plugin and automatically injects it into your `docmd.config.js`.
-
-```bash
-docmd add <plugin-name> [options]
-```
-
-**Options:**
-*   `-v, --verbose`: Shows detailed package manager logs and deep error traces.
-
-**What it does:**
-*   Detects your package manager (`npm`, `pnpm`, `yarn`, `bun`).
-*   Resolves the plugin name. Official plugins (e.g., `analytics`) map to `@docmd/plugin-analytics`. Unknowns fallback to NPM.
-*   Installs the package securely and safely updates your config natively.
-
-## `docmd remove`
-
-Uninstalls a plugin and cleanly strips its layout from your `docmd.config.js`.
+Launches the browser-based **Live Editor** environment.
 
 ```bash
-docmd remove <plugin-name> [options]
+docmd live [options]
 ```
 
-**Options:**
-*   `-v, --verbose`: View deep execution logs.
+### Options
+- `--build-only`: Generates the static editor bundle in `dist/` without starting a server.
+
+## `docmd stop`
+
+Gracefully terminates all background documentation servers.
+
+```bash
+docmd stop [options]
+```
+
+### Options
+- `-p, --port <number>`: Stop a specific instance running on a given port.
+
+## `docmd add <plugin>`
+
+Installs an official or community plugin and auto-configures your project.
+
+```bash
+docmd add analytics
+```
+
+### Actions
+- Uses your preferred package manager (`npm`, `pnpm`, `yarn`, or `bun`).
+- Injects the plugin and its recommended default settings into `docmd.config.js`.
+
+## `docmd remove <plugin>`
+
+Safely uninstalls a plugin and cleans up your configuration.
+
+```bash
+docmd remove analytics
+```
 
 ## `docmd migrate`
 
-Upgrades an old configuration file to the modern schema.
+Upgrades legacy `docmd` configurations to the modern V2 schema.
 
 ```bash
 docmd migrate
 ```
 
-It securely re-maps your legacy keys (`siteTitle`, `srcDir`, `defaultMode`) into their modern equivalents (`title`, `src`, `appearance`), restructures the object natively towards the newer `layout` and `optionsMenu` frameworks, and saves an automatic backup copy as `docmd.config.legacy.js`.
+It re-maps deprecated keys (e.g., `siteTitle` to `title`) and restructures the configuration object to support the new layout and navigation frameworks.
 
-## `docmd live`
-
-Launches the **Isomorphic Live Editor**.
-
-```bash
-docmd live
-```
-
-This starts a browser-based environment where you can write Markdown on the left and see the rendered `docmd` UI on the right in real-time. Use `--build-only` to generate a shareable static version of the editor.
-
-## `docmd stop`
-
-Kills all running background development servers.
-
-```bash
-docmd stop
-```
-
-**What it does:**
-
-*   Scans active processes for docmd dev or docmd live instances.
-*   Gracefully terminates all background servers.
-*   Automatically identifies servers even if they were started on automated, non-standard ports.
-*   Designed to find orphaned processes in complex workspace structures.
-
-::: callout tip
-The `docmd` CLI provides structured stdout and clear error logging, making it highly compatible with **Agentic Workflows**. If you are using an AI agent (like me) to manage your site, we can easily parse the logs from `docmd dev` to identify and fix path errors or configuration mismatches.
+::: callout tip "Agent-Compatible Logging"
+`docmd` implements structured terminal logging. If you are using an AI agent for development, this allows for precise error detection and automated project maintenance.
 :::

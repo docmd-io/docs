@@ -1,112 +1,105 @@
 ---
 title: "Mermaid Diagrams"
-description: "Native support for Mermaid.js. Create flowcharts, sequence diagrams, and pie charts directly in your Markdown files."
+description: "Create professional architectural diagrams, flowcharts, and sequence diagrams directly in your Markdown files using Mermaid.js syntax."
 ---
 
-`docmd` includes native, zero-config support for [Mermaid.js](https://mermaid.js.org/). You can create professional diagrams using simple text-based syntax without leaving your Markdown file.
+The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://mermaid.js.org/) engine into your documentation pipeline. It allows you to transform plain-text descriptions into high-fidelity, interactive diagrams without ever leaving your Markdown environment.
 
-## Why use Mermaid in docmd?
+## Key Features
 
-*   **Zero Scripting**: No need to include external scripts. `docmd` detects the usage and injects the rendering engine automatically.
-*   **Theme Aware**: Diagrams automatically shift colors between **Light** and **Dark** modes to match your site's theme.
-*   **Lazy Loading**: For optimum page speed, diagrams are only initialized once they enter the viewport.
+- **Zero Scripting**: No need to manually include external scripts or CDN links. `docmd` detects the usage and injects the rendering engine only where needed.
+- **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
+- **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialized and rendered only as they enter the user's viewport.
+- **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
 
-## Examples
+## Configuration
 
-### Flowchart
+To enable diagram support, add the `mermaid` plugin to your `docmd.config.js`:
 
-Flowcharts are used to represent workflows or processes. They show the steps as boxes of various kinds, and their order by connecting them with arrows.
+```javascript
+import { defineConfig } from '@docmd/core';
 
-````markdown
-```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> E[Fix the issue]
-    E --> B
-    C --> F[Deploy]
-```
-````
-
-```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> E[Fix the issue]
-    E --> B
-    C --> F[Deploy]
+export default defineConfig({
+  plugins: {
+    mermaid: {} // Enabled with zero-config
+  }
+});
 ```
 
-### Sequence Diagram
+## Implementation Gallery
 
-Sequence diagrams show how processes operate with one another and in what order. They capture the interaction between objects in the context of a collaboration.
+To render a diagram, place your Mermaid syntax within a fenced code block with the `mermaid` language identifier.
 
+### 1. Sequence Diagrams
+Ideal for illustrating interactions between multiple system components.
+
+::: tabs
+
+== tab "Preview"
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    
+    User->>Browser: Enters URL
+    Browser->>Server: HTTP Request
+    Server-->>Browser: HTTP Response
+    Browser-->>User: Displays Page
+```
+
+== tab "Markdown Source"
 ````markdown
 ```mermaid
 sequenceDiagram
     participant User
     participant Browser
     participant Server
-    participant Database
     
-    User->>Browser: Enter URL
+    User->>Browser: Enters URL
     Browser->>Server: HTTP Request
-    Server->>Database: Query Data
-    Database-->>Server: Return Results
     Server-->>Browser: HTTP Response
-    Browser-->>User: Display Page
+    Browser-->>User: Displays Page
 ```
 ````
 
+:::
+
+### 2. Analytical Charts
+Visualize data using built-in chart types like Pie Charts or Bar Charts.
+
+::: tabs
+
+== tab "Preview"
 ```mermaid
-sequenceDiagram
-    participant User
-    participant Browser
-    participant Server
-    participant Database
-    
-    User->>Browser: Enter URL
-    Browser->>Server: HTTP Request
-    Server->>Database: Query Data
-    Database-->>Server: Return Results
-    Server-->>Browser: HTTP Response
-    Browser-->>User: Display Page
+pie title Project Composition
+    "Documentation" : 45
+    "Core Engine" : 30
+    "Plugins" : 15
+    "UI Components" : 10
 ```
 
-## Pie Chart
-
-Pie charts are circular statistical graphics divided into slices to illustrate numerical proportions.
-
+== tab "Markdown Source"
 ````markdown
 ```mermaid
-pie title Browser Usage Statistics
-    "Chrome" : 64.5
-    "Safari" : 18.2
-    "Firefox" : 8.5
-    "Edge" : 4.8
-    "Other" : 4.0
+pie title Project Composition
+    "Documentation" : 45
+    "Core Engine" : 30
+    "Plugins" : 15
+    "UI Components" : 10
 ```
 ````
 
-```mermaid
-pie title Browser Usage Statistics
-    "Chrome" : 64.5
-    "Safari" : 18.2
-    "Firefox" : 8.5
-    "Edge" : 4.8
-    "Other" : 4.0
-```
+:::
 
-## Git Graph
+### 3. Git Workflows
+Visualize branching and merging strategies for your developer guides.
 
-Git graphs visualize Git branching and merging operations, making it easier to understand version control workflows.
+::: tabs
 
-````markdown
+== tab "Preview"
 ```mermaid
 gitGraph
-    commit
     commit
     branch develop
     checkout develop
@@ -115,18 +108,12 @@ gitGraph
     checkout main
     merge develop
     commit
-    branch feature
-    checkout feature
-    commit
-    checkout main
-    merge feature
-    commit
 ```
-````
 
+== tab "Markdown Source"
+````markdown
 ```mermaid
 gitGraph
-    commit
     commit
     branch develop
     checkout develop
@@ -135,40 +122,19 @@ gitGraph
     checkout main
     merge develop
     commit
-    branch feature
-    checkout feature
-    commit
-    checkout main
-    merge feature
-    commit
-```
-
-## XY Chart
-
-XY charts display data as a series of points on a coordinate plane, useful for showing correlations and trends.
-
-**Code:**
-
-````markdown
-```mermaid
-xychart-beta
-    title "Sales Revenue by Quarter"
-    x-axis [Q1, Q2, Q3, Q4]
-    y-axis "Revenue (in $1000)" 0 --> 100
-    bar [50, 60, 70, 85]
-    line [45, 55, 75, 80]
 ```
 ````
 
-```mermaid
-xychart-beta
-    title "Sales Revenue by Quarter"
-    x-axis [Q1, Q2, Q3, Q4]
-    y-axis "Revenue (in $1000)" 0 --> 100
-    bar [50, 60, 70, 85]
-    line [45, 55, 75, 80]
-```
+:::
 
-::: callout tip
-Mermaid diagrams are highly readable by LLMs. When an AI model reads your `llms-full.txt`, it can "see" the logic flow of your diagrams as text, making it much better at explaining complex architectural relationships in your project.
+## Technical Implementation
+
+The Mermaid plugin operates by intercepting `mermaid` code blocks during the parsing phase and wrapping them in a specialized `<div class="mermaid">` container. 
+
+1. **Detection**: The engine scans the rendered HTML for the presence of mermaid containers.
+2. **Asset Injection**: If containers are found, `docmd` injects a lightweight `init-mermaid.js` module.
+3. **Rendering**: The Mermaid library is fetched asynchronously and renders the diagrams client-side, ensuring that your initial HTML payload remains small and fast.
+
+::: callout tip "Diagrams for AI Agents"
+While diagrams are visually helpful for humans, they are technically transparent to AI. Because the source is pure text, models like GPT-4 or Claude can "see" your system architecture or logic flows through the `llms-full.txt` stream. This allows the AI to explain complex architectural relationships based on your diagrams.
 :::

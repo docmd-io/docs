@@ -1,80 +1,85 @@
 ---
 title: "Tabs"
-description: "Organize alternative or dense information into switchable panes. Perfect for multi-language code snippets."
+description: "Organize dense, alternative, or multi-language information into switchable interactive panes."
 ---
 
-Tabs are the best way to present related but mutually exclusive information (like "npm vs yarn" or "Windows vs macOS" instructions) in a compact, interactive format.
+Tabs are the optimal UI pattern for presenting mutually exclusive or related data sets (e.g., "Install via NPM vs. Yarn" or "macOS vs. Windows" instructions) within a compact, interactive format.
 
-## Syntax
+## Syntax Reference
 
-The `tabs` container uses a special sub-delimiter: `== tab "Label"`.
+The `tabs` container utilizes the specialized sub-delimiter `== tab "Label"`. Each label defines a distinct pane that users can toggle between.
 
 ```markdown
 ::: tabs
 
-== tab "Tab Label 1"
+== tab "Label 1"
 Content for the first tab.
 
-== tab "Tab Label 2"
+== tab "Label 2"
 Content for the second tab.
 
 :::
 ```
 
-## Detailed Example: Package Managers
+## Implementation Gallery
 
-````markdown
+### 1. Package Management
+Tabs are most commonly used to show installation instructions for different package managers in a single view.
+
 ::: tabs
 
-== tab "NPM"
-```bash
-npm install @docmd/core
-```
-
-== tab "Yarn"
-```bash
-yarn add @docmd/core
-```
-
-== tab "PNPM"
+== tab "pnpm"
 ```bash
 pnpm add @docmd/core
 ```
 
-:::
-````
-
-::: tabs
-== tab "NPM"
+== tab "npm"
 ```bash
 npm install @docmd/core
 ```
-== tab "Yarn"
+
+== tab "yarn"
 ```bash
 yarn add @docmd/core
 ```
-== tab "PNPM"
-```bash
-pnpm add @docmd/core
-```
+
 :::
 
-## Advanced Features
+### 2. Multi-Language Code Snippets
+Keep your logic clean by separating different programming languages or environments.
 
-### Lazy Rendering
-`docmd` implements **Conditional Lazy Rendering**. If a tab contains heavy assets like a **Mermaid.js** diagram or large images, they are only initialized once the user clicks that specific tab. This ensures your initial page load remains blazingly fast.
+::: tabs
 
-### Sticky Tab State
-The `docmd` SPA router remembers the active tab's index when navigating between similar pages. This creates a cohesive experience for users switching between pages that share the same tab setup.
+== tab "TypeScript"
+```typescript
+import { build } from '@docmd/core';
+await build('./docmd.config.js');
+```
+
+== tab "JavaScript"
+```javascript
+const { build } = require('@docmd/core');
+build('./docmd.config.js');
+```
+
+:::
+
+## Core Capabilities
+
+### Isomorphic Lazy Rendering
+`docmd` implements **Conditional Resource Laziness**. If a tab contains computationally expensive elements (e.g., **Mermaid.js** diagrams or high-resolution images), these assets are only initialized and rendered once the user activates that specific tab. This ensures rapid initial page loads.
+
+### State Persistence
+The default SPA router tracks the active tab's index across similar documentation pages. If a user selects "pnpm" on one page and navigates to another page with a matching tab structure, the "pnpm" tab will remain active automatically.
 
 ## Technical Constraints
 
 | Constraint | Note |
 | :--- | :--- |
-| **No Tabs-in-Tabs** | To prevent UX loops, tabs cannot be nested inside other tabs. |
-| **Steps-in-Tabs** | High-conflict syntax: If you need steps inside a tab, use a standard ordered list (`1. Step One`). |
-| **Max Tabs** | Recommended maximum of 6 tabs for mobile responsiveness. |
+| **Nesting Depth** | To preserve layout integrity, tabs cannot be nested inside other tab components. |
+| **Interactive Conflict**| High-conflict syntax: To nest Steps inside a Tab, use a standard ordered list (`1. Step One`) instead of the `::: steps` container. |
+| **Responsive Limit** | It is recommended to limit tab counts to 6 per block to ensure mobile device compatibility. |
 
-::: callout tip
-When using tabs for code snippets, always include the language in the tab label (e.g., `== tab "JavaScript"`). This allows LLMs to instantly identify the relevant block in the unified `llms-full.txt` stream.
+::: callout tip "AI Context Mapping"
+When utilizing tabs for code snippets, always include the target language directly in the tab label (e.g., `== tab "TypeScript"`). This allows LLMs to instantly identify and extract the technically relevant section from the `llms-full.txt` context stream.
 :::

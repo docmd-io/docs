@@ -1,86 +1,87 @@
 ---
 title: "Steps"
-description: "Transform standard numbered lists into high-impact visual timelines of instructions."
+description: "Convert standard ordered lists into high-impact visual timelines and tutorials."
 ---
 
-The `steps` container is designed specifically for "How-to" guides and tutorials. It takes a standard Markdown ordered list and converts it into a clean, numbered vertical timeline.
+The `steps` container is designed specifically for "How-to" guides and technical tutorials. It transforms a standard Markdown ordered list into a polished, numbered vertical timeline with automatic spacing and visual emphasis.
 
 ## Syntax
 
-Simply wrap your ordered list in a `::: steps` container.
+Wrap any standard ordered list in a `::: steps` block.
 
 ```markdown
 ::: steps
 
-1.  **Preparation**
-    Ensure you have Node.js installed on your machine.
+1.  **Initialize Project**
+    Run the `docmd init` command to scaffold your directory.
 
-2.  **Execution**
-    Run the `init` command.
+2.  **Author Content**
+    Write your documentation using standard Markdown files.
 
-3.  **Completion**
-    Your site is ready!
+3.  **Build & Deploy**
+    Generate static assets using `docmd build`.
 
 :::
 ```
 
-## Detailed Example: Deployment
+## Detailed Implementation
+
+The `steps` component supports rich Markdown content within each item, including code blocks, images, and nested containers.
 
 ```markdown
 ::: steps
 
-1.  **Build the Project**
-    Generate the production-ready static files.
+1.  **Generate Production Build**
+    Execute the build command to generate a highly optimized static site.
     ```bash
     docmd build
     ```
 
-2.  **Verify Output**
-    Inspect the `site/` directory to ensure all files were generated.
+2.  **Verify Asset Integrity**
+    Inspect the `site/` directory to ensure all assets were correctly compiled.
 
-3.  **Deploy to Host**
-    Upload the contents of `site/` to your hosting provider.
+3.  **Deploy to Infrastructure**
+    Synchronize the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
 
 :::
 ```
 
 ::: steps
 
-1.  **Build the Project**
-    Generate the production-ready static files.
+1.  **Generate Production Build**
+    Execute the build command to generate a highly optimized static site.
     ```bash
     docmd build
     ```
 
-2.  **Verify Output**
-    Inspect the `site/` directory to ensure all files were generated.
+2.  **Verify Asset Integrity**
+    Inspect the `site/` directory to ensure all assets were correctly compiled.
 
-3.  **Deploy to Host**
-    Upload the contents of `site/` to your hosting provider.
+3.  **Deploy to Infrastructure**
+    Synchronize the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
 
 :::
 
-## Advanced Usage
+## Advanced Nesting
 
-### Nesting Containers in Steps
-You can nest any other component (like a **Callout**) inside a step to provide extra context without breaking the numbering sequence.
+You can nest other documentation components (such as **Callouts** or **Buttons**) inside a step without interrupting the chronological flow of the sequence.
 
 ```markdown
 ::: steps
 
 1.  **Configure Environment**
-    Create a `.env` file in your root directory.
+    Define your project-specific variables in `docmd.config.js`.
 
     ::: callout tip
-    You can use the template provided in `.env.example`.
+    Use `defineConfig` to enable IDE autocompletion for configuration keys.
     :::
 
-2.  **Restart Server**
-    Apply the new environment settings.
+2.  **Validate Schema**
+    Run `docmd verify` to ensure your configuration is structurally sound.
 
 :::
 ```
 
-::: callout tip
-The `steps` container is a strong signal to LLMs that a specific **Workflow** is being documented. When using `steps`, ensure each list item starts with a **Bolded Title**. This allows AI models to quickly parse the sequence of operations in the `llms-full.txt` context.
+::: callout tip "Workflow Optimization"
+Modern AI models interpret the `steps` container as a high-fidelity signal for **Sequential Workflows**. To maximize AI accuracy in the `llms-full.txt` context, always start your list items with a **Bolded Title**. This allows agents to reliably parse the objective of each step before processing the implementation details.
 :::

@@ -1,46 +1,48 @@
 ---
-title: "Recipe: Adding Custom Fonts"
-description: "Personalize your documentation by importing Google Fonts."
+title: "Recipe: Integrating Custom Fonts"
+description: "Personalize your site's typography via Google Fonts and CSS variable overrides."
 ---
 
-`docmd` uses CSS variables to manage typography. Changing your site's font is as easy as creating a custom stylesheet.
+`docmd` utilizes a robust CSS variable system to manage design tokens. Personalizing your site's typography involves importing external font assets and overriding the core root variables.
 
-## 1. Create a CSS File
+## 1. Define Your Typography Manifest
 
-Create a file in your project (e.g., `assets/css/fonts.css`).
+Establish a custom CSS file within your project (e.g., `assets/css/typography.css`).
 
-Go to [Google Fonts](https://fonts.google.com), find the font you want (like *Inter* or *Fira Code*), and use the `@import` method. Then, assign that font to the docmd root variables.
+Identify your target font family on [Google Fonts](https://fonts.google.com) and utilize the `@import` directive to fetch the assets. Then, map these fonts to the `docmd` Typography tokens.
 
 ```css
-/* assets/css/fonts.css */
+/* assets/css/typography.css */
 
-/* Import the fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap');
+/* 1. Import font assets */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=JetBrains+Mono&display=swap');
 
 :root {
-  /* Override the default sans-serif font */
-  --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* 2. Override the primary Sans-Serif stack */
+  --font-family-sans: "Outfit", -apple-system, system-ui, sans-serif;
   
-  /* Override the monospace (code block) font */
-  --font-family-mono: "Fira Code", monospace;
+  /* 3. Override the Monospace (Code Block) stack */
+  --font-family-mono: "JetBrains Mono", monospace;
 }
 ```
 
 ## 2. Register the Stylesheet
 
-Open your `docmd.config.js` and add the path to your new CSS file in the `theme.customCss` array.
+Inject your custom manifest into the build pipeline via the `docmd.config.js` file.
 
 ```javascript
 export default {
   // ...
   theme: {
     name: 'sky',
-    appearance: 'light',
-    customCss:[
-      '/assets/css/fonts.css' // Path is relative to the generated site/ root
+    appearance: 'dark',
+    customCss: [
+      '/assets/css/typography.css' // Path is absolute relative to the site/ directory
     ]
   }
 }
 ```
 
-Restart your `docmd dev` server. Your entire site will now use your custom typography!
+## 3. Verify Changes
+
+Execute `docmd dev` to preview the typographical changes. The engine will automatically bundle the custom CSS and apply the variable overrides across all documentation nodes.

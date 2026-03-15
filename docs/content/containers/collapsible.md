@@ -1,70 +1,72 @@
 ---
-title: "Collapsible"
-description: "Create toggleable accordion sections for FAQs and advanced details."
+title: "Collapsible Sections"
+description: "Embed interactive accordion-style toggles for FAQs, deep-dive content, and spoilers."
 ---
 
-The `collapsible` container creates an accordion-style toggle. It is perfect for FAQs, spoilers, or hiding complex configuration options that aren't relevant to every reader.
+The `collapsible` container creates an interactive, toggleable section (accordion). This pattern is ideal for FAQs, detailed technical configuration, or any secondary information that should be accessible without cluttering the primary documentation flow.
 
 ## Syntax
 
 ```markdown
-::: collapsible [open] Title Text
-Content goes here.
+::: collapsible [open] "Title Text"
+Main content goes here.
 :::
 ```
 
-*   **`open`**: (Optional) If present, the section defaults to expanded.
-*   **`"Title"`**: The text shown on the clickable bar. Defaults to "Click to expand".
+### Options Reference
+- **`open`**: (Optional) If specified, the section initializes in an expanded state.
+- **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
 
-::: callout tip
-Even when collapsed in the UI, the content inside a `collapsible` is fully indexed by the `docmd` search engine and included in the `llms-full.txt` payload. This means AI can answer questions using hidden details while the interface remains clean for humans.
-:::
+## Detailed Implementation Examples
 
-## Examples
-
-### Default (Closed)
-Useful for FAQs or spoilers.
+### Standard Usage (Initial State: Closed)
+Primarily used for FAQs or reducing the visual density of technical pages.
 
 ```markdown
-::: collapsible "How do I reset my password?"
-Go to **Settings > Account** and click "Reset Password".
+::: collapsible "How do I upgrade docmd?"
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 ```
-::: collapsible "How do I reset my password?"
-Go to **Settings > Account** and click "Reset Password".
+::: collapsible "How do I upgrade docmd?"
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
-### Default (Open)
-Useful for sections that should be visible but optional to hide.
+### Opt-In Visibility (Initial State: Open)
+Ideal for sections that should be visible by default but allow the user to minimize them for a cleaner view.
 
 ```markdown
-::: collapsible open "Prerequisites"
-1.  Node.js v18+
-2.  A text editor
+::: collapsible open "Environment Prerequisites"
+1.  Node.js v18+ (LTS recommended)
+2.  PNPM package manager
 :::
 ```
-::: collapsible open "Prerequisites"
-1.  Node.js v18+
-2.  A text editor
+::: collapsible open "Environment Prerequisites"
+1.  Node.js v18+ (LTS recommended)
+2.  PNPM package manager
 :::
 
-### Nested Content
+### Nested Technical Data
+Collapsibles can contain complex Markdown elements, including syntax-highlighted code blocks.
 
 ````markdown
-::: collapsible "View JSON Response"
+::: collapsible "Analyze Sample JSON Response"
 ```json
 {
   "status": "success",
-  "data": { "id": 123 }
+  "data": { "version": "0.6.2" }
 }
 ```
 :::
 ````
-::: collapsible "View JSON Response"
+::: collapsible "Analyze Sample JSON Response"
 ```json
 {
   "status": "success",
-  "data": { "id": 123 }
+  "data": { "version": "0.6.2" }
 }
 ```
+:::
+
+::: callout tip
+While content inside a `collapsible` may be hidden from the human user, it remains fully visible to the `docmd` search index and is included in the unified `llms-full.txt` stream. This ensures AI agents can provide comprehensive answers based on hidden technical details while the human-facing interface remains clean and prioritized.
 :::

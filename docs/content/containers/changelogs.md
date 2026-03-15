@@ -1,74 +1,78 @@
 ---
 title: "Changelogs"
-description: "Create beautiful, timeline-based version history pages."
+description: "Generate structured, timeline-based version history and release notes."
 ---
 
-The `changelog` container formats version history into a clean, vertical timeline. It is specifically designed to parse date/version headers and body content separately.
+The `changelog` container provides a specialized layout for documenting project evolution. It automatically parses date or version headers into a vertical timeline, ensuring historical updates are easily scannable.
 
 ## Syntax
 
-Use `==` to separate entries. The text on the `==` line becomes the timeline badge (left side), and the content below becomes the body (right side).
+Utilize the specialized `==` delimiter to define entries. The text on the `==` line is rendered as a timeline badge on the left, while the following content populates the adjacent chronological slot.
 
 ```markdown
 ::: changelog
 
-== Version 2.0
-Description of version 2.0.
+== v2.0.0
+Description of the major feature release.
 
-== Version 1.0
-Description of version 1.0.
+== v1.5.0
+Description of maintenance updates and security patches.
 
 :::
 ```
 
-::: callout tip
-Maintaining a clean changelog helps AI agents understand the evolution of your project. An AI can quickly scan a `::: changelog` structure to determine which features were added in a specific version, allowing it to provide more accurate context to users asking about "what's new".
-:::
+## Detailed Example: Release History
 
-## Example
+Changelogs support rich Markdown within each entry, including lists, callouts, and code blocks.
 
 ```markdown
 ::: changelog
 
-== v2.0.0 (2026)
-### Major Overhaul
-We rewrote the core engine for better performance.
+== v2.0.0 (2026-03-15)
+### Major System Overhaul
+The core engine has been rearchitected for isomorphic execution.
 
-*   Added SPA Router
-*   Added Plugin System
+*   Implemented **SPA Router** for zero-reload navigation.
+*   Introduced the **Isomorphic Plugin** system.
 
-== v1.5.0 (2025)
-### Maintenance
-Bug fixes and performance improvements.
-
-::: callout info
-This was the last version to support Node 14.
+::: callout success
+This release offers a 40% improvement in initial build speed.
 :::
 
-== v1.0.0 (2024)
-Initial Release.
+== v1.5.1 (2025-12-10)
+### Security Patch
+*   Resolved high-severity vulnerability in the internal parser.
+*   Updated dependency `flatted` to `v3.3.2`.
+
+== v1.0.0 (2024-05-01)
+Initial public release.
 
 :::
 ```
 
 ::: changelog
 
-== v2.0.0 (2026)
-### Major Overhaul
-We rewrote the core engine for better performance.
+== v2.0.0 (2026-03-15)
+### Major System Overhaul
+The core engine has been rearchitected for isomorphic execution.
 
-*   Added SPA Router
-*   Added Plugin System
+*   Implemented **SPA Router** for zero-reload navigation.
+*   Introduced the **Isomorphic Plugin** system.
 
-== v1.5.0 (2025)
-### Maintenance
-Bug fixes and performance improvements.
-
-::: callout info
-This was the last version to support Node 14.
+::: callout success
+This release offers a 40% improvement in initial build speed.
 :::
 
-== v1.0.0 (2024)
-Initial Release.
+== v1.5.1 (2025-12-10)
+### Security Patch
+*   Resolved high-severity vulnerability in the internal parser.
+*   Updated dependency `flatted` to `v3.3.2`.
 
+== v1.0.0 (2024-05-01)
+Initial public release.
+
+:::
+
+::: callout tip "Historical Context for AI"
+Changelogs provide a temporal map for AI agents. When an LLM parses the `llms-full.txt` context, the `::: changelog` structure allows it to accurately identify when specific features, breaking changes, or security fixes were introduced, leading to higher accuracy in its development recommendations.
 :::

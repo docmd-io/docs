@@ -1,64 +1,64 @@
 ---
 title: "Buttons"
-description: "Inject call-to-action buttons for internal routing or external resources. No closing tag required."
+description: "Inject call-to-action buttons for internal routing or external resources with a minimalist syntax."
 ---
 
-Buttons are used to create prominent links. Unlike most `docmd` containers, the `button` is **self-closing**. You define it on a single line and do not use a closing `:::` tag.
+Buttons are high-impact UI elements used for prominent navigation. Unlike block containers, the `button` is **self-closing**—it is defined on a single line and does not require a closing `:::` tag.
 
 ## Syntax
 
 ```markdown
-::: button "Label" Path [Option]
+::: button "Label" Path [Options]
 ```
 
-### Options
+### Options Reference
 
-| Property | Value | Description |
+| Property | Format | Description |
 | :--- | :--- | :--- |
-| **Path** | `/path` | Relative URL to a page in your docs. |
-| **Path** | `external:URL` | Opens the link in a new tab with `target="_blank"`. |
-| **Color** | `color:#hex` | Custom background color (e.g. `color:#4f46e5`). |
+| **Path** | `/path/` | Relative project URL (resolves automatically for SPA navigation). |
+| **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
+| **Color** | `color:VALUE` | Applies a background color (supports CSS names or Hex codes). |
 
+## Usage Examples
 
-## Examples
-
-### 1. Internal Link
-Use relative paths to link between pages.
+### 1. Internal Navigation
+Use relative paths to ensure seamless, zero-reload transitions within the `docmd` SPA.
 ```markdown
-::: button "Back to Installation" /getting-started/installation
+::: button "Install docmd" /getting-started/installation
 ```
-::: button "Back to Installation" /getting-started/installation
+::: button "Install docmd" /getting-started/installation
 
-### 2. External Link
-Prepend `external:` to ensure the link opens in a new tab.
+### 2. External Resource Link
+Prepend `external:` to the URL to secure safe external linking.
 ```markdown
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd
+::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
 ```
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd
+::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
 
-### 3. Styled Branding
-You can use standard CSS colors or Hex codes to match your brand.
+### 3. Semantic & Brand Styling
+Match buttons to your brand identity or semantic priority using color overrides.
 ```markdown
-::: button "Critical Action" /delete-account color:red
-::: button "Success" /confirm color:#228B22
+::: button "Danger Action" /delete color:crimson
+::: button "Success Confirmation" /success color:#228B22
 ```
-::: button "Critical Action" ./#delete-account color:crimson
-::: button "Success" ./#confirm color:#228B22
+::: button "Danger Action" ./#delete color:crimson
+::: button "Success Confirmation" ./#success color:#228B22
 
-## Troubleshooting: Accidental Over-closing
-Because buttons are self-closing, adding a second `:::` line will actually **close the parent container** (like a Card or a Tab) that the button is sitting inside.
+## Critical Note: Self-Closing Logic
 
-**Incorrect (Will break layout):**
+Because buttons are self-closing, adding a terminal `:::` line will terminate the **parent container** (e.g., a Card or Tab) that the button resides in, potentially breaking your layout.
+
+**Incorrect Sequence:**
 ```markdown
-::: card
-::: button "Click" /path
+::: card "Setup"
+::: button "Begin" /setup
+:::        <-- Error: This closes the Card prematurely.
 :::
-:::
 ```
 
-**Correct:**
+**Correct Sequence:**
 ```markdown
-::: card
-::: button "Click" /path
-:::
+::: card "Setup"
+::: button "Begin" /setup
+:::        <-- Correct: This closes the Card.
 ```

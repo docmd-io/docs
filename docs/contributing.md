@@ -1,73 +1,71 @@
 ---
 title: "Contributing"
-description: "Learn how you can contribute to the development, design, and documentation of docmd."
+description: "Guidelines and setup instructions for contributing to docmd."
 ---
 
-Thank you for contributing to `docmd`! We appreciate your help in making this tool faster, smarter, and more reliable.
+Thank you for your interest in contributing to `docmd`! We appreciate all contributions, from bug fixes and documentation improvements to new features and design suggestions.
 
-## 🛠️ Development Setup
+## Development Environment
 
-`docmd` is a Monorepo managed with [pnpm](https://pnpm.io/).
+`docmd` is a monorepo managed with [pnpm](https://pnpm.io/).
 
-### 1. Prerequisites
-- **Node.js**: v20+
-- **pnpm**: v10+
+### Prerequisites
 
-### 2. Setup
-Clone the repository and run the automated onboarding tool to install dependencies and build the monorepo in one go:
+- **Node.js**: v22.x or later (LTS recommended)
+- **pnpm**: v10.x or later
+
+### Project Setup
+
+Clone the repository and run the automated onboarding tool to install dependencies and perform an initial build:
 
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd
-
-# Standard setup
 pnpm onboard
-
-# Setup + link the "docmd" command globally
-pnpm onboard --link-docmd
 ```
 
-### 3. Running the Dev Server
-We use workspace filtering to ensure the local CLI is used during development. Start the documentation site and watch for changes in the core engine automatically:
+To link the local `docmd` command globally for testing in other projects:
+
+```bash
+pnpm onboard --link
+```
+
+### Local Development
+
+Run the documentation site while watching for changes in the core engine:
 
 ```bash
 pnpm run dev
 ```
 
-### 4. Developer Mode
-By default, the dev server watches content. To watch internal source code (templates, core engine, plugins), set the environment variable:
+To watch internal source files (engine, templates, and plugins), set the `DOCMD_DEV` environment variable:
 
 ```bash
-# Mac/Linux
 DOCMD_DEV=true pnpm run dev
-
-# Windows (PowerShell)
-$env:DOCMD_DEV="true"; pnpm run dev
 ```
 
-## 🧪 Testing & Quality
+## Quality Standards
 
-Before submitting, ensure your changes haven't introduced regressions.
+Before submitting a Pull Request, please ensure your changes pass the verification suite:
 
-1. **Verification Suite:** Run our comprehensive failsafe to verify engine integrity, versioning, and plugin lifecycles:
-   ```bash
-   pnpm verify
-   ```
-2. **Conventional Commits:** We follow [Conventional Commits](https://www.conventionalcommits.org/). Use prefixes like `feat:`, `fix:`, or `docs:`.
-3. **Copyright Header:** All new files in `packages/` must include the standard project copyright header. Please copy the header from any existing file in the `src/` directory.
+```bash
+pnpm verify
+```
 
-## 🚀 Pull Request Workflow
+### Commit Guidelines
 
-1. **Branch:** Create a branch from `main`.
-2. **Code:** Make your changes.
-3. **Verify:** Run `pnpm verify` and ensure it outputs `🛡️ docmd is ready for production!`.
-4. **Push & Open:** Open a Pull Request against the `main` branch.
+We use [Conventional Commits](https://www.conventionalcommits.org/). Please prefix your commit messages with:
+- `feat:` (New features)
+- `fix:` (Bug fixes)
+- `docs:` (Documentation changes)
+- `refactor:` (Code changes that neither fix bugs nor add features)
 
-### Copyright Header
-All source files in `packages/` must include the standard copyright header. If you create a new file, please copy the header from an existing file.
+### Source Headers
 
-```html
-/*!
+All new files within the `packages/` directory MUST include the standard project copyright header to maintain consistency and compliance.
+
+```javascript
+/**
  * --------------------------------------------------------------------
  * docmd : the minimalist, zero-config documentation generator.
  *
@@ -82,6 +80,8 @@ All source files in `packages/` must include the standard copyright header. If y
  */
 ```
 
-## Code of Conduct
+## GitHub Workflow
 
-Please note that this project operates with a standard Contributor Code of Conduct. By participating in this project you agree to abide by its terms, ensuring a welcoming and respectful environment for everyone.
+1.  **Fork and Branch**: Create a feature branch from the latest `main`.
+2.  **Verify**: Ensure `pnpm verify` returns `🛡️ docmd is ready for production!`.
+3.  **Pull Request**: Open a PR with a clear description of the problem solved or the feature added.

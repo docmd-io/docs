@@ -1,74 +1,82 @@
 ---
 title: "Installation"
-description: "How to install docmd globally or locally using npm, yarn, or pnpm."
+description: "Instructions for installing docmd globally, locally, or using it on-the-fly with npx."
 ---
 
-`docmd` is a Node.js package. It requires **Node.js v18.x or higher** installed on your machine.
+`docmd` is a Node.js-based documentation generator. It requires **Node.js (v18.x or higher)** to be installed on your system.
 
-There are several ways you can deploy `docmd` sites. You can run it on-the-fly without installing, or add it permanently to your long term projects.
+There are several ways to deploy and use `docmd`. You can execute it instantly without installation, or integrate it permanently into your development workflow.
 
-## Option 1: Zero-Config (Try it instantly)
+## Option 1: Instant Execution (Zero-Config)
 
-Run `docmd` inside any folder containing markdown files. It will automatically read your files, extract their headers and build a nested navigation sidebar. No configuration or formal setup required.
+You can run `docmd` inside any directory containing Markdown files. It automatically scans your files, extracts headings for page titles, and generates a nested navigation structure. No configuration or formal setup is required.
 
 ```bash
-npx @docmd/core dev -z    # Start local dev serve
-npx @docmd/core build -z  # Generate production static site
+# Start a local development server on http://localhost:3000
+npx docmd dev -z
+
+# Generate a production-ready static site in the /site directory
+npx docmd build -z
 ```
-::: callout warning
-Zero-Config (`-z`) is currently in `beta`. It is fantastic for quick previews, but for production sites, we recommend initializing a standard configuration file for maximum control.
+
+::: callout warning "Beta Feature"
+Zero-Config mode (`-z`) is currently in beta. While it is excellent for rapid prototyping and internal documentation, we recommend initializing a project configuration (`docmd.config.js`) for production-grade sites to ensure maximum stability and control.
 :::
 
-### Option 2: Project Installation (Recommended)
-For permanent projects, install `docmd` as dependency to lock your versions.
+## Option 2: Local Project Installation (Recommended)
+
+For long-term projects, we recommend installing `docmd` as a development dependency. This ensures version consistency across your team and CI/CD environments.
 
 ```bash
-# 1. Install locally
-npm install @docmd/core
+# 1. Install docmd as a development dependency
+npm install -D @docmd/core
 
-# 2. Initialize your configuration
+# 2. Initialize your project configuration
 npx docmd init
 
-# 3. Start developing
+# 3. Start the development server
 npx docmd dev
 ```
 
-### Option 3: Global Installation
-Install once and use the `docmd` command anywhere on your machine.
+## Option 3: Global Installation
+
+If you prefer to have the `docmd` CLI available globally across your system:
 
 ```bash
+# Install globally
 npm install -g @docmd/core
 
-docmd dev        # Start the local dev server
-docmd build      # Generate the production static site
+# Use the 'docmd' command anywhere
+docmd dev        # Start development server
+docmd build      # Build static site
 ```
 
-## CDN Installation (Browser Only)
+## Developer Integration (Browser-Only)
 
-::: callout warning Developer Use Only
-This method is **not** for building documentation sites. It is for developers who want to embed the `docmd` parsing engine inside another web application (like a CMS or Live Preview tool).
+::: callout info "Library Use Only"
+This method is intended for developers who wish to embed the `docmd` parsing and rendering engine inside another web application, such as a CMS, a Live Preview tool, or a custom dashboard. It is **not** the standard way to build standalone documentation sites.
 :::
 
-If you are building a React/Vue/Vanilla JS app and want to render `docmd` syntax on the fly without a backend, use the browser build:
+To render `docmd` syntax dynamically in a web application without a Node.js backend, include the following assets:
 
 ```html
-<!-- 1. Styles -->
+<!-- 1. Core Styles -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- 2. Engine -->
+<!-- 2. Processing Engine -->
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-See the [Browser API](/advanced/browser-api) guide for implementation details.
+Refer to the [Browser API](../api/browser-api.md) guide for integration details.
 
-## Setup Troubleshooting
+## Troubleshooting
 
-::: callout warning Permission Errors
-If you see `EACCES` errors on macOS/Linux during global installation, it means you don't have permission to write to global directories.
-**Fix:** Run `sudo npm install -g @docmd/core`.
+::: callout warning "Permission Denied (EACCES)"
+If you encounter `EACCES` errors on macOS or Linux during global installation, it indicates insufficient permissions for global directories.
+**Resolution:** Use `sudo npm install -g @docmd/core` or, preferably, use a Node version manager like `nvm` to manage global packages without root access.
 :::
 
-::: callout info Windows Powershell
-If you receive an error about "running scripts is disabled on this system", run this command in PowerShell as Administrator:
+::: callout info "PowerShell Script Execution"
+On Windows, if you receive an error stating that "running scripts is disabled on this system," execute the following command in PowerShell as an Administrator:
 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 :::

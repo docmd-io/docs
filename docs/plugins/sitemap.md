@@ -1,45 +1,54 @@
 ---
 title: "Sitemap Plugin"
-description: "Automatically generate sitemap.xml to improve search engine discoverability."
+description: "Automatically generate a standard-compliant sitemap.xml for better search engine discovery."
 ---
 
-The `sitemap` plugin generates a standard `sitemap.xml` file during the build process. This ensures your content is indexed correctly by Google and other crawlers.
+The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages—including deep links within versioned documentation—are crawled and indexed.
 
-## Enabling the Plugin
+## Configuration
+
+Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customize the crawl weight of various sections within the `plugins` object.
 
 ```javascript
-// docmd.config.js
-export default {
-  siteUrl: 'https://mydocs.com',   // Required for absolute URLs
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
+  siteUrl: 'https://docs.example.com', // Required for sitemap generation
   plugins: {
     sitemap: {
-      defaultChangefreq: 'weekly', // Default: weekly
-      defaultPriority: 0.8         // Default: 0.8
+      defaultChangefreq: 'weekly', // 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
+      defaultPriority: 0.8,        // Default weight for standard pages
+      rootPriority: 1.0            // Weight for the homepage (index.md)
     }
   }
-};
+});
 ```
 
-## Frontmatter Overrides
+## Page-Level Controls
 
-You can control sitemap behavior on a per-page basis.
+You can override sitemap behavior for specific pages using frontmatter.
 
-*   **Exclude Page:** `sitemap: false`
-*   **Custom Settings**:
-    ```yaml
-    ---
-    sitemap:
-      changefreq: 'daily'
-      priority: 1.0
-    ---
-    ```
+```yaml
+---
+title: "Archive Page"
+priority: 0.3          # Lower weight for legacy content
+changefreq: "monthly"   # Hint to crawlers that this page rarely changes
+lastmod: "2024-03-15"   # Explicitly set the last modification date
+sitemap: false         # Exclude this specific page from the sitemap.xml
+---
+```
 
-## How It Works
+## Core Features
 
-1.  **Scanning**: The plugin scans every HTML file generated during the build.
-2.  **Absolute Mapping**: It uses your `siteUrl` to generate the final URLs. Ensure this is defined without a trailing slash.
-3.  **Generation**: It writes `sitemap.xml` to the root of your output directory.
+### 1. Automatic URL Construction
+The plugin intelligently resolves page paths to their canonical public URLs. It handles directory indexes automatically, ensuring that `guide/index.html` is listed as `https://yoursite.com/guide/` to maintain clean URL structures.
 
-::: callout tip "AI Discoverability 🤖"
-While traditional search engines use sitemaps, **AI Agents** and **Knowledge Crawlers** use them to prioritize which pages to ingest into their training or RAG sets first. A well-configured sitemap ensures your most important sections (like "Guides") are processed before minor utility pages.
+### 2. Versioned Discovery
+If your project uses [Versioning](../configuration/versioning), the sitemap plugin automatically includes all pages from all versions (e.g., `/v1/getting-started`, `/v2/getting-started`), allowing search engines to discover your archived documentation without manual configuration.
+
+### 3. Smart Exclusions
+Pages marked with `noindex: true` or `sitemap: false` in their frontmatter are automatically excluded from the generated `sitemap.xml`, giving you granular control over what is presented to search engines.
+
+::: callout tip "Validation"
+After building your site, you can typically find the sitemap at `your-output-dir/sitemap.xml`. Most search engine consoles allow you to submit this file directly to accelerate indexing.
 :::

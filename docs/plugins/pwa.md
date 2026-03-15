@@ -1,71 +1,67 @@
 ---
-title: "PWA Plugin"
-description: "Turn your documentation into a blazingly fast installable App using the zero-config PWA plugin."
+title: "PWA & Offline Support"
+description: "Transform your documentation into a progressive web application with offline caching and mobile-first features."
 ---
 
-# PWA Plugin
+The `@docmd/plugin-pwa` plugin enables Progressive Web App (PWA) features for your documentation site. It adds a web manifest for mobile installation and registers a service worker to handle intelligent offline caching, ensuring your technical manuals remain accessible even in low-connectivity environments.
 
-The `@docmd/plugin-pwa` allows you to instantly turn your documentation site into a **Progressive Web App (PWA)** with a single line of configuration. Once enabled, it handles everything: the Web Manifest, PWA meta tag injection, an intelligent Service Worker, and automatic offline caching.
+## Configuration
 
-## Installation
-
-This plugin ships bundled with `@docmd/core` and does not require a separate install.
-
-## Enabling the Plugin
-
-Add `pwa` under the `plugins` object in `docmd.config.js`:
+The PWA plugin can be customized to match your branding within the `plugins` section of `docmd.config.js`.
 
 ```javascript
-// docmd.config.js
-export default {
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
   plugins: {
-    pwa: {} // That's it. The plugin is now active!
+    pwa: {
+      enabled: true,           // Enabled by default if the plugin is loaded
+      themeColor: '#1e293b',   // The primary color of the mobile UI
+      bgColor: '#ffffff',      // Background color for the splash screen
+      logo: '/assets/logo.png' // Fallback for app icons if not explicitly defined
+    }
   }
+});
+```
+
+## Core Features
+
+### 1. Offline Caching
+The plugin automatically generates a `service-worker.js` file that implements a "Stale-While-Revalidate" caching strategy. When a user visits a page, the service worker:
+*   Returns the cached version instantly for maximum speed.
+*   Fetches the latest version from the network in the background.
+*   Updates the cache for the next visit.
+
+### 2. Mobile Installation
+By generating a `manifest.webmanifest` and injecting the required `<meta>` tags, the plugin allows users to "Add to Home Screen" on iOS and Android. Your documentation will behave like a standalone application, with its own splash screen and window frame.
+
+### 3. Smart Asset Resolution
+The plugin attempts to generate app icons automatically by looking for your project's `logo` or `favicon`. For more control, you can provide an explicit `icons` array:
+
+```javascript
+pwa: {
+  icons: [
+    { src: '/icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+    { src: '/icons/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+  ]
 }
 ```
 
-## What it Generates
+## Technical Implementation
 
-When `docmd build` runs with `pwa` active, three things are automatically generated and injected into your output:
+The service worker is designed to be compatible with Single Page Application (SPA) routing. It includes specific fail-safe logic for Safari's strict security policies regarding redirected streams, ensuring stability across all modern browsers.
 
-| File / Injection | Description |
-| :--- | :--- |
-| `manifest.webmanifest` | Declares your site as an installable app with name, theme colors, and icons |
-| `service-worker.js` | Intercepts network requests, caches assets, and powers offline support |
-| `<meta>` tag injection | Injects `mobile-web-app-capable`, `apple-mobile-web-app-capable`, and `theme-color` into every page's `<head>` |
-
-## How Caching Works
-
-The Service Worker uses a **network-first with cache fallback** strategy:
-
-1. **On page load**, it attempts to fetch from the network first. If the network responds successfully, the freshest version is stored and returned.
-2. **On subsequent visits**, if a cached version exists, it is returned instantly from the cache while the network is simultaneously checked in the background and the cache is updated silently.
-3. **Offline**: If the network is unreachable and a cached version exists, the cached version is returned seamlessly.
-
-## Automatic Cache Busting
-
-Every `docmd build` generates a new Service Worker with a unique `CACHE_NAME` timestamp fingerprint (e.g., `docmd-cache-1741267200000`). When the browser fetches the new worker, it automatically activates it and the old cache is purged immediately via the Service Worker's `activate` lifecycle.
-
-> **No manual cache clearing is needed.** Redeploying your site is all it takes.
-
-## Background Auto-Updates
-
-The plugin registers a silent polling interval that checks the server for a new Service Worker every **5 minutes** while the user has your site open in their browser tab. If a new Site Worker is found (i.e. you have redeployed), it is staged and installed during activation on the next navigation.
-
-## Disabling or Removing the Plugin
-
-### Temporarily Disable
-
-```javascript
-pwa: { enabled: false }
-```
+::: callout tip "Dev Mode"
+Service workers are typically disabled or bypassed in local development (`docmd dev`) to prevent aggressive caching from interfering with your edits. To test the PWA functionality, perform a production build with `docmd build` and serve the output directory using a static host.
+:::
 
 ### Fully Remove
 
 Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell — requiring no user action.
 
-> [!NOTE]
-> The `manifest.webmanifest` and `service-worker.js` files from a previous build persist on disk until you clear your output directory (`site/` by default) with `docmd build` or `rm -rf site`. This is a filesystem artifact, not an active PWA.
+::: callout warning
+The `manifest.webmanifest` and `service-worker.js` files from a previous build persist on disk until you clear your output directory (`site/` by default) with `docmd build` or `rm -rf site`. This is a filesystem artifact, not an active PWA.
+:::
 
 ## Configuration Reference
 

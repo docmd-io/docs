@@ -1,5 +1,5 @@
 ---
-title: "Documentation for docmd : The Minimalist Docs Generator"
+title: "Documentation for docmd: The Minimalist Docs Generator"
 description: "Generate beautiful, lightweight, and blazing-fast documentation sites directly from your Markdown files. Zero clutter, just content."
 ---
 
@@ -10,75 +10,75 @@ description: "Generate beautiful, lightweight, and blazing-fast documentation si
 |___|___|___|_|_|_|___|
 ```
 
-**Generate beautiful, lightweight documentation sites directly from your Markdown files. Zero clutter, just content.**
+**Generate professional, high-performance documentation sites directly from Markdown. Zero clutter, just content.**
 
-`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimized static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
+`docmd` bridges the gap between simple static site generators and heavy, framework-driven documentation tools. It transforms standard Markdown into highly optimized static HTML while delivering a seamless Single Page Application (SPA) experience.
 
-::: button "Quick Start" /getting-started/installation
+::: button "Get Started" /getting-started/installation
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333
 ::: button "Explore Features" /getting-started/basic-usage color:#333
 
 ## Quick Start
 
-**Requires [Node.js](https://nodejs.org/) installed on your machine.**
+**Requires [Node.js](https://nodejs.org/) (v18 or higher) installed.**
 
-Deploy a beautiful, searchable documentation site in seconds. No framework knowledge required.
+Deploy a beautiful, searchable documentation site in seconds. No framework knowledge or complex setup required.
 
-**1. Install `docmd` as dependency in your project to lock your versions.**
+**1. Install `docmd` as a development dependency**
 ```bash
-npm install @docmd/core     # Install locally (Recommended)
-
-npx docmd init              # Initialize your configuration
-npx docmd dev               # Start developing
+npm install -D @docmd/core     # Recommended: Install locally
+npx docmd init                 # Initialize your project configuration
+npx docmd dev                  # Start the development server
 ```
 
-**2. Install Globally**
+**2. Global Installation (Optional)**
 ```bash
-npm install -g @docmd/core  # Enables docmd to run anywhere on your local machine
+npm install -g @docmd/core     # Run docmd from anywhere on your system
 ```
 
-**3. You can run `docmd` on-the-fly without installing it or setting up any config.**
+**3. Instant Zero-Config Execution**
 ```bash
-npx @docmd/core dev -z      # Start local dev server instantly
+# Start a dev server instantly without any local configuration
+npx docmd dev -z
 ```
 
-Open `http://localhost:3000` in your browser. Any changes you make to the files in the `docs/` folder will instantly update on your screen.
+Once running, open `http://localhost:3000` in your browser. Changes to your files in the `docs/` folder will reflect instantly via Hot Module Replacement (HMR).
 
 ## Why choose docmd?
 
-We believe writing documentation should be as frictionless as possible. You shouldn't need to configure complex JavaScript frameworks just to publish text. We also believe that modern tools should be built for **both humans and machines**. That's why `docmd` is arguably the most AI-friendly static documentation generator on the market, ready to be immediately digested by the newest wave of LLMs directly out of the box.
+Writing documentation should be frictionless. You shouldn't have to manage complex JavaScript frameworks or deep configuration trees just to publish technical text. `docmd` is built for **both humans and AI**, serving as the most LLM-friendly static site generator available.
 
 <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-::: card AI-Native Optimization
-`docmd` transforms your documentation into a structured API for LLMs, allowing them to ingest your entire project context perfectly in single-shot prompts.
+::: card "AI-Native Optimization"
+`docmd` generates a structured context for LLMs (`llms.txt` and `llms-full.txt`), allowing AI models to ingest your entire project context perfectly in a single request.
 :::
 
-::: card Zero Config & Auto-Routing
-Run `docmd dev -z` in your project. We automatically scan for a expected documentation folders, extract H1 headers as page titles, and build a nested, collapsible navigation tree instantly. No `config.js` needed to start.
+::: card "Zero Config & Auto-Routing"
+Executing `docmd dev -z` automatically scans for documentation directories, extracts headings as page titles, and builds a nested, collapsible navigation tree instantly.
 :::
 
-::: card SPA Performance
-We serve static HTML for maximum SEO and speed. Once loaded, `docmd` transitions between pages as a high-performance Single Page Application, no full browser reloads, just instant content swaps.
+::: card "SPA Performance"
+We serve pre-rendered HTML for maximum SEO and initial load speed. Once loaded, `docmd` transitions between pages as a high-performance SPA, ensuring instant content swaps without full browser reloads.
 :::
 
-::: card Smart Offline Search
-Built-in full-text search with fuzzy matching and section-deep linking. The entire search index runs in-browser, meaning it works 100% offline and in air-gapped environments.
+::: card "Smart Offline Search"
+Features built-in full-text search with fuzzy matching and deep linking. The search index runs entirely in-browser, making it fully functional in offline or air-gapped environments.
 :::
 
-::: card Modern & Responsive
-Responsive by design. Includes a beautiful default theme with native Light/Dark mode, sticky versioning, and mobile-optimized sidebars out of the box.
+::: card "Modern & Responsive"
+Designed for all devices. Includes premium themes with native Light/Dark appearance modes, sticky versioning, and mobile-optimized sidebars out of the box.
 :::
 
-::: card Isomorphic Rendering
-The same engine that builds your static site can run natively in the browser. Embed live documentation previews or interactive editors directly into your own web applications.
+::: card "Isomorphic Rendering"
+The same engine used for static builds can run natively in the browser. Embed live documentation previews or interactive editors directly into your own web applications.
 :::
 
 </div>
 
 ## Rich Content Out of the Box
 
-`docmd` supports standard Markdown and extends it with intuitive components for professional structure.
+`docmd` extends standard Markdown with intuitive components designed for professional documentation structures.
 
 ::: tabs
 
@@ -86,13 +86,13 @@ The same engine that builds your static site can run natively in the browser. Em
 Highlight critical information with Callouts and native Buttons.
 
 ::: callout tip Performance Tip
-Nest containers inside each other to create complex, usable layouts without touching HTML or CSS.
+Nest containers inside each other to create complex layouts without touching HTML or CSS.
 :::
 
 ::: button "Read about Containers" /content/containers/callouts
 
 == tab "Native Diagrams"
-Create professional diagrams using **Mermaid.js** syntax directly in your markdown.
+Create professional architectural diagrams using **Mermaid.js** syntax directly in your Markdown files.
 
 ```mermaid
 graph LR
@@ -106,6 +106,8 @@ Automatic syntax highlighting with `highlight.js`, including one-click copy butt
 
 ```javascript
 // docmd.config.js
+import { defineConfig } from '@docmd/core';
+
 export default defineConfig({
   title: 'My Project',
   layout: { spa: true }
@@ -114,4 +116,4 @@ export default defineConfig({
 
 :::
 
-Ready to build? [Install docmd](/getting-started/installation) or see [Zero-Config Mode](/getting-started/zero-config) in action.
+Ready to build? [Install docmd](./getting-started/installation.md) or see [Zero-Config Mode](./getting-started/zero-config.md) in action.

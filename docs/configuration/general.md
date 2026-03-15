@@ -3,93 +3,95 @@ title: "General Configuration"
 description: "Master the docmd.config.js schema. Configure branding, layout architecture, and core engine features."
 ---
 
-The `docmd.config.js` file is the central brain of your documentation. It defines how your content is structured, how it looks, and how both humans and AI interact with it.
+The `docmd.config.js` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behavior, and engine-level processing rules.
 
 ## The Configuration File
 
-We recommend using the `defineConfig` helper. It provides full IDE autocomplete and type-checking, making it much easier to discover available settings.
+We recommend using the `defineConfig` helper provided by `@docmd/core`. This provides full IDE autocomplete and type-checking, enabling effortless discovery of available settings.
 
 ```javascript
-import  from '';
+import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
   title: 'My Project',
   url: 'https://docs.myproject.com',
-  // ... settings
+  // ... configuration settings
 });
 ```
 
-## Core Settings (V3 Schema)
+## Core Settings
 
-`docmd` v0.5.0 introduces a streamlined V3 schema. While legacy keys are still supported, we recommend transitioning to these modern labels:
+`docmd` utilizes a streamlined configuration schema. Below are the primary top-level settings:
 
 | Key | Description | Default |
 | :--- | :--- | :--- |
-| `title` | The name of your documentation site. | `Documentation` |
-| `url` | Production base URL. **Crucial for SEO and Sitemap.** | `null` |
-| `src` | Directory containing your Markdown files. | `docs` |
-| `out` | Directory for the compiled static site. | `site` |
+| `title` | The name of your documentation site. Used in the header and browser titles. | `Documentation` |
+| `url` | Your production base URL. **Critical for SEO, Sitemaps, and OpenGraph.** | `null` |
+| `src` | The relative path to the directory containing your Markdown files. | `docs` |
+| `out` | The relative path for the generated static site output. | `site` |
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
 
-## Branding
+## Branding & Identity
 
-Customize how your brand appears in the header and browser tabs.
+Configure how your brand is represented in the navigation header and browser tabs.
 
 ```javascript
 logo: {
-  light: 'assets/logo-dark.png', // Logo for light mode
-  dark: 'assets/logo-light.png',  // Logo for dark mode
-  href: '/',                      // Click destination
-  alt: 'Company Logo'             // Accessibility text
+  light: 'assets/images/logo-dark.png',  // Logo shown in Light Mode
+  dark: 'assets/images/logo-light.png',  // Logo shown in Dark Mode
+  href: '/',                             // Link destination when clicking the logo
+  alt: 'Company Logo',                   // Alternative text for accessibility
+  height: '32px'                         // Optional: Explicit height for the logo
 },
-favicon: 'assets/favicon.ico',
+favicon: 'assets/favicon.ico',           // Path to your site's favicon
 ```
 
 ## Layout Architecture
 
-`docmd` follows a component-based layout system. You can toggle and configure different parts of the UI via the `layout` object.
+`docmd` features a modular layout system. You can toggle UI components and configure navigation behavior via the `layout` object.
 
 | Section | Key | Default | Description |
 | :--- | :--- | :--- | :--- |
-| **Global** | `spa` | `true` | Enables/Disables Single Page Application navigation. |
+| **Global** | `spa` | `true` | Enables seamless Single Page Application navigation without browser reloads. |
 | **Header** | `header` | `{ enabled: true }` | Toggles the top navigation bar. |
-| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the navigation tree behavior. |
-| **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` styles. |
+| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the sidebar navigation tree and its behavior. |
+| **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` footer styles. |
 
-### The Options Menu
-The Options Menu consolidates utility buttons like **Search**, **Theme Switching**, and **Sponsorship links**.
+### Utility Menu (Options Menu)
+
+The Options Menu consolidates utility components suchs as **Global Search**, **Theme Switching**, and **Sponsorship links**.
 
 ```javascript
 layout: {
   optionsMenu: {
     position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
     components: {
-      search: true,
-      themeSwitch: true,
-      sponsor: 'https://github.com/sponsors/your-profile'
+      search: true,      // Enable built-in full-text search
+      themeSwitch: true, // Enable Light/Dark mode toggle
+      sponsor: 'https://github.com/sponsors/your-profile' // Optional URL for a heart icon/link
     }
   }
 }
 ```
 
 ::: callout info
-If `optionsMenu.position` is set to `header` or `menubar` but the target container is disabled or null, it automatically falls back to `sidebar-top`.
+If `optionsMenu.position` is set to `header` or `menubar` but those containers are disabled, the menu will automatically fall back to `sidebar-top`.
 :::
 
-## Engine Features
+## Core Engine Features
 
-Fine-tune how `docmd` processes your files.
+Fine-tune how `docmd` processes and renders your documentation content.
 
 ```javascript
-minify: true,           // Minifies production HTML, CSS, and JS
-autoTitleFromH1: true,  // Automatically use the first # Heading if Frontmatter title is missing
-copyCode: true,         // Adds a 'Copy' button to all code blocks
-pageNavigation: true,   // Adds 'Next' and 'Previous' links at the bottom of pages
+minify: true,           // Minifies production assets (CSS/JS) for better performance
+autoTitleFromH1: true,  // Uses the first H1 heading as the page title if frontmatter 'title' is missing
+copyCode: true,         // Adds a 'Copy' button to all code blocks automatically
+pageNavigation: true,   // Adds 'Previous' and 'Next' navigation links at the bottom of pages
 ```
 
 ## Legacy Support
 
-If you are upgrading from an older version of `docmd`, the following keys are automatically mapped to the V3 schema:
+If you are upgrading from an older version of `docmd`, the following keys are automatically mapped to the modern schema for backward compatibility:
 
 *   `siteTitle` → `title`
 *   `siteUrl` / `baseUrl` → `url`
@@ -97,5 +99,5 @@ If you are upgrading from an older version of `docmd`, the following keys are au
 *   `outDir` / `outputDir` → `out`
 
 ::: callout tip
-Use `docmd migrate` to automatically upgrade your configuration file to the newest schema while keeping a backup of your old settings.
+Execute `docmd migrate` to automatically upgrade your configuration file to the latest schema while preserving a backup of your original settings.
 :::

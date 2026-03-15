@@ -1,44 +1,46 @@
 ---
 title: "Linking & Referencing"
-description: "Master internal cross-linking, external links, and asset referencing."
+description: "Master internal cross-linking, external resources, and reliable asset referencing."
 ---
 
-To link to another page, use the **relative path** to the `.md` file.
+`docmd` provides a robust, filesystem-aware linking system. By using relative paths to your source `.md` files, you ensure that links remain functional within your IDE (e.g., VS Code) and are automatically rewritten for production deployment.
 
-::: callout info "Extension Rewriting"
-`docmd` automatically converts `.md` extensions to valid HTML links during the build. This ensures links work in your IDE (VS Code) and on the deployed website.
+::: callout info "Extension Neutrality"
+During the build process, the engine automatically resolves `.md` extensions to their relative HTML counterparts. This guarantees that internal documentation links never break, regardless of whether you are browsing local source or the compiled production site.
 :::
 
-| Goal | Syntax |
+## Internal Link Resolution
+
+| Targeting Strategy | Markdown Syntax |
 | :--- | :--- |
-| Same Folder | `[Read Guide](guide.md)` |
-| Subfolder | `[Read Config](configuration/index.md)` |
-| Parent Folder | `[Go Back](../index.md)` |
+| **Sibling Page** | `[System Overview](overview.md)` |
+| **Subdirectory** | `[API Reference](api/node-api.md)` |
+| **Parent Directory**| `[Back to Home](../index.md)` |
 
-## Anchors (Section Linking)
+## Section Anchors (Deep Linking)
 
-Link to specific headers using the `#slug`.
+Navigate directly to specific headings using standard URL slugs.
 
-*   **Same Page:** `[Jump to Top](#linking--referencing)`
-*   **Cross Page:** `[See Installation](../getting-started/installation.md#global-installation)`
+*   **Intra-page Anchor**: `[Jump to Roadmap](#project-roadmap)`
+*   **Cross-page Anchor**: `[Review CLI Flags](../cli-commands.md#available-flags)`
 
-## External & Protocol Links
+## Protocols & External Resources
 
-Standard URL syntax works for external sites and protocols.
+The engine respects standard browser protocols for global resources.
 
-*   **HTTPS:** `[Visit Google](https://google.com)`
-*   **Email:** `[Email Support](mailto:help@docmd.io)`
-*   **Phone:** `[Call Us](tel:+123456789)`
+*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)`
+*   **Mail Protocol**: `[Support Channel](mailto:help@docmd.io)`
+*   **Asset Protocol**: `[Download CLI Binary](/assets/bin/docmd-mac.zip)`
 
-## Linking to Assets
+## Static Asset Referencing
 
-To allow users to download files, place them in your `assets/` folder. `docmd` will **not** strip the extension for files inside this directory.
+To provide downloads or reference raw source files, place them within the `assets/` directory of your project. The `docmd` builder ensures these files are moved to the production root without path modifications.
 
 ```markdown
-[Download PDF](/assets/manual.pdf)
-[View Raw Config](/assets/examples/config.js)
+[Download Documentation PDF](/assets/pdf/handbook.pdf)
+[View Raw Global Config](/assets/config/docmd.config.js)
 ```
 
-::: callout tip "AI Navigation Tip"
-When cross-linking pages, using descriptive link text (like `[Read about PWA configuration](../plugins/pwa.md)`) instead of `[Click here](../plugins/pwa.md)` helps AI models understand the relationship between different technical topics during contextual analysis.
+::: callout tip "Semantic Linkage for AI"
+When cross-linking technical modules, prioritize **Descriptive Anchors** (e.g., `[Optimize PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
 :::

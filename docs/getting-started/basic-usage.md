@@ -1,85 +1,86 @@
 ---
 title: "Basic Usage"
-description: "Learn how to initialize a project, organize your markdown files, and build your documentation site."
+description: "Learn how to initialize a project, organize your Markdown files, and build your documentation site."
 ---
 
-Getting started with `docmd` is designed to be instantaneous. This guide explains the core workflow from initialization to final production build.
+Getting started with `docmd` is designed to be instantaneous. This guide walks you through the core workflow, from initial setup to the final production build.
 
-## 1. Initialize Your Project
+## 1. Project Initialization
 
-To start a new documentation project, create an empty directory and run the `init` command.
+To start a new documentation project, create a directory and execute the `init` command.
 
 ```bash
-mkdir my-guide && cd my-guide
-docmd init
+mkdir my-docs && cd my-docs
+npx docmd init
 ```
-### The Project Structure
 
-After initialization, your project will follow this clean, intuitive structure:
+### Project Structure
 
-| Folder / File | Purpose |
+After initialization, your project will follow a clean and predictable structure:
+
+| File / Directory | Description |
 | :--- | :--- |
-| `docs/` | **Source Folder.** Put all your `.md` files here. |
-| `assets/` | Static files (images, custom CSS, JS). |
-| `docmd.config.js` | Your site's brain. Branding, navigation, and plugins. |
-| `site/` | **Output Folder.** Generated after you run `docmd build`. |
+| `docs/` | **Source Directory.** Place all your `.md` files here. |
+| `assets/` | Static assets (images, custom CSS, or client-side JavaScript). |
+| `docmd.config.js` | **Configuration File.** Define branding, navigation, and plugins. |
+| `site/` | **Output Directory.** Contains the generated static site after running `build`. |
 
-## 2. Launching the Preview
+## 2. Real-Time Development
 
-You can see your changes in real-time without building the site. Launch the development server:
+You can preview your changes instantly without manual rebuilding. Start the development server with:
 
 ```bash
-docmd dev
+npx docmd dev
 ```
 
-*   **URL**: `http://localhost:3000`
-*   **Hot Reload**: Every time you save a `.md` or `.config.js` file, the browser updates instantly.
+*   **Access**: `http://localhost:3000`
+*   **Live Reload**: Changes to `.md` files or `docmd.config.js` are reflected instantly in the browser via Hot Module Replacement.
 
-## 3. Organizing Content
+## 3. Content Organization
 
-Every markdown file inside the `docs/` folder becomes a URL. Subfolders are respected automatically.
+`docmd` maps the file structure of your `docs/` folder directly to URLs. Subdirectories are handled automatically.
 
 *   `docs/index.md` → `/` (Home)
 *   `docs/api.md` → `/api`
 *   `docs/guides/setup.md` → `/guides/setup`
 
-> [!TIP]
-> Use standard Markdown syntax. `docmd` will automatically extract the first `H1` header of your file to use as the page title if not specified in the frontmatter.
+::: callout tip "Use standard Markdown"
+Use standard Markdown. If a page title is not defined in the frontmatter, `docmd` will automatically extract the first `H1` header as the title.
+:::
 
-## 4. Configuring Navigation
+## 4. Customizing Navigation
 
-`docmd` gives you absolute control over the sidebar. Edit the `navigation` array in `docmd.config.js` to structure your site.
+The sidebar navigation is controlled via the `navigation` array in `docmd.config.js`. This allows you to define a logical hierarchy for your content.
 
 ```javascript
-navigation:[
-  { title: 'Introduction', path: '/', icon: 'home' },
-  {
-    title: 'Advanced',
-    icon: 'settings',
-    collapsible: true, // Allow users to collapse this section
-    children:[
-      { title: 'Configuration', path: '/configuration' },
-      { title: 'Plugins', path: '/plugins' }
-    ]
-  }
-]
+import { defineConfig } from '@docmd/core';
+
+export default defineConfig({
+  navigation: [
+    { title: 'Introduction', path: '/', icon: 'home' },
+    {
+      title: 'Advanced',
+      icon: 'settings',
+      collapsible: true,
+      children: [
+        { title: 'Configuration', path: '/configuration' },
+        { title: 'Plugins', path: '/plugins' }
+      ]
+    }
+  ]
+});
 ```
 
-## 5. Building for Production
+## 5. Production Build
 
-When you are ready to deploy, run the build command:
+When you are ready to deploy, generate a production-ready static site:
 
 ```bash
-docmd build
+npx docmd build
 ```
 
-This generates a highly optimized Single Page Application (SPA) inside the `site/` directory. It is completely static so you can host it on GitHub Pages, Vercel, Netlify, or even a local USB drive.
+This command produces a highly optimized Single Page Application (SPA) in the `site/` directory. The output is entirely static and can be hosted on platforms like GitHub Pages, Vercel, Netlify, or even served from a local file system.
 
-### Verification Step
-To verify your production build locally, you can use any static server or run:
-```bash
-docmd dev --preserve
-```
-::: callout tip
-The `--preserve` flag prevents the dev server from overwriting your production `site/` folder with dev-mode assets.
-:::
+### Verification
+
+To verify your production build locally, you can use any static file server (e.g., `npx serve site`) to ensure all links and assets are functioning correctly before deployment.
