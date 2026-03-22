@@ -55,19 +55,35 @@ The following commands can be executed from the monorepo root for specific maint
 | `pnpm lint` | Executes ESLint and Prettier across the entire workspace. |
 | `pnpm unlink:global` | Explicitly removes all global binary symlinks. |
 
-## Verification Suite (`pnpm verify`)
+## Merge Preparation Pipeline (`pnpm prep`)
 
-The `docmd` verification suite is an aggressive integration testing system designed to verify engine integrity before a release.
+Before merging code, the central automated pipeline ensures complete integrity:
 
 ```bash
-pnpm verify
+pnpm prep
 ```
 
 **Testing Methodology:**
+- **Zero-Trust Reset**: Executes `pnpm reset` to wipe caches, builds, global instances, and node_modules.
+- **Deep Clean Linking**: Uses fresh dependency installations to block cache poisoning.
+- **Strict Lint Validation**: Enforces code style adherence via `pnpm lint`. If linting fails, the release aborts.
+- **Verification Suite (`pnpm verify`)**: Runs the aggressive `failsafe.js` integration testing system designed to verify engine integrity:
 - **Dynamic Scaffolding**: Creates a temporary, isolated directory and generates a raw documentation project.
 - **Cross-Schema Validation**: Builds the test project using both Legacy and Modern configuration schemas.
 - **Feature E2E**: Generates HTML and performs explicit assertions on structural elements, versioning, and link resolution.
 - **Installer Resilience**: Simulates `docmd add` and `docmd remove` operations to ensure configuration injection logic is stable.
+
+### Alternative: Fast Verification (`pnpm verify`)
+
+While `pnpm prep` is mandatory for pull requests to guarantee absolute safety, maintaining a clean state means tearing down active caches and re-installing Node modules from scratch every time. 
+
+For **isolated, high-speed testing** during active development, you can natively invoke:
+```bash
+pnpm verify
+```
+**Limitations & Use Cases:**
+- *Use Case*: Validating a quick core-engine patch before committing.
+- *Limitation*: Because it relies on the pre-existing state of your local `node_modules` and compiled files, it does not guarantee your branch will successfully replicate on a pristine machine or in CI. It strictly protects against regressions in code logic, lacking the cache-poisoning defense of a full `prep`.
 
 ## The Playground Environment
 

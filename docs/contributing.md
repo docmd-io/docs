@@ -46,11 +46,17 @@ DOCMD_DEV=true pnpm run dev
 
 ## Quality Standards
 
-Before submitting a Pull Request, please ensure your changes pass the verification suite:
+Ensure your code complies with the native codebase style guides enforced by our ESLint settings. For minor formatting issues, you can automatically fix them utilizing:
+```bash
+pnpm lint:fix
+```
+
+Before submitting a Pull Request, please verify your entire branch compiles flawlessly against the continuous integration Gauntlet by preparing the final release image:
 
 ```bash
-pnpm verify
+pnpm prep
 ```
+*(This rigorously chains `pnpm reset`, dependency installation, lint checks, E2E tests, and deep security audits in a fresh slate.)*
 
 ### Commit Guidelines
 

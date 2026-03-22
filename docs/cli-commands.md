@@ -13,7 +13,7 @@ Scaffolds a new documentation project in the current directory.
 docmd init
 ```
 
-**Actions**
+### Actions
 - Creates a `docs/` directory with a boilerplate `index.md`.
 - Generates a `docmd.config.js` file with recommended defaults.
 - Updates your `package.json` with recommended build scripts.
@@ -26,7 +26,7 @@ Starts a high-speed development server with **Instant Hot Reloading**.
 docmd dev [options]
 ```
 
-**Options**
+### Options
 - `-p, --port <number>`: Specify a custom port (Default: `3000`).
 - `-z, --zero-config`: Run in auto-detect mode without a configuration file.
 - `-c, --config <path>`: Use a non-standard configuration file path.
@@ -39,7 +39,7 @@ Generates a production-ready static website in the `site/` folder.
 docmd build [options]
 ```
 
-**Options**
+### Options
 - `--offline`: **File Protocol Friendly**. Rewrites links to end in `.html`, allowing for direct browsing from the local filesystem (e.g., `file://`).
 - `-z, --zero-config`: Build using auto-detection logic.
 - `-c, --config <path>`: Path to the configuration file (Default: `docmd.config.js`).
@@ -52,7 +52,7 @@ Launches the browser-based **Live Editor** environment.
 docmd live [options]
 ```
 
-**Options**
+### Options
 - `--build-only`: Generates the static editor bundle in `dist/` without starting a server.
 
 ## `docmd stop`
@@ -63,7 +63,7 @@ Gracefully terminates all background documentation servers.
 docmd stop [options]
 ```
 
-**Options**
+### Options
 - `-p, --port <number>`: Stop a specific instance running on a given port.
 
 ## `docmd add <plugin>`
@@ -74,7 +74,7 @@ Installs an official or community plugin and auto-configures your project.
 docmd add analytics
 ```
 
-**Actions**
+### Actions
 - Uses your preferred package manager (`npm`, `pnpm`, `yarn`, or `bun`).
 - Injects the plugin and its recommended default settings into `docmd.config.js`.
 
