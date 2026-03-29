@@ -181,6 +181,8 @@ module.exports = defineConfig({
             { title: 'Steps', path: '/content/containers/steps', icon: 'list-ordered' },
             { title: 'Collapsible', path: '/content/containers/collapsible', icon: 'chevrons-down' },
             { title: 'Changelogs', path: '/content/containers/changelogs', icon: 'history' },
+            { title: 'Grids', path: '/content/containers/grids', icon: 'layout-grid' },
+            { title: 'URL Embed', path: '/content/containers/embed', icon: 'youtube' },
             { title: 'Nested Containers', path: '/content/containers/nested-containers', icon: 'folder-tree' },
           ]
         },
@@ -256,6 +258,8 @@ module.exports = defineConfig({
       icon: 'package-check',
       collapsible: false,
       children: [
+        { title: '0.6.5', path: '/release-notes/0-6-5' },
+        { title: '0.6.4', path: '/release-notes/0-6-4' },
         { title: '0.6.3', path: '/release-notes/0-6-3' },
         { title: '0.6.2', path: '/release-notes/0-6-2' },
         { title: '0.6.1', path: '/release-notes/0-6-1' },
