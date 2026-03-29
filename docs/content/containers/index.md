@@ -20,6 +20,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | :--- | :--- | :--- |
 | **[Callouts](./callouts)** | `callout` | Semantic highlights for tips, warnings, and alerts. |
 | **[Cards](./cards)** | `card` | Framed structural blocks for feature grids and layout control. |
+| **[Grids](./grids)** | `grids` | Auto-adjusting multi-column structural groups. |
 | **[Tabs](./tabs)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
 | **[Steps](./steps)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
 | **[Buttons](./buttons)** | `button` | Self-closing, prominent call-to-action navigation links. |

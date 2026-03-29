@@ -53,20 +53,21 @@ docmd add i18n
 
 ## Multi-Column Layouts (Grids)
 
-While authored in Markdown, you can leverage standard HTML wrappers to organize your cards into responsive grids.
+You can leverage the native `grids` container to organize your cards into clean, responsive multi-column layouts without ever touching HTML.
 
 ```markdown
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-
+::: grids
+::: grid
 ::: card "Primary Node"
 Configuration for the master instance.
 :::
-
+:::
+::: grid
 ::: card "Secondary Node"
 Configuration for redundant slave instances.
 :::
-
-</div>
+:::
+:::
 ```
 
 ::: callout tip "Semantic Clustering for AI"
