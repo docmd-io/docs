@@ -3,7 +3,7 @@ title: "Code Blocks"
 description: "Document technical implementations with high-fidelity syntax highlighting and interactive copy buttons."
 ---
 
-`docmd` utilizes `highlight.js` to provide automatic, context-aware syntax highlighting across hundreds of programming languages and configuration formats.
+`docmd` utilizes the ultra-fast `lite-hl` engine to provide automatic, context-aware syntax highlighting across hundreds of programming languages and configuration formats.
 
 ## Syntax Highlighting
 
