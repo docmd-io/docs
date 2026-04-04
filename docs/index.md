@@ -102,7 +102,7 @@ graph LR
 ```
 
 == tab "Code Precision"
-Automatic syntax highlighting with `highlight.js`, including one-click copy buttons and multi-language support.
+Automatic syntax highlighting via our custom `lite-hl` engine, including one-click copy buttons and multi-language support.
 
 ```javascript
 // docmd.config.js
