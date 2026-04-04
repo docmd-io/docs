@@ -258,6 +258,7 @@ module.exports = defineConfig({
       icon: 'package-check',
       collapsible: false,
       children: [
+        { title: '0.6.6', path: '/release-notes/0-6-6' },
         { title: '0.6.5', path: '/release-notes/0-6-5' },
         { title: '0.6.4', path: '/release-notes/0-6-4' },
         { title: '0.6.3', path: '/release-notes/0-6-3' },
