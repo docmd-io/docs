@@ -183,6 +183,7 @@ module.exports = defineConfig({
             { title: 'Changelogs', path: '/content/containers/changelogs', icon: 'history' },
             { title: 'Grids', path: '/content/containers/grids', icon: 'layout-grid' },
             { title: 'URL Embed', path: '/content/containers/embed', icon: 'youtube' },
+            { title: 'Hero Sections', path: '/content/containers/hero', icon: 'layout-template' },
             { title: 'Nested Containers', path: '/content/containers/nested-containers', icon: 'folder-tree' },
           ]
         },
@@ -258,6 +259,7 @@ module.exports = defineConfig({
       icon: 'package-check',
       collapsible: false,
       children: [
+        { title: '0.6.7', path: '/release-notes/0-6-7' },
         { title: '0.6.6', path: '/release-notes/0-6-6' },
         { title: '0.6.5', path: '/release-notes/0-6-5' },
         { title: '0.6.4', path: '/release-notes/0-6-4' },
