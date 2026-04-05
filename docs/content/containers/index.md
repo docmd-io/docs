@@ -26,6 +26,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[Buttons](./buttons)** | `button` | Self-closing, prominent call-to-action navigation links. |
 | **[Collapsibles](./collapsible)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
 | **[Changelogs](./changelogs)** | `changelog` | Structured, timeline-based version history and release notes. |
+| **[Hero](./hero)** | `hero` | High-impact landing page sections with layout and slider support. |
 
 ## The Strategic Importance of Containers
 

@@ -13,23 +13,23 @@ The integrated engine natively exposes structured formatters targeting the follo
 *   **Music Services:** Spotify, SoundCloud
 
 ## Usage Syntax
-You simply establish the standard `::: embed` container syntax aggressively appending *any* destination URL immediately after it dynamically:
+You simply use the `::: embed` container followed by any destination URL. All three enclosing formats are equivalent:
 
 ```md
-::: embed https://www.youtube.com/watch?v=0CSyIBHQy9g
+::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 ```
 
 ### Standard Result Example
 The rendering engine strictly parses that URL in the background, checking the validation matrix, and structurally injects native HTML nodes directly onto your page output gracefully:
 
-::: embed https://www.youtube.com/watch?v=0CSyIBHQy9g
+::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 
 ## Fallback Safety
 Don't worry about generating broken screens. If the internal parser scans an unverified or strictly unavailable domain configuration mapping, `docmd` gracefully falls back to generating a simple, solid `<a>` hyperlink button mapping explicitly out to the target:
 
 ```md
-::: embed https://unsupported-example.com/status/123
+::: embed "https://unsupported-example.com/status/123"
 ```
 *(Proceeds to generate exactly what you would see below)*
 
-::: embed https://unsupported-example.com/status/123
+::: embed "https://unsupported-example.com/status/123"
