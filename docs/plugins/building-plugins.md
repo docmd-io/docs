@@ -16,6 +16,8 @@ A `docmd` plugin is a standard JavaScript object (or a module that exports one a
 | `generateScripts(config, opts)` | Return an object containing `headScriptsHtml` and `bodyScriptsHtml`. |
 | `getAssets(opts)` | Define external files or CDN scripts to be injected. |
 | `onPostBuild(ctx)` | Run logic after the generation of all HTML files. |
+| `actions` | An object of named action handlers for WebSocket RPC calls from the browser. |
+| `events` | An object of named event handlers for fire-and-forget messages from the browser. |
 
 ## Creating a Local Plugin
 
@@ -80,12 +82,57 @@ getAssets: (options) => {
 }
 ```
 
+## WebSocket RPC Actions
+
+Starting in `0.6.8`, plugins can register **action handlers** and **event handlers** that run on the dev server and are callable from the browser via the `window.docmd` API.
+
+```javascript
+// my-live-plugin.js
+export default {
+  // Server-side action — browser calls via docmd.call()
+  actions: {
+    'my-plugin:save-note': async (payload, ctx) => {
+      const content = await ctx.readFile(payload.file);
+      const updated = content + '\n\n> ' + payload.note;
+      await ctx.writeFile(payload.file, updated);
+      return { saved: true };
+    }
+  },
+
+  // Server-side event — browser sends via docmd.send()
+  events: {
+    'my-plugin:page-viewed': (data, ctx) => {
+      console.log(`Page viewed: ${data.path}`);
+    }
+  }
+};
+```
+
+The `ctx` (ActionContext) object provides:
+
+| Method | Description |
+| :--- | :--- |
+| `ctx.readFile(path)` | Read a file relative to the project root. |
+| `ctx.writeFile(path, content)` | Write a file (triggers rebuild + reload). |
+| `ctx.readFileLines(path)` | Read a file as an array of lines. |
+| `ctx.broadcast(event, data)` | Push an event to all connected browsers. |
+| `ctx.source` | Source editing tools for block-level markdown manipulation. |
+| `ctx.projectRoot` | Absolute path to the project root. |
+| `ctx.config` | Current docmd site configuration. |
+
+All file operations are sandboxed to the project root — path traversal attempts are rejected automatically.
+
+::: callout info "Dev Mode Only 🛡️"
+The WebSocket RPC system is only active during `docmd dev`. Production builds do not include the API client or any server-side action handling.
+:::
+
 ## Best Practices
 
-1.  **Async/Await**: Always use `async` functions for `onPostBuild` and metadata hooks to prevent blocking the build engine during I/O operations.
+1.  **Async/Await**: Always use `async` functions for `onPostBuild` and action handlers to prevent blocking the build engine during I/O operations.
 2.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
 3.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
-4.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
+4.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
+5.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
 
 ::: callout tip "AI-Ready Design 🤖"
 The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks use standard JavaScript objects and types without hidden complex class hierarchies, AI agents can generate bug-free custom plugins for you with minimal instruction.

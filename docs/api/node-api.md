@@ -69,3 +69,54 @@ async function deploy() {
 ::: callout tip
 The programmatic API is highly compatible with **AI-Driven Documentation**. Agents can trigger builds after content updates to verify integrity and manage deployments autonomously.
 :::
+
+## Plugin API Exports
+
+`@docmd/core` also exports utilities for building advanced plugins with server-side action handling.
+
+### `createActionDispatcher(hooks, options)`
+
+Creates a dispatcher that routes WebSocket RPC messages to plugin action/event handlers.
+
+```javascript
+import { createActionDispatcher } from '@docmd/core';
+
+const dispatcher = createActionDispatcher(
+  { actions: myPlugin.actions, events: myPlugin.events },
+  { projectRoot: '/path/to/project', config, broadcast }
+);
+
+const { result, reload } = await dispatcher.handleCall('my-action', payload);
+```
+
+### `createSourceTools({ projectRoot })`
+
+Creates source editing utilities for markdown file manipulation.
+
+```javascript
+import { createSourceTools } from '@docmd/core';
+
+const source = createSourceTools({ projectRoot: '/path/to/project' });
+
+// Get block information at a specific line range
+const block = await source.getBlockAt('docs/page.md', [10, 12]);
+
+// Wrap text with syntax markers
+await source.wrapText('docs/page.md', [10, 12], 'important', 0, '**', '**');
+```
+
+### Type Exports
+
+For TypeScript plugin authors, the following types are available:
+
+```typescript
+import type {
+  PluginModule,     // Full plugin contract interface
+  ActionContext,    // Context passed to action/event handlers
+  ActionHandler,    // Signature for action handlers
+  EventHandler,     // Signature for event handlers
+  SourceTools,      // Source editing tools interface
+  BlockInfo,        // Block information returned by getBlockAt
+  TextLocation,     // Text location returned by findText
+} from '@docmd/core';
+```
