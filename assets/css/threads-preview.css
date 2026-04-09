@@ -1,0 +1,191 @@
+/**
+ * Threads plugin preview styles for documentation.
+ * Replicates the look of inline thread comments for static previews.
+ */
+
+/* ========= Preview highlight marks ========= */
+.threads-preview-highlight {
+  background: hsl(48 96% 89% / 0.6);
+  border-bottom: 2px solid hsl(48 96% 53%);
+  border-radius: 2px;
+  padding: 1px 2px;
+  cursor: default;
+}
+.threads-preview-highlight-blue {
+  background: hsl(210 100% 88% / 0.55);
+  border-bottom: 2px solid hsl(210 100% 55%);
+  border-radius: 2px;
+  padding: 1px 2px;
+  cursor: default;
+}
+
+/* ========= Preview thread card ========= */
+.threads-preview-card {
+  margin: 16px 0;
+  border: 1px solid var(--border-color, hsl(0 0% 89.8%));
+  border-left: 3px solid hsl(48 96% 53%);
+  border-radius: 6px;
+  background: var(--bg-color, #fff);
+  overflow: hidden;
+  font-family: var(--font-family-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+.threads-preview-card-blue {
+  border-left-color: hsl(210 100% 55%);
+}
+.threads-preview-card-resolved {
+  opacity: 0.55;
+}
+
+/* ========= Preview comment ========= */
+.threads-preview-comment {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.threads-preview-comment + .threads-preview-comment {
+  border-top: 1px solid var(--border-color, hsl(0 0% 89.8%));
+}
+.threads-preview-avatar {
+  grid-column: 1;
+  grid-row: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sidebar-bg, hsl(0 0% 96.1%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted, hsl(0 0% 45.1%));
+}
+.threads-preview-meta {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted, hsl(0 0% 45.1%));
+}
+.threads-preview-meta strong {
+  color: var(--text-color, hsl(0 0% 9%));
+  font-weight: 500;
+}
+.threads-preview-body {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--text-color, hsl(0 0% 9%));
+  line-height: 1.6;
+}
+.threads-preview-body code {
+  background: var(--sidebar-bg, hsl(0 0% 96.1%));
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* ========= Preview reply (nested) ========= */
+.threads-preview-reply {
+  grid-template-columns: 24px 1fr;
+  padding: 8px 14px 8px 42px;
+}
+.threads-preview-reply .threads-preview-avatar {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+}
+
+/* ========= Preview reactions ========= */
+.threads-preview-reactions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  grid-column: 2;
+}
+.threads-preview-reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color, hsl(0 0% 89.8%));
+  background: var(--sidebar-bg, hsl(0 0% 96.1%));
+  font-size: 13px;
+  line-height: 1.4;
+}
+.threads-preview-reaction span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted, hsl(0 0% 45.1%));
+}
+
+/* ========= Preview footer ========= */
+.threads-preview-footer {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px 8px;
+  border-top: 1px solid var(--border-color, hsl(0 0% 89.8%));
+  font-size: 12px;
+  color: var(--text-muted, hsl(0 0% 45.1%));
+  gap: 8px;
+}
+.threads-preview-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border: 1px dashed var(--border-color, hsl(0 0% 89.8%));
+  background: transparent;
+  color: var(--text-muted, hsl(0 0% 45.1%));
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: default;
+}
+
+/* ========= Resolved badge ========= */
+.threads-preview-resolved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: hsl(142 60% 90%);
+  color: hsl(142 60% 30%);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ========= FAB preview ========= */
+.threads-preview-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color, hsl(0 0% 89.8%));
+  background: var(--bg-color, #fff);
+  color: var(--text-muted, hsl(0 0% 45.1%));
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12), 0 1px 3px rgb(0 0 0 / 0.08);
+  position: relative;
+  font-size: 20px;
+  cursor: default;
+}
+.threads-preview-fab-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: hsl(210 100% 55%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}

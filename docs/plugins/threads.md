@@ -21,6 +21,21 @@ plugins: {
 }
 ```
 
+### Configuration Options
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `sidebar` | `boolean` | `false` | When `true`, threads stay grouped at the bottom of the page. When `false` (default), threads are positioned inline next to their highlighted text. |
+
+```javascript
+// Keep threads at bottom of page instead of inline
+plugins: {
+  threads: {
+    sidebar: true
+  }
+}
+```
+
 ## How It Works
 
 1. **Select text** on any documentation page during `docmd dev`
@@ -28,6 +43,63 @@ plugins: {
 3. The selected text gets **highlighted** with a thread marker
 4. Threads are stored as `::: threads` blocks at the bottom of the markdown file
 5. **No database** — your markdown files are the source of truth
+
+## Preview
+
+Here's what threads look like on a live page. Text with discussions gets <span class="threads-preview-highlight">highlighted like this</span> and thread cards appear below.
+
+<div class="threads-preview-card">
+  <div class="threads-preview-comment">
+    <div class="threads-preview-avatar">A</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;2d ago</div>
+    <div class="threads-preview-body">This section could use a diagram to explain the architecture. What do you think?</div>
+  </div>
+  <div class="threads-preview-comment threads-preview-reply">
+    <div class="threads-preview-avatar">B</div>
+    <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1d ago</div>
+    <div class="threads-preview-body">Good idea — I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
+    <div class="threads-preview-reactions">
+      <div class="threads-preview-reaction">👍 <span>2</span></div>
+      <div class="threads-preview-reaction">🚀 <span>1</span></div>
+    </div>
+  </div>
+  <div class="threads-preview-comment threads-preview-reply">
+    <div class="threads-preview-avatar">A</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;12h ago</div>
+    <div class="threads-preview-body">Perfect. A simple flowchart would be ideal.</div>
+  </div>
+  <div class="threads-preview-footer">
+    <div class="threads-preview-footer-btn">+ New Comment</div>
+  </div>
+</div>
+
+And here's a <span class="threads-preview-highlight-blue">second highlight with a different color</span> — threads cycle through a palette of colors automatically.
+
+<div class="threads-preview-card threads-preview-card-blue">
+  <div class="threads-preview-comment">
+    <div class="threads-preview-avatar">C</div>
+    <div class="threads-preview-meta"><strong>Charlie</strong>&nbsp;·&nbsp;3d ago</div>
+    <div class="threads-preview-body">Should we mention backward compatibility here?</div>
+  </div>
+  <div class="threads-preview-footer">
+    <div class="threads-preview-footer-btn">+ New Comment</div>
+  </div>
+</div>
+
+Resolved threads appear dimmed:
+
+<div class="threads-preview-card threads-preview-card-resolved">
+  <div class="threads-preview-comment">
+    <div class="threads-preview-avatar">A</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5d ago&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Resolved</span></div>
+    <div class="threads-preview-body">Fixed the typo in the config example.</div>
+  </div>
+  <div class="threads-preview-footer">
+    <div class="threads-preview-footer-btn">+ New Comment</div>
+  </div>
+</div>
+
+A floating **discussion button** <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> appears in the bottom-right corner showing the count of open threads. Click it to jump to the first thread on the page.
 
 ## Storage Format
 
@@ -67,6 +139,8 @@ The `==text=={threadId}` syntax links highlighted text in the document body to a
 | **Resolve** | Mark threads as resolved with author + timestamp |
 | **Author Profiles** | Git-based author detection with Gravatar support |
 | **Highlight Markers** | Visual indicators on the page showing where threads are anchored |
+| **Floating Button** | Quick-access FAB with open thread count |
+| **Scroll Preservation** | Page stays in place after adding comments |
 
 ## Actions API
 
