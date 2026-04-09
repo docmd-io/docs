@@ -22,7 +22,7 @@ The installer automatically detects your package manager (npm, pnpm, yarn, or bu
 Use `--verbose` for full installer output:
 
 ```bash
-docmd add threads --verbose
+docmd add <plugin-name> --verbose
 ```
 
 ## Required Plugins
