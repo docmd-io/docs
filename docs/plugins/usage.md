@@ -45,14 +45,45 @@ export default defineConfig({
 });
 ```
 
-## Optional Plugins
+## Additional Plugins
 
-Optional plugins require installation before enabling.
+Additional plugins require installation before enabling.
 
 | Plugin | Install Command | Description |
 | :--- | :--- | :--- |
 | [Threads](threads.md) | `docmd add threads` | Inline discussion comments stored in your markdown |
 | [Math](math.md) | `docmd add math` | Native KaTeX and LaTeX mathematics integration |
+
+## Plugin Scopes and `noStyle` Overrides
+
+Plugins inject CSS and behavior by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
+
+### Global Config Extent
+
+You can instruct any plugin to automatically skip injecting into `noStyle` pages via your `docmd.config.js`:
+
+```javascript
+plugins: {
+  math: {
+    noStyle: false // math css/js will no longer load on minimalistic landing pages
+  }
+}
+```
+
+### Page Local Scope (Frontmatter)
+
+Regardless of your global config (or what the plugin developer set by default), you can definitively enable or disable any plugin uniquely per-document via markdown frontmatter.
+
+```markdown
+---
+noStyle: true
+plugins:
+  math: true
+  threads: false
+---
+
+# Only Math renders here, Threads are completely blocked
+```
 
 ## Plugin Lifecycle
 
