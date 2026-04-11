@@ -110,7 +110,8 @@ module.exports = defineConfig({
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },
     sitemap: { defaultChangefreq: 'weekly', defaultPriority: 0.8 },
     mermaid: {},
-    llms: {}
+    llms: {},
+    math: {}
   },
 
   versions: {
