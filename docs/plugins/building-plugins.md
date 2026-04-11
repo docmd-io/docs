@@ -46,25 +46,26 @@ export default {
 };
 ```
 
-To enable your plugin, simply use its shorthand name or absolute path in your `docmd.config.js`:
+To enable your plugin, reference its **full package name** in your `docmd.config.js`:
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
   plugins: {
-    'my-plugin': {
+    'my-awesome-plugin': {
       // Your custom options go here
     }
   }
 });
 ```
 
-### Dynamic Resolution Cascade
-The `docmd` engine uses a powerful dynamic resolver for plugin shorthands (like `my-plugin`):
-1. **Official Namespace:** It first tries `@docmd/plugin-my-plugin`. This protects the core ecosystem against malicious supply-chain package squatting.
-2. **Community Convention:** If the official package doesn't exist, it falls back to `docmd-plugin-my-plugin`.
-3. **Exact Fallback:** Finally, it attempts resolving the exact string `my-plugin`.
+> **Note:** Shorthand names (e.g. `math`, `search`) are reserved exclusively for official `@docmd/plugin-*` packages. Third-party plugins must always be referenced by their full npm package name.
+
+### Plugin Resolution
+The `docmd` engine resolves plugin names as follows:
+- **Official shorthands** (`math`, `search`, `seo`, etc.) automatically expand to `@docmd/plugin-<name>`. Since the `@docmd` npm scope is owned by the project, only official packages can exist under it.
+- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins — this prevents confusion and eliminates supply-chain attack vectors entirely.
 
 ### Scoping Plugins (`noStyle`)
 By default, plugins inject their CSS/JS universally. However, developers can explicitly prevent their plugin from rendering on `noStyle` pages (like minimal landing templates) by exporting a `noStyle` boolean:

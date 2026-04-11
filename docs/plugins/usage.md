@@ -45,9 +45,9 @@ export default defineConfig({
 });
 ```
 
-## Additional Plugins
+## Optional Plugins
 
-Additional plugins require installation before enabling.
+Optional plugins require installation before enabling.
 
 | Plugin | Install Command | Description |
 | :--- | :--- | :--- |
