@@ -36,6 +36,8 @@ You can inject standard equations flawlessly within a paragraph utilizing single
 Here is an inline equation: $E = mc^2$
 ```
 
+Here is an inline equation: $E = mc^2$
+
 ### Block Mathematics
 
 For wider mathematical proofs or distinct formulations, leverage double dollar signs `$$` for block level formatting:
@@ -45,3 +47,7 @@ $$
 \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
 $$
 ```
+
+$$
+\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
+$$
