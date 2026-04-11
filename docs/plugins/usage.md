@@ -52,6 +52,7 @@ Optional plugins require installation before enabling.
 | Plugin | Install Command | Description |
 | :--- | :--- | :--- |
 | [Threads](threads.md) | `docmd add threads` | Inline discussion comments stored in your markdown |
+| [Math](math.md) | `docmd add math` | Native KaTeX and LaTeX mathematics integration |
 
 ## Plugin Lifecycle
 
