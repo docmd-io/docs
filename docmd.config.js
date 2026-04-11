@@ -217,6 +217,7 @@ module.exports = defineConfig({
         { title: 'PWA', path: '/plugins/pwa', icon: 'smartphone' },
         { title: 'LLMs', path: '/plugins/llms', icon: 'brain-circuit' },
         { title: 'Threads', path: '/plugins/threads', icon: 'message-circle' },
+        { title: 'Math', path: '/plugins/math', icon: 'sigma' },
       ],
     },
     {
@@ -259,6 +260,7 @@ module.exports = defineConfig({
       icon: 'package-check',
       collapsible: false,
       children: [
+        { title: '0.6.9', path: '/release-notes/0-6-9' },
         { title: '0.6.8', path: '/release-notes/0-6-8' },
         { title: '0.6.7', path: '/release-notes/0-6-7' },
         { title: '0.6.6', path: '/release-notes/0-6-6' },
