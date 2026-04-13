@@ -1,0 +1,154 @@
+[
+  { "title": "Overview", "path": "/", "icon": "home" },
+  {
+    "title": "Getting Started",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      { "title": "Quick Start", "path": "/getting-started/quick-start" },
+      { "title": "Installation", "path": "/getting-started/installation" },
+      { "title": "Zero Config", "path": "/getting-started/zero-config" },
+      { "title": "Project Structure", "path": "/getting-started/project-structure" },
+      { "title": "Your First Site", "path": "/getting-started/first-site" },
+      { "title": "Localisation", "path": "/getting-started/localisation" }
+    ]
+  },
+  {
+    "title": "Configuration",
+    "icon": "settings",
+    "collapsible": false,
+    "children": [
+      { "title": "General Settings", "path": "/configuration/general" },
+      { "title": "Navigation", "path": "/configuration/navigation" },
+      { "title": "Layout & UI", "path": "/configuration/layout-ui" },
+      { "title": "Menubar", "path": "/configuration/menubar" },
+      { "title": "Versioning", "path": "/configuration/versioning" },
+      { "title": "Internationalisation", "path": "/configuration/i18n" },
+      { "title": "Redirects", "path": "/configuration/redirects" }
+    ]
+  },
+  {
+    "title": "Content",
+    "icon": "layout-template",
+    "collapsible": true,
+    "children": [
+      { "title": "Frontmatter", "path": "/content/frontmatter" },
+      {
+        "title": "Syntax",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          { "title": "Code Blocks", "path": "/content/syntax/code" },
+          { "title": "Images", "path": "/content/syntax/images" },
+          { "title": "Linking", "path": "/content/syntax/linking" },
+          { "title": "Advanced", "path": "/content/syntax/advanced" }
+        ]
+      },
+      {
+        "title": "Containers",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          { "title": "Callouts", "path": "/content/containers/callouts" },
+          { "title": "Tabs", "path": "/content/containers/tabs" },
+          { "title": "Steps", "path": "/content/containers/steps" },
+          { "title": "Cards", "path": "/content/containers/cards" },
+          { "title": "Grids", "path": "/content/containers/grids" },
+          { "title": "Collapsible", "path": "/content/containers/collapsible" },
+          { "title": "Buttons", "path": "/content/containers/buttons" },
+          { "title": "Hero Sections", "path": "/content/containers/hero" },
+          { "title": "URL Embed", "path": "/content/containers/embed" },
+          { "title": "Changelogs", "path": "/content/containers/changelogs" },
+          { "title": "Nested Containers", "path": "/content/containers/nested-containers" }
+        ]
+      },
+      { "title": "No-Style Pages", "path": "/content/no-style-pages" },
+      { "title": "Live Preview", "path": "/content/live-preview" }
+    ]
+  },
+  {
+    "title": "Theming",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      { "title": "Available Themes", "path": "/theming/available-themes" },
+      { "title": "Customisation", "path": "/theming/customization" },
+      { "title": "Light & Dark Mode", "path": "/theming/light-dark-mode" },
+      { "title": "Custom CSS & JS", "path": "/theming/custom-css-js" },
+      { "title": "Icons", "path": "/theming/icons" },
+      { "title": "Assets Management", "path": "/theming/assets-management" },
+      { "title": "Dynamic Theme Engine", "path": "/theming/dynamic-theme-engine" }
+    ]
+  },
+  {
+    "title": "Plugins",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      { "title": "Overview", "path": "/plugins/usage" },
+      { "title": "Core Plugins", "path": "/plugins/core-plugins" },
+      { "title": "Search", "path": "/plugins/search" },
+      { "title": "SEO", "path": "/plugins/seo" },
+      { "title": "Sitemap", "path": "/plugins/sitemap" },
+      { "title": "Analytics", "path": "/plugins/analytics" },
+      { "title": "PWA", "path": "/plugins/pwa" },
+      { "title": "LLMs", "path": "/plugins/llms" },
+      { "title": "Mermaid", "path": "/plugins/mermaid" },
+      { "title": "Threads", "path": "/plugins/threads" },
+      { "title": "Math (KaTeX)", "path": "/plugins/math" },
+      { "title": "Building Plugins", "path": "/plugins/building-plugins" },
+      { "title": "Plugin API", "path": "/plugins/plugin-api" }
+    ]
+  },
+  {
+    "title": "Recipes",
+    "icon": "chef-hat",
+    "collapsible": true,
+    "children": [
+      { "title": "Landing Pages", "path": "/recipes/landing-page" },
+      { "title": "Custom Fonts", "path": "/recipes/custom-fonts" },
+      { "title": "Favicon", "path": "/recipes/favicon" },
+      { "title": "AI Optimisation", "path": "/recipes/ai-optimization" },
+      { "title": "Writing Guide", "path": "/recipes/writing-guide" }
+    ]
+  },
+  {
+    "title": "Advanced",
+    "icon": "server-cog",
+    "collapsible": true,
+    "children": [
+      { "title": "Developer Guide", "path": "/advanced/developer-guide" },
+      { "title": "Contributing", "path": "/contributing" }
+    ]
+  },
+  {
+    "title": "API Reference",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      { "title": "CLI Commands", "path": "/api/cli-commands" },
+      { "title": "Node API", "path": "/api/node-api" },
+      { "title": "Browser API", "path": "/api/browser-api" },
+      { "title": "Client Events", "path": "/api/client-side-events" },
+      { "title": "Live Editor API", "path": "/api/live-api" }
+    ]
+  },
+  {
+    "title": "Deployment",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      { "title": "Build & Deploy", "path": "/deployment" },
+      { "title": "CI/CD", "path": "/deployment/ci-cd" }
+    ]
+  },
+  { "title": "Comparison", "path": "/comparison", "icon": "scale" },
+  {
+    "title": "Release Notes",
+    "icon": "package-check",
+    "collapsible": false,
+    "children": [
+      { "title": "0.7.0", "path": "/release-notes/0-7-0" }
+    ]
+  }
+]
