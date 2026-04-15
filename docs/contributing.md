@@ -1,9 +1,9 @@
 ---
-title: "Contributing"
+title: "Contributing — docmd Documentation"
 description: "Guidelines and setup instructions for contributing to docmd."
 ---
 
-Thank you for your interest in contributing to `docmd`! We appreciate all contributions, from bug fixes and documentation improvements to new features and design suggestions.
+Thank you for your interest in contributing to `docmd`. We appreciate bug fixes, documentation improvements, new features, and design suggestions.
 
 ## Development Environment
 
@@ -46,17 +46,17 @@ DOCMD_DEV=true pnpm run dev
 
 ## Quality Standards
 
-Ensure your code complies with the native codebase style guides enforced by our ESLint settings. For minor formatting issues, you can automatically fix them utilizing:
+Ensure your code complies with our ESLint settings. For minor formatting issues, run:
 ```bash
 pnpm lint:fix
 ```
 
-Before submitting a Pull Request, please verify your entire branch compiles flawlessly against the continuous integration Gauntlet by preparing the final release image:
+Before submitting a Pull Request, verify your branch compiles by preparing the final release image:
 
 ```bash
 pnpm prep
 ```
-*(This rigorously chains `pnpm reset`, dependency installation, lint checks, E2E tests, and deep security audits in a fresh slate.)*
+*(This chains `pnpm reset`, dependency installation, lint checks, E2E tests, and security audits in a fresh slate.)*
 
 ### Commit Guidelines
 
