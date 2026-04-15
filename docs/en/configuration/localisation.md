@@ -55,20 +55,25 @@ The language switcher preserves your current page and version when you switch lo
 
 ## Write translated content
 
-Your default locale content lives in the source directory (e.g. `docs/`). Translations go in a subdirectory named after the locale ID.
+Every locale lives in its own subdirectory inside the source directory. The default locale (e.g. `en`) goes in `docs/en/`, translations go in `docs/hi/`, `docs/zh/`, etc.
 
 ```
 docs/
-├── index.md                ← Default language (English)
-├── getting-started/
-│   └── installation.md
-├── hi/                     ← Hindi overrides
+├── en/                     ← Default language (English)
+│   ├── index.md
+│   ├── navigation.json
+│   └── getting-started/
+│       └── installation.md
+├── hi/                     ← Hindi translation
 │   ├── index.md            ← Translated homepage
+│   ├── navigation.json     ← Translated navigation labels
 │   └── getting-started/
 │       └── installation.md ← Translated page
-└── zh/                     ← Chinese overrides
+└── zh/                     ← Chinese translation
     └── index.md            ← Only the homepage translated
 ```
+
+This is cleaner than mixing locale folders alongside content folders — your source directory contains only locale directories, each self-contained.
 
 You don't need to translate every page. docmd uses a **per-file fallback** system:
 
@@ -81,20 +86,22 @@ The callout message itself is translated using the system's UI strings:
 
 ## Translate the navigation
 
-By default, all locales share the same `navigation.json`. To provide translated navigation labels, drop a `navigation.json` inside the locale's directory.
+Each locale has its own `navigation.json` inside its directory. If a locale doesn't have a `navigation.json`, it falls back to the default locale's navigation.
 
 ```
 docs/
-├── navigation.json         ← Default navigation (English labels)
-├── hi/
-│   └── navigation.json     ← Hindi navigation (translated labels)
+├── en/
+│   └── navigation.json     ← Default navigation (English labels)
+└── hi/
+    └── navigation.json     ← Hindi navigation (translated labels)
 ```
 
 The resolution priority follows a clear hierarchy:
 
 1. **Locale-specific navigation** — `docs/hi/navigation.json` (if it exists)
-2. **Version-specific navigation** — `docs-04/navigation.json` (if versioned)
-3. **Root config navigation** — the global `navigation` from `docmd.config.js`
+2. **Default locale navigation** — `docs/en/navigation.json` (the fallback)
+3. **Version-specific navigation** — `docs-04/navigation.json` (if versioned and no locale dirs)
+4. **Root config navigation** — the global `navigation` from `docmd.config.js`
 
 A locale navigation file uses the same format as the root one:
 
@@ -186,25 +193,26 @@ i18n: {
 
 ## Source directory vs URL structure
 
-The source directory and the output URL deliberately use different nesting orders. This is by design and matches the industry standard used by Docusaurus, VitePress, and similar tools.
+The source directory and the output URL deliberately use different nesting orders. This is by design.
 
 **Source** (how you organise files):
 ```
-docs/                    ← current version, default locale
-docs/hi/                 ← Hindi overrides for current version
-docs-04/                 ← old version
-docs-04/hi/              ← Hindi overrides for old version
+docs/                    ← source directory (container)
+  en/                    ← current version, default locale content
+  hi/                    ← current version, Hindi content
+docs-04/                 ← old version (no locale dirs = English only)
+docs-04/hi/              ← old version, Hindi translation (optional)
 ```
 
 **Output URLs** (what users see):
 ```
 /                        ← default locale, current version
 /hi/                     ← Hindi, current version
-/05/                     ← default locale, old version
-/hi/05/                  ← Hindi, old version
+/04/                     ← default locale, old version
+/hi/04/                  ← Hindi, old version
 ```
 
-Versions are the outer container in source because each version may have entirely different files. Locale overrides are per-version because translations are specific to that version's content. The URL flips the order because search engines and users expect the locale prefix first.
+Each locale is its own self-contained directory. Old versions that predate i18n work automatically — docmd reads them directly when no locale subdirectories are found. You can add locale support to old versions at any time by creating a locale subdirectory inside them.
 
 ## SEO and hreflang
 
