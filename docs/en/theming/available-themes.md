@@ -5,6 +5,9 @@ description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Le
 
 `docmd` provides a set of professionally designed, light/dark responsive themes. You can switch your entire site's aesthetic by changing a single key in `docmd.config.js`.
 
+<!-- SCREENSHOT: Gallery grid showing all available themes — each theme rendered as a small preview card with the theme name below. Show at least the default, minimal, and docs themes in both light and dark variants. -->
+
+
 ## How to Switch Themes
 
 ```javascript

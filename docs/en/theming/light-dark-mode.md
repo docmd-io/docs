@@ -5,6 +5,9 @@ description: "How to configure the default viewing mode and manage the theme swi
 
 `docmd` provides built-in support for light and dark color schemes. It detects user system preferences automatically and allows manual overrides via a UI toggle.
 
+<!-- SCREENSHOT: Split-screen showing the same documentation page in light mode (left) and dark mode (right), with the theme toggle button circled in both. -->
+
+
 ## Default Viewing Mode
 
 You specify the starting state of your documentation in `docmd.config.js`.

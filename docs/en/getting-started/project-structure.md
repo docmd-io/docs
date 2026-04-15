@@ -5,6 +5,9 @@ description: "How docmd maps your files and folders to pages, URLs, and navigati
 
 docmd uses your filesystem as the source of truth. Folders become sections, Markdown files become pages, and the directory hierarchy defines URL routes.
 
+<!-- SCREENSHOT: VS Code or file explorer showing the standard docmd project structure — docs/ folder with markdown files, docmd.config.js at root, and assets/ directory. -->
+
+
 ## Initialise a project
 
 ```bash

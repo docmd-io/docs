@@ -20,18 +20,36 @@ npx @docmd/core build
 
 ## Install as a project dependency (recommended)
 
+::: tabs
+== tab "npm"
 ```bash
-# Install as a dev dependency
 npm install -D @docmd/core
-
-# Initialise the project
 npx docmd init
-
-# Start the dev server
 npx docmd dev
 ```
+== tab "pnpm"
+```bash
+pnpm add -D @docmd/core
+pnpm dlx docmd init
+pnpm dlx docmd dev
+```
+== tab "yarn"
+```bash
+yarn add -D @docmd/core
+yarn docmd init
+yarn docmd dev
+```
+== tab "bun"
+```bash
+bun add -D @docmd/core
+bunx docmd init
+bunx docmd dev
+```
+:::
 
 This pins the version across your team and CI/CD pipeline.
+
+<!-- SCREENSHOT: Terminal output showing a successful `npx docmd init` run — the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
 
 ::: callout tip "After local install"
 Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @docmd/core` for all commands.
@@ -39,9 +57,26 @@ Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @doc
 
 ## Install globally
 
+::: tabs
+== tab "npm"
 ```bash
 npm install -g @docmd/core
+```
+== tab "pnpm"
+```bash
+pnpm add -g @docmd/core
+```
+== tab "yarn"
+```bash
+yarn global add @docmd/core
+```
+== tab "bun"
+```bash
+bun add -g @docmd/core
+```
+:::
 
+```bash
 # Use the 'docmd' command anywhere
 docmd dev
 docmd build

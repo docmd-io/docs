@@ -5,6 +5,9 @@ description: "Run docmd entirely in the browser without a backend server using t
 
 `docmd` features a modular architecture that separates filesystem operations from core processing logic. This enables the documentation engine to run **entirely within the browser**, facilitating live editors and CMS previews without the need for a Node.js backend.
 
+<!-- SCREENSHOT: A live preview window embedded in a documentation page, showing a code editor on the left and the rendered HTML output on the right, with the preview updating in real-time. -->
+
+
 ::: button "Open Live Editor" https://live.docmd.io
 
 ## The Live Editor

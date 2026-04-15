@@ -1,3 +1,337 @@
 [
-  { "title": "首页", "path": "/" }
+  {
+    "title": "Home",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "入门指南",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "快速开始",
+        "path": "/getting-started/quick-start"
+      },
+      {
+        "title": "安装",
+        "path": "/getting-started/installation"
+      },
+      {
+        "title": "项目结构",
+        "path": "/getting-started/project-structure"
+      }
+    ]
+  },
+  {
+    "title": "Writing Content",
+    "icon": "pencil-line",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Frontmatter",
+        "path": "/content/frontmatter"
+      },
+      {
+        "title": "语法",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "代码块",
+            "path": "/content/syntax/code"
+          },
+          {
+            "title": "图片",
+            "path": "/content/syntax/images"
+          },
+          {
+            "title": "链接",
+            "path": "/content/syntax/linking"
+          },
+          {
+            "title": "Advanced",
+            "path": "/content/syntax/advanced"
+          }
+        ]
+      },
+      {
+        "title": "容器",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "提示框",
+            "path": "/content/containers/callouts"
+          },
+          {
+            "title": "标签页",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "步骤",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "卡片",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "网格",
+            "path": "/content/containers/grids"
+          },
+          {
+            "title": "折叠面板",
+            "path": "/content/containers/collapsible"
+          },
+          {
+            "title": "按钮",
+            "path": "/content/containers/buttons"
+          },
+          {
+            "title": "Hero Sections",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL Embed",
+            "path": "/content/containers/embed"
+          },
+          {
+            "title": "更新日志",
+            "path": "/content/containers/changelogs"
+          },
+          {
+            "title": "嵌套容器",
+            "path": "/content/containers/nested-containers"
+          }
+        ]
+      },
+      {
+        "title": "无样式页面",
+        "path": "/content/no-style-pages"
+      },
+      {
+        "title": "实时预览",
+        "path": "/content/live-preview"
+      }
+    ]
+  },
+  {
+    "title": "配置",
+    "icon": "settings",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Overview",
+        "path": "/configuration/general"
+      },
+      {
+        "title": "导航",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "布局与界面",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "菜单栏",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "国际化",
+        "path": "/configuration/localisation",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "翻译内容",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI 字符串与 SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "版本管理",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "重定向",
+        "path": "/configuration/redirects"
+      }
+    ]
+  },
+  {
+    "title": "主题",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "可用主题",
+        "path": "/theming/available-themes"
+      },
+      {
+        "title": "Customisation",
+        "path": "/theming/customization"
+      },
+      {
+        "title": "明暗模式",
+        "path": "/theming/light-dark-mode"
+      },
+      {
+        "title": "自定义 CSS 与 JS",
+        "path": "/theming/custom-css-js"
+      },
+      {
+        "title": "图标",
+        "path": "/theming/icons"
+      },
+      {
+        "title": "Assets",
+        "path": "/theming/assets-management"
+      }
+    ]
+  },
+  {
+    "title": "插件",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "使用插件",
+        "path": "/plugins/usage"
+      },
+      {
+        "title": "搜索",
+        "path": "/plugins/search"
+      },
+      {
+        "title": "SEO",
+        "path": "/plugins/seo"
+      },
+      {
+        "title": "站点地图",
+        "path": "/plugins/sitemap"
+      },
+      {
+        "title": "数据分析",
+        "path": "/plugins/analytics"
+      },
+      {
+        "title": "PWA",
+        "path": "/plugins/pwa"
+      },
+      {
+        "title": "LLMs",
+        "path": "/plugins/llms"
+      },
+      {
+        "title": "Mermaid 图表",
+        "path": "/plugins/mermaid"
+      },
+      {
+        "title": "讨论区",
+        "path": "/plugins/threads"
+      },
+      {
+        "title": "Math (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
+        "title": "构建插件",
+        "path": "/plugins/building-plugins"
+      }
+    ]
+  },
+  {
+    "title": "部署",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Build & Deploy",
+        "path": "/deployment"
+      },
+      {
+        "title": "CI/CD",
+        "path": "/deployment/ci-cd"
+      }
+    ]
+  },
+  {
+    "title": "API Reference",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "CLI 命令",
+        "path": "/api/cli-commands"
+      },
+      {
+        "title": "Node API",
+        "path": "/api/node-api"
+      },
+      {
+        "title": "浏览器 API",
+        "path": "/api/browser-api"
+      },
+      {
+        "title": "Client Events",
+        "path": "/api/client-side-events"
+      },
+      {
+        "title": "Live Editor API",
+        "path": "/api/live-api"
+      }
+    ]
+  },
+  {
+    "title": "实用技巧",
+    "icon": "chef-hat",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Landing Pages",
+        "path": "/recipes/landing-page"
+      },
+      {
+        "title": "自定义字体",
+        "path": "/recipes/custom-fonts"
+      },
+      {
+        "title": "网站图标",
+        "path": "/recipes/favicon"
+      },
+      {
+        "title": "AI Optimisation",
+        "path": "/recipes/ai-optimization"
+      },
+      {
+        "title": "写作指南",
+        "path": "/recipes/writing-guide"
+      }
+    ]
+  },
+  {
+    "title": "对比",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "发布说明",
+    "icon": "package-check",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "v0.7.0 — What's New",
+        "path": "/release-notes/0-7-0"
+      }
+    ]
+  },
+  {
+    "title": "参与贡献",
+    "path": "/contributing",
+    "icon": "git-pull-request"
+  }
 ]
