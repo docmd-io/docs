@@ -1,44 +1,51 @@
 ---
-title: Quick Start
-description: Get a documentation site running in 60 seconds.
+title: "Quick Start — docmd Documentation"
+description: "Go from an empty folder to a running documentation site under a minute."
 ---
 
-Run this inside any folder with Markdown files:
+Run docmd inside any folder containing Markdown files. No config file, no setup, no framework knowledge required.
+
+## Start a dev server
 
 ```bash
-npx docmdx
+npx @docmd/core dev
 ```
 
-Open:
+Opens `http://localhost:3000`. Your documentation is live.
 
-```
-http://localhost:3000
-```
+<!-- IMAGE NEEDED: Screenshot of a fresh docmd dev server running with auto-generated navigation -->
 
-That’s it.
+## What happens automatically
 
-Your documentation site is now running. :rocket:
+docmd scans your project and sets everything up:
 
-## What just happened
+1. **Directory detection** — looks for `docs/`, `src/docs/`, `documentation/`, or any `.md` files
+2. **Navigation generation** — builds a nested sidebar from your folder structure
+3. **Metadata extraction** — reads `package.json` for the site title if available
+4. **Theme activation** — applies the default theme with system-aware light/dark mode
+5. **Search indexing** — enables built-in full-text search
 
-* Navigation was generated automatically
-* Pages rendered instantly
-* No configuration was required
+No `docmd.config.js` is needed. Add one later when you need versioning, plugins, or custom navigation.
 
-## Build your site
+## Build for production
 
 ```bash
-npx docmdx build
+npx @docmd/core build
 ```
 
-Outputs a static site ready to deploy.
+Outputs a static site to `./site/`, ready to deploy anywhere.
 
-## Next
+## Next steps
 
-If you plan to use this regularly, install it locally:
-
-→ Go to **Install (optional)**
-
-Or continue customising your site:
-
-→ Go to **Project Structure**
+::: grids
+::: grid
+::: card "Install locally"
+For long-term projects, [install docmd](./installation.md) as a dev dependency.
+:::
+:::
+::: grid
+::: card "Explore the structure"
+Learn how docmd organises files in [Project Structure](./project-structure.md).
+:::
+:::
+:::
