@@ -1,6 +1,6 @@
 ---
-title: "General Configuration"
-description: "Master the docmd.config.js schema. Configure branding, layout architecture, and core engine features."
+title: "General Configuration — docmd Documentation"
+description: "Configure docmd.config.js schema, branding, layout, and engine features."
 ---
 
 The `docmd.config.js` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behavior, and engine-level processing rules.
@@ -21,15 +21,17 @@ export default defineConfig({
 
 ## Core Settings
 
-`docmd` utilizes a streamlined configuration schema. Below are the primary top-level settings:
+`docmd` utilises a simple configuration schema. Below are the primary top-level settings:
 
 | Key | Description | Default |
 | :--- | :--- | :--- |
 | `title` | The name of your documentation site. Used in the header and browser titles. | `Documentation` |
-| `url` | Your production base URL. **Critical for SEO, Sitemaps, and OpenGraph.** | `null` |
+| `url` | Your production base URL. Critical for SEO, Sitemaps, and OpenGraph. | `null` |
 | `src` | The relative path to the directory containing your Markdown files. | `docs` |
 | `out` | The relative path for the generated static site output. | `site` |
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
+| `i18n` | Configuration for [multi-language support](./localisation.md). | `null` |
+| `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
 
 ## Branding & Identity
 
