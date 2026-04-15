@@ -1,82 +1,75 @@
 ---
 title: "Installation"
-description: "Instructions for installing docmd globally, locally, or using it on-the-fly with npx."
+description: "Install docmd globally, locally, or run it instantly with npx. Requires Node.js 18+."
 ---
 
-`docmd` is a Node.js-based documentation generator. It requires **Node.js (v18.x or higher)** to be installed on your system.
+Choose the installation method that fits your workflow.
 
-There are several ways to deploy and use `docmd`. You can execute it instantly without installation, or integrate it permanently into your development workflow.
-
-## Option 1: Instant Execution (Zero-Config)
-
-You can run `docmd` inside any directory containing Markdown files. It automatically scans your files, extracts headings for page titles, and generates a nested navigation structure. No configuration or formal setup is required.
+## Run instantly with npx
 
 ```bash
-# Start a local development server on http://localhost:3000
-npx docmd dev -z
-
-# Generate a production-ready static site in the /site directory
-npx docmd build -z
+npx @docmd/core dev
 ```
 
-::: callout warning "Beta Feature"
-Zero-Config mode (`-z`) is currently in beta. While it is excellent for rapid prototyping and internal documentation, we recommend initializing a project configuration (`docmd.config.js`) for production-grade sites to ensure maximum stability and control.
-:::
-
-## Option 2: Local Project Installation (Recommended)
-
-For long-term projects, we recommend installing `docmd` as a development dependency. This ensures version consistency across your team and CI/CD environments.
+No installation needed. Runs docmd directly inside any folder with Markdown files.
 
 ```bash
-# 1. Install docmd as a development dependency
+# Build a production-ready static site
+npx @docmd/core build
+```
+
+## Install as a project dependency (recommended)
+
+```bash
+# Install as a dev dependency
 npm install -D @docmd/core
 
-# 2. Initialize your project configuration
+# Initialise the project
 npx docmd init
 
-# 3. Start the development server
+# Start the dev server
 npx docmd dev
 ```
 
-## Option 3: Global Installation
+This pins the version across your team and CI/CD pipeline.
 
-If you prefer to have the `docmd` CLI available globally across your system:
+::: callout tip "After local install"
+Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @docmd/core` for all commands.
+:::
+
+## Install globally
 
 ```bash
-# Install globally
 npm install -g @docmd/core
 
 # Use the 'docmd' command anywhere
-docmd dev        # Start development server
-docmd build      # Build static site
+docmd dev
+docmd build
 ```
 
-## Developer Integration (Browser-Only)
+## Browser-only integration
 
-::: callout info "Library Use Only"
-This method is intended for developers who wish to embed the `docmd` parsing and rendering engine inside another web application, such as a CMS, a Live Preview tool, or a custom dashboard. It is **not** the standard way to build standalone documentation sites.
+::: callout info "Library use only"
+This method embeds the docmd rendering engine into another web application. It is not the standard way to build documentation sites.
 :::
 
-To render `docmd` syntax dynamically in a web application without a Node.js backend, include the following assets:
-
 ```html
-<!-- 1. Core Styles -->
+<!-- Core Styles -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- 2. Processing Engine -->
+<!-- Processing Engine -->
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-Refer to the [Browser API](../api/browser-api.md) guide for integration details.
+See the [Browser API](../api/browser-api.md) guide for integration details.
 
 ## Troubleshooting
 
-::: callout warning "Permission Denied (EACCES)"
-If you encounter `EACCES` errors on macOS or Linux during global installation, it indicates insufficient permissions for global directories.
-**Resolution:** Use `sudo npm install -g @docmd/core` or, preferably, use a Node version manager like `nvm` to manage global packages without root access.
+::: callout warning "Permission denied (EACCES)"
+If you encounter `EACCES` errors during global installation on macOS or Linux, switch to a Node version manager like [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) instead of using `sudo`.
 :::
 
-::: callout info "PowerShell Script Execution"
-On Windows, if you receive an error stating that "running scripts is disabled on this system," execute the following command in PowerShell as an Administrator:
+::: callout info "PowerShell script execution (Windows)"
+If PowerShell blocks script execution, run as Administrator:
 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 :::

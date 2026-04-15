@@ -1,6 +1,6 @@
 ---
 title: "Buttons"
-description: "Inject call-to-action buttons for internal routing or external resources with a minimalist syntax."
+description: "Inject call-to-action buttons for internal routing or external resources with a single-line syntax."
 ---
 
 Buttons are high-impact UI elements used for prominent navigation. Unlike block containers, the `button` is **self-closing**—it is defined on a single line and does not require a closing `:::` tag.

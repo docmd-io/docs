@@ -19,10 +19,10 @@ components:
   css: true       # Inject docmd-main.css for typography
 ---
 
-<!-- Raw HTML or specialized Markdown goes here -->
+<!-- Raw HTML or specialised Markdown goes here -->
 <div class="hero">
   <h1>Next-Gen Documentation</h1>
-  <p>Minimalist. Isomorphic. AI-Ready.</p>
+  <p>Zero-config. Isomorphic. AI-Ready.</p>
 </div>
 
 ::: callout info "Infinite Nesting Support"
@@ -78,10 +78,10 @@ The zero-config engine for modern engineering teams.
   ::: card "Zero Configuration"
   Just write markdown. No complex React logic or build scripts.
   :::
-  ::: card "AI Optimized"
+  ::: card "AI Optimised"
   Structure-aware parsing for the LLM era.
   :::
-  ::: card "Blazing Fast"
+  ::: card "Fast Without the Framework Tax"
   Static generation with isomorphic SPA navigation.
   :::
 :::

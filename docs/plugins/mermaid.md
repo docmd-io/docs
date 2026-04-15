@@ -129,7 +129,7 @@ gitGraph
 
 ## Technical Implementation
 
-The Mermaid plugin operates by intercepting `mermaid` code blocks during the parsing phase and wrapping them in a specialized `<div class="mermaid">` container. 
+The Mermaid plugin operates by intercepting `mermaid` code blocks during the parsing phase and wrapping them in a specialised `<div class="mermaid">` container. 
 
 1. **Detection**: The engine scans the rendered HTML for the presence of mermaid containers.
 2. **Asset Injection**: If containers are found, `docmd` injects a lightweight `init-mermaid.js` module.

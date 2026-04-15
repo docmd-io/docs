@@ -1,5 +1,5 @@
 ---
-title: "Project Structure — docmd Documentation"
+title: "Project Structure"
 description: "How docmd maps your files and folders to pages, URLs, and navigation."
 ---
 
@@ -14,12 +14,16 @@ npx @docmd/core init
 
 This creates the standard project scaffold:
 
-```
+```text
 my-docs/
 ├── docs/               ← Source directory. Your .md files go here.
 │   └── index.md        ← Home page (/)
 ├── assets/             ← Static assets (images, custom CSS/JS)
+│   ├── css/
+│   ├── js/
+│   └── images/
 ├── docmd.config.js     ← Configuration file
+├── package.json        ← Project metadata and scripts
 └── site/               ← Generated output (after build)
 ```
 

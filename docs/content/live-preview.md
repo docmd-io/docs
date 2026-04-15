@@ -9,7 +9,7 @@ description: "Run docmd entirely in the browser without a backend server using t
 
 ## The Live Editor
 
-The built-in Live Editor provides a high-performance, split-pane interface. Author your Markdown in the left pane and observe the rendered output navigate and synchronize in real-time on the right.
+The built-in Live Editor provides a high-performance, split-pane interface. Author your Markdown in the left pane and observe the rendered output navigate and synchronise in real-time on the right.
 
 ### Local Execution
 

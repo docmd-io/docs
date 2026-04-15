@@ -42,5 +42,5 @@ To provide downloads or reference raw source files, place them within the `asset
 ```
 
 ::: callout tip "Semantic Linkage for AI"
-When cross-linking technical modules, prioritize **Descriptive Anchors** (e.g., `[Optimize PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
+When cross-linking technical modules, prioritize **Descriptive Anchors** (e.g., `[Optimise PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
 :::

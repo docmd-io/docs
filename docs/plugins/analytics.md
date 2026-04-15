@@ -25,7 +25,7 @@ export default defineConfig({
         trackingId: 'UA-XXXXXXX-X' 
       },
 
-      // 3. Behavioral Tracking Settings
+      // 3. Behavioural Tracking Settings
       autoEvents: true,  // Track clicks, downloads, and TOC interactions
       trackSearch: true  // Track search keywords used by readers
     }

@@ -48,7 +48,7 @@ noindex: true # This page will not appear in search results or sitemaps
 
 ## Technical Implementation
 
-The plugin injects a minimalist search modal into the `<body>` of your site. It is designed to be fully accessible (ARIA compliant) and supports keyboard navigation for a native app-like experience.
+The plugin injects a lightweight search modal into the `<body>` of your site. It is fully accessible (ARIA compliant) and supports keyboard navigation for a native app-like experience.
 
 ::: callout tip "Search Analytics"
 If you have the [Analytics Plugin](./analytics) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.

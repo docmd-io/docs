@@ -78,5 +78,5 @@ The docmd router enables a seamless SPA experience.
 The docmd router enables a seamless SPA experience.
 
 ::: callout tip "Contextual Precision for AI"
-Utilizing **Definitions** and **Abbreviations** provides high-quality technical signals to AI agents. When an AI processes your `llms-full.txt` context, these explicit definitions prevent lexical ambiguity, ensuring the model generates logically correct explanations for your project's specific terminology.
+Utilising **Definitions** and **Abbreviations** provides high-quality technical signals to AI agents. When an AI processes your `llms-full.txt` context, these explicit definitions prevent lexical ambiguity, ensuring the model generates logically correct explanations for your project's specific terminology.
 :::

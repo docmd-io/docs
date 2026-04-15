@@ -3,7 +3,7 @@ title: "Images & Visual Media"
 description: "Master media management: Responsive images, styling attributes, and automated Lightbox effects."
 ---
 
-`docmd` utilizes standard Markdown syntax for media integration. We recommend centralizing your media assets in the `assets/images/` directory within your project source.
+`docmd` utilises standard Markdown syntax for media integration. We recommend centralizing your media assets in the `assets/images/` directory within your project source.
 
 ```markdown
 ![Technical Diagram](/assets/images/architecture.png "Optional Tooltip Title")
@@ -11,7 +11,7 @@ description: "Master media management: Responsive images, styling attributes, an
 
 ## Technical Styling Reference
 
-Assign specialized CSS classes and attributes directly to your images using the `{ .class }` attribute syntax.
+Assign specialised CSS classes and attributes directly to your images using the `{ .class }` attribute syntax.
 
 ### Dynamic Resizing
 ```markdown
@@ -40,7 +40,7 @@ For precise, accessible media captioning, use standard HTML5 `<figure>` elements
 ```
 
 ### Image Galleries
-Organize multiple assets into a responsive, balanced grid using the `image-gallery` class.
+Organise multiple assets into a responsive, balanced grid using the `image-gallery` class.
 
 ```html
 <div class="image-gallery">

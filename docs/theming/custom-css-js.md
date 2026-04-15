@@ -27,7 +27,7 @@ export default {
 
 ## Custom JavaScript
 
-Use the top-level `customJs` array for scripts that add behavior or integrate 3rd-party services.
+Use the top-level `customJs` array for scripts that add behaviour or integrate 3rd-party services.
 
 ```javascript
 // docmd.config.js

@@ -82,7 +82,7 @@ Nesting **Tabs** inside **Steps** is a professional pattern for providing platfo
 To maintain both performance and mobile responsiveness, observe the following constraints:
 
 *   **Recursive Tabs**: Nesting tabs within other tabs is technically supported but strongly discouraged. It creates navigation "loops" that are visually confusing on smaller viewports.
-*   **Sequential Conflict**: If you require numbered steps within a tab, utilize a standard ordered list (`1. Step Content`) rather than the `::: steps` container to avoid layout conflicts.
+*   **Sequential Conflict**: If you require numbered steps within a tab, utilise a standard ordered list (`1. Step Content`) rather than the `::: steps` container to avoid layout conflicts.
 *   **Legibility**: While `docmd` does not strictly require indentation for nested blocks, using a 2 or 4-space indentation significantly improves the human-readability of the Markdown source.
 
 ::: callout tip "Knowledge Segmentation for AI"

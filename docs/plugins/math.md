@@ -5,7 +5,7 @@ description: "Native KaTeX/LaTeX mathematics integration for docmd."
 
 The **Math plugin** adds native LaTeX and KaTeX support to your docmd sites.
 
-It utilizes `markdown-it-texmath` as securely integrated with the `katex` computation engine to render both inline and block-level mathematical equations smoothly without requiring complex client-side javascript libraries.
+It utilises `markdown-it-texmath` as securely integrated with the `katex` computation engine to render both inline and block-level mathematical equations smoothly without requiring complex client-side javascript libraries.
 
 ## Setup
 
@@ -30,7 +30,7 @@ plugins: {
 
 ### Inline Mathematics
 
-You can inject standard equations flawlessly within a paragraph utilizing single dollar signs `$`:
+You can inject standard equations flawlessly within a paragraph utilising single dollar signs `$`:
 
 ```markdown
 Here is an inline equation: $E = mc^2$

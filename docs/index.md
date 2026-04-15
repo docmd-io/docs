@@ -1,6 +1,6 @@
 ---
-title: "Overview"
-description: "Transform Markdown files into interactive production-ready documentation with zero configuration."
+title: "docmd"
+description: "Markdown to production docs in one command. Static HTML for SEO, SPA for speed, AI-ready by default."
 ---
 
 <!--
@@ -16,7 +16,7 @@ description: "Transform Markdown files into interactive production-ready documen
 
 # docmd
 
-A zero-configuration documentation generator that transforms Markdown files into interactive documentation.
+Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
 
 ::: button "Quick Start" /getting-started/quick-start
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333

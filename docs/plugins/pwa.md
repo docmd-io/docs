@@ -7,7 +7,7 @@ The `@docmd/plugin-pwa` plugin enables Progressive Web App (PWA) features for yo
 
 ## Configuration
 
-The PWA plugin can be customized to match your branding within the `plugins` section of `docmd.config.js`.
+The PWA plugin can be customised to match your branding within the `plugins` section of `docmd.config.js`.
 
 ```javascript
 import { defineConfig } from '@docmd/core';

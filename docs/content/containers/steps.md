@@ -32,7 +32,7 @@ The `steps` component supports rich Markdown content within each item, including
 ::: steps
 
 1.  **Generate Production Build**
-    Execute the build command to generate a highly optimized static site.
+    Execute the build command to generate a highly optimised static site.
     ```bash
     docmd build
     ```
@@ -49,7 +49,7 @@ The `steps` component supports rich Markdown content within each item, including
 ::: steps
 
 1.  **Generate Production Build**
-    Execute the build command to generate a highly optimized static site.
+    Execute the build command to generate a highly optimised static site.
     ```bash
     docmd build
     ```

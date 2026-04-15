@@ -3,7 +3,7 @@ title: "General Configuration"
 description: "Configure docmd.config.js schema, branding, layout, and engine features."
 ---
 
-The `docmd.config.js` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behavior, and engine-level processing rules.
+The `docmd.config.js` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behaviour, and engine-level processing rules.
 
 ## The Configuration File
 
@@ -50,18 +50,18 @@ favicon: 'assets/favicon.ico',           // Path to your site's favicon
 
 ## Layout Architecture
 
-`docmd` features a modular layout system. You can toggle UI components and configure navigation behavior via the `layout` object.
+`docmd` features a modular layout system. You can toggle UI components and configure navigation behaviour via the `layout` object.
 
 | Section | Key | Default | Description |
 | :--- | :--- | :--- | :--- |
 | **Global** | `spa` | `true` | Enables seamless Single Page Application navigation without browser reloads. |
 | **Header** | `header` | `{ enabled: true }` | Toggles the top navigation bar. |
-| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the sidebar navigation tree and its behavior. |
+| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the sidebar navigation tree and its behaviour. |
 | **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` footer styles. |
 
 ### Utility Menu (Options Menu)
 
-The Options Menu consolidates utility components suchs as **Global Search**, **Theme Switching**, and **Sponsorship links**.
+The Options Menu consolidates utility components such as **Global Search**, **Theme Switching**, and **Sponsorship links**.
 
 ```javascript
 layout: {

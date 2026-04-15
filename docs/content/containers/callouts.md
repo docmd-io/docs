@@ -49,7 +49,7 @@ As of `v0.7.0`, the internal WebSocket RPC system will be officially deprecated.
 Callouts support the full spectrum of Markdown, allowing you to embed buttons and code blocks within the alert.
 
 ````markdown
-::: callout tip "Optimized Local Testing"
+::: callout tip "Optimised Local Testing"
 Use the preserve flag to maintain build files during dev sessions:
 
 ```bash
@@ -60,7 +60,7 @@ docmd dev --preserve
 :::
 ````
 
-::: callout tip "Optimized Local Testing"
+::: callout tip "Optimised Local Testing"
 Use the preserve flag to maintain build files during dev sessions:
 
 ```bash
@@ -71,5 +71,5 @@ docmd dev --preserve
 :::
 
 ::: callout tip "Prioritized Logic for AI"
-For LLMs, callouts act as **High-Priority Anchors**. By utilizing `::: callout danger` to document breaking changes or system constraints, you provide a clear signal that the AI model must prioritize this information above surrounding text during its reasoning and generation process.
+For LLMs, callouts act as **High-Priority Anchors**. By utilising `::: callout danger` to document breaking changes or system constraints, you provide a clear signal that the AI model must prioritize this information above surrounding text during its reasoning and generation process.
 :::

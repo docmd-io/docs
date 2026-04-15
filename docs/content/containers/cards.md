@@ -1,6 +1,6 @@
 ---
 title: "Cards"
-description: "Organize information into framed, visually distinct containers. Perfect for feature grids and landing pages."
+description: "Organise information into framed, visually distinct containers. Perfect for feature grids and landing pages."
 ---
 
 Cards are the primary structural building blocks in `docmd`. They encapsulate related content into a distinct, bordered frame with optional headers, providing a clear visual hierarchy for your documentation.
@@ -19,19 +19,19 @@ This is the primary content area of the card.
 Use cards to highlight key technical advantages or module capabilities.
 ```markdown
 ::: card "Asynchronous Generation"
-The `docmd` core engine utilizes a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
+The `docmd` core engine utilises a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
 :::
 ```
 ::: card "Asynchronous Generation"
-The `docmd` core engine utilizes a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
+The `docmd` core engine utilises a non-blocking I/O pipeline, enabling the generation of thousands of pages in milliseconds.
 :::
 
 ### 2. Multi-Component Integration
 Cards can house any standard Markdown elements, including syntax-highlighted code and call-to-action buttons.
 
 ````markdown
-::: card "Instant Localization"
-Prepare your documentation for a global audience using our built-in i18n support.
+::: card "Instant Localisation"
+Prepare your documentation for a global audience using the built-in i18n support.
 
 ```bash
 docmd add i18n
@@ -41,8 +41,8 @@ docmd add i18n
 :::
 ````
 
-::: card "Instant Localization"
-Prepare your documentation for a global audience using our built-in i18n support.
+::: card "Instant Localisation"
+Prepare your documentation for a global audience using the built-in i18n support.
 
 ```bash
 docmd add i18n
@@ -53,7 +53,7 @@ docmd add i18n
 
 ## Multi-Column Layouts (Grids)
 
-You can leverage the native `grids` container to organize your cards into clean, responsive multi-column layouts without ever touching HTML.
+You can leverage the native `grids` container to organise your cards into clean, responsive multi-column layouts without ever touching HTML.
 
 ```markdown
 ::: grids

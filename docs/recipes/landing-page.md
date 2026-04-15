@@ -16,7 +16,7 @@ Create or refine your project's root entry point at `docs/index.md`.
 ```html
 ---
 title: "Next-Gen Documentation"
-description: "The minimalist, isomorphic, AI-ready engine for modern developers."
+description: "The zero-config, isomorphic, AI-ready documentation engine."
 noStyle: true
 components:
   meta: true      # Retain structured SEO and OpenGraph tags
@@ -32,13 +32,13 @@ customHead: |
 
 <div class="hero">
   <h1>Architecture Meets Documentation.</h1>
-  <p>Isomorphic execution. AI-optimized context. Zero-reload navigation.</p>
+  <p>Isomorphic execution. AI-optimised context. Zero-reload navigation.</p>
   <br>
   <a href="/getting-started/" class="btn">Launch Documentation →</a>
 </div>
 
 <div class="feature-grid">
-   <!-- Inject custom landing page HTML or specialized Markdown Cards here -->
+   <!-- Inject custom landing page HTML or specialised Markdown Cards here -->
 </div>
 ```
 

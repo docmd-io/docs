@@ -3,11 +3,11 @@ title: "Changelogs"
 description: "Generate structured, timeline-based version history and release notes."
 ---
 
-The `changelog` container provides a specialized layout for documenting project evolution. It automatically parses date or version headers into a vertical timeline, ensuring historical updates are easily scannable.
+The `changelog` container provides a specialised layout for documenting project evolution. It automatically parses date or version headers into a vertical timeline, ensuring historical updates are easily scannable.
 
 ## Syntax
 
-Utilize the specialized `==` delimiter to define entries. The text on the `==` line is rendered as a timeline badge on the left, while the following content populates the adjacent chronological slot.
+Utilise the specialised `==` delimiter to define entries. The text on the `==` line is rendered as a timeline badge on the left, while the following content populates the adjacent chronological slot.
 
 ```markdown
 ::: changelog

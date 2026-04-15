@@ -3,7 +3,7 @@ title: URL Embeds
 description: How to safely embed dynamic components, videos, and social media directly into your documents.
 ---
 
-`docmd` ships natively with the highly-optimized `embed-lite` parser ecosystem. This allows you to aggressively map raw external URLs strictly onto the page, transforming them beautifully into completely secure, zero-latency UI components instantly!
+`docmd` ships natively with the highly-optimised `embed-lite` parser ecosystem. This allows you to aggressively map raw external URLs strictly onto the page, transforming them beautifully into completely secure, zero-latency UI components instantly!
 
 ## Supported Platforms
 The integrated engine natively exposes structured formatters targeting the following networks identically:

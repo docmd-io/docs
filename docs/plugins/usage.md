@@ -56,7 +56,7 @@ Optional plugins require installation before enabling.
 
 ## Plugin Scopes and `noStyle` Overrides
 
-Plugins inject CSS and behavior by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
+Plugins inject CSS and behaviour by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
 
 ### Global Config Extent
 
@@ -65,7 +65,7 @@ You can instruct any plugin to automatically skip injecting into `noStyle` pages
 ```javascript
 plugins: {
   math: {
-    noStyle: false // math css/js will no longer load on minimalistic landing pages
+    noStyle: false // math css/js will no longer load on no-style pages
   }
 }
 ```

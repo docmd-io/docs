@@ -46,7 +46,7 @@ DOCMD_DEV=true pnpm run dev
 
 ## Quality Standards
 
-Ensure your code complies with our ESLint settings. For minor formatting issues, run:
+Ensure your code complies with the ESLint settings. For minor formatting issues, run:
 ```bash
 pnpm lint:fix
 ```
@@ -73,7 +73,7 @@ All new files within the `packages/` directory MUST include the standard project
 ```javascript
 /**
  * --------------------------------------------------------------------
- * docmd : the minimalist, zero-config documentation generator.
+ * docmd : the zero-config documentation engine.
  *
  * @package     @docmd/core (and ecosystem)
  * @website     https://docmd.io

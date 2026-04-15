@@ -28,7 +28,6 @@ docmd dev [options]
 
 ### Options
 - `-p, --port <number>`: Specify a custom port (Default: `3000`).
-- `-z, --zero-config`: Run in auto-detect mode without a configuration file.
 - `-c, --config <path>`: Use a non-standard configuration file path.
 
 ## `docmd build`
@@ -41,7 +40,6 @@ docmd build [options]
 
 ### Options
 - `--offline`: **File Protocol Friendly**. Rewrites links to end in `.html`, allowing for direct browsing from the local filesystem (e.g., `file://`).
-- `-z, --zero-config`: Build using auto-detection logic.
 - `-c, --config <path>`: Path to the configuration file (Default: `docmd.config.js`).
 
 ## `docmd live`

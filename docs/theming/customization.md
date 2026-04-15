@@ -1,5 +1,5 @@
 ---
-title: "Customization & Variables"
+title: "Customisation & Variables"
 description: "A complete reference of docmd's CSS variables and component classes for advanced styling."
 ---
 
@@ -20,7 +20,7 @@ description: "A complete reference of docmd's CSS variables and component classe
 
 ## Example Override
 
-To change your site's primary accent color, add this to your `customCss`:
+To change your site's primary accent colour, add this to your `customCss`:
 
 ```css
 :root {

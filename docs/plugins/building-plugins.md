@@ -16,6 +16,7 @@ A `docmd` plugin is a standard JavaScript object (or a module that exports one a
 | `generateScripts(config, opts)` | Return an object containing `headScriptsHtml` and `bodyScriptsHtml`. |
 | `getAssets(opts)` | Define external files or CDN scripts to be injected. |
 | `onPostBuild(ctx)` | Run logic after the generation of all HTML files. |
+| `translations(localeId)` | Return an object of translated strings for the given locale. |
 | `actions` | An object of named action handlers for WebSocket RPC calls from the browser. |
 | `events` | An object of named event handlers for fire-and-forget messages from the browser. |
 
@@ -77,7 +78,7 @@ export default {
   generateScripts: () => { ... }
 }
 ```
-Users can also override this behavior through their configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
+Users can also override this behaviour through their configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
 
 ## Deep Dive: Asset Injection
 
@@ -100,6 +101,38 @@ getAssets: (options) => {
   ];
 }
 ```
+
+## Translating Plugins (i18n)
+
+Plugins that render client-side UI should expose translatable strings via the `translations(localeId)` hook. The docmd engine will call this hook during the build process, merge the results with core system strings and user overrides, and pass them down.
+
+The standard pattern is to store a JSON file for each language in an `i18n/` directory inside your plugin:
+
+```javascript
+// my-plugin.js
+import fs from 'fs';
+import path from 'path';
+
+export default {
+  translations: (localeId) => {
+    // 1. Try loading the specific locale
+    try {
+      const p = path.join(__dirname, 'i18n', `${localeId}.json`);
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch { }
+
+    // 2. Fall back to English
+    try {
+      const p = path.join(__dirname, 'i18n', 'en.json');
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch { }
+
+    return {};
+  }
+}
+```
+
+You can then inject these strings via `generateScripts` (using `config._activeLocale.id` to determine the current language), or rely on the engine to merge them into a global registry.
 
 ## WebSocket RPC Actions
 

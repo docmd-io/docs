@@ -100,17 +100,13 @@ module.exports = defineConfig({
 
   // --- Plugins ---
   plugins: {
-    search: {},
-    // pwa: {},
+    pwa: { enabled: false },
     seo: {
       defaultDescription: 'Build production-ready documentation from Markdown in seconds. Zero setup when you start. Full control when you need it.',
       openGraph: { defaultImage: 'assets/images/preview.png' },
       twitter: { cardType: 'summary_large_image' }
     },
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },
-    sitemap: { defaultChangefreq: 'weekly', defaultPriority: 0.8 },
-    mermaid: {},
-    llms: {},
     math: {}
   },
 

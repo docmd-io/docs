@@ -1,5 +1,5 @@
 ---
-title: "Recipe: Optimizing for AI Agents"
+title: "Optimising for AI Agents"
 description: "Engineer your documentation for maximum ingestibility by LLMs and AI Agents."
 ---
 
@@ -22,11 +22,11 @@ export default {
 
 ## 2. Semantic Heading Integrity
 
-AI models utilize H-tags to build a hierarchical map of internal technical relationships.
+AI models utilise H-tags to build a hierarchical map of internal technical relationships.
 
 *   **Logical Descent**: Never skip heading levels (always go H1 → H2 → H3).
 *   **Technical Density**: Use descriptive headings. Instead of "Auth," use "Implementing OAuth2 Password Grants."
-*   **The H1 Singular**: Ensure your Markdown frontmatter `title` is descriptive; `docmd` utilizes this as the primary semantic entry point.
+*   **The H1 Singular**: Ensure your Markdown frontmatter `title` is descriptive; `docmd` utilises this as the primary semantic entry point.
 
 ## 3. Lexical Code Metadata
 
@@ -34,7 +34,7 @@ Always explicitly specify the language identifier for fenced code blocks. This a
 
 ````markdown
 ```typescript
-// Optimized entry point
+// Optimised entry point
 const docmd = new Engine();
 ```
 ````

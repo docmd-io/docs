@@ -7,7 +7,7 @@ Standard Markdown excels at basic text formatting, but professional technical do
 
 ## Block Syntax Reference
 
-All containers utilize a consistent block syntax, ensuring a predictable authoring experience across your entire project.
+All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.
 
 ```markdown
 ::: type "Optional Header Title"
@@ -38,12 +38,12 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
 
 ## Recursive Composition
 
-`docmd` supports **Infinite Nesting Depth**. You can compose any container within another to build complex, interactive documentation nodes purely with minimalist Markdown syntax.
+`docmd` supports **Infinite Nesting Depth**. You can compose any container within another to build complex, interactive documentation nodes purely in Markdown.
 
 ```markdown
 ::: card "Architecture Overview"
     ::: callout info
-        This module utilizes an asynchronous I/O pipeline.
+        This module utilises an asynchronous I/O pipeline.
     :::
     ::: button "Deep Dive into Core Engine" /advanced/developer-guide
 :::

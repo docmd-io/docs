@@ -1,9 +1,9 @@
 ---
 title: "LLM Context Plugin"
-description: "Optimized your documentation for AI Consumption with automated llms.txt and llms-full.txt generation."
+description: "Optimise your documentation for AI consumption with automated llms.txt and llms-full.txt generation."
 ---
 
-The `@docmd/plugin-llms` plugin ensures your documentation is perfectly optimized for Large Language Models (LLMs) and AI Agents. It follows the growing industry standard of providing a high-level summary and a comprehensive context file that AI tools can ingest to understand your project with minimal hallucination.
+The `@docmd/plugin-llms` plugin ensures your documentation is perfectly optimised for Large Language Models (LLMs) and AI Agents. It follows the growing industry standard of providing a high-level summary and a comprehensive context file that AI tools can ingest to understand your project with minimal hallucination.
 
 ## Configuration
 

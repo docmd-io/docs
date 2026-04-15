@@ -1,6 +1,6 @@
 ---
-title: "Quick Start — docmd Documentation"
-description: "Go from an empty folder to a running documentation site under a minute."
+title: "Quick Start"
+description: "Go from an empty folder to a running documentation site in under a minute."
 ---
 
 Run docmd inside any folder containing Markdown files. No config file, no setup, no framework knowledge required.

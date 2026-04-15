@@ -7,7 +7,7 @@ The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file 
 
 ## Configuration
 
-Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customize the crawl weight of various sections within the `plugins` object.
+Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customise the crawl weight of various sections within the `plugins` object.
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -26,7 +26,7 @@ export default defineConfig({
 
 ## Page-Level Controls
 
-You can override sitemap behavior for specific pages using frontmatter.
+You can override sitemap behaviour for specific pages using frontmatter.
 
 ```yaml
 ---

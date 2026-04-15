@@ -3,7 +3,7 @@ title: "Navigation Configuration"
 description: "Structure your sidebar, categorise links, and assign icons for human readers and LLMs."
 ---
 
-`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimizes the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.
+`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimises the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.
 
 ## The Navigation Array
 
@@ -31,7 +31,7 @@ export default defineConfig({
 
 ## Organizing Groups
 
-You can nest navigation items to create deep hierarchies. There are two primary ways to organize groups:
+You can nest navigation items to create deep hierarchies. There are two primary ways to organise groups:
 
 ### 1. Clickable Group (Directory with Index)
 If the parent has a `path`, clicking the label navigates to that page and automatically expands the children in the sidebar.

@@ -48,7 +48,7 @@ The theme engine applies a `data-theme` attribute to the `<body>` tag:
 If you are using a themed design like `sky`, the attribute will be `sky-light` or `sky-dark`.
 
 ### CSS Variables
-`docmd` themes use CSS variables for all colors. You can override these variables in your own CSS to customize the look of either mode.
+`docmd` themes use CSS variables for all colors. You can override these variables in your own CSS to customise the look of either mode.
 
 ```css
 /* Custom CSS override */

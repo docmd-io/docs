@@ -3,7 +3,7 @@ title: "Node.js API"
 description: "Integrate docmd's build engine into your custom Node.js scripts and automation pipelines."
 ---
 
-For advanced workflows, you can import and use the `docmd` build engine directly within your own Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending `docmd` for specialized environments.
+For advanced workflows, you can import and use the `docmd` build engine directly within your own Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending `docmd` for specialised environments.
 
 ## Installation
 
@@ -25,7 +25,7 @@ import { buildSite } from '@docmd/core';
 async function runBuild() {
   await buildSite('./docmd.config.js', {
     isDev: false,      // Set to true for watch mode logic
-    offline: false,    // Set to true to optimize for file:// access
+    offline: false,    // Set to true to optimise for file:// access
     zeroConfig: false  // Set to true to bypass config file detection
   });
 }

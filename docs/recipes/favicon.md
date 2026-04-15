@@ -7,7 +7,7 @@ The favicon is a critical branding element rendered within the browser tab. `doc
 
 ## 1. Format Preparation
 
-While `docmd` supports `.png` and `.svg` sources, utilize an `.ico` bundle for maximum legacy browser compatibility. Ensure your asset is at least 32x32px.
+While `docmd` supports `.png` and `.svg` sources, utilise an `.ico` bundle for maximum legacy browser compatibility. Ensure your asset is at least 32x32px.
 
 ## 2. Asset Staging
 

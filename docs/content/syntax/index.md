@@ -30,7 +30,7 @@ Advanced AI models and search internalizers rely on a strict heading hierarchy t
 
 ### Navigation & Reference
 
-Utilize standard link syntax for both internal documentation nodes and global resources.
+Utilise standard link syntax for both internal documentation nodes and global resources.
 
 ```markdown
 [Global Resource](https://docmd.io)
@@ -39,8 +39,8 @@ Utilize standard link syntax for both internal documentation nodes and global re
 
 ### Enumeration & Listing
 
-*   **Unordered Segments**: Utilize `*` or `-` for scannable bullet points.
-*   **Sequential Logic**: Utilize `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps)**).
+*   **Unordered Segments**: Utilise `*` or `-` for scannable bullet points.
+*   **Sequential Logic**: Utilise `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps)**).
 
 ## Technical Block Elements
 
@@ -58,7 +58,7 @@ The standard `>` syntax is ideal for highlighting outside quotes or background c
 
 ## Embedded HTML Support
 
-As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialized UI requirements.
+As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialised UI requirements.
 
 ```html
 <div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">

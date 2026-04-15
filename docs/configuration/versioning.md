@@ -7,7 +7,7 @@ description: "Enable multi-version documentation with seamless switching, sticky
 
 ## Directory Organization
 
-To enable versioning, organize your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
+To enable versioning, organise your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
 
 ```text
 my-project/

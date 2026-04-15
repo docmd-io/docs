@@ -1,13 +1,13 @@
 ---
 title: "Tabs"
-description: "Organize dense, alternative, or multi-language information into switchable interactive panes."
+description: "Organise dense, alternative, or multi-language information into switchable interactive panes."
 ---
 
 Tabs are the optimal UI pattern for presenting mutually exclusive or related data sets (e.g., "Install via NPM vs. Yarn" or "macOS vs. Windows" instructions) within a compact, interactive format.
 
 ## Syntax Reference
 
-The `tabs` container utilizes the specialized sub-delimiter `== tab "Label"`. Each label defines a distinct pane that users can toggle between.
+The `tabs` container utilises the specialised sub-delimiter `== tab "Label"`. Each label defines a distinct pane that users can toggle between.
 
 ```markdown
 ::: tabs
@@ -81,5 +81,5 @@ The default SPA router tracks the active tab's index across similar documentatio
 | **Responsive Limit** | It is recommended to limit tab counts to 6 per block to ensure mobile device compatibility. |
 
 ::: callout tip "AI Context Mapping"
-When utilizing tabs for code snippets, always include the target language directly in the tab label (e.g., `== tab "TypeScript"`). This allows LLMs to instantly identify and extract the technically relevant section from the `llms-full.txt` context stream.
+When utilising tabs for code snippets, always include the target language directly in the tab label (e.g., `== tab "TypeScript"`). This allows LLMs to instantly identify and extract the technically relevant section from the `llms-full.txt` context stream.
 :::

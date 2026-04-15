@@ -1,16 +1,13 @@
 [
-  { "title": "Overview", "path": "/", "icon": "home" },
+  { "title": "Home", "path": "/", "icon": "home" },
   {
     "title": "Getting Started",
     "icon": "rocket",
     "collapsible": false,
     "children": [
-      { "title": "Zero Config", "path": "/getting-started/zero-config" },
       { "title": "Quick Start", "path": "/getting-started/quick-start" },
-      { "title": "Your First Site", "path": "/getting-started/first-site" },
-      { "title": "Project Structure", "path": "/getting-started/project-structure" },
-      { "title": "Localisation", "path": "/getting-started/localisation" },
-      { "title": "Installation", "path": "/getting-started/installation" }
+      { "title": "Installation", "path": "/getting-started/installation" },
+      { "title": "Project Structure", "path": "/getting-started/project-structure" }
     ]
   },
   {
@@ -61,7 +58,7 @@
       { "title": "Navigation", "path": "/configuration/navigation" },
       { "title": "Layout & UI", "path": "/configuration/layout-ui" },
       { "title": "Menubar", "path": "/configuration/menubar" },
-      { "title": "Internationalisation", "path": "/configuration/i18n" },
+      { "title": "Localisation", "path": "/configuration/localisation" },
       { "title": "Versioning", "path": "/configuration/versioning" },
       { "title": "Redirects", "path": "/configuration/redirects" }
     ]
@@ -75,7 +72,6 @@
       { "title": "Customisation", "path": "/theming/customization" },
       { "title": "Light & Dark Mode", "path": "/theming/light-dark-mode" },
       { "title": "Custom CSS & JS", "path": "/theming/custom-css-js" },
-      { "title": "Dynamic Theme Engine", "path": "/theming/dynamic-theme-engine" },
       { "title": "Icons", "path": "/theming/icons" },
       { "title": "Assets", "path": "/theming/assets-management" }
     ]
@@ -85,7 +81,7 @@
     "icon": "puzzle",
     "collapsible": true,
     "children": [
-      { "title": "Core Plugins", "path": "/plugins/core-plugins" },
+      { "title": "Using Plugins", "path": "/plugins/usage" },
       { "title": "Search", "path": "/plugins/search" },
       { "title": "SEO", "path": "/plugins/seo" },
       { "title": "Sitemap", "path": "/plugins/sitemap" },
@@ -95,7 +91,6 @@
       { "title": "Mermaid", "path": "/plugins/mermaid" },
       { "title": "Threads", "path": "/plugins/threads" },
       { "title": "Math (KaTeX)", "path": "/plugins/math" },
-      { "title": "Plugin API", "path": "/plugins/plugin-api" },
       { "title": "Building Plugins", "path": "/plugins/building-plugins" }
     ]
   },

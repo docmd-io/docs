@@ -71,7 +71,7 @@ customHead: |
   <div class="demo-card">
     <h2>Logical Foundation</h2>
     <p>
-      This demonstration utilizes the <code>noStyle: true</code> frontmatter directive to bypass the global documentation layout (Sidebar, Header, and TOC). This provides a "Zero-Friction" canvas for creating marketing landing pages or custom product dashboards.
+      This demonstration utilises the <code>noStyle: true</code> frontmatter directive to bypass the global documentation layout (Sidebar, Header, and TOC). This provides a "Zero-Friction" canvas for creating marketing landing pages or custom product dashboards.
     </p>
     
     <h3>Enabled System Components</h3>

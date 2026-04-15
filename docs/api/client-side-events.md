@@ -3,7 +3,7 @@ title: "Client-Side Events"
 description: "Hook into the docmd SPA lifecycle to add interactive features."
 ---
 
-`docmd` utilizes a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
+`docmd` utilises a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
 
 To handle this, `docmd` dispatches custom lifecycle events that you can listen for in your `customJs` files.
 

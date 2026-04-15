@@ -47,5 +47,5 @@ export default {
 ## AI Recognition Strategy
 
 When adding assets:
-*   **Organize by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header color".
+*   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header color".
 *   **Use Descriptive Filenames**: Naming an image `authentication-flow-diagram.png` provides much more context to the `llms.txt` crawler than `img_01.png`.

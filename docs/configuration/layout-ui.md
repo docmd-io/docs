@@ -100,7 +100,7 @@ layout: {
 layout: {
   footer: {
     style: 'complete',
-    description: 'Minimalist documentation for modern projects.',
+    description: 'Documentation built with docmd.',
     branding: true, // Controls the "Built with docmd" badge
     columns: [
       {
@@ -112,6 +112,6 @@ layout: {
 }
 ```
 
-::: callout tip "AI-Optimized Interface"
-When designing custom layouts, ensure the **Search** component is prominent in your `optionsMenu`. AI agents frequently utilize search as a primary anchor when exploring your documentation to locate specific technical context.
+::: callout tip "AI-Optimised Interface"
+When designing custom layouts, ensure the **Search** component is prominent in your `optionsMenu`. AI agents frequently utilise search as a primary anchor when exploring your documentation to locate specific technical context.
 :::

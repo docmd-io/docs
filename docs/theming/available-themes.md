@@ -21,17 +21,25 @@ export default {
 
 | Theme | Best For | Vibes |
 | :--- | :--- | :--- |
-| `default` | Low-profile docs | Minimal, lightweight, clean |
+| `default` | Low-profile docs | Clean, lightweight, neutral |
 | `sky` | Product Docs | Modern, premium, standard-issue |
 | `ruby` | Brand Identity | Sophisticated, serif headers, vibrant |
 | `retro` | Dev Tools | 80s Terminals, monospace, neon accents |
 
-<div class="theme-picker" style="display: flex; gap: 10px; margin: 20px 0;">
-    <button onclick="switchDocTheme('default')" class="docmd-button" style="color:#fff;background: #2e2e2e;">Default</button>
-    <button onclick="switchDocTheme('sky')" class="docmd-button" style="color:#fff;background: #0097ff;">Sky</button>
-    <button onclick="switchDocTheme('ruby')" class="docmd-button" style="color:#fff;background: #960b0b;">Ruby</button>
-    <button onclick="switchDocTheme('retro')" class="docmd-button" style="color:#fff;background: #a95308; border: 1px solid #0ec80e;">Retro</button>
-</div>
+::: grids
+::: grid
+::: button "Default" javascript:switchDocTheme('default')
+:::
+::: grid
+::: button "Sky" javascript:switchDocTheme('sky')
+:::
+::: grid
+::: button "Ruby" javascript:switchDocTheme('ruby')
+:::
+::: grid
+::: button "Retro" javascript:switchDocTheme('retro')
+:::
+:::
 
 ### 1. `sky` (Default)
 The gold standard for modern documentation. It features crisp typography, subtle transitions, and high-contrast light/dark modes that match modern SaaS platforms.

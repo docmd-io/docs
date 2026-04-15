@@ -3,13 +3,13 @@ title: "Recipe: Integrating Custom Fonts"
 description: "Personalize your site's typography via Google Fonts and CSS variable overrides."
 ---
 
-`docmd` utilizes a robust CSS variable system to manage design tokens. Personalizing your site's typography involves importing external font assets and overriding the core root variables.
+`docmd` utilises a robust CSS variable system to manage design tokens. Personalizing your site's typography involves importing external font assets and overriding the core root variables.
 
 ## 1. Define Your Typography Manifest
 
 Establish a custom CSS file within your project (e.g., `assets/css/typography.css`).
 
-Identify your target font family on [Google Fonts](https://fonts.google.com) and utilize the `@import` directive to fetch the assets. Then, map these fonts to the `docmd` Typography tokens.
+Identify your target font family on [Google Fonts](https://fonts.google.com) and utilise the `@import` directive to fetch the assets. Then, map these fonts to the `docmd` Typography tokens.
 
 ```css
 /* assets/css/typography.css */

@@ -1,6 +1,6 @@
 ---
 title: "Grids"
-description: "Organize layout seamlessly with auto-adjusting responsive columns using native markdown containers."
+description: "Organise layout seamlessly with auto-adjusting responsive columns using native markdown containers."
 ---
 
 Grids provide a native, markdown-driven layout system in `docmd`. Instead of writing manual HTML wrappers, you can leverage the `grids` container to structure elements side-by-side. 
