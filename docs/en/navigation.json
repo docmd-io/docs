@@ -58,7 +58,10 @@
       { "title": "Navigation", "path": "/configuration/navigation" },
       { "title": "Layout & UI", "path": "/configuration/layout-ui" },
       { "title": "Menubar", "path": "/configuration/menubar" },
-      { "title": "Localisation", "path": "/configuration/localisation" },
+      { "title": "Localisation", "path": "/configuration/localisation", "collapsible": true, "children": [
+        { "title": "Translated Content", "path": "/configuration/localisation/translated-content" },
+        { "title": "UI Strings & SEO", "path": "/configuration/localisation/ui-strings" }
+      ]},
       { "title": "Versioning", "path": "/configuration/versioning" },
       { "title": "Redirects", "path": "/configuration/redirects" }
     ]
