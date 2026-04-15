@@ -1,6 +1,6 @@
 ---
-title: "Comparing Documentation Tools"
-description: "A professional comparison between docmd and other popular documentation generators like Docusaurus, MkDocs, and Mintlify."
+title: "Comparison — docmd Documentation"
+description: "A functional comparison between docmd and alternative documentation generators."
 ---
 
 `docmd` was engineered to occupy the space between simple Markdown parsers and heavy-weight framework applications (like Docusaurus). It provides the speed and SEO of a static site with the interactive feel of a modern Single Page Application (SPA).
@@ -13,11 +13,12 @@ description: "A professional comparison between docmd and other popular document
 | **Navigation** | **Instant SPA** | React SPA | Full Reloads | Hosted SPA |
 | **Base Payload** | **< 20kb** | > 200kb | Minimal | Medium |
 | **Versioning** | **Native** | Complex FS | Plugin-based | Native |
-| **i18n Support** | **Coming Soon** | Native | Plugin-based | Native |
+| **i18n Support** | **Native** | Native | Plugin-based | Native |
 | **Search** | **Built-in (Offline)** | Algolia (Cloud) | Built-in | Cloud-based |
+| **Collaboration** | **Native (Threads)** | None | None | None |
 | **PWA** | **Built-in (Plugin)** | Plugin | None | Hosted |
-| **AI Optimization** | **Built-in (llms.txt)** | Manual | None | Proprietary |
-| **Setup** | **Instant (-z)** | ~15 mins | ~10 mins | ~5 mins |
+| **AI Optimisation** | **Built-in (llms.txt)** | Manual | None | Proprietary |
+| **Setup** | **Instant (Zero-Config)** | ~15 mins | ~10 mins | ~5 mins |
 
 ## The docmd Advantage
 
