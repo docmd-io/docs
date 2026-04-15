@@ -3,8 +3,8 @@
 
 module.exports = defineConfig({
   // --- Core Metadata ---
-  siteTitle: 'docmd',
-  siteUrl: 'https://docs.docmd.io',
+  title: 'docmd',
+  url: 'https://docs.docmd.io',
 
   // --- Branding ---
   logo: {
@@ -16,8 +16,8 @@ module.exports = defineConfig({
   favicon: 'assets/favicon.ico',
 
   // --- Structure ---
-  srcDir: 'docs',
-  outputDir: 'site',
+  src: 'docs',
+  out: 'site',
 
   // --- Features & UX ---
   minify: true,
@@ -65,7 +65,7 @@ module.exports = defineConfig({
     },
     footer: {
       style: 'complete', // 'minimal' or 'complete'
-      description: 'The minimalist, zero-config documentation generator for Node.js developers.',
+      description: 'Build production-ready documentation from Markdown in seconds.',
       copyright: `© ${new Date().getFullYear()} Project docmd.`,
       columns: [
         {
@@ -103,7 +103,7 @@ module.exports = defineConfig({
     search: {},
     // pwa: {},
     seo: {
-      defaultDescription: 'The minimalist, zero-config documentation generator for Node.js developers.',
+      defaultDescription: 'Build production-ready documentation from Markdown in seconds. Zero setup when you start. Full control when you need it.',
       openGraph: { defaultImage: 'assets/images/preview.png' },
       twitter: { cardType: 'summary_large_image' }
     },
@@ -112,6 +112,16 @@ module.exports = defineConfig({
     mermaid: {},
     llms: {},
     math: {}
+  },
+
+  // --- Internationalisation ---
+  i18n: {
+    default: 'en',
+    locales: [
+      { id: 'en', label: 'English', dir: 'ltr' },
+      { id: 'hi', label: 'हिन्दी', dir: 'ltr' },
+      { id: 'zh', label: '中文', dir: 'ltr' }
+    ]
   },
 
   versions: {

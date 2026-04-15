@@ -1,6 +1,6 @@
 ---
-title: "Navigation Configuration — docmd Documentation"
-description: "Structure your sidebar, categorise links, and assign icons for human readers and AI models."
+title: "Navigation Configuration"
+description: "Structure your sidebar, categorise links, and assign icons for human readers and LLMs."
 ---
 
 `docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimizes the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.

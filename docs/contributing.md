@@ -1,5 +1,5 @@
 ---
-title: "Contributing — docmd Documentation"
+title: "Contributing"
 description: "Guidelines and setup instructions for contributing to docmd."
 ---
 

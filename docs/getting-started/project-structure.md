@@ -1,86 +1,62 @@
 ---
-title: "Basic Usage"
-description: "Learn how to initialize a project, organize your Markdown files, and build your documentation site."
+title: "Project Structure — docmd Documentation"
+description: "How docmd maps your files and folders to pages, URLs, and navigation."
 ---
 
-Getting started with `docmd` is designed to be instantaneous. This guide walks you through the core workflow, from initial setup to the final production build.
+docmd uses your filesystem as the source of truth. Folders become sections, Markdown files become pages, and the directory hierarchy defines URL routes.
 
-## 1. Project Initialization
-
-To start a new documentation project, create a directory and execute the `init` command.
+## Initialise a project
 
 ```bash
 mkdir my-docs && cd my-docs
-npx docmd init
+npx @docmd/core init
 ```
 
-### Project Structure
+This creates the standard project scaffold:
 
-After initialization, your project will follow a clean and predictable structure:
-
-| File / Directory | Description |
-| :--- | :--- |
-| `docs/` | **Source Directory.** Place all your `.md` files here. |
-| `assets/` | Static assets (images, custom CSS, or client-side JavaScript). |
-| `docmd.config.js` | **Configuration File.** Define branding, navigation, and plugins. |
-| `site/` | **Output Directory.** Contains the generated static site after running `build`. |
-
-## 2. Real-Time Development
-
-You can preview your changes instantly without manual rebuilding. Start the development server with:
-
-```bash
-npx docmd dev
+```
+my-docs/
+├── docs/               ← Source directory. Your .md files go here.
+│   └── index.md        ← Home page (/)
+├── assets/             ← Static assets (images, custom CSS/JS)
+├── docmd.config.js     ← Configuration file
+└── site/               ← Generated output (after build)
 ```
 
-*   **Access**: `http://localhost:3000`
-*   **Live Reload**: Changes to `.md` files or `docmd.config.js` are reflected instantly in the browser via Hot Module Replacement.
+<!-- IMAGE NEEDED: Screenshot of terminal after running npx @docmd/core init showing the generated file tree -->
 
-## 3. Content Organization
+## File-to-URL mapping
 
-`docmd` maps the file structure of your `docs/` folder directly to URLs. Subdirectories are handled automatically.
+docmd maps your `docs/` directory structure directly to URLs:
 
-*   `docs/index.md` → `/` (Home)
-*   `docs/api.md` → `/api`
-*   `docs/guides/setup.md` → `/guides/setup`
+| File | URL |
+|:-----|:----|
+| `docs/index.md` | `/` |
+| `docs/api.md` | `/api` |
+| `docs/guides/setup.md` | `/guides/setup` |
 
-::: callout tip "Use standard Markdown"
-Use standard Markdown. If a page title is not defined in the frontmatter, `docmd` will automatically extract the first `H1` header as the title.
+::: callout tip "Automatic titles"
+If a page title is not defined in frontmatter, docmd extracts the first `H1` heading as the title.
 :::
 
-## 4. Customizing Navigation
-
-The sidebar navigation is controlled via the `navigation` array in `docmd.config.js`. This allows you to define a logical hierarchy for your content.
-
-```javascript
-import { defineConfig } from '@docmd/core';
-
-export default defineConfig({
-  navigation: [
-    { title: 'Introduction', path: '/', icon: 'home' },
-    {
-      title: 'Advanced',
-      icon: 'settings',
-      collapsible: true,
-      children: [
-        { title: 'Configuration', path: '/configuration' },
-        { title: 'Plugins', path: '/plugins' }
-      ]
-    }
-  ]
-});
-```
-
-## 5. Production Build
-
-When you are ready to deploy, generate a production-ready static site:
+## Start the dev server
 
 ```bash
-npx docmd build
+npx @docmd/core dev
 ```
 
-This command produces a highly optimized Single Page Application (SPA) in the `site/` directory. The output is entirely static and can be hosted on platforms like GitHub Pages, Vercel, Netlify, or even served from a local file system.
+Opens `http://localhost:3000` with live reload. Changes to `.md` files or `docmd.config.js` are reflected instantly.
 
-### Verification
+## Build for production
 
-To verify your production build locally, you can use any static file server (e.g., `npx serve site`) to ensure all links and assets are functioning correctly before deployment.
+```bash
+npx @docmd/core build
+```
+
+Outputs a static site to `./site/`. The output is entirely static HTML — deploy it to GitHub Pages, Vercel, Netlify, or any static host.
+
+Verify locally before deploying:
+
+```bash
+npx serve site
+```

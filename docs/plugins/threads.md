@@ -1,5 +1,5 @@
 ---
-title: "Threads Plugin — docmd Documentation"
+title: "Threads Plugin"
 description: "Add inline discussion threads to your documentation — stored directly in your markdown files."
 ---
 

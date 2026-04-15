@@ -34,18 +34,3 @@ npx @docmd/core build
 ```
 
 Outputs a static site to `./site/`, ready to deploy anywhere.
-
-## Next steps
-
-::: grids
-::: grid
-::: card "Install locally"
-For long-term projects, [install docmd](./installation.md) as a dev dependency.
-:::
-:::
-::: grid
-::: card "Explore the structure"
-Learn how docmd organises files in [Project Structure](./project-structure.md).
-:::
-:::
-:::

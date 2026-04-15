@@ -1,5 +1,5 @@
 ---
-title: "Comparison — docmd Documentation"
+title: "Comparison"
 description: "A functional comparison between docmd and alternative documentation generators."
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "General Configuration — docmd Documentation"
+title: "General Configuration"
 description: "Configure docmd.config.js schema, branding, layout, and engine features."
 ---
 
