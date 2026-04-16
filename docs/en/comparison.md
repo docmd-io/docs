@@ -13,11 +13,11 @@ description: "A factual comparison between docmd and other documentation generat
 | **Config required** | **None** | `docusaurus.config.js` | `mkdocs.yml` | `config.mts` | `mint.json` |
 | **Initial payload** | **~18kb** | ~250kb | ~40kb | ~50kb | ~120kb |
 | **Navigation** | **SPA router** | React SPA | Full reloads | Vue SPA | Hosted SPA |
-| **Versioning** | **Native (directory-based)** | Native (complex) | mike plugin | Manual | Native |
-| **i18n** | **Native (locale dirs)** | Native (complex) | Plugin-based | Manual | Native |
-| **Search** | **Built-in offline** | Algolia (cloud) | Built-in | MiniSearch | Cloud |
+| **Versioning** | **Native** | Native (complex) | mike plugin | Manual | Native |
+| **i18n** | **Native** | Native (complex) | Plugin-based | Manual | Native |
+| **Search** | **Built-in** | Algolia (cloud) | Built-in | MiniSearch | Cloud |
 | **PWA** | **Built-in** | Community plugin | None | None | Hosted |
-| **llms.txt** | **Auto-generated** | Manual | None | None | Proprietary |
+| **llms.txt** | **Built-in (Auto-generated)** | Manual | None | None | Proprietary |
 | **Inline discussions** | **Threads plugin** | None | None | None | None |
 | **Self-hosted** | **Yes** | Yes | Yes | Yes | No |
 | **Zero-config start** | **`npx @docmd/core dev`** | No | No | No | No |
@@ -68,7 +68,7 @@ docmd ships with a brute test suite that validates **25 distinct scenarios** acr
 
 ::: callout tip "Run the tests yourself"
 ```bash
-git clone https://github.com/nicholasgriffintn/docmd.git
+git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js
 ```
 :::
@@ -95,14 +95,3 @@ At ~18kb initial load, docmd serves pages faster than any competitor. Pure seman
 :::
 
 :::
-
-## When to Choose Something Else
-
-::: callout info "No tool is perfect for every use case"
-- **Docusaurus** — Best when you need React components (MDX) embedded inside documentation pages, or when you're part of the React ecosystem.
-- **VitePress** — Best for Vue-ecosystem projects that want tight Vue component integration in Markdown.
-- **MkDocs Material** — Best for Python-first environments with extensive theming via the Material theme.
-- **Mintlify** — Best if you want a fully managed, hosted solution with zero server management.
-- **docmd** — Best when you want the fastest, lightest, most feature-complete static documentation generator that works out of the box.
-:::
-- **docmd**: Best if you value speed, developer experience, a modern SPA feel, and want your documentation to be digestible by both humans and AI agents.

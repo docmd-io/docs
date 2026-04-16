@@ -13,6 +13,13 @@ The technical content or warning goes here.
 :::
 ```
 
+Add an optional `icon:` parameter to override the default type icon with any [Lucide](https://lucide.dev/icons) icon:
+```markdown
+::: callout info "Custom Icon" icon:sparkles
+This callout uses a custom icon instead of the default info icon.
+:::
+```
+
 ### Supported Semantic Types
 
 | Type | Intent | Visual Signal |

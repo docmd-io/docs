@@ -16,6 +16,7 @@ Main content goes here.
 ### Options Reference
 - **`open`**: (Optional) If specified, the section initializes in an expanded state.
 - **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
+- **`icon:NAME`**: (Optional) Adds a [Lucide](https://lucide.dev/icons) icon before the title text.
 
 ## Detailed Implementation Examples
 

@@ -13,6 +13,16 @@ This is the primary content area of the card.
 :::
 ```
 
+Add an optional `icon:` parameter to display a [Lucide](https://lucide.dev/icons) icon in the header:
+```markdown
+::: card "Setup" icon:rocket
+Get started in seconds.
+:::
+```
+::: card "Setup" icon:rocket
+Get started in seconds.
+:::
+
 ## Practical Implementation Examples
 
 ### 1. Feature Showcasing

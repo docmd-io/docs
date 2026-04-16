@@ -18,6 +18,7 @@ Buttons are high-impact UI elements used for prominent navigation. Unlike block 
 | **Path** | `/path/` | Relative project URL (resolves automatically for SPA navigation). |
 | **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
 | **Color** | `color:VALUE` | Applies a background color (supports CSS names or Hex codes). |
+| **Icon** | `icon:NAME` | Adds a [Lucide](https://lucide.dev/icons) icon before the button label. |
 
 ## Usage Examples
 
@@ -43,6 +44,15 @@ Match buttons to your brand identity or semantic priority using color overrides.
 ```
 ::: button "Danger Action" ./#delete color:crimson
 ::: button "Success Confirmation" ./#success color:#228B22
+
+### 4. Buttons with Icons
+Add a Lucide icon to enhance visual clarity.
+```markdown
+::: button "Get Started" /getting-started/installation icon:arrow-right
+::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+```
+::: button "Get Started" /getting-started/installation icon:arrow-right
+::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
 ## Critical Note: Self-Closing Logic
 

@@ -113,9 +113,9 @@ module.exports = defineConfig({
   // --- Internationalisation ---
   i18n: {
     default: 'en',
+    position: 'sidebar-top',
     locales: [
       { id: 'en', label: 'English', dir: 'ltr' },
-      { id: 'hi', label: 'हिन्दी', dir: 'ltr' },
       { id: 'zh', label: '中文', dir: 'ltr' }
     ]
   },
@@ -124,7 +124,7 @@ module.exports = defineConfig({
     current: '07',
     position: 'sidebar-top',
     all: [
-      { id: '07', dir: 'docs', label: 'v0.7.0 (Latest)' },
+      { id: '07', dir: 'docs', label: 'v0.7.0' },
       { id: '06', dir: 'docs-06', label: 'v0.6.0' },
       { id: '05', dir: 'docs-05', label: 'v0.5.0' },
       { id: '04', dir: 'docs-04', label: 'v0.4.0' }

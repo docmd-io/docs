@@ -1,16 +1,8 @@
 ---
-title: "docmd"
+title: "docmd - Zero config documentation generator"
 description: "Markdown to production docs in one command. Static HTML for SEO, SPA for speed, AI-ready by default."
+titleAppend: false
 ---
-
-<!--
-```text
-   _                 _ 
- _| |___ ___ _____ _| |
-| . | . |  _|     | . |
-|___|___|___|_|_|_|___|
-```
--->
 
 ::: hero
 
@@ -18,38 +10,72 @@ description: "Markdown to production docs in one command. Static HTML for SEO, S
 
 Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
 
-::: button "Quick Start" /getting-started/quick-start
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333
+::: button "Get Started" /getting-started/quick-start icon:rocket
+::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
 :::
 
-<!-- IMAGE NEEDED: High-quality screenshot of a complete docmd documentation site showing sidebar, content, and search. -->
+## Start
+
+Get a production documentation site running in seconds — no boilerplate, no config files.
+
+```bash
+npx @docmd/core dev
+```
+
+That's it. Write Markdown in a `docs/` folder and docmd builds a full documentation site with navigation, search, SEO, sitemap, and more — all out of the box.
 
 ## Core Capabilities
 
-docmd ships with everything you need built-in. No boilerplate required.
+Everything you need ships built-in. No plugins to install for the essentials.
 
-::: button "Instant Setup" /getting-started/quick-start icon:rocket
-::: button "AI Optimised" /plugins/llms icon:brain-circuit
-::: button "Built-in Search" /plugins/search icon:search
-::: button "Live Previews" /content/live-preview icon:monitor
-::: button "Theming Engine" /theming/available-themes icon:palette
-::: button "Native i18n" /configuration/localisation icon:globe
+::: grids
+::: grid
+::: card "Instant Setup" icon:rocket
+One command to go from Markdown files to a production documentation site. No config files required.
+:::
+:::
+::: grid
+::: card "AI Optimised" icon:brain-circuit
+Auto-generates `llms.txt` and `llms-full.txt` for LLM consumption. Your docs are AI-ready by default.
+:::
+:::
+::: grid
+::: card "Built-in Search" icon:search
+Client-side full-text search powered by MiniSearch. Works across versions and locales with zero setup.
+:::
+:::
+::: grid
+::: card "Live Previews" icon:monitor
+Embed live, editable code sandboxes directly in your documentation pages.
+:::
+:::
+::: grid
+::: card "Theming Engine" icon:palette
+Switch between built-in themes or create your own. Supports light, dark, and system-preference modes.
+:::
+:::
+::: grid
+::: card "Native i18n" icon:globe
+First-class multi-language support with locale-first URLs, per-locale search, and translated UI strings.
+:::
+:::
+:::
 
 ## Extending Markdown
 
-Go beyond static text. Build comprehensive documentation layouts using native container syntax directly in your Markdown.
+Go beyond static text. docmd provides rich container syntax directly in Markdown — callouts, tabs, cards, grids, hero sections, collapsible sections, and more.
 
 ::: button "Explore Containers" /content/containers/ icon:blocks
 
 ::: grids
 ::: grid
 ::: card "Interactive Sandboxes"
-Embed live, editable preview windows naturally into your paragraphs using the [Live Preview](/content/live-preview) API.
+Embed live, editable preview windows naturally into your pages using the [Live Preview](/content/live-preview) API.
 :::
 :::
 ::: grid
 ::: card "Inline Collaboration"
-Select text in dev mode to open [Threads](/plugins/threads) and leave comments alongside your documentation team directly inside the markdown files.
+Select text in dev mode to open [Threads](/plugins/threads) and leave comments alongside your documentation team.
 :::
 :::
 :::
