@@ -30,7 +30,7 @@ my-docs/
 └── site/               ← Generated output (after build)
 ```
 
-<!-- IMAGE NEEDED: Screenshot of terminal after running npx @docmd/core init showing the generated file tree -->
+<!-- SCREENSHOT: Screenshot of terminal after running npx @docmd/core init showing the generated file tree -->
 
 ## File-to-URL mapping
 

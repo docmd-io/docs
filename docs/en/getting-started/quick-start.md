@@ -9,17 +9,15 @@ Run docmd inside any folder containing Markdown files. No config file, no setup,
 
 ```bash
 npx @docmd/core dev
-
-
-<!-- SCREENSHOT: Terminal output after running `npx @docmd/core dev` showing the local dev server URL and build summary with page count. -->
 ```
+<!-- SCREENSHOT: Terminal output after running `npx @docmd/core dev` showing the local dev server URL and build summary with page count. -->
 
 Opens `http://localhost:3000`. Your documentation is live.
 
 
 <!-- SCREENSHOT: Browser showing the docmd default page at localhost:3000 — the auto-generated homepage with sidebar navigation visible. -->
 
-<!-- IMAGE NEEDED: Screenshot of a fresh docmd dev server running with auto-generated navigation -->
+<!-- SCREENSHOT: Screenshot of a fresh docmd dev server running with auto-generated navigation -->
 
 ## What happens automatically
 

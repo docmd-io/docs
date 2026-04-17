@@ -36,6 +36,7 @@ The plugin automatically generates a `service-worker.js` file that implements a 
 
 
 <!-- SCREENSHOT: Mobile device (iOS or Android) showing the "Add to Home Screen" prompt for a docmd-powered site, and the resulting app icon on the home screen. -->
+
 By generating a `manifest.webmanifest` and injecting the required `<meta>` tags, the plugin allows users to "Add to Home Screen" on iOS and Android. Your documentation will behave like a standalone application, with its own splash screen and window frame.
 
 ### 3. Smart Asset Resolution
