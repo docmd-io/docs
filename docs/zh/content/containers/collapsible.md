@@ -1,55 +1,55 @@
 ---
-title: "Collapsible Sections"
-description: "Embed interactive accordion-style toggles for FAQs, deep-dive content, and spoilers."
+title: "折叠区块"
+description: "为常见问题、深度内容和隐藏内容嵌入交互式手风琴折叠切换。"
 ---
 
 The `collapsible` container creates an interactive, toggleable section (accordion). This pattern is ideal for FAQs, detailed technical configuration, or any secondary information that should be accessible without cluttering the primary documentation flow.
 
-## Syntax
+## 语法
 
 ```markdown
-::: collapsible [open] "Title Text"
-Main content goes here.
+::: collapsible [open] "标题文本"
+主要内容在此处。
 :::
 ```
 
-### Options Reference
-- **`open`**: (Optional) If specified, the section initializes in an expanded state.
-- **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
+### 选项参考
+- **`open`**：（可选）指定后，折叠区域初始时为展开状态。
+- **`"标题"`**：交互式切换栏上显示的文本。省略时默认为"点击展开"。
 
-## Detailed Implementation Examples
+## 详细实现示例
 
-### Standard Usage (Initial State: Closed)
-Primarily used for FAQs or reducing the visual density of technical pages.
-
-```markdown
-::: collapsible "How do I upgrade docmd?"
-Run `npm update -g @docmd/core` to fetch the latest stable engine.
-:::
-```
-::: collapsible "How do I upgrade docmd?"
-Run `npm update -g @docmd/core` to fetch the latest stable engine.
-:::
-
-### Opt-In Visibility (Initial State: Open)
-Ideal for sections that should be visible by default but allow the user to minimize them for a cleaner view.
+### 标准用法（初始状态：折叠）
+主要用于常见问题或减少技术页面的视觉密度。
 
 ```markdown
-::: collapsible open "Environment Prerequisites"
-1.  Node.js v18+ (LTS recommended)
-2.  PNPM package manager
+::: collapsible "如何升级 docmd？"
+运行 `npm update -g @docmd/core` 以获取最新稳定引擎。
 :::
 ```
-::: collapsible open "Environment Prerequisites"
-1.  Node.js v18+ (LTS recommended)
-2.  PNPM package manager
+::: collapsible "如何升级 docmd？"
+运行 `npm update -g @docmd/core` 以获取最新稳定引擎。
 :::
 
-### Nested Technical Data
-Collapsibles can contain complex Markdown elements, including syntax-highlighted code blocks.
+### 可选可见性（初始状态：展开）
+适合默认应可见但允许用户最小化以获得更简洁视图的章节。
+
+```markdown
+::: collapsible open "环境先决条件"
+1.  Node.js v18+（推荐 LTS 版本）
+2.  PNPM 包管理器
+:::
+```
+::: collapsible open "环境先决条件"
+1.  Node.js v18+（推荐 LTS 版本）
+2.  PNPM 包管理器
+:::
+
+### 嵌套技术数据
+折叠区块可包含复杂 Markdown 元素，包括语法高亮代码块。
 
 ````markdown
-::: collapsible "Analyze Sample JSON Response"
+::: collapsible "分析示例 JSON 响应"
 ```json
 {
   "status": "success",
@@ -58,7 +58,7 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
 ```
 :::
 ````
-::: collapsible "Analyze Sample JSON Response"
+::: collapsible "分析示例 JSON 响应"
 ```json
 {
   "status": "success",
@@ -68,5 +68,5 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
 :::
 
 ::: callout tip
-While content inside a `collapsible` may be hidden from the human user, it remains fully visible to the `docmd` search index and is included in the unified `llms-full.txt` stream. This ensures AI agents can provide comprehensive answers based on hidden technical details while the human-facing interface remains clean and prioritized.
+虽然 `collapsible` 中的内容对人类用户可能是隐藏的，但它对 `docmd` 搜索索引完全可见，并包含在统一的 `llms-full.txt` 流中。这确保了 AI Agent 可以基于隐藏的技术细节提供全面答案，同时人类界面保持简洁和有序。
 :::

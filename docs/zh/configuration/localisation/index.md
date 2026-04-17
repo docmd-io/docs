@@ -1,11 +1,10 @@
 ---
 title: "国际化"
-description: "Serve documentation in multiple languages with locale-first routing, translated navigation, and automatic fallback."
+description: "通过语言区域优先路由、翻译导航和自动降级回退，以多种语言提供文档服务。"
 ---
+为你的文档站点添加多语言支持。docmd 以各自的 URL 前缀提供每种语言区域的内容，翻译系统 UI 字符串，并在缺少翻译时优雅地回退。
 
-Add multi-language support to your documentation site. docmd serves each locale at its own URL prefix, translates system UI strings, and falls back gracefully when a translation is missing.
-
-## Add languages to your config
+## 在配置中添加语言
 
 ```js
 // docmd.config.js
@@ -21,59 +20,56 @@ export default {
 }
 ```
 
-The `default` locale renders at the site root (`/`). All other locales render at `/{id}/`. You choose the IDs, labels, and which locale is the default — there are no hardcoded assumptions. If you want Hindi as the default, set `default: 'hi'` and Hindi renders at `/` whilst English renders at `/en/`.
+`default` 语言区域在站点根路径（`/`）渲染。其他所有区域在 `/{id}/` 渲染。你可以自由选择 ID、标签以及哪个区域为默认值——没有任何硬编码假设。如果想以印地语为默认语言，设置 `default: 'hi'`，印地语将在 `/` 渲染，英语在 `/en/` 渲染。
 
-| Key | Type | Description |
+| 键 | 类型 | 说明 |
 |:----|:-----|:------------|
-| `default` | `string` | Locale ID that renders at `/`. Defaults to the first locale if omitted. |
-| `locales` | `array` | List of locale objects. Each must have an `id`. |
-| `position` | `string` | Where the language switcher appears. `options-menu` (default), `sidebar-top`, or `sidebar-bottom`. |
+| `default` | `string` | 在 `/` 渲染的区域 ID。省略时默认为第一个区域。 |
+| `locales` | `array` | 区域对象列表。每个对象必须包含 `id`。 |
+| `position` | `string` | 语言切换器的显示位置。`options-menu`（默认）、`sidebar-top` 或 `sidebar-bottom`。 |
 
-Each locale object accepts:
+每个区域对象可包含以下字段：
 
-| Key | Type | Default | Description |
+| 键 | 类型 | 默认值 | 说明 |
 |:----|:-----|:--------|:------------|
-| `id` | `string` | — | Any identifier you choose (e.g. `en`, `hi`, `fr-ca`). Used as the folder name and URL prefix. Required. |
-| `label` | `string` | Same as `id` | Display name shown in the language switcher. |
-| `dir` | `string` | `ltr` | Text direction. Set to `rtl` for Arabic, Hebrew, etc. |
-| `translations` | `object` | `{}` | Custom UI string overrides (see [Custom UI strings](./ui-strings)). |
+| `id` | `string` | — | 你选择的任意标识符（如 `en`、`hi`、`fr-ca`）。用作文件夹名称和 URL 前缀。必填。 |
+| `label` | `string` | 同 `id` | 语言切换器中显示的名称。 |
+| `dir` | `string` | `ltr` | 文字方向。阿拉伯语、希伯来语等设为 `rtl`。 |
+| `translations` | `object` | `{}` | 自定义 UI 字符串覆盖（参见 [自定义 UI 字符串](./ui-strings)）。 |
 
-## URL structure
+## URL 结构
 
-The default locale has no URL prefix. Non-default locales are nested under `/{id}/`. When combined with [versioning](../versioning), the URL is `/{locale}/{version}/page`.
+默认区域没有 URL 前缀。非默认区域嵌套在 `/{id}/` 下。与[版本控制](../versioning)结合使用时，URL 格式为 `/{locale}/{version}/page`。
 
 ```
-/                       ← default locale, current version
-/getting-started        ← default locale page
-/05/                    ← default locale, old version
-/hi/                    ← non-default locale, current version
-/hi/getting-started     ← non-default locale page
-/hi/05/                 ← non-default locale, old version
+/                       ← 默认区域，当前版本
+/getting-started        ← 默认区域页面
+/05/                    ← 默认区域，旧版本
+/hi/                    ← 非默认区域，当前版本
+/hi/getting-started     ← 非默认区域页面
+/hi/05/                 ← 非默认区域，旧版本
 ```
 
-The language switcher preserves your current page and version when you switch locales. The version switcher preserves your current locale.
+切换语言时，语言切换器会保留当前页面和版本。版本切换器会保留当前语言区域。
 
-## Position the language switcher
+## 语言切换器位置
 
-
-<!-- SCREENSHOT: Three variants of the language switcher — options-menu (globe icon in header), sidebar-top (dropdown at top of sidebar), sidebar-bottom (dropdown at bottom). Show all three side by side. -->
-
-Control where the language switcher appears using the `position` option:
+使用 `position` 选项控制语言切换器的显示位置：
 
 ```js
 i18n: {
-  position: 'options-menu',  // default
+  position: 'options-menu',  // 默认
   // ...
 }
 ```
 
-| Position | Behaviour |
+| 位置 | 行为 |
 |:---------|:----------|
-| `options-menu` | Compact globe icon alongside theme toggle and search. Default. |
-| `sidebar-top` | Full dropdown with label at the top of the sidebar. |
-| `sidebar-bottom` | Full dropdown with label at the bottom of the sidebar. |
+| `options-menu` | 紧凑的地球仪图标，与主题切换和搜索并排。默认。 |
+| `sidebar-top` | 带标签的完整下拉菜单，位于侧边栏顶部。 |
+| `sidebar-bottom` | 带标签的完整下拉菜单，位于侧边栏底部。 |
 
-## Next steps
+## 后续步骤
 
-- [Translated content](./translated-content) — directory structure, writing translations, navigation
-- [UI strings & SEO](./ui-strings) — customising system text, hreflang tags
+- [翻译内容](./translated-content) — 目录结构、编写翻译、导航
+- [UI 字符串与 SEO](./ui-strings) — 自定义系统文本、hreflang 标签

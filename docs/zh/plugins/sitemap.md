@@ -1,13 +1,13 @@
 ---
-title: "Sitemap Plugin"
-description: "Automatically generate a standard-compliant sitemap.xml for better search engine discovery."
+title: "Sitemap 插件"
+description: "自动生成符合标准的 sitemap.xml，提升搜索引擎发现效率。"
 ---
 
-The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages—including deep links within versioned documentation—are crawled and indexed.
+`@docmd/plugin-sitemap` 插件在构建目录根目录自动生成 `sitemap.xml` 文件。该文件为 Google、Bing 等搜索引擎提供完整的站点架构地图，确保包括版本化文档中深层链接在内的所有页面都能被爬取和索引。
 
-## Configuration
+## 配置
 
-Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customise the crawl weight of various sections within the `plugins` object.
+提供站点的 `siteUrl` 即可开启站点地图生成。可在 `plugins` 对象中自定义各章节的爬取权重。
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -24,31 +24,31 @@ export default defineConfig({
 });
 ```
 
-## Page-Level Controls
+## 页面级控制
 
-You can override sitemap behaviour for specific pages using frontmatter.
+可使用 frontmatter 覆盖特定页面的站点地图行为。
 
 ```yaml
 ---
-title: "Archive Page"
-priority: 0.3          # Lower weight for legacy content
-changefreq: "monthly"   # Hint to crawlers that this page rarely changes
-lastmod: "2024-03-15"   # Explicitly set the last modification date
-sitemap: false         # Exclude this specific page from the sitemap.xml
+title: "归档页面"
+priority: 0.3          # 旧版内容的较低权重
+changefreq: "monthly"   # 提示爬虫此页面变更频率较低
+lastmod: "2024-03-15"   # 明确设置最后修改日期
+sitemap: false         # 将此页面从 sitemap.xml 中排除
 ---
 ```
 
-## Core Features
+## 核心功能
 
-### 1. Automatic URL Construction
-The plugin intelligently resolves page paths to their canonical public URLs. It handles directory indexes automatically, ensuring that `guide/index.html` is listed as `https://yoursite.com/guide/` to maintain clean URL structures.
+### 1. 自动 URL 构建
+插件智能地将页面路径解析为规范的公开 URL。它自动处理目录索引，确保 `guide/index.html` 列为 `https://yoursite.com/guide/`，以维护简洁的 URL 结构。
 
-### 2. Versioned Discovery
-If your project uses [Versioning](../configuration/versioning), the sitemap plugin automatically includes all pages from all versions (e.g., `/v1/getting-started`, `/v2/getting-started`), allowing search engines to discover your archived documentation without manual configuration.
+### 2. 版本化发现
+如果你的项目使用[版本控制](../configuration/versioning)，站点地图插件会自动включать所有版本的所有页面（如 `/v1/getting-started`、`/v2/getting-started`），无需手动配置即可让搜索引擎发现你的归档文档。
 
-### 3. Smart Exclusions
-Pages marked with `noindex: true` or `sitemap: false` in their frontmatter are automatically excluded from the generated `sitemap.xml`, giving you granular control over what is presented to search engines.
+### 3. 智能排除
+在 frontmatter 中标记 `noindex: true` 或 `sitemap: false` 的页面会自动从生成的 `sitemap.xml` 中排除，让你精细控制呈现给搜索引擎的内容。
 
-::: callout tip "Validation"
-After building your site, you can typically find the sitemap at `your-output-dir/sitemap.xml`. Most search engine consoles allow you to submit this file directly to accelerate indexing.
+::: callout tip "验证"
+构建站点后，通常可在 `your-output-dir/sitemap.xml` 找到站点地图。大多数搜索引擎控制台允许你直接提交此文件以加速索引。
 :::

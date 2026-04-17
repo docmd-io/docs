@@ -1,68 +1,68 @@
 ---
-title: "Images & Visual Media"
-description: "Master media management: Responsive images, styling attributes, and automated Lightbox effects."
+title: "图片与视觉媒体"
+description: "掌握媒体管理：响应式图片、样式属性与自动 Lightbox 效果。"
 ---
 
-`docmd` utilises standard Markdown syntax for media integration. We recommend centralizing your media assets in the `assets/images/` directory within your project source.
+`docmd` 使用标准 Markdown 语法集成媒体资源。建议将媒体资源集中存放在项目源目录的 `assets/images/` 文件夹中。
 
 ```markdown
-![Technical Diagram](/assets/images/architecture.png "Optional Tooltip Title")
+![技术架构图](/assets/images/architecture.png "可选提示标题")
 ```
 
-## Technical Styling Reference
+## 样式属性参考
 
-Assign specialised CSS classes and attributes directly to your images using the `{ .class }` attribute syntax.
+使用 `{ .class }` 属性语法可直接为图片添加 CSS 类。
 
-### Dynamic Resizing
+### 动态缩放
 ```markdown
-![Small Scale](/assets/icon.png){ .size-small }
-![Standard View](/assets/preview.png){ .size-medium }
-![Full Scale](/assets/banner.png){ .size-large }
+![小尺寸](/assets/icon.png){ .size-small }
+![标准视图](/assets/preview.png){ .size-medium }
+![全尺寸](/assets/banner.png){ .size-large }
 ```
 
-### Alignment & Layout
+### 对齐与布局
 ```markdown
-![Centered Focus](/assets/img.png){ .align-center }
-![Floating Right](/assets/img.png){ .align-right .with-shadow .with-border }
+![居中](/assets/img.png){ .align-center }
+![右对齐](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
+![高级样式示例](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
 
-## Structured Media Elements
+## 结构化媒体元素
 
-### Figure Captions
-For precise, accessible media captioning, use standard HTML5 `<figure>` elements.
+### 图片标题
+对于精确的可访问性媒体标注，建议使用标准 HTML5 `<figure>` 元素。
 ```html
 <figure>
-  <img src="/assets/diagram.png" alt="Cloud Infrastructure Diagram">
-  <figcaption>Figure 1.1: Core System Infrastructure Architecture.</figcaption>
+  <img src="/assets/diagram.png" alt="云基础架构图">
+  <figcaption>图 1.1：核心系统基础架构。</figcaption>
 </figure>
 ```
 
-### Image Galleries
-Organise multiple assets into a responsive, balanced grid using the `image-gallery` class.
+### 图片画廊
+使用 `image-gallery` 类将多张图片整理到响应式均衡网格中。
 
 ```html
 <div class="image-gallery">
   <figure>
-    <img src="/assets/screen1.jpg" alt="User Dashboard View">
-    <figcaption>Live Performance Monitor</figcaption>
+    <img src="/assets/screen1.jpg" alt="用户仪表盘视图">
+    <figcaption>应用性能监控</figcaption>
   </figure>
   <figure>
-    <img src="/assets/screen2.jpg" alt="Configuration Panel View">
-    <figcaption>Project Global Settings</figcaption>
+    <img src="/assets/screen2.jpg" alt="配置面板视图">
+    <figcaption>项目全局设置</figcaption>
   </figure>
 </div>
 ```
 
-## Interactive Lightbox Zoom
+## 交互式 Lightbox 缩放
 
-If the `mainScripts` component is active (default), `docmd` automatically applies a full-screen zoom effect to any image contained within a gallery or any image tagged with the `.lightbox` class.
+开启 `mainScripts` 组件（默认开启）后，`docmd` 会自动为画廊内的图片或带有 `.lightbox` 类的图片应用全屏缩放效果。
 
 ```markdown
-![Deep Texture Analysis](/assets/sample.png){ .lightbox }
+![深层纹理分析](/assets/sample.png){ .lightbox }
 ```
 
-::: callout tip "AI Context & Accessibility"
-Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine—enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
+::: callout tip "AI 上下文与可访问性"
+媒体内容始终要提供全面的 **Alt 文本**。虽然高级 AI 模型具备视觉能力，但 Markdown 源文件中的描述性文本为模型推理引擎提供了直接、高保真的信号，有助于增强 `llms-full.txt` 流中的架构分析和功能理解。
 :::

@@ -1,42 +1,42 @@
 ---
-title: "Recipe: Implementing Custom Favicons"
-description: "Establish project-wide branding by adding a custom favicon to your build."
+title: "实用技巧：实现自定义网站图标"
+description: "通过添加自定义网站图标确立统一品牌形象。"
 ---
 
-The favicon is a critical branding element rendered within the browser tab. `docmd` provides a centralized configuration key to automate the injection and resolution of these assets.
+网站图标是浏览器标签页上展示的关键品牌元素。`docmd` 提供集中化配置项，可自动完成该资源的注入和解析。
 
-## 1. Format Preparation
+## 1. 格式准备
 
-While `docmd` supports `.png` and `.svg` sources, utilise an `.ico` bundle for maximum legacy browser compatibility. Ensure your asset is at least 32x32px.
+虽然 `docmd` 支持 `.png` 和 `.svg` 格式，但为了最广泛的老浏览器兼容性，建议使用 `.ico` 包。确保图片尺寸至少为 32x32 像素。
 
-## 2. Asset Staging
+## 2. 资源存放
 
-Place your processed image within the `assets/` directory of your project source.
+将处理好的图片放入项目源目录的 `assets/` 文件夹中。
 
 ```bash
-# Recommended Directory Mapping
+# 推荐目录结构
 my-project/
   ├── assets/
-  │   └── brand-favicon.ico  <-- Source asset
+  │   └── brand-favicon.ico  <-- 源资源
   ├── docs/
   └── docmd.config.js
 ```
 
-## 3. Configuration Binding
+## 3. 配置绑定
 
-Define the `favicon` property within your `docmd.config.js`. The path should reflect the location relative to the final `site/` output root.
+在 `docmd.config.js` 中定义 `favicon` 属性。路径应相对于最终 `site/` 输出目录的根目录。
 
 ```javascript
 export default {
   // ...
-  // Maps to site/assets/brand-favicon.ico
+  // 映射到 site/assets/brand-favicon.ico
   favicon: '/assets/brand-favicon.ico', 
   // ...
 };
 ```
 
-## 4. Final Build & Verification
+## 4. 构建与验证
 
-Execute `docmd build`. The engine will automatically:
-1.  Copy the asset to the production build directory.
-2.  Inject high-priority `<link rel="icon">` tags into the `<head>` of every generated HTML page.
+运行 `docmd build`。引擎将自动：
+1.  将资源复制到生产构建目录。
+2.  将高优先级的 `<link rel="icon">` 标签注入每个生成 HTML 页面的 `<head>` 中。

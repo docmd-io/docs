@@ -1,13 +1,13 @@
 ---
-title: "Optimising for AI Agents"
-description: "Engineer your documentation for maximum ingestibility by LLMs and AI Agents."
+title: "优化 AI Agent 可读性"
+description: "将文档打造成面向 LLM 和 AI Agent 的最佳射入格式。"
 ---
 
-`docmd` is architected as an "AI-First" documentation engine. By adhering to these structural best practices, you ensure that LLMs (such as ChatGPT, Claude, and GitHub Copilot) can parse your project's logic and architecture with surgical precision.
+`docmd` 建立了“AI 优先”的文档引擎架构。遵循这些结构化最佳实践，可确保 ChatGPT、Claude、GitHub Copilot 等 LLM 能够以极高的精准度解析你项目的逻辑和架构。
 
-## 1. Enable the LLM Plugin
+## 1. 启用 LLM 插件
 
-The baseline for AI optimization is the native `llms` plugin. It generates structured context files specifically designed for model ingestion.
+AI 优化的基线是内置 `llms` 插件，它专门生成面向模型射入的结构化上下文文件。
 
 ```javascript
 // docmd.config.js
@@ -20,32 +20,32 @@ export default {
 }
 ```
 
-## 2. Semantic Heading Integrity
+## 2. 语义化标题完整性
 
-AI models utilise H-tags to build a hierarchical map of internal technical relationships.
+AI 模型利用 H 标签构建内部技术关系的层级映射。
 
-*   **Logical Descent**: Never skip heading levels (always go H1 → H2 → H3).
-*   **Technical Density**: Use descriptive headings. Instead of "Auth," use "Implementing OAuth2 Password Grants."
-*   **The H1 Singular**: Ensure your Markdown frontmatter `title` is descriptive; `docmd` utilises this as the primary semantic entry point.
+*   **逻辑递进**：绝不跳级（始终保持 H1 → H2 → H3 的顺序）。
+*   **技术密度**：使用描述性标题。将"Auth"替换为"实现 OAuth2 密码授权"。
+*   **唯一 H1**：确保 Markdown frontmatter 中的 `title` 具有描述性；`docmd` 将其作为主要语义入口。
 
-## 3. Lexical Code Metadata
+## 3. 词汇化代码元数据
 
-Always explicitly specify the language identifier for fenced code blocks. This allows the AI's internal tokenizer to apply the correct grammar rules during context retrieval.
+始终为围栏代码块明确指定语言标识符。这样 AI 内部分词器在上下文检索时能应用正确的语法规则。
 
 ````markdown
 ```typescript
-// Optimised entry point
+// 优化后的入口点
 const docmd = new Engine();
 ```
 ````
 
-## 4. Leveraging the Context Pipeline
+## 4. 利用上下文管道
 
-The `llms-full.txt` file is a high-fidelity, concatenated stream of your entire static site.
+`llms-full.txt` 文件是整个静态站点的高保真串联流。
 
-*   **Prompt Engineering**: Direct your AI: *"Use the semantic structure in /llms.txt and the comprehensive technical content in /llms-full.txt to analyze this codebase."*
-*   **Context Control**: Use `llms: false` in specific page frontmatter to exclude sensitive or internal-only documentation from the public AI context stream.
+*   **提示词工程**：直接指示你的 AI：*"使用 /llms.txt 中的语义结构和 /llms-full.txt 中的完整技术内容分析此代码库。"*
+*   **上下文控制**：在特定页面的 frontmatter 中使用 `llms: false`，将敏感或仅限内部的文档排除在公开 AI 上下文流之外。
 
-## 5. High-Fidelity Alt-Text
+## 5. 高保真 Alt 文本
 
-While vision-capable models (Multimodal LLMs) are advancing, descriptive text remains the most reliable signal for reasoning engines. Comprehensive `alt` text for diagrams and screenshots ensures that the agent understands the visual logic even during text-only processing phases.
+尽管具备视觉能力的多模态 LLM 正在不断进步，描述性文本仍是推理引擎最可靠的信号。为图表和截图提供全面的 `alt` 文本，确保 AI Agent 在纯文本处理阶段也能理解视觉逻辑。

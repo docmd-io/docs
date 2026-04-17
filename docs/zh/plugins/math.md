@@ -1,13 +1,13 @@
 ---
-title: "Math Plugin"
-description: "Native KaTeX/LaTeX mathematics integration for docmd."
+title: "Math 插件"
+description: "docmd 的原生 KaTeX/LaTeX 数学公式集成。"
 ---
 
-The **Math plugin** adds native LaTeX and KaTeX support to your docmd sites.
+**Math 插件**为你的 docmd 网站添加原生 LaTeX 和 KaTeX 支持。
 
-It utilises `markdown-it-texmath` as securely integrated with the `katex` computation engine to render both inline and block-level mathematical equations smoothly without requiring complex client-side javascript libraries.
+它将 `markdown-it-texmath` 与 `katex` 计算引擎安全集成，平滑渲染内联和块级数学公式，无需复杂的客户端 JavaScript 库。
 
-## Setup
+## 安装
 
 ```bash
 docmd add math
@@ -19,28 +19,28 @@ plugins: {
 }
 ```
 
-## How It Works
+## 工作原理
 
-1. Enable the plugin via your `docmd.config.js`.
-2. Wrap your standard LaTeX mathematics in `$` (inline) or `$$` (block) indicators.
-3. The server intelligently processes these math rules during the static-site build exactly as raw static HTML tags.
-4. Minimal injected CSS automatically scopes these classes directly, yielding immediate visualization the moment the user views the page!
+1. 通过 `docmd.config.js` 启用插件。
+2. 用 `$`（内联）或 `$$`（块级）标识符包裹标准 LaTeX 数学公式。
+3. 服务器在静态站点构建时以原始静态 HTML 标签的形式智能处理这些数学规则。
+4. 注入的极简 CSS 自动为这些类设置作用域，用户访问页面时即刻呈现可视化效果！
 
-## Usage
+## 用法
 
-### Inline Mathematics
+### 内联数学公式
 
-You can inject standard equations flawlessly within a paragraph utilising single dollar signs `$`:
+使用单个美元符号 `$` 在段落中无缝注入标准方程式：
 
 ```markdown
-Here is an inline equation: $E = mc^2$
+这是一个内联方程式：$E = mc^2$
 ```
 
-Here is an inline equation: $E = mc^2$
+这是一个内联方程式：$E = mc^2$
 
-### Block Mathematics
+### 块级数学公式
 
-For wider mathematical proofs or distinct formulations, leverage double dollar signs `$$` for block level formatting:
+对于较宽的数学证明或独立公式，使用双美元符号 `$$` 进行块级格式化：
 
 ```markdown
 $$

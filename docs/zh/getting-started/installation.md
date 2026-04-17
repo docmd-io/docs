@@ -1,24 +1,25 @@
 ---
 title: "安装"
-description: "Install docmd globally, locally, or run it instantly with npx. Requires Node.js 18+."
+description: "全局安装、本地安装或直接用 npx 运行 docmd。需要 Node.js 18+。"
 ---
 
-Choose the installation method that fits your workflow.
+根据你的工作流选择合适的安装方式。
 
-## Run instantly with npx
+## 通过 npx 即时运行
 
 ```bash
 npx @docmd/core dev
 ```
 
-No installation needed. Runs docmd directly inside any folder with Markdown files.
+无需安装。可在任意包含 Markdown 文件的目录中直接运行 docmd。
 
 ```bash
-# Build a production-ready static site
+# 构建生产版本静态网站
 npx @docmd/core build
 ```
 
-## Install as a project dependency (recommended)
+## 安装为项目依赖
+## 安装为项目依赖（推荐）
 
 ::: tabs
 == tab "npm"
@@ -47,15 +48,13 @@ bunx docmd dev
 ```
 :::
 
-This pins the version across your team and CI/CD pipeline.
+这种方式可以锁定版本，方便团队和 CI/CD 流水线保持一致。
 
-<!-- SCREENSHOT: Terminal output showing a successful `npx docmd init` run — the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
-
-::: callout tip "After local install"
-Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @docmd/core` for all commands.
+::: callout tip "本地安装后"
+将 `@docmd/core` 安装为项目依赖后，所有命令改用 `npx docmd` 替代 `npx @docmd/core`。
 :::
 
-## Install globally
+## 全局安装
 
 ::: tabs
 == tab "npm"
@@ -77,34 +76,34 @@ bun add -g @docmd/core
 :::
 
 ```bash
-# Use the 'docmd' command anywhere
+# 在任意目录使用 docmd 命令
 docmd dev
 docmd build
 ```
 
-## Browser-only integration
+## 仅浏览器集成
 
-::: callout info "Library use only"
-This method embeds the docmd rendering engine into another web application. It is not the standard way to build documentation sites.
+::: callout info "仅限库集成模式"
+此方式将 docmd 渲染引擎嵌入到其他 Web 应用中，不适用于标准文档网站的构建方式。
 :::
 
 ```html
-<!-- Core Styles -->
+<!-- 核心样式 -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- Processing Engine -->
+<!-- 处理引擎 -->
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-See the [Browser API](../api/browser-api.md) guide for integration details.
+具体采用方式请参阅 [浏览器 API](../api/browser-api.md) 指南。
 
-## Troubleshooting
+## 常见问题
 
-::: callout warning "Permission denied (EACCES)"
-If you encounter `EACCES` errors during global installation on macOS or Linux, switch to a Node version manager like [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) instead of using `sudo`.
+::: callout warning "权限拒绝（EACCES）"
+如果在 macOS 或 Linux 上全局安装时遇到 `EACCES` 错误，请改用 [nvm](https://github.com/nvm-sh/nvm) 或 [fnm](https://github.com/Schniz/fnm) 等 Node 版本管理器，而不要使用 `sudo`。
 :::
 
-::: callout info "PowerShell script execution (Windows)"
-If PowerShell blocks script execution, run as Administrator:
+::: callout info "PowerShell 脚本执行策略（Windows）"
+如果 PowerShell 阻止脚本执行，请以管理员身份运行：
 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 :::

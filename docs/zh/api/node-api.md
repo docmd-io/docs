@@ -1,82 +1,82 @@
 ---
 title: "Node.js API"
-description: "Integrate docmd's build engine into your custom Node.js scripts and automation pipelines."
+description: "将 docmd 构建引擎集成到自定义 Node.js 脚本和自动化流水线中。"
 ---
 
-For advanced workflows, you can import and use the `docmd` build engine directly within your own Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending `docmd` for specialised environments.
+对于高级工作流，你可以直接在自己的 Node.js 应用中导入并使用 `docmd` 构建引擎。非常适合自定义 CI/CD 流水线、自动化文档生成，或针对特殊环境扩展 `docmd`。
 
-## Installation
+## 安装
 
-Ensure `@docmd/core` is installed in your project:
+确保项目中已安装 `@docmd/core`：
 
 ```bash
 npm install @docmd/core
 ```
 
-## Core Functions
+## 核心函数
 
 ### `buildSite(configPath, options)`
 
-The primary build function. It handles configuration loading, Markdown parsing, and asset generation.
+主要构建函数，处理配置加载、Markdown 解析和资源生成。
 
 ```javascript
 import { buildSite } from '@docmd/core';
 
 async function runBuild() {
   await buildSite('./docmd.config.js', {
-    isDev: false,      // Set to true for watch mode logic
-    offline: false,    // Set to true to optimise for file:// access
-    zeroConfig: false  // Set to true to bypass config file detection
+    isDev: false,      // 设为 true 启用监听模式逻辑
+    offline: false,    // 设为 true 针对 file:// 访问优化
+    zeroConfig: false  // 设为 true 绕过配置文件检测
   });
 }
 ```
 
 ### `buildLive(options)`
 
-Generates the browser-based **Live Editor** bundle.
+生成基于浏览器的**实时编辑器**包。
 
 ```javascript
 import { buildLive } from '@docmd/core';
 
 async function generateEditor() {
   await buildLive({
-    serve: false, // true starts a local server; false generates static files
-    port: 3000    // Custom port if serve is true
+    serve: false, // true 启动本地服务器；false 生成静态文件
+    port: 3000    // serve 为 true 时使用的自定义端口
   });
 }
 ```
 
-## Example: Custom Pipeline
+## 示例：自定义流水线
 
-You can wrap `docmd` to create complex documentation workflows.
+你可以封装 `docmd` 创建复杂的文档工作流。
 
 ```javascript
 import { buildSite } from '@docmd/core';
 import fs from 'fs-extra';
 
 async function deploy() {
-  // 1. Generate dynamic content
-  await fs.writeFile('./docs/dynamic.md', '# Generated Content');
+  // 1. 生成动态内容
+  await fs.writeFile('./docs/dynamic.md', '# 生成的内容');
 
-  // 2. Execute docmd build
+  // 2. 执行 docmd 构建
   await buildSite('./docmd.config.js');
 
-  // 3. Move output
+  // 3. 移动输出
   await fs.move('./site', './public/docs');
 }
 ```
 
 ::: callout tip
-The programmatic API is highly compatible with **AI-Driven Documentation**. Agents can trigger builds after content updates to verify integrity and manage deployments autonomously.
+编程式 API 与 **AI 驱动的文档**高度兼容。Agent 可在内容更新后触发构建，以验证完整性并自主管理部署。
 :::
 
-## Plugin API Exports
+## 插件 API 导出
 
-`@docmd/core` also exports utilities for building advanced plugins with server-side action handling.
+`@docmd/core` 还导出了用于构建带有服务器端动作处理的高级插件的工具函数。
 
 ### `createActionDispatcher(hooks, options)`
 
-Creates a dispatcher that routes WebSocket RPC messages to plugin action/event handlers.
+创建一个调度器，将 WebSocket RPC 消息路由到插件的动作/事件处理程序。
 
 ```javascript
 import { createActionDispatcher } from '@docmd/core';
@@ -91,32 +91,10 @@ const { result, reload } = await dispatcher.handleCall('my-action', payload);
 
 ### `createSourceTools({ projectRoot })`
 
-Creates source editing utilities for markdown file manipulation.
+创建用于 Markdown 文件操作的源码编辑工具。
 
 ```javascript
 import { createSourceTools } from '@docmd/core';
 
 const source = createSourceTools({ projectRoot: '/path/to/project' });
-
-// Get block information at a specific line range
-const block = await source.getBlockAt('docs/page.md', [10, 12]);
-
-// Wrap text with syntax markers
-await source.wrapText('docs/page.md', [10, 12], 'important', 0, '**', '**');
-```
-
-### Type Exports
-
-For TypeScript plugin authors, the following types are available:
-
-```typescript
-import type {
-  PluginModule,     // Full plugin contract interface
-  ActionContext,    // Context passed to action/event handlers
-  ActionHandler,    // Signature for action handlers
-  EventHandler,     // Signature for event handlers
-  SourceTools,      // Source editing tools interface
-  BlockInfo,        // Block information returned by getBlockAt
-  TextLocation,     // Text location returned by findText
-} from '@docmd/core';
 ```

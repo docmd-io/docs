@@ -1,46 +1,46 @@
 ---
-title: "Linking & Referencing"
-description: "Master internal cross-linking, external resources, and reliable asset referencing."
+title: "链接与引用"
+description: "掌握内部交叉链接、外部资源引用和可靠的资源路径引用。"
 ---
 
-`docmd` provides a robust, filesystem-aware linking system. By using relative paths to your source `.md` files, you ensure that links remain functional within your IDE (e.g., VS Code) and are automatically rewritten for production deployment.
+`docmd` 提供了健壮的文件系统感知链接系统。通过使用相对路径引用源 `.md` 文件，可确保链接在 IDE（如 VS Code）中正常工作，并在生产构建时自动重写为正确路径。
 
-::: callout info "Extension Neutrality"
-During the build process, the engine automatically resolves `.md` extensions to their relative HTML counterparts. This guarantees that internal documentation links never break, regardless of whether you are browsing local source or the compiled production site.
+::: callout info "扩展名中立性"
+在构建过程中，引擎会自动将 `.md` 扩展名解析为对应的相对 HTML 路径。无论是在本地浏览源文件还是编译后的生产网站，内部文档链接都不会失效。
 :::
 
-## Internal Link Resolution
+## 内部链接解析
 
-| Targeting Strategy | Markdown Syntax |
+| 定向策略 | Markdown 语法 |
 | :--- | :--- |
-| **Sibling Page** | `[System Overview](overview.md)` |
-| **Subdirectory** | `[API Reference](api/node-api.md)` |
-| **Parent Directory**| `[Back to Home](../index.md)` |
+| **同级页面** | `[系统概览](overview.md)` |
+| **子目录** | `[API 参考](api/node-api.md)` |
+| **上级目录** | `[返回首页](../index.md)` |
 
-## Section Anchors (Deep Linking)
+## 节点锚点（深层链接）
 
-Navigate directly to specific headings using standard URL slugs.
+使用标准 URL slug 直接定位特定标题。
 
-*   **Intra-page Anchor**: `[Jump to Roadmap](#project-roadmap)`
-*   **Cross-page Anchor**: `[Review CLI Flags](../cli-commands.md#available-flags)`
+*   **页内锚点**：`[跳转到路线图](#project-roadmap)`
+*   **跨页锚点**：`[查看 CLI 参数](../cli-commands.md#available-flags)`
 
-## Protocols & External Resources
+## 协议与外部资源
 
-The engine respects standard browser protocols for global resources.
+引擎支持各类标准浏览器协议。
 
-*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)`
-*   **Mail Protocol**: `[Support Channel](mailto:help@docmd.io)`
-*   **Asset Protocol**: `[Download CLI Binary](/assets/bin/docmd-mac.zip)`
+*   **HTTPS**：`[docmd 首页](https://docmd.io)`
+*   **邮件协议**：`[支持渠道](mailto:help@docmd.io)`
+*   **资源下载**：`[下载 CLI 二进制](/assets/bin/docmd-mac.zip)`
 
-## Static Asset Referencing
+## 静态资源引用
 
-To provide downloads or reference raw source files, place them within the `assets/` directory of your project. The `docmd` builder ensures these files are moved to the production root without path modifications.
+如需提供下载或引用原始源文件，将其放入项目的 `assets/` 目录。`docmd` 构建器会确保这些文件在没有路径修改的情况下迁移到生产根目录。
 
 ```markdown
-[Download Documentation PDF](/assets/pdf/handbook.pdf)
-[View Raw Global Config](/assets/config/docmd.config.js)
+[下载文档 PDF](/assets/pdf/handbook.pdf)
+[查看原始全局配置](/assets/config/docmd.config.js)
 ```
 
-::: callout tip "Semantic Linkage for AI"
-When cross-linking technical modules, prioritize **Descriptive Anchors** (e.g., `[Optimise PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
+::: callout tip "AI 语义链接"
+跨模块链接时，优先使用**描述性锚点文本**（如 `[优化 PWA 缓存](../plugins/pwa.md)`）而非泛泵文本（如 `[阅读更多](../plugins/pwa.md)`）。详细的链接标签为 AI Agent 提供了 `llms-full.txt` 上下文中不同文档节点间语义关系的高保真地图。
 :::

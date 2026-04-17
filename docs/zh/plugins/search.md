@@ -1,13 +1,13 @@
 ---
-title: "Search Plugin"
-description: "Enable high-speed, offline-first full-text search for your documentation using MiniSearch."
+title: "搜索插件"
+description: "使用 MiniSearch 为文档启用高速、离线优先的全文搜索。"
 ---
 
-The `@docmd/plugin-search` plugin provides a powerful, client-side search experience for your documentation. It uses [MiniSearch](https://github.com/lucaong/minisearch) to build a lightweight index during the build process, allowing users to find technical information instantly without a server-side database.
+`@docmd/plugin-search` 插件为文档提供强大的客户端搜索体验。它使用 [MiniSearch](https://github.com/lucaong/minisearch) 在构建时生成轻量级索引，让用户无需服务器数据库即可即时定位技术信息。
 
-## Configuration
+## 配置
 
-Search is enabled by default in most `docmd` templates. You can control its visibility and placement via the `layout` configuration.
+大多数 `docmd` 模板中搜索默认开启。可通过 `layout` 配置控制其可见性和位置。
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -24,48 +24,43 @@ export default defineConfig({
 });
 ```
 
-## How It Works
+## 工作原理
 
+### 1. 索引构建（构建时）
+在 `docmd build` 过程中，搜索插件遗历站点上的每个页面。它提取标题、标题和纯文本正文，然后将这些数据编译成压缩的 `search-index.json` 文件。
 
-<!-- SCREENSHOT: Search modal open with a query typed, showing matching results with highlighted titles and deep-linked headings. The keyboard shortcut hint (Ctrl+K or /) should be visible. -->
+*   **深度链接**：索引器自动将每个标题（`#`、`##` 等）注册为可搜索目标。
+*   **相关性加权**：标题权重最高，其次是标题，然后是页面正文。
 
-### 1. Indexing (Build-time)
-During the `docmd build` process, the search plugin iterates through every page on your site. It extracts the title, headings, and plain-text prose, then compiles this data into a compressed `search-index.json` file. 
+### 2. 检索（客户端）
+用户打开搜索模态框（通常通过 `/` 或 `Ctrl+K`）时，浏览器取回 `search-index.json`。搜索在本地使用模糊匹配和即时前缀匹配进行。
 
-*   **Deep Linking**: The indexer automatically registers every heading (`#`, `##`, etc.) as a searchable target.
-*   **Relevancy Boosting**: Titles are given the highest weight, followed by headings, then page content.
+## 自定义搜索行为
 
-### 2. Retrieval (Client-side)
-When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-index.json` is fetched by the browser. Searches are performed locally using fuzzy matching (allowing for small typos) and instant prefix matching.
-
-## Customizing Search Behavior
-
-While the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
+在页面 frontmatter 中使用 `noindex` 标志将特定页面排除在搜索索引之外：
 
 ```yaml
 ---
-title: "Internal Specification"
-noindex: true # This page will not appear in search results or sitemaps
+title: "内部规格"
+noindex: true # 此页面不会出现在搜索结果或站点地图中
 ---
 ```
 
-## Technical Implementation
+## 技术实现
 
-The plugin injects a lightweight search modal into the `<body>` of your site. It is fully accessible (ARIA compliant) and supports keyboard navigation for a native app-like experience.
+插件将一个轻量级搜索模态框注入站点的 `<body>` 中。它完全支持无障碍（符合 ARIA 标准），并支持键盘导航，带来原生应用级别的体验。
 
-::: callout tip "Search Analytics"
-If you have the [Analytics Plugin](./analytics) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
+::: callout tip "搜索分析"
+如果你已启用 [分析插件](./analytics)，读者使用的搜索关键词会自动捕获并发送到你的分析提供商。
 :::
-Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
+由于搜索完全在客户端进行，没有任何数据——甚至键盘输入——会发送到服务器。
 
-## Comparison
+## 对比
 
-Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. While Algolia is powerful, it introduces friction:
-
-| Feature | docmd Search | Algolia / External |
+| 功能 | docmd 搜索 | Algolia / 外部服务 |
 | :--- | :--- | :--- |
-| **Setup** | **Zero Config** (Automatic) | Complex (API Keys, CI/CD crawling) |
-| **Privacy** | **100% Private** (Client-side) | Data sent to 3rd party servers |
-| **Offline** | **Yes** | No |
-| **Cost** | **Free** | Free tier limits or Paid |
-| **Speed** | **Instant** (In-memory) | Fast (Network latency dependent) |
+| **安装** | **零配置**（自动） | 复杂（API 密鑰、CI/CD 爬取） |
+| **隐私** | **100% 私密**（客户端） | 数据发送到第三方服务器 |
+| **离线** | **支持** | 不支持 |
+| **费用** | **免费** | 免费层有限制或收费 |
+| **速度** | **即时**（内存内） | 较快（取决于网络延迟） |

@@ -3,33 +3,33 @@ title: URL Embeds
 description: How to safely embed dynamic components, videos, and social media directly into your documents.
 ---
 
-`docmd` ships natively with the highly-optimised `embed-lite` parser ecosystem. This allows you to aggressively map raw external URLs strictly onto the page, transforming them beautifully into completely secure, zero-latency UI components instantly!
+`docmd` 原生集成了高度优化的 `embed-lite` 解析器生态系统。它能将原始外部 URL 直接映射到页面上，即刻将其转化为完全安全的零延迟 UI 组件！
 
-## Supported Platforms
-The integrated engine natively exposes structured formatters targeting the following networks identically:
-*   **Video Ecosystem:** YouTube (including native 9:16 Shorts support), Vimeo, Dailymotion, TikTok
-*   **Social Connections:** X (Twitter), Reddit, Instagram, Facebook, LinkedIn
-*   **Code & Prototyping:** GitHub Gists, CodePen, Figma, Google Maps
-*   **Music Services:** Spotify, SoundCloud
+## 支持的平台
+集成引擎原生支持以下平台：
+*   **视频生态**：YouTube（包括原生 9:16 短视频支持）、Vimeo、Dailymotion、TikTok
+*   **社交平台**：X（Twitter）、Reddit、Instagram、Facebook、LinkedIn
+*   **代码与原型**：GitHub Gists、CodePen、Figma、Google Maps
+*   **音乐服务**：Spotify、SoundCloud
 
-## Usage Syntax
-You simply use the `::: embed` container followed by any destination URL. All three enclosing formats are equivalent:
+## 使用语法
+只需使用 `::: embed` 容器后跟目标 URL 即可：
 
 ```md
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 ```
 
-### Standard Result Example
-The rendering engine strictly parses that URL in the background, checking the validation matrix, and structurally injects native HTML nodes directly onto your page output gracefully:
+### 标准效果示例
+渲染引擎在后台解析 URL，并将原生 HTML 节点直接注入到页面输出中：
 
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 
-## Fallback Safety
-Don't worry about generating broken screens. If the internal parser scans an unverified or strictly unavailable domain configuration mapping, `docmd` gracefully falls back to generating a simple, solid `<a>` hyperlink button mapping explicitly out to the target:
+## 回退安全
+无需担心出现损坏的显示。如果内部解析器遇到不受支持的域，`docmd` 会优雅地回退为生成一个简单的 `<a>` 超链接按钮：
 
 ```md
 ::: embed "https://unsupported-example.com/status/123"
 ```
-*(Proceeds to generate exactly what you would see below)*
+*（将生成如下所示的效果）*
 
 ::: embed "https://unsupported-example.com/status/123"

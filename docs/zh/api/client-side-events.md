@@ -1,38 +1,38 @@
 ---
 title: "客户端事件"
-description: "Hook into the docmd SPA lifecycle to add interactive features."
+description: "接入 docmd SPA 生命周期，添加交互式功能。"
 ---
 
-`docmd` utilises a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
+`docmd` 使用轻量级单页应用（SPA）路由器，提供即时页面切换。由于浏览器在导航时不执行完整刷新，依赖 `DOMContentLoaded` 的脚本将不会重新执行。
 
-To handle this, `docmd` dispatches custom lifecycle events that you can listen for in your `customJs` files.
+为此，`docmd` 分发自定义生命周期事件，你可以在 `customJs` 文件中监听这些事件。
 
 ## `docmd:page-mounted`
 
-This event is dispatched whenever a new page has been successfully fetched and injected into the DOM.
+每当新页面成功获取并注入到 DOM 时，此事件就会被分发。
 
-### Usage
+### 用法
 
-Add a listener to the `document` object to re-initialize third-party libraries or trigger custom animations.
+在 `document` 对象上添加监听器，以重新初始化第三方库或触发自定义动画。
 
 ```javascript
 document.addEventListener('docmd:page-mounted', (event) => {
   const { url } = event.detail;
-  console.log(`Navigated to: ${url}`);
+  console.log(`已导航至：${url}`);
 
-  // Re-initialize components
-  // Example: Prism.highlightAll();
+  // 重新初始化组件
+  // 示例：Prism.highlightAll();
 });
 ```
 
-### Event Details (`event.detail`)
+### 事件详情（`event.detail`）
 
-| Property | Type | Description |
+| 属性 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `url` | `String` | The absolute URL of the page that was just mounted. |
+| `url` | `String` | 刚刚挂载的页面的绝对 URL。 |
 
-## Best Practices
+## 最佳实践
 
-1.  **Idempotency**: Ensure your initialization logic can be safely called multiple times on the same page or cleaned up before the next navigation.
-2.  **Global Scope**: Scripts added via `customJs` are executed in the global scope. Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the `window` object.
-3.  **Cleanup**: If your script adds global event listeners (e.g., `window.onresize`), consider tracking the current path to remove them when the user navigates away.
+1.  **幂等性**：确保你的初始化逻辑可以在同一页面上安全多次调用，或在下次导航前妥善清理。
+2.  **全局作用域**：通过 `customJs` 添加的脚本在全局作用域中执行。使用 IIFE（立即调用函数表达式）避免污染 `window` 对象。
+3.  **清理**：如果脚本添加了全局事件监听器（如 `window.onresize`），考虑追踪当前路径，以便用户离开时将其移除。

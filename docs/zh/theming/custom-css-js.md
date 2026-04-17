@@ -1,33 +1,33 @@
 ---
-title: "Custom Styles & Scripts"
-description: "Inject your own CSS and JS files to extend docmd's functionality and branding."
+title: "自定义样式与脚本"
+description: "注入自定义 CSS 和 JS 文件，扩展 docmd 的功能与品牌形象。"
 ---
 
-While `docmd` themes are highly flexible, you may want to inject your own stylesheets or interactive scripts. This is done via the `theme.customCss` and `customJs` arrays in your configuration.
+虽然 `docmd` 主题具备高度的灵活性，你仍可能需要注入自定义样式表或交互脚本。通过在配置文件中设置 `theme.customCss` 和 `customJs` 数组即可实现。
 
-## Custom CSS
+## 自定义 CSS
 
-Use `theme.customCss` to override existing styles or add new ones.
+使用 `theme.customCss` 覆盖现有样式或添加新样式。
 
 ```javascript
 // docmd.config.js
 export default {
   theme: {
     customCss: [
-      '/assets/css/branding.css' // Path relative to site root
+      '/assets/css/branding.css' // 相对站点根目录的路径
     ]
   }
 }
 ```
 
-### How it Works
-1.  Place your CSS file inside your project’s assets folder (e.g., `docs/assets/css/branding.css`).
-2.  `docmd` will automatically copy it to the build folder and inject a `<link>` tag into every page.
-3.  Custom CSS is loaded **after** the theme styles, ensuring your overrides take priority.
+### 工作原理
+1.  将 CSS 文件放入项目的 assets 文件夹（如 `docs/assets/css/branding.css`）。
+2.  `docmd` 会自动将其复制到构建目录，并在每个页面中注入 `<link>` 标签。
+3.  自定义 CSS 在主题样式**之后**加载，确保你的覆盖具有优先级。
 
-## Custom JavaScript
+## 自定义 JavaScript
 
-Use the top-level `customJs` array for scripts that add behaviour or integrate 3rd-party services.
+使用顶级 `customJs` 数组添加行为性脚本或集成第三方服务。
 
 ```javascript
 // docmd.config.js
@@ -38,19 +38,19 @@ export default {
 }
 ```
 
-### Life-cycle Awareness
-Scripts are injected at the bottom of the `<body>` tag. Since `docmd` is a **Single Page Application (SPA)**, remember that:
-*   The page does not fully reload when navigating between links.
-*   You may need to listen for the `docmd:navigated` event to re-initialize your scripts on new pages.
+### 生命周期感知
+脚本在 `<body>` 标签底部注入。由于 `docmd` 是**单页应用（SPA）**，需注意：
+*   导航链接时页面不会完整重载。
+*   在新页面上需要重新初始化脚本时，可监听 `docmd:navigated` 事件。
 
 ```javascript
-// Example: Re-init on page change
+// 示例：在页面切换时重新初始化
 document.addEventListener('docmd:page-mounted', () => {
-  console.log('New page loaded via SPA router');
+  console.log('已通过 SPA 路由器加载新页面');
   initMyCustomWidget();
 });
 ```
 
 ::: callout tip
-Adding custom CSS and JS allows AI models (like ChatGPT) to suggest much more tailored UI improvements. If you mention "I have a custom `branding.css` file", the model can provide specific selectors that won't conflict with the core `docmd` engine.
+添加自定义 CSS 和 JS 后，AI 模型（如 ChatGPT）可提出更有针对性的 UI 优化建议。如果你说"我有一个自定义的 `branding.css` 文件"，模型可提供不会与引擎冲突的具体选择器。
 :::

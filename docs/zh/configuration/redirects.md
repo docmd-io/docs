@@ -1,48 +1,48 @@
 ---
-title: "Redirects & 404"
-description: "Configure metadata-based redirects and custom branded 404 error pages for static deployments."
+title: "重定向与 404"
+description: "为静态部署配置基于元数据的重定向和自定义品牌化 404 错误页面。"
 ---
 
-In a static hosting environment, there is no server-side logic (such as Nginx rules or `.htaccess` files) to handle dynamic routing. `docmd` addresses this by generating native HTML failsafes that handle redirection and error states automatically.
+在静态托管环境中，没有服务端逻辑（如 Nginx 规则或 `.htaccess` 文件）来处理动态路由。`docmd` 通过自动生成原生 HTML 回退机制来解决重定向和错误状态问题。
 
-## Server-less Redirects
+## 无服务器重定向
 
-You can forward traffic from legacy URLs to new destinations by defining a mapping in the `redirects` object.
+在 `redirects` 对象中定义映射规则，即可将旧 URL 的流量转发到新目标地址。
 
 ```javascript
 export default defineConfig({
   redirects: {
-    '/setup': '/getting-started/installation', // Short URL to deep link
-    '/v1/api': '/api-reference'                  // Legacy version to modern path
+    '/setup': '/getting-started/installation', // 短 URL 跳转到深层链接
+    '/v1/api': '/api-reference'                  // 旧版本路径映射到新路径
   }
 });
 ```
 
-### Technical Implementation
+### 技术实现
 
-When a redirect is defined, `docmd` creates an `index.html` file at the legacy path containing a `<meta http-equiv="refresh">` tag. This strategy ensures:
+定义重定向后，`docmd` 会在旧路径下创建一个包含 `<meta http-equiv="refresh">` 标签的 `index.html` 文件。这种方式可确保：
 
-1.  **Seamless Redirection**: Users are forwarded to the new destination instantly after the page loads.
-2.  **SEO Preservation**: Search engines recognise the redirection, helping to maintain link equity.
-3.  **Analytics Tracking**: Page views are captured before the redirect occurs, preserving your traffic data.
+1. **无缝跳转**：页面加载后立即将用户转发到新目标地址。
+2. **SEO 保护**：搜索引擎识别跳转关系，有助于保留链接权重。
+3. **统计追踪**：在跳转发生前完成页面浏览统计，保留流量数据。
 
-## Branded 404 Pages
+## 品牌化 404 页面
 
-When a user attempts to access a non-existent URL, most static hosting providers (Netlify, Vercel, GitHub Pages) automatically look for a `404.html` file in the root directory. `docmd` generates this file by default, ensuring it inherits your site's theme, sidebar, and SPA functionality.
+当用户访问不存在的 URL 时，大多数静态托管服务（Netlify、Vercel、GitHub Pages）都会自动查找根目录下的 `404.html` 文件。`docmd` 默认生成该文件，并继承网站的主题、侧边栏和 SPA 功能。
 
-### Customizing Error Content
+### 自定义错误页面内容
 
-You can personalize the 404 error message within your configuration:
+可在配置中自定义 404 错误信息：
 
 ```javascript
 export default defineConfig({
   notFound: {
-    title: '404: Page Not Found',
-    content: "We couldn't find the page you're looking for. Use the sidebar to find your way back."
+    title: '404：页面不存在',
+    content: '找不到您请求的页面，请使用侧边栏导航返回。'
   }
 });
 ```
 
-::: callout tip "Local Development"
-The `docmd dev` server automatically serves your custom 404 page whenever a requested file is missing, allowing you to test the error experience locally.
+::: callout tip "本地开发调试"
+`docmd dev` 服务器会在找不到请求文件时自动提供自定义 404 页面，方便你在本地测试错误页面的效果。
 :::

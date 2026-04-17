@@ -1,6 +1,6 @@
 ---
 title: "docmd : Bespoke No-Style Page Demo"
-description: "A functional demonstration of the noStyle architectural feature."
+description: "noStyle 架构功能的实际演示。"
 noStyle: true
 components:
   meta: true
@@ -64,32 +64,32 @@ customHead: |
 
 <div class="demo-container">
   <div class="demo-hero">
-    <h1>Bespoke Page Architecture</h1>
-    <p>Demonstrating the absolute layout control enabled via <code>noStyle: true</code>.</p>
+    <h1>定制页面架构</h1>
+    <p>演示通过 <code>noStyle: true</code> 实现的绝对布局控制。</p>
   </div>
   
   <div class="demo-card">
-    <h2>Logical Foundation</h2>
+    <h2>逻辑基础</h2>
     <p>
-      This demonstration utilises the <code>noStyle: true</code> frontmatter directive to bypass the global documentation layout (Sidebar, Header, and TOC). This provides a "Zero-Friction" canvas for creating marketing landing pages or custom product dashboards.
+      本演示使用 <code>noStyle: true</code> frontmatter 指令绕过全局文档布局（侧边栏、Header 和目录）。这提供了一个"零阻力"画布，用于创建营销落地页或自定义产品仪表盘。
     </p>
     
-    <h3>Enabled System Components</h3>
-    <p>When in No-Style mode, you explicitly opt-in to the documentation engine's core features:</p>
+    <h3>已启用的系统组件</h3>
+    <p>在 No-Style 模式下，你需要明确选择文档引擎的核心功能：</p>
     
     <ul>
-      <li><strong>SEO Meta Engine</strong>: Structured tags and social graph data are retained.</li>
-      <li><strong>Project Branding</strong>: Global favicon injection remains active.</li>
-      <li><strong>Foundational Typography</strong>: The processed <code>docmd-main.css</code> provides base styling.</li>
-      <li><strong>Theme Synchronization</strong>: Light/Dark mode state is fully preserved.</li>
-      <li><strong>Interactive Capabilities</strong>: The SPA router and component logic remain available.</li>
+      <li><strong>SEO 元引擎</strong>：结构化标签和社交图谱数据被保留。</li>
+      <li><strong>项目品牌</strong>：全局 favicon 注入保持活跃。</li>
+      <li><strong>基础排版</strong>：处理后的 <code>docmd-main.css</code> 提供基础样式。</li>
+      <li><strong>主题同步</strong>：浅色/深色模式状态完全保留。</li>
+      <li><strong>交互能力</strong>：SPA 路由器和组件逻辑保持可用。</li>
     </ul>
     
-    <h3>Technical Implementation</h3>
+    <h3>技术实现</h3>
     <p>
-      The layout for this page is authored using standard HTML wrappers and scoped CSS defined within the <code>customHead</code> frontmatter field. This ensures zero CSS leakage to the rest of the documentation site.
+      此页面的布局使用标准 HTML 包装器和在 <code>customHead</code> frontmatter 字段中定义的作用域 CSS 编写。这确保了零 CSS 泄漏到文档站点的其余部分。
     </p>
     
-    <a href="/content/no-style-pages/" class="demo-button">Analyze the Implementation Guide →</a>
+    <a href="/content/no-style-pages/" class="demo-button">分析实现指南 →</a>
   </div>
 </div>

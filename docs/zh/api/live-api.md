@@ -1,34 +1,34 @@
 ---
-title: "Live Editor"
-description: "Understanding the docmd Live Editor and its browser-based authoring workflow."
+title: "实时编辑器"
+description: "了解 docmd 实时编辑器及其基于浏览器的创作工作流。"
 ---
 
-The `docmd` Live Editor is a dedicated environment for real-time documentation authoring. It uses the isomorphic core of `docmd` to provide an instant, side-by-side preview of your Markdown content without requiring a backend build process.
+`docmd` 实时编辑器是专为实时文档创作而设计的专用环境。它使用 `docmd` 的同构核心，无需后端构建流程，即可即时并排预览 Markdown 内容。
 
-## Launching the Editor
+## 启动编辑器
 
-Start the local Live Editor by running:
+运行以下命令启动本地实时编辑器：
 
 ```bash
 docmd live
 ```
 
-The editor will typically be available at `http://localhost:3000`.
+编辑器通常可在 `http://localhost:3000` 访问。
 
-## Architecture
+## 架构
 
-Unlike the standard `dev` server which rebuilds files on the disk, the Live Editor runs the `docmd` engine directly in your browser. This enables:
+与标准 `dev` 服务器（在磁盘上重新构建文件）不同，实时编辑器直接在浏览器中运行 `docmd` 引擎。这实现了：
 
-1.  **Instant Feedback**: Content is re-rendered as you type.
-2.  **Portable Playgrounds**: The editor can be bundled into a static site for hosting on platforms like GitHub Pages.
-3.  **Cross-Platform Consistency**: The preview uses the exact same rendering logic as the production build.
+1.  **即时反馈**：内容在输入时即时重新渲染。
+2.  **可移植沙盒**：编辑器可以打包成静态站点，托管在 GitHub Pages 等平台上。
+3.  **跨平台一致性**：预览使用与生产构建完全相同的渲染逻辑。
 
-## Static Deployment
+## 静态部署
 
-Generate a shareable, standalone version of the editor:
+生成一个可共享的独立编辑器版本：
 
 ```bash
 docmd live --build-only
 ```
 
-This creates a `dist/` directory containing the editor's HTML and the bundled isomorphic engine.
+这会创建一个包含编辑器 HTML 和打包同构引擎的 `dist/` 目录。

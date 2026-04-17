@@ -1,22 +1,22 @@
 ---
 title: "参与贡献"
-description: "Guidelines and setup instructions for contributing to docmd."
+description: "贡献 docmd 的指南与开发环境配置说明。"
 ---
 
-Thank you for your interest in contributing to `docmd`. We appreciate bug fixes, documentation improvements, new features, and design suggestions.
+感谢你有意向为 `docmd` 做贡献！我们欢迎 Bug 修复、文档改进、新功能开发以及设计建议。
 
-## Development Environment
+## 开发环境
 
-`docmd` is a monorepo managed with [pnpm](https://pnpm.io/).
+`docmd` 是一个由 [pnpm](https://pnpm.io/) 管理的 monorepo 项目。
 
-### Prerequisites
+### 前置要求
 
-- **Node.js**: v22.x or later (LTS recommended)
-- **pnpm**: v10.x or later
+- **Node.js**：v22.x 或更高版本（推荐使用 LTS 版）
+- **pnpm**：v10.x 或更高版本
 
-### Project Setup
+### 项目配置
 
-Clone the repository and run the automated onboarding tool to install dependencies and perform an initial build:
+克隆仓库后，运行自动化初始化工具安装依赖并执行首次构建：
 
 ```bash
 git clone https://github.com/docmd-io/docmd.git
@@ -24,51 +24,51 @@ cd docmd
 pnpm onboard
 ```
 
-To link the local `docmd` command globally for testing in other projects:
+如需将本地 `docmd` 命令全局链接以在其他项目中测试：
 
 ```bash
 pnpm onboard --link
 ```
 
-### Local Development
+### 本地开发
 
-Run the documentation site while watching for changes in the core engine:
+在监听核心引擎变更的同时运行文档网站：
 
 ```bash
 pnpm run dev
 ```
 
-To watch internal source files (engine, templates, and plugins), set the `DOCMD_DEV` environment variable:
+若要同时监听内部源文件（引擎、模板和插件），请设置 `DOCMD_DEV` 环境变量：
 
 ```bash
 DOCMD_DEV=true pnpm run dev
 ```
 
-## Quality Standards
+## 代码质量标准
 
-Ensure your code complies with the ESLint settings. For minor formatting issues, run:
+请确保你的代码符合 ESLint 配置的要求。如有格式问题，可运行：
 ```bash
 pnpm lint:fix
 ```
 
-Before submitting a Pull Request, verify your branch compiles by preparing the final release image:
+在提交 Pull Request 之前，请验证分支能否正常编译：
 
 ```bash
 pnpm prep
 ```
-*(This chains `pnpm reset`, dependency installation, lint checks, E2E tests, and security audits in a fresh slate.)*
+*（该命令会依次执行 `pnpm reset`、安装依赖、代码检查、E2E 测试和安全审计。）*
 
-### Commit Guidelines
+### 提交信息规范
 
-We use [Conventional Commits](https://www.conventionalcommits.org/). Please prefix your commit messages with:
-- `feat:` (New features)
-- `fix:` (Bug fixes)
-- `docs:` (Documentation changes)
-- `refactor:` (Code changes that neither fix bugs nor add features)
+我们遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范。请在提交信息前加上以下前缀：
+- `feat:`（新功能）
+- `fix:`（Bug 修复）
+- `docs:`（文档变更）
+- `refactor:`（代码重构，不涉及 Bug 修复或新功能）
 
-### Source Headers
+### 源文件头部注释
 
-All new files within the `packages/` directory MUST include the standard project copyright header to maintain consistency and compliance.
+`packages/` 目录下所有新文件**必须**包含标准版权头部注释，以保持一致性和合规性。
 
 ```javascript
 /**
@@ -86,8 +86,8 @@ All new files within the `packages/` directory MUST include the standard project
  */
 ```
 
-## GitHub Workflow
+## GitHub 工作流
 
-1.  **Fork and Branch**: Create a feature branch from the latest `main`.
-2.  **Verify**: Ensure `pnpm verify` returns `🛡️ docmd is ready for production!`.
-3.  **Pull Request**: Open a PR with a clear description of the problem solved or the feature added.
+1. **Fork 并创建分支**：从最新的 `main` 分支创建功能分支。
+2. **验证**：确保 `pnpm verify` 返回 `🛡️ docmd is ready for production!`。
+3. **提交 Pull Request**：清晰描述所解决的问题或新增的功能。

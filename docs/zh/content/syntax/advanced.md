@@ -1,82 +1,82 @@
 ---
-title: "Advanced Markdown Syntax"
-description: "Leverage docmd's extended feature set: Custom attributes, GFM extensions, and semantic definitions."
+title: "高级 Markdown 语法"
+description: "充分利用 docmd 的扩展功能：自定义属性、GFM 扩展与语义定义。"
 ---
 
-Beyond standard Markdown, `docmd` supports several high-fidelity extensions derived from GitHub Flavored Markdown (GFM) and custom attribute plugins. These tools provide total control over your document's structure and styling.
+除标准 Markdown 外，`docmd` 还支持多种源自 GitHub Flavored Markdown (GFM) 和自定义属性插件的高保真扩展。这些工具可让你完全掌控文档的结构与样式。
 
-## GFM Extensions
+## GFM 扩展
 
-### Task Lists
-Create interactive or read-only checklists for roadmap tracking.
+### 任务列表
+创建可交互或只读的检查列表，适用于路线跟踪。
 ```markdown
-- [x] Engine Optimization Complete
-- [ ] Plugin API Finalization
+- [x] 引擎优化完成
+- [ ] 插件 API 内容确定
 ```
-- [x] Engine Optimization Complete
-- [ ] Plugin API Finalization
+- [x] 引擎优化完成
+- [ ] 插件 API 内容确定
 
-### Automatic Link Resolution
-Standard URLs and email addresses are automatically identified and linked without additional markup: `https://docmd.io`
+### 自动链接识别
+标准 URL 和电子邮件地址会被自动识别并转化为链接，无需额外标记：`https://docmd.io`
 
-### Shortcode Emojis
-`docmd` supports standard shortcodes to inject visual personality into your documentation.
-> We :heart: high-performance documentation! :rocket: :smile:
+### 短代码 Emoji
+`docmd` 支持标准短代码，可为文档增添视觉趣味。
+> 我们 :heart: 高性能文档！:rocket: :smile:
 
-## Custom Element Attributes
+## 自定义元素属性
 
-Assign unique IDs and CSS classes directly to headers, images, and links using the curly-brace `{}` syntax. This is the primary method for applying [Custom CSS Styles](/theming/custom-css-js).
+使用花括号 `{}` 语法可甄气向标题、图片和链接添加唯一 ID 和 CSS 类。这是应用[自定义 CSS 样式](/theming/custom-css-js)的主要方式。
 
-### Unique Semantic IDs
-Useful for deep-linking directly to technical subsections.
+### 唯一语义 ID
+用于直接定位到技术子章节的深层链接。
 ```markdown
-## Performance Benchmarks {#benchmarks-2026}
-```
-
-### Functional CSS Classes
-Apply styling utilities to specific elements.
-```markdown
-## Center-Aligned Section {.text-center .text-blue}
+## 性能基准测试 {#benchmarks-2026}
 ```
 
-### Actionable Button Links
-Transform any standard markdown link into a styled call-to-action button.
+### CSS 功能类
+为特定元素应用样式工具。
 ```markdown
-[Download Latest Release](/download){.docmd-button}
+## 居中对齐章节 {.text-center .text-blue}
 ```
 
-## Citations & Definitions
-
-### Footnote References
-Add citations or technical deep-dives[^1] that are automatically collected and rendered at the bottom of the page.
-
+### 按鈕链接
+将任意标准 Markdown 链接转化为样式化的行动履用按鈕。
 ```markdown
-Architectural decisions are documented in the RFC[^1].
-
-[^1]: RFC-42: Isomorphic Rendering Pipeline.
+[下载最新版本](/download){.docmd-button}
 ```
 
-### Definition Lists
-Perfect for API parameter descriptions and glossaries.
+## 引用与定义
+
+### 脚注引用
+添加引用或技术深层内容[^1]，自动收集并在页跟渲染。
+
+```markdown
+架构决策记录在 RFC[^1] 中。
+
+[^1]: RFC-42: 同构渲染流水线。
+```
+
+### 定义列表
+非常适合 API 参数说明和词汇表。
 
 ```markdown
 PropName
-: The unique identifier for the configuration key.
+: 该配置项的唯一标识符。
 ```
 
 PropName
-: The unique identifier for the configuration key.
+: 该配置项的唯一标识符。
 
-### Technical Abbreviations
-Define abbreviations globally within a page. Hovering over the term reveals its full definition.
+### 节略词生成
+在页面中全局定义节略词，悬停时显示完整定义。
 
 ```markdown
 *[SPA]: Single Page Application
-The docmd router enables a seamless SPA experience.
+docmd 路由器带来流畅的 SPA 体验。
 ```
 *[SPA]: Single Page Application
-The docmd router enables a seamless SPA experience.
+docmd 路由器带来流畅的 SPA 体验。
 
-::: callout tip "Contextual Precision for AI"
-Utilising **Definitions** and **Abbreviations** provides high-quality technical signals to AI agents. When an AI processes your `llms-full.txt` context, these explicit definitions prevent lexical ambiguity, ensuring the model generates logically correct explanations for your project's specific terminology.
+::: callout tip "AI 上下文精确性"
+使用**定义**和**节略词**可为 AI Agent 提供高质量的技术信号。当 AI 处理你的 `llms-full.txt` 上下文时，这些明确的定义可防止词义模糊，确保模型为项目特定术语生成逻辑正确的解释。
 :::

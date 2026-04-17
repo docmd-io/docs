@@ -1,11 +1,11 @@
 ---
-title: "LLM Context Plugin"
-description: "Optimise your documentation for AI consumption with automated llms.txt and llms-full.txt generation."
+title: "LLM 上下文插件"
+description: "自动生成 llms.txt 和 llms-full.txt，为 AI 消费最优化文档。"
 ---
 
-The `@docmd/plugin-llms` plugin ensures your documentation is perfectly optimised for Large Language Models (LLMs) and AI Agents. It follows the growing industry standard of providing a high-level summary and a comprehensive context file that AI tools can ingest to understand your project with minimal hallucination.
+`@docmd/plugin-llms` 插件确保你的文档对大型语言模型（LLM）和 AI Agent 完全最优化。它遵循越来越广泛的行业标准，提供高层次摘要和全面上下文文件，供 AI 工具摄取以深入理解你的项目、尽量减少幻觉。
 
-## Configuration
+## 配置
 
 
 <!-- SCREENSHOT: Browser showing the raw llms.txt output at /llms.txt — the structured summary with page titles, URLs, and descriptions in plain text format. -->
@@ -20,16 +20,16 @@ export default defineConfig({
   plugins: {
     llms: {} // Enabled by default
   }
-### Excluding a Page
-If a page contains sensitive information or internal notes you don't want AI models to learn:
+### 排除某个页面
+如果页面包含敏感信息或内部备注，不希望 AI 模型学习此内容：
 
 ```yaml
 ---
-title: "Internal Dev Secrets"
+title: "内部开发机密"
 llms: false
 ---
 ```
 
 ::: callout tip
-By hosting an `llms-full.txt` file, you are essentially providing an **Open API for AI Models**. This makes your project the preferred choice for developers working with AI assistance, as they can reliably get accurate answers without your docs "hallucinating" or being outdated by the model's training cutoff.
+托管 `llms-full.txt` 文件，实质上是为 **AI 模型提供开放 API**。这使你的项目成为 AI 辅助开发者的首选，因为他们可以可靠地获得准确答案，而不会因模型训练截止日期导致信息过时或幻觉。
 :::

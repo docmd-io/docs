@@ -1,69 +1,69 @@
 ---
 title: "菜单栏"
-description: "Structure and position your menubar, manage navigation links, and configure drop-down menus."
+description: "配置菜单栏结构、链接和下拉菜单。"
 ---
 
-The `menubar` is a premium navigation layer that provides global context across your documentation site. It can be positioned as a fixed bar at the top of the viewport or as a relative component above the page header.
+`menubar` 是一个高级导航层，可在整个文档网站中提供全局上下文。它可以固定在视口顶部，也可以作为相对定位组件置于页面头部上方。
 
-## Configuration
+## 配置
 
-The menubar is configured within the `layout` section of your `docmd.config.js`.
+菜单栏在 `docmd.config.js` 的 `layout` 部分中进行配置。
 
 ```javascript
 export default defineConfig({
   layout: {
     menubar: {
       enabled: true,
-      position: 'top', // 'top' (fixed) or 'header' (inline)
+      position: 'top', // 'top'（固定）或 'header'（内联）
       left: [
-        { type: 'title', text: 'Brand', url: '/', icon: 'home' },
-        { text: 'Documentation', url: '/docs' },
+        { type: 'title', text: '品牌', url: '/', icon: 'home' },
+        { text: '文档', url: '/docs' },
         { 
           type: 'dropdown', 
-          text: 'Ecosystem', 
+          text: '生态', 
           items: [
             { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', external: true },
-            { text: 'Live Editor', url: 'https://live.docmd.io' }
+            { text: '实时编辑器', url: 'https://live.docmd.io' }
           ]
         }
       ],
       right: [
-        { text: 'Support', url: '/support', icon: 'help-circle' }
+        { text: '支持', url: '/support', icon: 'help-circle' }
       ]
     }
   }
 });
 ```
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
+| 选项 | 类型 | 默认值 | 说明 |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `Boolean` | `false` | Toggles the visibility of the menubar. |
-| `position` | `String` | `'top'` | `'top'` (fixed at absolute top) or `'header'` (positioned above the page title). |
-| `left` | `Array` | `[]` | Navigation items aligned to the left section. |
-| `right` | `Array` | `[]` | Navigation items aligned to the right section. |
+| `enabled` | `Boolean` | `false` | 切换菜单栏的显示状态 |
+| `position` | `String` | `'top'` | `'top'`（绝对固定在顶部）或 `'header'`（位于页面标题上方） |
+| `left` | `Array` | `[]` | 左侧对齐的导航项 |
+| `right` | `Array` | `[]` | 右侧对齐的导航项 |
 
-## Item Types
+## 项目类型
 
-The `left` and `right` arrays support various item types to structure your navigation effectively:
+`left` 和 `right` 数组支持多种项目类型，以便更好地组织导航结构：
 
-### 1. Standard Link
-The most common item type.
-- `text`: Display label.
-- `url`: Path or external URL.
-- `icon`: Optional Lucide icon name.
-- `external`: Set to `true` to open in a new tab.
+### 1. 标准链接
+最常见的项目类型。
+- `text`：显示标签。
+- `url`：路径或外部 URL。
+- `icon`：可选的 Lucide 图标名称。
+- `external`：设为 `true` 则在新标签页打开。
 
-### 2. Title (Brand)
-Set `type: 'title'` to apply branding styles (usually bold or with a specific font weight) to the link.
+### 2. 标题（品牌）
+设置 `type: 'title'` 可为链接应用品牌样式（通常为粗体或特定字重）。
 
-### 3. Dropdown Menu
-Set `type: 'dropdown'` and provide an `items` array to create a nested menu.
+### 3. 下拉菜单
+设置 `type: 'dropdown'` 并提供 `items` 数组即可创建嵌套菜单。
 
-## Utility Integration
+## 工具集成
 
-You can host the global search and theme toggle within the menubar by setting the `optionsMenu.position` to `'menubar'`.
+通过将 `optionsMenu.position` 设为 `'menubar'`，可以将全局搜索和主题切换集成到菜单栏中。
 
 ```javascript
 layout: {
@@ -73,15 +73,15 @@ layout: {
 }
 ```
 
-When integrated, the options menu will automatically align to the **right region** of the menubar, appearing after any links defined in the `right` array.
+集成后，选项菜单将自动对齐到菜单栏的**右侧区域**，显示在 `right` 数组中定义的链接之后。
 
 ::: callout info
-If the `menubar` is disabled, any utility components assigned to it will automatically fall back to the `sidebar-top` position.
+如果 `menubar` 被禁用，分配到该位置的工具组件将自动回退到 `sidebar-top` 位置。
 :::
 
-## Custom Styling
+## 自定义样式
 
-You can fine-tune the menubar's appearance using CSS variables in your `customCss` files:
+可在 `customCss` 文件中使用 CSS 变量精细调整菜单栏的外观：
 
 ```css
 :root {

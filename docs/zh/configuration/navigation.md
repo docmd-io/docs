@@ -1,47 +1,44 @@
 ---
-title: "Navigation Configuration"
-description: "Structure your sidebar, categorise links, and assign icons for human readers and LLMs."
+title: "导航配置"
+description: "构建侧边栏结构、对链接分类，并为人类读者和 AI 旁系统指定图标。"
 ---
 
-`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimises the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.
+`docmd` 提供对网站结构的精确控制。在 `docmd.config.js` 中定义 `navigation` ，可以建立合理的层级结构，同时为 AI 模型和搜索引擎提供清晰的上下文地图。
 
-## The Navigation Array
+## 导航数组
 
-
-<!-- SCREENSHOT: Sidebar navigation showing a two-level hierarchy with icons, an active page highlighted, and a collapsible group. -->
-
-Each object in the array defines a **Link** or a **Category Group**.
+数组中的每个对象定义一个**链接**或一个**分类组**。
 
 ```javascript
 export default defineConfig({
   navigation: [
-    { title: 'Home', path: '/', icon: 'home' },
-    { title: 'Installation', path: '/getting-started/installation', icon: 'download' }
+    { title: '首页', path: '/', icon: 'home' },
+    { title: '安装', path: '/getting-started/installation', icon: 'download' }
   ]
 });
 ```
 
-## Available Properties
+## 可用属性
 
-| Property | Type | Required | Description |
+| 属性 | 类型 | 是否必填 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **`title`** | `String` | Yes | The display text for the link or category. |
-| **`path`** | `String` | No | Destination URL. Must start with `/` for local paths. |
-| **`icon`** | `String` | No | Name of a [Lucide Icon](https://lucide.dev/icons) (e.g., `rocket`). |
-| **`children`** | `Array` | No | Nested items used to create a submenu or group. |
-| **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed by the user. |
-| **`external`** | `Boolean` | No | If `true`, the link opens in a new browser tab. |
+| **`title`** | `String` | 是 | 链接或分类的显示文字 |
+| **`path`** | `String` | 否 | 目标 URL，本地路径必须以 `/` 开头 |
+| **`icon`** | `String` | 否 | [Lucide 图标](https://lucide.dev/icons)名称（如 `rocket`） |
+| **`children`** | `Array` | 否 | 嵌套子项，用于创建子菜单或分组 |
+| **`collapsible`** | `Boolean` | 否 | 为 `true` 时，用户可展开/折叠该分组 |
+| **`external`** | `Boolean` | 否 | 为 `true` 时，链接在新标签页打开 |
 
-## Organizing Groups
+## 分组组织
 
-You can nest navigation items to create deep hierarchies. There are two primary ways to organise groups:
+可以将导航项嵌套以创建深层级结构。主要有两种组织方式：
 
-### 1. Clickable Group (Directory with Index)
-If the parent has a `path`, clicking the label navigates to that page and automatically expands the children in the sidebar.
+### 1. 可点击分组（带索引页的目录）
+如果父项有 `path`，点击标签就会跳转到该页面，并自动展开侧边栏子项。
 
 ```javascript
 {
-  title: 'Cloud Setup',
+  title: '云配置',
   path: '/cloud/overview', 
   children: [
     { title: 'AWS', path: '/cloud/aws' },
@@ -50,34 +47,34 @@ If the parent has a `path`, clicking the label navigates to that page and automa
 }
 ```
 
-### 2. Static Label (Category Header)
-If you **omit the `path`**, the item becomes a static category header. This is the recommended approach for grouping related technical sections that don't share a common landing page.
+### 2. 静态标签（分类标题）
+
+如果**省略 `path`**，该项就变成一个静态分类标题。这是对没有公共落地页的相关技术章节进行分组的推荐方式。
 
 ```javascript
 {
-  title: 'Content & Formatting',
+  title: '内容与格式',
   icon: 'layout',
   children: [
-    { title: 'Syntax Guide', path: '/content/syntax' },
-    { title: 'Containers', path: '/content/containers' }
+    { title: '语法指南', path: '/content/syntax' },
+    { title: '容器', path: '/content/containers' }
   ]
 }
 ```
 
-## Automated Breadcrumbs
+## 自动面包屑
 
+`docmd` 根据导航层级结构自动生成每个页面的面包屑，显示在页面标题上方，方便用户快速定位。
 
-<!-- SCREENSHOT: Breadcrumb bar above the page title showing "Home > Getting Started > Installation" with clickable links. -->
+### 耘饭尚番
+*   **自动解析**：引擎追踪 `navigation` 树中站点
+m的祖先路径。
+*   **当前状态**：当前页面为面包屑最末一项（无链接）。
+*   **移动端适配**：小屏上面包屑会吺能调整或隐藏，以保留头部空间。
 
-`docmd` automatically generates breadcrumbs for every page based on your navigation hierarchy. These crumbs are rendered above the main page title to improve orientation and navigation speed.
+### 禁用面包屑
 
-### Behavior
-*   **Auto-Resolution**: The engine traces the path through your `navigation` tree to identify the current page's ancestors.
-*   **Active State**: The current page is listed as the final, non-linked crumb.
-*   **Mobile Support**: Breadcrumbs are intelligently adjusted or hidden on smaller screens to preserve header space.
-
-### Disabling Breadcrumbs
-Breadcrumbs are enabled by default. To disable them site-wide, update your `docmd.config.js`:
+面包屑默认开启。如需全局关闭，输入下方配置：
 
 ```javascript
 layout: {
@@ -85,31 +82,28 @@ layout: {
 }
 ```
 
-## External Versioned Navigation
+## 外部版本导航
 
-When maintaining multiple versions of your documentation (e.g., `v1`, `v2`), managing a massive central configuration can become cumbersome.
+在维护多个版本文档时，`docmd` 支持 **Navigation V2**，允许在各版本目录下放置 `navigation.json` 文件。
 
-`docmd` supports **Navigation V2**, allowing you to place a `navigation.json` file at the root of your versioned directory (e.g., `docs-v1/navigation.json`).
-
-The JSON file must follow the standard array structure:
+JSON 文件必须遵循标准数组结构：
 
 ```json
 [
-  { "title": "Home", "path": "/" },
-  { "title": "Release Notes", "path": "/release-notes" }
+  { "title": "首页", "path": "/" },
+  { "title": "发布说明", "path": "/release-notes" }
 ]
 ```
 
-**Resolution Priority:**
-When rendering a versioned page, the sidebar is resolved in this order:
-1.  **`navigation.json`**: Checked first within the specific version source folder.
-2.  **`versions.navigation`**: Checked within the version definition in `docmd.config.js`.
-3.  **Default Navigation**: Falls back to the main site navigation.
+**解析优先级：**
+1. `navigation.json`：首先在特定版本源文件夹中查找
+2. `versions.navigation`：在 `docmd.config.js` 的版本定义中查找
+3. 默认导航：回退到主网站导航
 
-## Icons Integration
+## 图标集成
 
-`docmd` comes pre-bundled with the entire **Lucide** icon library. Simply use the icon name in kebab-case (e.g., `brain-circuit`, `terminal`, `settings`).
+`docmd` 內置了完整的 **Lucide** 图标库。使用时只需将图标名称写为短横线格式（如 `brain-circuit`、`terminal`、`settings`）即可。
 
 ::: callout tip
-Use descriptive `title` keys even if the page content starts with a header. Clear, consistent navigation titles allow AI agents (using `llms-full.txt`) to build an accurate mental map of your project structure effortlessly.
+即使页面内容以标题开头，也建议为 `title` 键使用描述性文字。清晰一致的导航标题将帮助 AI 模型通过 `llms-full.txt` 建立对项目结构的准确理解。
 :::

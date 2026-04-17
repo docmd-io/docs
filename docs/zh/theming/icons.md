@@ -1,46 +1,46 @@
 ---
 title: "图标"
-description: "How to use and customise Lucide icons in your documentation."
+description: "如何在文档中使用并自定义 Lucide 图标。"
 ---
 
-`docmd` comes with built-in support for the [Lucide](https://lucide.dev/) icon library. Icons can be used in your navigation sidebar, buttons, and custom components to provide visual cues and improve scannability.
+`docmd` 内置支持 [Lucide](https://lucide.dev/) 图标库。图标可用于导航侧边栏、按鈕和自定义组件，提供视觉提示并提升易扫读性。
 
-## Navigation Icons
+## 导航图标
 
-Assign an icon to any navigation item in your `docmd.config.js`. Use the kebab-case name of any icon found on the Lucide website.
+在 `docmd.config.js` 中为导航项指定图标。使用 Lucide 网站上任意图标的破折序写名称（kebab-case）。
 
 ```javascript
 navigation: [
-  { title: 'Home', path: '/', icon: 'home' },
-  { title: 'Setup', path: '/setup', icon: 'settings' }
+  { title: '首页', path: '/', icon: 'home' },
+  { title: '安装', path: '/setup', icon: 'settings' }
 ]
 ```
 
-## Button Icons
+## 按鈕图标
 
-You can also use icons inside your button labels by including the raw HTML or using standard Lucide naming if supported by your theme.
+也可在按鈕标签中使用图标，可包含原始 HTML 或如果主题支持，使用标准 Lucide 命名方式。
 
 ```markdown
-::: button "Download" /download icon:download
+::: button "下载" /download icon:download
 ```
 
-## CSS Styling
+## CSS 样式化
 
-All icons are rendered as inline SVGs with the class `.lucide-icon`. You can globally change their size or stroke weight in your `customCss`:
+所有图标以内联 SVG 形式渲染，带有 `.lucide-icon` 类。可在 `customCss` 中全局调整其大小或线条粗细：
 
 ```css
 .lucide-icon {
-  stroke-width: 1.5px; /* Thinner icons for a modern look */
+  stroke-width: 1.5px; /* 更细的现代风格图标 */
   width: 1.2rem;
   height: 1.2rem;
 }
 
-/* Target a specific icon */
+/* 针对特定图标 */
 .icon-rocket {
   color: #ff5733;
 }
 ```
 
-## Icon Reference
-We support the entire Lucide library. You can browse the thousands of available icons here:
-::: button "Browse Lucide Icons" external:https://lucide.dev/icons
+## 图标参考
+我们支持完整的 Lucide 图标库。可在此处浏览数千个可用图标：
+::: button "浏览 Lucide 图标" external:https://lucide.dev/icons

@@ -1,33 +1,31 @@
 ---
 title: "可用主题"
-description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Learn how to switch themes with a single config line."
+description: "探索 docmd 内置主题，包括 Sky、Ruby 和 Retro。只需一行配置即可切换主题。"
 ---
 
-`docmd` provides a set of professionally designed, light/dark responsive themes. You can switch your entire site's aesthetic by changing a single key in `docmd.config.js`.
-
-<!-- SCREENSHOT: Gallery grid showing all available themes — each theme rendered as a small preview card with the theme name below. Show at least the default, minimal, and docs themes in both light and dark variants. -->
+`docmd` 提供了一套专业设计、支持明暗模式的响应式主题。只需修改 `docmd.config.js` 中的一个配置项，即可切换整个网站的视觉风格。
 
 
-## How to Switch Themes
+## 如何切换主题
 
 ```javascript
 // docmd.config.js
 export default {
   theme: {
     name: 'sky',
-    appearance: 'system', // Options: 'light', 'dark', 'system'
+    appearance: 'system', // 可选值：'light'、'dark'、'system'
   }
 }
 ```
 
-## Built-in Theme Gallery
+## 内置主题库
 
-| Theme | Best For | Vibes |
+| 主题 | 适用场景 | 风格 |
 | :--- | :--- | :--- |
-| `default` | Low-profile docs | Clean, lightweight, neutral |
-| `sky` | Product Docs | Modern, premium, standard-issue |
-| `ruby` | Brand Identity | Sophisticated, serif headers, vibrant |
-| `retro` | Dev Tools | 80s Terminals, monospace, neon accents |
+| `default` | 简洁文档 | 干净、轻量、中性 |
+| `sky` | 产品文档 | 现代、高端、标准范式 |
+| `ruby` | 品牌形象 | 优雅、衢线标题、鲜明配色 |
+| `retro` | 开发工具 | 80 年代终端风格、等宽字体、霸光色点缀 |
 
 ::: grids
 ::: grid
@@ -44,24 +42,24 @@ export default {
 :::
 :::
 
-### 1. `sky` (Default)
-The gold standard for modern documentation. It features crisp typography, subtle transitions, and high-contrast light/dark modes that match modern SaaS platforms.
+### 1. `sky`（默认）
+现代文档的黄金标准。具有清晰的排版、微妙的过渡动画，以及反映现代 SaaS 平台的高对比明暗模式。
 
 ### 2. `ruby`
-A high-elegance theme using serif typography for headers and a deep, jewel-toned color palette. Perfect for documentation that needs to feel authoritative and premium.
+高雅展示主题，标题采用衢线字体、羞石色调色板。适合需要展现权威感和高端感的文档。
 
 ### 3. `retro`
-A nostalgia-fueled theme inspired by vintage computing. Features include phosphor-green text on black backgrounds (in dark mode), scanline effects, and monospace fonts like Fira Code by default.
+致敬复古计算的活力主题。暗色模式下采用黑底绿色荧光文字、扫描线效果，默认使用 Fira Code 等宽字体。
 
 ### 4. `default`
-A total "Blank Slate" theme. Use this if you plan on adding extensive custom CSS and don't want any built-in design layers interfering with your branding.
+完全的“空白画布”主题。如果你计划添加大量自定义 CSS，不希望内置设计层干扰品牌形象时，选择此项。
 
-## Theming Architecture
+## 主题架构
 
-1.  **CSS Layering**: Themes are additive. Choosing `sky` actually loads the base `default` styles and then overlays the `sky` aesthetic on top.
-2.  **Native dark-mode**: Every theme includes a first-class dark mode implementation.
-3.  **No Refresh**: When users switch themes via the UI, the SPA engine updates the `--docmd-primary` variables instantly without a page reload.
+1. **CSS 叠加机制**：主题采用叠加模式。选择 `sky` 实际上是在加载基础 `default` 样式后再叠加 `sky` 视觉。
+2. **原生暗色模式**：每个主题都内置一流的暗色模式实现。
+3. **无刷新切换**：用户通过界面切换主题时，SPA 引擎将即刻更新 `--docmd-primary` 变量，无需刷新页面。
 
 ::: callout tip
-When describing your documentation layout to an AI developer tool, mentioning your theme (e.g., "I'm using the `retro` theme") helps the model suggest custom CSS overrides that align with that specific theme's variable schema.
+向 AI 开发工具描述文档布局时，语言品主题名称（如「我在使用 `retro` 主题」）有助于模型提出与该主题 CSS 变量模式相匹配的自定义样式建议。
 :::

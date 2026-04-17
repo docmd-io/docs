@@ -1,57 +1,56 @@
 ---
 title: "翻译内容"
-description: "Organise translations in locale subdirectories with per-file fallback and per-locale navigation."
+description: "在语言区域子目录中组织翻译内容，支持逐文件降级回退和各区域独立导航。"
 ---
+## 目录结构
 
-## Directory structure
-
-Every locale — including the default — lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
+每种语言区域（包括默认区域）在源目录中都有自己的子目录。文件夹名称与配置中的区域 `id` 匹配。
 
 ```
 docs/
-├── en/                     ← default locale content
+├── en/                     ← 默认区域内容
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← second locale
-│   ├── index.md            ← translated homepage
-│   ├── navigation.json     ← translated navigation labels
+├── hi/                     ← 第二语言区域
+│   ├── index.md            ← 翻译后的首页
+│   ├── navigation.json     ← 翻译后的导航标签
 │   └── getting-started/
-│       └── installation.md ← translated page
-└── zh/                     ← third locale
-    └── index.md            ← only the homepage translated
+│       └── installation.md ← 翻译后的页面
+└── zh/                     ← 第三语言区域
+    └── index.md            ← 仅翻译了首页
 ```
 
-The source directory is a clean container — it holds only locale folders. No content files sit at the root level when i18n is enabled.
+源目录是纯净的容器——启用 i18n 后，根目录下不放任何内容文件，只放语言区域文件夹。
 
-::: callout info "Folder names are your choice"
-The folder names come directly from the `id` values in your config. If your config says `{ id: 'fr-ca' }`, your folder is `docs/fr-ca/`. If Hindi is your default locale (`default: 'hi'`), then `docs/hi/` is the canonical content directory.
+::: callout info "文件夹名称由你决定"
+文件夹名称直接来自配置中的 `id` 值。如果配置中写的是 `{ id: 'fr-ca' }`，文件夹就是 `docs/fr-ca/`。如果印地语是默认区域（`default: 'hi'`），则 `docs/hi/` 就是规范内容目录。
 :::
 
-## Per-file fallback
+## 逐文件回退
 
-You don't need to translate every page. docmd scans the **default locale's directory** as the canonical list of pages. For every other locale, it checks whether a translated version of each page exists:
+无需翻译每一个页面。docmd 以**默认区域的目录**为页面规范列表。对于其他区域，会检查每个页面是否存在翻译版本：
 
-- If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation
-- If it doesn't exist → serves the default locale's version of that page
+- 如果 `docs/hi/getting-started/installation.md` 存在 → 提供印地语翻译
+- 如果不存在 → 提供该页面的默认区域版本
 
-When a page falls back, docmd can display a translated callout informing viewers that the page is shown in the default language. This message is customisable via your [UI strings](./ui-strings) configuration.
+当页面发生回退时，docmd 可以显示一个翻译后的提示框，告知用户当前页面以默认语言展示。该消息可通过[UI 字符串](./ui-strings)配置自定义。
 
-## Locale-exclusive pages
+## 仅限该区域的页面
 
-A non-default locale can also have pages that don't exist in the default locale. These are rendered only for that locale — they don't appear in other locales.
+非默认区域也可以拥有默认区域中不存在的页面。这些页面仅为该区域渲染，不会出现在其他区域中。
 
-## Translate the navigation
+## 翻译导航
 
-Each locale directory can have its own `navigation.json`. The resolution priority:
+每个区域目录都可以有自己的 `navigation.json`。解析优先级：
 
-1. **Locale-specific** — `docs/hi/navigation.json` (if it exists)
-2. **Default locale** — `docs/en/navigation.json` (fallback)
-3. **Version-specific** — `docs-v1/navigation.json` (for old versions without locale dirs)
-4. **Root config** — the `navigation` array from `docmd.config.js`
+1. **特定区域** — `docs/hi/navigation.json`（如果存在）
+2. **默认区域** — `docs/en/navigation.json`（回退）
+3. **版本特定** — `docs-v1/navigation.json`（针对没有区域目录的旧版本）
+4. **根配置** — `docmd.config.js` 中的 `navigation` 数组
 
-A locale's `navigation.json` uses the same format:
+区域的 `navigation.json` 使用相同格式：
 
 ```json
 [
@@ -65,37 +64,37 @@ A locale's `navigation.json` uses the same format:
 ]
 ```
 
-::: callout tip "Partial navigation"
-You only need to create a locale `navigation.json` when you want translated labels. If it's missing, the default locale's navigation is used — pages still render, just with untranslated labels.
+::: callout tip "部分导航"
+只有在需要翻译标签时才需要创建区域 `navigation.json`。如果缺少该文件，将使用默认区域的导航——页面仍正常渲染，只是标签未翻译。
 :::
 
-## Versioning and i18n together
+## 版本控制与 i18n 结合使用
 
-When both versioning and i18n are configured, the source structure is:
+同时配置版本控制和 i18n 时，源目录结构如下：
 
 ```
-docs/                    ← current version (container)
-  en/                    ← current version, default locale
-  hi/                    ← current version, translated locale
-docs-v1/                 ← old version
-  index.md               ← old version content (no locale structure)
+docs/                    ← 当前版本（容器）
+  en/                    ← 当前版本，默认区域
+  hi/                    ← 当前版本，翻译区域
+docs-v1/                 ← 旧版本
+  index.md               ← 旧版本内容（无区域结构）
   navigation.json
 ```
 
-Old versions that predate i18n work automatically — docmd reads them directly when no locale subdirectories are present. Only the default locale renders the old version. To add translations to an old version, create a locale subdirectory inside it:
+早于 i18n 的旧版本可自动工作——当没有区域子目录时，docmd 直接读取。只有默认区域渲染旧版本。如需为旧版本添加翻译，在旧版本目录中创建区域子目录：
 
 ```
 docs-v1/
-  hi/                    ← Hindi translation for v1
+  hi/                    ← v1 的印地语翻译
     index.md
     navigation.json
 ```
 
-The output URLs nest locale first, then version:
+输出 URL 按区域优先、版本其次的顺序嵌套：
 
 ```
-/                        ← default locale, current version
-/hi/                     ← translated locale, current version
-/v1/                     ← default locale, old version
-/hi/v1/                  ← translated locale, old version
+/                        ← 默认区域，当前版本
+/hi/                     ← 翻译区域，当前版本
+/v1/                     ← 默认区域，旧版本
+/hi/v1/                  ← 翻译区域，旧版本
 ```

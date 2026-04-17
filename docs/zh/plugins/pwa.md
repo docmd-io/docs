@@ -1,13 +1,13 @@
 ---
-title: "PWA & Offline Support"
-description: "Transform your documentation into a progressive web application with offline caching and mobile-first features."
+title: "PWA 与离线支持"
+description: "将文档转化为渐进式 Web 应用，支持离线缓存和移动端特性。"
 ---
 
-The `@docmd/plugin-pwa` plugin enables Progressive Web App (PWA) features for your documentation site. It adds a web manifest for mobile installation and registers a service worker to handle intelligent offline caching, ensuring your technical manuals remain accessible even in low-connectivity environments.
+`@docmd/plugin-pwa` 插件为你的文档网站开启渐进式 Web 应用（PWA）功能。它添加 Web Manifest 以支持移动端安装，并注册 Service Worker 处理智能离线缓存，确保技术文档即使在网络不稳定的环境下仍可访问。
 
-## Configuration
+## 配置
 
-The PWA plugin can be customised to match your branding within the `plugins` section of `docmd.config.js`.
+可在 `docmd.config.js` 的 `plugins` 部分自定义 PWA 插件的品牌配置。
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -24,22 +24,20 @@ export default defineConfig({
 });
 ```
 
-## Core Features
+## 核心功能
 
-### 1. Offline Caching
-The plugin automatically generates a `service-worker.js` file that implements a "Stale-While-Revalidate" caching strategy. When a user visits a page, the service worker:
-*   Returns the cached version instantly for maximum speed.
-*   Fetches the latest version from the network in the background.
-*   Updates the cache for the next visit.
+### 1. 离线缓存
+插件会自动生成实现“旧数据优先更新”（Stale-While-Revalidate）缓存策略的 `service-worker.js` 文件。用户访问页面时，Service Worker 将：
+*   立即返回缓存版本以实现最大速度。
+*   在后台从网络获取最新版本。
+*   为下次访问更新缓存。
 
-### 2. Mobile Installation
+### 2. 移动端安装
 
+通过生成 `manifest.webmanifest` 并注入所需的 `<meta>` 标签，插件允许用户在 iOS 和 Android 上“添加到主屏幕”。你的文档将表现得像一个独立应用，拥有自己的启动画面和窗口框架。
 
-<!-- SCREENSHOT: Mobile device (iOS or Android) showing the "Add to Home Screen" prompt for a docmd-powered site, and the resulting app icon on the home screen. -->
-By generating a `manifest.webmanifest` and injecting the required `<meta>` tags, the plugin allows users to "Add to Home Screen" on iOS and Android. Your documentation will behave like a standalone application, with its own splash screen and window frame.
-
-### 3. Smart Asset Resolution
-The plugin attempts to generate app icons automatically by looking for your project's `logo` or `favicon`. For more control, you can provide an explicit `icons` array:
+### 3. 智能资源解析
+插件会通过查找项目的 `logo` 或 `favicon` 自动生成应用图标。如需更多控制，可提供明确的 `icons` 数组：
 
 ```javascript
 pwa: {
@@ -50,69 +48,69 @@ pwa: {
 }
 ```
 
-## Technical Implementation
+## 技术实现
 
-The service worker is designed to be compatible with Single Page Application (SPA) routing. It includes specific fail-safe logic for Safari's strict security policies regarding redirected streams, ensuring stability across all modern browsers.
+Service Worker 将与单页应用（SPA）路由兼容地设计。它包含针对 Safari 严格安全策略（涉及重定向流）的安全防护逻辑，确保在所有现代浏览器上的稳定性。
 
-::: callout tip "Dev Mode"
-Service workers are typically disabled or bypassed in local development (`docmd dev`) to prevent aggressive caching from interfering with your edits. To test the PWA functionality, perform a production build with `docmd build` and serve the output directory using a static host.
+::: callout tip "开发模式"
+在本地开发（`docmd dev`）中，Service Worker 通常会被禁用或绕过，以防止积极缓存干扰你的编辑。如需测试 PWA 功能，请使用 `docmd build` 执行生产构建，并使用静态托管服务输出目录。
 :::
 
-### Fully Remove
+### 完全移除
 
-Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell — requiring no user action.
+只需删除 `plugins` 中的 `pwa` 块即可。下次运行 `docmd build` 时不会生成新的 manifest。当用户访问站点时，docmd 的客户端引导程序（`docmd-main.js`）会检查 `<link rel="manifest">` 的存在。如果它不存在但 Service Worker 已注册，将自动**注销所有现存考古 Worker** 并清除缓存外壳——无需用户操作。
 
 ::: callout warning
-The `manifest.webmanifest` and `service-worker.js` files from a previous build persist on disk until you clear your output directory (`site/` by default) with `docmd build` or `rm -rf site`. This is a filesystem artifact, not an active PWA.
+上次构建产生的 `manifest.webmanifest` 和 `service-worker.js` 文件会在磁盘上持久存在，直到你使用 `docmd build` 或 `rm -rf site` 清除输出目录（默认为 `site/`）为止。这是文件系统残留物，不是活跃的 PWA。
 :::
 
-## Configuration Reference
+## 配置参考
 
-All fields are optional. The defaults are designed for zero-config use.
+所有字段均为可选。默认值设计为零配置即用。
 
 ```javascript
 export default {
   plugins: {
     pwa: {
-      // --- Icon Configuration ---
-      // Priority: pwa.logo > config.logo > config.favicon > (no icons)
-      logo: 'assets/images/app-icon.png', // Path relative to your src folder
+      // --- 图标配置 ---
+      // 优先级：pwa.logo > config.logo > config.favicon > （无图标）
+      logo: 'assets/images/app-icon.png', // 相对于源文件夹的路径
 
-      // Or for full manual control:
+      // 或者完全手动控制：
       icons: [
         { src: '/assets/images/icon-192.png', sizes: '192x192', type: 'image/png' },
         { src: '/assets/images/icon-512.png', sizes: '512x512', type: 'image/png' }
       ],
 
-      // --- Manifest Colors ---
-      themeColor: '#1e293b',  // Browser chrome / top bar accent
-      bgColor: '#ffffff',     // Splash screen background during install
+      // --- Manifest 颜色 ---
+      themeColor: '#1e293b',  // 浏览器外框 / 顶栏高亮色
+      bgColor: '#ffffff',     // 安装时启动画面背景色
 
-      // --- Disable the plugin entirely ---
+      // --- 完全禁用插件 ---
       enabled: false
     }
   }
 }
 ```
 
-### Icon Resolution Priority
+### 图标解析优先级
 
-docmd resolves your PWA icon from the following cascade:
+docmd 按以下层级解析 PWA 图标：
 
-1. `pwa.icons` — Manual array, used as-is
-2. `pwa.logo` — Single image path, used for both 192x192 and 512x512 entries
-3. `config.logo` — Your global site logo
-4. `config.favicon` — Your global favicon
-5. *(No icons declared in manifest)* — If none of the above are set
+1. `pwa.icons` — 手动数组，直接使用
+2. `pwa.logo` — 单一图片路径，用于 192x192 和 512x512 条目
+3. `config.logo` — 全局站点 logo
+4. `config.favicon` — 全局 favicon
+5. *（manifest 中未声明图标）* — 以上均未设置时
 
-## Testing Locally
+## 本地测试
 
-Browsers restrict Service Workers to `https://` or `localhost`. Use:
+浏览器将 Service Worker 限制在 `https://` 或 `localhost`。使用：
 
 ```bash
 docmd dev
 ```
 
-Open Chrome DevTools → **Application** → **Manifest** and **Service Workers** to view the activated registration in real-time.
+打开 Chrome DevTools → **Application** → **Manifest** 和 **Service Workers**，即可实时查看已激活的注册信息。
 
-Safari → **Develop** → **Service Workers** panel works equally well.
+Safari → **Develop** → **Service Workers** 面板同样适用。

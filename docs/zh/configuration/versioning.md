@@ -1,62 +1,57 @@
 ---
 title: "版本管理"
-description: "Enable multi-version documentation with seamless switching, sticky path preservation, and isolated build directories."
+description: "启用多版本文档管理，支持无缝切换、路径保留和独立构建目录。"
 ---
 
-`docmd` features a native Versioning Engine that allows you to manage and serve multiple versions of your project simultaneously (e.g., `v1.x`, `v2.x`). The engine automatically handles URL routing, sidebar updates, and switching logic.
+`docmd` 内置了原生版本管理引擎，可同时管理和提供多个版本的项目文档（如 `v1.x`、`v2.x`）。引擎自动处理 URL 路由、侧边栏更新和版本切换逻辑。
 
-## Directory Organization
+## 目录组织
 
-To enable versioning, organise your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
+启用版本管理前，需将文档组织到各版本的源文件夹中。常见做法是将最新版本保存在 `docs/`，旧版本存放在以 `docs-` 为前缀的目录中。
 
 ```text
 my-project/
-├── docs/           # Latest Version (Main)
-├── docs-v1/        # Legacy Version
+├── docs/           # 最新版本（主版本）
+├── docs-v1/        # 旧版本
 ├── docmd.config.js
 ```
 
-## Configuration
+## 配置
 
-
-<!-- SCREENSHOT: Version switcher dropdown in the sidebar showing "v2.x (Latest)" selected, with "v1.x" as an option. -->
-
-Define your versions within the `versions` object:
+在 `versions` 对象中定义所有版本：
 
 ```javascript
 export default defineConfig({
   versions: {
-    current: 'v2',           // The version ID built to the root (/)
-    position: 'sidebar-top', // Switcher location: 'sidebar-top' or 'sidebar-bottom'
+    current: 'v2',           // 构建到根目录（/）的版本 ID
+    position: 'sidebar-top', // 切换器位置：'sidebar-top' 或 'sidebar-bottom'
     all: [
-      { id: 'v2', dir: 'docs',    label: 'v2.x (Latest)' },
+      { id: 'v2', dir: 'docs',    label: 'v2.x（最新）' },
       { id: 'v1', dir: 'docs-v1', label: 'v1.x' }
     ]
   }
 });
 ```
 
-## Core Features
+## 核心特性
 
-### 1. Root SEO (The "Current" Version)
-The version designated as `current` is generated directly at your output root (e.g., `mysite.com/`). This ensures your primary search traffic always lands on your most up-to-date documentation.
+### 1. 根目录 SEO（「当前」版本）
+`current` 指定的版本将直接生成到输出根目录（如 `mysite.com/`），确保搜索流量始终落在最新文档上。
 
-### 2. Isolated Sub-directories
-Non-current versions are automatically built into subfolders matching their `id`.
-*   `v2 (Current)` → `mysite.com/`
+### 2. 独立子目录
+非当前版本将自动构建到以其 `id` 命名的子文件夹中：
+*   `v2（当前）` → `mysite.com/`
 *   `v1` → `mysite.com/v1/`
 
-### 3. Sticky Switching (Path Preservation)
+### 3. 粘性切换（路径保留）
 
+`docmd` 在用户切换版本时会保留相对路径。例如用户正在阅读 `mysite.com/getting-started`，切换到 **v1** 后将自动跳转到 `mysite.com/v1/getting-started`（如果该页面存在），而不是回到首页。
 
-<!-- SCREENSHOT: Two browser windows side by side — left showing v2 of a page, right showing the same page path in v1 after switching, demonstrating path preservation. -->
-`docmd` preserves the relative path when a user switches versions. If a user is reading `mysite.com/getting-started` and switches to **v1**, they are automatically redirected to `mysite.com/v1/getting-started` (if the page exists) rather than being returned to the home page.
+### 4. 资源隔离
+每个版本继承全局 `assets/` 目录，但 `docmd` 在构建过程中会对其进行隔离，防止样式泄露或版本冲突。
 
-### 4. Asset Isolation
-Each version inherits your global `assets/` directory, but `docmd` ensures they are isolated during the build process to prevent style leakage or version conflicts.
+## 最佳实践
 
-## Best Practices
-
-1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.
-2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximize the effectiveness of "Sticky Switching."
-3.  **Unified Configuration**: You do not need separate config files for each version; `docmd` processes all versions in a single pass.
+1. **语义化 ID**：使用简洁、URL 友好的 ID，如 `v1`、`v2` 或 `beta`。
+2. **导航结构保持一致**：各版本之间保持一致的文件夹结构，以最大化「粘性切换」的效果。
+3. **统一配置文件**：无需为每个版本单独准备配置文件，`docmd` 在一次构建过程中处理所有版本。

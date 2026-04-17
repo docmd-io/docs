@@ -1,37 +1,37 @@
 ---
-title: "Recipe: Technical Writing Standards"
-description: "Best practices for authoring clear, scannable, and AI-optimised documentation."
+title: "实用技巧：技术写作规范"
+description: "编写清晰、易于扫读且 AI 友好的文档的最佳实践。"
 ---
 
-High-quality documentation is defined by its architectural clarity and scannability. This guide outlines the professional standards for utilising `docmd` features to optimise the user and machine experience.
+优质文档以架构清晰和易扫读性为核心。本指南概述利用 `docmd` 功能优化用户和机器阅读体验的专业标准。
 
-## Scannability & Semantic Density
+## 易扫读性与语义密度
 
-Technical users rarely read documentation linearly; they scan for specific solutions.
+技术用户很少线性阅读文档，他们更多是扫描以查找特定解决方案。
 
-*   **Descriptive Semantic Headings**: Avoid generic titles. Use "Initializing the Production Pipeline" instead of "Startup."
-*   **Concise Paragraphs**: Encapsulate single concepts into 2-3 sentence blocks to prevent cognitive overload.
-*   **Lexical Emphasis**: Utilise **Bold Text** for key technical terms, file paths, and terminal commands to ensure they remain distinct during rapid scanning.
+*   **描述性语义标题**：避免泛泵。优先使用“初始化生产流水线”而非“启动”。
+*   **尖锐段落**：将单一概念封装在 2~3 句悯内，防止认知超载。
+*   **词汇强调**：配合使用 **粗体** 标注关键技术术语、文件路径和终端命令，确保快速扫读时内容损不失真。
 
-## Strategy for Interactive Containers
+## 交互式容器使用策略
 
-`docmd` provides specialised UI blocks. Use them intentionally to reinforce your document's mental model.
+`docmd` 提供了专业化 UI 块。请有意识地使用，以强化文档的概念模型。
 
-### Callouts vs. Cards
-*   **Callouts (Alerts)**: Use for "Out-of-band" information. `tip` for performance shortcuts, `warning` for cautionary logic, and `danger` for critical breaking changes.
-*   **Cards (Structural Blocks)**: Use for "In-band" content clustering. Cards are ideal for feature summaries on a landing page or grouping related configuration keys.
+### 提示框 vs 卡片
+*   **提示框（警告）**：用于"带外信息"。`tip` 适合性能快捷方式，`warning` 适合警示性逻辑，`danger` 适合关键破坏性变更。
+*   **卡片（结构块）**：用于"带内内容聚类"。卡片适合落地页的功能摘要或将相关配置项分组。
 
-### Sequential Workflows
-When documenting a multi-step procedure, always utilise the `::: steps` container. This provides a high-impact visual timeline that is significantly more legible than a standard numbered list for both humans and AI agents.
+### 顺序工作流
+在文档化多步骤操作时，始终使用 `::: steps` 容器。它提供的高冲击力可视化时间线，无论对于人还是 AI Agent，其易读性都远超标准有序列表。
 
-## High-Fidelity Linking
+## 高保真链接
 
-`docmd`’s SPA router enables instant, zero-reload navigation. Maintain this experience through reliable referencing:
+`docmd` 的 SPA 路由器支持即时、无刷新的导航。通过将可靠引用命名规范化，可保持这一体验。
 
-*   **Filesystem-Aware Paths**: Always utilise relative paths to your source `.md` files (e.g., `../core/engine.md`). This ensures link integrity across IDEs, local dev servers, and production builds.
-*   **Descriptive Anchors**: Avoid "Read more." Utilise high-fidelity descriptors like "[Analyze the Browser API Reference](/api/browser-api)."
+*   **文件系统感知路径**：始终使用源 `.md` 文件的相对路径（如 `../core/engine.md`）。这确保了在 IDE、本地开发服务器和生产构建中的链接完整性。
+*   **描述性锚点**：避免使用"阅读更多"。使用具体描述，如"[查看浏览器 API 参考](/api/browser-api)"。
 
-## Code Block Professionalism
+## 代码块专业化
 
-*   **Explicit Language Labeling**: Always specify the language identifier (e.g., ` ```typescript `). This enables both accurate syntax highlighting and reliable AI parsing.
-*   **Automated Portability**: `docmd` automatically attaches interactive copy buttons to every code block; prioritize concise, ready-to-execute snippets to maximize developer utility.
+*   **明确语言标注**：始终指定语言标识符（如 ` ```typescript `）。这可实现准确语法高亮和可靠的 AI 解析。
+*   **自动便携性**：`docmd` 为每个代码块自动添加交互式复制按钮；优先提供简洁、可直接执行的代码片段，以最大化开发者使用价值。

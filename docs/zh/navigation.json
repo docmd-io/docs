@@ -1,6 +1,6 @@
 [
   {
-    "title": "Home",
+    "title": "首页",
     "path": "/",
     "icon": "home"
   },
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "title": "Writing Content",
+    "title": "内容编写",
     "icon": "pencil-line",
     "collapsible": true,
     "children": [
@@ -50,7 +50,7 @@
             "path": "/content/syntax/linking"
           },
           {
-            "title": "Advanced",
+            "title": "高级用法",
             "path": "/content/syntax/advanced"
           }
         ]
@@ -89,11 +89,11 @@
             "path": "/content/containers/buttons"
           },
           {
-            "title": "Hero Sections",
+            "title": "主页横幅",
             "path": "/content/containers/hero"
           },
           {
-            "title": "URL Embed",
+            "title": "URL 嵌入",
             "path": "/content/containers/embed"
           },
           {
@@ -122,7 +122,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Overview",
+        "title": "概览",
         "path": "/configuration/general"
       },
       {
@@ -172,7 +172,7 @@
         "path": "/theming/available-themes"
       },
       {
-        "title": "Customisation",
+        "title": "自定义与变量",
         "path": "/theming/customization"
       },
       {
@@ -188,7 +188,7 @@
         "path": "/theming/icons"
       },
       {
-        "title": "Assets",
+        "title": "静态资源",
         "path": "/theming/assets-management"
       }
     ]
@@ -250,7 +250,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Build & Deploy",
+        "title": "构建与部署",
         "path": "/deployment"
       },
       {
@@ -260,7 +260,7 @@
     ]
   },
   {
-    "title": "API Reference",
+    "title": "API 参考",
     "icon": "braces",
     "collapsible": true,
     "children": [
@@ -277,11 +277,11 @@
         "path": "/api/browser-api"
       },
       {
-        "title": "Client Events",
+        "title": "客户端事件",
         "path": "/api/client-side-events"
       },
       {
-        "title": "Live Editor API",
+        "title": "实时编辑器 API",
         "path": "/api/live-api"
       }
     ]
@@ -292,7 +292,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Landing Pages",
+        "title": "落地页设计",
         "path": "/recipes/landing-page"
       },
       {
@@ -304,7 +304,7 @@
         "path": "/recipes/favicon"
       },
       {
-        "title": "AI Optimisation",
+        "title": "AI 优化",
         "path": "/recipes/ai-optimization"
       },
       {
@@ -324,7 +324,7 @@
     "collapsible": false,
     "children": [
       {
-        "title": "v0.7.0 — What's New",
+        "title": "v0.7.0 — 新功能",
         "path": "/release-notes/0-7-0"
       }
     ]

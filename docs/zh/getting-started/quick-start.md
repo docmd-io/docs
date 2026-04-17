@@ -1,42 +1,34 @@
 ---
 title: "快速开始"
-description: "Go from an empty folder to a running documentation site in under a minute."
+description: "从空文件夹到运行中的文档网站，不到一分钟。"
 ---
 
-Run docmd inside any folder containing Markdown files. No config file, no setup, no framework knowledge required.
+在任意包含 Markdown 文件的文件夹中运行 docmd，无需配置文件，无需安装框架，即刻启动。
 
-## Start a dev server
+## 启动开发服务器
 
 ```bash
 npx @docmd/core dev
-
-
-<!-- SCREENSHOT: Terminal output after running `npx @docmd/core dev` showing the local dev server URL and build summary with page count. -->
 ```
 
-Opens `http://localhost:3000`. Your documentation is live.
+访问 `http://localhost:3000`，文档网站即刻上线。
 
+## 自动完成的事项
 
-<!-- SCREENSHOT: Browser showing the docmd default page at localhost:3000 — the auto-generated homepage with sidebar navigation visible. -->
+docmd 会自动扫描项目并完成以下配置：
 
-<!-- IMAGE NEEDED: Screenshot of a fresh docmd dev server running with auto-generated navigation -->
+1. **目录检测** — 自动寻找 `docs/`、`src/docs/`、`documentation/` 或任意 `.md` 文件
+2. **导航生成** — 根据文件夹结构自动构建侧边栏导航
+3. **元数据提取** — 从 `package.json` 读取网站标题（如有）
+4. **主题激活** — 应用默认主题，支持跟随系统自动切换明暗模式
+5. **搜索索引** — 启用内置全文搜索
 
-## What happens automatically
+无需 `docmd.config.js`。如后续需要版本管理、插件或自定义导航，再添加配置文件即可。
 
-docmd scans your project and sets everything up:
-
-1. **Directory detection** — looks for `docs/`, `src/docs/`, `documentation/`, or any `.md` files
-2. **Navigation generation** — builds a nested sidebar from your folder structure
-3. **Metadata extraction** — reads `package.json` for the site title if available
-4. **Theme activation** — applies the default theme with system-aware light/dark mode
-5. **Search indexing** — enables built-in full-text search
-
-No `docmd.config.js` is needed. Add one later when you need versioning, plugins, or custom navigation.
-
-## Build for production
+## 构建生产版本
 
 ```bash
 npx @docmd/core build
 ```
 
-Outputs a static site to `./site/`, ready to deploy anywhere.
+生成的静态网站输出至 `./site/`，可部署到任意静态托管服务。

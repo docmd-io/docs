@@ -1,67 +1,67 @@
 ---
-title: "Markdown Syntax Foundation"
-description: "Master the fundamental formatting rules of docmd: Headings, typographic styles, and technical blocks."
+title: "Markdown 语法基础"
+description: "掌握 docmd 的基础格式规则：标题、排版样式和技术块。"
 ---
 
-`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This guide establishes the baseline standards for authoring core content across your documentation site.
+`docmd` 遵循标准 **GitHub Flavored Markdown (GFM)** 规范。本指南建立了在整个文档网站中编写核心内容的基准标准。
 
-## Typographic Styling
+## 排版样式
 
-| Attribute | Markdown Syntax | Visual Outcome |
+| 属性 | Markdown 语法 | 视觉效果 |
 | :--- | :--- | :--- |
-| **Emphasis** | `**Text**` | **Bold technical terms** |
-| **Italic** | `*Text*` | *Stylized variables* |
-| **Strikethrough** | `~~Text~~` | ~~Deprecated logic~~ |
-| **Inline Logic** | `` `code` `` | `engine.initialize()` |
+| **强调** | `**Text**` | **粗体技术术语** |
+| **斜体** | `*Text*` | *斜体变量* |
+| **删除线** | `~~Text~~` | ~~已废弃逻辑~~ |
+| **内联代码** | `` `code` `` | `engine.initialize()` |
 
-## Structural Elements
+## 结构元素
 
-### Semantic Header Hierarchy
+### 语义化标题层次
 
 ```markdown
-# Level 1 (Automatic via Frontmatter)
-## Level 2 (Major Section)
-### Level 3 (Feature Detail)
+# 一级标题（通过 Frontmatter 自动生成）
+## 二级标题（主要章节）
+### 三级标题（功能细节）
 ```
 
-::: callout tip "Logical Integrity for AI"
-Advanced AI models and search internalizers rely on a strict heading hierarchy to build an accurate mental model of your project. By avoiding "Heading Skipping" (e.g., jumping from H2 directly to H4), you ensure the `llms-full.txt` context stream remains chronologically and logically sound.
+::: callout tip "AI 逻辑完整性"
+高级 AI 模型和搜索索引器依靠严格的标题层次结构来建立对项目的精确理解。避免"跳级标题"（如从 H2 直接跳到 H4），可确保 `llms-full.txt` 上下文流在时序和逻辑上保持连贯。
 :::
 
-### Navigation & Reference
+### 导航与引用
 
-Utilise standard link syntax for both internal documentation nodes and global resources.
+内部文档节点和外部资源均使用标准链接语法。
 
 ```markdown
-[Global Resource](https://docmd.io)
-[Internal Module](../api/node-api.md)
+[外部资源](https://docmd.io)
+[内部模块](../api/node-api.md)
 ```
 
-### Enumeration & Listing
+### 枚举与列表
 
-*   **Unordered Segments**: Utilise `*` or `-` for scannable bullet points.
-*   **Sequential Logic**: Utilise `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps)**).
+*   **无序列表**：使用 `*` 或 `-` 创建易于扫描的项目符号。
+*   **有序逻辑**：使用 `1.`、`2.` 等表示有序步骤。（对于教程，建议使用高级**[步骤容器](../containers/steps)**。)
 
-## Technical Block Elements
+## 技术块级元素
 
-### Blockquotes
-The standard `>` syntax is ideal for highlighting outside quotes or background context.
+### 引用块
+标准 `>` 语法非常适合突出显示外部引用或背景上下文。
 
-> The docmd engine redefines the boundaries between static site generation and dynamic application delivery.
+> docmd 引擎重新定义了静态站点生成与动态应用交付之间的边界。
 
-### Data Schemas (Tables)
+### 数据表格
 
-| Attribute | Data Type | Default |
+| 属性 | 数据类型 | 默认值 |
 | :--- | :--- | :--- |
 | `name` | `string` | `undefined` |
 | `active` | `boolean` | `true` |
 
-## Embedded HTML Support
+## 原生 HTML 支持
 
-As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialised UI requirements.
+`docmd` 启用了原生 HTML 解析，你可以直接在 Markdown 文件中嵌入复杂布局或特殊样式，满足个性化 UI 需求。
 
 ```html
 <div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
-  Bespoke UI elements live here.
+  自定义 UI 元素放在这里。
 </div>
 ```

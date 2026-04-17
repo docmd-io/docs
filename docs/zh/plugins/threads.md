@@ -1,17 +1,17 @@
 ---
-title: "Threads Plugin"
-description: "Add inline discussion threads to your documentation — stored directly in your markdown files."
+title: "Threads 插件"
+description: "向文档添加内联讨论线程——直接存储在 Markdown 文件中。"
 ---
 
-The **Threads plugin** brings collaborative inline comments to your documentation. Select any text on the page, leave a comment, start a discussion — all stored directly in your markdown source files with zero database needed.
+**Threads 插件**为你的文档带来协作式内联评论。选中页面上的任意文字，留下评论，开始讨论——所有内容直接存储在 Markdown 源文件中，无需任何数据库。
 
-Original Author: [@svallory](https://github.com/svallory)
+原作者：[@svallory](https://github.com/svallory)
 
-::: callout info "Alpha Release"
-This plugin is in alpha. The API and storage format are stable, but the UI is under active development.
+::: callout info "测试版本"
+此插件处于 Alpha 阶段。API 和存储格式已稳定，但 UI 仍在积极开发中。
 :::
 
-## Setup
+## 配置
 
 ```bash
 docmd add threads
@@ -23,14 +23,14 @@ plugins: {
 }
 ```
 
-### Configuration Options
+### 配置选项
 
-| Option | Type | Default | Description |
+| 选项 | 类型 | 默认值 | 说明 |
 | :--- | :--- | :--- | :--- |
-| `sidebar` | `boolean` | `false` | When `true`, threads stay grouped at the bottom of the page. When `false` (default), threads are positioned inline next to their highlighted text. |
+| `sidebar` | `boolean` | `false` | 为 `true` 时，线程聚合在页面底部。为 `false`（默认）时，线程内联定位在高亮文本旁边。 |
 
 ```javascript
-// Keep threads at bottom of page instead of inline
+// 将线程保持在页面底部而非内联
 plugins: {
   threads: {
     sidebar: true
@@ -38,20 +38,17 @@ plugins: {
 }
 ```
 
-## How It Works
+## 工作原理
 
+1. 在 `docmd dev` 中，**选中任意文本**
+2. 出现**评论弹窗**——写下评论并提交
+3. 选中文本被**高亮**并显示线程标记
+4. 线程以 `::: threads` 块的形式存储在 Markdown 文件底部
+5. **无需数据库**——Markdown 文件即真相来源
 
-<!-- SCREENSHOT: The thread creation flow — (1) text selected on page, (2) comment popover appearing, (3) highlighted text with thread card below. Show the flow as 3 numbered steps. -->
+## 预览
 
-1. **Select text** on any documentation page during `docmd dev`
-2. A **comment popover** appears — write your comment and submit
-3. The selected text gets **highlighted** with a thread marker
-4. Threads are stored as `::: threads` blocks at the bottom of the markdown file
-5. **No database** — your markdown files are the source of truth
-
-## Preview
-
-Here's what threads look like on a live page. Text with discussions gets <span class="threads-preview-highlight">highlighted like this</span> and thread cards appear below.
+有讨论的文本会被高亮，线程卡片显示在下方。
 
 <div class="threads-preview-card">
   <div class="threads-preview-comment">
@@ -78,8 +75,6 @@ Here's what threads look like on a live page. Text with discussions gets <span c
   </div>
 </div>
 
-And here's a <span class="threads-preview-highlight-blue">second highlight with a different color</span> — threads cycle through a palette of colors automatically.
-
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">C</div>
@@ -91,7 +86,7 @@ And here's a <span class="threads-preview-highlight-blue">second highlight with 
   </div>
 </div>
 
-Resolved threads appear dimmed:
+已解决的线程以淡化样式显示：
 
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
@@ -104,11 +99,11 @@ Resolved threads appear dimmed:
   </div>
 </div>
 
-A floating **discussion button** <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> appears in the bottom-right corner showing the count of open threads. Click it to jump to the first thread on the page.
+右下角会出现浮动的**讨论按钮** <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span>，显示未解决线程数量。
 
-## Storage Format
+## 存储格式
 
-Threads are embedded in your markdown using docmd's container syntax:
+线程使用 docmd 的容器语法嵌入到 Markdown 中：
 
 ```markdown
 # My Documentation Page
@@ -131,42 +126,42 @@ Some content with ==highlighted text=={t-a1b2c3d4} that has a thread.
 :::
 ```
 
-The `==text=={threadId}` syntax links highlighted text in the document body to a specific thread.
+`==text=={threadId}` 语法将文档正文中的高亮文本链接到特定线程。
 
-## Features
+## 功能
 
-| Feature | Description |
+| 功能 | 说明 |
 | :--- | :--- |
-| **Text Selection** | Select any text to start a new thread |
-| **Replies** | Nested reply chains within each thread |
-| **Reactions** | Emoji reactions on individual comments |
-| **Edit / Delete** | Modify or remove your comments |
-| **Resolve** | Mark threads as resolved with author + timestamp |
-| **Author Profiles** | Git-based author detection with Gravatar support |
-| **Highlight Markers** | Visual indicators on the page showing where threads are anchored |
-| **Floating Button** | Quick-access FAB with open thread count |
-| **Scroll Preservation** | Page stays in place after adding comments |
+| **文本选择** | 选中任意文本以开启新线程 |
+| **回复** | 每个线程内的嵌套回复链 |
+| **表情反应** | 对单条评论的 emoji 反应 |
+| **编辑/删除** | 修改或删除你的评论 |
+| **解决** | 将线程标记为已解决并记录作者和时间戳 |
+| **作者档案** | 基于 Git 的作者检测，支持 Gravatar |
+| **高亮标记** | 显示线程锚点位置的页面视觉标记 |
+| **浮动按钮** | 带未解决线程数量的快速访问 FAB |
+| **滚动保持** | 添加评论后页面保持当前位置 |
 
 ## Actions API
 
-The threads plugin exposes the following actions via the WebSocket RPC system. These can be called from browser plugins using `docmd.call()`:
+Threads 插件通过 WebSocket RPC 系统暴露以下 action，可通过 `docmd.call()` 在浏览器插件中调用：
 
-| Action | Description |
+| Action | 说明 |
 | :--- | :--- |
-| `threads:get-threads` | Parse and return all threads from a file |
-| `threads:add-thread` | Create a new thread with its first comment |
-| `threads:add-comment` | Add a comment to an existing thread |
-| `threads:edit-comment` | Edit an existing comment's body |
-| `threads:delete-comment` | Remove a comment from a thread |
-| `threads:delete-thread` | Remove an entire thread and cleanup highlights |
-| `threads:resolve-thread` | Toggle resolved/unresolved status |
-| `threads:toggle-reaction` | Toggle an emoji reaction on a comment |
-| `threads:get-authors` | Read the author profile map |
-| `threads:upsert-author` | Create or update an author profile |
+| `threads:get-threads` | 解析并返回文件中的所有线程 |
+| `threads:add-thread` | 创建新线程及其第一条评论 |
+| `threads:add-comment` | 向现有线程添加评论 |
+| `threads:edit-comment` | 编辑现有评论内容 |
+| `threads:delete-comment` | 从线程中删除评论 |
+| `threads:delete-thread` | 删除整个线程并清理高亮标记 |
+| `threads:resolve-thread` | 切换已解决/未解决状态 |
+| `threads:toggle-reaction` | 切换评论上的 emoji 反应 |
+| `threads:get-authors` | 读取作者档案映射 |
+| `threads:upsert-author` | 创建或更新作者档案 |
 
-## Author Profiles
+## 作者档案
 
-Author information is stored in `<docsRoot>/.threads/authors.json`:
+作者信息存储在 `<docsRoot>/.threads/authors.json` 中：
 
 ```json
 {
@@ -177,8 +172,8 @@ Author information is stored in `<docsRoot>/.threads/authors.json`:
 }
 ```
 
-During development, the plugin automatically detects your git username and email for author identification.
+开发期间，插件会自动检测你的 git 用户名和邮箱用于作者识别。
 
-::: callout tip "Version Control Friendly"
-Since threads are stored in your markdown files, they are automatically version-controlled with git. Review comments in PRs, track discussion history, and collaborate through your existing workflow.
+::: callout tip "版本控制友好"
+由于线程存储在你的 Markdown 文件中，它们会随 git 自动进行版本控制。在 PR 中审查评论、追踪讨论历史，并通过现有工作流协作。
 :::

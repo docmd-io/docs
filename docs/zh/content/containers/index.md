@@ -1,6 +1,6 @@
 ---
-title: "Custom Interactive Containers"
-description: "A comprehensive directory of the interactive UI building blocks available in docmd."
+title: "自定义交互容器"
+description: "docmd 中所有可用交互式 UI 构建块的完整目录。"
 ---
 
 Standard Markdown excels at basic text formatting, but professional technical documentation requires rich structural components to effectively communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
@@ -8,48 +8,48 @@ Standard Markdown excels at basic text formatting, but professional technical do
 <!-- SCREENSHOT: Montage of all container types on a single page — callouts (info, warning, danger, tip), tabs with code, steps, cards grid, hero section, and collapsible sections. -->
 
 
-## Block Syntax Reference
+## 块语法参考
 
-All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.
+所有容器均采用一致的块语法，确保整个项目中可预测的编写体验。
 
 ```markdown
-::: type "Optional Header Title"
-This is the primary content area.
-It supports **Markdown**, imagery, and deep component nesting.
+::: type "可选标题"
+这是主要内容区域。
+它支持 **Markdown**、图片和深度组件嵌套。
 :::
 ```
 
-| Component | Keyword | Primary Use Case |
+| 组件 | 关键字 | 主要使用场景 |
 | :--- | :--- | :--- |
-| **[Callouts](./callouts)** | `callout` | Semantic highlights for tips, warnings, and alerts. |
-| **[Cards](./cards)** | `card` | Framed structural blocks for feature grids and layout control. |
-| **[Grids](./grids)** | `grids` | Auto-adjusting multi-column structural groups. |
-| **[Tabs](./tabs)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
-| **[Steps](./steps)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
-| **[Buttons](./buttons)** | `button` | Self-closing, prominent call-to-action navigation links. |
-| **[Collapsibles](./collapsible)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
-| **[Changelogs](./changelogs)** | `changelog` | Structured, timeline-based version history and release notes. |
-| **[Hero](./hero)** | `hero` | High-impact landing page sections with layout and slider support. |
+| **[提示框](./callouts)** | `callout` | 提示、警告和告警的语义高亮。 |
+| **[卡片](./cards)** | `card` | 用于功能网格和布局控制的框架结构块。 |
+| **[栅格](./grids)** | `grids` | 自动调整的多列结构组。 |
+| **[标签页](./tabs)** | `tabs` | 用于备选平台说明的交互式可切换面板。 |
+| **[步骤](./steps)** | `steps` | 用于操作指南和教程的可视化编号时间线。 |
+| **[按钮](./buttons)** | `button` | 自闭合、突出的行动号召导航链接。 |
+| **[折叠区块](./collapsible)**| `collapsible`| 用于常见问题和深度技术数据的交互式手风琴切换。 |
+| **[更新日志](./changelogs)** | `changelog` | 结构化、基于时间线的版本历史和发布说明。 |
+| **[Hero](./hero)** | `hero` | 支持布局和滑块的高冲击力落地页章节。 |
 
-## The Strategic Importance of Containers
+## 容器的战略意义
 
-Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` engine and downstream AI agents:
+容器不仅仅是视觉美化工具；它们还为 `docmd` 引擎和下游 AI Agent 提供高保真的**语义信号**：
 
-1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritize that information during its reasoning and generation phases.
-2.  **Structural Integrity**: Combining `cards` with standard CSS allows for the creation of sophisticated landing pages without ever leaving the Markdown environment.
-3.  **Source Maintainability**: Eliminates "HTML Bloat" in your documentation source, keeping your `.md` files clean and machine-readable.
+1.  **AI 上下文映射**：将块标记为 `callout warning` 明确告知 LLM 在推理和生成阶段优先处理该信息。
+2.  **结构完整性**：将 `cards` 与标准 CSS 结合，无需离开 Markdown 环境即可创建复杂的落地页。
+3.  **源码可维护性**：消除文档源码中的"HTML 臃肿"，保持 `.md` 文件简洁且机器可读。
 
-## Recursive Composition
+## 递归组合
 
-`docmd` supports **Infinite Nesting Depth**. You can compose any container within another to build complex, interactive documentation nodes purely in Markdown.
+`docmd` 支持**无限嵌套深度**。你可以在任意容器内嵌套另一个容器，纯用 Markdown 构建复杂的交互式文档节点。
 
 ```markdown
-::: card "Architecture Overview"
+::: card "架构概览"
     ::: callout info
-        This module utilises an asynchronous I/O pipeline.
+        此模块使用异步 I/O 管道。
     :::
-    ::: button "Deep Dive into Core Engine" /advanced/developer-guide
+    ::: button "深入了解核心引擎" /advanced/developer-guide
 :::
 ```
 
-[Master the Nesting Guide →](./nested-containers)
+[掌握嵌套指南 →](./nested-containers)

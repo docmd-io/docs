@@ -1,17 +1,17 @@
 ---
 title: "UI 字符串与 SEO"
-description: "Customise system UI text per locale and understand automatic SEO tags for multi-language sites."
+description: "按语言区域自定义系统 UI 文字，并了解多语言站点的自动 SEO 标签机制。"
 ---
 
-## Built-in language support
+## 内置语言支持
 
-docmd and its official plugins (Search, Threads, etc.) ship with built-in translations for common languages. When you configure a supported locale, all system text — search placeholders, navigation labels, theme toggles — is automatically translated.
+docmd 及其官方插件（搜索、Threads 等）为常见语言内置了翻译。配置受支持的区域后，所有系统文本——搜索占位符、导航标签、主题切换等——会自动翻译。
 
-For unsupported languages or custom phrasing, the system falls back to English. You can override any string per locale.
+对于不受支持的语言或自定义措辞，系统将回退到英语。你可以按区域覆盖任意字符串。
 
-## Custom UI strings
+## 自定义 UI 字符串
 
-Use the `translations` property on any locale to override system text:
+使用任意区域上的 `translations` 属性覆盖系统文本：
 
 ```js
 export default {
@@ -40,11 +40,11 @@ export default {
 }
 ```
 
-The merge order is: **system translations → plugin translations → your config translations**. Your config always wins.
+合并顺序为：**系统翻译 → 插件翻译 → 你的配置翻译**。你的配置始终优先。
 
-## Available keys
+## 可用键
 
-| Key | Default (English) |
+| 键 | 默认值（英语） |
 |:----|:-------------------|
 | `skipToContent` | Skip to main content |
 | `toggleSidebar` | Toggle Sidebar |
@@ -62,18 +62,18 @@ The merge order is: **system translations → plugin translations → your confi
 | `mainNavigation` | Main Navigation |
 | `fallbackMessage` | This page is not yet available in {active}. Showing default language ({default}). |
 
-The `fallbackMessage` key supports `{active}` and `{default}` placeholders, replaced with locale labels at build time.
+`fallbackMessage` 键支持 `{active}` 和 `{default}` 占位符，在构建时替换为区域标签。
 
-## SEO and hreflang
+## SEO 与 hreflang
 
-docmd automatically generates `<link rel="alternate" hreflang="...">` tags for every page across all locales. The default locale also receives the `x-default` hreflang value.
+docmd 自动为所有区域的每个页面生成 `<link rel="alternate" hreflang="...">` 标签。默认区域还会获得 `x-default` hreflang 值。
 
 ```html
-<!-- Generated automatically on every page -->
+<!-- 在每个页面自动生成 -->
 <link rel="alternate" hreflang="en" href="/">
 <link rel="alternate" hreflang="x-default" href="/">
 <link rel="alternate" hreflang="hi" href="/hi/">
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-No configuration is required — these tags are injected into every page when i18n is enabled.
+无需任何配置——启用 i18n 后，这些标签会自动注入每个页面。

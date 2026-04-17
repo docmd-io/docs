@@ -1,90 +1,90 @@
 ---
 title: "嵌套容器"
-description: "Leverage docmd's recursive parser to combine cards, tabs, and callouts into high-fidelity page layouts."
+description: "利用 docmd 的递归解析器将卡片、标签页和提示框组合成高保真页面布局。"
 ---
 
 One of `docmd`’s most powerful technical capabilities is its **Recursive Parsing Engine**. You can nest components within each other infinitely to synthesize complex, interactive documentation blocks that would otherwise require deep HTML knowledge or custom templates.
 
-## The Architectural Rule
+## 架构规则
 
-While nesting is mathematically infinite, always adhere to the **Self-Closing Component Rule**:
+虽然嵌套在数学上无限，但请始终遵循**自闭合组件规则**：
 
-::: callout warning "Self-Closing Buttons"
-Because the `::: button` component is self-closing (single line), never add a terminal `:::` line after it. Doing so will inadvertently close the **parent container** housing the button, resulting in a fractured layout.
+::: callout warning "自闭合按钮"
+由于 `::: button` 组件是自闭合的（单行），绝不要在其后添加终止 `:::` 行。否则会意外关闭容纳按钮的**父容器**，导致布局断裂。
 :::
 
-## Technical Composition Examples
+## 技术组合示例
 
-### 1. Interactive Resource Block
-Combine a **Card** for structural framing, **Tabs** for environment-specific instructions, and **Callouts** for highlighting critical information.
+### 1. 交互式资源块
+将**卡片**用于结构框架，**标签页**用于特定环境的说明，**提示框**用于高亮关键信息。
 
 ````markdown
-::: card "Monorepo Quickstart"
-Choose your preferred initialization path:
+::: card "Monorepo 快速开始"
+选择你偏好的初始化方式：
 
    ::: tabs
-   == tab "Automated"
+   == tab "自动化"
       ```bash
       pnpm onboard
       ```
       ::: callout success
-      This script handles all package installation and build tasks automatically.
+      此脚本自动处理所有包安装和构建任务。
       :::
 
-   == tab "Manual"
-      Manually fetch and link the core engine.
-      ::: button "Go to Developer Guide" /advanced/developer-guide
+   == tab "手动"
+      手动获取并链接核心引擎。
+      ::: button "前往开发者指南" /advanced/developer-guide
    :::
 :::
 ````
 
-### 2. Multi-Platform Tutorials
-Nesting **Tabs** inside **Steps** is a professional pattern for providing platform-specific instructions within a standard tutorial sequence.
+### 2. 多平台教程
+将**标签页**嵌套在**步骤**中是标准教程序列中提供平台特定说明的专业模式。
 
 ```markdown
 ::: steps
 
-1. **Environment Setup**
-   Configure your local operating system.
+1. **环境设置**
+   配置本地操作系统。
 
    ::: tabs
    == tab "macOS"
-      Ensure Homebrew is installed and up-to-date.
+      确保 Homebrew 已安装并为最新版本。
    == tab "Linux"
-      Verify the Presence of `curl` and `bash`.
+      验证 `curl` 和 `bash` 是否存在。
    :::
 
-2. **Core Verification**
-   Execute the version check to confirm connectivity.
+2. **核心验证**
+   执行版本检查以确认连接性。
 
 :::
 ```
 
 ::: steps
 
-1.  **Environment Setup**
-    Configure your local operating system.
+1.  **环境设置**
+    配置本地操作系统。
 
     ::: tabs
     == tab "macOS"
-    Ensure Homebrew is installed and up-to-date.
+    确保 Homebrew 已安装并为最新版本。
     == tab "Linux"
-    Verify the Presence of `curl` and `bash`.
+    验证 `curl` 和 `bash` 是否存在。
     :::
 
-2.  **Core Verification**
-    Execute the version check to confirm connectivity.
+2.  **核心验证**
+    执行版本检查以确认连接性。
 
 :::
 
-## Design Constraints
+## 设计约束
 
-To maintain both performance and mobile responsiveness, observe the following constraints:
+为保持性能和移动端响应性，请遵守以下约束：
 
-*   **Recursive Tabs**: Nesting tabs within other tabs is technically supported but strongly discouraged. It creates navigation "loops" that are visually confusing on smaller viewports.
-*   **Sequential Conflict**: If you require numbered steps within a tab, utilise a standard ordered list (`1. Step Content`) rather than the `::: steps` container to avoid layout conflicts.
-*   **Legibility**: While `docmd` does not strictly require indentation for nested blocks, using a 2 or 4-space indentation significantly improves the human-readability of the Markdown source.
+*   **递归标签页**：在标签页中嵌套标签页在技术上受支持，但强烈不建议。在小视口上会造成混乱的导航"循环"。
+*   **顺序冲突**：如果需要在标签页内使用编号步骤，请使用标准有序列表（`1. 步骤内容`）而非 `::: steps` 容器，以避免布局冲突。
+*   **可读性**：虽然 `docmd` 不严格要求嵌套块的缩进，但使用 2 或 4 个空格的缩进可显著提高 Markdown 源码的可读性。
 
-::: callout tip "Knowledge Segmentation for AI"
-Nesting provides clear **Semantic Boundaries**. When an AI agent parses the `llms-full.txt` stream, a `callout` nested within a `card` explicitly tells the model that the tip is scoped to that card's specific topic, preventing context leakage and improving technical accuracy in generated responses.
+::: callout tip "为 AI 提供知识分割"
+嵌套提供清晰的**语义边界**。当 AI Agent 解析 `llms-full.txt` 流时，嵌套在 `card` 中的 `callout` 明确告知模型该提示的范围限定于该卡片的特定主题，防止上下文泄漏并提高生成响应的技术准确性。
 :::

@@ -1,72 +1,69 @@
 ---
 title: "明暗模式"
-description: "How to configure the default viewing mode and manage the theme switcher for the best user experience."
+description: "如何配置默认浏览模式并管理主题切换器，以提供最佳用户体验。"
 ---
 
-`docmd` provides built-in support for light and dark color schemes. It detects user system preferences automatically and allows manual overrides via a UI toggle.
+`docmd` 内置支持明色和暗色配色方案。它会自动检测用户的系统偏好，并允许通过 UI 切换按鈕手动覆盖。
 
-<!-- SCREENSHOT: Split-screen showing the same documentation page in light mode (left) and dark mode (right), with the theme toggle button circled in both. -->
+## 默认浏览模式
 
-
-## Default Viewing Mode
-
-You specify the starting state of your documentation in `docmd.config.js`.
+在 `docmd.config.js` 中指定文档的初始状态。
 
 ```javascript
 // docmd.config.js
 export default {
   theme: {
     name: 'sky',
-    appearance: 'system' // Options: 'light', 'dark', 'system' (default)
+    appearance: 'system' // 可选值：'light'、'dark'、'system'（默认）
   }
 }
 ```
 
-*   **`system`**: Matches the user's OS preference (Recommended).
-*   **`light`**: Force light mode on initial load.
-*   **`dark`**: Force dark mode on initial load.
+*   **`system`**：匹配用户的操作系统偏好（推荐）。
+*   **`light`**：首次加载时强制使用亮色模式。
+*   **`dark`**：首次加载时强制使用暗色模式。
 
-## Configuring the Toggle Button
+## 配置切换按鈕
 
-The theme switcher is part of the **Options Menu**. You can control its visibility and position within the `layout` object.
+主题切换器是**选项菜单**的组成部分。可通过 `layout` 对象控制其可见性和位置。
 
 ```javascript
 layout: {
   optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom'
+    position: 'header', // 可选：'header'、'sidebar-top'、'sidebar-bottom'
     components: {
-      themeSwitch: true  // Show or hide the Sun/Moon toggle
+      themeSwitch: true  // 显示或隐藏太阳/月亮切换按鈕
     }
   }
 }
 ```
 
-## How it works (Technical)
+## 工作原理（技术详解）
 
-The theme engine applies a `data-theme` attribute to the `<body>` tag:
+主题引擎会向 `<body>` 标签添加 `data-theme` 属性：
 
 *   `<body data-theme="light">`
 *   `<body data-theme="dark">`
 
-If you are using a themed design like `sky`, the attribute will be `sky-light` or `sky-dark`.
+如果使用类似 `sky` 这样的主题设计，属性值将为 `sky-light` 或 `sky-dark`。
 
-### CSS Variables
-`docmd` themes use CSS variables for all colors. You can override these variables in your own CSS to customise the look of either mode.
+### CSS 变量
+`docmd` 主题为所有颜色使用 CSS 变量。可在自定义 CSS 中覆盖这些变量，自定义任意模式的外观。
 
 ```css
-/* Custom CSS override */
+/* 自定义 CSS 覆盖 */
 :root {
-  --docmd-primary: #4f46e5; /* Primary accent for light mode */
+  --docmd-primary: #4f46e5; /* 亮色模式主色调 */
 }
 
 body[data-theme="dark"] {
-  --docmd-primary: #818cf8; /* Primary accent for dark mode */
+  --docmd-primary: #818cf8; /* 暗色模式主色调 */
 }
 ```
 
-## User Persistence
-When a user manually toggles the mode, their preference is stored in `localStorage`. `docmd` instantly reads this value on every page load to prevent "theme flickering" (FOUC).
+## 用户偏好持久化
+用户手动切换模式后，居好将存入 `localStorage`。`docmd` 在每次页面加载时即时读取该值，防止“主题闪烁”（FOUC）。
 
 ::: callout tip
-When generating content, LLMs prefer high-contrast structures. `docmd` ensures that code snippets and callouts remain accessible in both modes, ensuring that `llms-full.txt` payloads are correctly understood as semantic blocks regardless of which mode was active during the build.
+生成内容时，LLM 偏幽高对比结构。`docmd` 确保代码片段和提示框在两种模式下均可正常访问，保证 `llms-full.txt` 内容无论在哪种模式下构建，都能被正确解析为语义块。
 :::

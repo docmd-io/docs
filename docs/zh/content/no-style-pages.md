@@ -1,92 +1,74 @@
 ---
 title: "无样式页面"
-description: "Create custom landing pages and unique layouts by disabling the default docmd theme."
+description: "通过禁用默认 docmd 主题创建自定义落地页和独特布局。"
 ---
 
-`docmd` allows you to bypass the standard documentation layout (Sidebar, Header, and Footer) on a per-page basis. This is ideal for creating product landing pages, custom dashboards, or marketing splash screens while maintaining access to the documentation engine's components.
+`docmd` 允许你在单个页面上跳过标准文档布局（侧边栏、头部和页脚）。这非常适合创建产品落地页、自定义仪表盘或运营起始页，同时沉淦使用文档引擎的各种组件。
 
-## Enabling No-Style Mode
+## 启用无样式模式
 
-To disable the global UI, add `noStyle: true` to the page's frontmatter.
+在页面的 frontmatter 中添加 `noStyle: true` 即可禁用全局 UI。
 
 ```yaml
 ---
-title: "Product Showcase"
+title: "产品展示"
 noStyle: true
 components:
-  meta: true      # Retain SEO and OpenGraph tags
-  favicon: true   # Retain site favicon
-  css: true       # Inject docmd-main.css for typography
+  meta: true      # 保留 SEO 和 OpenGraph 标签
+  favicon: true   # 保留网站图标
+  css: true       # 注入 docmd-main.css 用于排版
 ---
 
-<!-- Raw HTML or specialised Markdown goes here -->
+<!-- 原生 HTML 或特殊 Markdown 放在这里 -->
 <div class="hero">
-  <h1>Next-Gen Documentation</h1>
-  <p>Zero-config. Isomorphic. AI-Ready.</p>
+  <h1>下一代文档</h1>
+  <p>零配置。同构。AI 就绪。</p>
 </div>
 
-::: callout info "Infinite Nesting Support"
-Even with `noStyle: true`, all standard `docmd` containers like `::: card`, `::: tabs`, and `::: hero` are fully supported and can be nested at any depth.
+::: callout info "无限层级嵌套"
+即使开启 `noStyle: true`，所有标准 `docmd` 容器（如 `::: card`、`::: tabs`、`::: hero`）仍完全可用，并可以无限深度嵌套。
 :::
 ```
 
-## Component Opt-In
+## 组件单独启用
 
-When `noStyle` is active, you start with a blank canvas. Selectively re-enable core system components as needed:
+开启 `noStyle` 后，页面从空白画布开始。根据需要选择性地开启核心组件：
 
-| Component | Description |
+| 组件 | 说明 |
 | :--- | :--- |
-| `meta` | Injects `<title>`, SEO meta tags, and structured OpenGraph data. |
-| `favicon` | Injects the project-wide favicon. |
-| `css` | Injects `docmd-main.css`. Highly recommended for foundational grid and typography. |
-| `menubar` | Injects the site's top menubar. |
-| `theme` | Injects the active theme's CSS variables and appearance overrides. |
-| `scripts` | Injects interactive component logic (requires `mainScripts: true`). |
-| `spa` | Enables the single-page application router (requires `scripts: true`). |
+| `meta` | 注入 `<title>`、SEO 元标签和 OpenGraph 结构化数据。 |
+| `favicon` | 注入项目全局网站图标。 |
+| `css` | 注入 `docmd-main.css`。强烈建议开启，提供基础网格和排版。 |
+| `menubar` | 注入网站顶部菜单栏。 |
+| `theme` | 注入当前主题的 CSS 变量和外观覆盖。 |
+| `scripts` | 注入交互组件逻辑（需要 `mainScripts: true`）。 |
+| `spa` | 启用单页应用路由（需要 `scripts: true`）。 |
 
-## Composable Landing Pages
+## 组合式落地页
 
-The primary power of `noStyle` is that it allows you to use the entire suite of `docmd` components as high-fidelity "widgets" on a blank canvas. You aren't limited to raw HTML; you can build complex, structural designs purely in Markdown.
+`noStyle` 的核心优势在于：它允许你将所有 `docmd` 组件使用为在空白画布上的高价值“小插件”。你不局限于原始 HTML，可以纯簹用 Markdown 构建复杂的结构化设计。
 
-### Building a Modern Entry Point
+### 打造现代入口页
 
 ```yaml
 ---
-title: "Welcome"
+title: "欢迎使用"
 noStyle: true
 components:
   meta: true
   css: true
-  menubar: true    # Use the site's top navigation
-  scripts: true    # Enable interactive components
-  mainScripts: true
+  menubar: true    # 使用网站顶部导航
+  scripts: true
+  spa: true
 ---
 
-::: hero layout:split glow:true
-# Build Documentation that Wows.
-The zero-config engine for modern engineering teams.
-
-::: button "Get Started" /introduction color:blue
-::: button "GitHub" github:docmd-io/docmd color:gray
-
-== side
-::: embed [https://www.youtube.com/watch?v=dQw4w9WgXcQ]
-:::
-:::
-
-::: grids
-  ::: card "Zero Configuration"
-  Just write markdown. No complex React logic or build scripts.
-  :::
-  ::: card "AI Optimised"
-  Structure-aware parsing for the LLM era.
-  :::
-  ::: card "Fast Without the Framework Tax"
-  Static generation with isomorphic SPA navigation.
-  :::
+::: hero
+# 下一代文档
+沈浸式, 18kb, AI 就绪.
+::: button "立马开始" /getting-started/quick-start
 :::
 ```
 
-::: callout tip "AI-Generated Layouts"
-Because `noStyle` pages support raw HTML alongside `docmd` containers, they are perfectly suited for **AI-driven UI design**. You can prompt an AI: *"Design a modern hero section using Tailwind-like utility classes and docmd buttons, wrapped in a noStyle: true container."* The AI can iterate on the design within your static site pipeline with zero additional configuration.
+::: callout tip "AI 辅助布局设计"
+`noStyle` 页面同时支持原生 HTML 和 `docmd` 容器，因此非常适合 **AI 驱动的 UI 设计**。你可以提示 AI：*"使用 Tailwind 风格的工具类和 docmd 按钮设计一个现代 hero 区块，封装在 noStyle: true 容器中。"* AI 即可在你的静态网站流水线中快速迭代设计，无需任何额外配置。
 :::

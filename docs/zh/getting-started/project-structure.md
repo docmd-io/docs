@@ -1,68 +1,61 @@
 ---
 title: "项目结构"
-description: "How docmd maps your files and folders to pages, URLs, and navigation."
+description: "docmd 如何将文件和文件夹映射为页面、URL 和导航。"
 ---
 
-docmd uses your filesystem as the source of truth. Folders become sections, Markdown files become pages, and the directory hierarchy defines URL routes.
+docmd 以文件系统作为唯一数据来源。文件夹对应文档章节，Markdown 文件对应页面，目录层级决定 URL 路由。
 
-<!-- SCREENSHOT: VS Code or file explorer showing the standard docmd project structure — docs/ folder with markdown files, docmd.config.js at root, and assets/ directory. -->
-
-
-## Initialise a project
+## 初始化项目
 
 ```bash
 mkdir my-docs && cd my-docs
 npx @docmd/core init
 ```
 
-This creates the standard project scaffold:
+这将创建标准项目脚手架：
 
 ```text
 my-docs/
-├── docs/               ← Source directory. Your .md files go here.
-│   └── index.md        ← Home page (/)
-├── assets/             ← Static assets (images, custom CSS/JS)
+├── docs/               ← 源目录，.md 文件放这里
+│   └── index.md        ← 首页 (/)
+├── assets/             ← 静态资源（图片、自定义 CSS/JS）
 │   ├── css/
 │   ├── js/
 │   └── images/
-├── docmd.config.js     ← Configuration file
-├── package.json        ← Project metadata and scripts
-└── site/               ← Generated output (after build)
+├── docmd.config.js     ← 配置文件
+├── package.json        ← 项目元数据与脚本
+└── site/               ← 构建输出目录
 ```
 
-<!-- IMAGE NEEDED: Screenshot of terminal after running npx @docmd/core init showing the generated file tree -->
+## 文件到 URL 的映射
 
-## File-to-URL mapping
+docmd 将 `docs/` 目录结构直接映射为 URL：
 
-docmd maps your `docs/` directory structure directly to URLs:
-
-| File | URL |
+| 文件 | URL |
 |:-----|:----|
 | `docs/index.md` | `/` |
 | `docs/api.md` | `/api` |
 | `docs/guides/setup.md` | `/guides/setup` |
 
-::: callout tip "Automatic titles"
-If a page title is not defined in frontmatter, docmd extracts the first `H1` heading as the title.
+::: callout tip "自动标题"
+如果页面未在 frontmatter 中定义标题，docmd 会自动提取第一个 `H1` 标题作为页面标题。
 :::
 
-## Start the dev server
+## 启动开发服务器
 
 ```bash
 npx @docmd/core dev
 ```
 
-Opens `http://localhost:3000` with live reload. Changes to `.md` files or `docmd.config.js` are reflected instantly.
-
-## Build for production
+## 构建生产版本
 
 ```bash
 npx @docmd/core build
 ```
 
-Outputs a static site to `./site/`. The output is entirely static HTML — deploy it to GitHub Pages, Vercel, Netlify, or any static host.
+输出静态网站到 `./site/`，出品为纯静态 HTML——可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
 
-Verify locally before deploying:
+部署前可在本地预览：
 
 ```bash
 npx serve site

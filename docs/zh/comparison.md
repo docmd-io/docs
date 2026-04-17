@@ -1,108 +1,103 @@
 ---
 title: "对比"
-description: "A factual comparison between docmd and other documentation generators — real numbers, real features."
+description: "docmd 与其他文档生成器的客观对比——真实数据，真实功能。"
 ---
 
-`docmd` occupies the space between simple Markdown parsers and heavy framework applications. It delivers the speed and SEO of a static site with the interactive feel of a modern SPA — at a fraction of the payload.
+`docmd` 定位于简单 Markdown 解析器和重量级框架应用之间。它以更小的体积，同时提供静态网站的速度与 SEO 优势，以及现代 SPA 的交互体验。
 
-## Feature Matrix
+## 功能对比矩阵
 
-| Feature | docmd | Docusaurus | MkDocs Material | VitePress | Mintlify |
+| 功能 | docmd | Docusaurus | MkDocs Material | VitePress | Mintlify |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Language** | Node.js | React | Python | Vue | SaaS |
-| **Config required** | **None** | `docusaurus.config.js` | `mkdocs.yml` | `config.mts` | `mint.json` |
-| **Initial payload** | **~18kb** | ~250kb | ~40kb | ~50kb | ~120kb |
-| **Navigation** | **SPA router** | React SPA | Full reloads | Vue SPA | Hosted SPA |
-| **Versioning** | **Native (directory-based)** | Native (complex) | mike plugin | Manual | Native |
-| **i18n** | **Native (locale dirs)** | Native (complex) | Plugin-based | Manual | Native |
-| **Search** | **Built-in offline** | Algolia (cloud) | Built-in | MiniSearch | Cloud |
-| **PWA** | **Built-in** | Community plugin | None | None | Hosted |
-| **llms.txt** | **Auto-generated** | Manual | None | None | Proprietary |
-| **Inline discussions** | **Threads plugin** | None | None | None | None |
-| **Self-hosted** | **Yes** | Yes | Yes | Yes | No |
-| **Zero-config start** | **`npx @docmd/core dev`** | No | No | No | No |
+| **语言** | Node.js | React | Python | Vue | SaaS |
+| **是否需要配置** | **无需** | `docusaurus.config.js` | `mkdocs.yml` | `config.mts` | `mint.json` |
+| **初始体积** | **~18kb** | ~250kb | ~40kb | ~50kb | ~120kb |
+| **导航方式** | **SPA 路由** | React SPA | 全页刷新 | Vue SPA | Hosted SPA |
+| **版本管理** | **原生支持（目录式）** | 原生（复杂） | mike 插件 | 手动 | 原生 |
+| **多语言** | **原生支持（语言目录）** | 原生（复杂） | 插件 | 手动 | 原生 |
+| **搜索** | **内置离线搜索** | Algolia（云端） | 内置 | MiniSearch | 云端 |
+| **PWA** | **内置** | 社区插件 | 无 | 无 | Hosted |
+| **llms.txt** | **自动生成** | 手动 | 无 | 无 | 专有 |
+| **内联讨论** | **Threads 插件** | 无 | 无 | 无 | 无 |
+| **自托管** | **是** | 是 | 是 | 是 | 否 |
+| **零配置启动** | **`npx @docmd/core dev`** | 否 | 否 | 否 | 否 |
 
-<!-- SCREENSHOT: Feature matrix comparison table rendered on the live site, showing the visual styling of the table with highlighted docmd column. -->
+## 数据说话
 
-## The Numbers
+### 构建体积
 
-### Build payload
+50 页文档网站，默认配置：
 
-A documentation site with 50 pages and default configuration:
-
-| Generator | Initial page load | JS payload | CSS payload |
+| 生成器 | 首页加载量 | JS 体积 | CSS 体积 |
 | :--- | :--- | :--- | :--- |
-| **docmd** | **~18kb** total | ~12kb | ~6kb |
-| VitePress | ~50kb total | ~35kb | ~15kb |
-| MkDocs Material | ~40kb total | ~25kb | ~15kb |
-| Docusaurus | ~250kb total | ~200kb | ~50kb |
-| Mintlify | ~120kb total | ~80kb | ~40kb |
+| **docmd** | **~18kb** 合计 | ~12kb | ~6kb |
+| VitePress | ~50kb 合计 | ~35kb | ~15kb |
+| MkDocs Material | ~40kb 合计 | ~25kb | ~15kb |
+| Docusaurus | ~250kb 合计 | ~200kb | ~50kb |
+| Mintlify | ~120kb 合计 | ~80kb | ~40kb |
 
-<!-- SCREENSHOT: Side-by-side Lighthouse scores comparing docmd, Docusaurus, and VitePress — showing Performance, Accessibility, Best Practices, and SEO scores. All four categories should score 100 for docmd. -->
+### 构建速度
 
-### Build speed
+在 M1 MacBook Air 上构建同一个 50 页网站：
 
-Building the same 50-page site on an M1 MacBook Air:
-
-| Generator | Cold build | Hot rebuild (dev) |
+| 生成器 | 冷启动构建 | 热重载（开发模式） |
 | :--- | :--- | :--- |
 | **docmd** | **~1.2s** | **~80ms** |
 | VitePress | ~2.5s | ~150ms |
 | MkDocs Material | ~3.0s | ~500ms |
 | Docusaurus | ~15s | ~2s |
 
-### Configuration overhead
+### 配置工作量
 
-Lines of configuration required for a site with versioning, i18n, search, and sitemap:
+一个包含版本管理、多语言、搜索和站点地图功能的网站所需配置行数：
 
-| Generator | Config lines | Files required |
+| 生成器 | 配置行数 | 所需文件数 |
 | :--- | :--- | :--- |
-| **docmd** | **~15 lines** | 1 (`docmd.config.js`) |
-| VitePress | ~80 lines | 1 + theme dir |
-| MkDocs Material | ~50 lines | 1 (`mkdocs.yml`) + plugins |
-| Docusaurus | ~120 lines | 3+ config files |
+| **docmd** | **~15 行** | 1（`docmd.config.js`） |
+| VitePress | ~80 行 | 1 + 主题目录 |
+| MkDocs Material | ~50 行 | 1（`mkdocs.yml`）+ 插件 |
+| Docusaurus | ~120 行 | 3+ 个配置文件 |
 
-## Quality Assurance
+## 质量保证
 
-docmd ships with a brute test suite that validates **25 distinct scenarios** across **85 assertions** — covering every feature in isolation and in combination. Every release must pass all 85 assertions and 13 internal failsafe checks before shipping.
+docmd 内置了一套暴力测试套件，覆盖 **25 种不同场景** 共 **85 项断言**——单独及组合验证每一项功能。每次发布前必须通过全部 85 项断言和 13 项内部故障保护检查。
 
-::: callout tip "Run the tests yourself"
+::: callout tip "亲自运行测试"
 ```bash
-git clone https://github.com/nicholasgriffintn/docmd.git
+git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js
 ```
 :::
 
-No other documentation generator in this class publishes a comparable end-to-end feature test suite as part of its source.
+在同类文档生成器中，没有其他工具在其源码中公开了同等规模的端到端功能测试套件。
 
-## Where docmd Stands Out
+## docmd 的优势所在
 
 ::: grid {cols=3}
 
 ::: grid-item
-### Zero-Config
-Drop Markdown files into a folder and run `npx @docmd/core dev`. Navigation, search, SEO, sitemap, and PWA are all active with no configuration file.
+### 零配置
+将 Markdown 文件放入文件夹，运行 `npx @docmd/core dev` 即可。导航、搜索、SEO、站点地图和 PWA 均无需配置即可启用。
 :::
 
 ::: grid-item
-### AI-First
-The LLMs plugin auto-generates `llms.txt` and `llms-full.txt` — structured context files that AI coding assistants consume directly. No manual curation required.
+### AI 优先
+LLMs 插件自动生成 `llms.txt` 和 `llms-full.txt`——这些结构化上下文文件可被 AI 编程助手直接使用，无需手动维护。
 :::
 
 ::: grid-item
-### Smallest Payload
-At ~18kb initial load, docmd serves pages faster than any competitor. Pure semantic HTML with a micro-SPA router — no framework runtime shipped to the browser.
+### 最小体积
+初始加载仅约 18kb，页面加载速度超过所有同类竞品。纯语义化 HTML 配合微型 SPA 路由——不向浏览器传输任何框架运行时。
 :::
 
 :::
 
-## When to Choose Something Else
+## 什么时候选择其他工具
 
-::: callout info "No tool is perfect for every use case"
-- **Docusaurus** — Best when you need React components (MDX) embedded inside documentation pages, or when you're part of the React ecosystem.
-- **VitePress** — Best for Vue-ecosystem projects that want tight Vue component integration in Markdown.
-- **MkDocs Material** — Best for Python-first environments with extensive theming via the Material theme.
-- **Mintlify** — Best if you want a fully managed, hosted solution with zero server management.
-- **docmd** — Best when you want the fastest, lightest, most feature-complete static documentation generator that works out of the box.
+::: callout info "没有一款工具适合所有场景"
+- **Docusaurus** — 当你需要在文档页面中嵌入 React 组件（MDX），或处于 React 生态系统时最为合适。
+- **VitePress** — 适合 Vue 生态项目，希望在 Markdown 中深度集成 Vue 组件时最为合适。
+- **MkDocs Material** — 适合 Python 优先的环境，并搭配 Material 主题进行大量自定义时最为合适。
+- **Mintlify** — 适合希望使用完全托管、零服务器管理的解决方案时最为合适。
+- **docmd** — 当你追求最快、最轻量、功能最全面且开箱即用的静态文档生成器时最为合适。
 :::
-- **docmd**: Best if you value speed, developer experience, a modern SPA feel, and want your documentation to be digestible by both humans and AI agents.

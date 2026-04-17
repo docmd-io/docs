@@ -1,41 +1,42 @@
 ---
-title: "Mermaid Diagrams"
-description: "Create professional architectural diagrams, flowcharts, and sequence diagrams directly in your Markdown files using Mermaid.js syntax."
+title: "Mermaid 图表"
+description: "直接在 Markdown 中使用 Mermaid.js 语法创建架构图、流程图和序列图。"
 ---
 
-The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://mermaid.js.org/) engine into your documentation pipeline. It allows you to transform plain-text descriptions into high-fidelity, interactive diagrams without ever leaving your Markdown environment.
+`@docmd/plugin-mermaid` 插件将强大的 [Mermaid.js](https://mermaid.js.org/) 引擎集成到你的文档流水线中。它允许你将纯文本描述转化为高保真、交互式图表，无需离开 Markdown 环境。
 
-## Key Features
+## 主要特性
 
-- **Zero Scripting**: No need to manually include external scripts or CDN links. `docmd` detects the usage and injects the rendering engine only where needed.
-- **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
-- **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialized and rendered only as they enter the user's viewport.
-- **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
+- **无需编写脚本**：无需手动引入外部脚本或 CDN 链接。`docmd` 自动检测使用情况，仅在需要时注入渲染引擎。
+- **无需编写脚本**：无需手动引入外部脚本或 CDN 链接。`docmd` 自动检测使用情况，仅在需要时注入渲染引擎。
+- **主题感知**：图表会自动适应其配色方案，以匹配你站点的**浅色**或**深色**模式切换。
+- **同构懒加载**：为优化性能，图表仅在进入用户视口时才初始化和渲染。
+- **技术可读性**：图表在源文件中保持纯文本格式，便于版本控制，AI Agent 也可轻松读取。
 
-## Configuration
+## 配置
 
-To enable diagram support, add the `mermaid` plugin to your `docmd.config.js`:
+在 `docmd.config.js` 中添加 `mermaid` 插件以启用图表支持：
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
   plugins: {
-    mermaid: {} // Enabled with zero-config
+    mermaid: {} // 零配置启用
   }
 });
 ```
 
-## Implementation Gallery
+## 示例画廊
 
-To render a diagram, place your Mermaid syntax within a fenced code block with the `mermaid` language identifier.
+将 Mermaid 语法放在带 `mermaid` 语言标识符的代码块中即可渲染图表。
 
-### 1. Sequence Diagrams
-Ideal for illustrating interactions between multiple system components.
+### 1. 序列图
+非常适合说明多个系统组件之间的交互。
 
 ::: tabs
 
-== tab "Preview"
+== tab "预览"
 ```mermaid
 sequenceDiagram
     participant User
@@ -48,7 +49,7 @@ sequenceDiagram
     Browser-->>User: Displays Page
 ```
 
-== tab "Markdown Source"
+== tab "Markdown 源码"
 ````markdown
 ```mermaid
 sequenceDiagram
@@ -65,12 +66,12 @@ sequenceDiagram
 
 :::
 
-### 2. Analytical Charts
-Visualize data using built-in chart types like Pie Charts or Bar Charts.
+### 2. 分析图表
+使用饼图或条形图等内置图表类型可视化数据。
 
 ::: tabs
 
-== tab "Preview"
+== tab "预览"
 ```mermaid
 pie title Project Composition
     "Documentation" : 45
@@ -79,7 +80,7 @@ pie title Project Composition
     "UI Components" : 10
 ```
 
-== tab "Markdown Source"
+== tab "Markdown 源码"
 ````markdown
 ```mermaid
 pie title Project Composition
@@ -92,12 +93,12 @@ pie title Project Composition
 
 :::
 
-### 3. Git Workflows
-Visualize branching and merging strategies for your developer guides.
+### 3. Git 工作流
+为你的开发者指南可视化分支和合并策略。
 
 ::: tabs
 
-== tab "Preview"
+== tab "预览"
 ```mermaid
 gitGraph
     commit
@@ -110,7 +111,7 @@ gitGraph
     commit
 ```
 
-== tab "Markdown Source"
+== tab "Markdown 源码"
 ````markdown
 ```mermaid
 gitGraph
@@ -127,14 +128,14 @@ gitGraph
 
 :::
 
-## Technical Implementation
+## 技术实现
 
-The Mermaid plugin operates by intercepting `mermaid` code blocks during the parsing phase and wrapping them in a specialised `<div class="mermaid">` container. 
+Mermaid 插件在解析阶段拦截 `mermaid` 代码块，并将其包装在专用的 `<div class="mermaid">` 容器中。
 
-1. **Detection**: The engine scans the rendered HTML for the presence of mermaid containers.
-2. **Asset Injection**: If containers are found, `docmd` injects a lightweight `init-mermaid.js` module.
-3. **Rendering**: The Mermaid library is fetched asynchronously and renders the diagrams client-side, ensuring that your initial HTML payload remains small and fast.
+1. **检测**：引擎扫描渲染后的 HTML，查找 mermaid 容器的存在。
+2. **资源注入**：如果存在容器，`docmd` 注入轻量级的 `init-mermaid.js` 模块。
+3. **渲染**：Mermaid 库异步加载并在客户端渲染图表，确保初始 HTML 负载保持小巧快速。
 
-::: callout tip "Diagrams for AI Agents"
-While diagrams are visually helpful for humans, they are technically transparent to AI. Because the source is pure text, models like GPT-4 or Claude can "see" your system architecture or logic flows through the `llms-full.txt` stream. This allows the AI to explain complex architectural relationships based on your diagrams.
+::: callout tip "为 AI Agent 提供图表"
+虽然图表对人类非常直观，但对 AI 来说在技术层面是透明的。由于源码是纯文本，GPT-4 或 Claude 等模型可以通过 `llms-full.txt` 流"看到"你的系统架构或逻辑流程。这使 AI 能够基于你的图表解释复杂的架构关系。
 :::

@@ -1,13 +1,13 @@
 ---
-title: "General Configuration"
-description: "Configure docmd.config.js schema, branding, layout, and engine features."
+title: "配置概览"
+description: "配置 docmd.config.js 的架构、品牌、布局与引擎功能。"
 ---
 
-The `docmd.config.js` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behaviour, and engine-level processing rules.
+`docmd.config.js` 文件是你文档项目的核心配置中心，控制网站结构、品牌呈现、界面行为以及引擎级蓉处理规则。
 
-## The Configuration File
+## 配置文件
 
-We recommend using the `defineConfig` helper provided by `@docmd/core`. This provides full IDE autocomplete and type-checking, enabling effortless discovery of available settings.
+推荐使用 `@docmd/core` 提供的 `defineConfig` 辅助函数，它将提供完整的 IDE 自动补全和类型检查功能，让你轻松了解所有可用配置项。
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -15,87 +15,85 @@ import { defineConfig } from '@docmd/core';
 export default defineConfig({
   title: 'My Project',
   url: 'https://docs.myproject.com',
-  // ... configuration settings
+  // ... 配置项
 });
 ```
 
-## Core Settings
+## 核心配置项
 
-`docmd` utilises a simple configuration schema. Below are the primary top-level settings:
+`docmd` 采用简洁的配置架构。下表列出了主要顶层配置项：
 
-| Key | Description | Default |
+| 键名 | 说明 | 默认值 |
 | :--- | :--- | :--- |
-| `title` | The name of your documentation site. Used in the header and browser titles. | `Documentation` |
-| `url` | Your production base URL. Critical for SEO, Sitemaps, and OpenGraph. | `null` |
-| `src` | The relative path to the directory containing your Markdown files. | `docs` |
-| `out` | The relative path for the generated static site output. | `site` |
-| `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
-| `i18n` | Configuration for [multi-language support](./localisation.md). | `null` |
-| `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
+| `title` | 文档网站名称，显示在头部和浏览器标题中 | `Documentation` |
+| `url` | 生产环境基础 URL，对 SEO、站点地图和 OpenGraph 至关重要 | `null` |
+| `src` | Markdown 文件目录的相对路径 | `docs` |
+| `out` | 静态网站输出目录的相对路径 | `site` |
+| `base` | 如果托管在子目录下的基础路径（如 `/docs/`） | `/` |
+| `i18n` | [多语言支持](./localisation.md)配置 | `null` |
+| `plugins` | 标准或自定义[插件](../plugins/usage.md)配置 | `{}` |
 
-## Branding & Identity
+## 品牌与身份
 
-Configure how your brand is represented in the navigation header and browser tabs.
+配置导航头部和浏览器标签页的品牌展示方式。
 
 ```javascript
 logo: {
-  light: 'assets/images/logo-dark.png',  // Logo shown in Light Mode
-  dark: 'assets/images/logo-light.png',  // Logo shown in Dark Mode
-  href: '/',                             // Link destination when clicking the logo
-  alt: 'Company Logo',                   // Alternative text for accessibility
-  height: '32px'                         // Optional: Explicit height for the logo
+  light: 'assets/images/logo-dark.png',  // 浅色模式下显示的 Logo
+  dark: 'assets/images/logo-light.png',  // 深色模式下显示的 Logo
+  href: '/',                             // 点击 Logo 时跳转的链接
+  alt: 'Company Logo',                   // 无障碍文字
+  height: '32px'                         // 可选：Logo 高度
 },
-favicon: 'assets/favicon.ico',           // Path to your site's favicon
+favicon: 'assets/favicon.ico',           // 网站图标路径
 ```
 
-## Layout Architecture
+## 布局架构
 
-<!-- SCREENSHOT: Full page with sidebar, header, breadcrumbs, table of contents, and footer — annotated with arrows pointing to each configurable area (sidebar, TOC, breadcrumbs, footer, options menu). -->
+`docmd` 拥有模块化布局系统。你可以通过 `layout` 对象切换 UI 组件并配置导航行为。
 
-`docmd` features a modular layout system. You can toggle UI components and configure navigation behaviour via the `layout` object.
-
-| Section | Key | Default | Description |
+| 分区 | 键名 | 默认值 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **Global** | `spa` | `true` | Enables seamless Single Page Application navigation without browser reloads. |
-| **Header** | `header` | `{ enabled: true }` | Toggles the top navigation bar. |
-| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the sidebar navigation tree and its behaviour. |
-| **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` footer styles. |
+| **全局** | `spa` | `true` | 启用 SPA 无刷新跟踪导航 |
+| **头部** | `header` | `{ enabled: true }` | 切换顶部导航栏的显示 |
+| **侧边栏** | `sidebar` | `{ enabled: true, collapsible: true }` | 控制侧边栏导航树及其行为 |
+| **页脚** | `footer` | `{ style: 'minimal' }` | 支持 `'minimal'` 或 `'complete'` 页脚样式 |
 
-### Utility Menu (Options Menu)
+### 工具菜单（选项菜单）
 
-The Options Menu consolidates utility components such as **Global Search**, **Theme Switching**, and **Sponsorship links**.
+选项菜单将全局搜索、主题切换、赞助链接等实用功能整合在一起。
 
 ```javascript
 layout: {
   optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
+    position: 'header', // 可选值：'header'、'sidebar-top'、'sidebar-bottom'、'menubar'
     components: {
-      search: true,      // Enable built-in full-text search
-      themeSwitch: true, // Enable Light/Dark mode toggle
-      sponsor: 'https://github.com/sponsors/your-profile' // Optional URL for a heart icon/link
+      search: true,      // 启用内置全文搜索
+      themeSwitch: true, // 启用明暗模式切换
+      sponsor: 'https://github.com/sponsors/your-profile' // 可选的赞助链接
     }
   }
 }
 ```
 
 ::: callout info
-If `optionsMenu.position` is set to `header` or `menubar` but those containers are disabled, the menu will automatically fall back to `sidebar-top`.
+如果 `optionsMenu.position` 设置为 `header` 或 `menubar`，但对应容器已禁用，菜单将自动回退到 `sidebar-top`。
 :::
 
-## Core Engine Features
+## 核心引擎功能
 
-Fine-tune how `docmd` processes and renders your documentation content.
+细化调整 `docmd` 处理和渲染文档内容的方式。
 
 ```javascript
-minify: true,           // Minifies production assets (CSS/JS) for better performance
-autoTitleFromH1: true,  // Uses the first H1 heading as the page title if frontmatter 'title' is missing
-copyCode: true,         // Adds a 'Copy' button to all code blocks automatically
-pageNavigation: true,   // Adds 'Previous' and 'Next' navigation links at the bottom of pages
+minify: true,           // 压缩生产资源（CSS/JS）
+autoTitleFromH1: true,  // 如果 frontmatter 未设置 title，自动提取第一个 H1 作为页面标题
+copyCode: true,         // 自动为所有代码块添加“复制”按鈕
+pageNavigation: true,   // 在页面底部添加上一页/下一页导航链接
 ```
 
-## Legacy Support
+## 兖容旧版本
 
-If you are upgrading from an older version of `docmd`, the following keys are automatically mapped to the modern schema for backward compatibility:
+如果你将旧版 `docmd` 升级，以下键名会自动映射到新架构，保证向后兼容：
 
 *   `siteTitle` → `title`
 *   `siteUrl` / `baseUrl` → `url`
@@ -103,5 +101,5 @@ If you are upgrading from an older version of `docmd`, the following keys are au
 *   `outDir` / `outputDir` → `out`
 
 ::: callout tip
-Execute `docmd migrate` to automatically upgrade your configuration file to the latest schema while preserving a backup of your original settings.
+运行 `docmd migrate` 可自动将配置文件升级到最新架构，同时自动备份原始配置。
 :::
