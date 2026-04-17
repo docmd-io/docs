@@ -1,5 +1,5 @@
 [
-  { "title": "Home", "path": "/", "icon": "home" },
+  { "title": "Overview", "path": "/", "icon": "home" },
   {
     "title": "Getting Started",
     "icon": "rocket",

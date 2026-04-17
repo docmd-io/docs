@@ -28,6 +28,8 @@ The `default` locale renders at the site root (`/`). All other locales render at
 | `default` | `string` | Locale ID that renders at `/`. Defaults to the first locale if omitted. |
 | `locales` | `array` | List of locale objects. Each must have an `id`. |
 | `position` | `string` | Where the language switcher appears. `options-menu` (default), `sidebar-top`, or `sidebar-bottom`. |
+| `stringMode` | `boolean` | When `true`, generates locale pages from a single source using `data-i18n` attribute replacement. Default `false`. |
+| `inPlace` | `boolean` | When `true` (with client-side script), swaps strings without URL navigation. For SPAs/dashboards only. Default `false`. |
 
 Each locale object accepts:
 
@@ -73,7 +75,45 @@ i18n: {
 | `sidebar-top` | Full dropdown with label at the top of the sidebar. |
 | `sidebar-bottom` | Full dropdown with label at the bottom of the sidebar. |
 
+## String Mode (noStyle pages only)
+
+Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), each with its own markdown files. **String Mode** is a simpler alternative designed specifically for [noStyle pages](/content/no-style-pages/) — pages that use raw HTML instead of markdown.
+
+```js
+// docmd.config.js
+export default {
+  i18n: {
+    default: 'en',
+    stringMode: true,
+    locales: [
+      { id: 'en', label: 'English' },
+      { id: 'zh', label: '中文' }
+    ]
+  }
+}
+```
+
+With `stringMode: true`:
+
+1. Source files stay in the root `docs/` directory (no locale subdirectories)
+2. The default locale builds at `/` as normal
+3. For each non-default locale, docmd clones the rendered HTML and applies **server-side string replacement** using JSON files from `assets/i18n/{locale}.json`
+4. Output goes to `/{locale}/` — e.g. `/zh/index.html` — with full SEO (hreflang tags, correct `lang` attribute)
+5. If a translation file is missing, the page renders with the default language text
+
+For full details on the `data-i18n` attribute syntax and JSON file format, see [noStyle string replacement](/content/no-style-pages#string-replacement-i18n-for-nostyle).
+
+::: callout warning "String Mode does not translate markdown content"
+String replacement works by finding `data-i18n` attributes in the rendered HTML. Standard markdown content (`## Heading`, paragraphs, lists) renders to plain HTML tags without these attributes — so there is nothing for the replacer to find.
+
+- **Documentation sites** → use directory mode (the default). Each locale has its own markdown files with fully translated prose.
+- **Landing pages, marketing sites, dashboards** → use string mode. These are noStyle pages with custom HTML where you control every tag and can add `data-i18n` attributes.
+
+If your site has both — for example, a noStyle landing page plus documentation — use directory mode for the docs and add `data-i18n` attributes to your noStyle page. String mode will translate the noStyle HTML while directory mode handles the documentation content.
+:::
+
 ## Next steps
 
 - [Translated content](./translated-content) — directory structure, writing translations, navigation
 - [UI strings & SEO](./ui-strings) — customising system text, hreflang tags
+- [noStyle string replacement](/content/no-style-pages#string-replacement-i18n-for-nostyle) — `data-i18n` attribute syntax and JSON format for noStyle pages

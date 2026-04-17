@@ -1,5 +1,5 @@
 ---
-title: "docmd - Zero config documentation generator"
+title: "docmd - zero config documentation generator"
 description: "Markdown to production docs in one command. Static HTML for SEO, SPA for speed, AI-ready by default."
 titleAppend: false
 ---
