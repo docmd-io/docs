@@ -79,29 +79,3 @@ npx @docmd/core dev
 :::
 :::
 :::
-
-::: button "Instant Setup" /getting-started/quick-start icon:rocket
-::: button "AI Optimised" /plugins/llms icon:brain-circuit
-::: button "Built-in Search" /plugins/search icon:search
-::: button "Live Previews" /content/live-preview icon:monitor
-::: button "Theming Engine" /theming/available-themes icon:palette
-::: button "Native i18n" /configuration/localisation icon:globe
-
-## 扩展 Markdown
-
-超越静态文本。直接在 Markdown 中使用原生容器语法构建全面的文档布局。
-
-::: button "探索容器" /content/containers/ icon:blocks
-
-::: grids
-::: grid
-::: card "交互式沙盒"
-使用 [实时预览](/content/live-preview) API 将可实时编辑的预览窗口自然地嵌入到段落中。
-:::
-:::
-::: grid
-::: card "内联协作"
-在开发模式下选中文本，打开 [Threads](/plugins/threads) 并与文档团队直接在 Markdown 文件内留下评论。
-:::
-:::
-:::
