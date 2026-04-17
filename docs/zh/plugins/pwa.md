@@ -3,7 +3,13 @@ title: "PWA 与离线支持"
 description: "将文档转化为渐进式 Web 应用，支持离线缓存和移动端特性。"
 ---
 
-`@docmd/plugin-pwa` 插件为你的文档网站开启渐进式 Web 应用（PWA）功能。它添加 Web Manifest 以支持移动端安装，并注册 Service Worker 处理智能离线缓存，确保技术文档即使在网络不稳定的环境下仍可访问。
+**PWA 插件**将你的文档转化为渐进式 Web 应用，支持离线缓存和移动端安装。它添加 Web Manifest 以支持移动端安装，并注册 Service Worker 处理智能离线缓存，确保技术文档即使在网络不稳定的环境下仍可访问。
+
+## 安装
+
+```bash
+docmd add pwa
+```
 
 ## 配置
 

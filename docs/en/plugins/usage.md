@@ -38,7 +38,6 @@ export default defineConfig({
     seo: { aiBots: false },            // Meta tags, Open Graph, AI bot controls
     sitemap: {},                       // Automatic sitemap.xml generation
     analytics: {},                     // Google Analytics v4
-    pwa: { themeColor: '#0097ff' },    // Progressive Web App support
     llms: {},                          // LLM context generation (llms.txt)
     mermaid: {}                        // Native interactive diagrams
   }
@@ -51,6 +50,7 @@ Optional plugins require installation before enabling.
 
 | Plugin | Install Command | Description |
 | :--- | :--- | :--- |
+| [PWA](pwa.md) | `docmd add pwa` | Progressive Web App support with offline caching |
 | [Threads](threads.md) | `docmd add threads` | Inline discussion comments stored in your markdown |
 | [Math](math.md) | `docmd add math` | Native KaTeX and LaTeX mathematics integration |
 

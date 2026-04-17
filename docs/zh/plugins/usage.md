@@ -38,7 +38,6 @@ export default defineConfig({
     seo: { aiBots: false },            // Meta 标签、Open Graph、AI 爬虫控制
     sitemap: {},                       // 自动生成 sitemap.xml
     analytics: {},                     // Google Analytics v4
-    pwa: { themeColor: '#0097ff' },    // 渐进式 Web 应用支持
     llms: {},                          // LLM 上下文生成（llms.txt）
     mermaid: {}                        // 原生交互式图表
   }
@@ -51,6 +50,7 @@ export default defineConfig({
 
 | 插件 | 安装命令 | 说明 |
 | :--- | :--- | :--- |
+| [PWA](pwa.md) | `docmd add pwa` | 渐进式 Web 应用支持，含离线缓存 |
 | [Threads](threads.md) | `docmd add threads` | 存储在 Markdown 中的内联讨论评论 |
 | [Math](math.md) | `docmd add math` | 原生 KaTeX 和 LaTeX 数学公式集成 |
 

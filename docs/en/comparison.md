@@ -16,7 +16,7 @@ description: "A factual comparison between docmd and other documentation generat
 | **Versioning** | **Native** | Native (complex) | mike plugin | Manual | Native |
 | **i18n** | **Native** | Native (complex) | Plugin-based | Manual | Native |
 | **Search** | **Built-in** | Algolia (cloud) | Built-in | MiniSearch | Cloud |
-| **PWA** | **Built-in** | Community plugin | None | None | Hosted |
+| **PWA** | **Optional plugin** | Community plugin | None | None | Hosted |
 | **llms.txt** | **Built-in (Auto-generated)** | Manual | None | None | Proprietary |
 | **Inline discussions** | **Threads plugin** | None | None | None | None |
 | **Self-hosted** | **Yes** | Yes | Yes | Yes | No |
@@ -81,7 +81,7 @@ No other documentation generator in this class publishes a comparable end-to-end
 
 ::: grid-item
 ### Zero-Config
-Drop Markdown files into a folder and run `npx @docmd/core dev`. Navigation, search, SEO, sitemap, and PWA are all active with no configuration file.
+Drop Markdown files into a folder and run `npx @docmd/core dev`. Navigation, search, SEO, and sitemap are all active with no configuration file.
 :::
 
 ::: grid-item

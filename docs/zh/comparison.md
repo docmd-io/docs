@@ -16,7 +16,7 @@ description: "docmd 与其他文档生成器的客观对比——真实数据，
 | **版本管理** | **原生支持（目录式）** | 原生（复杂） | mike 插件 | 手动 | 原生 |
 | **多语言** | **原生支持（语言目录）** | 原生（复杂） | 插件 | 手动 | 原生 |
 | **搜索** | **内置离线搜索** | Algolia（云端） | 内置 | MiniSearch | 云端 |
-| **PWA** | **内置** | 社区插件 | 无 | 无 | Hosted |
+| **PWA** | **插件** | 社区插件 | 无 | 无 | Hosted |
 | **llms.txt** | **自动生成** | 手动 | 无 | 无 | 专有 |
 | **内联讨论** | **Threads 插件** | 无 | 无 | 无 | 无 |
 | **自托管** | **是** | 是 | 是 | 是 | 否 |
@@ -77,7 +77,7 @@ cd docmd && node scripts/brute-test.js
 
 ::: grid-item
 ### 零配置
-将 Markdown 文件放入文件夹，运行 `npx @docmd/core dev` 即可。导航、搜索、SEO、站点地图和 PWA 均无需配置即可启用。
+将 Markdown 文件放入文件夹，运行 `npx @docmd/core dev` 即可。导航、搜索、SEO 和站点地图均无需配置即可启用。
 :::
 
 ::: grid-item

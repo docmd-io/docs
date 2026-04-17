@@ -3,7 +3,13 @@ title: "PWA & Offline Support"
 description: "Transform your documentation into a progressive web application with offline caching and mobile-first features."
 ---
 
-The `@docmd/plugin-pwa` plugin enables Progressive Web App (PWA) features for your documentation site. It adds a web manifest for mobile installation and registers a service worker to handle intelligent offline caching, ensuring your technical manuals remain accessible even in low-connectivity environments.
+The **PWA plugin** transforms your documentation into a Progressive Web App with offline caching and mobile installation. It adds a web manifest for mobile installation and registers a service worker to handle intelligent offline caching, ensuring your technical manuals remain accessible even in low-connectivity environments.
+
+## Setup
+
+```bash
+docmd add pwa
+```
 
 ## Configuration
 
