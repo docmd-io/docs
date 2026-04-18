@@ -13,13 +13,13 @@
   {
     "title": "Configuration",
     "icon": "settings",
-    "collapsible": false,
+    "collapsible": true,
     "children": [
       { "title": "Overview", "path": "/configuration/general" },
       { "title": "Navigation", "path": "/configuration/navigation" },
       { "title": "Layout & UI", "path": "/configuration/layout-ui" },
       { "title": "Menubar", "path": "/configuration/menubar" },
-      { "title": "Localisation", "path": "/configuration/localisation", "collapsible": true, "children": [
+      { "title": "Localisation", "path": "/configuration/localisation", "collapsible": false, "children": [
         { "title": "Translated Content", "path": "/configuration/localisation/translated-content" },
         { "title": "UI Strings & SEO", "path": "/configuration/localisation/ui-strings" }
       ]},
@@ -30,7 +30,7 @@
   {
     "title": "Writing Content",
     "icon": "pencil-line",
-    "collapsible": true,
+    "collapsible": false,
     "children": [
       { "title": "Frontmatter", "path": "/content/frontmatter" },
       {
@@ -137,8 +137,10 @@
     "collapsible": false,
     "children": [
       { "title": "v0.7.1 — Plugin API", "path": "/release-notes/0-7-1" },
-      { "title": "v0.7.0 — What's New", "path": "/release-notes/0-7-0" }
+      { "title": "v0.7.0 — i18n Release", "path": "/release-notes/0-7-0" }
     ]
   },
-  { "title": "Contributing", "path": "/contributing", "icon": "git-pull-request" }
+  { "title": "Contributing", "path": "/contributing", "icon": "git-pull-request" },
+  { "title": "GitHub", "path": "https://github.com/docmd-io/docmd", "icon": "github", "external": true },
+  { "title": "Discussions", "path": "https://github.com/orgs/docmd-io/discussions", "icon": "message-circle", "external": true }
 ]

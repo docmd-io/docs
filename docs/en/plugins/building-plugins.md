@@ -24,20 +24,23 @@ export default {
 
 > **Note:** The descriptor is currently optional (soft deprecation warning). It will be **required starting 0.8.0**.
 
-### Capabilities
+## Core Capabilities
 
-Capabilities declare which hooks your plugin uses. The engine will skip hooks for undeclared capabilities with a warning.
+The capabilities array in the descriptor dictates which hooks your plugin is allowed to use. 
 
-| Capability | Allowed Hooks |
-| :--- | :--- |
-| `markdown` | `markdownSetup` |
-| `head` | `generateMetaTags`, `generateScripts` |
-| `body` | `generateScripts` |
-| `assets` | `getAssets` |
-| `post-build` | `onPostBuild` |
-| `actions` | `actions` |
-| `events` | `events` |
-| `translations` | `translations` |
+| Capability | Allowed Hooks | Phase |
+| :--- | :--- | :--- |
+| `init` | `onConfigResolved` | Init |
+| `markdown` | `markdownSetup` | Setup |
+| `head` | `generateMetaTags`, `generateScripts` (head) | Render |
+| `body` | `generateScripts` (body) | Render |
+| `build` | `onBeforeParse`, `onAfterParse`, `onPageReady` | Build |
+| `post-build`| `onPostBuild` | Post-Build |
+| `dev` | `onDevServerReady` | Dev Server |
+| `assets` | `getAssets` | Output |
+| `actions` | `actions` | Interactive |
+| `events` | `events` | Interactive |
+| `translations`| `translations` | i18n |
 
 Legacy plugins without a descriptor get full access to all hooks, so nothing breaks during the transition.
 
@@ -126,6 +129,38 @@ export default {
 }
 ```
 Users can also override this behaviour through their configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
+
+## Expanded Lifecycle Hooks
+
+Docmd `0.7.1` extends the build process with deep integration hooks allowing plugins to manipulate configuration, raw sources, and HTML representations during generation.
+
+| Hook | Description | Expected Return |
+| :--- | :--- | :--- |
+| **`onConfigResolved(config)`** | Reads or modifies the active normalized `config` right after initialization. | `void` or `Promise<void>` |
+| **`onDevServerReady(server, wss)`** | Exposes the raw Node.js `http.Server` and `WebSocketServer` during development mode (`docmd dev`). | `void` or `Promise<void>` |
+| **`onBeforeParse(src, frontmatter)`** | Pre-processes raw markdown string data immediately before it is passed to markdown-it for parsing. | `string` or `Promise<string>` |
+| **`onAfterParse(html, frontmatter)`** | Post-processes generated HTML representing the markdown body segment. | `string` or `Promise<string>` |
+| **`onPageReady(page)`** | Accesses the fully assembled page metadata (`page.html`, `page.outputPath`, `page.frontmatter`) just before it is written to the destination file. | `void` or `Promise<void>` |
+
+```javascript
+export default {
+  plugin: {
+    name: "my-advanced-plugin",
+    version: "1.0.0",
+    capabilities: ["init", "build", "dev"]
+  },
+  onConfigResolved: (config) => {
+    config.siteTitle = config.siteTitle + " (Modified)";
+  },
+  onBeforeParse: (src, frontmatter) => {
+    return src.replace(/foo/gi, 'bar');
+  },
+  onPageReady: (page) => {
+    // Append custom tracking bug into the final HTML file string
+    page.html = page.html.replace('</body>', '<script>/* tracker */</script></body>');
+  }
+}
+```
 
 ## Deep Dive: Asset Injection
 
@@ -244,7 +279,8 @@ The WebSocket RPC system is only active during `docmd dev`. Production builds do
 3.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
 4.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
 5.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
-6.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
+6.  **Action Validation**: As a robust API pattern, you should always define and require an explicit payload schema in your actions. This ensures a secure plugin ecosystem where unknown payload properties are stripped or rejected.
+7.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
 
 ::: callout tip "AI-Ready Design 🤖"
 The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks use standard JavaScript objects and types without hidden complex class hierarchies, AI agents can generate bug-free custom plugins for you with minimal instruction.

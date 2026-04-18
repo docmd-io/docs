@@ -132,7 +132,7 @@ import type {
   PluginModule,       // Full plugin contract interface
   PluginDescriptor,   // Plugin metadata (name, version, capabilities)
   PluginHooks,        // Shape of the hook registry
-  Capability,         // Hook category declaration
+  Capability,         // Hook category declaration (init, body, actions, etc)
   ActionContext,      // Context passed to action/event handlers
   ActionHandler,      // Signature for action handlers
   EventHandler,       // Signature for event handlers
