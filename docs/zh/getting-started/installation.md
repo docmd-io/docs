@@ -18,7 +18,6 @@ npx @docmd/core dev
 npx @docmd/core build
 ```
 
-## 安装为项目依赖
 ## 安装为项目依赖（推荐）
 
 ::: tabs

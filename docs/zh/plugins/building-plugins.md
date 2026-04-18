@@ -24,20 +24,23 @@ export default {
 
 > **注意：** 描述符目前是可选的（软弃用警告），将在 **0.8.0 版本中成为必需项**。
 
-### 功能声明
+## 核心功能
 
-功能声明了插件使用的钩子。引擎会跳过未声明功能的钩子，并输出警告。
+描述符中的功能数组决定了允许你的插件使用哪些钩子。
 
-| 功能 | 允许的钩子 |
-| :--- | :--- |
-| `markdown` | `markdownSetup` |
-| `head` | `generateMetaTags`、`generateScripts` |
-| `body` | `generateScripts` |
-| `assets` | `getAssets` |
-| `post-build` | `onPostBuild` |
-| `actions` | `actions` |
-| `events` | `events` |
-| `translations` | `translations` |
+| 功能 | 允许的钩子 | 阶段 |
+| :--- | :--- | :--- |
+| `init` | `onConfigResolved` | 初始化 |
+| `markdown` | `markdownSetup` | 设置 |
+| `head` | `generateMetaTags`、`generateScripts` (head) | 渲染 |
+| `body` | `generateScripts` (body) | 渲染 |
+| `build` | `onBeforeParse`、`onAfterParse`、`onPageReady` | 构建 |
+| `post-build` | `onPostBuild` | 构建后 |
+| `dev` | `onDevServerReady` | 开发服务器 |
+| `assets` | `getAssets` | 输出 |
+| `actions` | `actions` | 交互 |
+| `events` | `events` | 交互 |
+| `translations` | `translations` | 国际化 |
 
 没有描述符的旧版插件可完全访问所有钩子，因此在过渡期间不会出现中断。
 
@@ -126,6 +129,38 @@ export default {
 }
 ```
 用户也可以通过配置（`plugins: { math: { noStyle: false } }`）或在 Markdown frontmatter 中动态覆盖（`plugins: { math: true }`）。
+
+## 扩展生命周期钩子
+
+Docmd `0.7.1` 通过深度集成钩子扩展了构建过程，允许插件在生成期间操作配置、原始源码和 HTML 表现形式。
+
+| 钩子 | 描述 | 预期返回 |
+| :--- | :--- | :--- |
+| **`onConfigResolved(config)`** | 在初始化后立即读取或修改当前活跃的、已标准化的 `config`。 | `void` 或 `Promise<void>` |
+| **`onDevServerReady(server, wss)`** | 在开发模式 (`docmd dev`) 下公开原始 Node.js `http.Server` 和 `WebSocketServer`。 | `void` 或 `Promise<void>` |
+| **`onBeforeParse(src, frontmatter)`** | 在原始 Markdown 字符串数据传递给 markdown-it 进行解析之前立即对其进行预处理。 | `string` 或 `Promise<string>` |
+| **`onAfterParse(html, frontmatter)`** | 对代表 Markdown 主体部分的已生成 HTML 进行后处理。 | `string` 或 `Promise<string>` |
+| **`onPageReady(page)`** | 在页面即将被写入目标文件前，访问完全组装的页面元数据（`page.html`、`page.outputPath`、`page.frontmatter`）。 | `void` 或 `Promise<void>` |
+
+```javascript
+export default {
+  plugin: {
+    name: "my-advanced-plugin",
+    version: "1.0.0",
+    capabilities: ["init", "build", "dev"]
+  },
+  onConfigResolved: (config) => {
+    config.siteTitle = config.siteTitle + " (已修改)";
+  },
+  onBeforeParse: (src, frontmatter) => {
+    return src.replace(/foo/gi, 'bar');
+  },
+  onPageReady: (page) => {
+    // 将自定义追踪代码附加到最终的 HTML 文件字符串中
+    page.html = page.html.replace('</body>', '<script>/* tracker */</script></body>');
+  }
+}
+```
 
 ## 深入了解：资源注入
 
@@ -244,7 +279,8 @@ WebSocket RPC 系统仅在 `docmd dev` 期间活跃。生产构建不包含 API 
 3.  **无状态设计**：避免在插件对象内维护状态，因为 `docmd` 在开发"热重载"期间可能会重新初始化插件。
 4.  **命名惯例**：对社区插件，请在包名前添加 `docmd-plugin-` 前缀（如 `docmd-plugin-analytics`）。
 5.  **Action 命名空间**：在动作名称前加上你的插件名（如 `my-plugin:save-note`），以避免冲突。
-6.  **日志记录**：在 `onPostBuild` 中使用提供的 `log()` 辅助函数，确保你的消息遵循用户的 `--verbose` 设置。
+6.  **Action 验证**：作为稳健的 API 模式，你应该始终在动作中定义并要求显式的负载模式 (Payload Schema)。这确保了插件生态系统的安全性，未知负载属性将被剥离或拒绝。
+7.  **日志记录**：在 `onPostBuild` 中使用提供的 `log()` 辅助函数，确保你的消息遵循用户的 `--verbose` 设置。
 
 ::: callout tip "AI 就绪设计 🤖"
 `docmd` 插件 API 设计为**对 LLM 最优**。由于钩子使用标准 JavaScript 对象和类型，没有隐藏的复杂类层次结构，AI Agent 只需极少的指令即可为你生成无错误的自定义插件。
