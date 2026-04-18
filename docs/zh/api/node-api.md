@@ -70,16 +70,22 @@ async function deploy() {
 编程式 API 与 **AI 驱动的文档**高度兼容。Agent 可在内容更新后触发构建，以验证完整性并自主管理部署。
 :::
 
-## 插件 API 导出
+## 插件 API（`@docmd/api`）
 
-`@docmd/core` 还导出了用于构建带有服务器端动作处理的高级插件的工具函数。
+`@docmd/api` 包是插件系统的专用包，提供钩子注册、WebSocket RPC 调度和源码编辑工具。
+
+```bash
+npm install @docmd/api
+```
+
+> **向后兼容：** `@docmd/api` 的所有导出都从 `@docmd/core` 重新导出，因此现有代码无需修改即可继续使用。新项目建议直接从 `@docmd/api` 导入。
 
 ### `createActionDispatcher(hooks, options)`
 
 创建一个调度器，将 WebSocket RPC 消息路由到插件的动作/事件处理程序。
 
 ```javascript
-import { createActionDispatcher } from '@docmd/core';
+import { createActionDispatcher } from '@docmd/api';
 
 const dispatcher = createActionDispatcher(
   { actions: myPlugin.actions, events: myPlugin.events },
@@ -94,7 +100,44 @@ const { result, reload } = await dispatcher.handleCall('my-action', payload);
 创建用于 Markdown 文件操作的源码编辑工具。
 
 ```javascript
-import { createSourceTools } from '@docmd/core';
+import { createSourceTools } from '@docmd/api';
 
 const source = createSourceTools({ projectRoot: '/path/to/project' });
+
+// 获取指定行范围的块信息
+const block = await source.getBlockAt('docs/page.md', [10, 12]);
+
+// 用语法标记包裹文本
+await source.wrapText('docs/page.md', [10, 12], 'important', 0, '**', '**');
+```
+
+### `loadPlugins(config, options)`
+
+加载、验证并注册配置中声明的所有插件。返回填充后的钩子注册表。
+
+```javascript
+import { loadPlugins, hooks } from '@docmd/api';
+
+const registeredHooks = await loadPlugins(config, {
+  resolvePaths: [__dirname]  // 在 pnpm 工作区中帮助解析插件
+});
+```
+
+### 类型导出
+
+TypeScript 插件作者可使用以下类型：
+
+```typescript
+import type {
+  PluginModule,       // 完整插件合约接口
+  PluginDescriptor,   // 插件元数据（名称、版本、功能声明）
+  PluginHooks,        // 钩子注册表的形状
+  Capability,         // 钩子类别声明
+  ActionContext,      // 传递给动作/事件处理程序的上下文
+  ActionHandler,      // 动作处理程序签名
+  EventHandler,       // 事件处理程序签名
+  SourceTools,        // 源码编辑工具接口
+  BlockInfo,          // getBlockAt 返回的块信息
+  TextLocation,       // findText 返回的文本位置
+} from '@docmd/api';
 ```

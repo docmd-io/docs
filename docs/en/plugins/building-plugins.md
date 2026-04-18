@@ -5,9 +5,45 @@ description: "A comprehensive guide to extending docmd with custom logic and int
 
 Plugins are the primary extension mechanism for `docmd`. They allow you to inject custom HTML, modify the Markdown parsing logic, and automate post-build tasks. This guide outlines the plugin API and best practices for creating shareable components.
 
+## Plugin Descriptor
+
+Starting in `0.7.1`, every plugin should export a `plugin` descriptor declaring its identity and capabilities. This enables the engine to validate, isolate, and enforce capability boundaries at load time.
+
+```javascript
+export default {
+  plugin: {
+    name: 'my-analytics',
+    version: '1.0.0',
+    capabilities: ['head', 'body', 'post-build']
+  },
+
+  generateScripts: (config, opts) => { ... },
+  onPostBuild: async (ctx) => { ... }
+};
+```
+
+> **Note:** The descriptor is currently optional (soft deprecation warning). It will be **required starting 0.8.0**.
+
+### Capabilities
+
+Capabilities declare which hooks your plugin uses. The engine will skip hooks for undeclared capabilities with a warning.
+
+| Capability | Allowed Hooks |
+| :--- | :--- |
+| `markdown` | `markdownSetup` |
+| `head` | `generateMetaTags`, `generateScripts` |
+| `body` | `generateScripts` |
+| `assets` | `getAssets` |
+| `post-build` | `onPostBuild` |
+| `actions` | `actions` |
+| `events` | `events` |
+| `translations` | `translations` |
+
+Legacy plugins without a descriptor get full access to all hooks, so nothing breaks during the transition.
+
 ## Plugin API Reference
 
-A `docmd` plugin is a standard JavaScript object (or a module that exports one as default) that implements one or more of the following asynchronous hooks.
+A `docmd` plugin is a standard JavaScript object (or a module that exports one as default) that implements one or more of the following hooks.
 
 | Hook | Description |
 | :--- | :--- |
@@ -29,6 +65,13 @@ Creating a plugin is as simple as defining a JavaScript file. For example, `my-p
 import path from 'path';
 
 export default {
+  // Plugin descriptor (recommended)
+  plugin: {
+    name: 'my-plugin',
+    version: '1.0.0',
+    capabilities: ['head', 'post-build']
+  },
+
   // 1. Extend the Markdown Parser
   markdownSetup: (md, options) => {
     // Example: Add a rule or use a markdown-it plugin
@@ -67,6 +110,10 @@ export default defineConfig({
 The `docmd` engine resolves plugin names as follows:
 - **Official shorthands** (`math`, `search`, `seo`, etc.) automatically expand to `@docmd/plugin-<name>`. Since the `@docmd` npm scope is owned by the project, only official packages can exist under it.
 - **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins — this prevents confusion and eliminates supply-chain attack vectors entirely.
+
+### Plugin Isolation
+
+Every hook invocation is wrapped in a try/catch boundary. A broken plugin cannot crash the build or interfere with other plugins. Errors are logged and collected into a summary at the end of the build.
 
 ### Scoping Plugins (`noStyle`)
 By default, plugins inject their CSS/JS universally. However, developers can explicitly prevent their plugin from rendering on `noStyle` pages (like minimal landing templates) by exporting a `noStyle` boolean:
@@ -114,6 +161,12 @@ import fs from 'fs';
 import path from 'path';
 
 export default {
+  plugin: {
+    name: 'my-plugin',
+    version: '1.0.0',
+    capabilities: ['translations', 'body']
+  },
+
   translations: (localeId) => {
     // 1. Try loading the specific locale
     try {
@@ -141,6 +194,12 @@ Starting in `0.6.8`, plugins can register **action handlers** and **event handle
 ```javascript
 // my-live-plugin.js
 export default {
+  plugin: {
+    name: 'my-live-plugin',
+    version: '1.0.0',
+    capabilities: ['actions', 'events']
+  },
+
   // Server-side action — browser calls via docmd.call()
   actions: {
     'my-plugin:save-note': async (payload, ctx) => {
@@ -180,11 +239,12 @@ The WebSocket RPC system is only active during `docmd dev`. Production builds do
 
 ## Best Practices
 
-1.  **Async/Await**: Always use `async` functions for `onPostBuild` and action handlers to prevent blocking the build engine during I/O operations.
-2.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
-3.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
-4.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
-5.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
+1.  **Declare Capabilities**: Always export a `plugin` descriptor with your declared capabilities. This enables the engine to enforce boundaries and will be required in `0.8.0`.
+2.  **Async/Await**: Always use `async` functions for `onPostBuild` and action handlers to prevent blocking the build engine during I/O operations.
+3.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
+4.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
+5.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
+6.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.
 
 ::: callout tip "AI-Ready Design 🤖"
 The `docmd` plugin API is designed to be **LLM-Optimal**. Because the hooks use standard JavaScript objects and types without hidden complex class hierarchies, AI agents can generate bug-free custom plugins for you with minimal instruction.

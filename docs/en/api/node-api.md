@@ -70,16 +70,22 @@ async function deploy() {
 The programmatic API is highly compatible with **AI-Driven Documentation**. Agents can trigger builds after content updates to verify integrity and manage deployments autonomously.
 :::
 
-## Plugin API Exports
+## Plugin API (`@docmd/api`)
 
-`@docmd/core` also exports utilities for building advanced plugins with server-side action handling.
+The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, and source editing tools.
+
+```bash
+npm install @docmd/api
+```
+
+> **Backward Compatibility:** All exports from `@docmd/api` are also re-exported from `@docmd/core`, so existing code continues to work without changes. New projects are encouraged to import directly from `@docmd/api`.
 
 ### `createActionDispatcher(hooks, options)`
 
 Creates a dispatcher that routes WebSocket RPC messages to plugin action/event handlers.
 
 ```javascript
-import { createActionDispatcher } from '@docmd/core';
+import { createActionDispatcher } from '@docmd/api';
 
 const dispatcher = createActionDispatcher(
   { actions: myPlugin.actions, events: myPlugin.events },
@@ -94,7 +100,7 @@ const { result, reload } = await dispatcher.handleCall('my-action', payload);
 Creates source editing utilities for markdown file manipulation.
 
 ```javascript
-import { createSourceTools } from '@docmd/core';
+import { createSourceTools } from '@docmd/api';
 
 const source = createSourceTools({ projectRoot: '/path/to/project' });
 
@@ -105,18 +111,33 @@ const block = await source.getBlockAt('docs/page.md', [10, 12]);
 await source.wrapText('docs/page.md', [10, 12], 'important', 0, '**', '**');
 ```
 
+### `loadPlugins(config, options)`
+
+Loads, validates, and registers all plugins declared in the config. Returns the populated hooks registry.
+
+```javascript
+import { loadPlugins, hooks } from '@docmd/api';
+
+const registeredHooks = await loadPlugins(config, {
+  resolvePaths: [__dirname]  // Help resolve plugins in pnpm workspaces
+});
+```
+
 ### Type Exports
 
 For TypeScript plugin authors, the following types are available:
 
 ```typescript
 import type {
-  PluginModule,     // Full plugin contract interface
-  ActionContext,    // Context passed to action/event handlers
-  ActionHandler,    // Signature for action handlers
-  EventHandler,     // Signature for event handlers
-  SourceTools,      // Source editing tools interface
-  BlockInfo,        // Block information returned by getBlockAt
-  TextLocation,     // Text location returned by findText
-} from '@docmd/core';
+  PluginModule,       // Full plugin contract interface
+  PluginDescriptor,   // Plugin metadata (name, version, capabilities)
+  PluginHooks,        // Shape of the hook registry
+  Capability,         // Hook category declaration
+  ActionContext,      // Context passed to action/event handlers
+  ActionHandler,      // Signature for action handlers
+  EventHandler,       // Signature for event handlers
+  SourceTools,        // Source editing tools interface
+  BlockInfo,          // Block information returned by getBlockAt
+  TextLocation,       // Text location returned by findText
+} from '@docmd/api';
 ```

@@ -24,6 +24,52 @@
     ]
   },
   {
+    "title": "配置",
+    "icon": "settings",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/configuration/general"
+      },
+      {
+        "title": "导航",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "布局与界面",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "菜单栏",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "国际化",
+        "path": "/configuration/localisation",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "翻译内容",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI 字符串与 SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "版本管理",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "重定向",
+        "path": "/configuration/redirects"
+      }
+    ]
+  },
+  {
     "title": "内容编写",
     "icon": "pencil-line",
     "collapsible": true,
@@ -113,52 +159,6 @@
       {
         "title": "实时预览",
         "path": "/content/live-preview"
-      }
-    ]
-  },
-  {
-    "title": "配置",
-    "icon": "settings",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "概览",
-        "path": "/configuration/general"
-      },
-      {
-        "title": "导航",
-        "path": "/configuration/navigation"
-      },
-      {
-        "title": "布局与界面",
-        "path": "/configuration/layout-ui"
-      },
-      {
-        "title": "菜单栏",
-        "path": "/configuration/menubar"
-      },
-      {
-        "title": "国际化",
-        "path": "/configuration/localisation",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "翻译内容",
-            "path": "/configuration/localisation/translated-content"
-          },
-          {
-            "title": "UI 字符串与 SEO",
-            "path": "/configuration/localisation/ui-strings"
-          }
-        ]
-      },
-      {
-        "title": "版本管理",
-        "path": "/configuration/versioning"
-      },
-      {
-        "title": "重定向",
-        "path": "/configuration/redirects"
       }
     ]
   },
@@ -323,6 +323,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.7.1 — 插件 API",
+        "path": "/release-notes/0-7-1"
+      },
       {
         "title": "v0.7.0 — 新功能",
         "path": "/release-notes/0-7-0"

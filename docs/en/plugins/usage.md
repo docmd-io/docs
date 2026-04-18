@@ -96,8 +96,19 @@ Plugins hook into different stages of the build and development process:
 | `generateScripts(config, opts)` | Inject scripts into `<head>` or `</body>` |
 | `getAssets(opts)` | Define external files or CDN scripts to inject |
 | `onPostBuild(ctx)` | Run logic after all HTML files are generated |
+| `translations(localeId)` | Return translated UI strings for a locale |
 | `actions` | Server-side handlers callable from the browser via WebSocket RPC |
 | `events` | Fire-and-forget handlers for browser-pushed events |
+
+## Plugin Safety
+
+The plugin system provides built-in safety guarantees:
+
+- **Validation**: Plugins can declare a `plugin` descriptor with `name`, `version`, and `capabilities`. Invalid descriptors are rejected at load time.
+- **Isolation**: Every hook invocation is wrapped in a try/catch boundary. A broken plugin cannot crash the build or affect other plugins.
+- **Capability Enforcement**: Plugins that declare capabilities can only register for hooks they've explicitly declared. Undeclared hooks are skipped with a warning.
+
+See [Building Plugins](building-plugins.md) for the full API reference.
 
 ::: callout tip "AI-Transparent Architecture 🤖"
 The plugin architecture is designed to be **deterministic**. Every meta-tag and script injected by a plugin is traceable, allowing AI agents (and human developers) to understand exactly how the site behaves without hidden side effects.

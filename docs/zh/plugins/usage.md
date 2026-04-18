@@ -96,9 +96,20 @@ plugins:
 | `generateScripts(config, opts)` | 向 `<head>` 或 `</body>` 注入脚本 |
 | `getAssets(opts)` | 定义要注入的外部文件或 CDN 脚本 |
 | `onPostBuild(ctx)` | 所有 HTML 文件生成完毕后运行逻辑 |
+| `translations(localeId)` | 返回指定语言的翻译 UI 字符串 |
 | `actions` | 可通过浏览器 WebSocket RPC 调用的服务端处理程序 |
 | `events` | 浏览器推送事件的即发即忘处理程序 |
 
+## 插件安全性
+
+插件系统提供内置的安全保障：
+
+- **验证**：插件可声明带有 `name`、`version` 和 `capabilities` 的 `plugin` 描述符。无效描述符在加载时会被拒绝。
+- **隔离**：每个钩子调用都包裹在 try/catch 边界中。故障插件不会导致构建崩溃或影响其他插件。
+- **功能执行**：声明了功能的插件只能注册其显式声明的钩子。未声明的钩子会被跳过并输出警告。
+
+详见[构建插件](building-plugins.md)获取完整 API 参考。
+
 ::: callout tip "AI 透明架构 🤖"
-插件架构设计为**确定性**。插件注入的每个元标签和脚本均可追踯，让 AI Agent（和人类开发者）获私射的就是完全理解站点行为，无隐藏副作用。
+插件架构设计为**确定性**。插件注入的每个元标签和脚本均可追踪，让 AI Agent（和人类开发者）能够完全理解站点行为，无隐藏副作用。
 :::

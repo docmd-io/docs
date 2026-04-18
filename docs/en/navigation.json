@@ -11,6 +11,23 @@
     ]
   },
   {
+    "title": "Configuration",
+    "icon": "settings",
+    "collapsible": false,
+    "children": [
+      { "title": "Overview", "path": "/configuration/general" },
+      { "title": "Navigation", "path": "/configuration/navigation" },
+      { "title": "Layout & UI", "path": "/configuration/layout-ui" },
+      { "title": "Menubar", "path": "/configuration/menubar" },
+      { "title": "Localisation", "path": "/configuration/localisation", "collapsible": true, "children": [
+        { "title": "Translated Content", "path": "/configuration/localisation/translated-content" },
+        { "title": "UI Strings & SEO", "path": "/configuration/localisation/ui-strings" }
+      ]},
+      { "title": "Versioning", "path": "/configuration/versioning" },
+      { "title": "Redirects", "path": "/configuration/redirects" }
+    ]
+  },
+  {
     "title": "Writing Content",
     "icon": "pencil-line",
     "collapsible": true,
@@ -47,23 +64,6 @@
       },
       { "title": "No-Style Pages", "path": "/content/no-style-pages" },
       { "title": "Live Preview", "path": "/content/live-preview" }
-    ]
-  },
-  {
-    "title": "Configuration",
-    "icon": "settings",
-    "collapsible": true,
-    "children": [
-      { "title": "Overview", "path": "/configuration/general" },
-      { "title": "Navigation", "path": "/configuration/navigation" },
-      { "title": "Layout & UI", "path": "/configuration/layout-ui" },
-      { "title": "Menubar", "path": "/configuration/menubar" },
-      { "title": "Localisation", "path": "/configuration/localisation", "collapsible": true, "children": [
-        { "title": "Translated Content", "path": "/configuration/localisation/translated-content" },
-        { "title": "UI Strings & SEO", "path": "/configuration/localisation/ui-strings" }
-      ]},
-      { "title": "Versioning", "path": "/configuration/versioning" },
-      { "title": "Redirects", "path": "/configuration/redirects" }
     ]
   },
   {
@@ -136,6 +136,7 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      { "title": "v0.7.1 — Plugin API", "path": "/release-notes/0-7-1" },
       { "title": "v0.7.0 — What's New", "path": "/release-notes/0-7-0" }
     ]
   },
