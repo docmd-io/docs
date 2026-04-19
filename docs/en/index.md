@@ -1,6 +1,6 @@
 ---
-title: "docmd - zero config documentation generator"
-description: "Markdown to production docs in one command. Static HTML for SEO, SPA for speed, AI-ready by default."
+title: "docmd docs: zero-config docs from Markdown"
+description: "Build production-ready docs from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready."
 titleAppend: false
 ---
 
