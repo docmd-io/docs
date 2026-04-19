@@ -3,7 +3,7 @@
 
 module.exports = defineConfig({
   // --- Core Metadata ---
-  title: 'docmd',
+  title: 'docmd docs',
   url: 'https://docs.docmd.io',
 
   // --- Branding ---
@@ -102,8 +102,9 @@ module.exports = defineConfig({
   plugins: {
     pwa: { enabled: false },
     seo: {
-      defaultDescription: 'Build production-ready documentation from Markdown in seconds. Zero setup when you start. Full control when you need it.',
-      openGraph: { defaultImage: 'assets/images/preview.png' },
+      defaultDescription: 'Build production-ready docs from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready.',
+      aiBots: true,
+      openGraph: { defaultImage: 'assets/images/docmd-preview-en.png' },
       twitter: { cardType: 'summary_large_image' }
     },
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },
