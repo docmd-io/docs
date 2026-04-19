@@ -1,6 +1,6 @@
 ---
 title: "docmd docs: zero-config docs from Markdown"
-description: "Build production-ready docs from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready."
+description: "Build production-ready documentation from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready."
 titleAppend: false
 ---
 
