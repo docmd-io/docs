@@ -1,6 +1,6 @@
 ---
-title: "docmd - 零配置文档生成器"
-description: "一条命令，将 Markdown 转化为生产级文档网站。静态 HTML 助力 SEO，SPA 提升速度，默认支持 AI。"
+title: "docmd 文档：零配置的 Markdown 文档生成器"
+description: "用 Markdown 在几秒内构建生产级文档。零配置即可上手，默认支持 AI，兼顾性能与 SEO。"
 titleAppend: false
 ---
 
