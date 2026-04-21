@@ -254,6 +254,18 @@
         "path": "/deployment"
       },
       {
+        "title": "Docker",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
         "title": "CI/CD",
         "path": "/deployment/ci-cd"
       }
@@ -323,6 +335,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.7.2 — 部署 CLI",
+        "path": "/release-notes/0-7-2"
+      },
       {
         "title": "v0.7.1 — 插件 API",
         "path": "/release-notes/0-7-1"

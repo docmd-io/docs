@@ -35,6 +35,7 @@ Frontmatter 允许你在单个页面上覆盖全局设置。它心须写在 Mark
 | `layout` | `String` | 设为 `full` 使用主内容宽度并隐藏目录侧边栏。 |
 | `toc` | `Boolean` | 设为 `false` 完全禁用目录。 |
 | `noStyle` | `Boolean` | 为自定义页面禁用整个 `docmd` UI（侧边栏、Header、Footer）。 |
+| `titleAppend` | `Boolean` | 设为 `false` 可防止将站点标题附加到 `<title>`、OpenGraph (`og:title`) 和 Twitter 元数据标签。默认值：`true`。 |
 
 ### `noStyle` 组件控制
 

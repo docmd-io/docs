@@ -104,7 +104,7 @@ module.exports = defineConfig({
     seo: {
       defaultDescription: 'Build production-ready documentation from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready.',
       aiBots: true,
-      openGraph: { defaultImage: 'assets/images/docmd-preview-en.png' },
+      openGraph: { defaultImage: 'assets/images/docmd-preview-en.webp' },
       twitter: { cardType: 'summary_large_image' }
     },
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },

@@ -35,7 +35,7 @@ While not strictly required, the `title` field is strongly recommended. Without 
 | `layout` | `String` | Set to `full` to use the primary content width and hide the TOC sidebar. |
 | `toc` | `Boolean` | Set to `false` to disable the Table of Contents entirely. |
 | `noStyle` | `Boolean` | Disables the entire `docmd` UI (Sidebar, Header, Footer) for custom pages. |
-| `titleAppend` | `Boolean` | Set to `false` to prevent appending the site title to the page `<title>` tag. Default: `true`. |
+| `titleAppend` | `Boolean` | Set to `false` to prevent appending the site title to the html `<title>`, OpenGraph (`og:title`), and Twitter metadata tags. Default: `true`. |
 
 ### `noStyle` Component Control
 
