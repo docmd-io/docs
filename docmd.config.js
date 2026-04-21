@@ -117,7 +117,8 @@ module.exports = defineConfig({
     position: 'sidebar-top',
     locales: [
       { id: 'en', label: 'English', dir: 'ltr' },
-      { id: 'zh', label: '中文', dir: 'ltr' }
+      { id: 'zh', label: '中文', dir: 'ltr' },
+      { id: 'de', label: 'Deutsch', dir: 'ltr' }
     ]
   },
 
