@@ -1,0 +1,150 @@
+[
+  { "title": "Übersicht", "path": "/", "icon": "home" },
+  {
+    "title": "Erste Schritte",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      { "title": "Schnellstart", "path": "/getting-started/quick-start" },
+      { "title": "Installation", "path": "/getting-started/installation" },
+      { "title": "Projektstruktur", "path": "/getting-started/project-structure" }
+    ]
+  },
+  {
+    "title": "Konfiguration",
+    "icon": "settings",
+    "collapsible": true,
+    "children": [
+      { "title": "Übersicht", "path": "/configuration/general" },
+      { "title": "Navigation", "path": "/configuration/navigation" },
+      { "title": "Layout & UI", "path": "/configuration/layout-ui" },
+      { "title": "Menüleiste", "path": "/configuration/menubar" },
+      { "title": "Lokalisierung", "path": "/configuration/localisation", "collapsible": false, "children": [
+        { "title": "Übersetzte Inhalte", "path": "/configuration/localisation/translated-content" },
+        { "title": "UI-Strings & SEO", "path": "/configuration/localisation/ui-strings" }
+      ]},
+      { "title": "Versionierung", "path": "/configuration/versioning" },
+      { "title": "Weiterleitungen", "path": "/configuration/redirects" }
+    ]
+  },
+  {
+    "title": "Inhalte schreiben",
+    "icon": "pencil-line",
+    "collapsible": false,
+    "children": [
+      { "title": "Frontmatter", "path": "/content/frontmatter" },
+      {
+        "title": "Syntax",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          { "title": "Code-Blöcke", "path": "/content/syntax/code" },
+          { "title": "Bilder", "path": "/content/syntax/images" },
+          { "title": "Verlinkung", "path": "/content/syntax/linking" },
+          { "title": "Fortgeschritten", "path": "/content/syntax/advanced" }
+        ]
+      },
+      {
+        "title": "Container",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          { "title": "Callouts", "path": "/content/containers/callouts" },
+          { "title": "Tabs", "path": "/content/containers/tabs" },
+          { "title": "Steps", "path": "/content/containers/steps" },
+          { "title": "Cards", "path": "/content/containers/cards" },
+          { "title": "Grids", "path": "/content/containers/grids" },
+          { "title": "Ausklappbar", "path": "/content/containers/collapsible" },
+          { "title": "Buttons", "path": "/content/containers/buttons" },
+          { "title": "Hero-Bereiche", "path": "/content/containers/hero" },
+          { "title": "URL-Embed", "path": "/content/containers/embed" },
+          { "title": "Changelogs", "path": "/content/containers/changelogs" },
+          { "title": "Verschachtelte Container", "path": "/content/containers/nested-containers" }
+        ]
+      },
+      { "title": "No-Style Pages", "path": "/content/no-style-pages" },
+      { "title": "Live-Vorschau", "path": "/content/live-preview" }
+    ]
+  },
+  {
+    "title": "Theming",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      { "title": "Verfügbare Themes", "path": "/theming/available-themes" },
+      { "title": "Anpassung", "path": "/theming/customization" },
+      { "title": "Hell- & Dunkelmodus", "path": "/theming/light-dark-mode" },
+      { "title": "Eigenes CSS & JS", "path": "/theming/custom-css-js" },
+      { "title": "Icons", "path": "/theming/icons" },
+      { "title": "Assets", "path": "/theming/assets-management" }
+    ]
+  },
+  {
+    "title": "Plugins",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      { "title": "Plugins nutzen", "path": "/plugins/usage" },
+      { "title": "Suche", "path": "/plugins/search" },
+      { "title": "SEO", "path": "/plugins/seo" },
+      { "title": "Sitemap", "path": "/plugins/sitemap" },
+      { "title": "Analytics", "path": "/plugins/analytics" },
+      { "title": "PWA", "path": "/plugins/pwa" },
+      { "title": "LLMs", "path": "/plugins/llms" },
+      { "title": "Mermaid", "path": "/plugins/mermaid" },
+      { "title": "Threads", "path": "/plugins/threads" },
+      { "title": "Mathe (KaTeX)", "path": "/plugins/math" },
+      { "title": "Plugins erstellen", "path": "/plugins/building-plugins" }
+    ]
+  },
+  {
+    "title": "Bereitstellung",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      { "title": "Bauen & Bereitstellen", "path": "/deployment" },
+      { "title": "Docker", "path": "/deployment/docker" },
+      { "title": "NGINX", "path": "/deployment/nginx" },
+      { "title": "Caddy", "path": "/deployment/caddy" },
+      { "title": "CI/CD", "path": "/deployment/ci-cd" }
+    ]
+  },
+  {
+    "title": "API-Referenz",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      { "title": "CLI-Befehle", "path": "/api/cli-commands" },
+      { "title": "Node-API", "path": "/api/node-api" },
+      { "title": "Browser-API", "path": "/api/browser-api" },
+      { "title": "Client-Ereignisse", "path": "/api/client-side-events" },
+      { "title": "Live-Editor-API", "path": "/api/live-api" }
+    ]
+  },
+  {
+    "title": "Rezepte",
+    "icon": "chef-hat",
+    "collapsible": true,
+    "children": [
+      { "title": "Landingpages", "path": "/recipes/landing-page" },
+      { "title": "Eigene Schriften", "path": "/recipes/custom-fonts" },
+      { "title": "Favicon", "path": "/recipes/favicon" },
+      { "title": "KI-Optimierung", "path": "/recipes/ai-optimization" },
+      { "title": "Schreib-Ratgeber", "path": "/recipes/writing-guide" }
+    ]
+  },
+  { "title": "Vergleich", "path": "/comparison", "icon": "scale" },
+  {
+    "title": "Release Notes",
+    "icon": "package-check",
+    "collapsible": false,
+    "children": [
+      { "title": "v0.7.2 — Deploy CLI", "path": "/release-notes/0-7-2" },
+      { "title": "v0.7.1 — Plugin API", "path": "/release-notes/0-7-1" },
+      { "title": "v0.7.0 — i18n Release", "path": "/release-notes/0-7-0" }
+    ]
+  },
+  { "title": "Mitwirken", "path": "/contributing", "icon": "git-pull-request" },
+  { "title": "GitHub", "path": "https://github.com/docmd-io/docmd", "icon": "github", "external": true },
+  { "title": "Diskussionen", "path": "https://github.com/orgs/docmd-io/discussions", "icon": "message-circle", "external": true }
+]
