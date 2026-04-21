@@ -5,6 +5,15 @@ description: "The complete command-line interface reference for docmd."
 
 The `docmd` CLI provides a set of high-performance commands to manage your documentation lifecycle, from initial scaffolding to production deployment.
 
+## Global Options
+
+These options apply to theoretically all `docmd` commands.
+
+- `-v, --version`: Output the current version of `@docmd/core`.
+- `-V, --verbose`: Show detailed installer and engine logs. Useful for debugging plugin installations.
+- `-h, --help`: Display the interactive help menu.
+- `--cwd <path>`: (Internal) Override the working directory. Useful for monorepo setups.
+
 ## `docmd init`
 
 Scaffolds a new documentation project in the current directory.
