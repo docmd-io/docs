@@ -16,47 +16,57 @@ Thank you for your interest in contributing to `docmd`. We appreciate bug fixes,
 
 ### Project Setup
 
-Clone the repository and run the automated onboarding tool to install dependencies and perform an initial build:
+Clone the repository and run the initial setup to install dependencies and build the monorepo:
 
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd
-pnpm onboard
+pnpm install
+pnpm build
 ```
 
 To link the local `docmd` command globally for testing in other projects:
 
 ```bash
-pnpm onboard --link
+pnpm verify --link
 ```
 
 ### Local Development
 
-Run the documentation site while watching for changes in the core engine:
+We provide a master proxy command to run any `docmd` command against our internal `_playground` directory. This makes development identical to the user CLI experience:
 
 ```bash
-pnpm run dev
+pnpm docmd dev    # Starts playground dev server (also: pnpm dev)
+pnpm docmd build  # Builds playground documentation
 ```
 
-To watch internal source files (engine, templates, and plugins), set the `DOCMD_DEV` environment variable:
+To watch internal source files (engine, templates, and plugins) with hot-reload, set the `DOCMD_DEV` environment variable:
 
 ```bash
-DOCMD_DEV=true pnpm run dev
+DOCMD_DEV=true pnpm dev
 ```
 
 ## Quality Standards
 
-Ensure your code complies with the ESLint settings. For minor formatting issues, run:
+### Linting
+Ensure your code complies with our ESLint configuration. To automatically fix formatting issues, run:
 ```bash
-pnpm lint:fix
+pnpm lint --fix
 ```
 
-Before submitting a Pull Request, verify your branch compiles by preparing the final release image:
+### Verification
+Before submitting a Pull Request, you **MUST** ensure the entire monorepo passes our intensive verification pipeline. This simulates a fresh release environment, audits for security vulnerabilities, and verifies monorepo integrity:
 
 ```bash
 pnpm prep
 ```
-*(This chains `pnpm reset`, dependency installation, lint checks, E2E tests, and security audits in a fresh slate.)*
+*(This chains `pnpm reset`, dependency installation, lint checks, 7-pillar E2E tests, and the final release dry-run.)*
+
+## GitHub Workflow
+
+1.  **Fork and Branch**: Create a feature branch from the latest `main`.
+2.  **Verify**: Ensure `pnpm prep` returns `🛡️ docmd is ready for production!`.
+3.  **Pull Request**: Open a PR with a clear description of the problem solved or the feature added.
 
 ### Commit Guidelines
 
@@ -64,11 +74,11 @@ We use [Conventional Commits](https://www.conventionalcommits.org/). Please pref
 - `feat:` (New features)
 - `fix:` (Bug fixes)
 - `docs:` (Documentation changes)
-- `refactor:` (Code changes that neither fix bugs nor add features)
+- `refactor:` (Internal refactorings)
 
 ### Source Headers
 
-All new files within the `packages/` directory MUST include the standard project copyright header to maintain consistency and compliance.
+All new files within the `packages/` directory MUST include the standard project copyright header:
 
 ```javascript
 /**
@@ -85,9 +95,3 @@ All new files within the `packages/` directory MUST include the standard project
  * --------------------------------------------------------------------
  */
 ```
-
-## GitHub Workflow
-
-1.  **Fork and Branch**: Create a feature branch from the latest `main`.
-2.  **Verify**: Ensure `pnpm verify` returns `🛡️ docmd is ready for production!`.
-3.  **Pull Request**: Open a PR with a clear description of the problem solved or the feature added.
