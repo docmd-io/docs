@@ -3,107 +3,47 @@ title: "Deployment"
 description: "Host your docmd documentation on platforms like GitHub Pages, Vercel, Netlify, and Cloudflare Pages."
 ---
 
-Because `docmd` generates a high-performance static website, it can be hosted on any environment that serves HTML. Simply run the build command and deploy the output directory (Default: `site/`).
+Because `docmd` generates a high-performance static website, it can be hosted on any environment that serves HTML. Simply run the base build command to generate the raw `site/` directory:
 
 ```bash
 docmd build
 ```
 
-## Hosting Providers
+## Automated Deployment Configurations
 
-::: tabs
-
-== tab "GitHub Pages"
-
-The recommended method is using **GitHub Actions** to automate your deployments on every push.
-
-**Create `.github/workflows/deploy.yml`:**
-
-```yaml
-name: Deploy docmd
-on:
-  push:
-    branches: ["main"]
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '22' }
-      - run: npx @docmd/core build
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: ./site }
-      - uses: actions/deploy-pages@v4
-```
-
-== tab "Vercel"
-
-1.  Connect your repository to Vercel.
-2.  In the project **Build Settings**:
-    - **Framework Preset**: `Other`
-    - **Build Command**: `npx @docmd/core build`
-    - **Output Directory**: `site`
-3.  Deploy. Vercel automatically detects the static output and serves it globally.
-
-== tab "Netlify"
-
-1.  Import your project from GitHub/GitLab/Bitbucket.
-2.  Configure your build settings:
-    - **Build command**: `npx @docmd/core build`
-    - **Publish directory**: `site`
-3.  Click **Deploy site**. Netlify's CDN will handle the routing and asset delivery.
-
-== tab "Cloudflare Pages"
-
-1.  Create a new project in the Cloudflare Dashboard under **Pages**.
-2.  Connect your git provider and select your repository.
-3.  Configure the build settings:
-    - **Framework preset**: `None`
-    - **Build command**: `npx @docmd/core build`
-    - **Build output directory**: `site`
-4.  Save and Deploy.
-
-== tab "Firebase"
-
-1.  Install the Firebase CLI: `npm install -g firebase-tools`.
-2.  Build your site: `npx @docmd/core build`.
-3.  Run `firebase init hosting` and select your project.
-4.  Set the public directory to `site`.
-5.  Configure as a single-page app: `Yes` (this handles the 404 behaviour).
-6.  Deploy using `firebase deploy`.
-
-== tab "Static Server"
-
-For traditional web servers (NGINX, Apache, IIS):
-
-1.  Generate the site: `npx @docmd/core build`.
-2.  Upload the contents of the `site/` folder to your server via SFTP, SCP, or your preferred CI/CD tool.
-3.  Ensure your server is configured to serve `index.html` for directories (the default for most).
-
-== tab "Docker"
-
-For self-hosting within a containerized environment, you can use a simple Nginx-based Dockerfile:
-
-```dockerfile
-# Build Stage
-FROM node:22-alpine AS builder
-WORKDIR /app
-COPY . .
-RUN npx @docmd/core build
-
-# Serve Stage
-FROM nginx:alpine
-COPY --from=builder /app/site /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
+::: callout warning "Version Requirement"
+The `docmd deploy` command was introduced in **v0.7.2**.
 :::
+
+While `docmd build` gives you the raw files, actually deploying them to a self-hosted server or container usually requires writing tedious configuration files. `docmd` drastically solves this by scaffolding production-ready environments for you automatically.
+
+Run the native core command in your terminal to bootstrap a configuration profile:
+
+```bash
+docmd deploy [target]
+```
+
+### Supported Offline Targets
+We currently support generating configuration files for the following popular offline and self-hosted environments:
+
+*   [`docmd deploy --docker`](./docker) - Generates an optimized, multi-stage `Dockerfile` and `.dockerignore`.
+*   [`docmd deploy --nginx`](./nginx) - Generates an `nginx.conf` with security headers, GZIP, and caching policies.
+*   [`docmd deploy --caddy`](./caddy) - Generates a `Caddyfile` for automated routing.
+
+Use the `--force` flag if you need to overwrite existing deployment files:
+
+```bash
+docmd deploy --docker --force
+```
+
+Please click on the respective target above for detailed, service-specific documentation.
+
+*(Note: Cloud API deployment commands like `--vercel` and `--netlify` are currently in development for Phase 2).*
+
+## Cloud Hosting & CI/CD
+If you do not want to manage your own servers (Docker, Nginx), you can deploy your `site/` folder directly to cloud platforms like GitHub Pages, Vercel, Netlify, or Cloudflare.
+
+For detailed instructions on configuring Automated GitHub Actions or importing to Cloud Dashboards, see our [CI/CD Deployment Guide](./ci-cd).
 
 ## SPA Routing Considerations
 
