@@ -1,64 +1,82 @@
 ---
 title: "Deployment"
-description: "Host your docmd documentation on platforms like GitHub Pages, Vercel, Netlify, and Cloudflare Pages."
+description: "Deploy your docmd documentation to Docker, Nginx, Caddy, or any cloud platform with a single command."
 ---
 
-Because `docmd` generates a high-performance static website, it can be hosted on any environment that serves HTML. Simply run the base build command to generate the raw `site/` directory:
+`docmd` generates a high-performance static website. Run the build command to generate the output directory:
 
 ```bash
 docmd build
 ```
 
-## Automated Deployment Configurations
+The output is a self-contained `site/` folder (or whatever you've configured as `out` in your config) that can be hosted anywhere.
 
-::: callout warning "Version Requirement"
-The `docmd deploy` command was introduced in **v0.7.2**.
+## One-Command Deployment
+
+::: callout tip "New in v0.7.2"
+`docmd deploy` reads your `docmd.config.js` and generates deployment files personalised to your project — no generic templates.
 :::
 
-While `docmd build` gives you the raw files, actually deploying them to a self-hosted server or container usually requires writing tedious configuration files. `docmd` drastically solves this by scaffolding production-ready environments for you automatically.
-
-Run the native core command in your terminal to bootstrap a configuration profile:
+Instead of manually writing Dockerfiles and server configs, let docmd generate them for you:
 
 ```bash
-docmd deploy [target]
+docmd deploy --docker   # Dockerfile + .dockerignore
+docmd deploy --nginx    # Production nginx.conf
+docmd deploy --caddy    # Production Caddyfile
 ```
 
-### Supported Offline Targets
-We currently support generating configuration files for the following popular offline and self-hosted environments:
+### What Gets Personalised
 
-*   [`docmd deploy --docker`](./docker) - Generates an optimized, multi-stage `Dockerfile` and `.dockerignore`.
-*   [`docmd deploy --nginx`](./nginx) - Generates an `nginx.conf` with security headers, GZIP, and caching policies.
-*   [`docmd deploy --caddy`](./caddy) - Generates a `Caddyfile` for automated routing.
+The deploy command reads your configuration (or zero-config defaults) and injects:
 
-Use the `--force` flag if you need to overwrite existing deployment files:
+| Config Field | Used In |
+|:--|:--|
+| `title` | Comment headers in every generated file |
+| `out` | `COPY` paths in Dockerfile, `root` directives in Nginx/Caddy |
+| `url` | `server_name` in Nginx, site address in Caddy |
+| `layout.spa` | Controls whether SPA routing fallback is included |
+| Config file path | Dockerfile build step uses `--config` when non-default |
 
-```bash
-docmd deploy --docker --force
-```
+No `docmd.config.js`? No problem — the command uses the same zero-config defaults as `docmd dev` and `docmd build`.
 
-Please click on the respective target above for detailed, service-specific documentation.
+### Always In Sync
 
-*(Note: Cloud API deployment commands like `--vercel` and `--netlify` are currently in development for Phase 2).*
+Every run regenerates your deployment files to match your current config. Changed your site URL or output directory? Just re-run the deploy command — no need to manually track what changed.
+
+Use `--force` only if you intentionally want to suppress any future confirmation prompts. By default, files are silently regenerated.
+
+### Supported Targets
+
+*   [`docmd deploy --docker`](./docker) — Optimised multi-stage Dockerfile with layer caching and version pinning.
+*   [`docmd deploy --nginx`](./nginx) — Security-hardened nginx.conf with GZIP and immutable asset caching.
+*   [`docmd deploy --caddy`](./caddy) — HTTPS-ready Caddyfile with automatic routing.
+
+Click each target above for detailed, service-specific documentation.
+
+*(Cloud deployment targets like `--vercel` and `--netlify` are planned for a future release.)*
 
 ## Cloud Hosting & CI/CD
-If you do not want to manage your own servers (Docker, Nginx), you can deploy your `site/` folder directly to cloud platforms like GitHub Pages, Vercel, Netlify, or Cloudflare.
 
-For detailed instructions on configuring Automated GitHub Actions or importing to Cloud Dashboards, see our [CI/CD Deployment Guide](./ci-cd).
+If you prefer managed hosting over self-hosted servers, deploy your output folder directly to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
 
-## SPA Routing Considerations
+See the [CI/CD Deployment Guide](./ci-cd) for automated workflows.
 
-`docmd` implements a micro-SPA router that handles internal navigation smoothly. Unlike React-based SPAs, every page in `docmd` is generated as its own `index.html` file on the filesystem. This means:
+## SPA Routing
 
-- **No Rewrite Rules**: You don't need to configure `index.html` rewrites on your server for most platforms.
-- **Deep Linking**: Direct access to URLs like `/guide/setup` works out of the box because the server finds `/guide/setup/index.html`.
+`docmd` implements a micro-SPA router for smooth internal navigation. Every page is generated as its own `index.html` file, so:
+
+- **No rewrite rules needed** — direct URL access works because `/guide/setup` resolves to `/guide/setup/index.html`.
+- **Deep linking works** — out of the box, on every hosting platform.
+
+When `layout.spa` is set to `false` in your config, the deploy command omits SPA fallback routing from generated server configs.
 
 ## Production Checklist
 
-1.  **Site URL**: Ensure the `url` property is set in your `docmd.config.js`. This is critical for generating correct canonical tags, sitemaps, and social preview images.
-2.  **Redirects**: If you are migrating from another tool, use the `redirects` config to maintain your SEO rankings.
-3.  **Analytics**: Enable the `analytics` plugin to track user engagement and search queries.
-4.  **AI Ingress**: Enable the `llms` plugin to generate `llms.txt`. This allows AI agents to ingest your documentation more efficiently, providing better answers to your users.
+1.  **Site URL**: Set the `url` property in `docmd.config.js` — this drives canonical tags, sitemaps, social previews, and deployment file generation.
+2.  **Redirects**: Migrating from another tool? Use the `redirects` config to preserve SEO rankings.
+3.  **Analytics**: Enable the `analytics` plugin to track engagement and search queries.
+4.  **AI Context**: Enable the `llms` plugin to generate `llms.txt` for AI agent ingestion.
 
 ::: callout tip "Custom 404 Pages"
-`docmd` automatically generates a `404.html` in your output directory. Most hosting providers (GitHub Pages, Netlify, Vercel) will automatically use this file when a user hits a missing route.
+`docmd` generates a `404.html` in your output directory. Most hosting providers automatically serve this for missing routes.
 :::

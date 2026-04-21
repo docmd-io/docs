@@ -1,69 +1,73 @@
 ---
 title: "Docker"
-description: "Deploy docmd using a Docker container"
+description: "Deploy docmd in a Docker container with a single command."
 ---
 
-Because `docmd` generates a high-performance static website, it is incredibly efficient to serve within a Docker container.
+`docmd` generates static HTML — perfect for lightweight, reproducible Docker containers.
 
-## Automated Deployment Configuration
-
-::: callout warning "Version Requirement"
-The `docmd deploy` command was introduced in **v0.7.2**. Ensure you have updated `@docmd/core` before using this feature.
-:::
-
-You can automatically generate a production-ready `Dockerfile` and `.dockerignore` for your project using the core CLI:
+## Generate a Dockerfile
 
 ```bash
 docmd deploy --docker
 ```
 
-This generates a production-ready `Dockerfile` and `.dockerignore` in your project root. You can also use the `--force` flag to overwrite existing files, or `--all` if you want to generate Nginx and Caddy configs as well.
+This creates a `Dockerfile` and `.dockerignore` in your project root, personalised to your configuration:
 
-The generated Dockerfile uses an optimized multi-stage build:
-1. **Layer Caching**: Copies `package.json` first to cache dependency installation.
-2. **Deterministic Builds**: Dynamically installs the **exact** version of the `@docmd/core` engine you are currently using.
-3. **Optimized Size**: Uses Alpine Linux as a base for minimal footprint.
-4. **Security Hardening**: Drops the built static site into a secure Nginx container.
+- **Your output directory** is used in the `COPY` path (not a hardcoded `site/`)
+- **Your exact `@docmd/core` version** is pinned in the install step for reproducible builds
+- **Your config file** is passed to `docmd build` if you use a non-default name
 
-::: callout tip "Custom Nginx with Docker"
-If you generate an `nginx.conf` (via `--nginx`) before generating the Dockerfile, `docmd` will automatically detect it and configure the Dockerfile to use your custom Nginx configuration.
-:::
+### What Gets Generated
 
-## Manual Configuration
+The Dockerfile uses an optimised multi-stage build:
 
-If you prefer to write the `Dockerfile` manually, you can use the following template:
+1. **Stage 1 — Build**: Installs dependencies with layer caching (`package.json` copied first), installs the pinned `@docmd/core` version, and runs `docmd build`.
+2. **Stage 2 — Serve**: Copies the built output into a minimal `nginx:alpine` container.
 
 ```dockerfile
-# Stage 1: Build Phase
+# Stage 1: Build
 FROM node:20-alpine AS builder
 WORKDIR /app
-
-# 1. Copy manifests first for optimal layer caching
 COPY package*.json ./
 RUN if [ -f package.json ]; then npm install --ignore-scripts; fi
-
-# 2. Copy source and install engine
 COPY . .
 RUN npm install -g @docmd/core@0.7.2
-
-# 3. Build site
 RUN docmd build
 
-# Stage 2: Serve Phase
+# Stage 2: Serve
 FROM nginx:alpine
-# Optional: COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/site /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-## Running the Container
+::: callout tip "Custom Nginx with Docker"
+If you generate an `nginx.conf` (via `docmd deploy --nginx`) before generating the Dockerfile, it will be detected and automatically configured inside the container.
+:::
 
-Once your `Dockerfile` is present, you can build and run it locally or on your VPS:
+### The `.dockerignore`
 
-```bash
-docker build -t docmd-site .
-docker run -p 8080:80 docmd-site
+A `.dockerignore` is generated alongside the Dockerfile to keep the build context lean:
+
+```
+node_modules
+site
+dist
+.git
+.env
+*.md
+!docs/**/*.md
 ```
 
-Your documentation will now be live at `http://localhost:8080`.
+## Build and Run
+
+```bash
+docker build -t my-docs .
+docker run -p 8080:80 my-docs
+```
+
+Your documentation is now live at `http://localhost:8080`.
+
+### Re-Generating
+
+Changed your config? Just run `docmd deploy --docker` again — the files are always regenerated to match your current `docmd.config.js`.

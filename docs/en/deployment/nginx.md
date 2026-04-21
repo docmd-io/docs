@@ -1,36 +1,32 @@
 ---
 title: "NGINX"
-description: "Deploy docmd using NGINX web server"
+description: "Deploy docmd with a production-ready NGINX configuration."
 ---
 
-NGINX is one of the most reliable and high-performance web servers available. Because `docmd` files are completely static, NGINX can serve them with almost zero latency.
+NGINX is one of the most reliable web servers available. Because `docmd` output is entirely static, NGINX can serve it with near-zero latency.
 
-## Automated Deployment Configuration
-
-::: callout warning "Version Requirement"
-The `docmd deploy` command was introduced in **v0.7.2**. Ensure you have updated `@docmd/core` before using this feature.
-:::
-
-You can automatically generate an optimized `nginx.conf` file for your project using the core CLI:
+## Generate nginx.conf
 
 ```bash
 docmd deploy --nginx
 ```
 
-This generates a configuration file perfectly tuned for `docmd`'s static output, including GZIP compression and aggressive caching policies for static assets.
+This generates an `nginx.conf` personalised to your project:
 
-## The Configuration Explained
+- **`server_name`** is set to the hostname extracted from your `url` config (falls back to `localhost` if not set)
+- **SPA fallback** (`try_files ... /index.html`) is only included when `layout.spa` is `true` in your config
+- **Security headers**, GZIP compression, and immutable asset caching are included by default
 
-If you choose to write it manually or modify the generated file, here is what the NGINX configuration looks like:
+### What Gets Generated
 
 ```nginx
 server {
     listen 80;
-    server_name localhost;
+    server_name docs.example.com;
     root /usr/share/nginx/html;
     index index.html;
 
-    # Security Headers
+    # Security
     server_tokens off;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -39,9 +35,11 @@ server {
     gzip on;
     gzip_vary on;
     gzip_min_length 256;
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+    gzip_types text/plain text/css application/json application/javascript
+               text/xml application/xml application/xml+rss text/javascript
+               image/svg+xml;
 
-    # SPA Routing Fallback
+    # SPA Routing Fallback (only when layout.spa is true)
     location / {
         try_files $uri $uri/ /index.html;
     }
@@ -49,7 +47,7 @@ server {
     # Custom 404
     error_page 404 /404.html;
 
-    # Cache Control for Static Assets
+    # Cache Static Assets (6 months, immutable)
     location ~* \.(?:ico|css|js|gif|jpe?g|png|webp|avif|woff2?|eot|ttf|otf|svg)$ {
         expires 6M;
         access_log off;
@@ -59,7 +57,12 @@ server {
 ```
 
 ## Deployment Steps
-1. Generate the site using `docmd build`.
-2. Upload the contents of your `site/` directory to your remote server's web root (e.g., `/var/www/html/`).
-3. Place the `nginx.conf` rules into your server's NGINX configuration block.
-4. Restart your server: `sudo systemctl restart nginx`.
+
+1. Build your site: `docmd build`
+2. Upload the contents of your output directory to your server's web root (e.g., `/var/www/html/` or `/usr/share/nginx/html/`).
+3. Place the generated `nginx.conf` into your server's configuration (e.g., `/etc/nginx/conf.d/default.conf`).
+4. Restart NGINX: `sudo systemctl restart nginx`
+
+### Re-Generating
+
+Changed your site URL or switched off SPA mode? Just run `docmd deploy --nginx` again — the config file is regenerated to match your current `docmd.config.js`.

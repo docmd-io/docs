@@ -1,69 +1,42 @@
 ---
 title: "Docker"
-description: "Bereitstellen von docmd mittels Docker-Container"
+description: "docmd mit einem Docker-Container bereitstellen — mit einem einzigen Befehl."
 ---
 
-Da `docmd` eine hochperformante statische Website generiert, lässt sie sich äuẞerst effizient innerhalb eines Docker-Containers ausliefern.
+`docmd` generiert statisches HTML — perfekt für leichtgewichtige, reproduzierbare Docker-Container.
 
-## Automatisierte Bereitstellungskonfiguration
-
-::: callout warning "Versionsvorgabe"
-Der Befehl `docmd deploy` wurde mit **v0.7.2** eingeführt. Stellen Sie sicher, dass Sie `@docmd/core` aktualisiert haben, bevor Sie diese Funktion nutzen.
-:::
-
-Sie können automatisch ein produktionsreifes `Dockerfile` und eine `.dockerignore` für Ihr Projekt über die Core-CLI generieren:
+## Dockerfile generieren
 
 ```bash
 docmd deploy --docker
 ```
 
-Dies erstellt ein produktionsreifes `Dockerfile` und eine `.dockerignore` in Ihrem Projekt-Root. Sie können auch das `--force`-Flag verwenden, um bestehende Dateien zu überschreiben, oder `--all`, wenn Sie zusätzlich Nginx- und Caddy-Konfigurationen generieren möchten.
+Dies erstellt ein `Dockerfile` und `.dockerignore` in Ihrem Projektstammverzeichnis, zugeschnitten auf Ihre Konfiguration:
 
-Das generierte Dockerfile verwendet einen optimierten mehrstufigen (multi-stage) Build:
-1. **Layer-Caching**: Kopiert zuerst die `package.json`, um die Installation der Abhängigkeiten im Cache zu speichern.
-2. **Deterministische Builds**: Installiert dynamisch die **exakte** Version der `@docmd/core`-Engine, die Sie gerade verwenden.
-3. **Optimierte Größe**: Verwendet Alpine Linux als Basis für einen minimalen Platzbedarf.
-4. **Sicherheitshärtung**: Legt die gebaute statische Website in einen sicheren Nginx-Container ab.
+- **Ihr Ausgabeverzeichnis** wird im `COPY`-Pfad verwendet (nicht hartcodiert `site/`)
+- **Ihre exakte `@docmd/core`-Version** wird im Installationsschritt für reproduzierbare Builds fixiert
+- **Ihre Konfigurationsdatei** wird an `docmd build` übergeben, wenn Sie einen nicht-standardmäßigen Namen verwenden
+
+### Was generiert wird
+
+Das Dockerfile verwendet einen optimierten Multi-Stage-Build:
+
+1. **Stage 1 — Build**: Installiert Abhängigkeiten mit Layer-Caching (`package.json` wird zuerst kopiert), installiert die fixierte `@docmd/core`-Version und führt `docmd build` aus.
+2. **Stage 2 — Serve**: Kopiert die gebaute Ausgabe in einen minimalen `nginx:alpine`-Container.
 
 ::: callout tip "Benutzerdefiniertes Nginx mit Docker"
-Wenn Sie vor der Generierung des Dockerfiles eine `nginx.conf` (via `--nginx`) erstellen, wird `docmd` dies automatisch erkennen und das Dockerfile so konfigurieren, dass Ihre benutzerdefinierte Nginx-Konfiguration verwendet wird.
+Wenn Sie eine `nginx.conf` (via `docmd deploy --nginx`) vor dem Dockerfile generieren, wird sie automatisch erkannt und im Container konfiguriert.
 :::
 
-## Manuelle Konfiguration
-
-Wenn Sie das `Dockerfile` lieber manuell schreiben möchten, können Sie die folgende Vorlage verwenden:
-
-```dockerfile
-# Stage 1: Build-Phase
-FROM node:20-alpine AS builder
-WORKDIR /app
-
-# 1. Manifeste zuerst kopieren für optimales Layer-Caching
-COPY package*.json ./
-RUN if [ -f package.json ]; then npm install --ignore-scripts; fi
-
-# 2. Quelle kopieren und Engine installieren
-COPY . .
-RUN npm install -g @docmd/core@0.7.2
-
-# 3. Website bauen
-RUN docmd build
-
-# Stage 2: Serve-Phase
-FROM nginx:alpine
-# Optional: COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/site /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-## Container ausführen
-
-Sobald Ihr `Dockerfile` vorhanden ist, können Sie es lokal oder auf Ihrem VPS bauen und ausführen:
+## Bauen und Ausführen
 
 ```bash
-docker build -t docmd-site .
-docker run -p 8080:80 docmd-site
+docker build -t my-docs .
+docker run -p 8080:80 my-docs
 ```
 
-Ihre Dokumentation ist nun unter `http://localhost:8080` erreichbar.
+Ihre Dokumentation ist jetzt unter `http://localhost:8080` erreichbar.
+
+### Neu generieren
+
+Konfiguration geändert? Führen Sie einfach `docmd deploy --docker` erneut aus — die Dateien werden immer neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.

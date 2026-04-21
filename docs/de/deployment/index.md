@@ -1,64 +1,80 @@
 ---
 title: "Bereitstellung (Deployment)"
-description: "Hosten Sie Ihre docmd-Dokumentation auf Plattformen wie GitHub Pages, Vercel, Netlify und Cloudflare Pages."
+description: "Stellen Sie Ihre docmd-Dokumentation mit einem einzigen Befehl auf Docker, Nginx, Caddy oder einer Cloud-Plattform bereit."
 ---
 
-Da `docmd` eine hochperformante statische Website generiert, kann sie in jeder Umgebung gehostet werden, die HTML ausliefert. Führen Sie einfach den Basis-Build-Befehl aus, um das `site/`-Verzeichnis zu erstellen:
+`docmd` generiert eine hochperformante statische Website. Führen Sie den Build-Befehl aus, um das Ausgabeverzeichnis zu erstellen:
 
 ```bash
 docmd build
 ```
 
-## Automatisierte Bereitstellungskonfigurationen
+Die Ausgabe ist ein eigenständiger `site/`-Ordner (oder was Sie als `out` in Ihrer Konfiguration festgelegt haben), der überall gehostet werden kann.
 
-::: callout warning "Versionsvorgabe"
-Der Befehl `docmd deploy` wurde mit **v0.7.2** eingeführt.
+## Ein-Befehl-Bereitstellung
+
+::: callout tip "Neu in v0.7.2"
+`docmd deploy` liest Ihre `docmd.config.js` und generiert Bereitstellungsdateien, die auf Ihr Projekt zugeschnitten sind — keine generischen Vorlagen.
 :::
 
-Während `docmd build` Ihnen die reinen Dateien liefert, erfordert die eigentliche Bereitstellung auf einem selbst gehosteten Server oder in einem Container normalerweise das Schreiben mühsamer Konfigurationsdateien. `docmd` löst dies drastisch, indem es automatisch produktionsreife Umgebungen für Sie vorbereitet.
-
-Führen Sie den nativen Kernbefehl in Ihrem Terminal aus, um ein Konfigurationsprofil zu erstellen:
+Anstatt Dockerfiles und Server-Konfigurationen manuell zu schreiben, lassen Sie docmd diese für Sie generieren:
 
 ```bash
-docmd deploy [target]
+docmd deploy --docker   # Dockerfile + .dockerignore
+docmd deploy --nginx    # Produktions-nginx.conf
+docmd deploy --caddy    # Produktions-Caddyfile
 ```
 
-### Unterstützte Offline-Ziele
-Aktuell unterstützen wir die Generierung von Konfigurationsdateien für die folgenden gängigen Offline- und selbst gehosteten Umgebungen:
+### Was personalisiert wird
 
-*   [`docmd deploy --docker`](./docker) - Generiert ein optimiertes, mehrstufiges (multi-stage) `Dockerfile` und eine `.dockerignore`.
-*   [`docmd deploy --nginx`](./nginx) - Generiert eine `nginx.conf` mit Sicherheits-Headern, GZIP und Caching-Richtlinien.
-*   [`docmd deploy --caddy`](./caddy) - Generiert ein `Caddyfile` für automatisiertes Routing.
+Der Deploy-Befehl liest Ihre Konfiguration (oder Zero-Config-Standardwerte) und injiziert:
 
-Verwenden Sie das `--force`-Flag, falls Sie bestehende Bereitstellungsdateien überschreiben müssen:
+| Konfigurationsfeld | Verwendet in |
+|:--|:--|
+| `title` | Kommentar-Header in jeder generierten Datei |
+| `out` | `COPY`-Pfade im Dockerfile, `root`-Direktiven in Nginx/Caddy |
+| `url` | `server_name` in Nginx, Site-Adresse in Caddy |
+| `layout.spa` | Steuert, ob SPA-Routing-Fallback enthalten ist |
+| Konfigurations-Dateipfad | Dockerfile-Build-Schritt verwendet `--config` bei nicht-standardmäßigem Pfad |
 
-```bash
-docmd deploy --docker --force
-```
+Keine `docmd.config.js`? Kein Problem — der Befehl nutzt die gleichen Zero-Config-Standardwerte wie `docmd dev` und `docmd build`.
 
-Bitte klicken Sie auf das jeweilige oben genannte Ziel für eine detaillierte, service-spezifische Dokumentation.
+### Immer synchron
 
-*(Hinweis: Cloud-API-Bereitstellungsbefehle wie `--vercel` und `--netlify` befinden sich derzeit für Phase 2 in der Entwicklung).*
+Jede Ausführung generiert Ihre Bereitstellungsdateien neu, um sie mit Ihrer aktuellen Konfiguration abzugleichen. Site-URL oder Ausgabeverzeichnis geändert? Führen Sie den Deploy-Befehl einfach erneut aus.
+
+### Unterstützte Ziele
+
+*   [`docmd deploy --docker`](./docker) — Optimiertes Multi-Stage-Dockerfile mit Layer-Caching und Versionspinning.
+*   [`docmd deploy --nginx`](./nginx) — Sicherheitsgehärtete nginx.conf mit GZIP und unveränderlichem Asset-Caching.
+*   [`docmd deploy --caddy`](./caddy) — HTTPS-bereites Caddyfile mit automatischem Routing.
+
+Klicken Sie auf jedes Ziel für detaillierte, service-spezifische Dokumentation.
+
+*(Cloud-Bereitstellungsziele wie `--vercel` und `--netlify` sind für ein zukünftiges Release geplant.)*
 
 ## Cloud-Hosting & CI/CD
-Wenn Sie Ihre eigenen Server (Docker, Nginx) nicht selbst verwalten möchten, können Sie Ihren `site/`-Ordner direkt auf Cloud-Plattformen wie GitHub Pages, Vercel, Netlify oder Cloudflare bereitstellen.
 
-Detaillierte Anweisungen zur Konfiguration automatisierter GitHub Actions oder zum Importieren in Cloud-Dashboards finden Sie in unserem [CI/CD-Bereitstellungsleitfaden](./ci-cd).
+Wenn Sie verwaltetes Hosting gegenüber selbst gehosteten Servern bevorzugen, stellen Sie Ihren Ausgabe-Ordner direkt auf GitHub Pages, Vercel, Netlify oder Cloudflare Pages bereit.
 
-## Erwägungen zum SPA-Routing
+Siehe den [CI/CD-Bereitstellungsleitfaden](./ci-cd) für automatisierte Workflows.
 
-`docmd` implementiert einen Mikro-SPA-Router, der die interne Navigation reibungslos handhabt. Im Gegensatz zu React-basierten SPAs wird jede Seite in `docmd` als eigene `index.html`-Datei im Dateisystem generiert. Das bedeutet:
+## SPA-Routing
 
-- **Keine Rewrite-Regeln**: Sie müssen auf Ihrem Server für die meisten Plattformen keine `index.html`-Rewrites konfigurieren.
-- **Deep Linking**: Der direkte Zugriff auf URLs wie `/guide/setup` funktioniert sofort, da der Server die Datei `/guide/setup/index.html` findet.
+`docmd` implementiert einen Mikro-SPA-Router für reibungslose interne Navigation. Jede Seite wird als eigene `index.html`-Datei generiert:
+
+- **Keine Rewrite-Regeln nötig** — direkter URL-Zugriff funktioniert, weil `/guide/setup` als `/guide/setup/index.html` aufgelöst wird.
+- **Deep Linking funktioniert** — sofort einsatzbereit auf jeder Hosting-Plattform.
+
+Wenn `layout.spa` in Ihrer Konfiguration auf `false` gesetzt ist, lässt der Deploy-Befehl das SPA-Fallback-Routing in den generierten Server-Konfigurationen weg.
 
 ## Produktions-Checkliste
 
-1.  **Website-URL**: Stellen Sie sicher, dass die Eigenschaft `url` in Ihrer `docmd.config.js` gesetzt ist. Dies ist entscheidend für die Generierung korrekter kanonischer Tags, Sitemaps und Social-Preview-Bilder.
-2.  **Weiterleitungen**: Wenn Sie von einem anderen Tool migrieren, nutzen Sie die `redirects`-Konfiguration, um Ihre SEO-Rankings zu erhalten.
-3.  **Analytics**: Aktivieren Sie das `analytics`-Plugin, um das Benutzerengagement und Suchanfragen zu verfolgen.
-4.  **KI-Eingang**: Aktivieren Sie das `llms`-Plugin, um die `llms.txt` zu generieren. Dies ermöglicht es KI-Agenten, Ihre Dokumentation effizienter einzulesen und Ihren Benutzern bessere Antworten zu geben.
+1.  **Site-URL**: Setzen Sie die `url`-Eigenschaft in `docmd.config.js` — dies steuert kanonische Tags, Sitemaps, Social-Previews und die Generierung von Bereitstellungsdateien.
+2.  **Weiterleitungen**: Migration von einem anderen Tool? Verwenden Sie die `redirects`-Konfiguration zur Beibehaltung der SEO-Rankings.
+3.  **Analytik**: Aktivieren Sie das `analytics`-Plugin zur Verfolgung von Engagement und Suchanfragen.
+4.  **KI-Kontext**: Aktivieren Sie das `llms`-Plugin zur Generierung von `llms.txt` für die KI-Agent-Aufnahme.
 
 ::: callout tip "Benutzerdefinierte 404-Seiten"
-`docmd` generiert automatisch eine `404.html` in Ihrem Ausgabe-Verzeichnis. Die meisten Hosting-Anbieter (GitHub Pages, Netlify, Vercel) verwenden diese Datei automatisch, wenn ein Benutzer eine fehlende Route aufruft.
+`docmd` generiert eine `404.html` in Ihrem Ausgabeverzeichnis. Die meisten Hosting-Anbieter verwenden diese Datei automatisch für fehlende Routen.
 :::

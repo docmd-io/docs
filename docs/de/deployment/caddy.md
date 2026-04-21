@@ -1,58 +1,30 @@
 ---
 title: "Caddy"
-description: "Bereitstellen von docmd mittels Caddy-Webserver"
+description: "docmd mit einem produktionsreifen Caddyfile bereitstellen."
 ---
 
-[Caddy](https://caddyserver.com/) ist ein sehr beliebter Webserver, da er standardmäßig automatisch die HTTPS-Bereitstellung und Zertifikatsverlängerung übernimmt.
+[Caddy](https://caddyserver.com/) ist ein moderner Webserver, der HTTPS-Bereitstellung und Zertifikatserneuerungen automatisch verwaltet.
 
-## Automatisierte Bereitstellungskonfiguration
-
-::: callout warning "Versionsvorgabe"
-Der Befehl `docmd deploy` wurde mit **v0.7.2** eingeführt. Stellen Sie sicher, dass Sie `@docmd/core` aktualisiert haben, bevor Sie diese Funktion nutzen.
-:::
-
-Sie können automatisch ein produktionsreifes `Caddyfile` für Ihr `docmd`-Projekt über die Core-CLI generieren:
+## Caddyfile generieren
 
 ```bash
 docmd deploy --caddy
 ```
 
-## Das Caddyfile im Detail
+Dies generiert ein `Caddyfile`, das auf Ihr Projekt zugeschnitten ist:
 
-Die generierte Datei konfiguriert explizit die Dateiauslieferung, das Fallback-Routing und das Asset-Caching, was für die SPA-Leistung entscheidend ist.
+- **Site-Adresse** wird auf den Hostnamen aus Ihrer `url`-Konfiguration gesetzt — Caddy stellt automatisch ein SSL-Zertifikat bereit. Fallback auf `:80`, wenn keine URL konfiguriert ist.
+- **Root-Verzeichnis** nutzt Ihr konfiguriertes `out`-Verzeichnis (nicht hartcodiert)
+- **SPA-Fallback** wird nur einbezogen, wenn `layout.spa` in Ihrer Konfiguration `true` ist
 
-```caddy
-:80 {
-    root * ./site
-    file_server
+Wenn Sie eine echte Domain als Site-Adresse verwenden (z.B. `docs.example.com` anstatt `:80`), stellt Caddy automatisch ein kostenloses SSL-Zertifikat über Let's Encrypt bereit — keinerlei HTTPS-Konfiguration nötig.
 
-    # SPA-Routing-Fallback
-    try_files {path} {path}/ /index.html
-    
-    # Sicherheits-Header
-    header {
-        X-Content-Type-Options "nosniff"
-        X-Frame-Options "SAMEORIGIN"
-        -Server
-    }
+## Bereitstellungsschritte
 
-    # Eigene 404-Seite
-    handle_errors {
-        rewrite * /404.html
-        file_server
-    }
+1. Bauen Sie Ihre Website: `docmd build`
+2. Übertragen Sie Ihren Ausgabe-Ordner und das generierte `Caddyfile` auf Ihren Server.
+3. Führen Sie `caddy start` oder `caddy run` im Verzeichnis mit Ihrem Caddyfile aus.
 
-    # Statische Assets cachen (6 Monate)
-    @static {
-        file
-        path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.webp *.avif *.svg *.woff *.woff2 *.eot *.ttf *.otf
-    }
-    header @static Cache-Control "public, max-age=15552000, immutable"
-}
-```
-*(Wenn Sie dies in einer Produktionsumgebung bereitstellen, können Sie `:80` durch Ihren tatsächlichen Domainnamen wie `docs.beispiel.de` ersetzen, und Caddy wird automatisch ein SSL-Zertifikat für Sie abrufen!)*
+### Neu generieren
 
-## Schritte zur Bereitstellung
-1. Erstellen Sie die Website mittels `docmd build`.
-2. Übertragen Sie Ihren `site/`-Ordner und Ihr neu generiertes `Caddyfile` auf Ihren Remote-Server.
-3. Führen Sie `caddy start` oder `caddy run` in dem Verzeichnis aus, das Ihr Caddyfile enthält.
+Site-URL oder Ausgabeverzeichnis geändert? Führen Sie `docmd deploy --caddy` erneut aus — das Caddyfile wird neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.

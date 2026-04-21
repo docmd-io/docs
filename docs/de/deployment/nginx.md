@@ -1,65 +1,29 @@
 ---
 title: "NGINX"
-description: "Bereitstellen von docmd mittels NGINX-Webserver"
+description: "docmd mit einer produktionsreifen NGINX-Konfiguration bereitstellen."
 ---
 
-NGINX ist einer der zuverlässigsten und leistungsstärksten Webserver auf dem Markt. Da `docmd`-Dateien vollständig statisch sind, kann NGINX diese mit nahezu null Latenz ausliefern.
+NGINX ist einer der zuverlässigsten Webserver. Da `docmd`-Ausgabe vollständig statisch ist, kann NGINX sie mit nahezu null Latenz bereitstellen.
 
-## Automatisierte Bereitstellungskonfiguration
-
-::: callout warning "Versionsvorgabe"
-Der Befehl `docmd deploy` wurde mit **v0.7.2** eingeführt. Stellen Sie sicher, dass Sie `@docmd/core` aktualisiert haben, bevor Sie diese Funktion nutzen.
-:::
-
-Sie können automatisch eine optimierte `nginx.conf`-Datei für Ihr Projekt über die Core-CLI generieren:
+## nginx.conf generieren
 
 ```bash
 docmd deploy --nginx
 ```
 
-Dies erstellt eine Konfigurationsdatei, die perfekt auf die statische Ausgabe von `docmd` abgestimmt ist, einschließlich GZIP-Komprimierung und aggressiver Caching-Richtlinien für statische Assets.
+Dies generiert eine `nginx.conf`, die auf Ihr Projekt zugeschnitten ist:
 
-## Die Konfiguration im Detail
+- **`server_name`** wird auf den Hostnamen aus Ihrer `url`-Konfiguration gesetzt (Fallback auf `localhost`)
+- **SPA-Fallback** (`try_files ... /index.html`) wird nur einbezogen, wenn `layout.spa` in Ihrer Konfiguration `true` ist
+- **Sicherheitsheader**, GZIP-Kompression und unveränderliches Asset-Caching sind standardmäßig enthalten
 
-Falls Sie die Datei manuell schreiben oder die generierte Datei anpassen möchten, sieht die NGINX-Konfiguration wie folgt aus:
+## Bereitstellungsschritte
 
-```nginx
-server {
-    listen 80;
-    server_name localhost;
-    root /usr/share/nginx/html;
-    index index.html;
+1. Bauen Sie Ihre Website: `docmd build`
+2. Laden Sie den Inhalt Ihres Ausgabeverzeichnisses auf den Web-Root Ihres Servers hoch (z.B. `/usr/share/nginx/html/`).
+3. Platzieren Sie die generierte `nginx.conf` in die Konfiguration Ihres Servers (z.B. `/etc/nginx/conf.d/default.conf`).
+4. Starten Sie NGINX neu: `sudo systemctl restart nginx`
 
-    # Sicherheits-Header
-    server_tokens off;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header X-Frame-Options "SAMEORIGIN" always;
+### Neu generieren
 
-    # GZIP-Komprimierung
-    gzip on;
-    gzip_vary on;
-    gzip_min_length 256;
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
-
-    # SPA-Routing-Fallback
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    # Eigene 404-Seite
-    error_page 404 /404.html;
-
-    # Cache-Steuerung für statische Assets
-    location ~* \.(?:ico|css|js|gif|jpe?g|png|webp|avif|woff2?|eot|ttf|otf|svg)$ {
-        expires 6M;
-        access_log off;
-        add_header Cache-Control "public, immutable";
-    }
-}
-```
-
-## Schritte zur Bereitstellung
-1. Erstellen Sie die Website mittels `docmd build`.
-2. Laden Sie den Inhalt Ihres `site/`-Verzeichnisses in das Web-Root Ihres Remote-Servers hoch (z. B. `/var/www/html/`).
-3. Fügen Sie die `nginx.conf`-Regeln in den NGINX-Konfigurationsblock Ihres Servers ein.
-4. Starten Sie Ihren Server neu: `sudo systemctl restart nginx`.
+Site-URL geändert oder SPA-Modus umgeschaltet? Führen Sie `docmd deploy --nginx` erneut aus — die Konfiguration wird neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.

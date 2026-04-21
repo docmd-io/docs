@@ -1,34 +1,32 @@
 ---
 title: "Caddy"
-description: "Deploy docmd using Caddy web server"
+description: "Deploy docmd with a production-ready Caddyfile."
 ---
 
-[Caddy](https://caddyserver.com/) is an incredibly popular web server because it automatically handles HTTPS provisioning and certificate renewals by default.
+[Caddy](https://caddyserver.com/) is a modern web server that handles HTTPS provisioning and certificate renewals automatically.
 
-## Automated Deployment Configuration
-
-::: callout warning "Version Requirement"
-The `docmd deploy` command was introduced in **v0.7.2**. Ensure you have updated `@docmd/core` before using this feature.
-:::
-
-You can automatically generate a production-ready `Caddyfile` for your `docmd` project using the core CLI:
+## Generate a Caddyfile
 
 ```bash
 docmd deploy --caddy
 ```
 
-## The Caddyfile Explained
+This generates a `Caddyfile` personalised to your project:
 
-The generated file explicitly configures file serving, fallback routing, and asset caching, which is crucial for SPA performance.
+- **Site address** is set to the hostname from your `url` config — Caddy will automatically provision an SSL certificate for it. Falls back to `:80` if no URL is configured.
+- **Root directory** uses your configured `out` directory (not hardcoded)
+- **SPA fallback** is only included when `layout.spa` is `true` in your config
+
+### What Gets Generated
 
 ```caddy
-:80 {
+docs.example.com {
     root * ./site
     file_server
 
-    # SPA Routing Fallback
+    # SPA Routing Fallback (only when layout.spa is true)
     try_files {path} {path}/ /index.html
-    
+
     # Security Headers
     header {
         X-Content-Type-Options "nosniff"
@@ -50,9 +48,15 @@ The generated file explicitly configures file serving, fallback routing, and ass
     header @static Cache-Control "public, max-age=15552000, immutable"
 }
 ```
-*(If you are deploying this to production, you can change `:80` to your actual domain name like `docs.example.com`, and Caddy will automatically fetch an SSL certificate for you!)*
+
+When you use a real domain as the site address (e.g., `docs.example.com` instead of `:80`), Caddy automatically provisions a free SSL certificate via Let's Encrypt — zero HTTPS configuration needed.
 
 ## Deployment Steps
-1. Generate the site using `docmd build`.
-2. Transfer your `site/` folder and your newly generated `Caddyfile` to your remote server.
+
+1. Build your site: `docmd build`
+2. Transfer your output folder and the generated `Caddyfile` to your server.
 3. Run `caddy start` or `caddy run` in the directory containing your Caddyfile.
+
+### Re-Generating
+
+Changed your site URL or output directory? Run `docmd deploy --caddy` again — the Caddyfile is regenerated to match your current `docmd.config.js`.

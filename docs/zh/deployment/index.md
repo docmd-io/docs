@@ -1,64 +1,80 @@
 ---
 title: "部署"
-description: "将 docmd 文档托管到 GitHub Pages、Vercel、Netlify 和 Cloudflare Pages 等平台。"
+description: "通过一条命令将 docmd 文档部署到 Docker、Nginx、Caddy 或任何云平台。"
 ---
 
-`docmd` 生成高性能静态网站，可托管在任何能提供 HTML 服务的环境中。只需运行构建命令生成 `site/` 目录：
+`docmd` 生成高性能静态网站。运行构建命令生成输出目录：
 
 ```bash
 docmd build
 ```
 
-## 自动化部署配置
+输出是一个独立的 `site/` 文件夹（或你在配置中设定的 `out` 目录），可以托管在任何地方。
 
-::: callout warning "版本要求"
-`docmd deploy` 命令从 **v0.7.2** 开始引入。
+## 一键部署
+
+::: callout tip "v0.7.2 新功能"
+`docmd deploy` 会读取你的 `docmd.config.js`，生成针对你项目定制的部署文件——不是通用模板。
 :::
 
-`docmd build` 会生成原始静态文件，但将其部署到自托管服务器或容器通常需要编写繁琐的配置文件。`docmd` 通过自动构建生产级环境来彻底解决这个问题。
-
-在终端中运行以下命令即可引导生成配置文件：
+无需手动编写 Dockerfile 和服务器配置，让 docmd 为你自动生成：
 
 ```bash
-docmd deploy [target]
+docmd deploy --docker   # Dockerfile + .dockerignore
+docmd deploy --nginx    # 生产级 nginx.conf
+docmd deploy --caddy    # 生产级 Caddyfile
 ```
 
-### 支持的离线目标
-我们目前支持为以下主流离线和自托管环境生成配置文件：
+### 自动定制的内容
 
-*   [`docmd deploy --docker`](./docker) - 生成优化的多阶段 `Dockerfile` 和 `.dockerignore`。
-*   [`docmd deploy --nginx`](./nginx) - 生成包含安全头、GZIP 和缓存策略的 `nginx.conf`。
-*   [`docmd deploy --caddy`](./caddy) - 生成自动路由的 `Caddyfile`。
+deploy 命令会读取你的配置（或零配置默认值）并注入：
 
-如果需要覆盖已有的配置文件，可以使用 `--force` 参数：
+| 配置字段 | 用于 |
+|:--|:--|
+| `title` | 每个生成文件的注释头 |
+| `out` | Dockerfile 中的 `COPY` 路径、Nginx/Caddy 的 `root` 指令 |
+| `url` | Nginx 的 `server_name`、Caddy 的站点地址 |
+| `layout.spa` | 控制是否包含 SPA 路由回退 |
+| 配置文件路径 | 非默认配置名时，Dockerfile 构建步骤使用 `--config` |
 
-```bash
-docmd deploy --docker --force
-```
+没有 `docmd.config.js`？没问题——命令会使用与 `docmd dev` 和 `docmd build` 相同的零配置默认值。
 
-请点击上方对应的目标查看详细的服务专用文档。
+### 始终同步
 
-*(注意：`--vercel` 和 `--netlify` 等云 API 部署命令正在第二阶段开发中。)*
+每次运行都会重新生成部署文件以匹配你当前的配置。修改了站点 URL 或输出目录？直接重新运行 deploy 命令即可。
+
+### 支持的目标
+
+*   [`docmd deploy --docker`](./docker) — 优化的多阶段 Dockerfile，具有层缓存和版本锁定。
+*   [`docmd deploy --nginx`](./nginx) — 安全加固的 nginx.conf，包含 GZIP 和不可变资产缓存。
+*   [`docmd deploy --caddy`](./caddy) — 支持 HTTPS 的 Caddyfile，带自动路由。
+
+点击各目标查看详细的服务专用文档。
+
+*(云部署目标如 `--vercel` 和 `--netlify` 计划在未来版本中推出。)*
 
 ## 云托管与 CI/CD
-如果你不想管理自己的服务器（Docker、Nginx），可以将 `site/` 文件夹直接部署到 GitHub Pages、Vercel、Netlify 或 Cloudflare 等云平台。
 
-有关配置自动化 GitHub Actions 或导入云平台控制台的详细说明，请参阅 [CI/CD 部署指南](./ci-cd)。
+如果你更倾向于托管服务而非自托管，可以将输出文件夹直接部署到 GitHub Pages、Vercel、Netlify 或 Cloudflare Pages。
 
-## SPA 路由注意事项
+参见 [CI/CD 部署指南](./ci-cd) 了解自动化工作流。
 
-`docmd` 实现了微型 SPA 路由器，可平滑处理内部导航。与基于 React 的 SPA 不同，`docmd` 中的每个页面都作为独立的 `index.html` 文件生成在文件系统上，因此：
+## SPA 路由
 
-- **无需重写规则**：大多数平台上无需为服务器配置 `index.html` 重写规则。
-- **深层链接**：直接访问 `/guide/setup` 等 URL 开箱即用，因为服务器能找到 `/guide/setup/index.html`。
+`docmd` 实现了微型 SPA 路由器以实现平滑的内部导航。每个页面都生成为独立的 `index.html` 文件：
+
+- **无需重写规则** — 直接访问 URL 即可，因为 `/guide/setup` 会解析为 `/guide/setup/index.html`。
+- **深层链接开箱即用** — 在所有托管平台上均可正常工作。
+
+当配置中 `layout.spa` 设为 `false` 时，deploy 命令会在生成的服务器配置中省略 SPA 回退路由。
 
 ## 生产部署检查清单
 
-1.  **站点 URL**：确保在 `docmd.config.js` 中设置了 `url` 属性。这对生成正确的规范标签、站点地图和社交预览图至关重要。
-2.  **重定向**：如果从其他工具迁移，使用 `redirects` 配置维护 SEO 排名。
+1.  **站点 URL**：在 `docmd.config.js` 中设置 `url` 属性——这将驱动规范标签、站点地图、社交预览和部署文件生成。
+2.  **重定向**：从其他工具迁移？使用 `redirects` 配置保持 SEO 排名。
 3.  **统计分析**：启用 `analytics` 插件追踪用户行为和搜索查询。
-4.  **AI 接入**：启用 `llms` 插件生成 `llms.txt`，让 AI Agent 更高效地摄取你的文档内容。
+4.  **AI 上下文**：启用 `llms` 插件生成 `llms.txt`，供 AI Agent 高效摄取文档内容。
 
 ::: callout tip "自定义 404 页面"
-`docmd` 会在输出目录中自动生成 `404.html`。大多数托管服务（GitHub Pages、Netlify、Vercel）会在用户访问到缺失路由时自动使用该文件。
+`docmd` 会在输出目录中自动生成 `404.html`。大多数托管服务会在用户访问缺失路由时自动使用该文件。
 :::
