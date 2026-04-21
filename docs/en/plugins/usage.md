@@ -19,10 +19,10 @@ docmd remove <plugin-name>
 
 The installer automatically detects your package manager (npm, pnpm, yarn, or bun), resolves short names to full package names, and injects the plugin config into your `docmd.config.js`.
 
-Use `--verbose` for full installer output:
+Use `--verbose` (or `-V`) for full installer output:
 
 ```bash
-docmd add <plugin-name> --verbose
+docmd add <plugin-name> -V
 ```
 
 ## Required Plugins

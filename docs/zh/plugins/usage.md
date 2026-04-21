@@ -19,10 +19,10 @@ docmd remove <插件名称>
 
 安装程序会自动检测你的包管理器（npm、pnpm、yarn 或 bun），将短名称解析为完整包名，并将插件配置写入 `docmd.config.js`。
 
-使用 `--verbose` 查看完整安装日志：
+使用 `--verbose` (或 `-V`) 查看完整安装日志：
 
 ```bash
-docmd add <插件名称> --verbose
+docmd add <插件名称> -V
 ```
 
 ## 必需插件
