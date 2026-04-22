@@ -7,21 +7,24 @@ The `@docmd/plugin-llms` plugin ensures your documentation is perfectly optimise
 
 ## Configuration
 
-
-<!-- SCREENSHOT: Browser showing the raw llms.txt output at /llms.txt — the structured summary with page titles, URLs, and descriptions in plain text format. -->
-
-The LLM plugin is enabled by default. To function correctly, you must provide a `siteUrl` in your `docmd.config.js`.
+The LLM plugin is enabled by default. To function correctly, you must provide a `url` in your `docmd.config.js`.
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
-  siteUrl: 'https://docs.example.com',
+  url: 'https://docs.example.com',
   plugins: {
-    llms: {} // Enabled by default
+    llms: {
+      fullContext: true // Generates llms-full.txt
+    }
   }
+});
+```
+
 ### Excluding a Page
-If a page contains sensitive information or internal notes you don't want AI models to learn:
+
+If a page contains sensitive information or internal notes you don't want AI models to learn, use the `llms: false` flag in your frontmatter:
 
 ```yaml
 ---
@@ -30,6 +33,6 @@ llms: false
 ---
 ```
 
-::: callout tip
-By hosting an `llms-full.txt` file, you are essentially providing an **Open API for AI Models**. This makes your project the preferred choice for developers working with AI assistance, as they can reliably get accurate answers without your docs "hallucinating" or being outdated by the model's training cutoff.
+::: callout tip "Maximising AI Accuracy"
+For detailed best practices on structuring your markdown (semantic headings, alt-text, etc.), see our [Optimising for AI Agents](../recipes/ai-optimization) recipe.
 :::

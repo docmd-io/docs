@@ -12,55 +12,24 @@ A standard `docmd` page is divided into six primary functional zones:
 5.  **Table of Contents (TOC)**: Right-hand heading navigation for the current page.
 6.  **Footer**: Bottom area for copyright, branding, and site-wide links.
 
-## Global Components
+## Global Component Configuration
 
-Most UI zones are configured within the `layout` section of your `docmd.config.js`.
+`docmd` features a modular layout system. Most UI zones are configured within the `layout` section of your `docmd.config.js`.
 
 ### Menubar
+The menubar provides a high-level navigation layer above your documentation. It supports brand titles, regular links, and nested dropdowns.
 
-The menubar provides a high-level navigation layer above your documentation.
-
-```javascript
-layout: {
-  menubar: {
-    enabled: true,
-    position: 'top', // 'top' (fixed) or 'header' (within content flow)
-    left: [
-      { type: 'title', text: 'Brand', url: '/', icon: 'home' },
-      { text: 'Features', url: '/features' }
-    ],
-    right: [
-      { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', icon: 'github' }
-    ]
-  }
-}
-```
+*   **Location**: Fixed at the `top` or inline within the `header`.
+*   **Documentation**: See [Menubar Configuration](./menubar) for full item schemas and styling.
 
 ### The Page Header
+The header contains the page title, breadcrumbs, and usually the utility menus. 
 
-The header is enabled by default. You can disable it site-wide or hide specific elements via page-level frontmatter.
+*   **Controls**: Enable/disable the header or breadcrumbs site-wide via `layout.header` and `layout.breadcrumbs`.
+*   **Overriding**: Use `hideTitle: true` in your [Page Frontmatter](../content/frontmatter) to hide the title area on specific pages.
 
-```javascript
-// docmd.config.js
-layout: {
-  header: {
-    enabled: true // Set to false to hide the entire top header site-wide
-  },
-  breadcrumbs: true // Set to false to hide the breadcrumb trail site-wide
-}
-```
-
-**Page-level override (Frontmatter):**
-```yaml
----
-title: "Special Page"
-hideTitle: true # Hides the title from the sticky header for this specific page
----
-```
-
-## Utility Menus (Options Menu)
-
-The `optionsMenu` consolidates core utilities like **Search**, **Theme Toggle**, and **Sponsorship**.
+### Utility Menus (Options Menu)
+The `optionsMenu` consolidates core utilities like **Global Search**, **Theme Toggle**, and **Sponsorship links**.
 
 ```javascript
 layout: {
@@ -69,49 +38,43 @@ layout: {
     components: {
       search: true,      // Enable full-text search
       themeSwitch: true, // Enable Light/Dark mode toggle
-      sponsor: 'https://github.com/sponsors/your-profile'
+      sponsor: 'https://github.com/sponsors/your-profile' 
     }
   }
 }
 ```
 
-::: callout info "Container Fallback"
+::: callout info "Automatic Fallback"
 If the chosen position targets a container that is disabled, `docmd` will automatically render the options menu in the `sidebar-top` slot to ensure core utilities remain accessible.
 :::
 
-## Sidebar & Footer Controls
+### Sidebar & Navigation
+The sidebar is the primary navigation tree for your site. Its structure is defined either in your config or via external JSON files.
 
-### Sidebar Behavior
-```javascript
-layout: {
-  sidebar: {
-    enabled: true,
-    collapsible: true,       // Enables the expand/collapse animation
-    defaultCollapsed: false,  // Sets the initial sidebar state
-    position: 'left'
-  }
-}
-```
+*   **Behavior**: Supports animations, collapsible groups, and automatic path preservation.
+*   **Documentation**: See [Navigation Configuration](./navigation) for structuring your sidebar tree.
 
-### Footer Branding
+### Footer
 `docmd` provides both **minimal** and **complete** layouts for your site footer.
 
 ```javascript
 layout: {
   footer: {
-    style: 'complete',
+    style: 'complete', // Options: 'minimal' or 'complete'
     description: 'Documentation built with docmd.',
-    branding: true, // Controls the "Built with docmd" badge
+    branding: true,    // Controls the "Built with docmd" badge
     columns: [
       {
         title: 'Community',
-        links: [{ text: 'GitHub', url: '...' }]
+        links: [
+          { text: 'GitHub', url: 'https://github.com/docmd-io/docmd' }
+        ]
       }
     ]
   }
 }
 ```
 
-::: callout tip "AI-Optimised Interface"
-When designing custom layouts, ensure the **Search** component is prominent in your `optionsMenu`. AI agents frequently utilise search as a primary anchor when exploring your documentation to locate specific technical context.
+::: callout tip "Interface Hierarchy"
+For the best user experience, keep your **Menubar** for global external links and your **Sidebar** for logical documentation structure. AI agents frequently utilize this hierarchy to understand the relationship between different documentation modules.
 :::

@@ -48,39 +48,11 @@ logo: {
 favicon: 'assets/favicon.ico',           // Path to your site's favicon
 ```
 
-## Layout Architecture
+## Site Layout & UI
 
-<!-- SCREENSHOT: Full page with sidebar, header, breadcrumbs, table of contents, and footer — annotated with arrows pointing to each configurable area (sidebar, TOC, breadcrumbs, footer, options menu). -->
+`docmd` features a modular layout system. You can toggle UI components like the **Sidebar**, **Header**, **Menubar**, and **Global Search** via the `layout` object.
 
-`docmd` features a modular layout system. You can toggle UI components and configure navigation behaviour via the `layout` object.
-
-| Section | Key | Default | Description |
-| :--- | :--- | :--- | :--- |
-| **Global** | `spa` | `true` | Enables seamless Single Page Application navigation without browser reloads. |
-| **Header** | `header` | `{ enabled: true }` | Toggles the top navigation bar. |
-| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the sidebar navigation tree and its behaviour. |
-| **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` footer styles. |
-
-### Utility Menu (Options Menu)
-
-The Options Menu consolidates utility components such as **Global Search**, **Theme Switching**, and **Sponsorship links**.
-
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // Options: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
-    components: {
-      search: true,      // Enable built-in full-text search
-      themeSwitch: true, // Enable Light/Dark mode toggle
-      sponsor: 'https://github.com/sponsors/your-profile' // Optional URL for a heart icon/link
-    }
-  }
-}
-```
-
-::: callout info
-If `optionsMenu.position` is set to `header` or `menubar` but those containers are disabled, the menu will automatically fall back to `sidebar-top`.
-:::
+For a full breakdown of functional zones and configuration options, see [Layout & UI Zones](./layout-ui).
 
 ## Core Engine Features
 
