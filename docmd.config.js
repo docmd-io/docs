@@ -3,7 +3,7 @@
 
 module.exports = defineConfig({
   // --- Core Metadata ---
-  title: 'docmd docs',
+  title: 'docmd documentation',
   url: 'https://docs.docmd.io',
 
   // --- Branding ---

@@ -55,6 +55,16 @@ Non-current versions are automatically built into subfolders matching their `id`
 ### 4. Asset Isolation
 Each version inherits your global `assets/` directory, but `docmd` ensures they are isolated during the build process to prevent style leakage or version conflicts.
 
+### 5. Versioned Navigation
+
+Each version can maintain its own independent navigation structure. Because navigation is also language-specific, `docmd` resolves a version's navigation in the following priority order (from highest to lowest):
+
+1. **Version-level `navigation.json`:** (e.g., `docs-v1/navigation.json` or `docs-v1/zh/navigation.json`)
+2. **Language-level `navigation.json`:** (e.g., `docs/zh/navigation.json`)
+3. **Global Config:** `config.navigation` in `docmd.config.js`
+
+**Smart Broken-Link Filtering:** Even when sharing a language-level or global navigation fallback, `docmd` automatically filters out sidebar items that link to files not present in the older version's source folder. This guarantees no broken links when users select an older version.
+
 ## Best Practices
 
 1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.

@@ -53,6 +53,16 @@ Nicht-aktuelle Versionen werden automatisch in Unterordnern erstellt, die ihrer 
 ### 4. Asset-Isolation
 Jede Version erbt Ihr globales `assets/`-Verzeichnis, aber `docmd` stellt sicher, dass diese während des Build-Prozesses isoliert werden, um Style-Abweichungen oder Versionskonflikte zu vermeiden.
 
+### 5. Versionierte Navigation
+
+Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. Da die Navigation auch sprachspezifisch ist, ermittelt `docmd` die Navigation einer Version in der folgenden Prioritätsreihenfolge (von der höchsten zur niedrigsten):
+
+1. **Versions-Level `navigation.json`:** (z. B. `docs-v1/navigation.json` oder `docs-v1/zh/navigation.json`)
+2. **Sprach-Level `navigation.json`:** (z. B. `docs/zh/navigation.json`)
+3. **Globale Konfiguration:** `config.navigation` in der `docmd.config.js`
+
+**Intelligente Fehlerkorrektur:** Auch wenn ein sprachspezifisches oder globales Navigations-Fallback genutzt wird, filtert `docmd` automatisch Seitenleistenelemente heraus, die auf Dateien verweisen, welche im Quellordner der älteren Version nicht existieren. Das garantiert, dass keine defekten Links entstehen, wenn Benutzer zu einer älteren Version wechseln.
+
 ## Best Practices
 
 1.  **Semantische IDs**: Verwenden Sie prägnante, URL-freundliche IDs wie `v1`, `v2` oder `beta`.

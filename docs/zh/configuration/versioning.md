@@ -50,6 +50,16 @@ export default defineConfig({
 ### 4. 资源隔离
 每个版本继承全局 `assets/` 目录，但 `docmd` 在构建过程中会对其进行隔离，防止样式泄露或版本冲突。
 
+### 5. 版本级导航
+
+每个版本都可以维护自身独立的导航结构。由于导航也与特定语言相关，`docmd` 会按以下优先级（从高到低）解析每个版本的导航：
+
+1. **版本级 `navigation.json`：** （例如 `docs-v1/navigation.json` 或 `docs-v1/zh/navigation.json`）
+2. **语言级 `navigation.json`：** （例如 `docs/zh/navigation.json`）
+3. **全局配置：** `docmd.config.js` 中的 `config.navigation`
+
+**智能死链接过滤：** 即使回退到共享的语言级或全局导航，`docmd` 也会自动过滤掉指向旧版本源文件夹中不存在的文件的侧边栏条目。确保用户切换到旧版本时不会遇到任何包含 404 文件的破损链接。
+
 ## 最佳实践
 
 1. **语义化 ID**：使用简洁、URL 友好的 ID，如 `v1`、`v2` 或 `beta`。

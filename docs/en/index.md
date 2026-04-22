@@ -1,5 +1,5 @@
 ---
-title: "docmd docs: zero-config docs from Markdown"
+title: "docmd documentation: deploy production-ready docs instantly"
 description: "Build production-ready documentation from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready."
 titleAppend: false
 ---
