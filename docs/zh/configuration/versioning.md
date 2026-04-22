@@ -52,13 +52,24 @@ export default defineConfig({
 
 ### 5. 版本级导航
 
-每个版本都可以维护自身独立的导航结构。由于导航也与特定语言相关，`docmd` 会按以下优先级（从高到低）解析每个版本的导航：
+每个版本都可以维护自身独立的导航结构。导航解析基于文件夹嵌套级别。由于导航也可以是特定于语言的，嵌套最深的配置文件会覆盖其上级配置。`docmd` 会按以下优先级（从高到低）解析导航：
 
-1. **版本级 `navigation.json`：** （例如 `docs-v1/navigation.json` 或 `docs-v1/zh/navigation.json`）
-2. **语言级 `navigation.json`：** （例如 `docs/zh/navigation.json`）
-3. **全局配置：** `docmd.config.js` 中的 `config.navigation`
+```text
+my-project/
+├── docmd.config.js                    [第 3 级：全局配置] - 最低优先级
+│
+├── docs-v1/ 
+│   ├── navigation.json                [第 2 级：版本级导航] - 中等优先级
+│   │
+│   └── zh/
+│       └── navigation.json            [第 1 级：语言级导航] - 最高优先级
+```
 
-**智能死链接过滤：** 即使回退到共享的语言级或全局导航，`docmd` 也会自动过滤掉指向旧版本源文件夹中不存在的文件的侧边栏条目。确保用户切换到旧版本时不会遇到任何包含 404 文件的破损链接。
+1. **第 1 级（语言）：** `docs-v1/zh/navigation.json` 会覆盖 `v1` 版本下中（`zh`）语言环境的所有其他设置。
+2. **第 2 级（版本）：** `docs-v1/navigation.json` 充当 `v1` 版本中所有语言的回退配置。
+3. **第 3 级（全局）：** `docmd.config.js` 中的 `config.navigation` 充当最终的全局回退配置。
+
+**智能死链接过滤：** 即使回退到上级导航配置，`docmd` 也会自动过滤掉那些指向当前版本源文件夹中不存在的文件的侧边栏条目。确保用户切换到旧版本时不会遇到任何包含 404 文件的破损链接。
 
 ## 最佳实践
 

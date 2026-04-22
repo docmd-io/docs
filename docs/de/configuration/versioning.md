@@ -55,13 +55,24 @@ Jede Version erbt Ihr globales `assets/`-Verzeichnis, aber `docmd` stellt sicher
 
 ### 5. Versionierte Navigation
 
-Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. Da die Navigation auch sprachspezifisch ist, ermittelt `docmd` die Navigation einer Version in der folgenden Prioritätsreihenfolge (von der höchsten zur niedrigsten):
+Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. Die Navigationsauflösung basiert auf der Verschachtelung von Ordnern (Nesting). Da die Navigation auch sprachspezifisch sein kann, überschreibt die am tiefsten verschachtelte Datei ihre übergeordneten Dateien. `docmd` ermittelt die Navigation in der folgenden Prioritätsreihenfolge (von der höchsten zur niedrigsten):
 
-1. **Versions-Level `navigation.json`:** (z. B. `docs-v1/navigation.json` oder `docs-v1/zh/navigation.json`)
-2. **Sprach-Level `navigation.json`:** (z. B. `docs/zh/navigation.json`)
-3. **Globale Konfiguration:** `config.navigation` in der `docmd.config.js`
+```text
+mein-projekt/
+├── docmd.config.js                    [Ebene 3: Globale Konfig.] - Niedrigste Priorität
+│
+├── docs-v1/ 
+│   ├── navigation.json                [Ebene 2: Versions-Navigation] - Mittlere Priorität
+│   │
+│   └── zh/
+│       └── navigation.json            [Ebene 1: Sprach-Navigation] - Höchste Priorität
+```
 
-**Intelligente Fehlerkorrektur:** Auch wenn ein sprachspezifisches oder globales Navigations-Fallback genutzt wird, filtert `docmd` automatisch Seitenleistenelemente heraus, die auf Dateien verweisen, welche im Quellordner der älteren Version nicht existieren. Das garantiert, dass keine defekten Links entstehen, wenn Benutzer zu einer älteren Version wechseln.
+1. **Ebene 1 (Sprache):** `docs-v1/zh/navigation.json` überschreibt alles für das `zh` Locale in `v1`.
+2. **Ebene 2 (Version):** `docs-v1/navigation.json` fungiert als Fallback für alle Sprachen in `v1`.
+3. **Ebene 3 (Global):** `config.navigation` in der `docmd.config.js` dient als endgültiger globaler Fallback.
+
+**Intelligente Fehlerkorrektur:** Auch wenn auf eine übergeordnete Konfiguration zurückgegriffen wird, filtert `docmd` automatisch Seitenleistenelemente heraus, die auf Dateien verweisen, welche im Quellordner der aktuellen Version nicht existieren. Das garantiert, dass keine defekten Links entstehen, wenn Benutzer zu einer älteren Version wechseln.
 
 ## Best Practices
 
