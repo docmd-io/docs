@@ -85,13 +85,30 @@ layout: {
 }
 ```
 
-## External Versioned Navigation
+## Navigation Resolution Priority
 
-When maintaining multiple versions of your documentation (e.g., `v1`, `v2`), managing a massive central configuration can become cumbersome.
+`docmd` provides a flexible cascading resolution system. This allows you to maintain a central navigation config while overriding specific parts for different languages or versions.
 
-`docmd` supports **Navigation V2**, allowing you to place a `navigation.json` file at the root of your versioned directory (e.g., `docs-v1/navigation.json`).
+The resolution follows a "closest file wins" logic based on folder nesting. The hierarchy is as follows (from highest priority to lowest):
 
-The JSON file must follow the standard array structure:
+```text
+my-project/
+├── docmd.config.js           [Level 3: Global Config] - Lowest Priority
+├── docs-v1/ 
+│   ├── navigation.json       [Level 2: Version Navigation] - Medium Priority
+│   └── zh/
+│       └── navigation.json   [Level 1: Language Navigation] - Highest Priority
+```
+
+1. **Level 1: Language-Specific** (`docs-v1/zh/navigation.json`): Overrides everything for the specific locale and version.
+2. **Level 2: Version-Specific** (`docs-v1/navigation.json`): Overrides the global config for all languages in this version.
+3. **Level 3: Global Configuration** (`config.navigation`): The final fallback defined in your root config file.
+
+### Smart Broken-Link Filtering
+Even when falling back to a parent configuration (Level 2 or 3), `docmd` automatically filters out sidebar items that link to files not present in the current version's source folder. This guarantees no broken links when users select an older version.
+
+### JSON Structure
+Each `navigation.json` must follow the standard array structure:
 
 ```json
 [
@@ -99,12 +116,6 @@ The JSON file must follow the standard array structure:
   { "title": "Release Notes", "path": "/release-notes" }
 ]
 ```
-
-**Resolution Priority:**
-When rendering a versioned page, the sidebar is resolved in this order:
-1.  **`navigation.json`**: Checked first within the specific version source folder.
-2.  **`versions.navigation`**: Checked within the version definition in `docmd.config.js`.
-3.  **Default Navigation**: Falls back to the main site navigation.
 
 ## Icons Integration
 

@@ -44,12 +44,9 @@ Eine Nicht-Standardsprache kann auch Seiten haben, die in der Standardsprache ni
 
 ## Navigation übersetzen
 
-Jedes Sprachverzeichnis kann eine eigene `navigation.json` haben. Die Priorität der Auflösung:
+Jedes Sprachverzeichnis kann eine eigene `navigation.json` haben. `docmd` verwendet ein kaskadierendes Prioritätssystem, um die Seitenleiste aufzulösen.
 
-1. **Sprachspezifisch** — `docs/hi/navigation.json` (falls vorhanden)
-2. **Standardsprache** — `docs/en/navigation.json` (Fallback)
-3. **Versionsspezifisch** — `docs-v1/navigation.json` (für alte Versionen ohne Sprachordner)
-4. **Stammkonfiguration** — das `navigation`-Array aus der `docmd.config.js`
+Einzelheiten zur Auflösungshierarchie und visuelle Beispiele finden Sie unter [Priorität der Navigationsauflösung](../navigation#prioritat-der-navigationsauflosung).
 
 Die `navigation.json` einer Sprache verwendet dasselbe Format:
 

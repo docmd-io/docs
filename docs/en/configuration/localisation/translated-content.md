@@ -44,12 +44,9 @@ A non-default locale can also have pages that don't exist in the default locale.
 
 ## Translate the navigation
 
-Each locale directory can have its own `navigation.json`. The resolution priority:
+Each locale directory can have its own `navigation.json`. `docmd` uses a cascading priority system (Level 1-3) to resolve the sidebar.
 
-1. **Locale-specific** — `docs/hi/navigation.json` (if it exists)
-2. **Default locale** — `docs/en/navigation.json` (fallback)
-3. **Version-specific** — `docs-v1/navigation.json` (for old versions without locale dirs)
-4. **Root config** — the `navigation` array from `docmd.config.js`
+For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](../navigation#navigation-resolution-priority).
 
 A locale's `navigation.json` uses the same format:
 

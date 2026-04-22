@@ -55,24 +55,9 @@ Jede Version erbt Ihr globales `assets/`-Verzeichnis, aber `docmd` stellt sicher
 
 ### 5. Versionierte Navigation
 
-Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. Die Navigationsauflösung basiert auf der Verschachtelung von Ordnern (Nesting). Da die Navigation auch sprachspezifisch sein kann, überschreibt die am tiefsten verschachtelte Datei ihre übergeordneten Dateien. `docmd` ermittelt die Navigation in der folgenden Prioritätsreihenfolge (von der höchsten zur niedrigsten):
+Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. `docmd` verwendet ein kaskadierendes Prioritätssystem, um die Seitenleiste aufzulösen. Dies ermöglicht die Verwendung einer zentralen Konfiguration oder versions-/sprachspezifischer `navigation.json`-Dateien.
 
-```text
-mein-projekt/
-├── docmd.config.js                    [Ebene 3: Globale Konfig.] - Niedrigste Priorität
-│
-├── docs-v1/ 
-│   ├── navigation.json                [Ebene 2: Versions-Navigation] - Mittlere Priorität
-│   │
-│   └── zh/
-│       └── navigation.json            [Ebene 1: Sprach-Navigation] - Höchste Priorität
-```
-
-1. **Ebene 1 (Sprache):** `docs-v1/zh/navigation.json` überschreibt alles für das `zh` Locale in `v1`.
-2. **Ebene 2 (Version):** `docs-v1/navigation.json` fungiert als Fallback für alle Sprachen in `v1`.
-3. **Ebene 3 (Global):** `config.navigation` in der `docmd.config.js` dient als endgültiger globaler Fallback.
-
-**Intelligente Fehlerkorrektur:** Auch wenn auf eine übergeordnete Konfiguration zurückgegriffen wird, filtert `docmd` automatisch Seitenleistenelemente heraus, die auf Dateien verweisen, welche im Quellordner der aktuellen Version nicht existieren. Das garantiert, dass keine defekten Links entstehen, wenn Benutzer zu einer älteren Version wechseln.
+Einzelheiten zur Auflösungshierarchie und visuelle Beispiele finden Sie unter [Priorität der Navigationsauflösung](./navigation#prioritat-der-navigationsauflosung).
 
 ## Best Practices
 

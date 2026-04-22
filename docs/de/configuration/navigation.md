@@ -83,13 +83,30 @@ layout: {
 }
 ```
 
-## Externe versionierte Navigation
+## Priorität der Navigationsauflösung
 
-Wenn Sie mehrere Versionen Ihrer Dokumentation pflegen (z. B. `v1`, `v2`), kann die Verwaltung einer massiven zentralen Konfiguration mühsam werden.
+`docmd` bietet ein flexibles, kaskadierendes Auflösungssystem. Dies ermöglicht es Ihnen, eine zentrale Navigationskonfiguration beizubehalten, während Sie spezifische Teile für verschiedene Sprachen oder Versionen überschreiben.
 
-`docmd` unterstützt **Navigation V2**, was es Ihnen ermöglicht, eine `navigation.json`-Datei im Stammverzeichnis Ihres versionierten Verzeichnisses abzuwerfen (z. B. `docs-v1/navigation.json`).
+Die Auflösung folgt einer „Die am nächsten liegende Datei gewinnt“-Logik, basierend auf der Ordnerverschachtelung. Die Hierarchie ist wie folgt aufgebaut (von der höchsten zur niedrigsten Priorität):
 
-Die JSON-Datei muss der Standard-Array-Struktur folgen:
+```text
+mein-projekt/
+├── docmd.config.js           [Ebene 3: Globale Konfig. Navigation] - Niedrigste Priorität
+├── docs-v1/ 
+│   ├── navigation.json       [Ebene 2: Versions-Navigation] - Mittlere Priorität
+│   └── zh/
+│       └── navigation.json   [Ebene 1: Sprach-Navigation] - Höchste Priorität
+```
+
+1. **Ebene 1: Sprachspezifisch** (`docs-v1/zh/navigation.json`): Überschreibt alles für das spezifische Locale und die Version.
+2. **Ebene 2: Versionsspezifisch** (`docs-v1/navigation.json`): Überschreibt die globale Konfiguration für alle Sprachen in dieser Version.
+3. **Ebene 3: Globale Konfiguration** (`config.navigation`): Der endgültige Fallback, der in Ihrer Stammkonfigurationsdatei definiert ist.
+
+### Intelligente Fehlerkorrektur (Smart Broken-Link Filtering)
+Selbst wenn auf eine übergeordnete Konfiguration zurückgegriffen wird (Ebene 2 oder 3), filtert `docmd` automatisch Seitenleistenelemente heraus, die auf Dateien verweisen, welche im Quellordner der aktuellen Version nicht existieren. Dies garantiert, dass keine defekten Links entstehen, wenn Benutzer eine ältere Version auswählen.
+
+### JSON-Struktur
+Jede `navigation.json` muss der Standard-Array-Struktur folgen:
 
 ```json
 [
@@ -97,12 +114,6 @@ Die JSON-Datei muss der Standard-Array-Struktur folgen:
   { "title": "Versionshinweise", "path": "/release-notes" }
 ]
 ```
-
-**Priorität der Auflösung:**
-Beim Rendern einer versionierten Seite wird die Seitenleiste in dieser Reihenfolge aufgelöst:
-1.  **`navigation.json`**: Wird zuerst im spezifischen Versions-Quellordner gesucht.
-2.  **`versions.navigation`**: Wird in der Versionsdefinition in der `docmd.config.js` gesucht.
-3.  **Standard-Navigation**: Fallback auf die Hauptnavigation der Website.
 
 ## Integration von Icons
 

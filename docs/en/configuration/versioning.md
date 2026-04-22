@@ -57,24 +57,9 @@ Each version inherits your global `assets/` directory, but `docmd` ensures they 
 
 ### 5. Versioned Navigation
 
-Each version can maintain its own independent navigation structure. Navigation resolution is based on folder nesting. Because navigation can also be language-specific, the deepest file overrides its parents. `docmd` resolves navigation in the following priority order (from highest priority to lowest):
+Each version can maintain its own independent navigation structure. `docmd` uses a cascading priority system to resolve the sidebar, allowing you to use a centralized config or per-version/per-language `navigation.json` files.
 
-```text
-my-project/
-├── docmd.config.js                    [Level 3: Global Config] - Lowest Priority
-│
-├── docs-v1/ 
-│   ├── navigation.json                [Level 2: Version Navigation] - Medium Priority
-│   │
-│   └── zh/
-│       └── navigation.json            [Level 1: Language Navigation] - Highest Priority
-```
-
-1. **Level 1 (Language):** `docs-v1/zh/navigation.json` overrides everything for the `zh` locale in `v1`.
-2. **Level 2 (Version):** `docs-v1/navigation.json` acts as the fallback for all languages in `v1`.
-3. **Level 3 (Global):** `config.navigation` in `docmd.config.js` acts as the final global fallback.
-
-**Smart Broken-Link Filtering:** Even when falling back to a parent configuration, `docmd` automatically filters out sidebar items that link to files not present in the current version's source folder. This guarantees no broken links when users select an older version.
+For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](./navigation#navigation-resolution-priority).
 
 ## Best Practices
 

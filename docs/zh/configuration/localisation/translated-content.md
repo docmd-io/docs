@@ -43,12 +43,9 @@ docs/
 
 ## 翻译导航
 
-每个区域目录都可以有自己的 `navigation.json`。解析优先级：
+每个区域目录都可以有自己的 `navigation.json`。`docmd` 使用级联优先级系统来解析侧边栏。
 
-1. **特定区域** — `docs/hi/navigation.json`（如果存在）
-2. **默认区域** — `docs/en/navigation.json`（回退）
-3. **版本特定** — `docs-v1/navigation.json`（针对没有区域目录的旧版本）
-4. **根配置** — `docmd.config.js` 中的 `navigation` 数组
+有关解析层级结构和视觉示例的详细信息，请参阅 [导航解析优先级](../navigation#daohang-jiexi-youxianji)。
 
 区域的 `navigation.json` 使用相同格式：
 
