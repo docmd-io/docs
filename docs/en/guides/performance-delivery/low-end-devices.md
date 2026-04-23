@@ -5,27 +5,41 @@ description: "A comprehensive guide on low-end devices."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Documentation sites are increasingly adopting heavy Javascript frameworks (React, Vue) just to render markdown. When a developer on a low-end laptop or a mobile phone over a 3G connection tries to load the docs, their device struggles to parse the massive JavaScript bundle before the page even becomes interactive.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+Documentation should be accessible. Forcing users in emerging markets or those using older hardware to run a full Node.js-equivalent runtime in their browser just to read a text tutorial is highly exclusionary.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Adopt an **HTML-First** (Zero-JS payload) or **Micro-SPA** architecture. Keep the browser's Main Thread completely unblocked.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+`docmd` mathematically minimizes the runtime footprint by utilizing a zero-framework footprint. 
+
+1. **Leverage the Isomorphic Engine:** `docmd` pre-renders everything server-side.
+2. **Utilize `<picture>` tags:** Avoid loading massive PNGs on mobile constraints.
+
+```markdown
+<!-- docmd automatically handles markdown images, but for custom layouts, use responsive images -->
+<picture>
+  <source srcset="/assets/mobile-arch.webp" media="(max-width: 600px)">
+  <img src="/assets/desktop-arch.webp" alt="Architecture Flow">
+</picture>
+```
+
+3. **Disable Heavy Plugins:** If you suspect your user base relies heavily on low-end hardware, disable non-essential plugins like `mermaid` which execute heavy computations client-side.
 
 ```javascript
-// Example implementation snippet
 export default defineConfig({
-  // configuration details
+  plugins: {
+    mermaid: false // Prevents the 800kb mermaid engine from loading
+  }
 });
 ```
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Building for low-end configurations limits your ability to add flashy, high-fidelity interactive canvas elements or WebGL backgrounds to your documentation. Prioritizing performance over visual extravagance is a deliberate design choice that must be universally adopted by the documentation team.

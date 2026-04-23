@@ -5,27 +5,46 @@ description: "A comprehensive guide on ai-ready output."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Developers are increasingly relying on AI coding assistants (like Cursor, Copilot, and ChatGPT) to read documentation on their behalf. If your documentation is locked behind React SPAs without a standardized text API, the AI cannot easily ingest the full context of your platform.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+Providing a clean, token-optimized text dump of your entire documentation is the modern equivalent of providing a REST API. Without it, AI agents scrape raw HTML, consuming thousands of useless tokens on navigation elements, destroying their small context windows.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Leverage the `@docmd/plugin-llms` plugin. It implements the emerging `llms.txt` standard natively, generating token-optimized summaries and full-context files automatically during the build process.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+The `llms` plugin is enabled by default in `docmd >= 0.7.0`.
+
+1. Ensure your `baseUrl` or `url` is configured properly so absolute links are correctly resolved in the text file.
 
 ```javascript
-// Example implementation snippet
 export default defineConfig({
-  // configuration details
+  url: 'https://docs.mycompany.com',
+  plugins: {
+    llms: {
+      fullContext: true // Strongly recommended
+    }
+  }
 });
+```
+
+2. When you build, `docmd` scans the routing tree and outputs two files to your site root:
+*   `llms.txt`: A structured markdown summary of all your pages with their specific URLs.
+*   `llms-full.txt`: A massive, concatenated markdown file containing the stripped text of your entire site, preserving semantic headers and code blocks.
+
+3. To exclude internal-only documents from the AI feed, use frontmatter:
+
+```yaml
+---
+title: "Internal Release Process"
+llms: false
+---
 ```
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Generating `llms-full.txt` means you are creating a very large, single file. For sites with thousands of pages, this file could exceed 10MB, which might stress the context window of smaller LLMs. Future versions of `docmd` will introduce module-level chunking for `llms.txt`.

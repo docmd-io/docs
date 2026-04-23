@@ -5,27 +5,40 @@ description: "A comprehensive guide on chunkable content."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+When AI pipelines (RAG architectures) ingest documentation, they slice the markdown into "chunks" (e.g., 500 tokens each). If a document is composed of long, meandering paragraphs with unclear delineations, the slicing algorithm splits the context mid-thought, destroying the utility of the chunk.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+If the AI retrieves a chunk that contains a code block but misses the preceding paragraph explaining *when* to use that code, the generated answer will lack necessary conditionality, leading to incorrect usage.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Structure pages as a hierarchy of deterministic blocks. Keep sections short, visually bounded by headers, and immediately followed by their respective code or examples.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+### 1. The Header-to-Header Rule
+A chunk boundary should naturally occur at a Markdown header (`##`). Ensure that everything beneath a `##` header comprehensively answers a single, atomic concept.
 
-```javascript
-// Example implementation snippet
-export default defineConfig({
-  // configuration details
-});
+```markdown
+## Generating API Keys
+
+To authenticate, you must generate an API key. This key grants full read/write access.
+
+[Code block showing generation]
 ```
+
+### 2. Group Warnings with Context
+Do not separate a critical warning from the code it applies to using wide gaps of text. Use docmd's nested containers.
+
+```markdown
+::: callout warning "Destructive Action"
+Executing the following command will drop the production database.
+:::
+`db.core.drop()`
+```
+Because the callout and the code are tight vertically, RAG systems (which chunk sequentially) are highly likely to keep them in the same vector chunk.
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+This forces documentation into a more segmented, modular rhythm. Authors must resist the urge to write long, flowing narratives spanning thousands of words, opting instead for atomic, self-contained units of knowledge.

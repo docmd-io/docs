@@ -5,27 +5,45 @@ description: "A comprehensive guide on large site nav."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Building the sidebar for a 5-page site naturally results in a flat list. For a 500-page site, treating the sidebar as an expanding tree of nested folders creates a labyrinth where users expand 6 levels deep, lose context of where they are, and cannot find their way back.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+If navigation feels like a chore, users rely entirely on the search bar. This indicates the Information Architecture (IA) has failed. Good navigation teaches the user the taxonomy of your product without them realizing it.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Use **Top-Level Context Switching** rather than **Deep Nesting**. The left sidebar should rarely exceed 2 levels of depth.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+### 1. Utilize the Menubar for Domains
+In `docmd`, use the top menubar to shift the user between entirely different domains (e.g., Tutorials vs API Reference), completely swapping out the sidebar content.
 
-```javascript
-// Example implementation snippet
-export default defineConfig({
-  // configuration details
-});
+### 2. Flatten the Hierarchy
+Collapse deeply nested concepts into long-form parent pages utilizing anchor links (Table of Contents), rather than splitting a concept across 5 separate small markdown pages.
+
+*Poor IA:*
+- Auth Setup (Page)
+  - Setting up OAuth (Page)
+  - Setting up JWT (Page)
+  - Setting up SAML (Page)
+
+*Better IA:*
+- Auth Setup (One Page)
+  -> *Uses right-side TOC to navigate to OAuth, JWT, SAML sections*
+
+### 3. Default to Collapsed
+If you must use folders, set `collapsible: true` and ensure they default to closed except for the actively highlighted path.
+
+```json
+{
+  "title": "Reference",
+  "collapsible": true,
+  "children": [ /* 50 items hidden safely */ ]
+}
 ```
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Consolidating many small pages into fewer, longer pages makes those specific long pages harder to digest if not structured cleanly with Markdown headers. It requires the author to be highly disciplined about using the right-side Table of Contents effectively.

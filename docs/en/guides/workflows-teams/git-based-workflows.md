@@ -5,27 +5,36 @@ description: "A comprehensive guide on git-based flows."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Allowing anyone to push documentation straight to master results in broken links, duplicated sections, and stylistic nightmares. However, imposing too much friction discourages external contributors.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+Open-source projects and internal developer platforms survive on community contributions. If a user finds a typo, they should be able to fix it in 60 seconds.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Use the "Fork & Pull Request" model bolstered by automated CI checks. `docmd` integrates flawlessly with this model because it natively operates on flat markdown files.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+### 1. Enable Edit Links
+`docmd` provides built-in support for "Edit this page" links in the footer of every document.
 
 ```javascript
-// Example implementation snippet
+// docmd.config.js
 export default defineConfig({
-  // configuration details
+  editLink: {
+    pattern: 'https://github.com/my-org/my-docs/edit/main/docs/:path',
+    text: 'Edit this page on GitHub'
+  }
 });
 ```
 
+When a user clicks this, GitHub's web UI opens, automatically handles forking the repo on their behalf, and opens a PR upon save.
+
+### 2. The Threads Plugin
+For inline reviews, use the `@docmd/plugin-threads` module locally so authors can drop discussion nodes (`::: thread`) into PRs. This keeps review conversations contextualized with the text block directly in the Vscode diff.
+
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Relying entirely on GitHub PRs for docs can slow down urgent announcements (e.g., posting a quick notice about a server outage) if branch protection rules require multiple approvals. Consider having an exemption process or a simple automated status-page integration.

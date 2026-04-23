@@ -5,27 +5,48 @@ description: "A comprehensive guide on github actions."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Building and deploying documentation manually from a local machine leads to unpredictable environments (e.g., someone deploying with the wrong node version) and blocks deployments when the "deployment engineer" is on vacation.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+Continuous Deployment is mandatory for modern SaaS. Documentation updates should reach production within 3 minutes of a merged Pull Request automatically.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Leverage GitHub Actions to run the `docmd build` pipeline on an Ubuntu runner, and push the `site/` output securely via SSH to your VPS or natively to GitHub Pages.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+### Standard GitHub Pages Deploy
 
-```javascript
-// Example implementation snippet
-export default defineConfig({
-  // configuration details
-});
+Create `.github/workflows/docs.yml`:
+
+```yaml
+name: Deploy docmd to GitHub Pages
+on:
+  push:
+    branches: ["main"]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: { node-version: 22 }
+      
+      # Build
+      - run: npm i -g @docmd/core
+      - run: docmd build
+      
+      # Deploy using peaceiris action
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
 ```
+
+Ensure your `docmd.config.js` sets the `url` properly if deploying to a subpath (e.g., `https://user.github.io/repo/`).
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Relying entirely on GitHub Actions means relying on Microsoft's uptime. Additionally, managing edge-caching invalidations (e.g., purging Cloudfront caches via GH Action script) requires careful IAM secret management.

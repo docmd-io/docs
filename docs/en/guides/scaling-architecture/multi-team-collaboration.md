@@ -5,27 +5,48 @@ description: "A comprehensive guide on team collaboration."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+When multiple independent teams (e.g., Frontend, Backend, DevOps, Security) contribute to a single documentation repository, conflicting paradigms arise. Teams overwrite each other's global navigation, break relative links across domain boundaries, and disagree on stylistic approaches.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+Friction in the authoring experience leads to documentation silos. If teams are afraid of breaking the master build, they will spin up independent, isolated wikis, destroying the unified user experience of a single documentation portal.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Leverage `docmd`'s decentralized `navigation.json` capabilities and strict frontmatter validation to give teams autonomy over their specific domains, while a central documentation team governs the global menubar and layout.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+Divide ownership mathematically by top-level directories. Each team completely owns their subdirectory.
+
+```text
+docs/
+├── frontend/             # Owned by Web Team
+│   ├── navigation.json   # Local nav rules
+│   └── components.md
+├── backend/              # Owned by API Team
+│   ├── navigation.json   # Local nav rules
+│   └── database.md
+└── docmd.config.js       # Owned by Docs Team
+```
+
+**Global Governance (`docmd.config.js`):**
+The core docs team controls the Menubar, pointing users to the different domains.
 
 ```javascript
-// Example implementation snippet
-export default defineConfig({
-  // configuration details
-});
+layout: {
+  menubar: {
+    left: [
+      { text: 'Frontend UI', url: '/frontend/components' },
+      { text: 'Backend APIs', url: '/backend/database' }
+    ]
+  }
+}
 ```
+
+**Local Autonomy (`frontend/navigation.json`):**
+When a user navigates to `/frontend/components`, the `docmd` engine resolves the `frontend/` local navigation configuration, keeping the sidebar strictly focused on the frontend team's domain.
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Cross-linking between domains requires authors to rely on absolute paths relative to the root (e.g., `[Configuration](../../configuration/general.md)`) rather than direct relative paths, which can break if a team renames their root directory. Use CI/CD link-checkers during Pull Requests to catch cross-domain breakages early.

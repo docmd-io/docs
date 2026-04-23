@@ -5,27 +5,27 @@ description: "A comprehensive guide on preview changes."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Authors often write markdown, guess the formatting, and merge it. In production, tables break out of their containers, images fail to load due to incorrect relative paths, and nested lists render incorrectly.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+A broken container or unrendered React component in production looks incredibly unprofessional and ruins the reader's trust in the technical accuracy of the content.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Implement ephemeral preview environments using Vercel, Netlify, or Cloudflare pages tied to your PR webhooks.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+1. **Configure CI/CD Integrations:**
+Because `docmd` uses zero custom runtimes and outputs standard HTML, platforms like Vercel automatically detect it as a static project.
 
-```javascript
-// Example implementation snippet
-export default defineConfig({
-  // configuration details
-});
-```
+2. **Pull Request Automations:**
+When a PR is opened, the CI/CD pipeline runs `npx @docmd/core build` and hosts the output on a temporary domain (e.g., `pr-123.docs.mycompany.com`).
+
+3. **Live Editor APIs:**
+For authors who need a local preview before pushing, `docmd dev` utilizes HMR (Hot Module Replacement). Saving a `.md` file updates the browser instantaneously.
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Generating a full static site build on every single commit in a PR can consume CI/CD minutes and bloat hosting bills for very large sites (1000+ pages). Consider configuring your CI to only build documentation if files in the `docs/` folder have actually changed.

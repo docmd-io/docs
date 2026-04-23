@@ -5,27 +5,43 @@ description: "A comprehensive guide on parallel tools."
 
 ## Problem
 
-Explain the core challenge or friction point that users face when dealing with this topic. What is the fundamental issue?
+Large enterprises rarely use a single tool. Your company might use Confluence for internal specs, Stoplight for APIs, and want `docmd` for user-facing SDK tutorials. Integrating these disparate silos into a seamless user journey is critical.
 
 ## Why it matters
 
-Detail the impact of leaving this problem unsolved. How does it affect the team, the project, or the end-user negatively?
+If a user clicks an SDK method and is thrown into a jarring, completely unstyled Swagger UI hosted on a different subdomain, context is lost, and the developer experience shatters.
 
 ## Approach
 
-Discuss the high-level strategy and concepts used to tackle the problem within the context of docmd.
+Utilize `docmd` as your "Glass Pane" routing hub. Use its powerful menubar linking and container embedding capabilities to unify tools without replacing them.
 
 ## Implementation
 
-Provide concrete, actionable solutions.
+### 1. Iframe Embeds
+If you use a hosted API explorer (like ReadMe or Scalar), you can embed it directly inside a `docmd` container, keeping the user encompassed by your docmd sidebar and layout.
+
+```markdown
+::: embed "https://api.mycompany.com/explorer"
+:::
+```
+
+### 2. Header and Routing Unification
+If you must use separate subdomains (`docs.site.com` and `api.site.com`), replicate the `docmd` menubar globally. You can use docmd's `layout` config to map external URLs precisely.
 
 ```javascript
-// Example implementation snippet
+// docmd.config.js
 export default defineConfig({
-  // configuration details
+  layout: {
+    menubar: {
+      left: [
+        { text: 'SDK Guides', url: '/' }, // Handled by docmd
+        { text: 'REST API', url: 'https://api.site.com', external: false } // Avoids opening a new tab
+      ]
+    }
+  }
 });
 ```
 
 ## Trade-offs
 
-Acknowledge any limitations, costs, or edge cases that come with this approach to ensure users have a balanced perspective.
+Iframe embedding creates "scroll within a scroll" UX issues on mobile devices. Furthermore, using `docmd` purely as a router means your global search index (`docmd-search`) will not be able to natively index the content buried in external tools like Confluence or Stoplight unless you write custom scraping scripts.

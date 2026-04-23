@@ -424,20 +424,12 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Offline Semantic Search",
-            "path": "/guides/search/offline-semantic-search"
-          },
-          {
             "title": "Relevance & Structure",
             "path": "/guides/search/improving-search-relevance"
           },
           {
             "title": "Speed & Accuracy",
             "path": "/guides/search/fast-accurate-search"
-          },
-          {
-            "title": "Keyword vs Semantic",
-            "path": "/guides/search/keyword-vs-semantic"
           },
           {
             "title": "Local-First Opt",
