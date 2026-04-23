@@ -1,13 +1,26 @@
 [
-  { "title": "Übersicht", "path": "/", "icon": "home" },
+  {
+    "title": "Übersicht",
+    "path": "/",
+    "icon": "home"
+  },
   {
     "title": "Erste Schritte",
     "icon": "rocket",
     "collapsible": false,
     "children": [
-      { "title": "Schnellstart", "path": "/getting-started/quick-start" },
-      { "title": "Installation", "path": "/getting-started/installation" },
-      { "title": "Projektstruktur", "path": "/getting-started/project-structure" }
+      {
+        "title": "Schnellstart",
+        "path": "/getting-started/quick-start"
+      },
+      {
+        "title": "Installation",
+        "path": "/getting-started/installation"
+      },
+      {
+        "title": "Projektstruktur",
+        "path": "/getting-started/project-structure"
+      }
     ]
   },
   {
@@ -15,16 +28,45 @@
     "icon": "settings",
     "collapsible": true,
     "children": [
-      { "title": "Übersicht", "path": "/configuration/general" },
-      { "title": "Navigation", "path": "/configuration/navigation" },
-      { "title": "Layout & UI", "path": "/configuration/layout-ui" },
-      { "title": "Menüleiste", "path": "/configuration/menubar" },
-      { "title": "Lokalisierung", "path": "/configuration/localisation", "collapsible": false, "children": [
-        { "title": "Übersetzte Inhalte", "path": "/configuration/localisation/translated-content" },
-        { "title": "UI-Strings & SEO", "path": "/configuration/localisation/ui-strings" }
-      ]},
-      { "title": "Versionierung", "path": "/configuration/versioning" },
-      { "title": "Weiterleitungen", "path": "/configuration/redirects" }
+      {
+        "title": "Übersicht",
+        "path": "/configuration/general"
+      },
+      {
+        "title": "Navigation",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "Layout & UI",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "Menüleiste",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "Lokalisierung",
+        "path": "/configuration/localisation",
+        "collapsible": false,
+        "children": [
+          {
+            "title": "Übersetzte Inhalte",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI-Strings & SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "Versionierung",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "Weiterleitungen",
+        "path": "/configuration/redirects"
+      }
     ]
   },
   {
@@ -32,16 +74,31 @@
     "icon": "pencil-line",
     "collapsible": false,
     "children": [
-      { "title": "Frontmatter", "path": "/content/frontmatter" },
+      {
+        "title": "Frontmatter",
+        "path": "/content/frontmatter"
+      },
       {
         "title": "Syntax",
         "path": "/content/syntax/",
         "collapsible": true,
         "children": [
-          { "title": "Code-Blöcke", "path": "/content/syntax/code" },
-          { "title": "Bilder", "path": "/content/syntax/images" },
-          { "title": "Verlinkung", "path": "/content/syntax/linking" },
-          { "title": "Fortgeschritten", "path": "/content/syntax/advanced" }
+          {
+            "title": "Code-Blöcke",
+            "path": "/content/syntax/code"
+          },
+          {
+            "title": "Bilder",
+            "path": "/content/syntax/images"
+          },
+          {
+            "title": "Verlinkung",
+            "path": "/content/syntax/linking"
+          },
+          {
+            "title": "Fortgeschritten",
+            "path": "/content/syntax/advanced"
+          }
         ]
       },
       {
@@ -49,21 +106,60 @@
         "path": "/content/containers/",
         "collapsible": true,
         "children": [
-          { "title": "Callouts", "path": "/content/containers/callouts" },
-          { "title": "Tabs", "path": "/content/containers/tabs" },
-          { "title": "Steps", "path": "/content/containers/steps" },
-          { "title": "Cards", "path": "/content/containers/cards" },
-          { "title": "Grids", "path": "/content/containers/grids" },
-          { "title": "Ausklappbar", "path": "/content/containers/collapsible" },
-          { "title": "Buttons", "path": "/content/containers/buttons" },
-          { "title": "Hero-Bereiche", "path": "/content/containers/hero" },
-          { "title": "URL-Embed", "path": "/content/containers/embed" },
-          { "title": "Changelogs", "path": "/content/containers/changelogs" },
-          { "title": "Verschachtelte Container", "path": "/content/containers/nested-containers" }
+          {
+            "title": "Callouts",
+            "path": "/content/containers/callouts"
+          },
+          {
+            "title": "Tabs",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "Steps",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "Cards",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "Grids",
+            "path": "/content/containers/grids"
+          },
+          {
+            "title": "Ausklappbar",
+            "path": "/content/containers/collapsible"
+          },
+          {
+            "title": "Buttons",
+            "path": "/content/containers/buttons"
+          },
+          {
+            "title": "Hero-Bereiche",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL-Embed",
+            "path": "/content/containers/embed"
+          },
+          {
+            "title": "Changelogs",
+            "path": "/content/containers/changelogs"
+          },
+          {
+            "title": "Verschachtelte Container",
+            "path": "/content/containers/nested-containers"
+          }
         ]
       },
-      { "title": "No-Style Pages", "path": "/content/no-style-pages" },
-      { "title": "Live-Vorschau", "path": "/content/live-preview" }
+      {
+        "title": "No-Style Pages",
+        "path": "/content/no-style-pages"
+      },
+      {
+        "title": "Live-Vorschau",
+        "path": "/content/live-preview"
+      }
     ]
   },
   {
@@ -71,12 +167,30 @@
     "icon": "palette",
     "collapsible": true,
     "children": [
-      { "title": "Verfügbare Themes", "path": "/theming/available-themes" },
-      { "title": "Anpassung", "path": "/theming/customization" },
-      { "title": "Hell- & Dunkelmodus", "path": "/theming/light-dark-mode" },
-      { "title": "Eigenes CSS & JS", "path": "/theming/custom-css-js" },
-      { "title": "Icons", "path": "/theming/icons" },
-      { "title": "Assets", "path": "/theming/assets-management" }
+      {
+        "title": "Verfügbare Themes",
+        "path": "/theming/available-themes"
+      },
+      {
+        "title": "Anpassung",
+        "path": "/theming/customization"
+      },
+      {
+        "title": "Hell- & Dunkelmodus",
+        "path": "/theming/light-dark-mode"
+      },
+      {
+        "title": "Eigenes CSS & JS",
+        "path": "/theming/custom-css-js"
+      },
+      {
+        "title": "Icons",
+        "path": "/theming/icons"
+      },
+      {
+        "title": "Assets",
+        "path": "/theming/assets-management"
+      }
     ]
   },
   {
@@ -84,17 +198,50 @@
     "icon": "puzzle",
     "collapsible": true,
     "children": [
-      { "title": "Plugins nutzen", "path": "/plugins/usage" },
-      { "title": "Suche", "path": "/plugins/search" },
-      { "title": "SEO", "path": "/plugins/seo" },
-      { "title": "Sitemap", "path": "/plugins/sitemap" },
-      { "title": "Analytics", "path": "/plugins/analytics" },
-      { "title": "PWA", "path": "/plugins/pwa" },
-      { "title": "LLMs", "path": "/plugins/llms" },
-      { "title": "Mermaid", "path": "/plugins/mermaid" },
-      { "title": "Threads", "path": "/plugins/threads" },
-      { "title": "Mathe (KaTeX)", "path": "/plugins/math" },
-      { "title": "Plugins erstellen", "path": "/plugins/building-plugins" }
+      {
+        "title": "Plugins nutzen",
+        "path": "/plugins/usage"
+      },
+      {
+        "title": "Suche",
+        "path": "/plugins/search"
+      },
+      {
+        "title": "SEO",
+        "path": "/plugins/seo"
+      },
+      {
+        "title": "Sitemap",
+        "path": "/plugins/sitemap"
+      },
+      {
+        "title": "Analytics",
+        "path": "/plugins/analytics"
+      },
+      {
+        "title": "PWA",
+        "path": "/plugins/pwa"
+      },
+      {
+        "title": "LLMs",
+        "path": "/plugins/llms"
+      },
+      {
+        "title": "Mermaid",
+        "path": "/plugins/mermaid"
+      },
+      {
+        "title": "Threads",
+        "path": "/plugins/threads"
+      },
+      {
+        "title": "Mathe (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
+        "title": "Plugins erstellen",
+        "path": "/plugins/building-plugins"
+      }
     ]
   },
   {
@@ -102,11 +249,26 @@
     "icon": "upload-cloud",
     "collapsible": true,
     "children": [
-      { "title": "Bauen & Bereitstellen", "path": "/deployment" },
-      { "title": "Docker", "path": "/deployment/docker" },
-      { "title": "NGINX", "path": "/deployment/nginx" },
-      { "title": "Caddy", "path": "/deployment/caddy" },
-      { "title": "CI/CD", "path": "/deployment/ci-cd" }
+      {
+        "title": "Bauen & Bereitstellen",
+        "path": "/deployment"
+      },
+      {
+        "title": "Docker",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
+        "title": "CI/CD",
+        "path": "/deployment/ci-cd"
+      }
     ]
   },
   {
@@ -114,37 +276,290 @@
     "icon": "braces",
     "collapsible": true,
     "children": [
-      { "title": "CLI-Befehle", "path": "/api/cli-commands" },
-      { "title": "Node-API", "path": "/api/node-api" },
-      { "title": "Browser-API", "path": "/api/browser-api" },
-      { "title": "Client-Ereignisse", "path": "/api/client-side-events" },
-      { "title": "Live-Editor-API", "path": "/api/live-api" }
+      {
+        "title": "CLI-Befehle",
+        "path": "/api/cli-commands"
+      },
+      {
+        "title": "Node-API",
+        "path": "/api/node-api"
+      },
+      {
+        "title": "Browser-API",
+        "path": "/api/browser-api"
+      },
+      {
+        "title": "Client-Ereignisse",
+        "path": "/api/client-side-events"
+      },
+      {
+        "title": "Live-Editor-API",
+        "path": "/api/live-api"
+      }
     ]
   },
   {
-    "title": "Rezepte",
-    "icon": "chef-hat",
+    "title": "Leitfäden",
+    "icon": "book-open",
     "collapsible": true,
     "children": [
-      { "title": "Landingpages", "path": "/recipes/landing-page" },
-      { "title": "Eigene Schriften", "path": "/recipes/custom-fonts" },
-      { "title": "Favicon", "path": "/recipes/favicon" },
-      { "title": "KI-Optimierung", "path": "/recipes/ai-optimization" },
-      { "title": "Schreib-Ratgeber", "path": "/recipes/writing-guide" }
+      {
+        "title": "Scaling & Architecture",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "1000+ Pages",
+            "path": "/guides/scaling-architecture/scaling"
+          },
+          {
+            "title": "Folder Structure",
+            "path": "/guides/scaling-architecture/scalable-folder-structure"
+          },
+          {
+            "title": "Multi-Version Docs",
+            "path": "/guides/scaling-architecture/multi-version-documentation"
+          },
+          {
+            "title": "Breaking Changes",
+            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
+          },
+          {
+            "title": "Team Collaboration",
+            "path": "/guides/scaling-architecture/multi-team-collaboration"
+          },
+          {
+            "title": "Large Repositories",
+            "path": "/guides/scaling-architecture/organising-large-repositories"
+          }
+        ]
+      },
+      {
+        "title": "AI & LLMs",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Structure for LLMs",
+            "path": "/guides/ai-optimisation/structure-for-llms"
+          },
+          {
+            "title": "AI-Ready Output",
+            "path": "/guides/ai-optimisation/generating-ai-ready-docs"
+          },
+          {
+            "title": "Minimise Hallucinations",
+            "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
+          },
+          {
+            "title": "Semantic Search",
+            "path": "/guides/ai-optimisation/semantic-search-design"
+          },
+          {
+            "title": "Chunkable Content",
+            "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
+          },
+          {
+            "title": "Context Preservation",
+            "path": "/guides/ai-optimisation/context-preservation"
+          }
+        ]
+      },
+      {
+        "title": "Search",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Offline Semantic Search",
+            "path": "/guides/search/offline-semantic-search"
+          },
+          {
+            "title": "Relevance & Structure",
+            "path": "/guides/search/improving-search-relevance"
+          },
+          {
+            "title": "Speed & Accuracy",
+            "path": "/guides/search/fast-accurate-search"
+          },
+          {
+            "title": "Keyword vs Semantic",
+            "path": "/guides/search/keyword-vs-semantic"
+          },
+          {
+            "title": "Local-First Opt",
+            "path": "/guides/search/local-first-search"
+          }
+        ]
+      },
+      {
+        "title": "Performance",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Sub-100ms Navigation",
+            "path": "/guides/performance-delivery/sub-100ms-navigation"
+          },
+          {
+            "title": "CDN & Edge Deploy",
+            "path": "/guides/performance-delivery/deploying-cdn-edge"
+          },
+          {
+            "title": "JS Payload Reduction",
+            "path": "/guides/performance-delivery/reducing-javascript-payload"
+          },
+          {
+            "title": "Low-End Devices",
+            "path": "/guides/performance-delivery/low-end-devices"
+          },
+          {
+            "title": "Caching Strategies",
+            "path": "/guides/performance-delivery/caching-strategies"
+          }
+        ]
+      },
+      {
+        "title": "Workflows & Teams",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Workflow Setup",
+            "path": "/guides/workflows-teams/setting-up-workflow"
+          },
+          {
+            "title": "Git-Based Flows",
+            "path": "/guides/workflows-teams/git-based-workflows"
+          },
+          {
+            "title": "Preview Changes",
+            "path": "/guides/workflows-teams/previewing-changes"
+          },
+          {
+            "title": "Consistency at Scale",
+            "path": "/guides/workflows-teams/maintaining-consistency"
+          },
+          {
+            "title": "Release Workflows",
+            "path": "/guides/workflows-teams/versioning-release-workflows"
+          }
+        ]
+      },
+      {
+        "title": "Integrations",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "OpenAPI Generation",
+            "path": "/guides/integrations/openapi-generation"
+          },
+          {
+            "title": "GitHub Actions",
+            "path": "/guides/integrations/github-actions-cicd"
+          },
+          {
+            "title": "Existing Repos",
+            "path": "/guides/integrations/existing-markdown-repos"
+          },
+          {
+            "title": "from Docusaurus",
+            "path": "/guides/integrations/migrating-docusaurus"
+          },
+          {
+            "title": "from MkDocs",
+            "path": "/guides/integrations/migrating-mkdocs"
+          },
+          {
+            "title": "Parallel Tools",
+            "path": "/guides/integrations/alongside-other-tools"
+          }
+        ]
+      },
+      {
+        "title": "Content & UX",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Scalable Content",
+            "path": "/guides/content-ux/scalable-technical-writing"
+          },
+          {
+            "title": "Large Site Nav",
+            "path": "/guides/content-ux/navigation-large-sites"
+          },
+          {
+            "title": "Readability & Hierarchy",
+            "path": "/guides/content-ux/improving-readability"
+          },
+          {
+            "title": "Task vs Concept",
+            "path": "/guides/content-ux/task-vs-concept"
+          },
+          {
+            "title": "Anti-Patterns",
+            "path": "/guides/content-ux/avoiding-anti-patterns"
+          }
+        ]
+      },
+      {
+        "title": "Customisation",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Landing Pages",
+            "path": "/guides/customisation/custom-landing-pages"
+          },
+          {
+            "title": "Fonts & Branding",
+            "path": "/guides/customisation/custom-fonts-branding"
+          },
+          {
+            "title": "Favicons & Meta",
+            "path": "/guides/customisation/custom-favicons-metadata"
+          },
+          {
+            "title": "Custom Plugins",
+            "path": "/guides/customisation/extending-custom-plugins"
+          }
+        ]
+      }
     ]
   },
-  { "title": "Vergleich", "path": "/comparison", "icon": "scale" },
+  {
+    "title": "Vergleich",
+    "path": "/comparison",
+    "icon": "scale"
+  },
   {
     "title": "Release Notes",
     "icon": "package-check",
     "collapsible": false,
     "children": [
-      { "title": "v0.7.2 — Deploy CLI", "path": "/release-notes/0-7-2" },
-      { "title": "v0.7.1 — Plugin API", "path": "/release-notes/0-7-1" },
-      { "title": "v0.7.0 — i18n Release", "path": "/release-notes/0-7-0" }
+      {
+        "title": "v0.7.2 — Deploy CLI",
+        "path": "/release-notes/0-7-2"
+      },
+      {
+        "title": "v0.7.1 — Plugin API",
+        "path": "/release-notes/0-7-1"
+      },
+      {
+        "title": "v0.7.0 — i18n Release",
+        "path": "/release-notes/0-7-0"
+      }
     ]
   },
-  { "title": "Mitwirken", "path": "/contributing", "icon": "git-pull-request" },
-  { "title": "GitHub", "path": "https://github.com/docmd-io/docmd", "icon": "github", "external": true },
-  { "title": "Diskussionen", "path": "https://github.com/orgs/docmd-io/discussions", "icon": "message-circle", "external": true }
+  {
+    "title": "Mitwirken",
+    "path": "/contributing",
+    "icon": "git-pull-request"
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd",
+    "icon": "github",
+    "external": true
+  },
+  {
+    "title": "Diskussionen",
+    "path": "https://github.com/orgs/docmd-io/discussions",
+    "icon": "message-circle",
+    "external": true
+  }
 ]
