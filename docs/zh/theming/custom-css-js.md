@@ -41,15 +41,9 @@ export default {
 ### 生命周期感知
 脚本在 `<body>` 标签底部注入。由于 `docmd` 是**单页应用（SPA）**，需注意：
 *   导航链接时页面不会完整重载。
-*   在新页面上需要重新初始化脚本时，可监听 `docmd:navigated` 事件。
+*   你可能需要监听自定义生命周期事件，以便在新页面上重新初始化脚本。
 
-```javascript
-// 示例：在页面切换时重新初始化
-document.addEventListener('docmd:page-mounted', () => {
-  console.log('已通过 SPA 路由器加载新页面');
-  initMyCustomWidget();
-});
-```
+有关完整的事件列表和用法示例，请参阅 [客户端事件](../api/client-side-events)。
 
 ::: callout tip
 添加自定义 CSS 和 JS 后，AI 模型（如 ChatGPT）可提出更有针对性的 UI 优化建议。如果你说"我有一个自定义的 `branding.css` 文件"，模型可提供不会与引擎冲突的具体选择器。

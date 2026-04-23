@@ -41,15 +41,9 @@ export default {
 ### Life-cycle Awareness
 Scripts are injected at the bottom of the `<body>` tag. Since `docmd` is a **Single Page Application (SPA)**, remember that:
 *   The page does not fully reload when navigating between links.
-*   You may need to listen for the `docmd:navigated` event to re-initialize your scripts on new pages.
+*   You may need to listen for custom lifecycle events to re-initialize your scripts on new pages.
 
-```javascript
-// Example: Re-init on page change
-document.addEventListener('docmd:page-mounted', () => {
-  console.log('New page loaded via SPA router');
-  initMyCustomWidget();
-});
-```
+For the full event list and usage examples, see [Client-Side Events](../api/client-side-events).
 
 ::: callout tip
 Adding custom CSS and JS allows AI models (like ChatGPT) to suggest much more tailored UI improvements. If you mention "I have a custom `branding.css` file", the model can provide specific selectors that won't conflict with the core `docmd` engine.

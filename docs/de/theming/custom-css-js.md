@@ -41,15 +41,9 @@ export default {
 ### Beachtung des Lebenszyklus
 Skripte werden am Ende des `<body>`-Tags eingefügt. Da `docmd` eine **Single Page Application (SPA)** ist, denken Sie daran:
 *   Die Seite wird beim Navigieren zwischen Links nicht vollständig neu geladen.
-*   Möglicherweise müssen Sie auf das Ereignis `docmd:navigated` hören, um Ihre Skripte auf neuen Seiten neu zu initialisieren.
+*   Möglicherweise müssen Sie auf benutzerdefinierte Lebenszyklus-Ereignisse hören, um Ihre Skripte auf neuen Seiten neu zu initialisieren.
 
-```javascript
-// Beispiel: Neuinitialisierung bei Seitenwechsel
-document.addEventListener('docmd:page-mounted', () => {
-  console.log('Neue Seite via SPA-Router geladen');
-  initMeinBenutzerdefiniertesWidget();
-});
-```
+Die vollständige Liste der Ereignisse und Anwendungsbeispiele finden Sie unter [Client-Side Events](../api/client-side-events).
 
 ::: callout tip
 Das Hinzufügen von eigenem CSS und JS ermöglicht es KI-Modellen (wie ChatGPT), maßgeschneiderte UI-Verbesserungen vorzuschlagen. Wenn Sie erwähnen: „Ich habe eine eigene `branding.css`-Datei“, kann das Modell spezifische Selektoren liefern, die nicht mit der `docmd`-Kern-Engine kollidieren.
