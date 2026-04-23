@@ -304,19 +304,19 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Scaling & Architecture",
+        "title": "Skalierung & Architektur",
         "collapsible": true,
         "children": [
           {
-            "title": "1000+ Pages",
+            "title": "1000+ Seiten",
             "path": "/guides/scaling-architecture/scaling"
           },
           {
-            "title": "Folder Structure",
+            "title": "Ordnerstruktur",
             "path": "/guides/scaling-architecture/scalable-folder-structure"
           },
           {
-            "title": "Multi-Version Docs",
+            "title": "Multi-Versions-Dokumentation",
             "path": "/guides/scaling-architecture/multi-version-documentation"
           },
           {
@@ -324,65 +324,65 @@
             "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           },
           {
-            "title": "Team Collaboration",
+            "title": "Zusammenarbeit im Team",
             "path": "/guides/scaling-architecture/multi-team-collaboration"
           },
           {
-            "title": "Large Repositories",
+            "title": "Große Repositories",
             "path": "/guides/scaling-architecture/organising-large-repositories"
           }
         ]
       },
       {
-        "title": "AI & LLMs",
+        "title": "KI & LLMs",
         "collapsible": true,
         "children": [
           {
-            "title": "Structure for LLMs",
+            "title": "Struktur für LLMs",
             "path": "/guides/ai-optimisation/structure-for-llms"
           },
           {
-            "title": "AI-Ready Output",
+            "title": "KI-bereite Ausgabe",
             "path": "/guides/ai-optimisation/generating-ai-ready-docs"
           },
           {
-            "title": "Minimise Hallucinations",
+            "title": "Halluzinationen minimieren",
             "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
           },
           {
-            "title": "Semantic Search",
+            "title": "Semantische Suche",
             "path": "/guides/ai-optimisation/semantic-search-design"
           },
           {
-            "title": "Chunkable Content",
+            "title": "Zerlegbare Inhalte",
             "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
           },
           {
-            "title": "Context Preservation",
+            "title": "Kontexterhaltung",
             "path": "/guides/ai-optimisation/context-preservation"
           }
         ]
       },
       {
-        "title": "Search",
+        "title": "Suche",
         "collapsible": true,
         "children": [
           {
-            "title": "Relevance & Structure",
+            "title": "Relevanz & Struktur",
             "path": "/guides/search/improving-search-relevance"
           },
           {
-            "title": "Speed & Accuracy",
+            "title": "Geschwindigkeit & Genauigkeit",
             "path": "/guides/search/fast-accurate-search"
           },
           {
-            "title": "Local-First Opt",
+            "title": "Local-First Optimierung",
             "path": "/guides/search/local-first-search"
           }
         ]
       },
       {
-        "title": "Performance",
+        "title": "Leistung",
         "collapsible": true,
         "children": [
           {
@@ -394,15 +394,15 @@
             "path": "/guides/performance-delivery/deploying-cdn-edge"
           },
           {
-            "title": "JS Payload Reduction",
+            "title": "JS-Anteil reduzieren",
             "path": "/guides/performance-delivery/reducing-javascript-payload"
           },
           {
-            "title": "Low-End Devices",
+            "title": "Low-End-Geräte",
             "path": "/guides/performance-delivery/low-end-devices"
           },
           {
-            "title": "Caching Strategies",
+            "title": "Caching-Strategien",
             "path": "/guides/performance-delivery/caching-strategies"
           }
         ]
@@ -412,33 +412,33 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Workflow Setup",
+            "title": "Workflow-Konfiguration",
             "path": "/guides/workflows-teams/setting-up-workflow"
           },
           {
-            "title": "Git-Based Flows",
+            "title": "Git-basierte Workflows",
             "path": "/guides/workflows-teams/git-based-workflows"
           },
           {
-            "title": "Preview Changes",
+            "title": "Änderungenvorschau",
             "path": "/guides/workflows-teams/previewing-changes"
           },
           {
-            "title": "Consistency at Scale",
+            "title": "Skalierte Konsistenz",
             "path": "/guides/workflows-teams/maintaining-consistency"
           },
           {
-            "title": "Release Workflows",
+            "title": "Release-Workflows",
             "path": "/guides/workflows-teams/versioning-release-workflows"
           }
         ]
       },
       {
-        "title": "Integrations",
+        "title": "Integrationen",
         "collapsible": true,
         "children": [
           {
-            "title": "OpenAPI Generation",
+            "title": "OpenAPI-Erstellung",
             "path": "/guides/integrations/openapi-generation"
           },
           {
@@ -446,41 +446,41 @@
             "path": "/guides/integrations/github-actions-cicd"
           },
           {
-            "title": "Existing Repos",
+            "title": "Bestehende Repos",
             "path": "/guides/integrations/existing-markdown-repos"
           },
           {
-            "title": "from Docusaurus",
+            "title": "von Docusaurus",
             "path": "/guides/integrations/migrating-docusaurus"
           },
           {
-            "title": "from MkDocs",
+            "title": "von MkDocs",
             "path": "/guides/integrations/migrating-mkdocs"
           },
           {
-            "title": "Parallel Tools",
+            "title": "Parallele Tools",
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
       },
       {
-        "title": "Content & UX",
+        "title": "Inhalt & UX",
         "collapsible": true,
         "children": [
           {
-            "title": "Scalable Content",
+            "title": "Skalierbarer Inhalt",
             "path": "/guides/content-ux/scalable-technical-writing"
           },
           {
-            "title": "Large Site Nav",
+            "title": "Navigation großer Sites",
             "path": "/guides/content-ux/navigation-large-sites"
           },
           {
-            "title": "Readability & Hierarchy",
+            "title": "Lesbarkeit & Hierarchie",
             "path": "/guides/content-ux/improving-readability"
           },
           {
-            "title": "Task vs Concept",
+            "title": "Aufgabe vs. Konzept",
             "path": "/guides/content-ux/task-vs-concept"
           },
           {
@@ -490,15 +490,15 @@
         ]
       },
       {
-        "title": "Customisation",
+        "title": "Anpassung",
         "collapsible": true,
         "children": [
           {
-            "title": "Landing Pages",
+            "title": "Startseiten",
             "path": "/guides/customisation/custom-landing-pages"
           },
           {
-            "title": "Fonts & Branding",
+            "title": "Schriftarten & Branding",
             "path": "/guides/customisation/custom-fonts-branding"
           },
           {
@@ -506,7 +506,7 @@
             "path": "/guides/customisation/custom-favicons-metadata"
           },
           {
-            "title": "Custom Plugins",
+            "title": "Benutzerdefinierte Plugins",
             "path": "/guides/customisation/extending-custom-plugins"
           }
         ]

@@ -360,141 +360,141 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Scaling & Architecture",
+        "title": "扩展与架构",
         "collapsible": true,
         "children": [
           {
-            "title": "1000+ Pages",
+            "title": "1000+ 页面",
             "path": "/guides/scaling-architecture/scaling"
           },
           {
-            "title": "Folder Structure",
+            "title": "文件夹结构",
             "path": "/guides/scaling-architecture/scalable-folder-structure"
           },
           {
-            "title": "Multi-Version Docs",
+            "title": "多版本文档",
             "path": "/guides/scaling-architecture/multi-version-documentation"
           },
           {
-            "title": "Breaking Changes",
+            "title": "破坏性更改",
             "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           },
           {
-            "title": "Team Collaboration",
+            "title": "团队协作",
             "path": "/guides/scaling-architecture/multi-team-collaboration"
           },
           {
-            "title": "Large Repositories",
+            "title": "大型仓库",
             "path": "/guides/scaling-architecture/organising-large-repositories"
           }
         ]
       },
       {
-        "title": "AI & LLMs",
+        "title": "人工智能与大语言模型",
         "collapsible": true,
         "children": [
           {
-            "title": "Structure for LLMs",
+            "title": "LLM 文档结构",
             "path": "/guides/ai-optimisation/structure-for-llms"
           },
           {
-            "title": "AI-Ready Output",
+            "title": "AI 就绪输出",
             "path": "/guides/ai-optimisation/generating-ai-ready-docs"
           },
           {
-            "title": "Minimise Hallucinations",
+            "title": "减少幻觉",
             "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
           },
           {
-            "title": "Semantic Search",
+            "title": "语义搜索",
             "path": "/guides/ai-optimisation/semantic-search-design"
           },
           {
-            "title": "Chunkable Content",
+            "title": "可分块内容",
             "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
           },
           {
-            "title": "Context Preservation",
+            "title": "上下文保留",
             "path": "/guides/ai-optimisation/context-preservation"
           }
         ]
       },
       {
-        "title": "Search",
+        "title": "搜索",
         "collapsible": true,
         "children": [
           {
-            "title": "Relevance & Structure",
+            "title": "相关性与结构",
             "path": "/guides/search/improving-search-relevance"
           },
           {
-            "title": "Speed & Accuracy",
+            "title": "速度与准确度",
             "path": "/guides/search/fast-accurate-search"
           },
           {
-            "title": "Local-First Opt",
+            "title": "本地优先优化",
             "path": "/guides/search/local-first-search"
           }
         ]
       },
       {
-        "title": "Performance",
+        "title": "性能",
         "collapsible": true,
         "children": [
           {
-            "title": "Sub-100ms Navigation",
+            "title": "百毫秒级导航响应",
             "path": "/guides/performance-delivery/sub-100ms-navigation"
           },
           {
-            "title": "CDN & Edge Deploy",
+            "title": "CDN 与边缘部署",
             "path": "/guides/performance-delivery/deploying-cdn-edge"
           },
           {
-            "title": "JS Payload Reduction",
+            "title": "精简 JS 载荷",
             "path": "/guides/performance-delivery/reducing-javascript-payload"
           },
           {
-            "title": "Low-End Devices",
+            "title": "低端设备适配",
             "path": "/guides/performance-delivery/low-end-devices"
           },
           {
-            "title": "Caching Strategies",
+            "title": "缓存策略",
             "path": "/guides/performance-delivery/caching-strategies"
           }
         ]
       },
       {
-        "title": "Workflows & Teams",
+        "title": "工作流与团队",
         "collapsible": true,
         "children": [
           {
-            "title": "Workflow Setup",
+            "title": "配置工作流",
             "path": "/guides/workflows-teams/setting-up-workflow"
           },
           {
-            "title": "Git-Based Flows",
+            "title": "基于 Git 的流程",
             "path": "/guides/workflows-teams/git-based-workflows"
           },
           {
-            "title": "Preview Changes",
+            "title": "预览更改",
             "path": "/guides/workflows-teams/previewing-changes"
           },
           {
-            "title": "Consistency at Scale",
+            "title": "规模化一致性",
             "path": "/guides/workflows-teams/maintaining-consistency"
           },
           {
-            "title": "Release Workflows",
+            "title": "发布工作流",
             "path": "/guides/workflows-teams/versioning-release-workflows"
           }
         ]
       },
       {
-        "title": "Integrations",
+        "title": "集成",
         "collapsible": true,
         "children": [
           {
-            "title": "OpenAPI Generation",
+            "title": "OpenAPI 生成",
             "path": "/guides/integrations/openapi-generation"
           },
           {
@@ -502,67 +502,67 @@
             "path": "/guides/integrations/github-actions-cicd"
           },
           {
-            "title": "Existing Repos",
+            "title": "兼容现有仓库",
             "path": "/guides/integrations/existing-markdown-repos"
           },
           {
-            "title": "from Docusaurus",
+            "title": "由 Docusaurus 迁移",
             "path": "/guides/integrations/migrating-docusaurus"
           },
           {
-            "title": "from MkDocs",
+            "title": "由 MkDocs 迁移",
             "path": "/guides/integrations/migrating-mkdocs"
           },
           {
-            "title": "Parallel Tools",
+            "title": "并发工具集成",
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
       },
       {
-        "title": "Content & UX",
+        "title": "内容与体验",
         "collapsible": true,
         "children": [
           {
-            "title": "Scalable Content",
+            "title": "内容伸缩管理",
             "path": "/guides/content-ux/scalable-technical-writing"
           },
           {
-            "title": "Large Site Nav",
+            "title": "大型站点导航",
             "path": "/guides/content-ux/navigation-large-sites"
           },
           {
-            "title": "Readability & Hierarchy",
+            "title": "可读性与层级",
             "path": "/guides/content-ux/improving-readability"
           },
           {
-            "title": "Task vs Concept",
+            "title": "任务与概念导向",
             "path": "/guides/content-ux/task-vs-concept"
           },
           {
-            "title": "Anti-Patterns",
+            "title": "反模式",
             "path": "/guides/content-ux/avoiding-anti-patterns"
           }
         ]
       },
       {
-        "title": "Customisation",
+        "title": "自定义与定制",
         "collapsible": true,
         "children": [
           {
-            "title": "Landing Pages",
+            "title": "产品首页",
             "path": "/guides/customisation/custom-landing-pages"
           },
           {
-            "title": "Fonts & Branding",
+            "title": "字体与品牌",
             "path": "/guides/customisation/custom-fonts-branding"
           },
           {
-            "title": "Favicons & Meta",
+            "title": "收藏夹图标与元数据",
             "path": "/guides/customisation/custom-favicons-metadata"
           },
           {
-            "title": "Custom Plugins",
+            "title": "扩展与插件",
             "path": "/guides/customisation/extending-custom-plugins"
           }
         ]
