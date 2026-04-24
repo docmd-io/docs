@@ -11,7 +11,7 @@ The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://
 - **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
 - **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialized and rendered only as they enter the user's viewport.
 - **Interactive Controls**: Every diagram includes built-in **Pan**, **Zoom**, and **Fullscreen** capabilities, ensuring large architectural charts remain legible on all screen sizes.
-- **Icon Integration**: Deep support for the **Lucide** icon pack, allowing you to use `lucide:icon-name` syntax within architecture diagrams.
+- **Icon Integration**: Deep support for the **Lucide** icon pack, allowing you to use `icon:name` syntax within architecture diagrams.
 - **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
 
 ## Configuration
@@ -137,9 +137,9 @@ Use the integrated **Lucide** icon pack to create rich architectural diagrams th
 == tab "Preview"
 ```mermaid
 flowchart TD
-    User([lucide:user User])
-    Web([lucide:globe Web App])
-    DB[(lucide:database Database)]
+    User([icon:user User])
+    Web([icon:globe Web App])
+    DB[(icon:database Database)]
     
     User --> Web
     Web --> DB
@@ -149,9 +149,9 @@ flowchart TD
 ````markdown
 ```mermaid
 flowchart TD
-    User([lucide:user User])
-    Web([lucide:globe Web App])
-    DB[(lucide:database Database)]
+    User([icon:user User])
+    Web([icon:globe Web App])
+    DB[(icon:database Database)]
     
     User --> Web
     Web --> DB
