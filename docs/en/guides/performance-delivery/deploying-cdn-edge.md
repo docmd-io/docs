@@ -1,50 +1,61 @@
 ---
-title: "Deploying docmd Documentation on a CDN or Edge Network"
-description: "A comprehensive guide on cdn & edge deploy."
+title: "CDN & Edge Deployment"
+description: "How to minimize global latency by deploying your static documentation to a Content Delivery Network (CDN) or Edge Network."
 ---
 
 ## Problem
 
-Hosting your documentation on a single virtual machine (VM) in New York means that a developer reading your docs in Tokyo will experience 200ms+ round-trip latency on every single image, script, and HTML file they fetch.
+Hosting your documentation on a single server in one geographic region (e.g., US-East) means that users in other parts of the world (e.g., Europe or Asia) will experience significant network latency. Every page load, image, and script must travel thousands of miles, making your documentation feel sluggish and unresponsive for a global audience.
 
 ## Why it matters
 
-High latency kills the illusion of speed. Even if `docmd` generates an 18kb payload, physics dictates that sending data across the Pacific Ocean is slow. If doc navigation feels sluggish, developers lose focus and abandon the documentation.
+High latency directly harms the developer experience. Even if your documentation is well-written and lightweight, the "Time to First Byte" (TTFB) is limited by the laws of physics. If your site feels slow, developers are more likely to lose focus or abandon your tool entirely in favor of one with faster, more accessible documentation.
 
 ## Approach
 
-Deploy the site to an Edge CDN (Content Delivery Network). CDNs replicate your static `site/` folder across hundreds of globally distributed servers ("Edge Nodes"). When a user in Tokyo requests your docs, they are served from a Tokyo data center.
+The optimal solution is to deploy your site to an Edge CDN. Because `docmd` generates pure static assets (HTML, CSS, JS), it is perfectly suited for edge distribution. CDNs replicate your files across hundreds of globally distributed "Edge Nodes," serving your users from the data center closest to them.
 
 ## Implementation
 
-Because `docmd` outputs pure HTML/CSS/JS, it is instantly compatible with Vercel, Netlify, Cloudflare Pages, and AWS CloudFront. 
+### 1. Choose a Platform
 
-### GitHub Actions + Cloudflare Pages
-This is the recommended free-tier architecture for Edge deploys.
+`docmd` is natively compatible with all modern static hosting and edge platforms. We recommend the following for their global performance and ease of use:
+*   **Cloudflare Pages**: Extremely fast global edge network with built-in DDoS protection.
+*   **Vercel**: Optimized for performance with excellent developer workflow integration.
+*   **Netlify**: Powerful automation features and a robust global CDN.
+
+### 2. Automate the Build
+
+Use a CI/CD pipeline to build and deploy your site automatically whenever you push changes. See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd) for detailed examples.
 
 ```yaml
 # .github/workflows/deploy.yml
-name: Deploy docmd to Cloudflare Pages
-on:
-  push:
-    branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: npm install -g @docmd/core
-      - run: docmd build
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      # Build the site into the default 'site/' directory
+      - run: npm install && npx docmd build
+      
+      # Example: Deploying to Cloudflare Pages
       - name: Deploy
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: my-docmd-site
+          projectName: my-docs
           directory: site
 ```
 
+### 3. Verification
+
+Once deployed, you can verify your global performance using tools like PageSpeed Insights or global ping tests. You should see sub-100ms response times from almost any location worldwide.
+
 ## Trade-offs
 
-Global edge networks abstract away server logs. If an asset is randomly 404ing in Germany but working in the USA due to an edge caching fault, debugging becomes significantly harder than tailing a local NGINX log. However, standard deployments via Vercel/Cloudflare are generally rock-solid.
+Global edge networks abstract away server management, which is a major advantage for documentation teams. However, debugging regional caching issues can occasionally be more complex than reviewing a single server log. Using platforms with robust "instant cache invalidation" ensures that your users always see the latest version of your documentation immediately after a deployment.

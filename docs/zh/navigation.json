@@ -299,62 +299,6 @@
     ]
   },
   {
-    "title": "实用技巧",
-    "icon": "chef-hat",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "落地页设计",
-        "path": "/recipes/landing-page"
-      },
-      {
-        "title": "自定义字体",
-        "path": "/recipes/custom-fonts"
-      },
-      {
-        "title": "网站图标",
-        "path": "/recipes/favicon"
-      },
-      {
-        "title": "AI 优化",
-        "path": "/recipes/ai-optimization"
-      },
-      {
-        "title": "写作指南",
-        "path": "/recipes/writing-guide"
-      }
-    ]
-  },
-  {
-    "title": "对比",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
-    "title": "发布说明",
-    "icon": "package-check",
-    "collapsible": false,
-    "children": [
-      {
-        "title": "v0.7.2 — 部署 CLI",
-        "path": "/release-notes/0-7-2"
-      },
-      {
-        "title": "v0.7.1 — 插件 API",
-        "path": "/release-notes/0-7-1"
-      },
-      {
-        "title": "v0.7.0 — i18n 发布",
-        "path": "/release-notes/0-7-0"
-      }
-    ]
-  },
-  {
-    "title": "参与贡献",
-    "path": "/contributing",
-    "icon": "git-pull-request"
-  },
-  {
     "title": "指南",
     "icon": "book-open",
     "collapsible": true,
@@ -568,5 +512,50 @@
         ]
       }
     ]
+  },
+  {
+    "title": "对比",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "发布说明",
+    "icon": "package-check",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "v0.7.3 — 标签页图标",
+        "path": "/release-notes/0-7-3"
+      },
+      {
+        "title": "v0.7.2 — 部署 CLI",
+        "path": "/release-notes/0-7-2"
+      },
+      {
+        "title": "v0.7.1 — 插件 API",
+        "path": "/release-notes/0-7-1"
+      },
+      {
+        "title": "v0.7.0 — i18n 发布",
+        "path": "/release-notes/0-7-0"
+      }
+    ]
+  },
+  {
+    "title": "参与贡献",
+    "path": "/contributing",
+    "icon": "git-pull-request"
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd",
+    "icon": "github",
+    "external": true
+  },
+  {
+    "title": "讨论区",
+    "path": "https://github.com/orgs/docmd-io/discussions",
+    "icon": "message-circle",
+    "external": true
   }
 ]

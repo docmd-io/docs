@@ -70,34 +70,3 @@ cd docmd && node scripts/brute-test.js
 :::
 
 在同类文档生成器中，没有其他工具在其源码中公开了同等规模的端到端功能测试套件。
-
-## docmd 的优势所在
-
-::: grid {cols=3}
-
-::: grid-item
-### 零配置
-将 Markdown 文件放入文件夹，运行 `npx @docmd/core dev` 即可。导航、搜索、SEO 和站点地图均无需配置即可启用。
-:::
-
-::: grid-item
-### AI 优先
-LLMs 插件自动生成 `llms.txt` 和 `llms-full.txt`——这些结构化上下文文件可被 AI 编程助手直接使用，无需手动维护。
-:::
-
-::: grid-item
-### 最小体积
-初始加载仅约 18kb，页面加载速度超过所有同类竞品。纯语义化 HTML 配合微型 SPA 路由——不向浏览器传输任何框架运行时。
-:::
-
-:::
-
-## 什么时候选择其他工具
-
-::: callout info "没有一款工具适合所有场景"
-- **Docusaurus** — 当你需要在文档页面中嵌入 React 组件（MDX），或处于 React 生态系统时最为合适。
-- **VitePress** — 适合 Vue 生态项目，希望在 Markdown 中深度集成 Vue 组件时最为合适。
-- **MkDocs Material** — 适合 Python 优先的环境，并搭配 Material 主题进行大量自定义时最为合适。
-- **Mintlify** — 适合希望使用完全托管、零服务器管理的解决方案时最为合适。
-- **docmd** — 当你追求最快、最轻量、功能最全面且开箱即用的静态文档生成器时最为合适。
-:::

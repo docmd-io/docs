@@ -43,24 +43,3 @@ Bauen derselben 50-seitigen Website auf einem M1 MacBook Air:
 | VitePress | ~2.5s | ~150ms |
 | MkDocs Material | ~3.0s | ~500ms |
 | Docusaurus | ~15s | ~2s |
-
-## Wo docmd heraussticht
-
-::: grid {cols=3}
-
-::: grid-item
-### Zero-Config
-Markdown-Dateien in einen Ordner ablegen und `docmd dev` ausführen. Navigation, Suche, SEO und Sitemap sind ohne Konfiguration sofort aktiv.
-:::
-
-::: grid-item
-### AI-First
-Das LLM-Plugin generiert automatisch `llms.txt` und `llms-full.txt` — strukturierte Kontextdateien, die KI-Assistenten direkt verarbeiten können.
-:::
-
-::: grid-item
-### Kleinster Payload
-Mit ~18kb initialer Last liefert docmd Seiten schneller aus als jeder Konkurrent. Reines semantisches HTML ohne Framework-Runtime im Browser.
-:::
-
-:::

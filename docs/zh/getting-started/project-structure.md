@@ -7,10 +7,18 @@ docmd 以文件系统作为唯一数据来源。文件夹对应文档章节，Ma
 
 ## 初始化项目
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 mkdir my-docs && cd my-docs
 npx @docmd/core init
 ```
+== tab "Bun" icon:zap
+```bash
+mkdir my-docs && cd my-docs
+bunx @docmd/core init
+```
+:::
 
 这将创建标准项目脚手架：
 
@@ -43,20 +51,41 @@ docmd 将 `docs/` 目录结构直接映射为 URL：
 
 ## 启动开发服务器
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 ## 构建生产版本
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 输出静态网站到 `./site/`，出品为纯静态 HTML——可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
 
 部署前可在本地预览：
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx serve site
 ```
+== tab "Bun" icon:zap
+```bash
+bunx serve site
+```
+:::

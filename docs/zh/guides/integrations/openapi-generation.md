@@ -1,19 +1,68 @@
 ---
-title: "对接与集成从你的源代码 OpenAPI (Swagger) 标准来同步 API"
-description: "整合第三方生成与 docmd 文档构建工作流的方法集成技巧指南介绍手册。"
+title: "OpenAPI 生成"
+description: "如何将 OpenAPI/Swagger 模式集成到您的 docmd 工作流中，以实现自动化且同步的 API 参考文档。"
 ---
 
 ## 问题
-分离开发的结果会导致产品改版的后端实际参数变化和文档表面数据永远形成时间延误，需要花费大量的二次对齐开销并始终有错产生纠纷问题矛盾出现难以管理的困扰困局出现问题频发等系列难题发生。"
+
+手动维护 REST API 文档是一项重大的运营风险。一旦工程师修改了代码中的端点或更新了模式，文档就会立即过时。手动保持同步既繁琐又容易出错，并且经常导致 API 使用者的集成失败。
 
 ## 为什么重要
-错漏的字典参数是引发致命接口联调问题的杀手之一没有之二的直接根本的元凶头目所在处了。"
+
+不准确的 API 参考是导致开发者沮丧和支持工单增加的主要原因。自动化可确保您的文档始终是“单一事实来源”，实时（或在每次构建时）反映 API 的实际状态。这使工程师能够专注于构建功能，而不是手动更新文档表格。
 
 ## 方法
-借使用通过工作命令触发前置异步进行数据转换和文本生成的管道实现。并将其和 docmd 一并集成编排进流程管理里。"
+
+实施一个异步构建流水线，将您的 `openapi.json` 或 `swagger.yaml` 模式转换为标准的 Markdown 文件。由于 `docmd` 擅长渲染带有复杂 [容器](../../content/containers) 的 Markdown，生成的 API 参考在视觉上与文档的其余部分保持一致且集成。
 
 ## 实施
-推荐采用通过外部成熟生成器比如 Widdershins 先作为 `npm run prebuild` 动作生成特定页再继续生成静态网站。并推荐设定 `layout: "fullscreen"` 来容纳更宽广表格以防爆屏溢出的现象解决这一困境并改善界面的交互适配视觉排版的紧凑和可读友好程度。"
+
+### 1. 构建流水线集成
+
+您可以使用 `widdershins` 等工具或自定义脚本，在 CI/CD 流水线的预构建步骤中从 OpenAPI 模式生成 Markdown。
+
+```json
+// package.json
+{
+  "scripts": {
+    "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
+    "docs:build": "npm run docs:generate-api && npx docmd build"
+  }
+}
+```
+
+### 2. 优化 API 布局
+
+API 参考通常内容密集，包含用于参数和嵌套模式的大型表格。使用 [Frontmatter](../../content/frontmatter) 优化页面布局以提高可读性。
+
+```markdown
+---
+title: "REST API 参考"
+layout: "full"  # 最大化水平空间以容纳密集表格
+---
+```
+
+设置 `layout: "full"` 会移除右侧的目录 (TOC) 侧边栏，为宽代码块和响应示例提供更多空间。
+
+### 3. 使用 docmd 容器进行增强
+
+您可以对生成的 Markdown 进行后处理，以注入 `docmd` 功能，例如用于多语言代码示例的 [选项卡](../../content/containers/tabs) 或用于身份验证警告的 [标注](../../content/containers/callouts)。
+
+```markdown
+::: tabs
+::: tab "cURL"
+```bash
+curl -X GET "https://api.example.com/v1/users"
+```
+:::
+::: tab "Node.js"
+```javascript
+const users = await client.getUsers();
+```
+:::
+:::
+```
 
 ## 权衡
-工具自动机器语言由于死板固定缺乏主观上的连贯思维使得阅读时常常感到非常生硬，因此最好的途径应将二者作为辅助，而并非一切依赖单纯冰冷的模板格式展现并输出。"
+
+机器生成的文档在技术准确性方面表现出色，但往往缺乏有效学习所需的“人文关怀”。我们建议将 OpenAPI 生成用于 **技术参考**（端点、参数、模式），同时提供手写的 **教程** 和 **概念指南** 来解释 API 的上下文和使用场景。

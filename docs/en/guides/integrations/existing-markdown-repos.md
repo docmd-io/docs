@@ -1,33 +1,46 @@
 ---
-title: "Using docmd with Existing Markdown Repositories"
-description: "A comprehensive guide on existing repos."
+title: "Existing Markdown Repos"
+description: "How to instantly generate a professional documentation site from your existing Markdown files with zero configuration."
 ---
 
 ## Problem
 
-You have an established repository with thousands of raw Markdown files (e.g., an Obsidian Vault, a Hugo blog, or a legacy wiki directory). Converting all frontmatter and syntax manually to fit a new engine is impossible.
+You have an established repository with hundreds or thousands of raw Markdown files—perhaps a legacy wiki, an Obsidian vault, or a collection of technical notes. Manually converting frontmatter, fixing broken links, and restructuring files to fit a new engine is a daunting task that often prevents teams from modernizing their documentation.
 
 ## Why it matters
 
-Vendor lock-in is dangerous. A high-quality documentation engine should map to your files, rather than forcing your files to map to the engine.
+Your content should remain portable and tool-agnostic. A high-quality documentation engine should adapt to your existing files, not force your files to adapt to the engine. Avoiding vendor lock-in ensures that your intellectual property remains standard, readable, and future-proof.
 
 ## Approach
 
-`docmd` adheres to strict CommonMark specifications and requires **zero configuration**. You can point `docmd` at any existing markdown directory and it will intelligently bootstrap itself without altering your files.
+`docmd` adheres to strict CommonMark specifications and is designed to be **zero-config** by default. You can point the `docmd` CLI at any directory containing Markdown files, and it will intelligently bootstrap a full-featured documentation site without modifying a single line of your source content.
 
 ## Implementation
 
-Navigate to your existing markdown folder and execute:
+### 1. Instant Bootstrapping
+
+Navigate to your existing Markdown folder and run the development server. `docmd` will scan your directory structure and build a functional site in memory instantly.
 
 ```bash
-cd my-obsidian-vault/
-npx @docmd/core dev
+cd my-existing-docs/
+npx docmd dev
 ```
 
-1. **Auto-Navigation:** If `navigation.json` is missing, `docmd` recursively maps your folder structure, capitalizes folder names, and generates an automatic sidebar taxonomy.
-2. **Title Inference:** If frontmatter `title` is missing, `docmd` extracts the first `# H1` tag from the markdown.
-3. **Syntax Fallback:** Unsupported legacy shortcodes are safely rendered as raw text rather than throwing compilation errors.
+### 2. Automatic Navigation (Auto-Router)
+
+If no `navigation.json` or `docmd.config.js` is found, `docmd` triggers its [Auto-Router](../../configuration/navigation#automatic-sidebar-generation). It recursively maps your folder structure, prettifies directory names (e.g., `getting-started` becomes `Getting Started`), and generates a logical sidebar taxonomy automatically.
+
+### 3. Intelligent Title Inference
+
+You don't need to add `title` frontmatter to every file. `docmd` uses a cascading resolution strategy to determine page titles:
+1.  **Frontmatter**: Checks for a `title` or `h1` key.
+2.  **First Heading**: Extracts the first `# Heading` found in the file content.
+3.  **Filename**: Prettifies the filename as a fallback (e.g., `install-guide.md` becomes `Install Guide`).
+
+### 4. Resilient Syntax Handling
+
+`docmd` is built to be resilient. If your existing files contain proprietary syntax or legacy shortcodes from other engines, they are safely rendered as raw text or skipped, ensuring that your build never fails due to content you haven't yet migrated.
 
 ## Trade-offs
 
-Auto-generated sidebars sort alphabetically by filename. If you have "01-Intro.md" and "02-Setup.md", the engine will render them accurately, but using random filenames like "install.md" and "welcome.md" will sort alphabetically (Install before Welcome). Transitioning to a manual `navigation.json` is recommended for production aesthetics.
+Automatic sidebars are typically sorted alphabetically by filename. While naming files like `01-intro.md` and `02-setup.md` works well, more descriptive filenames may appear in an unintuitive order. For production-ready sites, we recommend transitioning to a manual [Navigation Configuration](../../configuration/navigation) to gain full control over the user journey.

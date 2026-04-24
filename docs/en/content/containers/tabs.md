@@ -7,15 +7,15 @@ Tabs are the optimal UI pattern for presenting mutually exclusive or related dat
 
 ## Syntax Reference
 
-The `tabs` container utilises the specialised sub-delimiter `== tab "Label"`. Each label defines a distinct pane that users can toggle between.
+The `tabs` container utilises the specialised sub-delimiter `== tab "Label"`. You can optionally add an icon using the `icon:name` syntax.
 
 ```markdown
 ::: tabs
 
-== tab "Label 1"
+== tab "Label 1" icon:rocket
 Content for the first tab.
 
-== tab "Label 2"
+== tab "Label 2" icon:settings
 Content for the second tab.
 
 :::

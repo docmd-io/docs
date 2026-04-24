@@ -5,41 +5,56 @@ description: "Installieren Sie docmd global, lokal oder führen Sie es sofort mi
 
 Wählen Sie die Installationsmethode, die am besten zu Ihrem Workflow passt.
 
-## Sofort mit npx ausführen
+## Sofort ausführen
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Keine Installation erforderlich. Führt docmd direkt in jedem Ordner mit Markdown-Dateien aus.
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 # Eine produktionsreife statische Website erstellen
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+# Eine produktionsreife statische Website erstellen
+bunx @docmd/core build
+```
+:::
 
 ## Als Projektabhängigkeit installieren (empfohlen)
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
 npx docmd init
 npx docmd dev
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -D @docmd/core
 pnpm dlx docmd init
 pnpm dlx docmd dev
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn add -D @docmd/core
 yarn docmd init
 yarn docmd dev
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -D @docmd/core
 bunx docmd init
@@ -58,19 +73,19 @@ Sobald `@docmd/core` eine Projektabhängigkeit ist, verwenden Sie `npx docmd` an
 ## Global installieren
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -g @docmd/core
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -g @docmd/core
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn global add @docmd/core
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -g @docmd/core
 ```
@@ -101,7 +116,7 @@ Weitere Details zur Integration finden Sie im [Browser-API](../api/browser-api.m
 ## Fehlerbehebung
 
 ::: callout warning "Berechtigung verweigert (EACCES)"
-Wenn während der globalen Installation unter macOS oder Linux `EACCES`-Fehler auftreten, wechseln Sie zu einem Node-Versionsmanager wie [nvm](https://github.com/nvm-sh/nvm) oder [fnm](https://github.com/Schniz/fnm), anstatt `sudo` zu verwenden.
+Wenn während der globalen Installation unter macOS oder Linux `EACCES`-Fehler auftreten, wechseln Sie zu einem Node-Versionsmanager wie [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm), anstatt `sudo` zu verwenden.
 :::
 
 ::: callout info "PowerShell-Skriptausführung (Windows)"

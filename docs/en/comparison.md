@@ -74,24 +74,3 @@ cd docmd && node scripts/brute-test.js
 :::
 
 No other documentation generator in this class publishes a comparable end-to-end feature test suite as part of its source.
-
-## Where docmd Stands Out
-
-::: grid {cols=3}
-
-::: grid-item
-### Zero-Config
-Drop Markdown files into a folder and run `npx @docmd/core dev`. Navigation, search, SEO, and sitemap are all active with no configuration file.
-:::
-
-::: grid-item
-### AI-First
-The LLMs plugin auto-generates `llms.txt` and `llms-full.txt` — structured context files that AI coding assistants consume directly. No manual curation required.
-:::
-
-::: grid-item
-### Smallest Payload
-At ~18kb initial load, docmd serves pages faster than any competitor. Pure semantic HTML with a micro-SPA router — no framework runtime shipped to the browser.
-:::
-
-:::

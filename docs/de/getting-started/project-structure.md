@@ -5,14 +5,20 @@ description: "Wie docmd Ihre Dateien und Ordner auf Seiten, URLs und Navigation 
 
 docmd verwendet Ihr Dateisystem als Quelle der Wahrheit. Ordner werden zu Abschnitten, Markdown-Dateien zu Seiten und die Verzeichnishierarchie definiert die URL-Routen.
 
-<!-- SCREENSHOT: VS Code oder Dateiexplorer, der die Standard-docmd-Projektstruktur zeigt — docs/-Ordner mit Markdown-Dateien, docmd.config.js im Stammverzeichnis und assets/-Verzeichnis. -->
-
 ## Ein Projekt initialisieren
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 mkdir meine-dokumentation && cd meine-dokumentation
 npx @docmd/core init
 ```
+== tab "Bun" icon:zap
+```bash
+mkdir meine-dokumentation && cd meine-dokumentation
+bunx @docmd/core init
+```
+:::
 
 Dies erstellt das Standard-Projektgerüst:
 
@@ -28,8 +34,6 @@ meine-dokumentation/
 ├── package.json        ← Projektmetadaten und Skripte
 └── site/               ← Generierte Ausgabe (nach dem Build)
 ```
-
-<!-- SCREENSHOT: Screenshot des Terminals nach dem Ausführen von npx @docmd/core init, der den generierten Dateibaum zeigt -->
 
 ## Datei-zu-URL-Mapping
 
@@ -47,22 +51,43 @@ Wenn ein Seitentitel nicht im Frontmatter definiert ist, extrahiert docmd die er
 
 ## Entwicklungsserver starten
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Öffnet `http://localhost:3000` mit Live-Reload. Änderungen an `.md`-Dateien oder der `docmd.config.js` werden sofort übernommen.
 
 ## Für die Produktion erstellen
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 Gibt eine statische Website in `./site/` aus. Die Ausgabe besteht ausschließlich aus statischem HTML — stellen Sie sie auf GitHub Pages, Vercel, Netlify oder einem beliebigen statischen Host bereit.
 
 Vor der Bereitstellung lokal überprüfen:
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx serve site
 ```
+== tab "Bun" icon:zap
+```bash
+bunx serve site
+```
+:::

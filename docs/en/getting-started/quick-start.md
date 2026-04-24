@@ -7,17 +7,21 @@ Run docmd inside any folder containing Markdown files. No config file, no setup,
 
 ## Start a dev server
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
-<!-- SCREENSHOT: Terminal output after running `npx @docmd/core dev` showing the local dev server URL and build summary with page count. -->
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Opens `http://localhost:3000`. Your documentation is live.
 
-
-<!-- SCREENSHOT: Browser showing the docmd default page at localhost:3000 — the auto-generated homepage with sidebar navigation visible. -->
-
-<!-- SCREENSHOT: Screenshot of a fresh docmd dev server running with auto-generated navigation -->
+<!-- SCREENSHOT: Terminal output after running docmd dev showing the local dev server URL and build summary with page count. -->
 
 ## What happens automatically
 
@@ -33,8 +37,16 @@ No `docmd.config.js` is needed. Add one later when you need versioning, plugins,
 
 ## Build for production
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 Outputs a static site to `./site/`, ready to deploy anywhere.

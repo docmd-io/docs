@@ -5,41 +5,56 @@ description: "全局安装、本地安装或直接用 npx 运行 docmd。需要 
 
 根据你的工作流选择合适的安装方式。
 
-## 通过 npx 即时运行
+## 即时运行
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 无需安装。可在任意包含 Markdown 文件的目录中直接运行 docmd。
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 # 构建生产版本静态网站
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+# 构建生产版本静态网站
+bunx @docmd/core build
+```
+:::
 
 ## 安装为项目依赖（推荐）
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
 npx docmd init
 npx docmd dev
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -D @docmd/core
 pnpm dlx docmd init
 pnpm dlx docmd dev
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn add -D @docmd/core
 yarn docmd init
 yarn docmd dev
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -D @docmd/core
 bunx docmd init
@@ -56,19 +71,19 @@ bunx docmd dev
 ## 全局安装
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -g @docmd/core
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -g @docmd/core
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn global add @docmd/core
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -g @docmd/core
 ```

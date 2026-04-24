@@ -5,15 +5,20 @@ description: "How docmd maps your files and folders to pages, URLs, and navigati
 
 docmd uses your filesystem as the source of truth. Folders become sections, Markdown files become pages, and the directory hierarchy defines URL routes.
 
-<!-- SCREENSHOT: VS Code or file explorer showing the standard docmd project structure — docs/ folder with markdown files, docmd.config.js at root, and assets/ directory. -->
-
-
 ## Initialise a project
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 mkdir my-docs && cd my-docs
 npx @docmd/core init
 ```
+== tab "Bun" icon:zap
+```bash
+mkdir my-docs && cd my-docs
+bunx @docmd/core init
+```
+:::
 
 This creates the standard project scaffold:
 
@@ -29,8 +34,6 @@ my-docs/
 ├── package.json        ← Project metadata and scripts
 └── site/               ← Generated output (after build)
 ```
-
-<!-- SCREENSHOT: Screenshot of terminal after running npx @docmd/core init showing the generated file tree -->
 
 ## File-to-URL mapping
 
@@ -48,22 +51,43 @@ If a page title is not defined in frontmatter, docmd extracts the first `H1` hea
 
 ## Start the dev server
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Opens `http://localhost:3000` with live reload. Changes to `.md` files or `docmd.config.js` are reflected instantly.
 
 ## Build for production
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 Outputs a static site to `./site/`. The output is entirely static HTML — deploy it to GitHub Pages, Vercel, Netlify, or any static host.
 
 Verify locally before deploying:
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx serve site
 ```
+== tab "Bun" icon:zap
+```bash
+bunx serve site
+```
+:::

@@ -1,43 +1,45 @@
 ---
-title: "Handling Breaking Changes and Deprecations in Versioned Docs"
-description: "A comprehensive guide on breaking changes."
+title: "Breaking Changes & Deprecations"
+description: "How to communicate API changes and migration paths effectively using versioned documentation and contextual callouts."
 ---
 
 ## Problem
 
-When a new major version of a product is introduced, certain APIs, CLI commands, or concepts are deprecated or entirely removed. Users browsing the latest documentation need to be clearly warned if they are using outdated strategies.
+When a product introduces a major version change, certain APIs, features, or configurations are inevitably deprecated or removed. Users browsing the latest documentation must be clearly warned if they are using outdated patterns, yet the documentation should remain focused on the modern implementation to avoid confusion.
 
 ## Why it matters
 
-If a breaking change isn't surfaced explicitly, developers will waste hours debugging syntax that the engine no longer supports. Contextual warnings are the key to smooth migration paths.
+Failure to explicitly surface breaking changes leads to developers wasting hours debugging code that the engine no longer supports. Contextual warnings and clear migration paths are essential for maintaining user trust, reducing support requests, and ensuring a smooth transition to the latest version of your software.
 
 ## Approach
 
-Use `docmd`'s extensive container syntax (specifically Callouts and Component level tagging) to visually interrupt the reader with migration contexts, while removing the deprecated content entirely from the active version.
+Combine `docmd`'s [Versioning Engine](../../configuration/versioning) with [Callout Containers](../../content/containers/callouts) to create a clear distinction between legacy and modern content. The strategy is to move full legacy documentation to an archived version while providing "migration anchors" in the current version that link back to the archived content.
 
 ## Implementation
 
-When you cut a new version (e.g. from `v1` to `v2`):
-1. Create the `docs-v1/` archive folder.
-2. In the active `docs/` folder, completely remove or rewrite the documentation for the deprecated feature.
-3. At the top of the new feature replacement, utilize `docmd` callouts to explicitly point out the breaking change to migrating users.
+### 1. Archiving Legacy Content
+
+When releasing a new major version (e.g., v2.0), move your existing documentation to an archived directory (e.g., `docs-v1/`). This ensures that the full context of the previous version is preserved for users who haven't migrated yet.
+
+### 2. Contextual Migration Callouts
+
+In your latest documentation, use `warning` or `important` callouts at the top of pages where significant changes have occurred. This provides immediate value to users who are attempting to use legacy patterns.
 
 ```markdown
-# Configuration Engine
+# Configuration API
 
-::: callout warning "Breaking Change in v2.0"
-The `siteTitle` property has been officially deprecated. It has been replaced by the more concise `title` property. If you are migrating from v1.x, you must update your `docmd.config.js` immediately.
+::: callout warning "Migration: Breaking Change in v2.0"
+The `siteTitle` property has been removed. It has been replaced by the global `title` property.
 
-[Read the Configuration documentation here](../../configuration/general.md)
+* **Migrating from v1.x?** Please update your `docmd.config.js`.
+* **Need v1.x docs?** Refer to the [Legacy Configuration Guide](/v1/configuration/general).
 :::
-
-export default {
-  title: 'My Project'
-}
 ```
 
-For AI ingestion, dropping the deprecated content from `docs/` ensures `llms-full.txt` only trains the AI on your modern syntax, while human users get the visual breadcrumbs they need to migrate safely.
+### 3. Maintaining AI Accuracy
+
+By strictly separating deprecated content from the active version, you significantly improve the accuracy of AI tools. `docmd`'s [LLMs Plugin](../../plugins/llms) generates context files based on the active version. Archiving legacy content prevents AI models from "hallucinating" and recommending outdated APIs to users who are looking for modern solutions.
 
 ## Trade-offs
 
-Actively curating breaking-change warnings in new documentation layers adds maintenance overhead. Over time, pages can become cluttered with "Legacy Notes." To combat this, establish a policy of removing migration callouts after the legacy version reaches its End-of-Life (EOL).
+Actively managing migration callouts adds maintenance overhead. If left indefinitely, pages can become cluttered with old warnings. We recommend a policy of removing migration callouts once the legacy version reaches its End-of-Life (EOL) or after one full major release cycle to keep the documentation lean and focused.

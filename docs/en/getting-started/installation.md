@@ -5,41 +5,56 @@ description: "Install docmd globally, locally, or run it instantly with npx. Req
 
 Choose the installation method that fits your workflow.
 
-## Run instantly with npx
+## Run instantly
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 No installation needed. Runs docmd directly inside any folder with Markdown files.
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 # Build a production-ready static site
 npx @docmd/core build
 ```
+== tab "Bun" icon:zap
+```bash
+# Build a production-ready static site
+bunx @docmd/core build
+```
+:::
 
 ## Install as a project dependency (recommended)
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
 npx docmd init
 npx docmd dev
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -D @docmd/core
 pnpm dlx docmd init
 pnpm dlx docmd dev
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn add -D @docmd/core
 yarn docmd init
 yarn docmd dev
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -D @docmd/core
 bunx docmd init
@@ -58,19 +73,19 @@ Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @doc
 ## Install globally
 
 ::: tabs
-== tab "npm"
+== tab "npm" icon:package
 ```bash
 npm install -g @docmd/core
 ```
-== tab "pnpm"
+== tab "pnpm" icon:boxes
 ```bash
 pnpm add -g @docmd/core
 ```
-== tab "yarn"
+== tab "yarn" icon:scroll
 ```bash
 yarn global add @docmd/core
 ```
-== tab "bun"
+== tab "Bun" icon:zap
 ```bash
 bun add -g @docmd/core
 ```

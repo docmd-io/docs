@@ -1,44 +1,45 @@
 ---
-title: "Creating Deterministic, Chunkable Documentation for AI Consumption"
-description: "A comprehensive guide on chunkable content."
+title: "Creating Deterministic and Chunkable Documentation"
+description: "How to structure your documentation to optimize it for Retrieval-Augmented Generation (RAG) and AI ingestion."
 ---
 
 ## Problem
 
-When AI pipelines (RAG architectures) ingest documentation, they slice the markdown into "chunks" (e.g., 500 tokens each). If a document is composed of long, meandering paragraphs with unclear delineations, the slicing algorithm splits the context mid-thought, destroying the utility of the chunk.
+When AI pipelines (such as RAG architectures) ingest documentation, they slice the Markdown source into smaller "chunks" (e.g., 500 tokens each). If a document consists of long, meandering paragraphs with unclear boundaries, the slicing algorithm may split the context mid-thought, destroying the utility of the chunk and leading to incomplete or incorrect AI responses.
 
 ## Why it matters
 
-If the AI retrieves a chunk that contains a code block but misses the preceding paragraph explaining *when* to use that code, the generated answer will lack necessary conditionality, leading to incorrect usage.
+If an AI retrieves a chunk containing a code block but misses the preceding paragraph explaining *when* to use that code, the generated answer will lack necessary conditionality. Structuring your documentation for chunkability ensures that each segment of text contains enough context to be useful on its own.
 
 ## Approach
 
-Structure pages as a hierarchy of deterministic blocks. Keep sections short, visually bounded by headers, and immediately followed by their respective code or examples.
+Structure your pages as a hierarchy of deterministic, atomic blocks. Use Markdown headers to clearly delineate concepts and ensure that related information (like a warning and the code it applies to) is kept physically close together in the source file.
 
 ## Implementation
 
-### 1. The Header-to-Header Rule
-A chunk boundary should naturally occur at a Markdown header (`##`). Ensure that everything beneath a `##` header comprehensively answers a single, atomic concept.
+### 1. Atomic Header Sections
 
-```markdown
-## Generating API Keys
+Ensure that every `##` or `###` header encapsulates a single, atomic concept. A well-structured section should be able to stand alone as a useful chunk for an AI model.
 
-To authenticate, you must generate an API key. This key grants full read/write access.
+-   **✅ Good**: A header "Authentication via OAuth" followed by a brief explanation and a code example.
+-   **❌ Poor**: A massive "Getting Started" page with 15 different concepts and no sub-headers.
 
-[Code block showing generation]
-```
+### 2. Tight Proximity for Critical Information
 
-### 2. Group Warnings with Context
-Do not separate a critical warning from the code it applies to using wide gaps of text. Use docmd's nested containers.
+Do not separate a critical warning from the code it applies to with long paragraphs. Use [Callouts](../../content/containers/callouts) to bind them together vertically. This increases the probability that they will remain in the same vector chunk during ingestion.
 
 ```markdown
 ::: callout warning "Destructive Action"
-Executing the following command will drop the production database.
+Running this command will permanently delete all logs.
 :::
-`db.core.drop()`
+
+`docmd logs --clear`
 ```
-Because the callout and the code are tight vertically, RAG systems (which chunk sequentially) are highly likely to keep them in the same vector chunk.
+
+### 3. Automated Concatenation
+
+The [LLMs Plugin](../../plugins/usage) facilitates chunking by generating a `llms-full.txt` file. This file uses standard separators (`---`) between pages, helping ingestion pipelines recognize natural document boundaries while preserving the global context of your project.
 
 ## Trade-offs
 
-This forces documentation into a more segmented, modular rhythm. Authors must resist the urge to write long, flowing narratives spanning thousands of words, opting instead for atomic, self-contained units of knowledge.
+This approach favors a modular, segmented writing style over long, flowing narratives. While this may feel more repetitive to a human reader, it significantly improves the performance of AI-powered search and automated support agents that rely on your documentation.

@@ -1,64 +1,69 @@
 ---
-title: "Designing a Scalable Folder Structure for Large Documentation Projects"
-description: "A comprehensive guide on folder structure."
+title: "Scalable Folder Structure"
+description: "How to organize large-scale documentation projects using the Diátaxis framework and docmd's resolution system."
 ---
 
 ## Problem
 
-Small documentation sites start simple: a `docs/` folder with a few markdown files. However, as independent modules, tutorials, APIs, and theoretical concepts are introduced, a flat or haphazardly nested folder structure becomes impossible to maintain.
+Small documentation sites often start with a flat `docs/` folder. However, as the project grows to include multiple modules, tutorials, APIs, and conceptual deep-dives, a disorganized folder structure becomes a significant maintenance burden. Files become difficult to locate, and the navigation sidebar becomes an overwhelming "wall of links."
 
 ## Why it matters
 
-A disorganized folder structure directly maps to a confusing user experience because routing and navigation inherit from it. For authors, finding where a specific conceptual guide lives becomes an exercise in guessing, which slows down content updates and increases the chance of duplicate documentation.
+A disorganized folder structure directly results in a confusing user experience, as `docmd`'s routing and default navigation are derived from your file system. For authors, a lack of clear structure leads to content duplication and inconsistent naming, making the documentation harder to manage as more contributors join the project.
 
 ## Approach
 
-Adopt an information architecture framework like [Diátaxis](https://diataxis.fr/) (separating Tutorials, How-To Guides, Explanation, and Reference), mapped strictly to your file system. Partner this with `docmd`'s file-based routing and localized `navigation.json` mappings.
+We recommend adopting an information architecture framework like [Diátaxis](https://diataxis.fr/), which separates content into four distinct categories: Tutorials, How-To Guides, Reference, and Explanation. Mapping these categories strictly to your physical file system provides a clear roadmap for both readers and authors.
 
 ## Implementation
 
-Configure a semantic, deeply nested folder hierarchy that physically isolates different documentation domains. 
+### 1. The Diátaxis Hierarchy
+
+Organize your source directory into semantic subfolders. This physical isolation makes it easier to manage large sets of files and ensures a clean URL structure.
 
 ```text
 my-project/
 ├── docs/
-│   ├── index.md             (Landing page)
-│   ├── tutorials/           (Learning-oriented)
-│   │   ├── get-started.md
-│   │   └── build-an-app.md
-│   ├── guides/              (Task-oriented)
-│   │   ├── deployment.md
-│   │   └── authentication.md
-│   ├── reference/           (Information-oriented)
-│   │   ├── cli.md
-│   │   └── rest-api.md
-│   └── architecture/        (Understanding-oriented)
-│       └── data-model.md
+│   ├── tutorials/           (Learning-oriented: step-by-step lessons)
+│   │   └── getting-started.md
+│   ├── guides/              (Task-oriented: solving specific problems)
+│   │   └── deployment.md
+│   ├── reference/           (Information-oriented: technical descriptions)
+│   │   └── api-spec.md
+│   ├── explanation/         (Understanding-oriented: theoretical background)
+│   │   └── architecture.md
+│   └── navigation.json      (Main navigation definition)
 └── docmd.config.js
 ```
 
-By binding your `navigation.json` specifically to these root categories, you cleanly separate concepts for the reader:
+### 2. Strategic Use of navigation.json
 
-```javascript
+Instead of defining a massive navigation tree in your global configuration, use `navigation.json` files within your source directories. `docmd` follows a [Resolution Priority](../../configuration/navigation#navigation-resolution-priority) system, allowing you to define distinct sidebar hierarchies for different sections of your site.
+
+```json
 // docs/navigation.json
 [
   {
-    "title": "Learning & Tasks",
+    "title": "Tutorials",
+    "icon": "book-open",
     "children": [
-      { "title": "Tutorials", "path": "/tutorials/get-started" },
-      { "title": "How-to Guides", "path": "/guides/deployment" }
+      { "title": "Get Started", "path": "/tutorials/getting-started" }
     ]
   },
   {
-    "title": "Deep Dives",
+    "title": "Reference",
+    "icon": "braces",
     "children": [
-      { "title": "API Reference", "path": "/reference/rest-api" },
-      { "title": "Architecture", "path": "/architecture/data-model" }
+      { "title": "API Specification", "path": "/reference/api-spec" }
     ]
   }
 ]
 ```
 
+### 3. File-Based Routing
+
+Remember that every Markdown file's location in the folder structure determines its final URL. For example, `docs/guides/auth.md` becomes `your-site.com/guides/auth`. Use this to your advantage to create intuitive, memorable URLs for your users.
+
 ## Trade-offs
 
-Strict organizational frameworks like Diátaxis have a learning curve. Technical writers may occasionally struggle to categorize a piece of content (e.g., "Is this a guide or a tutorial?"). You will need to maintain clear contributing guidelines to enforce structural consistency among teams.
+Strict organizational frameworks like Diátaxis require a clear understanding of content types. Technical writers may occasionally find it difficult to categorize a specific document (e.g., "Is this a guide or a tutorial?"). Establishing clear internal contribution guidelines is essential to maintain consistency as your team and documentation grow.

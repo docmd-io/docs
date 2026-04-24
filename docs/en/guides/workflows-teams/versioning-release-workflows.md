@@ -1,47 +1,61 @@
 ---
-title: "Versioning and Release Workflows for Documentation Systems"
-description: "A comprehensive guide on release workflows."
+title: "Versioning Workflows"
+description: "How to synchronize documentation releases with software deployment using docmd's versioning engine and promotion strategies."
 ---
 
 ## Problem
 
-Releasing software `v2.0` simultaneously with the `v2.0` documentation is stressful. Often, the docs are updated on the live site before the code is actually deployed (confusing current users) or deployed days after (confusing new users).
+Synchronizing software releases with corresponding documentation updates is a significant coordination challenge. Frequently, documentation is updated on the live site before the new code is deployed (confusing current users) or delayed several days after the release (frustrating early adopters).
 
 ## Why it matters
 
-Desync between code behavior and documentation behavior is the #1 cause of developer frustration. Accuracy must map strictly to chronography.
+Desynchronization between software behavior and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
 
 ## Approach
 
-Isolate active development documentation into a "Next" or "Beta" version directory using `docmd`'s version engine, and only promote it to "Current" upon semantic release.
+Isolate active development documentation using `docmd`'s [Versioning Engine](../../configuration/versioning). This allows your team to draft content for upcoming features asynchronously in a separate directory (e.g., `docs-next/`), promoting it to the "Stable" or "Current" status only when the official software release occurs.
 
 ## Implementation
 
-During the development cycle of `v2.0`:
+### 1. Structure Your Directories
 
-1. Maintain `docs/` as the current `v1.0` production environment.
-2. Create a `docs-next/` directory for writers to draft `v2.0` features asynchronously.
+Maintain your stable documentation in the primary `docs/` folder and create a dedicated directory for the upcoming release.
+
+```text
+project-root/
+├── docs/       # Current Stable (v1.x)
+├── docs-v2/    # Upcoming Release (v2.0)
+└── docmd.config.js
+```
+
+### 2. Configure Versions
+
+Register both versions in your configuration. You can label the upcoming version as "Beta" or "Next" to signal its status to users through the version switcher.
 
 ```javascript
 // docmd.config.js
-export default defineConfig({
+export default {
   versions: {
     current: 'v1.0',
     all: [
-      { id: 'v1.0', dir: 'docs', label: 'v1.0 (Stable)' },
-      { id: 'next', dir: 'docs-next', label: 'v2.0 (Beta)' }
+      { id: 'v1.0', dir: 'docs', label: 'v1.x (Stable)' },
+      { id: 'v2.0', dir: 'docs-v2', label: 'v2.0 (Beta)' }
     ]
   }
-});
+};
 ```
 
-*When Release Day arrives:*
-1. Rename `docs/` to `docs-v1/`.
-2. Rename `docs-next/` to `docs/`.
-3. Update config: `current: 'v2.0'`.
+### 3. The Promotion Process
 
-This workflow ensures PRs for the new version can be merged continuously without accidentally leaking beta documentation to stable users.
+When you are ready to release the new version officially:
+1.  **Update Config**: Change the `current` version ID in `docmd.config.js` to `v2.0`.
+2.  **Update Labels**: Remove the "(Beta)" tag from the `label` in the `all` array.
+3.  **Archive Old Docs**: Keep the `v1.0` entry in the `all` array so users on older versions can still access their relevant documentation.
 
 ## Trade-offs
 
-This approach requires writers to maintain two separate folders simultaneously for months. If a hotfix typo is corrected in `docs/` (v1.0), the writer must deliberately cherry-pick that fix into `docs-next/` (v2.0) to prevent the typo from returning upon release promotion.
+### Maintenance Overhead
+Maintaining multiple versions of documentation requires discipline. If a critical typo or security warning is fixed in the stable version, ensure it is also applied to the upcoming version directory to prevent "regressions" in clarity.
+
+### SEO and Search
+Multiple versions can occasionally lead to search results pointing to older documentation. Use the `seo` plugin and proper canonical tags to ensure that the "Current" version is always prioritized by search engines. See [Handling Breaking Changes](../scaling-architecture/breaking-changes-deprecations) for more on managing transitions.

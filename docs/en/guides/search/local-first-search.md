@@ -1,42 +1,47 @@
 ---
-title: "Optimising Documentation Content for Local-First Search Engines"
-description: "A comprehensive guide on local-first opt."
+title: "Local-First Search Optimization"
+description: "How to optimize your documentation content for docmd's high-performance, client-side search engine."
 ---
 
 ## Problem
 
-Local-first search engines (engines that run entirely in the browser using WebAssembly or Javascript, like MiniSearch or Pagefind) have strict memory limitations. If you feed them raw, unoptimized Markdown, the index balloons and crashes the user's browser tab with out-of-memory errors.
+Local-first search engines run entirely in the browser, providing instant results without a server round-trip. However, this means they are constrained by the browser's memory and processing limits. If a search index is not properly optimized, it can consume excessive RAM, causing the browser tab to stutter or even crash, especially on mobile devices.
 
 ## Why it matters
 
-Browser tabs are constrained to specific RAM limits (often ~2GB, but practically much lower for smooth operation). Swelling the memory footprint with a massive, unoptimized search index causes page scrolling to jitter, battery life to plummet, and eventually tab crashes on mobile devices.
+A seamless search experience is essential for developer productivity. If the search tool causes performance issues or consumes too much memory, users will avoid using it. Optimizing your content for local-first search ensures that your documentation remains fast, responsive, and reliable across all devices and network conditions.
 
 ## Approach
 
-A local-first engine requires you to prune the data *before* indexing it. You cannot rely on server-side compute to filter results on the fly. We must optimize the text corpus at build time.
+`docmd`'s [Search Plugin](../../plugins/search) uses a build-time extraction pipeline to create a highly optimized index. By pruning unnecessary data and focusing on high-value semantic fields, it ensures that the resulting index is both comprehensive and lightweight.
 
 ## Implementation
 
-### 1. The docmd Extraction Pipeline
-`docmd` intercepts your markdown during the build process and strips out raw formatting before handing it to the indexer. It removes:
-- HTML Tags
-- Markdown links `[text](url)` -> `text`
-- Callout syntax `::: callout`
+### 1. Build-Time Extraction
 
-### 2. Customizing the Indexer
-If your codebase has heavy, repetitive code blocks (like massive JSON responses in an API reference), you can configure `docmd` to only index the `headers` and `title` of API files, ignoring the body.
+During the build process, `docmd` processes your Markdown files to extract only the most relevant text for indexing. It automatically strips out:
+*   HTML tags and structural boilerplate.
+*   Markdown syntax characters that don't add semantic value.
+*   Formatting-only elements that would otherwise bloat the index.
 
-```javascript
-export default defineConfig({
-  plugins: {
-    search: {
-      excludeSelectors: ['.code-block-large', '.api-response-sample']
-    }
-  }
-});
+This ensures that the indexer only receives clean, meaningful text, which significantly reduces the final index size.
+
+### 2. Strategic Indexing with Frontmatter
+
+You can use [Frontmatter](../../content/frontmatter) to explicitly control how a page is indexed. For example, if a page contains large amounts of repetitive data (like raw JSON logs) that aren't useful for search, you can choose to index only the headers and metadata.
+
+```yaml
+---
+title: "API Log Reference"
+search:
+  indexBody: false  # Only index the title and headers
+---
 ```
-*(Note: Exclude selectors are a planned capability in the next Search Plugin iteration).*
+
+### 3. Client-Side Memory Management
+
+`docmd` manages the search index lifecycle carefully in the browser. It uses an on-demand loading strategy, meaning the search engine is only initialized when the user first interacts with it. This keeps the initial page load footprint small and ensures that system resources are only used when needed.
 
 ## Trade-offs
 
-By aggressively pruning indexable content (e.g., stripping out code blocks from the index), you lose the ability for users to search for specific deep variable names nested within JSON examples. You must evaluate whether your users search more for "Concepts" or "Deep Code References".
+Aggressively pruning content from the search index (e.g., excluding large code blocks) can sometimes result in missing niche results. You must balance the need for a lightweight, fast index with the requirement for thorough search coverage. We recommend prioritizing headers and conceptual descriptions, as these are the most common search targets for developers.

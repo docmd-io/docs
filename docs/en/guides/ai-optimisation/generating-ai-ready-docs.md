@@ -1,50 +1,55 @@
 ---
-title: "Generating AI-Ready Documentation with docmd (llms.txt and Beyond)"
-description: "A comprehensive guide on ai-ready output."
+title: "Generating AI-Ready Documentation with docmd"
+description: "How to use the llms.txt standard and docmd's built-in tools to provide optimized context for AI assistants."
 ---
 
 ## Problem
 
-Developers are increasingly relying on AI coding assistants (like Cursor, Copilot, and ChatGPT) to read documentation on their behalf. If your documentation is locked behind React SPAs without a standardized text API, the AI cannot easily ingest the full context of your platform.
+Developers increasingly rely on AI coding assistants (like Cursor, GitHub Copilot, and ChatGPT) to read and interpret documentation on their behalf. If your documentation is only accessible via a web browser and is cluttered with navigation elements, trackers, and complex HTML, AI agents will consume excessive tokens on irrelevant data, quickly exhausting their context windows.
 
 ## Why it matters
 
-Providing a clean, token-optimized text dump of your entire documentation is the modern equivalent of providing a REST API. Without it, AI agents scrape raw HTML, consuming thousands of useless tokens on navigation elements, destroying their small context windows.
+Providing a clean, token-optimized text version of your documentation is the modern equivalent of providing a high-quality REST API. It ensures that AI agents can quickly ingest your entire documentation set, resulting in more accurate code suggestions and better support for developers using your product.
 
 ## Approach
 
-Leverage the `@docmd/plugin-llms` plugin. It implements the emerging `llms.txt` standard natively, generating token-optimized summaries and full-context files automatically during the build process.
+Leverage `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the emerging `llms.txt` standard, automatically generating token-optimized summaries and full-context files during every build process.
 
 ## Implementation
 
-The `llms` plugin is enabled by default in `docmd >= 0.7.0`.
+The `llms` plugin is available in `docmd >= 0.7.0` and can be configured in your [Plugin Configuration](../../plugins/usage).
 
-1. Ensure your `baseUrl` or `url` is configured properly so absolute links are correctly resolved in the text file.
+### 1. Configure the Site URL
+
+Ensure that the `url` property is correctly set in your `docmd.config.js`. This allows the plugin to generate absolute URLs for all pages in the `llms.txt` file.
 
 ```javascript
-export default defineConfig({
-  url: 'https://docs.mycompany.com',
-  plugins: {
-    llms: {
-      fullContext: true // Strongly recommended
-    }
-  }
-});
+// docmd.config.js
+export default {
+  title: 'My Project Docs',
+  url: 'https://docs.example.com',
+  plugins: ['llms']
+};
 ```
 
-2. When you build, `docmd` scans the routing tree and outputs two files to your site root:
-*   `llms.txt`: A structured markdown summary of all your pages with their specific URLs.
-*   `llms-full.txt`: A massive, concatenated markdown file containing the stripped text of your entire site, preserving semantic headers and code blocks.
+### 2. Output Files
 
-3. To exclude internal-only documents from the AI feed, use frontmatter:
+During the build process, `docmd` generates two key files in your site root:
+
+-   **`llms.txt`**: A concise, structured Markdown summary of all your pages, including their titles, descriptions, and full URLs.
+-   **`llms-full.txt`**: A comprehensive file containing the raw Markdown content of your entire site, concatenated with standard separators (`---`). This provides the ultimate "source of truth" for AI models.
+
+### 3. Controlling Ingestion
+
+You can exclude specific pages from the AI-ready output by using the `llms` property in the [Page Frontmatter](../../content/frontmatter).
 
 ```yaml
 ---
-title: "Internal Release Process"
+title: "Internal Debugging Guide"
 llms: false
 ---
 ```
 
 ## Trade-offs
 
-Generating `llms-full.txt` means you are creating a very large, single file. For sites with thousands of pages, this file could exceed 10MB, which might stress the context window of smaller LLMs. Future versions of `docmd` will introduce module-level chunking for `llms.txt`.
+Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organize your [Navigation](../../configuration/navigation) logically so that the AI can prioritize the most important sections.

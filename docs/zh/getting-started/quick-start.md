@@ -7,9 +7,17 @@ description: "从空文件夹到运行中的文档网站，不到一分钟。"
 
 ## 启动开发服务器
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 访问 `http://localhost:3000`，文档网站即刻上线。
 
@@ -27,8 +35,16 @@ docmd 会自动扫描项目并完成以下配置：
 
 ## 构建生产版本
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 生成的静态网站输出至 `./site/`，可部署到任意静态托管服务。

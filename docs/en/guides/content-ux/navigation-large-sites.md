@@ -1,49 +1,50 @@
 ---
-title: "Designing Navigation That Works for Large Documentation Sites"
-description: "A comprehensive guide on large site nav."
+title: "Navigation for Large Sites"
+description: "How to organize complex documentation sets into an intuitive, scalable navigation structure using docmd's layout tools."
 ---
 
 ## Problem
 
-Building the sidebar for a 5-page site naturally results in a flat list. For a 500-page site, treating the sidebar as an expanding tree of nested folders creates a labyrinth where users expand 6 levels deep, lose context of where they are, and cannot find their way back.
+As a documentation site grows from a few dozen pages to hundreds or thousands, a simple sidebar often transforms into a confusing labyrinth of deeply nested folders. When users are forced to expand multiple levels of hierarchy just to find a specific reference, they lose context, become frustrated, and often abandon the documentation in favor of trial-and-error.
 
 ## Why it matters
 
-If navigation feels like a chore, users rely entirely on the search bar. This indicates the Information Architecture (IA) has failed. Good navigation teaches the user the taxonomy of your product without them realizing it.
+Navigation is the "map" of your product's capabilities. If navigation is difficult to use, users will rely exclusively on the search bar, which can lead to fragmented knowledge. A well-structured navigation system teaches the user the logic and taxonomy of your product as they browse, helping them become more proficient and self-sufficient over time.
 
 ## Approach
 
-Use **Top-Level Context Switching** rather than **Deep Nesting**. The left sidebar should rarely exceed 2 levels of depth.
+Prioritize **Top-Level Context Switching** over deep nesting. Aim to keep your left sidebar limited to no more than two or three levels of depth. Use the horizontal [Menubar](../../configuration/menubar) to separate distinct documentation "domains" (e.g., Guides, API Reference, and Community), which allows each individual sidebar to remain focused, relevant, and manageable.
 
 ## Implementation
 
-### 1. Utilize the Menubar for Domains
-In `docmd`, use the top menubar to shift the user between entirely different domains (e.g., Tutorials vs API Reference), completely swapping out the sidebar content.
+### 1. Domain-Based Separation
 
-### 2. Flatten the Hierarchy
-Collapse deeply nested concepts into long-form parent pages utilizing anchor links (Table of Contents), rather than splitting a concept across 5 separate small markdown pages.
+In your `docmd.config.js`, use the [Menubar](../../configuration/menubar) to divide your content into high-level categories. This approach allows you to present a completely different sidebar for each domain, preventing a single navigation tree from becoming overwhelmed.
 
-*Poor IA:*
-- Auth Setup (Page)
-  - Setting up OAuth (Page)
-  - Setting up JWT (Page)
-  - Setting up SAML (Page)
+### 2. Flattening the Hierarchy
 
-*Better IA:*
-- Auth Setup (One Page)
-  -> *Uses right-side TOC to navigate to OAuth, JWT, SAML sections*
+Instead of splitting a single concept across many tiny Markdown pages, consolidate related information into comprehensive parent pages. Use clear [Heading Hierarchy](../../content/syntax) to allow users to navigate within the page using the auto-generated right-side Table of Contents (TOC).
 
-### 3. Default to Collapsed
-If you must use folders, set `collapsible: true` and ensure they default to closed except for the actively highlighted path.
+*   **❌ Poor IA**: A folder named "Security" containing ten separate, one-paragraph files for different protocols.
+*   **✅ Better IA**: A single, well-structured "Security Overview" page that covers all protocols, using headings to provide a clean TOC.
+
+### 3. Leveraging Collapsible Sections
+
+For large groups of related content that aren't accessed constantly, use the `collapsible` property in your [Navigation Configuration](../../configuration/navigation). This keeps the interface clean by hiding secondary information until it is explicitly requested by the user.
 
 ```json
+// navigation.json
 {
-  "title": "Reference",
+  "title": "API Reference",
   "collapsible": true,
-  "children": [ /* 50 items hidden safely */ ]
+  "collapsed": true,
+  "children": [
+    { "title": "Authentication", "path": "api/auth" },
+    { "title": "Endpoints", "path": "api/endpoints" }
+  ]
 }
 ```
 
 ## Trade-offs
 
-Consolidating many small pages into fewer, longer pages makes those specific long pages harder to digest if not structured cleanly with Markdown headers. It requires the author to be highly disciplined about using the right-side Table of Contents effectively.
+Consolidating content into fewer, longer pages requires authors to be disciplined about structural clarity and heading use. If a page becomes too long without proper internal navigation (TOC), it can become its own "wall of text." However, the significant reduction in "click-fatigue" and the improved discovery of related content make a flatter, domain-based hierarchy far superior for large documentation sets.

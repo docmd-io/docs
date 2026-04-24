@@ -1,43 +1,47 @@
 ---
-title: "Best Practices for Linking and Context Preservation in AI-Friendly Docs"
-description: "A comprehensive guide on context preservation."
+title: "Context Preservation for AI-Friendly Documentation"
+description: "How to ensure that AI models can understand and utilize the relationships between different parts of your documentation."
 ---
 
 ## Problem
 
-Hyperlinks provide excellent context for humans, who can click them to open a new tab and learn more. However, when an AI model processes a chunk of text, it cannot "click" the link. The context locked behind the hyperlink is entirely lost.
+While human readers can easily click a hyperlink to learn more about a term, AI models often process documentation in isolated "chunks." When an AI encounters a hyperlink, it cannot "click" it to fetch more context. If critical information is hidden behind a link rather than explained in context, the AI may fail to provide accurate answers, leading to hallucinations.
 
 ## Why it matters
 
-If a critical parameter's definition is hidden behind a hyperlink rather than explained inline, the AI will fail to use that parameter correctly, despite the documentation technically pointing to the answer.
+AI models rely on the immediate surrounding text to determine the meaning and relevance of information. If your documentation is highly fragmented with poor context preservation, AI-driven search tools (like those powered by RAG) will struggle to provide high-quality responses.
 
 ## Approach
 
-Utilize **Inline Context Unrolling**. While you should still use hyperlinks for deep dives, you must provide a brief, one-sentence summary of the linked concept *before* initiating the link, or immediately adjacent to it.
+Use **Inline Context Unrolling** to provide the minimum viable context alongside every major link. Additionally, leverage `docmd`'s specific features, such as the [LLMs Plugin](../../plugins/usage), to provide a unified, machine-readable view of your entire documentation set.
 
 ## Implementation
 
-*Bad (Context Lost for AI):*
-To configure the timeout, refer to the [Navigation Array](../../configuration/navigation.md).
+### 1. Descriptive Linking and Summaries
 
-*Good (Context Preserved for AI):*
-Configure the timeline via the `timeoutMs` parameter, which is part of the [Navigation Array](../../configuration/navigation.md) (a schema defining retry limits and DNS resolutions).
+Avoid generic link text. Instead, provide a brief, one-sentence summary of the linked concept before or after the link itself.
 
-### Implementing with `docmd` Containers
-For advanced context, use Docmd's collapsible sections. These remain in the markdown stream (visible to the AI natively) but are visually hidden for human readers until clicked.
+-   **❌ Poor (Context Lost)**: To configure the timeout, refer to the [General Configuration](../../configuration/general).
+-   **✅ Better (Context Preserved)**: You can configure the `timeoutMs` parameter within the [General Configuration](../../configuration/general), which defines how long the engine waits before failing a network request.
+
+### 2. Using Collapsible Sections for Detail
+
+[Collapsible Containers](../../content/containers/collapsible) are excellent for AI optimization. The content remains part of the raw Markdown source (which the AI can read), but it is visually tucked away for human readers.
 
 ```markdown
-### Database Configuration
+### Database Connection
 
-Connect to your primary DB instance using the connection URI.
+Connect using the primary URI.
 
-::: collapsible "What is the internal connection URI?"
-The connection URI follows standard PostgreSQL syntax: `postgresql://user:password@host:port/database`.
+::: collapsible "What is the URI format?"
+The URI follows the standard PostgreSQL format: `postgresql://user:password@host:port/database`.
 :::
 ```
 
-The AI reads this seamlessly as part of the flow, while humans get a clean UI.
+### 3. Enabling the LLMs Plugin
+
+Enable the [LLMs Plugin](../../plugins/usage) in your `docmd.config.js`. This plugin automatically generates a `llms-full.txt` file after every build, which concatenates your entire documentation set into a single, high-context file that can be easily consumed by Large Language Models.
 
 ## Trade-offs
 
-Inline Context Unrolling makes documents slightly more verbose. It repeats high-level summaries that exist elsewhere in the wiki. However, this intentional redundancy ensures that regardless of how the text is chunked or retrieved, the agent always has the minimum viable context to act.
+Inline context unrolling makes your documentation slightly more verbose and introduces minor redundancy. However, this redundancy is a small price to pay for ensuring that your documentation is "AI-ready" and capable of powering high-quality automated support and search experiences.

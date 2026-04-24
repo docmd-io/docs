@@ -1,46 +1,52 @@
 ---
-title: "Improving Readability and Information Hierarchy in Documentation"
-description: "A comprehensive guide on readability & hierarchy."
+title: "Improving Readability"
+description: "How to use visual rhythm, information hierarchy, and docmd's structural tools to create highly readable documentation."
 ---
 
 ## Problem
 
-Engineers naturally write like they code: dense, logically packed, and utilizing jargon. When writing encounters dense technical matter without visual relief (whitespace), the eye glazes over, leading to "skimming."
+Technical documentation is often dense, jargon-heavy, and difficult to scan. When readers encounter "walls of text" without visual relief, they tend to skim over important details or miss critical safety warnings entirely. Dense formatting increases cognitive friction and leads to user frustration and potential errors.
 
 ## Why it matters
 
-Skimming leads to missed steps. A missed step in a deployment tutorial leads to a broken server. Visual readability is not an aesthetic choice; it is an operational requirement.
+Readability is not just an aesthetic choice—it is a functional requirement. If a developer misses a warning because it was buried in a long paragraph, the consequences can be severe. A clear information hierarchy ensures that users can find the information they need quickly, understand it accurately, and act upon it safely.
 
 ## Approach
 
-Enforce strict visual rhythms. Break up text walls mathematically and employ thematic `docmd` containers to establish a predictable information hierarchy.
+Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers) to highlight critical information. By utilizing `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
 
 ## Implementation
 
-### 1. The 3-Sentence Rule
-Never allow a paragraph to exceed three sentences. Technical concepts must breathe.
+### 1. The "Power of Brevity"
 
-### 2. Thematic Breakouts
-Use `docmd` callouts consistently to establish a visual language.
-- `info`: Contextual background.
-- `tip`: Best practices.
-- `warning`: Destructive actions.
+Try to limit paragraphs to no more than three or four sentences. Shorter paragraphs are easier to digest on screens and provide natural "breathing room" for complex technical concepts. If a paragraph feels too long, consider breaking it into a list or using a sub-heading to re-categorize the information.
 
-By color-coding the intent, a user scrolling rapidly can instantly spot dangerous actions (Red/Yellow) without reading a word.
+### 2. Categorizing with Callouts
 
-### 3. Step Structuring
-When outlining sequential actions, do not use narrative text. Use numbered lists or `docmd` step containers.
+Use [Callouts](../../content/containers/callouts) consistently to categorize information. This allows users who are skimming to instantly recognize the intent of a block based on its visual style:
+
+*   **Info**: Background context or supplementary details that provide deeper understanding.
+*   **Tip**: Best practices, shortcuts, and "pro-tips" for efficiency.
+*   **Warning/Danger**: Critical actions that could lead to errors, data loss, or security vulnerabilities.
 
 ```markdown
-::: steps
-1. Initialize the project.
-2. Configure the database.
-3. Deploy to production.
+::: callout warning "Production Safety"
+Never execute this command on a live database without verifying your backups first.
 :::
 ```
 
-This draws the eye downwards and clearly defines the progression.
+### 3. Sequential Instruction with Steps
+
+For tutorials and step-by-step guides, avoid narrative descriptions of actions. Instead, use the [Steps Container](../../content/containers/steps) to create a clear, numbered progression that is easy to follow.
+
+```markdown
+::: steps
+1. **Initialize**: Run `npx docmd init` in your project root.
+2. **Configure**: Update your `docmd.config.js` with your site title and navigation.
+3. **Build**: Run `npx docmd build` to generate your production-ready static files.
+:::
+```
 
 ## Trade-offs
 
-Breaking content into highly stylized blocks requires the author to learn the specific Markdown extensions (e.g., `::: callout`). This slightly raises the barrier to entry for casual open-source contributors compared to pure standard Markdown.
+Using specialized containers like `::: steps` or `::: callout` requires contributors to learn `docmd`-specific Markdown extensions. While this adds a small learning curve, the significant improvement in information density, clarity, and professional presentation far outweighs the minimal effort of learning these powerful structural tags.

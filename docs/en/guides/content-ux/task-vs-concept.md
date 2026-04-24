@@ -1,44 +1,49 @@
 ---
-title: "Creating Task-Oriented vs Concept-Oriented Documentation"
-description: "A comprehensive guide on task vs concept."
+title: "Task vs. Concept"
+description: "How to apply the Diátaxis framework to separate 'How-To' guides from conceptual explanations for a more effective documentation structure."
 ---
 
 ## Problem
 
-A common mistake is mixing *Why* something works with *How* to do it. A tutorial on "Deploying to AWS" becomes bogged down with 5 paragraphs explaining the philosophical history of AWS IAM roles.
+A frequent mistake in technical writing is mixing the *Why* something works with the *How* to actually do it. A tutorial on "Configuring SSO," for example, can easily become bogged down with pages explaining the history of the SAML protocol, distracting the user from their immediate goal of getting the feature running.
 
 ## Why it matters
 
-When an engineer is trying to fix a broken pipeline at 2 AM, they do not want to read philosophy. They want the structural CLI commands. If the page mixes the two, both the academic reader and the panicked engineer are frustrated.
+User intent varies significantly depending on their current context. An engineer trying to fix a production issue at 2 AM is looking for specific, actionable steps, not architectural philosophy. Conversely, a technical leader evaluating your platform needs to understand the underlying logic before committing to an implementation. Separating these concerns ensures that both personas find the information they need without unnecessary friction.
 
 ## Approach
 
-Physically split docs according to the Diátaxis framework. Separate "How-To Guides" (Task-oriented) from "Explanation" (Concept-oriented).
+Adopt the **Diátaxis framework**, which categorizes documentation into four distinct quadrants: Tutorials, How-to Guides, Explanation (Concepts), and Technical Reference. For this guide, we focus on the critical separation between **Task-oriented content** (actionable steps) and **Concept-oriented content** (deeper understanding).
 
 ## Implementation
 
 ### 1. The Task-Oriented Guide (How-To)
-Focus entirely on the objective. Strip out explanations.
 
-**Title**: "How to Rotate IAM Keys"
-- Step 1: Open the CLI.
-- Step 2: Run `aws iam create-access-key`.
-- Step 3: Store securely.
+Focus entirely on a specific, narrow objective. Strip out lengthy theoretical explanations and focus on the minimum steps required to achieve the goal. Use the [Steps Container](../../content/containers/steps) to provide a clear, unambiguous path forward.
+
+*   **Title Example**: "How to Configure Webhooks"
+*   **Structure**: 
+    *   Prerequisites
+    *   Direct, actionable instructions
+    *   Verification steps (how to know it worked)
 
 ### 2. The Concept-Oriented Guide (Explanation)
-Focus entirely on the architecture. Do not instruct the user to execute commands.
 
-**Title**: "Understanding Identity Management"
-- Section 1: The Principle of Least Privilege.
-- Section 2: How Keys Interface with Roles.
-- Section 3: The Rotation Lifecycle.
+Focus on the "Big Picture," including architecture, design philosophy, and the "why" behind specific decisions. Avoid giving direct instructions or commands in these sections.
 
-### 3. Link Between Them
-Instead of mixing them, use docmd's robust linking tools to bridge the gap.
+*   **Title Example**: "Understanding Webhook Delivery Architecture"
+*   **Structure**:
+    *   High-level architecture diagrams
+    *   Retry logic and reliability philosophy
+    *   Security considerations
 
-*In the How-To guide:*
-> For a deeper understanding of why 90-day rotation is enforced, read [Configuration System](../../configuration/general.md).
+### 3. Effective Cross-Referencing
+
+Instead of merging the two types of content, use `docmd`'s linking tools to provide a bridge for users who need more context or are ready to implement.
+
+*   **In a How-To guide**: "For a deeper dive into our retry logic, see [Webhook Architecture](../../guides/performance-delivery/caching-strategies)."
+*   **In a Conceptual guide**: "Ready to get started? Follow our [Webhook Configuration Guide](../../guides/integrations/alongside-other-tools)."
 
 ## Trade-offs
 
-Splitting tasks and concepts effectively doubles the number of files in your repository. It requires rigorous cross-linking discipline to ensure that a user reading a conceptual theoretical doc can easily find the practical guide to implement the theory.
+Separating tasks and concepts increases the number of pages in your navigation and requires more rigorous cross-linking. However, this modular structure significantly improves the long-term maintainability, searchability, and overall professionalism of your documentation suite.

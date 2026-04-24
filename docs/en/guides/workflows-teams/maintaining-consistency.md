@@ -1,47 +1,60 @@
 ---
-title: "Maintaining Consistency Across Large Documentation Teams"
-description: "A comprehensive guide on consistency at scale."
+title: "Maintaining Consistency"
+description: "How to ensure a unified voice and professional quality across large documentation teams using linting and standardized patterns."
 ---
 
 ## Problem
 
-Every technical writer has a different style. Some use `*` for italics, others use `_`. Some say "Click here", others say "Select the element". Over time, the document reads like a patchwork quilt written by ten different people.
+In large teams, every technical writer has a different style and preference. Some might use bold text for emphasis, while others use italics. Some may prefer "Click the button," while others use "Select the option." Over time, your documentation can become a "patchwork quilt" of conflicting styles, making it harder for users to parse information quickly and reducing the professional trust of your product.
 
 ## Why it matters
 
-Consistency breeds familiarity. When users are learning complex APIs, changing vocabulary mid-tutorial forces them to pause and translate terminology. "Wait, is an 'Instance' the same as a 'Node'?"
+Consistency breeds familiarity. When users are learning complex APIs or workflows, they rely on consistent vocabulary and structural patterns to navigate the content effectively. A unified voice makes your documentation feel like a cohesive, high-quality product, which in turn builds confidence in the software itself.
 
 ## Approach
 
-Enforce consistency mechanically using linters, rather than relying solely on human review. Combine `markdownlint`, Vale (for prose), and `docmd`'s strict parsing.
+Enforce consistency mechanically using [Standardized Containers](../../content/containers) and automated linting tools. By automating low-level style and syntax checks, you free up your human editors to focus on the high-level quality, accuracy, and clarity of the content.
 
 ## Implementation
 
-### 1. Vale Prose Linter
-Install Vale to enforce terminology, tone, and brand safety.
+### 1. Use Standardized docmd Patterns
 
-```ini
-# .vale.ini
-MinAlertLevel = suggestion
-Packages = Microsoft
-[*]
-BasedOnStyles = Vale, Microsoft
-```
-
-### 2. Standardized docmd Containers
-Force writers to use built-in, thematic `docmd` containers for warnings instead of improvising with bold text.
+Encourage all contributors to use `docmd`'s built-in thematic containers instead of improvising with manual Markdown formatting. This ensures that every warning, tip, or note looks and behaves identically across the entire site.
 
 ```markdown
-<!-- Reject this in PRs -->
-**Warning:** Do not format the disk.
+<!-- ❌ Avoid: inconsistent and unstyled -->
+**Note:** Please restart the service.
 
-<!-- Require this -->
-::: callout warning
-Do not format the disk.
+<!-- ✅ Use: consistent, accessible, and thematic -->
+::: callout info
+Please restart the service.
 :::
 ```
-Use `markdownlint` to blacklist custom HTML elements to force usage of thematic containers.
+
+Using [Callouts](../../content/containers/callouts) ensures that your documentation maintains a professional appearance and meets accessibility standards without extra effort from the writer.
+
+### 2. Implement Prose Linting
+
+Integrate tools like **Vale** or **Markdownlint** to enforce brand terminology, tone, and grammar. These tools can be configured to check for passive voice, biased language, or incorrect product spelling automatically.
+
+```ini
+# .vale.ini example
+MinAlertLevel = suggestion
+Packages = Google, Microsoft
+[*]
+BasedOnStyles = Vale, Google
+```
+
+### 3. Automated Enforcement in CI/CD
+
+Include consistency checks in your [GitHub Actions](../../guides/integrations/github-actions-cicd) or other CI/CD pipelines. This ensures that every Pull Request is automatically audited for style and structural consistency before it can be merged.
+
+```bash
+# Example CI step for linting
+- name: Lint Documentation
+  run: vale docs/
+```
 
 ## Trade-offs
 
-Aggressive linting frustrates new contributors. If a community member fixes a typo but the PR fails because they used the passive voice (flagged by Vale), they might abandon the PR out of frustration. Always ensure open-source contribution linters are less strict than internal ones.
+Strict linting can sometimes discourage community contributors if they are met with multiple "style errors" for a simple typo fix. We recommend setting your linter's sensitivity to `warning` for external contributions and reserving `error` status for internal team updates to balance consistency with inclusivity.

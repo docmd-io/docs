@@ -1,55 +1,73 @@
 ---
 title: "Extending docmd with Custom Plugins"
-description: "A comprehensive guide on custom plugins."
+description: "How to use docmd's lifecycle hooks to build custom functionality and extend the documentation engine."
 ---
 
 ## Problem
 
-You have a hyper-specific internal requirement. For example, replacing all instances of the word `TODO-VER` with the actual version string pulled dynamically from a proprietary internal API server during build time. Native tools do not support this.
+Sometimes you have a highly specific requirement that isn't covered by built-in features or existing plugins. For example, you might need to fetch data from an internal API during the build process or perform complex transformations on the generated HTML that go beyond simple CSS.
 
 ## Why it matters
 
-Extensibility is the difference between a tool you outgrow in a year versus a framework that scales with you for a decade. Without an escape hatch, custom requirements force teams to maintain dirty shell-script wrappers around their builds.
+Extensibility is what separates a static tool from a professional documentation framework. Without a clean way to inject custom logic, teams are often forced to maintain fragile shell scripts or post-processing wrappers that make the build process difficult to manage and debug.
 
 ## Approach
 
-`docmd` utilizes a powerful, hook-based plugin architecture. You can inject Node.js logic at specific lifecycle phases (e.g., `preBuild`, `onRender`, `postBuild`) to arbitrarily modify the AST or HTML outputs.
+`docmd` features a robust, hook-based [Plugin API](../../plugins/api). You can write simple Node.js modules that intercept the documentation lifecycle at various stages—from initial configuration to final HTML generation—allowing you to arbitrarily modify content and behavior.
 
 ## Implementation
 
-Create a local javascript file that exports a valid `docmd` plugin object, and pass it directly to the configuration block.
+### 1. Create a Local Plugin
+
+A plugin is a standard JavaScript module that exports a descriptor and several lifecycle hooks.
 
 ```javascript
 // plugins/version-injector.js
-export default function VersionInjectorPlugin(options) {
-  return {
-    name: 'custom-version-injector',
-    
-    // Hook runs right before the site builds
-    async preBuild(context) {
-      this.versionData = await fetch('https://api.internal.com/version/latest').then(r => r.text());
-    },
+export default {
+  // Plugin Metadata
+  plugin: {
+    name: 'version-injector',
+    version: '1.0.0',
+    capabilities: ['build'] // Required to use 'build' hooks
+  },
 
-    // Hook intercepts HTML generated for every page
-    onRender(html, pageContext) {
-      if (!html) return html;
-      return html.replace(/TODO-VER/g, this.versionData);
-    }
-  };
-}
+  // State shared across hooks
+  latestVersion: '0.0.0',
+
+  // Runs once the configuration is resolved
+  async onConfigResolved(config) {
+    // Fetch data from an internal API
+    const response = await fetch('https://api.internal.com/version');
+    this.latestVersion = await response.text();
+    console.log(`[Plugin] Fetched version: ${this.latestVersion}`);
+  },
+
+  // Intercepts HTML after Markdown parsing
+  async onAfterParse(html, frontmatter) {
+    if (!html) return html;
+    // Replace placeholders with dynamic data
+    return html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
+  }
+};
 ```
+
+### 2. Register the Plugin
+
+You can register your local plugin by importing it into your `docmd.config.js`.
 
 ```javascript
 // docmd.config.js
 import VersionInjector from './plugins/version-injector.js';
 
-export default defineConfig({
+export default {
+  title: 'My Project Docs',
   plugins: {
-    custom: [VersionInjector()]
+    // Register by providing the imported module
+    'version-injector': VersionInjector
   }
-});
+};
 ```
 
 ## Trade-offs
 
-Writing custom plugins requires diving into Node.js asynchronous architecture. Furthermore, any custom logic running in the `onRender` loop applies to *every single page*. A slow regex or a heavy API call inside `onRender` will transform `docmd`'s native ~1-second execution time into a multi-minute crawl.
+Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if not optimized. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimized Regex) to keep build times fast.

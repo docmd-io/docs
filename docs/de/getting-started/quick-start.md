@@ -7,16 +7,21 @@ Führen Sie docmd in jedem Ordner aus, der Markdown-Dateien enthält. Keine Konf
 
 ## Entwicklungsserver starten
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
-<!-- SCREENSHOT: Terminalausgabe nach dem Ausführen von `npx @docmd/core dev`, die die lokale Entwicklungsserver-URL und die Build-Zusammenfassung mit der Seitenanzahl zeigt. -->
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Öffnet `http://localhost:3000`. Ihre Dokumentation ist live.
 
-<!-- SCREENSHOT: Browser, der die docmd-Standardseite unter localhost:3000 anzeigt — die automatisch generierte Homepage mit sichtbarer Seitenleisten-Navigation. -->
-
-<!-- SCREENSHOT: Screenshot eines frisch laufenden docmd-Entwicklungsservers mit automatisch generierter Navigation -->
+<!-- SCREENSHOT: Terminalausgabe nach dem Ausführen von docmd dev, die die lokale Entwicklungsserver-URL und die Build-Zusammenfassung mit der Seitenanzahl zeigt. -->
 
 ## Was automatisch passiert
 
@@ -32,8 +37,16 @@ Es wird keine `docmd.config.js` benötigt. Fügen Sie später eine hinzu, wenn S
 
 ## Für die Produktion erstellen
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
+
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core build
+```
+:::
 
 Gibt eine statische Website in `./site/` aus, die überall bereitgestellt werden kann.

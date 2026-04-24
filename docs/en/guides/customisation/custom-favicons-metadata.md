@@ -1,46 +1,71 @@
 ---
-title: "Implementing Custom Favicons and Metadata"
-description: "A comprehensive guide on favicons & meta."
+title: "Customizing Favicons and Metadata"
+description: "How to configure your site's visual identity in the browser and optimize social media previews."
 ---
 
 ## Problem
 
-The uncustomized state of any site leads to generic browser tabs (the default globe icon) and terrible social media previews when links are shared on Slack or Twitter, diminishing click-through rates.
+A default documentation site often lacks a distinct visual identity in the browser (using a generic favicon) and provides poor previews when links are shared on social media or communication tools like Slack and Discord. This reduces brand recognition and click-through rates.
 
 ## Why it matters
 
-When an engineer pins your documentation tab, the Favicon is the only visual identifier they see. When they share an article internally, rich social previews containing branding and accurate titles validate the link's authority.
+Your favicon is the primary visual anchor in a crowded browser window. High-quality OpenGraph and Twitter metadata ensure that your documentation looks professional and trustworthy when shared, providing context through titles, descriptions, and hero images.
 
 ## Approach
 
-`docmd` natively handles standard metadata injection automatically based on your configuration `url` and `description` root tags. However, customized favicons and distinct social (OpenGraph) images must be placed manually.
+`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, leverage the [SEO Plugin](../../plugins/seo), which automates the generation of meta tags based on your project configuration and page frontmatter.
 
 ## Implementation
 
-### 1. The Favicon Array
-Generate your favicons (e.g., using a tool like realfavicongenerator.net) and place them in the `assets/` directory. Target them using the `head` array in `docmd.config.js`.
+### 1. Configuring the Favicon
+
+Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source directory and reference it in your `docmd.config.js`. `docmd` will automatically handle the relative pathing and cache-busting.
 
 ```javascript
-export default defineConfig({
-  head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/assets/favicon.ico' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/favicon-32x32.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/apple-touch-icon.png' }]
-  ]
-});
+// docmd.config.js
+export default {
+  title: 'My Project',
+  favicon: '/favicon.svg' // Relative to source directory
+};
 ```
 
-### 2. Page-Level Open Graph Images
-If a specific major release post needs a custom banner image when shared, use the `image` frontmatter property explicitly on that markdown file.
+### 2. Global SEO Configuration
+
+Enable and configure the [SEO Plugin](../../plugins/seo) to set default social media previews for your entire site.
+
+```javascript
+// docmd.config.js
+export default {
+  url: 'https://docs.example.com',
+  plugins: {
+    seo: {
+      defaultDescription: 'The ultimate guide to our amazing software.',
+      openGraph: {
+        defaultImage: '/static/og-banner.png'
+      },
+      twitter: {
+        siteUsername: '@myproject',
+        cardType: 'summary_large_image'
+      }
+    }
+  }
+};
+```
+
+### 3. Page-Specific Overrides
+
+You can override SEO settings for individual pages using the `seo` property in the [Frontmatter](../../content/frontmatter).
 
 ```yaml
 ---
-title: "Release v3.0: The Future"
-image: "https://docs.mycompany.com/assets/v3-hero.png"
+title: "Major Release v2.0"
+description: "Everything you need to know about our new engine."
+seo:
+  image: "/assets/v2-hero-banner.png"
+  keywords: ["release", "v2", "update", "performance"]
 ---
 ```
-`docmd` will automatically extract this and map it to `og:image` and `twitter:image` tags in the `<head>`.
 
 ## Trade-offs
 
-Managing custom `<head>` tags in the central JS config file requires hardcoding asset paths. If an asset is moved or renamed in your file system without updating the config array, `docmd` will not inherently throw a compilation error, and the image will 404 silently in production.
+While the `favicon` property is convenient, it only supports a single file. For complex multi-size favicon sets (Apple Touch Icons, Android manifests, etc.), you may need to use a custom plugin to inject additional `<link>` tags into the `<head>`.

@@ -1,44 +1,68 @@
 ---
-title: "Generating API Documentation from OpenAPI with docmd"
-description: "A comprehensive guide on openapi generation."
+title: "OpenAPI Generation"
+description: "How to integrate OpenAPI/Swagger schemas into your docmd workflow for automated and synchronized API reference documentation."
 ---
 
 ## Problem
 
-Manually maintaining API documentation means that the moment an engineer changes a REST endpoint, the documentation is immediately obsolete.
+Manually maintaining REST API documentation is a major operational risk. The moment an engineer modifies an endpoint or updates a schema in the code, the documentation becomes obsolete. Keeping these in sync manually is tedious, error-prone, and frequently leads to integration failures for your API consumers.
 
 ## Why it matters
 
-Inaccurate API references directly cause integration failures for your clients. Manually syncing payload schemas is tedious, error-prone, and a waste of engineering time.
+Inaccurate API references are a primary cause of developer frustration and increased support tickets. Automation ensures that your documentation remains the "source of truth," reflecting the actual state of your API in real-time (or at every build). This allows engineers to focus on building features rather than manually updating documentation tables.
 
 ## Approach
 
-Use an asynchronous pipeline to convert `swagger.json` or `openapi.yaml` into static `docmd` Markdown files. Since `docmd` natively supports complex layouts (Grids, Callouts, Code blocks), the generated output looks highly curated.
+Implement an asynchronous build pipeline that converts your `openapi.json` or `swagger.yaml` schema into standard Markdown files. Because `docmd` excels at rendering Markdown with complex [Containers](../../content/containers), the resulting API reference feels integrated and visually consistent with the rest of your documentation.
 
 ## Implementation
 
-There is no native OpenAPI plugin in `docmd` yet, but it integrates perfectly with standard generators like `widdershins` or custom scripts.
+### 1. Build Pipeline Integration
 
-1. **The Build Step**
-Add a pre-build step in `package.json` to fetch the schema and generate markdown.
+You can use a tool like `widdershins` or a custom script to generate Markdown from your OpenAPI schema as a pre-build step in your CI/CD pipeline.
 
 ```json
-"scripts": {
-  "prebuild": "npx widdershins --search false --language_tabs 'shell:cURL' 'javascript:Node' openapi.yaml -o docs/api/reference.md",
-  "build": "docmd build"
+// package.json
+{
+  "scripts": {
+    "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
+    "docs:build": "npm run docs:generate-api && npx docmd build"
+  }
 }
 ```
 
-2. **Layout Overrides**
-Force API reference pages into a "fullscreen" or "no-sidebar" layout to accommodate wide JSON response tables using frontmatter.
+### 2. Optimizing API Layouts
 
-```yaml
+API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter) to optimize the page layout for readability.
+
+```markdown
 ---
-title: "API Reference"
-layout: "fullscreen"
+title: "REST API Reference"
+layout: "full"  # Maximizes horizontal space for dense tables
 ---
+```
+
+Setting `layout: "full"` removes the right-hand Table of Contents sidebar, providing more room for wide code blocks and response examples.
+
+### 3. Enhancing with docmd Containers
+
+You can post-process the generated Markdown to inject `docmd` features like [Tabs](../../content/containers/tabs) for multi-language code samples or [Callouts](../../content/containers/callouts) for authentication warnings.
+
+```markdown
+::: tabs
+::: tab "cURL"
+```bash
+curl -X GET "https://api.example.com/v1/users"
+```
+:::
+::: tab "Node.js"
+```javascript
+const users = await client.getUsers();
+```
+:::
+:::
 ```
 
 ## Trade-offs
 
-Widdershins-generated markdown can be dense and lacks the "human touch" of handwritten guides. We highly recommend using OpenAPI generation purely for the **Reference** section, and keeping handwritten guides for the **Tutorials**, utilizing docmd routing to link between them seamlessly.
+Machine-generated documentation is excellent for technical accuracy but often lacks the "human touch" required for effective learning. We recommend using OpenAPI generation for the **Technical Reference** (endpoints, parameters, schemas) while providing handwritten **Tutorials** and **Conceptual Guides** to explain the context and use cases for your API.

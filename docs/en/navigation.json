@@ -524,6 +524,10 @@
     "collapsible": false,
     "children": [
       {
+        "title": "v0.7.3 — Tab Icons",
+        "path": "/release-notes/0-7-3"
+      },
+      {
         "title": "v0.7.2 — Deploy CLI",
         "path": "/release-notes/0-7-2"
       },
