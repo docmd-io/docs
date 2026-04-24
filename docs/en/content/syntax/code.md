@@ -25,6 +25,26 @@ function initialize() {
 }
 ```
 
+## Block Titles
+
+You can provide a descriptive title (like a filename) for your code blocks by following the language identifier with a string in double quotes. This renders a premium header above the code block.
+
+````markdown
+```javascript "initialize.js"
+function initialize() {
+  console.log("docmd engine active.");
+}
+```
+````
+
+**Rendered Result:**
+
+```javascript "initialize.js"
+function initialize() {
+  console.log("docmd engine active.");
+}
+```
+
 ::: callout tip "One-Click Portability"
 When `copyCode: true` is enabled in your configuration (default), a subtle copy button automatically appears in the top-right corner of every code block on hover, allowing users to instantly transfer snippets to their IDE.
 :::

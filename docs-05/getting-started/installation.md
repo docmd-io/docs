@@ -27,10 +27,10 @@ For permanent projects, install `docmd` as dependency to lock your versions.
 npm install @docmd/core
 
 # 2. Initialize your configuration
-npx docmd init
+npx @docmd/core init
 
 # 3. Start developing
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### Option 3: Global Installation

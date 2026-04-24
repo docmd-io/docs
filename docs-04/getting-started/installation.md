@@ -38,7 +38,7 @@ yarn add -D @docmd/core
 When installed locally, you cannot run `docmd` directly. Instead, use your package manager's runner:
 
 ```bash
-npx docmd dev
+npx @docmd/core dev
 # or
 pnpm docmd dev
 ```

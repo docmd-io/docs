@@ -28,8 +28,8 @@ Deploy a beautiful, searchable documentation site in seconds. No framework knowl
 ```bash
 npm install @docmd/core     # Install locally (Recommended)
 
-npx docmd init              # Initialize your configuration
-npx docmd dev               # Start developing
+npx @docmd/core init              # Initialize your configuration
+npx @docmd/core dev               # Start developing
 ```
 
 **2. Install Globally**

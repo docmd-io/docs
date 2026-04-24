@@ -41,10 +41,10 @@ pnpm add docmd
 如果故障排除步骤或特定边缘案例仅适用于极少数用户，请不要让它中断主教程的逻辑流。使用 [可折叠容器 (Collapsible Container)](../../content/containers/collapsible) 埋没这些细节，同时在需要时保持其易于访问。
 
 ```markdown
-1. 运行 `npx docmd dev` 启动开发服务器。
+1. 运行 `npx @docmd/core dev` 启动开发服务器。
 
 ::: collapsible "故障排除：端口已被占用"
-如果您收到 `EADDRINUSE` 错误，可以使用 `--port` 标志指定自定义端口：`npx docmd dev --port 4000`。
+如果您收到 `EADDRINUSE` 错误，可以使用 `--port` 标志指定自定义端口：`npx @docmd/core dev --port 4000`。
 :::
 ```
 

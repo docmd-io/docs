@@ -41,9 +41,9 @@ Vermeiden Sie bei Tutorials und Schritt-für-Schritt-Anleitungen erzählende Bes
 
 ```markdown
 ::: steps
-1. **Initialisieren**: Führen Sie `npx docmd init` in Ihrem Projektverzeichnis aus.
+1. **Initialisieren**: Führen Sie `npx @docmd/core init` in Ihrem Projektverzeichnis aus.
 2. **Konfigurieren**: Aktualisieren Sie Ihre `docmd.config.js` mit Ihrem Seitentitel und der Navigation.
-3. **Builden**: Führen Sie `npx docmd build` aus, um Ihre produktionsreifen statischen Dateien zu generieren.
+3. **Builden**: Führen Sie `npx @docmd/core build` aus, um Ihre produktionsreifen statischen Dateien zu generieren.
 :::
 ```
 

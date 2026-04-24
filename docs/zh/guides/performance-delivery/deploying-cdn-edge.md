@@ -40,7 +40,7 @@ jobs:
           node-version: 22
       
       # 将站点构建到默认的 'site/' 目录中
-      - run: npm install && npx docmd build
+      - run: npm install && npx @docmd/core build
       
       # 示例：部署到 Cloudflare Pages
       - name: Deploy

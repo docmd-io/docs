@@ -41,10 +41,10 @@ pnpm add docmd
 Wenn ein Troubleshooting-Schritt oder ein spezifischer Edge-Case nur für einen kleinen Prozentsatz der Benutzer relevant ist, sollte er den logischen Fluss Ihres Haupt-Tutorials nicht unterbrechen. Verwenden Sie den [Collapsible-Container](../../content/containers/collapsible), um diese Details zu verbergen, während sie bei Bedarf leicht zugänglich bleiben.
 
 ```markdown
-1. Starten Sie den Entwicklungsserver mit dem Befehl `npx docmd dev`.
+1. Starten Sie den Entwicklungsserver mit dem Befehl `npx @docmd/core dev`.
 
 ::: collapsible "Troubleshooting: Port bereits belegt"
-Wenn Sie den Fehler `EADDRINUSE` erhalten, können Sie einen benutzerdefinierten Port mit dem Flag `--port` angeben: `npx docmd dev --port 4000`.
+Wenn Sie den Fehler `EADDRINUSE` erhalten, können Sie einen benutzerdefinierten Port mit dem Flag `--port` angeben: `npx @docmd/core dev --port 4000`.
 :::
 ```
 

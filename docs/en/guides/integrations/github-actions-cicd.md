@@ -45,7 +45,7 @@ jobs:
       - run: npm install
       
       # Build the site into the 'site/' directory
-      - run: npx docmd build
+      - run: npx @docmd/core build
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
@@ -62,7 +62,7 @@ If you host your own documentation, use the [Deploy Command](../../deployment) t
 
 ```bash
 # Generate Docker and Nginx configs locally
-npx docmd deploy --docker --nginx
+npx @docmd/core deploy --docker --nginx
 ```
 
 You can then update your GitHub Action to build and push this Docker image to a registry (like Docker Hub or GitHub Container Registry) whenever you release a new version.

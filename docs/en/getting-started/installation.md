@@ -39,8 +39,8 @@ bunx @docmd/core build
 == tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
-npx docmd init
-npx docmd dev
+npx @docmd/core init
+npx @docmd/core dev
 ```
 == tab "pnpm" icon:boxes
 ```bash
@@ -64,10 +64,10 @@ bunx docmd dev
 
 This pins the version across your team and CI/CD pipeline.
 
-<!-- SCREENSHOT: Terminal output showing a successful `npx docmd init` run — the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
+<!-- SCREENSHOT: Terminal output showing a successful `npx @docmd/core init` run — the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
 
 ::: callout tip "After local install"
-Once `@docmd/core` is a project dependency, use `npx docmd` instead of `npx @docmd/core` for all commands.
+Once `@docmd/core` is a project dependency, use `npx @docmd/core` instead of `npx @docmd/core` for all commands.
 :::
 
 ## Install globally

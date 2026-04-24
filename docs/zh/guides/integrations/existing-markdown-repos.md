@@ -23,7 +23,7 @@ description: "如何从现有的 Markdown 文件中即时生成专业的文档�
 
 ```bash
 cd my-existing-docs/
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### 2. 自动导航 (Auto-Router)

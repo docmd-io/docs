@@ -23,7 +23,7 @@ The easiest way to implement optimal caching is by using the [Deploy Command](..
 
 ```bash
 # Generate an optimized Nginx configuration
-npx docmd deploy --nginx
+npx @docmd/core deploy --nginx
 ```
 
 ### 2. Immutable Assets

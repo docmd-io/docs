@@ -11,7 +11,7 @@ To start a new documentation project, create a directory and execute the `init` 
 
 ```bash
 mkdir my-docs && cd my-docs
-npx docmd init
+npx @docmd/core init
 ```
 
 ### Project Structure
@@ -30,7 +30,7 @@ After initialization, your project will follow a clean and predictable structure
 You can preview your changes instantly without manual rebuilding. Start the development server with:
 
 ```bash
-npx docmd dev
+npx @docmd/core dev
 ```
 
 *   **Access**: `http://localhost:3000`
@@ -76,7 +76,7 @@ export default defineConfig({
 When you are ready to deploy, generate a production-ready static site:
 
 ```bash
-npx docmd build
+npx @docmd/core build
 ```
 
 This command produces a highly optimized Single Page Application (SPA) in the `site/` directory. The output is entirely static and can be hosted on platforms like GitHub Pages, Vercel, Netlify, or even served from a local file system.

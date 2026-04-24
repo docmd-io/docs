@@ -45,7 +45,7 @@ jobs:
       - run: npm install
       
       # 将站点构建到 'site/' 目录中
-      - run: npx docmd build
+      - run: npx @docmd/core build
 
       - name: 上传产物
         uses: actions/upload-pages-artifact@v3
@@ -62,7 +62,7 @@ jobs:
 
 ```bash
 # 在本地生成 Docker 和 Nginx 配置
-npx docmd deploy --docker --nginx
+npx @docmd/core deploy --docker --nginx
 ```
 
 随后，您可以更新 GitHub Action，以便在发布新版本时构建此 Docker 镜像并将其推送到注册表（如 Docker Hub 或 GitHub Container Registry）。

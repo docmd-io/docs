@@ -50,7 +50,7 @@ export default {
 ```bash
 # 在您的 CI 流水线中
 npm install
-npx docmd build
+npx @docmd/core build
 ```
 
 ## 权衡

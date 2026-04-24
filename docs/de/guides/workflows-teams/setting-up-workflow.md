@@ -30,7 +30,7 @@ Integrieren Sie `docmd` in Ihre CI/CD-Pipeline, um sicherzustellen, dass jedes U
 ```bash
 # Beispiel für einen Validierungsschritt in GitHub Actions
 - name: Dokumentation validieren
-  run: npm install && npx docmd build
+  run: npm install && npx @docmd/core build
 ```
 Detaillierte Setup-Anweisungen finden Sie im [GitHub Actions Leitfaden](../../guides/integrations/github-actions-cicd).
 

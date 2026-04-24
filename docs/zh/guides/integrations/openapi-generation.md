@@ -26,7 +26,7 @@ description: "如何将 OpenAPI/Swagger 模式集成到您的 docmd 工作流中
 {
   "scripts": {
     "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
-    "docs:build": "npm run docs:generate-api && npx docmd build"
+    "docs:build": "npm run docs:generate-api && npx @docmd/core build"
   }
 }
 ```

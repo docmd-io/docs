@@ -10,6 +10,8 @@ The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://
 - **Zero Scripting**: No need to manually include external scripts or CDN links. `docmd` detects the usage and injects the rendering engine only where needed.
 - **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
 - **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialized and rendered only as they enter the user's viewport.
+- **Interactive Controls**: Every diagram includes built-in **Pan**, **Zoom**, and **Fullscreen** capabilities, ensuring large architectural charts remain legible on all screen sizes.
+- **Icon Integration**: Deep support for the **Lucide** icon pack, allowing you to use `lucide:icon-name` syntax within architecture diagrams.
 - **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
 
 ## Configuration

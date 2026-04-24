@@ -50,7 +50,7 @@ Integrieren Sie `docmd` in Ihre CI/CD-Pipeline (z. B. [GitHub Actions](../../gui
 ```bash
 # In Ihrer CI-Pipeline
 npm install
-npx docmd build
+npx @docmd/core build
 ```
 
 ## Abwägungen

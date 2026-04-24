@@ -23,7 +23,7 @@ Navigate to your existing Markdown folder and run the development server. `docmd
 
 ```bash
 cd my-existing-docs/
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### 2. Automatic Navigation (Auto-Router)

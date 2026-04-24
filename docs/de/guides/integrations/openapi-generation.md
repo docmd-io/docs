@@ -26,7 +26,7 @@ Sie können ein Tool wie `widdershins` oder ein eigenes Skript verwenden, um als
 {
   "scripts": {
     "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
-    "docs:build": "npm run docs:generate-api && npx docmd build"
+    "docs:build": "npm run docs:generate-api && npx @docmd/core build"
   }
 }
 ```

@@ -45,7 +45,7 @@ jobs:
       - run: npm install
       
       # Baut die Seite in das Verzeichnis 'site/'
-      - run: npx docmd build
+      - run: npx @docmd/core build
 
       - name: Artefakt hochladen
         uses: actions/upload-pages-artifact@v3
@@ -62,7 +62,7 @@ Wenn Sie Ihre Dokumentation selbst hosten, verwenden Sie den [Deploy-Befehl](../
 
 ```bash
 # Docker- und Nginx-Configs lokal generieren
-npx docmd deploy --docker --nginx
+npx @docmd/core deploy --docker --nginx
 ```
 
 Sie können dann Ihre GitHub Action aktualisieren, um dieses Docker-Image zu bauen und bei jedem Release in eine Registry (wie Docker Hub oder GitHub Container Registry) zu pushen.

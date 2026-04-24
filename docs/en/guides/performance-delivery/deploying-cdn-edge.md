@@ -40,7 +40,7 @@ jobs:
           node-version: 22
       
       # Build the site into the default 'site/' directory
-      - run: npm install && npx docmd build
+      - run: npm install && npx @docmd/core build
       
       # Example: Deploying to Cloudflare Pages
       - name: Deploy

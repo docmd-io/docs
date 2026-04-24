@@ -39,8 +39,8 @@ bunx @docmd/core build
 == tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
-npx docmd init
-npx docmd dev
+npx @docmd/core init
+npx @docmd/core dev
 ```
 == tab "pnpm" icon:boxes
 ```bash
@@ -65,7 +65,7 @@ bunx docmd dev
 这种方式可以锁定版本，方便团队和 CI/CD 流水线保持一致。
 
 ::: callout tip "本地安装后"
-将 `@docmd/core` 安装为项目依赖后，所有命令改用 `npx docmd` 替代 `npx @docmd/core`。
+将 `@docmd/core` 安装为项目依赖后，所有命令改用 `npx @docmd/core` 替代 `npx @docmd/core`。
 :::
 
 ## 全局安装

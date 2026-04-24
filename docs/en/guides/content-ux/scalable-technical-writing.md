@@ -41,10 +41,10 @@ pnpm add docmd
 If a troubleshooting step or a specific edge case only applies to a small percentage of users, do not let it interrupt the logical flow of your main tutorial. Use the [Collapsible Container](../../content/containers/collapsible) to bury these details while keeping them easily accessible when needed.
 
 ```markdown
-1. Start the development server by running `npx docmd dev`.
+1. Start the development server by running `npx @docmd/core dev`.
 
 ::: collapsible "Troubleshooting: Port already in use"
-If you receive an `EADDRINUSE` error, you can specify a custom port using the `--port` flag: `npx docmd dev --port 4000`.
+If you receive an `EADDRINUSE` error, you can specify a custom port using the `--port` flag: `npx @docmd/core dev --port 4000`.
 :::
 ```
 

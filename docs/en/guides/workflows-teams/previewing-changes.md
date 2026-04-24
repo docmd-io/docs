@@ -23,14 +23,14 @@ The fastest way to see your changes is by running the `docmd dev` server. It fea
 
 ```bash
 # Start the local development server
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### 2. Cloud-Based Preview Environments
 
 For collaborative reviews, configure your CI/CD platform to generate unique "Preview URLs" for every Pull Request. Since `docmd` outputs standard static files, it is compatible with all major hosting providers.
 
-*   **Build Command**: `npx docmd build`
+*   **Build Command**: `npx @docmd/core build`
 *   **Output Directory**: `site`
 
 This allows reviewers to see exactly how the changes will look and behave in a production-like environment before they are merged into the main branch.

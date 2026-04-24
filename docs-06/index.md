@@ -27,8 +27,8 @@ Deploy a beautiful, searchable documentation site in seconds. No framework knowl
 **1. Install `docmd` as a development dependency**
 ```bash
 npm install -D @docmd/core     # Recommended: Install locally
-npx docmd init                 # Initialize your project configuration
-npx docmd dev                  # Start the development server
+npx @docmd/core init                 # Initialize your project configuration
+npx @docmd/core dev                  # Start the development server
 ```
 
 **2. Global Installation (Optional)**
@@ -39,7 +39,7 @@ npm install -g @docmd/core     # Run docmd from anywhere on your system
 **3. Instant Zero-Config Execution**
 ```bash
 # Start a dev server instantly without any local configuration
-npx docmd dev -z
+npx @docmd/core dev -z
 ```
 
 Once running, open `http://localhost:3000` in your browser. Changes to your files in the `docs/` folder will reflect instantly via Hot Module Replacement (HMR).

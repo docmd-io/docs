@@ -13,10 +13,10 @@ You can run `docmd` inside any directory containing Markdown files. It automatic
 
 ```bash
 # Start a local development server on http://localhost:3000
-npx docmd dev -z
+npx @docmd/core dev -z
 
 # Generate a production-ready static site in the /site directory
-npx docmd build -z
+npx @docmd/core build -z
 ```
 
 ::: callout warning "Beta Feature"
@@ -32,10 +32,10 @@ For long-term projects, we recommend installing `docmd` as a development depende
 npm install -D @docmd/core
 
 # 2. Initialize your project configuration
-npx docmd init
+npx @docmd/core init
 
 # 3. Start the development server
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ## Option 3: Global Installation

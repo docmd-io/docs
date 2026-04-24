@@ -41,9 +41,9 @@ For tutorials and step-by-step guides, avoid narrative descriptions of actions. 
 
 ```markdown
 ::: steps
-1. **Initialize**: Run `npx docmd init` in your project root.
+1. **Initialize**: Run `npx @docmd/core init` in your project root.
 2. **Configure**: Update your `docmd.config.js` with your site title and navigation.
-3. **Build**: Run `npx docmd build` to generate your production-ready static files.
+3. **Build**: Run `npx @docmd/core build` to generate your production-ready static files.
 :::
 ```
 

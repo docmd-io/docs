@@ -23,7 +23,7 @@ description: "如何使用不可变缓存、Etag 重新验证和生产级服务�
 
 ```bash
 # 生成经过优化的 Nginx 配置
-npx docmd deploy --nginx
+npx @docmd/core deploy --nginx
 ```
 
 ### 2. 不可变资产

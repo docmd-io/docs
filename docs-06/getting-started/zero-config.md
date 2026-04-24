@@ -11,10 +11,10 @@ To activate Zero-Config mode, simply append the `-z` or `--zero-config` flag to 
 
 ```bash
 # Start the development server instantly
-npx docmd dev -z
+npx @docmd/core dev -z
 
 # Generate a production-ready static site
-npx docmd build -z
+npx @docmd/core build -z
 ```
 
 ## How It Works

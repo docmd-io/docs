@@ -272,6 +272,33 @@
     ]
   },
   {
+    "title": "Migration",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
     "title": "API-Referenz",
     "icon": "braces",
     "collapsible": true,
@@ -448,14 +475,6 @@
           {
             "title": "Bestehende Repos",
             "path": "/guides/integrations/existing-markdown-repos"
-          },
-          {
-            "title": "von Docusaurus",
-            "path": "/guides/integrations/migrating-docusaurus"
-          },
-          {
-            "title": "von MkDocs",
-            "path": "/guides/integrations/migrating-mkdocs"
           },
           {
             "title": "Parallele Tools",

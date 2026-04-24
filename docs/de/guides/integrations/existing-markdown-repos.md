@@ -23,7 +23,7 @@ Navigieren Sie zu Ihrem vorhandenen Markdown-Ordner und starten Sie den Entwickl
 
 ```bash
 cd meine-vorhandenen-docs/
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### 2. Automatische Navigation (Auto-Router)

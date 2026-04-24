@@ -26,7 +26,7 @@ You can use a tool like `widdershins` or a custom script to generate Markdown fr
 {
   "scripts": {
     "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
-    "docs:build": "npm run docs:generate-api && npx docmd build"
+    "docs:build": "npm run docs:generate-api && npx @docmd/core build"
   }
 }
 ```

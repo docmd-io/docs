@@ -23,14 +23,14 @@ Der schnellste Weg, Ihre Änderungen zu sehen, ist der Befehl `docmd dev`. Er bi
 
 ```bash
 # Lokalen Entwicklungsserver starten
-npx docmd dev
+npx @docmd/core dev
 ```
 
 ### 2. Cloudbasierte Preview-Umgebungen
 
 Konfigurieren Sie für die gemeinsame Review-Arbeit Ihre CI/CD-Plattform so, dass für jeden Pull Request eindeutige "Preview-URLs" generiert werden. Da `docmd` standardmäßige statische Dateien ausgibt, ist es mit allen gängigen Hosting-Anbietern kompatibel.
 
-*   **Build-Befehl**: `npx docmd build`
+*   **Build-Befehl**: `npx @docmd/core build`
 *   **Output-Verzeichnis**: `site`
 
 Dies ermöglicht es Reviewern, genau zu sehen, wie die Änderungen in einer produktionsnahen Umgebung aussehen und funktionieren, bevor sie in den Hauptzweig gemergt werden.

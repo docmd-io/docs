@@ -30,7 +30,7 @@ Integrate `docmd` into your CI/CD pipeline to ensure that every update is techni
 ```bash
 # Example validation step in GitHub Actions
 - name: Validate Documentation
-  run: npm install && npx docmd build
+  run: npm install && npx @docmd/core build
 ```
 See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd) for detailed setup instructions.
 

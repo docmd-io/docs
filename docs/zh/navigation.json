@@ -272,6 +272,33 @@
     ]
   },
   {
+    "title": "迁移",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
     "title": "API 参考",
     "icon": "braces",
     "collapsible": true,
@@ -448,14 +475,6 @@
           {
             "title": "兼容现有仓库",
             "path": "/guides/integrations/existing-markdown-repos"
-          },
-          {
-            "title": "由 Docusaurus 迁移",
-            "path": "/guides/integrations/migrating-docusaurus"
-          },
-          {
-            "title": "由 MkDocs 迁移",
-            "path": "/guides/integrations/migrating-mkdocs"
           },
           {
             "title": "并发工具集成",
