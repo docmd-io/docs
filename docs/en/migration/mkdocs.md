@@ -3,7 +3,7 @@ title: "Migrating from MkDocs"
 description: "A comprehensive guide on moving your MkDocs (or Material for MkDocs) project to docmd."
 ---
 
-# Migrating from MkDocs
+# Migrating from MkDocs to docmd
 
 MkDocs, particularly with the Material theme, is a popular Python-based documentation generator. `docmd` provides a similar Markdown-first experience, but relies on Node.js/Bun for incredibly fast builds and rich interactive features without the need for complex Python extensions.
 

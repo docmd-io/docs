@@ -3,7 +3,7 @@ title: "由 Docusaurus 迁移"
 description: "将您的 Docusaurus v2/v3 项目迁移到 docmd 的综合指南。"
 ---
 
-# 由 Docusaurus 迁移
+# 由 Docusaurus 迁移到 docmd
 
 Docusaurus 是一个流行的基于 React 的文档框架。`docmd` 提供了一个快速、零配置的替代方案，其编译速度显著加快，并且不需要 React 组件即可渲染丰富的功能。
 

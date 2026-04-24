@@ -3,7 +3,7 @@ title: "由 Astro Starlight 迁移"
 description: "将您的 Astro Starlight 项目迁移到 docmd 的综合指南。"
 ---
 
-# 由 Astro Starlight 迁移
+# 由 Astro Starlight 迁移到 docmd
 
 Starlight 是一个构建在 Astro 框架上的出色文档主题。`docmd` 提供了类似的默认零 JavaScript 体验，但它消除了配置完整 Web 框架 (Astro) 的需要，从而大幅降低了技术作者的学习曲线。
 

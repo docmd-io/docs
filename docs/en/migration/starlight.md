@@ -3,7 +3,7 @@ title: "Migrating from Astro Starlight"
 description: "A comprehensive guide on moving your Astro Starlight project to docmd."
 ---
 
-# Migrating from Astro Starlight
+# Migrating from Astro Starlight to docmd
 
 Starlight is an excellent documentation theme built on the Astro framework. `docmd` provides a similar zero-JavaScript-by-default experience, but eliminates the need to configure a full web framework (Astro), dramatically reducing the learning curve for technical writers.
 

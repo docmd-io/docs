@@ -3,7 +3,7 @@ title: "由 MkDocs 迁移"
 description: "将您的 MkDocs (或 Material for MkDocs) 项目迁移到 docmd 的综合指南。"
 ---
 
-# 由 MkDocs 迁移
+# 由 MkDocs 迁移到 docmd
 
 MkDocs，特别是结合了 Material 主题，是一个非常受欢迎的基于 Python 的文档生成器。`docmd` 提供类似的以 Markdown 优先的体验，但基于 Node.js/Bun，构建速度极快，且原生支持丰富的交互式功能，无需安装复杂的 Python 扩展。
 

@@ -10,6 +10,8 @@ Das Plugin `@docmd/plugin-mermaid` integriert die leistungsstarke [Mermaid.js](h
 - **Zero Scripting**: Manuelles Einbinden von externen Skripten oder CDN-Links ist nicht erforderlich. `docmd` erkennt die Verwendung und fügt die Rendering-Engine nur dort ein, wo sie benötigt wird.
 - **Theme-Bewusstsein**: Diagramme passen ihre Farbschemata automatisch an den Wechsel zwischen **Hell-** und **Dunkelmodus** Ihrer Website an.
 - **Isomorphes Lazy-Loading**: Für eine optimale Performance werden Diagramme erst initialisiert und gerendert, wenn sie in den Sichtbereich des Benutzers gelangen.
+- **Interaktive Steuerung**: Jedes Diagramm verfügt über integrierte **Schwenk-**, **Zoom-** und **Vollbildfunktionen**, um sicherzustellen, dass große Architekturdiagramme auf allen Bildschirmgrößen lesbar bleiben.
+- **Icon-Integration**: Tiefe Unterstützung für das **Lucide**-Icon-Paket, sodass Sie die `lucide:icon-name`-Syntax in Architekturdiagrammen verwenden können.
 - **Technische Lesbarkeit**: Diagramme bleiben in Ihrer Quelle reiner Text, was sie leicht versionierbar und für KI-Agenten lesbar macht.
 
 ## Konfiguration
@@ -122,6 +124,37 @@ gitGraph
     checkout main
     merge develop
     commit
+```
+````
+
+:::
+
+### 4. Architektur & Icons
+Verwenden Sie das integrierte **Lucide**-Icon-Paket, um detailreiche Architekturdiagramme zu erstellen, die zum visuellen Stil Ihrer Website passen.
+
+::: tabs
+
+== tab "Vorschau"
+```mermaid
+flowchart TD
+    User([lucide:user Benutzer])
+    Web([lucide:globe Web-App])
+    DB[(lucide:database Datenbank)]
+    
+    User --> Web
+    Web --> DB
+```
+
+== tab "Markdown-Quelle"
+````markdown
+```mermaid
+flowchart TD
+    User([lucide:user Benutzer])
+    Web([lucide:globe Web-App])
+    DB[(lucide:database Datenbank)]
+    
+    User --> Web
+    Web --> DB
 ```
 ````
 

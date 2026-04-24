@@ -3,7 +3,7 @@ title: "由 VitePress 迁移"
 description: "将您的 VitePress 项目迁移到 docmd 的综合指南。"
 ---
 
-# 由 VitePress 迁移
+# 由 VitePress 迁移到 docmd
 
 VitePress 是一个极其快速的基于 Vue 的静态网站生成器 (SSG) 框架。与 VitePress 类似，`docmd` 的运行速度也非常快，但它通过绝不向客户端加载任何 JavaScript 框架逻辑（没有 Vue 的水合成本）来实现这一点。
 

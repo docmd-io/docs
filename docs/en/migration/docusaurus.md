@@ -3,7 +3,7 @@ title: "Migrating from Docusaurus"
 description: "A comprehensive guide on moving your Docusaurus v2/v3 project to docmd."
 ---
 
-# Migrating from Docusaurus
+# Migrating from Docusaurus to docmd
 
 Docusaurus is a popular documentation framework built on React. `docmd` provides a fast, zero-config alternative that compiles significantly faster and doesn't require React components to render rich features.
 

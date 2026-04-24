@@ -3,7 +3,7 @@ title: "Migrating from VitePress"
 description: "A comprehensive guide on moving your VitePress project to docmd."
 ---
 
-# Migrating from VitePress
+# Migrating from VitePress to docmd
 
 VitePress is a fast Vue-powered SSG framework. Like VitePress, `docmd` is exceptionally fast, but it achieves this by shipping absolutely zero JavaScript framework logic to the client (no Vue hydration overhead).
 

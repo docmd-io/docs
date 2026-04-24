@@ -3,7 +3,7 @@ title: "Von Astro Starlight migrieren"
 description: "Ein umfassender Leitfaden zur Migration Ihres Astro Starlight-Projekts zu docmd."
 ---
 
-# Von Astro Starlight migrieren
+# Von Astro Starlight migrieren zu docmd
 
 Starlight ist ein hervorragendes Dokumentations-Theme, das auf dem Astro-Framework basiert. `docmd` bietet eine ähnliche Standarderfahrung ohne JavaScript, macht jedoch die Konfiguration eines vollständigen Web-Frameworks (Astro) überflüssig, was die Lernkurve für technische Redakteure drastisch reduziert.
 

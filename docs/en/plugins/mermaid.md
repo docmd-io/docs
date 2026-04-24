@@ -129,6 +129,37 @@ gitGraph
 
 :::
 
+### 4. Architecture & Icons
+Use the integrated **Lucide** icon pack to create rich architectural diagrams that match your site's visual style.
+
+::: tabs
+
+== tab "Preview"
+```mermaid
+flowchart TD
+    User([lucide:user User])
+    Web([lucide:globe Web App])
+    DB[(lucide:database Database)]
+    
+    User --> Web
+    Web --> DB
+```
+
+== tab "Markdown Source"
+````markdown
+```mermaid
+flowchart TD
+    User([lucide:user User])
+    Web([lucide:globe Web App])
+    DB[(lucide:database Database)]
+    
+    User --> Web
+    Web --> DB
+```
+````
+
+:::
+
 ## Technical Implementation
 
 The Mermaid plugin operates by intercepting `mermaid` code blocks during the parsing phase and wrapping them in a specialised `<div class="mermaid">` container. 
