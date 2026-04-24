@@ -8,7 +8,7 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.7.0",
-    "@docmd/plugin-math": "^0.7.0"
+    "@docmd/core": "^0.7.3",
+    "@docmd/plugin-math": "^0.7.3"
   }
 }
