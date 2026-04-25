@@ -1,68 +1,117 @@
 ---
 title: "Comparison"
-description: "A factual comparison between docmd and other documentation generators — real numbers, real features."
+description: "How docmd stacks up against Docusaurus, VitePress, MkDocs, Starlight, and Mintlify — real numbers, real features."
 ---
 
-`docmd` occupies the space between simple Markdown parsers and heavy framework applications. It delivers the speed and SEO of a static site with the interactive feel of a modern SPA — at a fraction of the payload.
+You picked a documentation tool before. You'll pick one again. Here's what actually matters — and where docmd stands.
 
-## Feature Matrix
+## Start writing in 3 seconds, not 30 minutes
 
-| Feature | docmd | Docusaurus | MkDocs Material | VitePress | Mintlify |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Language** | Node.js | React | Python | Vue | SaaS |
-| **Config required** | **None** | `docusaurus.config.js` | `mkdocs.yml` | `config.mts` | `mint.json` |
-| **Initial payload** | **~18kb** | ~250kb | ~40kb | ~50kb | ~120kb |
-| **Navigation** | **SPA router** | React SPA | Full reloads | Vue SPA | Hosted SPA |
-| **Versioning** | **Native** | Native (complex) | mike plugin | Manual | Native |
-| **i18n** | **Native** | Native (complex) | Plugin-based | Manual | Native |
-| **Search** | **Built-in** | Algolia (cloud) | Built-in | MiniSearch | Cloud |
-| **PWA** | **Optional plugin** | Community plugin | None | None | Hosted |
-| **llms.txt** | **Built-in (Auto-generated)** | Manual | None | None | Proprietary |
-| **Inline discussions** | **Threads plugin** | None | None | None | None |
-| **Self-hosted** | **Yes** | Yes | Yes | Yes | No |
-| **Zero-config start** | **`npx @docmd/core dev`** | No | No | No | No |
+::: tabs
+tab: docmd
+```bash
+npx @docmd/core dev
+```
+Done. Your docs are live. No config files, no project scaffolding, no dependency maze.
 
-<!-- SCREENSHOT: Feature matrix comparison table rendered on the live site, showing the visual styling of the table with highlighted docmd column. -->
+tab: Docusaurus
+```bash
+npx create-docusaurus@latest my-site classic
+cd my-site
+npm install
+npm start
+```
+Four commands, a generated project with ~250MB in `node_modules`, and a `docusaurus.config.js` you'll need to edit before anything useful happens.
 
-## The Numbers
+tab: VitePress
+```bash
+npx vitepress init
+```
+Asks you 5 questions, generates a config file, then you run `vitepress dev`. Clean — but still requires scaffolding.
 
-### Build payload
+tab: MkDocs
+```bash
+pip install mkdocs-material
+mkdocs new my-site && cd my-site
+mkdocs serve
+```
+Python ecosystem. You'll need `pip`, a virtual environment, and a `mkdocs.yml` before the first page renders.
+:::
 
-A documentation site with 50 pages and default configuration:
+## The payload gap is real
 
-| Generator | Initial page load | JS payload | CSS payload |
-| :--- | :--- | :--- | :--- |
-| **docmd** | **~18kb** total | ~12kb | ~6kb |
-| VitePress | ~50kb total | ~35kb | ~15kb |
-| MkDocs Material | ~40kb total | ~25kb | ~15kb |
-| Docusaurus | ~250kb total | ~200kb | ~50kb |
-| Mintlify | ~120kb total | ~80kb | ~40kb |
+Your readers shouldn't download a React app just to read a paragraph. Here's what the browser actually receives on a 50-page site:
 
-<!-- SCREENSHOT: Side-by-side Lighthouse scores comparing docmd, Docusaurus, and VitePress — showing Performance, Accessibility, Best Practices, and SEO scores. All four categories should score 100 for docmd. -->
+| Generator | Total initial load | JS payload | CSS payload |
+|:----------|:------------------:|:----------:|:----------:|
+| **docmd** | **~18 KB** | ~12 KB | ~6 KB |
+| MkDocs Material | ~40 KB | ~25 KB | ~15 KB |
+| VitePress | ~50 KB | ~35 KB | ~15 KB |
+| Mintlify | ~120 KB | ~80 KB | ~40 KB |
+| Docusaurus | ~250 KB | ~200 KB | ~50 KB |
 
-### Build speed
+::: callout tip "Why this matters"
+Every 100 KB of JavaScript costs ~50ms of parse time on a mid-range phone. docmd's 12 KB JS means your docs load instantly — even on 3G. Docusaurus ships 16× more JavaScript for the same content.
+:::
+
+## Build speed
 
 Building the same 50-page site on an M1 MacBook Air:
 
 | Generator | Cold build | Hot rebuild (dev) |
-| :--- | :--- | :--- |
+|:----------|:----------:|:-----------------:|
 | **docmd** | **~1.2s** | **~80ms** |
 | VitePress | ~2.5s | ~150ms |
 | MkDocs Material | ~3.0s | ~500ms |
 | Docusaurus | ~15s | ~2s |
 
-### Configuration overhead
+docmd rebuilds are fast enough that the page refreshes before you switch windows.
 
-Lines of configuration required for a site with versioning, i18n, search, and sitemap:
+## i18n that actually works
+
+This is where most tools fall apart. You add 6 languages, translate 3 pages in Hindi, and suddenly your users hit 404s on every untranslated page.
+
+| Capability | docmd | VitePress | Docusaurus | Starlight |
+|:-----------|:-----:|:---------:|:----------:|:---------:|
+| Per-page fallback to default locale | ✅ | ❌ (404) | ❌ (404) | ✅ |
+| Localised "not translated" warning | ✅ | ❌ | ❌ | ✅ |
+| Auto-disable missing locales in switcher | ✅ | ❌ | ❌ | ❌ |
+| Instant page-existence check (no network) | ✅ | ❌ | ❌ | ❌ |
+| Versioning + i18n combined | ✅ | ❌ | ❌ | ❌ |
+| Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
+
+::: callout warning "What happens in VitePress and Docusaurus"
+If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time — unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localized warning callout.
+:::
+
+## Full feature matrix
+
+| Feature | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
+|:--------|:-----:|:----------:|:---------:|:---------------:|:---------:|:--------:|
+| **Zero-config start** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Config required** | None | `docusaurus.config.js` | `config.mts` | `mkdocs.yml` | `astro.config.mjs` | `mint.json` |
+| **SPA navigation** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| **Native versioning** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
+| **Native i18n** | ✅ | ✅ | Manual | Plugin | ✅ | ✅ |
+| **Built-in search** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
+| **llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Inline discussions** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **PWA support** | ✅ | Community | ❌ | ❌ | ❌ | ❌ |
+| **Self-hosted** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Deploy config generator** | ✅ | ❌ | ❌ | ❌ | ❌ | N/A |
+
+## Configuration overhead
+
+Lines of config required for a site with versioning, i18n, search, and sitemap:
 
 | Generator | Config lines | Files required |
-| :--- | :--- | :--- |
+|:----------|:------------:|:--------------:|
 | **docmd** | **~15 lines** | 1 (`docmd.config.js`) |
+| MkDocs Material | ~50 lines | 1 + plugins |
 | VitePress | ~80 lines | 1 + theme dir |
-| MkDocs Material | ~50 lines | 1 (`mkdocs.yml`) + plugins |
 | Docusaurus | ~120 lines | 3+ config files |
 
-## Quality Assurance
+## Quality assurance
 
 docmd ships with a brute test suite that validates **25 distinct scenarios** across **85 assertions** — covering every feature in isolation and in combination. Every release must pass all 85 assertions and 13 internal failsafe checks before shipping.
 
