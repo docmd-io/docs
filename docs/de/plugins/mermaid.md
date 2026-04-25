@@ -136,25 +136,21 @@ Verwenden Sie das integrierte **Lucide**-Icon-Paket, um detailreiche Architektur
 
 == tab "Vorschau"
 ```mermaid
-flowchart TD
-    User([icon:user Benutzer])
-    Web([icon:globe Web-App])
-    DB[(icon:database Datenbank)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 
 == tab "Markdown-Quelle"
 ````markdown
 ```mermaid
-flowchart TD
-    User([icon:user Benutzer])
-    Web([icon:globe Web-App])
-    DB[(icon:database Datenbank)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 ````
 

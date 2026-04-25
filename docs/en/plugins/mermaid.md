@@ -136,25 +136,21 @@ Use the integrated **Lucide** icon pack to create rich architectural diagrams th
 
 == tab "Preview"
 ```mermaid
-flowchart TD
-    User([icon:user User])
-    Web([icon:globe Web App])
-    DB[(icon:database Database)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 
 == tab "Markdown Source"
 ````markdown
 ```mermaid
-flowchart TD
-    User([icon:user User])
-    Web([icon:globe Web App])
-    DB[(icon:database Database)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 ````
 

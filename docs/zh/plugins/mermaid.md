@@ -136,25 +136,21 @@ gitGraph
 
 == tab "预览"
 ```mermaid
-flowchart TD
-    User([icon:user 用户])
-    Web([icon:globe Web 应用])
-    DB[(icon:database 数据库)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 
 == tab "Markdown 源码"
 ````markdown
 ```mermaid
-flowchart TD
-    User([icon:user 用户])
-    Web([icon:globe Web 应用])
-    DB[(icon:database 数据库)]
-    
-    User --> Web
-    Web --> DB
+architecture-beta
+    group api(icon:cloud)[API]
+    service db(icon:database)[Database] in api
+    service disk(icon:hard-drive)[Storage] in api
+    db:L -- R:disk
 ```
 ````
 
