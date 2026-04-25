@@ -100,7 +100,6 @@ module.exports = defineConfig({
 
   // --- Plugins ---
   plugins: {
-    pwa: { enabled: false },
     seo: {
       defaultDescription: 'Build production-ready documentation from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready.',
       aiBots: true,
