@@ -55,6 +55,12 @@ Die Standardsprache hat kein URL-Präfix. Andere Sprachen werden unter `/{id}/` 
 
 Der Sprachumschalter behält die aktuelle Seite und Version beim Sprachwechsel bei. Der Versionsumschalter behält die aktuelle Sprache bei.
 
+## Fehlende Locale-Verzeichnisse
+
+Wenn eine Locale in `locales` deklariert ist, aber das zugehörige Quellverzeichnis nicht existiert (z. B. kein Ordner `docs/hi/`), **deaktiviert** docmd diese Locale automatisch im Sprachumschalter. Die Locale erscheint weiterhin im Dropdown — mit einem „N/A"-Badge und ausgegrautem Stil — aber ein Klick darauf bewirkt nichts.
+
+Dies verhindert 404-Fehler, wenn Sie geplante Sprachen auflisten, bevor deren Inhalte fertig sind.
+
 ## Positionierung des Sprachumschalters
 
 <!-- SCREENSHOT: Drei Varianten des Sprachumschalters — options-menu (Erdkugel-Icon im Header), sidebar-top (Dropdown oben in der Seitenleiste), sidebar-bottom (Dropdown unten). Zeige alle drei nebeneinander. -->

@@ -55,6 +55,12 @@ The default locale has no URL prefix. Non-default locales are nested under `/{id
 
 The language switcher preserves your current page and version when you switch locales. The version switcher preserves your current locale.
 
+## Missing locale directories
+
+If a locale is declared in `locales` but its source directory does not exist (e.g. no `docs/hi/` folder), docmd automatically **disables** that locale in the language switcher. The locale still appears in the dropdown — with an "N/A" badge and greyed-out styling — but clicking it does nothing.
+
+This prevents 404 errors when you list planned languages before their content is ready.
+
 ## Position the language switcher
 
 
