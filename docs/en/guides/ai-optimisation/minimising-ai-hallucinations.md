@@ -1,5 +1,5 @@
 ---
-title: "Minimizing AI Hallucinations via Documentation"
+title: "Minimising AI Hallucinations via Documentation"
 description: "How to write explicit, self-contained documentation that prevents AI models from inventing incorrect information."
 ---
 
@@ -9,7 +9,7 @@ AI models are predictive engines, not reasoning engines. If an API usage example
 
 ## Why it matters
 
-Hallucinated code destroys user trust. When a developer asks an AI for help and receives code that throws a syntax error or uses non-existent parameters, they often blame the software itself for being "buggy" or "poorly documented." Minimizing hallucinations is critical for maintaining the professional reputation of your project.
+Hallucinated code destroys user trust. When a developer asks an AI for help and receives code that throws a syntax error or uses non-existent parameters, they often blame the software itself for being "buggy" or "poorly documented." Minimising hallucinations is critical for maintaining the professional reputation of your project.
 
 ## Approach
 
@@ -51,7 +51,7 @@ export default {
 };
 ```
 
-### 4. Categorized Warnings
+### 4. Categorised Warnings
 
 Use [Callouts](../../content/containers/callouts) to clearly mark deprecated features or breaking changes. AI models are more likely to respect a `::: callout warning` block than a simple sentence in a paragraph.
 

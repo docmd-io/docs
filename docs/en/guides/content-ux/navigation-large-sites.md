@@ -1,11 +1,11 @@
 ---
 title: "Navigation for Large Sites"
-description: "How to organize complex documentation sets into an intuitive, scalable navigation structure using docmd's layout tools."
+description: "How to organise complex documentation sets into an intuitive, scalable navigation structure using docmd's layout tools."
 ---
 
 ## Problem
 
-As a documentation site grows from a few dozen pages to hundreds or thousands, a simple sidebar often transforms into a confusing labyrinth of deeply nested folders. When users are forced to expand multiple levels of hierarchy just to find a specific reference, they lose context, become frustrated, and often abandon the documentation in favor of trial-and-error.
+As a documentation site grows from a few dozen pages to hundreds or thousands, a simple sidebar often transforms into a confusing labyrinth of deeply nested folders. When users are forced to expand multiple levels of hierarchy just to find a specific reference, they lose context, become frustrated, and often abandon the documentation in favour of trial-and-error.
 
 ## Why it matters
 

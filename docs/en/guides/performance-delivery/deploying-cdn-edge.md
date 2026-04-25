@@ -1,6 +1,6 @@
 ---
 title: "CDN & Edge Deployment"
-description: "How to minimize global latency by deploying your static documentation to a Content Delivery Network (CDN) or Edge Network."
+description: "How to minimise global latency by deploying your static documentation to a Content Delivery Network (CDN) or Edge Network."
 ---
 
 ## Problem
@@ -9,7 +9,7 @@ Hosting your documentation on a single server in one geographic region (e.g., US
 
 ## Why it matters
 
-High latency directly harms the developer experience. Even if your documentation is well-written and lightweight, the "Time to First Byte" (TTFB) is limited by the laws of physics. If your site feels slow, developers are more likely to lose focus or abandon your tool entirely in favor of one with faster, more accessible documentation.
+High latency directly harms the developer experience. Even if your documentation is well-written and lightweight, the "Time to First Byte" (TTFB) is limited by the laws of physics. If your site feels slow, developers are more likely to lose focus or abandon your tool entirely in favour of one with faster, more accessible documentation.
 
 ## Approach
 
@@ -21,7 +21,7 @@ The optimal solution is to deploy your site to an Edge CDN. Because `docmd` gene
 
 `docmd` is natively compatible with all modern static hosting and edge platforms. We recommend the following for their global performance and ease of use:
 *   **Cloudflare Pages**: Extremely fast global edge network with built-in DDoS protection.
-*   **Vercel**: Optimized for performance with excellent developer workflow integration.
+*   **Vercel**: Optimised for performance with excellent developer workflow integration.
 *   **Netlify**: Powerful automation features and a robust global CDN.
 
 ### 2. Automate the Build

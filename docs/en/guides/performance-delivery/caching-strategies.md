@@ -1,6 +1,6 @@
 ---
 title: "Caching Strategies"
-description: "How to optimize your documentation site's performance using immutable caching, Etag revalidation, and production-ready server configurations."
+description: "How to optimise your documentation site's performance using immutable caching, Etag revalidation, and production-ready server configurations."
 ---
 
 ## Problem
@@ -22,7 +22,7 @@ Implement a two-tier caching strategy: **Immutable Caching** for static assets (
 The easiest way to implement optimal caching is by using the [Deploy Command](../../deployment) to generate your server configuration.
 
 ```bash
-# Generate an optimized Nginx configuration
+# Generate an optimised Nginx configuration
 npx @docmd/core deploy --nginx
 ```
 

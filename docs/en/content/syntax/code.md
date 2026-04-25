@@ -11,7 +11,7 @@ Author your technical examples using standard Markdown fenced code blocks. Alway
 
 ````markdown
 ```javascript
-function initialize() {
+function initialise() {
   console.log("docmd engine active.");
 }
 ```
@@ -20,7 +20,7 @@ function initialize() {
 **Rendered Result:**
 
 ```javascript
-function initialize() {
+function initialise() {
   console.log("docmd engine active.");
 }
 ```
@@ -30,8 +30,8 @@ function initialize() {
 You can provide a descriptive title (like a filename) for your code blocks by following the language identifier with a string in double quotes. This renders a premium header above the code block.
 
 ````markdown
-```javascript "initialize.js"
-function initialize() {
+```javascript "initialise.js"
+function initialise() {
   console.log("docmd engine active.");
 }
 ```
@@ -39,8 +39,8 @@ function initialize() {
 
 **Rendered Result:**
 
-```javascript "initialize.js"
-function initialize() {
+```javascript "initialise.js"
+function initialise() {
   console.log("docmd engine active.");
 }
 ```

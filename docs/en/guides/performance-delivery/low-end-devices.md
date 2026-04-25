@@ -1,5 +1,5 @@
 ---
-title: "Low-End Device Optimization"
+title: "Low-End Device Optimisation"
 description: "How to build high-performance, accessible documentation that works seamlessly on low-powered hardware and slow network connections."
 ---
 
@@ -21,13 +21,13 @@ Adopt an **HTML-First** strategy. `docmd` is designed with a zero-framework arch
 
 By default, `docmd` does not use React, Vue, or any other heavy client-side framework for its core UI. This pre-rendered approach ensures that the initial "First Contentful Paint" happens almost immediately. To maintain this performance:
 *   **Limit Custom Scripts**: Avoid adding large third-party libraries to your `customJs` configuration.
-*   **Use Native Browser Features**: Rely on standard CSS and HTML5 elements which are highly optimized by all modern browsers.
+*   **Use Native Browser Features**: Rely on standard CSS and HTML5 elements which are highly optimised by all modern browsers.
 
 ### 2. Strategic Plugin Management
 
 While [Plugins](../../plugins/usage) add powerful features, they can introduce significant performance overhead. For example, the [Mermaid Plugin](../../plugins/mermaid) requires a large engine to render diagrams. If your users are primarily on low-end devices, consider using static images for diagrams instead of client-side rendering.
 
-### 3. Responsive and Optimized Media
+### 3. Responsive and Optimised Media
 
 Avoid serving oversized images to mobile users. Use modern formats like WebP and consider the `<picture>` tag for more granular control over responsive assets.
 
@@ -41,7 +41,7 @@ Using the `loading="lazy"` attribute ensures that images are only downloaded as 
 
 ### 4. Efficient Search Indexing
 
-`docmd` generates scoped search indices to keep the memory footprint low. However, for extremely large sites, the [Search Plugin](../../plugins/search) can still be memory-intensive. Encourage users on mobile to use the search bar only when necessary, or optimize your index as described in the [Local-First Search Guide](../search/local-first-search).
+`docmd` generates scoped search indices to keep the memory footprint low. However, for extremely large sites, the [Search Plugin](../../plugins/search) can still be memory-intensive. Encourage users on mobile to use the search bar only when necessary, or optimise your index as described in the [Local-First Search Guide](../search/local-first-search).
 
 ## Trade-offs
 

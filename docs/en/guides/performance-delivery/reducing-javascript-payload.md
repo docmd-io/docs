@@ -1,6 +1,6 @@
 ---
 title: "Reducing JS Payload"
-description: "How to maintain a high-performance documentation site by optimizing your JavaScript dependencies and leveraging docmd's zero-framework architecture."
+description: "How to maintain a high-performance documentation site by optimising your JavaScript dependencies and leveraging docmd's zero-framework architecture."
 ---
 
 ## Problem
@@ -9,7 +9,7 @@ Many modern documentation tools rely on heavy JavaScript frameworks (like React 
 
 ## Why it matters
 
-A large JavaScript payload directly impacts "Time to Interactive" (TTI). In technical documentation, where users need answers quickly, any delay caused by heavy framework initialization is a significant usability barrier. Keeping your payload small ensures that search, navigation, and theme switching are instantaneous from the moment the page appears.
+A large JavaScript payload directly impacts "Time to Interactive" (TTI). In technical documentation, where users need answers quickly, any delay caused by heavy framework initialisation is a significant usability barrier. Keeping your payload small ensures that search, navigation, and theme switching are instantaneous from the moment the page appears.
 
 ## Approach
 
@@ -42,9 +42,9 @@ If you need to include third-party services like analytics or feedback widgets, 
 <script src="https://analytics.com/script.js" async defer></script>
 ```
 
-### 4. Optimize Assets
+### 4. Optimise Assets
 
-Ensure that any custom JavaScript you provide is minified and compressed. `docmd` handles the minification of its core assets, but you are responsible for the optimization of any files you add to your `static/` directory.
+Ensure that any custom JavaScript you provide is minified and compressed. `docmd` handles the minification of its core assets, but you are responsible for the optimisation of any files you add to your `static/` directory.
 
 ## Trade-offs
 

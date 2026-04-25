@@ -13,7 +13,7 @@ Extensibility is what separates a static tool from a professional documentation 
 
 ## Approach
 
-`docmd` features a robust, hook-based [Plugin API](../../plugins/api). You can write simple Node.js modules that intercept the documentation lifecycle at various stages—from initial configuration to final HTML generation—allowing you to arbitrarily modify content and behavior.
+`docmd` features a robust, hook-based [Plugin API](../../plugins/api). You can write simple Node.js modules that intercept the documentation lifecycle at various stages—from initial configuration to final HTML generation—allowing you to arbitrarily modify content and behaviour.
 
 ## Implementation
 
@@ -70,4 +70,4 @@ export default {
 
 ## Trade-offs
 
-Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if not optimized. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimized Regex) to keep build times fast.
+Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if not optimised. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimised Regex) to keep build times fast.

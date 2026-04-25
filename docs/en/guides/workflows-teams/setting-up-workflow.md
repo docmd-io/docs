@@ -21,7 +21,7 @@ Decouple documentation deployments from software release cycles while adopting t
 
 Choose the strategy that best fits your organizational structure:
 *   **Monorepo Strategy**: Keep a `/docs` folder within your main application repository. This is ideal for ensuring that documentation changes are merged in the same Pull Request as the code they describe, maintaining perfect synchronization.
-*   **Separate Repository Strategy**: Best for large organizations or open-source projects where a dedicated team manages the documentation independently of the main application's build pipeline.
+*   **Separate Repository Strategy**: Best for large organisations or open-source projects where a dedicated team manages the documentation independently of the main application's build pipeline.
 
 ### 2. Validation with CI/CD
 

@@ -25,7 +25,7 @@ This callout uses a custom icon instead of the default info icon.
 | Type | Intent | Visual Signal |
 | :--- | :--- | :--- |
 | `info` | **General Data** | Contextual background or helpful non-critical info. |
-| `tip` | **Optimization** | Performance shortcuts or "Pro-tips". |
+| `tip` | **Optimisation** | Performance shortcuts or "Pro-tips". |
 | `warning`| **Cautionary** | Potential issues or deprecated features to monitor. |
 | `danger` | **Critical** | Risk of data loss, breaking changes, or system failure. |
 | `success`| **Verification** | Confirmation of successful configuration or build. |

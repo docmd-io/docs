@@ -26,7 +26,7 @@ Avoid generic link text. Instead, provide a brief, one-sentence summary of the l
 
 ### 2. Using Collapsible Sections for Detail
 
-[Collapsible Containers](../../content/containers/collapsible) are excellent for AI optimization. The content remains part of the raw Markdown source (which the AI can read), but it is visually tucked away for human readers.
+[Collapsible Containers](../../content/containers/collapsible) are excellent for AI optimisation. The content remains part of the raw Markdown source (which the AI can read), but it is visually tucked away for human readers.
 
 ```markdown
 ### Database Connection

@@ -10,10 +10,10 @@ Beyond standard Markdown, `docmd` supports several high-fidelity extensions deri
 ### Task Lists
 Create interactive or read-only checklists for roadmap tracking.
 ```markdown
-- [x] Engine Optimization Complete
+- [x] Engine Optimisation Complete
 - [ ] Plugin API Finalization
 ```
-- [x] Engine Optimization Complete
+- [x] Engine Optimisation Complete
 - [ ] Plugin API Finalization
 
 ### Automatic Link Resolution

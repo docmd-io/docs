@@ -33,7 +33,7 @@ The zero-config documentation engine for modern developer teams.
 :::
 ```
 
-### 2. Organizing Content with Grids
+### 2. Organising Content with Grids
 
 Use [Grids and Cards](../../content/containers/grids-cards) to create high-level navigation sections that help users find what they need quickly.
 
@@ -54,7 +54,7 @@ Comprehensive documentation for all our endpoints.
 :::
 ```
 
-### 3. Full Customization with noStyle
+### 3. Full Customisation with noStyle
 
 If you need a completely custom design that ignores the standard documentation layout (no sidebar or header), use the `noStyle` property in the [Page Frontmatter](../../content/frontmatter).
 

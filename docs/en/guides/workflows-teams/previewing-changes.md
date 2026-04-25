@@ -41,4 +41,4 @@ Combine your cloud previews with the [Threads Plugin](../../plugins/usage). This
 
 ## Trade-offs
 
-Building a full static site for every commit in a massive repository (thousands of pages) can be time-consuming and costly in terms of CI/CD resources. To optimize this, configure your CI pipeline to only trigger a documentation build when files within your source directory (e.g., `/docs`) have been modified.
+Building a full static site for every commit in a massive repository (thousands of pages) can be time-consuming and costly in terms of CI/CD resources. To optimise this, configure your CI pipeline to only trigger a documentation build when files within your source directory (e.g., `/docs`) have been modified.

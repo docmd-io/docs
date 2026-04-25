@@ -1,6 +1,6 @@
 ---
 title: "OpenAPI Generation"
-description: "How to integrate OpenAPI/Swagger schemas into your docmd workflow for automated and synchronized API reference documentation."
+description: "How to integrate OpenAPI/Swagger schemas into your docmd workflow for automated and synchronised API reference documentation."
 ---
 
 ## Problem
@@ -31,9 +31,9 @@ You can use a tool like `widdershins` or a custom script to generate Markdown fr
 }
 ```
 
-### 2. Optimizing API Layouts
+### 2. Optimising API Layouts
 
-API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter) to optimize the page layout for readability.
+API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter) to optimise the page layout for readability.
 
 ```markdown
 ---

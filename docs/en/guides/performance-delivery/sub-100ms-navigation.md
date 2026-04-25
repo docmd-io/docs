@@ -54,4 +54,4 @@ For more details, see the [Client-Side Events](../../api/client-side-events) doc
 The SPA router automatically re-executes `<script>` tags found within the Markdown body of the new page. However, global scripts defined in your theme or layout only run once during the initial load. Always use the `docmd:page-mounted` event for logic that must execute on every page.
 
 ### SEO and Accessibility
-Despite the SPA-like behavior, `docmd` still generates a complete, standalone `.html` file for every page. This ensures that search engine crawlers see the full content and that the site remains functional for users with JavaScript disabled, maintaining excellent SEO and accessibility standards.
+Despite the SPA-like behaviour, `docmd` still generates a complete, standalone `.html` file for every page. This ensures that search engine crawlers see the full content and that the site remains functional for users with JavaScript disabled, maintaining excellent SEO and accessibility standards.

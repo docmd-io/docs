@@ -51,7 +51,7 @@ If the chosen position targets a container that is disabled, `docmd` will automa
 ### Sidebar & Navigation
 The sidebar is the primary navigation tree for your site. Its structure is defined either in your config or via external JSON files.
 
-*   **Behavior**: Supports animations, collapsible groups, and automatic path preservation.
+*   **Behaviour**: Supports animations, collapsible groups, and automatic path preservation.
 *   **Documentation**: See [Navigation Configuration](./navigation) for structuring your sidebar tree.
 
 ### Footer

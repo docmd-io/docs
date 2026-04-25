@@ -38,7 +38,7 @@ During the `docmd build` process, the search plugin iterates through every page 
 ### 2. Retrieval (Client-side)
 When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-index.json` is fetched by the browser. Searches are performed locally using fuzzy matching (allowing for small typos) and instant prefix matching.
 
-## Customizing Search Behavior
+## Customising Search Behaviour
 
 While the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
 

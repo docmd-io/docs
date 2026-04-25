@@ -1,6 +1,6 @@
 ---
 title: "Generating AI-Ready Documentation with docmd"
-description: "How to use the llms.txt standard and docmd's built-in tools to provide optimized context for AI assistants."
+description: "How to use the llms.txt standard and docmd's built-in tools to provide optimised context for AI assistants."
 ---
 
 ## Problem
@@ -9,11 +9,11 @@ Developers increasingly rely on AI coding assistants (like Cursor, GitHub Copilo
 
 ## Why it matters
 
-Providing a clean, token-optimized text version of your documentation is the modern equivalent of providing a high-quality REST API. It ensures that AI agents can quickly ingest your entire documentation set, resulting in more accurate code suggestions and better support for developers using your product.
+Providing a clean, token-optimised text version of your documentation is the modern equivalent of providing a high-quality REST API. It ensures that AI agents can quickly ingest your entire documentation set, resulting in more accurate code suggestions and better support for developers using your product.
 
 ## Approach
 
-Leverage `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the emerging `llms.txt` standard, automatically generating token-optimized summaries and full-context files during every build process.
+Leverage `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the emerging `llms.txt` standard, automatically generating token-optimised summaries and full-context files during every build process.
 
 ## Implementation
 
@@ -52,4 +52,4 @@ llms: false
 
 ## Trade-offs
 
-Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organize your [Navigation](../../configuration/navigation) logically so that the AI can prioritize the most important sections.
+Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organise your [Navigation](../../configuration/navigation) logically so that the AI can prioritize the most important sections.

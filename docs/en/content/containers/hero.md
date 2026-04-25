@@ -64,7 +64,7 @@ Create an interactive hero slider by using the `== slide` separator between diff
 # Isomorphic Core
 The engine renders everywhere.
 == slide
-# AI Optimization
+# AI Optimisation
 Built for the LLM era.
 :::
 ```
@@ -74,11 +74,11 @@ Built for the LLM era.
 # Isomorphic Core
 The engine renders everywhere.
 == slide
-# AI Optimization
+# AI Optimisation
 Built for the LLM era.
 :::
 
-## Responsive Behavior
+## Responsive Behaviour
 
 The `hero` container is fully responsive by default:
 - On **Desktop**, `layout:split` displays side-by-side.

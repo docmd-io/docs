@@ -1,5 +1,5 @@
 ---
-title: "Organizing Large Repositories"
+title: "Organising Large Repositories"
 description: "How to maintain navigation clarity and usability in complex documentation structures using hub pages and hierarchical navigation."
 ---
 

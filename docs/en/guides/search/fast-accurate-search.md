@@ -13,7 +13,7 @@ The primary goal of documentation search is "Time to Answer." If a user triggers
 
 ## Approach
 
-`docmd` utilizes an optimized indexing strategy powered by a high-performance search library. It employs **Scoping**, **Incremental Loading**, and **Field Optimization** to ensure that search results are delivered almost instantaneously, regardless of the size of the documentation site.
+`docmd` utilizes an optimised indexing strategy powered by a high-performance search library. It employs **Scoping**, **Incremental Loading**, and **Field Optimisation** to ensure that search results are delivered almost instantaneously, regardless of the size of the documentation site.
 
 ## Implementation
 

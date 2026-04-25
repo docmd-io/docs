@@ -32,7 +32,7 @@ export default defineConfig({
 | **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed by the user. |
 | **`external`** | `Boolean` | No | If `true`, the link opens in a new browser tab. |
 
-## Organizing Groups
+## Organising Groups
 
 You can nest navigation items to create deep hierarchies. There are two primary ways to organise groups:
 
@@ -71,7 +71,7 @@ If you **omit the `path`**, the item becomes a static category header. This is t
 
 `docmd` automatically generates breadcrumbs for every page based on your navigation hierarchy. These crumbs are rendered above the main page title to improve orientation and navigation speed.
 
-### Behavior
+### Behaviour
 *   **Auto-Resolution**: The engine traces the path through your `navigation` tree to identify the current page's ancestors.
 *   **Active State**: The current page is listed as the final, non-linked crumb.
 *   **Mobile Support**: Breadcrumbs are intelligently adjusted or hidden on smaller screens to preserve header space.

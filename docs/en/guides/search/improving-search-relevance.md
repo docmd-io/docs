@@ -13,11 +13,11 @@ Users typically search for specific technical terms (e.g., "authentication token
 
 ## Approach
 
-Structure your Markdown so the search indexer can automatically identify and prioritize core concepts. `docmd`'s search engine assigns higher weights to the page `title`, `description`, and `headers` compared to the body text. By optimizing these structural elements, you significantly improve the discoverability of your content.
+Structure your Markdown so the search indexer can automatically identify and prioritize core concepts. `docmd`'s search engine assigns higher weights to the page `title`, `description`, and `headers` compared to the body text. By optimising these structural elements, you significantly improve the discoverability of your content.
 
 ## Implementation
 
-### 1. Optimize Frontmatter Metadata
+### 1. Optimise Frontmatter Metadata
 
 Use the [Frontmatter](../../content/frontmatter) block to provide explicit keywords and a descriptive summary. The [Search Plugin](../../plugins/search) indexes these fields to provide better results and more useful snippets in the search UI.
 
@@ -42,4 +42,4 @@ Using [Callout Containers](../../content/containers/callouts) for critical warni
 
 ## Trade-offs
 
-Optimizing for search relevance requires disciplined writing. As your product evolves, keywords in frontmatter can become outdated if not regularly reviewed. Furthermore, including too many keywords in headers (keyword stuffing) can make the documentation feel repetitive and less natural to read. Aim for a balance between SEO and readability.
+Optimising for search relevance requires disciplined writing. As your product evolves, keywords in frontmatter can become outdated if not regularly reviewed. Furthermore, including too many keywords in headers (keyword stuffing) can make the documentation feel repetitive and less natural to read. Aim for a balance between SEO and readability.

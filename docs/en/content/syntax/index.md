@@ -12,7 +12,7 @@ description: "Master the fundamental formatting rules of docmd: Headings, typogr
 | **Emphasis** | `**Text**` | **Bold technical terms** |
 | **Italic** | `*Text*` | *Stylized variables* |
 | **Strikethrough** | `~~Text~~` | ~~Deprecated logic~~ |
-| **Inline Logic** | `` `code` `` | `engine.initialize()` |
+| **Inline Logic** | `` `code` `` | `engine.initialise()` |
 
 ## Structural Elements
 

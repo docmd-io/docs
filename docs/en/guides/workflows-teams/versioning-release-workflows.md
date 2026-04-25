@@ -1,6 +1,6 @@
 ---
 title: "Versioning Workflows"
-description: "How to synchronize documentation releases with software deployment using docmd's versioning engine and promotion strategies."
+description: "How to synchronise documentation releases with software deployment using docmd's versioning engine and promotion strategies."
 ---
 
 ## Problem
@@ -9,7 +9,7 @@ Synchronizing software releases with corresponding documentation updates is a si
 
 ## Why it matters
 
-Desynchronization between software behavior and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
+Desynchronization between software behaviour and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
 
 ## Approach
 

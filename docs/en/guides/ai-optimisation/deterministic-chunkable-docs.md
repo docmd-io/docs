@@ -1,6 +1,6 @@
 ---
 title: "Creating Deterministic and Chunkable Documentation"
-description: "How to structure your documentation to optimize it for Retrieval-Augmented Generation (RAG) and AI ingestion."
+description: "How to structure your documentation to optimise it for Retrieval-Augmented Generation (RAG) and AI ingestion."
 ---
 
 ## Problem
@@ -38,7 +38,7 @@ Running this command will permanently delete all logs.
 
 ### 3. Automated Concatenation
 
-The [LLMs Plugin](../../plugins/usage) facilitates chunking by generating a `llms-full.txt` file. This file uses standard separators (`---`) between pages, helping ingestion pipelines recognize natural document boundaries while preserving the global context of your project.
+The [LLMs Plugin](../../plugins/usage) facilitates chunking by generating a `llms-full.txt` file. This file uses standard separators (`---`) between pages, helping ingestion pipelines recognise natural document boundaries while preserving the global context of your project.
 
 ## Trade-offs
 

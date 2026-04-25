@@ -19,11 +19,11 @@ Establish a predictable visual rhythm by breaking up long sections of text and u
 
 ### 1. The "Power of Brevity"
 
-Try to limit paragraphs to no more than three or four sentences. Shorter paragraphs are easier to digest on screens and provide natural "breathing room" for complex technical concepts. If a paragraph feels too long, consider breaking it into a list or using a sub-heading to re-categorize the information.
+Try to limit paragraphs to no more than three or four sentences. Shorter paragraphs are easier to digest on screens and provide natural "breathing room" for complex technical concepts. If a paragraph feels too long, consider breaking it into a list or using a sub-heading to re-categorise the information.
 
-### 2. Categorizing with Callouts
+### 2. Categorising with Callouts
 
-Use [Callouts](../../content/containers/callouts) consistently to categorize information. This allows users who are skimming to instantly recognize the intent of a block based on its visual style:
+Use [Callouts](../../content/containers/callouts) consistently to categorise information. This allows users who are skimming to instantly recognise the intent of a block based on its visual style:
 
 *   **Info**: Background context or supplementary details that provide deeper understanding.
 *   **Tip**: Best practices, shortcuts, and "pro-tips" for efficiency.
@@ -41,7 +41,7 @@ For tutorials and step-by-step guides, avoid narrative descriptions of actions. 
 
 ```markdown
 ::: steps
-1. **Initialize**: Run `npx @docmd/core init` in your project root.
+1. **Initialise**: Run `npx @docmd/core init` in your project root.
 2. **Configure**: Update your `docmd.config.js` with your site title and navigation.
 3. **Build**: Run `npx @docmd/core build` to generate your production-ready static files.
 :::

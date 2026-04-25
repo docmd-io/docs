@@ -30,7 +30,7 @@ When a redirect is defined, `docmd` creates an `index.html` file at the legacy p
 
 When a user attempts to access a non-existent URL, most static hosting providers (Netlify, Vercel, GitHub Pages) automatically look for a `404.html` file in the root directory. `docmd` generates this file by default, ensuring it inherits your site's theme, sidebar, and SPA functionality.
 
-### Customizing Error Content
+### Customising Error Content
 
 You can personalize the 404 error message within your configuration:
 

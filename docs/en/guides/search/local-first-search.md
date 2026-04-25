@@ -1,19 +1,19 @@
 ---
-title: "Local-First Search Optimization"
-description: "How to optimize your documentation content for docmd's high-performance, client-side search engine."
+title: "Local-First Search Optimisation"
+description: "How to optimise your documentation content for docmd's high-performance, client-side search engine."
 ---
 
 ## Problem
 
-Local-first search engines run entirely in the browser, providing instant results without a server round-trip. However, this means they are constrained by the browser's memory and processing limits. If a search index is not properly optimized, it can consume excessive RAM, causing the browser tab to stutter or even crash, especially on mobile devices.
+Local-first search engines run entirely in the browser, providing instant results without a server round-trip. However, this means they are constrained by the browser's memory and processing limits. If a search index is not properly optimised, it can consume excessive RAM, causing the browser tab to stutter or even crash, especially on mobile devices.
 
 ## Why it matters
 
-A seamless search experience is essential for developer productivity. If the search tool causes performance issues or consumes too much memory, users will avoid using it. Optimizing your content for local-first search ensures that your documentation remains fast, responsive, and reliable across all devices and network conditions.
+A seamless search experience is essential for developer productivity. If the search tool causes performance issues or consumes too much memory, users will avoid using it. Optimising your content for local-first search ensures that your documentation remains fast, responsive, and reliable across all devices and network conditions.
 
 ## Approach
 
-`docmd`'s [Search Plugin](../../plugins/search) uses a build-time extraction pipeline to create a highly optimized index. By pruning unnecessary data and focusing on high-value semantic fields, it ensures that the resulting index is both comprehensive and lightweight.
+`docmd`'s [Search Plugin](../../plugins/search) uses a build-time extraction pipeline to create a highly optimised index. By pruning unnecessary data and focusing on high-value semantic fields, it ensures that the resulting index is both comprehensive and lightweight.
 
 ## Implementation
 
@@ -40,7 +40,7 @@ search:
 
 ### 3. Client-Side Memory Management
 
-`docmd` manages the search index lifecycle carefully in the browser. It uses an on-demand loading strategy, meaning the search engine is only initialized when the user first interacts with it. This keeps the initial page load footprint small and ensures that system resources are only used when needed.
+`docmd` manages the search index lifecycle carefully in the browser. It uses an on-demand loading strategy, meaning the search engine is only initialised when the user first interacts with it. This keeps the initial page load footprint small and ensures that system resources are only used when needed.
 
 ## Trade-offs
 

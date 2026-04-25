@@ -116,4 +116,4 @@ If you used `hero` or `banner` frontmatter properties in Starlight for landing p
 
 ## Next Steps
 
-- Explore `docmd`'s built-in [Search plugin](/plugins/search) (Starlight uses Pagefind, while `docmd` ships with a highly optimized local search indexer natively).
+- Explore `docmd`'s built-in [Search plugin](/plugins/search) (Starlight uses Pagefind, while `docmd` ships with a highly optimised local search indexer natively).

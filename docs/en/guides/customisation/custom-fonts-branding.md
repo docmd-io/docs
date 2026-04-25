@@ -57,4 +57,4 @@ export default {
 
 ## Trade-offs
 
-Importing external fonts (like those from Google Fonts) adds a small amount of latency to the initial page load. To optimize performance, consider hosting your font files locally within your project and using `font-display: swap` to prevent "Flash of Unstyled Text" (FOUT) while the custom font is loading.
+Importing external fonts (like those from Google Fonts) adds a small amount of latency to the initial page load. To optimise performance, consider hosting your font files locally within your project and using `font-display: swap` to prevent "Flash of Unstyled Text" (FOUT) while the custom font is loading.

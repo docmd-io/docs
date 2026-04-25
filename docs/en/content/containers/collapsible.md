@@ -33,7 +33,7 @@ Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
 ### Opt-In Visibility (Initial State: Open)
-Ideal for sections that should be visible by default but allow the user to minimize them for a cleaner view.
+Ideal for sections that should be visible by default but allow the user to minimise them for a cleaner view.
 
 ```markdown
 ::: collapsible open "Environment Prerequisites"

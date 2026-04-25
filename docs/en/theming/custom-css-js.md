@@ -41,7 +41,7 @@ export default {
 ### Life-cycle Awareness
 Scripts are injected at the bottom of the `<body>` tag. Since `docmd` is a **Single Page Application (SPA)**, remember that:
 *   The page does not fully reload when navigating between links.
-*   You may need to listen for custom lifecycle events to re-initialize your scripts on new pages.
+*   You may need to listen for custom lifecycle events to re-initialise your scripts on new pages.
 
 For the full event list and usage examples, see [Client-Side Events](../api/client-side-events).
 

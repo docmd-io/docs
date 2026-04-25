@@ -136,7 +136,7 @@ Docmd `0.7.1` extends the build process with deep integration hooks allowing plu
 
 | Hook | Description | Expected Return |
 | :--- | :--- | :--- |
-| **`onConfigResolved(config)`** | Reads or modifies the active normalized `config` right after initialization. | `void` or `Promise<void>` |
+| **`onConfigResolved(config)`** | Reads or modifies the active normalised `config` right after initialisation. | `void` or `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | Exposes the raw Node.js `http.Server` and `WebSocketServer` during development mode (`docmd dev`). | `void` or `Promise<void>` |
 | **`onBeforeParse(src, frontmatter)`** | Pre-processes raw markdown string data immediately before it is passed to markdown-it for parsing. | `string` or `Promise<string>` |
 | **`onAfterParse(html, frontmatter)`** | Post-processes generated HTML representing the markdown body segment. | `string` or `Promise<string>` |
@@ -276,7 +276,7 @@ The WebSocket RPC system is only active during `docmd dev`. Production builds do
 
 1.  **Declare Capabilities**: Always export a `plugin` descriptor with your declared capabilities. This enables the engine to enforce boundaries and will be required in `0.8.0`.
 2.  **Async/Await**: Always use `async` functions for `onPostBuild` and action handlers to prevent blocking the build engine during I/O operations.
-3.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
+3.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialise plugins during development "Hot Reloads."
 4.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
 5.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
 6.  **Action Validation**: As a robust API pattern, you should always define and require an explicit payload schema in your actions. This ensures a secure plugin ecosystem where unknown payload properties are stripped or rejected.

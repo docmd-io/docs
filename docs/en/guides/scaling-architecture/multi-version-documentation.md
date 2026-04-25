@@ -17,7 +17,7 @@ Without a seamless way to switch versions, developers often mistakenly apply ins
 
 ## Implementation
 
-### 1. Organize Source Directories
+### 1. Organise Source Directories
 
 Keep your latest documentation in a standard directory (e.g., `docs/`) and place legacy versions in sibling directories (e.g., `docs-v1/`).
 

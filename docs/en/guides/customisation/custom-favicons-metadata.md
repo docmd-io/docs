@@ -1,6 +1,6 @@
 ---
-title: "Customizing Favicons and Metadata"
-description: "How to configure your site's visual identity in the browser and optimize social media previews."
+title: "Customising Favicons and Metadata"
+description: "How to configure your site's visual identity in the browser and optimise social media previews."
 ---
 
 ## Problem

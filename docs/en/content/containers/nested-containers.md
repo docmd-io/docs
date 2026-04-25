@@ -20,7 +20,7 @@ Combine a **Card** for structural framing, **Tabs** for environment-specific ins
 
 ````markdown
 ::: card "Monorepo Quickstart"
-Choose your preferred initialization path:
+Choose your preferred initialisation path:
 
    ::: tabs
    == tab "Automated"

@@ -5,7 +5,7 @@ description: "Strategies for integrating docmd into a multi-tool documentation e
 
 ## Problem
 
-Large organizations rarely use a single tool for all their documentation needs. Your company might use Confluence for internal specifications, Stoplight for API design, and GitHub for code examples. Integrating these disparate sources into a unified user journey is a significant challenge, as users often find themselves jumping between disconnected portals with different styles and navigation.
+Large organisations rarely use a single tool for all their documentation needs. Your company might use Confluence for internal specifications, Stoplight for API design, and GitHub for code examples. Integrating these disparate sources into a unified user journey is a significant challenge, as users often find themselves jumping between disconnected portals with different styles and navigation.
 
 ## Why it matters
 

@@ -13,7 +13,7 @@ If documentation generation takes minutes instead of seconds, authors are discou
 
 ## Approach
 
-`docmd` is architected for speed and scalability. By utilizing a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimized SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
+`docmd` is architected for speed and scalability. By utilizing a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimised SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
 
 ## Implementation
 
@@ -21,7 +21,7 @@ If documentation generation takes minutes instead of seconds, authors are discou
 
 Avoid placing all files in a single flat directory. Use a deeply nested folder structure that mirrors your product's architecture. This makes the project easier to maintain and allows `docmd` to efficiently track changes during development.
 
-### 2. Optimized Search Indexing
+### 2. Optimised Search Indexing
 
 For large sites, the [Search Plugin](../../plugins/search) is essential. `docmd` generates a highly compressed search index that is loaded on demand. This ensures that even with thousands of pages, the initial page load remains fast while providing full-text search capabilities across the entire site.
 

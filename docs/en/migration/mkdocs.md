@@ -114,4 +114,4 @@ Content for tab 2.
 ## Next Steps
 
 - `docmd` has native search. You do not need to configure a search plugin.
-- Explore the [Theming options](/theming/customization) to customize your site's colors to match your old Material theme.
+- Explore the [Theming options](/theming/customisation) to customise your site's colors to match your old Material theme.

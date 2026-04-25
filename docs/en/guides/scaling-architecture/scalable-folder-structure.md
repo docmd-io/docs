@@ -1,6 +1,6 @@
 ---
 title: "Scalable Folder Structure"
-description: "How to organize large-scale documentation projects using the Diátaxis framework and docmd's resolution system."
+description: "How to organise large-scale documentation projects using the Diátaxis framework and docmd's resolution system."
 ---
 
 ## Problem
@@ -19,7 +19,7 @@ We recommend adopting an information architecture framework like [Diátaxis](htt
 
 ### 1. The Diátaxis Hierarchy
 
-Organize your source directory into semantic subfolders. This physical isolation makes it easier to manage large sets of files and ensures a clean URL structure.
+Organise your source directory into semantic subfolders. This physical isolation makes it easier to manage large sets of files and ensures a clean URL structure.
 
 ```text
 my-project/
@@ -66,4 +66,4 @@ Remember that every Markdown file's location in the folder structure determines 
 
 ## Trade-offs
 
-Strict organizational frameworks like Diátaxis require a clear understanding of content types. Technical writers may occasionally find it difficult to categorize a specific document (e.g., "Is this a guide or a tutorial?"). Establishing clear internal contribution guidelines is essential to maintain consistency as your team and documentation grow.
+Strict organizational frameworks like Diátaxis require a clear understanding of content types. Technical writers may occasionally find it difficult to categorise a specific document (e.g., "Is this a guide or a tutorial?"). Establishing clear internal contribution guidelines is essential to maintain consistency as your team and documentation grow.

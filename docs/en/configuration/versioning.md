@@ -5,7 +5,7 @@ description: "Enable multi-version documentation with seamless switching, sticky
 
 `docmd` features a native Versioning Engine that allows you to manage and serve multiple versions of your project simultaneously (e.g., `v1.x`, `v2.x`). The engine automatically handles URL routing, sidebar updates, and switching logic.
 
-## Directory Organization
+## Directory Organisation
 
 To enable versioning, organise your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
 

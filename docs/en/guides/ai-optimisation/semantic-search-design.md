@@ -1,6 +1,6 @@
 ---
 title: "Designing for Semantic Search and RAG"
-description: "How to structure your documentation to optimize it for vector-based search and Retrieval-Augmented Generation."
+description: "How to structure your documentation to optimise it for vector-based search and Retrieval-Augmented Generation."
 ---
 
 ## Problem
