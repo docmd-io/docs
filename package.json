@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@docmd/core": "^0.7.3",
-    "@docmd/plugin-math": "^0.7.3"
+    "@docmd/plugin-math": "^0.7.3",
+    "@docmd/plugin-search": "^0.7.3"
   }
 }
