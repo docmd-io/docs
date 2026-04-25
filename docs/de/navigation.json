@@ -139,6 +139,10 @@
             "path": "/content/containers/hero"
           },
           {
+            "title": "Tags",
+            "path": "/content/containers/tags"
+          },
+          {
             "title": "URL-Embed",
             "path": "/content/containers/embed"
           },

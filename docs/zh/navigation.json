@@ -139,6 +139,10 @@
             "path": "/content/containers/hero"
           },
           {
+            "title": "标签",
+            "path": "/content/containers/tags"
+          },
+          {
             "title": "URL 嵌入",
             "path": "/content/containers/embed"
           },
