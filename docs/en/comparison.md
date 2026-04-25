@@ -81,7 +81,7 @@ This is where most tools fall apart. You add 6 languages, translate 3 pages in H
 | Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
 
 ::: callout warning "What happens in VitePress and Docusaurus"
-If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time — unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localized warning callout.
+If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time — unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localised warning callout.
 :::
 
 ## Full feature matrix
