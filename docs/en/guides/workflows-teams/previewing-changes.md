@@ -13,7 +13,7 @@ High-quality documentation is essential for developer trust. A broken warning bo
 
 ## Approach
 
-Implement a multi-stage preview strategy: use `docmd`'s [Local Development](../../getting-started/quick-start#local-development) server for immediate feedback while writing, and leverage ephemeral cloud environments (like Vercel or Cloudflare Pages) for final reviews within your Pull Requests.
+Implement a multi-stage preview strategy: use `docmd`'s [Local Development](../../getting-started/quick-start.md#local-development) server for immediate feedback while writing, and leverage ephemeral cloud environments (like Vercel or Cloudflare Pages) for final reviews within your Pull Requests.
 
 ## Implementation
 
@@ -37,7 +37,7 @@ This allows reviewers to see exactly how the changes will look and behave in a p
 
 ### 3. Collaborative Reviews with Threads
 
-Combine your cloud previews with the [Threads Plugin](../../plugins/usage). This allows team members to leave feedback directly on the rendered preview page, bridging the gap between the source Markdown and the final user experience.
+Combine your cloud previews with the [Threads Plugin](../../plugins/usage.md). This allows team members to leave feedback directly on the rendered preview page, bridging the gap between the source Markdown and the final user experience.
 
 ## Trade-offs
 

@@ -13,7 +13,7 @@ Failure to explicitly surface breaking changes leads to developers wasting hours
 
 ## Approach
 
-Combine `docmd`'s [Versioning Engine](../../configuration/versioning) with [Callout Containers](../../content/containers/callouts) to create a clear distinction between legacy and modern content. The strategy is to move full legacy documentation to an archived version while providing "migration anchors" in the current version that link back to the archived content.
+Combine `docmd`'s [Versioning Engine](../../configuration/versioning.md) with [Callout Containers](../../content/containers/callouts.md) to create a clear distinction between legacy and modern content. The strategy is to move full legacy documentation to an archived version while providing "migration anchors" in the current version that link back to the archived content.
 
 ## Implementation
 
@@ -32,13 +32,13 @@ In your latest documentation, use `warning` or `important` callouts at the top o
 The `siteTitle` property has been removed. It has been replaced by the global `title` property.
 
 * **Migrating from v1.x?** Please update your `docmd.config.js`.
-* **Need v1.x docs?** Refer to the [Legacy Configuration Guide](/v1/configuration/general).
+* **Need latest docs?** Refer to the [Configuration Guide](../../configuration/overview.md).
 :::
 ```
 
 ### 3. Maintaining AI Accuracy
 
-By strictly separating deprecated content from the active version, you significantly improve the accuracy of AI tools. `docmd`'s [LLMs Plugin](../../plugins/llms) generates context files based on the active version. Archiving legacy content prevents AI models from "hallucinating" and recommending outdated APIs to users who are looking for modern solutions.
+By strictly separating deprecated content from the active version, you significantly improve the accuracy of AI tools. `docmd`'s [LLMs Plugin](../../plugins/llms.md) generates context files based on the active version. Archiving legacy content prevents AI models from "hallucinating" and recommending outdated APIs to users who are looking for modern solutions.
 
 ## Trade-offs
 

@@ -13,7 +13,7 @@ Navigation is a critical component of user experience. A cluttered interface dim
 
 ## Approach
 
-Implement a hierarchical grouping strategy using `docmd`'s [Navigation Configuration](../../configuration/navigation). The core principle is to hide complexity until it is needed. Use collapsible groups and "Hub Pages" to maintain a clean sidebar, ensuring that users can focus on their current task without being overwhelmed.
+Implement a hierarchical grouping strategy using `docmd`'s [Navigation Configuration](../../configuration/navigation.md). The core principle is to hide complexity until it is needed. Use collapsible groups and "Hub Pages" to maintain a clean sidebar, ensuring that users can focus on their current task without being overwhelmed.
 
 ## Implementation
 
@@ -39,7 +39,7 @@ Use the `collapsible` property in your `navigation.json` or config file to group
 
 ### 2. Implementing Hub Pages
 
-Instead of exposing every individual page in the sidebar, create central "Hub Pages" that act as directories for specific sub-systems. Use [Grids and Cards](../../content/containers/grids-cards) to provide a visual, high-level overview of the available content.
+Instead of exposing every individual page in the sidebar, create central "Hub Pages" that act as directories for specific sub-systems. Use [Grids and Cards](../../content/containers/grids.md) to provide a visual, high-level overview of the available content.
 
 ```markdown
 # Integrations Hub
@@ -62,7 +62,7 @@ Learn how to implement Stripe, PayPal, and more.
 
 ### 3. Leveraging Breadcrumbs
 
-`docmd` automatically generates [Breadcrumbs](../../content/syntax/advanced#breadcrumbs) for every page based on your folder structure and navigation hierarchy. By using Hub Pages, you can keep the sidebar focused while breadcrumbs provide the necessary context and an easy way for users to navigate back up the hierarchy.
+`docmd` automatically generates [Breadcrumbs](../../content/syntax/advanced.md#breadcrumbs) for every page based on your folder structure and navigation hierarchy. By using Hub Pages, you can keep the sidebar focused while breadcrumbs provide the necessary context and an easy way for users to navigate back up the hierarchy.
 
 ## Trade-offs
 

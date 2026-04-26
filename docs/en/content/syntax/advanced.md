@@ -25,7 +25,7 @@ Standard URLs and email addresses are automatically identified and linked withou
 
 ## Custom Element Attributes
 
-Assign unique IDs and CSS classes directly to headers, images, and links using the curly-brace `{}` syntax. This is the primary method for applying [Custom CSS Styles](/theming/custom-css-js).
+Assign unique IDs and CSS classes directly to headers, images, and links using the curly-brace `{}` syntax. This is the primary method for applying [Custom CSS Styles](../../theming/custom-css-js.md).
 
 ### Unique Semantic IDs
 Useful for deep-linking directly to technical subsections.
@@ -42,7 +42,7 @@ Apply styling utilities to specific elements.
 ### Actionable Button Links
 Transform any standard markdown link into a styled call-to-action button.
 ```markdown
-[Download Latest Release](/download){.docmd-button}
+[Download Latest Release](#download){.docmd-button}
 ```
 
 ## Citations & Definitions

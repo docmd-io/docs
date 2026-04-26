@@ -34,5 +34,5 @@ llms: false
 ```
 
 ::: callout tip "Maximising AI Accuracy"
-For detailed best practices on structuring your markdown (semantic headings, alt-text, etc.), see our [Optimising for AI Agents](../recipes/ai-optimisation) recipe.
+For detailed best practices on structuring your markdown (semantic headings, alt-text, etc.), see our [Optimising for AI Agents](../guides/ai-optimisation/generating-ai-ready-docs.md) guide.
 :::

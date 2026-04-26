@@ -32,12 +32,12 @@ Integrate `docmd` into your CI/CD pipeline to ensure that every update is techni
 - name: Validate Documentation
   run: npm install && npx @docmd/core build
 ```
-See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd) for detailed setup instructions.
+See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd.md) for detailed setup instructions.
 
 ### 3. Collaborative Review Process
 
-Establish a culture of peer review for all documentation updates. Use Pull Requests to discuss changes, verify formatting, and ensure technical accuracy. You can leverage the [Threads Plugin](../../plugins/usage) to facilitate detailed discussions directly on the rendered content.
+Establish a culture of peer review for all documentation updates. Use Pull Requests to discuss changes, verify formatting, and ensure technical accuracy. You can leverage the [Threads Plugin](../../plugins/usage.md) to facilitate detailed discussions directly on the rendered content.
 
 ## Trade-offs
 
-Adopting a "docs-as-code" workflow can create a barrier for non-technical contributors (e.g., Product Managers or Legal teams) who may find Git and Markdown intimidating. To mitigate this, consider using GitHub's built-in web editor for minor fixes or leveraging the [Live Preview](../../content/live-preview) feature to provide a more visual and intuitive authoring experience.
+Adopting a "docs-as-code" workflow can create a barrier for non-technical contributors (e.g., Product Managers or Legal teams) who may find Git and Markdown intimidating. To mitigate this, consider using GitHub's built-in web editor for minor fixes or leveraging the [Live Preview](../../content/live-preview.md) feature to provide a more visual and intuitive authoring experience.

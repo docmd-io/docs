@@ -10,7 +10,7 @@ titleAppend: false
 
 Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
 
-::: button "Get Started" /getting-started/quick-start icon:rocket
+::: button "Get Started" ./getting-started/quick-start.md icon:rocket
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
 :::
 
@@ -46,7 +46,7 @@ Client-side full-text search powered by MiniSearch. Works across versions and lo
 :::
 ::: grid
 ::: card "Live Previews" icon:monitor
-Embed live, editable code sandboxes directly in your documentation pages.
+Embed docmd live, editable code sandboxes directly in your documentation pages.
 :::
 :::
 ::: grid
@@ -65,17 +65,17 @@ First-class multi-language support with locale-first URLs, per-locale search, an
 
 Go beyond static text. docmd provides rich container syntax directly in Markdown — callouts, tabs, cards, grids, hero sections, collapsible sections, and more.
 
-::: button "Explore Containers" /content/containers/ icon:blocks
+::: button "Explore Containers" ./content/containers/index.md icon:blocks
 
 ::: grids
 ::: grid
 ::: card "Interactive Sandboxes"
-Embed live, editable preview windows naturally into your pages using the [Live Preview](/content/live-preview) API.
+Embed live, editable preview windows naturally into your pages using the [Live Preview](./content/live-preview.md) API.
 :::
 :::
 ::: grid
 ::: card "Inline Collaboration"
-Select text in dev mode to open [Threads](/plugins/threads) and leave comments alongside your documentation team.
+Select text in dev mode to open [Threads](./plugins/threads.md) and leave comments alongside your documentation team.
 :::
 :::
 :::

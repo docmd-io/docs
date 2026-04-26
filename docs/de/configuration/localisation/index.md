@@ -82,7 +82,7 @@ i18n: {
 
 ## String-Modus (nur für noStyle-Seiten)
 
-Standard-i18n verwendet separate Verzeichnisse pro Sprache (`docs/en/`, `docs/hi/`), jedes mit eigenen Markdown-Dateien. **String Mode** ist eine einfachere Alternative, die speziell für [noStyle-Seiten](/content/no-style-pages/) entwickelt wurde — Seiten, die reines HTML anstelle von Markdown verwenden.
+Standard-i18n verwendet separate Verzeichnisse pro Sprache (`docs/en/`, `docs/hi/`), jedes mit eigenen Markdown-Dateien. **String Mode** ist eine einfachere Alternative, die speziell für [noStyle-Seiten](../../content/no-style-pages.md) entwickelt wurde — Seiten, die reines HTML anstelle von Markdown verwenden.
 
 ```js
 // docmd.config.js
@@ -106,7 +106,7 @@ Mit `stringMode: true`:
 4. Die Ausgabe erfolgt unter `/{locale}/` — z. B. `/zh/index.html` — mit vollem SEO (hreflang-Tags, korrektes `lang`-Attribut)
 5. Falls eine Übersetzungsdatei fehlt, wird die Seite im Text der Standardsprache gerendert
 
-Weitere Details zur Syntax des `data-i18n`-Attributs und zum JSON-Dateiformat finden Sie unter [noStyle String-Ersetzung](/content/no-style-pages#string-replacement-i18n-for-nostyle).
+Weitere Details zur Syntax des `data-i18n`-Attributs und zum JSON-Dateiformat finden Sie unter [noStyle String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 
 ::: callout warning "String Mode übersetzt keine Markdown-Inhalte"
 Die String-Ersetzung funktioniert durch das Finden von `data-i18n`-Attributen im gerenderten HTML. Standard-Markdown-Inhalte (`## Überschrift`, Absätze, Listen) werden in einfache HTML-Tags ohne diese Attribute umgewandelt — daher kann der Ersetzer dort nichts finden.
@@ -119,6 +119,6 @@ Wenn Ihre Website beides hat — zum Beispiel eine noStyle-Landingpage plus Doku
 
 ## Nächste Schritte
 
-- [Übersetzte Inhalte](./translated-content) — Verzeichnisstruktur, Schreiben von Übersetzungen, Navigation
-- [UI-Strings & SEO](./ui-strings) — Anpassen von Systemtexten, hreflang-Tags
-- [noStyle String-Ersetzung](/content/no-style-pages#string-replacement-i18n-for-nostyle) — Syntax des `data-i18n`-Attributs und JSON-Format für noStyle-Seiten
+- [Übersetzte Inhalte](./translated-content.md) — Verzeichnisstruktur, Schreiben von Übersetzungen, Navigation
+- [UI-Strings & SEO](./ui-strings.md) — Anpassen von Systemtexten, hreflang-Tags
+- [noStyle String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) — Syntax des `data-i18n`-Attributs und JSON-Format für noStyle-Seiten

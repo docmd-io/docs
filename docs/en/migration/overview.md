@@ -37,15 +37,15 @@ Every documentation platform handles navigation sidebars, translations, and mult
 
 Rather than risking an incorrect, broken migration by guessing complex configurations, `docmd` moves your content safely and asks you to configure navigation, localisation, and versioning natively using `docmd`'s simple JSON-based APIs.
 
-- **Navigation:** Learn how to create a `navigation.json` in the [Navigation Setup](/configuration/navigation).
-- **Localisation:** See the [Localisation Guide](/configuration/localisation) for setting up multi-language docs.
-- **Versioning:** Refer to the [Versioning Setup](/configuration/versioning).
+- **Navigation:** Learn how to create a `navigation.json` in the [Navigation Setup](../configuration/navigation.md).
+- **Localisation:** See the [Localisation Guide](../configuration/localisation/index.md) for setting up multi-language docs.
+- **Versioning:** Refer to the [Versioning Setup](../configuration/versioning.md).
 
 ## Supported Platforms
 
 Select your current platform for specific migration instructions:
 
-- [Migrating from Docusaurus](/migration/docusaurus)
-- [Migrating from MkDocs](/migration/mkdocs)
-- [Migrating from VitePress](/migration/vitepress)
-- [Migrating from Astro Starlight](/migration/starlight)
+- [Migrating from Docusaurus](./docusaurus.md)
+- [Migrating from MkDocs](./mkdocs.md)
+- [Migrating from VitePress](./vitepress.md)
+- [Migrating from Astro Starlight](./starlight.md)

@@ -59,7 +59,7 @@ Each version inherits your global `assets/` directory, but `docmd` ensures they 
 
 Each version can maintain its own independent navigation structure. `docmd` uses a cascading priority system to resolve the sidebar, allowing you to use a centralized config or per-version/per-language `navigation.json` files.
 
-For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](./navigation#navigation-resolution-priority).
+For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](navigation.md#navigation-resolution-priority).
 
 ## Best Practices
 

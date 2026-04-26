@@ -13,7 +13,7 @@ Anti-Patterns tragen zur "Content Debt" (Inhaltsschulden) bei. Sie verschlechter
 
 ## Ansatz
 
-Identifizieren und eliminieren Sie gängige Anti-Patterns konsequent während des [Peer-Review-Prozesses](../workflows-teams/git-based-workflows). Nutzen Sie automatisierte Prose-Linter wie Vale sowie manuelle Reviews, um sicherzustellen, dass Ihre Inhalte auf allen Seiten hochwertig, zugänglich und konsistent bleiben.
+Identifizieren und eliminieren Sie gängige Anti-Patterns konsequent während des [Peer-Review-Prozesses](../workflows-teams/git-based-workflows.md). Nutzen Sie automatisierte Prose-Linter wie Vale sowie manuelle Reviews, um sicherzustellen, dass Ihre Inhalte auf allen Seiten hochwertig, zugänglich und konsistent bleiben.
 
 ## Implementierung
 
@@ -21,20 +21,20 @@ Identifizieren und eliminieren Sie gängige Anti-Patterns konsequent während de
 
 Vermeiden Sie generische Texte wie "hier klicken" oder "mehr lesen" für Links. Dies schadet der SEO und macht die Dokumentation unzugänglich für Nutzer von Screenreadern, die oft navigieren, indem sie von Link zu Link springen.
 
-*   **❌ Schlecht**: Um Ihren Server zu konfigurieren, [klicken Sie hier](../../configuration/general).
-*   **✅ Gut**: Lesen Sie die [globale Konfiguration](../../configuration/general), um Ihren Produktionsserver einzurichten.
+*   **❌ Schlecht**: Um Ihren Server zu konfigurieren, [klicken Sie hier](../../configuration/overview.md).
+*   **✅ Gut**: Lesen Sie die [globale Konfiguration](../../configuration/overview.md), um Ihren Produktionsserver einzurichten.
 
 ### 2. Die "Wand aus Boilerplate"
 
 Das Einfügen dutzender Zeilen von Standard-Imports und Boilerplate-Konfiguration vor der eigentlichen Logik in Codebeispielen lenkt den Leser vom eigentlichen Punkt des Beispiels ab.
 
-*   **Lösung**: Konzentrieren Sie sich auf das relevante Code-Snippet. Wenn Boilerplate für den Kontext notwendig ist, verwenden Sie Kommentare, um darauf hinzuweisen, dass Standard-Imports aus Gründen der Kürze weggelassen wurden, oder nutzen Sie [Callouts](../../content/containers/callouts), um das erforderliche Setup zu erläutern.
+*   **Lösung**: Konzentrieren Sie sich auf das relevante Code-Snippet. Wenn Boilerplate für den Kontext notwendig ist, verwenden Sie Kommentare, um darauf hinzuweisen, dass Standard-Imports aus Gründen der Kürze weggelassen wurden, oder nutzen Sie [Callouts](../../content/containers/callouts.md), um das erforderliche Setup zu erläutern.
 
 ### 3. FAQs als "Müllhalde" nutzen
 
 "Häufig gestellte Fragen" (FAQ) werden oft zu einem Sammelbecken für Informationen, die zu schwierig in die Hauptanleitungen zu integrieren waren. Wenn eine Frage tatsächlich "häufig gestellt" wird, ist dies ein klares Zeichen dafür, dass Ihre Kerndokumentation dieses Konzept nicht effektiv erklärt hat.
 
-*   **Lösung**: Anstatt die FAQ zu erweitern, sollten Sie das entsprechende Tutorial oder die konzeptionelle Anleitung überarbeiten, um die Unklarheit direkt dort zu beseitigen, wo der Benutzer sie zuerst bemerkt. Verwenden Sie einen [wichtigen Callout](../../content/containers/callouts), wenn die Information kritisch für den Erfolg ist.
+*   **Lösung**: Anstatt die FAQ zu erweitern, sollten Sie das entsprechende Tutorial oder die konzeptionelle Anleitung überarbeiten, um die Unklarheit direkt dort zu beseitigen, wo der Benutzer sie zuerst bemerkt. Verwenden Sie einen [wichtigen Callout](../../content/containers/callouts.md), wenn die Information kritisch für den Erfolg ist.
 
 ## Abwägungen
 

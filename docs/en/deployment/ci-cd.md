@@ -87,4 +87,4 @@ For traditional web servers (NGINX, Apache, IIS):
 2.  Upload the contents of the `site/` folder to your server via SFTP, SCP, or your preferred deployment tool.
 3.  Ensure your server is configured to serve `index.html` for directories (the default for most).
 
-For self-hosted environments like Docker, NGINX, or Caddy, see the dedicated [Deployment guides](./docker).
+For self-hosted environments like Docker, NGINX, or Caddy, see the dedicated [Deployment guides](index.md).

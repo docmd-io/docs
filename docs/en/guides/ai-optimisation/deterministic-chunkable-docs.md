@@ -26,7 +26,7 @@ Ensure that every `##` or `###` header encapsulates a single, atomic concept. A 
 
 ### 2. Tight Proximity for Critical Information
 
-Do not separate a critical warning from the code it applies to with long paragraphs. Use [Callouts](../../content/containers/callouts) to bind them together vertically. This increases the probability that they will remain in the same vector chunk during ingestion.
+Do not separate a critical warning from the code it applies to with long paragraphs. Use [Callouts](../../content/containers/callouts.md) to bind them together vertically. This increases the probability that they will remain in the same vector chunk during ingestion.
 
 ```markdown
 ::: callout warning "Destructive Action"
@@ -38,7 +38,7 @@ Running this command will permanently delete all logs.
 
 ### 3. Automated Concatenation
 
-The [LLMs Plugin](../../plugins/usage) facilitates chunking by generating a `llms-full.txt` file. This file uses standard separators (`---`) between pages, helping ingestion pipelines recognise natural document boundaries while preserving the global context of your project.
+The [LLMs Plugin](../../plugins/llms.md) facilitates chunking by generating a `llms-full.txt` file. This file uses standard separators (`---`) between pages, helping ingestion pipelines recognise natural document boundaries while preserving the global context of your project.
 
 ## Trade-offs
 

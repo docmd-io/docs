@@ -13,7 +13,7 @@ Das Versäumnis, Breaking Changes explizit hervorzuheben, führt dazu, dass Entw
 
 ## Ansatz
 
-Kombinieren Sie die [Versioning Engine](../../configuration/versioning) von `docmd` mit [Callout-Containern](../../content/containers/callouts), um eine klare Trennung zwischen Legacy- und modernen Inhalten zu schaffen. Die Strategie besteht darin, die vollständige Legacy-Dokumentation in eine archivierte Version zu verschieben und gleichzeitig "Migrations-Anker" in der aktuellen Version bereitzustellen, die auf die archivierten Inhalte verweisen.
+Kombinieren Sie die [Versioning Engine](../../configuration/versioning.md) von `docmd` mit [Callout-Containern](../../content/containers/callouts.md), um eine klare Trennung zwischen Legacy- und modernen Inhalten zu schaffen. Die Strategie besteht darin, die vollständige Legacy-Dokumentation in eine archivierte Version zu verschieben und gleichzeitig "Migrations-Anker" in der aktuellen Version bereitzustellen, die auf die archivierten Inhalte verweisen.
 
 ## Implementierung
 
@@ -32,13 +32,13 @@ Verwenden Sie in Ihrer neuesten Dokumentation `warning`- oder `important`-Callou
 Die Eigenschaft `siteTitle` wurde entfernt. Sie wurde durch die globale Eigenschaft `title` ersetzt.
 
 * **Migration von v1.x?** Bitte aktualisieren Sie Ihre `docmd.config.js`.
-* **Benötigen Sie v1.x-Docs?** Siehe [Legacy-Konfigurationsanleitung](/v1/configuration/general).
+* **Benötigen Sie v1.x-Docs?** Siehe [Legacy-Konfigurationsanleitung](../../configuration/overview.md).
 :::
 ```
 
 ### 3. Aufrechterhaltung der AI-Genauigkeit
 
-Durch die strikte Trennung von veralteten Inhalten von der aktiven Version verbessern Sie die Genauigkeit von KI-Tools erheblich. Das [LLMs-Plugin](../../plugins/llms) von `docmd` generiert Kontextdateien basierend auf der aktiven Version. Die Archivierung von Legacy-Inhalten verhindert, dass KI-Modelle "halluzinieren" und Benutzern, die nach modernen Lösungen suchen, veraltete APIs empfehlen.
+Durch die strikte Trennung von veralteten Inhalten von der aktiven Version verbessern Sie die Genauigkeit von KI-Tools erheblich. Das [LLMs-Plugin](../../plugins/llms.md) von `docmd` generiert Kontextdateien basierend auf der aktiven Version. Die Archivierung von Legacy-Inhalten verhindert, dass KI-Modelle "halluzinieren" und Benutzern, die nach modernen Lösungen suchen, veraltete APIs empfehlen.
 
 ## Abwägungen
 

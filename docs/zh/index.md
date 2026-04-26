@@ -10,7 +10,7 @@ titleAppend: false
 
 一条命令，将 Markdown 转化为生产级文档网站。静态 HTML 助力 SEO。SPA 提升速度。默认支持 AI。
 
-::: button "快速开始" /getting-started/quick-start icon:rocket
+::: button "快速开始" ./getting-started/quick-start.md icon:rocket
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
 :::
 
@@ -65,17 +65,17 @@ npx @docmd/core dev
 
 超越静态文本。docmd 在 Markdown 中直接提供丰富的容器语法——提示框、标签页、卡片、网格、主页横幅、折叠面板等。
 
-::: button "探索容器" /content/containers/ icon:blocks
+::: button "探索容器" ./content/containers/index.md icon:blocks
 
 ::: grids
 ::: grid
 ::: card "交互式沙盒"
-使用 [实时预览](/content/live-preview) API，将可编辑的预览窗口自然地嵌入页面。
+使用 [实时预览](./content/live-preview.md) API，将可编辑的预览窗口自然地嵌入页面。
 :::
 :::
 ::: grid
 ::: card "内联协作"
-在开发模式下选择文本，打开 [讨论区](/plugins/threads)，与文档团队在旁留下评论。
+在开发模式下选择文本，打开 [讨论区](./plugins/threads.md)，与文档团队在旁留下评论。
 :::
 :::
 :::

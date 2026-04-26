@@ -58,7 +58,7 @@ jobs:
 
 ### 2. Containerized Deployment (Docker)
 
-If you host your own documentation, use the [Deploy Command](../../deployment) to generate a production-ready `Dockerfile` and server configurations.
+If you host your own documentation, use the [Deploy Command](../../deployment/index.md) to generate a production-ready `Dockerfile` and server configurations.
 
 ```bash
 # Generate Docker and Nginx configs locally
@@ -69,7 +69,7 @@ You can then update your GitHub Action to build and push this Docker image to a 
 
 ### 3. Pull Request Previews
 
-Enhance your workflow by generating ephemeral preview environments for every Pull Request. This allows reviewers to see the rendered documentation before it is merged into the main branch. See the [Previewing Changes Guide](../workflows-teams/previewing-changes) for more details.
+Enhance your workflow by generating ephemeral preview environments for every Pull Request. This allows reviewers to see the rendered documentation before it is merged into the main branch. See the [Previewing Changes Guide](../workflows-teams/previewing-changes.md) for more details.
 
 ## Trade-offs
 

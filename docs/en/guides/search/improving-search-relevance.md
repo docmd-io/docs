@@ -19,7 +19,7 @@ Structure your Markdown so the search indexer can automatically identify and pri
 
 ### 1. Optimise Frontmatter Metadata
 
-Use the [Frontmatter](../../content/frontmatter) block to provide explicit keywords and a descriptive summary. The [Search Plugin](../../plugins/search) indexes these fields to provide better results and more useful snippets in the search UI.
+Use the [Frontmatter](../../content/frontmatter.md) block to provide explicit keywords and a descriptive summary. The [Search Plugin](../../plugins/search.md) indexes these fields to provide better results and more useful snippets in the search UI.
 
 ```yaml
 ---
@@ -38,7 +38,7 @@ Avoid generic header names. Instead, include relevant keywords in your headers t
 
 ### 3. Leverage Callouts for Key Information
 
-Using [Callout Containers](../../content/containers/callouts) for critical warnings or "Pro Tips" can also help search relevance. Content within callouts is often semantically isolated and can be weighted differently by the indexer to highlight important troubleshooting steps.
+Using [Callout Containers](../../content/containers/callouts.md) for critical warnings or "Pro Tips" can also help search relevance. Content within callouts is often semantically isolated and can be weighted differently by the indexer to highlight important troubleshooting steps.
 
 ## Trade-offs
 

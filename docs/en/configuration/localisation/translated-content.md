@@ -36,7 +36,7 @@ You don't need to translate every page. docmd scans the **default locale's direc
 - If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation
 - If it doesn't exist → serves the default locale's version of that page
 
-When a page falls back, docmd can display a translated callout informing viewers that the page is shown in the default language. This message is customisable via your [UI strings](./ui-strings) configuration.
+When a page falls back, docmd can display a translated callout informing viewers that the page is shown in the default language. This message is customisable via your [UI strings](ui-strings.md) configuration.
 
 ## Locale-exclusive pages
 
@@ -46,7 +46,7 @@ A non-default locale can also have pages that don't exist in the default locale.
 
 Each locale directory can have its own `navigation.json`. `docmd` uses a cascading priority system (Level 1-3) to resolve the sidebar.
 
-For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](../navigation#navigation-resolution-priority).
+For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](../navigation.md#navigation-resolution-priority).
 
 A locale's `navigation.json` uses the same format:
 

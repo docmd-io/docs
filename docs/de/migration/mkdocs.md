@@ -72,7 +72,7 @@ nav:
 
 Wenn Sie "Material for MkDocs" verwendet haben, haben Sie sich wahrscheinlich auf Python-Markdown-Erweiterungen wie PyMdown Extensions für Tabs, Admonitions oder Aufgabenlisten verlassen.
 
-**Aktion erforderlich:** Konvertieren Sie die MkDocs-spezifische Erweiterungssyntax in die nativen [Container](/content/containers/callouts) von `docmd`.
+**Aktion erforderlich:** Konvertieren Sie die MkDocs-spezifische Erweiterungssyntax in die nativen [Container](../content/containers/callouts.md) von `docmd`.
 
 #### Beispiel: Admonitions (Callouts) konvertieren
 
@@ -114,4 +114,4 @@ Content for tab 2.
 ## Nächste Schritte
 
 - `docmd` verfügt über eine native Suchfunktion. Sie müssen kein zusätzliches Such-Plugin konfigurieren.
-- Entdecken Sie die [Theme-Optionen](/theming/customization), um die Farben Ihrer Website an Ihr altes Material-Theme anzupassen.
+- Entdecken Sie die [Theme-Optionen](../theming/customization.md), um die Farben Ihrer Website an Ihr altes Material-Theme anzupassen.

@@ -31,11 +31,11 @@ export default {
   }
 };
 ```
-For more details, see the [Edit Link Configuration](../../configuration/general#editlink).
+For more details, see the [Edit Link Configuration](../../configuration/overview.md#editlink).
 
 ### 2. Contextual Reviews with Threads
 
-For complex updates that require detailed feedback, use the [Threads Plugin](../../plugins/usage). This allows authors and reviewers to leave inline comments directly within the Markdown content during the review phase, keeping discussions contextualized.
+For complex updates that require detailed feedback, use the [Threads Plugin](../../plugins/usage.md). This allows authors and reviewers to leave inline comments directly within the Markdown content during the review phase, keeping discussions contextualized.
 
 ```markdown
 ::: thread "Reviewer Name"
@@ -45,7 +45,7 @@ Should we include a code example for the new authentication flow here?
 
 ### 3. Automated Validation in CI
 
-Integrate `docmd` into your CI/CD pipeline (e.g., [GitHub Actions](../../guides/integrations/github-actions-cicd)) to validate every PR. At a minimum, your pipeline should run the build command to ensure no syntax errors or broken configurations are introduced.
+Integrate `docmd` into your CI/CD pipeline (e.g., [GitHub Actions](../../guides/integrations/github-actions-cicd.md)) to validate every PR. At a minimum, your pipeline should run the build command to ensure no syntax errors or broken configurations are introduced.
 
 ```bash
 # In your CI pipeline

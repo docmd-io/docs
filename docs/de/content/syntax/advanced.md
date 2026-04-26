@@ -25,7 +25,7 @@ Standard-URLs und E-Mail-Adressen werden automatisch erkannt und verlinkt, ohne 
 
 ## Benutzerdefinierte Element-Attribute
 
-Weisen Sie Überschriften, Bildern und Links mit der Syntax in geschweiften Klammern `{}` eindeutige IDs und CSS-Klassen zu. Dies ist die primäre Methode, um [Benutzerdefinierte CSS-Styles](/theming/custom-css-js) anzuwenden.
+Weisen Sie Überschriften, Bildern und Links mit der Syntax in geschweiften Klammern `{}` eindeutige IDs und CSS-Klassen zu. Dies ist die primäre Methode, um [Benutzerdefinierte CSS-Styles](../../theming/custom-css-js.md) anzuwenden.
 
 ### Eindeutige semantische IDs
 Nützlich für Deep-Links direkt zu technischen Unterabschnitten.
@@ -42,7 +42,7 @@ Wenden Sie Styling-Utilities auf spezifische Elemente an.
 ### Aktions-Schaltflächen (Buttons)
 Verwandeln Sie jeden Standard-Markdown-Link in eine gestaltete Call-to-Action-Schaltfläche.
 ```markdown
-[Neuestes Release herunterladen](/download){.docmd-button}
+[Neuestes Release herunterladen](#download){.docmd-button}
 ```
 
 ## Zitate & Definitionen

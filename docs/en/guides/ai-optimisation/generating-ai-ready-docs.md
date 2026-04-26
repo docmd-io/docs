@@ -17,7 +17,7 @@ Leverage `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the
 
 ## Implementation
 
-The `llms` plugin is available in `docmd >= 0.7.0` and can be configured in your [Plugin Configuration](../../plugins/usage).
+The `llms` plugin is available in `docmd >= 0.7.0` and can be configured in your [Plugin Configuration](../../plugins/llms.md).
 
 ### 1. Configure the Site URL
 
@@ -41,7 +41,7 @@ During the build process, `docmd` generates two key files in your site root:
 
 ### 3. Controlling Ingestion
 
-You can exclude specific pages from the AI-ready output by using the `llms` property in the [Page Frontmatter](../../content/frontmatter).
+You can exclude specific pages from the AI-ready output by using the `llms` property in the [Page Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---
@@ -52,4 +52,4 @@ llms: false
 
 ## Trade-offs
 
-Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organise your [Navigation](../../configuration/navigation) logically so that the AI can prioritize the most important sections.
+Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organise your [Navigation](../../configuration/navigation.md) logically so that the AI can prioritize the most important sections.

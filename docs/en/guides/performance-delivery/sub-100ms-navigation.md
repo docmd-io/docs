@@ -46,7 +46,7 @@ document.addEventListener('docmd:page-mounted', (event) => {
   }
 });
 ```
-For more details, see the [Client-Side Events](../../api/client-side-events) documentation.
+For more details, see the [Client-Side Events](../../api/client-side-events.md) documentation.
 
 ## Trade-offs
 

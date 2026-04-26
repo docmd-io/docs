@@ -31,11 +31,11 @@ export default {
   }
 };
 ```
-有关更多详细信息，请参阅 [编辑链接配置](../../configuration/general#editlink)。
+有关更多详细信息，请参阅 [编辑链接配置](../../configuration/overview.md#editlink)。
 
 ### 2. 利用 Threads 插件进行上下文审查
 
-对于需要详细反馈的复杂更新，请使用 [Threads 插件](../../plugins/usage)。这允许作者和审查人员在审查阶段直接在 Markdown 内容中留下行内评论，保持讨论的上下文一致性。
+对于需要详细反馈的复杂更新，请使用 [Threads 插件](../../plugins/threads.md)。这允许作者和审查人员在审查阶段直接在 Markdown 内容中留下行内评论，保持讨论的上下文一致性。
 
 ```markdown
 ::: thread "审查人姓名"
@@ -45,7 +45,7 @@ export default {
 
 ### 3. CI 中的自动化验证
 
-将 `docmd` 集成到您的 CI/CD 流水线（例如 [GitHub Actions](../../guides/integrations/github-actions-cicd)）中以验证每个 PR。至少，您的流水线应运行构建命令，以确保没有引入语法错误或损坏的配置。
+将 `docmd` 集成到您的 CI/CD 流水线（例如 [GitHub Actions](../integrations/github-actions-cicd.md)）中以验证每个 PR。至少，您的流水线应运行构建命令，以确保没有引入语法错误或损坏的配置。
 
 ```bash
 # 在您的 CI 流水线中

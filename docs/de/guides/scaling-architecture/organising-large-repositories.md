@@ -13,7 +13,7 @@ Navigation ist eine kritische Komponente der User Experience. Ein überladenes I
 
 ## Ansatz
 
-Implementieren Sie eine hierarchische Gruppierungsstrategie mithilfe der [Navigationskonfiguration](../../configuration/navigation) von `docmd`. Das Grundprinzip besteht darin, Komplexität zu verbergen, bis sie benötigt wird. Verwenden Sie ausklappbare Gruppen und "Hub-Pages", um die Sidebar sauber zu halten und sicherzustellen, dass sich Benutzer auf ihre aktuelle Aufgabe konzentrieren können, ohne überfordert zu werden.
+Implementieren Sie eine hierarchische Gruppierungsstrategie mit der [Navigations-Konfiguration](../../configuration/navigation.md) von `docmd`. Das Grundprinzip besteht darin, Komplexität zu verbergen, bis sie benötigt wird. Verwenden Sie ausklappbare Gruppen und "Hub-Pages", um eine übersichtliche Sidebar zu erhalten und sicherzustellen, dass sich Benutzer auf ihre aktuelle Aufgabe konzentrieren können, ohne überfordert zu werden.
 
 ## Implementierung
 
@@ -39,7 +39,7 @@ Verwenden Sie die Eigenschaft `collapsible` in Ihrer `navigation.json` oder Konf
 
 ### 2. Implementierung von Hub-Pages
 
-Anstatt jede einzelne Seite in der Sidebar zu exponieren, erstellen Sie zentrale "Hub-Pages", die als Verzeichnisse für spezifische Subsysteme fungieren. Nutzen Sie [Grids und Cards](../../content/containers/grids-cards), um eine visuelle Übersicht über die verfügbaren Inhalte auf hoher Ebene zu geben.
+Anstatt jede einzelne Seite in der Sidebar anzuzeigen, erstellen Sie zentrale "Hub-Pages", die als Verzeichnisse für bestimmte Teilsysteme dienen. Verwenden Sie [Grids und Cards](../../content/containers/grids.md) um eine visuelle, übergeordnete Übersicht über die verfügbaren Inhalte zu geben.
 
 ```markdown
 # Integrations-Hub
@@ -48,13 +48,13 @@ Anstatt jede einzelne Seite in der Sidebar zu exponieren, erstellen Sie zentrale
 ::: grid
 ::: card "Datenbank-Integrationen" icon:database
 Verbinden Sie Ihre Anwendung mit populären Datenbanken wie Postgres und MongoDB.
-[Datenbank-Anleitungen ansehen](/integrations/databases)
+[Datenbank-Anleitungen ansehen](../integrations/openapi-generation.md)
 :::
 :::
 ::: grid
 ::: card "Payment Gateways" icon:credit-card
 Erfahren Sie, wie Sie Stripe, PayPal und mehr implementieren.
-[Payment-Anleitungen ansehen](/integrations/payments)
+[Payment-Anleitungen ansehen](../integrations/alongside-other-tools.md)
 :::
 :::
 :::
@@ -62,7 +62,7 @@ Erfahren Sie, wie Sie Stripe, PayPal und mehr implementieren.
 
 ### 3. Nutzung von Breadcrumbs
 
-`docmd` generiert automatisch [Breadcrumbs](../../content/syntax/advanced#breadcrumbs) für jede Seite basierend auf Ihrer Ordnerstruktur und Navigationshierarchie. Durch die Verwendung von Hub-Pages können Sie die Sidebar fokussiert halten, während Breadcrumbs den notwendigen Kontext liefern und Benutzern eine einfache Möglichkeit bieten, in der Hierarchie wieder nach oben zu navigieren.
+`docmd` generiert automatisch [Breadcrumbs](../../content/syntax/advanced.md#breadcrumbs) für jede Seite, basierend auf Ihrer Ordnerstruktur und Navigationshierarchie. Durch die Verwendung von Hub-Pages können Sie die Sidebar fokussiert halten, während Breadcrumbs den notwendigen Kontext und eine einfache Möglichkeit für Benutzer bieten, in der Hierarchie zurückzunavigieren.
 
 ## Abwägungen
 

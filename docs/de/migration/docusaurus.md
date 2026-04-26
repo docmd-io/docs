@@ -39,13 +39,13 @@ Docusaurus verfügt über komplexe programmatische Konfigurationen, die `docmd` 
 
 Docusaurus-Sidebars werden häufig automatisch generiert oder in der `sidebars.js` konfiguriert.
 
-**Aktion erforderlich:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Verzeichnis, um Ihre `docmd`-Sidebar zu strukturieren. Weitere Informationen finden Sie im [Navigations-Leitfaden](/configuration/navigation).
+**Aktion erforderlich:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Verzeichnis, um Ihre `docmd`-Sidebar zu strukturieren. Weitere Informationen finden Sie im [Navigations-Leitfaden](../configuration/navigation.md).
 
 ### 2. MDX-Komponenten ersetzen
 
 Docusaurus verlässt sich stark auf MDX (`.mdx`), um benutzerdefinierte React-Komponenten (wie Tabs, Admonitions oder benutzerdefinierte UI-Elemente) darzustellen. `docmd` wird rein über Markdown gesteuert und verwendet kein React.
 
-**Aktion erforderlich:** Sie müssen alle benutzerdefinierten `<MyReactComponent />`-Tags in Standard-Markdown konvertieren oder die nativen [Container](/content/containers/callouts) von `docmd` verwenden.
+**Aktion erforderlich:** Sie müssen alle benutzerdefinierten `<MyReactComponent />`-Tags in Standard-Markdown konvertieren oder die nativen [Container](../content/containers/callouts.md) von `docmd` verwenden.
 
 #### Beispiel: Admonitions (Callouts) konvertieren
 
@@ -95,9 +95,9 @@ This is an orange.
 
 Wenn Sie die `i18n`-Funktionen von Docusaurus verwendet haben, befanden sich Ihre übersetzten Dateien wahrscheinlich in `i18n/locale/docusaurus-plugin-content-docs/current/`.
 
-**Aktion erforderlich:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Sprachen in der `docmd.config.js`. Weitere Informationen finden Sie im [Lokalisierungs-Leitfaden](/configuration/localisation).
+**Aktion erforderlich:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Sprachen in der `docmd.config.js`. Weitere Informationen finden Sie im [Lokalisierungs-Leitfaden](../configuration/localisation/index.md).
 
 ## Nächste Schritte
 
-- Entdecken Sie die [Layout & UI](/configuration/layout-ui)-Einstellungen, um Ihr Docusaurus-Theme nachzubilden.
-- Konvertieren Sie React-basierte Hero-Header in `docmd` [Hero-Container](/content/containers/hero).
+- Entdecken Sie die [Layout & UI](../configuration/layout-ui.md)-Einstellungen, um Ihr Docusaurus-Theme nachzubilden.
+- Konvertieren Sie React-basierte Hero-Header in `docmd` [Hero-Container](../content/containers/hero.md).

@@ -13,7 +13,7 @@ KI-Modelle verlassen sich auf den unmittelbar umgebenden Text, um die Bedeutung 
 
 ## Ansatz
 
-Nutzen Sie **Inline-Kontext-Entfaltung (Inline Context Unrolling)**, um neben jedem wichtigen Link einen minimal lebensfähigen Kontext bereitzustellen. Nutzen Sie zusätzlich spezifische Funktionen von `docmd`, wie das [LLMs-Plugin](../../plugins/usage), um eine einheitliche, maschinenlesbare Sicht auf Ihren gesamten Dokumentationssatz zu ermöglichen.
+Nutzen Sie **Inline-Kontext-Entfaltung (Inline Context Unrolling)**, um neben jedem wichtigen Link einen minimal lebensfähigen Kontext bereitzustellen. Nutzen Sie zusätzlich spezifische Funktionen von `docmd`, wie das [LLMs-Plugin](../../plugins/llms.md), um eine einheitliche, maschinenlesbare Sicht auf Ihren gesamten Dokumentationssatz zu ermöglichen.
 
 ## Implementierung
 
@@ -21,12 +21,12 @@ Nutzen Sie **Inline-Kontext-Entfaltung (Inline Context Unrolling)**, um neben je
 
 Vermeiden Sie generische Linktexte. Geben Sie stattdessen vor oder nach dem Link eine kurze, ein-satz-lange Zusammenfassung des verlinkten Konzepts an.
 
--   **❌ Schlecht (Kontext geht verloren)**: Informationen zur Zeitüberschreitung finden Sie in der [Allgemeinen Konfiguration](../../configuration/general).
--   **✅ Besser (Kontext bleibt erhalten)**: Sie können den Parameter `timeoutMs` in der [Allgemeinen Konfiguration](../../configuration/general) konfigurieren. Dieser definiert, wie lange die Engine wartet, bevor eine Netzwerkanfrage fehlschlägt.
+-   **❌ Schlecht (Kontext geht verloren)**: Informationen zur Zeitüberschreitung finden Sie in der [Allgemeinen Konfiguration](../../configuration/overview.md).
+-   **✅ Besser (Kontext bleibt erhalten)**: Sie können den Parameter `timeoutMs` in der [Allgemeinen Konfiguration](../../configuration/overview.md) konfigurieren. Dieser definiert, wie lange die Engine wartet, bevor eine Netzwerkanfrage fehlschlägt.
 
 ### 2. Verwendung von Collapsibles für Details
 
-[Einklappbare Container (Collapsibles)](../../content/containers/collapsible) eignen sich hervorragend für die KI-Optimierung. Der Inhalt bleibt Teil der rohen Markdown-Quelle (die die KI lesen kann), ist aber für menschliche Leser visuell ausgeblendet.
+[Einklappbare Container (Collapsibles)](../../content/containers/collapsible.md) eignen sich hervorragend für die KI-Optimierung. Der Inhalt bleibt Teil der rohen Markdown-Quelle (die die KI lesen kann), ist aber für menschliche Leser visuell ausgeblendet.
 
 ```markdown
 ### Datenbank-Verbindung
@@ -40,7 +40,7 @@ Die URI folgt dem Standard-PostgreSQL-Format: `postgresql://user:password@host:p
 
 ### 3. Aktivierung des LLMs-Plugins
 
-Aktivieren Sie das [LLMs-Plugin](../../plugins/usage) in Ihrer `docmd.config.js`. Dieses Plugin generiert nach jedem Build automatisch eine `llms-full.txt`-Datei, die Ihren gesamten Dokumentationssatz in einer einzigen Datei mit hohem Kontext zusammenfasst, die leicht von Large Language Models verarbeitet werden kann.
+Aktivieren Sie das [LLMs-Plugin](../../plugins/llms.md) in Ihrer `docmd.config.js`. Dieses Plugin generiert nach jedem Build automatisch eine `llms-full.txt`-Datei, die Ihren gesamten Dokumentationssatz in einer einzigen Datei mit hohem Kontext zusammenfasst, die leicht von Large Language Models verarbeitet werden kann.
 
 ## Abwägungen
 

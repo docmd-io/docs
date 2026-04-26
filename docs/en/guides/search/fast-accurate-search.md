@@ -19,11 +19,11 @@ The primary goal of documentation search is "Time to Answer." If a user triggers
 
 ### 1. Scoped Search Indices
 
-`docmd` automatically generates separate search indices for every [Locale](../../configuration/localisation) and [Version](../../configuration/versioning). This ensures that a user only downloads the index relevant to their current context. For example, a user browsing the Chinese version of your documentation only downloads the Chinese search index, significantly reducing the payload size.
+`docmd` automatically generates separate search indices for every [Locale](../../configuration/localisation/index.md) and [Version](../../configuration/versioning.md). This ensures that a user only downloads the index relevant to their current context. For example, a user browsing the Chinese version of your documentation only downloads the Chinese search index, significantly reducing the payload size.
 
 ### 2. Intelligent Field Stripping
 
-The [Search Plugin](../../plugins/search) allows you to control exactly what content is indexed. By default, it prioritizes headers and frontmatter metadata while stripping out common "stop words" and unnecessary code symbols that bloat the index without adding value. You can also exclude specific pages from the index using the `search` property in your [Frontmatter](../../content/frontmatter).
+The [Search Plugin](../../plugins/search.md) allows you to control exactly what content is indexed. By default, it prioritizes headers and frontmatter metadata while stripping out common "stop words" and unnecessary code symbols that bloat the index without adding value. You can also exclude specific pages from the index using the `search` property in your [Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---

@@ -13,7 +13,7 @@ Anti-patterns contribute to "content debt." They degrade search engine rankings 
 
 ## Approach
 
-Identify and ruthlessly eliminate common anti-patterns during the [Peer Review process](../workflows-teams/git-based-workflows). Use automated prose linters like Vale and manual reviews to ensure your content remains high-quality, accessible, and consistent across all pages.
+Identify and ruthlessly eliminate common anti-patterns during the [Peer Review process](../workflows-teams/git-based-workflows.md). Use automated prose linters like Vale and manual reviews to ensure your content remains high-quality, accessible, and consistent across all pages.
 
 ## Implementation
 
@@ -21,20 +21,20 @@ Identify and ruthlessly eliminate common anti-patterns during the [Peer Review p
 
 Avoid using generic text like "click here" or "read more" for links. This is harmful to SEO and makes the documentation inaccessible for screen reader users who often navigate by skipping between links.
 
-*   **❌ Bad**: To configure your server, [click here](../../configuration/general).
-*   **✅ Good**: Review the [General Configuration](../../configuration/general) to set up your production server.
+*   **❌ Bad**: To configure your server, [click here](../../configuration/overview.md).
+*   **✅ Good**: Review the [General Configuration](../../configuration/overview.md) to set up your production server.
 
 ### 2. The "Wall of Boilerplate"
 
 In code examples, including dozens of lines of standard imports and boilerplate configuration before the core logic distracts the reader from the actual point of the example.
 
-*   **Solution**: Focus on the relevant code snippet. If boilerplate is necessary for context, use comments to indicate that standard imports are omitted for brevity, or use [Callouts](../../content/containers/callouts) to explain the required setup.
+*   **Solution**: Focus on the relevant code snippet. If boilerplate is necessary for context, use comments to indicate that standard imports are omitted for brevity, or use [Callouts](../../content/containers/callouts.md) to explain the required setup.
 
 ### 3. Using FAQs as "Dumping Grounds"
 
 "Frequently Asked Questions" (FAQ) pages often become a repository for information that was too difficult to integrate into the main guides. If a question is truly "frequently asked," it is a clear sign that your core documentation has failed to explain that concept effectively.
 
-*   **Solution**: Instead of adding to an FAQ, refactor the relevant tutorial or conceptual guide to address the confusion directly where the user first encounters it. Use an [Important Callout](../../content/containers/callouts) if the information is critical for success.
+*   **Solution**: Instead of adding to an FAQ, refactor the relevant tutorial or conceptual guide to address the confusion directly where the user first encounters it. Use an [Important Callout](../../content/containers/callouts.md) if the information is critical for success.
 
 ## Trade-offs
 

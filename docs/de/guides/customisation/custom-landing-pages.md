@@ -13,7 +13,7 @@ Die Startseite Ihrer Dokumentation ist oft der erste Kontakt eines Entwicklers m
 
 ## Ansatz
 
-`docmd` bietet spezialisierte [Hero](../../content/containers/hero)- und [Grid](../../content/containers/grids-cards)-Container, die speziell für den Aufbau hochwertiger Landing-Pages entwickelt wurden. Für vollständige kreative Freiheit können Sie auch die Frontmatter-Eigenschaft `noStyle` verwenden, um die volle Kontrolle über HTML und Styling einer Seite zu übernehmen.
+`docmd` bietet spezialisierte [Hero](../../content/containers/hero.md)- und [Grid](../../content/containers/grids.md)-Container, die speziell für den Aufbau hochwertiger Landing-Pages entwickelt wurden. Für vollständige kreative Freiheit können Sie auch die Frontmatter-Eigenschaft `noStyle` verwenden, um die volle Kontrolle über HTML und Styling einer Seite zu übernehmen.
 
 ## Implementierung
 
@@ -26,7 +26,7 @@ Der `hero`-Container unterstützt verschiedene Layouts, darunter `split` (für S
 # Schneller aufbauen mit docmd
 Die Zero-Config Documentation Engine für moderne Entwicklerteams.
 
-[Erste Schritte](/docs/start) [Auf GitHub ansehen](https://github.com/docmd-io/docmd)
+[Erste Schritte](../../getting-started/quick-start.md) [Auf GitHub ansehen](https://github.com/docmd-io/docmd)
 
 == side
 ![Dashboard Vorschau](../../static/img/hero-preview.png)
@@ -35,20 +35,20 @@ Die Zero-Config Documentation Engine für moderne Entwicklerteams.
 
 ### 3. Inhalte mit Grids organisieren
 
-Nutzen Sie [Grids und Cards](../../content/containers/grids-cards), um übergeordnete Navigationsbereiche zu erstellen, die den Benutzern helfen, schnell zu finden, was sie suchen.
+Nutzen Sie [Grids und Cards](../../content/containers/grids.md), um übergeordnete Navigationsbereiche zu erstellen, die den Benutzern helfen, schnell zu finden, was sie suchen.
 
 ```markdown
 ::: grids
 ::: grid
 ::: card "Quick Start" icon:rocket
 In weniger als 5 Minuten einsatzbereit.
-[Mehr erfahren](/docs/start)
+[Mehr erfahren](../../getting-started/quick-start.md)
 :::
 :::
 ::: grid
 ::: card "API Referenz" icon:code
 Umfassende Dokumentation für alle unsere Endpunkte.
-[API erkunden](/api)
+[API erkunden](../../api/node-api.md)
 :::
 :::
 :::
@@ -56,7 +56,7 @@ Umfassende Dokumentation für alle unsere Endpunkte.
 
 ### 3. Vollständige Anpassung mit noStyle
 
-Wenn Sie ein komplett individuelles Design benötigen, das das Standard-Layout (ohne Sidebar oder Header) ignoriert, verwenden Sie die Eigenschaft `noStyle` im [Seiten-Frontmatter](../../content/frontmatter).
+Wenn Sie ein komplett individuelles Design benötigen, das das Standard-Layout (ohne Sidebar oder Header) ignoriert, verwenden Sie die Eigenschaft `noStyle` im [Seiten-Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---

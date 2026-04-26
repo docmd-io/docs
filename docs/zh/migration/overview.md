@@ -37,15 +37,15 @@ description: "了解如何轻松将现有文档迁移到 docmd。"
 
 为了避免猜测复杂配置带来的错误和损坏迁移，`docmd` 会安全地移动您的内容，并要求您使用 `docmd` 简单的基于 JSON 的 API，原生配置导航、国际化和版本管理。
 
-- **导航：** 请参阅 [导航设置](/configuration/navigation) 了解如何创建 `navigation.json`。
-- **国际化：** 了解如何设置多语言文档，请参阅 [国际化指南](/configuration/localisation)。
-- **版本管理：** 请参考 [版本管理设置](/configuration/versioning)。
+- **导航：** 请参阅 [导航设置](../configuration/navigation.md) 了解如何创建 `navigation.json`。
+- **国际化：** 了解如何设置多语言文档，请参阅 [国际化指南](../configuration/localisation/index.md)。
+- **版本管理：** 请参考 [版本管理设置](../configuration/versioning.md)。
 
 ## 支持的平台
 
 选择您当前的平台以获取具体的迁移说明：
 
-- [由 Docusaurus 迁移](/migration/docusaurus)
-- [由 MkDocs 迁移](/migration/mkdocs)
-- [由 VitePress 迁移](/migration/vitepress)
-- [由 Astro Starlight 迁移](/migration/starlight)
+- [由 Docusaurus 迁移](./docusaurus.md)
+- [由 MkDocs 迁移](./mkdocs.md)
+- [由 VitePress 迁移](./vitepress.md)
+- [由 Astro Starlight 迁移](./starlight.md)

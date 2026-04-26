@@ -40,7 +40,7 @@ Utilise standard link syntax for both internal documentation nodes and global re
 ### Enumeration & Listing
 
 *   **Unordered Segments**: Utilise `*` or `-` for scannable bullet points.
-*   **Sequential Logic**: Utilise `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps)**).
+*   **Sequential Logic**: Utilise `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps.md)**).
 
 ## Technical Block Elements
 

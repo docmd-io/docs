@@ -74,7 +74,7 @@ themeConfig: {
 
 VitePress erlaubt es Autoren, Vue-Komponenten (z. B. `<MyComponent />`) direkt in Markdown-Dateien einzubetten. Da `docmd` Vue nicht auf dem Client ausführt, müssen Sie diese benutzerdefinierten Komponenten entfernen oder durch natives Markdown ersetzen.
 
-**Aktion erforderlich:** Ersetzen Sie Vue-spezifische UI-Komponenten durch `docmd` [Container](/content/containers/callouts).
+**Aktion erforderlich:** Ersetzen Sie Vue-spezifische UI-Komponenten durch `docmd` [Container](../content/containers/callouts.md).
 
 #### Beispiel: Admonitions (Benutzerdefinierte Container)
 
@@ -93,8 +93,8 @@ This is an info box.
 This is an info box.
 :::
 ```
-*Hinweis: VitePress verwendet `info`, `tip`, `warning`, `danger`, `details`. `docmd` unterstützt diese direkt, aber Sie möchten sich möglicherweise die vollständige Liste der [docmd Callouts](/content/containers/callouts) ansehen.*
+*Hinweis: VitePress verwendet `info`, `tip`, `warning`, `danger`, `details`. `docmd` unterstützt diese direkt, aber Sie möchten sich möglicherweise die vollständige Liste der [docmd Callouts](../content/containers/callouts.md) ansehen.*
 
 ## Nächste Schritte
 
-- Entdecken Sie den `docmd`-Leitfaden [Bauen & Bereitstellen](/deployment), da `docmd` nicht auf die Build-Pipeline von Vite angewiesen ist.
+- Entdecken Sie den `docmd`-Leitfaden [Bauen & Bereitstellen](../deployment/index.md), da `docmd` nicht auf die Build-Pipeline von Vite angewiesen ist.

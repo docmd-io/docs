@@ -21,12 +21,12 @@ Use **Inline Context Unrolling** to provide the minimum viable context alongside
 
 Avoid generic link text. Instead, provide a brief, one-sentence summary of the linked concept before or after the link itself.
 
--   **❌ Poor (Context Lost)**: To configure the timeout, refer to the [General Configuration](../../configuration/general).
--   **✅ Better (Context Preserved)**: You can configure the `timeoutMs` parameter within the [General Configuration](../../configuration/general), which defines how long the engine waits before failing a network request.
+-   **❌ Poor (Context Lost)**: To configure the timeout, refer to the [General Configuration](../../configuration/overview.md).
+-   **✅ Better (Context Preserved)**: You can configure the `timeoutMs` parameter within the [General Configuration](../../configuration/overview.md), which defines how long the engine waits before failing a network request.
 
 ### 2. Using Collapsible Sections for Detail
 
-[Collapsible Containers](../../content/containers/collapsible) are excellent for AI optimisation. The content remains part of the raw Markdown source (which the AI can read), but it is visually tucked away for human readers.
+[Collapsible Containers](../../content/containers/collapsible.md) are excellent for AI optimisation. The content remains part of the raw Markdown source (which the AI can read), but it is visually tucked away for human readers.
 
 ```markdown
 ### Database Connection
@@ -40,7 +40,7 @@ The URI follows the standard PostgreSQL format: `postgresql://user:password@host
 
 ### 3. Enabling the LLMs Plugin
 
-Enable the [LLMs Plugin](../../plugins/usage) in your `docmd.config.js`. This plugin automatically generates a `llms-full.txt` file after every build, which concatenates your entire documentation set into a single, high-context file that can be easily consumed by Large Language Models.
+Enable the [LLMs Plugin](../../plugins/llms.md) in your `docmd.config.js`. This plugin automatically generates a `llms-full.txt` file after every build, which concatenates your entire documentation set into a single, high-context file that can be easily consumed by Large Language Models.
 
 ## Trade-offs
 

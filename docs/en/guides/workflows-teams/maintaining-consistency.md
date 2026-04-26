@@ -13,7 +13,7 @@ Consistency breeds familiarity. When users are learning complex APIs or workflow
 
 ## Approach
 
-Enforce consistency mechanically using [Standardized Containers](../../content/containers) and automated linting tools. By automating low-level style and syntax checks, you free up your human editors to focus on the high-level quality, accuracy, and clarity of the content.
+Enforce consistency mechanically using [Standardized Containers](../../content/containers/index.md) and automated linting tools. By automating low-level style and syntax checks, you free up your human editors to focus on the high-level quality, accuracy, and clarity of the content.
 
 ## Implementation
 
@@ -31,7 +31,7 @@ Please restart the service.
 :::
 ```
 
-Using [Callouts](../../content/containers/callouts) ensures that your documentation maintains a professional appearance and meets accessibility standards without extra effort from the writer.
+Using [Callouts](../../content/containers/callouts.md) ensures that your documentation maintains a professional appearance and meets accessibility standards without extra effort from the writer.
 
 ### 2. Implement Prose Linting
 
@@ -47,7 +47,7 @@ BasedOnStyles = Vale, Google
 
 ### 3. Automated Enforcement in CI/CD
 
-Include consistency checks in your [GitHub Actions](../../guides/integrations/github-actions-cicd) or other CI/CD pipelines. This ensures that every Pull Request is automatically audited for style and structural consistency before it can be merged.
+Include consistency checks in your [GitHub Actions](../../guides/integrations/github-actions-cicd.md) or other CI/CD pipelines. This ensures that every Pull Request is automatically audited for style and structural consistency before it can be merged.
 
 ```bash
 # Example CI step for linting

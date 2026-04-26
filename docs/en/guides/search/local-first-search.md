@@ -13,7 +13,7 @@ A seamless search experience is essential for developer productivity. If the sea
 
 ## Approach
 
-`docmd`'s [Search Plugin](../../plugins/search) uses a build-time extraction pipeline to create a highly optimised index. By pruning unnecessary data and focusing on high-value semantic fields, it ensures that the resulting index is both comprehensive and lightweight.
+`docmd`'s [Search Plugin](../../plugins/search.md) uses a build-time extraction pipeline to create a highly optimised index. By pruning unnecessary data and focusing on high-value semantic fields, it ensures that the resulting index is both comprehensive and lightweight.
 
 ## Implementation
 
@@ -28,7 +28,7 @@ This ensures that the indexer only receives clean, meaningful text, which signif
 
 ### 2. Strategic Indexing with Frontmatter
 
-You can use [Frontmatter](../../content/frontmatter) to explicitly control how a page is indexed. For example, if a page contains large amounts of repetitive data (like raw JSON logs) that aren't useful for search, you can choose to index only the headers and metadata.
+You can use [Frontmatter](../../content/frontmatter.md) to explicitly control how a page is indexed. For example, if a page contains large amounts of repetitive data (like raw JSON logs) that aren't useful for search, you can choose to index only the headers and metadata.
 
 ```yaml
 ---

@@ -19,7 +19,7 @@ Adopt the **Diátaxis framework**, which categorizes documentation into four dis
 
 ### 1. The Task-Oriented Guide (How-To)
 
-Focus entirely on a specific, narrow objective. Strip out lengthy theoretical explanations and focus on the minimum steps required to achieve the goal. Use the [Steps Container](../../content/containers/steps) to provide a clear, unambiguous path forward.
+Focus entirely on a specific, narrow objective. Strip out lengthy theoretical explanations and focus on the minimum steps required to achieve the goal. Use the [Steps Container](../../content/containers/steps.md) to provide a clear, unambiguous path forward.
 
 *   **Title Example**: "How to Configure Webhooks"
 *   **Structure**: 
@@ -41,8 +41,8 @@ Focus on the "Big Picture," including architecture, design philosophy, and the "
 
 Instead of merging the two types of content, use `docmd`'s linking tools to provide a bridge for users who need more context or are ready to implement.
 
-*   **In a How-To guide**: "For a deeper dive into our retry logic, see [Webhook Architecture](../../guides/performance-delivery/caching-strategies)."
-*   **In a Conceptual guide**: "Ready to get started? Follow our [Webhook Configuration Guide](../../guides/integrations/alongside-other-tools)."
+*   **In a How-To guide**: "For a deeper dive into our retry logic, see [Webhook Architecture](../../guides/performance-delivery/caching-strategies.md)."
+*   **In a Conceptual guide**: "Ready to get started? Follow our [Webhook Configuration Guide](../../guides/integrations/alongside-other-tools.md)."
 
 ## Trade-offs
 

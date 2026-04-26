@@ -19,7 +19,7 @@ Implement a two-tier caching strategy: **Immutable Caching** for static assets (
 
 ### 1. Production-Ready Server Configs
 
-The easiest way to implement optimal caching is by using the [Deploy Command](../../deployment) to generate your server configuration.
+The easiest way to implement optimal caching is by using the [Deploy Command](../../deployment/index.md) to generate your server configuration.
 
 ```bash
 # Generate an optimised Nginx configuration

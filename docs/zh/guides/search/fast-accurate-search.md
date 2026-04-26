@@ -19,11 +19,11 @@ description: "docmd 如何优化搜索索引以提高速度和准确性，即使
 
 ### 1. 限定范围的搜索索引
 
-`docmd` 会为每个 [语言区域](../../configuration/localisation) 和 [版本](../../configuration/versioning) 自动生成独立的搜索索引。这确保了用户仅下载与其当前上下文相关的索引。例如，浏览中文版文档的用户仅下载中文搜索索引，从而显著减小了有效载荷大小。
+`docmd` 会为每个 [语言区域](../../configuration/localisation/index.md) 和 [版本](../../configuration/versioning.md) 自动生成独立的搜索索引。这确保了用户仅下载与其当前上下文相关的索引。例如，浏览中文版文档的用户仅下载中文搜索索引，从而显著减小了有效载荷大小。
 
 ### 2. 智能字段剥离
 
-[搜索插件](../../plugins/search) 允许您精确控制索引哪些内容。默认情况下，它会优先处理标题和 Frontmatter 元数据，同时剥离常见的“停用词”和不必要的代码符号，这些内容会增加索引体积而不增加搜索价值。您还可以使用 [Frontmatter](../../content/frontmatter) 中的 `search` 属性从索引中排除特定页面。
+[搜索插件](../../plugins/search.md) 允许您精确控制索引哪些内容。默认情况下，它会优先处理标题和 Frontmatter 元数据，同时剥离常见的“停用词”和不必要的代码符号，这些内容会增加索引体积而不增加搜索价值。您还可以使用 [Frontmatter](../../content/frontmatter.md) 中的 `search` 属性从索引中排除特定页面。
 
 ```yaml
 ---

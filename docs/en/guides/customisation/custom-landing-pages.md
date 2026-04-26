@@ -13,7 +13,7 @@ Your documentation homepage is often the first interaction a developer has with 
 
 ## Approach
 
-`docmd` provides specialized [Hero](../../content/containers/hero) and [Grid](../../content/containers/grids-cards) containers designed specifically for building premium landing pages. For total creative freedom, you can also use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
+`docmd` provides specialized [Hero](../../content/containers/hero.md) and [Grids](../../content/containers/grids.md) containers designed specifically for building premium landing pages. For total creative freedom, you can also use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
 
 ## Implementation
 
@@ -35,14 +35,14 @@ The zero-config documentation engine for modern developer teams.
 
 ### 2. Organising Content with Grids
 
-Use [Grids and Cards](../../content/containers/grids-cards) to create high-level navigation sections that help users find what they need quickly.
+Use [Grids and Cards](../../content/containers/grids.md) to create high-level navigation sections that help users find what they need quickly.
 
 ```markdown
 ::: grids
 ::: grid
 ::: card "Quick Start" icon:rocket
 Get up and running in less than 5 minutes.
-[Learn More](/docs/start)
+[Learn More](/docs/start.md)
 :::
 :::
 ::: grid
@@ -56,7 +56,7 @@ Comprehensive documentation for all our endpoints.
 
 ### 3. Full Customisation with noStyle
 
-If you need a completely custom design that ignores the standard documentation layout (no sidebar or header), use the `noStyle` property in the [Page Frontmatter](../../content/frontmatter).
+If you need a completely custom design that ignores the standard documentation layout (no sidebar or header), use the `noStyle` property in the [Page Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---

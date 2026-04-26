@@ -19,7 +19,7 @@ Implement **Progressive Disclosure**. This technique involves presenting only th
 
 ### 1. Handling Variations with Tabs
 
-Instead of listing instructions for multiple package managers, operating systems, or cloud providers sequentially, use the [Tabs Container](../../content/containers/tabs). This allows the user to select their specific environment, instantly hiding irrelevant commands and reducing visual noise.
+Instead of listing instructions for multiple package managers, operating systems, or cloud providers sequentially, use the [Tabs Container](../../content/containers/tabs.md). This allows the user to select their specific environment, instantly hiding irrelevant commands and reducing visual noise.
 
 ```markdown
 ::: tabs
@@ -38,7 +38,7 @@ pnpm add docmd
 
 ### 2. Managing Edge Cases with Collapsibles
 
-If a troubleshooting step or a specific edge case only applies to a small percentage of users, do not let it interrupt the logical flow of your main tutorial. Use the [Collapsible Container](../../content/containers/collapsible) to bury these details while keeping them easily accessible when needed.
+If a troubleshooting step or a specific edge case only applies to a small percentage of users, do not let it interrupt the logical flow of your main tutorial. Use the [Collapsible Container](../../content/containers/collapsible.md) to bury these details while keeping them easily accessible when needed.
 
 ```markdown
 1. Start the development server by running `npx @docmd/core dev`.
@@ -50,8 +50,8 @@ If you receive an `EADDRINUSE` error, you can specify a custom port using the `-
 
 ### 3. Progressive Detail with Callouts
 
-Use [Callouts](../../content/containers/callouts) to provide supplementary information that isn't required for the primary task but offers valuable context for advanced users.
+Use [Callouts](../../content/containers/callouts.md) to provide supplementary information that isn't required for the primary task but offers valuable context for advanced users.
 
 ## Trade-offs
 
-Hiding content inside tabs or collapsibles can occasionally make it harder for users to find information using the browser's native `Ctrl+F` search. However, `docmd`'s integrated [Search Engine](../../plugins/search) indexes all content within these containers, ensuring that users can still find exactly what they need through the site's primary search interface while enjoying a much cleaner reading experience.
+Hiding content inside tabs or collapsibles can occasionally make it harder for users to find information using the browser's native `Ctrl+F` search. However, `docmd`'s integrated [Search Engine](../../plugins/search.md) indexes all content within these containers, ensuring that users can still find exactly what they need through the site's primary search interface while enjoying a much cleaner reading experience.

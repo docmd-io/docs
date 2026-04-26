@@ -93,17 +93,17 @@ Because `noStyle` pages support raw HTML alongside `docmd` containers, they are 
 
 ## String Replacement (i18n for noStyle)
 
-When your site has [i18n configured](/configuration/localisation/), themed documentation pages get full server-side translations automatically — each locale has its own markdown files in separate directories. But noStyle pages use custom HTML, not markdown, so that approach doesn't apply. Instead, docmd provides **string replacement** — translating your HTML via `data-i18n` attributes and JSON translation files.
+When your site has [i18n configured](../configuration/localisation/index.md), themed documentation pages get full server-side translations automatically — each locale has its own markdown files in separate directories. But noStyle pages use custom HTML, not markdown, so that approach doesn't apply. Instead, docmd provides **string replacement** — translating your HTML via `data-i18n` attributes and JSON translation files.
 
 ::: callout info "Why this only works for noStyle pages"
-String replacement finds elements with `data-i18n` attributes in the rendered HTML and swaps their text content. Standard markdown content renders to plain `<p>`, `<h2>`, `<li>` tags — there are no `data-i18n` attributes for the replacer to find. For translating documentation written in markdown, use [directory mode](/configuration/localisation/translated-content/) — separate markdown files per locale.
+String replacement finds elements with `data-i18n` attributes in the rendered HTML and swaps their text content. Standard markdown content renders to plain `<p>`, `<h2>`, `<li>` tags — there are no `data-i18n` attributes for the replacer to find. For translating documentation written in markdown, use [directory mode](../configuration/localisation/translated-content.md) — separate markdown files per locale.
 :::
 
 ### How It Works
 
 There are two modes for string replacement:
 
-- **Server-side (recommended)**: With [`stringMode: true`](/configuration/localisation/#string-mode-nostyle-pages-only) in your i18n config, docmd resolves `data-i18n` attributes **at build time** and generates fully translated HTML in `/{locale}/` directories. Each locale gets its own URL — fully indexable by search engines.
+- **Server-side (recommended)**: With [`stringMode: true`](../configuration/localisation/index.md#string-mode-nostyle-pages-only) in your i18n config, docmd resolves `data-i18n` attributes **at build time** and generates fully translated HTML in `/{locale}/` directories. Each locale gets its own URL — fully indexable by search engines.
 - **Client-side**: The `docmd-i18n-strings.js` script loads translations at runtime via XHR. This is injected automatically on noStyle pages when i18n is configured. Useful for in-place switching without page reload (e.g. SPAs, dashboards).
 
 Both modes use the same `data-i18n` attribute syntax and JSON file format.

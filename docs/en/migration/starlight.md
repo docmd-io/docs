@@ -68,7 +68,7 @@ sidebar: [
 
 Starlight uses Astro components (`<Tabs>`, `<Card>`, etc.) embedded via MDX or Markdoc. Because `docmd` relies on pure Markdown syntax instead of UI components, these must be converted.
 
-**Action required:** Replace Astro components with `docmd` [Containers](/content/containers/callouts).
+**Action required:** Replace Astro components with `docmd` [Containers](../content/containers/callouts.md).
 
 #### Example: Converting Tabs
 
@@ -112,8 +112,8 @@ Some note content.
 ### 3. Frontmatter Mapping
 
 Starlight has strict frontmatter typing via Astro content collections. `docmd` frontmatter is simpler.
-If you used `hero` or `banner` frontmatter properties in Starlight for landing pages, you will need to replace them with `docmd`'s [Hero Sections](/content/containers/hero) written directly in the Markdown body.
+If you used `hero` or `banner` frontmatter properties in Starlight for landing pages, you will need to replace them with `docmd`'s [Hero Sections](../content/containers/hero.md) written directly in the Markdown body.
 
 ## Next Steps
 
-- Explore `docmd`'s built-in [Search plugin](/plugins/search) (Starlight uses Pagefind, while `docmd` ships with a highly optimised local search indexer natively).
+- Explore `docmd`'s built-in [Search plugin](../plugins/search.md) (Starlight uses Pagefind, while `docmd` ships with a highly optimised local search indexer natively).

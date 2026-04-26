@@ -74,7 +74,7 @@ themeConfig: {
 
 VitePress 允许作者在 Markdown 文件中直接嵌入 Vue 组件（例如 `<MyComponent />`）。由于 `docmd` 不会在客户端运行 Vue，您必须移除这些自定义组件，或者用原生的 Markdown 语法代替。
 
-**所需操作：** 将特定的 Vue UI 组件替换为 `docmd` 的 [容器](/content/containers/callouts)。
+**所需操作：** 将特定的 Vue UI 组件替换为 `docmd` 的 [容器](../content/containers/callouts.md)。
 
 #### 示例：提示框（自定义容器）
 
@@ -93,8 +93,8 @@ This is an info box.
 This is an info box.
 :::
 ```
-*注：VitePress 使用 `info`, `tip`, `warning`, `danger`, `details`。`docmd` 原生支持其中绝大多数，但您可能需要查看完整的 [docmd 提示框列表](/content/containers/callouts)。*
+*注：VitePress 使用 `info`, `tip`, `warning`, `danger`, `details`。`docmd` 原生支持其中绝大多数，但您可能需要查看完整的 [docmd 提示框列表](../content/containers/callouts.md)。*
 
 ## 下一步
 
-- 探索 `docmd` 的 [构建与部署](/deployment) 指南，因为 `docmd` 并不依赖 Vite 的构建管线。
+- 探索 `docmd` 的 [构建与部署](../deployment/index.md) 指南，因为 `docmd` 并不依赖 Vite 的构建管线。

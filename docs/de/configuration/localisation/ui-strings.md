@@ -79,5 +79,5 @@ docmd generiert automatisch `<link rel="alternate" hreflang="...">`-Tags für je
 Es ist keine Konfiguration erforderlich — diese Tags werden in jede Seite eingefügt, wenn i18n aktiviert ist.
 
 ::: callout info "noStyle-Seiten"
-Das oben beschriebene UI-String-System gilt für thematisierte Layout-Seiten (serverseitig). Für noStyle-Seiten, die benutzerdefiniertes HTML verwenden, siehe das [clientseitige String-Ersetzungssystem](/content/no-style-pages#string-replacement-i18n-for-nostyle), das `data-i18n`-Attribute und JSON-Dateien in `assets/i18n/` verwendet.
+Das oben beschriebene UI-String-System gilt für thematisierte Layout-Seiten (serverseitig). Für noStyle-Seiten, die benutzerdefiniertes HTML verwenden, siehe das [clientseitige String-Ersetzungssystem](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle), das `data-i18n`-Attribute und JSON-Dateien in `assets/i18n/` verwendet.
 :::

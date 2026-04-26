@@ -13,7 +13,7 @@ Friction in the authoring experience leads to "documentation silos," where teams
 
 ## Approach
 
-Leverage `docmd`'s decentralized [Navigation Resolution](../../configuration/navigation#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files, while a central team governs the global [Menubar](../../configuration/menubar) and visual design system.
+Leverage `docmd`'s decentralized [Navigation Resolution](../../configuration/navigation.md#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files, while a central team governs the global [Menubar](../../configuration/menubar.md) and visual design system.
 
 ## Implementation
 
@@ -35,7 +35,7 @@ my-project/
 
 ### 2. Global Context Switching (The Menubar)
 
-The central platform team controls the [Menubar](../../configuration/menubar), which serves as the primary navigation layer to switch between different team domains.
+The central platform team controls the [Menubar](../../configuration/menubar.md), which serves as the primary navigation layer to switch between different team domains.
 
 ```javascript
 // docmd.config.js

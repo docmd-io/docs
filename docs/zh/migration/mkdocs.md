@@ -72,7 +72,7 @@ nav:
 
 如果您使用了 "Material for MkDocs"，您很可能依赖了 Python Markdown 扩展（如 PyMdown Extensions）来实现标签页、提示框或任务列表。
 
-**所需操作：** 将特定于 MkDocs 扩展的语法转换为 `docmd` 原生的 [容器](/content/containers/callouts)。
+**所需操作：** 将特定于 MkDocs 扩展的语法转换为 `docmd` 原生的 [容器](../content/containers/callouts.md)。
 
 #### 示例：转换提示框（Admonitions）
 
@@ -114,4 +114,4 @@ Content for tab 2.
 ## 下一步
 
 - `docmd` 具有原生搜索功能。您不需要配置额外的搜索插件。
-- 探索 [主题选项](/theming/customization) 从而自定义您的网站颜色，以匹配您之前的 Material 主题。
+- 探索 [主题选项](../theming/customization.md) 从而自定义您的网站颜色，以匹配您之前的 Material 主题。

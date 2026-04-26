@@ -13,7 +13,7 @@ A fragmented documentation experience ruins developer trust and increases cognit
 
 ## Approach
 
-Use `docmd` as your primary documentation hub or "Single Pane of Glass." By leveraging the [Menubar](../../configuration/menubar) for unified navigation and [Embed Containers](../../content/containers/embed) for third-party content, you can create a seamless interface that hides the complexity of your multi-tool infrastructure.
+Use `docmd` as your primary documentation hub or "Single Pane of Glass." By leveraging the [Menubar](../../configuration/menubar.md) for unified navigation and [Embed Containers](../../content/containers/embed.md) for third-party content, you can create a seamless interface that hides the complexity of your multi-tool infrastructure.
 
 ## Implementation
 
@@ -46,12 +46,12 @@ For tools that provide a web interface (like interactive API explorers or dashbo
 ::: embed "https://api.example.com/v1/explorer"
 :::
 ```
-For more information, see the [Embed Reference](../../content/containers/embed).
+For more information, see the [Embed Reference](../../content/containers/embed.md).
 
 ### 3. Content Aggregation
 
-For external content that must be searchable alongside your core documentation, consider a build step that fetches data from other sources and converts it into Markdown. This allows `docmd` to index all your information in a single, unified [Search Index](../../plugins/search).
+For external content that must be searchable alongside your core documentation, consider a build step that fetches data from other sources and converts it into Markdown. This allows `docmd` to index all your information in a single, unified [Search Index](../../plugins/search.md).
 
 ## Trade-offs
 
-While embedding provides a unified look, it can occasionally introduce performance overhead or "scroll-nesting" issues on mobile devices. Furthermore, content within an iframe is not natively indexed by `docmd`'s search engine. If search parity is critical, prioritizing [OpenAPI Generation](./openapi-generation) or other Markdown-based ingestion methods is recommended.
+While embedding provides a unified look, it can occasionally introduce performance overhead or "scroll-nesting" issues on mobile devices. Furthermore, content within an iframe is not natively indexed by `docmd`'s search engine. If search parity is critical, prioritizing [OpenAPI Generation](openapi-generation.md) or other Markdown-based ingestion methods is recommended.

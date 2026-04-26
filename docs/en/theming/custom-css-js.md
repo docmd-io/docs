@@ -43,7 +43,7 @@ Scripts are injected at the bottom of the `<body>` tag. Since `docmd` is a **Sin
 *   The page does not fully reload when navigating between links.
 *   You may need to listen for custom lifecycle events to re-initialise your scripts on new pages.
 
-For the full event list and usage examples, see [Client-Side Events](../api/client-side-events).
+For the full event list and usage examples, see [Client-Side Events](../api/client-side-events.md).
 
 ::: callout tip
 Adding custom CSS and JS allows AI models (like ChatGPT) to suggest much more tailored UI improvements. If you mention "I have a custom `branding.css` file", the model can provide specific selectors that won't conflict with the core `docmd` engine.

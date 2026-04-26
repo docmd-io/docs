@@ -37,15 +37,15 @@ Jede Dokumentationsplattform behandelt Navigations-Sidebars, Übersetzungen und 
 
 Um fehlerhafte Migrationen durch das Erraten komplexer Konfigurationen zu vermeiden, verschiebt `docmd` Ihre Inhalte sicher und bittet Sie darum, die Navigation, Lokalisierung und Versionierung mithilfe der einfachen JSON-basierten APIs von `docmd` nativ zu konfigurieren.
 
-- **Navigation:** Erfahren Sie unter [Navigations-Setup](/configuration/navigation), wie Sie eine `navigation.json` erstellen.
-- **Lokalisierung:** Lesen Sie den [Leitfaden zur Lokalisierung](/configuration/localisation), um mehrsprachige Dokumentationen einzurichten.
-- **Versionierung:** Beziehen Sie sich auf das [Versions-Setup](/configuration/versioning).
+- **Navigation:** Erfahren Sie unter [Navigations-Setup](../configuration/navigation.md), wie Sie eine `navigation.json` erstellen.
+- **Lokalisierung:** Lesen Sie den [Leitfaden zur Lokalisierung](../configuration/localisation/index.md), um mehrsprachige Dokumentationen einzurichten.
+- **Versionierung:** Beziehen Sie sich auf das [Versions-Setup](../configuration/versioning.md).
 
 ## Unterstützte Plattformen
 
 Wählen Sie Ihre aktuelle Plattform für spezifische Migrationsanweisungen aus:
 
-- [Von Docusaurus migrieren](/migration/docusaurus)
-- [Von MkDocs migrieren](/migration/mkdocs)
-- [Von VitePress migrieren](/migration/vitepress)
-- [Von Astro Starlight migrieren](/migration/starlight)
+- [Von Docusaurus migrieren](./docusaurus.md)
+- [Von MkDocs migrieren](./mkdocs.md)
+- [Von VitePress migrieren](./vitepress.md)
+- [Von Astro Starlight migrieren](./starlight.md)

@@ -66,7 +66,7 @@ components:
 # Dokumentation, die begeistert.
 Die Zero-Config-Engine für moderne Entwicklerteams.
 
-::: button "Erste Schritte" /introduction color:blue
+::: button "Erste Schritte" ../getting-started/quick-start.md color:blue
 ::: button "GitHub" github:docmd-io/docmd color:gray
 
 == side
@@ -93,17 +93,17 @@ Da `noStyle`-Seiten sowohl reines HTML als auch `docmd`-Container unterstützen,
 
 ## String-Ersetzung (i18n für noStyle)
 
-Wenn Ihre Website für [i18n konfiguriert](/configuration/localisation/) ist, erhalten gewöhnliche Dokumentationsseiten automatisch serverseitige Übersetzungen — jede Sprache hat ihre eigenen Markdown-Dateien in separaten Verzeichnissen. Aber noStyle-Seiten verwenden benutzerdefiniertes HTML statt Markdown, weshalb dieser Ansatz dort nicht greift. Stattdessen bietet docmd eine **String-Ersetzung** an — die Übersetzung Ihres HTML über `data-i18n`-Attribute und JSON-Übersetzungsdateien.
+Wenn Ihre Website für [i18n konfiguriert](../configuration/localisation/index.md) ist, erhalten gewöhnliche Dokumentationsseiten automatisch serverseitige Übersetzungen — jede Sprache hat ihre eigenen Markdown-Dateien in separaten Verzeichnissen. Aber noStyle-Seiten verwenden benutzerdefiniertes HTML statt Markdown, weshalb dieser Ansatz dort nicht greift. Stattdessen bietet docmd eine **String-Ersetzung** an — die Übersetzung Ihres HTML über `data-i18n`-Attribute und JSON-Übersetzungsdateien.
 
 ::: callout info "Warum dies nur für noStyle-Seiten funktioniert"
-Die String-Ersetzung findet Elemente mit `data-i18n`-Attributen im gerenderten HTML und tauscht deren Textinhalt aus. Standard-Markdown-Inhalte werden in einfache `<p>`, `<h2>`, `<li>` Tags gerendert — dort gibt es keine `data-i18n`-Attribute, die der Ersetzer finden könnte. Für die Übersetzung von in Markdown verfassten Dokumentationen verwenden Sie den [Verzeichnis-Modus](/configuration/localisation/translated-content/) — separate Markdown-Dateien pro Sprache.
+Die String-Ersetzung findet Elemente mit `data-i18n`-Attributen im gerenderten HTML und tauscht deren Textinhalt aus. Standard-Markdown-Inhalte werden in einfache `<p>`, `<h2>`, `<li>` Tags gerendert — dort gibt es keine `data-i18n`-Attribute, die der Ersetzer findten könnte. Für die Übersetzung von in Markdown verfassten Dokumentationen verwenden Sie den [Verzeichnis-Modus](../configuration/localisation/translated-content.md) — separate Markdown-Dateien pro Sprache.
 :::
 
 ### Wie es funktioniert
 
 Es gibt zwei Modi für die String-Ersetzung:
 
-- **Serverseitig (empfohlen)**: Mit [`stringMode: true`](/configuration/localisation/#string-mode-nostyle-pages-only) in Ihrer i18n-Konfiguration löst docmd `data-i18n`-Attribute **zur Build-Zeit** auf und generiert vollständig übersetztes HTML in den Verzeichnissen `/{locale}/`. Jede Sprache erhält ihre eigene URL — vollständig indexierbar für Suchmaschinen.
+- **Serverseitig (empfohlen)**: Mit [`stringMode: true`](../configuration/localisation/index.md#string-mode-nostyle-pages-only) in Ihrer i18n-Konfiguration löst docmd `data-i18n`-Attribute **zur Build-Zeit** auf und generiert vollständig übersetztes HTML in den Verzeichnissen `/{locale}/`. Jede Sprache erhält ihre eigene URL — vollständig indexierbar für Suchmaschinen.
 - **Clientseitig**: Das Skript `docmd-i18n-strings.js` lädt Übersetzungen zur Laufzeit via XHR. Dies wird auf noStyle-Seiten automatisch eingefügt, wenn i18n konfiguriert ist. Nützlich für den Austausch an Ort und Stelle ohne Neuladen der Seite (z. B. SPAs, Dashboards).
 
 Beide Modi verwenden dieselbe Syntax für `data-i18n`-Attribute und dasselbe JSON-Dateiformat.

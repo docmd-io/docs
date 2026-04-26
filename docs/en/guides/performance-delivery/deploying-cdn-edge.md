@@ -26,7 +26,7 @@ The optimal solution is to deploy your site to an Edge CDN. Because `docmd` gene
 
 ### 2. Automate the Build
 
-Use a CI/CD pipeline to build and deploy your site automatically whenever you push changes. See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd) for detailed examples.
+Use a CI/CD pipeline to build and deploy your site automatically whenever you push changes. See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd.md) for detailed examples.
 
 ```yaml
 # .github/workflows/deploy.yml

@@ -13,7 +13,7 @@ Your favicon is the primary visual anchor in a crowded browser window. High-qual
 
 ## Approach
 
-`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, leverage the [SEO Plugin](../../plugins/seo), which automates the generation of meta tags based on your project configuration and page frontmatter.
+`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, leverage the [SEO Plugin](../../plugins/seo.md), which automates the generation of meta tags based on your project configuration and page frontmatter.
 
 ## Implementation
 
@@ -31,7 +31,7 @@ export default {
 
 ### 2. Global SEO Configuration
 
-Enable and configure the [SEO Plugin](../../plugins/seo) to set default social media previews for your entire site.
+Enable and configure the [SEO Plugin](../../plugins/seo.md) to set default social media previews for your entire site.
 
 ```javascript
 // docmd.config.js
@@ -54,7 +54,7 @@ export default {
 
 ### 3. Page-Specific Overrides
 
-You can override SEO settings for individual pages using the `seo` property in the [Frontmatter](../../content/frontmatter).
+You can override SEO settings for individual pages using the `seo` property in the [Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---

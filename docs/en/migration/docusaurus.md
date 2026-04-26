@@ -39,13 +39,13 @@ Docusaurus has complex programmatic configurations that `docmd` does not try to 
 
 Docusaurus sidebars are often auto-generated or configured in `sidebars.js`.
 
-**Action required:** Create a `navigation.json` inside your new `docs/` directory to structure your `docmd` sidebar. See the [Navigation Guide](/configuration/navigation).
+**Action required:** Create a `navigation.json` inside your new `docs/` directory to structure your `docmd` sidebar. See the [Navigation Guide](../configuration/navigation.md).
 
 ### 2. Replacing MDX Components
 
 Docusaurus relies heavily on MDX (`.mdx`) to render custom React components (like Tabs, Admonitions, or custom UI elements). `docmd` is purely Markdown-driven and does not use React.
 
-**Action required:** You must convert any custom `<MyReactComponent />` tags into standard Markdown or use `docmd`'s native [Containers](/content/containers/callouts).
+**Action required:** You must convert any custom `<MyReactComponent />` tags into standard Markdown or use `docmd`'s native [Containers](../content/containers/callouts.md).
 
 #### Example: Converting Admonitions
 
@@ -95,9 +95,9 @@ This is an orange.
 
 If you used Docusaurus's `i18n` features, your translated files were likely in `i18n/locale/docusaurus-plugin-content-docs/current/`.
 
-**Action required:** Move these files into `docmd`'s directory structure (`docs/en/`, `docs/es/`, etc.) and configure the locales in `docmd.config.js`. See the [Localisation Guide](/configuration/localisation).
+**Action required:** Move these files into `docmd`'s directory structure (`docs/en/`, `docs/es/`, etc.) and configure the locales in `docmd.config.js`. See the [Localisation Guide](../configuration/localisation/index.md).
 
 ## Next Steps
 
-- Explore the [Layout & UI](/configuration/layout-ui) settings to match your Docusaurus theme.
-- Convert React-based hero headers into `docmd` [Hero Containers](/content/containers/hero).
+- Explore the [Layout & UI](../configuration/layout-ui.md) settings to match your Docusaurus theme.
+- Convert React-based hero headers into `docmd` [Hero Containers](../content/containers/hero.md).

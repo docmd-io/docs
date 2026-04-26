@@ -28,7 +28,7 @@ npx @docmd/core dev
 
 ### 2. Automatic Navigation (Auto-Router)
 
-If no `navigation.json` or `docmd.config.js` is found, `docmd` triggers its [Auto-Router](../../configuration/navigation#automatic-sidebar-generation). It recursively maps your folder structure, prettifies directory names (e.g., `getting-started` becomes `Getting Started`), and generates a logical sidebar taxonomy automatically.
+If no `navigation.json` or `docmd.config.js` is found, `docmd` triggers its [Auto-Router](../../configuration/navigation.md#automatic-sidebar-generation). It recursively maps your folder structure, prettifies directory names (e.g., `getting-started` becomes `Getting Started`), and generates a logical sidebar taxonomy automatically.
 
 ### 3. Intelligent Title Inference
 
@@ -43,4 +43,4 @@ You don't need to add `title` frontmatter to every file. `docmd` uses a cascadin
 
 ## Trade-offs
 
-Automatic sidebars are typically sorted alphabetically by filename. While naming files like `01-intro.md` and `02-setup.md` works well, more descriptive filenames may appear in an unintuitive order. For production-ready sites, we recommend transitioning to a manual [Navigation Configuration](../../configuration/navigation) to gain full control over the user journey.
+Automatic sidebars are typically sorted alphabetically by filename. While naming files like `01-intro.md` and `02-setup.md` works well, more descriptive filenames may appear in an unintuitive order. For production-ready sites, we recommend transitioning to a manual [Navigation Configuration](../../configuration/navigation.md) to gain full control over the user journey.

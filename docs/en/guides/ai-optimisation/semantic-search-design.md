@@ -5,7 +5,7 @@ description: "How to structure your documentation to optimise it for vector-base
 
 ## Problem
 
-Traditional keyword search (like [docmd's built-in search](../../plugins/search)) relies on exact text matches. If a user searches for "authentication," a basic keyword engine might fail to find a page titled "Integrating OAuth2" if that specific word doesn't appear frequently enough. Semantic search, which uses vector embeddings to understand the *meaning* of a query, solves this problem but requires specific documentation structures to be effective.
+Traditional keyword search (like [docmd's built-in search](../../plugins/search.md)) relies on exact text matches. If a user searches for "authentication," a basic keyword engine might fail to find a page titled "Integrating OAuth2" if that specific word doesn't appear frequently enough. Semantic search, which uses vector embeddings to understand the *meaning* of a query, solves this problem but requires specific documentation structures to be effective.
 
 ## Why it matters
 
@@ -19,7 +19,7 @@ Structure your documentation to be easily consumed by Retrieval-Augmented Genera
 
 ### 1. Rich Frontmatter Metadata
 
-Use [Frontmatter](../../content/frontmatter) to provide explicit keywords and descriptions that might not be used naturally in the body text. This gives the search engine extra "hooks" into your content.
+Use [Frontmatter](../../content/frontmatter.md) to provide explicit keywords and descriptions that might not be used naturally in the body text. This gives the search engine extra "hooks" into your content.
 
 ```yaml
 ---

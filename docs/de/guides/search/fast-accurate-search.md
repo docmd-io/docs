@@ -19,11 +19,11 @@ Das primäre Ziel der Dokumentationssuche ist die "Time to Answer". Wenn ein Ben
 
 ### 1. Gescopte Suchindizes
 
-`docmd` generiert automatisch separate Suchindizes für jedes [Locale](../../configuration/localisation) und jede [Version](../../configuration/versioning). Dies stellt sicher, dass ein Benutzer nur den für seinen aktuellen Kontext relevanten Index herunterlädt. Beispielsweise lädt ein Benutzer, der die deutsche Version Ihrer Dokumentation durchsucht, nur den deutschen Suchindex herunter, was die Payload-Größe erheblich reduziert.
+`docmd` generiert automatisch separate Suchindizes für jedes [Locale](../../configuration/localisation/index.md) und jede [Version](../../configuration/versioning.md). Dies stellt sicher, dass ein Benutzer nur den für seinen aktuellen Kontext relevanten Index herunterlädt. Beispielsweise lädt ein Benutzer, der die deutsche Version Ihrer Dokumentation durchsucht, nur den deutschen Suchindex herunter, was die Payload-Größe erheblich reduziert.
 
 ### 2. Intelligentes Field-Stripping
 
-Das [Search-Plugin](../../plugins/search) ermöglicht es Ihnen zu steuern, welche Inhalte genau indexiert werden. Standardmäßig werden Überschriften und Frontmatter-Metadaten priorisiert, während gängige "Stoppwörter" und unnötige Codesymbole, die den Index ohne Mehrwert aufblähen würden, entfernt werden. Sie können auch spezifische Seiten über die Eigenschaft `search` in Ihrem [Frontmatter](../../content/frontmatter) vom Index ausschließen.
+Das [Search-Plugin](../../plugins/search.md) ermöglicht es Ihnen zu steuern, welche Inhalte genau indexiert werden. Standardmäßig werden Überschriften und Frontmatter-Metadaten priorisiert, während gängige "Stoppwörter" und unnötige Codesymbole, die den Index ohne Mehrwert aufblähen würden, entfernt werden. Sie können auch spezifische Seiten über die Eigenschaft `search` in Ihrem [Frontmatter](../../content/frontmatter.md) vom Index ausschließen.
 
 ```yaml
 ---

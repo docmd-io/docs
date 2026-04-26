@@ -13,7 +13,7 @@ Extensibility is what separates a static tool from a professional documentation 
 
 ## Approach
 
-`docmd` features a robust, hook-based [Plugin API](../../plugins/api). You can write simple Node.js modules that intercept the documentation lifecycle at various stages—from initial configuration to final HTML generation—allowing you to arbitrarily modify content and behaviour.
+`docmd` features a robust, hook-based [Plugin API](../../plugins/building-plugins.md). You can write simple Node.js modules that intercept the documentation lifecycle at various stages—from initial configuration to final HTML generation—allowing you to arbitrarily modify content and behaviour.
 
 ## Implementation
 

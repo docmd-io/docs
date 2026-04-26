@@ -10,7 +10,7 @@ titleAppend: false
 
 Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisches HTML für SEO. SPA für Geschwindigkeit. Standardmäßig KI-bereit.
 
-::: button "Erste Schritte" /getting-started/quick-start icon:rocket
+::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
 :::
 
@@ -65,17 +65,17 @@ Erstklassige Mehrsprachigkeitsunterstützung mit sprachspezifischen URLs, Suche 
 
 Gehen Sie über statischen Text hinaus. docmd bietet eine reiche Container-Syntax direkt in Markdown — Callouts, Tabs, Karten, Raster, Hero-Bereiche, ausklappbare Abschnitte und mehr.
 
-::: button "Container erkunden" /content/containers/ icon:blocks
+::: button "Container erkunden" ./content/containers/index.md icon:blocks
 
 ::: grids
 ::: grid
 ::: card "Interaktive Sandboxes"
-Betten Sie interaktive, editierbare Vorschaufenster natürlich in Ihre Seiten ein, indem Sie die [Live Preview](/content/live-preview) API nutzen.
+Betten Sie interaktive, editierbare Vorschaufenster natürlich in Ihre Seiten ein, indem Sie die [Live Preview](./content/live-preview.md) API nutzen.
 :::
 :::
 ::: grid
 ::: card "Inline-Kollaboration"
-Wählen Sie Text im Entwicklungsmodus aus, um [Threads](/plugins/threads) zu öffnen und Kommentare mit Ihrem Dokumentationsteam zu hinterlassen.
+Wählen Sie Text im Entwicklungsmodus aus, um [Threads](./plugins/threads.md) zu öffnen und Kommentare mit Ihrem Dokumentationsteam zu hinterlassen.
 :::
 :::
 :::

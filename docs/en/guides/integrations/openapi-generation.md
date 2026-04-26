@@ -13,7 +13,7 @@ Inaccurate API references are a primary cause of developer frustration and incre
 
 ## Approach
 
-Implement an asynchronous build pipeline that converts your `openapi.json` or `swagger.yaml` schema into standard Markdown files. Because `docmd` excels at rendering Markdown with complex [Containers](../../content/containers), the resulting API reference feels integrated and visually consistent with the rest of your documentation.
+Implement an asynchronous build pipeline that converts your `openapi.json` or `swagger.yaml` schema into standard Markdown files. Because `docmd` excels at rendering Markdown with complex [Containers](../../content/containers/index.md), the resulting API reference feels integrated and visually consistent with the rest of your documentation.
 
 ## Implementation
 
@@ -33,7 +33,7 @@ You can use a tool like `widdershins` or a custom script to generate Markdown fr
 
 ### 2. Optimising API Layouts
 
-API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter) to optimise the page layout for readability.
+API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter.md) to optimise the page layout for readability.
 
 ```markdown
 ---
@@ -46,7 +46,7 @@ Setting `layout: "full"` removes the right-hand Table of Contents sidebar, provi
 
 ### 3. Enhancing with docmd Containers
 
-You can post-process the generated Markdown to inject `docmd` features like [Tabs](../../content/containers/tabs) for multi-language code samples or [Callouts](../../content/containers/callouts) for authentication warnings.
+You can post-process the generated Markdown to inject `docmd` features like [Tabs](../../content/containers/tabs.md) for multi-language code samples or [Callouts](../../content/containers/callouts.md) for authentication warnings.
 
 ```markdown
 ::: tabs

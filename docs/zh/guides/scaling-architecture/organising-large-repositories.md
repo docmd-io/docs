@@ -39,7 +39,7 @@ description: "如何使用落地页和层级导航在复杂的文档结构中保
 
 ### 2. 实施落地页 (Hub Pages)
 
-不要在侧边栏中公开每一个单独的页面，而是创建中央“落地页”，作为特定子系统的目录。使用 [网格和卡片](../../content/containers/grids-cards) 提供可用内容的视觉化、高层级概览。
+不要在侧边栏中公开每一个单独的页面，而是创建中央“落地页”，作为特定子系统的目录。使用 [网格和卡片](../../content/containers/grids.md) 提供可用内容的视觉化、高层级概览。
 
 ```markdown
 # 集成中心 (Integrations Hub)
@@ -48,13 +48,13 @@ description: "如何使用落地页和层级导航在复杂的文档结构中保
 ::: grid
 ::: card "数据库集成" icon:database
 将您的应用程序连接到 Postgres 和 MongoDB 等流行数据库。
-[查看数据库指南](/integrations/databases)
+[查看数据库指南](../integrations/openapi-generation.md)
 :::
 :::
 ::: grid
 ::: card "支付网关" icon:credit-card
 了解如何集成 Stripe、PayPal 等。
-[查看支付指南](/integrations/payments)
+[查看支付指南](../integrations/alongside-other-tools.md)
 :::
 :::
 :::
@@ -62,7 +62,7 @@ description: "如何使用落地页和层级导航在复杂的文档结构中保
 
 ### 3. 利用面包屑导航
 
-`docmd` 会根据您的文件夹结构和导航层级为每个页面自动生成 [面包屑导航](../../content/syntax/advanced#breadcrumbs)。通过使用落地页，您可以保持侧边栏的专注，同时面包屑导航提供必要的上下文，并方便用户向上级层级导航。
+`docmd` 会根据您的文件夹结构和导航层级为每个页面自动生成 [面包屑导航](../../content/syntax/advanced.md#breadcrumbs)。通过使用落地页，您可以保持侧边栏的专注，同时面包屑导航提供必要的上下文，并方便用户向上级层级导航。
 
 ## 权衡
 

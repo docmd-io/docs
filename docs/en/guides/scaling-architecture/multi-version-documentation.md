@@ -13,7 +13,7 @@ Without a seamless way to switch versions, developers often mistakenly apply ins
 
 ## Approach
 
-`docmd` features a native [Versioning Engine](../../configuration/versioning) that treats versions as first-class citizens. It isolates builds into version-prefixed directories, provides a "Sticky Switching" mechanism that preserves the current page path, and correctly scopes search results to the active version context.
+`docmd` features a native [Versioning Engine](../../configuration/versioning.md) that treats versions as first-class citizens. It isolates builds into version-prefixed directories, provides a "Sticky Switching" mechanism that preserves the current page path, and correctly scopes search results to the active version context.
 
 ## Implementation
 

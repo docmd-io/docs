@@ -25,7 +25,7 @@ By default, `docmd` does not use React, Vue, or any other heavy client-side fram
 
 ### 2. Strategic Plugin Management
 
-While [Plugins](../../plugins/usage) add powerful features, they can introduce significant performance overhead. For example, the [Mermaid Plugin](../../plugins/mermaid) requires a large engine to render diagrams. If your users are primarily on low-end devices, consider using static images for diagrams instead of client-side rendering.
+While [Plugins](../../plugins/usage.md) add powerful features, they can introduce significant performance overhead. For example, the [Mermaid Plugin](../../plugins/mermaid.md) requires a large engine to render diagrams. If your users are primarily on low-end devices, consider using static images for diagrams instead of client-side rendering.
 
 ### 3. Responsive and Optimised Media
 
@@ -41,7 +41,7 @@ Using the `loading="lazy"` attribute ensures that images are only downloaded as 
 
 ### 4. Efficient Search Indexing
 
-`docmd` generates scoped search indices to keep the memory footprint low. However, for extremely large sites, the [Search Plugin](../../plugins/search) can still be memory-intensive. Encourage users on mobile to use the search bar only when necessary, or optimise your index as described in the [Local-First Search Guide](../search/local-first-search).
+`docmd` generates scoped search indices to keep the memory footprint low. However, for extremely large sites, the [Search Plugin](../../plugins/search.md) can still be memory-intensive. Encourage users on mobile to use the search bar only when necessary, or optimise your index as described in the [Local-First Search Guide](../search/local-first-search.md).
 
 ## Trade-offs
 

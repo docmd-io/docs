@@ -30,7 +30,7 @@ export default defineConfig({
 | `src` | The relative path to the directory containing your Markdown files. | `docs` |
 | `out` | The relative path for the generated static site output. | `site` |
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
-| `i18n` | Configuration for [multi-language support](./localisation.md). | `null` |
+| `i18n` | Configuration for [multi-language support](localisation/index.md). | `null` |
 | `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
 
 ## Branding & Identity
@@ -52,7 +52,7 @@ favicon: 'assets/favicon.ico',           // Path to your site's favicon
 
 `docmd` features a modular layout system. You can toggle UI components like the **Sidebar**, **Header**, **Menubar**, and **Global Search** via the `layout` object.
 
-For a full breakdown of functional zones and configuration options, see [Layout & UI Zones](./layout-ui).
+For a full breakdown of functional zones and configuration options, see [Layout & UI Zones](layout-ui.md).
 
 ## Core Engine Features
 

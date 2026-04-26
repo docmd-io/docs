@@ -20,13 +20,13 @@ A standard `docmd` page is divided into six primary functional zones:
 The menubar provides a high-level navigation layer above your documentation. It supports brand titles, regular links, and nested dropdowns.
 
 *   **Location**: Fixed at the `top` or inline within the `header`.
-*   **Documentation**: See [Menubar Configuration](./menubar) for full item schemas and styling.
+*   **Documentation**: See [Menubar Configuration](menubar.md) for full item schemas and styling.
 
 ### The Page Header
 The header contains the page title, breadcrumbs, and usually the utility menus. 
 
 *   **Controls**: Enable/disable the header or breadcrumbs site-wide via `layout.header` and `layout.breadcrumbs`.
-*   **Overriding**: Use `hideTitle: true` in your [Page Frontmatter](../content/frontmatter) to hide the title area on specific pages.
+*   **Overriding**: Use `hideTitle: true` in your [Page Frontmatter](../content/frontmatter.md) to hide the title area on specific pages.
 
 ### Utility Menus (Options Menu)
 The `optionsMenu` consolidates core utilities like **Global Search**, **Theme Toggle**, and **Sponsorship links**.
@@ -52,7 +52,7 @@ If the chosen position targets a container that is disabled, `docmd` will automa
 The sidebar is the primary navigation tree for your site. Its structure is defined either in your config or via external JSON files.
 
 *   **Behaviour**: Supports animations, collapsible groups, and automatic path preservation.
-*   **Documentation**: See [Navigation Configuration](./navigation) for structuring your sidebar tree.
+*   **Documentation**: See [Navigation Configuration](navigation.md) for structuring your sidebar tree.
 
 ### Footer
 `docmd` provides both **minimal** and **complete** layouts for your site footer.

@@ -13,7 +13,7 @@ Readability is not just an aesthetic choice—it is a functional requirement. If
 
 ## Approach
 
-Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers) to highlight critical information. By utilizing `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
+Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers/index.md) to highlight critical information. By utilizing `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
 
 ## Implementation
 
@@ -23,7 +23,7 @@ Try to limit paragraphs to no more than three or four sentences. Shorter paragra
 
 ### 2. Categorising with Callouts
 
-Use [Callouts](../../content/containers/callouts) consistently to categorise information. This allows users who are skimming to instantly recognise the intent of a block based on its visual style:
+Use [Callouts](../../content/containers/callouts.md) consistently to categorise information. This allows users who are skimming to instantly recognise the intent of a block based on its visual style:
 
 *   **Info**: Background context or supplementary details that provide deeper understanding.
 *   **Tip**: Best practices, shortcuts, and "pro-tips" for efficiency.
@@ -37,7 +37,7 @@ Never execute this command on a live database without verifying your backups fir
 
 ### 3. Sequential Instruction with Steps
 
-For tutorials and step-by-step guides, avoid narrative descriptions of actions. Instead, use the [Steps Container](../../content/containers/steps) to create a clear, numbered progression that is easy to follow.
+For tutorials and step-by-step guides, avoid narrative descriptions of actions. Instead, use the [Steps Container](../../content/containers/steps.md) to create a clear, numbered progression that is easy to follow.
 
 ```markdown
 ::: steps

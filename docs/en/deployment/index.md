@@ -47,9 +47,9 @@ Use `--force` only if you intentionally want to suppress any future confirmation
 
 ### Supported Targets
 
-*   [`docmd deploy --docker`](./docker) — Optimised multi-stage Dockerfile with layer caching and version pinning.
-*   [`docmd deploy --nginx`](./nginx) — Security-hardened nginx.conf with GZIP and immutable asset caching.
-*   [`docmd deploy --caddy`](./caddy) — HTTPS-ready Caddyfile with automatic routing.
+*   [`docmd deploy --docker`](docker.md) — Optimised multi-stage Dockerfile with layer caching and version pinning.
+*   [`docmd deploy --nginx`](nginx.md) — Security-hardened nginx.conf with GZIP and immutable asset caching.
+*   [`docmd deploy --caddy`](caddy.md) — HTTPS-ready Caddyfile with automatic routing.
 
 Click each target above for detailed, service-specific documentation.
 
@@ -59,7 +59,7 @@ Click each target above for detailed, service-specific documentation.
 
 If you prefer managed hosting over self-hosted servers, deploy your output folder directly to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
 
-See the [CI/CD Deployment Guide](./ci-cd) for automated workflows.
+See the [CI/CD Deployment Guide](ci-cd.md) for automated workflows.
 
 ## SPA Routing
 

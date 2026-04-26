@@ -31,7 +31,7 @@ export default {
 
 ### 2. Strategic Plugin Management
 
-While [Plugins](../../plugins/usage) add powerful features, some can significantly increase your JavaScript payload. For example, the [Mermaid Plugin](../../plugins/mermaid) requires a large client-side library to render diagrams. Only enable heavy plugins if they are essential to your content, and consider their impact on overall page weight.
+While [Plugins](../../plugins/usage.md) add powerful features, some can significantly increase your JavaScript payload. For example, the [Mermaid Plugin](../../plugins/mermaid.md) requires a large client-side library to render diagrams. Only enable heavy plugins if they are essential to your content, and consider their impact on overall page weight.
 
 ### 3. Defer Non-Critical Scripts
 

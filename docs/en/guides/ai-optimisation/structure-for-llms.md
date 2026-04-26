@@ -13,7 +13,7 @@ If your documentation is not optimised for LLMs, developers using tools like Git
 
 ## Approach
 
-Transition from a "visual-first" mindset to a **"semantic-first"** mindset. Use standard Markdown features—such as strict header hierarchies, explicit code block language tags, and descriptive alt text—to provide a clear, machine-readable roadmap of your content. `docmd` processes this structure into optimised outputs via the [LLMs Plugin](../../plugins/usage).
+Transition from a "visual-first" mindset to a **"semantic-first"** mindset. Use standard Markdown features—such as strict header hierarchies, explicit code block language tags, and descriptive alt text—to provide a clear, machine-readable roadmap of your content. `docmd` processes this structure into optimised outputs via the [LLMs Plugin](../../plugins/usage.md).
 
 ## Implementation
 
@@ -38,7 +38,7 @@ Since LLMs cannot "see" images or diagrams, you must provide the architectural c
 
 ### 3. Explicit Code Block Labeling
 
-Always specify the language for every fenced code block using [Syntax Highlighting](../../content/syntax). This allows LLMs to parse the code's Abstract Syntax Tree (AST) correctly.
+Always specify the language for every fenced code block using [Syntax Highlighting](../../content/syntax/index.md). This allows LLMs to parse the code's Abstract Syntax Tree (AST) correctly.
 
 ```javascript
 // docmd.config.js
@@ -49,7 +49,7 @@ export default {
 
 ### 4. Semantic Containers
 
-Use [Callouts](../../content/containers/callouts) rather than generic blockquotes to provide intent. `docmd`'s semantic containers help AI models distinguish between core instructions and supplementary tips or warnings.
+Use [Callouts](../../content/containers/callouts.md) rather than generic blockquotes to provide intent. `docmd`'s semantic containers help AI models distinguish between core instructions and supplementary tips or warnings.
 
 ## Trade-offs
 

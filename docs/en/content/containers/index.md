@@ -21,15 +21,15 @@ It supports **Markdown**, imagery, and deep component nesting.
 
 | Component | Keyword | Primary Use Case |
 | :--- | :--- | :--- |
-| **[Callouts](./callouts)** | `callout` | Semantic highlights for tips, warnings, and alerts. |
-| **[Cards](./cards)** | `card` | Framed structural blocks for feature grids and layout control. |
-| **[Grids](./grids)** | `grids` | Auto-adjusting multi-column structural groups. |
-| **[Tabs](./tabs)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
-| **[Steps](./steps)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
-| **[Buttons](./buttons)** | `button` | Self-closing, prominent call-to-action navigation links. |
-| **[Collapsibles](./collapsible)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
-| **[Changelogs](./changelogs)** | `changelog` | Structured, timeline-based version history and release notes. |
-| **[Hero](./hero)** | `hero` | High-impact landing page sections with layout and slider support. |
+| **[Callouts](callouts.md)** | `callout` | Semantic highlights for tips, warnings, and alerts. |
+| **[Cards](cards.md)** | `card` | Framed structural blocks for feature grids and layout control. |
+| **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column structural groups. |
+| **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
+| **[Steps](steps.md)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
+| **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
+| **[Collapsibles](collapsible.md)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
+| **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |
+| **[Hero](hero.md)** | `hero` | High-impact landing page sections with layout and slider support. |
 
 ## The Strategic Importance of Containers
 
@@ -52,4 +52,4 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
 :::
 ```
 
-[Master the Nesting Guide →](./nested-containers)
+[Master the Nesting Guide](nested-containers.md)

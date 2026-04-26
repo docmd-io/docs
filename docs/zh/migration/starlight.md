@@ -68,7 +68,7 @@ sidebar: [
 
 Starlight 使用通过 MDX 或 Markdoc 嵌入的 Astro 组件（`<Tabs>`, `<Card>` 等）。由于 `docmd` 依赖于纯 Markdown 语法而不是 UI 组件，因此需要转换这些内容。
 
-**所需操作：** 将 Astro 组件替换为 `docmd` 的 [容器](/content/containers/callouts)。
+**所需操作：** 将 Astro 组件替换为 `docmd` 的 [容器](../content/containers/callouts.md)。
 
 #### 示例：转换标签页（Tabs）
 
@@ -112,8 +112,8 @@ Some note content.
 ### 3. Frontmatter 映射
 
 Starlight 通过 Astro 的内容合集功能对 Frontmatter 进行了严格地类型限制。`docmd` 的 Frontmatter 则更加简单。
-如果您在 Starlight 中的登录页面使用了 `hero` 或 `banner` 前置属性，则需要将它们替换为直接写在 Markdown 正文中的 `docmd` [主页横幅](/content/containers/hero)。
+如果您在 Starlight 中的登录页面使用了 `hero` 或 `banner` 前置属性，则需要将它们替换为直接写在 Markdown 正文中的 `docmd` [主页横幅](../content/containers/hero.md)。
 
 ## 下一步
 
-- 探索 `docmd` 的内置 [搜索插件](/plugins/search)（Starlight 使用 Pagefind，而 `docmd` 则原生提供了一个高度优化的本地搜索索引器）。
+- 探索 `docmd` 的内置 [搜索插件](../plugins/search.md)（Starlight 使用 Pagefind，而 `docmd` 则原生提供了一个高度优化的本地搜索索引器）。

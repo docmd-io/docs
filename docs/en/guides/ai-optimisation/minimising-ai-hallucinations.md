@@ -53,7 +53,7 @@ export default {
 
 ### 4. Categorised Warnings
 
-Use [Callouts](../../content/containers/callouts) to clearly mark deprecated features or breaking changes. AI models are more likely to respect a `::: callout warning` block than a simple sentence in a paragraph.
+Use [Callouts](../../content/containers/callouts.md) to clearly mark deprecated features or breaking changes. AI models are more likely to respect a `::: callout warning` block than a simple sentence in a paragraph.
 
 ## Trade-offs
 

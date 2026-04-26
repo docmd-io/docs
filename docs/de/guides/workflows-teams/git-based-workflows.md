@@ -31,11 +31,11 @@ export default {
   }
 };
 ```
-Weitere Details finden Sie unter [Edit-Link-Konfiguration](../../configuration/general#editlink).
+Weitere Details finden Sie unter [Edit-Link-Konfiguration](../../configuration/overview.md#editlink).
 
 ### 2. Kontextbezogene Reviews mit Threads
 
-Verwenden Sie für komplexe Updates, die detailliertes Feedback erfordern, das [Threads-Plugin](../../plugins/usage). Dies ermöglicht es Autoren und Reviewern, während der Review-Phase Inline-Kommentare direkt im Markdown-Inhalt zu hinterlassen, wodurch Diskussionen kontextbezogen bleiben.
+Verwenden Sie für komplexe Updates, die detailliertes Feedback erfordern, das [Threads-Plugin](../../plugins/threads.md). Dies ermöglicht es Autoren und Reviewern, während der Review-Phase Inline-Kommentare direkt im Markdown-Inhalt zu hinterlassen, wodurch Diskussionen kontextbezogen bleiben.
 
 ```markdown
 ::: thread "Name des Reviewers"
@@ -45,7 +45,7 @@ Sollten wir hier ein Code-Beispiel für den neuen Authentifizierungs-Flow einfü
 
 ### 3. Automatisierte Validierung in der CI
 
-Integrieren Sie `docmd` in Ihre CI/CD-Pipeline (z. B. [GitHub Actions](../../guides/integrations/github-actions-cicd)), um jeden PR zu validieren. Ihre Pipeline sollte mindestens den Build-Befehl ausführen, um sicherzustellen, dass keine Syntaxfehler oder fehlerhafte Konfigurationen eingeführt werden.
+Integrieren Sie `docmd` in Ihre CI/CD-Pipeline (z. B. [GitHub Actions](../integrations/github-actions-cicd.md)), um jeden PR zu validieren. Ihre Pipeline sollte mindestens den Build-Befehl ausführen, um sicherzustellen, dass keine Syntaxfehler oder fehlerhafte Konfigurationen eingeführt werden.
 
 ```bash
 # In Ihrer CI-Pipeline

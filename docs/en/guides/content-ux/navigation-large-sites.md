@@ -13,24 +13,24 @@ Navigation is the "map" of your product's capabilities. If navigation is difficu
 
 ## Approach
 
-Prioritize **Top-Level Context Switching** over deep nesting. Aim to keep your left sidebar limited to no more than two or three levels of depth. Use the horizontal [Menubar](../../configuration/menubar) to separate distinct documentation "domains" (e.g., Guides, API Reference, and Community), which allows each individual sidebar to remain focused, relevant, and manageable.
+Prioritize **Top-Level Context Switching** over deep nesting. Aim to keep your left sidebar limited to no more than two or three levels of depth. Use the horizontal [Menubar](../../configuration/menubar.md) to separate distinct documentation "domains" (e.g., Guides, API Reference, and Community), which allows each individual sidebar to remain focused, relevant, and manageable.
 
 ## Implementation
 
 ### 1. Domain-Based Separation
 
-In your `docmd.config.js`, use the [Menubar](../../configuration/menubar) to divide your content into high-level categories. This approach allows you to present a completely different sidebar for each domain, preventing a single navigation tree from becoming overwhelmed.
+In your `docmd.config.js`, use the [Menubar](../../configuration/menubar.md) to divide your content into high-level categories. This approach allows you to present a completely different sidebar for each domain, preventing a single navigation tree from becoming overwhelmed.
 
 ### 2. Flattening the Hierarchy
 
-Instead of splitting a single concept across many tiny Markdown pages, consolidate related information into comprehensive parent pages. Use clear [Heading Hierarchy](../../content/syntax) to allow users to navigate within the page using the auto-generated right-side Table of Contents (TOC).
+Instead of splitting a single concept across many tiny Markdown pages, consolidate related information into comprehensive parent pages. Use clear [Heading Hierarchy](../../content/syntax/index.md) to allow users to navigate within the page using the auto-generated right-side Table of Contents (TOC).
 
 *   **❌ Poor IA**: A folder named "Security" containing ten separate, one-paragraph files for different protocols.
 *   **✅ Better IA**: A single, well-structured "Security Overview" page that covers all protocols, using headings to provide a clean TOC.
 
 ### 3. Leveraging Collapsible Sections
 
-For large groups of related content that aren't accessed constantly, use the `collapsible` property in your [Navigation Configuration](../../configuration/navigation). This keeps the interface clean by hiding secondary information until it is explicitly requested by the user.
+For large groups of related content that aren't accessed constantly, use the `collapsible` property in your [Navigation Configuration](../../configuration/navigation.md). This keeps the interface clean by hiding secondary information until it is explicitly requested by the user.
 
 ```json
 // navigation.json

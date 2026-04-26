@@ -38,11 +38,11 @@ Each locale object accepts:
 | `id` | `string` | — | Any identifier you choose (e.g. `en`, `hi`, `fr-ca`). Used as the folder name and URL prefix. Required. |
 | `label` | `string` | Same as `id` | Display name shown in the language switcher. |
 | `dir` | `string` | `ltr` | Text direction. Set to `rtl` for Arabic, Hebrew, etc. |
-| `translations` | `object` | `{}` | Custom UI string overrides (see [Custom UI strings](./ui-strings)). |
+| `translations` | `object` | `{}` | Custom UI string overrides (see [Custom UI strings](ui-strings.md)). |
 
 ## URL structure
 
-The default locale has no URL prefix. Non-default locales are nested under `/{id}/`. When combined with [versioning](../versioning), the URL is `/{locale}/{version}/page`.
+The default locale has no URL prefix. Non-default locales are nested under `/{id}/`. When combined with [versioning](../versioning.md), the URL is `/{locale}/{version}/page`.
 
 ```
 /                       ← default locale, current version
@@ -83,7 +83,7 @@ i18n: {
 
 ## String Mode (noStyle pages only)
 
-Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), each with its own markdown files. **String Mode** is a simpler alternative designed specifically for [noStyle pages](/content/no-style-pages/) — pages that use raw HTML instead of markdown.
+Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), each with its own markdown files. **String Mode** is a simpler alternative designed specifically for [noStyle pages](../../content/no-style-pages.md) — pages that use raw HTML instead of markdown.
 
 ```js
 // docmd.config.js
@@ -107,7 +107,7 @@ With `stringMode: true`:
 4. Output goes to `/{locale}/` — e.g. `/zh/index.html` — with full SEO (hreflang tags, correct `lang` attribute)
 5. If a translation file is missing, the page renders with the default language text
 
-For full details on the `data-i18n` attribute syntax and JSON file format, see [noStyle string replacement](/content/no-style-pages#string-replacement-i18n-for-nostyle).
+For full details on the `data-i18n` attribute syntax and JSON file format, see [noStyle string replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 
 ::: callout warning "String Mode does not translate markdown content"
 String replacement works by finding `data-i18n` attributes in the rendered HTML. Standard markdown content (`## Heading`, paragraphs, lists) renders to plain HTML tags without these attributes — so there is nothing for the replacer to find.
@@ -120,6 +120,6 @@ If your site has both — for example, a noStyle landing page plus documentation
 
 ## Next steps
 
-- [Translated content](./translated-content) — directory structure, writing translations, navigation
-- [UI strings & SEO](./ui-strings) — customising system text, hreflang tags
-- [noStyle string replacement](/content/no-style-pages#string-replacement-i18n-for-nostyle) — `data-i18n` attribute syntax and JSON format for noStyle pages
+- [Translated content](translated-content.md) — directory structure, writing translations, navigation
+- [UI strings & SEO](ui-strings.md) — customising system text, hreflang tags
+- [noStyle string replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) — `data-i18n` attribute syntax and JSON format for noStyle pages
