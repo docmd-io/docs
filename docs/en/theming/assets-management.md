@@ -20,7 +20,7 @@ my-docs/
   └── site/            # Build Output (Automatically mirrored)
 ```
 
-## Automatic Copying (v0.5.1+)
+## Automatic Copying
 
 When you run `docmd build` or `docmd dev`:
 1.  **The Mirroring Logic**: The entire contents of your `assets/` folder are recursively copied to `site/assets/`.
@@ -44,8 +44,9 @@ export default {
 }
 ```
 
-## AI Recognition Strategy
+::: callout info "AI Recognition Strategy :robot:"
 
-When adding assets:
 *   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header color".
 *   **Use Descriptive Filenames**: Naming an image `authentication-flow-diagram.png` provides much more context to the `llms.txt` crawler than `img_01.png`.
+
+:::

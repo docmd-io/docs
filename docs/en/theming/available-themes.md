@@ -44,17 +44,17 @@ export default {
 :::
 :::
 
-### 1. `sky` (Default)
+### 1. `default`
+The very theme used for this documentation site. Use this if you plan on adding extensive custom CSS and don't want any built-in design layers interfering.
+
+### 2. `sky`
 The gold standard for modern documentation. It features crisp typography, subtle transitions, and high-contrast light/dark modes that match modern SaaS platforms.
 
-### 2. `ruby`
+### 3. `ruby`
 A high-elegance theme using serif typography for headers and a deep, jewel-toned color palette. Perfect for documentation that needs to feel authoritative and premium.
 
-### 3. `retro`
+### 4. `retro`
 A nostalgia-fueled theme inspired by vintage computing. Features include phosphor-green text on black backgrounds (in dark mode), scanline effects, and monospace fonts like Fira Code by default.
-
-### 4. `default`
-A total "Blank Slate" theme. Use this if you plan on adding extensive custom CSS and don't want any built-in design layers interfering with your branding.
 
 ## Theming Architecture
 

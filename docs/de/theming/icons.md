@@ -3,7 +3,7 @@ title: "Icons"
 description: "So verwenden und passen Sie Lucide-Icons in Ihrer Dokumentation an."
 ---
 
-`docmd` bietet integrierte Unterstützung für die [Lucide](https://lucide.dev/)-Icon-Bibliothek. Icons können in Ihrer Navigations-Seitenleiste, Schaltflächen und benutzerdefinierten Komponenten verwendet werden, um visuelle Hinweise zu geben und die Scanbarkeit zu verbessern.
+`docmd` verfügt über integrierte Unterstützung für die [Lucide](external:https://lucide.dev/)-Icon-Bibliothek. Icons können in Ihrer Navigations-Seitenleiste, in Buttons und in benutzerdefinierten Komponenten verwendet werden, um visuelle Hinweise zu geben und die Scannbarkeit zu verbessern.
 
 ## Navigations-Icons
 
@@ -11,14 +11,14 @@ Weisen Sie jedem Navigationselement in Ihrer `docmd.config.js` ein Icon zu. Verw
 
 ```javascript
 navigation: [
-  { title: 'Start', path: '/', icon: 'home' },
+  { title: 'Home', path: '/', icon: 'home' },
   { title: 'Setup', path: '/setup', icon: 'settings' }
 ]
 ```
 
-## Button-Icons
+## Icons in Containern
 
-Sie können auch Icons innerhalb Ihrer Button-Beschriftungen verwenden, indem Sie das Icon-Flag nutzen.
+Sie können Icons auch innerhalb Ihrer Buttons, Tags, Tabs und anderen Containern verwenden, indem Sie den rohen HTML-Code einbinden oder das standardmäßige `icon:`-Präfix in docmd nutzen.
 
 ```markdown
 ::: button "Download" /download icon:download
@@ -26,7 +26,7 @@ Sie können auch Icons innerhalb Ihrer Button-Beschriftungen verwenden, indem Si
 
 ## CSS-Styling
 
-Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie können deren Größe oder Strichstärke global in Ihrem `customCss` ändern:
+Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie können deren Größe oder Linienstärke global in Ihrem `customCss` ändern:
 
 ```css
 .lucide-icon {
@@ -35,12 +35,14 @@ Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie k
   height: 1.2rem;
 }
 
-/* Ein spezifisches Icon ansprechen */
-.lucide-rocket {
+/* Gezielte Anpassung eines Icons */
+.icon-rocket {
   color: #ff5733;
 }
 ```
 
 ## Icon-Referenz
+
 Wir unterstützen die gesamte Lucide-Bibliothek. Sie können die Tausenden von verfügbaren Icons hier durchsuchen:
-::: button "Lucide Icons durchsuchen" external:https://lucide.dev/icons
+
+::: button "Lucide-Icons durchsuchen" external:https://lucide.dev/icons icon:globe

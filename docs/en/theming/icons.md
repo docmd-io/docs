@@ -3,7 +3,7 @@ title: "Icons"
 description: "How to use and customise Lucide icons in your documentation."
 ---
 
-`docmd` comes with built-in support for the [Lucide](https://lucide.dev/) icon library. Icons can be used in your navigation sidebar, buttons, and custom components to provide visual cues and improve scannability.
+`docmd` comes with built-in support for the [Lucide](external:https://lucide.dev/) icon library. Icons can be used in your navigation sidebar, buttons, and custom components to provide visual cues and improve scannability.
 
 ## Navigation Icons
 
@@ -16,9 +16,9 @@ navigation: [
 ]
 ```
 
-## Button Icons
+## Icons in Containers
 
-You can also use icons inside your button labels by including the raw HTML or using standard Lucide naming if supported by your theme.
+You can also use icons inside your buttons, tags, tabs, and other containers by including the raw HTML or using standard `icon:` prefix across docmd.
 
 ```markdown
 ::: button "Download" /download icon:download
@@ -42,5 +42,7 @@ All icons are rendered as inline SVGs with the class `.lucide-icon`. You can glo
 ```
 
 ## Icon Reference
+
 We support the entire Lucide library. You can browse the thousands of available icons here:
-::: button "Browse Lucide Icons" external:https://lucide.dev/icons
+
+::: button "Browse Lucide Icons" external:https://lucide.dev/icons icon:globe

@@ -1,36 +1,36 @@
 ---
-title: "图标"
-description: "如何在文档中使用并自定义 Lucide 图标。"
+title: "图标 (Icons)"
+description: "如何在你的文档中使用和自定义 Lucide 图标。"
 ---
 
-`docmd` 内置支持 [Lucide](https://lucide.dev/) 图标库。图标可用于导航侧边栏、按鈕和自定义组件，提供视觉提示并提升易扫读性。
+`docmd` 内置支持 [Lucide](external:https://lucide.dev/) 图标库。图标可以用于你的导航侧边栏、按钮和自定义组件，以提供视觉线索并提高可扫描性。
 
 ## 导航图标
 
-在 `docmd.config.js` 中为导航项指定图标。使用 Lucide 网站上任意图标的破折序写名称（kebab-case）。
+在 `docmd.config.js` 中为任何导航项分配一个图标。请使用 Lucide 网站上找到的任何图标的短横线命名法 (kebab-case) 名称。
 
 ```javascript
 navigation: [
   { title: '首页', path: '/', icon: 'home' },
-  { title: '安装', path: '/setup', icon: 'settings' }
+  { title: '设置', path: '/setup', icon: 'settings' }
 ]
 ```
 
-## 按鈕图标
+## 容器中的图标
 
-也可在按鈕标签中使用图标，可包含原始 HTML 或如果主题支持，使用标准 Lucide 命名方式。
+你也可以通过包含原始 HTML 或在整个 docmd 中使用标准的 `icon:` 前缀，在按钮、标签、选项卡和其他容器内部使用图标。
 
 ```markdown
 ::: button "下载" /download icon:download
 ```
 
-## CSS 样式化
+## CSS 样式
 
-所有图标以内联 SVG 形式渲染，带有 `.lucide-icon` 类。可在 `customCss` 中全局调整其大小或线条粗细：
+所有图标都渲染为带有 `.lucide-icon` 类的行内 SVG。你可以在你的 `customCss` 中全局更改它们的大小或线条粗细：
 
 ```css
 .lucide-icon {
-  stroke-width: 1.5px; /* 更细的现代风格图标 */
+  stroke-width: 1.5px; /* 更细的图标，呈现现代感 */
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -42,5 +42,7 @@ navigation: [
 ```
 
 ## 图标参考
-我们支持完整的 Lucide 图标库。可在此处浏览数千个可用图标：
-::: button "浏览 Lucide 图标" external:https://lucide.dev/icons
+
+我们支持整个 Lucide 库。你可以在这里浏览数千个可用的图标：
+
+::: button "浏览 Lucide 图标" external:https://lucide.dev/icons icon:globe

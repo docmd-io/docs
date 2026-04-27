@@ -1,11 +1,9 @@
 ---
 title: "Verfügbare Themes"
-description: "Entdecken Sie die integrierten docmd-Themes, einschließlich Sky, Ruby und Retro. Erfahren Sie, wie Sie Themes mit einer einzigen Konfigurationszeile wechseln."
+description: "Entdecken Sie die integrierten Themes von docmd, darunter Sky, Ruby und Retro. Erfahren Sie, wie Sie Themes mit einer einzigen Konfigurationszeile wechseln."
 ---
 
-`docmd` bietet eine Reihe professionell gestalteter Themes, die responsiv auf Hell- und Dunkelmodus reagieren. Sie können die gesamte Ästhetik Ihrer Website ändern, indem Sie einen einzigen Schlüssel in der `docmd.config.js` anpassen.
-
-<!-- SCREENSHOT: Galerie-Raster, das alle verfügbaren Themes zeigt — jedes Theme als kleine Vorschaukarte mit dem Namen des Themes darunter. Zeige mindestens die Themes default, minimal und docs in Hell- und Dunkelvarianten. -->
+`docmd` bietet eine Reihe von professionell gestalteten Themes mit responsivem Light/Dark-Mode. Sie können die gesamte Ästhetik Ihrer Website durch Ändern eines einzigen Schlüssels in der `docmd.config.js` anpassen.
 
 ## So wechseln Sie Themes
 
@@ -21,12 +19,12 @@ export default {
 
 ## Galerie der integrierten Themes
 
-| Theme | Bestens geeignet für | Atmosphäre |
+| Theme | Bestens geeignet für | Vibe |
 | :--- | :--- | :--- |
 | `default` | Schlichte Dokumentation | Sauber, leichtgewichtig, neutral |
 | `sky` | Produktdokumentation | Modern, hochwertig, Standard |
 | `ruby` | Markenidentität | Anspruchsvoll, Serif-Header, lebendig |
-| `retro` | Entwickler-Tools | 80er Terminals, Monospace, Neon-Akzente |
+| `retro` | Entwickler-Tools | 80er-Jahre-Terminals, Monospace, Neon-Akzente |
 
 ::: grids
 ::: grid
@@ -43,24 +41,24 @@ export default {
 :::
 :::
 
-### 1. `sky` (Standard)
-Der Goldstandard für moderne Dokumentationen. Es zeichnet sich durch gestochen scharfe Typografie, dezente Übergänge und kontrastreiche Hell-/Dunkelmodi aus, die zu modernen SaaS-Plattformen passen.
+### 1. `default`
+Genau das Theme, das für diese Dokumentationsseite verwendet wird. Nutzen Sie dieses, wenn Sie umfangreiches benutzerdefiniertes CSS hinzufügen möchten und keine störenden integrierten Designschichten wünschen.
 
-### 2. `ruby`
-Ein hochelegantes Theme, das Serif-Typografie für Überschriften und eine tiefe, juwelenfarbene Palette verwendet. Perfekt für Dokumentationen, die autoritär und hochwertig wirken sollen.
+### 2. `sky`
+Der Goldstandard für moderne Dokumentation. Es bietet klare Typografie, subtile Übergänge und kontrastreiche Light/Dark-Modi, die zu modernen SaaS-Plattformen passen.
 
-### 3. `retro`
-Ein nostalgisches Theme, inspiriert von klassischem Computing. Merkmale sind phosphorgrüner Text auf schwarzem Hintergrund (im Dunkelmodus), Scanline-Effekte und Monospace-Schriftarten wie Fira Code als Standard.
+### 3. `ruby`
+Ein hochelegantes Theme mit Serif-Typografie für Überschriften und einer tiefen, juwelenfarbenen Farbpalette. Perfekt für Dokumentationen, die autoritär und hochwertig wirken sollen.
 
-### 4. `default`
-Ein "Blank Slate"-Theme (unbeschriebenes Blatt). Verwenden Sie dieses Theme, wenn Sie umfangreiches eigenes CSS hinzufügen möchten und keine integrierten Design-Ebenen wünschen, die Ihre Marke beeinflussen könnten.
+### 4. `retro`
+Ein von Nostalgie geprägtes Theme, inspiriert von klassischem Computing. Zu den Merkmalen gehören phosphorgrüner Text auf schwarzem Hintergrund (im Dark Mode), Scanline-Effekte und Monospace-Schriftarten wie Fira Code als Standard.
 
-## Theming-Architektur
+## Theme-Architektur
 
-1.  **CSS-Layering**: Themes sind additiv. Die Wahl von `sky` lädt tatsächlich die Basis-Stile von `default` und legt dann die `sky`-Ästhetik darüber.
-2.  **Nativer Dunkelmodus**: Jedes Theme enthält eine erstklassige Dunkelmodus-Implementierung.
-3.  **Ohne Neuladen**: Wenn Benutzer Themes über die Benutzeroberfläche wechseln, aktualisiert die SPA-Engine die `--docmd-primary`-Variablen sofort ohne Neuladen der Seite.
+1.  **CSS-Layering**: Themes sind additiv. Die Wahl von `sky` lädt tatsächlich die Basisstile von `default` und legt dann die `sky`-Ästhetik darüber.
+2.  **Nativer Dark-Mode**: Jedes Theme enthält eine erstklassige Dark-Mode-Implementierung.
+3.  **Kein Refresh**: Wenn Benutzer Themes über die UI wechseln, aktualisiert die SPA-Engine die `--docmd-primary`-Variablen sofort ohne Neuladen der Seite.
 
 ::: callout tip
-Wenn Sie einem KI-Entwickler-Tool Ihr Dokumentations-Layout beschreiben, hilft die Erwähnung Ihres Themes (z. B. "Ich verwende das `retro`-Theme") dem Modell dabei, CSS-Anpassungen vorzuschlagen, die zum Variablen-Schema des jeweiligen Themes passen.
+Wenn Sie Ihr Dokumentationslayout einem KI-Entwickler-Tool beschreiben, hilft die Erwähnung Ihres Themes (z. B. "Ich verwende das `retro`-Theme") dem Modell, benutzerdefinierte CSS-Überschreibungen vorzuschlagen, die zum Variablenschema dieses spezifischen Themes passen.
 :::

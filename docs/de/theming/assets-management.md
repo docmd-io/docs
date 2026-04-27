@@ -1,38 +1,38 @@
 ---
 title: "Asset-Management"
-description: "Wie docmd während des Build-Prozesses mit CSS, JavaScript und Bild-Assets umgeht."
+description: "Wie docmd CSS-, JavaScript- und Bild-Assets während des Build-Prozesses verarbeitet."
 ---
 
-`docmd` verfolgt bei Assets einen "Mirror & Map"-Ansatz. Dies stellt sicher, dass Ihre lokalen Entwicklungspfade mit Ihrem Produktions-Build konsistent bleiben.
+`docmd` verfolgt einen "Mirror & Map"-Ansatz für Assets. Dies stellt sicher, dass Ihre lokalen Entwicklungspfade konsistent mit Ihrem Produktions-Build bleiben.
 
 ## Verzeichnisstruktur
 
 Standardmäßig sucht `docmd` nach einem `assets/`-Ordner in Ihrem Projekt-Root.
 
 ```bash
-mein-projekt/
+my-docs/
   ├── assets/          # Quell-Assets
   │   ├── css/
   │   ├── js/
   │   └── images/
-  ├── docs/            # Inhalte
+  ├── docs/            # Inhalt
   ├── docmd.config.js
-  └── site/            # Build-Ausgabe (Automatisch gespiegelt)
+  └── site/            # Build-Output (automatisch gespiegelt)
 ```
 
-## Automatisches Kopieren (v0.5.1+)
+## Automatisches Kopieren
 
 Wenn Sie `docmd build` oder `docmd dev` ausführen:
-1.  **Die Spiegelungslogik**: Der gesamte Inhalt Ihres `assets/`-Ordners wird rekursiv nach `site/assets/` kopiert.
-2.  **Stabilität**: Wir verwenden eine gehärtete Kopier-Engine mit automatischen Wiederholungsversuchen, um "File Busy"- oder "ENOENT"-Fehler auf macOS und modernen SSDs zu verhindern.
-3.  **Referenzierung**: Sie sollten Assets in Ihrem Markdown oder in der Konfiguration immer über den **Wurzel-relativen** Pfad referenzieren:
+1.  **Die Spiegelungs-Logik**: Der gesamte Inhalt Ihres `assets/`-Ordners wird rekursiv nach `site/assets/` kopiert.
+2.  **Stabilität**: Wir verwenden eine gehärtete Kopier-Engine mit automatischen Wiederholungsversuchen, um "File Busy"- oder "ENOENT"-Fehler auf macOS und modernen SSDs zu vermeiden.
+3.  **Referenzierung**: Sie sollten Assets in Ihrem Markdown oder in der Konfiguration immer über den **root-relativen** Pfad referenzieren:
     ```markdown
     ![Logo](/assets/images/logo.png)
     ```
 
-## Integration von eigenem CSS & JS
+## Integration von benutzerdefiniertem CSS & JS
 
-Um Ihre Assets mit jeder Seite zu verknüpfen, fügen Sie diese Ihrer Theme-Konfiguration hinzu:
+Um Ihre Assets auf jeder Seite einzubinden, fügen Sie sie Ihrer Theme-Konfiguration hinzu:
 
 ```javascript
 // docmd.config.js
@@ -44,8 +44,9 @@ export default {
 }
 ```
 
-## Erkennungsstrategie für KI
+::: callout info "KI-Erkennungsstrategie :robot:"
 
-Beachten Sie beim Hinzufügen von Assets:
-*   **Nach Typ organisieren**: Halten Sie `/css`, `/js` und `/images` getrennt. Dies hilft KI-Agenten, relevante Styles oder Skripte sofort zu finden, wenn Sie sie bitten, "die Farbe des Headers zu ändern".
-*   **Aussagekräftige Dateinamen**: Ein Bild namens `authentifizierungs-flow-diagramm.png` liefert dem `llms.txt`-Crawler wesentlich mehr Kontext als `bild_01.png`.
+*   **Nach Typ organisieren**: Halten Sie `/css`, `/js` und `/images` getrennt. Dies hilft KI-Agenten, relevante Stile oder Skripte sofort zu finden, wenn Sie sie bitten, "die Farbe des Headers zu ändern".
+*   **Beschreibende Dateinamen verwenden**: Die Benennung eines Bildes als `authentication-flow-diagram.png` bietet dem `llms.txt`-Crawler viel mehr Kontext als `img_01.png`.
+
+:::
