@@ -62,6 +62,8 @@ bunx @docmd/core dev
 ```
 :::
 
+访问 `http://localhost:3000` 即可查看带热重载的文档。对 `.md` 文件或 `docmd.config.js` 的更改会即时反映。
+
 ## 构建生产版本
 
 ::: tabs
