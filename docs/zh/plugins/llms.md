@@ -1,13 +1,13 @@
 ---
 title: "LLM 上下文插件"
-description: "自动生成 llms.txt 和 llms-full.txt，为 AI 消费最优化文档。"
+description: "通过自动生成 llms.txt 和 llms-full.txt，为 AI 消费优化你的文档。"
 ---
 
-`@docmd/plugin-llms` 插件确保你的文档对大型语言模型（LLM）和 AI Agent 完全最优化。它遵循不断发展的行业标准，提供高层次摘要（`llms.txt`）和全面上下文文件（`llms-full.txt`），供 AI 工具摄取以深入理解你的项目，尽量减少幻觉。
+`@docmd/plugin-llms` 插件确保你的文档针对大型语言模型 (LLMs) 和 AI 代理进行了完美优化。它遵循不断增长的行业标准，即提供高层摘要和全面的上下文文件，AI 工具可以提取这些文件，以在产生极少幻觉的情况下理解你的项目。
 
 ## 配置
 
-LLM 插件默认开启。为确保其正常运行，你必须在 `docmd.config.js` 中提供 `url`。
+LLM 插件默认启用。为了使其正常运行，你必须在 `docmd.config.js` 中提供一个 `url`。
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -16,15 +16,15 @@ export default defineConfig({
   url: 'https://docs.example.com',
   plugins: {
     llms: {
-      fullContext: true // 生成 llms-full.txt (强烈推荐)
+      fullContext: true // 生成 llms-full.txt
     }
   }
 });
 ```
 
-### 排除某个页面
+### 排除页面
 
-如果页面包含敏感信息或内部备注，不希望 AI 模型学习此内容，请在 Frontmatter 中使用 `llms: false` 标记：
+如果页面包含敏感信息或你不希望 AI 模型学习的内部笔记，请在 frontmatter 中使用 `llms: false` 标志：
 
 ```yaml
 ---
@@ -33,6 +33,6 @@ llms: false
 ---
 ```
 
-::: callout tip "最大化 AI 准确度"
-关于构建 Markdown（语义化标题、替代文本等）以提高 AI 摄取效果的详细最佳实践，请参阅 [为 AI Agent 优化](../recipes/ai-optimization) 秘籍。
+::: callout tip "最大化 AI 准确性 :robot:"
+有关构建 Markdown（语义标题、替代文本等）的详细最佳实践，请参阅我们的 [针对 AI 代理进行优化](../guides/ai-optimisation/generating-ai-ready-docs.md) 指南。
 :::

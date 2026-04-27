@@ -1,45 +1,45 @@
 ---
-title: "由 MkDocs 迁移"
-description: "将您的 MkDocs (或 Material for MkDocs) 项目迁移到 docmd 的综合指南。"
+title: "从 MkDocs 迁移"
+description: "关于将你的 MkDocs (或 Material for MkDocs) 项目转移到 docmd 的综合指南。"
 ---
 
-# 由 MkDocs 迁移到 docmd
+# 从 MkDocs 迁移到 docmd
 
-MkDocs，特别是结合了 Material 主题，是一个非常受欢迎的基于 Python 的文档生成器。`docmd` 提供类似的以 Markdown 优先的体验，但基于 Node.js/Bun，构建速度极快，且原生支持丰富的交互式功能，无需安装复杂的 Python 扩展。
+MkDocs，特别是配合 Material 主题，是一个流行的基于 Python 的文档生成器。`docmd` 提供了类似的 Markdown 优先体验，但它依赖于 Node.js/Bun 以实现极快的构建速度和丰富的交互功能，而无需复杂的 Python 扩展。
 
-## 第一步：运行迁移引擎
+## 第 1 步：运行迁移引擎
 
-在您现有的 MkDocs 项目的根目录（即 `mkdocs.yml` 所在的位置）运行以下命令：
+在现有 MkDocs 项目的根目录（即 `mkdocs.yml` 所在的位置）运行以下命令：
 
 ```bash
 npx @docmd/core migrate --mkdocs
 ```
 
-### 自动执行的操作
+### 自动发生的更改
 
-1.  **备份**：您的整个项目会被安全地移动到一个新的 `mkdocs-backup/` 目录中。
-2.  **内容迁移**：您的 `docs/` 文件夹会被恢复到根目录，供 `docmd` 使用。
-3.  **配置生成**：生成一个 `docmd.config.js` 文件，从您的 `mkdocs.yml` 中提取您的站点 `site_name`。
+1.  **备份**: 你的整个项目会被安全地移动到一个新的 `mkdocs-backup/` 目录中。
+2.  **内容迁移**: 你的 `docs/` 文件夹将被恢复到根目录，供 `docmd` 使用。
+3.  **配置生成**: 生成一个 `docmd.config.js` 文件，从你的 `mkdocs.yml` 中提取站点名称 (`site_name`)。
 
-## 第二步：测试配置
+## 第 2 步：测试设置
 
-命令完成后，在 `docmd` 中预览您的内容：
+命令完成后，在 `docmd` 中预览你的内容：
 
 ```bash
 npx @docmd/core dev
 ```
 
-您的 Markdown 文件将被编译，但导航侧边栏此时为空。
+你的 Markdown 文件将会编译，但你的导航侧边栏将是空的。
 
-## 第三步：手动配置
+## 第 3 步：手动配置
 
-MkDocs 使用 `mkdocs.yml` 来定义网站导航和扩展。您需要将这些设置转换至 `docmd`。
+MkDocs 使用 `mkdocs.yml` 来定义站点导航和扩展。你需要将这些设置转换为 `docmd`。
 
 ### 1. 导航设置
 
-在 MkDocs 中，导航严格定义在 `mkdocs.yml` 的 `nav` 键下。
+在 MkDocs 中，导航严格定义在 `mkdocs.yml` 的 `nav` 键中。
 
-**所需操作：** 您必须在您的 `docs/` 文件夹内创建一个 `navigation.json` 文件。
+**所需操作：** 你必须在 `docs/` 文件夹内创建一个 `navigation.json` 文件。
 
 **MkDocs (`mkdocs.yml`):**
 ```yaml
@@ -54,15 +54,15 @@ nav:
 ```json
 [
   {
-    "title": "Home",
+    "title": "首页",
     "path": "/"
   },
   {
-    "title": "Guide",
+    "title": "指南",
     "collapsible": true,
     "children": [
-      { "title": "Setup", "path": "/setup" },
-      { "title": "Usage", "path": "/usage" }
+      { "title": "安装设置", "path": "/setup" },
+      { "title": "使用方法", "path": "/usage" }
     ]
   }
 ]
@@ -70,48 +70,48 @@ nav:
 
 ### 2. 替换 Python Markdown 扩展
 
-如果您使用了 "Material for MkDocs"，您很可能依赖了 Python Markdown 扩展（如 PyMdown Extensions）来实现标签页、提示框或任务列表。
+如果你使用了 "Material for MkDocs"，你可能依赖于 Python Markdown 扩展（如 PyMdown Extensions）来实现选项卡、提示框或任务列表。
 
-**所需操作：** 将特定于 MkDocs 扩展的语法转换为 `docmd` 原生的 [容器](../content/containers/callouts.md)。
+**所需操作：** 将 MkDocs 特有的扩展语法转换为 `docmd` 原生的 [容器](../content/containers/callouts.md)。
 
-#### 示例：转换提示框（Admonitions）
+#### 示例：转换提示框 (Admonitions)
 
 **MkDocs (PyMdown):**
 ```markdown
-!!! note "Optional Title"
-    This is an admonition content block.
+!!! note "可选标题"
+    这是一个提示框内容块。
 ```
 
 **docmd:**
 ```markdown
-::: note "Optional Title"
-This is an admonition content block.
+::: callout info "可选标题"
+这是一个提示框内容块。
 :::
 ```
 
-#### 示例：转换标签页（Tabs）
+#### 示例：转换选项卡 (Tabs)
 
 **MkDocs (SuperFences):**
 ```markdown
-=== "Tab 1"
-    Content for tab 1.
+=== "选项卡 1"
+    选项卡 1 的内容。
 
-=== "Tab 2"
-    Content for tab 2.
+=== "选项卡 2"
+    选项卡 2 的内容。
 ```
 
 **docmd:**
 ```markdown
 ::: tabs
-== tab "Tab 1"
-Content for tab 1.
+== tab "选项卡 1"
+选项卡 1 的内容。
 
-== tab "Tab 2"
-Content for tab 2.
+== tab "选项卡 2"
+选项卡 2 的内容。
 :::
 ```
 
-## 下一步
+## 后续步骤
 
-- `docmd` 具有原生搜索功能。您不需要配置额外的搜索插件。
-- 探索 [主题选项](../theming/customization.md) 从而自定义您的网站颜色，以匹配您之前的 Material 主题。
+- `docmd` 具有原生搜索功能。你不需要配置搜索插件。
+- 探索 [主题选项](../theming/customization.md) 来自定义网站颜色，以匹配你旧的 Material 主题。

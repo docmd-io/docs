@@ -3,7 +3,7 @@ title: "Mermaid Diagrams"
 description: "Create professional architectural diagrams, flowcharts, and sequence diagrams directly in your Markdown files using Mermaid.js syntax."
 ---
 
-The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://mermaid.js.org/) engine into your documentation pipeline. It allows you to transform plain-text descriptions into high-fidelity, interactive diagrams without ever leaving your Markdown environment.
+The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](external:https://mermaid.js.org/) engine into your documentation pipeline. It allows you to transform plain-text descriptions into high-fidelity, interactive diagrams without ever leaving your Markdown environment.
 
 ## Key Features
 
@@ -11,7 +11,7 @@ The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://
 - **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
 - **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialised and rendered only as they enter the user's viewport.
 - **Interactive Controls**: Every diagram includes built-in **Pan**, **Zoom**, and **Fullscreen** capabilities, ensuring large architectural charts remain legible on all screen sizes.
-- **Icon Integration**: Deep support for the **Lucide** icon pack, allowing you to use `icon:name` syntax within architecture diagrams.
+- **Icon Integration**: Deep support for the icon pack, allowing you to use `icon:name` syntax within architecture diagrams.
 - **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
 
 ## Configuration

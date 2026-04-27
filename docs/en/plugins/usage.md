@@ -110,6 +110,6 @@ The plugin system provides built-in safety guarantees:
 
 See [Building Plugins](building-plugins.md) for the full API reference.
 
-::: callout tip "AI-Transparent Architecture 🤖"
+::: callout tip "AI-Transparent Architecture :robot:"
 The plugin architecture is designed to be **deterministic**. Every meta-tag and script injected by a plugin is traceable, allowing AI agents (and human developers) to understand exactly how the site behaves without hidden side effects.
 :::

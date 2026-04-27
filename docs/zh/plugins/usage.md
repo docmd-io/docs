@@ -1,115 +1,42 @@
 ---
-title: "使用插件"
-description: "安装、配置和管理 docmd 插件——从必需的内置插件到可选的扩展插件。"
+title: "插件机制与用法 (Plugin Mechanism & Usage)"
+description: "了解 docmd 的生命周期钩子、插件安全机制以及如何扩展引擎的功能。"
 ---
 
-`docmd` 采用模块化插件架构。必需插件随核心包提供，无需安装。可选插件只需一条 CLI 命令即可安装。
+`docmd` 采用可插拔架构。几乎所有核心功能（从搜索到 SEO 再到实时预览）都是作为插件实现的。这种设计确保了引擎保持轻量，同时允许开发者根据具体项目需求选择性地开启功能。
 
-## 安装插件
+## 插件概览
 
-使用 `docmd` CLI 安装和移除插件：
-
-```bash
-# 安装插件
-docmd add <插件名称>
-
-# 移除插件
-docmd remove <插件名称>
-```
-
-安装程序会自动检测你的包管理器（npm、pnpm、yarn 或 bun），将短名称解析为完整包名，并将插件配置写入 `docmd.config.js`。
-
-使用 `--verbose` (或 `-V`) 查看完整安装日志：
-
-```bash
-docmd add <插件名称> -V
-```
-
-## 必需插件
-
-这些插件已随 `@docmd/core` 一起打包——无需安装，在 `docmd.config.js` 中启用即可：
-
-```javascript
-import { defineConfig } from '@docmd/core';
-
-export default defineConfig({
-  plugins: {
-    search: {},                        // 离线全文搜索
-    seo: { aiBots: false },            // Meta 标签、Open Graph、AI 爬虫控制
-    sitemap: {},                       // 自动生成 sitemap.xml
-    analytics: {},                     // Google Analytics v4
-    llms: {},                          // LLM 上下文生成（llms.txt）
-    mermaid: {}                        // 原生交互式图表
-  }
-});
-```
-
-## 可选插件
-
-可选插件需要先安装才能启用。
-
-| 插件 | 安装命令 | 说明 |
-| :--- | :--- | :--- |
-| [PWA](pwa.md) | `docmd add pwa` | 渐进式 Web 应用支持，含离线缓存 |
-| [Threads](threads.md) | `docmd add threads` | 存储在 Markdown 中的内联讨论评论 |
-| [Math](math.md) | `docmd add math` | 原生 KaTeX 和 LaTeX 数学公式集成 |
-
-## 插件作用域与 `noStyle` 覆盖
-
-默认情况下，插件在所有页面中全局注入 CSS 和行为。但你可以明确配置，让插件跳过特定页面，或完全禁用对无样式落地页（`noStyle: true`）的执行。
-
-### 全局配置范围
-
-通过 `docmd.config.js` 配置，使插件自动跳过 `noStyle` 页面：
-
-```javascript
-plugins: {
-  math: {
-    noStyle: false // math css/js 不再加载到 noStyle 页面
-  }
-}
-```
-
-### 页面本地作用域（Frontmatter）
-
-无论全局配置如何，都可以通过 Markdown frontmatter 在单个页面中精确启用或禁用任意插件：
-
-```markdown
----
-noStyle: true
-plugins:
-  math: true
-  threads: false
----
-
-# 仅 Math 在此页面渲染，Threads 被完全屏蔽
-```
-
-## 插件生命周期
-
-插件可以挂钩到构建与开发过程的不同阶段：
-
-| 钩子 | 说明 |
+| 插件 | 功能 |
 | :--- | :--- |
-| `markdownSetup(md, opts)` | 使用自定义规则或容器扩展 Markdown 解析器 |
-| `generateMetaTags(config, page, root)` | 向 `<head>` 注入 `<meta>` 和 `<link>` 标签 |
-| `generateScripts(config, opts)` | 向 `<head>` 或 `</body>` 注入脚本 |
-| `getAssets(opts)` | 定义要注入的外部文件或 CDN 脚本 |
-| `onPostBuild(ctx)` | 所有 HTML 文件生成完毕后运行逻辑 |
-| `translations(localeId)` | 返回指定语言的翻译 UI 字符串 |
-| `actions` | 可通过浏览器 WebSocket RPC 调用的服务端处理程序 |
-| `events` | 浏览器推送事件的即发即忘处理程序 |
+| **[搜索 (Search)](search.md)** | 提供高性能、离线优先的全文本搜索。 |
+| **[SEO](seo.md)** | 自动生成元标签、Sitemap 并控制 AI 爬虫访问。 |
+| **[Mermaid](mermaid.md)** | 渲染流程图、序列图和甘特图。 |
+| **[LLMs](llms.md)** | 生成机器可读的全量文档流以供 AI 训练或搜索。 |
+| **[实时预览 (Live)](../content/live-preview.md)** | 为自定义编辑器提供在浏览器中运行的渲染引擎。 |
 
-## 插件安全性
+## 生命周期钩子
 
-插件系统提供内置的安全保障：
+插件可以通过连接到以下生命周期钩子来介入构建过程：
 
-- **验证**：插件可声明带有 `name`、`version` 和 `capabilities` 的 `plugin` 描述符。无效描述符在加载时会被拒绝。
-- **隔离**：每个钩子调用都包裹在 try/catch 边界中。故障插件不会导致构建崩溃或影响其他插件。
-- **功能执行**：声明了功能的插件只能注册其显式声明的钩子。未声明的钩子会被跳过并输出警告。
+| 钩子 | 描述 |
+| :--- | :--- |
+| `onInit(ctx)` | 在引擎启动且配置加载后立即运行 |
+| `onPostBuild(ctx)` | 在所有 HTML 文件生成后运行逻辑 |
+| `translations(localeId)` | 返回语言环境翻译后的 UI 字符串 |
+| `actions` | 可从浏览器通过 WebSocket RPC 调用的服务器端处理程序 |
+| `events` | 浏览器推送事件的“发后即忘”式处理程序 |
 
-详见[构建插件](building-plugins.md)获取完整 API 参考。
+## 插件安全
 
-::: callout tip "AI 透明架构 🤖"
-插件架构设计为**确定性**。插件注入的每个元标签和脚本均可追踪，让 AI Agent（和人类开发者）能够完全理解站点行为，无隐藏副作用。
+插件系统提供内置的安全保证：
+
+- **验证**: 插件可以声明一个包含 `name`、`version` 和 `capabilities` 的插件描述符。无效的描述符在加载时会被拒绝。
+- **隔离**: 每次钩子调用都包裹在 try/catch 边界内。一个损坏的插件不会导致构建崩溃或影响其他插件。
+- **能力强制**: 声明了能力的插件只能注册其已明确声明的钩子。未声明的钩子将被跳过并发出警告。
+
+有关完整的 API 参考，请参阅 [开发插件](building-plugins.md)。
+
+::: callout tip "针对 AI 的透明架构 :robot:"
+插件架构旨在具有 **确定性**。插件注入的每个元标签和脚本都是可追溯的，这允许 AI 代理（和人类开发人员）准确了解网站的行为，而不会产生隐藏的副作用。
 :::

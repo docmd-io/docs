@@ -5,7 +5,7 @@ description: "Add inline discussion threads to your documentation — stored dir
 
 The **Threads plugin** brings collaborative inline comments to your documentation. Select any text on the page, leave a comment, start a discussion — all stored directly in your markdown source files with zero database needed.
 
-Original Author: [@svallory](https://github.com/svallory)
+Original Author: [@svallory](external:https://github.com/svallory)
 
 ::: callout info "Alpha Release"
 This plugin is in alpha. The API and storage format are stable, but the UI is under active development.

@@ -3,7 +3,7 @@ title: "Search Plugin"
 description: "Enable high-speed, offline-first full-text search for your documentation using MiniSearch."
 ---
 
-The `@docmd/plugin-search` plugin provides a powerful, client-side search experience for your documentation. It uses [MiniSearch](https://github.com/lucaong/minisearch) to build a lightweight index during the build process, allowing users to find technical information instantly without a server-side database.
+The `@docmd/plugin-search` plugin provides a powerful, client-side search experience for your documentation. It uses [MiniSearch](external:https://github.com/lucaong/minisearch) to build a lightweight index during the build process, allowing users to find technical information instantly without a server-side database.
 
 ## Configuration
 

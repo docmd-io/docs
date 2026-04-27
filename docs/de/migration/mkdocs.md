@@ -1,45 +1,45 @@
 ---
-title: "Von MkDocs migrieren"
-description: "Ein umfassender Leitfaden zur Migration Ihres MkDocs- (oder Material for MkDocs)-Projekts zu docmd."
+title: "Migration von MkDocs"
+description: "Ein umfassender Leitfaden zum Umzug Ihres MkDocs- (oder Material for MkDocs-) Projekts zu docmd."
 ---
 
-# Von MkDocs migrieren zu docmd
+# Migration von MkDocs zu docmd
 
-MkDocs, insbesondere in Kombination mit dem Material-Theme, ist ein beliebter Python-basierter Dokumentationsgenerator. `docmd` bietet eine ähnliche, auf Markdown fokussierte Erfahrung, verwendet jedoch Node.js/Bun für extrem schnelle Builds und bietet umfangreiche interaktive Funktionen, ohne dass komplexe Python-Erweiterungen erforderlich sind.
+MkDocs, insbesondere mit dem Material-Theme, ist ein beliebter Python-basierter Dokumentationsgenerator. `docmd` bietet eine ähnliche Markdown-First-Erfahrung, setzt jedoch auf Node.js/Bun für unglaublich schnelle Builds und reichhaltige interaktive Funktionen, ohne dass komplexe Python-Erweiterungen erforderlich sind.
 
-## Schritt 1: Führen Sie die Migrations-Engine aus
+## Schritt 1: Ausführen der Migration-Engine
 
-Führen Sie den folgenden Befehl im Hauptverzeichnis Ihres bestehenden MkDocs-Projekts aus (dort, wo sich Ihre `mkdocs.yml` befindet):
+Führen Sie den folgenden Befehl im Root-Verzeichnis Ihres bestehenden MkDocs-Projekts aus (dort, wo sich Ihre `mkdocs.yml` befindet):
 
 ```bash
 npx @docmd/core migrate --mkdocs
 ```
 
-### Was passiert automatisch
+### Was automatisch passiert
 
-1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues `mkdocs-backup/`-Verzeichnis verschoben.
-2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Stammverzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.js` wird generiert, die den `site_name` Ihrer Website aus Ihrer `mkdocs.yml` extrahiert.
+1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues Verzeichnis `mkdocs-backup/` verschoben.
+2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Root-Verzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
+3.  **Konfigurationserstellung**: Eine `docmd.config.js` wird generiert, wobei der Projektname (`site_name`) aus Ihrer `mkdocs.yml` extrahiert wird.
 
-## Schritt 2: Testen Sie das Setup
+## Schritt 2: Testen des Setups
 
-Sobald der Befehl abgeschlossen ist, können Sie Ihre Inhalte in `docmd` in der Vorschau anzeigen:
+Sobald der Befehl abgeschlossen ist, zeigen Sie Ihre Inhalte in `docmd` in der Vorschau an:
 
 ```bash
 npx @docmd/core dev
 ```
 
-Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar bleibt zunächst leer.
+Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Seitenleiste wird leer sein.
 
 ## Schritt 3: Manuelle Konfiguration
 
-MkDocs verwendet die `mkdocs.yml`, um die Navigation und die Erweiterungen der Website zu definieren. Sie müssen diese Einrichtung auf `docmd` übertragen.
+MkDocs verwendet die `mkdocs.yml`, um die Navigation und Erweiterungen der Website zu definieren. Sie müssen dieses Setup auf `docmd` übertragen.
 
 ### 1. Navigations-Setup
 
-In MkDocs wird die Navigation streng unter dem Schlüssel `nav` in der `mkdocs.yml` definiert.
+In MkDocs wird die Navigation strikt im Schlüssel `nav` der `mkdocs.yml` definiert.
 
-**Aktion erforderlich:** Sie müssen eine `navigation.json` in Ihrem `docs/`-Ordner erstellen.
+**Erforderliche Aktion:** Sie müssen eine `navigation.json` in Ihrem `docs/`-Ordner erstellen.
 
 **MkDocs (`mkdocs.yml`):**
 ```yaml
@@ -54,64 +54,64 @@ nav:
 ```json
 [
   {
-    "title": "Home",
+    "title": "Startseite",
     "path": "/"
   },
   {
-    "title": "Guide",
+    "title": "Leitfaden",
     "collapsible": true,
     "children": [
-      { "title": "Setup", "path": "/setup" },
-      { "title": "Usage", "path": "/usage" }
+      { "title": "Einrichtung", "path": "/setup" },
+      { "title": "Nutzung", "path": "/usage" }
     ]
   }
 ]
 ```
 
-### 2. Python-Markdown-Erweiterungen ersetzen
+### 2. Ersetzen von Python-Markdown-Erweiterungen
 
 Wenn Sie "Material for MkDocs" verwendet haben, haben Sie sich wahrscheinlich auf Python-Markdown-Erweiterungen wie PyMdown Extensions für Tabs, Admonitions oder Aufgabenlisten verlassen.
 
-**Aktion erforderlich:** Konvertieren Sie die MkDocs-spezifische Erweiterungssyntax in die nativen [Container](../content/containers/callouts.md) von `docmd`.
+**Erforderliche Aktion:** Wandeln Sie die MkDocs-spezifische Erweiterungssyntax in die nativen [Container](../content/containers/callouts.md) von `docmd` um.
 
-#### Beispiel: Admonitions (Callouts) konvertieren
+#### Beispiel: Umwandeln von Admonitions (Hinweisen)
 
 **MkDocs (PyMdown):**
 ```markdown
-!!! note "Optional Title"
-    This is an admonition content block.
+!!! note "Optionaler Titel"
+    Dies ist ein Inhaltsblock für einen Hinweis.
 ```
 
 **docmd:**
 ```markdown
-::: note "Optional Title"
-This is an admonition content block.
+::: callout info "Optionaler Titel"
+Dies ist ein Inhaltsblock für einen Hinweis.
 :::
 ```
 
-#### Beispiel: Tabs konvertieren
+#### Beispiel: Umwandeln von Tabs
 
 **MkDocs (SuperFences):**
 ```markdown
 === "Tab 1"
-    Content for tab 1.
+    Inhalt für Tab 1.
 
 === "Tab 2"
-    Content for tab 2.
+    Inhalt für Tab 2.
 ```
 
 **docmd:**
 ```markdown
 ::: tabs
 == tab "Tab 1"
-Content for tab 1.
+Inhalt für Tab 1.
 
 == tab "Tab 2"
-Content for tab 2.
+Inhalt für Tab 2.
 :::
 ```
 
 ## Nächste Schritte
 
-- `docmd` verfügt über eine native Suchfunktion. Sie müssen kein zusätzliches Such-Plugin konfigurieren.
+- `docmd` verfügt über eine integrierte Suche. Sie müssen kein Such-Plugin konfigurieren.
 - Entdecken Sie die [Theme-Optionen](../theming/customization.md), um die Farben Ihrer Website an Ihr altes Material-Theme anzupassen.

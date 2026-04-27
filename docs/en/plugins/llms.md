@@ -33,6 +33,6 @@ llms: false
 ---
 ```
 
-::: callout tip "Maximising AI Accuracy"
+::: callout tip "Maximising AI Accuracy :robot:"
 For detailed best practices on structuring your markdown (semantic headings, alt-text, etc.), see our [Optimising for AI Agents](../guides/ai-optimisation/generating-ai-ready-docs.md) guide.
 :::

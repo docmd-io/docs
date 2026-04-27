@@ -56,9 +56,9 @@ This is a helpful tip.
 :::
 ```
 
-**docmd:** (No change needed! `docmd` natively supports Docusaurus-style admonitions as Callouts).
+**docmd:** (Learning curve is almost 0 except few changed keywords designed for better UX. `docmd` natively supports Docusaurus-style admonitions as Callouts).
 ```markdown
-::: tip "My Tip"
+::: callout tip "My Tip"
 This is a helpful tip.
 :::
 ```

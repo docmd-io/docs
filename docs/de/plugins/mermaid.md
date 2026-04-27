@@ -1,36 +1,36 @@
 ---
 title: "Mermaid-Diagramme"
-description: "Erstellen Sie professionelle Architekturdiagramme, Flussdiagramme und Sequenzdiagramme direkt in Ihren Markdown-Dateien unter Verwendung der Mermaid.js-Syntax."
+description: "Erstellen Sie professionelle Architekturdiagramme, Flussdiagramme und Sequenzdiagramme direkt in Ihren Markdown-Dateien mithilfe der Mermaid.js-Syntax."
 ---
 
-Das Plugin `@docmd/plugin-mermaid` integriert die leistungsstarke [Mermaid.js](https://mermaid.js.org/)-Engine in Ihre Dokumentations-Pipeline. Es ermöglicht Ihnen, Textbeschreibungen in hochwertige, interaktive Diagramme zu verwandeln, ohne Ihre Markdown-Umgebung verlassen zu müssen.
+Das `@docmd/plugin-mermaid`-Plugin integriert die leistungsstarke [Mermaid.js](external:https://mermaid.js.org/)-Engine in Ihre Dokumentations-Pipeline. Es ermöglicht Ihnen, reine Textbeschreibungen in hochauflösende, interaktive Diagramme zu verwandeln, ohne jemals Ihre Markdown-Umgebung verlassen zu müssen.
 
 ## Hauptmerkmale
 
-- **Zero Scripting**: Manuelles Einbinden von externen Skripten oder CDN-Links ist nicht erforderlich. `docmd` erkennt die Verwendung und fügt die Rendering-Engine nur dort ein, wo sie benötigt wird.
-- **Theme-Bewusstsein**: Diagramme passen ihre Farbschemata automatisch an den Wechsel zwischen **Hell-** und **Dunkelmodus** Ihrer Website an.
-- **Isomorphes Lazy-Loading**: Für eine optimale Performance werden Diagramme erst initialisiert und gerendert, wenn sie in den Sichtbereich des Benutzers gelangen.
-- **Interaktive Steuerung**: Jedes Diagramm verfügt über integrierte **Schwenk-**, **Zoom-** und **Vollbildfunktionen**, um sicherzustellen, dass große Architekturdiagramme auf allen Bildschirmgrößen lesbar bleiben.
-- **Icon-Integration**: Tiefe Unterstützung für das **Lucide**-Icon-Paket, sodass Sie die `icon:name`-Syntax in Architekturdiagrammen verwenden können.
-- **Technische Lesbarkeit**: Diagramme bleiben in Ihrer Quelle reiner Text, was sie leicht versionierbar und für KI-Agenten lesbar macht.
+- **Zero Scripting**: Es ist nicht erforderlich, externe Skripte oder CDN-Links manuell einzubinden. `docmd` erkennt die Verwendung und injiziert die Rendering-Engine nur dort, wo sie benötigt wird.
+- **Theme-Bewusstsein**: Diagramme passen ihre Farbschemata automatisch an den Wechsel zwischen **Light**- und **Dark**-Mode Ihrer Website an.
+- **Isomorphes Lazy Loading**: Für optimale Performance werden Diagramme erst initialisiert und gerendert, wenn sie in das Sichtfeld des Benutzers gelangen.
+- **Interaktive Steuerung**: Jedes Diagramm verfügt über integrierte Funktionen für **Pan** (Schwenken), **Zoom** und **Vollbild**, um sicherzustellen, dass auch große Architekturdiagramme auf allen Bildschirmgrößen lesbar bleiben.
+- **Icon-Integration**: Umfassende Unterstützung für das Icon-Paket, sodass Sie die Syntax `icon:name` innerhalb von Architekturdiagrammen verwenden können.
+- **Technische Lesbarkeit**: Diagramme bleiben in Ihrem Quellcode reiner Text, was sie leicht versionierbar und für KI-Agenten lesbar macht.
 
 ## Konfiguration
 
-Um die Unterstützung für Diagramme zu aktivieren, fügen Sie das `mermaid`-Plugin zu Ihrer `docmd.config.js` hinzu:
+Um die Diagramm-Unterstützung zu aktivieren, fügen Sie das `mermaid`-Plugin zu Ihrer `docmd.config.js` hinzu:
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
   plugins: {
-    mermaid: {} // Ohne Konfiguration aktiviert
+    mermaid: {} // Aktiviert mit Zero-Config
   }
 });
 ```
 
-## Implementierungs-Galerie
+## Implementierungsgalerie
 
-Um ein Diagramm zu rendern, platzieren Sie Ihre Mermaid-Syntax in einen Code-Block mit der Sprachkennung `mermaid`.
+Um ein Diagramm zu rendern, platzieren Sie Ihre Mermaid-Syntax in einem Fenced Code Block mit der Sprachkennung `mermaid`.
 
 ### 1. Sequenzdiagramme
 Ideal zur Veranschaulichung von Interaktionen zwischen mehreren Systemkomponenten.
@@ -76,7 +76,7 @@ Visualisieren Sie Daten mit integrierten Diagrammtypen wie Torten- oder Balkendi
 ```mermaid
 pie title Projektzusammensetzung
     "Dokumentation" : 45
-    "Core-Engine" : 30
+    "Core Engine" : 30
     "Plugins" : 15
     "UI-Komponenten" : 10
 ```
@@ -86,7 +86,7 @@ pie title Projektzusammensetzung
 ```mermaid
 pie title Projektzusammensetzung
     "Dokumentation" : 45
-    "Core-Engine" : 30
+    "Core Engine" : 30
     "Plugins" : 15
     "UI-Komponenten" : 10
 ```
@@ -95,7 +95,7 @@ pie title Projektzusammensetzung
 :::
 
 ### 3. Git-Workflows
-Visualisieren Sie Branching- und Merging-Strategien für Ihre Entwicklerhandbücher.
+Visualisieren Sie Branching- und Merging-Strategien für Ihre Entwickler-Leitfäden.
 
 ::: tabs
 
@@ -138,8 +138,8 @@ Verwenden Sie das integrierte **Lucide**-Icon-Paket, um detailreiche Architektur
 ```mermaid
 architecture-beta
     group api(icon:cloud)[API]
-    service db(icon:database)[Database] in api
-    service disk(icon:hard-drive)[Storage] in api
+    service db(icon:database)[Datenbank] in api
+    service disk(icon:hard-drive)[Speicher] in api
     db:L -- R:disk
 ```
 
@@ -148,22 +148,22 @@ architecture-beta
 ```mermaid
 architecture-beta
     group api(icon:cloud)[API]
-    service db(icon:database)[Database] in api
-    service disk(icon:hard-drive)[Storage] in api
+    service db(icon:database)[Datenbank] in api
+    service disk(icon:hard-drive)[Speicher] in api
     db:L -- R:disk
 ```
 ````
 
 :::
 
-## Technische Umsetzung
+## Technische Implementierung
 
 Das Mermaid-Plugin fängt `mermaid`-Codeblöcke während der Parsing-Phase ab und hüllt sie in einen speziellen `<div class="mermaid">`-Container.
 
-1. **Erkennung**: Die Engine durchsucht das gerenderte HTML nach dem Vorhandensein von Mermaid-Containern.
-2. **Asset-Injektion**: Falls Container gefunden werden, fügt `docmd` ein leichtgewichtiges `init-mermaid.js`-Modul ein.
-3. **Rendering**: Die Mermaid-Bibliothek wird asynchron geladen und rendert die Diagramme clientseitig. So bleibt Ihre initiale HTML-Last klein und schnell.
+1. **Erkennung**: Die Engine scannt das gerenderte HTML nach dem Vorhandensein von Mermaid-Containern.
+2. **Asset-Injektion**: Wenn Container gefunden werden, injiziert `docmd` ein leichtgewichtiges `init-mermaid.js`-Modul.
+3. **Rendering**: Die Mermaid-Bibliothek wird asynchron geladen und rendert die Diagramme clientseitig. So bleibt Ihr initiales HTML-Paket klein und schnell.
 
 ::: callout tip "Diagramme für KI-Agenten"
-Während Diagramme für Menschen visuell hilfreich sind, sind sie für KI technisch transparent. Da die Quelle reiner Text ist, können Modelle wie GPT-4 oder Claude Ihre Systemarchitektur oder Logikflüsse durch den `llms-full.txt`-Stream „sehen“. Dies ermöglicht es der KI, komplexe architektonische Zusammenhänge basierend auf Ihren Diagrammen zu erklären.
+Während Diagramme für Menschen visuell hilfreich sind, sind sie für KIs technisch transparent. Da die Quelle reiner Text ist, können Modelle wie GPT-4 oder Claude Ihre Systemarchitektur oder Logikflüsse über den `llms-full.txt`-Stream "sehen". Dies ermöglicht es der KI, komplexe architektonische Beziehungen basierend auf Ihren Diagrammen zu erklären.
 :::

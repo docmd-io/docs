@@ -84,7 +84,7 @@ If you used "Material for MkDocs", you likely relied on Python Markdown extensio
 
 **docmd:**
 ```markdown
-::: note "Optional Title"
+::: callout info "Optional Title"
 This is an admonition content block.
 :::
 ```

@@ -65,7 +65,7 @@ For the best SEO results, ensure your `siteUrl` is defined in the root of your c
 :::
 
 ## Structured Data (LD+JSON)
-`docmd` can automatically generate [Article Schema](https://developers.google.com/search/docs/appearance/structured-data/article) to help Search Engines display rich snippets.
+`docmd` can automatically generate [Article Schema](external:https://developers.google.com/search/docs/appearance/structured-data/article) to help Search Engines display rich snippets.
 
 ```yaml
 ---

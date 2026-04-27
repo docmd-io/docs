@@ -1,13 +1,13 @@
 ---
 title: "Such-Plugin"
-description: "Aktivieren Sie eine schnelle, Offline-first Volltextsuche für Ihre Dokumentation unter Verwendung von MiniSearch."
+description: "Aktivieren Sie eine extrem schnelle, Offline-first Volltextsuche für Ihre Dokumentation mit MiniSearch."
 ---
 
-Das Plugin `@docmd/plugin-search` bietet eine leistungsfähige clientseitige Sucherfahrung für Ihre Dokumentation. Es nutzt [MiniSearch](https://github.com/lucaong/minisearch), um während des Build-Prozesses einen leichtgewichtigen Index zu erstellen. So können Benutzer technische Informationen sofort finden, ohne dass eine serverseitige Datenbank erforderlich ist.
+Das `@docmd/plugin-search`-Plugin bietet ein leistungsstarkes, clientseitiges Sucherlebnis für Ihre Dokumentation. Es verwendet [MiniSearch](external:https://github.com/lucaong/minisearch), um während des Build-Prozesses einen leichtgewichtigen Index zu erstellen, der es Benutzern ermöglicht, technische Informationen sofort und ohne serverseitige Datenbank zu finden.
 
 ## Konfiguration
 
-Die Suche ist in den meisten `docmd`-Templates standardmäßig aktiviert. Sie können deren Sichtbarkeit und Platzierung über die `layout`-Konfiguration steuern.
+Die Suche ist in den meisten `docmd`-Templates standardmäßig aktiviert. Sie können ihre Sichtbarkeit und Platzierung über die `layout`-Konfiguration steuern.
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -26,34 +26,32 @@ export default defineConfig({
 
 ## Funktionsweise
 
-<!-- SCREENSHOT: Such-Modal geöffnet mit einer eingegebenen Abfrage, zeigt passende Ergebnisse mit hervorgehobenen Titeln und Deep-Links zu Überschriften. Der Hinweis auf das Tastaturkürzel (Strg+K oder /) sollte sichtbar sein. -->
+### 1. Indizierung (Build-Zeit)
+Während des `docmd build`-Prozesses iteriert das Such-Plugin über jede Seite Ihrer Website. Es extrahiert den Titel, Überschriften und den Fließtext und komprimiert diese Daten dann in eine `search-index.json`-Datei.
 
-### 1. Indexierung (Build-Zeit)
-Während des `docmd build`-Prozesses durchläuft das Such-Plugin jede Seite Ihrer Website. Es extrahiert den Titel, die Überschriften und den Fließtext und kompiliert diese Daten in eine komprimierte `search-index.json`-Datei.
+*   **Deep Linking**: Der Indexer registriert automatisch jede Überschrift (`#`, `##` etc.) als suchbares Ziel.
+*   **Relevanz-Gewichtung**: Titel erhalten das höchste Gewicht, gefolgt von Überschriften und schließlich dem Seiteninhalt.
 
-*   **Deep Linking**: Der Indexierer registriert automatisch jede Überschrift (`#`, `##`, etc.) als suchbares Ziel.
-*   **Relevanz-Gewichtung**: Titel erhalten die höchste Gewichtung, gefolgt von Überschriften und dann dem Seiteninhalt.
-
-### 2. Abfrage (Clientseitig)
-Wenn ein Benutzer das Such-Modal öffnet (normalerweise über `/` oder `Strg+K`), wird die `search-index.json` vom Browser geladen. Suchvorgänge werden lokal mit Fuzzy-Matching (erlaubt kleine Tippfehler) und sofortigem Präfix-Matching durchgeführt.
+### 2. Abruf (Client-seitig)
+Wenn ein Benutzer das Suchmodal öffnet (normalerweise über `/` oder `Strg+K`), wird die `search-index.json` vom Browser geladen. Suchen werden lokal mit Fuzzy-Matching (erlaubt kleine Tippfehler) und sofortigem Präfix-Matching durchgeführt.
 
 ## Suchverhalten anpassen
 
-Obwohl das Such-Plugin auf Einfachheit ohne Konfiguration ausgelegt ist, können Sie bestimmte Seiten vom Index ausschließen, indem Sie das `noindex`-Flag im Frontmatter verwenden:
+Obwohl das Such-Plugin auf Einfachheit ohne Konfiguration ausgelegt ist, können Sie bestimmte Seiten vom Index ausschließen, indem Sie das `noindex`-Flag in deren Frontmatter verwenden:
 
 ```yaml
 ---
 title: "Interne Spezifikation"
-noindex: true # Diese Seite wird nicht in Suchergebnissen oder Sitemaps erscheinen
+noindex: true # Diese Seite wird nicht in den Suchergebnissen oder Sitemaps erscheinen
 ---
 ```
 
-## Technische Umsetzung
+## Technische Implementierung
 
-Das Plugin fügt ein leichtgewichtiges Such-Modal in den `<body>` Ihrer Website ein. Es ist vollständig barrierefrei (ARIA-konform) und unterstützt die Tastaturnavigation für ein Benutzererlebnis, das einer nativen App ähnelt.
+Das Plugin injiziert ein leichtgewichtiges Suchmodal in den `<body>` Ihrer Website. Es ist vollständig barrierefrei (ARIA-konform) und unterstützt die Tastaturnavigation für ein Erlebnis, das sich wie eine native App anfühlt.
 
 ::: callout tip "Such-Analyse"
-Wenn Sie das [Analytics-Plugin](./analytics) aktiviert haben, werden die von Ihren Lesern verwendeten Suchbegriffe automatisch erfasst und an Ihren Analytics-Anbieter gesendet. Dies gibt Ihnen Einblicke darüber, welche Informationen fehlen oder am schwersten zu finden sind.
+Wenn Sie das [Analytics-Plugin](./analytics.md) aktiviert haben, werden die von Ihren Lesern verwendeten Suchbegriffe automatisch erfasst und an Ihren Analytics-Anbieter gesendet. So erhalten Sie Einblicke, welche Informationen fehlen oder am schwersten zu finden sind.
 :::
 
 Da die Suche vollständig auf dem Client stattfindet, werden niemals Daten — nicht einmal Tastaturanschläge — an einen Server gesendet. Dies macht `docmd` zum Goldstandard für die Dokumentationssuche in datenschutzsensiblen Branchen (Gesundheitswesen, Finanzen, Sicherheit).
@@ -62,10 +60,10 @@ Da die Suche vollständig auf dem Client stattfindet, werden niemals Daten — n
 
 Viele Dokumentationsgeneratoren (wie Docusaurus) verlassen sich auf **Algolia DocSearch**. Obwohl Algolia leistungsstark ist, bringt es Hürden mit sich:
 
-| Funktion | docmd Suche | Algolia / Extern |
+| Feature | docmd Suche | Algolia / Extern |
 | :--- | :--- | :--- |
-| **Setup** | **Zero Config** (Automatisch) | Komplex (API-Keys, CI/CD-Crawling) |
-| **Datenschutz**| **100% Privat** (Clientseitig) | Daten werden an Drittserver gesendet |
+| **Einrichtung** | **Zero Config** (Automatisch) | Komplex (API-Keys, CI/CD Crawling) |
+| **Datenschutz** | **100% Privat** (Client-seitig) | Daten werden an Drittserver gesendet |
 | **Offline** | **Ja** | Nein |
-| **Kosten** | **Kostenlos** | Limits im kostenlosen Plan oder Bezahlmodell |
-| **Tempo** | **Sofort** (Arbeitsspeicher) | Schnell (abhängig von Netzwerklatenz) |
+| **Kosten** | **Kostenlos** | Kostenloses Kontingent oder kostenpflichtig |
+| **Geschwindigkeit** | **Sofort** (In-Memory) | Schnell (Abhängig von Netzwerklatenz) |

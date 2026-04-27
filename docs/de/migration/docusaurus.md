@@ -1,27 +1,27 @@
 ---
-title: "Von Docusaurus migrieren"
-description: "Ein umfassender Leitfaden zur Migration Ihres Docusaurus v2/v3-Projekts zu docmd."
+title: "Migration von Docusaurus"
+description: "Ein umfassender Leitfaden zum Umzug Ihres Docusaurus v2/v3-Projekts zu docmd."
 ---
 
-# Von Docusaurus migrieren zu docmd
+# Migration von Docusaurus zu docmd
 
-Docusaurus ist ein beliebtes Dokumentations-Framework, das auf React basiert. `docmd` bietet eine schnelle, konfigurationsfreie Alternative, die wesentlich schneller kompiliert und keine React-Komponenten erfordert, um umfangreiche Funktionen zu rendern.
+Docusaurus ist ein beliebtes Dokumentations-Framework, das auf React basiert. `docmd` bietet eine schnelle, konfigurationsfreie Alternative, die deutlich schneller kompiliert und keine React-Komponenten benötigt, um umfangreiche Funktionen zu rendern.
 
-## Schritt 1: Führen Sie die Migrations-Engine aus
+## Schritt 1: Ausführen der Migration-Engine
 
-Führen Sie den folgenden Befehl im Hauptverzeichnis Ihres bestehenden Docusaurus-Projekts aus (dort, wo sich Ihre `docusaurus.config.js` oder `docusaurus.config.ts` befindet):
+Führen Sie den folgenden Befehl im Root-Verzeichnis Ihres bestehenden Docusaurus-Projekts aus (dort, wo sich Ihre `docusaurus.config.js` oder `docusaurus.config.ts` befindet):
 
 ```bash
 npx @docmd/core migrate --docusaurus
 ```
 
-### Was passiert automatisch
+### Was automatisch passiert
 
-1.  **Backup**: Ihr gesamtes Projekt (mit Ausnahme von `node_modules` und `.git`) wird sicher in ein neues `docusaurus-backup/`-Verzeichnis verschoben.
-2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Stammverzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.js` wird generiert, die Ihren Website-`title` aus Ihrer Docusaurus-Konfiguration extrahiert.
+1.  **Backup**: Ihr gesamtes Projekt (außer `node_modules` und `.git`) wird sicher in ein neues Verzeichnis `docusaurus-backup/` verschoben.
+2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Root-Verzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
+3.  **Konfigurationserstellung**: Eine `docmd.config.js` wird generiert, wobei der Seitentitel (`title`) aus Ihrer Docusaurus-Konfiguration extrahiert wird.
 
-## Schritt 2: Testen Sie das Setup
+## Schritt 2: Testen des Setups
 
 Sobald der Befehl abgeschlossen ist, können Sie Ihre Markdown-Inhalte sofort in `docmd` in der Vorschau anzeigen:
 
@@ -29,7 +29,7 @@ Sobald der Befehl abgeschlossen ist, können Sie Ihre Markdown-Inhalte sofort in
 npx @docmd/core dev
 ```
 
-Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar bleibt zunächst leer.
+Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Seitenleiste wird leer sein.
 
 ## Schritt 3: Manuelle Konfiguration
 
@@ -37,33 +37,33 @@ Docusaurus verfügt über komplexe programmatische Konfigurationen, die `docmd` 
 
 ### 1. Navigations-Setup
 
-Docusaurus-Sidebars werden häufig automatisch generiert oder in der `sidebars.js` konfiguriert.
+Docusaurus-Seitenleisten werden oft automatisch generiert oder in `sidebars.js` konfiguriert.
 
-**Aktion erforderlich:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Verzeichnis, um Ihre `docmd`-Sidebar zu strukturieren. Weitere Informationen finden Sie im [Navigations-Leitfaden](../configuration/navigation.md).
+**Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Verzeichnis, um Ihre `docmd`-Seitenleiste zu strukturieren. Siehe den [Leitfaden zur Navigation](../configuration/navigation.md).
 
-### 2. MDX-Komponenten ersetzen
+### 2. Ersetzen von MDX-Komponenten
 
-Docusaurus verlässt sich stark auf MDX (`.mdx`), um benutzerdefinierte React-Komponenten (wie Tabs, Admonitions oder benutzerdefinierte UI-Elemente) darzustellen. `docmd` wird rein über Markdown gesteuert und verwendet kein React.
+Docusaurus stützt sich stark auf MDX (`.mdx`), um benutzerdefinierte React-Komponenten (wie Tabs, Admonitions oder benutzerdefinierte UI-Elemente) zu rendern. `docmd` wird rein über Markdown gesteuert und verwendet kein React.
 
-**Aktion erforderlich:** Sie müssen alle benutzerdefinierten `<MyReactComponent />`-Tags in Standard-Markdown konvertieren oder die nativen [Container](../content/containers/callouts.md) von `docmd` verwenden.
+**Erforderliche Aktion:** Sie müssen alle benutzerdefinierten `<MyReactComponent />`-Tags in Standard-Markdown umwandeln oder die nativen [Container](../content/containers/callouts.md) von `docmd` verwenden.
 
-#### Beispiel: Admonitions (Callouts) konvertieren
+#### Beispiel: Umwandeln von Admonitions (Hinweisen)
 
 **Docusaurus:**
 ```markdown
-:::tip My Tip
-This is a helpful tip.
+:::tip Mein Tipp
+Dies ist ein hilfreicher Tipp.
 :::
 ```
 
-**docmd:** (Keine Änderung erforderlich! `docmd` unterstützt von Haus aus Admonitions im Docusaurus-Stil als Callouts).
+**docmd:** (Die Lernkurve ist fast bei Null, außer einigen geänderten Schlüsselwörtern für eine bessere Benutzererfahrung. `docmd` unterstützt nativ Admonitions im Docusaurus-Stil als Callouts).
 ```markdown
-::: tip "My Tip"
-This is a helpful tip.
+::: callout tip "Mein Tipp"
+Dies ist ein hilfreicher Tipp.
 :::
 ```
 
-#### Beispiel: Tabs konvertieren
+#### Beispiel: Umwandeln von Tabs
 
 **Docusaurus:**
 ```jsx
@@ -72,22 +72,22 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="apple" label="Apple" default>
-    This is an apple.
+    Dies ist ein Apfel.
   </TabItem>
   <TabItem value="orange" label="Orange">
-    This is an orange.
+    Dies ist eine Orange.
   </TabItem>
 </Tabs>
 ```
 
-**docmd:** (Konvertieren in die native `docmd`-Tab-Container-Syntax)
+**docmd:** (Umwandlung in die native `docmd`-Tabs-Container-Syntax)
 ```markdown
 ::: tabs
 == tab "Apple"
-This is an apple.
+Dies ist ein Apfel.
 
 == tab "Orange"
-This is an orange.
+Dies ist eine Orange.
 :::
 ```
 
@@ -95,9 +95,9 @@ This is an orange.
 
 Wenn Sie die `i18n`-Funktionen von Docusaurus verwendet haben, befanden sich Ihre übersetzten Dateien wahrscheinlich in `i18n/locale/docusaurus-plugin-content-docs/current/`.
 
-**Aktion erforderlich:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Sprachen in der `docmd.config.js`. Weitere Informationen finden Sie im [Lokalisierungs-Leitfaden](../configuration/localisation/index.md).
+**Erforderliche Aktion:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Locales in der `docmd.config.js`. Siehe den [Leitfaden zur Lokalisierung](../configuration/localisation/index.md).
 
 ## Nächste Schritte
 
-- Entdecken Sie die [Layout & UI](../configuration/layout-ui.md)-Einstellungen, um Ihr Docusaurus-Theme nachzubilden.
-- Konvertieren Sie React-basierte Hero-Header in `docmd` [Hero-Container](../content/containers/hero.md).
+- Entdecken Sie die Einstellungen für [Layout & UI](../configuration/layout-ui.md), um Ihr Docusaurus-Theme anzupassen.
+- Wandeln Sie React-basierte Hero-Header in `docmd` [Hero-Container](../content/containers/hero.md) um.
