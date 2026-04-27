@@ -29,8 +29,6 @@ module.exports = {
 | **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed. |
 | **`external`** | `Boolean` | No | If `true`, the link opens in a new tab. |
 
----
-
 ## Organizing Groups
 
 You can nest navigation items infinitely. There are two primary ways to organize groups:

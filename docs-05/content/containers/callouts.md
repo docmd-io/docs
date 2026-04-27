@@ -21,8 +21,6 @@ Your content here.
 | `danger` | Danger | Critical warnings, data loss, or significant errors. |
 | `success` | Success | Confirmation of a completed action. |
 
----
-
 ## Examples
 
 ### 1. Simple Note

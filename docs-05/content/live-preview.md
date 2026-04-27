@@ -24,8 +24,6 @@ docmd live --build-only
 ```
 This creates a `dist/` directory containing the `index.html` and `docmd-live.js` engine.
 
----
-
 ## Embedding docmd in Your Site
 
 Use the browser-compatible bundle to add Markdown preview capabilities to your own applications.
