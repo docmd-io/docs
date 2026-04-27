@@ -8,7 +8,7 @@ description: "Run docmd entirely in the browser without a backend server using t
 <!-- SCREENSHOT: A live preview window embedded in a documentation page, showing a code editor on the left and the rendered HTML output on the right, with the preview updating in real-time. -->
 
 
-::: button "Open Live Editor" https://live.docmd.io
+::: button "Open Live Editor" external:https://live.docmd.io
 
 ## The Live Editor
 

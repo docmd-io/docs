@@ -1,9 +1,9 @@
 ---
-title: "Schaltflächen (Buttons)"
-description: "Fügen Sie Call-to-Action-Schaltflächen für internes Routing oder externe Ressourcen mit einer einzeiligen Syntax ein."
+title: "Buttons"
+description: "Fügen Sie Call-to-Action-Buttons für internes Routing oder externe Ressourcen mit einer einzeiligen Syntax ein."
 ---
 
-Buttons sind wirkungsvolle UI-Elemente, die für eine prominente Navigation eingesetzt werden. Im Gegensatz zu Block-Containern ist der `button` **selbstschließend** — er wird in einer einzigen Zeile definiert und benötigt kein schließendes `:::`-Tag.
+Buttons sind einflussreiche UI-Elemente, die für eine prominente Navigation verwendet werden. Im Gegensatz zu Block-Containern ist der `button` **selbstschließend** — er wird in einer einzigen Zeile definiert und benötigt kein schließendes `:::`-Tag.
 
 ## Syntax
 
@@ -11,14 +11,14 @@ Buttons sind wirkungsvolle UI-Elemente, die für eine prominente Navigation eing
 ::: button "Beschriftung" Pfad [Optionen]
 ```
 
-### Referenz der Optionen
+### Optionen-Referenz
 
 | Eigenschaft | Format | Beschreibung |
 | :--- | :--- | :--- |
-| **Pfad** | `/pfad/` | Relative Projekt-URL (wird automatisch für die SPA-Navigation aufgelöst). |
-| **Extern** | `external:URL`| Öffnet die Ziel-URL in einem neuen Browser-Tab (`target="_blank"`). |
-| **Farbe** | `color:WERT` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). |
-| **Icon** | `icon:NAME` | Fügt ein [Lucide](https://lucide.dev/icons) Icon vor der Beschriftung hinzu. |
+| **Pfad (Path)** | `/pfad/` | Relative Projekt-URL (wird automatisch für die SPA-Navigation aufgelöst). |
+| **Extern (External)** | `external:URL`| Öffnet die Ziel-URL in einem neuen Browser-Tab (`target="_blank"`). |
+| **Farbe (Color)** | `color:WERT` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). |
+| **Icon** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor der Button-Beschriftung hinzu. |
 
 ## Anwendungsbeispiele
 
@@ -29,46 +29,46 @@ Verwenden Sie relative Pfade, um nahtlose Übergänge ohne Neuladen innerhalb de
 ```
 ::: button "docmd installieren" /getting-started/installation
 
-### 2. Externer Ressourcen-Link
+### 2. Link zu externen Ressourcen
 Stellen Sie der URL `external:` voran, um eine sichere externe Verlinkung zu gewährleisten.
 ```markdown
-::: button "GitHub Repository ansehen" external:https://github.com/docmd-io/docmd
+::: button "GitHub-Repository anzeigen" external:https://github.com/docmd-io/docmd
 ```
-::: button "GitHub Repository ansehen" external:https://github.com/docmd-io/docmd
+::: button "GitHub-Repository anzeigen" external:https://github.com/docmd-io/docmd
 
 ### 3. Semantisches & Marken-Styling
-Passen Sie Schaltflächen mit Farbüberschreibungen an Ihre Markenidentität oder semantische Priorität an.
+Passen Sie Buttons durch Farbüberschreibungen an Ihre Markenidentität oder semantische Priorität an.
 ```markdown
 ::: button "Gefährliche Aktion" /delete color:crimson
-::: button "Erfolg Bestätigen" /success color:#228B22
+::: button "Erfolgreiche Bestätigung" /success color:#228B22
 ```
 ::: button "Gefährliche Aktion" ./#delete color:crimson
-::: button "Erfolg Bestätigen" ./#success color:#228B22
+::: button "Erfolgreiche Bestätigung" ./#success color:#228B22
 
-### 4. Schaltflächen mit Icons
-Fügen Sie ein Lucide-Icon hinzu, um die visuelle Klarheit zu erhöhen.
+### 4. Buttons mit Icons
+Fügen Sie ein Lucide-Icon hinzu, um die visuelle Klarheit zu verbessern.
 ```markdown
 ::: button "Erste Schritte" /getting-started/installation icon:arrow-right
-::: button "Quellcode ansehen" external:https://github.com/docmd-io/docmd icon:github
+::: button "Quellcode anzeigen" external:https://github.com/docmd-io/docmd icon:github
 ```
 ::: button "Erste Schritte" /getting-started/installation icon:arrow-right
-::: button "Quellcode ansehen" external:https://github.com/docmd-io/docmd icon:github
+::: button "Quellcode anzeigen" external:https://github.com/docmd-io/docmd icon:github
 
 ## Wichtiger Hinweis: Selbstschließende Logik
 
-Da Buttons selbstschließend sind, wird das Hinzufügen einer abschließenden `:::`-Zeile den **übergeordneten Container** (z. B. eine Karte oder einen Tab) beenden, in dem sich der Button befindet, was möglicherweise Ihr Layout zerstört.
+Da Buttons selbstschließend sind, beendet das Hinzufügen einer abschließenden `:::`-Zeile den **übergeordneten Container** (z. B. eine Card oder ein Tab), in dem sich der Button befindet, was potenziell Ihr Layout zerstören kann.
 
 **Falsche Sequenz:**
 ```markdown
 ::: card "Setup"
-::: button "Beginnen" /setup
-:::        <-- Fehler: Dies schließt die Karte vorzeitig.
+    ::: button "Beginnen" /setup
+    :::        <-- Fehler: Dies schließt die Card vorzeitig.
 :::
 ```
 
 **Richtige Sequenz:**
 ```markdown
 ::: card "Setup"
-::: button "Beginnen" /setup
-:::        <-- Korrekt: Dies schließt die Karte.
+    ::: button "Beginnen" /setup
+:::        <-- Richtig: Dies schließt die Card.
 ```

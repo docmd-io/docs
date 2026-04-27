@@ -9,14 +9,14 @@ The `collapsible` container creates an interactive, toggleable section (accordio
 
 ```markdown
 ::: collapsible [open] "Title Text"
-Main content goes here.
+  Main content goes here.
 :::
 ```
 
 ### Options Reference
 - **`open`**: (Optional) If specified, the section initializes in an expanded state.
 - **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
-- **`icon:NAME`**: (Optional) Adds a [Lucide](https://lucide.dev/icons) icon before the title text.
+- **`icon:NAME`**: (Optional) Adds a [Lucide](external:https://lucide.dev/icons) icon before the title text.
 
 ## Detailed Implementation Examples
 
@@ -25,11 +25,11 @@ Primarily used for FAQs or reducing the visual density of technical pages.
 
 ```markdown
 ::: collapsible "How do I upgrade docmd?"
-Run `npm update -g @docmd/core` to fetch the latest stable engine.
+  Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 ```
 ::: collapsible "How do I upgrade docmd?"
-Run `npm update -g @docmd/core` to fetch the latest stable engine.
+  Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
 ### Opt-In Visibility (Initial State: Open)
@@ -37,8 +37,8 @@ Ideal for sections that should be visible by default but allow the user to minim
 
 ```markdown
 ::: collapsible open "Environment Prerequisites"
-1.  Node.js v18+ (LTS recommended)
-2.  PNPM package manager
+  1.  Node.js v18+ (LTS recommended)
+  2.  PNPM package manager
 :::
 ```
 ::: collapsible open "Environment Prerequisites"
@@ -51,12 +51,12 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
 
 ````markdown
 ::: collapsible "Analyze Sample JSON Response"
-```json
-{
-  "status": "success",
-  "data": { "version": "0.6.2" }
-}
-```
+  ```json
+  {
+    "status": "success",
+    "data": { "version": "0.6.2" }
+  }
+  ```
 :::
 ````
 ::: collapsible "Analyze Sample JSON Response"

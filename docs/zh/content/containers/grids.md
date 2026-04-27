@@ -1,63 +1,63 @@
 ---
-title: "网格"
-description: "使用原生 Markdown 容器通过自动调整的响应式栏列无缝组织布局。"
+title: "网格 (Grids)"
+description: "使用原生 markdown 容器，通过自动调整的响应式列无缝组织布局。"
 ---
 
-Grids provide a native, markdown-driven layout system in `docmd`. Instead of writing manual HTML wrappers, you can leverage the `grids` container to structure elements side-by-side. 
+网格在 `docmd` 中提供了一个原生的、由 markdown 驱动的布局系统。你可以利用 `grids` 容器来并排构建元素，而无需编写手动的 HTML 包装器。
 
-列会自动调整宽度以填充可用空间，并在小屏幕（移动设备）上逻辑性地垂直堆叠。
+列会自动调整宽度以填满可用空间，并在较小屏幕（移动设备）上逻辑地堆叠成垂直行。
 
 ## 语法参考
 
 ```markdown
 ::: grids
-::: grid
-#### 组件 A
-左侧内容。
-:::
-::: grid
-#### 组件 B
-右侧内容。
-:::
+    ::: grid
+        #### 组件 A
+        左侧的内容。
+    :::
+    ::: grid
+        #### 组件 B
+        右侧的内容。
+    :::
 :::
 ```
 
 ## 实际应用示例
 
 ### 1. 并排展示功能
-使用栅格并排展示主要功能，例如将结构卡片与信息块组合。
+使用网格将关键功能并排展示，例如将结构化卡片与信息块结合。
 
 ```markdown
 ::: grids
-::: grid
-::: card "速度 :rocket:"
-基于非阻塞 I/O 管道，实现最大性能。
-:::
-:::
-::: grid
-::: card "可扩展性 :zap:"
-专为大型 Monorepo 和庞大项目结构设计。
-:::
-:::
+    ::: grid
+        ::: card "速度 :rocket:"
+            建立在非阻塞 I/O 流水线上，以获得最高性能。
+        :::
+    :::
+    ::: grid
+        ::: card "可扩展性 :zap:"
+            专为大规模 monorepos 和广泛的项目结构而设计。
+        :::
+    :::
 :::
 ```
 
 ::: grids
 ::: grid
 ::: card "速度 :rocket:"
-基于非阻塞 I/O 管道，实现最大性能。
+建立在非阻塞 I/O 流水线上，以获得最高性能。
 :::
 :::
 ::: grid
 ::: card "可扩展性 :zap:"
-专为大型 Monorepo 和庞大项目结构设计。
+专为大规模 monorepos 和广泛的项目结构而设计。
 :::
 :::
 :::
 
-### 2. 布局均衡
-栅格会根据可用内容自动计算每列的最优宽度（在超宽屏幕上每行最多 4 项），并在窄视口上无缝分组成行。
+### 2. 布局平衡
+网格将根据可用内容自动计算每列的最佳宽度（超宽屏幕上每行最多 4 个项目），并在窄视口上无缝分组行。
 
-::: callout tip "语义布局"
-使用 `grids` 容器让你的文档结构完全以 Markdown 编写，生成更简洁的源文件，并确保 LLM 能完美理解你的结构关系！
+::: callout tip "语义化布局"
+使用 `grids` 容器可以使你的文档结构纯粹用 Markdown 编写，从而产生更整洁的源文件，并确保 LLM 完美地解释你的结构关系！
 :::

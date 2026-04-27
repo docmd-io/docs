@@ -1,88 +1,88 @@
 ---
 title: "Verlinkung & Referenzierung"
-description: "Meistern Sie die automatische URL-Normalisierung von docmd für interne Querverweise, externe Ressourcen und zuverlässige Asset-Referenzierung."
+description: "Meistern Sie interne Querverweise, externe Ressourcen und zuverlässige Asset-Referenzierung mit der automatischen URL-Normalisierung von docmd."
 ---
 
-`docmd` bietet ein robustes, dateisystembasiertes Verlinkungssystem. Schreiben Sie Links zu Ihren `.md`-Quelldateien ganz natürlich — in jedem Format, das Sie bevorzugen — und die Engine normalisiert sie automatisch zu sauberen, SEO-optimierten URLs für die Produktion.
+`docmd` bietet ein robustes, Dateisystem-bewusstes Verlinkungssystem. Schreiben Sie Links zu Ihren Quell-`.md`-Dateien ganz natürlich — in jedem Format, das Sie bevorzugen — und die Engine normalisiert diese automatisch in saubere, SEO-optimierte URLs für die Produktion.
 
 ::: callout info "Natürlich schreiben, perfekt ausliefern"
-Sie müssen keine speziellen Verlinkungskonventionen befolgen. Ob Sie `overview.md`, `overview/` oder einfach nur `overview` schreiben — die Build-Engine erzeugt dieselbe saubere URL mit abschließendem Schrägstrich. Jeder interne Link wird zur Build-Zeit automatisch normalisiert, sodass Sie sich auf den Inhalt konzentrieren können.
+Sie müssen keine speziellen Verlinkungskonventionen befolgen. Egal, ob Sie `overview.md`, `overview/` oder nur `overview` schreiben, die Build-Engine erzeugt dieselbe saubere URL mit abschließendem Schrägstrich. Jeder interne Link wird zur Build-Zeit automatisch normalisiert, sodass Sie sich auf den Inhalt konzentrieren können, nicht auf die URL-Formatierung.
 :::
 
 ## Wie die URL-Normalisierung funktioniert
 
-Während des Build-Prozesses wendet die Engine einheitliche Regeln auf jeden internen Link an — ob im Markdown-Text, in Button-Containern, Tags oder in der Navigationskonfiguration:
+Während des Build-Prozesses wendet die Engine eine konsistente Reihe von Regeln auf jeden internen Link an — egal ob in Markdown-Texten, Button-Containern, Tags oder der Navigationskonfiguration:
 
 | Was Sie schreiben | Was gerendert wird | Warum |
 | :--- | :--- | :--- |
-| `overview.md` | `overview/` | `.md`-Erweiterung entfernt, `/` angehängt |
-| `overview` | `overview/` | Abschließender `/` automatisch hinzugefügt |
+| `overview.md` | `overview/` | `.md`-Erweiterung entfernt, abschließender `/` hinzugefügt |
+| `overview` | `overview/` | Abschließender `/` wird automatisch hinzugefügt |
 | `overview/` | `overview/` | Bereits korrekt — keine Änderung |
-| `api/commands.md` | `api/commands/` | Unterverzeichnis-Link normalisiert |
+| `api/commands.md` | `api/commands/` | Link in Unterverzeichnis normalisiert |
 | `localisation/index.md` | `localisation/` | `index` entfernt — der Ordner ist die kanonische URL |
-| `../index.md` | `../` | Übergeordnetes Verzeichnis korrekt aufgelöst |
-| `overview.md#settings` | `overview/#settings` | Hash-Fragment beibehalten |
-| `./guide.md` | `./guide/` | Relativer Präfix beibehalten |
-| `https://example.com` | `https://example.com` | Externe Links werden direkt durchgereicht |
+| `../index.md` | `../` | Parent-Verzeichnis-Index sauber aufgelöst |
+| `overview.md#settings` | `overview/#settings` | Hash-Fragment bleibt durch Normalisierung erhalten |
+| `./guide.md` | `./guide/` | Relatives Präfix bleibt erhalten |
+| `https://example.com` | `https://example.com` | Externe Links bleiben unberührt |
 
 ::: callout tip "SEO Best Practice"
-Alle internen Seiten werden als Verzeichnis-URLs mit abschließendem Schrägstrich bereitgestellt (z. B. `/configuration/overview/`). Dies ist der Industriestandard für statische Websites, verhindert 301-Weiterleitungsketten und stellt konsistente kanonische URLs sicher.
+Alle internen Seiten werden als URLs im Verzeichnisstil bereitgestellt, die mit einem abschließenden Schrägstrich enden (z. B. `/configuration/overview/`). Dies ist der Industriestandard für statische Websites, verhindert 301-Weiterleitungsketten und gewährleistet konsistente kanonische URLs für die Indizierung durch Suchmaschinen.
 :::
 
-## Interne Linkauflösung
+## Interne Link-Auflösung
 
-Verlinken Sie auf andere Seiten mit relativen Pfaden zu den `.md`-Quelldateien. Die Engine löst sie unabhängig von der Verzeichnistiefe korrekt auf.
+Verlinken Sie auf andere Seiten in Ihrer Dokumentation über relative Pfade zu den Quell-`.md`-Dateien. Die Engine löst diese unabhängig von der Verzeichnistiefe korrekt auf.
 
 | Zielstrategie | Markdown-Syntax |
 | :--- | :--- |
-| **Seite auf gleicher Ebene** | `[Systemübersicht](overview.md)` |
+| **Geschwister-Seite** | `[Systemübersicht](overview.md)` |
 | **Unterverzeichnis** | `[API-Referenz](api/node-api.md)` |
-| **Unterverzeichnis-Index** | `[Lokalisierung](localisation/index.md)` |
-| **Übergeordnetes Verzeichnis** | `[Zurück zur Startseite](../index.md)` |
+| **Unterverzeichnis-Index**| `[Lokalisierung](localisation/index.md)` |
+| **Eltern-Verzeichnis** | `[Zurück zur Startseite](../index.md)` |
 
-## Abschnittsanker (Deep Linking)
+## Abschnitts-Anker (Deep Linking)
 
 Navigieren Sie direkt zu bestimmten Überschriften mit Standard-URL-Hash-Fragmenten.
 
-*   **Seiteninterne Anker**: `[Zur Roadmap springen](#project-roadmap)`
-*   **Seitenübergreifende Anker**: `[CLI-Flags ansehen](../cli-commands.md#available-flags)`
+*   **Anker auf derselben Seite**: `[Zum Roadmap springen](#project-roadmap)`
+*   **Anker auf anderer Seite**: `[CLI-Flags prüfen](../cli-commands.md#available-flags)`
 
-Hash-Fragmente bleiben durch den Normalisierungsprozess hindurch erhalten. Der obige Link wird in der Produktion als `../cli-commands/#available-flags` gerendert.
+Hash-Fragmente bleiben während des Normalisierungsprozesses erhalten. Der obige Link wird in der Produktion als `../cli-commands/#available-flags` gerendert.
 
-## Links in neuem Tab öffnen
+## Links in einem neuen Tab öffnen
 
-Verwenden Sie das `external:`-Präfix bei jedem Link, um ihn in einem neuen Tab zu öffnen. Dies funktioniert universell — in Standard-Markdown-Links, Button-Containern, Tags und überall sonst, wo Sie eine URL schreiben können.
+Verwenden Sie das Präfix `external:` bei jedem Link, um das Öffnen in einem neuen Tab zu erzwingen. Dies funktioniert universell — in Standard-Markdown-Links, Button-Containern, Tags und überall dort, wo Sie eine URL schreiben können.
 
 ```markdown
-<!-- Standard-Markdown -->
-[Extern öffnen](external:https://github.com/docmd-io/docmd)
-
-<!-- Funktioniert auch für interne Links, die in einem neuen Tab geöffnet werden sollen -->
+<!-- Öffnen in neuem Tab erzwingen -->
 [In neuem Tab öffnen](external:./configuration/overview.md)
+
+<!-- Externer Link zu GitHub -->
+[GitHub](external:https://github.com/docmd-io/docmd)
 ```
 
-Links, die mit `https://` oder `http://` beginnen, werden automatisch als extern erkannt und ohne `external:`-Präfix in einem neuen Tab geöffnet.
+Standardmäßig werden alle Links (einschließlich HTTP/HTTPS) im selben Fenster geöffnet. Verwenden Sie das Präfix `external:` nur, wenn Sie einen neuen Tab wünschen.
 
-Das `external:`-Präfix wird aus der gerenderten URL **entfernt** — es ist rein ein Build-Zeit-Signal.
+Das Präfix `external:` wird aus der gerenderten URL **entfernt** — es ist ein reines Signal für die Build-Zeit.
 
-## Verlinkung auf Rohdateien
+## Verlinkung zu Rohdateien (Raw Files)
 
-Standardmäßig entfernt die Engine `.md`-Erweiterungen und normalisiert Pfade. Wenn Sie tatsächlich auf eine rohe `.md`-Datei verlinken müssen (z. B. eine herunterladbare Quelldatei), verwenden Sie das `raw:`-Präfix:
+Standardmäßig entfernt die Engine `.md`-Erweiterungen und normalisiert Pfade. Wenn Sie tatsächlich auf eine rohe `.md`-Datei verlinken müssen (zum Beispiel eine herunterladbare Quelldatei), verwenden Sie das Präfix `raw:`:
 
 ```markdown
-[Rohquelle anzeigen](raw:docs/readme.md)
+[Quellcode anzeigen](raw:docs/readme.md)
 ```
 
-Das `raw:`-Präfix umgeht die gesamte Normalisierung — Erweiterung und Pfad bleiben exakt wie geschrieben erhalten. Wie bei `external:` wird das Präfix selbst aus der gerenderten URL entfernt.
+Das Präfix `raw:` umgeht die gesamte Normalisierung — die Erweiterung und der Pfad bleiben exakt so erhalten, wie sie geschrieben wurden. Wie bei `external:` wird das Präfix selbst aus der gerenderten URL entfernt.
 
 ## Button-Container
 
-Der `::: button`-Container unterstützt dieselben Verlinkungskonventionen — einschließlich `external:` und `raw:`:
+Der `::: button`-Container unterstützt dieselben Verlinkungskonventionen wie Standard-Markdown-Links — einschließlich der Präfixe `external:` und `raw:`:
 
 ```markdown
 ::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket
 
-::: button "Auf GitHub ansehen" https://github.com/docmd-io/docmd icon:github
+::: button "Auf GitHub anzeigen" https://github.com/docmd-io/docmd icon:github
 
 ::: button "Quelle herunterladen" raw:docs/readme.md icon:download
 ```
@@ -101,19 +101,19 @@ Tags mit `link:`-Werten profitieren ebenfalls vom einheitlichen Normalisierer:
 
 ## Navigationskonfiguration
 
-In `navigation.json` und `docmd.config.js` definierte Pfade werden ebenfalls zur Build-Zeit normalisiert:
+Pfade, die in `navigation.json` und `docmd.config.js` definiert sind, werden ebenfalls zur Build-Zeit normalisiert. Sie können sie in jedem Format schreiben:
 
 ```json "navigation.json"
 [
-  { "title": "Übersicht", "path": "configuration/overview" },
-  { "title": "Übersicht", "path": "configuration/overview.md" },
-  { "title": "Übersicht", "path": "configuration/overview/" }
+  { "title": "Overview", "path": "configuration/overview" },
+  { "title": "Overview", "path": "configuration/overview.md" },
+  { "title": "Overview", "path": "configuration/overview/" }
 ]
 ```
 
-Alle drei Einträge erzeugen dieselbe kanonische URL: `/configuration/overview/`.
+Alle drei obigen Einträge erzeugen dieselbe kanonische URL: `/configuration/overview/`.
 
-Für Navigationseinträge, die in einem neuen Tab geöffnet werden sollen, verwenden Sie das `external`-Flag:
+Für Navigationselemente, die in einem neuen Tab geöffnet werden sollen, verwenden Sie das Flag `external`:
 
 ```json "navigation.json"
 [
@@ -125,35 +125,35 @@ Für Navigationseinträge, die in einem neuen Tab geöffnet werden sollen, verwe
 ]
 ```
 
-::: callout warning "Indexseiten in der Navigation"
-Wenn Sie auf die Indexseite eines Verzeichnisses verlinken, verwenden Sie den Ordnerpfad anstelle einer expliziten Referenz auf `index.md`:
+::: callout warning "Index-Seiten in der Navigation"
+Wenn Sie auf die Index-Seite eines Verzeichnisses verlinken, verwenden Sie den Ordnerpfad, anstatt explizit auf `index.md` zu verweisen. Beides funktioniert identisch, aber der Ordnerpfad ist sauberer:
 
 ```markdown
-<!-- Empfohlen -->
+<!-- Bevorzugt -->
 [Lokalisierung](localisation/)
 
-<!-- Funktioniert ebenfalls (automatisch normalisiert) -->
+<!-- Funktioniert auch (auto-normalisiert) -->
 [Lokalisierung](localisation/index.md)
 ```
 :::
 
-## Protokolle & externe Ressourcen
+## Protokolle & Externe Ressourcen
 
-Die Engine respektiert Standard-Browserprotokolle. Diese Links werden automatisch als extern erkannt (öffnen in neuem Tab).
+Die Engine respektiert Standard-Browserprotokolle für externe Ressourcen. Diese Links werden niemals geändert.
 
-*   **Globales HTTPS**: `[docmd-Homepage](https://docmd.io)`
-*   **Mail-Protokoll**: `[Support-Kanal](mailto:help@docmd.io)` — öffnet nicht in neuem Tab
+*   **Globales HTTPS**: `[docmd Homepage](https://docmd.io)` — öffnet im selben Tab (Präfix `external:` für neuen Tab verwenden)
+*   **Mail-Protokoll**: `[Support-Kanal](mailto:help@docmd.io)` — wird nicht in einem neuen Tab geöffnet
 *   **Asset-Protokoll**: `[CLI-Binary herunterladen](/assets/bin/docmd-mac.zip)` — wird nicht normalisiert
 
-## Statische Asset-Referenzierung
+## Referenzierung statischer Assets
 
-Platzieren Sie Downloads im `assets/`-Verzeichnis. Der Builder verschiebt diese Dateien ohne Pfadänderungen in das Produktionswurzelverzeichnis.
+Um Downloads bereitzustellen oder auf rohe Quelldateien zu verweisen, platzieren Sie diese im Verzeichnis `assets/` Ihres Projekts. Der `docmd`-Builder stellt sicher, dass diese Dateien ohne Pfadänderungen in das Produktions-Root verschoben werden.
 
 ```markdown
 [Dokumentations-PDF herunterladen](/assets/pdf/handbook.pdf)
 [Globale Konfiguration anzeigen](/assets/config/docmd.config.js)
 ```
 
-::: callout tip "Semantische Verlinkung für KI"
-Beim Querverlinken technischer Module priorisieren Sie **beschreibende Anker** (z. B. `[PWA-Caching optimieren](../plugins/pwa.md)`) gegenüber generischem Text (z. B. `[Mehr erfahren](../plugins/pwa.md)`). Detaillierte Link-Labels bieten KI-Agenten eine hochauflösende Karte der semantischen Beziehungen im `llms-full.txt`-Kontext.
+::: callout tip "Semantische Verknüpfung für KI"
+Verwenden Sie bei der Querverlinkung technischer Module vorrangig **beschreibende Anker** (z. B. `[PWA-Caching optimieren](../plugins/pwa.md)`) anstelle von generischem Text (z. B. `[Mehr lesen](../plugins/pwa.md)`). Detaillierte Link-Labels bieten KI-Agenten eine hochpräzise Karte der semantischen Beziehungen zwischen verschiedenen Dokumentationsknoten im `llms-full.txt`-Kontext.
 :::

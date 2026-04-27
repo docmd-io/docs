@@ -1,54 +1,51 @@
 ---
-title: "Benutzerdefinierte interaktive Container"
-description: "Ein umfassendes Verzeichnis der interaktiven UI-Bausteine, die in docmd zur Verfügung stehen."
+title: "Container-Übersicht"
+description: "Erweitern Sie Standard-Markdown mit integrierten interaktiven Komponenten, die Ihre Dokumentation von statischen Seiten in funktionsreiche Anwendungen verwandeln."
 ---
 
-Standard-Markdown glänzt bei der grundlegenden Textformatierung, aber professionelle technische Dokumentationen erfordern reichhaltige strukturelle Komponenten, um komplexe Logik effektiv zu vermitteln. `docmd` erweitert Markdown um eine Reihe von **isomorphen Containern**, die in responsive, hochwertige UI-Elemente gerendert werden.
+`docmd`-Container ermöglichen es Ihnen, komplexe UI-Elemente wie Buttons, Cards, ausklappbare Abschnitte und Tabs direkt in Ihre Dokumentationsquellen einzufügen, ohne HTML oder CSS schreiben zu müssen.
 
-<!-- SCREENSHOT: Montage aller Containertypen auf einer einzigen Seite — Callouts (Info, Warning, Danger, Tip), Tabs mit Code, Schritte (Steps), Karten-Raster (Cards Grid), Hero-Abschnitt und ausklappbare Abschnitte. -->
+## Block-Syntax-Referenz
 
-## Referenz für die Block-Syntax
-
-Alle Container verwenden eine konsistente Block-Syntax, was eine vorhersehbare Authoring-Erfahrung über Ihr gesamtes Projekt hinweg gewährleistet.
+Alle Container nutzen eine konsistente Block-Syntax, die eine vorhersehbare Bearbeitungserfahrung im gesamten Projekt gewährleistet.
 
 ```markdown
-::: typ "Optionaler Titel"
-Dies ist der Hauptinhaltsbereich.
-Er unterstützt **Markdown**, Bilder und tiefe Verschachtelungen von Komponenten.
+::: typ "Optionaler Titel für die Kopfzeile"
+Dies ist der primäre Inhaltsbereich.
+Er unterstützt **Markdown**, Bilder und tiefe Verschachtelung von Komponenten.
 :::
 ```
 
 | Komponente | Schlüsselwort | Primärer Anwendungsfall |
 | :--- | :--- | :--- |
-| **[Callouts](./callouts)** | `callout` | Semantische Hervorhebungen für Tipps, Warnungen und Alarme. |
-| **[Karten](./cards)** | `card` | Eingerahmte Strukturblöcke für Feature-Raster und Layoutsteuerung. |
-| **[Raster](./grids)** | `grids` | Automatisch anpassbare, mehrspaltige Strukturgruppen. |
-| **[Tabs](./tabs)** | `tabs` | Interaktive, umschaltbare Bereiche für plattformspezifische Anweisungen. |
-| **[Schritte](./steps)** | `steps` | Visuelle, nummerierte Zeitachsen für Anleitungen ("How-to") und Tutorials. |
-| **[Buttons](./buttons)** | `button` | Selbstschließende, prominente Call-to-Action-Navigationslinks. |
-| **[Ausklappbar](./collapsible)**| `collapsible`| Interaktive Akkordeon-Umschalter für FAQs und technische Vertiefungen. |
-| **[Changelogs](./changelogs)** | `changelog` | Strukturierte, zeitachsenbasierte Versionshistorie und Release-Notes. |
-| **[Hero](./hero)** | `hero` | Eindrucksvolle Landingpage-Abschnitte mit Layout- und Slider-Unterstützung. |
+| **[Callouts](callouts.md)** | `callout` | Semantische Hervorhebungen für Tipps, Warnungen und Alarme. |
+| **[Cards](cards.md)** | `card` | Gerahmte strukturelle Blöcke für Feature-Grids und Layout-Steuerung. |
+| **[Grids](grids.md)** | `grids` | Sich automatisch anpassende, mehrspaltige Strukturgruppen. |
+| **[Tabs](tabs.md)** | `tabs` | Interaktive, umschaltbare Fenster für alternative Anweisungen (z.B. Betriebssysteme). |
+| **[Steps](steps.md)** | `steps` | Visuelle, nummerierte Zeitachsen für "How-to"-Anleitungen und Tutorials. |
+| **[Tags](tags.md)** | `tag` | Selbstschließende, farbige Labels für Versionen, Status oder Hervorhebungen. |
+| **[Buttons](buttons.md)** | `button` | Selbstschließende, prominente Call-to-Action-Navigationslinks. |
+| **[Collapsibles](collapsible.md)**| `collapsible`| Interaktive Akkordeon-Umschalter für FAQs und vertiefende technische Daten. |
+| **[Changelogs](changelogs.md)** | `changelog` | Strukturierte, zeitachsenbasierte Versionshistorie und Versionshinweise. |
+| **[Hero](hero.md)** | `hero` | Wirkungsvolle Landingpage-Abschnitte mit Layout- und Slider-Unterstützung. |
 
 ## Die strategische Bedeutung von Containern
 
-Container ermöglichen mehr als nur visuelles Design; sie liefern hochwertige **semantische Signale** an die `docmd`-Engine und nachgelagerte KI-Agenten:
+Container bieten mehr als nur optischen Glanz; sie liefern hochpräzise **semantische Signale** an die `docmd`-Engine und nachgeschaltete KI-Agenten:
 
-1.  **KI-Kontext-Mapping**: Die Kennzeichnung eines Blocks als `callout warning` teilt LLMs explizit mit, diese Information während der Argumentations- und Generierungsphase zu priorisieren.
-2.  **Strukturelle Integrität**: Die Kombination von `cards` mit Standard-CSS ermöglicht die Erstellung anspruchsvoller Landingpages, ohne die Markdown-Umgebung verlassen zu müssen.
-3.  **Wartbarkeit der Quelle**: Eliminiert „HTML-Aufblähung“ in Ihrer Dokumentationsquelle und hält Ihre `.md`-Dateien sauber und maschinenlesbar.
+1.  **KI-Kontext-Mapping**: Das Markieren eines Blocks als `callout warning` signalisiert LLMs explizit, diese Informationen während der Denk- und Generierungsphasen zu priorisieren.
+2.  **Strukturelle Integrität**: Die Kombination von `cards` mit Standard-CSS ermöglicht die Erstellung anspruchsvoller Landingpages, ohne die Markdown-Umgebung zu verlassen.
+3.  **Wartbarkeit des Quellcodes**: Eliminiert "HTML-Aufblähung" in Ihrem Dokumentationsquellcode und hält Ihre `.md`-Dateien sauber und maschinenlesbar.
 
-## Rekursive Komposition (Verschachtelung)
+## Rekursive Komposition
 
-`docmd` unterstützt **unbegrenzte Verschachtelungstiefe**. Sie können jeden Container innerhalb eines anderen kombinieren, um komplexe, interaktive Dokumentationsknoten rein in Markdown zu erstellen.
+`docmd` unterstützt **unendliche Verschachtelungstiefe**. Sie können jeden Container in einem anderen kombinieren, um komplexe, interaktive Dokumentationsknoten rein in Markdown zu erstellen.
 
 ```markdown
 ::: card "Architektur-Übersicht"
     ::: callout info
         Dieses Modul nutzt eine asynchrone I/O-Pipeline.
     :::
-    ::: button "Tauchgang in die Core-Engine" /advanced/developer-guide
+    ::: button "Tiefes Eintauchen in den Core" /advanced/developer-guide
 :::
 ```
-
-[Meistern Sie den Leitfaden zur Verschachtelung →](./nested-containers)

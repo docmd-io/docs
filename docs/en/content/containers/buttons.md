@@ -18,7 +18,7 @@ Buttons are high-impact UI elements used for prominent navigation. Unlike block 
 | **Path** | `/path/` | Relative project URL (resolves automatically for SPA navigation). |
 | **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
 | **Color** | `color:VALUE` | Applies a background color (supports CSS names or Hex codes). |
-| **Icon** | `icon:NAME` | Adds a [Lucide](https://lucide.dev/icons) icon before the button label. |
+| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the button label. |
 
 ## Usage Examples
 
@@ -61,14 +61,14 @@ Because buttons are self-closing, adding a terminal `:::` line will terminate th
 **Incorrect Sequence:**
 ```markdown
 ::: card "Setup"
-::: button "Begin" /setup
-:::        <-- Error: This closes the Card prematurely.
+    ::: button "Begin" /setup
+    :::        <-- Error: This closes the Card prematurely.
 :::
 ```
 
 **Correct Sequence:**
 ```markdown
 ::: card "Setup"
-::: button "Begin" /setup
+    ::: button "Begin" /setup
 :::        <-- Correct: This closes the Card.
 ```

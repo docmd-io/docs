@@ -50,13 +50,13 @@ Keep your logic clean by separating different programming languages or environme
 
 ::: tabs
 
-== tab "TypeScript"
+== tab "TypeScript" icon:hexagon
 ```typescript
 import { build } from '@docmd/core';
 await build('./docmd.config.js');
 ```
 
-== tab "JavaScript"
+== tab "JavaScript" icon:braces
 ```javascript
 const { build } = require('@docmd/core');
 build('./docmd.config.js');

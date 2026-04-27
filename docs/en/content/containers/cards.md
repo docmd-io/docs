@@ -13,7 +13,7 @@ This is the primary content area of the card.
 :::
 ```
 
-Add an optional `icon:` parameter to display a [Lucide](https://lucide.dev/icons) icon in the header:
+Add an optional `icon:` parameter to display a [Lucide](external:https://lucide.dev/icons) icon in the header:
 ```markdown
 ::: card "Setup" icon:rocket
 Get started in seconds.
@@ -67,16 +67,16 @@ You can leverage the native `grids` container to organise your cards into clean,
 
 ```markdown
 ::: grids
-::: grid
-::: card "Primary Node"
-Configuration for the master instance.
-:::
-:::
-::: grid
-::: card "Secondary Node"
-Configuration for redundant slave instances.
-:::
-:::
+    ::: grid
+        ::: card "Primary Node"
+            Configuration for the master instance.
+        :::
+    :::
+    ::: grid
+        ::: card "Secondary Node"
+            Configuration for redundant slave instances.
+        :::
+    :::
 :::
 ```
 

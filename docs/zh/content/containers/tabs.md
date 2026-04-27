@@ -1,30 +1,30 @@
 ---
-title: "标签页"
-description: "将密集、可选或多语言内容整理为可切换的交互式选项卡面板。"
+title: "选项卡 (Tabs)"
+description: "将密集、替代或多语言信息组织到可切换的交互式面板中。"
 ---
 
-Tabs are the optimal UI pattern for presenting mutually exclusive or related data sets (e.g., "Install via NPM vs. Yarn" or "macOS vs. Windows" instructions) within a compact, interactive format.
+选项卡是在紧凑、交互式的格式中展示互斥或相关数据集（例如，“通过 NPM 与 Yarn 安装”或“macOS 与 Windows”指令）的最佳 UI 模式。
 
 ## 语法参考
 
-`tabs` 容器使用专用子分隔符 `== tab "标签"`。每个标签定义一个用户可切换的独立面板。
+`tabs` 容器使用专门的子分隔符 `== tab "标签"`。你可以选择使用 `icon:name` 语法添加图标。
 
 ```markdown
 ::: tabs
 
-== tab "标签 1"
-第一个标签的内容。
+== tab "标签 1" icon:rocket
+第一个选项卡的内容。
 
-== tab "标签 2"
-第二个标签的内容。
+== tab "标签 2" icon:settings
+第二个选项卡的内容。
 
 :::
 ```
 
-## 示例画廊
+## 实现展示
 
 ### 1. 包管理
-标签页最常用于在单个视图中显示不同包管理器的安装说明。
+选项卡最常用于在单个视图中显示不同包管理器的安装说明。
 
 ::: tabs
 
@@ -46,17 +46,17 @@ yarn add @docmd/core
 :::
 
 ### 2. 多语言代码片段
-通过分离不同编程语言或环境保持逻辑清晰。
+通过分离不同的编程语言或环境来保持逻辑整洁。
 
 ::: tabs
 
-== tab "TypeScript"
+== tab "TypeScript" icon:hexagon
 ```typescript
 import { build } from '@docmd/core';
 await build('./docmd.config.js');
 ```
 
-== tab "JavaScript"
+== tab "JavaScript" icon:braces
 ```javascript
 const { build } = require('@docmd/core');
 build('./docmd.config.js');
@@ -64,22 +64,22 @@ build('./docmd.config.js');
 
 :::
 
-## 核心功能
+## 核心能力
 
-### 同构懒渲染
-`docmd` 实现了**条件资源懒加载**。如果标签页包含计算密集型元素（如 **Mermaid.js** 图表或高分辨率图片），这些资源仅在用户激活特定标签时才初始化和渲染，确保快速的初始页面加载。
+### 同构延迟渲染
+`docmd` 实现了 **条件资源延迟 (Conditional Resource Laziness)**。如果选项卡包含计算密集型元素（例如 **Mermaid.js** 图表或高分辨率图像），则仅在用户激活该特定选项卡时才初始化并渲染这些资源。这确保了初始页面的快速加载。
 
 ### 状态持久化
-默认 SPA 路由器会跨相似文档页面追踪活动标签的索引。如果用户在某页选择了"pnpm"并导航到具有相同标签结构的另一页，"pnpm"标签会自动保持激活状态。
+默认的 SPA 路由器会在类似的文档页面之间跟踪活动选项卡的索引。如果用户在某一页选择了“pnpm”，并导航到另一页具有匹配选项卡结构的页面，则“pnpm”选项卡将自动保持活动状态。
 
 ## 技术约束
 
 | 约束 | 说明 |
 | :--- | :--- |
-| **嵌套深度** | 为保持布局完整性，标签页不能嵌套在其他标签组件内。 |
-| **交互冲突** | 高冲突语法：在标签页内嵌套步骤时，请使用标准有序列表（`1. 步骤一`）而非 `::: steps` 容器。 |
-| **响应式限制** | 建议每个块的标签数量限制在 6 个以内，以确保移动设备兼容性。 |
+| **嵌套深度** | 为了保持布局完整性，选项卡不能嵌套在其他选项卡组件内。 |
+| **交互冲突**| 高冲突语法：要在选项卡内嵌套“步骤”，请使用标准有序列表 (`1. 第一步`) 而不是 `::: steps` 容器。 |
+| **响应限制** | 建议将每个区块的选项卡数量限制在 6 个以内，以确保移动设备兼容性。 |
 
 ::: callout tip "AI 上下文映射"
-在代码片段中使用标签页时，请始终在标签标签中直接包含目标语言（如 `== tab "TypeScript"`）。这允许 LLM 从 `llms-full.txt` 上下文流中即时识别并提取技术相关部分。
+在将选项卡用于代码片段时，始终直接在选项卡标签中包含目标语言（例如 `== tab "TypeScript"`）。这允许 LLM 从 `llms-full.txt` 上下文流中立即识别并提取技术相关的部分。
 :::

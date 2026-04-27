@@ -13,7 +13,7 @@ The technical content or warning goes here.
 :::
 ```
 
-Add an optional `icon:` parameter to override the default type icon with any [Lucide](https://lucide.dev/icons) icon:
+Add an optional `icon:` parameter to override the default type icon with any [Lucide](external:https://lucide.dev/icons) icon:
 ```markdown
 ::: callout info "Custom Icon" icon:sparkles
 This callout uses a custom icon instead of the default info icon.
@@ -56,7 +56,7 @@ As of `v0.7.0`, the internal WebSocket RPC system will be officially deprecated.
 Callouts support the full spectrum of Markdown, allowing you to embed buttons and code blocks within the alert.
 
 ````markdown
-::: callout tip "Optimised Local Testing"
+::: callout tip "Optimised Local Testing" icon:command
 Use the preserve flag to maintain build files during dev sessions:
 
 ```bash
@@ -67,7 +67,7 @@ docmd dev --preserve
 :::
 ````
 
-::: callout tip "Optimised Local Testing"
+::: callout info "Optimised Local Testing" icon:command
 Use the preserve flag to maintain build files during dev sessions:
 
 ```bash

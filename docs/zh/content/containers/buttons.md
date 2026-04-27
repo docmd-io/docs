@@ -1,9 +1,9 @@
 ---
-title: "按钮"
-description: "使用单行语法注入面向内部路由或外部资源的行动号召按钮。"
+title: "按钮 (Buttons)"
+description: "通过单行语法注入用于内部路由或外部资源的呼吁操作按钮。"
 ---
 
-按鈕是用于突出导航的高影响力 UI 元素。与块级容器不同，`button` 为**自闭合**类型——在单行上定义，不需要闭合的 `:::` 标签。
+按钮是用于突出导航的高影响力 UI 元素。与块容器不同，`button` 是 **自闭合的** —— 它定义在单行上，不需要结束标签 `:::`。
 
 ## 语法
 
@@ -13,30 +13,31 @@ description: "使用单行语法注入面向内部路由或外部资源的行动
 
 ### 选项参考
 
-| 属性 | 格式 | 说明 |
+| 属性 | 格式 | 描述 |
 | :--- | :--- | :--- |
-| **路径** | `/path/` | 相对项目 URL（自动解析以支持 SPA 导航）。 |
-| **外部链接** | `external:URL`| 在新浏览器标签中打开目标 URL（`target="_blank"`）。 |
-| **颜色** | `color:VALUE` | 应用背景色（支持 CSS 颜色名称或十六进制代码）。 |
+| **路径 (Path)** | `/path/` | 相对项目 URL（会自动解析以用于 SPA 导航）。 |
+| **外部 (External)** | `external:URL`| 在新的浏览器标签页中打开目标 URL (`target="_blank"`)。 |
+| **颜色 (Color)** | `color:VALUE` | 应用背景颜色（支持 CSS 名称或十六进制代码）。 |
+| **图标 (Icon)** | `icon:NAME` | 在按钮标签前添加 [Lucide](external:https://lucide.dev/icons) 图标。 |
 
 ## 使用示例
 
 ### 1. 内部导航
-使用相对路径确保在 `docmd` SPA 内的无缝零刷新跳转。
+使用相对路径以确保在 `docmd` SPA 中实现无缝、零刷新的切换。
 ```markdown
 ::: button "安装 docmd" /getting-started/installation
 ```
 ::: button "安装 docmd" /getting-started/installation
 
 ### 2. 外部资源链接
-在 URL 前加 `external:` 以确保安全的外部链接。
+在 URL 前面加上 `external:` 以确保安全的外部链接。
 ```markdown
 ::: button "查看 GitHub 仓库" external:https://github.com/docmd-io/docmd
 ```
 ::: button "查看 GitHub 仓库" external:https://github.com/docmd-io/docmd
 
 ### 3. 语义与品牌样式
-使用颜色覆盖使按钮与你的品牌标识或语义优先级匹配。
+使用颜色覆盖来使按钮符合你的品牌标识或语义优先级。
 ```markdown
 ::: button "危险操作" /delete color:crimson
 ::: button "成功确认" /success color:#228B22
@@ -44,21 +45,30 @@ description: "使用单行语法注入面向内部路由或外部资源的行动
 ::: button "危险操作" ./#delete color:crimson
 ::: button "成功确认" ./#success color:#228B22
 
-## 注意：自闭合逻辑
+### 4. 带有图标的按钮
+添加 Lucide 图标以增强视觉清晰度。
+```markdown
+::: button "开始使用" /getting-started/installation icon:arrow-right
+::: button "查看源码" external:https://github.com/docmd-io/docmd icon:github
+```
+::: button "开始使用" /getting-started/installation icon:arrow-right
+::: button "查看源码" external:https://github.com/docmd-io/docmd icon:github
 
-由于按钮是自闭合的，添加终止 `:::` 行会关闭按钮所在的**父容器**（如卡片或标签页），可能破坏布局。
+## 关键提示：自闭合逻辑
 
-**错误写法：**
+由于按钮是自闭合的，添加结尾的 `:::` 行将终止按钮所在的 **父容器**（例如 Card 或 Tab），这可能会破坏你的布局。
+
+**不正确的序列：**
 ```markdown
 ::: card "设置"
-::: button "开始" /setup
-:::        <-- 错误：此处会提前关闭卡片。
+    ::: button "开始" /setup
+    :::        <-- 错误：这将提前关闭 Card。
 :::
 ```
 
-**正确写法：**
+**正确的序列：**
 ```markdown
 ::: card "设置"
-::: button "开始" /setup
-:::        <-- 正确：此处关闭卡片。
+    ::: button "开始" /setup
+:::        <-- 正确：这将关闭 Card。
 ```

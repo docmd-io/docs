@@ -3,21 +3,19 @@ title: "Tags"
 description: "Use the tag container to label versions, statuses, or highlight short text snippets seamlessly inline."
 ---
 
-The `tag` container is a self-closing component used to insert small, pill-shaped badges directly into your text. Unlike block containers, tags do not inherit massive sizing from parent elements like headings—they retain their tight, clean proportions no matter where they are placed.
+The `tag` container is a self-closing component used to insert small, pill-shaped badges directly into your text. Unlike block containers, tags do not inherit massive sizing from parent elements like headings, they retain their tight, clean proportions no matter where they are placed.
 
 ## Basic Usage
 
 To create a basic tag, simply provide the text you want to display:
 
 ::: tabs
-
-== tab "Preview"
-This feature was added in ::: tag "v0.7.4" and works perfectly.
-== tab "Markdown Source"
-````markdown
-This feature was added in ::: tag "v0.7.4" and works perfectly.
-````
-
+    == tab "Preview"
+        This feature was added in ::: tag "v0.7.4" color:blue and works perfectly.
+    == tab "Markdown Source"
+        ```markdown
+        This feature was added in ::: tag "v0.7.4" and works perfectly.
+        ```
 :::
 
 ## Customising Colors
@@ -78,7 +76,7 @@ Because tags are true inline elements, they look gorgeous when used to label maj
 == tab "Preview"
 # Search Filtering ::: tag "New" color:#8b5cf6
 == tab "Markdown Source"
-````markdown
+````bash
 # Search Filtering ::: tag "New" color:#8b5cf6
 ````
 

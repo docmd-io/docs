@@ -54,14 +54,14 @@ Hash fragments are preserved through the normalisation process. The link above r
 Use the `external:` prefix on any link to force it to open in a new tab. This works universally — in standard Markdown links, button containers, tags, and anywhere else you can write a URL.
 
 ```markdown
-<!-- Standard Markdown (auto-external)-->
-[Open Externally](https://github.com/docmd-io/docmd)
-
-<!-- Special prefix for internal links to open in a new tab -->
+<!-- Force any link to open in a new tab -->
 [Open in New Tab](external:./configuration/overview.md)
+
+<!-- External link to GitHub -->
+[GitHub](external:https://github.com/docmd-io/docmd)
 ```
 
-Links starting with `https://` or `http://` are automatically detected as external and open in a new tab without needing the `external:` prefix.
+By default, all links (including HTTP/HTTPS) open in the same window. Use the `external:` prefix only when you want a new tab.
 
 The `external:` prefix is **stripped** from the rendered URL — it is purely a build-time signal.
 
@@ -139,9 +139,9 @@ When linking to a directory's index page, use the folder path rather than explic
 
 ## Protocols & External Resources
 
-The engine respects standard browser protocols for external resources. These links are never modified but are automatically detected as external (opening in a new tab).
+The engine respects standard browser protocols for external resources. These links are never modified.
 
-*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)`
+*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)` — opens in same tab (use `external:` prefix for new tab)
 *   **Mail Protocol**: `[Support Channel](mailto:help@docmd.io)` — not opened in a new tab
 *   **Asset Protocol**: `[Download CLI Binary](/assets/bin/docmd-mac.zip)` — not normalised
 

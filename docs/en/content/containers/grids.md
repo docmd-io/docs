@@ -11,14 +11,14 @@ Columns automatically adjust their widths to fill available space and logically 
 
 ```markdown
 ::: grids
-::: grid
-#### Component A
-Content for the left side.
-:::
-::: grid
-#### Component B
-Content for the right side.
-:::
+    ::: grid
+        #### Component A
+        Content for the left side.
+    :::
+    ::: grid
+        #### Component B
+        Content for the right side.
+    :::
 :::
 ```
 
@@ -29,16 +29,16 @@ Use grids to highlight key capabilities next to each other, like combining struc
 
 ```markdown
 ::: grids
-::: grid
-::: card "Speed :rocket:"
-Built on a non-blocking I/O pipeline for maximum performance.
-:::
-:::
-::: grid
-::: card "Scalability :zap:"
-Designed for massive monorepos and extensive project structures.
-:::
-:::
+    ::: grid
+        ::: card "Speed :rocket:"
+            Built on a non-blocking I/O pipeline for maximum performance.
+        :::
+    :::
+    ::: grid
+        ::: card "Scalability :zap:"
+            Designed for massive monorepos and extensive project structures.
+        :::
+    :::
 :::
 ```
 

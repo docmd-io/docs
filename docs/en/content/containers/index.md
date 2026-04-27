@@ -26,6 +26,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column structural groups. |
 | **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
 | **[Steps](steps.md)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
+| **[Tags](tags.md)** | `tag` | Self-closing, colored labels for version, statuses, or highlight. |
 | **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
 | **[Collapsibles](collapsible.md)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
 | **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |

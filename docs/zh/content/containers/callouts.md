@@ -1,41 +1,48 @@
 ---
-title: "提示框"
-description: "使用语义化视觉块突出显示关键警告、专业提示和背景说明。"
+title: "标注 (Callouts)"
+description: "使用语义化的视觉区块突出显示关键警告、专业技巧和背景信息。"
 ---
 
-Callouts are used to isolate information that requires the reader's immediate attention. `docmd` provides five semantic types, each featuring distinct visual styling and themed iconography.
+标注用于隔离那些需要读者立即注意的信息。`docmd` 提供了五种语义类型，每种都具有独特的视觉样式和主题图标。
 
 ## 语法参考
 
 ```markdown
-::: callout type "可选标题"
-技术内容或警告信息。
+::: callout 类型 "可选标题"
+技术内容或警告放在这里。
+:::
+```
+
+添加可选的 `icon:` 参数，可以用任何 [Lucide](external:https://lucide.dev/icons) 图标覆盖默认的类型图标：
+```markdown
+::: callout info "自定义图标" icon:sparkles
+此标注使用自定义图标而不是默认的 info 图标。
 :::
 ```
 
 ### 支持的语义类型
 
-| 类型 | 用途 | 视觉信号 |
+| 类型 | 意图 | 视觉信号 |
 | :--- | :--- | :--- |
-| `info` | **通用说明** | 上下文背景或有用的非关键信息。 |
-| `tip` | **优化提示** | 性能快捷方式或专业建议。 |
-| `warning`| **注意事项** | 潜在问题或需要关注的已弃用功能。 |
-| `danger` | **关键警告** | 数据丢失风险、破坏性变更或系统故障。 |
-| `success`| **成功确认** | 配置或构建成功的确认信息。 |
+| `info` | **通用数据** | 上下文背景或有用的非关键信息。 |
+| `tip` | **优化** | 性能捷径或“专业技巧”。 |
+| `warning`| **警告** | 潜在问题或需要关注的弃用功能。 |
+| `danger` | **危险** | 数据丢失风险、破坏性变更或系统故障。 |
+| `success`| **成功** | 成功配置或构建的确认。 |
 
-## 示例画廊
+## 实现展示
 
-### 1. 简约信息提示
+### 1. 极简信息说明
 ```markdown
 ::: callout info
-旧版配置格式仍受支持，但不再推荐使用。
+旧版配置架构仍然受支持，但不再推荐使用。
 :::
 ```
 ::: callout info
-旧版配置格式仍受支持，但不再推荐使用。
+旧版配置架构仍然受支持，但不再推荐使用。
 :::
 
-### 2. 带自定义标题的高优先级警告
+### 2. 带有自定义标题的高优先级警报
 ```markdown
 ::: callout warning "破坏性变更目标"
 自 `v0.7.0` 起，内部 WebSocket RPC 系统将正式弃用。
@@ -45,12 +52,12 @@ Callouts are used to isolate information that requires the reader's immediate at
 自 `v0.7.0` 起，内部 WebSocket RPC 系统将正式弃用。
 :::
 
-### 3. 富文本内容组合
-提示框支持完整的 Markdown 语法，允许在警告中嵌入按钮和代码块。
+### 3. 丰富内容组合
+标注支持全方位的 Markdown，允许你在警报中嵌入按钮和代码块。
 
 ````markdown
-::: callout tip "优化本地测试"
-使用 preserve 标志在开发会话期间保留构建文件：
+::: callout tip "优化的本地测试" icon:command
+在开发过程中使用 preserve 标志来保留构建文件：
 
 ```bash
 docmd dev --preserve
@@ -60,8 +67,8 @@ docmd dev --preserve
 :::
 ````
 
-::: callout tip "优化本地测试"
-使用 preserve 标志在开发会话期间保留构建文件：
+::: callout info "优化的本地测试" icon:command
+使用 preserve 标志来保留构建文件：
 
 ```bash
 docmd dev --preserve
@@ -70,6 +77,6 @@ docmd dev --preserve
 ::: button "CLI 标志参考" ./#cli-commands
 :::
 
-::: callout tip "AI 优先逻辑"
-对于 LLMs 而言，提示框充当**高优先级锚点**。通过使用 `::: callout danger` 记录破坏性变更或系统约束，你向 AI 模型发出清晰信号，让其在推理和生成过程中优先处理这些信息。
+::: callout tip "AI 的优先逻辑"
+对于 LLM，标注充当 **高优先级锚点 (High-Priority Anchors)**。通过使用 `::: callout danger` 来记录破坏性变更或系统限制，你可以提供一个清晰的信号，即 AI 模型在推理和生成过程中必须优先处理此信息。
 :::

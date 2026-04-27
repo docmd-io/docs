@@ -11,10 +11,10 @@ By default, the `hero` centers its content, making it perfect for banners and si
 
 ```markdown
 ::: hero
-# Build Faster.
-Markdown to production docs in one command.
+    # Build Faster.
+    Markdown to production docs in one command.
 
-::: button "Get Started" /intro color:blue
+    ::: button "Get Started" /intro color:blue
 :::
 ```
 
@@ -34,13 +34,13 @@ Use the `== side` separator to define what content goes in the primary text area
 
 ```markdown
 ::: hero layout:split glow:true
-# docmd 2.0
-Isomorphic execution. AI-optimised.
+    # docmd 2.0
+    Isomorphic execution. AI-optimised.
 
-::: button "Quickstart" /getting-started/basic-usage color:blue
+    ::: button "Quickstart" /getting-started/basic-usage color:blue
 
-== side
-::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
+    == side
+        ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 :::
 ```
 
@@ -60,22 +60,22 @@ Create an interactive hero slider by using the `== slide` separator between diff
 
 ```markdown
 ::: hero layout:slider
-== slide
-# Isomorphic Core
-The engine renders everywhere.
-== slide
-# AI Optimisation
-Built for the LLM era.
+    == slide
+        # Isomorphic Core
+        The engine renders everywhere.
+    == slide
+        # AI Optimisation
+        Built for the LLM era.
 :::
 ```
 
 ::: hero layout:slider
-== slide
-# Isomorphic Core
-The engine renders everywhere.
-== slide
-# AI Optimisation
-Built for the LLM era.
+    == slide
+        # Isomorphic Core
+        The engine renders everywhere.
+    == slide
+        # AI Optimisation
+        Built for the LLM era.
 :::
 
 ## Responsive Behaviour

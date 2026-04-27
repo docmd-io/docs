@@ -1,9 +1,9 @@
 ---
-title: "Callouts (Hinweise)"
-description: "Heben Sie kritische Warnungen, Profi-Tipps und Hintergrundkontext durch semantische visuelle Blöcke hervor."
+title: "Callouts"
+description: "Heben Sie kritische Warnungen, Pro-Tipps und Hintergrundkonformationen durch semantische visuelle Blöcke hervor."
 ---
 
-Callouts werden verwendet, um Informationen zu isolieren, die die sofortige Aufmerksamkeit des Lesers erfordern. `docmd` bietet fünf semantische Typen, die sich durch unterschiedliches visuelles Design und thematische Icons auszeichnen.
+Callouts werden verwendet, um Informationen hervorzuheben, die die sofortige Aufmerksamkeit des Lesers erfordern. `docmd` bietet fünf semantische Typen an, die jeweils ein unterschiedliches visuelles Design und thematische Icons besitzen.
 
 ## Syntax-Referenz
 
@@ -13,10 +13,10 @@ Der technische Inhalt oder die Warnung wird hier platziert.
 :::
 ```
 
-Fügen Sie einen optionalen `icon:`-Parameter hinzu, um das Standard-Icon des Typs durch ein beliebiges [Lucide](https://lucide.dev/icons) Icon zu ersetzen:
+Fügen Sie einen optionalen `icon:`-Parameter hinzu, um das Standard-Icon des Typs durch ein beliebiges [Lucide](external:https://lucide.dev/icons)-Icon zu ersetzen:
 ```markdown
 ::: callout info "Benutzerdefiniertes Icon" icon:sparkles
-Dieser Hinweis verwendet ein benutzerdefiniertes Icon anstelle des Standard-Info-Icons.
+Dieser Callout verwendet ein benutzerdefiniertes Icon anstelle des Standard-Info-Icons.
 :::
 ```
 
@@ -24,40 +24,40 @@ Dieser Hinweis verwendet ein benutzerdefiniertes Icon anstelle des Standard-Info
 
 | Typ | Absicht | Visuelles Signal |
 | :--- | :--- | :--- |
-| `info` | **Allgemeine Daten** | Kontextbezogener Hintergrund oder hilfreiche, nicht kritische Informationen. |
-| `tip` | **Optimierung** | Performance-Shortcuts oder „Profi-Tipps“. |
-| `warning`| **Warnung** | Potenzielle Probleme oder veraltete Funktionen, die beobachtet werden sollten. |
-| `danger` | **Kritisch** | Risiko von Datenverlust, Breaking Changes oder Systemausfällen. |
+| `info` | **Allgemeine Daten** | Kontextueller Hintergrund oder hilfreiche, nicht kritische Infos. |
+| `tip` | **Optimierung** | Performance-Shortcuts oder "Pro-Tipps". |
+| `warning`| **Vorsicht** | Potenzielle Probleme oder veraltete Funktionen, die beachtet werden sollten. |
+| `danger` | **Kritisch** | Risiko von Datenverlust, Breaking Changes oder Systemausfall. |
 | `success`| **Verifizierung** | Bestätigung einer erfolgreichen Konfiguration oder eines erfolgreichen Builds. |
 
-## Implementierungs-Galerie
+## Implementierungsgalerie
 
-### 1. Minimalistische Info-Notiz
+### 1. Minimalistischer Informationshinweis
 ```markdown
 ::: callout info
-Veraltete Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
+Legacy-Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
 :::
 ```
 ::: callout info
-Veraltete Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
+Legacy-Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
 :::
 
-### 2. Warnhinweis mit hoher Priorität und Titel
+### 2. Warnung mit hoher Priorität und benutzerdefiniertem Titel
 ```markdown
-::: callout warning "Ziel für Breaking Change"
+::: callout warning "Ziel für Breaking Changes"
 Ab `v0.7.0` wird das interne WebSocket-RPC-System offiziell als veraltet eingestuft.
 :::
 ```
-::: callout warning "Ziel für Breaking Change"
+::: callout warning "Ziel für Breaking Changes"
 Ab `v0.7.0` wird das interne WebSocket-RPC-System offiziell als veraltet eingestuft.
 :::
 
-### 3. Komposition mit reichhaltigem Inhalt
-Callouts unterstützen das gesamte Spektrum von Markdown, sodass Sie Schaltflächen und Code-Blöcke direkt in den Hinweis einbetten können.
+### 3. Kombination mit reichhaltigem Inhalt
+Callouts unterstützen das volle Spektrum von Markdown, sodass Sie Buttons und Code-Blöcke innerhalb der Warnung einbetten können.
 
 ````markdown
-::: callout tip "Optimiertes lokales Testen"
-Verwenden Sie das Preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
+::: callout tip "Optimiertes lokales Testen" icon:command
+Verwenden Sie das preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
 
 ```bash
 docmd dev --preserve
@@ -67,8 +67,8 @@ docmd dev --preserve
 :::
 ````
 
-::: callout tip "Optimiertes lokales Testen"
-Verwenden Sie das Preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
+::: callout info "Optimiertes lokales Testen" icon:command
+Verwenden Sie das preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
 
 ```bash
 docmd dev --preserve
@@ -78,5 +78,5 @@ docmd dev --preserve
 :::
 
 ::: callout tip "Priorisierte Logik für KI"
-Für LLMs fungieren Callouts als **Anker mit hoher Priorität**. Durch die Verwendung von `::: callout danger` zur Dokumentation von Breaking Changes oder Systemeinschränkungen geben Sie ein klares Signal, dass das KI-Modell diese Information während seines Argumentations- und Generierungsprozesses gegenüber dem umgebenden Text priorisieren muss.
+Für LLMs fungieren Callouts als **Anker mit hoher Priorität**. Durch die Verwendung von `::: callout danger` zur Dokumentation von Breaking Changes oder Systembeschränkungen geben Sie ein klares Signal, dass das KI-Modell diese Informationen während seines Denk- und Generierungsprozesses gegenüber dem umgebenden Text priorisieren muss.
 :::
