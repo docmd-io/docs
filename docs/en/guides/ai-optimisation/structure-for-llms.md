@@ -13,7 +13,7 @@ If your documentation is not optimised for LLMs, developers using tools like Git
 
 ## Approach
 
-Transition from a "visual-first" mindset to a **"semantic-first"** mindset. Use standard Markdown features—such as strict header hierarchies, explicit code block language tags, and descriptive alt text—to provide a clear, machine-readable roadmap of your content. `docmd` processes this structure into optimised outputs via the [LLMs Plugin](../../plugins/usage.md).
+Transition from a "visual-first" mindset to a **"semantic-first"** mindset. Use standard Markdown features—such as strict header hierarchies, explicit code block language tags, and descriptive alt text—to provide a clear, machine-readable roadmap of your content. `docmd` processes this structure into optimised outputs via the [LLMs Plugin](../../plugins/llms.md).
 
 ## Implementation
 

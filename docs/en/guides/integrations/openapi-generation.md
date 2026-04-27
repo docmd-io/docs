@@ -48,20 +48,21 @@ Setting `layout: "full"` removes the right-hand Table of Contents sidebar, provi
 
 You can post-process the generated Markdown to inject `docmd` features like [Tabs](../../content/containers/tabs.md) for multi-language code samples or [Callouts](../../content/containers/callouts.md) for authentication warnings.
 
-```markdown
+````markdown
 ::: tabs
-::: tab "cURL"
-```bash
-curl -X GET "https://api.example.com/v1/users"
-```
+
+  == tab "cURL"
+    ```bash
+    curl -X GET "https://api.example.com/v1/users"
+    ```
+
+  == tab "Node.js"
+    ```javascript
+    const users = await client.getUsers();
+    ```
+
 :::
-::: tab "Node.js"
-```javascript
-const users = await client.getUsers();
-```
-:::
-:::
-```
+````
 
 ## Trade-offs
 

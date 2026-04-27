@@ -21,20 +21,20 @@ Implement **Progressive Disclosure**. This technique involves presenting only th
 
 Instead of listing instructions for multiple package managers, operating systems, or cloud providers sequentially, use the [Tabs Container](../../content/containers/tabs.md). This allows the user to select their specific environment, instantly hiding irrelevant commands and reducing visual noise.
 
-```markdown
+````markdown
 ::: tabs
-::: tab "npm"
-```bash
-npm install docmd
-```
+
+    == tab "npm"
+        ```bash
+        npm install docmd
+        ```
+
+    == tab "pnpm"
+        ```bash
+        pnpm add docmd
+        ```
 :::
-::: tab "pnpm"
-```bash
-pnpm add docmd
-```
-:::
-:::
-```
+````
 
 ### 2. Managing Edge Cases with Collapsibles
 

@@ -13,7 +13,7 @@ AI models rely on the immediate surrounding text to determine the meaning and re
 
 ## Approach
 
-Use **Inline Context Unrolling** to provide the minimum viable context alongside every major link. Additionally, leverage `docmd`'s specific features, such as the [LLMs Plugin](../../plugins/usage), to provide a unified, machine-readable view of your entire documentation set.
+Use **Inline Context Unrolling** to provide the minimum viable context alongside every major link. Additionally, leverage `docmd`'s specific features, such as the [LLMs Plugin](../../plugins/llms.md), to provide a unified, machine-readable view of your entire documentation set.
 
 ## Implementation
 

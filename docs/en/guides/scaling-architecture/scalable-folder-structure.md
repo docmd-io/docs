@@ -13,7 +13,7 @@ A disorganized folder structure directly results in a confusing user experience,
 
 ## Approach
 
-We recommend adopting an information architecture framework like [Diátaxis](https://diataxis.fr/), which separates content into four distinct categories: Tutorials, How-To Guides, Reference, and Explanation. Mapping these categories strictly to your physical file system provides a clear roadmap for both readers and authors.
+We recommend adopting an information architecture framework like [Diátaxis](external:https://diataxis.fr/), which separates content into four distinct categories: Tutorials, How-To Guides, Reference, and Explanation. Mapping these categories strictly to your physical file system provides a clear roadmap for both readers and authors.
 
 ## Implementation
 

@@ -31,7 +31,7 @@ Use [Callouts](../../content/containers/callouts.md) consistently to categorise 
 
 ```markdown
 ::: callout warning "Production Safety"
-Never execute this command on a live database without verifying your backups first.
+    Never execute this command on a live database without verifying your backups first.
 :::
 ```
 
@@ -41,9 +41,9 @@ For tutorials and step-by-step guides, avoid narrative descriptions of actions. 
 
 ```markdown
 ::: steps
-1. **Initialise**: Run `npx @docmd/core init` in your project root.
-2. **Configure**: Update your `docmd.config.js` with your site title and navigation.
-3. **Build**: Run `npx @docmd/core build` to generate your production-ready static files.
+    1. **Initialise**: Run `npx @docmd/core init` in your project root.
+    2. **Configure**: Update your `docmd.config.js` with your site title and navigation.
+    3. **Build**: Run `npx @docmd/core build` to generate your production-ready static files.
 :::
 ```
 
