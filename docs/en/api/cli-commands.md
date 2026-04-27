@@ -1,108 +1,148 @@
 ---
 title: "CLI Commands"
-description: "The complete command-line interface reference for docmd."
+description: "Command-line reference for docmd — all available commands and options."
 ---
 
-The `docmd` CLI provides a set of high-performance commands to manage your documentation lifecycle, from initial scaffolding to production deployment.
+## Commands Overview
+
+| Command | Description |
+|:--------|:------------|
+| [`docmd init`](#docmd-init) | Scaffold a new documentation project |
+| [`docmd dev`](#docmd-dev) | Start the development server with hot reload |
+| [`docmd build`](#docmd-build) | Generate a production static site |
+| [`docmd live`](#docmd-live) | Launch the browser-based Live Editor |
+| [`docmd stop`](#docmd-stop) | Kill running dev servers |
+| [`docmd deploy`](#docmd-deploy) | Generate deployment configs (Docker, Nginx, Caddy) |
+| [`docmd migrate`](#docmd-migrate) | Upgrade legacy configs to V2 schema |
+| [`docmd add <plugin>`](#docmd-add-plugin) | Install and configure a plugin |
+| [`docmd remove <plugin>`](#docmd-remove-plugin) | Remove a plugin and its config |
 
 ## Global Options
 
-These options apply to theoretically all `docmd` commands.
-
-- `-v, --version`: Output the current version of `@docmd/core`.
-- `-V, --verbose`: Show detailed installer and engine logs. Useful for debugging plugin installations.
-- `-h, --help`: Display the interactive help menu.
-- `--cwd <path>`: (Internal) Override the working directory. Useful for monorepo setups.
+| Option | Alias | Description |
+|:-------|:------|:------------|
+| `--config <path>` | `-c` | Path to config file (default: `docmd.config.js`) |
+| `--verbose` | `-V` | Show detailed build logs |
+| `--version` | `-v` | Output the installed version |
+| `--help` | `-h` | Display help menu |
+| `--cwd <path>` | — | Override working directory (for monorepos) |
 
 ## `docmd init`
 
-Scaffolds a new documentation project in the current directory.
+Scaffold a new documentation project in the current directory.
 
 ```bash
 docmd init
 ```
 
-### Actions
-- Creates a `docs/` directory with a boilerplate `index.md`.
-- Generates a `docmd.config.js` file with recommended defaults.
-- Updates your `package.json` with recommended build scripts.
+Creates:
+- `docs/index.md` — boilerplate home page
+- `docmd.config.js` — recommended defaults
+- Updated `package.json` with build scripts
 
 ## `docmd dev`
 
-Starts a high-speed development server with **Instant Hot Reloading**.
+Start a development server with instant hot reload.
 
 ```bash
 docmd dev [options]
 ```
 
-### Options
-- `-p, --port <number>`: Specify a custom port (Default: `3000`).
-- `-c, --config <path>`: Use a non-standard configuration file path.
+| Option | Alias | Description |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | Server port (default: `3000`) |
+| `--config <path>` | `-c` | Path to config file |
 
 ## `docmd build`
 
-Generates a production-ready static website in the `site/` folder.
+Generate a production-ready static site in `site/`.
 
 ```bash
 docmd build [options]
 ```
 
-### Options
-- `--offline`: **File Protocol Friendly**. Rewrites links to end in `.html`, allowing for direct browsing from the local filesystem (e.g., `file://`).
-- `-c, --config <path>`: Path to the configuration file (Default: `docmd.config.js`).
+| Option | Alias | Description |
+|:-------|:------|:------------|
+| `--offline` | — | Rewrite links to `.html` for `file://` browsing |
+| `--config <path>` | `-c` | Path to config file |
 
 ## `docmd live`
 
-Launches the browser-based **Live Editor** environment.
+Launch the browser-based Live Editor.
 
 ```bash
 docmd live [options]
 ```
 
-### Options
-- `--build-only`: Generates the static editor bundle in `dist/` without starting a server.
+| Option | Description |
+|:-------|:------------|
+| `--build-only` | Generate the editor bundle without starting the server |
 
 ## `docmd stop`
 
-Gracefully terminates all background documentation servers.
+Kill running docmd dev servers.
 
 ```bash
 docmd stop [options]
 ```
 
-### Options
-- `-p, --port <number>`: Stop a specific instance running on a given port.
+| Option | Alias | Description |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | Stop only the server on this port |
+| `--force` | `-f` | Also kill `serve` processes on ports 3000, 3001, 8080, 8081 |
 
-## `docmd add <plugin>`
+## `docmd deploy`
 
-Installs an official or community plugin and auto-configures your project.
-
-```bash
-docmd add analytics
-```
-
-### Actions
-- Uses your preferred package manager (`npm`, `pnpm`, `yarn`, or `bun`).
-- Injects the plugin and its recommended default settings into `docmd.config.js`.
-
-## `docmd remove <plugin>`
-
-Safely uninstalls a plugin and cleans up your configuration.
+Generate deployment configuration files.
 
 ```bash
-docmd remove analytics
+docmd deploy [options]
 ```
+
+| Option | Description |
+|:-------|:------------|
+| `--docker` | Generate a `Dockerfile` |
+| `--nginx` | Generate `nginx.conf` |
+| `--caddy` | Generate `Caddyfile` |
+| `--force` | Overwrite existing deployment files |
 
 ## `docmd migrate`
 
-Upgrades legacy `docmd` configurations to the modern V2 schema.
+Upgrade legacy docmd V1 configs to the V2 schema.
 
 ```bash
 docmd migrate
 ```
 
-It re-maps deprecated keys (e.g., `siteTitle` to `title`) and restructures the configuration object to support the new layout and navigation frameworks.
+Automatically re-maps deprecated keys (e.g., `siteTitle` → `title`) and restructures the config object.
 
-::: callout tip "Agent-Compatible Logging"
-`docmd` implements structured terminal logging. If you are using an AI agent for development, this allows for precise error detection and automated project maintenance.
+## `docmd add <plugin>`
+
+Install and configure an official or community plugin.
+
+```bash
+docmd add <plugin-name>
+```
+
+| Example | Description |
+|:--------|:------------|
+| `docmd add analytics` | Install `@docmd/plugin-analytics` |
+| `docmd add search` | Install `@docmd/plugin-search` |
+
+The CLI detects your package manager (npm, pnpm, yarn, or bun) and injects recommended defaults into `docmd.config.js`.
+
+## `docmd remove <plugin>`
+
+Safely uninstall a plugin and clean up its config.
+
+```bash
+docmd remove <plugin-name>
+```
+
+Removes:
+- The npm package
+- Plugin configuration from `docmd.config.js`
+
+::: callout tip "Agent-Compatible Logging :robot:"
+`docmd` uses structured terminal logging. AI agents can parse output precisely for error detection and automated maintenance.
 :::

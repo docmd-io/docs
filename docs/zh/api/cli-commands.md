@@ -1,108 +1,148 @@
 ---
 title: "CLI 命令"
-description: "docmd 命令行界面完整参考。"
+description: "docmd 的命令行参考 —— 所有可用的命令和选项。"
 ---
 
-`docmd` CLI 提供了一套高性能命令，用于管理文档的完整生命周期——从初始脚手架到生产部署。
+## 命令概览
+
+| 命令 | 描述 |
+|:--------|:------------|
+| [`docmd init`](#docmd-init) | 初始化一个新的文档项目 |
+| [`docmd dev`](#docmd-dev) | 启动带有热重载的开发服务器 |
+| [`docmd build`](#docmd-build) | 生成生产环境静态网站 |
+| [`docmd live`](#docmd-live) | 启动基于浏览器的实时编辑器 |
+| [`docmd stop`](#docmd-stop) | 停止正在运行的开发服务器 |
+| [`docmd deploy`](#docmd-deploy) | 生成部署配置（Docker、Nginx、Caddy） |
+| [`docmd migrate`](#docmd-migrate) | 将旧版配置升级到 V2 架构 |
+| [`docmd add <plugin>`](#docmd-add-plugin) | 安装并配置插件 |
+| [`docmd remove <plugin>`](#docmd-remove-plugin) | 移除插件及其配置 |
 
 ## 全局选项
 
-这些选项理论上适用于所有 `docmd` 命令。
-
-- `-v, --version`：输出 `@docmd/core` 的当前版本。
-- `-V, --verbose`：显示详细的安装程序和引擎日志。对调试插件安装非常有用。
-- `-h, --help`：显示交互式帮助菜单。
-- `--cwd <路径>`：（内部使用）覆盖当前工作目录。对 Monorepo 设置非常有用。
+| 选项 | 别名 | 描述 |
+|:-------|:------|:------------|
+| `--config <path>` | `-c` | 配置文件路径（默认：`docmd.config.js`） |
+| `--verbose` | `-V` | 显示详细的构建日志 |
+| `--version` | `-v` | 输出安装的版本号 |
+| `--help` | `-h` | 显示帮助菜单 |
+| `--cwd <path>` | — | 覆盖当前工作目录（适用于 monorepos） |
 
 ## `docmd init`
 
-在当前目录中生成一个新的文档项目脚手架。
+在当前目录中初始化一个新的文档项目。
 
 ```bash
 docmd init
 ```
 
-### 操作内容
-- 创建包含 `index.md` 模板的 `docs/` 目录。
-- 生成包含推荐默认值的 `docmd.config.js` 文件。
-- 在 `package.json` 中写入推荐的构建脚本。
+创建内容：
+- `docs/index.md` —— 示例主页
+- `docmd.config.js` —— 推荐的默认配置
+- 更新 `package.json` 并添加构建脚本
 
 ## `docmd dev`
 
-启动高速开发服务器，支持**即时热重载**。
+启动一个带有即时热重载的开发服务器。
 
 ```bash
-docmd dev [选项]
+docmd dev [options]
 ```
 
-### 选项
-- `-p, --port <端口号>`：指定自定义端口（默认：`3000`）。
-- `-c, --config <路径>`：使用非标准配置文件路径。
+| 选项 | 别名 | 描述 |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | 服务器端口（默认：`3000`） |
+| `--config <path>` | `-c` | 配置文件路径 |
 
 ## `docmd build`
 
-在 `site/` 文件夹中生成生产就绪的静态网站。
+在 `site/` 目录中生成生产就绪的静态网站。
 
 ```bash
-docmd build [选项]
+docmd build [options]
 ```
 
-### 选项
-- `--offline`：**文件协议友好模式**。将链接重写为以 `.html` 结尾，支持直接从本地文件系统浏览（如 `file://`）。
-- `-c, --config <路径>`：配置文件路径（默认：`docmd.config.js`）。
+| 选项 | 别名 | 描述 |
+|:-------|:------|:------------|
+| `--offline` | — | 将链接重写为 `.html` 以进行 `file://` 浏览 |
+| `--config <path>` | `-c` | 配置文件路径 |
 
 ## `docmd live`
 
-启动基于浏览器的**实时编辑器**环境。
+启动基于浏览器的实时编辑器。
 
 ```bash
-docmd live [选项]
+docmd live [options]
 ```
 
-### 选项
-- `--build-only`：在 `dist/` 中生成静态编辑器包，不启动服务器。
+| 选项 | 描述 |
+|:-------|:------------|
+| `--build-only` | 仅生成编辑器捆绑包而不启动服务器 |
 
 ## `docmd stop`
 
-优雅地终止所有后台文档服务器。
+停止正在运行的 docmd 开发服务器。
 
 ```bash
-docmd stop [选项]
+docmd stop [options]
 ```
 
-### 选项
-- `-p, --port <端口号>`：终止在指定端口上运行的特定实例。
+| 选项 | 别名 | 描述 |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | 仅停止该端口上的服务器 |
+| `--force` | `-f` | 同时强制停止端口 3000、3001、8080、8081 上的服务进程 |
 
-## `docmd add <插件>`
+## `docmd deploy`
 
-安装官方或社区插件，并自动配置你的项目。
+生成部署配置文件。
 
 ```bash
-docmd add analytics
+docmd deploy [options]
 ```
 
-### 操作内容
-- 使用你的首选包管理器（`npm`、`pnpm`、`yarn` 或 `bun`）。
-- 将插件及其推荐默认配置写入 `docmd.config.js`。
-
-## `docmd remove <插件>`
-
-安全卸载插件并清理配置。
-
-```bash
-docmd remove analytics
-```
+| 选项 | 描述 |
+|:-------|:------------|
+| `--docker` | 生成 `Dockerfile` |
+| `--nginx` | 生成 `nginx.conf` |
+| `--caddy` | 生成 `Caddyfile` |
+| `--force` | 覆盖现有的部署文件 |
 
 ## `docmd migrate`
 
-将旧版 `docmd` 配置升级到现代 V2 架构。
+将旧版 docmd V1 配置升级到 V2 架构。
 
 ```bash
 docmd migrate
 ```
 
-自动重映射已弃用的键（如 `siteTitle` → `title`），并重构配置对象以支持新的布局和导航框架。
+自动重新映射已弃用的键（例如，`siteTitle` → `title`）并重构配置对象。
 
-::: callout tip "Agent 兼容日志"
-`docmd` 实现了结构化终端日志。如果你使用 AI Agent 进行开发，这有助于精准检测错误并实现自动化项目维护。
+## `docmd add <plugin>`
+
+安装并配置官方或社区插件。
+
+```bash
+docmd add <plugin-name>
+```
+
+| 示例 | 描述 |
+|:--------|:------------|
+| `docmd add analytics` | 安装 `@docmd/plugin-analytics` |
+| `docmd add search` | 安装 `@docmd/plugin-search` |
+
+CLI 会自动检测你的包管理器（npm、pnpm、yarn 或 bun），并将推荐的默认设置注入到 `docmd.config.js` 中。
+
+## `docmd remove <plugin>`
+
+安全地卸载插件并清理其配置。
+
+```bash
+docmd remove <plugin-name>
+```
+
+移除：
+- npm 软件包
+- `docmd.config.js` 中的插件配置
+
+::: callout tip "代理兼容的日志记录 :robot:"
+`docmd` 使用结构化的终端日志记录。AI 代理可以精确解析输出，以便进行错误检测和自动化维护。
 :::

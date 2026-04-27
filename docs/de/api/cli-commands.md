@@ -1,18 +1,31 @@
 ---
 title: "CLI-Befehle"
-description: "Die vollständige Referenz des Command-Line-Interface von docmd."
+description: "Befehlszeilenreferenz für docmd — alle verfügbaren Befehle und Optionen."
 ---
 
-Die `docmd`-CLI bietet eine Reihe leistungsstarker Befehle zur Verwaltung Ihrer Dokumentation — von der ersten Projektstruktur bis hin zur produktionsreifen Bereitstellung.
+## Befehlsübersicht
+
+| Befehl | Beschreibung |
+|:--------|:------------|
+| [`docmd init`](#docmd-init) | Erstellt ein neues Dokumentationsprojekt |
+| [`docmd dev`](#docmd-dev) | Startet den Entwicklungsserver mit Hot-Reload |
+| [`docmd build`](#docmd-build) | Erzeugt eine statische Website für die Produktion |
+| [`docmd live`](#docmd-live) | Startet den browserbasierten Live-Editor |
+| [`docmd stop`](#docmd-stop) | Beendet laufende Entwicklungsserver |
+| [`docmd deploy`](#docmd-deploy) | Erzeugt Bereitstellungskonfigurationen (Docker, Nginx, Caddy) |
+| [`docmd migrate`](#docmd-migrate) | Aktualisiert Legacy-Konfigurationen auf das V2-Schema |
+| [`docmd add <plugin>`](#docmd-add-plugin) | Installiert und konfiguriert ein Plugin |
+| [`docmd remove <plugin>`](#docmd-remove-plugin) | Entfernt ein Plugin und dessen Konfiguration |
 
 ## Globale Optionen
 
-Diese Optionen gelten theoretisch für alle `docmd`-Befehle.
-
-- `-v, --version`: Gibt die aktuelle Version von `@docmd/core` aus.
-- `-V, --verbose`: Zeigt detaillierte Protokolle der Engine und des Installers an. Nützlich zum Debuggen von Plugin-Installationen.
-- `-h, --help`: Zeigt das interaktive Hilfemenü an.
-- `--cwd <pfad>`: (Intern) Überschreibt das Arbeitsverzeichnis. Nützlich für Monorepo-Setups.
+| Option | Alias | Beschreibung |
+|:-------|:------|:------------|
+| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei (Standard: `docmd.config.js`) |
+| `--verbose` | `-V` | Detaillierte Build-Protokolle anzeigen |
+| `--version` | `-v` | Die installierte Version ausgeben |
+| `--help` | `-h` | Hilfemenü anzeigen |
+| `--cwd <path>` | — | Arbeitsverzeichnis überschreiben (für Monorepos) |
 
 ## `docmd init`
 
@@ -22,87 +35,114 @@ Erstellt ein neues Dokumentationsprojekt im aktuellen Verzeichnis.
 docmd init
 ```
 
-### Aktionen
-- Erstellt ein `docs/`-Verzeichnis mit einer beispielhaften `index.md`.
-- Generiert eine `docmd.config.js`-Datei mit empfohlenen Standardwerten.
-- Aktualisiert Ihre `package.json` mit empfohlenen Build-Skripten.
+Erstellt:
+- `docs/index.md` — Beispiel-Startseite
+- `docmd.config.js` — Empfohlene Standardeinstellungen
+- Aktualisierte `package.json` mit Build-Skripten
 
 ## `docmd dev`
 
-Startet einen schnellen Entwicklungsserver mit **sofortigem Hot-Reloading**.
+Startet einen Entwicklungsserver mit sofortigem Hot-Reload.
 
 ```bash
-docmd dev [optionen]
+docmd dev [options]
 ```
 
-### Optionen
-- `-p, --port <nummer>`: Einen benutzerdefinierten Port angeben (Standard: `3000`).
-- `-c, --config <pfad>`: Einen vom Standard abweichenden Pfad zur Konfigurationsdatei verwenden.
+| Option | Alias | Beschreibung |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | Server-Port (Standard: `3000`) |
+| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei |
 
 ## `docmd build`
 
-Generiert eine produktionsreife statische Website im Ordner `site/`.
+Erzeugt eine produktionsreife statische Website im Verzeichnis `site/`.
 
 ```bash
-docmd build [optionen]
+docmd build [options]
 ```
 
-### Optionen
-- `--offline`: **Dateiprotokoll-freundlich**. Schreibt Links so um, dass sie auf `.html` enden, was das direkte Browsen im lokalen Dateisystem ermöglicht (z. B. `file://`).
-- `-c, --config <pfad>`: Pfad zur Konfigurationsdatei (Standard: `docmd.config.js`).
+| Option | Alias | Beschreibung |
+|:-------|:------|:------------|
+| `--offline` | — | Links auf `.html` umschreiben für `file://` Browsing |
+| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei |
 
 ## `docmd live`
 
-Startet die browserbasierte **Live-Editor**-Umgebung.
+Startet den browserbasierten Live-Editor.
 
 ```bash
-docmd live [optionen]
+docmd live [options]
 ```
 
-### Optionen
-- `--build-only`: Generiert das statische Editor-Bundle in `dist/`, ohne einen Server zu starten.
+| Option | Beschreibung |
+|:-------|:------------|
+| `--build-only` | Erzeugt das Editor-Bundle, ohne den Server zu starten |
 
 ## `docmd stop`
 
-Beendet alle im Hintergrund laufenden Dokumentationsserver ordnungsgemäß.
+Beendet laufende docmd-Entwicklungsserver.
 
 ```bash
-docmd stop [optionen]
+docmd stop [options]
 ```
 
-### Optionen
-- `-p, --port <nummer>`: Beendet eine spezifische Instanz, die auf einem bestimmten Port läuft.
+| Option | Alias | Beschreibung |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | Nur den Server auf diesem Port stoppen |
+| `--force` | `-f` | Auch `serve`-Prozesse auf den Ports 3000, 3001, 8080, 8081 beenden |
 
-## `docmd add <plugin>`
+## `docmd deploy`
 
-Installiert ein offizielles Plugin oder ein Community-Plugin und konfiguriert Ihr Projekt automatisch.
+Erzeugt Konfigurationsdateien für die Bereitstellung.
 
 ```bash
-docmd add analytics
+docmd deploy [options]
 ```
 
-### Aktionen
-- Nutzt Ihren bevorzugten Paketmanager (`npm`, `pnpm`, `yarn` oder `bun`).
-- Fügt das Plugin und seine empfohlenen Standardeinstellungen in die `docmd.config.js` ein.
-
-## `docmd remove <plugin>`
-
-Deinstalliert sicher ein Plugin und bereinigt Ihre Konfiguration.
-
-```bash
-docmd remove analytics
-```
+| Option | Beschreibung |
+|:-------|:------------|
+| `--docker` | Erzeugt ein `Dockerfile` |
+| `--nginx` | Erzeugt `nginx.conf` |
+| `--caddy` | Erzeugt `Caddyfile` |
+| `--force` | Bestehende Bereitstellungsdateien überschreiben |
 
 ## `docmd migrate`
 
-Aktualisiert veraltete `docmd`-Konfigurationen auf das moderne V2-Schema.
+Aktualisiert Legacy docmd V1-Konfigurationen auf das V2-Schema.
 
 ```bash
 docmd migrate
 ```
 
-Es ordnet veraltete Schlüssel neu zu (z. B. `siteTitle` zu `title`) und strukturiert das Konfigurationsobjekt neu, um das neue Layout und die neuen Navigations-Frameworks zu unterstützen.
+Ordnet automatisch veraltete Schlüssel neu zu (z. B. `siteTitle` → `title`) und strukturiert das Konfigurationsobjekt um.
 
-::: callout tip "Agenten-kompatibles Logging"
-`docmd` implementiert strukturiertes Terminal-Logging. Wenn Sie einen KI-Agenten für die Entwicklung nutzen, ermöglicht dies eine präzise Fehlererkennung und automatisierte Projektwartung.
+## `docmd add <plugin>`
+
+Installiert und konfiguriert ein offizielles oder Community-Plugin.
+
+```bash
+docmd add <plugin-name>
+```
+
+| Beispiel | Beschreibung |
+|:--------|:------------|
+| `docmd add analytics` | Installiert `@docmd/plugin-analytics` |
+| `docmd add search` | Installiert `@docmd/plugin-search` |
+
+Die CLI erkennt Ihren Paketmanager (npm, pnpm, yarn oder bun) und fügt empfohlene Standardeinstellungen in die `docmd.config.js` ein.
+
+## `docmd remove <plugin>`
+
+Deinstalliert sicher ein Plugin und bereinigt dessen Konfiguration.
+
+```bash
+docmd remove <plugin-name>
+```
+
+Entfernt:
+- Das npm-Paket
+- Plugin-Konfiguration aus der `docmd.config.js`
+
+::: callout tip "Agenten-kompatible Protokollierung :robot:"
+`docmd` verwendet strukturierte Terminal-Protokolle. KI-Agenten können die Ausgabe präzise parsen für Fehlererkennung und automatisierte Wartung.
 :::

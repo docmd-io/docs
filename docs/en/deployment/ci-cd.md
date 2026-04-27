@@ -81,10 +81,8 @@ In CI/CD environments where `docmd` is not globally installed, use `npx @docmd/c
 
 ## Manual / Static Server
 
-For traditional web servers (NGINX, Apache, IIS):
+For traditional web servers (Apache, IIS, etc):
 
 1.  Generate the site: `npx @docmd/core build`.
 2.  Upload the contents of the `site/` folder to your server via SFTP, SCP, or your preferred deployment tool.
 3.  Ensure your server is configured to serve `index.html` for directories (the default for most).
-
-For self-hosted environments like Docker, NGINX, or Caddy, see the dedicated [Deployment guides](index.md).

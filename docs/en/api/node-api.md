@@ -72,11 +72,108 @@ The programmatic API is highly compatible with **AI-Driven Documentation**. Agen
 
 ## Plugin API (`@docmd/api`)
 
-The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, and source editing tools.
+The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and **centralized URL utilities**.
 
 ```bash
 npm install @docmd/api
 ```
+
+### URL Utilities
+
+Plugins should use these centralized utilities instead of rolling their own URL logic.
+
+#### `outputPathToSlug(outputPath)`
+
+Convert a build engine output path to a clean directory-style slug.
+
+```javascript
+import { outputPathToSlug } from '@docmd/api';
+
+outputPathToSlug('guide/index.html');   // → 'guide/'
+outputPathToSlug('index.html');         // → '/'
+outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
+```
+
+#### `outputPathToPathname(outputPath)`
+
+Convert to a root-relative pathname.
+
+```javascript
+import { outputPathToPathname } from '@docmd/api';
+
+outputPathToPathname('guide/index.html'); // → '/guide/'
+outputPathToPathname('index.html');       // → '/'
+```
+
+#### `outputPathToCanonical(outputPath, siteUrl)`
+
+Build a full canonical URL.
+
+```javascript
+import { outputPathToCanonical } from '@docmd/api';
+
+outputPathToCanonical('guide/index.html', 'https://example.com');
+// → 'https://example.com/guide/'
+```
+
+#### `sanitizeUrl(url)`
+
+Collapse double slashes (except after protocol).
+
+```javascript
+import { sanitizeUrl } from '@docmd/api';
+
+sanitizeUrl('https://example.com//path/'); // → 'https://example.com/path/'
+sanitizeUrl('/foo//bar/');                  // → '/foo/bar/'
+```
+
+#### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
+
+Build an absolute URL with locale and version prefixes.
+
+```javascript
+import { buildAbsoluteUrl } from '@docmd/api';
+
+buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/');
+// → '/de/v1/guide/'
+```
+
+#### `resolveHref(href)`
+
+Normalize user-written hrefs to clean URLs. Handles `.md` stripping, trailing slashes, `external:` and `raw:` prefixes.
+
+```javascript
+import { resolveHref } from '@docmd/api';
+
+resolveHref('overview.md');
+// → { href: 'overview/', isExternal: false, isRaw: false }
+
+resolveHref('external:https://github.com/docmd-io/docmd');
+// → { href: 'https://github.com/docmd-io/docmd', isExternal: true, isRaw: false }
+
+resolveHref('raw:docs/readme.md');
+// → { href: 'docs/readme.md', isExternal: false, isRaw: true }
+```
+
+### Pre-computed Page URLs
+
+Every page object includes pre-computed URL data. Plugins can read these directly — zero computation needed.
+
+```javascript
+export async function onPostBuild({ pages, config }) {
+  for (const page of pages) {
+    console.log(page.urls.slug);      // "guide/"
+    console.log(page.urls.canonical); // "https://example.com/guide/"
+    console.log(page.urls.pathname);  // "/guide/"
+  }
+}
+```
+
+| Property | Type | Description |
+|:---------|:-----|:------------|
+| `slug` | `string` | Clean directory-style slug (e.g., `guide/` or `/`) |
+| `canonical` | `string` | Full canonical URL (only if `config.url` is set) |
+| `pathname` | `string` | Root-relative path (e.g., `/guide/`) |
 
 > **Backward Compatibility:** All exports from `@docmd/api` are also re-exported from `@docmd/core`, so existing code continues to work without changes. New projects are encouraged to import directly from `@docmd/api`.
 

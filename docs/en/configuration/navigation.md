@@ -27,7 +27,7 @@ export default defineConfig({
 | :--- | :--- | :--- | :--- |
 | **`title`** | `String` | Yes | The display text for the link or category. |
 | **`path`** | `String` | No | Destination URL. Must start with `/` for local paths. |
-| **`icon`** | `String` | No | Name of a [Lucide Icon](https://lucide.dev/icons) (e.g., `rocket`). |
+| **`icon`** | `String` | No | Name of a [Lucide Icon](external:https://lucide.dev/icons) (e.g., `rocket`). |
 | **`children`** | `Array` | No | Nested items used to create a submenu or group. |
 | **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed by the user. |
 | **`external`** | `Boolean` | No | If `true`, the link opens in a new browser tab. |

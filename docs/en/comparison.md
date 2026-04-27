@@ -8,13 +8,13 @@ You picked a documentation tool before. You'll pick one again. Here's what actua
 ## Start writing in 3 seconds, not 30 minutes
 
 ::: tabs
-tab: docmd
+== tab "docmd"
 ```bash
 npx @docmd/core dev
 ```
 Done. Your docs are live. No config files, no project scaffolding, no dependency maze.
 
-tab: Docusaurus
+== tab "Docusaurus"
 ```bash
 npx create-docusaurus@latest my-site classic
 cd my-site
@@ -23,13 +23,13 @@ npm start
 ```
 Four commands, a generated project with ~250MB in `node_modules`, and a `docusaurus.config.js` you'll need to edit before anything useful happens.
 
-tab: VitePress
+== tab "VitePress"
 ```bash
 npx vitepress init
 ```
 Asks you 5 questions, generates a config file, then you run `vitepress dev`. Clean — but still requires scaffolding.
 
-tab: MkDocs
+== tab "MkDocs"
 ```bash
 pip install mkdocs-material
 mkdocs new my-site && cd my-site
@@ -51,7 +51,7 @@ Your readers shouldn't download a React app just to read a paragraph. Here's wha
 | Docusaurus | ~250 KB | ~200 KB | ~50 KB |
 
 ::: callout tip "Why this matters"
-Every 100 KB of JavaScript costs ~50ms of parse time on a mid-range phone. docmd's 12 KB JS means your docs load instantly — even on 3G. Docusaurus ships 16× more JavaScript for the same content.
+Every 100 KB of JavaScript costs ~50ms of parse time on a mid-range phone. docmd's 12 KB JS means your docs load instantly, even on 3G. Docusaurus ships 16× more JavaScript for the same content.
 :::
 
 ## Build speed

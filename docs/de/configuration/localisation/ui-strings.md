@@ -1,83 +1,68 @@
 ---
-title: "UI-Strings & SEO"
-description: "Passen Sie System-UI-Texte pro Sprache an und verstehen Sie die automatischen SEO-Tags für mehrsprachige Websites."
+title: "UI-Strings Lokalisierung"
+description: "Passen Sie die in der docmd-Benutzeroberfläche angezeigten Texte (Such-Platzhalter, Navigations-Labels usw.) durch Konfiguration benutzerdefinierter Übersetzungen an."
 ---
 
-## Integrierte Sprachunterstützung
+Obwohl `docmd` über integrierte Übersetzungen für gängige Sprachen verfügt, möchten Sie möglicherweise UI-Texte für ein bestimmtes Projekt anpassen (z. B. "Search" in "In der Doku suchen" ändern).
 
-docmd und seine offiziellen Plugins (Search, Threads usw.) werden mit integrierten Übersetzungen für gängige Sprachen ausgeliefert. Wenn Sie eine unterstützte Sprache konfigurieren, werden alle Systemtexte — Such-Platzhalter, Navigations-Labels, Theme-Umschalter — automatisch übersetzt.
+## Globale Konfiguration
 
-Für nicht unterstützte Sprachen oder benutzerdefinierte Formulierungen fällt das System auf Englisch zurück. Sie können jeden String pro Sprache überschreiben.
+Sie können Übersetzungen für bestimmte Locales direkt in Ihrer `docmd.config.js` definieren.
 
-## Benutzerdefinierte UI-Strings
+```javascript
+import { defineConfig } from '@docmd/core';
 
-Verwenden Sie die Eigenschaft `translations` bei jedem Sprachobjekt, um Systemtexte zu überschreiben:
-
-```js
-export default {
-  i18n: {
-    default: 'en',
-    locales: [
-      { id: 'en', label: 'English' },
-      {
-        id: 'ar',
-        label: 'العربية',
-        dir: 'rtl',
-        translations: {
-          onThisPage: 'في هذه الصفحة',
-          previous: 'السابق',
-          next: 'التالي',
-          search: 'بحث',
-          toggleTheme: 'تبديل المظهر',
-          editThisPage: 'تعديل هذه الصفحة',
-          selectLanguage: 'اخter اللغة',
-          selectVersion: 'اختر الإصدار',
-          fallbackMessage: 'هذه الصفحة غير متاحة بعد باللغة {active}. عرض اللغة الافتراضية ({default}).'
+export default defineConfig({
+  locales: {
+    en: { title: 'English', label: 'English' },
+    de: { title: 'German', label: 'Deutsch' }
+  },
+  plugins: {
+    localisation: {
+      translations: {
+        de: {
+          'search.placeholder': 'Dokumentation durchsuchen...',
+          'nav.next': 'Nächste Seite',
+          'nav.prev': 'Vorherige Seite',
+          'toc.title': 'Auf dieser Seite'
         }
       }
-    ]
+    }
   }
-}
+});
 ```
 
-Die Reihenfolge der Zusammenführung ist: **System-Übersetzungen → Plugin-Übersetzungen → Ihre Konfigurations-Übersetzungen**. Ihre Konfiguration gewinnt immer.
+## Verfügbare UI-Keys
 
-## Verfügbare Schlüssel
+Dies sind die am häufigsten verwendeten UI-Strings, die Sie überschreiben können:
 
-| Schlüssel | Standard (Englisch) |
-|:----|:-------------------|
-| `skipToContent` | Zum Hauptinhalt springen |
-| `toggleSidebar` | Seitenleiste umschalten |
-| `previous` | Vorherige |
-| `next` | Nächste |
-| `onThisPage` | Auf dieser Seite |
-| `search` | Suche |
-| `toggleTheme` | Theme umschalten |
-| `selectLanguage` | Sprache wählen |
-| `selectVersion` | Version wählen |
-| `editThisPage` | Diese Seite bearbeiten |
-| `builtWith` | Erstellt mit |
-| `copyCode` | Code kopieren |
-| `copiedToClipboard` | Kopiert! |
-| `mainNavigation` | Hauptnavigation |
-| `fallbackMessage` | Diese Seite ist noch nicht in {active} verfügbar. Es wird die Standardsprache ({default}) angezeigt. |
+| Key | Standardwert (EN) | Beschreibung |
+| :--- | :--- | :--- |
+| `search.placeholder` | `Search...` | Platzhalter im Sucheingabefeld. |
+| `search.noResults` | `No results found` | Text, wenn keine Übereinstimmungen gefunden wurden. |
+| `nav.next` | `Next` | Text für den "Weiter"-Button im Pagination-Bereich. |
+| `nav.prev` | `Previous` | Text für den "Zurück"-Button im Pagination-Bereich. |
+| `toc.title` | `On this page` | Überschrift über der Inhaltsverzeichnis-Seitenleiste. |
+| `theme.light` | `Light` | Label für den hellen Modus im Theme-Switcher. |
+| `theme.dark` | `Dark` | Label für den dunklen Modus im Theme-Switcher. |
+| `theme.system` | `System` | Label für die Synchronisierung mit dem System im Theme-Switcher. |
 
-Der Schlüssel `fallbackMessage` unterstützt die Platzhalter `{active}` und `{default}`, die zur Build-Zeit durch die Sprachlabels ersetzt werden.
+## Plugin-Beiträge
 
-## SEO und hreflang
+Wenn Sie ein [Plugin entwickeln](../../plugins/building-plugins.md), können Sie auch neue Übersetzungsschlüssel über den `translations`-Hook bereitstellen:
 
-docmd generiert automatisch `<link rel="alternate" hreflang="...">`-Tags für jede Seite über alle Sprachen hinweg. Die Standardsprache erhält zusätzlich den Wert `x-default` für hreflang.
-
-```html
-<!-- Automatisch generiert auf jeder Seite -->
-<link rel="alternate" hreflang="en" href="/">
-<link rel="alternate" hreflang="x-default" href="/">
-<link rel="alternate" hreflang="hi" href="/hi/">
-<link rel="alternate" hreflang="zh" href="/zh/">
+```javascript
+export default {
+  name: 'mein-plugin',
+  translations(localeId) {
+    if (localeId === 'de') {
+      return { 'meinplugin.status': 'Status' };
+    }
+    return { 'meinplugin.status': 'Status' };
+  }
+};
 ```
 
-Es ist keine Konfiguration erforderlich — diese Tags werden in jede Seite eingefügt, wenn i18n aktiviert ist.
-
-::: callout info "noStyle-Seiten"
-Das oben beschriebene UI-String-System gilt für thematisierte Layout-Seiten (serverseitig). Für noStyle-Seiten, die benutzerdefiniertes HTML verwenden, siehe das [clientseitige String-Ersetzungssystem](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle), das `data-i18n`-Attribute und JSON-Dateien in `assets/i18n/` verwendet.
+::: callout tip "KI-Übersetzungshilfe"
+Wenn Sie einen KI-Assistenten bitten, Ihrer Website eine neue Sprache hinzuzufügen, stellen Sie ihm diese Liste der UI-Keys zur Verfügung. Dies stellt sicher, dass die KI nicht nur Ihren Inhalt übersetzt, sondern auch einen passenden Satz lokalisierter UI-Strings für Ihre `.config.js`-Datei liefert.
 :::
