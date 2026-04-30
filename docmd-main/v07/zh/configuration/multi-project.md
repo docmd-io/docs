@@ -61,26 +61,11 @@ module.exports = defineConfig({
 
 每个项目目录有自己的 `docmd.config.js`，包含完全独立的配置。**不要**包含 `src` 或 `out` 键 —— 父配置会自动提供这些值。
 
-```javascript
-// sdk-docs/docmd.config.js
-module.exports = defineConfig({
-  title: 'SDK 参考',
-  url: 'https://docs.example.com/sdk',
-
-  theme: {
-    name: 'default',
-    appearance: 'light',
-  },
-
-  versions: {
-    current: '02',
-    all: [
-      { id: '02', dir: 'v02', label: 'v2.0' },
-      { id: '01', dir: 'v01', label: 'v1.0' }
-    ]
-  },
-});
-```
+每个项目可以拥有完全独立的：
+- **i18n** — 不同的语言环境、不同的默认语言
+- **版本控制** — 不同的版本号和结构
+- **插件** — 仅启用每个项目需要的插件
+- **导航** — 每个项目的自定义侧边栏
 
 ## 资源
 
@@ -92,6 +77,17 @@ module.exports = defineConfig({
 
 每个项目可以拥有自己的 `assets/` 目录。当文件名重复时，项目资源优先于共享资源。
 
+```
+my-docs/
+├── assets/
+│   └── images/
+│       └── logo.png          ← 所有项目使用
+├── sdk-docs/
+│   └── assets/
+│       └── images/
+│           └── logo.png      ← 仅覆盖 SDK 的 logo
+```
+
 ## 开发
 
 启动多项目开发服务器：
@@ -100,7 +96,20 @@ module.exports = defineConfig({
 docmd dev
 ```
 
-服务器构建所有项目并通过单个端口提供服务。任何项目中的文件更改都会触发重建和实时刷新。共享资源的更改会重建所有项目。
+服务器构建所有项目并通过单个端口提供服务：
+
+```
+┌─ DEV SERVER
+│
+│  Local           http://127.0.0.1:3000
+│  Network         http://192.168.1.5:3000
+│
+│  Project         http://127.0.0.1:3000/
+│  Project         http://127.0.0.1:3000/sdk
+└──────────────────────────────────────────────────────────
+```
+
+任何项目中的文件更改都会触发针对性重建和实时刷新。仅重建受影响的项目 —— 其他项目保持不变以实现快速迭代。共享资源的更改会重建所有项目。
 
 ## 构建与部署
 
@@ -108,7 +117,19 @@ docmd dev
 docmd build
 ```
 
-输出为单个静态目录，可直接部署到任何静态托管服务（GitHub Pages、Netlify、Vercel、Cloudflare Pages），无需额外配置。
+输出为单个静态目录：
+
+```
+site/
+├── index.html              ← main-docs 根目录
+├── sdk/
+│   └── index.html          ← sdk-docs 根目录
+├── assets/                 ← 合并后的资源
+├── 404.html
+└── sitemap.xml
+```
+
+可直接部署到任何静态托管服务（GitHub Pages、Netlify、Vercel、Cloudflare Pages），无需额外配置。无需 nginx 或代理规则。
 
 ## 规则与约束
 

@@ -61,26 +61,11 @@ Jede Multi-Projekt-Konfiguration **muss** ein Root-Projekt mit `prefix: '/'` ent
 
 Jedes Projektverzeichnis hat seine eigene `docmd.config.js` mit vollständig unabhängiger Konfiguration. Fügen Sie **keine** `src`- oder `out`-Schlüssel ein — die übergeordnete Konfiguration stellt diese automatisch bereit.
 
-```javascript
-// sdk-docs/docmd.config.js
-module.exports = defineConfig({
-  title: 'SDK-Referenz',
-  url: 'https://docs.example.com/sdk',
-
-  theme: {
-    name: 'default',
-    appearance: 'light',
-  },
-
-  versions: {
-    current: '02',
-    all: [
-      { id: '02', dir: 'v02', label: 'v2.0' },
-      { id: '01', dir: 'v01', label: 'v1.0' }
-    ]
-  },
-});
-```
+Jedes Projekt kann vollständig unabhängige Einstellungen haben:
+- **i18n** — verschiedene Sprachen, verschiedene Standardsprachen
+- **Versionierung** — unterschiedliche Versionsnummern und Strukturen
+- **Plugins** — nur aktivieren, was jedes Projekt benötigt
+- **Navigation** — individuelle Seitenleiste für jedes Projekt
 
 ## Assets
 
@@ -92,6 +77,17 @@ Legen Sie gemeinsame Ressourcen (Logos, Favicons, globales CSS) im Root-`assets/
 
 Jedes Projekt kann ein eigenes `assets/`-Verzeichnis haben. Projektspezifische Assets haben Vorrang vor gemeinsamen Assets bei Namenskonflikten.
 
+```
+my-docs/
+├── assets/
+│   └── images/
+│       └── logo.png          ← von allen Projekten verwendet
+├── sdk-docs/
+│   └── assets/
+│       └── images/
+│           └── logo.png      ← überschreibt Logo nur für SDK
+```
+
 ## Entwicklung
 
 Starten Sie den Multi-Projekt-Entwicklungsserver:
@@ -100,7 +96,20 @@ Starten Sie den Multi-Projekt-Entwicklungsserver:
 docmd dev
 ```
 
-Der Server erstellt alle Projekte und stellt sie über einen einzigen Port bereit. Dateiänderungen in einem Projekt lösen einen Neubau mit Live-Reload aus. Änderungen an gemeinsamen Assets erstellen alle Projekte neu.
+Der Server erstellt alle Projekte und stellt sie über einen einzigen Port bereit:
+
+```
+┌─ DEV SERVER
+│
+│  Local           http://127.0.0.1:3000
+│  Network         http://192.168.1.5:3000
+│
+│  Project         http://127.0.0.1:3000/
+│  Project         http://127.0.0.1:3000/sdk
+└──────────────────────────────────────────────────────────
+```
+
+Dateiänderungen in einem Projekt lösen einen gezielten Neubau mit Live-Reload aus. Nur das betroffene Projekt wird neu erstellt — andere Projekte bleiben für schnelle Iteration unberührt. Änderungen an gemeinsamen Assets erstellen alle Projekte neu.
 
 ## Erstellen & Bereitstellen
 
@@ -108,7 +117,19 @@ Der Server erstellt alle Projekte und stellt sie über einen einzigen Port berei
 docmd build
 ```
 
-Die Ausgabe ist ein einzelnes statisches Verzeichnis. Veröffentlichen Sie es auf jedem statischen Hosting (GitHub Pages, Netlify, Vercel, Cloudflare Pages) ohne zusätzliche Konfiguration.
+Die Ausgabe ist ein einzelnes statisches Verzeichnis:
+
+```
+site/
+├── index.html              ← main-docs Root
+├── sdk/
+│   └── index.html          ← sdk-docs Root
+├── assets/                 ← zusammengeführte Assets
+├── 404.html
+└── sitemap.xml
+```
+
+Veröffentlichen Sie es auf jedem statischen Hosting (GitHub Pages, Netlify, Vercel, Cloudflare Pages) ohne zusätzliche Konfiguration. Keine nginx- oder Proxy-Regeln erforderlich.
 
 ## Regeln & Einschränkungen
 
