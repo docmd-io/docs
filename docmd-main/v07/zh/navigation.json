@@ -64,6 +64,10 @@
         "path": "/configuration/versioning"
       },
       {
+        "title": "多项目配置",
+        "path": "/configuration/multi-project"
+      },
+      {
         "title": "重定向",
         "path": "/configuration/redirects"
       }
@@ -546,6 +550,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.7.7 — 多项目支持",
+        "path": "/release-notes/0-7-7"
+      },
       {
         "title": "v0.7.6 — URL 引擎",
         "path": "/release-notes/0-7-6"

@@ -64,6 +64,10 @@
         "path": "/configuration/versioning"
       },
       {
+        "title": "Multi-Project",
+        "path": "/configuration/multi-project"
+      },
+      {
         "title": "Redirects",
         "path": "/configuration/redirects"
       }
@@ -546,6 +550,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.7.7 — Multi-Project",
+        "path": "/release-notes/0-7-7"
+      },
       {
         "title": "v0.7.6 — URL Engine",
         "path": "/release-notes/0-7-6"
