@@ -5,6 +5,7 @@ module.exports = defineConfig({
   // --- Core Metadata ---
   title: 'docmd docs',
   url: 'https://docs.docmd.io',
+  src: '.', // Content is at project root (versioned dirs: v07/, v06/)
 
   // --- Branding ---
   logo: {

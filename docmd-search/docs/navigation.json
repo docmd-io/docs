@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Overview",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Getting Started",
+    "path": "/getting-started",
+    "icon": "rocket"
+  },
+  {
+    "title": "Configuration",
+    "path": "/configuration",
+    "icon": "settings"
+  },
+  {
+    "title": "How It Works",
+    "path": "/how-it-works",
+    "icon": "cpu"
+  },
+  {
+    "title": "CLI Reference",
+    "path": "/cli",
+    "icon": "terminal"
+  },
+  {
+    "title": "Programmatic API",
+    "path": "/api",
+    "icon": "braces"
+  },
+  {
+    "title": "Browser Client",
+    "path": "/browser-client",
+    "icon": "globe"
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd-search",
+    "icon": "github",
+    "external": true
+  }
+]
