@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "docmd dev",
+    "dev:local": "node ../docmd/packages/core/dist/bin/docmd.js dev",
     "build": "docmd build",
+    "build:local": "node ../docmd/packages/core/dist/bin/docmd.js build",
     "preview": "npx serve site"
   },
   "dependencies": {
