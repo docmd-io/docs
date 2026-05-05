@@ -23,12 +23,6 @@ module.exports = defineConfig({
   pageNavigation: true,
   customJs: ['/assets/js/theme-switcher.js'],
 
-  editLink: {
-    enabled: true,
-    baseUrl: 'https://github.com/docmd-io/docs/edit/main/docs',
-    text: 'Edit this page on GitHub'
-  },
-
   // --- Theme ---
   theme: {
     name: 'default',
@@ -106,7 +100,7 @@ module.exports = defineConfig({
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },
     math: {},
     git: {
-      repo: 'https://github.com/docmd-io/docmd',
+      repo: 'https://github.com/docmd-io/docs',
       branch: 'main'
     }
   },
