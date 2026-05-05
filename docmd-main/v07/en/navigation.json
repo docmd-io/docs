@@ -215,6 +215,10 @@
         "path": "/plugins/search"
       },
       {
+        "title": "Git",
+        "path": "/plugins/git"
+      },
+      {
         "title": "SEO",
         "path": "/plugins/seo"
       },
@@ -245,10 +249,6 @@
       {
         "title": "Math (KaTeX)",
         "path": "/plugins/math"
-      },
-      {
-        "title": "Git",
-        "path": "/plugins/git"
       },
       {
         "title": "Building Plugins",
