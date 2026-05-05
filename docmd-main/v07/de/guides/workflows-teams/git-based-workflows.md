@@ -5,7 +5,7 @@ description: "So verwalten Sie Dokumentationsbeiträge effektiv mit Git, Pull Re
 
 ## Problem
 
-Direkte Pushes in den Hauptzweig der Dokumentation führen oft zu fehlerhaften Links, inkonsistenter Formatierung und ungeprüften technischen Informationen. Gleichzeitig schreckt zu viel Reibung – etwa die Anforderung separater CMS-Accounts – Community-Mitglieder und interne Entwickler davon ab, wertvolle Updates beizusteuern.
+Direkte Pushes in den Hauptzweig der Dokumentation führen oft zu fehlerhaften Links, inkonsistenter Formatierung und ungeprüften technischen Informationen. Gleichzeitig schreckt zu viel Reibung , etwa die Anforderung separater CMS-Accounts , Community-Mitglieder und interne Entwickler davon ab, wertvolle Updates beizusteuern.
 
 ## Warum es wichtig ist
 

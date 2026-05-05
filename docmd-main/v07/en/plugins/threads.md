@@ -1,9 +1,9 @@
 ---
 title: "Threads Plugin"
-description: "Add inline discussion threads to your documentation — stored directly in your markdown files."
+description: "Add inline discussion threads to your documentation - stored directly in your markdown files."
 ---
 
-The **Threads plugin** brings collaborative inline comments to your documentation. Select any text on the page, leave a comment, start a discussion — all stored directly in your markdown source files with zero database needed.
+The **Threads plugin** brings collaborative inline comments to your documentation. Select any text on the page, leave a comment, start a discussion - all stored directly in your markdown source files with zero database needed.
 
 Original Author: [@svallory](external:https://github.com/svallory)
 
@@ -41,13 +41,13 @@ plugins: {
 ## How It Works
 
 
-<!-- SCREENSHOT: The thread creation flow — (1) text selected on page, (2) comment popover appearing, (3) highlighted text with thread card below. Show the flow as 3 numbered steps. -->
+<!-- SCREENSHOT: The thread creation flow - (1) text selected on page, (2) comment popover appearing, (3) highlighted text with thread card below. Show the flow as 3 numbered steps. -->
 
 1. **Select text** on any documentation page during `docmd dev`
-2. A **comment popover** appears — write your comment and submit
+2. A **comment popover** appears - write your comment and submit
 3. The selected text gets **highlighted** with a thread marker
 4. Threads are stored as `::: threads` blocks at the bottom of the markdown file
-5. **No database** — your markdown files are the source of truth
+5. **No database** - your markdown files are the source of truth
 
 ## Preview
 
@@ -62,7 +62,7 @@ Here's what threads look like on a live page. Text with discussions gets <span c
   <div class="threads-preview-comment threads-preview-reply">
     <div class="threads-preview-avatar">B</div>
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1d ago</div>
-    <div class="threads-preview-body">Good idea — I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
+    <div class="threads-preview-body">Good idea - I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
     <div class="threads-preview-reactions">
       <div class="threads-preview-reaction">👍 <span>2</span></div>
       <div class="threads-preview-reaction">🚀 <span>1</span></div>
@@ -78,7 +78,7 @@ Here's what threads look like on a live page. Text with discussions gets <span c
   </div>
 </div>
 
-And here's a <span class="threads-preview-highlight-blue">second highlight with a different color</span> — threads cycle through a palette of colors automatically.
+And here's a <span class="threads-preview-highlight-blue">second highlight with a different color</span> - threads cycle through a palette of colors automatically.
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
@@ -121,7 +121,7 @@ Some content with ==highlighted text=={t-a1b2c3d4} that has a thread.
       This text needs clarification.
     :::
     ::: comment c-d9e0f1a2 "Bob" "2026-04-09" reply-to c-e5f6a7b8
-      Updated it — does this work?
+      Updated it - does this work?
 
       ::: reactions
         - 👍 Alice

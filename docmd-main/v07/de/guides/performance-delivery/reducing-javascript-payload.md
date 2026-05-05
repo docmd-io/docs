@@ -48,4 +48,4 @@ Stellen Sie sicher, dass jedes von Ihnen bereitgestellte benutzerdefinierte Java
 
 ## Abwägungen
 
-Das Erstellen komplexer interaktiver Funktionen mit Vanilla JavaScript kann mehr manuellen Aufwand erfordern als die Verwendung eines deklarativen Frameworks. Für die Dokumentation jedoch – wo 95 % des Inhalts aus statischem Text und Bildern bestehen – überwiegen die Performance-Vorteile eines Zero-Framework-Ansatzes bei weitem die Bequemlichkeit eines schweren Frameworks.
+Das Erstellen komplexer interaktiver Funktionen mit Vanilla JavaScript kann mehr manuellen Aufwand erfordern als die Verwendung eines deklarativen Frameworks. Für die Dokumentation jedoch , wo 95 % des Inhalts aus statischem Text und Bildern bestehen , überwiegen die Performance-Vorteile eines Zero-Framework-Ansatzes bei weitem die Bequemlichkeit eines schweren Frameworks.

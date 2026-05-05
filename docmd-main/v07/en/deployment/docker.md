@@ -3,7 +3,7 @@ title: "Docker"
 description: "Deploy docmd in a Docker container with a single command."
 ---
 
-`docmd` generates static HTML — perfect for lightweight, reproducible Docker containers.
+`docmd` generates static HTML - perfect for lightweight, reproducible Docker containers.
 
 ## Generate a Dockerfile
 
@@ -21,8 +21,8 @@ This creates a `Dockerfile` and `.dockerignore` in your project root, personalis
 
 The Dockerfile uses an optimised multi-stage build:
 
-1. **Stage 1 — Build**: Installs dependencies with layer caching (`package.json` copied first), installs the pinned `@docmd/core` version, and runs `docmd build`.
-2. **Stage 2 — Serve**: Copies the built output into a minimal `nginx:alpine` container.
+1. **Stage 1 - Build**: Installs dependencies with layer caching (`package.json` copied first), installs the pinned `@docmd/core` version, and runs `docmd build`.
+2. **Stage 2 - Serve**: Copies the built output into a minimal `nginx:alpine` container.
 
 ```dockerfile
 # Stage 1: Build
@@ -70,4 +70,4 @@ Your documentation is now live at `http://localhost:8080`.
 
 ### Re-Generating
 
-Changed your config? Just run `docmd deploy --docker` again — the files are always regenerated to match your current `docmd.config.js`.
+Changed your config? Just run `docmd deploy --docker` again - the files are always regenerated to match your current `docmd.config.js`.

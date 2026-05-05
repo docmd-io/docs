@@ -5,7 +5,7 @@ description: "So identifizieren und eliminieren Sie häufige Dokumentationsfehle
 
 ## Problem
 
-Im Laufe der Zeit sammeln sich in Dokumentations-Repositories oft "Quick Fixes" für Content-Probleme an, welche die User Experience ungewollt verschlechtern. Diese Anti-Patterns – wie vage Linktexte oder überladene Codebeispiele – verfestigen sich im Projekt, was die Dokumentation schwerer wartbar und für Entwickler weniger nützlich macht.
+Im Laufe der Zeit sammeln sich in Dokumentations-Repositories oft "Quick Fixes" für Content-Probleme an, welche die User Experience ungewollt verschlechtern. Diese Anti-Patterns , wie vage Linktexte oder überladene Codebeispiele , verfestigen sich im Projekt, was die Dokumentation schwerer wartbar und für Entwickler weniger nützlich macht.
 
 ## Warum es wichtig ist
 

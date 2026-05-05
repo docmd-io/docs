@@ -120,7 +120,7 @@ Chunk size affects search quality and index size:
 | Short API docs | `128` | Smaller chunks = more precise matches |
 | General documentation | `256` (default) | Good balance of precision and context |
 | Long-form guides | `512` | Keeps more context per result |
-| Technical references | `128–256` | Precise matches for specific parameters |
+| Technical references | `128-256` | Precise matches for specific parameters |
 
 ::: callout warning "Overlap matters"
 `chunkOverlap` ensures content near chunk boundaries isn't lost. A value of `32` (default) works well for most cases. Set to `0` only if your content has very clear section boundaries.

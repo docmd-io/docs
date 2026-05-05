@@ -1,6 +1,6 @@
 ---
 title: "Browser API (Client-Side)"
-description: "Interact with docmd from the browser — live compilation and dev-mode plugin communication."
+description: "Interact with docmd from the browser - live compilation and dev-mode plugin communication."
 ---
 
 `docmd` provides two browser APIs: the **isomorphic compile engine** for rendering markdown in the browser, and the **dev-mode plugin API** for real-time communication with the dev server.

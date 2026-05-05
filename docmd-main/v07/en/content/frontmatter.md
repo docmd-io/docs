@@ -15,7 +15,7 @@ Frontmatter allows you to override global settings on a per-page basis. It must 
 
 
 ::: callout warning "Title is important"
-While not strictly required, the `title` field is strongly recommended. Without it, docmd falls back to the first `# H1` heading or the filename — which can produce less ideal `<title>` tags and search results.
+While not strictly required, the `title` field is strongly recommended. Without it, docmd falls back to the first `# H1` heading or the filename - which can produce less ideal `<title>` tags and search results.
 :::
 
 

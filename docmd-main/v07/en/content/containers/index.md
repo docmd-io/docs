@@ -5,7 +5,11 @@ description: "A comprehensive directory of the interactive UI building blocks av
 
 Standard Markdown excels at basic text formatting, but professional technical documentation requires rich structural components to effectively communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
 
-<!-- SCREENSHOT: Montage of all container types on a single page — callouts (info, warning, danger, tip), tabs with code, steps, cards grid, hero section, and collapsible sections. -->
+::: callout tip "Migrating from Other Documentation Engines?"
+`docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g., `:::tabs` instead of `::: tabs`) is also supported for all containers.
+:::
+
+<!-- SCREENSHOT: Montage of all container types on a single page - callouts (info, warning, danger, tip), tabs with code, steps, cards grid, hero section, and collapsible sections. -->
 
 
 ## Block Syntax Reference

@@ -14,7 +14,7 @@ The output is a self-contained `site/` folder (or whatever you've configured as 
 ## One-Command Deployment
 
 ::: callout tip "New in v0.7.2"
-`docmd deploy` reads your `docmd.config.js` and generates deployment files personalised to your project — no generic templates.
+`docmd deploy` reads your `docmd.config.js` and generates deployment files personalised to your project - no generic templates.
 :::
 
 Instead of manually writing Dockerfiles and server configs, let docmd generate them for you:
@@ -37,19 +37,19 @@ The deploy command reads your configuration (or zero-config defaults) and inject
 | `layout.spa` | Controls whether SPA routing fallback is included |
 | Config file path | Dockerfile build step uses `--config` when non-default |
 
-No `docmd.config.js`? No problem — the command uses the same zero-config defaults as `docmd dev` and `docmd build`.
+No `docmd.config.js`? No problem - the command uses the same zero-config defaults as `docmd dev` and `docmd build`.
 
 ### Always In Sync
 
-Every run regenerates your deployment files to match your current config. Changed your site URL or output directory? Just re-run the deploy command — no need to manually track what changed.
+Every run regenerates your deployment files to match your current config. Changed your site URL or output directory? Just re-run the deploy command - no need to manually track what changed.
 
 Use `--force` only if you intentionally want to suppress any future confirmation prompts. By default, files are silently regenerated.
 
 ### Supported Targets
 
-*   [`docmd deploy --docker`](docker.md) — Optimised multi-stage Dockerfile with layer caching and version pinning.
-*   [`docmd deploy --nginx`](nginx.md) — Security-hardened nginx.conf with GZIP and immutable asset caching.
-*   [`docmd deploy --caddy`](caddy.md) — HTTPS-ready Caddyfile with automatic routing.
+*   [`docmd deploy --docker`](docker.md) - Optimised multi-stage Dockerfile with layer caching and version pinning.
+*   [`docmd deploy --nginx`](nginx.md) - Security-hardened nginx.conf with GZIP and immutable asset caching.
+*   [`docmd deploy --caddy`](caddy.md) - HTTPS-ready Caddyfile with automatic routing.
 
 Click each target above for detailed, service-specific documentation.
 
@@ -65,14 +65,14 @@ See the [CI/CD Deployment Guide](ci-cd.md) for automated workflows.
 
 `docmd` implements a micro-SPA router for smooth internal navigation. Every page is generated as its own `index.html` file, so:
 
-- **No rewrite rules needed** — direct URL access works because `/guide/setup` resolves to `/guide/setup/index.html`.
-- **Deep linking works** — out of the box, on every hosting platform.
+- **No rewrite rules needed** - direct URL access works because `/guide/setup` resolves to `/guide/setup/index.html`.
+- **Deep linking works** - out of the box, on every hosting platform.
 
 When `layout.spa` is set to `false` in your config, the deploy command omits SPA fallback routing from generated server configs.
 
 ## Production Checklist
 
-1.  **Site URL**: Set the `url` property in `docmd.config.js` — this drives canonical tags, sitemaps, social previews, and deployment file generation.
+1.  **Site URL**: Set the `url` property in `docmd.config.js` - this drives canonical tags, sitemaps, social previews, and deployment file generation.
 2.  **Redirects**: Migrating from another tool? Use the `redirects` config to preserve SEO rankings.
 3.  **Analytics**: Enable the `analytics` plugin to track engagement and search queries.
 4.  **AI Context**: Enable the `llms` plugin to generate `llms.txt` for AI agent ingestion.

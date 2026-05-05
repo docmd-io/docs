@@ -77,3 +77,7 @@ If you are upgrading from an older version of `docmd`, the following keys are au
 ::: callout tip
 Execute `docmd migrate` to automatically upgrade your configuration file to the latest schema while preserving a backup of your original settings.
 :::
+
+::: callout warning "Deprecated: editLink"
+The standalone `editLink` configuration option has been deprecated in favour of the [Git plugin](../plugins/git.md). The Git plugin provides the same edit link functionality plus additional features like last-updated timestamps and commit history tooltips. See the [migration guide](../plugins/git.md#migration-from-editlink) for details.
+:::

@@ -27,11 +27,11 @@ Opens `http://localhost:3000`. Your documentation is live.
 
 docmd scans your project and sets everything up:
 
-1. **Directory detection** — looks for `docs/`, `src/docs/`, `documentation/`, or any `.md` files
-2. **Navigation generation** — builds a nested sidebar from your folder structure
-3. **Metadata extraction** — reads `package.json` for the site title if available
-4. **Theme activation** — applies the default theme with system-aware light/dark mode
-5. **Search indexing** — enables built-in full-text search
+1. **Directory detection** - looks for `docs/`, `src/docs/`, `documentation/`, or any `.md` files
+2. **Navigation generation** - builds a nested sidebar from your folder structure
+3. **Metadata extraction** - reads `package.json` for the site title if available
+4. **Theme activation** - applies the default theme with system-aware light/dark mode
+5. **Search indexing** - enables built-in full-text search
 
 No `docmd.config.js` is needed. Add one later when you need versioning, plugins, or custom navigation.
 

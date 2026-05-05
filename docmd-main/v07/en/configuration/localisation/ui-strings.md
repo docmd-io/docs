@@ -5,7 +5,7 @@ description: "Customise system UI text per locale and understand automatic SEO t
 
 ## Built-in language support
 
-docmd and its official plugins (Search, Threads, etc.) ship with built-in translations for common languages. When you configure a supported locale, all system text — search placeholders, navigation labels, theme toggles — is automatically translated.
+docmd and its official plugins (Search, Threads, etc.) ship with built-in translations for common languages. When you configure a supported locale, all system text - search placeholders, navigation labels, theme toggles - is automatically translated.
 
 For unsupported languages or custom phrasing, the system falls back to English. You can override any string per locale.
 
@@ -76,7 +76,7 @@ docmd automatically generates `<link rel="alternate" hreflang="...">` tags for e
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-No configuration is required — these tags are injected into every page when i18n is enabled.
+No configuration is required - these tags are injected into every page when i18n is enabled.
 
 ::: callout info "noStyle Pages"
 The UI strings system described above applies to themed layout pages (server-side). For noStyle pages that use custom HTML, see the [client-side string replacement](../../content/no-style-pages/#string-replacement-i18n-for-nostyle) system which uses `data-i18n` attributes and JSON files in `assets/i18n/`.

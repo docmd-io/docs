@@ -93,7 +93,7 @@ function search(query: string, topK?: number): SearchResult[]
 
 ```typescript
 interface SearchResult {
-  score: number;       // Relevance score (0–1)
+  score: number;       // Relevance score (0-1)
   chunk: {
     file: string;      // Source file path
     heading?: string;   // Section heading

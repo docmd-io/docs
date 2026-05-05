@@ -5,6 +5,10 @@ description: "Convert standard ordered lists into high-impact visual timelines a
 
 The `steps` container is designed specifically for "How-to" guides and technical tutorials. It transforms a standard Markdown ordered list into a polished, numbered vertical timeline with automatic spacing and visual emphasis.
 
+::: callout info "Spaceless Syntax"
+Both `::: steps` and `:::steps` (spaceless) are supported. Use whichever style you prefer.
+:::
+
 ## Syntax
 
 Wrap any standard ordered list in a `::: steps` block.

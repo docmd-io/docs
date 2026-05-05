@@ -59,13 +59,13 @@ Every multi-project configuration **must** include a root project with `prefix: 
 
 ### 3. Project Configurations
 
-Each project directory has its own `docmd.config.js` with full independent configuration. Do **not** include `src` or `out` keys — the parent config provides those automatically.
+Each project directory has its own `docmd.config.js` with full independent configuration. Do **not** include `src` or `out` keys - the parent config provides those automatically.
 
 Each project can have completely independent:
-- **i18n** — different locales, different default languages
-- **Versioning** — different version numbers and structures
-- **Plugins** — enable only what each project needs
-- **Navigation** — custom sidebar for each project
+- **i18n** - different locales, different default languages
+- **Versioning** - different version numbers and structures
+- **Plugins** - enable only what each project needs
+- **Navigation** - custom sidebar for each project
 
 ## Assets
 
@@ -109,7 +109,7 @@ The server builds all projects and serves them from a single port:
 └──────────────────────────────────────────────────────────
 ```
 
-File changes in any project trigger a targeted rebuild with live reload. Only the affected project rebuilds — other projects remain untouched for fast iteration. Shared asset changes rebuild all projects.
+File changes in any project trigger a targeted rebuild with live reload. Only the affected project rebuilds - other projects remain untouched for fast iteration. Shared asset changes rebuild all projects.
 
 ## Building & Deployment
 
@@ -133,11 +133,11 @@ Deploy to any static hosting (GitHub Pages, Netlify, Vercel, Cloudflare Pages) w
 
 ## Rules & Constraints
 
-1. **Root project required** — one project must have `prefix: '/'`
-2. **No duplicate prefixes** — each project needs a unique URL prefix
-3. **No `src`/`out` in children** — the parent config provides these
-4. **Independent everything** — each project has its own title, versions, i18n, plugins, and navigation
-5. **Root config is minimal** — only `projects` should be in the root `docmd.config.js`
+1. **Root project required** - one project must have `prefix: '/'`
+2. **No duplicate prefixes** - each project needs a unique URL prefix
+3. **No `src`/`out` in children** - the parent config provides these
+4. **Independent everything** - each project has its own title, versions, i18n, plugins, and navigation
+5. **Root config is minimal** - only `projects` should be in the root `docmd.config.js`
 
 ## Example
 
@@ -157,10 +157,10 @@ Check the [documentation repo](external:https://github.com/docmd-io/docs).
 
 This produces:
 
-- `docs.docmd.io/` — main docmd documentation (versioned, multilingual)
-- `docs.docmd.io/search/` — docmd search documentation (independent versioning)
+- `docs.docmd.io/` - main docmd documentation (versioned, multilingual)
+- `docs.docmd.io/search/` - docmd search documentation (independent versioning)
 
 Each project has its own:
 - `docmd.config.js` with different title, URL, and plugins
-- Version structure (main has v0.5–v0.7, search has its own versioning)
+- Version structure (main has v0.5-v0.7, search has its own versioning)
 - Navigation and sidebar configuration

@@ -157,7 +157,7 @@ resolveHref('raw:docs/readme.md');
 
 ### Pre-computed Page URLs
 
-Every page object includes pre-computed URL data. Plugins can read these directly — zero computation needed.
+Every page object includes pre-computed URL data. Plugins can read these directly - zero computation needed.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {

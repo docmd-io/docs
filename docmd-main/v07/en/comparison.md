@@ -1,9 +1,9 @@
 ---
 title: "Comparison"
-description: "How docmd stacks up against Docusaurus, VitePress, MkDocs, Starlight, and Mintlify — real numbers, real features."
+description: "How docmd stacks up against Docusaurus, VitePress, MkDocs, Starlight, and Mintlify - real numbers, real features."
 ---
 
-You picked a documentation tool before. You'll pick one again. Here's what actually matters — and where docmd stands.
+You picked a documentation tool before. You'll pick one again. Here's what actually matters - and where docmd stands.
 
 ## Start writing in 3 seconds, not 30 minutes
 
@@ -27,7 +27,7 @@ Four commands, a generated project with ~250MB in `node_modules`, and a `docusau
 ```bash
 npx vitepress init
 ```
-Asks you 5 questions, generates a config file, then you run `vitepress dev`. Clean — but still requires scaffolding.
+Asks you 5 questions, generates a config file, then you run `vitepress dev`. Clean - but still requires scaffolding.
 
 == tab "MkDocs"
 ```bash
@@ -81,12 +81,12 @@ This is where most tools fall apart. You add 6 languages, translate 3 pages in H
 | Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
 
 ::: callout warning "What happens in VitePress and Docusaurus"
-If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time — unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localised warning callout.
+If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time - unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localised warning callout.
 :::
 
 ## Multi-project
 
-Organisations maintaining multiple tools under one domain need separate docs for each — different versions, different navigation, different release cycles. Most generators force you to either maintain separate sites or hack around plugin systems.
+Organisations maintaining multiple tools under one domain need separate docs for each - different versions, different navigation, different release cycles. Most generators force you to either maintain separate sites or hack around plugin systems.
 
 | Capability | docmd | Docusaurus | VitePress | MkDocs | Starlight |
 |:-----------|:-----:|:----------:|:---------:|:------:|:---------:|
@@ -108,10 +108,10 @@ module.exports = defineConfig({
   ]
 });
 ```
-Each project folder has its own `docmd.config.js` with independent configuration. One `docmd build` produces a single deployable directory — no reverse proxy, no nginx, no separate CI pipelines.
+Each project folder has its own `docmd.config.js` with independent configuration. One `docmd build` produces a single deployable directory - no reverse proxy, no nginx, no separate CI pipelines.
 :::
 
-Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration — each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native multi-project support.
+Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native multi-project support.
 
 ## Full feature matrix
 
@@ -143,7 +143,7 @@ Lines of config required for a site with versioning, i18n, search, and sitemap:
 
 ## Quality assurance
 
-docmd ships with a brute test suite that validates **25 distinct scenarios** across **85 assertions** — covering every feature in isolation and in combination. Every release must pass all 85 assertions and 13 internal failsafe checks before shipping.
+docmd ships with a brute test suite that validates **25 distinct scenarios** across **85 assertions** - covering every feature in isolation and in combination. Every release must pass all 85 assertions and 13 internal failsafe checks before shipping.
 
 ::: callout tip "Run the tests yourself"
 ```bash

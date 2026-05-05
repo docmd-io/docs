@@ -67,7 +67,7 @@ Service workers are typically disabled or bypassed in local development (`docmd 
 
 ### Fully Remove
 
-Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell — requiring no user action.
+Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell - requiring no user action.
 
 ::: callout warning
 The `manifest.webmanifest` and `service-worker.js` files from a previous build persist on disk until you clear your output directory (`site/` by default) with `docmd build` or `rm -rf site`. This is a filesystem artifact, not an active PWA.
@@ -106,11 +106,11 @@ export default {
 
 docmd resolves your PWA icon from the following cascade:
 
-1. `pwa.icons` — Manual array, used as-is
-2. `pwa.logo` — Single image path, used for both 192x192 and 512x512 entries
-3. `config.logo` — Your global site logo
-4. `config.favicon` — Your global favicon
-5. *(No icons declared in manifest)* — If none of the above are set
+1. `pwa.icons` - Manual array, used as-is
+2. `pwa.logo` - Single image path, used for both 192x192 and 512x512 entries
+3. `config.logo` - Your global site logo
+4. `config.favicon` - Your global favicon
+5. *(No icons declared in manifest)* - If none of the above are set
 
 ## Testing Locally
 

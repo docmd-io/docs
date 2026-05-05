@@ -5,7 +5,7 @@ description: "Wie der native SPA-Router von docmd und das intentionsbasierte Pre
 
 ## Problem
 
-Herkömmliche Multi-Page-Navigation, bei der jeder Klick auf einen Link ein vollständiges Neuladen des Browsers auslöst, erzeugt ein störendes "weißes Blinken" und unterbricht den Lesefluss. Der Browser muss den aktuellen Status verwerfen, neues HTML anfordern und CSS sowie JavaScript neu parsen – selbst wenn sich nur der zentrale Inhaltsbereich geändert hat.
+Herkömmliche Multi-Page-Navigation, bei der jeder Klick auf einen Link ein vollständiges Neuladen des Browsers auslöst, erzeugt ein störendes "weißes Blinken" und unterbricht den Lesefluss. Der Browser muss den aktuellen Status verwerfen, neues HTML anfordern und CSS sowie JavaScript neu parsen , selbst wenn sich nur der zentrale Inhaltsbereich geändert hat.
 
 ## Warum es wichtig ist
 
@@ -32,7 +32,7 @@ Anstatt die gesamte Seite neu zu rendern, aktualisiert `docmd` intelligent nur d
 
 ### 3. Lifecycle-Events für eigene Logik
 
-Da der Browser kein vollständiges Neuladen durchführt, werden Standard-Events wie `DOMContentLoaded` nur einmal ausgelöst. Um nach jeder Navigation eigenen JavaScript-Code auszuführen – wie das Neuinitialisieren eines Drittanbieter-Widgets oder das Tracking von Seitenaufrufen – sollten Sie auf das Event `docmd:page-mounted` hören.
+Da der Browser kein vollständiges Neuladen durchführt, werden Standard-Events wie `DOMContentLoaded` nur einmal ausgelöst. Um nach jeder Navigation eigenen JavaScript-Code auszuführen , wie das Neuinitialisieren eines Drittanbieter-Widgets oder das Tracking von Seitenaufrufen , sollten Sie auf das Event `docmd:page-mounted` hören.
 
 ```javascript
 // Beispiel: Neuinitialisierung einer eigenen Komponente nach der Navigation

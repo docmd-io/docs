@@ -5,6 +5,10 @@ description: "Embed interactive accordion-style toggles for FAQs, deep-dive cont
 
 The `collapsible` container creates an interactive, toggleable section (accordion). This pattern is ideal for FAQs, detailed technical configuration, or any secondary information that should be accessible without cluttering the primary documentation flow.
 
+::: callout info "VitePress Alias"
+If you're migrating from **VitePress**, you can use `:::details` as an alias for `:::collapsible`. Spaceless syntax like `:::collapsible` also works.
+:::
+
 ## Syntax
 
 ```markdown

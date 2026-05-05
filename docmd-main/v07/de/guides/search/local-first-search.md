@@ -5,7 +5,7 @@ description: "So optimieren Sie Ihre Dokumentationsinhalte für die leistungssta
 
 ## Problem
 
-Local-First-Suchmaschinen laufen vollständig im Browser und liefern sofortige Ergebnisse ohne Server-Umweg. Das bedeutet jedoch auch, dass sie durch den Speicher und die Rechenleistung des Browsers begrenzt sind. Wenn ein Suchindex nicht ordnungsgemäß optimiert ist, kann er übermäßig viel RAM verbrauchen, was dazu führt, dass der Browser-Tab ruckelt oder sogar abstürzt – besonders auf mobilen Geräten.
+Local-First-Suchmaschinen laufen vollständig im Browser und liefern sofortige Ergebnisse ohne Server-Umweg. Das bedeutet jedoch auch, dass sie durch den Speicher und die Rechenleistung des Browsers begrenzt sind. Wenn ein Suchindex nicht ordnungsgemäß optimiert ist, kann er übermäßig viel RAM verbrauchen, was dazu führt, dass der Browser-Tab ruckelt oder sogar abstürzt , besonders auf mobilen Geräten.
 
 ## Warum es wichtig ist
 

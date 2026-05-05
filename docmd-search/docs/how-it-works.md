@@ -84,7 +84,7 @@ For larger indexes, additional compression kicks in automatically:
 | Chunk count | Compression | Ratio | Description |
 | :---------- | :---------- | :---- | :---------- |
 | ≤ 100 | None | 1:1 | Raw Int8 vectors, no overhead |
-| 101–1000 | Ternary | ~12:1 | Vectors reduced to {-1, 0, +1} values |
+| 101-1000 | Ternary | ~12:1 | Vectors reduced to {-1, 0, +1} values |
 | > 1000 | Product Quantization | ~24:1 | Codebook-based, highest compression |
 
 ::: callout tip "Automatic selection"

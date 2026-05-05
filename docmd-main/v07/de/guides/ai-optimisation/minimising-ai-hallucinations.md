@@ -5,7 +5,7 @@ description: "So schreiben Sie explizite, in sich geschlossene Dokumentationen, 
 
 ## Problem
 
-KI-Modelle sind Vorhersagesysteme, keine Logiksysteme. Wenn ein API-Anwendungsbeispiel unvollständig ist, mehrdeutige Platzhalter verwendet oder auf implizitem Wissen beruht, wird die KI oft "halluzinieren" – sie erfindet die fehlenden Teile basierend auf allgemeinen Mustern, die sie während des Trainings gelernt hat. Diese Erfindungen sind für Ihre spezifische Software häufig falsch, was zu Frustration bei den Entwicklern führt.
+KI-Modelle sind Vorhersagesysteme, keine Logiksysteme. Wenn ein API-Anwendungsbeispiel unvollständig ist, mehrdeutige Platzhalter verwendet oder auf implizitem Wissen beruht, wird die KI oft "halluzinieren" , sie erfindet die fehlenden Teile basierend auf allgemeinen Mustern, die sie während des Trainings gelernt hat. Diese Erfindungen sind für Ihre spezifische Software häufig falsch, was zu Frustration bei den Entwicklern führt.
 
 ## Warum es wichtig ist
 

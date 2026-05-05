@@ -13,7 +13,7 @@ Erweiterbarkeit ist das, was ein statisches Tool von einem professionellen Dokum
 
 ## Ansatz
 
-`docmd` verfügt über eine robuste, Hook-basierte [Plugin-API](../../plugins/api). Sie können einfache Node.js-Module schreiben, die den Dokumentations-Lifecycle in verschiedenen Phasen abfangen – von der initialen Konfiguration bis zur finalen HTML-Generierung – und so Inhalte und Verhalten beliebig anpassen.
+`docmd` verfügt über eine robuste, Hook-basierte [Plugin-API](../../plugins/api). Sie können einfache Node.js-Module schreiben, die den Dokumentations-Lifecycle in verschiedenen Phasen abfangen , von der initialen Konfiguration bis zur finalen HTML-Generierung , und so Inhalte und Verhalten beliebig anpassen.
 
 ## Implementierung
 

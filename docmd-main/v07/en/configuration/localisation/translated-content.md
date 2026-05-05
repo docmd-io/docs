@@ -5,7 +5,7 @@ description: "Organise translations in locale subdirectories with per-file fallb
 
 ## Directory structure
 
-Every locale — including the default — lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
+Every locale - including the default - lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
 
 ```
 docs/
@@ -23,7 +23,7 @@ docs/
     └── index.md            ← only the homepage translated
 ```
 
-The source directory is a clean container — it holds only locale folders. No content files sit at the root level when i18n is enabled.
+The source directory is a clean container - it holds only locale folders. No content files sit at the root level when i18n is enabled.
 
 ::: callout info "Folder names are your choice"
 The folder names come directly from the `id` values in your config. If your config says `{ id: 'fr-ca' }`, your folder is `docs/fr-ca/`. If Hindi is your default locale (`default: 'hi'`), then `docs/hi/` is the canonical content directory.
@@ -40,7 +40,7 @@ When a page falls back, docmd can display a translated callout informing viewers
 
 ## Locale-exclusive pages
 
-A non-default locale can also have pages that don't exist in the default locale. These are rendered only for that locale — they don't appear in other locales.
+A non-default locale can also have pages that don't exist in the default locale. These are rendered only for that locale - they don't appear in other locales.
 
 ## Translate the navigation
 
@@ -63,7 +63,7 @@ A locale's `navigation.json` uses the same format:
 ```
 
 ::: callout tip "Partial navigation"
-You only need to create a locale `navigation.json` when you want translated labels. If it's missing, the default locale's navigation is used — pages still render, just with untranslated labels.
+You only need to create a locale `navigation.json` when you want translated labels. If it's missing, the default locale's navigation is used - pages still render, just with untranslated labels.
 :::
 
 ## Versioning and i18n together
@@ -79,7 +79,7 @@ docs-v1/                 ← old version
   navigation.json
 ```
 
-Old versions that predate i18n work automatically — docmd reads them directly when no locale subdirectories are present. Only the default locale renders the old version. To add translations to an old version, create a locale subdirectory inside it:
+Old versions that predate i18n work automatically - docmd reads them directly when no locale subdirectories are present. Only the default locale renders the old version. To add translations to an old version, create a locale subdirectory inside it:
 
 ```
 docs-v1/

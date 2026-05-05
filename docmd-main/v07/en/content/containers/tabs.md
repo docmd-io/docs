@@ -5,6 +5,10 @@ description: "Organise dense, alternative, or multi-language information into sw
 
 Tabs are the optimal UI pattern for presenting mutually exclusive or related data sets (e.g., "Install via NPM vs. Yarn" or "macOS vs. Windows" instructions) within a compact, interactive format.
 
+::: callout info "Spaceless Syntax"
+Both `::: tabs` and `:::tabs` (spaceless) are supported. Use whichever style you prefer.
+:::
+
 ## Syntax Reference
 
 The `tabs` container utilises the specialised sub-delimiter `== tab "Label"`. You can optionally add an icon using the `icon:name` syntax.

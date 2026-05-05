@@ -1,11 +1,11 @@
 ---
 title: "Vorhandene Markdown-Repos"
-description: "So generieren Sie aus Ihren vorhandenen Markdown-Dateien sofort eine professionelle Dokumentations-Website – ganz ohne Konfiguration."
+description: "So generieren Sie aus Ihren vorhandenen Markdown-Dateien sofort eine professionelle Dokumentations-Website , ganz ohne Konfiguration."
 ---
 
 ## Problem
 
-Sie verfügen über ein bestehendes Repository mit hunderten oder tausenden von Markdown-Dateien – vielleicht ein altes Wiki, ein Obsidian-Vault oder eine Sammlung technischer Notizen. Das manuelle Konvertieren von Frontmatter, das Reparieren fehlerhafter Links und das Umstrukturieren von Dateien für eine neue Engine ist eine gewaltige Aufgabe, die Teams oft davon abhält, ihre Dokumentation zu modernisieren.
+Sie verfügen über ein bestehendes Repository mit hunderten oder tausenden von Markdown-Dateien , vielleicht ein altes Wiki, ein Obsidian-Vault oder eine Sammlung technischer Notizen. Das manuelle Konvertieren von Frontmatter, das Reparieren fehlerhafter Links und das Umstrukturieren von Dateien für eine neue Engine ist eine gewaltige Aufgabe, die Teams oft davon abhält, ihre Dokumentation zu modernisieren.
 
 ## Warum es wichtig ist
 

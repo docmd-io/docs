@@ -247,6 +247,10 @@
         "path": "/plugins/math"
       },
       {
+        "title": "Git",
+        "path": "/plugins/git"
+      },
+      {
         "title": "Plugins erstellen",
         "path": "/plugins/building-plugins"
       }

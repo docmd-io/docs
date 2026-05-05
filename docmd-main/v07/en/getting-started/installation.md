@@ -36,7 +36,7 @@ bunx docmd dev
 
 This pins the version across your team and CI/CD pipeline.
 
-<!-- SCREENSHOT: Terminal output showing a successful `npx @docmd/core init` run — the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
+<!-- SCREENSHOT: Terminal output showing a successful `npx @docmd/core init` run - the generated file tree with docmd.config.js, docs/index.md, and the 'Ready!' message. -->
 
 ::: callout tip "After local install"
 Once `@docmd/core` is a project dependency, use `npx @docmd/core` instead of `npx @docmd/core` for all commands.

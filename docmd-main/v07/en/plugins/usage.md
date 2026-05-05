@@ -1,6 +1,6 @@
 ---
 title: "Using Plugins"
-description: "Install, configure, and manage docmd plugins — from required defaults to optional add-ons."
+description: "Install, configure, and manage docmd plugins - from required defaults to optional add-ons."
 ---
 
 `docmd` features a modular plugin architecture. Required plugins ship with the core and need no installation. Optional plugins can be installed with a single CLI command.
@@ -27,7 +27,7 @@ docmd add <plugin-name> -V
 
 ## Required Plugins
 
-These plugins are bundled with `@docmd/core` — no installation needed. Enable them in your `docmd.config.js`:
+These plugins are bundled with `@docmd/core` - no installation needed. Enable them in your `docmd.config.js`:
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -39,10 +39,15 @@ export default defineConfig({
     sitemap: {},                       // Automatic sitemap.xml generation
     analytics: {},                     // Google Analytics v4
     llms: {},                          // LLM context generation (llms.txt)
-    mermaid: {}                        // Native interactive diagrams
+    mermaid: {},                       // Native interactive diagrams
+    git: {}                            // Last updated timestamps and commit history
   }
 });
 ```
+
+::: callout tip "Git Plugin"
+The Git plugin automatically detects if your project is in a Git repository. If not, it gracefully disables itself. No configuration is needed for basic last-updated timestamps - just ensure your docs are in a Git repo.
+:::
 
 ## Optional Plugins
 
@@ -53,6 +58,27 @@ Optional plugins require installation before enabling.
 | [PWA](pwa.md) | `docmd add pwa` | Progressive Web App support with offline caching |
 | [Threads](threads.md) | `docmd add threads` | Inline discussion comments stored in your markdown |
 | [Math](math.md) | `docmd add math` | Native KaTeX and LaTeX mathematics integration |
+
+## Auto-Installation
+
+When you add an official plugin to your `docmd.config.js` that isn't installed, docmd automatically downloads and installs it on the next build. This works for all plugins in the [official registry](/plugins/usage).
+
+```javascript
+// docmd.config.js
+plugins: {
+  pwa: {}  // Not installed? docmd will auto-install it
+}
+```
+
+The auto-installer:
+- Only works for official `@docmd/plugin-*` packages
+- Installs the exact version matching your `@docmd/core` version
+- Uses your project's package manager (npm, pnpm, yarn, or bun)
+- Shows progress in the terminal
+
+::: callout warning "Third-Party Plugins"
+Auto-installation only works for official plugins in the registry. Third-party plugins must be installed manually using your package manager.
+:::
 
 ## Plugin Scopes and `noStyle` Overrides
 

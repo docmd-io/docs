@@ -73,4 +73,4 @@ Verbessern Sie Ihren Workflow, indem Sie für jeden Pull Request kurzlebige Prev
 
 ## Abwägungen
 
-Automatisiertes CI/CD erfordert initialen Setup-Aufwand und die Verwaltung von Secrets (z. B. API-Tokens). Die langfristigen Vorteile eines automatisierten Deployment-Prozesses – darunter weniger menschliche Fehler und schnellere Update-Zyklen – überwiegen jedoch bei weitem die Anfangsinvestition. Stellen Sie bei großen Sites sicher, dass Ihr Workflow nur ausgelöst wird, wenn Dateien in Ihrem Dokumentationsverzeichnis geändert wurden, um CI-Minuten zu sparen.
+Automatisiertes CI/CD erfordert initialen Setup-Aufwand und die Verwaltung von Secrets (z. B. API-Tokens). Die langfristigen Vorteile eines automatisierten Deployment-Prozesses , darunter weniger menschliche Fehler und schnellere Update-Zyklen , überwiegen jedoch bei weitem die Anfangsinvestition. Stellen Sie bei großen Sites sicher, dass Ihr Workflow nur ausgelöst wird, wenn Dateien in Ihrem Dokumentationsverzeichnis geändert wurden, um CI-Minuten zu sparen.

@@ -112,7 +112,7 @@ export default defineConfig({
 ### Plugin Resolution
 The `docmd` engine resolves plugin names as follows:
 - **Official shorthands** (`math`, `search`, `seo`, etc.) automatically expand to `@docmd/plugin-<name>`. Since the `@docmd` npm scope is owned by the project, only official packages can exist under it.
-- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins — this prevents confusion and eliminates supply-chain attack vectors entirely.
+- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins - this prevents confusion and eliminates supply-chain attack vectors entirely.
 
 ### Plugin Isolation
 
@@ -235,7 +235,7 @@ export default {
     capabilities: ['actions', 'events']
   },
 
-  // Server-side action — browser calls via docmd.call()
+  // Server-side action - browser calls via docmd.call()
   actions: {
     'my-plugin:save-note': async (payload, ctx) => {
       const content = await ctx.readFile(payload.file);
@@ -245,7 +245,7 @@ export default {
     }
   },
 
-  // Server-side event — browser sends via docmd.send()
+  // Server-side event - browser sends via docmd.send()
   events: {
     'my-plugin:page-viewed': (data, ctx) => {
       console.log(`Page viewed: ${data.path}`);
@@ -266,7 +266,7 @@ The `ctx` (ActionContext) object provides:
 | `ctx.projectRoot` | Absolute path to the project root. |
 | `ctx.config` | Current docmd site configuration. |
 
-All file operations are sandboxed to the project root — path traversal attempts are rejected automatically.
+All file operations are sandboxed to the project root - path traversal attempts are rejected automatically.
 
 ::: callout info "Dev Mode Only 🛡️"
 The WebSocket RPC system is only active during `docmd dev`. Production builds do not include the API client or any server-side action handling.

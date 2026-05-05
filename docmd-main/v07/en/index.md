@@ -16,13 +16,13 @@ Markdown to production docs in one command. Static HTML for SEO. SPA for speed. 
 
 ## Start
 
-Get a production documentation site running in seconds — no boilerplate, no config files.
+Get a production documentation site running in seconds - no boilerplate, no config files.
 
 ```bash
 npx @docmd/core dev
 ```
 
-That's it. Write Markdown in a `docs/` folder and docmd builds a full documentation site with navigation, search, SEO, sitemap, and more — all out of the box.
+That's it. Write Markdown in a `docs/` folder and docmd builds a full documentation site with navigation, search, SEO, sitemap, and more - all out of the box.
 
 ## Core Capabilities
 
@@ -63,7 +63,7 @@ First-class multi-language support with locale-first URLs, per-locale search, an
 
 ## Extending Markdown
 
-Go beyond static text. docmd provides rich container syntax directly in Markdown — callouts, tabs, cards, grids, hero sections, collapsible sections, and more.
+Go beyond static text. docmd provides rich container syntax directly in Markdown - callouts, tabs, cards, grids, hero sections, collapsible sections, and more.
 
 ::: button "Explore Containers" ./content/containers/index.md icon:blocks
 

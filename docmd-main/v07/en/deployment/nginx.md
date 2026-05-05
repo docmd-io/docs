@@ -65,4 +65,4 @@ server {
 
 ### Re-Generating
 
-Changed your site URL or switched off SPA mode? Just run `docmd deploy --nginx` again — the config file is regenerated to match your current `docmd.config.js`.
+Changed your site URL or switched off SPA mode? Just run `docmd deploy --nginx` again - the config file is regenerated to match your current `docmd.config.js`.

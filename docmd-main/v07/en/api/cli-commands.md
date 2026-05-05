@@ -1,6 +1,6 @@
 ---
 title: "CLI Commands"
-description: "Command-line reference for docmd — all available commands and options."
+description: "Command-line reference for docmd - all available commands and options."
 ---
 
 ## Commands Overview
@@ -25,7 +25,7 @@ description: "Command-line reference for docmd — all available commands and op
 | `--verbose` | `-V` | Show detailed build logs |
 | `--version` | `-v` | Output the installed version |
 | `--help` | `-h` | Display help menu |
-| `--cwd <path>` | — | Override working directory (for monorepos) |
+| `--cwd <path>` | - | Override working directory (for monorepos) |
 
 ## `docmd init`
 
@@ -36,8 +36,8 @@ docmd init
 ```
 
 Creates:
-- `docs/index.md` — boilerplate home page
-- `docmd.config.js` — recommended defaults
+- `docs/index.md` - boilerplate home page
+- `docmd.config.js` - recommended defaults
 - Updated `package.json` with build scripts
 
 ## `docmd dev`
@@ -63,7 +63,7 @@ docmd build [options]
 
 | Option | Alias | Description |
 |:-------|:------|:------------|
-| `--offline` | — | Rewrite links to `.html` for `file://` browsing |
+| `--offline` | - | Rewrite links to `.html` for `file://` browsing |
 | `--config <path>` | `-c` | Path to config file |
 
 ## `docmd live`

@@ -3,7 +3,7 @@ title: "Linking & Referencing"
 description: "Master internal cross-linking, external resources, and reliable asset referencing with docmd's automatic URL normalisation."
 ---
 
-`docmd` provides a robust, filesystem-aware linking system. Write links to your source `.md` files naturally — using any format you prefer — and the engine will automatically normalise them into clean, SEO-optimised URLs for production.
+`docmd` provides a robust, filesystem-aware linking system. Write links to your source `.md` files naturally - using any format you prefer - and the engine will automatically normalise them into clean, SEO-optimised URLs for production.
 
 ::: callout info "Write Naturally, Ship Perfectly"
 You do not need to follow any special linking conventions. Whether you write `overview.md`, `overview/`, or just `overview`, the build engine produces the same clean, trailing-slash URL. Every internal link is automatically normalised at build time so you can focus on content, not URL formatting.
@@ -11,15 +11,15 @@ You do not need to follow any special linking conventions. Whether you write `ov
 
 ## How URL Normalisation Works
 
-During the build process, the engine applies a consistent set of rules to every internal link — in Markdown text, button containers, tags, and navigation configuration alike:
+During the build process, the engine applies a consistent set of rules to every internal link - in Markdown text, button containers, tags, and navigation configuration alike:
 
 | What You Write | What Gets Rendered | Why |
 | :--- | :--- | :--- |
 | `overview.md` | `overview/` | `.md` extension stripped, trailing `/` added |
 | `overview` | `overview/` | Trailing `/` added automatically |
-| `overview/` | `overview/` | Already correct — no change |
+| `overview/` | `overview/` | Already correct - no change |
 | `api/commands.md` | `api/commands/` | Subdirectory link normalised |
-| `localisation/index.md` | `localisation/` | `index` stripped — folder is the canonical URL |
+| `localisation/index.md` | `localisation/` | `index` stripped - folder is the canonical URL |
 | `../index.md` | `../` | Parent directory index resolved cleanly |
 | `overview.md#settings` | `overview/#settings` | Hash fragment preserved through normalisation |
 | `./guide.md` | `./guide/` | Relative prefix preserved |
@@ -51,7 +51,7 @@ Hash fragments are preserved through the normalisation process. The link above r
 
 ## Opening Links in a New Tab
 
-Use the `external:` prefix on any link to force it to open in a new tab. This works universally — in standard Markdown links, button containers, tags, and anywhere else you can write a URL.
+Use the `external:` prefix on any link to force it to open in a new tab. This works universally - in standard Markdown links, button containers, tags, and anywhere else you can write a URL.
 
 ```markdown
 <!-- Force any link to open in a new tab -->
@@ -63,7 +63,7 @@ Use the `external:` prefix on any link to force it to open in a new tab. This wo
 
 By default, all links (including HTTP/HTTPS) open in the same window. Use the `external:` prefix only when you want a new tab.
 
-The `external:` prefix is **stripped** from the rendered URL — it is purely a build-time signal.
+The `external:` prefix is **stripped** from the rendered URL - it is purely a build-time signal.
 
 ## Linking to Raw Files
 
@@ -73,11 +73,11 @@ By default, the engine strips `.md` extensions and normalises paths. If you genu
 [View Raw Source](raw:docs/readme.md)
 ```
 
-The `raw:` prefix bypasses all normalisation — the extension and path are preserved exactly as written. Like `external:`, the prefix itself is stripped from the rendered URL.
+The `raw:` prefix bypasses all normalisation - the extension and path are preserved exactly as written. Like `external:`, the prefix itself is stripped from the rendered URL.
 
 ## Button Containers
 
-The `::: button` container supports the same linking conventions as standard Markdown links — including `external:` and `raw:` prefixes:
+The `::: button` container supports the same linking conventions as standard Markdown links - including `external:` and `raw:` prefixes:
 
 ```markdown
 ::: button "Get Started" ./getting-started/quick-start.md icon:rocket
@@ -141,9 +141,9 @@ When linking to a directory's index page, use the folder path rather than explic
 
 The engine respects standard browser protocols for external resources. These links are never modified.
 
-*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)` — opens in same tab (use `external:` prefix for new tab)
-*   **Mail Protocol**: `[Support Channel](mailto:help@docmd.io)` — not opened in a new tab
-*   **Asset Protocol**: `[Download CLI Binary](/assets/bin/docmd-mac.zip)` — not normalised
+*   **Global HTTPS**: `[docmd Homepage](https://docmd.io)` - opens in same tab (use `external:` prefix for new tab)
+*   **Mail Protocol**: `[Support Channel](mailto:help@docmd.io)` - not opened in a new tab
+*   **Asset Protocol**: `[Download CLI Binary](/assets/bin/docmd-mac.zip)` - not normalised
 
 ## Static Asset Referencing
 

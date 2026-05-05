@@ -77,7 +77,7 @@ bunx @docmd/core build
 ```
 :::
 
-Outputs a static site to `./site/`. The output is entirely static HTML — deploy it to GitHub Pages, Vercel, Netlify, or any static host.
+Outputs a static site to `./site/`. The output is entirely static HTML - deploy it to GitHub Pages, Vercel, Netlify, or any static host.
 
 Verify locally before deploying:
 

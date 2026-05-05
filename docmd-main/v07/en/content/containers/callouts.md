@@ -5,6 +5,14 @@ description: "Highlight critical warnings, pro-tips, and background context usin
 
 Callouts are used to isolate information that requires the reader's immediate attention. `docmd` provides five semantic types, each featuring distinct visual styling and themed iconography.
 
+::: callout info "Migration-Friendly Aliases"
+If you're migrating from **VitePress** or **Docusaurus**, you can use their native syntax directly:
+- `:::tip`, `:::warning`, `:::danger`, `:::info` (VitePress)
+- `:::note`, `:::caution` (Docusaurus)
+
+These aliases render identically to their `docmd` equivalents. Spaceless syntax like `:::callout` also works.
+:::
+
 ## Syntax Reference
 
 ```markdown
