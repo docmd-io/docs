@@ -104,7 +104,11 @@ module.exports = defineConfig({
       twitter: { cardType: 'summary_large_image' }
     },
     analytics: { googleV4: { measurementId: 'G-YGLJ5HPMM3' } },
-    math: {}
+    math: {},
+    git: {
+      repo: 'https://github.com/docmd-io/docmd',
+      branch: 'main'
+    }
   },
 
   // --- Internationalisation ---
