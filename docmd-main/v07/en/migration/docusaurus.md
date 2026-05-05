@@ -56,7 +56,18 @@ This is a helpful tip.
 :::
 ```
 
-**docmd:** (Learning curve is almost 0 except few changed keywords designed for better UX. `docmd` natively supports Docusaurus-style admonitions as Callouts).
+::: callout success "Zero Changes Required"
+As of `docmd` 0.7.8, Docusaurus admonition syntax works **without any modification**. The following aliases are fully supported:
+- `:::note` → renders as `callout info`
+- `:::tip` → renders as `callout tip`
+- `:::info` → renders as `callout info`
+- `:::caution` → renders as `callout warning`
+- `:::danger` → renders as `callout danger`
+
+Spaceless syntax is also supported. Your existing Docusaurus admonitions will render correctly in `docmd` without changes.
+:::
+
+**docmd native syntax** (optional, provides more features like custom icons):
 ```markdown
 ::: callout tip "My Tip"
 This is a helpful tip.

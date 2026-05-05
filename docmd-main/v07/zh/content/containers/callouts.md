@@ -5,6 +5,14 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 
 标注用于隔离那些需要读者立即注意的信息。`docmd` 提供了五种语义类型，每种都具有独特的视觉样式和主题图标。
 
+::: callout info "迁移友好的别名"
+如果您从 **VitePress** 或 **Docusaurus** 迁移，可以直接使用它们的原生语法：
+- `:::tip`、`:::warning`、`:::danger`、`:::info`（VitePress）
+- `:::note`、`:::caution`（Docusaurus）
+
+这些别名的渲染效果与 `docmd` 等效语法完全相同。无空格语法如 `:::callout` 也同样支持。
+:::
+
 ## 语法参考
 
 ```markdown

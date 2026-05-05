@@ -5,6 +5,10 @@ description: "Erweitern Sie Standard-Markdown mit integrierten interaktiven Komp
 
 `docmd`-Container ermöglichen es Ihnen, komplexe UI-Elemente wie Buttons, Cards, ausklappbare Abschnitte und Tabs direkt in Ihre Dokumentationsquellen einzufügen, ohne HTML oder CSS schreiben zu müssen.
 
+::: callout tip "Migration von anderen Dokumentations-Engines?"
+`docmd` unterstützt Syntax-Aliase von **VitePress** und **Docusaurus** direkt. Container wie `:::tip`, `:::warning`, `:::note`, `:::details` und `:::caution` funktionieren ohne Änderung. Leerzeichenlose Syntax (z.B. `:::tabs` statt `::: tabs`) wird ebenfalls für alle Container unterstützt.
+:::
+
 ## Block-Syntax-Referenz
 
 Alle Container nutzen eine konsistente Block-Syntax, die eine vorhersehbare Bearbeitungserfahrung im gesamten Projekt gewährleistet.

@@ -5,6 +5,10 @@ description: "为常见问题、深度内容和剧透内容嵌入交互式手风
 
 `collapsible` 容器创建一个交互式的、可切换的区域（手风琴）。这种模式非常适合常见问题 (FAQ)、详细的技术配置，或任何应该在不干扰主要文档流程的情况下可以访问的次要信息。
 
+::: callout info "VitePress 别名"
+如果您从 **VitePress** 迁移，可以使用 `:::details` 作为 `:::collapsible` 的别名。无空格语法如 `:::collapsible` 也同样支持。
+:::
+
 ## 语法
 
 ```markdown

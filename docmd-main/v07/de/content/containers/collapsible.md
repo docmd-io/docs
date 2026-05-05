@@ -5,6 +5,10 @@ description: "Betten Sie interaktive Umschalter im Akkordeon-Stil für FAQs, ver
 
 Der `collapsible`-Container erstellt einen interaktiven, umschaltbaren Abschnitt (Akkordeon). Dieses Muster ist ideal für FAQs, detaillierte technische Konfigurationen oder alle sekundären Informationen, die zugänglich sein sollen, ohne den primären Dokumentationsfluss zu überladen.
 
+::: callout info "VitePress-Alias"
+Wenn Sie von **VitePress** migrieren, können Sie `:::details` als Alias für `:::collapsible` verwenden. Leerzeichenlose Syntax wie `:::collapsible` funktioniert ebenfalls.
+:::
+
 ## Syntax
 
 ```markdown

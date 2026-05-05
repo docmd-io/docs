@@ -82,6 +82,17 @@ If you used "Material for MkDocs", you likely relied on Python Markdown extensio
     This is an admonition content block.
 ```
 
+::: callout warning "Manual Conversion Required"
+MkDocs uses `!!!` syntax for admonitions, which differs from the `:::` syntax used by `docmd`, VitePress, and Docusaurus. You will need to convert these manually or use a find-and-replace tool.
+
+**Mapping:**
+- `!!! note` → `::: callout info` or `:::note`
+- `!!! tip` → `::: callout tip` or `:::tip`
+- `!!! warning` → `::: callout warning` or `:::warning`
+- `!!! danger` → `::: callout danger` or `:::danger`
+- `!!! example` → `::: callout info`
+:::
+
 **docmd:**
 ```markdown
 ::: callout info "Optional Title"

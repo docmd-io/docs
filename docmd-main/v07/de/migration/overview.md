@@ -26,10 +26,17 @@ Anschließend können Sie direkt `npx @docmd/core dev` ausführen, um Ihre Inhal
 | **Markdown-Dateien** | ✅ Ja, alle `.md` und `.mdx` Dateien werden nach `docs/` verschoben |
 | **Verzeichnisstruktur** | ✅ Ja, Ihre Ordner-Verschachtelung bleibt erhalten |
 | **Website-Titel** | ✅ Ja, aus Ihrer Konfiguration extrahiert |
+| **Container-Syntax** | ✅ Ja, VitePress/Docusaurus-Container funktionieren ohne Änderungen |
 | **Navigation / Sidebar** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
 | **Lokalisierung (i18n)** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
 | **Versionierung** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
 | **Eigene React/Vue-Komponenten** | ❌ Nein, diese müssen durch `docmd` Container ersetzt werden |
+
+::: callout success "Container-Syntax-Kompatibilität"
+Ab `docmd` 0.7.8 funktioniert die Container-Syntax von **VitePress** (`:::tip`, `:::warning`, `:::danger`, `:::info`, `:::details`) und **Docusaurus** (`:::note`, `:::caution`) ohne Änderung. Ihre bestehenden Admonitions und ausklappbaren Abschnitte werden in `docmd` korrekt gerendert.
+
+**MkDocs** verwendet `!!!`-Syntax, die eine manuelle Konvertierung in das `:::`-Format erfordert.
+:::
 
 ## Warum Navigation und i18n nicht automatisch migriert werden
 

@@ -26,10 +26,17 @@ You can then run `npx @docmd/core dev` immediately to see your content rendered 
 | **Markdown Files** | ✅ Yes, all `.md` and `.mdx` files are moved to `docs/` |
 | **Directory Structure** | ✅ Yes, your folder nesting is preserved |
 | **Site Title** | ✅ Yes, extracted from your config |
+| **Container Syntax** | ✅ Yes, VitePress/Docusaurus containers work without changes |
 | **Navigation / Sidebar** | ⚠️ **No**, requires manual mapping |
 | **Localisation (i18n)** | ⚠️ **No**, requires manual mapping |
 | **Versioning** | ⚠️ **No**, requires manual mapping |
 | **Custom React/Vue Components** | ❌ No, these must be replaced with `docmd` Containers |
+
+::: callout success "Container Syntax Compatibility"
+As of `docmd` 0.7.8, container syntax from **VitePress** (`:::tip`, `:::warning`, `:::danger`, `:::info`, `:::details`) and **Docusaurus** (`:::note`, `:::caution`) works without modification. Your existing admonitions and collapsible sections will render correctly in `docmd`.
+
+**MkDocs** uses `!!!` syntax which requires manual conversion to `:::` format.
+:::
 
 ## Why Navigation and i18n Aren't Automatically Migrated
 

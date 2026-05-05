@@ -93,8 +93,19 @@ This is an info box.
 This is an info box.
 :::
 ```
-*Note: VitePress uses `info`, `tip`, `warning`, `danger`, `details`. `docmd` supports these directly, but you may want to review the full list of [docmd Callouts](../content/containers/callouts.md).*
+
+::: callout success "Zero Changes Required"
+As of `docmd` 0.7.8, VitePress container syntax works **without any modification**. The following aliases are fully supported:
+- `:::tip` → renders as `callout tip`
+- `:::warning` → renders as `callout warning`
+- `:::danger` → renders as `callout danger`
+- `:::info` → renders as `callout info`
+- `:::details` → renders as `collapsible`
+
+Spaceless syntax (e.g., `:::tip` instead of `::: tip`) is also supported. Your existing VitePress content will render correctly in `docmd` without changes.
+:::
 
 ## Next Steps
 
 - Explore `docmd`'s [Build & Deploy](../deployment/index.md) guide since `docmd` does not rely on Vite's build pipeline.
+- Review the full list of [docmd Containers](../content/containers/index.md) for additional UI components.
