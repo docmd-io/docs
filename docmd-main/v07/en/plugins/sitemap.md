@@ -3,7 +3,7 @@ title: "Sitemap Plugin"
 description: "Automatically generate a standard-compliant sitemap.xml for better search engine discovery."
 ---
 
-The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages—including deep links within versioned documentation—are crawled and indexed.
+The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages - including deep links within versioned documentation - are crawled and indexed.
 
 ## Configuration
 
