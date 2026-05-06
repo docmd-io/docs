@@ -5,8 +5,8 @@ description: "直接在 Markdown 页面中从 JSON 或 YAML 规范文件渲染 O
 
 **OpenAPI 插件**将 OpenAPI 3.x 规范文件转换为结构化的 API 参考页面——在构建时渲染，无需客户端 JavaScript，无需第三方依赖。每个端点、参数、请求体和响应都转换为语义化 HTML 表格。
 
-::: callout info "可选插件"
-OpenAPI 插件**未**与 `@docmd/core` 捆绑。当您需要在 Markdown 内容旁边嵌入 API 文档时，请单独安装。不涉及 Swagger UI 或 Redoc——插件在构建时读取规范并输出干净的静态 HTML。
+::: callout info "核心插件"
+OpenAPI 插件现在已**内置**于 `@docmd/core` 中，无需单独安装。它遵循 Docmd 的构建时渲染理念——插件在构建时读取您的规范并输出干净、可访问的 HTML 表格，无需客户端 JavaScript。
 :::
 
 ## 安装
@@ -32,10 +32,18 @@ export default defineConfig({
 在任何 Markdown 页面中使用带 `openapi` 语言标签的围栏代码块嵌入 OpenAPI 规范：
 
 ````markdown
+### 实时示例
+
 ```openapi
-./api/openapi.json
+assets/docmd-api.json
 ```
 ````
+
+### 渲染结果
+
+```openapi
+assets/docmd-api.json
+```
 
 路径相对于您的 `src` 目录解析。支持 **JSON** 和 **YAML** 格式。YAML 需要安装 `js-yaml`：
 

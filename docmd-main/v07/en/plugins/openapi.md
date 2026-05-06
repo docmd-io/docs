@@ -5,8 +5,8 @@ description: "Render OpenAPI 3.x API reference documentation directly from JSON 
 
 The **OpenAPI plugin** turns OpenAPI 3.x specification files into structured API reference pages - rendered at build time with no client-side JavaScript and no third-party dependencies. Every endpoint, parameter, request body, and response is converted to semantic HTML tables.
 
-::: callout info "Optional Plugin"
-The OpenAPI plugin is **not** bundled with `@docmd/core`. Install it separately when you need to embed API documentation alongside your Markdown content. No Swagger UI or Redoc is involved - the plugin reads your spec and outputs clean, accessible HTML at build time.
+::: callout info "Core Plugin"
+The OpenAPI plugin is **included** by default in `@docmd/core`. There is no need to install it separately. It follows the Docmd philosophy of build-time rendering - the plugin reads your spec and outputs clean, accessible HTML tables with zero client-side JavaScript.
 :::
 
 ## Installation
@@ -32,10 +32,18 @@ export default defineConfig({
 Embed an OpenAPI spec in any Markdown page using a fenced code block with the `openapi` language tag:
 
 ````markdown
+### Live Example
+
 ```openapi
-./api/openapi.json
+assets/docmd-api.json
 ```
 ````
+
+### Result
+
+```openapi
+assets/docmd-api.json
+```
 
 The path is resolved relative to your `src` directory. Both **JSON** and **YAML** formats are supported. YAML requires `js-yaml` to be installed:
 

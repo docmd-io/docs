@@ -235,6 +235,10 @@
         "path": "/plugins/llms"
       },
       {
+        "title": "OpenAPI",
+        "path": "/plugins/openapi"
+      },
+      {
         "title": "Mermaid 图表",
         "path": "/plugins/mermaid"
       },

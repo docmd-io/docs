@@ -5,8 +5,8 @@ description: "Rendert OpenAPI 3.x API-Referenzdokumentation direkt aus JSON- ode
 
 Das **OpenAPI-Plugin** wandelt OpenAPI 3.x Spezifikationsdateien in strukturierte API-Referenzseiten um — zur Build-Zeit gerendert, ohne clientseitiges JavaScript und ohne Drittanbieter-Abhängigkeiten. Jeder Endpunkt, Parameter, Request-Body und jede Response wird in semantische HTML-Tabellen konvertiert.
 
-::: callout info "Optionales Plugin"
-Das OpenAPI-Plugin ist **nicht** in `@docmd/core` enthalten. Installieren Sie es separat, wenn Sie API-Dokumentation neben Ihrem Markdown-Inhalt einbetten müssen. Kein Swagger UI oder Redoc — das Plugin liest Ihre Spezifikation und gibt sauberes, zugängliches HTML zur Build-Zeit aus.
+::: callout info "Kern-Plugin"
+Das OpenAPI-Plugin ist jetzt standardmäßig in `@docmd/core` **enthalten**. Eine separate Installation ist nicht erforderlich. Es folgt der Docmd-Philosophie des Build-Zeit-Renderings — das Plugin liest Ihre Spezifikation und gibt saubere, zugängliche HTML-Tabellen ohne clientseitiges JavaScript aus.
 :::
 
 ## Installation
@@ -32,10 +32,18 @@ export default defineConfig({
 Betten Sie eine OpenAPI-Spezifikation in jede Markdown-Seite ein, indem Sie einen umzäunten Codeblock mit dem `openapi`-Sprach-Tag verwenden:
 
 ````markdown
+### Live-Beispiel
+
 ```openapi
-./api/openapi.json
+assets/docmd-api.json
 ```
 ````
+
+### Ergebnis
+
+```openapi
+assets/docmd-api.json
+```
 
 Der Pfad wird relativ zu Ihrem `src`-Verzeichnis aufgelöst. Sowohl **JSON** als auch **YAML**-Formate werden unterstützt. YAML erfordert die Installation von `js-yaml`:
 
