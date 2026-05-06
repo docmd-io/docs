@@ -101,7 +101,8 @@ module.exports = defineConfig({
     math: {},
     git: {
       repo: 'https://github.com/docmd-io/docs',
-      branch: 'main'
+      branch: 'main',
+      maxCommits: 4
     }
   },
 

@@ -82,6 +82,7 @@ export default defineConfig({
   plugins: {
     openapi: {
       info: true,           // API-Titel und Versions-Header anzeigen
+      download: true,       // 'Download JSON/YAML'-Link in der Benutzeroberfläche bereitstellen
       summaryOnly: false,    // Nur Zusammenfassungen anzeigen, Parameter/Antworten ausblenden
       allowRawHtml: false    // HTML in Beschreibungen zulassen (mit Vorsicht verwenden)
     }
@@ -92,6 +93,7 @@ export default defineConfig({
 | Option | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
 | `info` | `boolean` | `true` | Zeigt API-Titel, Version und Beschreibung aus dem `info`-Objekt der Spezifikation an. |
+| `download` | `boolean` | `false` | Wenn wahr, wird ein Link im Header der Spezifikation hinzugefügt, um die rohe JSON/YAML-Datei herunterzuladen/anzusehen. **Empfohlen für KI-Barrierefreiheit.** |
 | `summaryOnly` | `boolean` | `false` | Wenn wahr, werden nur Methode, Pfad und Zusammenfassung gerendert. Nützlich für große API-Indizes. |
 | `allowRawHtml` | `boolean` | `false` | Wenn wahr, wird das Escaping von HTML-Tags in Beschreibungen verhindert. |
 

@@ -82,6 +82,7 @@ export default defineConfig({
   plugins: {
     openapi: {
       info: true,           // 显示 API 标题和版本标题
+      download: true,       // 在 UI 中提供“下载 JSON/YAML”链接
       summaryOnly: false,    // 仅显示摘要，隐藏参数/响应
       allowRawHtml: false    // 允许在描述中使用 HTML（请谨慎使用）
     }
@@ -92,6 +93,7 @@ export default defineConfig({
 | 选项 | 类型 | 默认值 | 描述 |
 | :--- | :--- | :--- | :--- |
 | `info` | `boolean` | `true` | 显示规范中 `info` 对象的 API 标题、版本和描述。 |
+| `download` | `boolean` | `false` | 如果为 true，则在规范页眉添加下载/查看原始 JSON/YAML 文件的链接。**推荐用于 AI 辅助。** |
 | `summaryOnly` | `boolean` | `false` | 如果为 true，则仅渲染方法、路径和摘要。对大型 API 索引很有用。 |
 | `allowRawHtml` | `boolean` | `false` | 如果为 true，则不转义描述中的 HTML 标签。 |
 

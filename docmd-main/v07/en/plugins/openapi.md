@@ -3,7 +3,7 @@ title: "OpenAPI Plugin"
 description: "Render OpenAPI 3.x API reference documentation directly from JSON or YAML spec files inside your Markdown pages."
 ---
 
-The **OpenAPI plugin** turns OpenAPI 3.x specification files into structured API reference pages — rendered at build time with no client-side JavaScript and no third-party dependencies. Every endpoint, parameter, request body, and response is converted to semantic HTML tables.
+The **OpenAPI plugin** turns OpenAPI 3.x specification files into structured API reference pages - rendered at build time with no client-side JavaScript and no third-party dependencies. Every endpoint, parameter, request body, and response is converted to semantic HTML tables.
 
 ::: callout info "Optional Plugin"
 The OpenAPI plugin is **not** bundled with `@docmd/core`. Install it separately when you need to embed API documentation alongside your Markdown content. No Swagger UI or Redoc is involved - the plugin reads your spec and outputs clean, accessible HTML at build time.
@@ -47,16 +47,16 @@ npm install js-yaml
 
 For each path and HTTP method in the spec, the plugin renders:
 
-- **Method badge** — colour-coded (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
-- **Path** — the full endpoint path with parameters highlighted
-- **Summary and description** — from the operation object
-- **Parameters table** — name, location (`path`, `query`, `header`, `cookie`), type, required flag, description
-- **Request body table** — schema properties with types and defaults
-- **Responses table** — status codes with descriptions and response schema types
-- **Deprecated notice** — operations marked `deprecated: true` are flagged inline
+- **Method badge** - colour-coded (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
+- **Path** - the full endpoint path with parameters highlighted
+- **Summary and description** - from the operation object
+- **Parameters table** - name, location (`path`, `query`, `header`, `cookie`), type, required flag, description
+- **Request body table** - schema properties with types and defaults
+- **Responses table** - status codes with descriptions and response schema types
+- **Deprecated notice** - operations marked `deprecated: true` are flagged inline
 
 ::: callout tip "Build-Time Rendering"
-All rendering happens at build time. The generated pages are fully static — no JavaScript is needed to display the API docs, which means fast page loads and full search indexation.
+All rendering happens at build time. The generated pages are fully static - no JavaScript is needed to display the API docs, which means fast page loads and full search indexation. This approach is intentionally chosen over dynamic tools like Swagger UI or Redoc to ensure zero-JS performance and SEO-friendliness.
 :::
 
 ## Supported OpenAPI Features
@@ -65,6 +65,7 @@ All rendering happens at build time. The generated pages are fully static — no
 | :--- | :--- |
 | OpenAPI 3.x | ✓ |
 | Swagger 2.x | ✗ (convert to 3.x first) |
+| Swagger UI / Redoc | ✗ (intentionally omitted) |
 | JSON format | ✓ |
 | YAML format | ✓ (requires `js-yaml`) |
 | `$ref` resolution | ✓ (internal `#/components/schemas/` refs) |
@@ -125,6 +126,7 @@ export default defineConfig({
   plugins: {
     openapi: {
       info: true,           // Show the API title and version header
+      download: true,       // Provide a 'Download JSON/YAML' link in the UI
       summaryOnly: false,    // Only show summaries, hide parameters/responses
       allowRawHtml: false    // Allow HTML in descriptions (use with caution)
     }
@@ -135,6 +137,7 @@ export default defineConfig({
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `info` | `boolean` | `true` | Display the API title, version, and description from the spec's `info` object. |
+| `download` | `boolean` | `false` | If true, adds a link to the header of the spec to download/view the raw JSON/YAML file. **Recommended for AI accessibility.** |
 | `summaryOnly` | `boolean` | `false` | If true, only renders the method, path, and summary. Useful for large API indexes. |
 | `allowRawHtml` | `boolean` | `false` | If true, prevents escaping of HTML tags in descriptions. |
 
