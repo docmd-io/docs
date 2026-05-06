@@ -1,18 +1,18 @@
 ---
-title: "Plugins erstellen"
-description: "Ein umfassender Leitfaden zur Erweiterung von docmd um benutzerdefinierte Logik und interaktive Funktionen."
+title: "Plugins entwickeln"
+description: "Ein umfassender Leitfaden zur Erweiterung von docmd mit benutzerdefinierter Logik, Dateneinfügung und interaktiven Funktionen."
 ---
 
-Plugins sind der primäre Erweiterungsmechanismus für `docmd`. Sie ermöglichen es Ihnen, eigenes HTML einzufügen, die Markdown-Parsing-Logik zu modifizieren und Post-Build-Aufgaben zu automatisieren. Dieser Leitfaden beschreibt die Plugin-API und Best Practices für die Erstellung teilbarer Komponenten.
+Plugins sind der primäre Erweiterungsmechanismus für `docmd`. Sie ermöglichen das Einfügen von benutzerdefiniertem HTML, das Ändern der Markdown-Parslogik, das Einschleusen von Build-Zeit-Daten vor dem Template-Rendering und die Automatisierung von Post-Build-Aufgaben. Dieser Leitfaden beschreibt die Plugin-API und Best Practices für die Erstellung wiederverwendbarer Komponenten.
 
 ## Plugin-Deskriptor
 
-Ab Version `0.7.1` sollte jedes Plugin einen `plugin`-Deskriptor exportieren, der seine Identität und Fähigkeiten deklariert. Dies ermöglicht es der Engine, beim Laden Validierungen durchzuführen, Isolation zu gewährleisten und Fähigkeitsgrenzen durchzusetzen.
+Jedes Plugin sollte einen `plugin`-Deskriptor exportieren, der seine Identität und Fähigkeiten deklariert. Dies ermöglicht der Engine, Fähigkeitsgrenzen beim Laden zu validieren, zu isolieren und durchzusetzen.
 
 ```javascript
 export default {
   plugin: {
-    name: 'mein-analytics',
+    name: 'my-analytics',
     version: '1.0.0',
     capabilities: ['head', 'body', 'post-build']
   },
@@ -22,19 +22,19 @@ export default {
 };
 ```
 
-> **Hinweis:** Der Deskriptor ist derzeit optional (es wird eine Warnung ausgegeben). Ab **Version 0.8.0 wird er zwingend erforderlich** sein.
+> **Hinweis:** Der Deskriptor ist derzeit optional (Soft-Deprecation-Warnung). Er wird **ab 0.8.0 erforderlich sein**.
 
-## Kernfähigkeiten (Capabilities)
+## Kern-Fähigkeiten
 
-Das Array `capabilities` im Deskriptor legt fest, welche Hooks Ihr Plugin verwenden darf.
+Das `capabilities`-Array bestimmt, welche Hooks Ihr Plugin verwenden darf.
 
 | Fähigkeit | Erlaubte Hooks | Phase |
 | :--- | :--- | :--- |
-| `init` | `onConfigResolved` | Initialisierung |
+| `init` | `onConfigResolved` | Init |
 | `markdown` | `markdownSetup` | Setup |
 | `head` | `generateMetaTags`, `generateScripts` (head) | Rendering |
 | `body` | `generateScripts` (body) | Rendering |
-| `build` | `onBeforeParse`, `onAfterParse`, `onPageReady` | Build |
+| `build` | `onBeforeParse`, `onAfterParse`, `onBeforeRender`, `onPageReady` | Build |
 | `post-build`| `onPostBuild` | Post-Build |
 | `dev` | `onDevServerReady` | Dev-Server |
 | `assets` | `getAssets` | Ausgabe |
@@ -42,118 +42,132 @@ Das Array `capabilities` im Deskriptor legt fest, welche Hooks Ihr Plugin verwen
 | `events` | `events` | Interaktiv |
 | `translations`| `translations` | i18n |
 
-Ältere Plugins ohne Deskriptor erhalten vollen Zugriff auf alle Hooks, damit während des Übergangs nichts kaputt geht.
+Legacy-Plugins ohne Deskriptor erhalten vollen Zugriff auf alle Hooks, sodass während der Übergangsphase nichts abbricht.
 
 ## Plugin-API-Referenz
 
-Ein `docmd`-Plugin ist ein standardmäßiges JavaScript-Objekt (oder ein Modul, das ein solches als Standard exportiert), das einen oder mehrere der folgenden Hooks implementiert.
+Ein `docmd`-Plugin ist ein Standard-JavaScript-Objekt (oder ein Modul, das eines als Standard exportiert), das einen oder mehrere der folgenden Hooks implementiert.
 
 | Hook | Beschreibung |
 | :--- | :--- |
 | `markdownSetup(md, opts)` | Erweitert die `markdown-it`-Instanz. Synchron. |
 | `generateMetaTags(config, page, root)` | Fügt `<meta>`- oder `<link>`-Tags in den `<head>` ein. |
 | `generateScripts(config, opts)` | Gibt ein Objekt mit `headScriptsHtml` und `bodyScriptsHtml` zurück. |
-| `getAssets(opts)` | Definiert externe Dateien oder CDN-Skripte zum Einfügen. |
+| `getAssets(opts)` | Definiert externe Dateien oder CDN-Skripte zum Einbinden. |
 | `onPostBuild(ctx)` | Führt Logik nach der Generierung aller HTML-Dateien aus. |
-| `translations(localeId)` | Gibt ein Objekt mit übersetzten Strings für die angegebene Sprache zurück. |
-| `actions` | Ein Objekt mit benannten Action-Handlern für WebSocket RPC-Aufrufe vom Browser. |
-| `events` | Ein Objekt mit benannten Event-Handlern für „Fire-and-forget“-Nachrichten vom Browser. |
+| `translations(localeId)` | Gibt ein Objekt mit übersetzten Strings für das angegebene Gebietsschema zurück. |
+| `actions` | Objekt mit benannten Aktions-Handlern für WebSocket-RPC-Aufrufe vom Browser. |
+| `events` | Objekt mit benannten Event-Handlern für Fire-and-Forget-Nachrichten vom Browser. |
 
-## Erstellen eines lokalen Plugins
+## Ein lokales Plugin erstellen
 
-Das Erstellen eines Plugins ist so einfach wie das Definieren einer JavaScript-Datei. Zum Beispiel `mein-plugin.js`:
+Ein Plugin zu erstellen ist so einfach wie das Definieren einer JavaScript-Datei. Zum Beispiel `my-plugin.js`:
 
 ```javascript
-// mein-plugin.js
+// my-plugin.js
 import path from 'path';
 
 export default {
-  // Plugin-Deskriptor (empfohlen)
   plugin: {
-    name: 'mein-plugin',
+    name: 'my-plugin',
     version: '1.0.0',
     capabilities: ['head', 'post-build']
   },
 
-  // 1. Markdown-Parser erweitern
   markdownSetup: (md, options) => {
-    // Beispiel: Regel hinzufügen oder ein markdown-it-Plugin verwenden
+    // Beispiel: Regel hinzufügen oder markdown-it-Plugin verwenden
   },
 
-  // 2. Seitenvmetadaten einfügen
   generateMetaTags: async (config, page, relativePathToRoot) => {
     return `<meta name="x-build-id" content="${config._buildHash}">`;
   },
 
-  // 3. Post-Build-Automatisierung
   onPostBuild: async ({ config, pages, outputDir, log, options }) => {
-    log(`Custom Plugin: ${pages.length} Seiten verifiziert.`);
-    // Beispiel: Benutzerdefiniertes Manifest oder Benachrichtigung generieren
+    log(`Benutzerdefiniertes Plugin: ${pages.length} Seiten überprüft.`);
   }
 };
 ```
 
-Um Ihr Plugin zu aktivieren, referenzieren Sie seinen **vollständigen Paketnamen** in Ihrer `docmd.config.js`:
+Verweisen Sie in Ihrer `docmd.config.js` über den **vollständigen Paketnamen** auf Ihr Plugin:
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
   plugins: {
-    'mein-tolles-plugin': {
-      // Ihre benutzerdefinierten Optionen kommen hierhin
+    'my-awesome-plugin': {
+      // Ihre benutzerdefinierten Optionen hier
     }
   }
 });
 ```
 
-> **Hinweis:** Kurznamen (z. B. `math`, `search`) sind exklusiv den offiziellen `@docmd/plugin-*`-Paketen vorbehalten. Drittanbieter-Plugins müssen immer über ihren vollständigen npm-Paketnamen referenziert werden.
+> **Hinweis:** Kurzformen (z.B. `math`, `search`) sind ausschließlich für offizielle `@docmd/plugin-*`-Pakete reserviert. Drittanbieter-Plugins müssen immer mit ihrem vollständigen npm-Paketnamen referenziert werden.
 
-### Plugin-Auflösung
-Die `docmd`-Engine löst Plugin-Namen wie folgt auf:
-- **Offizielle Kurznamen** (`math`, `search`, `seo` etc.) werden automatisch zu `@docmd/plugin-<name>` erweitert. Da der `@docmd`-npm-Scope dem Projekt gehört, können darunter nur offizielle Pakete existieren.
-- **Drittanbieter-Plugins** müssen ihren vollständigen Paketnamen verwenden (z. B. `mein-tolles-plugin`, `@meinorg/docmd-extras`). Es gibt kein Alias- oder Kurznamen-System für externe Plugins — dies beugt Verwirrung vor und eliminiert Supply-Chain-Angriffsszenarien vollständig.
+### Plugin-Isolierung
 
-### Plugin-Isolation
-Jeder Hook-Aufruf ist in eine Try/Catch-Grenze gehüllt. Ein fehlerhaftes Plugin kann den Build nicht zum Absturz bringen oder andere Plugins beeinträchtigen. Fehler werden protokolliert und am Ende des Builds in einer Zusammenfassung gesammelt.
+Jeder Hook-Aufruf ist in eine try/catch-Grenze eingebettet. Ein defektes Plugin kann den Build nicht zum Absturz bringen oder andere Plugins stören. Fehler werden protokolliert und am Ende des Builds in einer Zusammenfassung gesammelt.
 
-### Plugin-Gültigkeitsbereich (`noStyle`)
-Standardmäßig fügen Plugins ihr CSS/JS universell ein. Entwickler können jedoch explizit verhindern, dass ihr Plugin auf `noStyle`-Seiten (wie minimalistischen Landing-Templates) gerendert wird, indem sie einen `noStyle`-Boolean exportieren:
+## Lebenszyklus-Hooks
+
+docmd bietet tiefe Integrations-Hooks, die es Plugins ermöglichen, Konfiguration, Rohquellen und Seitendaten während der gesamten Build-Pipeline zu manipulieren.
+
+| Hook | Beschreibung | Erwarteter Rückgabewert |
+| :--- | :--- | :--- |
+| **`onConfigResolved(config)`** | Liest oder modifiziert die aktive normalisierte Konfiguration direkt nach der Initialisierung. | `void` oder `Promise<void>` |
+| **`onDevServerReady(server, wss)`** | Gibt den rohen Node.js `http.Server` und `WebSocketServer` im Entwicklungsmodus frei. | `void` oder `Promise<void>` |
+| **`onBeforeParse(src, frontmatter)`** | Vorverarbeitet rohe Markdown-Zeichenkettendaten unmittelbar bevor sie zur Analyse übergeben werden. | `string` oder `Promise<string>` |
+| **`onAfterParse(html, frontmatter)`** | Nachverarbeitet den generierten HTML-Code, der das Markdown-Body-Segment darstellt. | `string` oder `Promise<string>` |
+| **`onBeforeRender(page)`** | Wird vor dem Template-Rendering aufgerufen. Empfängt den vollständigen `PageContext`. Änderungen an `frontmatter` und `html` werden in der gerenderten Ausgabe widergespiegelt. | `void` oder `Promise<void>` |
+| **`onPageReady(page)`** | Greift auf die vollständig zusammengestellten Seitenmetadaten zu, kurz bevor die Seite in die Zieldatei geschrieben wird. | `void` oder `Promise<void>` |
+
+### `onBeforeRender` und `PageContext`
+
+Der `onBeforeRender`-Hook ist der richtige Ort für Plugins, die Build-Zeit-Daten aus der Quelldatei einschleusen müssen — Datei-Metadaten lesen, benutzerdefinierte Frontmatter-Felder berechnen oder Daten aus externen Quellen laden.
+
+```typescript
+interface PageContext {
+  sourcePath: string;           // Absoluter Pfad zur .md-Quelldatei. Immer gesetzt.
+  frontmatter: Record<string, any>; // Veränderbar — Änderungen in der Template-Ausgabe widergespiegelt
+  html: string;                 // Veränderbar — gerenderter Markdown-Body
+  localeId?: string;
+  versionId?: string;
+  relativePathToRoot?: string;
+}
+```
 
 ```javascript
 export default {
-  noStyle: false, // Verhindert, dass generateMetaTags und generateScripts auf noStyle-Seiten laufen
+  plugin: {
+    name: 'my-metadata-plugin',
+    version: '1.0.0',
+    capabilities: ['build']
+  },
 
-  generateScripts: () => { ... }
-}
+  onBeforeRender: async (page) => {
+    // sourcePath ist immer verfügbar — kein Raten oder Pfadkonstruktion nötig
+    const stats = fs.statSync(page.sourcePath);
+    page.frontmatter.wordCount = page.html.split(/\s+/).length;
+    page.frontmatter.fileSize = stats.size;
+  }
+};
 ```
-Benutzer können dieses Verhalten über ihre Konfiguration (`plugins: { math: { noStyle: false } }`) oder dynamisch über das Markdown-Frontmatter (`plugins: { math: true }`) überschreiben.
 
-## Erweiterte Lebenszyklus-Hooks
-Docmd `0.7.1` erweitert den Build-Prozess um tiefe Integrations-Hooks, die es Plugins ermöglichen, Konfigurationen, Rohquellen und HTML-Darstellungen während der Generierung zu manipulieren.
+## Vertiefung: Asset-Einbindung
 
-| Hook | Beschreibung | Erwartete Rückgabe |
-| :--- | :--- | :--- |
-| **`onConfigResolved(config)`** | Liest oder modifiziert die aktive normalisierte `config` direkt nach der Initialisierung. | `void` oder `Promise<void>` |
-| **`onDevServerReady(server, wss)`** | Exponiert den rohen Node.js `http.Server` und `WebSocketServer` während des Entwicklungsmodus (`docmd dev`). | `void` oder `Promise<void>` |
-| **`onBeforeParse(src, frontmatter)`** | Verarbeitet den rohen Markdown-String vor, unmittelbar bevor dieser zum Parsen an markdown-it übergeben wird. | `string` oder `Promise<string>` |
-| **`onAfterParse(html, frontmatter)`** | Verarbeitet das generierte HTML nach, das den Körper des Markdown-Abschnitts darstellt. | `string` or `Promise<string>` |
-| **`onPageReady(page)`** | Greift auf die vollständig zusammengebauten Metadaten der Seite zu (`page.html`, `page.outputPath`, `page.frontmatter`), kurz bevor diese in die Zieldatei geschrieben werden. | `void` oder `Promise<void>` |
-
-## Deep Dive: Asset-Injektion
-Der Hook `getAssets()` ermöglicht es Ihrem Plugin, clientseitige Logik sicher mit auszuliefern.
+Der `getAssets()`-Hook ermöglicht es Ihrem Plugin, clientseitige Logik sicher zu bündeln.
 
 ```javascript
 getAssets: (options) => {
   return [
     {
-      url: 'https://cdn.beispiel.de/lib.js', // Externes CDN-Skript
+      url: 'https://cdn.example.com/lib.js',
       type: 'js',
       location: 'head'
     },
     {
-      src: path.join(__dirname, 'plugin-init.js'), // Lokale Quelle
-      dest: 'assets/js/plugin-init.js',            // Ziel in build/
+      src: path.join(__dirname, 'plugin-init.js'),
+      dest: 'assets/js/plugin-init.js',
       type: 'js',
       location: 'body'
     }
@@ -161,24 +175,46 @@ getAssets: (options) => {
 }
 ```
 
-## Übersetzen von Plugins (i18n)
-Plugins, die eine clientseitige UI rendern, sollten übersetzbare Strings über den Hook `translations(localeId)` bereitstellen. Die docmd-Engine ruft diesen Hook während des Build-Prozesses auf, führt die Ergebnisse mit den Kernsystem-Strings und Benutzer-Überschreibungen zusammen und reicht sie weiter.
+## Plugins übersetzen (i18n)
 
-## WebSocket-RPC-Aktionen
-Ab Version `0.6.8` können Plugins **Action-Handler** und **Event-Handler** registrieren, die auf dem Dev-Server laufen und vom Browser aus über die `window.docmd`-API aufrufbar sind.
+Plugins, die clientseitige UI rendern, sollten übersetzbare Strings über den `translations(localeId)`-Hook bereitstellen.
 
 ```javascript
-// mein-live-plugin.js
 export default {
   plugin: {
-    name: 'mein-live-plugin',
+    name: 'my-plugin',
+    version: '1.0.0',
+    capabilities: ['translations', 'body']
+  },
+
+  translations: (localeId) => {
+    try {
+      const p = path.join(__dirname, 'i18n', `${localeId}.json`);
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch { }
+    try {
+      const p = path.join(__dirname, 'i18n', 'en.json');
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch { }
+    return {};
+  }
+}
+```
+
+## WebSocket-RPC-Aktionen
+
+Plugins können **Aktions-Handler** und **Event-Handler** registrieren, die auf dem Dev-Server laufen und über die `window.docmd`-API vom Browser aufrufbar sind.
+
+```javascript
+export default {
+  plugin: {
+    name: 'my-live-plugin',
     version: '1.0.0',
     capabilities: ['actions', 'events']
   },
 
-  // Serverseitige Aktion — Browser ruft via docmd.call() auf
   actions: {
-    'mein-plugin:save-note': async (payload, ctx) => {
+    'my-plugin:save-note': async (payload, ctx) => {
       const content = await ctx.readFile(payload.file);
       const updated = content + '\n\n> ' + payload.note;
       await ctx.writeFile(payload.file, updated);
@@ -186,29 +222,41 @@ export default {
     }
   },
 
-  // Serverseitiges Event — Browser sendet via docmd.send()
   events: {
-    'mein-plugin:page-viewed': (data, ctx) => {
+    'my-plugin:page-viewed': (data, ctx) => {
       console.log(`Seite aufgerufen: ${data.path}`);
     }
   }
 };
 ```
 
-Das `ctx`-Objekt (ActionContext) bietet u.a.: `ctx.readFile(path)`, `ctx.writeFile(path, content)`, `ctx.broadcast(event, data)`, `ctx.config`. Alle Dateioperationen sind auf das Projekt-Root beschränkt.
+Das `ctx`-Objekt (ActionContext) bietet:
 
-::: callout info "Nur im Dev-Modus 🛡️"
-Das WebSocket-RPC-System ist nur während `docmd dev` aktiv. Produktions-Builds enthalten weder den API-Client noch serverseitige Action-Handler.
+| Methode | Beschreibung |
+| :--- | :--- |
+| `ctx.readFile(path)` | Liest eine Datei relativ zum Projektstamm. |
+| `ctx.writeFile(path, content)` | Schreibt eine Datei (löst Rebuild + Reload aus). |
+| `ctx.readFileLines(path)` | Liest eine Datei als Zeilenarray. |
+| `ctx.broadcast(event, data)` | Sendet ein Event an alle verbundenen Browser. |
+| `ctx.source` | Quellbearbeitungswerkzeuge für blockbasierte Markdown-Manipulation. |
+| `ctx.projectRoot` | Absoluter Pfad zum Projektstamm. |
+| `ctx.config` | Aktuelle docmd-Seitenkonfiguration. |
+
+::: callout info "Nur Entwicklungsmodus 🛡️"
+Das WebSocket-RPC-System ist nur während `docmd dev` aktiv. Produktions-Builds enthalten weder den API-Client noch serverseitige Aktionsverarbeitung.
 :::
 
 ## Best Practices
 
-1.  **Fähigkeiten deklarieren**: Exportieren Sie immer einen `plugin`-Deskriptor. Dies wird in `0.8.0` zwingend erforderlich sein.
-2.  **Async/Await**: Verwenden Sie immer `async`-Funktionen für `onPostBuild` und Action-Handler, um die Build-Engine nicht zu blockieren.
-3.  **Namenskonvention**: Stellen Sie bei Community-Plugins Ihrem Paketnamen den Präfix `docmd-plugin-` voran.
-4.  **Aktions-Namespacing**: Stellen Sie Ihren Aktionsnamen den Namen Ihres Plugins voran (z. B. `mein-plugin:save-note`).
-5.  **Logging**: Nutzen Sie den bereitgestellten `log()`-Helper, damit Ihre Nachrichten die `--verbose`-Einstellungen des Benutzers respektieren.
+1.  **Fähigkeiten deklarieren**: Exportieren Sie immer einen `plugin`-Deskriptor mit Ihren deklarierten Fähigkeiten. Ab `0.8.0` wird dies erforderlich sein.
+2.  **`onBeforeRender` für Dateneinfügung verwenden**: Wenn Ihr Plugin die Quelldatei liest oder Frontmatter-Felder berechnet, verwenden Sie `onBeforeRender` — nicht `generateMetaTags`. `sourcePath` ist im `PageContext` immer verfügbar.
+3.  **Async/Await**: Verwenden Sie immer `async`-Funktionen für `onPostBuild`, `onBeforeRender` und Aktions-Handler.
+4.  **Zustandslosigkeit**: Vermeiden Sie die Beibehaltung von Zustand im Plugin-Objekt, da `docmd` Plugins während Entwicklungs-Rebuilds neu initialisieren kann.
+5.  **Namenskonvention**: Für Community-Plugins, stellen Sie `docmd-plugin-` voran (z.B. `docmd-plugin-analytics`).
+6.  **Aktions-Namensräume**: Stellen Sie Ihren Plugin-Namen voran (z.B. `my-plugin:save-note`) um Kollisionen zu vermeiden.
+7.  **Aktionsvalidierung**: Definieren Sie immer ein explizites Payload-Schema in Ihren Aktionen.
+8.  **Logging**: Verwenden Sie den bereitgestellten `log()`-Helfer in `onPostBuild`.
 
-::: callout tip "KI-bereites Design 🤖"
-Die Plugin-API von `docmd` ist auf **optimale LLM-Nutzung** ausgelegt. Da die Hooks Standard-JavaScript-Objekte und Typen ohne versteckte komplexe Klassenhierarchien verwenden, können KI-Agenten mit minimalen Anweisungen fehlerfreie benutzerdefinierte Plugins für Sie generieren.
+::: callout tip "KI-optimiertes Design 🤖"
+Die `docmd`-Plugin-API ist **LLM-optimal** gestaltet. Da die Hooks Standard-JavaScript-Objekte und -Typen ohne versteckte komplexe Klassenhierarchien verwenden, können KI-Agenten fehlerfreie benutzerdefinierte Plugins mit minimaler Anleitung generieren.
 :::

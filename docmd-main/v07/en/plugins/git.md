@@ -21,7 +21,7 @@ Timestamps use relative formatting for recent changes ("2h ago", "3d ago") and s
 
 ### Commit History Tooltip
 
-Hover over the "Last updated" text to reveal a tooltip showing the most recent commits for that page. Each entry displays the commit message, author, and relative timestamp.
+Hover over the "Last updated" text to reveal a tooltip showing the most recent commits for that page. Each entry displays the commit message, author (with Gravatar avatar), and relative timestamp.
 
 <!-- SCREENSHOT: Commit history tooltip showing 4-5 recent commits with author avatars and messages -->
 
@@ -52,6 +52,7 @@ The plugin automatically detects GitHub, GitLab, and Bitbucket URLs and construc
 | `lastUpdated` | `boolean` | `true` | Show last updated timestamp. |
 | `commitHistory` | `boolean` | `true` | Show commit history tooltip on hover. |
 | `maxCommits` | `number` | `6` | Maximum commits to show in the tooltip. |
+| `dateFormat` | `string` | `'relative'` | Timestamp format: `relative` (default), `iso`, or `locale-aware`. |
 
 ### Full Example
 

@@ -227,13 +227,14 @@ const registeredHooks = await loadPlugins(config, {
 ```typescript
 import type {
   PluginModule,       // 完整插件合约接口
-  PluginDescriptor,   // 插件元数据 (名称, 版本, 能力)
-  PluginHooks,        // 钩子注册表的形状
-  Capability,         // 钩子类别声明 (init, body, actions, 等)
+  PluginDescriptor,   // 插件元数据（名称、版本、能力）
+  PluginHooks,        // 钩子注册表形状
+  PageContext,        // 传递给构建钩子的上下文（sourcePath、html 等）
+  Capability,         // 钩子类别声明（init、body、actions 等）
   ActionContext,      // 传递给动作/事件处理程序的上下文
-  ActionHandler,      // 动作处理程序的签名
-  EventHandler,       // 事件处理程序的签名
-  SourceTools,        // 源码编辑工具接口
+  ActionHandler,      // 动作处理程序签名
+  EventHandler,       // 事件处理程序签名
+  SourceTools,        // 源编辑工具接口
   BlockInfo,          // getBlockAt 返回的块信息
   TextLocation,       // findText 返回的文本位置
 } from '@docmd/api';

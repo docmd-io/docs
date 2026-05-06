@@ -229,6 +229,7 @@ import type {
   PluginModule,       // Vollständiges Plugin-Vertragsinterface
   PluginDescriptor,   // Plugin-Metadaten (Name, Version, Fähigkeiten)
   PluginHooks,        // Form des Hook-Registers
+  PageContext,        // Kontext für Build-Hooks (sourcePath, html etc.)
   Capability,         // Deklaration der Hook-Kategorie (init, body, actions, etc.)
   ActionContext,      // Kontext, der an Aktions-/Event-Handler übergeben wird
   ActionHandler,      // Signatur für Aktions-Handler

@@ -42,11 +42,12 @@ export default {
     console.log(`[插件] 已获取版本：${this.latestVersion}`);
   },
 
-  // 在 Markdown 解析后拦截 HTML
-  async onAfterParse(html, frontmatter) {
-    if (!html) return html;
-    // 将占位符替换为动态数据
-    return html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
+  // 在模板渲染前拦截页面上下文
+  async onBeforeRender(page) {
+    if (!page.html) return;
+    // 在 HTML 和 frontmatter 中用动态数据替换占位符
+    page.html = page.html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
+    page.frontmatter.computedVersion = this.latestVersion;
   }
 };
 ```

@@ -42,11 +42,12 @@ export default {
     console.log(`[Plugin] Version abgerufen: ${this.latestVersion}`);
   },
 
-  // Fangt das HTML nach dem Markdown-Parsing ab
-  async onAfterParse(html, frontmatter) {
-    if (!html) return html;
-    // Platzhalter durch dynamische Daten ersetzen
-    return html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
+  // Abfangen des Seitenkontexts vor dem Template-Rendering
+  async onBeforeRender(page) {
+    if (!page.html) return;
+    // Platzhalter durch dynamische Daten in HTML und Frontmatter ersetzen
+    page.html = page.html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
+    page.frontmatter.computedVersion = this.latestVersion;
   }
 };
 ```

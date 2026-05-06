@@ -21,7 +21,7 @@ Zeitstempel verwenden relative Formatierung für aktuelle Änderungen ("vor 2 St
 
 ### Commit-Verlauf-Tooltip
 
-Bewegen Sie den Mauszeiger über den Text "Zuletzt aktualisiert", um einen Tooltip mit den letzten Commits für diese Seite anzuzeigen. Jeder Eintrag zeigt die Commit-Nachricht, den Autor und den relativen Zeitstempel.
+Bewegen Sie den Mauszeiger über den Text "Zuletzt aktualisiert", um einen Tooltip mit den letzten Commits für diese Seite anzuzeigen. Jeder Eintrag zeigt die Commit-Nachricht, den Autor (mit Gravatar-Avatar) und den relativen Zeitstempel.
 
 <!-- SCREENSHOT: Commit-Verlauf-Tooltip mit 4-5 aktuellen Commits mit Autor-Avataren und Nachrichten -->
 
@@ -52,6 +52,7 @@ Das Plugin erkennt automatisch GitHub-, GitLab- und Bitbucket-URLs und erstellt 
 | `lastUpdated` | `boolean` | `true` | Zeitstempel der letzten Aktualisierung anzeigen. |
 | `commitHistory` | `boolean` | `true` | Commit-Verlauf-Tooltip beim Hovern anzeigen. |
 | `maxCommits` | `number` | `6` | Maximale Anzahl der Commits im Tooltip. |
+| `dateFormat` | `string` | `'relative'` | Zeitstempel-Format: `relative` (relativ), `iso` (ISO-Format) oder `locale-aware` (lokalisiertes Format). |
 
 ### Vollständiges Beispiel
 
