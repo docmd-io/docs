@@ -5,7 +5,7 @@ description: "How to identify and eliminate common documentation mistakes that d
 
 ## Problem
 
-Over time, documentation repositories often accumulate "quick fixes" to content problems that inadvertently erode the user experience. These anti-patterns—such as vague link text or bloated code samples—become entrenched in the project, making the documentation harder to maintain and less useful for developers.
+Over time, documentation repositories often accumulate "quick fixes" to content problems that inadvertently erode the user experience. These anti-patterns - such as vague link text or bloated code samples - become entrenched in the project, making the documentation harder to maintain and less useful for developers.
 
 ## Why it matters
 

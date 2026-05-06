@@ -145,13 +145,13 @@ Docmd provides deep integration hooks that allow plugins to manipulate configura
 
 ### `onBeforeRender` and `PageContext`
 
-The `onBeforeRender` hook is the right place for plugins that need to inject build-time data derived from the source file — reading file metadata, computing custom frontmatter fields, or loading data from external sources.
+The `onBeforeRender` hook is the right place for plugins that need to inject build-time data derived from the source file  -  reading file metadata, computing custom frontmatter fields, or loading data from external sources.
 
 ```typescript
 interface PageContext {
   sourcePath: string;           // Absolute path to the .md source file. Always set.
-  frontmatter: Record<string, any>; // Mutable — changes reflected in template output
-  html: string;                 // Mutable — rendered markdown body
+  frontmatter: Record<string, any>; // Mutable  -  changes reflected in template output
+  html: string;                 // Mutable  -  rendered markdown body
   localeId?: string;
   versionId?: string;
   relativePathToRoot?: string;
@@ -167,7 +167,7 @@ export default {
   },
 
   onBeforeRender: async (page) => {
-    // sourcePath is always available — no guessing or path construction needed
+    // sourcePath is always available  -  no guessing or path construction needed
     const stats = fs.statSync(page.sourcePath);
     page.frontmatter.wordCount = page.html.split(/\s+/).length;
     page.frontmatter.fileSize = stats.size;
@@ -312,7 +312,7 @@ The WebSocket RPC system is only active during `docmd dev`. Production builds do
 ## Best Practices
 
 1.  **Declare Capabilities**: Always export a `plugin` descriptor with your declared capabilities. This enables the engine to enforce boundaries and will be required in `0.8.0`.
-2.  **Use `onBeforeRender` for data injection**: If your plugin reads the source file or computes frontmatter fields, use `onBeforeRender` — not `generateMetaTags`. The `sourcePath` is always available in `PageContext`.
+2.  **Use `onBeforeRender` for data injection**: If your plugin reads the source file or computes frontmatter fields, use `onBeforeRender`  -  not `generateMetaTags`. The `sourcePath` is always available in `PageContext`.
 3.  **Async/Await**: Always use `async` functions for `onPostBuild`, `onBeforeRender`, and action handlers to prevent blocking the build engine during I/O operations.
 4.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialise plugins during development rebuilds.
 5.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).

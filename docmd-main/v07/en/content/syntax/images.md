@@ -64,5 +64,5 @@ If the `mainScripts` component is active (default), `docmd` automatically applie
 ```
 
 ::: callout tip "AI Context & Accessibility"
-Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine—enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
+Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine - enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
 :::

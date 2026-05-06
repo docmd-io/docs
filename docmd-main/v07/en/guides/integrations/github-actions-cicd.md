@@ -73,4 +73,4 @@ Enhance your workflow by generating ephemeral preview environments for every Pul
 
 ## Trade-offs
 
-Automated CI/CD requires initial setup time and management of secrets (e.g., API tokens). However, the long-term benefits of a "hands-off" deployment process—including reduced human error and faster update cycles—far outweigh the initial investment. For large sites, ensure your workflow only triggers when files in your documentation directory are changed to save on CI minutes.
+Automated CI/CD requires initial setup time and management of secrets (e.g., API tokens). However, the long-term benefits of a "hands-off" deployment process - including reduced human error and faster update cycles - far outweigh the initial investment. For large sites, ensure your workflow only triggers when files in your documentation directory are changed to save on CI minutes.

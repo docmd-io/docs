@@ -5,7 +5,7 @@ description: "How docmd's native SPA router and intent-based prefetching deliver
 
 ## Problem
 
-Traditional multi-page navigation, where every link click triggers a full browser reload, creates a disruptive "white flash" and breaks the reader's flow. The browser must discard the current state, request new HTML, and re-parse CSS and JavaScript—even if only the central content area has changed.
+Traditional multi-page navigation, where every link click triggers a full browser reload, creates a disruptive "white flash" and breaks the reader's flow. The browser must discard the current state, request new HTML, and re-parse CSS and JavaScript - even if only the central content area has changed.
 
 ## Why it matters
 
@@ -32,7 +32,7 @@ Instead of re-rendering the entire page, `docmd` intelligently updates only the 
 
 ### 3. Lifecycle Events for Custom Logic
 
-Because the browser doesn't perform a full reload, standard events like `DOMContentLoaded` only fire once. To execute custom JavaScript after every navigation—such as re-initializing a third-party widget or tracking page views—you should listen for the `docmd:page-mounted` event.
+Because the browser doesn't perform a full reload, standard events like `DOMContentLoaded` only fire once. To execute custom JavaScript after every navigation - such as re-initializing a third-party widget or tracking page views - you should listen for the `docmd:page-mounted` event.
 
 ```javascript
 // Example: Re-initializing a custom component after navigation

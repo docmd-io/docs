@@ -56,7 +56,7 @@ The plugin injects a lightweight search modal into the `<body>` of your site. It
 ::: callout tip "Search Analytics"
 If you have the [Analytics Plugin](./analytics.md) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
 :::
-Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
+Because the search happens entirely on the client, no data - not even keystrokes - is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
 
 ## Comparison
 

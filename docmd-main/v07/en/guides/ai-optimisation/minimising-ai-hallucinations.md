@@ -5,7 +5,7 @@ description: "How to write explicit, self-contained documentation that prevents 
 
 ## Problem
 
-AI models are predictive engines, not reasoning engines. If an API usage example is incomplete, uses ambiguous placeholders, or relies on implicit knowledge, the AI will often "hallucinate"—it will invent the missing pieces based on general patterns it learned during training. These inventions are frequently incorrect for your specific software, leading to developer frustration.
+AI models are predictive engines, not reasoning engines. If an API usage example is incomplete, uses ambiguous placeholders, or relies on implicit knowledge, the AI will often "hallucinate" - it will invent the missing pieces based on general patterns it learned during training. These inventions are frequently incorrect for your specific software, leading to developer frustration.
 
 ## Why it matters
 

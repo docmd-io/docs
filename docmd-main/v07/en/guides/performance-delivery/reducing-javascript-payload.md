@@ -48,4 +48,4 @@ Ensure that any custom JavaScript you provide is minified and compressed. `docmd
 
 ## Trade-offs
 
-Building complex interactive features with Vanilla JavaScript can require more manual effort than using a declarative framework. However, for documentation—where 95% of the content is static text and images—the performance gains of a zero-framework approach far outweigh the developer convenience of a heavy framework.
+Building complex interactive features with Vanilla JavaScript can require more manual effort than using a declarative framework. However, for documentation - where 95% of the content is static text and images - the performance gains of a zero-framework approach far outweigh the developer convenience of a heavy framework.

@@ -9,7 +9,7 @@ Technical documentation is often dense, jargon-heavy, and difficult to scan. Whe
 
 ## Why it matters
 
-Readability is not just an aesthetic choice—it is a functional requirement. If a developer misses a warning because it was buried in a long paragraph, the consequences can be severe. A clear information hierarchy ensures that users can find the information they need quickly, understand it accurately, and act upon it safely.
+Readability is not just an aesthetic choice - it is a functional requirement. If a developer misses a warning because it was buried in a long paragraph, the consequences can be severe. A clear information hierarchy ensures that users can find the information they need quickly, understand it accurately, and act upon it safely.
 
 ## Approach
 

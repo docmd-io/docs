@@ -5,7 +5,7 @@ description: "How to manage documentation contributions effectively using Git, P
 
 ## Problem
 
-Allowing direct pushes to the main documentation branch often leads to broken links, inconsistent formatting, and unverified technical information. However, imposing too much friction—such as requiring separate CMS accounts—discourages community members and internal developers from contributing valuable updates.
+Allowing direct pushes to the main documentation branch often leads to broken links, inconsistent formatting, and unverified technical information. However, imposing too much friction - such as requiring separate CMS accounts - discourages community members and internal developers from contributing valuable updates.
 
 ## Why it matters
 
