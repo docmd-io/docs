@@ -65,6 +65,44 @@ plugins:
 ---
 ```
 
+## CI/CD Integration
+
+The Git plugin reads your repository history at build-time using local Git commands. Many CI/CD providers use "shallow clones" by default (fetching only the last commit), which will cause the plugin to only show the most recent change across all pages.
+
+To ensure accurate timestamps and history, you must configure your CI environment to perform a full fetch.
+
+::: tabs
+
+== tab "GitHub Actions"
+
+Add `fetch-depth: 0` to your checkout step:
+
+```yaml
+- name: Checkout
+  uses: actions/checkout@v4
+  with:
+    fetch-depth: 0
+```
+
+== tab "GitLab CI"
+
+Set the `GIT_DEPTH` variable to `0`:
+
+```yaml
+variables:
+  GIT_DEPTH: 0
+```
+
+== tab "Netlify"
+
+Netlify fetches the full history by default. However, if you have issues, ensure your build command has access to the `.git` directory. No additional configuration is usually required.
+
+:::
+
+::: callout warning "Git Data Requirement"
+The `.git` directory must be present in the build environment for the plugin to function. If you are building inside a Docker container or a restricted CI environment, ensure the Git history is preserved and that the `git` binary is installed.
+:::
+
 ## Localisation
 
 The plugin includes built-in translations for English, German, and Chinese. Custom strings can be provided through the [UI Localisation](../configuration/localisation/ui-strings.md) system.
