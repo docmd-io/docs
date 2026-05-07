@@ -231,10 +231,6 @@
         "path": "/plugins/analytics"
       },
       {
-        "title": "PWA",
-        "path": "/plugins/pwa"
-      },
-      {
         "title": "LLMs",
         "path": "/plugins/llms"
       },
@@ -245,6 +241,10 @@
       {
         "title": "Mermaid",
         "path": "/plugins/mermaid"
+      },
+      {
+        "title": "PWA",
+        "path": "/plugins/pwa"
       },
       {
         "title": "Threads",
