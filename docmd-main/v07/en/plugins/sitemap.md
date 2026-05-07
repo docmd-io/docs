@@ -3,52 +3,55 @@ title: "Sitemap Plugin"
 description: "Automatically generate a standard-compliant sitemap.xml for better search engine discovery."
 ---
 
-The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages - including deep links within versioned documentation - are crawled and indexed.
+The `@docmd/plugin-sitemap` plugin generates a `sitemap.xml` file at the root of your build directory. This provides search engines with a comprehensive map of your site's architecture, ensuring that all pages—including versioned documentation—are crawled and indexed.
 
 ## Configuration
 
-Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customise the crawl weight of various sections within the `plugins` object.
+Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customise the crawl weight within the `plugins` object.
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Enable or disable sitemap generation. |
+| `defaultChangefreq` | `string` | `'weekly'` | Hint to crawlers on how often pages change. |
+| `defaultPriority` | `number` | `0.8` | Default weight for standard pages (0.0 to 1.0). |
+| `rootPriority` | `number` | `1.0` | Weight for the homepage (`index.md`). |
+
+### Example
 
 ```javascript
 import { defineConfig } from '@docmd/core';
 
 export default defineConfig({
-  siteUrl: 'https://docs.example.com', // Required for sitemap generation
+  url: 'https://docs.example.com',
   plugins: {
     sitemap: {
-      defaultChangefreq: 'weekly', // 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
-      defaultPriority: 0.8,        // Default weight for standard pages
-      rootPriority: 1.0            // Weight for the homepage (index.md)
+      defaultChangefreq: 'weekly',
+      defaultPriority: 0.8
     }
   }
 });
 ```
 
+## Features
+
+- **Automatic URL Construction**: Intelligently resolves page paths to their canonical public URLs with clean directory structure.
+- **Versioned Discovery**: Automatically includes all pages from all versions (e.g. `/v1/`, `/v2/`) without manual configuration.
+- **Granular Exclusions**: Exclude specific pages from the sitemap using frontmatter.
+- **SEO Ready**: Follows standard XML sitemap protocols compatible with all major search engines.
+
 ## Page-Level Controls
 
-You can override sitemap behaviour for specific pages using frontmatter.
+Override sitemap behaviour for specific pages using frontmatter:
 
-```yaml
+```markdown
 ---
 title: "Archive Page"
 priority: 0.3          # Lower weight for legacy content
-changefreq: "monthly"   # Hint to crawlers that this page rarely changes
-lastmod: "2024-03-15"   # Explicitly set the last modification date
-sitemap: false         # Exclude this specific page from the sitemap.xml
+changefreq: "monthly"   # Hint to crawlers
+sitemap: false         # Exclude this specific page
 ---
 ```
 
-## Core Features
-
-### 1. Automatic URL Construction
-The plugin intelligently resolves page paths to their canonical public URLs. It handles directory indexes automatically, ensuring that `guide/index.html` is listed as `https://yoursite.com/guide/` to maintain clean URL structures.
-
-### 2. Versioned Discovery
-If your project uses [Versioning](../configuration/versioning), the sitemap plugin automatically includes all pages from all versions (e.g., `/v1/getting-started`, `/v2/getting-started`), allowing search engines to discover your archived documentation without manual configuration.
-
-### 3. Smart Exclusions
-Pages marked with `noindex: true` or `sitemap: false` in their frontmatter are automatically excluded from the generated `sitemap.xml`, giving you granular control over what is presented to search engines.
-
 ::: callout tip "Validation"
-After building your site, you can typically find the sitemap at `your-output-dir/sitemap.xml`. Most search engine consoles allow you to submit this file directly to accelerate indexing.
+After building your site, you can find the sitemap at `site/sitemap.xml`. You can submit this URL directly to search engine consoles to accelerate indexing.
 :::

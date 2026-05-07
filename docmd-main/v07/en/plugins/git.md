@@ -1,46 +1,9 @@
 ---
 title: "Git Plugin"
-description: "Display last-updated timestamps and commit history derived directly from your Git repository."
+description: "Repository-aware metadata, last-updated timestamps, and automated edit links derived from Git history."
 ---
 
-The **Git plugin** adds repository-aware metadata to your documentation pages. It displays when each page was last modified, who contributed, and provides an optional "Edit this page" link - all derived directly from your Git history with zero configuration.
-
-::: callout info "Core Plugin"
-The Git plugin is bundled with `@docmd/core` and enabled by default. It automatically detects if your project is in a Git repository and gracefully disables itself if not. No installation or configuration is required for basic functionality.
-:::
-
-## Features
-
-### Last Updated Timestamps
-
-Every page automatically displays when it was last modified, shown in the page footer alongside the edit link. The timestamp is derived from the most recent Git commit that touched the source file.
-
-<!-- SCREENSHOT: Page footer showing "Last updated: 3 days ago" on the left and "Edit this page" on the right -->
-
-Timestamps use relative formatting for recent changes ("2h ago", "3d ago") and switch to absolute dates for older content ("15 Mar 2026").
-
-### Commit History Tooltip
-
-Hover over the "Last updated" text to reveal a tooltip showing the most recent commits for that page. Each entry displays the commit message, author (with Gravatar avatar), and relative timestamp.
-
-<!-- SCREENSHOT: Commit history tooltip showing 4-5 recent commits with author avatars and messages -->
-
-This provides quick context about recent changes without leaving the page - useful for understanding what has been updated and by whom.
-
-### Edit Links
-
-When configured with a repository URL, the plugin displays an "Edit this page" link that opens the source file directly in your Git provider's web editor.
-
-```javascript
-plugins: {
-  git: {
-    repo: 'https://github.com/your-org/your-docs',
-    branch: 'main'
-  }
-}
-```
-
-The plugin automatically detects GitHub, GitLab, and Bitbucket URLs and constructs the correct edit link format for each provider.
+The `@docmd/plugin-git` plugin adds repository intelligence to your documentation. It automatically displays when each page was last modified, who contributed to it, and provides an optional "Edit this page" link—all extracted directly from your Git history at build-time.
 
 ## Configuration
 
@@ -54,7 +17,7 @@ The plugin automatically detects GitHub, GitLab, and Bitbucket URLs and construc
 | `maxCommits` | `number` | `6` | Maximum commits to show in the tooltip. |
 | `dateFormat` | `string` | `'relative'` | Timestamp format: `relative` (default), `iso`, or `locale-aware`. |
 
-### Full Example
+### Usage
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -73,9 +36,26 @@ export default defineConfig({
 });
 ```
 
+## Features
+
+- **Last Updated Timestamps**: Automatically shows when a page was last modified in the footer.
+- **Commit History Tooltip**: Hovering over the timestamp reveals a list of recent commits for that specific page.
+- **Automated Edit Links**: Provides a link to edit the source file on GitHub, GitLab, or Bitbucket.
+- **Performance-First**: Git history is queried once and cached at build-time, ensuring zero impact on site performance.
+
+## Usage
+
+Once configured, the plugin works automatically. Timestamps and edit links appear in the page footer.
+
+### Footer Example
+
+::: callout info "Rendering Result"
+The footer of this page (and all others in this documentation) is rendered by the Git plugin. Scroll to the bottom to see it in action—hover over the **Last updated** date to see the commit history.
+:::
+
 ## Per-Page Control
 
-Disable the Git plugin for specific pages using frontmatter:
+Disable Git features for specific pages via frontmatter:
 
 ```markdown
 ---
@@ -83,70 +63,8 @@ title: "Internal Notes"
 plugins:
   git: false
 ---
-
-This page won't show last updated or edit links.
 ```
-
-## How It Works
-
-The plugin reads Git history at build time using standard Git commands. For each markdown file:
-
-1. Runs `git log` to fetch the commit history
-2. Extracts timestamps, authors, and commit messages
-3. Injects the data into the page context
-4. Client-side JavaScript renders the UI components
-
-::: callout tip "Performance"
-Git data is cached during the build process. Each file's history is queried only once, regardless of how many times the page is rendered (e.g. across multiple locales).
-:::
-
-## Requirements
-
-- The documentation source must be inside a Git repository
-- Git must be available in the build environment
-- Files must have at least one commit in their history
-
-Pages without Git history (new files not yet committed) will not display timestamps or commit history.
-
-## Migration from editLink
-
-If you were previously using the `editLink` configuration option, the Git plugin provides the same functionality with additional features:
-
-**Before (editLink config):**
-```javascript
-export default defineConfig({
-  editLink: {
-    enabled: true,
-    baseUrl: 'https://github.com/org/repo/edit/main/docs',
-    text: 'Edit this page'
-  }
-});
-```
-
-**After (Git plugin):**
-```javascript
-export default defineConfig({
-  plugins: {
-    git: {
-      repo: 'https://github.com/org/repo',
-      branch: 'main'
-    }
-  }
-});
-```
-
-The Git plugin automatically constructs the edit URL from the repository and branch, so you no longer need to manually specify the full edit path.
-
-::: callout warning "Deprecation Notice"
-The standalone `editLink` configuration option is deprecated and will be removed in a future release. Please migrate to the Git plugin for edit link functionality.
-:::
 
 ## Localisation
 
-The plugin includes translations for all UI strings. Supported languages:
-
-- English (en)
-- German (de)
-- Chinese (zh)
-
-Custom translations can be provided through the standard [UI strings](../configuration/localisation/ui-strings.md) system.
+The plugin includes built-in translations for English, German, and Chinese. Custom strings can be provided through the [UI Localisation](../configuration/localisation/ui-strings.md) system.

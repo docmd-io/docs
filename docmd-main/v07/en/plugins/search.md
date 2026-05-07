@@ -9,6 +9,14 @@ The `@docmd/plugin-search` plugin provides a powerful, client-side search experi
 
 Search is enabled by default in most `docmd` templates. You can control its visibility and placement via the `layout` configuration.
 
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Enable or disable the full-text search indexer. |
+| `placeholder` | `string` | `'Search...'` | Custom placeholder text for the search input. |
+| `maxResults` | `number` | `10` | Maximum number of results to display in the modal. |
+
+### Usage
+
 ```javascript
 import { defineConfig } from '@docmd/core';
 
