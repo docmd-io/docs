@@ -65,7 +65,7 @@ bunx docmd dev
 这种方式可以锁定版本，方便团队和 CI/CD 流水线保持一致。
 
 ::: callout tip "本地安装后"
-将 `@docmd/core` 安装为项目依赖后，所有命令改用 `npx @docmd/core` 替代 `npx @docmd/core`。
+将 `@docmd/core` 安装为项目依赖后，所有命令改用 `docmd` (或 `npm docmd`, `yarn docmd`, `bun docmd`) 替代 `npx @docmd/core`。
 :::
 
 ## 全局安装
