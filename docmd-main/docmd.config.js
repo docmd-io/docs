@@ -118,7 +118,7 @@ module.exports = defineConfig({
   },
 
   versions: {
-    current: '07',
+    current: '08',
     position: 'sidebar-top',
     all: [
       { id: '08', dir: 'v08', label: 'v0.8.0' },
