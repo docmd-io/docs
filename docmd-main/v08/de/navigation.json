@@ -1,0 +1,620 @@
+[
+  {
+    "title": "Übersicht",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Erste Schritte",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "Schnellstart",
+        "path": "/getting-started/quick-start"
+      },
+      {
+        "title": "Installation",
+        "path": "/getting-started/installation"
+      },
+      {
+        "title": "Projektstruktur",
+        "path": "/getting-started/project-structure"
+      }
+    ]
+  },
+  {
+    "title": "Konfiguration",
+    "icon": "settings",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/configuration/overview"
+      },
+      {
+        "title": "Navigation",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "Layout & UI",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "Menüleiste",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "Lokalisierung",
+        "path": "/configuration/localisation",
+        "collapsible": false,
+        "children": [
+          {
+            "title": "Übersetzte Inhalte",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI-Strings & SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "Versionierung",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "Multi-Projekt",
+        "path": "/configuration/multi-project"
+      },
+      {
+        "title": "Weiterleitungen",
+        "path": "/configuration/redirects"
+      }
+    ]
+  },
+  {
+    "title": "Inhalte schreiben",
+    "icon": "pencil-line",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "Frontmatter",
+        "path": "/content/frontmatter"
+      },
+      {
+        "title": "Syntax",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Code-Blöcke",
+            "path": "/content/syntax/code"
+          },
+          {
+            "title": "Bilder",
+            "path": "/content/syntax/images"
+          },
+          {
+            "title": "Verlinkung",
+            "path": "/content/syntax/linking"
+          },
+          {
+            "title": "Fortgeschritten",
+            "path": "/content/syntax/advanced"
+          }
+        ]
+      },
+      {
+        "title": "Container",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Callouts",
+            "path": "/content/containers/callouts"
+          },
+          {
+            "title": "Tabs",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "Steps",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "Cards",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "Grids",
+            "path": "/content/containers/grids"
+          },
+          {
+            "title": "Ausklappbar",
+            "path": "/content/containers/collapsible"
+          },
+          {
+            "title": "Buttons",
+            "path": "/content/containers/buttons"
+          },
+          {
+            "title": "Hero-Bereiche",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "Tags",
+            "path": "/content/containers/tags"
+          },
+          {
+            "title": "URL-Embed",
+            "path": "/content/containers/embed"
+          },
+          {
+            "title": "Changelogs",
+            "path": "/content/containers/changelogs"
+          },
+          {
+            "title": "Verschachtelte Container",
+            "path": "/content/containers/nested-containers"
+          }
+        ]
+      },
+      {
+        "title": "No-Style Pages",
+        "path": "/content/no-style-pages"
+      },
+      {
+        "title": "Live-Vorschau",
+        "path": "/content/live-preview"
+      }
+    ]
+  },
+  {
+    "title": "Theming",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Verfügbare Themes",
+        "path": "/theming/available-themes"
+      },
+      {
+        "title": "Anpassung",
+        "path": "/theming/customization"
+      },
+      {
+        "title": "Hell- & Dunkelmodus",
+        "path": "/theming/light-dark-mode"
+      },
+      {
+        "title": "Eigenes CSS & JS",
+        "path": "/theming/custom-css-js"
+      },
+      {
+        "title": "Icons",
+        "path": "/theming/icons"
+      },
+      {
+        "title": "Assets",
+        "path": "/theming/assets-management"
+      }
+    ]
+  },
+  {
+    "title": "Plugins",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Plugins nutzen",
+        "path": "/plugins/usage"
+      },
+      {
+        "title": "Suche",
+        "path": "/plugins/search"
+      },
+      {
+        "title": "SEO",
+        "path": "/plugins/seo"
+      },
+      {
+        "title": "Sitemap",
+        "path": "/plugins/sitemap"
+      },
+      {
+        "title": "Analytics",
+        "path": "/plugins/analytics"
+      },
+      {
+        "title": "PWA",
+        "path": "/plugins/pwa"
+      },
+      {
+        "title": "LLMs",
+        "path": "/plugins/llms"
+      },
+      {
+        "title": "OpenAPI",
+        "path": "/plugins/openapi"
+      },
+      {
+        "title": "Mermaid",
+        "path": "/plugins/mermaid"
+      },
+      {
+        "title": "Threads",
+        "path": "/plugins/threads"
+      },
+      {
+        "title": "Mathe (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
+        "title": "Git",
+        "path": "/plugins/git"
+      },
+      {
+        "title": "Plugins erstellen",
+        "path": "/plugins/building-plugins"
+      }
+    ]
+  },
+  {
+    "title": "Bereitstellung",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Bauen & Bereitstellen",
+        "path": "/deployment"
+      },
+      {
+        "title": "Docker",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
+        "title": "CI/CD",
+        "path": "/deployment/ci-cd"
+      }
+    ]
+  },
+  {
+    "title": "Migration",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
+    "title": "API-Referenz",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "CLI-Befehle",
+        "path": "/api/cli-commands"
+      },
+      {
+        "title": "Node-API",
+        "path": "/api/node-api"
+      },
+      {
+        "title": "Browser-API",
+        "path": "/api/browser-api"
+      },
+      {
+        "title": "Client-Ereignisse",
+        "path": "/api/client-side-events"
+      },
+      {
+        "title": "Live-Editor-API",
+        "path": "/api/live-api"
+      }
+    ]
+  },
+  {
+    "title": "Leitfäden",
+    "icon": "book-open",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Skalierung & Architektur",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "1000+ Seiten",
+            "path": "/guides/scaling-architecture/scaling"
+          },
+          {
+            "title": "Ordnerstruktur",
+            "path": "/guides/scaling-architecture/scalable-folder-structure"
+          },
+          {
+            "title": "Multi-Versions-Dokumentation",
+            "path": "/guides/scaling-architecture/multi-version-documentation"
+          },
+          {
+            "title": "Breaking Changes",
+            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
+          },
+          {
+            "title": "Zusammenarbeit im Team",
+            "path": "/guides/scaling-architecture/multi-team-collaboration"
+          },
+          {
+            "title": "Große Repositories",
+            "path": "/guides/scaling-architecture/organising-large-repositories"
+          }
+        ]
+      },
+      {
+        "title": "KI & LLMs",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Struktur für LLMs",
+            "path": "/guides/ai-optimisation/structure-for-llms"
+          },
+          {
+            "title": "KI-bereite Ausgabe",
+            "path": "/guides/ai-optimisation/generating-ai-ready-docs"
+          },
+          {
+            "title": "Halluzinationen minimieren",
+            "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
+          },
+          {
+            "title": "Semantische Suche",
+            "path": "/guides/ai-optimisation/semantic-search-design"
+          },
+          {
+            "title": "Zerlegbare Inhalte",
+            "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
+          },
+          {
+            "title": "Kontexterhaltung",
+            "path": "/guides/ai-optimisation/context-preservation"
+          }
+        ]
+      },
+      {
+        "title": "Suche",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Relevanz & Struktur",
+            "path": "/guides/search/improving-search-relevance"
+          },
+          {
+            "title": "Geschwindigkeit & Genauigkeit",
+            "path": "/guides/search/fast-accurate-search"
+          },
+          {
+            "title": "Local-First Optimierung",
+            "path": "/guides/search/local-first-search"
+          }
+        ]
+      },
+      {
+        "title": "Leistung",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Sub-100ms Navigation",
+            "path": "/guides/performance-delivery/sub-100ms-navigation"
+          },
+          {
+            "title": "CDN & Edge Deploy",
+            "path": "/guides/performance-delivery/deploying-cdn-edge"
+          },
+          {
+            "title": "JS-Anteil reduzieren",
+            "path": "/guides/performance-delivery/reducing-javascript-payload"
+          },
+          {
+            "title": "Low-End-Geräte",
+            "path": "/guides/performance-delivery/low-end-devices"
+          },
+          {
+            "title": "Caching-Strategien",
+            "path": "/guides/performance-delivery/caching-strategies"
+          }
+        ]
+      },
+      {
+        "title": "Workflows & Teams",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Workflow-Konfiguration",
+            "path": "/guides/workflows-teams/setting-up-workflow"
+          },
+          {
+            "title": "Git-basierte Workflows",
+            "path": "/guides/workflows-teams/git-based-workflows"
+          },
+          {
+            "title": "Änderungenvorschau",
+            "path": "/guides/workflows-teams/previewing-changes"
+          },
+          {
+            "title": "Skalierte Konsistenz",
+            "path": "/guides/workflows-teams/maintaining-consistency"
+          },
+          {
+            "title": "Release-Workflows",
+            "path": "/guides/workflows-teams/versioning-release-workflows"
+          }
+        ]
+      },
+      {
+        "title": "Integrationen",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "OpenAPI-Erstellung",
+            "path": "/guides/integrations/openapi-generation"
+          },
+          {
+            "title": "GitHub Actions",
+            "path": "/guides/integrations/github-actions-cicd"
+          },
+          {
+            "title": "Bestehende Repos",
+            "path": "/guides/integrations/existing-markdown-repos"
+          },
+          {
+            "title": "Parallele Tools",
+            "path": "/guides/integrations/alongside-other-tools"
+          }
+        ]
+      },
+      {
+        "title": "Inhalt & UX",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Skalierbarer Inhalt",
+            "path": "/guides/content-ux/scalable-technical-writing"
+          },
+          {
+            "title": "Navigation großer Sites",
+            "path": "/guides/content-ux/navigation-large-sites"
+          },
+          {
+            "title": "Lesbarkeit & Hierarchie",
+            "path": "/guides/content-ux/improving-readability"
+          },
+          {
+            "title": "Aufgabe vs. Konzept",
+            "path": "/guides/content-ux/task-vs-concept"
+          },
+          {
+            "title": "Anti-Patterns",
+            "path": "/guides/content-ux/avoiding-anti-patterns"
+          }
+        ]
+      },
+      {
+        "title": "Anpassung",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Startseiten",
+            "path": "/guides/customisation/custom-landing-pages"
+          },
+          {
+            "title": "Schriftarten & Branding",
+            "path": "/guides/customisation/custom-fonts-branding"
+          },
+          {
+            "title": "Favicons & Meta",
+            "path": "/guides/customisation/custom-favicons-metadata"
+          },
+          {
+            "title": "Benutzerdefinierte Plugins",
+            "path": "/guides/customisation/extending-custom-plugins"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Vergleich",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "Release Notes",
+    "icon": "package-check",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "v0.7.9 — Git-Plugin Fixes",
+        "path": "/release-notes/0-7-9"
+      },
+      {
+        "title": "v0.7.8 — Git-Plugin",
+        "path": "/release-notes/0-7-8"
+      },
+      {
+        "title": "v0.7.7 — Multi-Projekt",
+        "path": "/release-notes/0-7-7"
+      },
+      {
+        "title": "v0.7.6 — URL Engine",
+        "path": "/release-notes/0-7-6"
+      },
+      {
+        "title": "v0.7.5 — Sicherheitspatch",
+        "path": "/release-notes/0-7-5"
+      },
+      {
+        "title": "v0.7.4 — Mermaid-Icons",
+        "path": "/release-notes/0-7-4"
+      },
+      {
+        "title": "v0.7.3 — Migrate CLI",
+        "path": "/release-notes/0-7-3"
+      },
+      {
+        "title": "v0.7.2 — Deploy CLI",
+        "path": "/release-notes/0-7-2"
+      },
+      {
+        "title": "v0.7.1 — Plugin API",
+        "path": "/release-notes/0-7-1"
+      },
+      {
+        "title": "v0.7.0 — i18n Release",
+        "path": "/release-notes/0-7-0"
+      }
+    ]
+  },
+  {
+    "title": "Mitwirken",
+    "path": "/contributing",
+    "icon": "git-pull-request"
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd",
+    "icon": "github",
+    "external": true
+  },
+  {
+    "title": "Diskussionen",
+    "path": "https://github.com/orgs/docmd-io/discussions",
+    "icon": "message-circle",
+    "external": true
+  }
+]

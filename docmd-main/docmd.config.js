@@ -121,6 +121,7 @@ module.exports = defineConfig({
     current: '07',
     position: 'sidebar-top',
     all: [
+      { id: '08', dir: 'v08', label: 'v0.8.0' },
       { id: '07', dir: 'v07', label: 'v0.7.0' },
       { id: '06', dir: 'v06', label: 'v0.6.0' },
       { id: '05', dir: 'v05', label: 'v0.5.0' },
