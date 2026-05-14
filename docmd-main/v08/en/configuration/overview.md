@@ -17,7 +17,8 @@ Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully sup
   "title": "My Project",
   "url": "https://docs.myproject.com",
   "src": "docs",
-  "out": "site"
+  "out": "site",
+  "tmp": ".my-output/my-docmd"
 }
 ```
 
@@ -31,6 +32,7 @@ Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully sup
 | `url` | Your production base URL. Critical for SEO, Sitemaps, and OpenGraph. | `null` |
 | `src` | The relative path to the directory containing your Markdown files. | `docs` |
 | `out` | The relative path for the generated static site output. | `site` |
+| `tmp` | Configurable destination path for internal caches and build-time temporary files. If omitted, defaults to the device's isolated OS temp folder nested securely by project hash. | `null` |
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
 | `i18n` | Configuration for [multi-language support](localisation/index.md). | `null` |
 | `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
