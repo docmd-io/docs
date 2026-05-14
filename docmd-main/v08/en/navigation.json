@@ -578,6 +578,10 @@
     "collapsible": false,
     "children": [
       {
+        "title": "v0.8.2 - Patch Release",
+        "path": "/release-notes/0-8-2"
+      },
+      {
         "title": "v0.8.1 - Rust Engine Preview",
         "path": "/release-notes/0-8-1"
       },
