@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "prefix": "/",
+      "src": "docmd-main"
+    },
+    {
+      "prefix": "/search",
+      "src": "docmd-search"
+    }
+  ]
+}

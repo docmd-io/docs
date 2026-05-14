@@ -18,7 +18,7 @@ Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully sup
   "url": "https://docs.myproject.com",
   "src": "docs",
   "out": "site",
-  "tmp": ".my-output/my-docmd"
+  "tmp": ".cache/docmd"
 }
 ```
 
