@@ -1,22 +1,24 @@
 ---
 title: "General Configuration"
-description: "Configure docmd.config.jsonon schema, branding, layout, and engine features."
+description: "Configure docmd.config.json schema, branding, layout, and engine features."
 ---
 
-The `docmd.config.jsonon` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behaviour, and engine-level processing rules.
+The `docmd.config.json` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behaviour, and engine-level processing rules.
 
 ## The Configuration File
 
 ::: callout tip "JSON is the New Standard"
-Starting in version 0.8.0, `docmd.config.jsonon` is the standard and recommended configuration format. It allows for safe, high-performance serialization across docmd's new multi-threaded worker pools.
-Fallback to `docmd.config.json` and `docmd.config.ts` is still valid and fully supported if you require dynamic Javascript logic.
+Starting in version 0.8.0, `docmd.config.json` is the standard and recommended configuration format. It allows for safe, high-performance serialisation across docmd's new multi-threaded worker pools.
+Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully supported if you require dynamic JavaScript logic.
 :::
 
-```javascript
+```json
+{
   "title": "My Project",
   "url": "https://docs.myproject.com",
   "src": "docs",
   "out": "site"
+}
 ```
 
 ## Core Settings
@@ -32,14 +34,14 @@ Fallback to `docmd.config.json` and `docmd.config.ts` is still valid and fully s
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
 | `i18n` | Configuration for [multi-language support](localisation/index.md). | `null` |
 | `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
-
-## Branding & Identity
+| `engine` | Build engine: `"js"` (default) or `"rust"` (preview). See [Engine Architecture](../release-notes/0-8-1.md). | `"js"` |
 
 ## Branding & Identity
 
 Configure how your brand is represented in the navigation header and browser tabs.
 
-```javascript
+```json
+{
   "logo": {
     "light": "assets/images/logo-dark.png",
     "dark": "assets/images/logo-light.png",
@@ -48,6 +50,7 @@ Configure how your brand is represented in the navigation header and browser tab
     "height": "32px"
   },
   "favicon": "assets/favicon.ico"
+}
 ```
 
 ## Site Layout & UI
@@ -58,15 +61,15 @@ For a full breakdown of functional zones and configuration options, see [Layout 
 
 ## Core Engine Features
 
-## Core Engine Features
-
 Fine-tune how `docmd` processes and renders your documentation content.
 
-```javascript
+```json
+{
   "minify": true,
   "autoTitleFromH1": true,
   "copyCode": true,
   "pageNavigation": true
+}
 ```
 
 ## Legacy Support

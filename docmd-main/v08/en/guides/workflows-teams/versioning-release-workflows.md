@@ -32,7 +32,7 @@ project-root/
 
 Register both versions in your configuration. You can label the upcoming version as "Beta" or "Next" to signal its status to users through the version switcher.
 
-```javascript
+```json
   "versions": {
     "current": "v1.0",
     "all": [

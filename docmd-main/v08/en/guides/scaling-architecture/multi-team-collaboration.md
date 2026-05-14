@@ -37,7 +37,7 @@ my-project/
 
 The central platform team controls the [Menubar](../../configuration/menubar.md), which serves as the primary navigation layer to switch between different team domains.
 
-```javascript
+```json
   "menubar": {
     "enabled": true,
     "items": [

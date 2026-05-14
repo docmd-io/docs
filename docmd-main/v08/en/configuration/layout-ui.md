@@ -31,16 +31,18 @@ The header contains the page title, breadcrumbs, and usually the utility menus.
 ### Utility Menus (Options Menu)
 The `optionsMenu` consolidates core utilities like **Global Search**, **Theme Toggle**, and **Sponsorship links**.
 
-```javascript
-layout: {
+```json
+{
+"layout": {
   "optionsMenu": {
     "position": "header", 
-    components: {
+    "components": {
       "search": true,      
-      themeSwitch: true, 
-      sponsor: "https:
+      "themeSwitch": true, 
+      "sponsor": "https:
     }
   }
+}
 }
 ```
 
@@ -57,13 +59,13 @@ The sidebar is the primary navigation tree for your site. Its structure is defin
 ### Footer
 `docmd` provides both **minimal** and **complete** layouts for your site footer.
 
-```javascript
+```json
 layout: {
   "footer": {
     "style": "complete", 
-    description: "Documentation built with docmd.",
+    "description": "Documentation built with docmd.",
     "branding": true,    
-    columns: [
+    "columns": [
       {
         "title": "Community",
         "links": [
@@ -76,5 +78,5 @@ layout: {
 ```
 
 ::: callout tip "Interface Hierarchy"
-For the best user experience, keep your **Menubar** for global external links and your **Sidebar** for logical documentation structure. AI agents frequently utilize this hierarchy to understand the relationship between different documentation modules.
+For the best user experience, keep your **Menubar** for global external links and your **Sidebar** for logical documentation structure. AI agents frequently utilise this hierarchy to understand the relationship between different documentation modules.
 :::

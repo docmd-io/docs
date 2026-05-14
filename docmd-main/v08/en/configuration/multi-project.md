@@ -39,13 +39,13 @@ my-docs/
 
 The root `docmd.config.json` contains **only** the `projects` array:
 
-```javascript
-module.exports = defineConfig({
+```json
+{
   "projects": [
     { "prefix": "/", "src": "main-docs" },
     { "prefix": "/sdk", "src": "sdk-docs" }
   ]
-});
+}
 ```
 
 | Key | Description |
@@ -143,14 +143,13 @@ Deploy to any static hosting (GitHub Pages, Netlify, Vercel, Cloudflare Pages) w
 
 The official docmd documentation uses multi-project to serve the main docs and semantic search docs from one domain:
 
-```javascript
-
-module.exports = defineConfig({
+```json
+{
   "projects": [
     { "prefix": "/", "src": "docmd-main" },
     { "prefix": "/search", "src": "docmd-search" }
   ]
-});
+}
 ```
 
 Check the [documentation repo](external:https://github.com/docmd-io/docs).

@@ -9,7 +9,7 @@ description: "How to use and customise Lucide icons in your documentation."
 
 Assign an icon to any navigation item in your `docmd.config.json`. Use the kebab-case name of any icon found on the Lucide website.
 
-```javascript
+```json
 navigation: [
   { "title": "Home", "path": "/", "icon": "home" },
   { "title": "Setup", "path": "/setup", "icon": "settings" }

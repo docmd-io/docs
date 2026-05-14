@@ -32,11 +32,11 @@ my-project/
 
 Define your version structure in `docmd.config.json`. The `current` version is served at the root URL, while others are served at `/{id}/`.
 
-```javascript
+```json
   "versions": {
     "current": "v2",           
-    position: "sidebar-top", 
-    all: [
+    "position": "sidebar-top", 
+    "all": [
       { "id": "v2", "dir": "docs",    "label": "v2.x (Latest)" },
       { "id": "v1", "dir": "docs-v1", "label": "v1.x (LTS)" }
     ]

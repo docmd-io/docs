@@ -13,7 +13,7 @@ If documentation generation takes minutes instead of seconds, authors are discou
 
 ## Approach
 
-`docmd` is architected for speed and scalability. By utilizing a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimised SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
+`docmd` is architected for speed and scalability. By utilising a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimised SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
 
 ## Implementation
 
@@ -29,7 +29,7 @@ For large sites, the [Search Plugin](../../plugins/search) is essential. `docmd`
 
 Leverage the [Versioning Engine](../../configuration/versioning) to separate legacy content from active documentation. By isolating older versions into their own build contexts, you reduce the number of pages that need to be re-processed during daily updates, significantly improving development velocity.
 
-```javascript
+```json
   "versions": {
     "current": "v3",
     "all": [

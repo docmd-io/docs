@@ -21,7 +21,7 @@ Use `docmd` as your primary documentation hub or "Single Pane of Glass." By leve
 
 Use the `menubar` configuration to link your various documentation portals together. This ensures that users can always find their way back to the main guides, regardless of which subdomain they are currently on.
 
-```javascript
+```json
   "layout": {
     "menubar": {
       "left": [

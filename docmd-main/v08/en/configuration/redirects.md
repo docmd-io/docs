@@ -9,13 +9,13 @@ In a static hosting environment, there is no server-side logic (such as Nginx ru
 
 You can forward traffic from legacy URLs to new destinations by defining a mapping in the `redirects` object.
 
-```javascript
-export default defineConfig({
-  "redirects": {
+```json
+{
+"redirects": {
     "/setup": "/getting-started/installation", 
     "/v1/api": "/api-reference"                  
   }
-});
+}
 ```
 
 ### Technical Implementation
@@ -34,13 +34,13 @@ When a user attempts to access a non-existent URL, most static hosting providers
 
 You can personalize the 404 error message within your configuration:
 
-```javascript
-export default defineConfig({
-  "notFound": {
+```json
+{
+"notFound": {
     "title": "404: Page Not Found",
     "content": "We couldn"t find the page you"re looking for. Use the sidebar to find your way back."
   }
-});
+}
 ```
 
 ::: callout tip "Local Development"

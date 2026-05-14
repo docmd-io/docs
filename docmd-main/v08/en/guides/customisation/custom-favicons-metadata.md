@@ -21,7 +21,7 @@ Your favicon is the primary visual anchor in a crowded browser window. High-qual
 
 Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source directory and reference it in your `docmd.config.json`. `docmd` will automatically handle the relative pathing and cache-busting.
 
-```javascript
+```json
   "title": "My Project",
   "favicon": "/favicon.svg" 
 ```
@@ -30,7 +30,7 @@ Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source di
 
 Enable and configure the [SEO Plugin](../../plugins/seo.md) to set default social media previews for your entire site.
 
-```javascript
+```json
   "url": "https:
   "plugins": {
     "seo": {

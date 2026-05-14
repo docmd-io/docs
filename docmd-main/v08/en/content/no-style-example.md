@@ -90,6 +90,6 @@ customHead: |
       The layout for this page is authored using standard HTML wrappers and scoped CSS defined within the <code>customHead</code> frontmatter field. This ensures zero CSS leakage to the rest of the documentation site.
     </p>
     
-    <a href="/content/no-style-pages/" class="demo-button">Analyze the Implementation Guide →</a>
+    <a href="/content/no-style-pages/" class="demo-button">Analyse the Implementation Guide →</a>
   </div>
 </div>

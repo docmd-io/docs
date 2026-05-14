@@ -220,6 +220,31 @@ const registeredHooks = await loadPlugins(config, {
 });
 ```
 
+### Engine Loader API
+
+The pluggable engine architecture allows programmatic resolution and instantiation of acceleration layers directly via `@docmd/api`.
+
+#### `loadEngine(engineName)`
+
+Resolves and initialises the requested build engine backend. If native architecture binaries are unavailable or fail validation allowlists, it gracefully falls back to the high-performance JavaScript engine.
+
+```javascript
+import { loadEngine } from "@docmd/api";
+
+const engine = await loadEngine("rust");
+const gitLogResult = await engine.runWorkerTask("git:log", { "paths": ["docs/guide.md"] });
+```
+
+#### `registerEngine(engineName, engineInstance)`
+
+Allows custom tools or third-party integrators to register custom execution engines programmatically.
+
+```javascript
+import { registerEngine } from "@docmd/api";
+
+registerEngine("custom", myCustomEngineImpl);
+```
+
 ### Type Exports
 
 For TypeScript plugin authors, the following types are available:
@@ -239,5 +264,6 @@ import type {
   SourceTools,        // Source editing tools interface
   BlockInfo,          // Block information returned by getBlockAt
   TextLocation,       // Text location returned by findText
+  Engine,             // Pluggable execution engine contract interface
 } from '@docmd/api';
 ```

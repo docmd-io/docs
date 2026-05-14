@@ -92,7 +92,7 @@ export default {
 
 To enable your plugin, reference its **full package name** in your `docmd.config.json`:
 
-```javascript
+```json
   "plugins": {
     "my-awesome-plugin": {
       
@@ -137,18 +137,18 @@ Docmd provides deep integration hooks that allow plugins to manipulate configura
 | **`onBeforeRender(page)`** | Called before template rendering. Receives the full `PageContext`. Mutations to `frontmatter` and `html` are reflected in the rendered output. | `void` or `Promise<void>` |
 | **`onPageReady(page)`** | Accesses the fully assembled page metadata (`page.html`, `page.outputPath`, `page.frontmatter`) just before it is written to the destination file. | `void` or `Promise<void>` |
 
-### Multi-Threaded Background Tasks (`runWorkerTask`)
+### Engine Acceleration & Background Tasks (`runWorkerTask`)
 
-Starting in 0.8.0, docmd processes markdown inside a persistent multi-threaded `WorkerPool`. Plugins can offload their own heavy I/O or CPU-bound tasks to these threads instead of blocking the main build thread.
+Starting in 0.8.0, docmd executes intensive operations via a modular **Pluggable Engine Architecture**. Plugins can seamlessly offload custom heavy I/O, file parsing, or CPU-bound subroutines through the configured build engine layer (e.g., JavaScript or native Rust workers) without blocking the primary build thread.
 
-The `runWorkerTask` method is injected into `PageContext`, `PostBuildContext`, and `ActionContext`. 
+The `runWorkerTask` method is injected transparently into `PageContext`, `PostBuildContext`, and `ActionContext`. The engine implementation satisfies the execution request automatically based on active configuration settings.
 
 ```javascript
 {
   "plugin": { "name": "my-plugin", "version": "1.0.0", "capabilities": ["post-build"] },
-  
+
   "onPostBuild": async (ctx) => {
-    // Pass the absolute path to your worker script, the exported function name, and an array of arguments
+    // Pass a registered engine action name or absolute script path alongside serialisable arguments
     const result = await ctx.runWorkerTask('/absolute/path/to/worker.js', 'parseData', [ctx.outputDir]);
   }
 }

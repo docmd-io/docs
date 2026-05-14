@@ -29,15 +29,15 @@ docmd add <plugin-name> -V
 
 These plugins are bundled with `@docmd/core` - no installation needed. Enable them in your `docmd.config.json`:
 
-```javascript
+```json
   "plugins": {
     "search": {},                        
-    seo: { "aiBots": false },            
-    sitemap: {},                       
-    analytics: {},                     
-    llms: {},                          
-    mermaid: {},                       
-    git: {}                            
+    "seo": { "aiBots": false },            
+    "sitemap": {},                       
+    "analytics": {},                     
+    "llms": {},                          
+    "mermaid": {},                       
+    "git": {}                            
   }
 ```
 
@@ -59,9 +59,11 @@ Optional plugins require installation before enabling.
 
 When you add an official plugin to your `docmd.config.json` that isn't installed, docmd automatically downloads and installs it on the next build. This works for all plugins in the [official registry](/plugins/usage).
 
-```javascript
-plugins: {
-  "pwa": {}  
+```json
+{
+  "plugins": {
+    "pwa": {}
+  }
 }
 ```
 
@@ -83,10 +85,12 @@ Plugins inject CSS and behaviour by default globally across all pages. However, 
 
 You can instruct any plugin to automatically skip injecting into `noStyle` pages via your `docmd.config.json`:
 
-```javascript
-plugins: {
-  "math": {
-    "noStyle": false 
+```json
+{
+  "plugins": {
+    "math": {
+      "noStyle": false
+    }
   }
 }
 ```

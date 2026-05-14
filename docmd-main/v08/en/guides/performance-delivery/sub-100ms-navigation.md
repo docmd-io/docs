@@ -13,7 +13,7 @@ Documentation users frequently jump between different sections, such as tutorial
 
 ## Approach
 
-`docmd` utilizes a high-performance **Single Page Application (SPA) Router** built on top of pre-generated static files. This allows the browser to intercept link clicks, fetch only the necessary content in the background, and update the page dynamically without a full reload. This approach preserves the state of the sidebar, table of contents, and theme settings, resulting in near-instant transitions.
+`docmd` utilises a high-performance **Single Page Application (SPA) Router** built on top of pre-generated static files. This allows the browser to intercept link clicks, fetch only the necessary content in the background, and update the page dynamically without a full reload. This approach preserves the state of the sidebar, table of contents, and theme settings, resulting in near-instant transitions.
 
 ## Implementation
 

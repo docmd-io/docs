@@ -46,7 +46,7 @@ Create a file named `custom.css` in your source directory (or any subdirectory) 
 
 Add your custom CSS file to the `theme.customCss` array in your `docmd.config.json`.
 
-```javascript
+```json
   "theme": {
     "customCss": ["/custom.css"]
   }

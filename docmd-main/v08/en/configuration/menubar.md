@@ -9,13 +9,13 @@ The `menubar` is a premium navigation layer that provides global context across 
 
 The menubar is configured within the `layout` section of your `docmd.config.json`.
 
-```javascript
-export default defineConfig({
-  "layout": {
+```json
+{
+"layout": {
     "menubar": {
       "enabled": true,
       "position": "top", 
-      left: [
+      "left": [
         { "type": "title", "text": "Brand", "url": "/", "icon": "home" },
         { "text": "Documentation", "url": "/docs" },
         { 
@@ -32,7 +32,7 @@ export default defineConfig({
       ]
     }
   }
-});
+}
 ```
 
 ### Options
@@ -65,11 +65,13 @@ Set `type: 'dropdown'` and provide an `items` array to create a nested menu.
 
 You can host the global search and theme toggle within the menubar by setting the `optionsMenu.position` to `'menubar'`.
 
-```javascript
-layout: {
+```json
+{
+"layout": {
   "optionsMenu": {
     "position": "menubar"
   }
+}
 }
 ```
 

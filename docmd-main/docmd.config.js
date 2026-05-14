@@ -2,7 +2,7 @@
 // Source file from the docmd project — https://github.com/docmd-io/docs
 
 module.exports = defineConfig({
-  // --- Core Metadata ---
+// --- Core Metadata ---
   title: 'docmd docs',
   url: 'https://docs.docmd.io',
   src: '.', // Content is at project root (versioned dirs: v07/, v06/)

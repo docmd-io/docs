@@ -18,7 +18,7 @@ Enable analytics by adding your tracking credentials to the `plugins` section of
 
 ### Usage
 
-```javascript
+```json
   "plugins": {
     "analytics": {
       "googleV4": { 

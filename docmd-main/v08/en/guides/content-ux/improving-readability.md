@@ -13,7 +13,7 @@ Readability is not just an aesthetic choice - it is a functional requirement. If
 
 ## Approach
 
-Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers/index.md) to highlight critical information. By utilizing `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
+Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers/index.md) to highlight critical information. By utilising `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
 
 ## Implementation
 

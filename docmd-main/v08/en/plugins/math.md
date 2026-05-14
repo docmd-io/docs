@@ -13,9 +13,11 @@ It utilises `markdown-it-texmath` as securely integrated with the `katex` comput
 docmd add math
 ```
 
-```javascript
-plugins: {
+```json
+{
+"plugins": {
   "math": {}
+}
 }
 ```
 

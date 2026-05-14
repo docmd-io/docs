@@ -34,7 +34,7 @@ When you run `docmd build` or `docmd dev`:
 
 To link your assets to every page, add them to your theme configuration:
 
-```javascript
+```json
   "theme": {
     "customCss": ["/assets/css/branding.css"]
   },

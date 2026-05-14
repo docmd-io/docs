@@ -17,11 +17,11 @@ Search is enabled by default in most `docmd` templates. You can control its visi
 
 ### Usage
 
-```javascript
+```json
   "layout": {
     "optionsMenu": {
       "position": "header", 
-      components: {
+      "components": {
         "search": true 
       }
     }

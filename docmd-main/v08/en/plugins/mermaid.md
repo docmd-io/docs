@@ -15,7 +15,7 @@ The Mermaid plugin is bundled with `@docmd/core` and enabled by default. No mand
 
 ### Example
 
-```javascript
+```json
   "plugins": {
     "mermaid": {} 
   }

@@ -9,7 +9,7 @@ While `docmd` themes are highly flexible, you may want to inject your own styles
 
 Use `theme.customCss` to override existing styles or add new ones.
 
-```javascript
+```json
   "theme": {
     "customCss": [
       "/assets/css/branding.css" 

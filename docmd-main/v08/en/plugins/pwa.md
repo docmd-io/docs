@@ -18,7 +18,7 @@ Customise your app branding within the `plugins` section of your `docmd.config.j
 
 ### Example
 
-```javascript
+```json
   "plugins": {
     "pwa": {
       "themeColor": "#1e293b",

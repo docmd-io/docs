@@ -81,5 +81,5 @@ You can leverage the native `grids` container to organise your cards into clean,
 ```
 
 ::: callout tip "Semantic Clustering for AI"
-In the `llms-full.txt` stream, content wrapped in a `card` is treated by AI agents as a **Cohesive Topic Cluster**. Utilizing cards to segment unrelated technical concepts on the same page prevents context leakage and ensures that LLM-generated summaries remain logically isolated and accurate.
+In the `llms-full.txt` stream, content wrapped in a `card` is treated by AI agents as a **Cohesive Topic Cluster**. Utilising cards to segment unrelated technical concepts on the same page prevents context leakage and ensures that LLM-generated summaries remain logically isolated and accurate.
 :::

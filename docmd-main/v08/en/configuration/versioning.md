@@ -23,17 +23,17 @@ my-project/
 
 Define your versions within the `versions` object:
 
-```javascript
-export default defineConfig({
-  "versions": {
+```json
+{
+"versions": {
     "current": "v2",           
-    position: "sidebar-top", 
-    all: [
+    "position": "sidebar-top", 
+    "all": [
       { "id": "v2", "dir": "docs",    "label": "v2.x (Latest)" },
       { "id": "v1", "dir": "docs-v1", "label": "v1.x" }
     ]
   }
-});
+}
 ```
 
 ## Core Features

@@ -12,7 +12,7 @@ description: "How to configure the default viewing mode and manage the theme swi
 
 You specify the starting state of your documentation in `docmd.config.json`.
 
-```javascript
+```json
   "theme": {
     "name": "sky",
     "appearance": "system" 

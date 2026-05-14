@@ -12,13 +12,13 @@ description: "Structure your sidebar, categorise links, and assign icons for hum
 
 Each object in the array defines a **Link** or a **Category Group**.
 
-```javascript
-export default defineConfig({
-  "navigation": [
+```json
+{
+"navigation": [
     { "title": "Home", "path": "/", "icon": "home" },
     { "title": "Installation", "path": "/getting-started/installation", "icon": "download" }
   ]
-});
+}
 ```
 
 ## Available Properties
@@ -39,7 +39,7 @@ You can nest navigation items to create deep hierarchies. There are two primary 
 ### 1. Clickable Group (Directory with Index)
 If the parent has a `path`, clicking the label navigates to that page and automatically expands the children in the sidebar.
 
-```javascript
+```json
   "title": "Cloud Setup",
   "path": "/cloud/overview", 
   "children": [
@@ -51,7 +51,7 @@ If the parent has a `path`, clicking the label navigates to that page and automa
 ### 2. Static Label (Category Header)
 If you **omit the `path`**, the item becomes a static category header. This is the recommended approach for grouping related technical sections that don't share a common landing page.
 
-```javascript
+```json
   "title": "Content & Formatting",
   "icon": "layout",
   "children": [
@@ -75,9 +75,11 @@ If you **omit the `path`**, the item becomes a static category header. This is t
 ### Disabling Breadcrumbs
 Breadcrumbs are enabled by default. To disable them site-wide, update your `docmd.config.json`:
 
-```javascript
-layout: {
+```json
+{
+"layout": {
   "breadcrumbs": false
+}
 }
 ```
 

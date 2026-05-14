@@ -146,3 +146,4 @@ genctx.context.md
 .DS_Store
 pnpm-workspace.yaml
 pnpm-lock.yaml
+.docmd/

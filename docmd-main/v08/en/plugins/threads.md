@@ -17,9 +17,11 @@ This plugin is in alpha. The API and storage format are stable, but the UI is un
 docmd add threads
 ```
 
-```javascript
-plugins: {
+```json
+{
+"plugins": {
   "threads": {}
+}
 }
 ```
 
@@ -29,12 +31,13 @@ plugins: {
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | When `true`, threads stay grouped at the bottom of the page. When `false` (default), threads are positioned inline next to their highlighted text. |
 
-```javascript
-
-plugins: {
+```json
+{
+"plugins": {
   "threads": {
     "sidebar": true
   }
+}
 }
 ```
 
@@ -168,11 +171,13 @@ The threads plugin exposes the following actions via the WebSocket RPC system. T
 
 Author information is stored in `<docsRoot>/.threads/authors.json`:
 
-```javascript
+```json
+{
   "alice@example.com": {
     "name": "Alice",
     "avatarUrl": "https://gravatar.com/avatar/..."
   }
+}
 ```
 
 During development, the plugin automatically detects your git username and email for author identification.

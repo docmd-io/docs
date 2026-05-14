@@ -18,7 +18,7 @@ Enable sitemap generation by providing your `siteUrl` in the root configuration.
 
 ### Example
 
-```javascript
+```json
   "url": "https:
   "plugins": {
     "sitemap": {

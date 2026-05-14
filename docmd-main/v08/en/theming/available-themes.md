@@ -10,10 +10,10 @@ description: "Explore docmd's built-in themes including Sky, Ruby, and Retro. Le
 
 ## How to Switch Themes
 
-```javascript
+```json
   "theme": {
     "name": "sky",
-    "appearance": "system", 
+    "appearance": "system" 
   }
 ```
 

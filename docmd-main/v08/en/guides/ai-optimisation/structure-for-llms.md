@@ -40,7 +40,7 @@ Since LLMs cannot "see" images or diagrams, you must provide the architectural c
 
 Always specify the language for every fenced code block using [Syntax Highlighting](../../content/syntax/index.md). This allows LLMs to parse the code's Abstract Syntax Tree (AST) correctly.
 
-```javascript
+```json
   "plugins": ["llms"]
 ```
 

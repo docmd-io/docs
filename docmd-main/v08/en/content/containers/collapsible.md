@@ -63,7 +63,7 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
   ```
 :::
 ````
-::: collapsible "Analyze Sample JSON Response"
+::: collapsible "Analyse Sample JSON Response"
 ```javascript
   "status": "success",
   "data": { "version": "0.6.2" }

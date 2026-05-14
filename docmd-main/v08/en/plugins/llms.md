@@ -17,7 +17,7 @@ The LLM plugin is enabled by default. To function correctly, you must provide a 
 
 ### Usage
 
-```javascript
+```json
   "url": "https:
   "plugins": {
     "llms": {

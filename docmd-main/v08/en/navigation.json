@@ -261,6 +261,25 @@
     ]
   },
   {
+    "title": "Engines",
+    "icon": "cpu",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Overview",
+        "path": "/engines/overview"
+      },
+      {
+        "title": "JavaScript Engine",
+        "path": "/engines/js"
+      },
+      {
+        "title": "Rust Engine",
+        "path": "/engines/rust"
+      }
+    ]
+  },
+  {
     "title": "Deployment",
     "icon": "upload-cloud",
     "collapsible": true,
@@ -558,6 +577,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.8.1 - Rust Engine Preview",
+        "path": "/release-notes/0-8-1"
+      },
       {
         "title": "v0.8.0 - The Parallel Engine Era",
         "path": "/release-notes/0-8-0"

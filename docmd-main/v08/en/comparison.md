@@ -99,16 +99,15 @@ Organisations maintaining multiple tools under one domain need separate docs for
 | Zero-config detection | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 ::: callout info "How docmd does it"
-```javascript
-
-module.exports = defineConfig({
+```json
+{
   "projects": [
     { "prefix": "/", "src": "main-docs" },
     { "prefix": "/sdk", "src": "sdk-docs" }
   ]
-});
+}
 ```
-Each project folder has its own `docmd.config.json` with independent configuration. One `docmd build` produces a single deployable directory - no reverse proxy, no nginx, no separate CI pipelines.
+Each project folder has its own `docmd.config.json` with independent configuration. One `docmd build` produces a single deployable directory — no reverse proxy, no nginx, no separate CI pipelines.
 :::
 
 Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native multi-project support.

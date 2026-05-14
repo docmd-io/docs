@@ -55,4 +55,4 @@ location ~* \.html$ {
 Setting long cache times for assets is highly performant but requires a robust "cache-busting" strategy. `docmd` handles this automatically for its core files, but if you manually add assets to your `static/` directory, you must ensure you update their references (e.g., by changing the filename or adding a query parameter) when the content changes.
 
 ### CDN Integration
-If you are using a CDN (like Cloudflare or AWS CloudFront), ensure that it is configured to honor your server's `Cache-Control` headers. Most modern CDNs provide "instant purge" capabilities, which we recommend triggering as part of your CI/CD pipeline whenever you deploy a new version of your documentation.
+If you are using a CDN (like Cloudflare or AWS CloudFront), ensure that it is configured to honour your server's `Cache-Control` headers. Most modern CDNs provide "instant purge" capabilities, which we recommend triggering as part of your CI/CD pipeline whenever you deploy a new version of your documentation.
