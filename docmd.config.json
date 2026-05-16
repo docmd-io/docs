@@ -1,13 +1,14 @@
 {
   "projects": [
     {
+      "title": "docmd",
       "prefix": "/",
       "src": "docmd-main"
     },
     {
+      "title": "docmd search",
       "prefix": "/search",
-      "src": "docmd-search",
-      "title": "Search"
+      "src": "docmd-search"
     }
   ]
 }
