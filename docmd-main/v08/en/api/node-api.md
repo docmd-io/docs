@@ -46,6 +46,33 @@ async function generateEditor() {
 }
 ```
 
+## Workspace Management
+
+For managing workspace workspaces programmatically, use the dedicated workspace functions.
+
+### `isWorkspace(config)`
+Returns `true` if the provided configuration object follows the Workspace or legacy workspace schema.
+
+### `detectWorkspace(configPath)`
+Detects and loads a workspace configuration file, returning a normalized `WorkspaceRootConfig` or `null`.
+
+### `buildWorkspace(config, options)`
+Builds all projects within a workspace. Handles shared assets and project-specific prefixing.
+
+### `devWorkspace(config, options)`
+Starts the workspace dev server, watching all projects for changes and performing targeted rebuilds.
+
+```javascript
+import { detectWorkspace, buildWorkspace } from "@docmd/core";
+
+async function buildAll() {
+  const config = await detectWorkspace("./docmd.config.json");
+  if (config) {
+    await buildWorkspace(config, { quiet: false });
+  }
+}
+```
+
 ## Example: Custom Pipeline
 
 You can wrap `docmd` to create complex documentation workflows.

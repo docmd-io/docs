@@ -84,13 +84,13 @@ This is where most tools fall apart. You add 6 languages, translate 3 pages in H
 If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time - unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localised warning callout.
 :::
 
-## Multi-project
+## Workspace
 
 Organisations maintaining multiple tools under one domain need separate docs for each - different versions, different navigation, different release cycles. Most generators force you to either maintain separate sites or hack around plugin systems.
 
 | Capability | docmd | Docusaurus | VitePress | MkDocs | Starlight |
 |:-----------|:-----:|:----------:|:---------:|:------:|:---------:|
-| Native multi-project support | ✅ | Plugin | ❌ | Plugin | ❌ |
+| Native workspace support | ✅ | Plugin | ❌ | Plugin | ❌ |
 | Single config line per project | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Independent versioning per project | ✅ | ✅ | ❌ | ❌ | ❌ |
 | Independent i18n per project | ✅ | ❌ | ❌ | ❌ | ❌ |
@@ -110,7 +110,7 @@ Organisations maintaining multiple tools under one domain need separate docs for
 Each project folder has its own `docmd.config.json` with independent configuration. One `docmd build` produces a single deployable directory — no reverse proxy, no nginx, no separate CI pipelines.
 :::
 
-Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native multi-project support.
+Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native workspace support.
 
 ## Full feature matrix
 
@@ -118,7 +118,7 @@ Docusaurus achieves something similar with multi-instance plugins, but requires 
 |:--------|:-----:|:----------:|:---------:|:---------------:|:---------:|:--------:|
 | **Zero-config start** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Config required** | None | `docusaurus.config.js` | `config.mts` | `mkdocs.yml` | `astro.config.mjs` | `mint.json` |
-| **Multi-project** | ✅ | Plugin | ❌ | Plugin | ❌ | ❌ |
+| **Workspace** | ✅ | Plugin | ❌ | Plugin | ❌ | ❌ |
 | **SPA navigation** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | **Native versioning** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **Native i18n** | ✅ | ✅ | Manual | Plugin | ✅ | ✅ |

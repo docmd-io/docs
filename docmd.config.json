@@ -6,7 +6,8 @@
     },
     {
       "prefix": "/search",
-      "src": "docmd-search"
+      "src": "docmd-search",
+      "title": "Search"
     }
   ]
 }

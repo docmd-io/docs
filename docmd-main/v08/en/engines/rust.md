@@ -26,7 +26,7 @@ The Rust engine is engineered to solve specific compilation bottlenecks. It prov
 
 - **Massive Repositories (1,000+ Files)**: Monolithic documentation platforms containing over a thousand individual files benefit immensely from asynchronous, parallel file system access orchestrated via Tokio.
 - **Intensive Git Metadata Harvesting**: Extracting deep commit logs, contribution histories, and accurate modification timestamps across hundreds of pages requires heavy subprocess spawning. The Rust engine processes `git:log` tasks up to **1.24× faster** than native JavaScript loops.
-- **Cold Build Acceleration in CI/CD**: In ephemeral continuous integration environments where warm disk caches are unavailable, raw file read throughput reduces total processing time. Real-world benchmarks on an 886-page multi-project site demonstrate a **~25% speedup during cold builds** and a **~17% improvement on warm builds**.
+- **Cold Build Acceleration in CI/CD**: In ephemeral continuous integration environments where warm disk caches are unavailable, raw file read throughput reduces total processing time. Real-world benchmarks on an 886-page workspace site demonstrate a **~25% speedup during cold builds** and a **~17% improvement on warm builds**.
 
 ## Supported Devices & Platform Packages
 

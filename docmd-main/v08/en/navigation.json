@@ -64,8 +64,8 @@
         "path": "/configuration/versioning"
       },
       {
-        "title": "Multi-Project",
-        "path": "/configuration/multi-project"
+        "title": "Workspaces",
+        "path": "/configuration/workspaces"
       },
       {
         "title": "Redirects",
@@ -577,6 +577,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.8.3 - Routing Stability",
+        "path": "/release-notes/0-8-3"
+      },
       {
         "title": "v0.8.2 - Patch Release",
         "path": "/release-notes/0-8-2"
