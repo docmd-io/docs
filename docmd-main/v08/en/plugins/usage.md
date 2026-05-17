@@ -68,14 +68,33 @@ When you add an official plugin to your `docmd.config.json` that isn't installed
 ```
 
 The auto-installer:
-- Only works for official `@docmd/plugin-*` packages
+- Only works for official `@docmd/plugin-*` packages listed in the docmd registry
 - Installs the exact version matching your `@docmd/core` version
 - Uses your project's package manager (npm, pnpm, yarn, or bun)
 - Shows progress in the terminal
 
-::: callout warning "Third-Party Plugins"
-Auto-installation only works for official plugins in the registry. Third-party plugins must be installed manually using your package manager.
-:::
+## Third-Party & Custom Plugins
+
+Because `docmd add <plugin>` and the auto-installer strictly enforce an official registry allowlist for security, third-party and custom community plugins must be installed natively using your package manager:
+
+```bash
+npm install my-custom-plugin
+# or pnpm add, yarn add, bun add
+```
+
+After installation, simply add the plugin to your `docmd.config.json` using its exact package name as the key:
+
+```json
+{
+  "plugins": {
+    "my-custom-plugin": {
+      "someOption": true
+    }
+  }
+}
+```
+
+If the plugin fulfills docmd's plugin requirements, it will be automatically loaded and activated during the build. If it is not recognized or fails to load, docmd will report an error in the console.
 
 ## Plugin Scopes and `noStyle` Overrides
 
