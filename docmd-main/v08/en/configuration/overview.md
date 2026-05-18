@@ -75,11 +75,11 @@ Fine-tune how `docmd` processes and renders your documentation content.
     "breaks": true
   }
 }
+```
 
 | Feature | Description | Default |
 | :--- | :--- | :--- |
 | `markdown.breaks` | Converts `\n` in paragraphs into `<br>`. Set to `false` to disable and allow 80-column line limits. | `true` |
-```
 
 ## Legacy Support
 

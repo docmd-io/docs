@@ -9,8 +9,6 @@ No configuration is required to get started. docmd-search uses sensible defaults
 
 Settings are merged in order — each layer overrides the previous:
 
-::: steps
-
 ### Defaults
 
 Built-in values that work for most projects.
@@ -26,8 +24,6 @@ Built-in values that work for most projects.
 ### CLI flags
 
 Command-line flags take highest priority and override everything else.
-
-:::
 
 ## Default values
 
@@ -82,7 +78,7 @@ docmd-search --settings
 ```
 
 ::: callout tip "Model cache"
-Downloaded models are cached inside `~/.docmd-search/`. Switching models does not delete previous downloads — you can switch back without re-downloading.
+Downloaded models are cached inside `~/.docmd-search/`. Switching models does not delete previous downloads, so you can switch back without re-downloading.
 :::
 
 ## Project config

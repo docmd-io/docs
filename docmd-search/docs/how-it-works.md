@@ -9,26 +9,26 @@ docmd-search splits the work into two distinct phases: a heavy **build-time** pi
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    BUILD TIME (Node.js)                  │
+│                 BUILD TIME (Node.js)                    │
 │                                                         │
-│  Crawl → Chunk → Embed (ONNX) → Quantize → Compress    │
+│   Crawl → Chunk → Embed (ONNX) → Quantize → Compress    │
 │                        │                                │
 │                        ▼                                │
-│              .docmd-search/                             │
-│              ├── manifest.json                          │
-│              ├── batch-000.json                         │
-│              ├── batch-001.json                         │
-│              └── navigation.json                        │
+│                .docmd-search/                           │
+│                ├── manifest.json                        │
+│                ├── batch-000.json                       │
+│                ├── batch-001.json                       │
+│                └── navigation.json                      │
 └─────────────────────────────────────────────────────────┘
                          │
                     deploy / serve
                          │
 ┌─────────────────────────────────────────────────────────┐
-│                  SEARCH TIME (Browser, <3KB)             │
+│               SEARCH TIME (Browser, <3KB)               │
 │                                                         │
 │  Load manifest → Load batch 000 → Search immediately    │
 │                → Background-load remaining batches      │
-│                → Keyword scoring + Cosine similarity     │
+│                → Keyword scoring + Cosine similarity    │
 │                → Ranked results                         │
 └─────────────────────────────────────────────────────────┘
 ```

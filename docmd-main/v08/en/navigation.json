@@ -301,8 +301,24 @@
         "path": "/deployment/caddy"
       },
       {
-        "title": "CI/CD",
-        "path": "/deployment/ci-cd"
+        "title": "GitHub Pages",
+        "path": "/deployment/github-pages"
+      },
+      {
+        "title": "Vercel",
+        "path": "/deployment/vercel"
+      },
+      {
+        "title": "Netlify",
+        "path": "/deployment/netlify"
+      },
+      {
+        "title": "Cloudflare Pages",
+        "path": "/deployment/cloudflare-pages"
+      },
+      {
+        "title": "Firebase",
+        "path": "/deployment/firebase"
       }
     ]
   },
@@ -577,6 +593,10 @@
     "icon": "package-check",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.8.4 - Security & Deployer V2",
+        "path": "/release-notes/0-8-4"
+      },
       {
         "title": "v0.8.3 - Routing Stability",
         "path": "/release-notes/0-8-3"

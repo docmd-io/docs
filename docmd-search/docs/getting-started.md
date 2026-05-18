@@ -61,8 +61,6 @@ docmd-search ./docs
 
 On first run, the setup wizard appears:
 
-::: steps
-
 ### Model selection
 
 Choose an embedding model. The default (MiniLM L6 v2) works well for most projects.
@@ -81,8 +79,6 @@ The selected model downloads automatically on first use. This is a one-time down
 ### Global config
 
 A global configuration file is created at `~/.docmd-search/config.json`. This stores your model choice and wizard status so you are never prompted again.
-
-:::
 
 ::: callout tip "Change model later"
 Run `docmd-search --settings` at any time to switch models or reconfigure.

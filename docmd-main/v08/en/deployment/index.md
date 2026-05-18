@@ -20,9 +20,12 @@ The output is a self-contained `site/` folder (or whatever you've configured as 
 Instead of manually writing Dockerfiles and server configs, let docmd generate them for you:
 
 ```bash
-docmd deploy --docker   # Dockerfile + .dockerignore
-docmd deploy --nginx    # Production nginx.conf
-docmd deploy --caddy    # Production Caddyfile
+docmd deploy --docker          # Dockerfile + .dockerignore
+docmd deploy --nginx           # Production nginx.conf
+docmd deploy --caddy           # Production Caddyfile
+docmd deploy --github-pages   # GitHub Actions workflow
+docmd deploy --vercel          # vercel.json
+docmd deploy --netlify         # netlify.toml
 ```
 
 ### What Gets Personalised
@@ -47,36 +50,21 @@ Use `--force` only if you intentionally want to suppress any future confirmation
 
 ### Supported Targets
 
+**Self-hosted**
+
 *   [`docmd deploy --docker`](docker.md) - Optimised multi-stage Dockerfile with layer caching and version pinning.
 *   [`docmd deploy --nginx`](nginx.md) - Security-hardened nginx.conf with GZIP and immutable asset caching.
 *   [`docmd deploy --caddy`](caddy.md) - HTTPS-ready Caddyfile with automatic routing.
 
+**Cloud & CI**
+
+*   [`docmd deploy --github-pages`](github-pages.md) - GitHub Actions CI/CD workflow for automated Pages deployment.
+*   [`docmd deploy --vercel`](vercel.md) - vercel.json with build command, output directory, and cache headers.
+*   [`docmd deploy --netlify`](netlify.md) - netlify.toml with build settings, Node version, and SPA redirects.
+
+**More Platforms**
+
+*   [Cloudflare Pages](cloudflare-pages.md) - Edge-native hosting with built-in CI/CD; no config file needed.
+*   [Firebase Hosting](firebase.md) - Google's global CDN with GitHub Actions CI/CD integration.
+
 Click each target above for detailed, service-specific documentation.
-
-*(Cloud deployment targets like `--vercel` and `--netlify` are planned for a future release.)*
-
-## Cloud Hosting & CI/CD
-
-If you prefer managed hosting over self-hosted servers, deploy your output folder directly to GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
-
-See the [CI/CD Deployment Guide](ci-cd.md) for automated workflows.
-
-## SPA Routing
-
-`docmd` implements a micro-SPA router for smooth internal navigation. Every page is generated as its own `index.html` file, so:
-
-- **No rewrite rules needed** - direct URL access works because `/guide/setup` resolves to `/guide/setup/index.html`.
-- **Deep linking works** - out of the box, on every hosting platform.
-
-When `layout.spa` is set to `false` in your config, the deploy command omits SPA fallback routing from generated server configs.
-
-## Production Checklist
-
-1.  **Site URL**: Set the `url` property in `docmd.config.json` - this drives canonical tags, sitemaps, social previews, and deployment file generation.
-2.  **Redirects**: Migrating from another tool? Use the `redirects` config to preserve SEO rankings.
-3.  **Analytics**: Enable the `analytics` plugin to track engagement and search queries.
-4.  **AI Context**: Enable the `llms` plugin to generate `llms.txt` for AI agent ingestion.
-
-::: callout tip "Custom 404 Pages"
-`docmd` generates a `404.html` in your output directory. Most hosting providers automatically serve this for missing routes.
-:::

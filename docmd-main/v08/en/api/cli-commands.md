@@ -12,7 +12,7 @@ description: "Command-line reference for docmd - all available commands and opti
 | [`docmd build`](#docmd-build) | Generate a production static site |
 | [`docmd live`](#docmd-live) | Launch the browser-based Live Editor |
 | [`docmd stop`](#docmd-stop) | Kill running dev servers |
-| [`docmd deploy`](#docmd-deploy) | Generate deployment configs (Docker, Nginx, Caddy) |
+| [`docmd deploy`](#docmd-deploy) | Generate deployment configs (Docker, Nginx, Caddy, GitHub Pages, Vercel, Netlify) |
 | [`docmd migrate`](#docmd-migrate) | Upgrade legacy configs to V2 schema |
 | [`docmd add <plugin>`](#docmd-add-plugin) | Install and configure a plugin |
 | [`docmd remove <plugin>`](#docmd-remove-plugin) | Remove a plugin and its config |
@@ -101,9 +101,12 @@ docmd deploy [options]
 
 | Option | Description |
 |:-------|:------------|
-| `--docker` | Generate a `Dockerfile` |
+| `--docker` | Generate a `Dockerfile` + `.dockerignore` |
 | `--nginx` | Generate `nginx.conf` |
 | `--caddy` | Generate `Caddyfile` |
+| `--github-pages` | Generate `.github/workflows/deploy.yml` |
+| `--vercel` | Generate `vercel.json` |
+| `--netlify` | Generate `netlify.toml` |
 | `--force` | Overwrite existing deployment files |
 
 ## `docmd migrate`
