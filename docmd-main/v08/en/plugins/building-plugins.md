@@ -131,8 +131,8 @@ Docmd provides deep integration hooks that allow plugins to manipulate configura
 | :--- | :--- | :--- |
 | **`onConfigResolved(config)`** | Reads or modifies the active normalised `config` right after initialisation. | `void` or `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | Exposes the raw Node.js `http.Server` and `WebSocketServer` during development mode (`docmd dev`). | `void` or `Promise<void>` |
-| **`onBeforeParse(src, frontmatter)`** | Pre-processes raw markdown string data immediately before it is passed to markdown-it for parsing. | `string` or `Promise<string>` |
-| **`onAfterParse(html, frontmatter)`** | Post-processes generated HTML representing the markdown body segment. | `string` or `Promise<string>` |
+| **`onBeforeParse(src, frontmatter, filePath?)`** | Pre-processes raw markdown string data immediately before it is passed to markdown-it for parsing. | `string` or `Promise<string>` |
+| **`onAfterParse(html, frontmatter, filePath?)`** | Post-processes generated HTML representing the markdown body segment. | `string` or `Promise<string>` |
 | **`onBeforeBuild(ctx)`** | Called in a separate data-indexing phase after all markdown is parsed but before HTML generation begins. Used for heavy pre-computation. Receives `BeforeBuildContext`. | `void` or `Promise<void>` |
 | **`onBeforeRender(page)`** | Called before template rendering. Receives the full `PageContext`. Mutations to `frontmatter` and `html` are reflected in the rendered output. | `void` or `Promise<void>` |
 | **`onPageReady(page)`** | Accesses the fully assembled page metadata (`page.html`, `page.outputPath`, `page.frontmatter`) just before it is written to the destination file. | `void` or `Promise<void>` |
@@ -223,7 +223,7 @@ export default {
   onConfigResolved: (config) => {
     config.siteTitle = config.siteTitle + " (Modified)";
   },
-  onBeforeParse: (src, frontmatter) => {
+  onBeforeParse: (src, frontmatter, filePath) => {
     return src.replace(/foo/gi, "bar");
   },
   onBeforeRender: async (page) => {

@@ -70,8 +70,15 @@ Fine-tune how `docmd` processes and renders your documentation content.
   "minify": true,
   "autoTitleFromH1": true,
   "copyCode": true,
-  "pageNavigation": true
+  "pageNavigation": true,
+  "markdown": {
+    "breaks": true
+  }
 }
+
+| Feature | Description | Default |
+| :--- | :--- | :--- |
+| `markdown.breaks` | Converts `\n` in paragraphs into `<br>`. Set to `false` to disable and allow 80-column line limits. | `true` |
 ```
 
 ## Legacy Support
