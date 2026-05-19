@@ -1,14 +1,20 @@
 {
-  "projects": [
-    {
-      "title": "docmd",
-      "prefix": "/",
-      "src": "docmd-main"
+  "workspace": {
+    "switcher": {
+      "enabled": true,
+      "position": "options-menu"
     },
-    {
-      "title": "docmd search",
-      "prefix": "/search",
-      "src": "docmd-search"
-    }
-  ]
+    "projects": [
+      {
+        "title": "docmd",
+        "prefix": "/",
+        "src": "docmd-main"
+      },
+      {
+        "title": "docmd search",
+        "prefix": "/search",
+        "src": "docmd-search"
+      }
+    ]
+  }
 }
