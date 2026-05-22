@@ -65,7 +65,7 @@ export default defineConfig({
 ### Plugin Resolution
 The `docmd` engine resolves plugin names as follows:
 - **Official shorthands** (`math`, `search`, `seo`, etc.) automatically expand to `@docmd/plugin-<name>`. Since the `@docmd` npm scope is owned by the project, only official packages can exist under it.
-- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins — this prevents confusion and eliminates supply-chain attack vectors entirely.
+- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias or shorthand system for external plugins - this prevents confusion and eliminates supply-chain attack vectors entirely.
 
 ### Scoping Plugins (`noStyle`)
 By default, plugins inject their CSS/JS universally. However, developers can explicitly prevent their plugin from rendering on `noStyle` pages (like minimal landing templates) by exporting a `noStyle` boolean:
@@ -77,7 +77,7 @@ export default {
   generateScripts: () => { ... }
 }
 ```
-Users can also override this behavior through their configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
+Users can also override this behaviour through their configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
 
 ## Deep Dive: Asset Injection
 
@@ -108,7 +108,7 @@ Starting in `0.6.8`, plugins can register **action handlers** and **event handle
 ```javascript
 // my-live-plugin.js
 export default {
-  // Server-side action — browser calls via docmd.call()
+  // Server-side action - browser calls via docmd.call()
   actions: {
     'my-plugin:save-note': async (payload, ctx) => {
       const content = await ctx.readFile(payload.file);
@@ -118,7 +118,7 @@ export default {
     }
   },
 
-  // Server-side event — browser sends via docmd.send()
+  // Server-side event - browser sends via docmd.send()
   events: {
     'my-plugin:page-viewed': (data, ctx) => {
       console.log(`Page viewed: ${data.path}`);
@@ -139,7 +139,7 @@ The `ctx` (ActionContext) object provides:
 | `ctx.projectRoot` | Absolute path to the project root. |
 | `ctx.config` | Current docmd site configuration. |
 
-All file operations are sandboxed to the project root — path traversal attempts are rejected automatically.
+All file operations are sandboxed to the project root - path traversal attempts are rejected automatically.
 
 ::: callout info "Dev Mode Only 🛡️"
 The WebSocket RPC system is only active during `docmd dev`. Production builds do not include the API client or any server-side action handling.
@@ -148,7 +148,7 @@ The WebSocket RPC system is only active during `docmd dev`. Production builds do
 ## Best Practices
 
 1.  **Async/Await**: Always use `async` functions for `onPostBuild` and action handlers to prevent blocking the build engine during I/O operations.
-2.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialize plugins during development "Hot Reloads."
+2.  **Statelessness**: Avoid maintaining state within the plugin object, as `docmd` may re-initialise plugins during development "Hot Reloads."
 3.  **Naming Convention**: For community plugins, prefix your package name with `docmd-plugin-` (e.g., `docmd-plugin-analytics`).
 4.  **Action Namespacing**: Prefix your action names with your plugin name (e.g., `my-plugin:save-note`) to avoid collisions.
 5.  **Logging**: Use the provided `log()` helper in `onPostBuild` to ensure your messages respect the user's `--verbose` settings.

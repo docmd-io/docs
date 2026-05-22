@@ -16,13 +16,13 @@ description: "A professional comparison between docmd and other popular document
 | **i18n Support** | **Coming Soon** | Native | Plugin-based | Native |
 | **Search** | **Built-in (Offline)** | Algolia (Cloud) | Built-in | Cloud-based |
 | **PWA** | **Built-in (Plugin)** | Plugin | None | Hosted |
-| **AI Optimization** | **Built-in (llms.txt)** | Manual | None | Proprietary |
+| **AI Optimisation** | **Built-in (llms.txt)** | Manual | None | Proprietary |
 | **Setup** | **Instant (-z)** | ~15 mins | ~10 mins | ~5 mins |
 
 ## The docmd Advantage
 
 ### 1. AI-First Architecture
-Unlike traditional generators, `docmd` recognizes that AI agents are now primary consumers of technical documentation. Our built-in **LLM Plugin** automatically generates `llms.txt` and `llms-full.txt` files, providing structured context for LLM-driven development tools.
+Unlike traditional generators, `docmd` recognises that AI agents are now primary consumers of technical documentation. Our built-in **LLM Plugin** automatically generates `llms.txt` and `llms-full.txt` files, providing structured context for LLM-driven development tools.
 
 ### 2. Zero-Config PWA
 Transform your documentation into a high-performance, installable mobile and desktop application with a single plugin. `docmd` handles the service worker logic, manifest generation, and offline caching automatically.

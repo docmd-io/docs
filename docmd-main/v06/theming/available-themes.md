@@ -37,7 +37,7 @@ export default {
 The gold standard for modern documentation. It features crisp typography, subtle transitions, and high-contrast light/dark modes that match modern SaaS platforms.
 
 ### 2. `ruby`
-A high-elegance theme using serif typography for headers and a deep, jewel-toned color palette. Perfect for documentation that needs to feel authoritative and premium.
+A high-elegance theme using serif typography for headers and a deep, jewel-toned colour palette. Perfect for documentation that needs to feel authoritative and premium.
 
 ### 3. `retro`
 A nostalgia-fueled theme inspired by vintage computing. Features include phosphor-green text on black backgrounds (in dark mode), scanline effects, and monospace fonts like Fira Code by default.

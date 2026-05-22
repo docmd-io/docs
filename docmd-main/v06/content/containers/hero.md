@@ -7,7 +7,7 @@ The `hero` container is designed for creates professional, visually-striking "la
 
 ## Basic Syntax
 
-By default, the `hero` centers its content, making it perfect for banners and simple headlines.
+By default, the `hero` centres its content, making it perfect for banners and simple headlines.
 
 ```markdown
 ::: hero
@@ -20,12 +20,12 @@ The minimalist, zero-config documentation generator.
 
 ## Advanced Layouts
 
-The `hero` container supports specialized flags to control its structural behavior.
+The `hero` container supports specialized flags to control its structural behaviour.
 
 | Flag | Effect |
 | :--- | :--- |
 | `layout:split` | Divides the hero into a Text area (left) and a Media area (right). Stacks vertically on mobile. |
-| `layout:slider` | Transforms the hero into a horizontal slider with scroll-snap behavior. |
+| `layout:slider` | Transforms the hero into a horizontal slider with scroll-snap behaviour. |
 | `glow:true` | Injects a subtle, radial gradient glow in the background. |
 
 ### The Split Layout (`== side`)
@@ -35,7 +35,7 @@ Use the `== side` separator to define what content goes in the primary text area
 ```markdown
 ::: hero layout:split glow:true
 # docmd 2.0
-Isomorphic execution. AI-optimized.
+Isomorphic execution. AI-optimised.
 
 ::: button "Quickstart" /getting-started/basic-usage color:blue
 
@@ -46,7 +46,7 @@ Isomorphic execution. AI-optimized.
 
 ::: hero layout:split glow:true
 # docmd 2.0
-Isomorphic execution. AI-optimized.
+Isomorphic execution. AI-optimised.
 
 ::: button "Quickstart" /getting-started/basic-usage color:blue
 
@@ -64,7 +64,7 @@ Create an interactive hero slider by using the `== slide` separator between diff
 # Isomorphic Core
 The engine renders everywhere.
 == slide
-# AI Optimization
+# AI Optimisation
 Built for the LLM era.
 :::
 ```
@@ -74,15 +74,15 @@ Built for the LLM era.
 # Isomorphic Core
 The engine renders everywhere.
 == slide
-# AI Optimization
+# AI Optimisation
 Built for the LLM era.
 :::
 
-## Responsive Behavior
+## Responsive Behaviour
 
 The `hero` container is fully responsive by default:
 - On **Desktop**, `layout:split` displays side-by-side.
-- On **Mobile**, it automatically transitions to a centered, vertical stack to ensure optimal readability.
+- On **Mobile**, it automatically transitions to a centred, vertical stack to ensure optimal readability.
 
 ## Best Practices
 

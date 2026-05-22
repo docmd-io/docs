@@ -8,8 +8,8 @@ The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](https://
 ## Key Features
 
 - **Zero Scripting**: No need to manually include external scripts or CDN links. `docmd` detects the usage and injects the rendering engine only where needed.
-- **Theme Awareness**: Diagrams automatically adapt their color schemes to match your site's **Light** or **Dark** mode transitions.
-- **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialized and rendered only as they enter the user's viewport.
+- **Theme Awareness**: Diagrams automatically adapt their colour schemes to match your site's **Light** or **Dark** mode transitions.
+- **Isomorphic Lazy Loading**: For optimum performance, diagrams are initialised and rendered only as they enter the user's viewport.
 - **Technical Readability**: Diagrams remain pure text in your source, making them easily version-controlled and readable by AI agents.
 
 ## Configuration

@@ -1,15 +1,15 @@
 ---
 title: "Recipe: Technical Writing Standards"
-description: "Best practices for authoring clear, scannable, and AI-optimized documentation."
+description: "Best practices for authoring clear, scannable, and AI-optimised documentation."
 ---
 
-High-quality documentation is defined by its architectural clarity and scannability. This guide outlines the professional standards for utilizing `docmd` features to optimize the user and machine experience.
+High-quality documentation is defined by its architectural clarity and scannability. This guide outlines the professional standards for utilizing `docmd` features to optimise the user and machine experience.
 
 ## Scannability & Semantic Density
 
 Technical users rarely read documentation linearly; they scan for specific solutions.
 
-*   **Descriptive Semantic Headings**: Avoid generic titles. Use "Initializing the Production Pipeline" instead of "Startup."
+*   **Descriptive Semantic Headings**: Avoid generic titles. Use "Initialising the Production Pipeline" instead of "Startup."
 *   **Concise Paragraphs**: Encapsulate single concepts into 2-3 sentence blocks to prevent cognitive overload.
 *   **Lexical Emphasis**: Utilize **Bold Text** for key technical terms, file paths, and terminal commands to ensure they remain distinct during rapid scanning.
 
@@ -29,9 +29,9 @@ When documenting a multi-step procedure, always utilize the `::: steps` containe
 `docmd`’s SPA router enables instant, zero-reload navigation. Maintain this experience through reliable referencing:
 
 *   **Filesystem-Aware Paths**: Always utilize relative paths to your source `.md` files (e.g., `../core/engine.md`). This ensures link integrity across IDEs, local dev servers, and production builds.
-*   **Descriptive Anchors**: Avoid "Read more." Utilize high-fidelity descriptors like "[Analyze the Browser API Reference](/api/browser-api)."
+*   **Descriptive Anchors**: Avoid "Read more." Utilize high-fidelity descriptors like "[Analyse the Browser API Reference](/api/browser-api)."
 
 ## Code Block Professionalism
 
 *   **Explicit Language Labeling**: Always specify the language identifier (e.g., ` ```typescript `). This enables both accurate syntax highlighting and reliable AI parsing.
-*   **Automated Portability**: `docmd` automatically attaches interactive copy buttons to every code block; prioritize concise, ready-to-execute snippets to maximize developer utility.
+*   **Automated Portability**: `docmd` automatically attaches interactive copy buttons to every code block; prioritise concise, ready-to-execute snippets to maximise developer utility.

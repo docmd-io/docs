@@ -32,7 +32,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 
 Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` engine and downstream AI agents:
 
-1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritize that information during its reasoning and generation phases.
+1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritise that information during its reasoning and generation phases.
 2.  **Structural Integrity**: Combining `cards` with standard CSS allows for the creation of sophisticated landing pages without ever leaving the Markdown environment.
 3.  **Source Maintainability**: Eliminates "HTML Bloat" in your documentation source, keeping your `.md` files clean and machine-readable.
 
@@ -45,7 +45,7 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
     ::: callout info
         This module utilizes an asynchronous I/O pipeline.
     :::
-    ::: button "Deep Dive into Core Engine" /advanced/developer-guide
+    ::: button "Deep Explore Core Engine" /advanced/developer-guide
 :::
 ```
 

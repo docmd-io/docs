@@ -12,7 +12,7 @@ description: "Master the fundamental formatting rules of docmd: Headings, typogr
 | **Emphasis** | `**Text**` | **Bold technical terms** |
 | **Italic** | `*Text*` | *Stylized variables* |
 | **Strikethrough** | `~~Text~~` | ~~Deprecated logic~~ |
-| **Inline Logic** | `` `code` `` | `engine.initialize()` |
+| **Inline Logic** | `` `code` `` | `engine.initialise()` |
 
 ## Structural Elements
 
@@ -61,7 +61,7 @@ The standard `>` syntax is ideal for highlighting outside quotes or background c
 As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialized UI requirements.
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: centre;">
   Bespoke UI elements live here.
 </div>
 ```

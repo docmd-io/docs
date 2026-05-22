@@ -1,6 +1,6 @@
 ---
 title: "Using Plugins"
-description: "Install, configure, and manage docmd plugins — from required defaults to optional add-ons."
+description: "Install, configure, and manage docmd plugins - from required defaults to optional add-ons."
 ---
 
 `docmd` features a modular plugin architecture. Required plugins ship with the core and need no installation. Optional plugins can be installed with a single CLI command.
@@ -27,7 +27,7 @@ docmd add <plugin-name> --verbose
 
 ## Required Plugins
 
-These plugins are bundled with `@docmd/core` — no installation needed. Enable them in your `docmd.config.js`:
+These plugins are bundled with `@docmd/core` - no installation needed. Enable them in your `docmd.config.js`:
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -56,7 +56,7 @@ Optional plugins require installation before enabling.
 
 ## Plugin Scopes and `noStyle` Overrides
 
-Plugins inject CSS and behavior by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
+Plugins inject CSS and behaviour by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
 
 ### Global Config Extent
 

@@ -1,11 +1,11 @@
 ---
 title: "Basic Usage"
-description: "Learn how to initialize a project, organize your Markdown files, and build your documentation site."
+description: "Learn how to initialise a project, organise your Markdown files, and build your documentation site."
 ---
 
 Getting started with `docmd` is designed to be instantaneous. This guide walks you through the core workflow, from initial setup to the final production build.
 
-## 1. Project Initialization
+## 1. Project Initialisation
 
 To start a new documentation project, create a directory and execute the `init` command.
 
@@ -16,7 +16,7 @@ npx @docmd/core init
 
 ### Project Structure
 
-After initialization, your project will follow a clean and predictable structure:
+After initialisation, your project will follow a clean and predictable structure:
 
 | File / Directory | Description |
 | :--- | :--- |
@@ -36,7 +36,7 @@ npx @docmd/core dev
 *   **Access**: `http://localhost:3000`
 *   **Live Reload**: Changes to `.md` files or `docmd.config.js` are reflected instantly in the browser via Hot Module Replacement.
 
-## 3. Content Organization
+## 3. Content Organisation
 
 `docmd` maps the file structure of your `docs/` folder directly to URLs. Subdirectories are handled automatically.
 
@@ -48,7 +48,7 @@ npx @docmd/core dev
 Use standard Markdown. If a page title is not defined in the frontmatter, `docmd` will automatically extract the first `H1` header as the title.
 :::
 
-## 4. Customizing Navigation
+## 4. Customising Navigation
 
 The sidebar navigation is controlled via the `navigation` array in `docmd.config.js`. This allows you to define a logical hierarchy for your content.
 
@@ -79,7 +79,7 @@ When you are ready to deploy, generate a production-ready static site:
 npx @docmd/core build
 ```
 
-This command produces a highly optimized Single Page Application (SPA) in the `site/` directory. The output is entirely static and can be hosted on platforms like GitHub Pages, Vercel, Netlify, or even served from a local file system.
+This command produces a highly optimised Single Page Application (SPA) in the `site/` directory. The output is entirely static and can be hosted on platforms like GitHub Pages, Vercel, Netlify, or even served from a local file system.
 
 ### Verification
 

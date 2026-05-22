@@ -1,9 +1,9 @@
 ---
 title: "Grids"
-description: "Organize layout seamlessly with auto-adjusting responsive columns using native markdown containers."
+description: "Organise layout easily with auto-adjusting responsive columns using native markdown containers."
 ---
 
-Grids provide a native, markdown-driven layout system in `docmd`. Instead of writing manual HTML wrappers, you can leverage the `grids` container to structure elements side-by-side. 
+Grids provide a native, markdown-driven layout system in `docmd`. Instead of writing manual HTML wrappers, you can use the `grids` container to structure elements side-by-side. 
 
 Columns automatically adjust their widths to fill available space and logically stack into vertical rows on smaller screens (mobile devices).
 
@@ -56,7 +56,7 @@ Designed for massive monorepos and extensive project structures.
 :::
 
 ### 2. Layout Balancing
-Grids will automatically calculate the optimal width per column (up to 4 items per row on ultra-wide screens) based on the content available and seamlessly group rows on narrow viewports.
+Grids will automatically calculate the optimal width per column (up to 4 items per row on ultra-wide screens) based on the content available and easily group rows on narrow viewports.
 
 ::: callout tip "Semantic Layouts"
 Using the `grids` container keeps your documentation structure purely written in Markdown, resulting in cleaner source files and ensuring LLMs interpret your structural relationships flawlessly!

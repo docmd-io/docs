@@ -23,14 +23,14 @@ export default defineConfig({
 When a redirect is defined, `docmd` creates an `index.html` file at the legacy path containing a `<meta http-equiv="refresh">` tag. This strategy ensures:
 
 1.  **Seamless Redirection**: Users are forwarded to the new destination instantly after the page loads.
-2.  **SEO Preservation**: Search engines recognize the redirection, helping to maintain link equity.
+2.  **SEO Preservation**: Search engines recognise the redirection, helping to maintain link equity.
 3.  **Analytics Tracking**: Page views are captured before the redirect occurs, preserving your traffic data.
 
 ## Branded 404 Pages
 
 When a user attempts to access a non-existent URL, most static hosting providers (Netlify, Vercel, GitHub Pages) automatically look for a `404.html` file in the root directory. `docmd` generates this file by default, ensuring it inherits your site's theme, sidebar, and SPA functionality.
 
-### Customizing Error Content
+### Customising Error Content
 
 You can personalize the 404 error message within your configuration:
 

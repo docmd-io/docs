@@ -12,7 +12,7 @@ Wrap any standard ordered list in a `::: steps` block.
 ```markdown
 ::: steps
 
-1.  **Initialize Project**
+1.  **Initialise Project**
     Run the `docmd init` command to scaffold your directory.
 
 2.  **Author Content**
@@ -32,7 +32,7 @@ The `steps` component supports rich Markdown content within each item, including
 ::: steps
 
 1.  **Generate Production Build**
-    Execute the build command to generate a highly optimized static site.
+    Execute the build command to generate a highly optimised static site.
     ```bash
     docmd build
     ```
@@ -41,7 +41,7 @@ The `steps` component supports rich Markdown content within each item, including
     Inspect the `site/` directory to ensure all assets were correctly compiled.
 
 3.  **Deploy to Infrastructure**
-    Synchronize the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
+    Synchronise the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
 
 :::
 ```
@@ -49,7 +49,7 @@ The `steps` component supports rich Markdown content within each item, including
 ::: steps
 
 1.  **Generate Production Build**
-    Execute the build command to generate a highly optimized static site.
+    Execute the build command to generate a highly optimised static site.
     ```bash
     docmd build
     ```
@@ -58,7 +58,7 @@ The `steps` component supports rich Markdown content within each item, including
     Inspect the `site/` directory to ensure all assets were correctly compiled.
 
 3.  **Deploy to Infrastructure**
-    Synchronize the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
+    Synchronise the `site/` directory with your primary hosting provider (e.g., S3, Cloudflare Pages, or Vercel).
 
 :::
 
@@ -82,6 +82,6 @@ You can nest other documentation components (such as **Callouts** or **Buttons**
 :::
 ```
 
-::: callout tip "Workflow Optimization"
-Modern AI models interpret the `steps` container as a high-fidelity signal for **Sequential Workflows**. To maximize AI accuracy in the `llms-full.txt` context, always start your list items with a **Bolded Title**. This allows agents to reliably parse the objective of each step before processing the implementation details.
+::: callout tip "Workflow Optimisation"
+Modern AI models interpret the `steps` container as a high-fidelity signal for **Sequential Workflows**. To maximise AI accuracy in the `llms-full.txt` context, always start your list items with a **Bolded Title**. This allows agents to reliably parse the objective of each step before processing the implementation details.
 :::

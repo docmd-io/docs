@@ -69,7 +69,7 @@
     "icon": "palette",
     "collapsible": true,
     "children": [
-      { "title": "Customization", "path": "/theming/customization", "icon": "wand-sparkles" },
+      { "title": "Customisation", "path": "/theming/customisation", "icon": "wand-sparkles" },
       { "title": "Available Themes", "path": "/theming/available-themes", "icon": "layout-grid" },
       { "title": "Light & Dark Mode", "path": "/theming/light-dark-mode", "icon": "sun-moon" },
       { "title": "Custom CSS & JS", "path": "/theming/custom-css-js", "icon": "file-code" },
@@ -103,7 +103,7 @@
       { "title": "Custom Fonts", "path": "/recipes/custom-fonts", "icon": "type" },
       { "title": "Favicon", "path": "/recipes/favicon", "icon": "image-plus" },
       { "title": "Writing Guide", "path": "/recipes/writing-guide", "icon": "book-open" },
-      { "title": "AI Optimization", "path": "/recipes/ai-optimization", "icon": "bot" }
+      { "title": "AI Optimisation", "path": "/recipes/ai-optimisation", "icon": "bot" }
     ]
   },
   {

@@ -1,6 +1,6 @@
 ---
 title: "Tabs"
-description: "Organize dense, alternative, or multi-language information into switchable interactive panes."
+description: "Organise dense, alternative, or multi-language information into switchable interactive panes."
 ---
 
 Tabs are the optimal UI pattern for presenting mutually exclusive or related data sets (e.g., "Install via NPM vs. Yarn" or "macOS vs. Windows" instructions) within a compact, interactive format.
@@ -67,7 +67,7 @@ build('./docmd.config.js');
 ## Core Capabilities
 
 ### Isomorphic Lazy Rendering
-`docmd` implements **Conditional Resource Laziness**. If a tab contains computationally expensive elements (e.g., **Mermaid.js** diagrams or high-resolution images), these assets are only initialized and rendered once the user activates that specific tab. This ensures rapid initial page loads.
+`docmd` implements **Conditional Resource Laziness**. If a tab contains computationally expensive elements (e.g., **Mermaid.js** diagrams or high-resolution images), these assets are only initialised and rendered once the user activates that specific tab. This ensures rapid initial page loads.
 
 ### State Persistence
 The default SPA router tracks the active tab's index across similar documentation pages. If a user selects "pnpm" on one page and navigates to another page with a matching tab structure, the "pnpm" tab will remain active automatically.

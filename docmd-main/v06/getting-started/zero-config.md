@@ -21,11 +21,11 @@ npx @docmd/core build -z
 
 When executing in Zero-Config mode, `docmd` performs the following automated steps:
 
-1.  **Directory Detection**: The engine scans your project root for common documentation folders, including: `docs/`, `src/docs/`, `documentation/`, and `content/`. If multiple candidates exist, it prioritizes them in that order.
+1.  **Directory Detection**: The engine scans your project root for common documentation folders, including: `docs/`, `src/docs/`, `documentation/`, and `content/`. If multiple candidates exist, it prioritises them in that order.
 2.  **Smart Indexing**: If no `index.md` or `README.md` is found at the root of the source directory, `docmd` automatically designates the first discovered Markdown file as the home page.
 3.  **Metadata Extraction**: If a `package.json` exists in your project, `docmd` extracts the `name` and `description` to automatically set the site title and branding.
 4.  **Automatic Routing**: The engine recursively scans all subdirectories and Markdown files to build a nested, collapsible navigation sidebar instantly.
-5.  **Optimized Defaults**: It applies the premium `default` theme with system-aware Light/Dark mode and enables core features like built-in search.
+5.  **Optimised Defaults**: It applies the premium `default` theme with system-aware Light/Dark mode and enables core features like built-in search.
 
 ## Safety & Performance
 

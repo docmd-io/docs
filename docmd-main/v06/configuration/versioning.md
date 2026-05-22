@@ -5,9 +5,9 @@ description: "Enable multi-version documentation with seamless switching, sticky
 
 `docmd` features a native Versioning Engine that allows you to manage and serve multiple versions of your project simultaneously (e.g., `v1.x`, `v2.x`). The engine automatically handles URL routing, sidebar updates, and switching logic.
 
-## Directory Organization
+## Directory Organisation
 
-To enable versioning, organize your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
+To enable versioning, organise your documentation into versioned source folders. A common pattern is keeping the active version in `docs/` and archived versions in directories prefixed with `docs-`.
 
 ```text
 my-project/
@@ -52,5 +52,5 @@ Each version inherits your global `assets/` directory, but `docmd` ensures they 
 ## Best Practices
 
 1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.
-2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximize the effectiveness of "Sticky Switching."
+2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximise the effectiveness of "Sticky Switching."
 3.  **Unified Configuration**: You do not need separate config files for each version; `docmd` processes all versions in a single pass.

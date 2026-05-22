@@ -81,7 +81,7 @@ If the chosen position targets a container that is disabled, `docmd` will automa
 
 ## Sidebar & Footer Controls
 
-### Sidebar Behavior
+### Sidebar Behaviour
 ```javascript
 layout: {
   sidebar: {
@@ -112,6 +112,6 @@ layout: {
 }
 ```
 
-::: callout tip "AI-Optimized Interface"
+::: callout tip "AI-Optimised Interface"
 When designing custom layouts, ensure the **Search** component is prominent in your `optionsMenu`. AI agents frequently utilize search as a primary anchor when exploring your documentation to locate specific technical context.
 :::

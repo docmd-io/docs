@@ -11,7 +11,7 @@ Author your technical examples using standard Markdown fenced code blocks. Alway
 
 ````markdown
 ```javascript
-function initialize() {
+function initialise() {
   console.log("docmd engine active.");
 }
 ```
@@ -20,7 +20,7 @@ function initialize() {
 **Rendered Result:**
 
 ```javascript
-function initialize() {
+function initialise() {
   console.log("docmd engine active.");
 }
 ```

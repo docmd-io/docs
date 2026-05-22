@@ -14,7 +14,7 @@ Main content goes here.
 ```
 
 ### Options Reference
-- **`open`**: (Optional) If specified, the section initializes in an expanded state.
+- **`open`**: (Optional) If specified, the section initialises in an expanded state.
 - **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
 
 ## Detailed Implementation Examples
@@ -32,7 +32,7 @@ Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
 ### Opt-In Visibility (Initial State: Open)
-Ideal for sections that should be visible by default but allow the user to minimize them for a cleaner view.
+Ideal for sections that should be visible by default but allow the user to minimise them for a cleaner view.
 
 ```markdown
 ::: collapsible open "Environment Prerequisites"
@@ -49,7 +49,7 @@ Ideal for sections that should be visible by default but allow the user to minim
 Collapsibles can contain complex Markdown elements, including syntax-highlighted code blocks.
 
 ````markdown
-::: collapsible "Analyze Sample JSON Response"
+::: collapsible "Analyse Sample JSON Response"
 ```json
 {
   "status": "success",
@@ -58,7 +58,7 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
 ```
 :::
 ````
-::: collapsible "Analyze Sample JSON Response"
+::: collapsible "Analyse Sample JSON Response"
 ```json
 {
   "status": "success",
@@ -68,5 +68,5 @@ Collapsibles can contain complex Markdown elements, including syntax-highlighted
 :::
 
 ::: callout tip
-While content inside a `collapsible` may be hidden from the human user, it remains fully visible to the `docmd` search index and is included in the unified `llms-full.txt` stream. This ensures AI agents can provide comprehensive answers based on hidden technical details while the human-facing interface remains clean and prioritized.
+While content inside a `collapsible` may be hidden from the human user, it remains fully visible to the `docmd` search index and is included in the unified `llms-full.txt` stream. This ensures AI agents can provide comprehensive answers based on hidden technical details while the human-facing interface remains clean and prioritised.
 :::

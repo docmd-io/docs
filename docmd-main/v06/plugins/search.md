@@ -35,7 +35,7 @@ During the `docmd build` process, the search plugin iterates through every page 
 ### 2. Retrieval (Client-side)
 When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-index.json` is fetched by the browser. Searches are performed locally using fuzzy matching (allowing for small typos) and instant prefix matching.
 
-## Customizing Search Behavior
+## Customising Search Behaviour
 
 While the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
 
@@ -53,7 +53,7 @@ The plugin injects a minimalist search modal into the `<body>` of your site. It 
 ::: callout tip "Search Analytics"
 If you have the [Analytics Plugin](./analytics) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
 :::
-Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
+Because the search happens entirely on the client, no data - not even keystrokes - is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
 
 ## Comparison
 

@@ -40,7 +40,7 @@ Here is an inline equation: $E = mc^2$
 
 ### Block Mathematics
 
-For wider mathematical proofs or distinct formulations, leverage double dollar signs `$$` for block level formatting:
+For wider mathematical proofs or distinct formulations, use double dollar signs `$$` for block level formatting:
 
 ```markdown
 $$

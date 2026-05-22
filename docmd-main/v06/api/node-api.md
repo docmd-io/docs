@@ -25,7 +25,7 @@ import { buildSite } from '@docmd/core';
 async function runBuild() {
   await buildSite('./docmd.config.js', {
     isDev: false,      // Set to true for watch mode logic
-    offline: false,    // Set to true to optimize for file:// access
+    offline: false,    // Set to true to optimise for file:// access
     zeroConfig: false  // Set to true to bypass config file detection
   });
 }

@@ -1,6 +1,6 @@
 ---
 title: "Icons"
-description: "How to use and customize Lucide icons in your documentation."
+description: "How to use and customise Lucide icons in your documentation."
 ---
 
 `docmd` comes with built-in support for the [Lucide](https://lucide.dev/) icon library. Icons can be used in your navigation sidebar, buttons, and custom components to provide visual cues and improve scannability.

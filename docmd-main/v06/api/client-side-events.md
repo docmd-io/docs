@@ -13,14 +13,14 @@ This event is dispatched whenever a new page has been successfully fetched and i
 
 ### Usage
 
-Add a listener to the `document` object to re-initialize third-party libraries or trigger custom animations.
+Add a listener to the `document` object to re-initialise third-party libraries or trigger custom animations.
 
 ```javascript
 document.addEventListener('docmd:page-mounted', (event) => {
   const { url } = event.detail;
   console.log(`Navigated to: ${url}`);
 
-  // Re-initialize components
+  // Re-initialise components
   // Example: Prism.highlightAll();
 });
 ```
@@ -33,6 +33,6 @@ document.addEventListener('docmd:page-mounted', (event) => {
 
 ## Best Practices
 
-1.  **Idempotency**: Ensure your initialization logic can be safely called multiple times on the same page or cleaned up before the next navigation.
+1.  **Idempotency**: Ensure your initialisation logic can be safely called multiple times on the same page or cleaned up before the next navigation.
 2.  **Global Scope**: Scripts added via `customJs` are executed in the global scope. Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the `window` object.
 3.  **Cleanup**: If your script adds global event listeners (e.g., `window.onresize`), consider tracking the current path to remove them when the user navigates away.

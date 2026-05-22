@@ -3,7 +3,7 @@ title: "Navigation Configuration"
 description: "Structure your sidebar, categorize links, and assign icons for both human readers and AI models."
 ---
 
-`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimizes the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.
+`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimises the Single Page Application (SPA) experience and provides a clear context map for AI models and search engines.
 
 ## The Navigation Array
 
@@ -29,9 +29,9 @@ export default defineConfig({
 | **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed by the user. |
 | **`external`** | `Boolean` | No | If `true`, the link opens in a new browser tab. |
 
-## Organizing Groups
+## Organising Groups
 
-You can nest navigation items to create deep hierarchies. There are two primary ways to organize groups:
+You can nest navigation items to create deep hierarchies. There are two primary ways to organise groups:
 
 ### 1. Clickable Group (Directory with Index)
 If the parent has a `path`, clicking the label navigates to that page and automatically expands the children in the sidebar.
@@ -65,7 +65,7 @@ If you **omit the `path`**, the item becomes a static category header. This is t
 
 `docmd` automatically generates breadcrumbs for every page based on your navigation hierarchy. These crumbs are rendered above the main page title to improve orientation and navigation speed.
 
-### Behavior
+### Behaviour
 *   **Auto-Resolution**: The engine traces the path through your `navigation` tree to identify the current page's ancestors.
 *   **Active State**: The current page is listed as the final, non-linked crumb.
 *   **Mobile Support**: Breadcrumbs are intelligently adjusted or hidden on smaller screens to preserve header space.

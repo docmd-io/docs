@@ -12,7 +12,7 @@ description: "Generate beautiful, lightweight, and blazing-fast documentation si
 
 **Generate professional, high-performance documentation sites directly from Markdown. Zero clutter, just content.**
 
-`docmd` bridges the gap between simple static site generators and heavy, framework-driven documentation tools. It transforms standard Markdown into highly optimized static HTML while delivering a seamless Single Page Application (SPA) experience.
+`docmd` bridges the gap between simple static site generators and heavy, framework-driven documentation tools. It transforms standard Markdown into highly optimised static HTML while delivering a seamless Single Page Application (SPA) experience.
 
 ::: button "Get Started" /getting-started/installation
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333
@@ -27,7 +27,7 @@ Deploy a beautiful, searchable documentation site in seconds. No framework knowl
 **1. Install `docmd` as a development dependency**
 ```bash
 npm install -D @docmd/core     # Recommended: Install locally
-npx @docmd/core init                 # Initialize your project configuration
+npx @docmd/core init                 # Initialise your project configuration
 npx @docmd/core dev                  # Start the development server
 ```
 
@@ -50,7 +50,7 @@ Writing documentation should be frictionless. You shouldn't have to manage compl
 
 <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-::: card "AI-Native Optimization"
+::: card "AI-Native Optimisation"
 `docmd` generates a structured context for LLMs (`llms.txt` and `llms-full.txt`), allowing AI models to ingest your entire project context perfectly in a single request.
 :::
 
@@ -67,7 +67,7 @@ Features built-in full-text search with fuzzy matching and deep linking. The sea
 :::
 
 ::: card "Modern & Responsive"
-Designed for all devices. Includes premium themes with native Light/Dark appearance modes, sticky versioning, and mobile-optimized sidebars out of the box.
+Designed for all devices. Includes premium themes with native Light/Dark appearance modes, sticky versioning, and mobile-optimised sidebars out of the box.
 :::
 
 ::: card "Isomorphic Rendering"

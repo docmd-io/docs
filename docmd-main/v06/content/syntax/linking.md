@@ -3,7 +3,7 @@ title: "Linking & Referencing"
 description: "Master internal cross-linking, external resources, and reliable asset referencing."
 ---
 
-`docmd` provides a robust, filesystem-aware linking system. By using relative paths to your source `.md` files, you ensure that links remain functional within your IDE (e.g., VS Code) and are automatically rewritten for production deployment.
+`docmd` provides a reliable, filesystem-aware linking system. By using relative paths to your source `.md` files, you ensure that links remain functional within your IDE (e.g., VS Code) and are automatically rewritten for production deployment.
 
 ::: callout info "Extension Neutrality"
 During the build process, the engine automatically resolves `.md` extensions to their relative HTML counterparts. This guarantees that internal documentation links never break, regardless of whether you are browsing local source or the compiled production site.
@@ -42,5 +42,5 @@ To provide downloads or reference raw source files, place them within the `asset
 ```
 
 ::: callout tip "Semantic Linkage for AI"
-When cross-linking technical modules, prioritize **Descriptive Anchors** (e.g., `[Optimize PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
+When cross-linking technical modules, prioritise **Descriptive Anchors** (e.g., `[Optimise PWA caching](../plugins/pwa.md)`) over generic text (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels provide AI agents with a high-fidelity map of the semantic relationships between different documentation nodes in the `llms-full.txt` context.
 :::

@@ -1,6 +1,6 @@
 ---
 title: "SEO Plugin"
-description: "Optimize your documentation for search engines and control AI crawler access with native meta tag generation."
+description: "Optimise your documentation for search engines and control AI crawler access with native meta tag generation."
 ---
 
 The `@docmd/plugin-seo` plugin is responsible for generating high-quality metadata for every page. It ensures your documentation is not only discoverable by human readers on search engines but also correctly interpreted by AI models and social media platforms.

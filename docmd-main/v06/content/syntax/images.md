@@ -22,11 +22,11 @@ Assign specialized CSS classes and attributes directly to your images using the 
 
 ### Alignment & Layout
 ```markdown
-![Centered Focus](/assets/img.png){ .align-center }
+![Centred Focus](/assets/img.png){ .align-centre }
 ![Floating Right](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
+![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
 
 ## Structured Media Elements
 
@@ -40,7 +40,7 @@ For precise, accessible media captioning, use standard HTML5 `<figure>` elements
 ```
 
 ### Image Galleries
-Organize multiple assets into a responsive, balanced grid using the `image-gallery` class.
+Organise multiple assets into a responsive, balanced grid using the `image-gallery` class.
 
 ```html
 <div class="image-gallery">
@@ -64,5 +64,5 @@ If the `mainScripts` component is active (default), `docmd` automatically applie
 ```
 
 ::: callout tip "AI Context & Accessibility"
-Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine—enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
+Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine - enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
 :::

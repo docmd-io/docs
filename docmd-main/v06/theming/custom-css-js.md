@@ -27,7 +27,7 @@ export default {
 
 ## Custom JavaScript
 
-Use the top-level `customJs` array for scripts that add behavior or integrate 3rd-party services.
+Use the top-level `customJs` array for scripts that add behaviour or integrate 3rd-party services.
 
 ```javascript
 // docmd.config.js
@@ -41,7 +41,7 @@ export default {
 ### Life-cycle Awareness
 Scripts are injected at the bottom of the `<body>` tag. Since `docmd` is a **Single Page Application (SPA)**, remember that:
 *   The page does not fully reload when navigating between links.
-*   You may need to listen for the `docmd:navigated` event to re-initialize your scripts on new pages.
+*   You may need to listen for the `docmd:navigated` event to re-initialise your scripts on new pages.
 
 ```javascript
 // Example: Re-init on page change

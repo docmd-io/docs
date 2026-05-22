@@ -3,11 +3,11 @@ title: "Sitemap Plugin"
 description: "Automatically generate a standard-compliant sitemap.xml for better search engine discovery."
 ---
 
-The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages—including deep links within versioned documentation—are crawled and indexed.
+The `@docmd/plugin-sitemap` plugin automatically generates a `sitemap.xml` file at the root of your build directory. This file provides search engines like Google and Bing with a comprehensive map of your site's architecture, ensuring that all pages - including deep links within versioned documentation - are crawled and indexed.
 
 ## Configuration
 
-Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customize the crawl weight of various sections within the `plugins` object.
+Enable sitemap generation by providing your `siteUrl` in the root configuration. You can customise the crawl weight of various sections within the `plugins` object.
 
 ```javascript
 import { defineConfig } from '@docmd/core';
@@ -26,7 +26,7 @@ export default defineConfig({
 
 ## Page-Level Controls
 
-You can override sitemap behavior for specific pages using frontmatter.
+You can override sitemap behaviour for specific pages using frontmatter.
 
 ```yaml
 ---

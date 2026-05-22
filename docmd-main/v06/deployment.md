@@ -74,7 +74,7 @@ jobs:
 2.  Build your site: `npx @docmd/core build`.
 3.  Run `firebase init hosting` and select your project.
 4.  Set the public directory to `site`.
-5.  Configure as a single-page app: `Yes` (this handles the 404 behavior).
+5.  Configure as a single-page app: `Yes` (this handles the 404 behaviour).
 6.  Deploy using `firebase deploy`.
 
 == tab "Static Server"

@@ -25,14 +25,14 @@ components:
 customHead: |
   <style>
     body { font-family: 'Inter', sans-serif; margin: 0; background: #000; color: #fff; }
-    .hero { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .hero { height: 80vh; display: flex; flex-direction: column; align-items: centre; justify-content: centre; }
     .btn { background: #3b82f6; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
   </style>
 ---
 
 <div class="hero">
   <h1>Architecture Meets Documentation.</h1>
-  <p>Isomorphic execution. AI-optimized context. Zero-reload navigation.</p>
+  <p>Isomorphic execution. AI-optimised context. Zero-reload navigation.</p>
   <br>
   <a href="/getting-started/" class="btn">Launch Documentation →</a>
 </div>
@@ -44,4 +44,4 @@ customHead: |
 
 ## Technical Outcomes
 
-When the project is compiled via `docmd build`, the root `index.html` will render as a bespoke landing page. This page serves as a high-fidelity entry point that seamlessly directs users into the standardized documentation environment.
+When the project is compiled via `docmd build`, the root `index.html` will render as a bespoke landing page. This page serves as a high-fidelity entry point that easily directs users into the standardised documentation environment.

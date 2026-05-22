@@ -20,7 +20,7 @@ npx @docmd/core build -z
 ```
 
 ::: callout warning "Beta Feature"
-Zero-Config mode (`-z`) is currently in beta. While it is excellent for rapid prototyping and internal documentation, we recommend initializing a project configuration (`docmd.config.js`) for production-grade sites to ensure maximum stability and control.
+Zero-Config mode (`-z`) is currently in beta. While it is excellent for rapid prototyping and internal documentation, we recommend initialising a project configuration (`docmd.config.js`) for production-grade sites to ensure maximum stability and control.
 :::
 
 ## Option 2: Local Project Installation (Recommended)
@@ -31,7 +31,7 @@ For long-term projects, we recommend installing `docmd` as a development depende
 # 1. Install docmd as a development dependency
 npm install -D @docmd/core
 
-# 2. Initialize your project configuration
+# 2. Initialise your project configuration
 npx @docmd/core init
 
 # 3. Start the development server

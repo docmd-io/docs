@@ -1,5 +1,5 @@
 ---
-title: "Recipe: Optimizing for AI Agents"
+title: "Recipe: Optimising for AI Agents"
 description: "Engineer your documentation for maximum ingestibility by LLMs and AI Agents."
 ---
 
@@ -7,7 +7,7 @@ description: "Engineer your documentation for maximum ingestibility by LLMs and 
 
 ## 1. Enable the LLM Plugin
 
-The baseline for AI optimization is the native `llms` plugin. It generates structured context files specifically designed for model ingestion.
+The baseline for AI optimisation is the native `llms` plugin. It generates structured context files specifically designed for model ingestion.
 
 ```javascript
 // docmd.config.js
@@ -34,16 +34,16 @@ Always explicitly specify the language identifier for fenced code blocks. This a
 
 ````markdown
 ```typescript
-// Optimized entry point
+// Optimised entry point
 const docmd = new Engine();
 ```
 ````
 
-## 4. Leveraging the Context Pipeline
+## 4. Using the Context Pipeline
 
 The `llms-full.txt` file is a high-fidelity, concatenated stream of your entire static site.
 
-*   **Prompt Engineering**: Direct your AI: *"Use the semantic structure in /llms.txt and the comprehensive technical content in /llms-full.txt to analyze this codebase."*
+*   **Prompt Engineering**: Direct your AI: *"Use the semantic structure in /llms.txt and the comprehensive technical content in /llms-full.txt to analyse this codebase."*
 *   **Context Control**: Use `llms: false` in specific page frontmatter to exclude sensitive or internal-only documentation from the public AI context stream.
 
 ## 5. High-Fidelity Alt-Text

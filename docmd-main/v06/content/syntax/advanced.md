@@ -1,6 +1,6 @@
 ---
 title: "Advanced Markdown Syntax"
-description: "Leverage docmd's extended feature set: Custom attributes, GFM extensions, and semantic definitions."
+description: "Use docmd's extended feature set: Custom attributes, GFM extensions, and semantic definitions."
 ---
 
 Beyond standard Markdown, `docmd` supports several high-fidelity extensions derived from GitHub Flavored Markdown (GFM) and custom attribute plugins. These tools provide total control over your document's structure and styling.
@@ -10,10 +10,10 @@ Beyond standard Markdown, `docmd` supports several high-fidelity extensions deri
 ### Task Lists
 Create interactive or read-only checklists for roadmap tracking.
 ```markdown
-- [x] Engine Optimization Complete
+- [x] Engine Optimisation Complete
 - [ ] Plugin API Finalization
 ```
-- [x] Engine Optimization Complete
+- [x] Engine Optimisation Complete
 - [ ] Plugin API Finalization
 
 ### Automatic Link Resolution
@@ -36,7 +36,7 @@ Useful for deep-linking directly to technical subsections.
 ### Functional CSS Classes
 Apply styling utilities to specific elements.
 ```markdown
-## Center-Aligned Section {.text-center .text-blue}
+## Center-Aligned Section {.text-centre .text-blue}
 ```
 
 ### Actionable Button Links

@@ -11,13 +11,13 @@ We provide high-level scripts to handle environmental health and project scaffol
 
 ### Project Scaffolding: `pnpm onboard`
 
-Run this command after forking the repository or pulling major changes. It performs a full environment synchronization.
+Run this command after forking the repository or pulling major changes. It performs a full environment synchronisation.
 
 ```bash
 pnpm onboard
 ```
 
-### Environment Synchronization: `pnpm onboard --link`
+### Environment Synchronisation: `pnpm onboard --link`
 
 This extended command prepares the environment and makes the local `docmd` binary available globally for system-wide testing.
 
@@ -83,7 +83,7 @@ pnpm verify
 ```
 **Limitations & Use Cases:**
 - *Use Case*: Validating a quick core-engine patch before committing.
-- *Limitation*: Because it relies on the pre-existing state of your local `node_modules` and compiled files, it does not guarantee your branch will successfully replicate on a pristine machine or in CI. It strictly protects against regressions in code logic, lacking the cache-poisoning defense of a full `prep`.
+- *Limitation*: Because it relies on the pre-existing state of your local `node_modules` and compiled files, it does not guarantee your branch will successfully replicate on a pristine machine or in CI. It strictly protects against regressions in code logic, lacking the cache-poisoning defence of a full `prep`.
 
 ## The Playground Environment
 

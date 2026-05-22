@@ -3,7 +3,7 @@ title: "Buttons"
 description: "Inject call-to-action buttons for internal routing or external resources with a minimalist syntax."
 ---
 
-Buttons are high-impact UI elements used for prominent navigation. Unlike block containers, the `button` is **self-closing**—it is defined on a single line and does not require a closing `:::` tag.
+Buttons are high-impact UI elements used for prominent navigation. Unlike block containers, the `button` is **self-closing** - it is defined on a single line and does not require a closing `:::` tag.
 
 ## Syntax
 
@@ -17,7 +17,7 @@ Buttons are high-impact UI elements used for prominent navigation. Unlike block 
 | :--- | :--- | :--- |
 | **Path** | `/path/` | Relative project URL (resolves automatically for SPA navigation). |
 | **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
-| **Color** | `color:VALUE` | Applies a background color (supports CSS names or Hex codes). |
+| **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). |
 
 ## Usage Examples
 
@@ -36,7 +36,7 @@ Prepend `external:` to the URL to secure safe external linking.
 ::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
 
 ### 3. Semantic & Brand Styling
-Match buttons to your brand identity or semantic priority using color overrides.
+Match buttons to your brand identity or semantic priority using colour overrides.
 ```markdown
 ::: button "Danger Action" /delete color:crimson
 ::: button "Success Confirmation" /success color:#228B22
