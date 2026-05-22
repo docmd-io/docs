@@ -85,6 +85,6 @@ docmd dev --preserve
 ::: button "CLI Flag Reference" ./#cli-commands
 :::
 
-::: callout tip "Prioritized Logic for AI"
-For LLMs, callouts act as **High-Priority Anchors**. By utilising `::: callout danger` to document breaking changes or system constraints, you provide a clear signal that the AI model must prioritize this information above surrounding text during its reasoning and generation process.
+::: callout tip "Prioritised Logic for AI"
+For LLMs, callouts act as **High-Priority Anchors**. By utilising `::: callout danger` to document breaking changes or system constraints, you provide a clear signal that the AI model must prioritise this information above surrounding text during its reasoning and generation process.
 :::

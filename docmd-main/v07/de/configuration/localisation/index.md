@@ -1,6 +1,6 @@
 ---
 title: "Lokalisierung"
-description: "Bieten Sie Ihre Dokumentation in mehreren Sprachen an — mit sprachspezifischem Routing, übersetzter Navigation und automatischem Fallback."
+description: "Bieten Sie Ihre Dokumentation in mehreren Sprachen an - mit sprachspezifischem Routing, übersetzter Navigation und automatischem Fallback."
 ---
 
 Fügen Sie Ihrer Dokumentationsseite Mehrsprachigkeitsunterstützung hinzu. docmd stellt jede Sprache unter einem eigenen URL-Präfix bereit, übersetzt die System-UI-Strings und nutzt einen eleganten Fallback, falls eine Übersetzung fehlt.
@@ -21,7 +21,7 @@ export default {
 }
 ```
 
-Die Standardsprache (`default`) wird im Stammverzeichnis der Website (`/`) gerendert. Alle anderen Sprachen werden unter `/{id}/` gerendert. Sie wählen die IDs, Labels und welche Sprache die Standardsprache ist — es gibt keine fest programmierten Annahmen. Wenn Sie Hindi als Standardsprache möchten, setzen Sie `default: 'hi'`, und Hindi wird unter `/` gerendert, während Englisch unter `/en/` erscheint.
+Die Standardsprache (`default`) wird im Stammverzeichnis der Website (`/`) gerendert. Alle anderen Sprachen werden unter `/{id}/` gerendert. Sie wählen die IDs, Labels und welche Sprache die Standardsprache ist - es gibt keine fest programmierten Annahmen. Wenn Sie Hindi als Standardsprache möchten, setzen Sie `default: 'hi'`, und Hindi wird unter `/` gerendert, während Englisch unter `/en/` erscheint.
 
 | Schlüssel | Typ | Beschreibung |
 |:----|:-----|:------------|
@@ -35,7 +35,7 @@ Jedes Sprachobjekt akzeptiert:
 
 | Schlüssel | Typ | Standard | Beschreibung |
 |:----|:-----|:--------|:------------|
-| `id` | `string` | — | Ein beliebiger Identifikator Ihrer Wahl (z. B. `en`, `hi`, `fr-ca`). Wird als Ordnername und URL-Präfix verwendet. Erforderlich. |
+| `id` | `string` | - | Ein beliebiger Identifikator Ihrer Wahl (z. B. `en`, `hi`, `fr-ca`). Wird als Ordnername und URL-Präfix verwendet. Erforderlich. |
 | `label` | `string` | Gleich wie `id` | Im Sprachumschalter angezeigter Name. |
 | `dir` | `string` | `ltr` | Textrichtung. Setzen Sie `rtl` für Arabisch, Hebräisch usw. |
 | `translations` | `object` | `{}` | Benutzerdefinierte Überschreibungen für UI-Strings (siehe [Benutzerdefinierte UI-Strings](./ui-strings)). |
@@ -57,13 +57,13 @@ Der Sprachumschalter behält die aktuelle Seite und Version beim Sprachwechsel b
 
 ## Fehlende Locale-Verzeichnisse
 
-Wenn eine Locale in `locales` deklariert ist, aber das zugehörige Quellverzeichnis nicht existiert (z. B. kein Ordner `docs/hi/`), **deaktiviert** docmd diese Locale automatisch im Sprachumschalter. Die Locale erscheint weiterhin im Dropdown — mit einem „N/A"-Badge und ausgegrautem Stil — aber ein Klick darauf bewirkt nichts.
+Wenn eine Locale in `locales` deklariert ist, aber das zugehörige Quellverzeichnis nicht existiert (z. B. kein Ordner `docs/hi/`), **deaktiviert** docmd diese Locale automatisch im Sprachumschalter. Die Locale erscheint weiterhin im Dropdown - mit einem „N/A"-Badge und ausgegrautem Stil - aber ein Klick darauf bewirkt nichts.
 
 Dies verhindert 404-Fehler, wenn Sie geplante Sprachen auflisten, bevor deren Inhalte fertig sind.
 
 ## Positionierung des Sprachumschalters
 
-<!-- SCREENSHOT: Drei Varianten des Sprachumschalters — options-menu (Erdkugel-Icon im Header), sidebar-top (Dropdown oben in der Seitenleiste), sidebar-bottom (Dropdown unten). Zeige alle drei nebeneinander. -->
+<!-- SCREENSHOT: Drei Varianten des Sprachumschalters - options-menu (Erdkugel-Icon im Header), sidebar-top (Dropdown oben in der Seitenleiste), sidebar-bottom (Dropdown unten). Zeige alle drei nebeneinander. -->
 
 Steuern Sie die Position des Sprachumschalters mit der Option `position`:
 
@@ -82,7 +82,7 @@ i18n: {
 
 ## String-Modus (nur für noStyle-Seiten)
 
-Standard-i18n verwendet separate Verzeichnisse pro Sprache (`docs/en/`, `docs/hi/`), jedes mit eigenen Markdown-Dateien. **String Mode** ist eine einfachere Alternative, die speziell für [noStyle-Seiten](../../content/no-style-pages.md) entwickelt wurde — Seiten, die reines HTML anstelle von Markdown verwenden.
+Standard-i18n verwendet separate Verzeichnisse pro Sprache (`docs/en/`, `docs/hi/`), jedes mit eigenen Markdown-Dateien. **String Mode** ist eine einfachere Alternative, die speziell für [noStyle-Seiten](../../content/no-style-pages.md) entwickelt wurde - Seiten, die reines HTML anstelle von Markdown verwenden.
 
 ```js
 // docmd.config.js
@@ -103,22 +103,22 @@ Mit `stringMode: true`:
 1. Quelldateien bleiben im Stammverzeichnis `docs/` (keine Sprach-Unterverzeichnisse)
 2. Die Standardsprache wird wie gewohnt unter `/` erstellt
 3. Für jede andere Sprache klont docmd das gerenderte HTML und führt eine **serverseitige String-Ersetzung** mittels JSON-Dateien aus `assets/i18n/{locale}.json` durch
-4. Die Ausgabe erfolgt unter `/{locale}/` — z. B. `/zh/index.html` — mit vollem SEO (hreflang-Tags, korrektes `lang`-Attribut)
+4. Die Ausgabe erfolgt unter `/{locale}/` - z. B. `/zh/index.html` - mit vollem SEO (hreflang-Tags, korrektes `lang`-Attribut)
 5. Falls eine Übersetzungsdatei fehlt, wird die Seite im Text der Standardsprache gerendert
 
 Weitere Details zur Syntax des `data-i18n`-Attributs und zum JSON-Dateiformat finden Sie unter [noStyle String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 
 ::: callout warning "String Mode übersetzt keine Markdown-Inhalte"
-Die String-Ersetzung funktioniert durch das Finden von `data-i18n`-Attributen im gerenderten HTML. Standard-Markdown-Inhalte (`## Überschrift`, Absätze, Listen) werden in einfache HTML-Tags ohne diese Attribute umgewandelt — daher kann der Ersetzer dort nichts finden.
+Die String-Ersetzung funktioniert durch das Finden von `data-i18n`-Attributen im gerenderten HTML. Standard-Markdown-Inhalte (`## Überschrift`, Absätze, Listen) werden in einfache HTML-Tags ohne diese Attribute umgewandelt - daher kann der Ersetzer dort nichts finden.
 
 - **Dokumentationsseiten** → verwenden Sie den Verzeichnismodus (Standard). Jede Sprache hat eigene Markdown-Dateien mit vollständig übersetztem Text.
 - **Landingpages, Marketing-Websites, Dashboards** → verwenden Sie den String-Modus. Dies sind noStyle-Seiten mit benutzerdefiniertem HTML, bei dem Sie jeden Tag kontrollieren und `data-i18n`-Attribute hinzufügen können.
 
-Wenn Ihre Website beides hat — zum Beispiel eine noStyle-Landingpage plus Dokumentation — verwenden Sie den Verzeichnismodus für die Dokumentation und fügen Sie Ihrer noStyle-Seite `data-i18n`-Attribute hinzu. Der String-Modus übersetzt das noStyle-HTML, während der Verzeichnismodus die Dokumentationsinhalte verarbeitet.
+Wenn Ihre Website beides hat - zum Beispiel eine noStyle-Landingpage plus Dokumentation - verwenden Sie den Verzeichnismodus für die Dokumentation und fügen Sie Ihrer noStyle-Seite `data-i18n`-Attribute hinzu. Der String-Modus übersetzt das noStyle-HTML, während der Verzeichnismodus die Dokumentationsinhalte verarbeitet.
 :::
 
 ## Nächste Schritte
 
-- [Übersetzte Inhalte](./translated-content.md) — Verzeichnisstruktur, Schreiben von Übersetzungen, Navigation
-- [UI-Strings & SEO](./ui-strings.md) — Anpassen von Systemtexten, hreflang-Tags
-- [noStyle String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) — Syntax des `data-i18n`-Attributs und JSON-Format für noStyle-Seiten
+- [Übersetzte Inhalte](./translated-content.md) - Verzeichnisstruktur, Schreiben von Übersetzungen, Navigation
+- [UI-Strings & SEO](./ui-strings.md) - Anpassen von Systemtexten, hreflang-Tags
+- [noStyle String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) - Syntax des `data-i18n`-Attributs und JSON-Format für noStyle-Seiten

@@ -42,4 +42,4 @@ The [LLMs Plugin](../../plugins/llms.md) facilitates chunking by generating a `l
 
 ## Trade-offs
 
-This approach favors a modular, segmented writing style over long, flowing narratives. While this may feel more repetitive to a human reader, it significantly improves the performance of AI-powered search and automated support agents that rely on your documentation.
+This approach favours a modular, segmented writing style over long, flowing narratives. While this may feel more repetitive to a human reader, it significantly improves the performance of AI-powered search and automated support agents that rely on your documentation.

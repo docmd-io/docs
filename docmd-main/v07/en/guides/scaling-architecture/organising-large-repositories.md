@@ -60,7 +60,7 @@ Learn how to implement Stripe, PayPal, and more.
 :::
 ```
 
-### 3. Leveraging Breadcrumbs
+### 3. Using Breadcrumbs
 
 `docmd` automatically generates [Breadcrumbs](../../content/syntax/advanced.md#breadcrumbs) for every page based on your folder structure and navigation hierarchy. By using Hub Pages, you can keep the sidebar focused while breadcrumbs provide the necessary context and an easy way for users to navigate back up the hierarchy.
 

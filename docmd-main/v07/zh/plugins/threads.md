@@ -1,9 +1,9 @@
 ---
 title: "评论线程插件 (Threads Plugin)"
-description: "为你的文档添加行内讨论线程 —— 直接存储在你的 markdown 文件中。"
+description: "为你的文档添加行内讨论线程  -  -  直接存储在你的 markdown 文件中。"
 ---
 
-**Threads 插件** 为你的文档带来协作式的行内评论功能。选择页面上的任何文本，留下评论，开始讨论 —— 所有内容都直接存储在你的 markdown 源文件中，无需任何数据库。
+**Threads 插件** 为你的文档带来协作式的行内评论功能。选择页面上的任何文本，留下评论，开始讨论  -  -  所有内容都直接存储在你的 markdown 源文件中，无需任何数据库。
 
 原作者：[@svallory](external:https://github.com/svallory)
 
@@ -41,10 +41,10 @@ plugins: {
 ## 工作原理
 
 1. 在 `docmd dev` 期间，在任何文档页面上 **选择文本**
-2. 出现一个 **评论弹出层** —— 写下你的评论并提交
+2. 出现一个 **评论弹出层**  -  -  写下你的评论并提交
 3. 所选文本会被 **高亮显示** 并带有线程标记
 4. 线程以 `::: threads` 块的形式存储在 markdown 文件的底部
-5. **无需数据库** —— 你的 markdown 文件就是事实来源
+5. **无需数据库**  -  -  你的 markdown 文件就是事实来源
 
 ## 预览
 
@@ -59,7 +59,7 @@ plugins: {
   <div class="threads-preview-comment threads-preview-reply">
     <div class="threads-preview-avatar">B</div>
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1d ago</div>
-    <div class="threads-preview-body">好主意 —— 我会添加一个 Mermaid 流程图。这里可以使用 <code>sequenceDiagram</code> 吗？</div>
+    <div class="threads-preview-body">好主意  -  -  我会添加一个 Mermaid 流程图。这里可以使用 <code>sequenceDiagram</code> 吗？</div>
     <div class="threads-preview-reactions">
       <div class="threads-preview-reaction">👍 <span>2</span></div>
       <div class="threads-preview-reaction">🚀 <span>1</span></div>
@@ -75,7 +75,7 @@ plugins: {
   </div>
 </div>
 
-这是 <span class="threads-preview-highlight-blue">第二种不同颜色的高亮</span> —— 线程会自动循环使用一系列颜色。
+这是 <span class="threads-preview-highlight-blue">第二种不同颜色的高亮</span>  -  -  线程会自动循环使用一系列颜色。
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
@@ -118,7 +118,7 @@ plugins: {
       这段文本需要澄清。
     :::
     ::: comment c-d9e0f1a2 "Bob" "2026-04-09" reply-to c-e5f6a7b8
-      更新了 —— 这样可以吗？
+      更新了  -  -  这样可以吗？
 
       ::: reactions
         - 👍 Alice

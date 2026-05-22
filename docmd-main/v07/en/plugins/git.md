@@ -3,7 +3,7 @@ title: "Git Plugin"
 description: "Repository-aware metadata, last-updated timestamps, and automated edit links derived from Git history."
 ---
 
-The `@docmd/plugin-git` plugin adds repository intelligence to your documentation. It automatically displays when each page was last modified, who contributed to it, and provides an optional "Edit this page" link—all extracted directly from your Git history at build-time.
+The `@docmd/plugin-git` plugin adds repository intelligence to your documentation. It automatically displays when each page was last modified, who contributed to it, and provides an optional "Edit this page" link - all extracted directly from your Git history at build-time.
 
 ## Configuration
 
@@ -50,7 +50,7 @@ Once configured, the plugin works automatically. Timestamps and edit links appea
 ### Footer Example
 
 ::: callout info "Rendering Result"
-The footer of this page (and all others in this documentation) is rendered by the Git plugin. Scroll to the bottom to see it in action—hover over the **Last updated** date to see the commit history.
+The footer of this page (and all others in this documentation) is rendered by the Git plugin. Scroll to the bottom to see it in action - hover over the **Last updated** date to see the commit history.
 :::
 
 ## Per-Page Control

@@ -3,7 +3,7 @@ title: "Verlinkung & Referenzierung"
 description: "Meistern Sie interne Querverweise, externe Ressourcen und zuverlässige Asset-Referenzierung mit der automatischen URL-Normalisierung von docmd."
 ---
 
-`docmd` bietet ein robustes, Dateisystem-bewusstes Verlinkungssystem. Schreiben Sie Links zu Ihren Quell-`.md`-Dateien ganz natürlich — in jedem Format, das Sie bevorzugen — und die Engine normalisiert diese automatisch in saubere, SEO-optimierte URLs für die Produktion.
+`docmd` bietet ein robustes, Dateisystem-bewusstes Verlinkungssystem. Schreiben Sie Links zu Ihren Quell-`.md`-Dateien ganz natürlich - in jedem Format, das Sie bevorzugen - und die Engine normalisiert diese automatisch in saubere, SEO-optimierte URLs für die Produktion.
 
 ::: callout info "Natürlich schreiben, perfekt ausliefern"
 Sie müssen keine speziellen Verlinkungskonventionen befolgen. Egal, ob Sie `overview.md`, `overview/` oder nur `overview` schreiben, die Build-Engine erzeugt dieselbe saubere URL mit abschließendem Schrägstrich. Jeder interne Link wird zur Build-Zeit automatisch normalisiert, sodass Sie sich auf den Inhalt konzentrieren können, nicht auf die URL-Formatierung.
@@ -11,15 +11,15 @@ Sie müssen keine speziellen Verlinkungskonventionen befolgen. Egal, ob Sie `ove
 
 ## Wie die URL-Normalisierung funktioniert
 
-Während des Build-Prozesses wendet die Engine eine konsistente Reihe von Regeln auf jeden internen Link an — egal ob in Markdown-Texten, Button-Containern, Tags oder der Navigationskonfiguration:
+Während des Build-Prozesses wendet die Engine eine konsistente Reihe von Regeln auf jeden internen Link an - egal ob in Markdown-Texten, Button-Containern, Tags oder der Navigationskonfiguration:
 
 | Was Sie schreiben | Was gerendert wird | Warum |
 | :--- | :--- | :--- |
 | `overview.md` | `overview/` | `.md`-Erweiterung entfernt, abschließender `/` hinzugefügt |
 | `overview` | `overview/` | Abschließender `/` wird automatisch hinzugefügt |
-| `overview/` | `overview/` | Bereits korrekt — keine Änderung |
+| `overview/` | `overview/` | Bereits korrekt - keine Änderung |
 | `api/commands.md` | `api/commands/` | Link in Unterverzeichnis normalisiert |
-| `localisation/index.md` | `localisation/` | `index` entfernt — der Ordner ist die kanonische URL |
+| `localisation/index.md` | `localisation/` | `index` entfernt - der Ordner ist die kanonische URL |
 | `../index.md` | `../` | Parent-Verzeichnis-Index sauber aufgelöst |
 | `overview.md#settings` | `overview/#settings` | Hash-Fragment bleibt durch Normalisierung erhalten |
 | `./guide.md` | `./guide/` | Relatives Präfix bleibt erhalten |
@@ -51,7 +51,7 @@ Hash-Fragmente bleiben während des Normalisierungsprozesses erhalten. Der obige
 
 ## Links in einem neuen Tab öffnen
 
-Verwenden Sie das Präfix `external:` bei jedem Link, um das Öffnen in einem neuen Tab zu erzwingen. Dies funktioniert universell — in Standard-Markdown-Links, Button-Containern, Tags und überall dort, wo Sie eine URL schreiben können.
+Verwenden Sie das Präfix `external:` bei jedem Link, um das Öffnen in einem neuen Tab zu erzwingen. Dies funktioniert universell - in Standard-Markdown-Links, Button-Containern, Tags und überall dort, wo Sie eine URL schreiben können.
 
 ```markdown
 <!-- Öffnen in neuem Tab erzwingen -->
@@ -63,7 +63,7 @@ Verwenden Sie das Präfix `external:` bei jedem Link, um das Öffnen in einem ne
 
 Standardmäßig werden alle Links (einschließlich HTTP/HTTPS) im selben Fenster geöffnet. Verwenden Sie das Präfix `external:` nur, wenn Sie einen neuen Tab wünschen.
 
-Das Präfix `external:` wird aus der gerenderten URL **entfernt** — es ist ein reines Signal für die Build-Zeit.
+Das Präfix `external:` wird aus der gerenderten URL **entfernt** - es ist ein reines Signal für die Build-Zeit.
 
 ## Verlinkung zu Rohdateien (Raw Files)
 
@@ -73,11 +73,11 @@ Standardmäßig entfernt die Engine `.md`-Erweiterungen und normalisiert Pfade. 
 [Quellcode anzeigen](raw:docs/readme.md)
 ```
 
-Das Präfix `raw:` umgeht die gesamte Normalisierung — die Erweiterung und der Pfad bleiben exakt so erhalten, wie sie geschrieben wurden. Wie bei `external:` wird das Präfix selbst aus der gerenderten URL entfernt.
+Das Präfix `raw:` umgeht die gesamte Normalisierung - die Erweiterung und der Pfad bleiben exakt so erhalten, wie sie geschrieben wurden. Wie bei `external:` wird das Präfix selbst aus der gerenderten URL entfernt.
 
 ## Button-Container
 
-Der `::: button`-Container unterstützt dieselben Verlinkungskonventionen wie Standard-Markdown-Links — einschließlich der Präfixe `external:` und `raw:`:
+Der `::: button`-Container unterstützt dieselben Verlinkungskonventionen wie Standard-Markdown-Links - einschließlich der Präfixe `external:` und `raw:`:
 
 ```markdown
 ::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket
@@ -141,9 +141,9 @@ Wenn Sie auf die Index-Seite eines Verzeichnisses verlinken, verwenden Sie den O
 
 Die Engine respektiert Standard-Browserprotokolle für externe Ressourcen. Diese Links werden niemals geändert.
 
-*   **Globales HTTPS**: `[docmd Homepage](https://docmd.io)` — öffnet im selben Tab (Präfix `external:` für neuen Tab verwenden)
-*   **Mail-Protokoll**: `[Support-Kanal](mailto:help@docmd.io)` — wird nicht in einem neuen Tab geöffnet
-*   **Asset-Protokoll**: `[CLI-Binary herunterladen](/assets/bin/docmd-mac.zip)` — wird nicht normalisiert
+*   **Globales HTTPS**: `[docmd Homepage](https://docmd.io)` - öffnet im selben Tab (Präfix `external:` für neuen Tab verwenden)
+*   **Mail-Protokoll**: `[Support-Kanal](mailto:help@docmd.io)` - wird nicht in einem neuen Tab geöffnet
+*   **Asset-Protokoll**: `[CLI-Binary herunterladen](/assets/bin/docmd-mac.zip)` - wird nicht normalisiert
 
 ## Referenzierung statischer Assets
 

@@ -157,7 +157,7 @@ resolveHref('raw:docs/readme.md');
 
 ### 预计算的页面 URL
 
-每个页面对象都包含预计算的 URL 数据。插件可以直接读取这些数据 —— 无需计算。
+每个页面对象都包含预计算的 URL 数据。插件可以直接读取这些数据  -  -  无需计算。
 
 ```javascript
 export async function onPostBuild({ pages, config }) {

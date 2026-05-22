@@ -32,10 +32,10 @@ Instead of re-rendering the entire page, `docmd` intelligently updates only the 
 
 ### 3. Lifecycle Events for Custom Logic
 
-Because the browser doesn't perform a full reload, standard events like `DOMContentLoaded` only fire once. To execute custom JavaScript after every navigation - such as re-initializing a third-party widget or tracking page views - you should listen for the `docmd:page-mounted` event.
+Because the browser doesn't perform a full reload, standard events like `DOMContentLoaded` only fire once. To execute custom JavaScript after every navigation - such as re-initialising a third-party widget or tracking page views - you should listen for the `docmd:page-mounted` event.
 
 ```javascript
-// Example: Re-initializing a custom component after navigation
+// Example: Re-initialising a custom component after navigation
 document.addEventListener('docmd:page-mounted', (event) => {
   const currentPath = event.detail.path;
   console.log(`Successfully navigated to: ${currentPath}`);

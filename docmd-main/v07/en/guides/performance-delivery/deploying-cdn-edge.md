@@ -13,7 +13,7 @@ High latency directly harms the developer experience. Even if your documentation
 
 ## Approach
 
-The optimal solution is to deploy your site to an Edge CDN. Because `docmd` generates pure static assets (HTML, CSS, JS), it is perfectly suited for edge distribution. CDNs replicate your files across hundreds of globally distributed "Edge Nodes," serving your users from the data center closest to them.
+The optimal solution is to deploy your site to an Edge CDN. Because `docmd` generates pure static assets (HTML, CSS, JS), it is perfectly suited for edge distribution. CDNs replicate your files across hundreds of globally distributed "Edge Nodes," serving your users from the data centre closest to them.
 
 ## Implementation
 
@@ -22,7 +22,7 @@ The optimal solution is to deploy your site to an Edge CDN. Because `docmd` gene
 `docmd` is natively compatible with all modern static hosting and edge platforms. We recommend the following for their global performance and ease of use:
 *   **Cloudflare Pages**: Extremely fast global edge network with built-in DDoS protection.
 *   **Vercel**: Optimised for performance with excellent developer workflow integration.
-*   **Netlify**: Powerful automation features and a robust global CDN.
+*   **Netlify**: Powerful automation features and a reliable global CDN.
 
 ### 2. Automate the Build
 
@@ -58,4 +58,4 @@ Once deployed, you can verify your global performance using tools like PageSpeed
 
 ## Trade-offs
 
-Global edge networks abstract away server management, which is a major advantage for documentation teams. However, debugging regional caching issues can occasionally be more complex than reviewing a single server log. Using platforms with robust "instant cache invalidation" ensures that your users always see the latest version of your documentation immediately after a deployment.
+Global edge networks abstract away server management, which is a major advantage for documentation teams. However, debugging regional caching issues can occasionally be more complex than reviewing a single server log. Using platforms with reliable "instant cache invalidation" ensures that your users always see the latest version of your documentation immediately after a deployment.

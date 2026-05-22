@@ -5,11 +5,11 @@ description: "How to match your documentation's appearance to your corporate ide
 
 ## Problem
 
-Ensuring that your documentation platform seamlessly matches your corporate identity is critical for maintaining a professional appearance. The default font stack and color palette are designed for general readability but may not reflect your specific brand personality.
+Ensuring that your documentation platform easily matches your corporate identity is critical for maintaining a professional appearance. The default font stack and colour palette are designed for general readability but may not reflect your specific brand personality.
 
 ## Why it matters
 
-Documentation is a key brand touchpoint. If your main product uses a specific typography (like "Outfit") and a distinct primary color, your documentation should reflect those same choices. Consistency across all your web properties builds trust and provides a more cohesive user experience.
+Documentation is a key brand touchpoint. If your main product uses a specific typography (like "Outfit") and a distinct primary colour, your documentation should reflect those same choices. Consistency across all your web properties builds trust and provides a more cohesive user experience.
 
 ## Approach
 
@@ -29,8 +29,8 @@ Create a file named `custom.css` in your source directory (or any subdirectory) 
   /* Brand Typography */
   --font-family-sans: "Outfit", system-ui, -apple-system, sans-serif;
   
-  /* Brand Colors (Light Mode) */
-  --link-color: #8a2be2;      /* Your primary brand color */
+  /* Brand Colours (Light Mode) */
+  --link-color: #8a2be2;      /* Your primary brand colour */
   --link-color-hover: #7b1fa2;
   --bg-color: #fcfcfd;        /* Subtle background tint */
 }

@@ -1,6 +1,6 @@
 ---
 title: "Maintaining Consistency"
-description: "How to ensure a unified voice and professional quality across large documentation teams using linting and standardized patterns."
+description: "How to ensure a unified voice and professional quality across large documentation teams using linting and standardised patterns."
 ---
 
 ## Problem
@@ -13,11 +13,11 @@ Consistency breeds familiarity. When users are learning complex APIs or workflow
 
 ## Approach
 
-Enforce consistency mechanically using [Standardized Containers](../../content/containers/index.md) and automated linting tools. By automating low-level style and syntax checks, you free up your human editors to focus on the high-level quality, accuracy, and clarity of the content.
+Enforce consistency mechanically using [Standardised Containers](../../content/containers/index.md) and automated linting tools. By automating low-level style and syntax checks, you free up your human editors to focus on the high-level quality, accuracy, and clarity of the content.
 
 ## Implementation
 
-### 1. Use Standardized docmd Patterns
+### 1. Use Standardised docmd Patterns
 
 Encourage all contributors to use `docmd`'s built-in thematic containers instead of improvising with manual Markdown formatting. This ensures that every warning, tip, or note looks and behaves identically across the entire site.
 

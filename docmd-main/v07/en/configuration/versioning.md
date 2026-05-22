@@ -64,5 +64,5 @@ For details on the resolution hierarchy and visual examples, see [Navigation Res
 ## Best Practices
 
 1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.
-2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximize the effectiveness of "Sticky Switching."
+2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximise the effectiveness of "Sticky Switching."
 3.  **Unified Configuration**: You do not need separate config files for each version; `docmd` processes all versions in a single pass.

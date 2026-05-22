@@ -13,14 +13,14 @@ Without a formal process, documentation quickly becomes outdated and loses its v
 
 ## Approach
 
-Decouple documentation deployments from software release cycles while adopting the same robust processes used in software engineering (Branches → Pull Requests → CI/CD Previews). `docmd`'s lightweight nature allows teams to treat "documentation as code" with minimal overhead, ensuring that your guides are as reliable and up-to-date as your software.
+Decouple documentation deployments from software release cycles while adopting the same reliable processes used in software engineering (Branches → Pull Requests → CI/CD Previews). `docmd`'s lightweight nature allows teams to treat "documentation as code" with minimal overhead, ensuring that your guides are as reliable and up-to-date as your software.
 
 ## Implementation
 
 ### 1. Repository Strategy
 
 Choose the strategy that best fits your organizational structure:
-*   **Monorepo Strategy**: Keep a `/docs` folder within your main application repository. This is ideal for ensuring that documentation changes are merged in the same Pull Request as the code they describe, maintaining perfect synchronization.
+*   **Monorepo Strategy**: Keep a `/docs` folder within your main application repository. This is ideal for ensuring that documentation changes are merged in the same Pull Request as the code they describe, maintaining perfect synchronisation.
 *   **Separate Repository Strategy**: Best for large organisations or open-source projects where a dedicated team manages the documentation independently of the main application's build pipeline.
 
 ### 2. Validation with CI/CD
@@ -36,8 +36,8 @@ See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd.md)
 
 ### 3. Collaborative Review Process
 
-Establish a culture of peer review for all documentation updates. Use Pull Requests to discuss changes, verify formatting, and ensure technical accuracy. You can leverage the [Threads Plugin](../../plugins/usage.md) to facilitate detailed discussions directly on the rendered content.
+Establish a culture of peer review for all documentation updates. Use Pull Requests to discuss changes, verify formatting, and ensure technical accuracy. You can use the [Threads Plugin](../../plugins/usage.md) to facilitate detailed discussions directly on the rendered content.
 
 ## Trade-offs
 
-Adopting a "docs-as-code" workflow can create a barrier for non-technical contributors (e.g., Product Managers or Legal teams) who may find Git and Markdown intimidating. To mitigate this, consider using GitHub's built-in web editor for minor fixes or leveraging the [Live Preview](../../content/live-preview.md) feature to provide a more visual and intuitive authoring experience.
+Adopting a "docs-as-code" workflow can create a barrier for non-technical contributors (e.g., Product Managers or Legal teams) who may find Git and Markdown intimidating. To mitigate this, consider using GitHub's built-in web editor for minor fixes or using the [Live Preview](../../content/live-preview.md) feature to provide a more visual and intuitive authoring experience.

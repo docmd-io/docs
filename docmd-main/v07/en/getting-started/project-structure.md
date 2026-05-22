@@ -1,93 +1,68 @@
 ---
 title: "Project Structure"
-description: "How docmd maps your files and folders to pages, URLs, and navigation."
+description: "Learn how docmd maps physical folders and Markdown files to dynamic URLs and clean navigation."
 ---
 
-docmd uses your filesystem as the source of truth. Folders become sections, Markdown files become pages, and the directory hierarchy defines URL routes.
+The compiler uses your local filesystem as the source of truth. Folders become navigation sections. Markdown files become content pages. Your directory hierarchy translates directly into web URLs.
 
-## Initialise a project
+## 1. Standard Project Scaffold
 
-::: tabs
-== tab "npm" icon:box
-```bash
-mkdir my-docs && cd my-docs
-npx @docmd/core init
-```
-== tab "Bun" icon:zap
-```bash
-mkdir my-docs && cd my-docs
-bunx @docmd/core init
-```
-:::
-
-This creates the standard project scaffold:
+Scaffolding a default project establishes a minimal workspace layout. This structure keeps source content separated from assets and production builds.
 
 ```text
 my-docs/
-├── docs/               ← Source directory. Your .md files go here.
-│   └── index.md        ← Home page (/)
-├── assets/             ← Static assets (images, custom CSS/JS)
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── docmd.config.js     ← Configuration file
-├── package.json        ← Project metadata and scripts
-└── site/               ← Generated output (after build)
+├── docs/                 ← Source directory containing your Markdown (.md) pages
+│   └── index.md          ← The landing page (resolves to /)
+├── assets/               ← Static web assets loaded directly by the engine
+│   ├── css/              ← Custom stylesheets for customising page layout
+│   ├── js/               ← Custom scripts to extend browser-side logic
+│   └── images/           ← Brand logos, icons, and inline illustrations
+├── docmd.config.json     ← Central configuration script
+├── package.json          ← Node dependency manifest and scripts
+└── site/                 ← Generated production build output folder
 ```
 
-## File-to-URL mapping
-
-docmd maps your `docs/` directory structure directly to URLs:
-
-| File | URL |
-|:-----|:----|
-| `docs/index.md` | `/` |
-| `docs/api.md` | `/api` |
-| `docs/guides/setup.md` | `/guides/setup` |
-
-::: callout tip "Automatic titles"
-If a page title is not defined in frontmatter, docmd extracts the first `H1` heading as the title.
+::: callout info "Configuration File Resolution" icon:settings
+`docmd.config.json` (or `docmd.config.ts`) is the recommended, primary configuration format. The legacy `docmd.config.js` format remains supported but acts strictly as a fallback when `.json` or `.ts` configuration files are missing.
 :::
 
-## Start the dev server
+## 2. Directory and URL Mapping
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core dev
-```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core dev
-```
+The compiler maps files within your source folder directly to public URLs. There are no trailing `.html` extensions or complex routing rules.
+
+| Source File | Resolved URL Path | Purpose |
+| :--- | :--- | :--- |
+| `docs/index.md` | `/` | Home Landing Page |
+| `docs/api.md` | `/api` | Main API Reference |
+| `docs/guides/setup.md` | `/guides/setup` | Sub-section Technical Guide |
+
+::: callout tip "Automatic Header Parsing"
+If a file lacks a `title` in its YAML frontmatter, the engine extracts the first `H1` tag (`# Heading`). This title represents the page in breadcrumb navigation and search.
 :::
 
-Opens `http://localhost:3000` with live reload. Changes to `.md` files or `docmd.config.js` are reflected instantly.
+## 3. Workspace Monorepo Structure
 
-## Build for production
+For complex layouts or large projects with multiple distinct products (such as a core platform, an SDK, and a CLI tool), `docmd` natively supports a **Workspace Monorepo** directory structure. This allows you to manage multiple independent documentation sites from a single root repository while maintaining unified branding.
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core build
+```text
+my-docs-monorepo/
+├── docmd.config.json         ← Root configuration (defines global settings)
+├── assets/                   ← Shared global assets (inherited by all projects)
+│   ├── css/                  ← Shared global stylesheets
+│   └── images/               ← Shared logos and icons
+├── package.json              ← Root dependency manifest
+├── main-site/                ← Root project directory
+│   ├── docmd.config.json     ← Project-specific config overrides
+│   └── docs/                 ← Content for main-site (resolves to /)
+│       └── index.md
+└── sdk-reference/            ← Secondary project directory
+    ├── docmd.config.json     ← Project-specific config overrides
+    └── docs/                 ← Content for sdk-reference (resolves to /sdk)
+        └── index.md
 ```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core build
-```
-:::
 
-Outputs a static site to `./site/`. The output is entirely static HTML - deploy it to GitHub Pages, Vercel, Netlify, or any static host.
+### Key Workspace Directory Patterns
 
-Verify locally before deploying:
-
-::: tabs
-== tab "npm" icon:box
-```bash
-npx serve site
-```
-== tab "Bun" icon:zap
-```bash
-bunx serve site
-```
-:::
+*   **Global Configuration Cascading:** Any configuration defined in the root `docmd.config.json` (such as `theme` or `menubar`) acts as a fallback default. Individual projects can selectively override these defaults in their own local config files.
+*   **Asset Sharing and Priority:** Shared logos, global custom styles, and common scripts are placed in the root `assets/` directory. Projects can also define their own local `assets/` directories; in the event of filename conflicts, project-specific assets always take precedence.
+*   **Output Consolidation:** During the build process (`npx @docmd/core build`), the engine automatically merges all projects into a single consolidated production output directory (e.g. `./site/` and `./site/sdk/`), negating the need for complex reverse proxy setups or isolated build pipeline configuration.

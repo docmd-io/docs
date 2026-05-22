@@ -77,7 +77,7 @@ bunx @docmd/core build
 ```
 :::
 
-输出静态网站到 `./site/`，出品为纯静态 HTML——可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
+输出静态网站到 `./site/`，出品为纯静态 HTML -  - 可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
 
 部署前可在本地预览：
 

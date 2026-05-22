@@ -13,7 +13,7 @@ Your favicon is the primary visual anchor in a crowded browser window. High-qual
 
 ## Approach
 
-`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, leverage the [SEO Plugin](../../plugins/seo.md), which automates the generation of meta tags based on your project configuration and page frontmatter.
+`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, use the [SEO Plugin](../../plugins/seo.md), which automates the generation of meta tags based on your project configuration and page frontmatter.
 
 ## Implementation
 

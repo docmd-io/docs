@@ -16,13 +16,13 @@ Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisch
 
 ## Start
 
-Starten Sie eine produktionsreife Dokumentationsseite in Sekunden — ohne Boilerplate, ohne Konfigurationsdateien.
+Starten Sie eine produktionsreife Dokumentationsseite in Sekunden - ohne Boilerplate, ohne Konfigurationsdateien.
 
 ```bash
 npx @docmd/core dev
 ```
 
-Das ist alles. Schreiben Sie Markdown in einen `docs/`-Ordner und docmd erstellt eine vollständige Dokumentationsseite mit Navigation, Suche, SEO, Sitemap und mehr — alles direkt einsatzbereit.
+Das ist alles. Schreiben Sie Markdown in einen `docs/`-Ordner und docmd erstellt eine vollständige Dokumentationsseite mit Navigation, Suche, SEO, Sitemap und mehr - alles direkt einsatzbereit.
 
 ## Kernfunktionen
 
@@ -63,7 +63,7 @@ Erstklassige Mehrsprachigkeitsunterstützung mit sprachspezifischen URLs, Suche 
 
 ## Markdown erweitern
 
-Gehen Sie über statischen Text hinaus. docmd bietet eine reiche Container-Syntax direkt in Markdown — Callouts, Tabs, Karten, Raster, Hero-Bereiche, ausklappbare Abschnitte und mehr.
+Gehen Sie über statischen Text hinaus. docmd bietet eine reiche Container-Syntax direkt in Markdown - Callouts, Tabs, Karten, Raster, Hero-Bereiche, ausklappbare Abschnitte und mehr.
 
 ::: button "Container erkunden" ./content/containers/index.md icon:blocks
 

@@ -1,6 +1,6 @@
 ---
 title: "Fast & Accurate Search"
-description: "How docmd optimizes search indexing for speed and accuracy, even in large-scale documentation projects."
+description: "How docmd optimises search indexing for speed and accuracy, even in large-scale documentation projects."
 ---
 
 ## Problem
@@ -23,7 +23,7 @@ The primary goal of documentation search is "Time to Answer." If a user triggers
 
 ### 2. Intelligent Field Stripping
 
-The [Search Plugin](../../plugins/search.md) allows you to control exactly what content is indexed. By default, it prioritizes headers and frontmatter metadata while stripping out common "stop words" and unnecessary code symbols that bloat the index without adding value. You can also exclude specific pages from the index using the `search` property in your [Frontmatter](../../content/frontmatter.md).
+The [Search Plugin](../../plugins/search.md) allows you to control exactly what content is indexed. By default, it prioritises headers and frontmatter metadata while stripping out common "stop words" and unnecessary code symbols that bloat the index without adding value. You can also exclude specific pages from the index using the `search` property in your [Frontmatter](../../content/frontmatter.md).
 
 ```yaml
 ---

@@ -3,7 +3,7 @@ title: "Analytics Plugin"
 description: "Integrate Google Analytics 4 or legacy Universal Analytics and track user interactions automatically."
 ---
 
-The `@docmd/plugin-analytics` plugin allows you to seamlessly integrate Google Analytics into your documentation. It supports the modern Google Analytics 4 (GA4) standard, legacy Universal Analytics (UA), and includes native event tracking for interaction-heavy documentation sites.
+The `@docmd/plugin-analytics` plugin allows you to easily integrate Google Analytics into your documentation. It supports the modern Google Analytics 4 (GA4) standard, legacy Universal Analytics (UA), and includes native event tracking for interaction-heavy documentation sites.
 
 ## Configuration
 

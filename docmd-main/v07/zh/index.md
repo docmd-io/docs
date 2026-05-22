@@ -16,13 +16,13 @@ titleAppend: false
 
 ## 开始
 
-几秒钟内即可运行一个生产级文档网站——无需样板代码，无需配置文件。
+几秒钟内即可运行一个生产级文档网站 -  - 无需样板代码，无需配置文件。
 
 ```bash
 npx @docmd/core dev
 ```
 
-就这么简单。在 `docs/` 文件夹中编写 Markdown，docmd 就会自动构建一个完整的文档网站，包含导航、搜索、SEO、站点地图等——一切开箱即用。
+就这么简单。在 `docs/` 文件夹中编写 Markdown，docmd 就会自动构建一个完整的文档网站，包含导航、搜索、SEO、站点地图等 -  - 一切开箱即用。
 
 ## 核心功能
 
@@ -63,7 +63,7 @@ npx @docmd/core dev
 
 ## 扩展 Markdown
 
-超越静态文本。docmd 在 Markdown 中直接提供丰富的容器语法——提示框、标签页、卡片、网格、主页横幅、折叠面板等。
+超越静态文本。docmd 在 Markdown 中直接提供丰富的容器语法 -  - 提示框、标签页、卡片、网格、主页横幅、折叠面板等。
 
 ::: button "探索容器" ./content/containers/index.md icon:blocks
 

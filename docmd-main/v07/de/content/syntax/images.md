@@ -64,5 +64,5 @@ Wenn die Komponente `mainScripts` aktiviert ist (Standard), wendet `docmd` autom
 ```
 
 ::: callout tip "KI-Kontext & Barrierefreiheit"
-Geben Sie immer umfassende **Alt-Texte** für visuelle Medien an. Obwohl fortgeschrittene KI-Modelle über Sehfähigkeiten verfügen, liefert beschreibender Text innerhalb der Markdown-Quelle ein direktes, hochwertiges Signal für die Argumentationsebene des Modells — dies verbessert die Architekturanalyse und das Verständnis von Funktionen im `llms-full.txt`-Stream.
+Geben Sie immer umfassende **Alt-Texte** für visuelle Medien an. Obwohl fortgeschrittene KI-Modelle über Sehfähigkeiten verfügen, liefert beschreibender Text innerhalb der Markdown-Quelle ein direktes, hochwertiges Signal für die Argumentationsebene des Modells - dies verbessert die Architekturanalyse und das Verständnis von Funktionen im `llms-full.txt`-Stream.
 :::

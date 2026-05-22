@@ -13,7 +13,7 @@ Providing a clean, token-optimised text version of your documentation is the mod
 
 ## Approach
 
-Leverage `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the emerging `llms.txt` standard, automatically generating token-optimised summaries and full-context files during every build process.
+Use `docmd`'s built-in **LLMs Plugin**. This plugin natively implements the emerging `llms.txt` standard, automatically generating token-optimised summaries and full-context files during every build process.
 
 ## Implementation
 
@@ -52,4 +52,4 @@ llms: false
 
 ## Trade-offs
 
-Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organise your [Navigation](../../configuration/navigation.md) logically so that the AI can prioritize the most important sections.
+Generating `llms-full.txt` creates a large single file. For exceptionally large documentation sites, this file could exceed several megabytes. While this is ideal for modern LLMs with large context windows (like Gemini 1.5 Pro or Claude 3.5 Sonnet), it may be too large for smaller models. Ensure you organise your [Navigation](../../configuration/navigation.md) logically so that the AI can prioritise the most important sections.

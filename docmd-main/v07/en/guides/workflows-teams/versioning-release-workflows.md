@@ -58,4 +58,4 @@ When you are ready to release the new version officially:
 Maintaining multiple versions of documentation requires discipline. If a critical typo or security warning is fixed in the stable version, ensure it is also applied to the upcoming version directory to prevent "regressions" in clarity.
 
 ### SEO and Search
-Multiple versions can occasionally lead to search results pointing to older documentation. Use the `seo` plugin and proper canonical tags to ensure that the "Current" version is always prioritized by search engines. See [Handling Breaking Changes](../scaling-architecture/breaking-changes-deprecations.md) for more on managing transitions.
+Multiple versions can occasionally lead to search results pointing to older documentation. Use the `seo` plugin and proper canonical tags to ensure that the "Current" version is always prioritised by search engines. See [Handling Breaking Changes](../scaling-architecture/breaking-changes-deprecations.md) for more on managing transitions.

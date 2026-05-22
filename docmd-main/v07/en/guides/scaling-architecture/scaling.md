@@ -27,7 +27,7 @@ For large sites, the [Search Plugin](../../plugins/search) is essential. `docmd`
 
 ### 3. Versioning and Archiving
 
-Leverage the [Versioning Engine](../../configuration/versioning) to separate legacy content from active documentation. By isolating older versions into their own build contexts, you reduce the number of pages that need to be re-processed during daily updates, significantly improving development velocity.
+Use the [Versioning Engine](../../configuration/versioning) to separate legacy content from active documentation. By isolating older versions into their own build contexts, you reduce the number of pages that need to be re-processed during daily updates, significantly improving development velocity.
 
 ```javascript
 // docmd.config.js

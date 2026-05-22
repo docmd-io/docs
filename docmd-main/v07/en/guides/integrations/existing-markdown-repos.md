@@ -5,7 +5,7 @@ description: "How to instantly generate a professional documentation site from y
 
 ## Problem
 
-You have an established repository with hundreds or thousands of raw Markdown files - perhaps a legacy wiki, an Obsidian vault, or a collection of technical notes. Manually converting frontmatter, fixing broken links, and restructuring files to fit a new engine is a daunting task that often prevents teams from modernizing their documentation.
+You have an established repository with hundreds or thousands of raw Markdown files - perhaps a legacy wiki, an Obsidian vault, or a collection of technical notes. Manually converting frontmatter, fixing broken links, and restructuring files to fit a new engine is a difficult task that often prevents teams from modernizing their documentation.
 
 ## Why it matters
 

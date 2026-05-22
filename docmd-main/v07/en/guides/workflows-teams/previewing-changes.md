@@ -13,7 +13,7 @@ High-quality documentation is essential for developer trust. A broken warning bo
 
 ## Approach
 
-Implement a multi-stage preview strategy: use `docmd`'s [Local Development](../../getting-started/quick-start.md#local-development) server for immediate feedback while writing, and leverage ephemeral cloud environments (like Vercel or Cloudflare Pages) for final reviews within your Pull Requests.
+Implement a multi-stage preview strategy: use `docmd`'s [Local Development](../../getting-started/quick-start.md#local-development) server for immediate feedback while writing, and use ephemeral cloud environments (like Vercel or Cloudflare Pages) for final reviews within your Pull Requests.
 
 ## Implementation
 

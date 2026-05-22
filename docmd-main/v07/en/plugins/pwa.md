@@ -12,8 +12,8 @@ Customise your app branding within the `plugins` section of your `docmd.config.j
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `enabled` | `boolean` | `true` | Enable or disable PWA manifest and service worker generation. |
-| `themeColor` | `string` | `'#1e293b'` | The primary color of the mobile UI browser chrome. |
-| `bgColor` | `string` | `'#ffffff'` | Background color for the splash screen during installation. |
+| `themeColor` | `string` | `'#1e293b'` | The primary colour of the mobile UI browser chrome. |
+| `bgColor` | `string` | `'#ffffff'` | Background colour for the splash screen during installation. |
 | `logo` | `string` | `null` | Path to the app icon (relative to project source). |
 
 ### Example
@@ -43,10 +43,10 @@ export default defineConfig({
 
 The plugin resolves your PWA icons based on the following priority:
 
-1. `pwa.icons` — Explicit array in config.
-2. `pwa.logo` — Path relative to source.
-3. `config.logo` — Global site logo.
-4. `config.favicon` — Global favicon.
+1. `pwa.icons` - Explicit array in config.
+2. `pwa.logo` - Path relative to source.
+3. `config.logo` - Global site logo.
+4. `config.favicon` - Global favicon.
 
 ::: callout tip "Testing PWA Features"
 Service workers are bypassed in `docmd dev` to prevent caching issues during editing. To test PWA features, run `docmd build` and serve the `site/` directory using a static host.

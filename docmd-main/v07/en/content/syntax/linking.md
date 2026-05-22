@@ -3,7 +3,7 @@ title: "Linking & Referencing"
 description: "Master internal cross-linking, external resources, and reliable asset referencing with docmd's automatic URL normalisation."
 ---
 
-`docmd` provides a robust, filesystem-aware linking system. Write links to your source `.md` files naturally - using any format you prefer - and the engine will automatically normalise them into clean, SEO-optimised URLs for production.
+`docmd` provides a reliable, filesystem-aware linking system. Write links to your source `.md` files naturally - using any format you prefer - and the engine will automatically normalise them into clean, SEO-optimised URLs for production.
 
 ::: callout info "Write Naturally, Ship Perfectly"
 You do not need to follow any special linking conventions. Whether you write `overview.md`, `overview/`, or just `overview`, the build engine produces the same clean, trailing-slash URL. Every internal link is automatically normalised at build time so you can focus on content, not URL formatting.

@@ -3,7 +3,7 @@ title: "Buttons"
 description: "Fügen Sie Call-to-Action-Buttons für internes Routing oder externe Ressourcen mit einer einzeiligen Syntax ein."
 ---
 
-Buttons sind einflussreiche UI-Elemente, die für eine prominente Navigation verwendet werden. Im Gegensatz zu Block-Containern ist der `button` **selbstschließend** — er wird in einer einzigen Zeile definiert und benötigt kein schließendes `:::`-Tag.
+Buttons sind einflussreiche UI-Elemente, die für eine prominente Navigation verwendet werden. Im Gegensatz zu Block-Containern ist der `button` **selbstschließend** - er wird in einer einzigen Zeile definiert und benötigt kein schließendes `:::`-Tag.
 
 ## Syntax
 

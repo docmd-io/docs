@@ -1,6 +1,6 @@
 ---
 title: "Reducing JS Payload"
-description: "How to maintain a high-performance documentation site by optimising your JavaScript dependencies and leveraging docmd's zero-framework architecture."
+description: "How to maintain a high-performance documentation site by optimising your JavaScript dependencies and using docmd's zero-framework architecture."
 ---
 
 ## Problem
@@ -17,9 +17,9 @@ A large JavaScript payload directly impacts "Time to Interactive" (TTI). In tech
 
 ## Implementation
 
-### 1. Leverage Native Browser APIs
+### 1. Use Native Browser APIs
 
-Avoid importing heavy libraries like jQuery or Lodash for simple tasks. Modern browsers have robust native APIs that can handle almost any documentation-related requirement with zero overhead.
+Avoid importing heavy libraries like jQuery or Lodash for simple tasks. Modern browsers have reliable native APIs that can handle almost any documentation-related requirement with zero overhead.
 
 ```javascript
 // docmd.config.js

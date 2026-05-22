@@ -13,7 +13,7 @@ Navigation is the "map" of your product's capabilities. If navigation is difficu
 
 ## Approach
 
-Prioritize **Top-Level Context Switching** over deep nesting. Aim to keep your left sidebar limited to no more than two or three levels of depth. Use the horizontal [Menubar](../../configuration/menubar.md) to separate distinct documentation "domains" (e.g., Guides, API Reference, and Community), which allows each individual sidebar to remain focused, relevant, and manageable.
+Prioritise **Top-Level Context Switching** over deep nesting. Aim to keep your left sidebar limited to no more than two or three levels of depth. Use the horizontal [Menubar](../../configuration/menubar.md) to separate distinct documentation "domains" (e.g., Guides, API Reference, and Community), which allows each individual sidebar to remain focused, relevant, and manageable.
 
 ## Implementation
 
@@ -28,7 +28,7 @@ Instead of splitting a single concept across many tiny Markdown pages, consolida
 *   **❌ Poor IA**: A folder named "Security" containing ten separate, one-paragraph files for different protocols.
 *   **✅ Better IA**: A single, well-structured "Security Overview" page that covers all protocols, using headings to provide a clean TOC.
 
-### 3. Leveraging Collapsible Sections
+### 3. Using Collapsible Sections
 
 For large groups of related content that aren't accessed constantly, use the `collapsible` property in your [Navigation Configuration](../../configuration/navigation.md). This keeps the interface clean by hiding secondary information until it is explicitly requested by the user.
 
@@ -47,4 +47,4 @@ For large groups of related content that aren't accessed constantly, use the `co
 
 ## Trade-offs
 
-Consolidating content into fewer, longer pages requires authors to be disciplined about structural clarity and heading use. If a page becomes too long without proper internal navigation (TOC), it can become its own "wall of text." However, the significant reduction in "click-fatigue" and the improved discovery of related content make a flatter, domain-based hierarchy far superior for large documentation sets.
+Consolidating content into fewer, longer pages requires authors to be disciplined about structural clarity and heading use. If a page becomes too long without proper internal navigation (TOC), it can become its own "wall of text." However, the significant reduction in "click-fatigue" and the improved discovery of related content make a flatter, domain-based hierarchy far better for large documentation sets.

@@ -7,7 +7,7 @@ The `hero` container creates professional, visually striking landing page header
 
 ## Basic Syntax
 
-By default, the `hero` centers its content, making it perfect for banners and simple headlines.
+By default, the `hero` centres its content, making it perfect for banners and simple headlines.
 
 ```markdown
 ::: hero
@@ -82,7 +82,7 @@ Create an interactive hero slider by using the `== slide` separator between diff
 
 The `hero` container is fully responsive by default:
 - On **Desktop**, `layout:split` displays side-by-side.
-- On **Mobile**, it automatically transitions to a centered, vertical stack to ensure optimal readability.
+- On **Mobile**, it automatically transitions to a centred, vertical stack to ensure optimal readability.
 
 ## Best Practices
 

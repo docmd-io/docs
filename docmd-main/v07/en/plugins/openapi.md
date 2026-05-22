@@ -3,7 +3,7 @@ title: "OpenAPI Plugin"
 description: "Static API reference documentation rendered directly from OpenAPI 3.x specifications at build-time."
 ---
 
-The `@docmd/plugin-openapi` plugin converts OpenAPI 3.x specification files into structured, searchable API reference pages. It follows the Docmd "Zero-JS" philosophy—rendering every endpoint, parameter, and response into semantic HTML tables during the build process, ensuring maximum performance and SEO.
+The `@docmd/plugin-openapi` plugin converts OpenAPI 3.x specification files into structured, searchable API reference pages. It follows the Docmd "Zero-JS" philosophy - rendering every endpoint, parameter, and response into semantic HTML tables during the build process, ensuring maximum performance and SEO.
 
 ## Configuration
 
@@ -61,7 +61,7 @@ For each path and HTTP method in the spec, the plugin renders:
 - **Deprecated notice** - operations marked `deprecated: true` are flagged inline
 
 ::: callout tip "Build-Time Rendering"
-All rendering happens at build time. The generated pages are fully static—no JavaScript is needed to display the API docs, which means fast page loads and full search indexation. This approach ensures zero-JS performance and SEO-friendliness.
+All rendering happens at build time. The generated pages are fully static - no JavaScript is needed to display the API docs, which means fast page loads and full search indexation. This approach ensures zero-JS performance and SEO-friendliness.
 :::
 
 ## Capability Support

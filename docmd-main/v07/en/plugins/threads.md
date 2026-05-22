@@ -78,7 +78,7 @@ Here's what threads look like on a live page. Text with discussions gets <span c
   </div>
 </div>
 
-And here's a <span class="threads-preview-highlight-blue">second highlight with a different color</span> - threads cycle through a palette of colors automatically.
+And here's a <span class="threads-preview-highlight-blue">second highlight with a different colour</span> - threads cycle through a palette of colours automatically.
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">

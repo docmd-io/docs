@@ -46,7 +46,7 @@ export default {
 
 ::: callout info "AI Recognition Strategy :robot:"
 
-*   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header color".
+*   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header colour".
 *   **Use Descriptive Filenames**: Naming an image `authentication-flow-diagram.png` provides much more context to the `llms.txt` crawler than `img_01.png`.
 
 :::

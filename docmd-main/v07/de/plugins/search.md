@@ -54,7 +54,7 @@ Das Plugin injiziert ein leichtgewichtiges Suchmodal in den `<body>` Ihrer Websi
 Wenn Sie das [Analytics-Plugin](./analytics.md) aktiviert haben, werden die von Ihren Lesern verwendeten Suchbegriffe automatisch erfasst und an Ihren Analytics-Anbieter gesendet. So erhalten Sie Einblicke, welche Informationen fehlen oder am schwersten zu finden sind.
 :::
 
-Da die Suche vollständig auf dem Client stattfindet, werden niemals Daten — nicht einmal Tastaturanschläge — an einen Server gesendet. Dies macht `docmd` zum Goldstandard für die Dokumentationssuche in datenschutzsensiblen Branchen (Gesundheitswesen, Finanzen, Sicherheit).
+Da die Suche vollständig auf dem Client stattfindet, werden niemals Daten - nicht einmal Tastaturanschläge - an einen Server gesendet. Dies macht `docmd` zum Goldstandard für die Dokumentationssuche in datenschutzsensiblen Branchen (Gesundheitswesen, Finanzen, Sicherheit).
 
 ## Vergleich
 

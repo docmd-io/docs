@@ -13,7 +13,7 @@ Friction in the authoring experience leads to "documentation silos," where teams
 
 ## Approach
 
-Leverage `docmd`'s decentralized [Navigation Resolution](../../configuration/navigation.md#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files, while a central team governs the global [Menubar](../../configuration/menubar.md) and visual design system.
+Use `docmd`'s decentralized [Navigation Resolution](../../configuration/navigation.md#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files, while a central team governs the global [Menubar](../../configuration/menubar.md) and visual design system.
 
 ## Implementation
 
@@ -53,7 +53,7 @@ export default {
 
 ### 3. Local Autonomy with navigation.json
 
-When a user is browsing content within the `/frontend/` directory, `docmd` automatically prioritizes the `frontend/navigation.json` file. The sidebar updates dynamically to reflect only the frontend-specific hierarchy, preventing the navigation from becoming cluttered with unrelated information from other teams.
+When a user is browsing content within the `/frontend/` directory, `docmd` automatically prioritises the `frontend/navigation.json` file. The sidebar updates dynamically to reflect only the frontend-specific hierarchy, preventing the navigation from becoming cluttered with unrelated information from other teams.
 
 ```json
 // docs/frontend/navigation.json

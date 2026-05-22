@@ -22,11 +22,11 @@ Assign specialised CSS classes and attributes directly to your images using the 
 
 ### Alignment & Layout
 ```markdown
-![Centered Focus](/assets/img.png){ .align-center }
+![Centred Focus](/assets/img.png){ .align-centre }
 ![Floating Right](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
+![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
 
 ## Structured Media Elements
 

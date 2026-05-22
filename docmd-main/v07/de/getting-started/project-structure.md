@@ -77,7 +77,7 @@ bunx @docmd/core build
 ```
 :::
 
-Gibt eine statische Website in `./site/` aus. Die Ausgabe besteht ausschließlich aus statischem HTML — stellen Sie sie auf GitHub Pages, Vercel, Netlify oder einem beliebigen statischen Host bereit.
+Gibt eine statische Website in `./site/` aus. Die Ausgabe besteht ausschließlich aus statischem HTML - stellen Sie sie auf GitHub Pages, Vercel, Netlify oder einem beliebigen statischen Host bereit.
 
 Vor der Bereitstellung lokal überprüfen:
 

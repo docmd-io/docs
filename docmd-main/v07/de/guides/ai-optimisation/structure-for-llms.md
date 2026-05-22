@@ -13,7 +13,7 @@ Wenn Ihre Dokumentation nicht für LLMs optimiert ist, werden Entwickler, die To
 
 ## Ansatz
 
-Wechseln Sie von einer "Visual-First"-Mentalität zu einer **"Semantic-First"**-Mentalität. Verwenden Sie Standard-Markdown-Funktionen — wie strenge Überschriftenhierarchien, explizite Sprach-Tags für Codeblöcke und beschreibende Alt-Texte —, um einen klaren, maschinenlesbaren Fahrplan für Ihre Inhalte bereitzustellen. `docmd` verarbeitet diese Struktur über das [LLMs-Plugin](../../plugins/llms.md) zu optimierten Ausgaben.
+Wechseln Sie von einer "Visual-First"-Mentalität zu einer **"Semantic-First"**-Mentalität. Verwenden Sie Standard-Markdown-Funktionen - wie strenge Überschriftenhierarchien, explizite Sprach-Tags für Codeblöcke und beschreibende Alt-Texte  - , um einen klaren, maschinenlesbaren Fahrplan für Ihre Inhalte bereitzustellen. `docmd` verarbeitet diese Struktur über das [LLMs-Plugin](../../plugins/llms.md) zu optimierten Ausgaben.
 
 ## Implementierung
 

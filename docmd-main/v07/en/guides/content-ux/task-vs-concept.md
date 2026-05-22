@@ -41,7 +41,7 @@ Focus on the "Big Picture," including architecture, design philosophy, and the "
 
 Instead of merging the two types of content, use `docmd`'s linking tools to provide a bridge for users who need more context or are ready to implement.
 
-*   **In a How-To guide**: "For a deeper dive into our retry logic, see [Webhook Architecture](../../guides/performance-delivery/caching-strategies.md)."
+*   **In a How-To guide**: "For a deeper explore our retry logic, see [Webhook Architecture](../../guides/performance-delivery/caching-strategies.md)."
 *   **In a Conceptual guide**: "Ready to get started? Follow our [Webhook Configuration Guide](../../guides/integrations/alongside-other-tools.md)."
 
 ## Trade-offs

@@ -27,11 +27,11 @@ bunx @docmd/core dev
 
 docmd scannt Ihr Projekt und richtet alles ein:
 
-1. **Ordnererkennung** — sucht nach `docs/`, `src/docs/`, `documentation/` oder beliebigen `.md`-Dateien
-2. **Navigationserstellung** — erstellt eine verschachtelte Seitenleiste aus Ihrer Ordnerstruktur
-3. **Metadaten-Extraktion** — liest die `package.json` für den Seitentitel aus, falls verfügbar
-4. **Theme-Aktivierung** — wendet das Standard-Theme mit systemabhängigem Hell-/Dunkelmodus an
-5. **Suchindexierung** — ermöglicht die integrierte Volltextsuche
+1. **Ordnererkennung** - sucht nach `docs/`, `src/docs/`, `documentation/` oder beliebigen `.md`-Dateien
+2. **Navigationserstellung** - erstellt eine verschachtelte Seitenleiste aus Ihrer Ordnerstruktur
+3. **Metadaten-Extraktion** - liest die `package.json` für den Seitentitel aus, falls verfügbar
+4. **Theme-Aktivierung** - wendet das Standard-Theme mit systemabhängigem Hell-/Dunkelmodus an
+5. **Suchindexierung** - ermöglicht die integrierte Volltextsuche
 
 Es wird keine `docmd.config.js` benötigt. Fügen Sie später eine hinzu, wenn Sie Versionierung, Plugins oder eine benutzerdefinierte Navigation benötigen.
 

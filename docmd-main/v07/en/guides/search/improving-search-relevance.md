@@ -5,7 +5,7 @@ description: "How to structure your Markdown content to improve search relevance
 
 ## Problem
 
-Search engines prioritize content based on structure. If a high-quality guide uses generic headers like "Introduction" or "Step 1," the search engine may not assign enough weight to the core keywords buried within the paragraphs. This results in relevant pages being buried deep in search results, frustrating users who expect instant answers.
+Search engines prioritise content based on structure. If a high-quality guide uses generic headers like "Introduction" or "Step 1," the search engine may not assign enough weight to the core keywords buried within the paragraphs. This results in relevant pages being buried deep in search results, frustrating users who expect instant answers.
 
 ## Why it matters
 
@@ -13,7 +13,7 @@ Users typically search for specific technical terms (e.g., "authentication token
 
 ## Approach
 
-Structure your Markdown so the search indexer can automatically identify and prioritize core concepts. `docmd`'s search engine assigns higher weights to the page `title`, `description`, and `headers` compared to the body text. By optimising these structural elements, you significantly improve the discoverability of your content.
+Structure your Markdown so the search indexer can automatically identify and prioritise core concepts. `docmd`'s search engine assigns higher weights to the page `title`, `description`, and `headers` compared to the body text. By optimising these structural elements, you significantly improve the discoverability of your content.
 
 ## Implementation
 
@@ -36,10 +36,10 @@ Avoid generic header names. Instead, include relevant keywords in your headers t
 *   **Low Relevance:** `## Step 1: Configuration`
 *   **High Relevance:** `## Step 1: Configuring AWS IAM Roles`
 
-### 3. Leverage Callouts for Key Information
+### 3. Use Callouts for Key Information
 
 Using [Callout Containers](../../content/containers/callouts.md) for critical warnings or "Pro Tips" can also help search relevance. Content within callouts is often semantically isolated and can be weighted differently by the indexer to highlight important troubleshooting steps.
 
 ## Trade-offs
 
-Optimising for search relevance requires disciplined writing. As your product evolves, keywords in frontmatter can become outdated if not regularly reviewed. Furthermore, including too many keywords in headers (keyword stuffing) can make the documentation feel repetitive and less natural to read. Aim for a balance between SEO and readability.
+Optimising for search relevance requires disciplined writing. As your product evolves, keywords in frontmatter can become outdated if not regularly reviewed. In addition, including too many keywords in headers (keyword stuffing) can make the documentation feel repetitive and less natural to read. Aim for a balance between SEO and readability.

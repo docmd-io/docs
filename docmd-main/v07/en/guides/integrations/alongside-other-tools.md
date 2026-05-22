@@ -13,7 +13,7 @@ A fragmented documentation experience ruins developer trust and increases cognit
 
 ## Approach
 
-Use `docmd` as your primary documentation hub or "Single Pane of Glass." By leveraging the [Menubar](../../configuration/menubar.md) for unified navigation and [Embed Containers](../../content/containers/embed.md) for third-party content, you can create a seamless interface that hides the complexity of your multi-tool infrastructure.
+Use `docmd` as your primary documentation hub or "Single Pane of Glass." By using the [Menubar](../../configuration/menubar.md) for unified navigation and [Embed Containers](../../content/containers/embed.md) for third-party content, you can create a seamless interface that hides the complexity of your multi-tool infrastructure.
 
 ## Implementation
 
@@ -54,4 +54,4 @@ For external content that must be searchable alongside your core documentation, 
 
 ## Trade-offs
 
-While embedding provides a unified look, it can occasionally introduce performance overhead or "scroll-nesting" issues on mobile devices. Furthermore, content within an iframe is not natively indexed by `docmd`'s search engine. If search parity is critical, prioritizing [OpenAPI Generation](openapi-generation.md) or other Markdown-based ingestion methods is recommended.
+While embedding provides a unified look, it can occasionally introduce performance overhead or "scroll-nesting" issues on mobile devices. In addition, content within an iframe is not natively indexed by `docmd`'s search engine. If search parity is critical, prioritising [OpenAPI Generation](openapi-generation.md) or other Markdown-based ingestion methods is recommended.

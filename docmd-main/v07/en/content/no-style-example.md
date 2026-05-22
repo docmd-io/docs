@@ -26,7 +26,7 @@ customHead: |
       padding: 80px 20px;
     }
     .demo-hero {
-      text-align: center;
+      text-align: centre;
       margin-bottom: 60px;
     }
     .demo-hero h1 {
@@ -81,7 +81,7 @@ customHead: |
       <li><strong>SEO Meta Engine</strong>: Structured tags and social graph data are retained.</li>
       <li><strong>Project Branding</strong>: Global favicon injection remains active.</li>
       <li><strong>Foundational Typography</strong>: The processed <code>docmd-main.css</code> provides base styling.</li>
-      <li><strong>Theme Synchronization</strong>: Light/Dark mode state is fully preserved.</li>
+      <li><strong>Theme Synchronisation</strong>: Light/Dark mode state is fully preserved.</li>
       <li><strong>Interactive Capabilities</strong>: The SPA router and component logic remain available.</li>
     </ul>
     
@@ -90,6 +90,6 @@ customHead: |
       The layout for this page is authored using standard HTML wrappers and scoped CSS defined within the <code>customHead</code> frontmatter field. This ensures zero CSS leakage to the rest of the documentation site.
     </p>
     
-    <a href="/content/no-style-pages/" class="demo-button">Analyze the Implementation Guide →</a>
+    <a href="/content/no-style-pages/" class="demo-button">Analyse the Implementation Guide →</a>
   </div>
 </div>

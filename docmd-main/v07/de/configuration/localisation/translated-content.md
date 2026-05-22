@@ -5,7 +5,7 @@ description: "Organisieren Sie Übersetzungen in Sprach-Unterverzeichnissen mit 
 
 ## Verzeichnisstruktur
 
-Jede Sprache — einschließlich der Standardsprache — lebt in ihrem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses. Der Ordnername entspricht der Sprach-`id` aus Ihrer Konfiguration.
+Jede Sprache - einschließlich der Standardsprache - lebt in ihrem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses. Der Ordnername entspricht der Sprach-`id` aus Ihrer Konfiguration.
 
 ```
 docs/
@@ -23,7 +23,7 @@ docs/
     └── index.md            ← Nur die Homepage übersetzt
 ```
 
-Das Quellverzeichnis dient als sauberer Container — es enthält ausschließlich Sprachordner. Wenn i18n aktiviert ist, befinden sich keine Inhaltsdateien auf der Stammebene.
+Das Quellverzeichnis dient als sauberer Container - es enthält ausschließlich Sprachordner. Wenn i18n aktiviert ist, befinden sich keine Inhaltsdateien auf der Stammebene.
 
 ::: callout info "Ordnernamen sind Ihre Wahl"
 Die Ordnernamen stammen direkt aus den `id`-Werten in Ihrer Konfiguration. Wenn Ihre Konfiguration `{ id: 'fr-ca' }` angibt, lautet Ihr Ordner `docs/fr-ca/`. Wenn Hindi Ihre Standardsprache ist (`default: 'hi'`), dann ist `docs/hi/` das Verzeichnis für den kanonischen Inhalt.
@@ -40,7 +40,7 @@ Wenn eine Seite auf den Fallback zurückgreift, kann docmd einen übersetzten Ca
 
 ## Sprach-exklusive Seiten
 
-Eine Nicht-Standardsprache kann auch Seiten haben, die in der Standardsprache nicht existieren. Diese werden nur für diese Sprache gerendert — sie erscheinen nicht in anderen Sprachen.
+Eine Nicht-Standardsprache kann auch Seiten haben, die in der Standardsprache nicht existieren. Diese werden nur für diese Sprache gerendert - sie erscheinen nicht in anderen Sprachen.
 
 ## Navigation übersetzen
 
@@ -63,7 +63,7 @@ Die `navigation.json` einer Sprache verwendet dasselbe Format:
 ```
 
 ::: callout tip "Teilweise Navigation"
-Sie müssen nur dann eine `navigation.json` für eine Sprache erstellen, wenn Sie übersetzte Labels wünschen. Wenn sie fehlt, wird die Navigation der Standardsprache verwendet — die Seiten werden gerendert, nur mit nicht übersetzten Labels.
+Sie müssen nur dann eine `navigation.json` für eine Sprache erstellen, wenn Sie übersetzte Labels wünschen. Wenn sie fehlt, wird die Navigation der Standardsprache verwendet - die Seiten werden gerendert, nur mit nicht übersetzten Labels.
 :::
 
 ## Versionierung und i18n zusammen
@@ -79,7 +79,7 @@ docs-v1/                 ← Alte Version
   navigation.json
 ```
 
-Alte Versionen, die i18n zeitlich vorausgehen, funktionieren automatisch — docmd liest sie direkt aus, wenn keine Sprach-Unterverzeichnisse vorhanden sind. Nur die Standardsprache rendert die alte Version. Um Übersetzungen zu einer alten Version hinzuzufügen, erstellen Sie darin ein Sprach-Unterverzeichnis:
+Alte Versionen, die i18n zeitlich vorausgehen, funktionieren automatisch - docmd liest sie direkt aus, wenn keine Sprach-Unterverzeichnisse vorhanden sind. Nur die Standardsprache rendert die alte Version. Um Übersetzungen zu einer alten Version hinzuzufügen, erstellen Sie darin ein Sprach-Unterverzeichnis:
 
 ```
 docs-v1/

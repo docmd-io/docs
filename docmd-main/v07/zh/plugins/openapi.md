@@ -3,10 +3,10 @@ title: "OpenAPI 插件"
 description: "直接在 Markdown 页面中从 JSON 或 YAML 规范文件渲染 OpenAPI 3.x API 参考文档。"
 ---
 
-**OpenAPI 插件**将 OpenAPI 3.x 规范文件转换为结构化的 API 参考页面——在构建时渲染，无需客户端 JavaScript，无需第三方依赖。每个端点、参数、请求体和响应都转换为语义化 HTML 表格。
+**OpenAPI 插件**将 OpenAPI 3.x 规范文件转换为结构化的 API 参考页面 -  - 在构建时渲染，无需客户端 JavaScript，无需第三方依赖。每个端点、参数、请求体和响应都转换为语义化 HTML 表格。
 
 ::: callout info "核心插件"
-OpenAPI 插件现在已**内置**于 `@docmd/core` 中，无需单独安装。它遵循 Docmd 的构建时渲染理念——插件在构建时读取您的规范并输出干净、可访问的 HTML 表格，无需客户端 JavaScript。
+OpenAPI 插件现在已**内置**于 `@docmd/core` 中，无需单独安装。它遵循 Docmd 的构建时渲染理念 -  - 插件在构建时读取您的规范并输出干净、可访问的 HTML 表格，无需客户端 JavaScript。
 :::
 
 ## 安装
@@ -55,16 +55,16 @@ npm install js-yaml
 
 对于规范中的每个路径和 HTTP 方法，插件渲染：
 
-- **方法徽章** — 颜色编码（`GET`、`POST`、`PUT`、`PATCH`、`DELETE`）
-- **路径** — 完整端点路径
-- **摘要和描述** — 来自操作对象
-- **参数表格** — 名称、位置（`path`、`query`、`header`、`cookie`）、类型、必填标志、描述
-- **请求体表格** — 带类型和默认值的模式属性
-- **响应表格** — 带描述和响应模式类型的状态码
-- **已弃用通知** — 标记为 `deprecated: true` 的操作内联标注
+- **方法徽章** - 颜色编码（`GET`、`POST`、`PUT`、`PATCH`、`DELETE`）
+- **路径** - 完整端点路径
+- **摘要和描述** - 来自操作对象
+- **参数表格** - 名称、位置（`path`、`query`、`header`、`cookie`）、类型、必填标志、描述
+- **请求体表格** - 带类型和默认值的模式属性
+- **响应表格** - 带描述和响应模式类型的状态码
+- **已弃用通知** - 标记为 `deprecated: true` 的操作内联标注
 
 ::: callout tip "构建时渲染"
-所有渲染在构建时发生。生成的页面是完全静态的——无需 JavaScript 即可显示 API 文档，意味着快速页面加载和完整的搜索索引。
+所有渲染在构建时发生。生成的页面是完全静态的 -  - 无需 JavaScript 即可显示 API 文档，意味着快速页面加载和完整的搜索索引。
 :::
 
 ## 支持的 OpenAPI 功能

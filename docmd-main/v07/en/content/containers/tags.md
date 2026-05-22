@@ -1,6 +1,6 @@
 ---
 title: "Tags"
-description: "Use the tag container to label versions, statuses, or highlight short text snippets seamlessly inline."
+description: "Use the tag container to label versions, statuses, or highlight short text snippets easily inline."
 ---
 
 The `tag` container is a self-closing component used to insert small, pill-shaped badges directly into your text. Unlike block containers, tags do not inherit massive sizing from parent elements like headings, they retain their tight, clean proportions no matter where they are placed.
@@ -18,9 +18,9 @@ To create a basic tag, simply provide the text you want to display:
         ```
 :::
 
-## Customising Colors
+## Customising Colours
 
-You can override the default tag styling by providing any valid CSS color string (e.g., `#ff0000`, `blue`, or `hsl(...)`) using the `color:` attribute. `docmd` will automatically calculate a beautiful tinted background with perfectly contrasted text and borders!
+You can override the default tag styling by providing any valid CSS colour string (e.g., `#ff0000`, `blue`, or `hsl(...)`) using the `color:` attribute. `docmd` will automatically calculate a beautiful tinted background with perfectly contrasted text and borders!
 
 ::: tabs
 

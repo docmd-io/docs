@@ -38,7 +38,7 @@ API references are often content-dense, with large tables for parameters and nes
 ```markdown
 ---
 title: "REST API Reference"
-layout: "full"  # Maximizes horizontal space for dense tables
+layout: "full"  # Maximises horizontal space for dense tables
 ---
 ```
 

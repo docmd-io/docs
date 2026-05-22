@@ -3,7 +3,7 @@ title: "Vergleich"
 description: "Warum docmd? Erfahren Sie, wie es im Vergleich zu Docusaurus, VitePress, MkDocs und anderen Tools abschneidet."
 ---
 
-Sie haben sich schon früher für ein Dokumentations-Tool entschieden. Sie werden es wieder tun. Hier ist das, was wirklich zählt — und wo docmd steht.
+Sie haben sich schon früher für ein Dokumentations-Tool entschieden. Sie werden es wieder tun. Hier ist das, was wirklich zählt - und wo docmd steht.
 
 ## Schreiben in 3 Sekunden starten, nicht in 30 Minuten
 
@@ -27,7 +27,7 @@ Vier Befehle, ein generiertes Projekt mit ~250 MB in `node_modules` und eine `do
 ```bash
 npx vitepress init
 ```
-Stellt Ihnen 5 Fragen, generiert eine Konfigurationsdatei, dann führen Sie `vitepress dev` aus. Sauber — erfordert aber dennoch Scaffolding.
+Stellt Ihnen 5 Fragen, generiert eine Konfigurationsdatei, dann führen Sie `vitepress dev` aus. Sauber - erfordert aber dennoch Scaffolding.
 
 == tab "MkDocs"
 ```bash
@@ -81,7 +81,7 @@ Hier scheitern die meisten Tools. Sie fügen 6 Sprachen hinzu, übersetzen 3 Sei
 | Zero-Config (kein individuelles React/Vue) | ✅ | Teilweise | ❌ | ✅ |
 
 ::: callout warning "Was in VitePress und Docusaurus passiert"
-Wenn ein Leser auf Hindi wechselt und diese Seite nicht übersetzt ist, erhält er eine **404-Fehlermeldung**. Die einzige Abhilfe sind serverseitige Weiterleitungen oder das Schreiben einer eigenen React/Vue-Komponente. docmd regelt dies zum Build-Zeitpunkt — nicht verfügbare Locales erhalten ein "N/A"-Badge, und nicht übersetzte Seiten fallen lautlos auf den Standard zurück, begleitet von einem lokalisierten Warnungs-Callout.
+Wenn ein Leser auf Hindi wechselt und diese Seite nicht übersetzt ist, erhält er eine **404-Fehlermeldung**. Die einzige Abhilfe sind serverseitige Weiterleitungen oder das Schreiben einer eigenen React/Vue-Komponente. docmd regelt dies zum Build-Zeitpunkt - nicht verfügbare Locales erhalten ein "N/A"-Badge, und nicht übersetzte Seiten fallen lautlos auf den Standard zurück, begleitet von einem lokalisierten Warnungs-Callout.
 :::
 
 ## Vollständige Feature-Matrix
@@ -113,7 +113,7 @@ Erforderliche Konfigurationszeilen für eine Website mit Versionierung, i18n, Su
 
 ## Qualitätssicherung
 
-docmd wird mit einer Brute-Test-Suite ausgeliefert, die **25 verschiedene Szenarien** anhand von **85 Assertionen** validiert — wobei jedes Feature isoliert und in Kombination abgedeckt wird. Jedes Release muss alle 85 Assertionen und 13 interne Failsafe-Checks bestehen, bevor es ausgeliefert wird.
+docmd wird mit einer Brute-Test-Suite ausgeliefert, die **25 verschiedene Szenarien** anhand von **85 Assertionen** validiert - wobei jedes Feature isoliert und in Kombination abgedeckt wird. Jedes Release muss alle 85 Assertionen und 13 interne Failsafe-Checks bestehen, bevor es ausgeliefert wird.
 
 ::: callout tip "Führen Sie die Tests selbst aus"
 ```bash

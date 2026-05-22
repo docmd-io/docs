@@ -12,25 +12,21 @@ Choose the installation method that fits your workflow.
 ```bash
 npm install -D @docmd/core
 npx @docmd/core init
-npx @docmd/core dev
 ```
 == tab "pnpm" icon:boxes
 ```bash
 pnpm add -D @docmd/core
-pnpm dlx docmd init
-pnpm dlx docmd dev
+pnpm dlx @docmd/core init
 ```
 == tab "yarn" icon:scroll
 ```bash
 yarn add -D @docmd/core
-yarn docmd init
-yarn docmd dev
+yarn dlx @docmd/core init
 ```
 == tab "Bun" icon:zap
 ```bash
 bun add -D @docmd/core
-bunx docmd init
-bunx docmd dev
+bunx @docmd/core init
 ```
 :::
 

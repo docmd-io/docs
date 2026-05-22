@@ -1,6 +1,6 @@
 ---
 title: "Low-End Device Optimisation"
-description: "How to build high-performance, accessible documentation that works seamlessly on low-powered hardware and slow network connections."
+description: "How to build high-performance, accessible documentation that works easily on low-powered hardware and slow network connections."
 ---
 
 ## Problem
@@ -45,4 +45,4 @@ Using the `loading="lazy"` attribute ensures that images are only downloaded as 
 
 ## Trade-offs
 
-Prioritizing performance for low-end devices often means avoiding "heavy" interactive features like complex 3D visualizations or large client-side data processing. This is a deliberate design choice that values **inclusivity and speed** over visual complexity, ensuring your documentation remains a useful resource for the widest possible audience.
+Prioritising performance for low-end devices often means avoiding "heavy" interactive features like complex 3D visualizations or large client-side data processing. This is a deliberate design choice that values **inclusivity and speed** over visual complexity, ensuring your documentation remains a useful resource for the widest possible audience.

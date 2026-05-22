@@ -44,4 +44,4 @@ search:
 
 ## Trade-offs
 
-Aggressively pruning content from the search index (e.g., excluding large code blocks) can sometimes result in missing niche results. You must balance the need for a lightweight, fast index with the requirement for thorough search coverage. We recommend prioritizing headers and conceptual descriptions, as these are the most common search targets for developers.
+Aggressively pruning content from the search index (e.g., excluding large code blocks) can sometimes result in missing niche results. You must balance the need for a lightweight, fast index with the requirement for thorough search coverage. We recommend prioritising headers and conceptual descriptions, as these are the most common search targets for developers.

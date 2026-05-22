@@ -13,7 +13,7 @@ Continuous Deployment (CD) ensures that your documentation is always in sync wit
 
 ## Approach
 
-Leverage GitHub Actions to run the `docmd` build pipeline on every push or Pull Request. The resulting static assets can then be automatically deployed to hosting providers like GitHub Pages, Cloudflare Pages, or containerized environments using Docker.
+Use GitHub Actions to run the `docmd` build pipeline on every push or Pull Request. The resulting static assets can then be automatically deployed to hosting providers like GitHub Pages, Cloudflare Pages, or containerized environments using Docker.
 
 ## Implementation
 

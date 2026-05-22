@@ -14,7 +14,7 @@ Frontmatter ermöglicht es Ihnen, globale Einstellungen auf einer pro-Seite-Basi
 | `keywords` | `Array` | Eine Liste von Schlüsselwörtern für den `<meta name="keywords">`-Tag. |
 
 ::: callout warning "Der Titel ist wichtig"
-Obwohl nicht strikt erforderlich, wird das Feld `title` dringend empfohlen. Ohne diesen greift docmd auf die erste `# H1`-Überschrift oder den Dateinamen zurück — was zu weniger idealen `<title>`-Tags und Suchergebnissen führen kann.
+Obwohl nicht strikt erforderlich, wird das Feld `title` dringend empfohlen. Ohne diesen greift docmd auf die erste `# H1`-Überschrift oder den Dateinamen zurück - was zu weniger idealen `<title>`-Tags und Suchergebnissen führen kann.
 :::
 
 ## Sichtbarkeit & Indexierung
