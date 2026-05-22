@@ -40,7 +40,7 @@ components:
   meta: true      # Injects SEO tags
   favicon: true   # Injects favicon
   css: true       # Injects docmd-main.css
-  theme: true     # Injects theme colors/overrides
+  theme: true     # Injects theme colours/overrides
   highlight: true # Injects syntax highlighting
   scripts: true   # Injects docmd-main.js (for SPA/Search)
   layout: true    # Injects the content-area wrapper

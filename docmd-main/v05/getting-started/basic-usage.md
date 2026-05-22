@@ -1,11 +1,11 @@
 ---
 title: "Basic Usage"
-description: "Learn how to initialize a project, organize your markdown files, and build your documentation site."
+description: "Learn how to initialise a project, organise your markdown files, and build your documentation site."
 ---
 
-Getting started with `docmd` is designed to be instantaneous. This guide explains the core workflow from initialization to final production build.
+Getting started with `docmd` is designed to be instantaneous. This guide explains the core workflow from initialisation to final production build.
 
-## 1. Initialize Your Project
+## 1. Initialise Your Project
 
 To start a new documentation project, create an empty directory and run the `init` command.
 
@@ -15,7 +15,7 @@ docmd init
 ```
 ### The Project Structure
 
-After initialization, your project will follow this clean, intuitive structure:
+After initialisation, your project will follow this clean, intuitive structure:
 
 | Folder / File | Purpose |
 | :--- | :--- |
@@ -35,7 +35,7 @@ docmd dev
 *   **URL**: `http://localhost:3000`
 *   **Hot Reload**: Every time you save a `.md` or `.config.js` file, the browser updates instantly.
 
-## 3. Organizing Content
+## 3. Organising Content
 
 Every markdown file inside the `docs/` folder becomes a URL. Subfolders are respected automatically.
 
@@ -73,7 +73,7 @@ When you are ready to deploy, run the build command:
 docmd build
 ```
 
-This generates a highly optimized Single Page Application (SPA) inside the `site/` directory. It is completely static so you can host it on GitHub Pages, Vercel, Netlify, or even a local USB drive.
+This generates a highly optimised Single Page Application (SPA) inside the `site/` directory. It is completely static so you can host it on GitHub Pages, Vercel, Netlify, or even a local USB drive.
 
 ### Verification Step
 To verify your production build locally, you can use any static server or run:

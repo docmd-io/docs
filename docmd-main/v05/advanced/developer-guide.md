@@ -3,7 +3,7 @@ title: "Developer Guide"
 description: "Advanced debugging, testing, and contribution tools for developers working directly on the docmd monorepo."
 ---
 
-If you are a contributor who has forked the `docmd` monorepo, understanding the internal testing and debugging infrastructure is crucial. While `contributing.md` outlines how to get the project running, this guide details **how** to safely develop and test your changes inside the monorepo architecture. 
+If you are a contributor who has forked the `docmd` monorepo, understanding the internal testing and debugging infrastructure is important. While `contributing.md` outlines how to get the project running, this guide details **how** to safely develop and test your changes inside the monorepo architecture. 
 
 ## The Universal Failsafe (`failsafe.js`)
 

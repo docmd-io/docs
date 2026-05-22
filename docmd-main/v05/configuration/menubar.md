@@ -80,9 +80,9 @@ When positioned in the menubar, the options menu will appear on the **right regi
 If the `menubar` is disabled or not configured, the options menu automatically falls back to `sidebar-top`.
 :::
 
-## Customization
+## Customisation
 
-You can customize the menubar's appearance using CSS variables in your `customCss`:
+You can customise the menubar's appearance using CSS variables in your `customCss`:
 
 ```css
 :root {

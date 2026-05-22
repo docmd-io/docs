@@ -1,5 +1,5 @@
 ---
-title: "Recipe: Optimizing for AI Agents"
+title: "Recipe: Optimising for AI Agents"
 description: "How to structure your docmd site to be perfectly ingestible by LLMs and AI Agents."
 ---
 
@@ -38,7 +38,7 @@ const docmd = new Engine();
 ## 4. Using the `llms-full.txt` Pipeline
 The `llms-full.txt` file is a concatenated version of your entire documentation. 
 *   **Prompting Tip**: Tell your AI: *"Use the structure in /llms.txt and the full content in /llms-full.txt to answer my questions about this project."*
-*   **Customization**: Use `llms: false` in frontmatter to exclude private or internal-only pages from this public AI context file.
+*   **Customisation**: Use `llms: false` in frontmatter to exclude private or internal-only pages from this public AI context file.
 
 ## 5. Descriptive Image Alt-Text
 While AI is getting better at vision, text is still the most reliable way to provide context. descriptive `alt` text in your images ensures that even if the AI doesn't "see" the image, it understands its purpose in the build.

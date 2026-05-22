@@ -8,8 +8,8 @@ description: "Native support for Mermaid.js. Create flowcharts, sequence diagram
 ## Why use Mermaid in docmd?
 
 *   **Zero Scripting**: No need to include external scripts. `docmd` detects the usage and injects the rendering engine automatically.
-*   **Theme Aware**: Diagrams automatically shift colors between **Light** and **Dark** modes to match your site's theme.
-*   **Lazy Loading**: For optimum page speed, diagrams are only initialized once they enter the viewport.
+*   **Theme Aware**: Diagrams automatically shift colours between **Light** and **Dark** modes to match your site's theme.
+*   **Lazy Loading**: For optimum page speed, diagrams are only initialised once they enter the viewport.
 
 ## Examples
 

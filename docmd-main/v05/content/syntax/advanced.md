@@ -36,7 +36,7 @@ Useful for deep-linking to specific sections.
 ### Custom Classes
 Assign classes to elements to apply [Custom CSS](/theming/custom-css-js).
 ```markdown
-## Styled Header {.text-center .text-red}
+## Styled Header {.text-centre .text-red}
 ```
 
 ### Direct Button Links

@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 
-For a deeper dive into menubar layouts, see the [Menubar Configuration](./menubar) page.
+For a deeper explore menubar layouts, see the [Menubar Configuration](./menubar) page.
 
 ## The Header Slot
 

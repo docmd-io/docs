@@ -24,7 +24,7 @@ module.exports = {
 When enabled, `docmd` generates two specialized files at the root of your production output:
 
 ### 1. `llms.txt` (The Index)
-A standardized, minimalist Markdown file that map out your site's hierarchy. AI tools like **Cursor**, **ChatGPT Search**, and **Perplexity** can use this to crawl your site's structure efficiently without downloading heavy HTML.
+A standardised, minimalist Markdown file that map out your site's hierarchy. AI tools like **Cursor**, **ChatGPT Search**, and **Perplexity** can use this to crawl your site's structure efficiently without downloading heavy HTML.
 
 ### 2. `llms-full.txt` (The Context Payload)
 This is a `docmd`-specific innovation. It concatenates the raw, high-fidelity content of your **entire** documentation project into one single massive text file. 

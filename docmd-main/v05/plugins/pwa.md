@@ -30,7 +30,7 @@ When `docmd build` runs with `pwa` active, three things are automatically genera
 
 | File / Injection | Description |
 | :--- | :--- |
-| `manifest.webmanifest` | Declares your site as an installable app with name, theme colors, and icons |
+| `manifest.webmanifest` | Declares your site as an installable app with name, theme colours, and icons |
 | `service-worker.js` | Intercepts network requests, caches assets, and powers offline support |
 | `<meta>` tag injection | Injects `mobile-web-app-capable`, `apple-mobile-web-app-capable`, and `theme-color` into every page's `<head>` |
 
@@ -40,7 +40,7 @@ The Service Worker uses a **network-first with cache fallback** strategy:
 
 1. **On page load**, it attempts to fetch from the network first. If the network responds successfully, the freshest version is stored and returned.
 2. **On subsequent visits**, if a cached version exists, it is returned instantly from the cache while the network is simultaneously checked in the background and the cache is updated silently.
-3. **Offline**: If the network is unreachable and a cached version exists, the cached version is returned seamlessly.
+3. **Offline**: If the network is unreachable and a cached version exists, the cached version is returned easily.
 
 ## Automatic Cache Busting
 
@@ -62,7 +62,7 @@ pwa: { enabled: false }
 
 ### Fully Remove
 
-Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell — requiring no user action.
+Simply delete the `pwa` block from your `plugins`. The next time you run `docmd build`, a new manifest is not generated. When users visit the site, docmd's client-side bootstrap (`docmd-main.js`) checks for the presence of `<link rel="manifest">`. If it's missing but a Service Worker is registered, it automatically **unregisters all existing ghost workers** and clears the cached shell - requiring no user action.
 
 > [!NOTE]
 > The `manifest.webmanifest` and `service-worker.js` files from a previous build persist on disk until you clear your output directory (`site/` by default) with `docmd build` or `rm -rf site`. This is a filesystem artifact, not an active PWA.
@@ -85,7 +85,7 @@ module.exports = {
         { src: '/assets/images/icon-512.png', sizes: '512x512', type: 'image/png' }
       ],
 
-      // --- Manifest Colors ---
+      // --- Manifest Colours ---
       themeColor: '#1e293b',  // Browser chrome / top bar accent
       bgColor: '#ffffff',     // Splash screen background during install
 
@@ -100,11 +100,11 @@ module.exports = {
 
 docmd resolves your PWA icon from the following cascade:
 
-1. `pwa.icons` — Manual array, used as-is
-2. `pwa.logo` — Single image path, used for both 192x192 and 512x512 entries
-3. `config.logo` — Your global site logo
-4. `config.favicon` — Your global favicon
-5. *(No icons declared in manifest)* — If none of the above are set
+1. `pwa.icons` - Manual array, used as-is
+2. `pwa.logo` - Single image path, used for both 192x192 and 512x512 entries
+3. `config.logo` - Your global site logo
+4. `config.favicon` - Your global favicon
+5. *(No icons declared in manifest)* - If none of the above are set
 
 ## Testing Locally
 

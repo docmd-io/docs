@@ -1,6 +1,6 @@
 ---
 title: "Tabs"
-description: "Organize alternative or dense information into switchable panes. Perfect for multi-language code snippets."
+description: "Organise alternative or dense information into switchable panes. Perfect for multi-language code snippets."
 ---
 
 Tabs are the best way to present related but mutually exclusive information (like "npm vs yarn" or "Windows vs macOS" instructions) in a compact, interactive format.
@@ -62,7 +62,7 @@ pnpm add @docmd/core
 ## Advanced Features
 
 ### Lazy Rendering
-`docmd` implements **Conditional Lazy Rendering**. If a tab contains heavy assets like a **Mermaid.js** diagram or large images, they are only initialized once the user clicks that specific tab. This ensures your initial page load remains blazingly fast.
+`docmd` implements **Conditional Lazy Rendering**. If a tab contains heavy assets like a **Mermaid.js** diagram or large images, they are only initialised once the user clicks that specific tab. This ensures your initial page load remains blazingly fast.
 
 ### Sticky Tab State
 The `docmd` SPA router remembers the active tab's index when navigating between similar pages. This creates a cohesive experience for users switching between pages that share the same tab setup.

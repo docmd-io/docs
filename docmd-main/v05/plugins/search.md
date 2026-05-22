@@ -7,13 +7,13 @@ Every `docmd` project includes a powerful, full-text search engine built-in. Unl
 
 ## How it Works
 
-1.  **Build Phase**: `docmd` analyzes your markdown and generates a compressed `search-index.json`.
+1.  **Build Phase**: `docmd` analyses your markdown and generates a compressed `search-index.json`.
 2.  **Section Awareness**: We don't just index pages; we index **headers**. If a keyword appears in a specific `###` section, the search result will link the user directly to that section using its permalink.
 3.  **Local Execution**: When a user types, the matching happens instantly in memory using `MiniSearch`. It works perfectly in air-gapped environments or on slow connections.
 
 ## Configuration
 
-The search plugin is **active by default**. You can customize its presence via the `layout` object.
+The search plugin is **active by default**. You can customise its presence via the `layout` object.
 
 ```javascript
 // docmd.config.js
@@ -41,14 +41,14 @@ noindex: true
 ```
 
 ### Keyboard Shortcuts
-We've optimized the search experience with native feeling shortcuts:
+We've optimised the search experience with native feeling shortcuts:
 *   `Cmd + K` (Mac) or `Ctrl + K` (Windows) to open.
 *   `ESC` to close.
 *   `Arrow Keys` and `Enter` to navigate.
 
 
 ## Privacy First
-Because the search happens entirely on the client, no data—not even keystrokes—is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
+Because the search happens entirely on the client, no data - not even keystrokes - is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
 
 ## Comparison
 

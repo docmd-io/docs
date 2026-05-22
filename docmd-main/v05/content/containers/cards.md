@@ -1,6 +1,6 @@
 ---
 title: "Cards"
-description: "Organize information into framed, visually distinct blocks. Ideal for landing pages and feature grids."
+description: "Organise information into framed, visually distinct blocks. Ideal for landing pages and feature grids."
 ---
 
 Cards are the primary structural component in `docmd`. They group related content into a bordered box with optional titles, providing clear visual hierarchy.
@@ -30,7 +30,7 @@ Cards can contain any other Markdown elements, including code blocks and buttons
 
 ````markdown
 ::: card "Quick Install"
-Get the library via your favorite package manager:
+Get the library via your favourite package manager:
 
 ```bash
 npm install @docmd/core
@@ -40,7 +40,7 @@ npm install @docmd/core
 :::
 ````
 ::: card "Quick Install"
-Get the library via your favorite package manager:
+Get the library via your favourite package manager:
 
 ```bash
 npm install @docmd/core

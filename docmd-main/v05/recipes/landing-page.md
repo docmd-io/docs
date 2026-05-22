@@ -3,7 +3,7 @@ title: "Recipe: Creating a Landing Page"
 description: "How to build a custom landing page using noStyle."
 ---
 
-Sometimes you want your `index.html` (the home page) to look completely different from your documentation—like a product marketing page. `docmd` makes this easy with **No-Style Pages**.
+Sometimes you want your `index.html` (the home page) to look completely different from your documentation - like a product marketing page. `docmd` makes this easy with **No-Style Pages**.
 
 ## The Concept
 By adding `noStyle: true` to your frontmatter, `docmd` strips away the sidebar, header, and default CSS, giving you a blank canvas while still keeping helpful meta tags.
@@ -24,7 +24,7 @@ components:
 customHead: |
   <style>
     body { font-family: sans-serif; margin: 0; }
-    .hero { background: #111; color: #fff; padding: 100px 20px; text-align: center; }
+    .hero { background: #111; color: #fff; padding: 100px 20px; text-align: centre; }
     .btn { background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
   </style>
 ---

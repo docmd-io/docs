@@ -17,7 +17,7 @@ Buttons are used to create prominent links. Unlike most `docmd` containers, the 
 | :--- | :--- | :--- |
 | **Path** | `/path` | Relative URL to a page in your docs. |
 | **Path** | `external:URL` | Opens the link in a new tab with `target="_blank"`. |
-| **Color** | `color:#hex` | Custom background color (e.g. `color:#4f46e5`). |
+| **Colour** | `color:#hex` | Custom background colour (e.g. `color:#4f46e5`). |
 
 
 ## Examples
@@ -37,7 +37,7 @@ Prepend `external:` to ensure the link opens in a new tab.
 ::: button "View on GitHub" external:https://github.com/docmd-io/docmd
 
 ### 3. Styled Branding
-You can use standard CSS colors or Hex codes to match your brand.
+You can use standard CSS colours or Hex codes to match your brand.
 ```markdown
 ::: button "Critical Action" /delete-account color:red
 ::: button "Success" /confirm color:#228B22

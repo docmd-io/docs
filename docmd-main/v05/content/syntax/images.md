@@ -22,7 +22,7 @@ Add specific classes using the `{ .class }` syntax.
 
 ### Alignment & Effects
 ```markdown
-![Centered](/assets/img.png){ .align-center }
+![Centred](/assets/img.png){ .align-centre }
 ![Right](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 

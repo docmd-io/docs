@@ -24,7 +24,7 @@ const { build } = require('@docmd/core');
 async function run() {
   await build('./docmd.config.js', {
     isDev: false,      // Set to true for watch mode logic
-    offline: false,    // Set to true to optimize for file:// access
+    offline: false,    // Set to true to optimise for file:// access
     zeroConfig: false  // Set to true to bypass config file detection
   });
 }
@@ -71,5 +71,5 @@ async function deployDocs() {
 ```
 
 ::: callout tip
-The Programmatic API allows AI agents to act as **Documentation Engineers**. An agent can trigger a `docmd build` after modifying content, verify that the `llms-full.txt` was generated correctly, and then handle the deployment—all without human intervention.
+The Programmatic API allows AI agents to act as **Documentation Engineers**. An agent can trigger a `docmd build` after modifying content, verify that the `llms-full.txt` was generated correctly, and then handle the deployment - all without human intervention.
 :::

@@ -16,7 +16,7 @@ npx @docmd/core dev -z    # Start local dev serve
 npx @docmd/core build -z  # Generate production static site
 ```
 ::: callout warning
-Zero-Config (`-z`) is currently in `beta`. It is fantastic for quick previews, but for production sites, we recommend initializing a standard configuration file for maximum control.
+Zero-Config (`-z`) is currently in `beta`. It is fantastic for quick previews, but for production sites, we recommend initialising a standard configuration file for maximum control.
 :::
 
 ### Option 2: Project Installation (Recommended)
@@ -26,7 +26,7 @@ For permanent projects, install `docmd` as dependency to lock your versions.
 # 1. Install locally
 npm install @docmd/core
 
-# 2. Initialize your configuration
+# 2. Initialise your configuration
 npx @docmd/core init
 
 # 3. Start developing

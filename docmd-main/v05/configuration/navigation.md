@@ -3,7 +3,7 @@ title: "Navigation Configuration"
 description: "How to structure your sidebar, categorize links, and assign icons for both humans and AI models."
 ---
 
-`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimizes the Single Page Application (SPA) experience and provides a clear context map for AI models.
+`docmd` provides explicit control over your site's structure. By defining your `navigation` in `docmd.config.js`, you create a logical hierarchy that optimises the Single Page Application (SPA) experience and provides a clear context map for AI models.
 
 ## The Navigation Array
 
@@ -29,9 +29,9 @@ module.exports = {
 | **`collapsible`**| `Boolean` | No | If `true`, the group can be expanded/collapsed. |
 | **`external`** | `Boolean` | No | If `true`, the link opens in a new tab. |
 
-## Organizing Groups
+## Organising Groups
 
-You can nest navigation items infinitely. There are two primary ways to organize groups:
+You can nest navigation items infinitely. There are two primary ways to organise groups:
 
 ### 1. Clickable Group (Folder with Index)
 If the parent has a `path`, clicking the label navigates to that page and expands the children.

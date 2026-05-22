@@ -1,6 +1,6 @@
 ---
 title: "Plugin Installer"
-description: "How to use the docmd plugin installer to seamlessly add and configure plugins."
+description: "How to use the docmd plugin installer to easily add and configure plugins."
 ---
 
 The `docmd` plugin installer is a built-in cross-platform utility that fully automates downloading npm packages and injecting their configurations directly into your `docmd.config.js`.

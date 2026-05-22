@@ -31,12 +31,12 @@ module.exports = {
 ### Google Analytics 4 (GA4)
 *   **Key**: `googleV4`
 *   **Requirement**: `measurementId` (String).
-*   **Behavior**: Injects the `gtag.js` snippet into every page.
+*   **Behaviour**: Injects the `gtag.js` snippet into every page.
 
 ### Universal Analytics (UA)
 *   **Key**: `googleUA`
 *   **Requirement**: `trackingId` (String).
-*   **Behavior**: Injects the legacy `analytics.js` script.
+*   **Behaviour**: Injects the legacy `analytics.js` script.
 
 ## Important Considerations
 

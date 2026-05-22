@@ -31,7 +31,7 @@ Since `docmd` generates a Single Page Application, navigating between pages is i
 *   **Use Relative Paths:** Always link using `./file.md` or `../folder/file.md`. This ensures your links work in your code editor (VS Code), on your web server, and even in offline mode.
 *   **Self-Describing Links:** Avoid "Click here." Instead, use "[Read the Installation Guide](/getting-started/installation)."
 
-## Organizing Code Blocks
+## Organising Code Blocks
 
 *   **Specify Languages:** Always add the language tag (e.g., ` ```javascript `) to enable syntax highlighting.
 *   **Copy Buttons:** Remember that `docmd` automatically adds a copy button to every code block, so you don't need to ask users to "copy and paste" manually.

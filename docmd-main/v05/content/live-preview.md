@@ -48,5 +48,5 @@ document.getElementById('preview-frame').srcdoc = html;
 ```
 
 ::: callout tip "AI Feedback Loops 🤖"
-By leveraging the Live Editor architecture, you can build **AI-Agent sandboxes**. Instead of the AI saving files to disk, it can "post" its suggested edits to a live-compilation buffer, allowing you to preview AI-suggested documentation changes in real-time before approving the commit.
+By using the Live Editor architecture, you can build **AI-Agent sandboxes**. Instead of the AI saving files to disk, it can "post" its suggested edits to a live-compilation buffer, allowing you to preview AI-suggested documentation changes in real-time before approving the commit.
 :::

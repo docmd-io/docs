@@ -37,7 +37,7 @@ When `noStyle` is active, you have a blank canvas. Selectively re-enable specifi
 | `meta` | Injects `<title>`, SEO tags, and OpenGraph data. |
 | `favicon` | Injects the site favicon. |
 | `css` | Injects `docmd-main.css` (useful for grid/typography). |
-| `theme` | Injects the active theme colors/overrides. |
+| `theme` | Injects the active theme colours/overrides. |
 | `scripts` | Injects `docmd-main.js` (needed for buttons/SPA). |
 
 ## Example: Marketing Landing Page
@@ -51,7 +51,7 @@ components:
   css: true
 customHead: |
   <style>
-    .hero { text-align: center; padding: 100px 20px; }
+    .hero { text-align: centre; padding: 100px 20px; }
   </style>
 ---
 

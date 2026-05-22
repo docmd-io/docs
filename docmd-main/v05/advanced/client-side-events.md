@@ -9,7 +9,7 @@ To solve this, `docmd` dispatches a custom event called `docmd:page-mounted` whe
 
 ## The `docmd:page-mounted` Event
 
-Listen for this event in your custom JavaScript files to re-initialize libraries or trigger custom logic.
+Listen for this event in your custom JavaScript files to re-initialise libraries or trigger custom logic.
 
 ### Usage
 
@@ -19,7 +19,7 @@ Create a custom script (e.g., `assets/js/my-plugin.js`) and add it to your `docm
 document.addEventListener('docmd:page-mounted', (e) => {
     console.log('New page loaded:', e.detail.url);
 
-    // Re-initialize your libraries here
+    // Re-initialise your libraries here
     // Example: MathJax.typeset();
 });
 ```
@@ -34,7 +34,7 @@ The event object contains a `detail` property with the following data:
 | `initial` | `boolean` | `true` if this is the first initial load, `undefined` on navigation. |
 
 ::: callout tip
-When building AI-powered Search or Chat widgets for `docmd`, always bind their initialization to `docmd:page-mounted`. This ensures the AI features remain active and aware of the current page context as the user navigates.
+When building AI-powered Search or Chat widgets for `docmd`, always bind their initialisation to `docmd:page-mounted`. This ensures the AI features remain active and aware of the current page context as the user navigates.
 :::
 
 ## Example: Integrating MathJax

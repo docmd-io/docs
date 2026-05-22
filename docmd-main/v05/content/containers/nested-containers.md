@@ -77,7 +77,7 @@ Nesting **Tabs** inside **Steps** is a great way to show multi-platform instruct
 
 ## Nesting Constraints
 
-While the engine is robust, follow these best practices for the best experience:
+While the engine is reliable, follow these best practices for the best experience:
 
 *   **Tabs in Tabs**: Not recommended. It creates "Context Loops" that are difficult for users to navigate on mobile.
 *   **Steps in Tabs**: High syntax conflict. Use standard ordered lists (`1.`) inside tabs instead of the `::: steps` container.

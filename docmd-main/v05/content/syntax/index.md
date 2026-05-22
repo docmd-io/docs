@@ -48,7 +48,7 @@ AI models (and search engines) rely heavily on a proper heading hierarchy. Alway
 
 | Header 1 | Header 2 |
 | :--- | :--- |
-| Left Align | Center Align |
+| Left Align | Centre Align |
 
 ## Advanced HTML
 

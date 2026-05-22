@@ -1,6 +1,6 @@
 ---
 title: "SEO & Meta Tags"
-description: "Automatic SEO optimization, Open Graph integration, and AI Scraper control for your docmd site."
+description: "Automatic SEO optimisation, Open Graph integration, and AI Scraper control for your docmd site."
 ---
 
 The `seo` plugin ensures your documentation is discoverable by search engines and looks professional when shared on social media. It handles technical meta-tag injection automatically.

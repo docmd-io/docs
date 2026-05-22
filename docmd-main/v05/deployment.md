@@ -12,7 +12,7 @@ docmd build
 ::: tabs
 
 == tab "GitHub Pages"
-The most robust way is using a **GitHub Action**. This ensures your site rebuilds automatically every time you push.
+The most reliable way is using a **GitHub Action**. This ensures your site rebuilds automatically every time you push.
 
 **Create `.github/workflows/deploy-docs.yml`**
 

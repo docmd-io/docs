@@ -21,16 +21,16 @@ module.exports = defineConfig({
 ### Technical Implementation
 When you define a redirect, `docmd` creates a directory and an `index.html` at the old path containing a `<meta http-equiv="refresh">` tag. This ensures:
 1.  **Humans** are redirected instantly after the page loads.
-2.  **Search Engines** recognize the canonical link to the new content.
+2.  **Search Engines** recognise the canonical link to the new content.
 3.  **Analytics** are preserved across the transition.
 
 ## Branded 404 Pages
 
 When a user accesses a non-existent URL, most static hosts (Netlify, Vercel, GitHub Pages) look for a `404.html` file in the root. `docmd` automatically generates this file, ensuring that it inherits your theme, sidebar, and Single Page Application (SPA) functionality.
 
-### Customizing the Error Content
+### Customising the Error Content
 
-You can customize the 404 messaging in your configuration:
+You can customise the 404 messaging in your configuration:
 
 ```javascript
 module.exports = defineConfig({

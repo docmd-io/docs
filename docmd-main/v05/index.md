@@ -12,7 +12,7 @@ description: "Generate beautiful, lightweight, and blazing-fast documentation si
 
 **Generate beautiful, lightweight documentation sites directly from your Markdown files. Zero clutter, just content.**
 
-`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimized static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
+`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimised static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
 
 ::: button "Quick Start" /getting-started/installation
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333
@@ -28,7 +28,7 @@ Deploy a beautiful, searchable documentation site in seconds. No framework knowl
 ```bash
 npm install @docmd/core     # Install locally (Recommended)
 
-npx @docmd/core init              # Initialize your configuration
+npx @docmd/core init              # Initialise your configuration
 npx @docmd/core dev               # Start developing
 ```
 
@@ -50,7 +50,7 @@ We believe writing documentation should be as frictionless as possible. You shou
 
 <div class="image-gallery" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-::: card AI-Native Optimization
+::: card AI-Native Optimisation
 `docmd` transforms your documentation into a structured API for LLMs, allowing them to ingest your entire project context perfectly in single-shot prompts.
 :::
 
@@ -67,7 +67,7 @@ Built-in full-text search with fuzzy matching and section-deep linking. The enti
 :::
 
 ::: card Modern & Responsive
-Responsive by design. Includes a beautiful default theme with native Light/Dark mode, sticky versioning, and mobile-optimized sidebars out of the box.
+Responsive by design. Includes a beautiful default theme with native Light/Dark mode, sticky versioning, and mobile-optimised sidebars out of the box.
 :::
 
 ::: card Isomorphic Rendering

@@ -22,7 +22,7 @@ module.exports = {
 
 ## Frontmatter Overrides
 
-You can control sitemap behavior on a per-page basis.
+You can control sitemap behaviour on a per-page basis.
 
 *   **Exclude Page:** `sitemap: false`
 *   **Custom Settings**:
@@ -41,5 +41,5 @@ You can control sitemap behavior on a per-page basis.
 3.  **Generation**: It writes `sitemap.xml` to the root of your output directory.
 
 ::: callout tip "AI Discoverability 🤖"
-While traditional search engines use sitemaps, **AI Agents** and **Knowledge Crawlers** use them to prioritize which pages to ingest into their training or RAG sets first. A well-configured sitemap ensures your most important sections (like "Guides") are processed before minor utility pages.
+While traditional search engines use sitemaps, **AI Agents** and **Knowledge Crawlers** use them to prioritise which pages to ingest into their training or RAG sets first. A well-configured sitemap ensures your most important sections (like "Guides") are processed before minor utility pages.
 :::

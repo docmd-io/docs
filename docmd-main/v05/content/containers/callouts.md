@@ -68,5 +68,5 @@ docmd dev --preserve
 :::
 
 ::: callout tip
-For LLMs, callouts act as high-priority anchors. Use a `::: callout danger` block to explicitly document breaking changes or "Gotchas" - AI models are specially tuned to prioritize these blocks in their reasoning.
+For LLMs, callouts act as high-priority anchors. Use a `::: callout danger` block to explicitly document breaking changes or "Gotchas" - AI models are specially tuned to prioritise these blocks in their reasoning.
 :::

@@ -1,5 +1,5 @@
 ---
-title: "Customization & Variables"
+title: "Customisation & Variables"
 description: "A complete reference of docmd's CSS variables and component classes for advanced styling."
 ---
 
@@ -11,7 +11,7 @@ description: "A complete reference of docmd's CSS variables and component classe
 | :--- | :--- | :--- | :--- |
 | `--bg-color` | `#ffffff` | `#09090b` | Main page background. |
 | `--text-color` | `#3f3f46` | `#a1a1aa` | Standard body text. |
-| `--text-heading` | `#09090b` | `#fafafa` | Title and Header colors. |
+| `--text-heading` | `#09090b` | `#fafafa` | Title and Header colours. |
 | `--link-color` | `#068ad5` | `#068ad5` | Primary accent / links. |
 | `--border-color` | `#e4e4e7` | `#27272a` | Dividers and borders. |
 | `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation background. |
@@ -20,7 +20,7 @@ description: "A complete reference of docmd's CSS variables and component classe
 
 ## Example Override
 
-To change your site's primary accent color, add this to your `customCss`:
+To change your site's primary accent colour, add this to your `customCss`:
 
 ```css
 :root {
@@ -47,5 +47,5 @@ If you need to style specific components, use these top-level classes:
 Most `docmd` styles use low specificity. If your overrides aren't applying, ensure your `customCss` is registered correctly and check if adding a `body` prefix (e.g., `body .main-content`) helps.
 
 ::: callout tip
-Because `docmd` uses standard CSS variables, you can ask an AI: *"Give me a professional color palette using --link-color and --bg-color for docmd"*. The model will be able to provide ready-to-paste CSS that integrates perfectly with the built-in themes.
+Because `docmd` uses standard CSS variables, you can ask an AI: *"Give me a professional colour palette using --link-color and --bg-color for docmd"*. The model will be able to provide ready-to-paste CSS that integrates perfectly with the built-in themes.
 :::

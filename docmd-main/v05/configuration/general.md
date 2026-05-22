@@ -26,14 +26,14 @@ module.exports = defineConfig({
 | Key | Description | Default |
 | :--- | :--- | :--- |
 | `title` | The name of your documentation site. | `Documentation` |
-| `url` | Production base URL. **Crucial for SEO and Sitemap.** | `null` |
+| `url` | Production base URL. **Important for SEO and Sitemap.** | `null` |
 | `src` | Directory containing your Markdown files. | `docs` |
 | `out` | Directory for the compiled static site. | `site` |
 | `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
 
 ## Branding
 
-Customize how your brand appears in the header and browser tabs.
+Customise how your brand appears in the header and browser tabs.
 
 ```javascript
 logo: {
@@ -53,7 +53,7 @@ favicon: 'assets/favicon.ico',
 | :--- | :--- | :--- | :--- |
 | **Global** | `spa` | `true` | Enables/Disables Single Page Application navigation. |
 | **Header** | `header` | `{ enabled: true }` | Toggles the top navigation bar. |
-| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the navigation tree behavior. |
+| **Sidebar**| `sidebar`| `{ enabled: true, collapsible: true }` | Controls the navigation tree behaviour. |
 | **Footer** | `footer` | `{ style: 'minimal' }` | Supports `'minimal'` or `'complete'` styles. |
 
 ### The Options Menu
