@@ -70,7 +70,7 @@
           "links": [
             { "text": "Versioning", "url": "/configuration/versioning" },
             { "text": "Plugins", "url": "/plugins/usage" },
-            { "text": "Themes", "url": "/theming/customization" },
+            { "text": "Themes", "url": "/theming/customisation" },
             { "text": "Live Editor", "url": "/content/live-preview" }
           ]
         },
