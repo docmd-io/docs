@@ -53,7 +53,7 @@ You can assign classes to elements.
 **Note:** You must define these classes in your own [Custom CSS](/theming/custom-css-js) file.
 
 ```markdown
-## Styled Header {.text-center .text-red}
+## Styled Header {.text-centre .text-red}
 ```
 
 ### Links and Buttons

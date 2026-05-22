@@ -1,5 +1,5 @@
 ---
-title: "Customization & Variables"
+title: "Customisation & Variables"
 description: "Master the look of your docs by overriding CSS variables and targeting component classes."
 ---
 
@@ -7,14 +7,14 @@ description: "Master the look of your docs by overriding CSS variables and targe
 
 ## Variables Reference
 
-### Core Colors
+### Core Colours
 | Variable | Usage |
 | :--- | :--- |
 | `--bg-color` | The main page background. |
-| `--text-color` | Standard paragraph text color. |
-| `--text-heading` | Contrast color for H1, H2, etc. |
-| `--link-color` | Color for hyperlinks and active states. |
-| `--border-color` | Standard divider and border color. |
+| `--text-color` | Standard paragraph text colour. |
+| `--text-heading` | Contrast colour for H1, H2, etc. |
+| `--link-color` | Colour for hyperlinks and active states. |
+| `--border-color` | Standard divider and border colour. |
 
 ### Visual Polish
 | Variable | Usage |

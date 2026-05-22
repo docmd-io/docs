@@ -1,6 +1,6 @@
 ---
 title: "SEO & Meta Tags Plugin"
-description: "Configure Search Engine Optimization (SEO) meta tags to improve your docmd site's discoverability."
+description: "Configure Search Engine Optimisation (SEO) meta tags to improve your docmd site's discoverability."
 ---
 
 The `seo` plugin automatically generates important meta tags in the `<head>` of your HTML pages. This helps search engines and social media platforms understand, index, and display your content more effectively.
@@ -37,7 +37,7 @@ The options in the config file serve as site-wide defaults. For the best results
 
 ## Frontmatter for SEO
 
-To control SEO on a per-page basis, add a nested `seo` object to your page's frontmatter. This keeps all SEO-related settings organized and prevents conflicts with other frontmatter keys.
+To control SEO on a per-page basis, add a nested `seo` object to your page's frontmatter. This keeps all SEO-related settings organised and prevents conflicts with other frontmatter keys.
 
 ```yaml
 ---
@@ -56,7 +56,7 @@ seo:
 ```
 
 ::: callout info Backward Compatibility
-For backward compatibility, the plugin will still recognize top-level SEO fields like `image`, `ogType`, etc. However, the nested `seo:` structure is the recommended approach.
+For backward compatibility, the plugin will still recognise top-level SEO fields like `image`, `ogType`, etc. However, the nested `seo:` structure is the recommended approach.
 :::
 
 ### Supported Frontmatter Fields
@@ -91,11 +91,11 @@ seo:
 
 This generates a basic `Article` schema using your page's metadata.
 
-### Customizing Structured Data
+### Customising Structured Data
 
 For more control, provide an object to `ldJson`. This object will be merged with the default data, allowing you to add or override any properties.
 
-**Example: Customizing schema type and adding an author**
+**Example: Customising schema type and adding an author**
 
 ```yaml
 ---

@@ -24,7 +24,7 @@ customHead: |
       padding: 40px 20px;
     }
     .header {
-      text-align: center;
+      text-align: centre;
       margin-bottom: 40px;
     }
     .header h1 {

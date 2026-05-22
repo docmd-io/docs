@@ -1,11 +1,11 @@
 ---
 title: "Basic Usage"
-description: "A quick-start guide to initializing a project, writing content, and building your site."
+description: "A quick-start guide to initialising a project, writing content, and building your site."
 ---
 
 Once you have `docmd` installed, creating a beautiful documentation site takes only a few minutes. This guide walks you through the standard workflow.
 
-## 1. Initialize the Project
+## 1. Initialise the Project
 
 Create a new folder for your documentation and navigate into it using your terminal.
 
@@ -14,7 +14,7 @@ mkdir my-docs
 cd my-docs
 ```
 
-Run the initialization command:
+Run the initialisation command:
 
 ```bash
 docmd init
@@ -45,13 +45,13 @@ Open your browser to `http://localhost:3000`. You will see your newly generated 
 
 ## 3. Write Your Content
 
-Open the `docs/` folder in your favorite code editor (like VS Code). 
+Open the `docs/` folder in your favourite code editor (like VS Code). 
 
 `docmd` uses standard Markdown. Any `.md` file you create inside the `docs/` folder will automatically be converted into a web page. 
 
 Try opening `docs/index.md` and changing the `# Welcome` text. When you save the file, your browser will instantly refresh to show the change.
 
-::: callout tip Organizing Content
+::: callout tip Organising Content
 You can create subfolders inside `docs/` (e.g., `docs/api/endpoints.md`). `docmd` will automatically mirror this folder structure when generating your website's URLs.
 :::
 
@@ -84,6 +84,6 @@ When you are ready to share your documentation with the world, stop the developm
 docmd build
 ```
 
-`docmd` will process all your Markdown, generate an offline search index, minify your assets, and output a highly optimized static website into a new folder called `site/`.
+`docmd` will process all your Markdown, generate an offline search index, minify your assets, and output a highly optimised static website into a new folder called `site/`.
 
 You can now upload the contents of that `site/` folder to any web host (GitHub Pages, Netlify, Vercel, or a traditional server). See our [Deployment Guide](/deployment) for specific instructions.

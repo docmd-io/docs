@@ -44,7 +44,7 @@ Click a button below to instantly switch the theme of this website:
 *   **Description:** A modern theme inspired by popular documentation platforms, with a fresh and airy design. It features:
     *   A clean, minimalist interface with subtle shadows and rounded corners
     *   Custom typography with improved readability
-    *   Refined color palette for both light and dark modes
+    *   Refined colour palette for both light and dark modes
     *   Enhanced callout and container styles
     *   Premium documentation feel with careful attention to spacing and contrast
 *   **When to use:** When you want a premium, polished look for your documentation site.
@@ -53,12 +53,12 @@ Click a button below to instantly switch the theme of this website:
 
 *   **`theme.name: 'ruby'`**
 *   **Description:** An elegant, vibrant theme inspired by the precious gemstone. It features:
-    *   Rich, jewel-toned color palette centered around ruby reds and complementary colors
+    *   Rich, jewel-toned colour palette centred around ruby reds and complementary colours
     *   Sophisticated typography with serif headings and sans-serif body text
     *   Distinctive card and callout designs with gem-like faceted styling
     *   Subtle gradients and depth effects that evoke the brilliance of gemstones
-    *   Luxurious dark mode with deep, rich backgrounds and vibrant accent colors
-*   **When to use:** When you want your documentation to have a distinctive, premium feel with rich colors and elegant typography.
+    *   Luxurious dark mode with deep, rich backgrounds and vibrant accent colours
+*   **When to use:** When you want your documentation to have a distinctive, premium feel with rich colours and elegant typography.
 
 ## 4. `retro` Theme
 
@@ -67,7 +67,7 @@ Click a button below to instantly switch the theme of this website:
     *   Terminal-style black backgrounds with phosphor green text in dark mode
     *   Light mode with dark green text on light gray backgrounds
     *   Monospace typography (Fira Code) for authentic retro feel
-    *   Neon accent colors (cyan, pink, amber) with glow effects
+    *   Neon accent colours (cyan, pink, amber) with glow effects
     *   Animated scanlines and CRT flicker effects
     *   Terminal-style code blocks with `[TERMINAL]` labels
     *   Retro-styled containers with pixel-art inspired elements
@@ -83,4 +83,4 @@ Each theme consists of CSS files located within `docmd`'s internal assets. When 
 - `ruby` theme loads `docmd-theme-ruby.css` with its custom styling on top of the default CSS
 - `retro` theme loads `docmd-theme-retro.css` with its custom styling on top of the default CSS
 
-You can further customize any chosen theme using the `theme.customCss` option in your config file to add your own overrides or additional styles. See [Custom CSS & JS](/theming/custom-css-js/) for details.
+You can further customise any chosen theme using the `theme.customCss` option in your config file to add your own overrides or additional styles. See [Custom CSS & JS](/theming/custom-css-js/) for details.

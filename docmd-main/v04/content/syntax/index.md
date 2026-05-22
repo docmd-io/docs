@@ -109,13 +109,13 @@ You can create tables using GitHub Flavored Markdown syntax:
 ```bash
 | Header 1 | Header 2 | Header 3 |
 | :------- | :------: | -------: |
-| Align L  | Center   | Align R  |
+| Align L  | Centre   | Align R  |
 | Cell 1   | Cell 2   | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   |
 ```
 | Header 1 | Header 2 | Header 3 |
 | :------- | :------: | -------: |
-| Align L  | Center   | Align R  |
+| Align L  | Centre   | Align R  |
 | Cell 1   | Cell 2   | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   |
 

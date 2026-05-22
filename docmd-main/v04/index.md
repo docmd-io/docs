@@ -12,7 +12,7 @@ description: "Generate beautiful, lightweight, and blazing-fast documentation si
 
 **Generate beautiful, lightweight documentation sites directly from your Markdown files. Zero clutter, just content.**
 
-`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimized static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
+`docmd` bridges the gap between simple static site generators and heavy, framework-driven applications. It processes standard Markdown into highly optimised static HTML, while delivering a buttery-smooth Single Page Application (SPA) experience for your users.
 
 ::: button "Get Started" /getting-started/installation
 ::: button "View on GitHub" external:https://github.com/docmd-io/docmd color:#333
@@ -25,7 +25,7 @@ You can have a beautiful documentation site running locally in under a minute. R
 # 1. Install docmd globally
 npm install -g @docmd/core
 
-# 2. Initialize a new project in your current directory
+# 2. Initialise a new project in your current directory
 docmd init
 
 # 3. Start the local development server
@@ -45,7 +45,7 @@ We generate static HTML for ultimate SEO and fast initial loads, but once the pa
 :::
 
 ::: card Zero Configuration
-Run `docmd init` and start writing. Our sensible defaults mean you don't have to touch a configuration file unless you want to customize your branding or layout.
+Run `docmd init` and start writing. Our sensible defaults mean you don't have to touch a configuration file unless you want to customise your branding or layout.
 :::
 
 ::: card Smart Offline Search

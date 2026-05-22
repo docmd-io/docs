@@ -7,7 +7,7 @@ The Command Line Interface (CLI) is the primary way you will interact with `docm
 
 ## `docmd init`
 
-Initializes a new `docmd` project in your current directory.
+Initialises a new `docmd` project in your current directory.
 
 **Usage:**
 ```bash
@@ -48,7 +48,7 @@ This command reads your source directory, processes all Markdown and assets, min
 
 **Options:**
 * `-c, --config <path>`: Specify a custom configuration file.
-* `--offline`: Optimizes the generated HTML links to end in `/index.html` so the site can be browsed directly from a local hard drive without a web server (using `file:///` protocols).
+* `--offline`: Optimises the generated HTML links to end in `/index.html` so the site can be browsed directly from a local hard drive without a web server (using `file:///` protocols).
 
 ## `docmd migrate`
 

@@ -3,7 +3,7 @@ title: "No-Style Pages"
 description: "Create landing pages and custom layouts by disabling the default docmd theme."
 ---
 
-Sometimes you need a page that doesn't look like documentation—for example, a Marketing Landing Page, a Login screen, or a completely custom showcase.
+Sometimes you need a page that doesn't look like documentation - for example, a Marketing Landing Page, a Login screen, or a completely custom showcase.
 
 `docmd` allows you to disable the standard layout (Sidebar, Header, Footer) on a per-page basis using **Frontmatter**.
 
@@ -52,7 +52,7 @@ components:
   css: true
 customHead: |
   <style>
-    .hero { text-align: center; padding: 100px 20px; }
+    .hero { text-align: centre; padding: 100px 20px; }
     .hero h1 { font-size: 3rem; margin-bottom: 20px; }
   </style>
 ---

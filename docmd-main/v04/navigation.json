@@ -63,7 +63,7 @@
     "collapsible": true,
     "children": [
       { "title": "Available Themes", "path": "/theming/available-themes", "icon": "layout-grid" },
-      { "title": "Customization", "path": "/theming/customization", "icon": "wand-sparkles" },
+      { "title": "Customisation", "path": "/theming/customisation", "icon": "wand-sparkles" },
       { "title": "Light & Dark Mode", "path": "/theming/light-dark-mode", "icon": "sun-moon" },
       { "title": "Custom CSS & JS", "path": "/theming/custom-css-js", "icon": "file-code" },
       { "title": "Icons", "path": "/theming/icons", "icon": "pencil-ruler" },

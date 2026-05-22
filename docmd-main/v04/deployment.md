@@ -16,7 +16,7 @@ The contents of this `site/` folder are all you need. Below are guides for deplo
 ::: tabs
 
 == tab "GitHub Pages"
-The most robust and automated way to deploy to GitHub Pages is using a **GitHub Actions** workflow. This ensures your site rebuilds automatically every time you push changes to your repository.
+The most reliable and automated way to deploy to GitHub Pages is using a **GitHub Actions** workflow. This ensures your site rebuilds automatically every time you push changes to your repository.
 
 **1. Create the Workflow File**
 Create a file in your repository at `.github/workflows/deploy-docs.yml` and add the following content:

@@ -23,7 +23,7 @@ async function generateDocs() {
     // 1. Build the Static Site
     await build('./docmd.config.js', { 
       isDev: false,      // true = enables hot-reload logic (internal)
-      offline: false     // true = optimize links for file:// access
+      offline: false     // true = optimise links for file:// access
     });
 
     console.log('Static site generated in ./site');

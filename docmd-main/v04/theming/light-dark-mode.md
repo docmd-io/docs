@@ -3,7 +3,7 @@ title: "Light & Dark Mode"
 description: "How to configure and manage light and dark themes in your docmd documentation."
 ---
 
-`docmd` provides built-in support for light and dark color schemes to enhance readability and user experience. Users can choose their preferred viewing mode, which improves accessibility and reduces eye strain in different lighting conditions.
+`docmd` provides built-in support for light and dark colour schemes to enhance readability and user experience. Users can choose their preferred viewing mode, which improves accessibility and reduces eye strain in different lighting conditions.
 
 ## Setting the Default Theme
 
@@ -22,8 +22,8 @@ module.exports = {
 };
 ```
 
-* `defaultMode: 'light'`: The site will initially render with the light color scheme.
-* `defaultMode: 'dark'`: The site will initially render with the dark color scheme.
+* `defaultMode: 'light'`: The site will initially render with the light colour scheme.
+* `defaultMode: 'dark'`: The site will initially render with the dark colour scheme.
 * `enableModeToggle: true`: Shows a toggle button for users to switch modes.
 * `positionMode: 'bottom'`: Places the toggle button at the bottom of the sidebar (default).
 * `positionMode: 'top'`: Places the toggle button in the page header (top right).
@@ -38,7 +38,7 @@ The theme is controlled by a `data-theme` attribute on the `<body>` tag of your 
 
 For the `sky` theme, the values would be `sky-light` and `sky-dark`.
 
-CSS variables in the theme files define colors, backgrounds, fonts, etc., for both modes:
+CSS variables in the theme files define colours, backgrounds, fonts, etc., for both modes:
 
 ```css
 /* Example from main.css */
@@ -96,17 +96,17 @@ When a user selects a theme, their preference is saved in their browser's `local
 
 The correct syntax highlighting theme is loaded automatically based on the current theme mode. When the user toggles the mode, the appropriate syntax highlighting theme is also switched dynamically.
 
-## Customizing Theme Colors
+## Customising Theme Colours
 
-You can customize the colors for both light and dark modes by adding custom CSS to your project. See [Custom CSS & JS](/theming/custom-css-js/) for more information.
+You can customise the colours for both light and dark modes by adding custom CSS to your project. See [Custom CSS & JS](/theming/custom-css-js/) for more information.
 
 ```css
-/* Example of overriding theme colors in your custom CSS */
+/* Example of overriding theme colours in your custom CSS */
 :root {
-  --link-color: #0077cc; /* Custom link color for light mode */
+  --link-color: #0077cc; /* Custom link colour for light mode */
 }
 
 body[data-theme="dark"] {
-  --link-color: #4da6ff; /* Custom link color for dark mode */
+  --link-color: #4da6ff; /* Custom link colour for dark mode */
 }
 ```

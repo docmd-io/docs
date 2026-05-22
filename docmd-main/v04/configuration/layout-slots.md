@@ -3,7 +3,7 @@ title: "Layout & UI Slots"
 description: "Master the structure of docmd by controlling headers, sidebars, and functional slots."
 ---
 
-`docmd` treats the interface as a series of "Slots." Every major component-from the navigation sidebar to the search bar, can be toggled, moved, or customized to fit your project's specific needs.
+`docmd` treats the interface as a series of "Slots." Every major component-from the navigation sidebar to the search bar, can be toggled, moved, or customised to fit your project's specific needs.
 
 ## Visual Overview
 
@@ -17,7 +17,7 @@ A standard `docmd` page is divided into the following structural areas:
 
 ## The Header Slot
 
-The header is enabled by default. You can disable it site-wide or customize its content.
+The header is enabled by default. You can disable it site-wide or customise its content.
 
 ```javascript
 // docmd.config.js

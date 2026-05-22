@@ -24,7 +24,7 @@ You can add classes to images using the attribute syntax `{ .class }` after the 
 
 ### Alignment
 ```markdown
-![Centered](../../assets/img.png){ .align-center }
+![Centred](../../assets/img.png){ .align-centre }
 ![Right](../../assets/img.png){ .align-right }
 ```
 
@@ -90,7 +90,7 @@ If `mainScripts` is enabled (default), clicking any image in a gallery or any im
 ![Click to Zoom](../../assets/diagram.png){ .lightbox }
 ```
 
-## Image Optimization Best Practices
+## Image Optimisation Best Practices
 
 For optimal performance:
 
@@ -100,7 +100,7 @@ For optimal performance:
    - SVG for icons and logos
    - WebP for better compression (with fallbacks)
 
-2. **Optimize file sizes**:
+2. **Optimise file sizes**:
    - Compress images before adding them to your documentation
    - Consider using tools like ImageOptim, TinyPNG, or Squoosh
 

@@ -9,7 +9,7 @@ description: "Run docmd entirely in the browser without a server using the new L
 
 ## The Live Editor
 
-`docmd` comes with a built-in "Live Editor" that demonstrates this capability. It provides a split-pane interface where you can write Markdown on the left and see the rendered documentation on the right—instantly, without a server round-trip.
+`docmd` comes with a built-in "Live Editor" that demonstrates this capability. It provides a split-pane interface where you can write Markdown on the left and see the rendered documentation on the right - instantly, without a server round-trip.
 
 ### Running the Editor Locally
 

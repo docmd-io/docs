@@ -33,8 +33,8 @@ Prepend `external:` to the URL to force it to open in a new tab with `target="_b
 ```
 ::: button "View Source" external:https://github.com/docmd-io/docmd
 
-### Custom Colors
-You can customize the button color using a hex code or CSS color name.
+### Custom Colours
+You can customise the button colour using a hex code or CSS colour name.
 
 ```markdown
 ::: button "Critical Action" /delete-account color:#ef4444

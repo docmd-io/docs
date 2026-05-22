@@ -1,6 +1,6 @@
 ---
 title: "Tabs"
-description: "Organize content into switchable tabbed panes."
+description: "Organise content into switchable tabbed panes."
 ---
 
 Tabs are essential for showing alternative content (like code snippets for different languages or instructions for different OSs) without cluttering the page.
@@ -66,7 +66,7 @@ Use `== tab "Name"` to define a new tab pane.
 2. **Consistent Content** - Keep similar content types in each tab
 3. **Logical Order** - Arrange tabs in a logical sequence
 4. **Not Too Many** - Limit to 5-7 tabs for best usability
-5. **Mobile Friendly** - Consider mobile users when organizing content
+5. **Mobile Friendly** - Consider mobile users when organising content
 
 ## Nesting Limitations
 

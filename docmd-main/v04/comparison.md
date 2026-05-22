@@ -31,7 +31,7 @@ You can run the exact same `docmd` compilation engine directly inside a web brow
 ### 2. Privacy-First, Offline Search
 Most documentation generators push you toward third-party services like Algolia DocSearch. While Algolia is fantastic for enterprise scale, it requires API keys, crawler configurations, and sends user search data to external servers.
 
-`docmd` includes a production-grade search engine out of the box. It generates a highly optimized local index during the build. This means your documentation is searchable even if the user loses their internet connection, and respects user privacy completely.
+`docmd` includes a production-grade search engine out of the box. It generates a highly optimised local index during the build. This means your documentation is searchable even if the user loses their internet connection, and respects user privacy completely.
 
 ### 3. Pure HTML + SPA Speed
 We believe reading documentation shouldn't require downloading a massive JavaScript framework. 

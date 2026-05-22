@@ -14,7 +14,7 @@ const { defineConfig } = require('@docmd/core');
 
 module.exports = {
   siteTitle: 'My Project',
-  siteUrl: 'https://mysite.com', // Crucial for SEO & Sitemap plugins
+  siteUrl: 'https://mysite.com', // Important for SEO & Sitemap plugins
   srcDir: 'docs',                // Default: 'docs'
   outputDir: 'site',             // Default: 'site'
   
@@ -31,7 +31,7 @@ module.exports = {
 
 ## Layout Architecture
 
-`docmd` (v0.4.8+) uses a nested `layout` object to organize UI components.
+`docmd` (v0.4.8+) uses a nested `layout` object to organise UI components.
 
 ```javascript
 layout: {

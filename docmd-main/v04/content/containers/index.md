@@ -20,7 +20,7 @@ Group related content into distinct, framed boxes. Perfect for grids.
 :::
 
 ::: card 📑 Tabs
-Organize content into switchable panes to save vertical space.
+Organise content into switchable panes to save vertical space.
 ::: button "Tab Examples" /content/containers/tabs
 :::
 
@@ -30,7 +30,7 @@ Transform ordered lists into beautiful visual timelines.
 :::
 
 ::: card 🖱️ Buttons
-Call-to-action links with custom colors and styles.
+Call-to-action links with custom colours and styles.
 ::: button "Button API" /content/containers/buttons
 :::
 

@@ -3,7 +3,7 @@ title: "LLM Support (llms.txt) Plugin"
 description: "Generate context files for Large Language Models (AI) to better understand your documentation."
 ---
 
-The `llms` plugin generates a standardized `/llms.txt` file at the root of your site. This file is becoming a standard for helping AI agents (like ChatGPT, Claude, or Cursor) discover and read your documentation context efficiently.
+The `llms` plugin generates a standardised `/llms.txt` file at the root of your site. This file is becoming a standard for helping AI agents (like ChatGPT, Claude, or Cursor) discover and read your documentation context efficiently.
 
 ## Installation
 

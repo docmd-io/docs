@@ -26,7 +26,7 @@ Wrap a standard numbered list in `::: steps`.
 ```markdown
 ::: steps
 
-1.  **Initialize Project**
+1.  **Initialise Project**
     Run the init command to scaffold your folder.
     ```bash
     docmd init
@@ -48,7 +48,7 @@ Wrap a standard numbered list in `::: steps`.
 
 ::: steps
 
-1.  **Initialize Project**
+1.  **Initialise Project**
     Run the init command to scaffold your folder.
     ```bash
     docmd init
@@ -98,7 +98,7 @@ You can use other containers inside a step to provide extra context.
 
 :::
 
-## Customization
+## Customisation
 
 Steps containers automatically apply consistent styling and numbering. The container handles:
 

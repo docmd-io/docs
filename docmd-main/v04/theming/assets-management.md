@@ -1,13 +1,13 @@
 ---
 title: "Assets Management"
-description: "Learn how to manage and customize your assets (CSS, JavaScript, images) in your docmd site."
+description: "Learn how to manage and customise your assets (CSS, JavaScript, images) in your docmd site."
 ---
 
-Managing your custom assets (CSS, JavaScript, images) is an important part of customizing your documentation site. `docmd` provides flexible ways to include and manage these assets.
+Managing your custom assets (CSS, JavaScript, images) is an important part of customising your documentation site. `docmd` provides flexible ways to include and manage these assets.
 
 ## Project Structure
 
-When you initialize a new project with `docmd init`, it creates the following structure:
+When you initialise a new project with `docmd init`, it creates the following structure:
 
 ```
 your-project/
@@ -20,7 +20,7 @@ your-project/
 └── ...
 ```
 
-This structure makes it easy to organize and manage your custom assets.
+This structure makes it easy to organise and manage your custom assets.
 
 ## How Assets Are Handled
 
@@ -70,7 +70,7 @@ The simplest and recommended approach is to use the `assets/` directory in your 
    docmd build
    ```
 
-### 2. Customizing Default Assets
+### 2. Customising Default Assets
 
 If you want to modify docmd's default assets:
 
@@ -81,7 +81,7 @@ If you want to modify docmd's default assets:
 
 2. Modify the generated files in the `site/assets` directory as needed.
 
-3. When rebuilding, use the `--preserve` flag to keep your customized files:
+3. When rebuilding, use the `--preserve` flag to keep your customised files:
    ```bash
    docmd build --preserve
    ```
@@ -96,7 +96,7 @@ This approach allows you to:
 - Preserve your customizations when needed with `--preserve`
 - See which files are being preserved during the build process
 
-The preservation behavior works with both `build` and `dev` commands:
+The preservation behaviour works with both `build` and `dev` commands:
 ```bash
 # Preserve custom assets during development
 docmd dev --preserve

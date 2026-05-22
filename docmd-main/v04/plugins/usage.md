@@ -3,7 +3,7 @@ title: "Extending docmd with Plugins"
 description: "Extend docmd's functionality with built-in integrations."
 ---
 
-Plugins allow you to add complex features to your documentation site—like analytics tracking or AI context generation—without bloating the core engine. 
+Plugins allow you to add complex features to your documentation site - like analytics tracking or AI context generation - without bloating the core engine. 
 
 All core plugins are bundled with `@docmd/core`. You simply enable them in your `docmd.config.js` file.
 
@@ -53,4 +53,4 @@ Plugins in `docmd` hook into various parts of the build process:
 * They can generate additional files in the output directory
 * They can modify the HTML output of pages
 
-All plugins are designed to be configurable through your config file, giving you control over their behavior. Explore the sidebar to see the specific configuration options available for each plugin.
+All plugins are designed to be configurable through your config file, giving you control over their behaviour. Explore the sidebar to see the specific configuration options available for each plugin.

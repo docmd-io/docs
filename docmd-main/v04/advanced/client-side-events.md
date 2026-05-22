@@ -9,7 +9,7 @@ To solve this, `docmd` dispatches a custom event called `docmd:page-mounted` whe
 
 ## The `docmd:page-mounted` Event
 
-You can listen for this event in your custom JavaScript files to re-initialize libraries or trigger custom logic.
+You can listen for this event in your custom JavaScript files to re-initialise libraries or trigger custom logic.
 
 ### Usage
 
@@ -19,7 +19,7 @@ Create a custom script (e.g., `assets/js/my-plugin.js`) and add it to your `docm
 document.addEventListener('docmd:page-mounted', (e) => {
     console.log('New page loaded:', e.detail.url);
 
-    // Re-initialize your libraries here
+    // Re-initialise your libraries here
     // Example: MathJax.typeset();
 });
 ```

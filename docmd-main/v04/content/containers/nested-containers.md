@@ -12,7 +12,7 @@ The advanced nested container system in docmd allows you to create complex, inte
 1. **Logical Structure** - Nest containers in a way that makes logical sense
 2. **Readability** - Don't nest too deeply (3-4 levels maximum for readability)
 3. **Performance** - Complex nesting is supported but keep it reasonable
-4. **Content Organization** - Use nesting to organize related content
+4. **Content Organisation** - Use nesting to organise related content
 5. **Use the Right Tool** - Use steps for simple sequences, cards/tabs for complex content
 
 ### Limitations

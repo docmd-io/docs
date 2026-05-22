@@ -1,9 +1,9 @@
 ---
 title: "Custom Styles & Scripts"
-description: "Learn how to add your own custom CSS and JavaScript to your docmd site for advanced customization."
+description: "Learn how to add your own custom CSS and JavaScript to your docmd site for advanced customisation."
 ---
 
-While `docmd` themes provide a solid foundation, you can further tailor the appearance and behavior of your site by injecting custom CSS and JavaScript files. This is configured in your config file.
+While `docmd` themes provide a solid foundation, you can further tailor the appearance and behaviour of your site by injecting custom CSS and JavaScript files. This is configured in your config file.
 
 ## Custom CSS
 
@@ -35,7 +35,7 @@ module.exports = {
     ```css
     /* my-branding.css */
     :root { /* Light mode overrides */
-      --primary-color: #D65A31; /* Example: Change primary color */
+      --primary-color: #D65A31; /* Example: Change primary colour */
       --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --text-color: #222;
     }
