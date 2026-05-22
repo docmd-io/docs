@@ -3,48 +3,58 @@ title: "快速开始"
 description: "从空文件夹到运行中的文档网站，不到一分钟。"
 ---
 
-在任意包含 Markdown 文件的文件夹中运行 docmd，无需配置文件，无需安装框架，即刻启动。
+在任何包含 Markdown 文件的文件夹中运行 docmd。无需配置文件、无需安装框架、无需配置知识。
 
-## 启动开发服务器
+## 1. 启动开发服务器
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core dev
 ```
 :::
 
-访问 `http://localhost:3000`，文档网站即刻上线。
+访问 `http://localhost:3000`。你的文档已上线。
 
-## 自动完成的事项
+<!-- SCREENSHOT: Terminal window showing a successful local dev server startup, with the green local access URL http://localhost:3000 and initial build statistics. -->
 
-docmd 会自动扫描项目并完成以下配置：
+::: callout tip "自动端口故障转移"
+如果端口 `3000` 已被占用，docmd 会自动寻找下一个可用端口（例如 `3001`）。
+:::
 
-1. **目录检测** — 自动寻找 `docs/`、`src/docs/`、`documentation/` 或任意 `.md` 文件
-2. **导航生成** — 根据文件夹结构自动构建侧边栏导航
-3. **元数据提取** — 从 `package.json` 读取网站标题（如有）
-4. **主题激活** — 应用默认主题，支持跟随系统自动切换明暗模式
-5. **搜索索引** — 启用内置全文搜索
+## 2. 自动完成的事项
 
-无需 `docmd.config.js`。如后续需要版本管理、插件或自定义导航，再添加配置文件即可。
+引擎自动设置一切：
 
-## 构建生产版本
+1. **目录检测** - 扫描 `docs/`、`src/docs/`、`documentation/` 或 `.md` 文件。
+2. **导航生成** - 根据文件夹树自动构建嵌套侧边栏。
+3. **标题提取** - 自动从第一个 `H1` 标题提取页面标题。
+4. **搜索索引** - 立即启用内置全文搜索。
+5. **智能缓存** - 文件保存时触发亚 200ms 的重建。
+
+无需 `docmd.config.json`。稍后可添加来自定义布局、插件或版本。
+
+## 3. 构建生产版本
+
+将 Markdown 文件编译为静态的、生产就绪的网站。
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core build
 ```
 :::
 
-生成的静态网站输出至 `./site/`，可部署到任意静态托管服务。
+编译器将静态网站输出到 `./site/`。
+
+<!-- SCREENSHOT: Terminal output showing a successful production build with compilation times, sitemap generation, and total page count summary. -->
+
+可以将此静态输出托管在任何地方。部署到 GitHub Pages、Vercel、Netlify 或任何静态主机。

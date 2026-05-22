@@ -1,6 +1,6 @@
 ---
 title: "CLI 命令"
-description: "docmd 的命令行参考 —— 所有可用的命令和选项。"
+description: "docmd 的命令行参考  -  -  所有可用的命令和选项。"
 ---
 
 ## 命令概览
@@ -25,7 +25,7 @@ description: "docmd 的命令行参考 —— 所有可用的命令和选项。"
 | `--verbose` | `-V` | 显示详细的构建日志 |
 | `--version` | `-v` | 输出安装的版本号 |
 | `--help` | `-h` | 显示帮助菜单 |
-| `--cwd <path>` | — | 覆盖当前工作目录（适用于 monorepos） |
+| `--cwd <path>` | - | 覆盖当前工作目录（适用于 monorepos） |
 
 ## `docmd init`
 
@@ -36,8 +36,8 @@ docmd init
 ```
 
 创建内容：
-- `docs/index.md` —— 示例主页
-- `docmd.config.js` —— 推荐的默认配置
+- `docs/index.md`  -  -  示例主页
+- `docmd.config.js`  -  -  推荐的默认配置
 - 更新 `package.json` 并添加构建脚本
 
 ## `docmd dev`
@@ -63,7 +63,7 @@ docmd build [options]
 
 | 选项 | 别名 | 描述 |
 |:-------|:------|:------------|
-| `--offline` | — | 将链接重写为 `.html` 以进行 `file://` 浏览 |
+| `--offline` | - | 将链接重写为 `.html` 以进行 `file://` 浏览 |
 | `--config <path>` | `-c` | 配置文件路径 |
 
 ## `docmd live`

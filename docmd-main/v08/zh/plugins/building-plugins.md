@@ -140,13 +140,13 @@ export default {
 
 ### `onBeforeRender` 和 `PageContext`
 
-`onBeforeRender` 钩子适用于需要注入源文件派生构建时数据的插件——读取文件元数据、计算自定义 frontmatter 字段或从外部源加载数据。
+`onBeforeRender` 钩子适用于需要注入源文件派生构建时数据的插件 -  - 读取文件元数据、计算自定义 frontmatter 字段或从外部源加载数据。
 
 ```typescript
 interface PageContext {
   sourcePath: string;           // .md 源文件的绝对路径。始终设置。
-  frontmatter: Record<string, any>; // 可变 — 更改反映在模板输出中
-  html: string;                 // 可变 — 渲染的 markdown 正文
+  frontmatter: Record<string, any>; // 可变 - 更改反映在模板输出中
+  html: string;                 // 可变 - 渲染的 markdown 正文
   localeId?: string;
   versionId?: string;
   relativePathToRoot?: string;
@@ -162,7 +162,7 @@ export default {
   },
 
   onBeforeRender: async (page) => {
-    // sourcePath 始终可用 — 无需猜测或路径构建
+    // sourcePath 始终可用 - 无需猜测或路径构建
     const stats = fs.statSync(page.sourcePath);
     page.frontmatter.wordCount = page.html.split(/\s+/).length;
     page.frontmatter.fileSize = stats.size;
@@ -266,7 +266,7 @@ WebSocket RPC 系统仅在 `docmd dev` 期间活跃。生产构建不包含 API 
 ## 最佳实践
 
 1.  **声明能力**：始终导出带有声明能力的 `plugin` 描述符。从 `0.8.0` 开始将成为必需。
-2.  **使用 `onBeforeRender` 进行数据注入**：如果您的插件读取源文件或计算 frontmatter 字段，请使用 `onBeforeRender` — 而不是 `generateMetaTags`。`sourcePath` 在 `PageContext` 中始终可用。
+2.  **使用 `onBeforeRender` 进行数据注入**：如果您的插件读取源文件或计算 frontmatter 字段，请使用 `onBeforeRender` - 而不是 `generateMetaTags`。`sourcePath` 在 `PageContext` 中始终可用。
 3.  **异步/等待**：始终对 `onPostBuild`、`onBeforeRender` 和动作处理程序使用 `async` 函数。
 4.  **无状态**：避免在插件对象中维护状态，因为 `docmd` 可能在开发重建期间重新初始化插件。
 5.  **命名约定**：对于社区插件，以 `docmd-plugin-` 为前缀（如 `docmd-plugin-analytics`）。

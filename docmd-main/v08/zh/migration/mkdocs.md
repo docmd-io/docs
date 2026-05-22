@@ -114,4 +114,4 @@ nav:
 ## 后续步骤
 
 - `docmd` 具有原生搜索功能。你不需要配置搜索插件。
-- 探索 [主题选项](../theming/customization.md) 来自定义网站颜色，以匹配你旧的 Material 主题。
+- 探索 [主题选项](../theming/customisation.md) 来自定义网站颜色，以匹配你旧的 Material 主题。

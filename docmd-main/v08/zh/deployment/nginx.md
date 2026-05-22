@@ -26,4 +26,4 @@ docmd deploy --nginx
 
 ### 重新生成
 
-修改了站点 URL 或关闭了 SPA 模式？重新运行 `docmd deploy --nginx`——配置文件会根据当前 `docmd.config.js` 重新生成。
+修改了站点 URL 或关闭了 SPA 模式？重新运行 `docmd deploy --nginx` -  - 配置文件会根据当前 `docmd.config.js` 重新生成。

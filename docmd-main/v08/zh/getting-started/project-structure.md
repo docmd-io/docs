@@ -1,9 +1,13 @@
 ---
 title: "项目结构"
-description: "docmd 如何将文件和文件夹映射为页面、URL 和导航。"
+description: "学习 `@docmd/core` 如何将物理文件夹和 Markdown 文件映射为动态 URL 和导航。"
 ---
 
-docmd 以文件系统作为唯一数据来源。文件夹对应文档章节，Markdown 文件对应页面，目录层级决定 URL 路由。
+编译器使用本地文件系统作为唯一数据来源。文件夹成为导航部分。Markdown 文件成为内容页面。你的目录层级直接转换为网址。
+
+## 1. 标准项目脚手架
+
+运行 `npx @docmd/core init` 建立最小化工作区布局。此结构将源内容与资源和生产构建分离。
 
 ## 初始化项目
 
@@ -77,7 +81,7 @@ bunx @docmd/core build
 ```
 :::
 
-输出静态网站到 `./site/`，出品为纯静态 HTML——可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
+输出静态网站到 `./site/`，出品为纯静态 HTML -  - 可部署到 GitHub Pages、Vercel、Netlify 或任意静态托管服务。
 
 部署前可在本地预览：
 

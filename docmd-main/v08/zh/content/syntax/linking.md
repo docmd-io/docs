@@ -3,7 +3,7 @@ title: "链接与引用 (Linking & Referencing)"
 description: "通过 docmd 的自动 URL 规范化功能，掌握内部交叉链接、外部资源和可靠的资源引用。"
 ---
 
-`docmd` 提供了一个强大的、具有文件系统感知能力的链接系统。你可以自然地编写指向源 `.md` 文件的链接 —— 使用你喜欢的任何格式 —— 引擎会自动将它们规范化为干净、经过 SEO 优化的生产环境 URL。
+`docmd` 提供了一个强大的、具有文件系统感知能力的链接系统。你可以自然地编写指向源 `.md` 文件的链接  -  -  使用你喜欢的任何格式  -  -  引擎会自动将它们规范化为干净、经过 SEO 优化的生产环境 URL。
 
 ::: callout info "自然编写，完美交付"
 你不需要遵循任何特殊的链接约定。无论你写的是 `overview.md`、`overview/` 还是仅仅是 `overview`，构建引擎都会生成相同的干净、带有尾随斜杠的 URL。每个内部链接在构建时都会自动规范化，因此你可以专注于内容，而不是 URL 格式。
@@ -17,9 +17,9 @@ description: "通过 docmd 的自动 URL 规范化功能，掌握内部交叉链
 | :--- | :--- | :--- |
 | `overview.md` | `overview/` | 剥离 `.md` 扩展名，添加尾随 `/` |
 | `overview` | `overview/` | 自动添加尾随 `/` |
-| `overview/` | `overview/` | 已经正确 —— 无需更改 |
+| `overview/` | `overview/` | 已经正确  -  -  无需更改 |
 | `api/commands.md` | `api/commands/` | 规范化子目录链接 |
-| `localisation/index.md` | `localisation/` | 剥离 `index` —— 文件夹是规范 URL |
+| `localisation/index.md` | `localisation/` | 剥离 `index`  -  -  文件夹是规范 URL |
 | `../index.md` | `../` | 清洁地解析父目录索引 |
 | `overview.md#settings` | `overview/#settings` | 在规范化过程中保留哈希片段 |
 | `./guide.md` | `./guide/` | 保留相对前缀 |
@@ -63,7 +63,7 @@ description: "通过 docmd 的自动 URL 规范化功能，掌握内部交叉链
 
 默认情况下，所有链接（包括 HTTP/HTTPS）都在同一个窗口中打开。仅当你想要一个新标签页时才使用 `external:` 前缀。
 
-`external:` 前缀会从渲染后的 URL 中 **剥离** —— 它纯粹是一个构建时信号。
+`external:` 前缀会从渲染后的 URL 中 **剥离**  -  -  它纯粹是一个构建时信号。
 
 ## 链接到原始文件
 
@@ -73,11 +73,11 @@ description: "通过 docmd 的自动 URL 规范化功能，掌握内部交叉链
 [查看原始源码](raw:docs/readme.md)
 ```
 
-`raw:` 前缀会绕过所有规范化 —— 扩展名和路径将完全按照编写的方式保留。与 `external:` 一样，前缀本身会从渲染后的 URL 中剥离。
+`raw:` 前缀会绕过所有规范化  -  -  扩展名和路径将完全按照编写的方式保留。与 `external:` 一样，前缀本身会从渲染后的 URL 中剥离。
 
 ## 按钮容器 (Button Containers)
 
-`::: button` 容器支持与标准 Markdown 链接相同的链接约定 —— 包括 `external:` 和 `raw:` 前缀：
+`::: button` 容器支持与标准 Markdown 链接相同的链接约定  -  -  包括 `external:` 和 `raw:` 前缀：
 
 ```markdown
 ::: button "开始使用" ./getting-started/quick-start.md icon:rocket
@@ -141,9 +141,9 @@ description: "通过 docmd 的自动 URL 规范化功能，掌握内部交叉链
 
 引擎尊重标准浏览器的外部资源协议。这些链接永远不会被修改。
 
-*   **全局 HTTPS**: `[docmd 主页](https://docmd.io)` —— 在同一个标签页中打开（使用 `external:` 前缀以在新标签页中打开）
-*   **邮件协议**: `[支持渠道](mailto:help@docmd.io)` —— 不在新标签页中打开
-*   **资源协议**: `[下载 CLI 二进制文件](/assets/bin/docmd-mac.zip)` —— 不进行规范化
+*   **全局 HTTPS**: `[docmd 主页](https://docmd.io)`  -  -  在同一个标签页中打开（使用 `external:` 前缀以在新标签页中打开）
+*   **邮件协议**: `[支持渠道](mailto:help@docmd.io)`  -  -  不在新标签页中打开
+*   **资源协议**: `[下载 CLI 二进制文件](/assets/bin/docmd-mac.zip)`  -  -  不进行规范化
 
 ## 静态资源引用
 
