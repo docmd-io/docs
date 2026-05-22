@@ -157,7 +157,7 @@ resolveHref('raw:docs/readme.md');
 
 ### Vorberechnete Seiten-URLs
 
-Jedes Seiten-Objekt enthält vorberechnete URL-Daten. Plugins können diese direkt lesen — keine Berechnung erforderlich.
+Jedes Seiten-Objekt enthält vorberechnete URL-Daten. Plugins können diese direkt lesen - keine Berechnung erforderlich.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {

@@ -114,4 +114,4 @@ Inhalt für Tab 2.
 ## Nächste Schritte
 
 - `docmd` verfügt über eine integrierte Suche. Sie müssen kein Such-Plugin konfigurieren.
-- Entdecken Sie die [Theme-Optionen](../theming/customization.md), um die Farben Ihrer Website an Ihr altes Material-Theme anzupassen.
+- Entdecken Sie die [Theme-Optionen](../theming/customisation.md), um die Farben Ihrer Website an Ihr altes Material-Theme anzupassen.

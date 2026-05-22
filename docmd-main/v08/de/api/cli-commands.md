@@ -1,6 +1,6 @@
 ---
 title: "CLI-Befehle"
-description: "Befehlszeilenreferenz für docmd — alle verfügbaren Befehle und Optionen."
+description: "Befehlszeilenreferenz für docmd - alle verfügbaren Befehle und Optionen."
 ---
 
 ## Befehlsübersicht
@@ -25,7 +25,7 @@ description: "Befehlszeilenreferenz für docmd — alle verfügbaren Befehle und
 | `--verbose` | `-V` | Detaillierte Build-Protokolle anzeigen |
 | `--version` | `-v` | Die installierte Version ausgeben |
 | `--help` | `-h` | Hilfemenü anzeigen |
-| `--cwd <path>` | — | Arbeitsverzeichnis überschreiben (für Monorepos) |
+| `--cwd <path>` | - | Arbeitsverzeichnis überschreiben (für Monorepos) |
 
 ## `docmd init`
 
@@ -36,8 +36,8 @@ docmd init
 ```
 
 Erstellt:
-- `docs/index.md` — Beispiel-Startseite
-- `docmd.config.js` — Empfohlene Standardeinstellungen
+- `docs/index.md` - Beispiel-Startseite
+- `docmd.config.js` - Empfohlene Standardeinstellungen
 - Aktualisierte `package.json` mit Build-Skripten
 
 ## `docmd dev`
@@ -63,7 +63,7 @@ docmd build [options]
 
 | Option | Alias | Beschreibung |
 |:-------|:------|:------------|
-| `--offline` | — | Links auf `.html` umschreiben für `file://` Browsing |
+| `--offline` | - | Links auf `.html` umschreiben für `file://` Browsing |
 | `--config <path>` | `-c` | Pfad zur Konfigurationsdatei |
 
 ## `docmd live`

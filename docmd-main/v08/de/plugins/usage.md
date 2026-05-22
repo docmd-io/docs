@@ -3,7 +3,7 @@ title: "Plugin-Mechanismus & Verwendung"
 description: "Erfahren Sie mehr über die Lifecycle-Hooks von docmd, den Plugin-Sicherheitsmechanismus und wie Sie die Funktionen der Engine erweitern können."
 ---
 
-`docmd` folgt einer steckbaren Architektur. Fast alle Kernfunktionen — von der Suche über SEO bis hin zur Live-Vorschau — sind als Plugins implementiert. Dieses Design stellt sicher, dass die Engine leichtgewichtig bleibt, während Entwickler Funktionen selektiv basierend auf ihren spezifischen Projektanforderungen aktivieren können.
+`docmd` folgt einer steckbaren Architektur. Fast alle Kernfunktionen - von der Suche über SEO bis hin zur Live-Vorschau - sind als Plugins implementiert. Dieses Design stellt sicher, dass die Engine leichtgewichtig bleibt, während Entwickler Funktionen selektiv basierend auf ihren spezifischen Projektanforderungen aktivieren können.
 
 ## Plugin-Übersicht
 

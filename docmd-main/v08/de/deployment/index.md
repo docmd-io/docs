@@ -14,7 +14,7 @@ Die Ausgabe ist ein eigenständiger `site/`-Ordner (oder was Sie als `out` in Ih
 ## Ein-Befehl-Bereitstellung
 
 ::: callout tip "Neu in v0.7.2"
-`docmd deploy` liest Ihre `docmd.config.js` und generiert Bereitstellungsdateien, die auf Ihr Projekt zugeschnitten sind — keine generischen Vorlagen.
+`docmd deploy` liest Ihre `docmd.config.js` und generiert Bereitstellungsdateien, die auf Ihr Projekt zugeschnitten sind - keine generischen Vorlagen.
 :::
 
 Anstatt Dockerfiles und Server-Konfigurationen manuell zu schreiben, lassen Sie docmd diese für Sie generieren:
@@ -37,7 +37,7 @@ Der Deploy-Befehl liest Ihre Konfiguration (oder Zero-Config-Standardwerte) und 
 | `layout.spa` | Steuert, ob SPA-Routing-Fallback enthalten ist |
 | Konfigurations-Dateipfad | Dockerfile-Build-Schritt verwendet `--config` bei nicht-standardmäßigem Pfad |
 
-Keine `docmd.config.js`? Kein Problem — der Befehl nutzt die gleichen Zero-Config-Standardwerte wie `docmd dev` und `docmd build`.
+Keine `docmd.config.js`? Kein Problem - der Befehl nutzt die gleichen Zero-Config-Standardwerte wie `docmd dev` und `docmd build`.
 
 ### Immer synchron
 
@@ -45,9 +45,9 @@ Jede Ausführung generiert Ihre Bereitstellungsdateien neu, um sie mit Ihrer akt
 
 ### Unterstützte Ziele
 
-*   [`docmd deploy --docker`](./docker) — Optimiertes Multi-Stage-Dockerfile mit Layer-Caching und Versionspinning.
-*   [`docmd deploy --nginx`](./nginx) — Sicherheitsgehärtete nginx.conf mit GZIP und unveränderlichem Asset-Caching.
-*   [`docmd deploy --caddy`](./caddy) — HTTPS-bereites Caddyfile mit automatischem Routing.
+*   [`docmd deploy --docker`](./docker) - Optimiertes Multi-Stage-Dockerfile mit Layer-Caching und Versionspinning.
+*   [`docmd deploy --nginx`](./nginx) - Sicherheitsgehärtete nginx.conf mit GZIP und unveränderlichem Asset-Caching.
+*   [`docmd deploy --caddy`](./caddy) - HTTPS-bereites Caddyfile mit automatischem Routing.
 
 Klicken Sie auf jedes Ziel für detaillierte, service-spezifische Dokumentation.
 
@@ -63,14 +63,14 @@ Siehe den [CI/CD-Bereitstellungsleitfaden](./ci-cd) für automatisierte Workflow
 
 `docmd` implementiert einen Mikro-SPA-Router für reibungslose interne Navigation. Jede Seite wird als eigene `index.html`-Datei generiert:
 
-- **Keine Rewrite-Regeln nötig** — direkter URL-Zugriff funktioniert, weil `/guide/setup` als `/guide/setup/index.html` aufgelöst wird.
-- **Deep Linking funktioniert** — sofort einsatzbereit auf jeder Hosting-Plattform.
+- **Keine Rewrite-Regeln nötig** - direkter URL-Zugriff funktioniert, weil `/guide/setup` als `/guide/setup/index.html` aufgelöst wird.
+- **Deep Linking funktioniert** - sofort einsatzbereit auf jeder Hosting-Plattform.
 
 Wenn `layout.spa` in Ihrer Konfiguration auf `false` gesetzt ist, lässt der Deploy-Befehl das SPA-Fallback-Routing in den generierten Server-Konfigurationen weg.
 
 ## Produktions-Checkliste
 
-1.  **Site-URL**: Setzen Sie die `url`-Eigenschaft in `docmd.config.js` — dies steuert kanonische Tags, Sitemaps, Social-Previews und die Generierung von Bereitstellungsdateien.
+1.  **Site-URL**: Setzen Sie die `url`-Eigenschaft in `docmd.config.js` - dies steuert kanonische Tags, Sitemaps, Social-Previews und die Generierung von Bereitstellungsdateien.
 2.  **Weiterleitungen**: Migration von einem anderen Tool? Verwenden Sie die `redirects`-Konfiguration zur Beibehaltung der SEO-Rankings.
 3.  **Analytik**: Aktivieren Sie das `analytics`-Plugin zur Verfolgung von Engagement und Suchanfragen.
 4.  **KI-Kontext**: Aktivieren Sie das `llms`-Plugin zur Generierung von `llms.txt` für die KI-Agent-Aufnahme.

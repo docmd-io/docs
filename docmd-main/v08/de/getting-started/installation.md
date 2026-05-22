@@ -1,79 +1,70 @@
 ---
 title: "Installation"
-description: "Installieren Sie docmd global, lokal oder führen Sie es sofort mit npx aus. Erfordert Node.js 18+."
+description: "Installieren Sie @docmd/core global, lokal in einem Projekt oder integrieren Sie es direkt in Web-Anwendungen. Benötigt Node.js 18+."
 ---
 
-Wählen Sie die Installationsmethode, die am besten zu Ihrem Workflow passt.
+Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Node.js 18 oder höher ist erforderlich.
 
-## Sofort ausführen
+## 1. Projekt-lokale Installation (empfohlen)
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core dev
-```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core dev
-```
-:::
+Installieren Sie `@docmd/core` lokal als Entwicklungsabhängigkeit. Dies sperrt die Version in Ihrer `package.json` und stellt sicher, dass Builds in Teams und CI/CD konsistent sind.
 
-Keine Installation erforderlich. Führt docmd direkt in jedem Ordner mit Markdown-Dateien aus.
+### Paket installieren
 
 ::: tabs
 == tab "npm" icon:box
-```bash
-# Eine produktionsreife statische Website erstellen
-npx @docmd/core build
-```
-== tab "Bun" icon:zap
-```bash
-# Eine produktionsreife statische Website erstellen
-bunx @docmd/core build
-```
-:::
-
-## Als Projektabhängigkeit installieren (empfohlen)
-
-::: tabs
-== tab "npm" icon:package
 ```bash
 npm install -D @docmd/core
-npx @docmd/core init
-npx @docmd/core dev
 ```
 == tab "pnpm" icon:boxes
 ```bash
 pnpm add -D @docmd/core
-pnpm dlx docmd init
-pnpm dlx docmd dev
 ```
 == tab "yarn" icon:scroll
 ```bash
 yarn add -D @docmd/core
-yarn docmd init
-yarn docmd dev
 ```
 == tab "Bun" icon:zap
 ```bash
 bun add -D @docmd/core
-bunx docmd init
-bunx docmd dev
 ```
 :::
 
-Dies fixiert die Version für Ihr gesamtes Team und Ihre CI/CD-Pipeline.
+### Projekt initialisieren
 
-<!-- SCREENSHOT: Terminalausgabe eines erfolgreichen `npx @docmd/core init`-Laufs — der generierte Dateibaum mit docmd.config.js, docs/index.md und der 'Ready!'-Nachricht. -->
-
-::: callout tip "Nach der lokalen Installation"
-Sobald `@docmd/core` zu Ihren Projektabhängigkeiten hinzugefügt wurde, können Sie `docmd` (oder `npm docmd`, `yarn docmd`, `bun docmd`) anstelle von `npx @docmd/core` für alle Befehle verwenden.
-:::
-
-## Global installieren
+Erstellt automatisch die Standard-Ordnerstruktur, eine erste Seite und eine Konfigurationsdatei.
 
 ::: tabs
-== tab "npm" icon:package
+== tab "npm" icon:box
+```bash
+npx @docmd/core init
+```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core init
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core init
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core init
+```
+:::
+
+<!-- SCREENSHOT: Terminal interactive prompt for `docmd init` showing file detection, directory creation steps, and the success confirmation message. -->
+
+::: callout tip "Kurzbefehle"
+Nach der lokalen Installation können Sie `npx @docmd/core dev` verwenden oder es direkt zu Ihren `package.json`-Skripten hinzufügen.
+:::
+
+## 2. Globale Installation
+
+Installieren Sie das Paket global, um überall auf Ihrem System Websites zu erstellen oder in der Vorschau zu betrachten.
+
+::: tabs
+== tab "npm" icon:box
 ```bash
 npm install -g @docmd/core
 ```
@@ -91,35 +82,41 @@ bun add -g @docmd/core
 ```
 :::
 
+Nach der globalen Installation ist die `docmd`-Binärdatei überall verfügbar. Sie können auch immer `npx @docmd/core` verwenden, ohne eine globale Installation.
+
 ```bash
-# Den 'docmd'-Befehl überall verwenden
-docmd dev
-docmd build
+docmd dev   # Lokalen Entwicklungsserver starten
+docmd build # Statische Ausgabe erstellen
 ```
 
-## Nur-Browser-Integration
+## 3. Nur-Browser-Integration
 
-::: callout info "Nur für Bibliotheksnutzung"
-Diese Methode bettet die docmd-Rendering-Engine in eine andere Webanwendung ein. Dies ist nicht der Standardweg zum Erstellen von Dokumentationsseiten.
+Betten Sie die Engine direkt über ein CDN in eine bestehende Web-Anwendung ein.
+
+::: callout info "Spezialisierte Bibliotheksintegration"
+Dies umgeht die CLI und lädt die Parsing-Engine im Browser des Lesers. Verwenden Sie dies für dynamische Portale, nicht für statische SEO-Websites.
 :::
 
+Fügen Sie das Stylesheet und die JavaScript-Engine zu Ihrem HTML hinzu.
+
 ```html
-<!-- Kern-Styles -->
+<!-- Haupt-Stylesheet -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- Processing-Engine -->
+<!-- Isomorphe Rendering-Engine -->
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-Weitere Details zur Integration finden Sie im [Browser-API](../api/browser-api.md)-Leitfaden.
+Siehe [Browser API](../api/browser-api.md) für vollständige Integrationsdetails.
 
-## Fehlerbehebung
+## 4. Fehlerbehebung
 
-::: callout warning "Berechtigung verweigert (EACCES)"
-Wenn während der globalen Installation unter macOS oder Linux `EACCES`-Fehler auftreten, wechseln Sie zu einem Node-Versionsmanager wie [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm), anstatt `sudo` zu verwenden.
-:::
+### Berechtigung verweigert (`EACCES`-Fehler)
+Verwenden Sie nicht `sudo` für globale Installationen unter macOS oder Linux. Beheben Sie Berechtigungskonflikte mit einem Node.js-Versionsmanager wie [nvm](https://github.com/nvm-sh/nvm) oder [fnm](https://github.com/Schniz/fnm).
 
-::: callout info "PowerShell-Skriptausführung (Windows)"
-Wenn PowerShell die Skriptausführung blockiert, führen Sie dies als Administrator aus:
-`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-:::
+### PowerShell-Ausführungsrichtlinien (Windows)
+Wenn Windows die Ausführung blockiert, öffnen Sie PowerShell als Administrator und aktivieren Sie die Ausführung von Skripten für den aktuellen Benutzer.
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```

@@ -3,10 +3,10 @@ title: "OpenAPI-Plugin"
 description: "Rendert OpenAPI 3.x API-Referenzdokumentation direkt aus JSON- oder YAML-Spezifikationsdateien in Ihren Markdown-Seiten."
 ---
 
-Das **OpenAPI-Plugin** wandelt OpenAPI 3.x Spezifikationsdateien in strukturierte API-Referenzseiten um — zur Build-Zeit gerendert, ohne clientseitiges JavaScript und ohne Drittanbieter-Abhängigkeiten. Jeder Endpunkt, Parameter, Request-Body und jede Response wird in semantische HTML-Tabellen konvertiert.
+Das **OpenAPI-Plugin** wandelt OpenAPI 3.x Spezifikationsdateien in strukturierte API-Referenzseiten um - zur Build-Zeit gerendert, ohne clientseitiges JavaScript und ohne Drittanbieter-Abhängigkeiten. Jeder Endpunkt, Parameter, Request-Body und jede Response wird in semantische HTML-Tabellen konvertiert.
 
 ::: callout info "Kern-Plugin"
-Das OpenAPI-Plugin ist jetzt standardmäßig in `@docmd/core` **enthalten**. Eine separate Installation ist nicht erforderlich. Es folgt der Docmd-Philosophie des Build-Zeit-Renderings — das Plugin liest Ihre Spezifikation und gibt saubere, zugängliche HTML-Tabellen ohne clientseitiges JavaScript aus.
+Das OpenAPI-Plugin ist jetzt standardmäßig in `@docmd/core` **enthalten**. Eine separate Installation ist nicht erforderlich. Es folgt der Docmd-Philosophie des Build-Zeit-Renderings - das Plugin liest Ihre Spezifikation und gibt saubere, zugängliche HTML-Tabellen ohne clientseitiges JavaScript aus.
 :::
 
 ## Installation
@@ -55,16 +55,16 @@ npm install js-yaml
 
 Für jeden Pfad und jede HTTP-Methode in der Spezifikation rendert das Plugin:
 
-- **Methoden-Badge** — farbkodiert (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
-- **Pfad** — der vollständige Endpunkt-Pfad
-- **Zusammenfassung und Beschreibung** — aus dem Operationsobjekt
-- **Parameter-Tabelle** — Name, Position (`path`, `query`, `header`, `cookie`), Typ, Pflichtfeld, Beschreibung
-- **Request-Body-Tabelle** — Schema-Eigenschaften mit Typen und Standardwerten
-- **Response-Tabelle** — Status-Codes mit Beschreibungen und Response-Schema-Typen
-- **Veraltungshinweis** — als `deprecated: true` markierte Operationen werden inline gekennzeichnet
+- **Methoden-Badge** - farbkodiert (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
+- **Pfad** - der vollständige Endpunkt-Pfad
+- **Zusammenfassung und Beschreibung** - aus dem Operationsobjekt
+- **Parameter-Tabelle** - Name, Position (`path`, `query`, `header`, `cookie`), Typ, Pflichtfeld, Beschreibung
+- **Request-Body-Tabelle** - Schema-Eigenschaften mit Typen und Standardwerten
+- **Response-Tabelle** - Status-Codes mit Beschreibungen und Response-Schema-Typen
+- **Veraltungshinweis** - als `deprecated: true` markierte Operationen werden inline gekennzeichnet
 
 ::: callout tip "Build-Zeit-Rendering"
-Alles Rendering erfolgt zur Build-Zeit. Die generierten Seiten sind vollständig statisch — kein JavaScript ist erforderlich, um die API-Dokumentation anzuzeigen, was schnelle Seitenladevorgänge und vollständige Suchindexierung bedeutet.
+Alles Rendering erfolgt zur Build-Zeit. Die generierten Seiten sind vollständig statisch - kein JavaScript ist erforderlich, um die API-Dokumentation anzuzeigen, was schnelle Seitenladevorgänge und vollständige Suchindexierung bedeutet.
 :::
 
 ## Unterstützte OpenAPI-Funktionen

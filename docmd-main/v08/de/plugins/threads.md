@@ -1,9 +1,9 @@
 ---
 title: "Threads-Plugin"
-description: "Fügen Sie Ihrer Dokumentation Inline-Diskussionsstränge hinzu — direkt in Ihren Markdown-Dateien gespeichert."
+description: "Fügen Sie Ihrer Dokumentation Inline-Diskussionsstränge hinzu - direkt in Ihren Markdown-Dateien gespeichert."
 ---
 
-Das **Threads-Plugin** bringt kollaborative Inline-Kommentare in Ihre Dokumentation. Wählen Sie einen beliebigen Text auf der Seite aus, hinterlassen Sie einen Kommentar, starten Sie eine Diskussion — alles wird direkt in Ihren Markdown-Quelldateien gespeichert, ganz ohne Datenbank.
+Das **Threads-Plugin** bringt kollaborative Inline-Kommentare in Ihre Dokumentation. Wählen Sie einen beliebigen Text auf der Seite aus, hinterlassen Sie einen Kommentar, starten Sie eine Diskussion - alles wird direkt in Ihren Markdown-Quelldateien gespeichert, ganz ohne Datenbank.
 
 Originalautor: [@svallory](external:https://github.com/svallory)
 
@@ -41,10 +41,10 @@ plugins: {
 ## Funktionsweise
 
 1. **Text markieren** auf einer beliebigen Dokumentationsseite während `docmd dev`.
-2. Ein **Kommentar-Popover** erscheint — schreiben Sie Ihren Kommentar und senden Sie ihn ab.
+2. Ein **Kommentar-Popover** erscheint - schreiben Sie Ihren Kommentar und senden Sie ihn ab.
 3. Der ausgewählte Text wird mit einem Thread-Marker **hervorgehoben**.
 4. Threads werden als `::: threads`-Blöcke am Ende der Markdown-Datei gespeichert.
-5. **Keine Datenbank** — Ihre Markdown-Dateien sind die "Source of Truth".
+5. **Keine Datenbank** - Ihre Markdown-Dateien sind die "Source of Truth".
 
 ## Vorschau
 
@@ -59,7 +59,7 @@ So sehen Threads auf einer Live-Seite aus. Text mit Diskussionen wird <span clas
   <div class="threads-preview-comment threads-preview-reply">
     <div class="threads-preview-avatar">B</div>
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;vor 1 T.</div>
-    <div class="threads-preview-body">Gute Idee — ich füge ein Mermaid-Flowchart hinzu. Funktioniert <code>sequenceDiagram</code> hier?</div>
+    <div class="threads-preview-body">Gute Idee - ich füge ein Mermaid-Flowchart hinzu. Funktioniert <code>sequenceDiagram</code> hier?</div>
     <div class="threads-preview-reactions">
       <div class="threads-preview-reaction">👍 <span>2</span></div>
       <div class="threads-preview-reaction">🚀 <span>1</span></div>
@@ -75,7 +75,7 @@ So sehen Threads auf einer Live-Seite aus. Text mit Diskussionen wird <span clas
   </div>
 </div>
 
-Und hier ist eine <span class="threads-preview-highlight-blue">zweite Hervorhebung mit einer anderen Farbe</span> — Threads durchlaufen automatisch eine Farbpalette.
+Und hier ist eine <span class="threads-preview-highlight-blue">zweite Hervorhebung mit einer anderen Farbe</span> - Threads durchlaufen automatisch eine Farbpalette.
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
@@ -118,7 +118,7 @@ Inhalt mit ==markiertem Text=={t-a1b2c3d4}, der einen Thread hat.
       Dieser Text muss klargestellt werden.
     :::
     ::: comment c-d9e0f1a2 "Bob" "2026-04-09" reply-to c-e5f6a7b8
-      Habe es aktualisiert — passt das so?
+      Habe es aktualisiert - passt das so?
 
       ::: reactions
         - 👍 Alice

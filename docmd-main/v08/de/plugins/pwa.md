@@ -66,7 +66,7 @@ Service Worker werden im lokalen Entwicklungsmodus (`docmd dev`) normalerweise d
 
 ### Vollständiges Entfernen
 
-Löschen Sie einfach den `pwa`-Block aus Ihren `plugins`. Beim nächsten Ausführen von `docmd build` wird kein neues Manifest generiert. Wenn Benutzer die Website besuchen, prüft der clientseitige Bootstrap von docmd (`docmd-main.js`) das Vorhandensein von `<link rel="manifest">`. Falls dieser fehlt, aber ein Service Worker registriert ist, werden automatisch **alle vorhandenen Service Worker deregistriert** und der Cache geleert — es ist keine Aktion des Benutzers erforderlich.
+Löschen Sie einfach den `pwa`-Block aus Ihren `plugins`. Beim nächsten Ausführen von `docmd build` wird kein neues Manifest generiert. Wenn Benutzer die Website besuchen, prüft der clientseitige Bootstrap von docmd (`docmd-main.js`) das Vorhandensein von `<link rel="manifest">`. Falls dieser fehlt, aber ein Service Worker registriert ist, werden automatisch **alle vorhandenen Service Worker deregistriert** und der Cache geleert - es ist keine Aktion des Benutzers erforderlich.
 
 ::: callout warning
 Die Dateien `manifest.webmanifest` und `service-worker.js` aus einem vorherigen Build bleiben auf der Festplatte erhalten, bis Sie Ihr Ausgabe-Verzeichnis (standardmäßig `site/`) mit `docmd build` überschreiben oder mittels `rm -rf site` löschen. Dies ist ein Artefakt im Dateisystem, keine aktive PWA.
@@ -105,11 +105,11 @@ export default {
 
 docmd löst Ihr PWA-Icon gemäß der folgenden Rangfolge auf:
 
-1. `pwa.icons` — Manuelles Array, wird unverändert verwendet.
-2. `pwa.logo` — Einzelner Bildpfad, wird für Einträge in 192x192 und 512x512 verwendet.
-3. `config.logo` — Ihr globales Website-Logo.
-4. `config.favicon` — Ihr globales Favicon.
-5. *(Keine Icons im Manifest deklariert)* — Falls keiner der obigen Punkte gesetzt ist.
+1. `pwa.icons` - Manuelles Array, wird unverändert verwendet.
+2. `pwa.logo` - Einzelner Bildpfad, wird für Einträge in 192x192 und 512x512 verwendet.
+3. `config.logo` - Ihr globales Website-Logo.
+4. `config.favicon` - Ihr globales Favicon.
+5. *(Keine Icons im Manifest deklariert)* - Falls keiner der obigen Punkte gesetzt ist.
 
 ## Lokales Testen
 

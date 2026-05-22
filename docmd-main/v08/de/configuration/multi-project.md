@@ -59,13 +59,13 @@ Jede Multi-Projekt-Konfiguration **muss** ein Root-Projekt mit `prefix: '/'` ent
 
 ### 3. Projektkonfigurationen
 
-Jedes Projektverzeichnis hat seine eigene `docmd.config.js` mit vollständig unabhängiger Konfiguration. Fügen Sie **keine** `src`- oder `out`-Schlüssel ein — die übergeordnete Konfiguration stellt diese automatisch bereit.
+Jedes Projektverzeichnis hat seine eigene `docmd.config.js` mit vollständig unabhängiger Konfiguration. Fügen Sie **keine** `src`- oder `out`-Schlüssel ein - die übergeordnete Konfiguration stellt diese automatisch bereit.
 
 Jedes Projekt kann vollständig unabhängige Einstellungen haben:
-- **i18n** — verschiedene Sprachen, verschiedene Standardsprachen
-- **Versionierung** — unterschiedliche Versionsnummern und Strukturen
-- **Plugins** — nur aktivieren, was jedes Projekt benötigt
-- **Navigation** — individuelle Seitenleiste für jedes Projekt
+- **i18n** - verschiedene Sprachen, verschiedene Standardsprachen
+- **Versionierung** - unterschiedliche Versionsnummern und Strukturen
+- **Plugins** - nur aktivieren, was jedes Projekt benötigt
+- **Navigation** - individuelle Seitenleiste für jedes Projekt
 
 ## Assets
 
@@ -109,7 +109,7 @@ Der Server erstellt alle Projekte und stellt sie über einen einzigen Port berei
 └──────────────────────────────────────────────────────────
 ```
 
-Dateiänderungen in einem Projekt lösen einen gezielten Neubau mit Live-Reload aus. Nur das betroffene Projekt wird neu erstellt — andere Projekte bleiben für schnelle Iteration unberührt. Änderungen an gemeinsamen Assets erstellen alle Projekte neu.
+Dateiänderungen in einem Projekt lösen einen gezielten Neubau mit Live-Reload aus. Nur das betroffene Projekt wird neu erstellt - andere Projekte bleiben für schnelle Iteration unberührt. Änderungen an gemeinsamen Assets erstellen alle Projekte neu.
 
 ## Erstellen & Bereitstellen
 
@@ -133,8 +133,8 @@ Veröffentlichen Sie es auf jedem statischen Hosting (GitHub Pages, Netlify, Ver
 
 ## Regeln & Einschränkungen
 
-1. **Root-Projekt erforderlich** — ein Projekt muss `prefix: '/'` haben
-2. **Keine doppelten Präfixe** — jedes Projekt benötigt ein einzigartiges URL-Präfix
-3. **Kein `src`/`out` in untergeordneten Konfigurationen** — die übergeordnete Konfiguration stellt diese bereit
-4. **Alles unabhängig** — jedes Projekt hat eigene Titel, Versionen, i18n, Plugins und Navigation
-5. **Root-Konfiguration minimal** — nur `projects` sollte in der Root-`docmd.config.js` stehen
+1. **Root-Projekt erforderlich** - ein Projekt muss `prefix: '/'` haben
+2. **Keine doppelten Präfixe** - jedes Projekt benötigt ein einzigartiges URL-Präfix
+3. **Kein `src`/`out` in untergeordneten Konfigurationen** - die übergeordnete Konfiguration stellt diese bereit
+4. **Alles unabhängig** - jedes Projekt hat eigene Titel, Versionen, i18n, Plugins und Navigation
+5. **Root-Konfiguration minimal** - nur `projects` sollte in der Root-`docmd.config.js` stehen

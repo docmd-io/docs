@@ -26,4 +26,4 @@ Dies generiert eine `nginx.conf`, die auf Ihr Projekt zugeschnitten ist:
 
 ### Neu generieren
 
-Site-URL geändert oder SPA-Modus umgeschaltet? Führen Sie `docmd deploy --nginx` erneut aus — die Konfiguration wird neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.
+Site-URL geändert oder SPA-Modus umgeschaltet? Führen Sie `docmd deploy --nginx` erneut aus - die Konfiguration wird neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.

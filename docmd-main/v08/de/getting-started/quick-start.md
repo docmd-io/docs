@@ -5,14 +5,13 @@ description: "Gelangen Sie in weniger als einer Minute von einem leeren Ordner z
 
 Führen Sie docmd in jedem Ordner aus, der Markdown-Dateien enthält. Keine Konfigurationsdatei, kein Setup, keine Framework-Kenntnisse erforderlich.
 
-## Entwicklungsserver starten
+## 1. Entwicklungsserver starten
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core dev
@@ -21,32 +20,41 @@ bunx @docmd/core dev
 
 Öffnet `http://localhost:3000`. Ihre Dokumentation ist live.
 
-<!-- SCREENSHOT: Terminalausgabe nach dem Ausführen von docmd dev, die die lokale Entwicklungsserver-URL und die Build-Zusammenfassung mit der Seitenanzahl zeigt. -->
+<!-- SCREENSHOT: Terminal window showing a successful local dev server startup, with the green local access URL http://localhost:3000 and initial build statistics. -->
 
-## Was automatisch passiert
+::: callout tip "Automatische Port-Umleitung"
+Wenn Port `3000` bereits verwendet wird, findet docmd automatisch den nächsten verfügbaren Port (z. B. `3001`).
+:::
 
-docmd scannt Ihr Projekt und richtet alles ein:
+## 2. Automatische Funktionen
 
-1. **Ordnererkennung** — sucht nach `docs/`, `src/docs/`, `documentation/` oder beliebigen `.md`-Dateien
-2. **Navigationserstellung** — erstellt eine verschachtelte Seitenleiste aus Ihrer Ordnerstruktur
-3. **Metadaten-Extraktion** — liest die `package.json` für den Seitentitel aus, falls verfügbar
-4. **Theme-Aktivierung** — wendet das Standard-Theme mit systemabhängigem Hell-/Dunkelmodus an
-5. **Suchindexierung** — ermöglicht die integrierte Volltextsuche
+Die Engine richtet alles automatisch ein:
 
-Es wird keine `docmd.config.js` benötigt. Fügen Sie später eine hinzu, wenn Sie Versionierung, Plugins oder eine benutzerdefinierte Navigation benötigen.
+1. **Ordnererkennung** - Sucht nach `docs/`, `src/docs/`, `documentation/` oder `.md`-Dateien.
+2. **Navigationserstellung** - Erstellt eine verschachtelte Seitenleiste aus Ihrer Ordnerstruktur.
+3. **Titel-Auflösung** - Extrahiert automatisch Seitentitel aus dem ersten `H1`-Tag.
+4. **Suchindexierung** - Aktiviert sofort die integrierte Volltextsuche.
+5. **Intelligentes Caching** - Erzeugt beim Speichern sub-200ms-Neuerstellungen.
 
-## Für die Produktion erstellen
+Es wird keine `docmd.config.json` benötigt. Fügen Sie später eine hinzu, um Layouts, Plugins oder Versionen anzupassen.
+
+## 3. Für die Produktion erstellen
+
+Kompilieren Sie Ihre Markdown-Dateien in eine statische, produktionsreife Website.
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core build
 ```
 :::
 
-Gibt eine statische Website in `./site/` aus, die überall bereitgestellt werden kann.
+Der Compiler gibt eine statische Website in `./site/` aus.
+
+<!-- SCREENSHOT: Terminal output showing a successful production build with compilation times, sitemap generation, and total page count summary. -->
+
+Hosten Sie diese statische Ausgabe überall. Stellen Sie auf GitHub Pages, Vercel, Netlify oder einem anderen statischen Host bereit.

@@ -3,7 +3,7 @@ title: "Sitemap-Plugin"
 description: "Generieren Sie automatisch eine standardkonforme sitemap.xml für eine bessere Sichtbarkeit in Suchmaschinen."
 ---
 
-Das Plugin `@docmd/plugin-sitemap` generiert automatisch eine `sitemap.xml`-Datei im Stammverzeichnis Ihres Build-Ordners. Diese Datei bietet Suchmaschinen wie Google und Bing eine umfassende Karte der Architektur Ihrer Website und stellt sicher, dass alle Seiten — einschließlich Deep-Links innerhalb versionierter Dokumentationen — gecrawlt und indexiert werden.
+Das Plugin `@docmd/plugin-sitemap` generiert automatisch eine `sitemap.xml`-Datei im Stammverzeichnis Ihres Build-Ordners. Diese Datei bietet Suchmaschinen wie Google und Bing eine umfassende Karte der Architektur Ihrer Website und stellt sicher, dass alle Seiten - einschließlich Deep-Links innerhalb versionierter Dokumentationen - gecrawlt und indexiert werden.
 
 ## Konfiguration
 

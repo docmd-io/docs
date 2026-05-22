@@ -9,7 +9,7 @@ Technische Dokumentationen sind oft dicht, fachsprachlich überladen und schwer 
 
 ## Warum es wichtig ist
 
-Lesbarkeit ist nicht nur eine ästhetische Entscheidung — sie ist eine funktionale Anforderung. Wenn ein Entwickler eine Warnung übersieht, weil sie in einem langen Absatz vergraben war, können die Folgen schwerwiegend sein. Eine klare Informationshierarchie stellt sicher, dass Benutzer die benötigten Informationen schnell finden, genau verstehen und sicher danach handeln können.
+Lesbarkeit ist nicht nur eine ästhetische Entscheidung - sie ist eine funktionale Anforderung. Wenn ein Entwickler eine Warnung übersieht, weil sie in einem langen Absatz vergraben war, können die Folgen schwerwiegend sein. Eine klare Informationshierarchie stellt sicher, dass Benutzer die benötigten Informationen schnell finden, genau verstehen und sicher danach handeln können.
 
 ## Ansatz
 

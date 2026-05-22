@@ -1,5 +1,5 @@
 ---
-title: "docmd Dokumentation: Zero-Config Docs aus Markdown"
+title: "docmd Dokumentation: Produktionsreife Docs aus Markdown"
 description: "Erstellen Sie in Sekundenschnelle produktionsreife Dokumentationen aus Markdown. Zero Setup, standardmäßig schnell, SEO-freundlich und KI-bereit."
 titleAppend: false
 ---
@@ -11,71 +11,57 @@ titleAppend: false
 Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisches HTML für SEO. SPA für Geschwindigkeit. Standardmäßig KI-bereit.
 
 ::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
+::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
 :::
 
-## Start
+## Übersicht
 
-Starten Sie eine produktionsreife Dokumentationsseite in Sekunden — ohne Boilerplate, ohne Konfigurationsdateien.
+docmd ist ein Zero-Config-Dokumentationsgenerator. Er erstellt hochperformante statische Websites direkt aus Ihren Markdown-Dateien.
 
 ```bash
 npx @docmd/core dev
 ```
 
-Das ist alles. Schreiben Sie Markdown in einen `docs/`-Ordner und docmd erstellt eine vollständige Dokumentationsseite mit Navigation, Suche, SEO, Sitemap und mehr — alles direkt einsatzbereit.
+Ein einzelner Befehl. Die Engine erstellt automatisch Ihre Website, generiert Navigation und aktiviert die sofortige Suche.
 
 ## Kernfunktionen
 
-Alles, was Sie brauchen, ist bereits enthalten. Keine Plugins für die Essentials erforderlich.
+Alles, was für weltklasse Dokumentation benötigt wird, ist bereits enthalten. Keine komplexen Plugins für die Essentials erforderlich.
 
 ::: grids
 ::: grid
 ::: card "Sofortiges Setup" icon:rocket
-Ein Befehl, um von Markdown-Dateien zu einer produktionsreifen Dokumentationsseite zu gelangen. Keine Konfigurationsdateien erforderlich.
+Ohne Boilerplate-Code sofort anfangen. Die Engine erkennt Dateien automatisch und erstellt in Sekunden die Navigationsstruktur.
 :::
 :::
 ::: grid
 ::: card "KI-optimiert" icon:brain-circuit
-Generiert automatisch `llms.txt` und `llms-full.txt` für die Nutzung von LLMs. Ihre Dokumentation ist standardmäßig KI-bereit.
+Generiert automatisch `llms.txt` und `llms-full.txt`. Halten Sie Ihre Dokumentation für KI-Modelle verdaubar.
 :::
 :::
 ::: grid
-::: card "Integrierte Suche" icon:search
-Clientseitige Volltextsuche, unterstützt durch MiniSearch. Funktioniert über Versionen und Sprachen hinweg ohne Konfiguration.
+::: card "Lokale Suche" icon:search
+Schnelle clientseitige Volltextsuche mit MiniSearch. Funktioniert sofort über Versionen und Sprachen hinweg.
 :::
 :::
 ::: grid
 ::: card "Live-Vorschau" icon:monitor
-Betten Sie interaktive, editierbare Code-Sandboxes direkt in Ihre Dokumentationsseiten ein.
+Betten Sie interaktive, editierbare Code-Sandboxes direkt in Ihre Seiten ein für sofortige Experimente.
 :::
 :::
 ::: grid
-::: card "Theming-Engine" icon:palette
-Wechseln Sie zwischen integrierten Themes oder erstellen Sie Ihr eigenes. Unterstützt Hell-, Dunkel- und System-Modus.
+::: card "Flexible Themes" icon:palette
+Wechseln Sie zwischen integrierten Themes oder wenden Sie benutzerdefiniertes Styling an. Vollständige Unterstützung für dunklen Modus und Systemvoreinstellungen.
 :::
 :::
 ::: grid
-::: card "Native i18n" icon:globe
-Erstklassige Mehrsprachigkeitsunterstützung mit sprachspezifischen URLs, Suche pro Sprache und übersetzten UI-Strings.
+::: card "Native Internationalisierung" icon:globe
+Erstklassige i18n-Unterstützung. Beinhaltet sprachpriorisiertes Routing, eigenständige Suchindizes und übersetzte UI-Strings.
 :::
 :::
 :::
 
-## Markdown erweitern
-
-Gehen Sie über statischen Text hinaus. docmd bietet eine reiche Container-Syntax direkt in Markdown — Callouts, Tabs, Karten, Raster, Hero-Bereiche, ausklappbare Abschnitte und mehr.
-
+::: callout info "Umfangreiche Content-Container"
+Gehen Sie über Standard-Markdown hinaus. Verwenden Sie strukturierte visuelle Muster wie Schritte, Tabs, Karten, Raster und Callouts direkt in Ihrem Text.
 ::: button "Container erkunden" ./content/containers/index.md icon:blocks
-
-::: grids
-::: grid
-::: card "Interaktive Sandboxes"
-Betten Sie interaktive, editierbare Vorschaufenster natürlich in Ihre Seiten ein, indem Sie die [Live Preview](./content/live-preview.md) API nutzen.
-:::
-:::
-::: grid
-::: card "Inline-Kollaboration"
-Wählen Sie Text im Entwicklungsmodus aus, um [Threads](./plugins/threads.md) zu öffnen und Kommentare mit Ihrem Dokumentationsteam zu hinterlassen.
-:::
-:::
 :::

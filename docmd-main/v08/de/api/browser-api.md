@@ -1,6 +1,6 @@
 ---
 title: "Browser-API (Clientseitig)"
-description: "Interagieren Sie vom Browser aus mit docmd — Live-Kompilierung und Plugin-Kommunikation im Entwicklungsmodus."
+description: "Interagieren Sie vom Browser aus mit docmd - Live-Kompilierung und Plugin-Kommunikation im Entwicklungsmodus."
 ---
 
 `docmd` bietet zwei Browser-APIs: die **isomorphe Compile-Engine** zum Rendern von Markdown im Browser und die **Plugin-API für den Entwicklungsmodus** für die Echtzeitkommunikation mit dem Dev-Server.
