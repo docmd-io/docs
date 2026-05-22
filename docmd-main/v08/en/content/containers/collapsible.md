@@ -3,73 +3,82 @@ title: "Collapsible Sections"
 description: "Embed interactive accordion-style toggles for FAQs, deep-dive content, and spoilers."
 ---
 
-The `collapsible` container creates an interactive, toggleable section (accordion). This pattern is ideal for FAQs, detailed technical configuration, or any secondary information that should be accessible without cluttering the primary documentation flow.
+The `collapsible` container creates an interactive, toggleable accordion. It is ideal for FAQs and detailed technical configuration, keeping secondary information accessible without cluttering the primary view.
 
 ::: callout info "VitePress Alias"
-If you're migrating from **VitePress**, you can use `:::details` as an alias for `:::collapsible`. Spaceless syntax like `:::collapsible` also works.
+If migrating from VitePress, use `:::details` as an alias for `:::collapsible`. Spaceless syntax like `:::collapsible` also works.
 :::
 
-## Syntax
+## Syntax Reference
 
 ```markdown
-::: collapsible [open] "Title Text"
-  Main content goes here.
+::: collapsible [open] "Title text" [property:value...]
+Main content goes here.
 :::
 ```
 
-### Options Reference
-- **`open`**: (Optional) If specified, the section initializes in an expanded state.
-- **`"Title"`**: The text rendered on the interactive toggle bar. Defaults to "Click to expand" if omitted.
-- **`icon:NAME`**: (Optional) Adds a [Lucide](external:https://lucide.dev/icons) icon before the title text.
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| **Open State** | `open` | Optional. If provided, the section initialises in an expanded state. |
+| **Title** | `"String"` | The text rendered on the toggle bar. Defaults to "Click to expand". |
+| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the title text. |
 
-## Detailed Implementation Examples
+## Examples
 
-### Standard Usage (Initial State: Closed)
-Primarily used for FAQs or reducing the visual density of technical pages.
+### Default State
+
+A collapsible section is closed by default. Ideal for FAQs and reducing visual density.
 
 ```markdown
 ::: collapsible "How do I upgrade docmd?"
-  Run `npm update -g @docmd/core` to fetch the latest stable engine.
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 ```
+
 ::: collapsible "How do I upgrade docmd?"
-  Run `npm update -g @docmd/core` to fetch the latest stable engine.
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
-### Opt-In Visibility (Initial State: Open)
-Ideal for sections that should be visible by default but allow the user to minimise them for a cleaner view.
+### Initially Open
+
+Use the `open` flag for sections that should be visible by default but allow users to minimise them.
 
 ```markdown
 ::: collapsible open "Environment Prerequisites"
-  1.  Node.js v18+ (LTS recommended)
-  2.  PNPM package manager
+1. Node.js v18+ (LTS recommended)
+2. PNPM package manager
 :::
 ```
+
 ::: collapsible open "Environment Prerequisites"
-1.  Node.js v18+ (LTS recommended)
-2.  PNPM package manager
+1. Node.js v18+ (LTS recommended)
+2. PNPM package manager
 :::
 
-### Nested Technical Data
-Collapsibles can contain complex Markdown elements, including syntax-highlighted code blocks.
+### Rich Content
+
+Collapsibles can contain any Markdown, including syntax-highlighted code blocks.
 
 ````markdown
-::: collapsible "Analyze Sample JSON Response"
-  ```json
-  {
-    "status": "success",
-    "data": { "version": "0.6.2" }
-  }
-  ```
+::: collapsible "Sample JSON Response"
+```json
+{
+  "status": "success",
+  "data": { "version": "0.8.2" }
+}
+```
 :::
 ````
-::: collapsible "Analyse Sample JSON Response"
-```javascript
+
+::: collapsible "Sample JSON Response"
+```json
+{
   "status": "success",
-  "data": { "version": "0.6.2" }
+  "data": { "version": "0.8.2" }
+}
 ```
 :::
 
 ::: callout tip
-While content inside a `collapsible` may be hidden from the human user, it remains fully visible to the `docmd` search index and is included in the unified `llms-full.txt` stream. This ensures AI agents can provide comprehensive answers based on hidden technical details while the human-facing interface remains clean and prioritized.
+Content inside a `collapsible` is fully indexed by search and included in the `llms.txt` stream. AI agents can answer questions based on hidden technical details while keeping the human-facing interface clean.
 :::

@@ -1,66 +1,64 @@
 ---
 title: "Code Blocks"
-description: "Document technical implementations with high-fidelity syntax highlighting and interactive copy buttons."
+description: "Document technical implementations with syntax highlighting, file titles, and one-click copying."
 ---
 
-`docmd` utilises the ultra-fast `lite-hl` engine to provide automatic, context-aware syntax highlighting across hundreds of programming languages and configuration formats.
+docmd uses the ultra-fast `lite-hl` engine for automatic, context-aware syntax highlighting. Specify the language identifier on every fenced block to ensure the correct lexical rules apply.
 
 ## Syntax Highlighting
 
-Author your technical examples using standard Markdown fenced code blocks. Always specify the language identifier to ensure the highlight engine applies the correct lexical rules.
+Always name the language after the opening fence. The highlighter applies grammar rules specific to that ecosystem.
 
 ````markdown
-```javascript
-function initialise() {
-  console.log("docmd engine active.");
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
 }
 ```
 ````
 
-**Rendered Result:**
-
-```javascript
-function initialise() {
-  console.log("docmd engine active.");
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
 }
 ```
 
 ## Block Titles
 
-You can provide a descriptive title (like a filename) for your code blocks by following the language identifier with a string in double quotes. This renders a premium header above the code block.
+Follow the language identifier with a quoted filename to render a labelled header above the block. This is useful for referencing configuration files and source paths directly.
 
 ````markdown
-```javascript "initialise.js"
-function initialise() {
-  console.log("docmd engine active.");
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
 }
 ```
 ````
 
-**Rendered Result:**
-
-```javascript "initialise.js"
-function initialise() {
-  console.log("docmd engine active.");
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
 }
 ```
 
+## Language Support
+
+docmd supports common technical ecosystems out of the box:
+
+*   **Logic:** `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`
+*   **Web:** `html`, `css`, `markdown`
+*   **Data & Shell:** `json`, `yaml`, `bash`, `powershell`, `dockerfile`
+*   **Documentation:** `mermaid`, `changelog`
+
+## AI Context Strategy
+
+When documenting code for AI agents, follow these practices:
+
+1.  **Label every block explicitly** — use `typescript`, `bash`, `json` rather than relying on auto-detection. This ensures the parser applies the correct grammar for the `llms.txt` stream.
+2.  **Embed intent in comments** — inline comments explain complex logic and provide critical reasoning context directly inside the code.
+
 ::: callout tip "One-Click Portability"
-When `copyCode: true` is enabled in your configuration (default), a subtle copy button automatically appears in the top-right corner of every code block on hover, allowing users to instantly transfer snippets to their IDE.
+Set `copyCode: true` in your configuration to enable a subtle copy button. It appears on the top-right of every block on hover, allowing readers to copy snippets instantly.
 :::
-
-## Strategy for AI Context
-
-When documenting code for consumption by LLMs and AI Agents, adhere to these technical best practices:
-
-1.  **Strict Language Labeling**: Explicitly labeling blocks as `typescript`, `bash`, or `json` ensures the AI parser accurately interprets the block's grammar within the `llms-full.txt` stream.
-2.  **Embedded Intent**: Use inline comments within your code blocks to explain the *why* behind complex logic. This provides the AI with critical reasoning context that simple text outside the block might lack.
-
-## Language Support Reference
-
-`docmd` provides out-of-the-box support for the most common technical ecosystems, including:
-
-*   **Logic**: `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`.
-*   **Web**: `html`, `css`, `markdown`.
-*   **Data & Shell**: `json`, `yaml`, `bash`, `powershell`, `dockerfile`.
-*   **Documentation**: `mermaid`, `changelog`.

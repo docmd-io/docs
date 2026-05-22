@@ -22,7 +22,7 @@ my-docs/
 
 ## Automatic Copying
 
-When you run `docmd build` or `docmd dev`:
+When you run `npx @docmd/core build` or `npx @docmd/core dev`:
 1.  **The Mirroring Logic**: The entire contents of your `assets/` folder are recursively copied to `site/assets/`.
 2.  **Stability**: We use a hardened copy engine with automatic retries to prevent "File Busy" or "ENOENT" errors on macOS and modern SSDs.
 3.  **Referencing**: You should always reference assets from your Markdown or Config using the **root-relative** path:
@@ -35,15 +35,17 @@ When you run `docmd build` or `docmd dev`:
 To link your assets to every page, add them to your theme configuration:
 
 ```json
+{
   "theme": {
     "customCss": ["/assets/css/branding.css"]
   },
   "customJs": ["/assets/js/utils.js"]
+}
 ```
 
 ::: callout info "AI Recognition Strategy :robot:"
 
-*   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header color".
+*   **Organise by type**: Keep `/css`, `/js`, and `/images` separate. This helps AI agents locate relevant styles or scripts instantly when you ask them to "edit the header colour".
 *   **Use Descriptive Filenames**: Naming an image `authentication-flow-diagram.png` provides much more context to the `llms.txt` crawler than `img_01.png`.
 
 :::

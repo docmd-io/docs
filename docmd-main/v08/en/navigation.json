@@ -24,6 +24,11 @@
     ]
   },
   {
+    "title": "Comparison",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
     "title": "Configuration",
     "icon": "settings",
     "collapsible": true,
@@ -47,7 +52,7 @@
       {
         "title": "Localisation",
         "path": "/configuration/localisation",
-        "collapsible": false,
+        "collapsible": true,
         "children": [
           {
             "title": "Translated Content",
@@ -76,7 +81,7 @@
   {
     "title": "Writing Content",
     "icon": "pencil-line",
-    "collapsible": false,
+    "collapsible": true,
     "children": [
       {
         "title": "Frontmatter",
@@ -100,7 +105,7 @@
             "path": "/content/syntax/linking"
           },
           {
-            "title": "Advanced",
+            "title": "Advanced Formatting",
             "path": "/content/syntax/advanced"
           }
         ]
@@ -115,20 +120,20 @@
             "path": "/content/containers/callouts"
           },
           {
-            "title": "Tabs",
-            "path": "/content/containers/tabs"
-          },
-          {
-            "title": "Steps",
-            "path": "/content/containers/steps"
-          },
-          {
             "title": "Cards",
             "path": "/content/containers/cards"
           },
           {
             "title": "Grids",
             "path": "/content/containers/grids"
+          },
+          {
+            "title": "Tabs",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "Steps",
+            "path": "/content/containers/steps"
           },
           {
             "title": "Collapsible",
@@ -139,15 +144,15 @@
             "path": "/content/containers/buttons"
           },
           {
-            "title": "Hero Sections",
-            "path": "/content/containers/hero"
-          },
-          {
             "title": "Tags",
             "path": "/content/containers/tags"
           },
           {
-            "title": "URL Embed",
+            "title": "Hero Sections",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL Embeds",
             "path": "/content/containers/embed"
           },
           {
@@ -181,7 +186,7 @@
       },
       {
         "title": "Customisation",
-        "path": "/theming/customization"
+        "path": "/theming/customisation"
       },
       {
         "title": "Light & Dark Mode",
@@ -196,7 +201,7 @@
         "path": "/theming/icons"
       },
       {
-        "title": "Assets",
+        "title": "Assets Management",
         "path": "/theming/assets-management"
       }
     ]
@@ -207,7 +212,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Using Plugins",
+        "title": "Overview",
         "path": "/plugins/usage"
       },
       {
@@ -215,7 +220,7 @@
         "path": "/plugins/search"
       },
       {
-        "title": "Git",
+        "title": "Git Integration",
         "path": "/plugins/git"
       },
       {
@@ -243,7 +248,7 @@
         "path": "/plugins/mermaid"
       },
       {
-        "title": "PWA",
+        "title": "PWA Support",
         "path": "/plugins/pwa"
       },
       {
@@ -261,25 +266,6 @@
     ]
   },
   {
-    "title": "Engines",
-    "icon": "cpu",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "Overview",
-        "path": "/engines/overview"
-      },
-      {
-        "title": "JavaScript Engine",
-        "path": "/engines/js"
-      },
-      {
-        "title": "Rust Engine",
-        "path": "/engines/rust"
-      }
-    ]
-  },
-  {
     "title": "Deployment",
     "icon": "upload-cloud",
     "collapsible": true,
@@ -287,6 +273,10 @@
       {
         "title": "Build & Deploy",
         "path": "/deployment"
+      },
+      {
+        "title": "Deployer Package",
+        "path": "/deployment/deployer-package"
       },
       {
         "title": "Docker",
@@ -323,60 +313,6 @@
     ]
   },
   {
-    "title": "Migration",
-    "icon": "arrow-right-left",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "Overview",
-        "path": "/migration/overview"
-      },
-      {
-        "title": "Docusaurus",
-        "path": "/migration/docusaurus"
-      },
-      {
-        "title": "MkDocs",
-        "path": "/migration/mkdocs"
-      },
-      {
-        "title": "VitePress",
-        "path": "/migration/vitepress"
-      },
-      {
-        "title": "Astro Starlight",
-        "path": "/migration/starlight"
-      }
-    ]
-  },
-  {
-    "title": "API Reference",
-    "icon": "braces",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "CLI Commands",
-        "path": "/api/cli-commands"
-      },
-      {
-        "title": "Node API",
-        "path": "/api/node-api"
-      },
-      {
-        "title": "Browser API",
-        "path": "/api/browser-api"
-      },
-      {
-        "title": "Client Events",
-        "path": "/api/client-side-events"
-      },
-      {
-        "title": "Live Editor API",
-        "path": "/api/live-api"
-      }
-    ]
-  },
-  {
     "title": "Guides",
     "icon": "book-open",
     "collapsible": true,
@@ -408,6 +344,10 @@
           {
             "title": "Large Repositories",
             "path": "/guides/scaling-architecture/organising-large-repositories"
+          },
+          {
+            "title": "Workspace & Monorepo",
+            "path": "/guides/scaling-architecture/workspace-monorepo"
           }
         ]
       },
@@ -584,17 +524,85 @@
     ]
   },
   {
-    "title": "Comparison",
-    "path": "/comparison",
-    "icon": "scale"
+    "title": "Migration",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Overview",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
+    "title": "API Reference",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "CLI Commands",
+        "path": "/api/cli-commands"
+      },
+      {
+        "title": "Node API",
+        "path": "/api/node-api"
+      },
+      {
+        "title": "Browser API",
+        "path": "/api/browser-api"
+      },
+      {
+        "title": "Client Events",
+        "path": "/api/client-side-events"
+      },
+      {
+        "title": "Live Editor API",
+        "path": "/api/live-api"
+      }
+    ]
+  },
+  {
+    "title": "Engines",
+    "icon": "cpu",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Overview",
+        "path": "/engines/overview"
+      },
+      {
+        "title": "JavaScript Engine",
+        "path": "/engines/js"
+      },
+      {
+        "title": "Rust Engine",
+        "path": "/engines/rust"
+      }
+    ]
   },
   {
     "title": "Release Notes",
     "icon": "package-check",
-    "collapsible": false,
+    "collapsible": true,
     "children": [
       {
-        "title": "v0.8.4 - Security & Deployer V2",
+        "title": "v0.8.4 - Deployer & Security",
         "path": "/release-notes/0-8-4"
       },
       {

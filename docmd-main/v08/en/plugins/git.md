@@ -3,7 +3,7 @@ title: "Git Plugin"
 description: "Repository-aware metadata, last-updated timestamps, and automated edit links derived from Git history."
 ---
 
-The `@docmd/plugin-git` plugin adds repository intelligence to your documentation. It automatically displays when each page was last modified, who contributed to it, and provides an optional "Edit this page" link—all extracted directly from your Git history at build-time.
+The `@docmd/plugin-git` plugin adds repository intelligence to your documentation. It extracts data directly from Git history at build time. It displays when a page was last modified, who contributed, and provides an optional "Edit this page" link.
 
 ## Configuration
 
@@ -14,12 +14,13 @@ The `@docmd/plugin-git` plugin adds repository intelligence to your documentatio
 | `editLink` | `boolean` | `true` | Show "Edit this page" link when `repo` is set. |
 | `lastUpdated` | `boolean` | `true` | Show last updated timestamp. |
 | `commitHistory` | `boolean` | `true` | Show commit history tooltip on hover. |
-| `maxCommits` | `number` | `6` | Maximum commits to show in the tooltip (only applicable if `commitHistory` is `true`). |
+| `maxCommits` | `number` | `6` | Maximum commits to show in the tooltip (if `commitHistory` is true). |
 | `dateFormat` | `string` | `'relative'` | Timestamp format: `relative` (default), `iso`, or `locale-aware`. |
 
-### Usage
+### Example
 
 ```json
+{
   "plugins": {
     "git": {
       "repo": "https://github.com/org/repo",
@@ -30,23 +31,24 @@ The `@docmd/plugin-git` plugin adds repository intelligence to your documentatio
       "maxCommits": 5
     }
   }
+}
 ```
 
 ## Features
 
 - **Last Updated Timestamps**: Automatically shows when a page was last modified in the footer.
-- **Commit History Tooltip**: Hovering over the timestamp reveals a list of recent commits for that specific page.
+- **Commit History Tooltip**: Hovering over the timestamp reveals recent commits for that specific page.
 - **Automated Edit Links**: Provides a link to edit the source file on GitHub, GitLab, or Bitbucket.
-- **Performance-First**: Git history is queried once and cached at build-time, ensuring zero impact on site performance.
+- **Performance-First**: Git history is queried once and cached at build time. This ensures zero impact on site performance.
 
-## Usage
+## Behaviour
 
 Once configured, the plugin works automatically. Timestamps and edit links appear in the page footer.
 
 ### Footer Example
 
 ::: callout info "Rendering Result"
-The footer of this page (and all others in this documentation) is rendered by the Git plugin. Scroll to the bottom to see it in action—hover over the **Last updated** date to see the commit history.
+The footer of this page is rendered by the Git plugin. Scroll to the bottom to see it in action. Hover over the **Last updated** date to see the commit history.
 :::
 
 ## Per-Page Control
@@ -63,9 +65,9 @@ plugins:
 
 ## CI/CD Integration
 
-The Git plugin reads your repository history at build-time using local Git commands. Many CI/CD providers use "shallow clones" by default (fetching only the last commit), which will cause the plugin to only show the most recent change across all pages.
+The Git plugin reads your repository history at build time using local Git commands. Many CI/CD providers use "shallow clones" by default (fetching only the last commit). This causes the plugin to show only the most recent change across all pages.
 
-To ensure accurate timestamps and history, you must configure your CI environment to perform a full fetch.
+To ensure accurate timestamps and history, configure your CI environment to perform a full fetch.
 
 ::: tabs
 
@@ -91,12 +93,12 @@ variables:
 
 == tab "Netlify"
 
-Netlify fetches the full history by default. However, if you have issues, ensure your build command has access to the `.git` directory. No additional configuration is usually required.
+Netlify fetches the full history by default. If you encounter issues, ensure your build command has access to the `.git` directory.
 
 :::
 
 ::: callout warning "Git Data Requirement"
-The `.git` directory must be present in the build environment for the plugin to function. If you are building inside a Docker container or a restricted CI environment, ensure the Git history is preserved and that the `git` binary is installed.
+The `.git` directory must be present in the build environment. If building inside a Docker container or restricted CI environment, ensure Git history is preserved and the `git` binary is installed.
 :::
 
 ## Localisation

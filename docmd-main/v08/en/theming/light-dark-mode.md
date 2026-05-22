@@ -3,7 +3,7 @@ title: "Light & Dark Mode"
 description: "How to configure the default viewing mode and manage the theme switcher for the best user experience."
 ---
 
-`docmd` provides built-in support for light and dark color schemes. It detects user system preferences automatically and allows manual overrides via a UI toggle.
+`docmd` provides built-in support for light and dark colour schemes. It detects user system preferences automatically and allows manual overrides via a UI toggle.
 
 <!-- SCREENSHOT: Split-screen showing the same documentation page in light mode (left) and dark mode (right), with the theme toggle button circled in both. -->
 
@@ -13,10 +13,12 @@ description: "How to configure the default viewing mode and manage the theme swi
 You specify the starting state of your documentation in `docmd.config.json`.
 
 ```json
+{
   "theme": {
     "name": "sky",
-    "appearance": "system" 
+    "appearance": "system"
   }
+}
 ```
 
 *   **`system`**: Matches the user's OS preference (Recommended).
@@ -27,12 +29,14 @@ You specify the starting state of your documentation in `docmd.config.json`.
 
 The theme switcher is part of the **Options Menu**. You can control its visibility and position within the `layout` object.
 
-```javascript
-layout: {
-  "optionsMenu": {
-    "position": "header", 
-    components: {
-      "themeSwitch": true  
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "themeSwitch": true
+      }
     }
   }
 }
@@ -48,7 +52,7 @@ The theme engine applies a `data-theme` attribute to the `<body>` tag:
 If you are using a themed design like `sky`, the attribute will be `sky-light` or `sky-dark`.
 
 ### CSS Variables
-`docmd` themes use CSS variables for all colors. You can override these variables in your own CSS to customise the look of either mode.
+`docmd` themes use CSS variables for all colours. You can override these variables in your own CSS to customise the look of either mode.
 
 ```css
 /* Custom CSS override */

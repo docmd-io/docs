@@ -50,7 +50,7 @@ Your readers shouldn't download a React app just to read a paragraph. Here's wha
 | Mintlify | ~120 KB | ~80 KB | ~40 KB |
 | Docusaurus | ~250 KB | ~200 KB | ~50 KB |
 
-::: callout tip "Why this matters"
+::: callout tip "Why this matters" icon:lightbulb
 Every 100 KB of JavaScript costs ~50ms of parse time on a mid-range phone. docmd's 12 KB JS means your docs load instantly, even on 3G. Docusaurus ships 16× more JavaScript for the same content.
 :::
 
@@ -80,7 +80,7 @@ This is where most tools fall apart. You add 6 languages, translate 3 pages in H
 | Versioning + i18n combined | ✅ | ❌ | ❌ | ❌ |
 | Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
 
-::: callout warning "What happens in VitePress and Docusaurus"
+::: callout warning "What happens in VitePress and Docusaurus" icon:info
 If a reader switches to Hindi and that page isn't translated, they get a **404 error**. The only workaround is server-side redirects or writing a custom React/Vue component. docmd handles this at build time - unavailable locales show an "N/A" badge, and untranslated pages fall back silently with a localised warning callout.
 :::
 
@@ -98,16 +98,18 @@ Organisations maintaining multiple tools under one domain need separate docs for
 | Single `site/` output (no proxy needed) | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Zero-config detection | ✅ | ❌ | ❌ | ❌ | ❌ |
 
-::: callout info "How docmd does it"
+::: callout info "How docmd does it" icon:info
 ```json
 {
-  "projects": [
-    { "prefix": "/", "src": "main-docs" },
-    { "prefix": "/sdk", "src": "sdk-docs" }
-  ]
+  "workspace": {
+    "projects": [
+      { "prefix": "/", "src": "main-docs", "title": "Docs" },
+      { "prefix": "/sdk", "src": "sdk-docs", "title": "SDK" }
+    ]
+  }
 }
 ```
-Each project folder has its own `docmd.config.json` with independent configuration. One `docmd build` produces a single deployable directory — no reverse proxy, no nginx, no separate CI pipelines.
+Each project folder has its own `docmd.config.json` with independent configuration. One `npx @docmd/core build` produces a single deployable directory - no reverse proxy, no nginx, no separate CI pipelines.
 :::
 
 Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native workspace support.
@@ -144,7 +146,7 @@ Lines of config required for a site with versioning, i18n, search, and sitemap:
 
 docmd ships with a brute test suite that validates **25 distinct scenarios** across **85 assertions** - covering every feature in isolation and in combination. Every release must pass all 85 assertions and 13 internal failsafe checks before shipping.
 
-::: callout tip "Run the tests yourself"
+::: callout tip "Run the tests yourself" icon:lightbulb
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js

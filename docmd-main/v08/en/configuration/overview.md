@@ -1,16 +1,15 @@
 ---
 title: "General Configuration"
-description: "Configure docmd.config.json schema, branding, layout, and engine features."
+description: "Configure docmd.config.json to manage branding, custom schemas, routing, layout behaviour, and build engines."
 ---
 
-The `docmd.config.json` file serves as the definitive configuration for your documentation project. It controls site structure, branding, UI behaviour, and engine-level processing rules.
+The `docmd.config.json` file is the central configuration for your workspace. It controls site styling, sidebar hierarchies, localisation details, and compiler options.
 
-## The Configuration File
+## 1. The Configuration Schema
 
-::: callout tip "JSON is the New Standard"
-Starting in version 0.8.0, `docmd.config.json` is the standard and recommended configuration format. It allows for safe, high-performance serialisation across docmd's new multi-threaded worker pools.
-Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully supported if you require dynamic JavaScript logic.
-:::
+JSON is the standard configuration format. This allows high-performance serialisation across the engine's worker pools. 
+
+However, `docmd.config.js` and `docmd.config.ts` remain fully supported if you need dynamic JavaScript logic.
 
 ```json
 {
@@ -18,29 +17,29 @@ Fallback to `docmd.config.js` and `docmd.config.ts` is still valid and fully sup
   "url": "https://docs.myproject.com",
   "src": "docs",
   "out": "site",
-  "tmp": ".cache/docmd"
+  "base": "/"
 }
 ```
 
-## Core Settings
+## 2. Core Settings
 
-`docmd` utilises a simple configuration schema. Below are the primary top-level settings:
+These top-level parameters configure the compiler's base inputs and destinations.
 
-| Key | Description | Default |
-| :--- | :--- | :--- |
-| `title` | The name of your documentation site. Used in the header and browser titles. | `Documentation` |
-| `url` | Your production base URL. Critical for SEO, Sitemaps, and OpenGraph. | `null` |
-| `src` | The relative path to the directory containing your Markdown files. | `docs` |
-| `out` | The relative path for the generated static site output. | `site` |
-| `tmp` | Configurable destination path for internal caches and build-time temporary files. If omitted, defaults to the device's isolated OS temp folder nested securely by project hash. | `null` |
-| `base` | The base path if hosting in a subfolder (e.g., `/docs/`). | `/` |
-| `i18n` | Configuration for [multi-language support](localisation/index.md). | `null` |
-| `plugins` | Configuration for any standard or custom [plugins](../plugins/usage.md). | `{}` |
-| `engine` | Build engine: `"js"` (default) or `"rust"` (preview). See [Engine Architecture](../release-notes/0-8-1.md). | `"js"` |
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `title` | `String` | `"Documentation"` | The formal name of your site. Appears in navigation headers and browser title tabs. |
+| `url` | `String` | `null` | Your canonical production URL. Critical for SEO validation, Sitemap indexing, and OpenGraph metadata. |
+| `src` | `String` | `"docs"` | Relative path to the folder containing your source Markdown (.md) files. |
+| `out` | `String` | `"site"` | Relative path where the compiler writes the optimised production static site. |
+| `base` | `String` | `"/"` | The root base path of your site (e.g., set to `/docs/` if hosting in a subfolder). |
+| `tmp` | `String` | `null` | Custom directory for temporary compile files and caching. Defaults to an isolated system temp folder. |
+| `i18n` | `Object` | `null` | Multi-language parameters. See the [Localisation Guide](localisation/translated-content.md). |
+| `plugins` | `Object` | `{}` | Key-value mapping to configure standard and custom plugins. See [Plugins Guide](../plugins/usage.md). |
+| `engine` | `String` | `"js"` | The active processing engine: `"js"` or `"rust"` (preview). |
 
-## Branding & Identity
+## 3. Branding & Identity
 
-Configure how your brand is represented in the navigation header and browser tabs.
+Manage how your brand appears in the header and browser tabs.
 
 ```json
 {
@@ -55,15 +54,37 @@ Configure how your brand is represented in the navigation header and browser tab
 }
 ```
 
-## Site Layout & UI
+## 4. UI Layout & Behaviour
 
-`docmd` features a modular layout system. You can toggle UI components like the **Sidebar**, **Header**, **Menubar**, and **Global Search** via the `layout` object.
+The engine provides a modular header and sidebar layout. Customise functional regions. Change component visibility like search and dark-mode toggles. Enable or disable breadcrumbs.
 
-For a full breakdown of functional zones and configuration options, see [Layout & UI Zones](layout-ui.md).
+```json
+{
+  "layout": {
+    "spa": true,
+    "header": {
+      "enabled": true
+    },
+    "sidebar": {
+      "collapsible": true,
+      "defaultCollapsed": false
+    },
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "search": true,
+        "themeSwitch": true
+      }
+    }
+  }
+}
+```
 
-## Core Engine Features
+See the [Layout & UI Zones](layout-ui.md) guide for full visual customisation options.
 
-Fine-tune how `docmd` processes and renders your documentation content.
+## 5. Core Engine Features
+
+Fine-tune how the parser processes your content files.
 
 ```json
 {
@@ -77,23 +98,14 @@ Fine-tune how `docmd` processes and renders your documentation content.
 }
 ```
 
-| Feature | Description | Default |
-| :--- | :--- | :--- |
-| `markdown.breaks` | Converts `\n` in paragraphs into `<br>`. Set to `false` to disable and allow 80-column line limits. | `true` |
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `minify` | `Boolean` | `true` | Compresses output HTML and JS structures for maximum speed. |
+| `autoTitleFromH1` | `Boolean` | `true` | Resolves missing page titles using the first H1 header in the file. |
+| `copyCode` | `Boolean` | `true` | Displays a "Copy Code" button on the top-right of syntax blocks. |
+| `pageNavigation` | `Boolean` | `true` | Generates a right-hand "On This Page" table of contents automatically. |
+| `markdown.breaks` | `Boolean` | `true` | Standardises line breaks. Set to `false` if you wrap markdown lines at 80 columns. |
 
-## Legacy Support
-
-If you are upgrading from an older version of `docmd`, the following keys are automatically mapped to the modern schema for backward compatibility:
-
-*   `siteTitle` → `title`
-*   `siteUrl` / `baseUrl` → `url`
-*   `srcDir` / `source` → `src`
-*   `outDir` / `outputDir` → `out`
-
-::: callout tip
-Execute `docmd migrate` to automatically upgrade your configuration file to the latest schema while preserving a backup of your original settings.
-:::
-
-::: callout warning "Deprecated: editLink"
-The standalone `editLink` configuration option has been deprecated in favour of the [Git plugin](../plugins/git.md). The Git plugin provides the same edit link functionality plus additional features like last-updated timestamps and commit history tooltips. See the [migration guide](../plugins/git.md#migration-from-editlink) for details.
+::: callout warning "Standalone editLink Deprecated" icon:alert-triangle
+The standalone `editLink` configuration is deprecated. Use the core [Git plugin](../plugins/git.md) instead. It provides identical edit link functionality alongside commit timestamps and metadata logs.
 :::

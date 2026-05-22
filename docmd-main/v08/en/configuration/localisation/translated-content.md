@@ -3,11 +3,11 @@ title: "Translated Content"
 description: "Organise translations in locale subdirectories with per-file fallback and per-locale navigation."
 ---
 
-## Directory structure
+## Directory Structure
 
-Every locale - including the default - lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
+Every locale lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
 
-```
+```text
 docs/
 ├── en/                     ← default locale content
 │   ├── index.md
@@ -23,32 +23,32 @@ docs/
     └── index.md            ← only the homepage translated
 ```
 
-The source directory is a clean container - it holds only locale folders. No content files sit at the root level when i18n is enabled.
+The source directory holds only locale folders. No content files sit at the root level when i18n is enabled.
 
-::: callout info "Folder names are your choice"
-The folder names come directly from the `id` values in your config. If your config says `{ id: 'fr-ca' }`, your folder is `docs/fr-ca/`. If Hindi is your default locale (`default: 'hi'`), then `docs/hi/` is the canonical content directory.
+::: callout info "Folder Names Are Your Choice" icon:info
+Folder names match the `id` values in your config. If your config sets `{ id: 'fr-ca' }`, your folder is `docs/fr-ca/`.
 :::
 
-## Per-file fallback
+## Per-file Fallback
 
-You don't need to translate every page. docmd scans the **default locale's directory** as the canonical list of pages. For every other locale, it checks whether a translated version of each page exists:
+You do not need to translate every page. docmd scans the **default locale directory** as the canonical structure. For every other locale, it checks for a translated page:
 
-- If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation
-- If it doesn't exist → serves the default locale's version of that page
+- If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation.
+- If it does not exist → serves the default locale version.
 
-When a page falls back, docmd can display a translated callout informing viewers that the page is shown in the default language. This message is customisable via your [UI strings](ui-strings.md) configuration.
+When a page falls back, docmd displays a translated callout. This informs viewers the page is shown in the default language. Customise this message via your [UI strings](ui-strings.md) configuration.
 
-## Locale-exclusive pages
+## Locale-Exclusive Pages
 
-A non-default locale can also have pages that don't exist in the default locale. These are rendered only for that locale - they don't appear in other locales.
+A non-default locale can host pages that do not exist in the default locale. These render only for that specific locale.
 
-## Translate the navigation
+## Translate the Navigation
 
-Each locale directory can have its own `navigation.json`. `docmd` uses a cascading priority system (Level 1-3) to resolve the sidebar.
+Each locale directory can include its own `navigation.json`. docmd uses a cascading priority system to resolve the sidebar.
 
-For details on the resolution hierarchy and visual examples, see [Navigation Resolution Priority](../navigation.md#navigation-resolution-priority).
+For details on the resolution hierarchy, see [Navigation Configuration](../navigation.md).
 
-A locale's `navigation.json` uses the same format:
+A locale's `navigation.json` uses the standard format:
 
 ```json
 [
@@ -62,37 +62,28 @@ A locale's `navigation.json` uses the same format:
 ]
 ```
 
-::: callout tip "Partial navigation"
-You only need to create a locale `navigation.json` when you want translated labels. If it's missing, the default locale's navigation is used - pages still render, just with untranslated labels.
+::: callout tip "Partial Navigation" icon:info
+Create a locale `navigation.json` only when you want translated labels. If missing, the default navigation is used.
 :::
 
-## Versioning and i18n together
+## Versioning and i18n
 
-When both versioning and i18n are configured, the source structure is:
+When combining versioning and i18n, structure the source directories hierarchically:
 
-```
-docs/                    ← current version (container)
+```text
+docs/                    ← current version
   en/                    ← current version, default locale
   hi/                    ← current version, translated locale
-docs-v1/                 ← old version
-  index.md               ← old version content (no locale structure)
-  navigation.json
-```
-
-Old versions that predate i18n work automatically - docmd reads them directly when no locale subdirectories are present. Only the default locale renders the old version. To add translations to an old version, create a locale subdirectory inside it:
-
-```
-docs-v1/
-  hi/                    ← Hindi translation for v1
-    index.md
-    navigation.json
+docs-v1/                 ← previous version
+  en/                    ← v1, default locale
+  hi/                    ← v1, translated locale
 ```
 
 The output URLs nest locale first, then version:
 
-```
+```text
 /                        ← default locale, current version
 /hi/                     ← translated locale, current version
-/v1/                     ← default locale, old version
-/hi/v1/                  ← translated locale, old version
+/v1/                     ← default locale, previous version
+/hi/v1/                  ← translated locale, previous version
 ```

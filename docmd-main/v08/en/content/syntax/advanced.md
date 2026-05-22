@@ -1,82 +1,106 @@
 ---
 title: "Advanced Markdown Syntax"
-description: "Leverage docmd's extended feature set: Custom attributes, GFM extensions, and semantic definitions."
+description: "Extended formatting features: task lists, custom element attributes, footnotes, and semantic definitions."
 ---
 
-Beyond standard Markdown, `docmd` supports several high-fidelity extensions derived from GitHub Flavored Markdown (GFM) and custom attribute plugins. These tools provide total control over your document's structure and styling.
+Beyond standard Markdown, docmd supports high-fidelity extensions derived from GitHub Flavored Markdown (GFM) and custom attribute plugins. These tools provide fine-grained control over document structure and styling.
 
-## GFM Extensions
+## Task Lists
 
-### Task Lists
-Create interactive or read-only checklists for roadmap tracking.
+Create interactive or read-only checklists for roadmap tracking and release planning.
+
 ```markdown
-- [x] Engine Optimisation Complete
-- [ ] Plugin API Finalization
+- [x] Engine optimisation complete
+- [ ] Plugin API finalisation
+- [ ] Documentation audit
 ```
-- [x] Engine Optimisation Complete
-- [ ] Plugin API Finalization
 
-### Automatic Link Resolution
-Standard URLs and email addresses are automatically identified and linked without additional markup: `https://docmd.io`
+- [x] Engine optimisation complete
+- [ ] Plugin API finalisation
+- [ ] Documentation audit
 
-### Shortcode Emojis
-`docmd` supports standard shortcodes to inject visual personality into your documentation.
-> We :heart: high-performance documentation! :rocket: :smile:
+## Emojis
+
+Use standard shortcodes to add visual personality. Emoji codes render inline with surrounding text.
+
+```markdown
+We :heart: high-performance documentation! :rocket: :sparkles:
+```
+
+We :heart: high-performance documentation! :rocket: :sparkles:
 
 ## Custom Element Attributes
 
-Assign unique IDs and CSS classes directly to headers, images, and links using the curly-brace `{}` syntax. This is the primary method for applying [Custom CSS Styles](../../theming/custom-css-js.md).
+Assign unique IDs and CSS classes to headings, images, and links using the `{}` syntax.
 
-### Unique Semantic IDs
+### Custom IDs
+
 Useful for deep-linking directly to technical subsections.
+
 ```markdown
 ## Performance Benchmarks {#benchmarks-2026}
 ```
 
-### Functional CSS Classes
-Apply styling utilities to specific elements.
+### CSS Classes
+
+Apply styling utilities to specific elements without touching your CSS.
+
 ```markdown
-## Center-Aligned Section {.text-center .text-blue}
+## Centre-Aligned Section {.text-centre .text-blue}
 ```
 
-### Actionable Button Links
-Transform any standard markdown link into a styled call-to-action button.
+### Button-Style Links
+
+Transform any standard Markdown link into a styled call-to-action button.
+
 ```markdown
 [Download Latest Release](#download){.docmd-button}
 ```
 
-## Citations & Definitions
+## Footnotes
 
-### Footnote References
-Add citations or technical deep-dives[^1] that are automatically collected and rendered at the bottom of the page.
+Add citations or technical deep-dives as footnotes. The engine automatically collects and renders them at the page bottom.
 
 ```markdown
-Architectural decisions are documented in the RFC[^1].
+Architectural decisions are documented in the RFC.[^1]
 
 [^1]: RFC-42: Isomorphic Rendering Pipeline.
 ```
 
-### Definition Lists
+Architectural decisions are documented in the RFC.[^1]
+
+[^1]: RFC-42: Isomorphic Rendering Pipeline.
+
+## Definition Lists
+
 Perfect for API parameter descriptions and glossaries.
 
 ```markdown
 PropName
 : The unique identifier for the configuration key.
+
+DefaultValue
+: The value used when no override is specified.
 ```
 
 PropName
 : The unique identifier for the configuration key.
 
-### Technical Abbreviations
+DefaultValue
+: The value used when no override is specified.
+
+## Abbreviations
+
 Define abbreviations globally within a page. Hovering over the term reveals its full definition.
 
 ```markdown
 *[SPA]: Single Page Application
 The docmd router enables a seamless SPA experience.
 ```
+
 *[SPA]: Single Page Application
 The docmd router enables a seamless SPA experience.
 
 ::: callout tip "Contextual Precision for AI"
-Utilising **Definitions** and **Abbreviations** provides high-quality technical signals to AI agents. When an AI processes your `llms-full.txt` context, these explicit definitions prevent lexical ambiguity, ensuring the model generates logically correct explanations for your project's specific terminology.
+Definitions and abbreviations provide high-quality technical signals to AI agents. Explicit semantic definitions prevent lexical ambiguity in the `llms.txt` context stream.
 :::

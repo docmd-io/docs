@@ -1,35 +1,47 @@
 ---
 title: URL Embeds
-description: How to safely embed dynamic components, videos, and social media directly into your documents.
+description: Safely embed dynamic video, social, and interactive content directly into your documents.
 ---
 
-`docmd` ships natively with the highly-optimised **[embed-lite](external:https://github.com/mgks/embed-lite)** parser ecosystem. This allows you to aggressively map raw external URLs strictly onto the page, transforming them beautifully into completely secure, zero-latency UI components instantly!
+docmd ships natively with the highly-optimised **[embed-lite](external:https://github.com/mgks/embed-lite)** parser. It transforms external URLs into secure, zero-latency UI components automatically.
 
 ## Supported Platforms
-The integrated engine natively exposes structured formatters targeting the following networks identically:
-*   **Video Ecosystem:** YouTube (including native 9:16 Shorts support), Vimeo, Dailymotion, TikTok
-*   **Social Connections:** X (Twitter), Reddit, Instagram, Facebook, LinkedIn
+
+The engine natively supports structured formatters for the following networks:
+
+*   **Video:** YouTube (including Shorts), Vimeo, Dailymotion, TikTok
+*   **Social:** X (Twitter), Reddit, Instagram, Facebook, LinkedIn
 *   **Code & Prototyping:** GitHub Gists, CodePen, Figma, Google Maps
-*   **Music Services:** Spotify, SoundCloud
+*   **Music:** Spotify, SoundCloud
 
-## Usage Syntax
-You simply use the `::: embed` container followed by any destination URL. All three enclosing formats are equivalent:
+## Syntax Reference
 
-```md
+```markdown
+::: embed "target_url"
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| **URL** | `"String"` | The absolute URL of the external resource to embed (e.g., a YouTube video, Figma file, or GitHub Gist). |
+
+## Examples
+
+### Video Embed
+
+Paste any YouTube, Vimeo, or TikTok URL to render a native, responsive player.
+
+```markdown
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 ```
 
-### Standard Result Example
-The rendering engine strictly parses that URL in the background, checking the validation matrix, and structurally injects native HTML nodes directly onto your page output gracefully:
-
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 
-## Fallback Safety
-Don't worry about generating broken screens. If the internal parser scans an unverified or strictly unavailable domain configuration mapping, `docmd` gracefully falls back to generating a simple, solid `<a>` hyperlink button mapping explicitly out to the target:
+### Fallback Behaviour
 
-```md
+If the parser encounters an unsupported or invalid URL, docmd gracefully falls back to a hyperlink button rather than breaking the page.
+
+```markdown
 ::: embed "https://docs.docmd.io/content/containers/embed/"
 ```
-*(Proceeds to generate exactly what you would see below)*
 
 ::: embed "https://docs.docmd.io/content/containers/embed/"

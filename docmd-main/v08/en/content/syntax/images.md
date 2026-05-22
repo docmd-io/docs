@@ -1,37 +1,39 @@
 ---
 title: "Images & Visual Media"
-description: "Master media management: Responsive images, styling attributes, and automated Lightbox effects."
+description: "Embed responsive images, apply styling attributes, and enable interactive lightbox zoom."
 ---
 
-`docmd` utilises standard Markdown syntax for media integration. We recommend centralizing your media assets in the `assets/images/` directory within your project source.
+docmd uses standard Markdown syntax for images. Centralise your media assets in the `assets/images/` directory within your project source for clean, consistent references.
 
 ```markdown
-![Technical Diagram](/assets/images/architecture.png "Optional Tooltip Title")
+![Alt text](/assets/images/architecture.png "Optional tooltip title")
 ```
 
-## Technical Styling Reference
+![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
 
-Assign specialised CSS classes and attributes directly to your images using the `{ .class }` attribute syntax.
+## Sizing
 
-### Dynamic Resizing
+Apply a size class using the `{ }` attribute syntax. Three predefined sizes are available.
+
 ```markdown
-![Small Scale](/assets/icon.png){ .size-small }
-![Standard View](/assets/preview.png){ .size-medium }
-![Full Scale](/assets/banner.png){ .size-large }
+![Small icon](/assets/icon.png){ .size-small }
+![Standard view](/assets/preview.png){ .size-medium }
+![Full width banner](/assets/banner.png){ .size-large }
 ```
 
-### Alignment & Layout
+## Alignment & Decoration
+
+Combine alignment and decoration classes in a single attribute block.
+
 ```markdown
-![Centered Focus](/assets/img.png){ .align-center }
-![Floating Right](/assets/img.png){ .align-right .with-shadow .with-border }
+![Centred diagram](/assets/img.png){ .align-centre }
+![Floating right with shadow](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
+## Figure Captions
 
-## Structured Media Elements
+Use the standard HTML5 `<figure>` element for precise, accessible image captioning.
 
-### Figure Captions
-For precise, accessible media captioning, use standard HTML5 `<figure>` elements.
 ```html
 <figure>
   <img src="/assets/diagram.png" alt="Cloud Infrastructure Diagram">
@@ -39,8 +41,9 @@ For precise, accessible media captioning, use standard HTML5 `<figure>` elements
 </figure>
 ```
 
-### Image Galleries
-Organise multiple assets into a responsive, balanced grid using the `image-gallery` class.
+## Image Galleries
+
+Wrap multiple figures in a `div.image-gallery` to produce a responsive, balanced grid.
 
 ```html
 <div class="image-gallery">
@@ -55,14 +58,14 @@ Organise multiple assets into a responsive, balanced grid using the `image-galle
 </div>
 ```
 
-## Interactive Lightbox Zoom
+## Lightbox Zoom
 
-If the `mainScripts` component is active (default), `docmd` automatically applies a full-screen zoom effect to any image contained within a gallery or any image tagged with the `.lightbox` class.
+When `mainScripts` is active, docmd automatically applies a full-screen zoom effect to any image tagged with the `.lightbox` class or placed inside a gallery.
 
 ```markdown
-![Deep Texture Analysis](/assets/sample.png){ .lightbox }
+![Deep texture analysis](/assets/sample.png){ .lightbox }
 ```
 
-::: callout tip "AI Context & Accessibility"
-Always provide comprehensive **Alt-Text** for visual media. While advanced AI models possess vision capabilities, descriptive text within the Markdown source provides a direct, high-fidelity signal for the model's reasoning engine - enhancing architectural analysis and feature comprehension in the `llms-full.txt` stream.
+::: callout tip "AI Context & Accessibility" icon:sparkles
+Always provide descriptive **alt text** for every image. Meaningful alt text is a direct, high-fidelity signal for AI agents parsing the `llms.txt` stream and improves accessibility for screen reader users.
 :::

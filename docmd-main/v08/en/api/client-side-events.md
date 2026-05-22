@@ -3,9 +3,9 @@ title: "Client-Side Events"
 description: "Hook into the docmd SPA lifecycle to add interactive features."
 ---
 
-`docmd` utilises a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
+docmd uses a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
 
-To handle this, `docmd` dispatches custom lifecycle events that you can listen for in your `customJs` files.
+To handle this, docmd dispatches custom lifecycle events that you can listen for in your `customJs` files.
 
 ## `docmd:page-mounted`
 
@@ -19,9 +19,6 @@ Add a listener to the `document` object to re-initialise third-party libraries o
 document.addEventListener("docmd:page-mounted", (event) => {
   const { url } = event.detail;
   console.log(`Navigated to: ${url}`);
-
-  
-  
 });
 ```
 
@@ -34,5 +31,5 @@ document.addEventListener("docmd:page-mounted", (event) => {
 ## Best Practices
 
 1.  **Idempotency**: Ensure your initialisation logic can be safely called multiple times on the same page or cleaned up before the next navigation.
-2.  **Global Scope**: Scripts added via `customJs` are executed in the global scope. Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the `window` object.
+2.  **Global Scope**: Scripts added via `customJs` execute in the global scope. Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the `window` object.
 3.  **Cleanup**: If your script adds global event listeners (e.g., `window.onresize`), consider tracking the current path to remove them when the user navigates away.

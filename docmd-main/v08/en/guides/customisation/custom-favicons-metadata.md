@@ -5,21 +5,21 @@ description: "How to configure your site's visual identity in the browser and op
 
 ## Problem
 
-A default documentation site often lacks a distinct visual identity in the browser (using a generic favicon) and provides poor previews when links are shared on social media or communication tools like Slack and Discord. This reduces brand recognition and click-through rates.
+A default documentation site often lacks a distinct visual identity in the browser. It uses generic favicons and provides poor previews when links are shared on social media or communication tools. This reduces brand recognition and click-through rates.
 
 ## Why it matters
 
-Your favicon is the primary visual anchor in a crowded browser window. High-quality OpenGraph and Twitter metadata ensure that your documentation looks professional and trustworthy when shared, providing context through titles, descriptions, and hero images.
+Your favicon is the primary visual anchor in a crowded browser window. High-quality OpenGraph and Twitter metadata ensure your documentation looks professional and trustworthy when shared. This provides context through titles, descriptions, and hero images.
 
 ## Approach
 
-`docmd` provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, leverage the [SEO Plugin](../../plugins/seo.md), which automates the generation of meta tags based on your project configuration and page frontmatter.
+docmd provides a built-in `favicon` property for easy icon configuration. For advanced SEO and social metadata, use the [SEO Plugin](../../plugins/seo.md). This automates the generation of meta tags based on your project configuration and page frontmatter.
 
 ## Implementation
 
 ### 1. Configuring the Favicon
 
-Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source directory and reference it in your `docmd.config.json`. `docmd` will automatically handle the relative pathing and cache-busting.
+Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source directory and reference it in your `docmd.config.json`. docmd will automatically handle the relative pathing and cache-busting.
 
 ```json
   "title": "My Project",
@@ -31,7 +31,7 @@ Place your favicon file (e.g., `favicon.svg` or `favicon.ico`) in your source di
 Enable and configure the [SEO Plugin](../../plugins/seo.md) to set default social media previews for your entire site.
 
 ```json
-  "url": "https:
+  "url": "https://docs.example.com",
   "plugins": {
     "seo": {
       "defaultDescription": "The ultimate guide to our amazing software.",

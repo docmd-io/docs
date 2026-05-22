@@ -3,13 +3,13 @@ title: "UI Strings & SEO"
 description: "Customise system UI text per locale and understand automatic SEO tags for multi-language sites."
 ---
 
-## Built-in language support
+## Built-in Language Support
 
-docmd and its official plugins (Search, Threads, etc.) ship with built-in translations for common languages. When you configure a supported locale, all system text - search placeholders, navigation labels, theme toggles - is automatically translated.
+docmd and its official plugins ship with built-in translations for common languages. When you configure a supported locale, the engine automatically translates system text like search placeholders, navigation labels, and theme toggles.
 
 For unsupported languages or custom phrasing, the system falls back to English. You can override any string per locale.
 
-## Custom UI strings
+## Custom UI Strings
 
 Use the `translations` property on any locale to override system text:
 
@@ -40,29 +40,15 @@ Use the `translations` property on any locale to override system text:
 
 The merge order is: **system translations → plugin translations → your config translations**. Your config always wins.
 
-## Available keys
+## Available Keys
 
-| Key | Default (English) |
-|:----|:-------------------|
-| `skipToContent` | Skip to main content |
-| `toggleSidebar` | Toggle Sidebar |
-| `previous` | Previous |
-| `next` | Next |
-| `onThisPage` | On This Page |
-| `search` | Search |
-| `toggleTheme` | Toggle theme |
-| `selectLanguage` | Select Language |
-| `selectVersion` | Select Version |
-| `editThisPage` | Edit this page |
-| `builtWith` | Built with |
-| `copyCode` | Copy code |
-| `copiedToClipboard` | Copied! |
-| `mainNavigation` | Main Navigation |
-| `fallbackMessage` | This page is not yet available in {active}. Showing default language ({default}). |
+Instead of hardcoding a list of available keys, you can review the complete set of supported languages and translation keys directly in the docmd source repository.
 
-The `fallbackMessage` key supports `{active}` and `{default}` placeholders, replaced with locale labels at build time.
+**[View Translation Source on GitHub](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
 
-## SEO and hreflang
+The `fallbackMessage` key supports `{active}` and `{default}` placeholders. The engine replaces these with locale labels at build time.
+
+## SEO and Hreflang
 
 docmd automatically generates `<link rel="alternate" hreflang="...">` tags for every page across all locales. The default locale also receives the `x-default` hreflang value.
 
@@ -74,8 +60,8 @@ docmd automatically generates `<link rel="alternate" hreflang="...">` tags for e
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-No configuration is required - these tags are injected into every page when i18n is enabled.
+No configuration is required. The engine injects these tags into every page when i18n is enabled.
 
-::: callout info "noStyle Pages"
-The UI strings system described above applies to themed layout pages (server-side). For noStyle pages that use custom HTML, see the [client-side string replacement](../../content/no-style-pages/#string-replacement-i18n-for-nostyle) system which uses `data-i18n` attributes and JSON files in `assets/i18n/`.
+::: callout info "noStyle Pages" icon:info
+The UI strings system applies to themed layout pages. For noStyle pages using custom HTML, see [Client-Side String Replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 :::

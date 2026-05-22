@@ -3,50 +3,58 @@ title: "Quick Start"
 description: "Go from an empty folder to a running documentation site in under a minute."
 ---
 
-Run docmd inside any folder containing Markdown files. No config file, no setup, no framework knowledge required.
+Run docmd inside any folder with Markdown files. No config file, setup, or framework knowledge required.
 
-## Start a dev server
+## 1. Start a dev server
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core dev
 ```
 :::
 
-Opens `http://localhost:3000`. Your documentation is live.
+This opens `http://localhost:3000`. Your documentation is live.
 
-<!-- SCREENSHOT: Terminal output after running docmd dev showing the local dev server URL and build summary with page count. -->
+<!-- SCREENSHOT: Terminal window showing a successful local dev server startup, with the green local access URL http://localhost:3000 and initial build statistics. -->
 
-## What happens automatically
+::: callout tip "Automatic Port Failover" icon:info
+If port `3000` is in use, docmd automatically finds the next available port (e.g., `3001`).
+:::
 
-docmd scans your project and sets everything up:
+## 2. Automatic features
 
-1. **Directory detection** - looks for `docs/`, `src/docs/`, `documentation/`, or any `.md` files
-2. **Navigation generation** - builds a nested sidebar from your folder structure
-3. **Metadata extraction** - reads `package.json` for the site title if available
-4. **Theme activation** - applies the default theme with system-aware light/dark mode
-5. **Search indexing** - enables built-in full-text search
+The engine sets up everything automatically:
 
-No `docmd.config.json` is needed. Add one later when you need versioning, plugins, or custom navigation.
+1.  **Directory Detection**: Scans for `docs/`, `src/docs/`, `documentation/`, or `.md` files.
+2.  **Navigation Structuring**: Builds a nested sidebar from your folder tree.
+3.  **Title Resolution**: Extracts page titles from the first `H1` tag automatically.
+4.  **Search Indexing**: Enables built-in full-text search immediately.
+5.  **Smart Caching**: Triggers sub-200ms rebuilds instantly on file save.
 
-## Build for production
+No `docmd.config.json` is required. Add one later to customise layouts, plugins, or versions.
+
+## 3. Build for production
+
+Compile your Markdown files into a static, production-ready site.
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
 npx @docmd/core build
 ```
-
 == tab "Bun" icon:zap
 ```bash
 bunx @docmd/core build
 ```
 :::
 
-Outputs a static site to `./site/`, ready to deploy anywhere.
+The compiler outputs a static site to `./site/`. 
+
+<!-- SCREENSHOT: Terminal output showing a successful production build with compilation times, sitemap generation, and total page count summary. -->
+
+Host this static output anywhere. Deploy to GitHub Pages, Vercel, Netlify, or any static host.

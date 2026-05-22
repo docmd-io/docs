@@ -15,18 +15,20 @@ The LLM plugin is enabled by default. To function correctly, you must provide a 
 | `fullContext` | `boolean` | `true` | If true, generates a `llms-full.txt` file containing the content of all pages. |
 | `maxTokenLimit` | `number` | `null` | Optional limit on the total characters/tokens for context files. |
 
-### Usage
+### Example
 
 ```json
-  "url": "https:
+{
+  "url": "https://docs.example.com",
   "plugins": {
     "llms": {
       "fullContext": true
     }
   }
+}
 ```
 
-## Usage
+## Generated Output
 
 Once configured, the plugin automatically generates `llms.txt` and `llms-full.txt` in your site root during every build. These files are linked in the page `<head>` for automatic discovery by AI tools.
 

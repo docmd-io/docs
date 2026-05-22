@@ -3,46 +3,47 @@ title: "Using Plugins"
 description: "Install, configure, and manage docmd plugins - from required defaults to optional add-ons."
 ---
 
-`docmd` features a modular plugin architecture. Required plugins ship with the core and need no installation. Optional plugins can be installed with a single CLI command.
+docmd features a modular plugin architecture. Required plugins ship with the core and need no installation. Optional plugins can be installed with a single CLI command.
 
 ## Installing Plugins
 
-Use the `docmd` CLI to install and remove plugins:
+Use the docmd CLI to install and remove plugins:
 
 ```bash
 # Install a plugin
-docmd add <plugin-name>
+npx @docmd/core add <plugin-name>
 
 # Remove a plugin
-docmd remove <plugin-name>
+npx @docmd/core remove <plugin-name>
 ```
 
-The installer automatically detects your package manager (npm, pnpm, yarn, or bun), resolves short names to full package names, and injects the plugin config into your `docmd.config.json`.
+The installer detects your package manager (npm, pnpm, yarn, or bun). It resolves short names to full package names and injects the config into your `docmd.config.json`.
 
 Use `--verbose` (or `-V`) for full installer output:
 
 ```bash
-docmd add <plugin-name> -V
+npx @docmd/core add <plugin-name> -V
 ```
 
 ## Required Plugins
 
-These plugins are bundled with `@docmd/core` - no installation needed. Enable them in your `docmd.config.json`:
+These plugins are bundled with `@docmd/core`. No installation is needed. Enable them in your `docmd.config.json`:
 
 ```json
   "plugins": {
-    "search": {},                        
-    "seo": { "aiBots": false },            
-    "sitemap": {},                       
-    "analytics": {},                     
-    "llms": {},                          
-    "mermaid": {},                       
-    "git": {}                            
+    "search": {},
+    "seo": { "aiBots": false },
+    "sitemap": {},
+    "analytics": {},
+    "llms": {},
+    "mermaid": {},
+    "openapi": {},
+    "git": {}
   }
 ```
 
 ::: callout tip "Git Plugin"
-The Git plugin automatically detects if your project is in a Git repository. If not, it gracefully disables itself. No configuration is needed for basic last-updated timestamps - just ensure your docs are in a Git repo.
+The Git plugin detects if your project is a Git repository. If not, it disables itself automatically. No configuration is required for last-updated timestamps.
 :::
 
 ## Optional Plugins
@@ -51,13 +52,13 @@ Optional plugins require installation before enabling.
 
 | Plugin | Install Command | Description |
 | :--- | :--- | :--- |
-| [PWA](pwa.md) | `docmd add pwa` | Progressive Web App support with offline caching |
-| [Threads](threads.md) | `docmd add threads` | Inline discussion comments stored in your markdown |
-| [Math](math.md) | `docmd add math` | Native KaTeX and LaTeX mathematics integration |
+| [PWA](pwa.md) | `npx @docmd/core add pwa` | Progressive Web App support with offline caching |
+| [Threads](threads.md) | `npx @docmd/core add threads` | Inline discussion comments stored in Markdown |
+| [Math](math.md) | `npx @docmd/core add math` | Native KaTeX and LaTeX mathematics rendering |
 
 ## Auto-Installation
 
-When you add an official plugin to your `docmd.config.json` that isn't installed, docmd automatically downloads and installs it on the next build. This works for all plugins in the [official registry](/plugins/usage).
+When you add an official plugin to your `docmd.config.json` without installing it, docmd automatically downloads and installs it on the next build. This works for all plugins in the official registry.
 
 ```json
 {
@@ -68,21 +69,21 @@ When you add an official plugin to your `docmd.config.json` that isn't installed
 ```
 
 The auto-installer:
-- Only works for official `@docmd/plugin-*` packages listed in the docmd registry
-- Installs the exact version matching your `@docmd/core` version
-- Uses your project's package manager (npm, pnpm, yarn, or bun)
-- Shows progress in the terminal
+- Only targets official `@docmd/plugin-*` packages.
+- Installs the exact version matching your `@docmd/core` installation.
+- Uses your project's active package manager.
+- Displays progress directly in the terminal.
 
 ## Third-Party & Custom Plugins
 
-Because `docmd add <plugin>` and the auto-installer strictly enforce an official registry allowlist for security, third-party and custom community plugins must be installed natively using your package manager:
+For security, the installer enforces an official registry allowlist. Third-party plugins must be installed natively using your package manager:
 
 ```bash
 npm install my-custom-plugin
 # or pnpm add, yarn add, bun add
 ```
 
-After installation, simply add the plugin to your `docmd.config.json` using its exact package name as the key:
+After installation, add the plugin to your `docmd.config.json` using its exact package name:
 
 ```json
 {
@@ -94,15 +95,15 @@ After installation, simply add the plugin to your `docmd.config.json` using its 
 }
 ```
 
-If the plugin fulfills docmd's plugin requirements, it will be automatically loaded and activated during the build. If it is not recognized or fails to load, docmd will report an error in the console.
+If the plugin meets docmd's requirements, it activates automatically during the build. Otherwise, the engine reports an error.
 
 ## Plugin Scopes and `noStyle` Overrides
 
-Plugins inject CSS and behaviour by default globally across all pages. However, you can explicitly configure them to bypass specific pages or entirely disable their execution on unstyled landing templates (`noStyle: true`).
+Plugins inject CSS and behaviour globally. However, you can configure them to bypass specific pages or entirely disable their execution on unstyled landing pages (`noStyle: true`).
 
 ### Global Config Extent
 
-You can instruct any plugin to automatically skip injecting into `noStyle` pages via your `docmd.config.json`:
+Instruct any plugin to automatically skip `noStyle` pages via your `docmd.config.json`:
 
 ```json
 {
@@ -116,7 +117,7 @@ You can instruct any plugin to automatically skip injecting into `noStyle` pages
 
 ### Page Local Scope (Frontmatter)
 
-Regardless of your global config (or what the plugin developer set by default), you can definitively enable or disable any plugin uniquely per-document via markdown frontmatter.
+You can definitively enable or disable any plugin per-document via markdown frontmatter.
 
 ```markdown
 ---
@@ -135,25 +136,25 @@ Plugins hook into different stages of the build and development process:
 
 | Hook | Description |
 | :--- | :--- |
-| `markdownSetup(md, opts)` | Extend the Markdown parser with custom rules or containers |
-| `generateMetaTags(config, page, root)` | Inject `<meta>` and `<link>` tags into the `<head>` |
-| `generateScripts(config, opts)` | Inject scripts into `<head>` or `</body>` |
-| `getAssets(opts)` | Define external files or CDN scripts to inject |
-| `onPostBuild(ctx)` | Run logic after all HTML files are generated |
-| `translations(localeId)` | Return translated UI strings for a locale |
-| `actions` | Server-side handlers callable from the browser via WebSocket RPC |
-| `events` | Fire-and-forget handlers for browser-pushed events |
+| `markdownSetup(md, opts)` | Extend the Markdown parser with custom rules. |
+| `generateMetaTags(config, page, root)` | Inject `<meta>` and `<link>` tags into the `<head>`. |
+| `generateScripts(config, opts)` | Inject scripts into `<head>` or `</body>`. |
+| `getAssets(opts)` | Define external files or CDN scripts to inject. |
+| `onPostBuild(ctx)` | Run logic after all HTML files finish generating. |
+| `translations(localeId)` | Return translated UI strings for a locale. |
+| `actions` | Server-side handlers callable via WebSocket RPC. |
+| `events` | Fire-and-forget handlers for browser-pushed events. |
 
 ## Plugin Safety
 
-The plugin system provides built-in safety guarantees:
+The plugin system guarantees build safety:
 
-- **Validation**: Plugins can declare a `plugin` descriptor with `name`, `version`, and `capabilities`. Invalid descriptors are rejected at load time.
-- **Isolation**: Every hook invocation is wrapped in a try/catch boundary. A broken plugin cannot crash the build or affect other plugins.
-- **Capability Enforcement**: Plugins that declare capabilities can only register for hooks they've explicitly declared. Undeclared hooks are skipped with a warning.
+- **Validation**: Invalid plugin descriptors are rejected instantly at load time.
+- **Isolation**: Every hook invocation is wrapped in a try/catch block. A broken plugin cannot crash the build.
+- **Capability Enforcement**: Plugins can only register for explicitly declared hooks.
 
 See [Building Plugins](building-plugins.md) for the full API reference.
 
 ::: callout tip "AI-Transparent Architecture :robot:"
-The plugin architecture is designed to be **deterministic**. Every meta-tag and script injected by a plugin is traceable, allowing AI agents (and human developers) to understand exactly how the site behaves without hidden side effects.
+The architecture is **deterministic**. Every meta-tag and script is traceable. AI agents can understand exactly how the site behaves without hidden side effects.
 :::

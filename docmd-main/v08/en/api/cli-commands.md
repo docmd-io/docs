@@ -7,15 +7,15 @@ description: "Command-line reference for docmd - all available commands and opti
 
 | Command | Description |
 |:--------|:------------|
-| [`docmd init`](#docmd-init) | Scaffold a new documentation project |
-| [`docmd dev`](#docmd-dev) | Start the development server with hot reload |
-| [`docmd build`](#docmd-build) | Generate a production static site |
-| [`docmd live`](#docmd-live) | Launch the browser-based Live Editor |
-| [`docmd stop`](#docmd-stop) | Kill running dev servers |
-| [`docmd deploy`](#docmd-deploy) | Generate deployment configs (Docker, Nginx, Caddy, GitHub Pages, Vercel, Netlify) |
-| [`docmd migrate`](#docmd-migrate) | Upgrade legacy configs to V2 schema |
-| [`docmd add <plugin>`](#docmd-add-plugin) | Install and configure a plugin |
-| [`docmd remove <plugin>`](#docmd-remove-plugin) | Remove a plugin and its config |
+| [`npx @docmd/core init`](#npx-docmdcore-init) | Scaffold a new documentation project |
+| [`npx @docmd/core dev`](#npx-docmdcore-dev) | Start the development server with hot reload |
+| [`npx @docmd/core build`](#npx-docmdcore-build) | Generate a production static site |
+| [`npx @docmd/core live`](#npx-docmdcore-live) | Launch the browser-based Live Editor |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Kill running dev servers |
+| [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment configs |
+| [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configs or migrate from other tools |
+| [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Install and configure a plugin |
+| [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Remove a plugin and its config |
 
 ## Global Options
 
@@ -27,12 +27,12 @@ description: "Command-line reference for docmd - all available commands and opti
 | `--help` | `-h` | Display help menu |
 | `--cwd <path>` | - | Override working directory (for monorepos) |
 
-## `docmd init`
+## `npx @docmd/core init`
 
 Scaffold a new documentation project in the current directory.
 
 ```bash
-docmd init
+npx @docmd/core init
 ```
 
 Creates:
@@ -40,12 +40,12 @@ Creates:
 - `docmd.config.json` - recommended defaults
 - Updated `package.json` with build scripts
 
-## `docmd dev`
+## `npx @docmd/core dev`
 
 Start a development server with instant hot reload.
 
 ```bash
-docmd dev [options]
+npx @docmd/core dev [options]
 ```
 
 | Option | Alias | Description |
@@ -53,12 +53,12 @@ docmd dev [options]
 | `--port <number>` | `-p` | Server port (default: `3000`) |
 | `--config <path>` | `-c` | Path to config file |
 
-## `docmd build`
+## `npx @docmd/core build`
 
 Generate a production-ready static site in `site/`.
 
 ```bash
-docmd build [options]
+npx @docmd/core build [options]
 ```
 
 | Option | Alias | Description |
@@ -66,24 +66,24 @@ docmd build [options]
 | `--offline` | - | Rewrite links to `.html` for `file://` browsing |
 | `--config <path>` | `-c` | Path to config file |
 
-## `docmd live`
+## `npx @docmd/core live`
 
 Launch the browser-based Live Editor.
 
 ```bash
-docmd live [options]
+npx @docmd/core live [options]
 ```
 
 | Option | Description |
 |:-------|:------------|
 | `--build-only` | Generate the editor bundle without starting the server |
 
-## `docmd stop`
+## `npx @docmd/core stop`
 
-Kill running docmd dev servers.
+Kill running dev servers.
 
 ```bash
-docmd stop [options]
+npx @docmd/core stop [options]
 ```
 
 | Option | Alias | Description |
@@ -91,12 +91,12 @@ docmd stop [options]
 | `--port <number>` | `-p` | Stop only the server on this port |
 | `--force` | `-f` | Also kill `serve` processes on ports 3000, 3001, 8080, 8081 |
 
-## `docmd deploy`
+## `npx @docmd/core deploy`
 
 Generate deployment configuration files.
 
 ```bash
-docmd deploy [options]
+npx @docmd/core deploy [options]
 ```
 
 | Option | Description |
@@ -109,43 +109,43 @@ docmd deploy [options]
 | `--netlify` | Generate `netlify.toml` |
 | `--force` | Overwrite existing deployment files |
 
-## `docmd migrate`
+## `npx @docmd/core migrate`
 
-Upgrade legacy docmd V1 configs to the V2 schema.
+Migrate from another tool or upgrade configs.
 
 ```bash
-docmd migrate
+npx @docmd/core migrate
 ```
 
 Automatically re-maps deprecated keys (e.g., `siteTitle` → `title`) and restructures the config object.
 
-## `docmd add <plugin>`
+## `npx @docmd/core add <plugin>`
 
 Install and configure an official or community plugin.
 
 ```bash
-docmd add <plugin-name>
+npx @docmd/core add <plugin-name>
 ```
 
 | Example | Description |
 |:--------|:------------|
-| `docmd add analytics` | Install `@docmd/plugin-analytics` |
-| `docmd add search` | Install `@docmd/plugin-search` |
+| `npx @docmd/core add analytics` | Install `@docmd/plugin-analytics` |
+| `npx @docmd/core add search` | Install `@docmd/plugin-search` |
 
 The CLI detects your package manager (npm, pnpm, yarn, or bun) and injects recommended defaults into `docmd.config.json`.
 
-## `docmd remove <plugin>`
+## `npx @docmd/core remove <plugin>`
 
 Safely uninstall a plugin and clean up its config.
 
 ```bash
-docmd remove <plugin-name>
+npx @docmd/core remove <plugin-name>
 ```
 
 Removes:
 - The npm package
 - Plugin configuration from `docmd.config.json`
 
-::: callout tip "Agent-Compatible Logging :robot:"
-`docmd` uses structured terminal logging. AI agents can parse output precisely for error detection and automated maintenance.
+::: callout tip "Agent-Compatible Logging" icon:sparkles
+docmd uses structured terminal logging. AI agents can parse output precisely for error detection and automated maintenance.
 :::

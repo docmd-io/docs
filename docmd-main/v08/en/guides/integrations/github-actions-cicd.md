@@ -1,19 +1,19 @@
 ---
 title: "GitHub Actions CI/CD"
-description: "How to automate your documentation builds and deployments using GitHub Actions and docmd for a high-velocity documentation workflow."
+description: "How to automate your documentation builds and deployments using GitHub Actions and docmd for a high-velocity workflow."
 ---
 
 ## Problem
 
-Building and deploying documentation manually from a local machine is prone to errors, environment inconsistencies (e.g., differing Node.js versions), and security risks. It also creates a bottleneck, as deployments depend on a single individual's availability and local setup.
+Building and deploying documentation manually from a local machine is prone to errors, environment inconsistencies, and security risks. It creates a bottleneck, as deployments depend on a single individual's availability.
 
 ## Why it matters
 
-Continuous Deployment (CD) ensures that your documentation is always in sync with your software. When a technical update is merged, it should reach your users within minutes, not days. Automation guarantees that every build happens in a clean, reproducible environment, maintaining high standards of quality and reliability.
+Continuous Deployment (CD) ensures your documentation is always in sync with your software. When a technical update is merged, it should reach users within minutes. Automation guarantees every build happens in a clean, reproducible environment, maintaining quality and reliability.
 
 ## Approach
 
-Leverage GitHub Actions to run the `docmd` build pipeline on every push or Pull Request. The resulting static assets can then be automatically deployed to hosting providers like GitHub Pages, Cloudflare Pages, or containerized environments using Docker.
+Use GitHub Actions to run the docmd build pipeline on every push or Pull Request. The resulting static assets can be automatically deployed to hosting providers like GitHub Pages, Cloudflare Pages, or containerised environments using Docker.
 
 ## Implementation
 
@@ -56,7 +56,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-### 2. Containerized Deployment (Docker)
+### 2. Containerised Deployment (Docker)
 
 If you host your own documentation, use the [Deploy Command](../../deployment/index.md) to generate a production-ready `Dockerfile` and server configurations.
 
@@ -65,12 +65,12 @@ If you host your own documentation, use the [Deploy Command](../../deployment/in
 npx @docmd/core deploy --docker --nginx
 ```
 
-You can then update your GitHub Action to build and push this Docker image to a registry (like Docker Hub or GitHub Container Registry) whenever you release a new version.
+You can update your GitHub Action to build and push this Docker image to a registry (like Docker Hub or GitHub Container Registry) whenever you release a new version.
 
 ### 3. Pull Request Previews
 
-Enhance your workflow by generating ephemeral preview environments for every Pull Request. This allows reviewers to see the rendered documentation before it is merged into the main branch. See the [Previewing Changes Guide](../workflows-teams/previewing-changes.md) for more details.
+Enhance your workflow by generating ephemeral preview environments for every Pull Request. This allows reviewers to see the rendered documentation before merging it into the main branch. See the [Previewing Changes Guide](../workflows-teams/previewing-changes.md) for more details.
 
 ## Trade-offs
 
-Automated CI/CD requires initial setup time and management of secrets (e.g., API tokens). However, the long-term benefits of a "hands-off" deployment process - including reduced human error and faster update cycles - far outweigh the initial investment. For large sites, ensure your workflow only triggers when files in your documentation directory are changed to save on CI minutes.
+Automated CI/CD requires initial setup time and management of secrets (e.g., API tokens). However, the long-term benefits of a "hands-off" deployment process - including reduced human error and faster update cycles - far outweigh the initial investment. For large sites, ensure your workflow only triggers when files in your documentation directory change to save CI minutes.

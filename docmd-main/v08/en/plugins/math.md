@@ -5,19 +5,25 @@ description: "Native KaTeX/LaTeX mathematics integration for docmd."
 
 The **Math plugin** adds native LaTeX and KaTeX support to your docmd sites.
 
-It utilises `markdown-it-texmath` as securely integrated with the `katex` computation engine to render both inline and block-level mathematical equations smoothly without requiring complex client-side javascript libraries.
+It uses `markdown-it-texmath` integrated with the `katex` computation engine. This renders inline and block-level equations smoothly without complex client-side javascript libraries.
 
-## Setup
+## Configuration
+
+The Math plugin is an optional plugin. Install it via the CLI:
 
 ```bash
-docmd add math
+npx @docmd/core add math
 ```
+
+Enable it in your `docmd.config.json`:
+
+### Example
 
 ```json
 {
-"plugins": {
-  "math": {}
-}
+  "plugins": {
+    "math": {}
+  }
 }
 ```
 
@@ -25,14 +31,14 @@ docmd add math
 
 1. Enable the plugin via your `docmd.config.json`.
 2. Wrap your standard LaTeX mathematics in `$` (inline) or `$$` (block) indicators.
-3. The server intelligently processes these math rules during the static-site build exactly as raw static HTML tags.
-4. Minimal injected CSS automatically scopes these classes directly, yielding immediate visualization the moment the user views the page!
+3. The engine processes these rules during the build exactly as raw static HTML tags.
+4. Minimal injected CSS styles the classes automatically. This yields immediate visualisation on page load.
 
 ## Usage
 
 ### Inline Mathematics
 
-You can inject standard equations flawlessly within a paragraph utilising single dollar signs `$`:
+Inject standard equations within a paragraph using single dollar signs `$`:
 
 ```markdown
 Here is an inline equation: $E = mc^2$
@@ -42,7 +48,7 @@ Here is an inline equation: $E = mc^2$
 
 ### Block Mathematics
 
-For wider mathematical proofs or distinct formulations, leverage double dollar signs `$$` for block level formatting:
+For wider mathematical proofs or distinct formulations, use double dollar signs `$$` for block level formatting:
 
 ```markdown
 $$

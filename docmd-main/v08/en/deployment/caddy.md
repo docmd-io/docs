@@ -8,14 +8,14 @@ description: "Deploy docmd with a production-ready Caddyfile."
 ## Generate a Caddyfile
 
 ```bash
-docmd deploy --caddy
+npx @docmd/core deploy --caddy
 ```
 
 This generates a `Caddyfile` personalised to your project:
 
-- **Site address** is set to the hostname from your `url` config - Caddy will automatically provision an SSL certificate for it. Falls back to `:80` if no URL is configured.
-- **Root directory** uses your configured `out` directory (not hardcoded)
-- **SPA fallback** is only included when `layout.spa` is `true` in your config
+- **Site address** is set to the hostname from your `url` config. Caddy automatically provisions an SSL certificate for it. It falls back to `:80` if no URL is configured.
+- **Root directory** uses your configured `out` directory (not hardcoded).
+- **SPA fallback** is only included when `layout.spa` is `true` in your config.
 
 ### What Gets Generated
 
@@ -49,14 +49,14 @@ docs.example.com {
 }
 ```
 
-When you use a real domain as the site address (e.g., `docs.example.com` instead of `:80`), Caddy automatically provisions a free SSL certificate via Let's Encrypt - zero HTTPS configuration needed.
+When you use a real domain as the site address (e.g., `docs.example.com` instead of `:80`), Caddy automatically provisions a free SSL certificate via Let's Encrypt. Zero HTTPS configuration is needed.
 
 ## Deployment Steps
 
-1. Build your site: `docmd build`
+1. Build your site: `npx @docmd/core build`
 2. Transfer your output folder and the generated `Caddyfile` to your server.
 3. Run `caddy start` or `caddy run` in the directory containing your Caddyfile.
 
 ### Re-Generating
 
-Changed your site URL or output directory? Run `docmd deploy --caddy` again - the Caddyfile is regenerated to match your current `docmd.config.json`.
+Changed your site URL or output directory? Run `npx @docmd/core deploy --caddy` again. The engine regenerates the Caddyfile to match your current `docmd.config.json`.

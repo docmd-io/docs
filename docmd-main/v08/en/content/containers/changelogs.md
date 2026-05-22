@@ -3,25 +3,27 @@ title: "Changelogs"
 description: "Generate structured, timeline-based version history and release notes."
 ---
 
-The `changelog` container provides a specialised layout for documenting project evolution. It automatically parses date or version headers into a vertical timeline, ensuring historical updates are easily scannable.
+The `changelog` container provides a specialised layout for documenting project evolution. It parses version or date headers into a vertical timeline, ensuring historical updates are easily scannable.
 
-## Syntax
-
-Utilise the specialised `==` delimiter to define entries. The text on the `==` line is rendered as a timeline badge on the left, while the following content populates the adjacent chronological slot.
+## Syntax Reference
 
 ```markdown
 ::: changelog
 
-== v2.0.0
-Description of the major feature release.
-
-== v1.5.0
-Description of maintenance updates and security patches.
+== Label Text
+Description of the entry goes here.
 
 :::
 ```
 
-## Detailed Example: Release History
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| **Entry Marker** | `==` | The delimiter that defines a new timeline entry within the changelog. |
+| **Label** | `String` | The text (e.g., version number or date) that renders as a timeline badge on the left. |
+
+## Examples
+
+### Release History
 
 Changelogs support rich Markdown within each entry, including lists, callouts, and code blocks.
 
@@ -74,5 +76,5 @@ Initial public release.
 :::
 
 ::: callout tip "Historical Context for AI"
-Changelogs provide a temporal map for AI agents. When an LLM parses the `llms-full.txt` context, the `::: changelog` structure allows it to accurately identify when specific features, breaking changes, or security fixes were introduced, leading to higher accuracy in its development recommendations.
+Changelogs provide a temporal map for AI agents. The `::: changelog` structure allows an LLM to accurately parse when specific features or security fixes were introduced in the `llms.txt` context stream.
 :::

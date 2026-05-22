@@ -5,15 +5,15 @@ description: "How to use docmd's hero and grid containers to create premium land
 
 ## Problem
 
-By default, the `index.md` file in most documentation generators looks like a standard technical page. Creating a high-impact, marketing-grade landing page usually requires a separate web framework (like Next.js or Astro), which adds complexity to your documentation workflow.
+By default, the `index.md` file in most documentation generators looks like a standard technical page. Creating a high-impact, marketing-grade landing page usually requires a separate web framework (like Next.js or Astro). This adds complexity to your documentation workflow.
 
 ## Why it matters
 
-Your documentation homepage is often the first interaction a developer has with your product. A generic Markdown-parsed page may fail to inspire confidence in your project's polish and professional quality. A custom landing page can better guide users to the most important sections while reinforcing your brand's visual identity.
+Your documentation homepage is often the first interaction a developer has with your product. A generic Markdown-parsed page may fail to inspire confidence in your project's quality. A custom landing page guides users to important sections while reinforcing your brand's visual identity.
 
 ## Approach
 
-`docmd` provides specialized [Hero](../../content/containers/hero.md) and [Grids](../../content/containers/grids.md) containers designed specifically for building premium landing pages. For total creative freedom, you can also use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
+docmd provides specialised [Hero](../../content/containers/hero.md) and [Grids](../../content/containers/grids.md) containers designed specifically for building premium landing pages. For total creative freedom, use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
 
 ## Implementation
 
@@ -64,8 +64,8 @@ title: "Custom Dashboard"
 noStyle: true
 ---
 ```
-When `noStyle: true` is set, `docmd` will render only the raw HTML/Markdown content you provide, allowing you to inject your own CSS and JavaScript for a pixel-perfect experience.
+When `noStyle: true` is set, docmd renders only the raw HTML/Markdown content you provide. This allows you to inject your own CSS and JavaScript for a pixel-perfect experience.
 
 ## Trade-offs
 
-Using `noStyle: true` means you forfeit the native navigation, search, and theme-switching features provided by `docmd`. You are responsible for ensuring that the custom page is mobile-responsive and accessible. For most use cases, combining the `hero` and `grid` containers within the standard layout provides the best balance of aesthetics and functionality.
+Using `noStyle: true` means you forfeit the native navigation, search, and theme-switching features provided by docmd. You are responsible for ensuring the custom page is mobile-responsive and accessible. For most use cases, combining the `hero` and `grid` containers provides the best balance of aesthetics and functionality.

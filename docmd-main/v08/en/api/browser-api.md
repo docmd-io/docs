@@ -3,11 +3,11 @@ title: "Browser API (Client-Side)"
 description: "Interact with docmd from the browser - live compilation and dev-mode plugin communication."
 ---
 
-`docmd` provides two browser APIs: the **isomorphic compile engine** for rendering markdown in the browser, and the **dev-mode plugin API** for real-time communication with the dev server.
+docmd provides two browser APIs: the **isomorphic compile engine** for rendering markdown in the browser, and the **dev-mode plugin API** for real-time communication with the dev server.
 
 ## Isomorphic Compile Engine
 
-The same engine that generates static sites in Node.js can run entirely within a web browser. This is ideal for building CMS previews, interactive playgrounds, or embedding documentation into existing web applications.
+The engine that generates static sites in Node.js can run entirely within a web browser. This is ideal for building CMS previews, interactive playgrounds, or embedding documentation.
 
 ### Installation via CDN
 
@@ -21,7 +21,7 @@ The same engine that generates static sites in Node.js can run entirely within a
 
 ### `docmd.compile(markdown, config)`
 
-Compiles raw Markdown into a full HTML document string using the default `docmd` layout.
+Compiles raw Markdown into a full HTML document string using the default docmd layout.
 
 **Parameters:**
 - `markdown` (String): The raw Markdown content.
@@ -31,7 +31,7 @@ Compiles raw Markdown into a full HTML document string using the default `docmd`
 
 ### Example: Live Preview
 
-To ensure style isolation, it is recommended to render the output inside an `<iframe>` using the `srcdoc` attribute.
+To ensure style isolation, render the output inside an `<iframe>` using the `srcdoc` attribute.
 
 ```javascript
 const editor = document.getElementById("editor");
@@ -50,10 +50,10 @@ editor.addEventListener("input", updatePreview);
 
 ## Dev-Mode Plugin API
 
-During `docmd dev`, a `window.docmd` global is automatically injected into every page. This API enables real-time communication between browser-side plugin code and server-side action handlers via WebSocket RPC.
+During `npx @docmd/core dev`, a `window.docmd` global is injected into every page automatically. This API enables real-time communication between browser-side plugin code and server-side action handlers via WebSocket RPC.
 
-::: callout info "Dev Mode Only"
-The plugin API methods below are only available during `docmd dev`. They are not included in production builds.
+::: callout info "Dev Mode Only" icon:code
+The plugin API methods below are only available during `npx @docmd/core dev`. They are not included in production builds.
 :::
 
 ### `docmd.call(action, payload)`
@@ -61,7 +61,6 @@ The plugin API methods below are only available during `docmd dev`. They are not
 Call a server-side action handler registered by a plugin. Returns a promise that resolves with the handler's return value.
 
 ```javascript
-
 const threads = await docmd.call("threads:get-threads", {
   "file": "docs/getting-started.md"
 });
@@ -75,7 +74,6 @@ If the action modifies source files, the page automatically reloads after the pr
 Send a fire-and-forget event to the server. No response is returned.
 
 ```javascript
-
 docmd.send("analytics:page-view", {
   "path": window.location.pathname
 });
@@ -86,11 +84,9 @@ docmd.send("analytics:page-view", {
 Subscribe to server-pushed events. Returns an unsubscribe function.
 
 ```javascript
-
 const unsub = docmd.on("threads:updated", (data) => {
   console.log("Threads updated:", data);
 });
-
 
 unsub();
 ```
@@ -111,7 +107,6 @@ docmd.afterReload('scroll-restore', (ctx) => {
 Stash context into `sessionStorage` for a named `afterReload` handler. The matching handler fires with this context after the next page reload.
 
 ```javascript
-
 docmd.scheduleReload("scroll-restore", {
   "scrollY": window.scrollY
 });
@@ -121,4 +116,4 @@ docmd.scheduleReload("scroll-restore", {
 
 - **No File System**: The browser engine cannot scan folders. You must provide the `navigation` array explicitly in the config object if you need a sidebar.
 - **Node-Only Plugins**: Plugins that rely on Node.js APIs (like Sitemap or LLM text generation) are disabled in the browser environment.
-- **WebSocket Connection**: The dev-mode API requires an active WebSocket connection to the dev server. It will auto-reconnect with exponential backoff if the connection drops.
+- **WebSocket Connection**: The dev-mode API requires an active WebSocket connection to the dev server. It auto-reconnects with exponential backoff if the connection drops.

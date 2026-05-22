@@ -5,15 +5,15 @@ description: "How to write explicit, self-contained documentation that prevents 
 
 ## Problem
 
-AI models are predictive engines, not reasoning engines. If an API usage example is incomplete, uses ambiguous placeholders, or relies on implicit knowledge, the AI will often "hallucinate" - it will invent the missing pieces based on general patterns it learned during training. These inventions are frequently incorrect for your specific software, leading to developer frustration.
+AI models are predictive engines, not reasoning engines. If an API usage example is incomplete, uses ambiguous placeholders, or relies on implicit knowledge, the AI will "hallucinate". It invents missing pieces based on general training patterns. These inventions are frequently incorrect, leading to developer frustration.
 
 ## Why it matters
 
-Hallucinated code destroys user trust. When a developer asks an AI for help and receives code that throws a syntax error or uses non-existent parameters, they often blame the software itself for being "buggy" or "poorly documented." Minimising hallucinations is critical for maintaining the professional reputation of your project.
+Hallucinated code destroys user trust. When a developer asks an AI for help and receives broken code, they blame the software for being "buggy" or "poorly documented". Minimising hallucinations is critical for maintaining your project's professional reputation.
 
 ## Approach
 
-Practice **Defensive Documentation**. This involves writing extremely explicit, fully instantiated code blocks that leave no room for ambiguity. Never assume that the reader (or the AI) knows the necessary imports, environment variables, or prerequisite configurations.
+Practice **Defensive Documentation**. Write extremely explicit, fully instantiated code blocks that leave no room for ambiguity. Never assume the reader (or the AI) knows the necessary imports, environment variables, or prerequisite configurations.
 
 ## Implementation
 
@@ -33,7 +33,7 @@ Always include the necessary imports or setup code in every snippet. This ensure
 
 ### 2. Concrete Examples Over Placeholders
 
-Avoid using vague placeholders like `your-api-key` or `env-name`. Instead, provide concrete, valid examples or use comments to specify strict enum requirements.
+Avoid using vague placeholders like `your-api-key` or `env-name`. Provide concrete, valid examples or use comments to specify strict enum requirements.
 
 ```javascript
 // Valid environments: "development", "staging", "production"
@@ -42,10 +42,10 @@ const app = init({ env: "production" });
 
 ### 3. Inline Code Comments
 
-Place critical requirements *inside* the code block as comments, rather than only in the surrounding Markdown text. AI models weigh comments within code highly when generating similar snippets.
+Place critical requirements *inside* the code block as comments, rather than only in surrounding paragraphs. AI models weigh comments within code highly when generating similar snippets.
 
 ```javascript
-  
+  // REQUIRED: Must be an absolute path
   outputPath: "/var/www/html/docs"
 ```
 
@@ -55,4 +55,4 @@ Use [Callouts](../../content/containers/callouts.md) to clearly mark deprecated 
 
 ## Trade-offs
 
-Defensive documentation makes code blocks longer and more repetitive. Human readers may find seeing the same `import` statements in every snippet slightly tedious. However, the benefit of having "AI-proof" documentation that significantly reduces support tickets and user errors far outweighs the minor cost of verbosity.
+Defensive documentation makes code blocks longer and more repetitive. Human readers may find seeing the same `import` statements tedious. However, the benefit of having "AI-proof" documentation that reduces support tickets far outweighs the minor cost of verbosity.

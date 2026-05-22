@@ -1,64 +1,72 @@
 ---
 title: "Markdown Syntax Foundation"
-description: "Master the fundamental formatting rules of docmd: Headings, typographic styles, and technical blocks."
+description: "The baseline formatting rules for all docmd content: typography, structure, lists, and tables."
 ---
 
-`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This guide establishes the baseline standards for authoring core content across your documentation site.
+`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This page covers the core formatting primitives that apply across every page in your project.
 
-## Typographic Styling
+## Typography
 
-| Attribute | Markdown Syntax | Visual Outcome |
+| Style | Syntax | Renders As |
 | :--- | :--- | :--- |
-| **Emphasis** | `**Text**` | **Bold technical terms** |
-| **Italic** | `*Text*` | *Stylized variables* |
-| **Strikethrough** | `~~Text~~` | ~~Deprecated logic~~ |
-| **Inline Logic** | `` `code` `` | `engine.initialise()` |
+| **Bold** | `**text**` | **Strong emphasis** |
+| *Italic* | `*text*` | *Soft emphasis* |
+| ~~Strikethrough~~ | `~~text~~` | ~~Deprecated content~~ |
+| `Inline code` | `` `text` `` | `engine.initialise()` |
 
-## Structural Elements
+## Heading Hierarchy
 
-### Semantic Header Hierarchy
+`docmd` derives the page `<h1>` automatically from the `title` field in your frontmatter. Begin your heading structure at `##`.
 
 ```markdown
-# Level 1 (Automatic via Frontmatter)
-## Level 2 (Major Section)
-### Level 3 (Feature Detail)
+## Level 2 — Major Section
+### Level 3 — Feature Detail
+#### Level 4 — Sub-Detail
 ```
 
 ::: callout tip "Logical Integrity for AI"
-Advanced AI models and search internalizers rely on a strict heading hierarchy to build an accurate mental model of your project. By avoiding "Heading Skipping" (e.g., jumping from H2 directly to H4), you ensure the `llms-full.txt` context stream remains chronologically and logically sound.
+AI models and search indexers rely on a strict heading hierarchy to build an accurate mental model of your project. Avoid skipping levels (e.g., jumping from `##` to `####`) to keep the `llms-full.txt` context stream logically sound.
 :::
 
-### Navigation & Reference
+## Lists
 
-Utilise standard link syntax for both internal documentation nodes and global resources.
+Use unordered lists for scannable bullet points and ordered lists for sequential steps. For numbered tutorials, consider the higher-impact [Steps container](../containers/steps.md).
 
 ```markdown
-[Global Resource](https://docmd.io)
-[Internal Module](../api/node-api.md)
+*   Unordered item
+*   Another item
+
+1.  First step
+2.  Second step
 ```
 
-### Enumeration & Listing
+## Blockquotes
 
-*   **Unordered Segments**: Utilise `*` or `-` for scannable bullet points.
-*   **Sequential Logic**: Utilise `1.`, `2.`, etc., for ordered instructions. (For tutorials, consider the high-impact **[Steps Container](../containers/steps.md)**).
+The standard `>` syntax highlights external quotes or background context.
 
-## Technical Block Elements
-
-### Blockquotes
-The standard `>` syntax is ideal for highlighting outside quotes or background context.
+```markdown
+> The docmd engine redefines the boundaries between static site generation and dynamic application delivery.
+```
 
 > The docmd engine redefines the boundaries between static site generation and dynamic application delivery.
 
-### Data Schemas (Tables)
+## Tables
 
-| Attribute | Data Type | Default |
+```markdown
+| Parameter | Type | Default |
+| :--- | :--- | :--- |
+| `name` | `string` | `undefined` |
+| `active` | `boolean` | `true` |
+```
+
+| Parameter | Type | Default |
 | :--- | :--- | :--- |
 | `name` | `string` | `undefined` |
 | `active` | `boolean` | `true` |
 
-## Embedded HTML Support
+## Embedded HTML
 
-As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialised UI requirements.
+docmd has raw HTML parsing enabled. Inject custom layouts or unique styling directly within Markdown files for specialised UI requirements.
 
 ```html
 <div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">

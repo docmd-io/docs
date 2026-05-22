@@ -11,71 +11,57 @@ titleAppend: false
 Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
 
 ::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
+::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
 :::
 
-## Start
+## Overview
 
-Get a production documentation site running in seconds - no boilerplate, no config files.
+docmd is a zero-configuration documentation generator. It creates premium, high-performance static websites directly from your Markdown files.
 
 ```bash
 npx @docmd/core dev
 ```
 
-That's it. Write Markdown in a `docs/` folder and docmd builds a full documentation site with navigation, search, SEO, sitemap, and more - all out of the box.
+Run this single command. The engine automatically builds your site, generates navigation, and enables instant search.
 
 ## Core Capabilities
 
-Everything you need ships built-in. No plugins to install for the essentials.
+Everything needed for world-class documentation ships built-in. No complex plugins required for the essentials.
 
 ::: grids
-::: grid
-::: card "Instant Setup" icon:rocket
-One command to go from Markdown files to a production documentation site. No config files required.
-:::
-:::
-::: grid
-::: card "AI Optimised" icon:brain-circuit
-Auto-generates `llms.txt` and `llms-full.txt` for LLM consumption. Your docs are AI-ready by default.
-:::
-:::
-::: grid
-::: card "Built-in Search" icon:search
-Client-side full-text search powered by MiniSearch. Works across versions and locales with zero setup.
-:::
-:::
-::: grid
-::: card "Live Previews" icon:monitor
-Embed docmd live, editable code sandboxes directly in your documentation pages.
-:::
-:::
-::: grid
-::: card "Theming Engine" icon:palette
-Switch between built-in themes or create your own. Supports light, dark, and system-preference modes.
-:::
-:::
-::: grid
-::: card "Native i18n" icon:globe
-First-class multi-language support with locale-first URLs, per-locale search, and translated UI strings.
-:::
-:::
+    ::: grid
+        ::: card "Instant Setup" icon:rocket
+        Start immediately without boilerplate. The engine auto-detects files and structures navigation in seconds.
+        :::
+    :::
+    ::: grid
+        ::: card "AI Optimised" icon:brain-circuit
+        Generates `llms.txt` and `llms-full.txt` automatically. Keep your documentation digestible for AI models.
+        :::
+    :::
+    ::: grid
+        ::: card "Local-First Search" icon:search
+        Fast, client-side full-text search powered by MiniSearch. Works out of the box across versions and locales.
+        :::
+    :::
+    ::: grid
+        ::: card "Live Previews" icon:monitor
+        Embed interactive, editable code sandboxes directly into your pages for real-time experimentation.
+        :::
+    :::
+    ::: grid
+        ::: card "Flexible Theming" icon:palette
+        Switch between built-in themes or apply custom styling. Fully supports dark mode and system preferences.
+        :::
+    :::
+    ::: grid
+        ::: card "Native Translation" icon:globe
+        First-class i18n support. Features locale-first routing, individual search indexes, and translated UI strings.
+        :::
+    :::
 :::
 
-## Extending Markdown
-
-Go beyond static text. docmd provides rich container syntax directly in Markdown - callouts, tabs, cards, grids, hero sections, collapsible sections, and more.
-
-::: button "Explore Containers" ./content/containers/index.md icon:blocks
-
-::: grids
-::: grid
-::: card "Interactive Sandboxes"
-Embed live, editable preview windows naturally into your pages using the [Live Preview](./content/live-preview.md) API.
-:::
-:::
-::: grid
-::: card "Inline Collaboration"
-Select text in dev mode to open [Threads](./plugins/threads.md) and leave comments alongside your documentation team.
-:::
-:::
+::: callout info "Rich Content Containers" icon:info
+    Go beyond standard Markdown. Use structured visual patterns like steps, tabs, cards, grids, and callouts directly in your text.
+    ::: button "Explore Containers" ./content/containers/index.md icon:blocks
 :::

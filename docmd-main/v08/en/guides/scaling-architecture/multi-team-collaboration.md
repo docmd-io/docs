@@ -1,19 +1,19 @@
 ---
 title: "Multi-Team Collaboration"
-description: "How to use decentralized navigation and global menubars to allow multiple teams to contribute to a unified documentation project without friction."
+description: "How to use decentralised navigation and global menubars to allow multiple teams to contribute without friction."
 ---
 
 ## Problem
 
-When multiple independent teams (e.g., Frontend, Backend, DevOps, and Product) contribute to a single documentation repository, organizational friction often occurs. Teams may accidentally overwrite global navigation settings, create conflicting styling paradigms, or break links across domain boundaries during concurrent updates.
+When multiple independent teams (e.g., Frontend, Backend, DevOps, and Product) contribute to a single documentation repository, organisational friction occurs. Teams may overwrite global navigation settings, create conflicting styling paradigms, or break links across boundaries during concurrent updates.
 
 ## Why it matters
 
-Friction in the authoring experience leads to "documentation silos," where teams create independent, isolated wikis to avoid the complexity of a shared repository. This destroys the unified user experience of a single documentation portal and makes it significantly harder for users to find comprehensive information about the entire system.
+Friction in the authoring experience leads to "documentation silos". Teams create isolated wikis to avoid the complexity of a shared repository. This destroys the unified user experience of a single portal and makes it significantly harder for users to find comprehensive information.
 
 ## Approach
 
-Leverage `docmd`'s decentralized [Navigation Resolution](../../configuration/navigation.md#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files, while a central team governs the global [Menubar](../../configuration/menubar.md) and visual design system.
+Use docmd's decentralised [Navigation Resolution](../../configuration/navigation.md#navigation-resolution-priority) system. This allows individual teams to have full autonomy over their specific domains using local `navigation.json` files. A central team governs the global [Menubar](../../configuration/menubar.md) and visual design system.
 
 ## Implementation
 
@@ -30,12 +30,12 @@ my-project/
 │   ├── backend/              # Owned by the API Team
 │   │   ├── navigation.json
 │   │   └── database.md
-│   └── docmd.config.json       # Owned by the Platform/Core Team
+│   └── docmd.config.json     # Owned by the Platform/Core Team
 ```
 
 ### 2. Global Context Switching (The Menubar)
 
-The central platform team controls the [Menubar](../../configuration/menubar.md), which serves as the primary navigation layer to switch between different team domains.
+The central platform team controls the [Menubar](../../configuration/menubar.md). This serves as the primary navigation layer to switch between different team domains.
 
 ```json
   "menubar": {
@@ -50,7 +50,7 @@ The central platform team controls the [Menubar](../../configuration/menubar.md)
 
 ### 3. Local Autonomy with navigation.json
 
-When a user is browsing content within the `/frontend/` directory, `docmd` automatically prioritizes the `frontend/navigation.json` file. The sidebar updates dynamically to reflect only the frontend-specific hierarchy, preventing the navigation from becoming cluttered with unrelated information from other teams.
+When a user browses content within the `/frontend/` directory, docmd automatically prioritises the `frontend/navigation.json` file. The sidebar updates dynamically to reflect only the frontend-specific hierarchy. This prevents navigation clutter.
 
 ```json
 // docs/frontend/navigation.json
@@ -62,4 +62,4 @@ When a user is browsing content within the `/frontend/` directory, `docmd` autom
 
 ## Trade-offs
 
-Decentralized navigation requires teams to be mindful of cross-domain links. While `docmd` handles relative links effectively, moving an entire team directory will break links in other teams' files. We recommend using root-relative paths (starting with `/`) for links between different team domains to ensure stability.
+Decentralised navigation requires teams to be mindful of cross-domain links. While docmd handles relative links effectively, moving an entire team directory breaks links in other teams' files. Use root-relative paths (starting with `/`) for links between different team domains to ensure stability.

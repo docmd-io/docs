@@ -1,23 +1,23 @@
 ---
 title: "Vercel"
-description: "Deploy your docmd documentation to Vercel using a generated vercel.json. Supports CI/CD via Git integration — push to deploy automatically."
+description: "Deploy your docmd documentation to Vercel using a generated vercel.json."
 ---
 
-`docmd deploy --vercel` generates a `vercel.json` file at the root of your project, configured for your site's output directory and SPA routing settings.
+`npx @docmd/core deploy --vercel` generates a `vercel.json` file at the root of your project. It is automatically configured for your site's output directory and SPA routing settings.
 
 ```bash
-docmd deploy --vercel
+npx @docmd/core deploy --vercel
 ```
 
 ## What Gets Generated
 
 The `vercel.json` configures:
 
-- **Build command** — runs `docmd build`
-- **Output directory** — set to whatever `out` is in your `docmd.config.json`
-- **Install command** — installs the exact `@docmd/core` version used
-- **Cache headers** — immutable caching for assets, no-cache for HTML
-- **SPA routing** — a catch-all route to `index.html` when `layout.spa` is enabled
+- **Build command** - runs `npx @docmd/core build`.
+- **Output directory** - set to the `out` property in your config.
+- **Install command** - installs the exact `@docmd/core` version used.
+- **Cache headers** - immutable caching for assets, no-cache for HTML.
+- **SPA routing** - a catch-all route to `index.html` when `layout.spa` is enabled.
 
 ## Deploying
 
@@ -28,8 +28,8 @@ npm install -g vercel
 vercel
 ```
 
-Or connect your repository to Vercel from the dashboard - it will detect the `vercel.json` automatically.
+Alternatively, connect your repository to Vercel from the dashboard. It detects the `vercel.json` automatically.
 
 ## Re-generating
 
-If you change your `out` directory or `url` in `docmd.config.json`, re-run the command to regenerate the file and keep the configuration in sync.
+If you change your `out` directory or `url` in `docmd.config.json`, re-run the command to regenerate the file. This keeps the configuration in sync.

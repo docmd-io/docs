@@ -65,10 +65,11 @@ This prevents 404 errors when you list planned languages before their content is
 
 Control where the language switcher appears using the `position` option:
 
-```javascript
-i18n: {
-  "position": "options-menu",  
-  
+```json
+{
+  "i18n": {
+    "position": "options-menu"
+  }
 }
 ```
 
@@ -103,7 +104,7 @@ With `stringMode: true`:
 
 For full details on the `data-i18n` attribute syntax and JSON file format, see [noStyle string replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 
-::: callout warning "String Mode does not translate markdown content"
+::: callout warning "String Mode does not translate markdown content" icon:info
 String replacement works by finding `data-i18n` attributes in the rendered HTML. Standard markdown content (`## Heading`, paragraphs, lists) renders to plain HTML tags without these attributes - so there is nothing for the replacer to find.
 
 - **Documentation sites** → use directory mode (the default). Each locale has its own markdown files with fully translated prose.

@@ -3,19 +3,19 @@ title: "NGINX"
 description: "Deploy docmd with a production-ready NGINX configuration."
 ---
 
-NGINX is one of the most reliable web servers available. Because `docmd` output is entirely static, NGINX can serve it with near-zero latency.
+NGINX is one of the most reliable web servers available. Because docmd output is entirely static, NGINX can serve it with near-zero latency.
 
 ## Generate nginx.conf
 
 ```bash
-docmd deploy --nginx
+npx @docmd/core deploy --nginx
 ```
 
 This generates an `nginx.conf` personalised to your project:
 
-- **`server_name`** is set to the hostname extracted from your `url` config (falls back to `localhost` if not set)
-- **SPA fallback** (`try_files ... /index.html`) is only included when `layout.spa` is `true` in your config
-- **Security headers**, GZIP compression, and immutable asset caching are included by default
+- **`server_name`** is set to the hostname extracted from your `url` config. It falls back to `localhost` if not set.
+- **SPA fallback** (`try_files ... /index.html`) is only included when `layout.spa` is `true` in your config.
+- **Security headers**, GZIP compression, and immutable asset caching are included by default.
 
 ### What Gets Generated
 
@@ -58,11 +58,11 @@ server {
 
 ## Deployment Steps
 
-1. Build your site: `docmd build`
+1. Build your site: `npx @docmd/core build`
 2. Upload the contents of your output directory to your server's web root (e.g., `/var/www/html/` or `/usr/share/nginx/html/`).
 3. Place the generated `nginx.conf` into your server's configuration (e.g., `/etc/nginx/conf.d/default.conf`).
 4. Restart NGINX: `sudo systemctl restart nginx`
 
 ### Re-Generating
 
-Changed your site URL or switched off SPA mode? Just run `docmd deploy --nginx` again - the config file is regenerated to match your current `docmd.config.json`.
+Changed your site URL or switched off SPA mode? Just run `npx @docmd/core deploy --nginx` again. The config file automatically regenerates to match your current `docmd.config.json`.

@@ -5,56 +5,56 @@ description: "How to use docmd's lifecycle hooks to build custom functionality a
 
 ## Problem
 
-Sometimes you have a highly specific requirement that isn't covered by built-in features or existing plugins. For example, you might need to fetch data from an internal API during the build process or perform complex transformations on the generated HTML that go beyond simple CSS.
+Sometimes you have specific requirements not covered by built-in features. For example, you might need to fetch data from an internal API during the build process or perform complex transformations on the generated HTML.
 
 ## Why it matters
 
-Extensibility is what separates a static tool from a professional documentation framework. Without a clean way to inject custom logic, teams are often forced to maintain fragile shell scripts or post-processing wrappers that make the build process difficult to manage and debug.
+Extensibility separates a static tool from a professional documentation framework. Without a clean way to inject custom logic, teams maintain fragile shell scripts or post-processing wrappers. This makes the build process difficult to manage and debug.
 
 ## Approach
 
-`docmd` features a robust, hook-based [Plugin API](../../plugins/building-plugins.md). You can write simple Node.js modules that intercept the documentation lifecycle at various stages - from initial configuration to final HTML generation - allowing you to arbitrarily modify content and behaviour.
+docmd features a reliable, hook-based [Plugin API](../../plugins/building-plugins.md). Write simple Node.js modules that intercept the documentation lifecycle at various stages. This allows you to arbitrarily modify content and behaviour from initial configuration to final HTML generation.
 
 ## Implementation
 
 ### 1. Create a Local Plugin
 
-A plugin is a standard JavaScript module that exports a descriptor and several lifecycle hooks.
+A plugin is a standard JavaScript module that exports a descriptor and lifecycle hooks.
 
 ```javascript
+// plugins/version-injector.js
+
+let latestVersion = "0.0.0";
 
 export default {
-  
+  // Plugin Descriptor
   plugin: {
     "name": "version-injector",
     "version": "1.0.0",
-    "capabilities": ["build"] 
+    "capabilities": ["init", "build"]
   },
 
-  
-  latestVersion: "0.0.0",
-
-  
+  // Lifecycle Hooks
   async onConfigResolved(config) {
-    
-    const response = await fetch("https:
-    this.latestVersion = await response.text();
-    console.log(`[Plugin] Fetched version: ${this.latestVersion}`);
+    // Fetch external data once during initialisation
+    const response = await fetch("https://api.example.com/version");
+    latestVersion = await response.text();
+    console.log(`[Plugin] Fetched version: ${latestVersion}`);
   },
 
-  
+  // Modify HTML before writing
   async onBeforeRender(page) {
     if (!page.html) return;
-    
-    page.html = page.html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
-    page.frontmatter.computedVersion = this.latestVersion;
+
+    page.html = page.html.replace(/\{\{VERSION\}\}/g, latestVersion);
+    page.frontmatter.computedVersion = latestVersion;
   }
 };
 ```
 
 ### 2. Register the Plugin
 
-You can register your local plugin by importing it into your `docmd.config.json`.
+Register your local plugin by importing it into your `docmd.config.js` (or `docmd.config.ts`). JSON config files cannot use imports - use the `.js` or `.ts` format for plugin registration.
 
 ```javascript
 import VersionInjector from "./plugins/version-injector.js";
@@ -62,7 +62,7 @@ import VersionInjector from "./plugins/version-injector.js";
 export default {
   "title": "My Project Docs",
   "plugins": {
-    
+    // Inject the local plugin object
     "version-injector": VersionInjector
   }
 };
@@ -70,4 +70,4 @@ export default {
 
 ## Trade-offs
 
-Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if not optimised. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimised Regex) to keep build times fast.
+Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if unoptimised. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimised Regex) to keep build times fast.

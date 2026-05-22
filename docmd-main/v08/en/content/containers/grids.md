@@ -1,63 +1,104 @@
 ---
 title: "Grids"
-description: "Organise layout seamlessly with auto-adjusting responsive columns using native markdown containers."
+description: "Organise layout into auto-adjusting responsive columns without writing HTML."
 ---
 
-Grids provide a native, markdown-driven layout system in `docmd`. Instead of writing manual HTML wrappers, you can leverage the `grids` container to structure elements side-by-side. 
-
-Columns automatically adjust their widths to fill available space and logically stack into vertical rows on smaller screens (mobile devices).
+Grids provide a native, Markdown-driven layout system. Use the `grids` container to structure elements side-by-side. Columns automatically fill available space and stack vertically on smaller screens.
 
 ## Syntax Reference
 
 ```markdown
 ::: grids
     ::: grid
-        #### Component A
-        Content for the left side.
+        Content for the first column.
     :::
     ::: grid
-        #### Component B
-        Content for the right side.
+        Content for the second column.
     :::
 :::
 ```
 
-## Practical Implementation Examples
+| Container | Description |
+| :--- | :--- |
+| **`::: grids`** | The parent container that initiates the responsive flexbox layout. |
+| **`::: grid`** | Each child `grid` block acts as an individual column. Add as many as needed. |
 
-### 1. Feature Showcasing Side-by-Side
-Use grids to highlight key capabilities next to each other, like combining structural cards with informational blocks.
+## Examples
+
+### Side-by-Side Cards
+
+Combine `grids` with `cards` to display multiple features in a clean, responsive layout.
 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Speed :rocket:"
-            Built on a non-blocking I/O pipeline for maximum performance.
+        ::: card "Speed" icon:zap
+        Built on a non-blocking I/O pipeline for maximum performance.
         :::
     :::
     ::: grid
-        ::: card "Scalability :zap:"
-            Designed for massive monorepos and extensive project structures.
+        ::: card "Scalability" icon:layers
+        Designed for massive monorepos and extensive project structures.
         :::
     :::
 :::
 ```
 
 ::: grids
-::: grid
-::: card "Speed :rocket:"
-Built on a non-blocking I/O pipeline for maximum performance.
-:::
-:::
-::: grid
-::: card "Scalability :zap:"
-Designed for massive monorepos and extensive project structures.
-:::
-:::
+    ::: grid
+        ::: card "Speed" icon:zap
+        Built on a non-blocking I/O pipeline for maximum performance.
+        :::
+    :::
+    ::: grid
+        ::: card "Scalability" icon:layers
+        Designed for massive monorepos and extensive project structures.
+        :::
+    :::
 :::
 
-### 2. Layout Balancing
-Grids will automatically calculate the optimal width per column (up to 4 items per row on ultra-wide screens) based on the content available and seamlessly group rows on narrow viewports.
+### Three-Column Layout
+
+Add a third `grid` block to create a three-column row. Columns automatically balance their widths.
+
+```markdown
+::: grids
+    ::: grid
+        ::: card "Search" icon:search
+        Client-side full-text search powered by MiniSearch.
+        :::
+    :::
+    ::: grid
+        ::: card "i18n" icon:globe
+        First-class locale routing and translated search indexes.
+        :::
+    :::
+    ::: grid
+        ::: card "Themes" icon:palette
+        Built-in dark mode and full CSS variable customisation.
+        :::
+    :::
+:::
+```
+
+::: grids
+    ::: grid
+        ::: card "Search" icon:search
+        Client-side full-text search powered by MiniSearch.
+        :::
+    :::
+    ::: grid
+        ::: card "i18n" icon:globe
+        First-class locale routing and translated search indexes.
+        :::
+    :::
+    ::: grid
+        ::: card "Themes" icon:palette
+        Built-in dark mode and full CSS variable customisation.
+        :::
+    :::
+:::
 
 ::: callout tip "Semantic Layouts"
-Using the `grids` container keeps your documentation structure purely written in Markdown, resulting in cleaner source files and ensuring LLMs interpret your structural relationships flawlessly!
+The `grids` container keeps your structure purely in Markdown. This results in cleaner source files and ensures LLMs interpret structural relationships accurately.
 :::

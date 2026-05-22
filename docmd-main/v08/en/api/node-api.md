@@ -3,7 +3,7 @@ title: "Node.js API"
 description: "Integrate docmd's build engine into your custom Node.js scripts and automation pipelines."
 ---
 
-For advanced workflows, you can import and use the `docmd` build engine directly within your own Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending `docmd` for specialised environments.
+You can import and use the docmd build engine directly within your Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending docmd for specialised environments.
 
 ## Installation
 
@@ -48,19 +48,19 @@ async function generateEditor() {
 
 ## Workspace Management
 
-For managing workspace workspaces programmatically, use the dedicated workspace functions.
+For managing workspaces programmatically, use the dedicated workspace functions.
 
 ### `isWorkspace(config)`
-Returns `true` if the provided configuration object follows the Workspace or legacy workspace schema.
+Returns `true` if the provided configuration object follows the Workspace schema.
 
 ### `detectWorkspace(configPath)`
-Detects and loads a workspace configuration file, returning a normalized `WorkspaceRootConfig` or `null`.
+Detects and loads a workspace configuration file. Returns a normalized `WorkspaceRootConfig` or `null`.
 
 ### `buildWorkspace(config, options)`
 Builds all projects within a workspace. Handles shared assets and project-specific prefixing.
 
 ### `devWorkspace(config, options)`
-Starts the workspace dev server, watching all projects for changes and performing targeted rebuilds.
+Starts the workspace dev server. Watches all projects for changes and performs targeted rebuilds.
 
 ```javascript
 import { detectWorkspace, buildWorkspace } from "@docmd/core";
@@ -75,7 +75,7 @@ async function buildAll() {
 
 ## Example: Custom Pipeline
 
-You can wrap `docmd` to create complex documentation workflows.
+You can wrap docmd to create complex documentation workflows.
 
 ```javascript
 import { buildSite } from '@docmd/core';
@@ -85,7 +85,7 @@ async function deploy() {
   // 1. Generate dynamic content
   await fs.writeFile('./docs/dynamic.md', '# Generated Content');
 
-  // 2. Execute docmd build
+  // 2. Execute build
   await buildSite('./docmd.config.json');
 
   // 3. Move output
@@ -139,8 +139,7 @@ Build a full canonical URL.
 ```javascript
 import { outputPathToCanonical } from "@docmd/api";
 
-outputPathToCanonical("guide/index.html", "https:
-
+outputPathToCanonical("guide/index.html", "https://docs.example.com");
 ```
 
 #### `sanitizeUrl(url)`
@@ -150,8 +149,8 @@ Collapse double slashes (except after protocol).
 ```javascript
 import { sanitizeUrl } from "@docmd/api";
 
-sanitizeUrl("https:
-sanitizeUrl("/foo
+sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com/guide"
+sanitizeUrl("/foo//bar"); // → "/foo/bar"
 ```
 
 #### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
@@ -161,8 +160,7 @@ Build an absolute URL with locale and version prefixes.
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/');
-// → '/de/v1/guide/'
+buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
 ```
 
 #### `resolveHref(href)`
@@ -172,19 +170,14 @@ Normalize user-written hrefs to clean URLs. Handles `.md` stripping, trailing sl
 ```javascript
 import { resolveHref } from "@docmd/api";
 
-resolveHref("overview.md");
-
-
-resolveHref("external:https:
-
-
-resolveHref("raw:docs/readme.md");
-
+resolveHref("overview.md"); // → "overview/"
+resolveHref("external:https://github.com"); // → "https://github.com"
+resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
 ```
 
 ### Pre-computed Page URLs
 
-Every page object includes pre-computed URL data. Plugins can read these directly - zero computation needed.
+Every page object includes pre-computed URL data. Plugins can read these directly with zero computation needed.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {
@@ -202,7 +195,7 @@ export async function onPostBuild({ pages, config }) {
 | `canonical` | `string` | Full canonical URL (only if `config.url` is set) |
 | `pathname` | `string` | Root-relative path (e.g., `/guide/`) |
 
-> **Backward Compatibility:** All exports from `@docmd/api` are also re-exported from `@docmd/core`, so existing code continues to work without changes. New projects are encouraged to import directly from `@docmd/api`.
+> **Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
 
 ### `createActionDispatcher(hooks, options)`
 
@@ -228,10 +221,7 @@ import { createSourceTools } from "@docmd/api";
 
 const source = createSourceTools({ "projectRoot": "/path/to/project" });
 
-
 const block = await source.getBlockAt("docs/page.md", [10, 12]);
-
-
 await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 ```
 
@@ -253,7 +243,7 @@ The pluggable engine architecture allows programmatic resolution and instantiati
 
 #### `loadEngine(engineName)`
 
-Resolves and initialises the requested build engine backend. If native architecture binaries are unavailable or fail validation allowlists, it gracefully falls back to the high-performance JavaScript engine.
+Resolves and initialises the requested build engine backend. If native architecture binaries are unavailable, it gracefully falls back to the high-performance JavaScript engine.
 
 ```javascript
 import { loadEngine } from "@docmd/api";
@@ -278,19 +268,19 @@ For TypeScript plugin authors, the following types are available:
 
 ```typescript
 import type {
-  PluginModule,       // Full plugin contract interface
-  PluginDescriptor,   // Plugin metadata (name, version, capabilities)
-  PluginHooks,        // Shape of the hook registry
-  PageContext,        // Context passed to build hooks (sourcePath, html, etc)
-  BeforeBuildContext, // Context passed to onBeforeBuild (pages, tui, runWorkerTask, etc)
-  PostBuildContext,   // Context passed to onPostBuild (pages, tui, runWorkerTask, etc)
-  Capability,         // Hook category declaration (init, body, actions, etc)
-  ActionContext,      // Context passed to action/event handlers
-  ActionHandler,      // Signature for action handlers
-  EventHandler,       // Signature for event handlers
-  SourceTools,        // Source editing tools interface
-  BlockInfo,          // Block information returned by getBlockAt
-  TextLocation,       // Text location returned by findText
-  Engine,             // Pluggable execution engine contract interface
+  PluginModule,       
+  PluginDescriptor,   
+  PluginHooks,        
+  PageContext,        
+  BeforeBuildContext, 
+  PostBuildContext,   
+  Capability,         
+  ActionContext,      
+  ActionHandler,      
+  EventHandler,       
+  SourceTools,        
+  BlockInfo,          
+  TextLocation,       
+  Engine,             
 } from '@docmd/api';
 ```

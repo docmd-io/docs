@@ -11,7 +11,6 @@ Standard Markdown excels at basic text formatting, but professional technical do
 
 <!-- SCREENSHOT: Montage of all container types on a single page - callouts (info, warning, danger, tip), tabs with code, steps, cards grid, hero section, and collapsible sections. -->
 
-
 ## Block Syntax Reference
 
 All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.
@@ -29,18 +28,20 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[Cards](cards.md)** | `card` | Framed structural blocks for feature grids and layout control. |
 | **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column structural groups. |
 | **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
-| **[Steps](steps.md)** | `steps` | Visual numbered timelines for "How-to" guides and tutorials. |
-| **[Tags](tags.md)** | `tag` | Self-closing, colored labels for version, statuses, or highlight. |
+| **[Steps](steps.md)** | `steps` | Visual numbered timelines for how-to guides and tutorials. |
+| **[Collapsibles](collapsible.md)** | `collapsible` | Interactive accordion toggles for FAQs and deep-dive technical data. |
 | **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
-| **[Collapsibles](collapsible.md)**| `collapsible`| Interactive accordion toggles for FAQs and deep-dive technical data. |
-| **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |
+| **[Tags](tags.md)** | `tag` | Self-closing, coloured labels for versions, statuses, or inline highlights. |
 | **[Hero](hero.md)** | `hero` | High-impact landing page sections with layout and slider support. |
+| **[URL Embeds](embed.md)** | `embed` | Secure, zero-latency embeds for video, social, and interactive content. |
+| **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |
+| **[Nested Containers](nested-containers.md)** | — | Recursive composition patterns for complex, multi-component layouts. |
 
 ## The Strategic Importance of Containers
 
 Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` engine and downstream AI agents:
 
-1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritize that information during its reasoning and generation phases.
+1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritise that information during its reasoning and generation phases.
 2.  **Structural Integrity**: Combining `cards` with standard CSS allows for the creation of sophisticated landing pages without ever leaving the Markdown environment.
 3.  **Source Maintainability**: Eliminates "HTML Bloat" in your documentation source, keeping your `.md` files clean and machine-readable.
 
@@ -53,7 +54,7 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
     ::: callout info
         This module utilises an asynchronous I/O pipeline.
     :::
-    ::: button "Deep Dive into Core Engine" /advanced/developer-guide
+    ::: button "Deep Explore Core Engine" /advanced/developer-guide
 :::
 ```
 

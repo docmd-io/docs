@@ -1,15 +1,15 @@
 ---
 title: "JavaScript Engine"
-description: "Deep dive into docmd's native JavaScript execution engine: standard use cases, maximum device portability, internal capabilities, and operational limits."
+description: "Deep explore docmd's native JavaScript execution engine: use cases, portability, capabilities, and limits."
 ---
 
-The **JavaScript Engine** is the foundational, universally compatible execution engine bundled directly into docmd. Designed to run seamlessly atop standard modern JavaScript runtimes, it delivers excellent performance out of the box without requiring external dependencies, complex compiler chains, or pre-built system binaries.
+The **JavaScript Engine** is the foundational execution engine bundled into docmd. It runs easily on modern JavaScript runtimes. It delivers excellent performance without external dependencies or complex compilers.
 
-By default, every docmd repository relies on the JavaScript engine. It provides highly reliable file traversal, metadata indexing, and build generation tailored for modern web developers.
+By default, every docmd repository relies on the JavaScript engine. It provides highly reliable file traversal, metadata indexing, and build generation.
 
 ## Configuration
 
-To explicitly instruct docmd to utilise the JavaScript backend, define the `engine` property as `"js"` inside your `docmd.config.json` file.
+To explicitly instruct docmd to utilise the JavaScript backend, define the `engine` property as `"js"` inside `docmd.config.json`.
 
 ```json
 {
@@ -22,32 +22,32 @@ To explicitly instruct docmd to utilise the JavaScript backend, define the `engi
 
 ## Ideal Use Cases & Where It Shines
 
-The JavaScript engine is exceptionally versatile. It shines brightest under the following operational environments:
+The JavaScript engine is exceptionally versatile. It shines under the following conditions:
 
-- **Standard Repositories**: Sites containing up to several hundred pages build extremely rapidly, leveraging highly optimised JIT compilation and native JSON parsing built directly into modern V8 engines.
-- **Maximum Portability Requirements**: If your collaborative writing team spans disparate operating systems, custom containerised Linux distributions, or restricted enterprise networks, the JavaScript engine guarantees flawless builds everywhere.
-- **Rapid Prototyping**: Local development builds benefit from instantaneous hot-reloading (`docmd dev`) with low initialisation latency.
-- **Custom Scripting & Hooks**: Because configuration fallback layers and plugin integrations execute naturally within JavaScript, standard string parsing and inline file manipulation avoid cross-boundary serialisation costs.
+- **Standard Repositories**: Sites containing up to several hundred pages build extremely fast. It leverages optimised JIT compilation and native JSON parsing.
+- **Maximum Portability**: If your team uses diverse operating systems or restricted enterprise networks, the JavaScript engine guarantees flawless builds everywhere.
+- **Rapid Prototyping**: Local development builds benefit from instantaneous hot-reloading (`npx @docmd/core dev`) with low initialisation latency.
+- **Custom Scripting**: Configuration fallbacks and plugin integrations execute naturally within JavaScript. Standard string parsing avoids cross-boundary serialisation costs.
 
 ## Available Devices & Host Compatibility
 
-Because it operates entirely within native runtime environments, the JavaScript engine supports an exhaustive array of target architectures and platforms:
+Because it operates entirely within native runtime environments, the JavaScript engine supports an exhaustive array of target platforms:
 
 - **Operating Systems**: macOS, Linux, Windows, FreeBSD, and OpenBSD.
 - **Hardware Architectures**: x64, ARM64 (Apple Silicon, AWS Graviton), ARMv7, and RISC-V.
-- **Container Environments**: Alpine Linux, standard Debian/Ubuntu base images, serverless build runners (Vercel, Netlify, Cloudflare Pages), and embedded CI pipelines.
+- **Container Environments**: Alpine Linux, standard Debian/Ubuntu, serverless build runners (Vercel, Netlify), and embedded CI pipelines.
 
 ## Capabilities & Limitations
 
 | Dimension | JavaScript Engine Profile | Operational Impact |
 | :--- | :--- | :--- |
-| **Concurrency Model** | Node.js Event Loop + Native Worker Threads | Excellent asynchronous scheduling for network and API responses. Disk-heavy blocks operate smoothly alongside client rendering. |
-| **Git Metadata Handling** | Subprocess Orchestration (`child_process.execFile`) | Safely spawns native Git binaries to harvest commit histories and modification timestamps. Includes persistent disk-caching to accelerate warm builds. |
-| **Setup & Initialisation** | Zero-Configuration | Boots instantaneously. No package postinstall compilation or remote CDNs required. |
-| **Scalability Ceiling** | Highly Performant up to ~1,000 documents | On monolithic repositories exceeding a thousand complex files, sequential subprocess invocation overhead during cold builds can introduce minor latencies compared to native multi-threaded alternatives. |
+| **Concurrency Model** | Node.js Event Loop + Native Worker Threads | Excellent asynchronous scheduling for network responses. Disk-heavy blocks operate smoothly. |
+| **Git Metadata Handling** | Subprocess Orchestration (`child_process.execFile`) | Safely spawns native Git binaries to harvest commit histories. Includes persistent disk caching. |
+| **Setup & Initialisation** | Zero-Configuration | Boots instantaneously. No package postinstall compilation required. |
+| **Scalability Ceiling** | Highly Performant up to ~1,000 documents | On monolithic repositories exceeding a thousand complex files, sequential subprocess overhead may introduce minor latencies. |
 
 ## Feature Completeness
 
-The JavaScript engine is absolutely **exclusive in its universal feature support**. Every core feature, advanced parsing syntax, templating zone, and optional official plugin is engineered to run seamlessly on this engine. 
+The JavaScript engine is **exclusive in its universal feature support**. Every core feature, advanced syntax, templating zone, and official plugin is engineered to run easily here. 
 
-Whether you are compiling intricate mathematical formulas, rendering client-side live search indices, or generating exhaustive static site maps, the JavaScript engine guarantees perfect fidelity and deterministic builds.
+Whether compiling mathematical formulas, rendering live search indices, or generating static site maps, the JavaScript engine guarantees deterministic builds.

@@ -3,15 +3,15 @@ title: "Menubar"
 description: "Structure and position your menubar, manage navigation links, and configure drop-down menus."
 ---
 
-The `menubar` is a premium navigation layer that provides global context across your documentation site. It can be positioned as a fixed bar at the top of the viewport or as a relative component above the page header.
+The `menubar` is a premium navigation layer. It provides global context across your site. Position it as a fixed bar at the viewport top or relatively above the page header.
 
 ## Configuration
 
-The menubar is configured within the `layout` section of your `docmd.config.json`.
+Configure the menubar in the `layout` section of your `docmd.config.json`.
 
 ```json
 {
-"layout": {
+  "layout": {
     "menubar": {
       "enabled": true,
       "position": "top", 
@@ -22,8 +22,8 @@ The menubar is configured within the `layout` section of your `docmd.config.json
           "type": "dropdown", 
           "text": "Ecosystem", 
           "items": [
-            { "text": "GitHub", "url": "https:
-            { "text": "Live Editor", "url": "https:
+            { "text": "GitHub", "url": "https://github.com/docmd-io/docmd" },
+            { "text": "Live Editor", "url": "https://live.docmd.io" }
           ]
         }
       ],
@@ -39,14 +39,14 @@ The menubar is configured within the `layout` section of your `docmd.config.json
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `Boolean` | `false` | Toggles the visibility of the menubar. |
+| `enabled` | `Boolean` | `false` | Toggles menubar visibility. |
 | `position` | `String` | `'top'` | `'top'` (fixed at absolute top) or `'header'` (positioned above the page title). |
-| `left` | `Array` | `[]` | Navigation items aligned to the left section. |
-| `right` | `Array` | `[]` | Navigation items aligned to the right section. |
+| `left` | `Array` | `[]` | Left-aligned navigation items. |
+| `right` | `Array` | `[]` | Right-aligned navigation items. |
 
 ## Item Types
 
-The `left` and `right` arrays support various item types to structure your navigation effectively:
+The `left` and `right` arrays support various item types.
 
 ### 1. Standard Link
 The most common item type.
@@ -56,34 +56,34 @@ The most common item type.
 - `external`: Set to `true` to open in a new tab.
 
 ### 2. Title (Brand)
-Set `type: 'title'` to apply branding styles (usually bold or with a specific font weight) to the link.
+Set `type: 'title'` to apply branding styles (e.g. bold fonts).
 
 ### 3. Dropdown Menu
 Set `type: 'dropdown'` and provide an `items` array to create a nested menu.
 
 ## Utility Integration
 
-You can host the global search and theme toggle within the menubar by setting the `optionsMenu.position` to `'menubar'`.
+Host the global search and theme toggle in the menubar. Set `optionsMenu.position` to `'menubar'`.
 
 ```json
 {
-"layout": {
-  "optionsMenu": {
-    "position": "menubar"
+  "layout": {
+    "optionsMenu": {
+      "position": "menubar"
+    }
   }
-}
 }
 ```
 
-When integrated, the options menu will automatically align to the **right region** of the menubar, appearing after any links defined in the `right` array.
+The options menu automatically aligns to the **right region**. It appears after any links defined in the `right` array.
 
-::: callout info
-If the `menubar` is disabled, any utility components assigned to it will automatically fall back to the `sidebar-top` position.
+::: callout info "Automatic Fallback"
+If the `menubar` is disabled, assigned utilities automatically fall back to the `sidebar-top` position.
 :::
 
 ## Custom Styling
 
-You can fine-tune the menubar's appearance using CSS variables in your `customCss` files:
+Use CSS variables in your custom stylesheets to override the menubar appearance. See [Custom CSS & JS](../theming/custom-css-js.md) for details.
 
 ```css
 :root {

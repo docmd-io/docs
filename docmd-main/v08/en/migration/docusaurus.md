@@ -5,11 +5,11 @@ description: "A comprehensive guide on moving your Docusaurus v2/v3 project to d
 
 # Migrating from Docusaurus to docmd
 
-Docusaurus is a popular documentation framework built on React. `docmd` provides a fast, zero-config alternative that compiles significantly faster and doesn't require React components to render rich features.
+Docusaurus is a popular React-based documentation framework. docmd provides a fast, zero-config alternative. It compiles significantly faster and doesn't require React components to render rich features.
 
 ## Step 1: Run the Migration Engine
 
-Run the following command at the root of your existing Docusaurus project (where your `docusaurus.config.js` or `docusaurus.config.ts` is located):
+Run the following command at the root of your existing Docusaurus project:
 
 ```bash
 npx @docmd/core migrate --docusaurus
@@ -18,12 +18,12 @@ npx @docmd/core migrate --docusaurus
 ### What Happens Automatically
 
 1.  **Backup**: Your entire project (excluding `node_modules` and `.git`) is safely moved into a new `docusaurus-backup/` directory.
-2.  **Content Migration**: Your `docs/` folder is restored to the root directory for `docmd` to use.
+2.  **Content Migration**: Your `docs/` folder is restored to the root directory for docmd to use.
 3.  **Config Generation**: A `docmd.config.json` is generated, extracting your site `title` from your Docusaurus configuration.
 
 ## Step 2: Test the Setup
 
-Once the command finishes, you can immediately preview your Markdown content in `docmd`:
+Once the command finishes, you can immediately preview your Markdown content in docmd:
 
 ```bash
 npx @docmd/core dev
@@ -33,19 +33,19 @@ Your Markdown files will compile, but your navigation sidebar will be empty.
 
 ## Step 3: Manual Configuration
 
-Docusaurus has complex programmatic configurations that `docmd` does not try to guess. You will need to map these manually.
+Docusaurus has complex programmatic configurations that docmd does not try to guess. You must map these manually.
 
 ### 1. Navigation Setup
 
 Docusaurus sidebars are often auto-generated or configured in `sidebars.js`.
 
-**Action required:** Create a `navigation.json` inside your new `docs/` directory to structure your `docmd` sidebar. See the [Navigation Guide](../configuration/navigation.md).
+**Action required:** Create a `navigation.json` inside your new `docs/` directory to structure your docmd sidebar. See the [Navigation Guide](../configuration/navigation.md).
 
 ### 2. Replacing MDX Components
 
-Docusaurus relies heavily on MDX (`.mdx`) to render custom React components (like Tabs, Admonitions, or custom UI elements). `docmd` is purely Markdown-driven and does not use React.
+Docusaurus relies heavily on MDX (`.mdx`) to render custom React components. docmd is purely Markdown-driven and does not use React.
 
-**Action required:** You must convert any custom `<MyReactComponent />` tags into standard Markdown or use `docmd`'s native [Containers](../content/containers/callouts.md).
+**Action required:** Convert any custom `<MyReactComponent />` tags into standard Markdown or use docmd's native [Containers](../content/containers/callouts.md).
 
 #### Example: Converting Admonitions
 
@@ -57,14 +57,14 @@ This is a helpful tip.
 ```
 
 ::: callout success "Zero Changes Required"
-As of `docmd` 0.7.8, Docusaurus admonition syntax works **without any modification**. The following aliases are fully supported:
+Docusaurus admonition syntax works **without any modification**. The following aliases are fully supported:
 - `:::note` → renders as `callout info`
 - `:::tip` → renders as `callout tip`
 - `:::info` → renders as `callout info`
 - `:::caution` → renders as `callout warning`
 - `:::danger` → renders as `callout danger`
 
-Spaceless syntax is also supported. Your existing Docusaurus admonitions will render correctly in `docmd` without changes.
+Spaceless syntax is also supported. Your existing Docusaurus admonitions will render correctly in docmd without changes.
 :::
 
 **docmd native syntax** (optional, provides more features like custom icons):
@@ -91,7 +91,7 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 ```
 
-**docmd:** (Convert to the native `docmd` tabs container syntax)
+**docmd:** (Convert to the native docmd tabs container syntax)
 ```markdown
 ::: tabs
 == tab "Apple"
@@ -106,9 +106,9 @@ This is an orange.
 
 If you used Docusaurus's `i18n` features, your translated files were likely in `i18n/locale/docusaurus-plugin-content-docs/current/`.
 
-**Action required:** Move these files into `docmd`'s directory structure (`docs/en/`, `docs/es/`, etc.) and configure the locales in `docmd.config.json`. See the [Localisation Guide](../configuration/localisation/index.md).
+**Action required:** Move these files into docmd's directory structure (`docs/en/`, `docs/es/`, etc.) and configure the locales in `docmd.config.json`. See the [Localisation Guide](../configuration/localisation/index.md).
 
 ## Next Steps
 
 - Explore the [Layout & UI](../configuration/layout-ui.md) settings to match your Docusaurus theme.
-- Convert React-based hero headers into `docmd` [Hero Containers](../content/containers/hero.md).
+- Convert React-based hero headers into docmd [Hero Containers](../content/containers/hero.md).

@@ -5,21 +5,21 @@ description: "How to synchronise documentation releases with software deployment
 
 ## Problem
 
-Synchronizing software releases with corresponding documentation updates is a significant coordination challenge. Frequently, documentation is updated on the live site before the new code is deployed (confusing current users) or delayed several days after the release (frustrating early adopters).
+Synchronising software releases with corresponding documentation updates is a coordination challenge. Frequently, documentation updates on the live site before new code deploys (confusing current users) or delays several days (frustrating early adopters).
 
 ## Why it matters
 
-Desynchronization between software behaviour and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
+Desynchronisation between software behaviour and its documentation causes developer friction. For documentation to be effective, it must strictly map to the software version the user is running. Providing correct context for every version ensures smooth onboarding and troubleshooting.
 
 ## Approach
 
-Isolate active development documentation using `docmd`'s [Versioning Engine](../../configuration/versioning.md). This allows your team to draft content for upcoming features asynchronously in a separate directory (e.g., `docs-next/`), promoting it to the "Stable" or "Current" status only when the official software release occurs.
+Isolate active development documentation using docmd's [Versioning Engine](../../configuration/versioning.md). This allows your team to draft content for upcoming features asynchronously in a separate directory (e.g., `docs-next/`). Promote it to "Stable" status only when the official software release occurs.
 
 ## Implementation
 
 ### 1. Structure Your Directories
 
-Maintain your stable documentation in the primary `docs/` folder and create a dedicated directory for the upcoming release.
+Maintain your stable documentation in the primary `docs/` folder. Create a dedicated directory for the upcoming release.
 
 ```text
 project-root/
@@ -30,7 +30,7 @@ project-root/
 
 ### 2. Configure Versions
 
-Register both versions in your configuration. You can label the upcoming version as "Beta" or "Next" to signal its status to users through the version switcher.
+Register both versions in your configuration. Label the upcoming version as "Beta" or "Next" to signal its status to users through the version switcher.
 
 ```json
   "versions": {
@@ -44,15 +44,15 @@ Register both versions in your configuration. You can label the upcoming version
 
 ### 3. The Promotion Process
 
-When you are ready to release the new version officially:
+When you are ready to officially release the new version:
 1.  **Update Config**: Change the `current` version ID in `docmd.config.json` to `v2.0`.
 2.  **Update Labels**: Remove the "(Beta)" tag from the `label` in the `all` array.
-3.  **Archive Old Docs**: Keep the `v1.0` entry in the `all` array so users on older versions can still access their relevant documentation.
+3.  **Archive Old Docs**: Keep the `v1.0` entry in the `all` array so users on older versions can still access relevant documentation.
 
 ## Trade-offs
 
 ### Maintenance Overhead
-Maintaining multiple versions of documentation requires discipline. If a critical typo or security warning is fixed in the stable version, ensure it is also applied to the upcoming version directory to prevent "regressions" in clarity.
+Maintaining multiple versions of documentation requires discipline. If a critical typo or security warning is fixed in the stable version, ensure it is also applied to the upcoming version directory to prevent regressions.
 
 ### SEO and Search
-Multiple versions can occasionally lead to search results pointing to older documentation. Use the `seo` plugin and proper canonical tags to ensure that the "Current" version is always prioritized by search engines. See [Handling Breaking Changes](../scaling-architecture/breaking-changes-deprecations.md) for more on managing transitions.
+Multiple versions can occasionally lead to search results pointing to older documentation. Use the `seo` plugin and proper canonical tags to ensure the "Current" version is always prioritised by search engines. See [Handling Breaking Changes](../scaling-architecture/breaking-changes-deprecations.md) for more details.

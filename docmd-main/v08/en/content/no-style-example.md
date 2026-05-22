@@ -26,7 +26,7 @@ customHead: |
       padding: 80px 20px;
     }
     .demo-hero {
-      text-align: center;
+      text-align: centre;
       margin-bottom: 60px;
     }
     .demo-hero h1 {
@@ -81,7 +81,7 @@ customHead: |
       <li><strong>SEO Meta Engine</strong>: Structured tags and social graph data are retained.</li>
       <li><strong>Project Branding</strong>: Global favicon injection remains active.</li>
       <li><strong>Foundational Typography</strong>: The processed <code>docmd-main.css</code> provides base styling.</li>
-      <li><strong>Theme Synchronization</strong>: Light/Dark mode state is fully preserved.</li>
+      <li><strong>Theme Synchronisation</strong>: Light/Dark mode state is fully preserved.</li>
       <li><strong>Interactive Capabilities</strong>: The SPA router and component logic remain available.</li>
     </ul>
     

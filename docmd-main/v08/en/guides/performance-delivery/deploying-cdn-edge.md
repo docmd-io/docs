@@ -5,24 +5,24 @@ description: "How to minimise global latency by deploying your static documentat
 
 ## Problem
 
-Hosting your documentation on a single server in one geographic region (e.g., US-East) means that users in other parts of the world (e.g., Europe or Asia) will experience significant network latency. Every page load, image, and script must travel thousands of miles, making your documentation feel sluggish and unresponsive for a global audience.
+Hosting documentation on a single server in one geographic region (e.g., US-East) creates significant network latency for users elsewhere. Every page load, image, and script travels thousands of miles. This makes your documentation feel sluggish for a global audience.
 
 ## Why it matters
 
-High latency directly harms the developer experience. Even if your documentation is well-written and lightweight, the "Time to First Byte" (TTFB) is limited by the laws of physics. If your site feels slow, developers are more likely to lose focus or abandon your tool entirely in favour of one with faster, more accessible documentation.
+High latency directly harms the developer experience. Even if your documentation is well-written and lightweight, the "Time to First Byte" (TTFB) is limited by physics. If your site feels slow, developers lose focus or abandon your tool in favour of faster alternatives.
 
 ## Approach
 
-The optimal solution is to deploy your site to an Edge CDN. Because `docmd` generates pure static assets (HTML, CSS, JS), it is perfectly suited for edge distribution. CDNs replicate your files across hundreds of globally distributed "Edge Nodes," serving your users from the data center closest to them.
+The optimal solution is to deploy your site to an Edge CDN. docmd generates pure static assets (HTML, CSS, JS), making it perfectly suited for edge distribution. CDNs replicate files across globally distributed "Edge Nodes" to serve users from the closest data centre.
 
 ## Implementation
 
 ### 1. Choose a Platform
 
-`docmd` is natively compatible with all modern static hosting and edge platforms. We recommend the following for their global performance and ease of use:
+docmd natively supports all modern static hosting and edge platforms. We recommend the following for their global performance and ease of use:
 *   **Cloudflare Pages**: Extremely fast global edge network with built-in DDoS protection.
 *   **Vercel**: Optimised for performance with excellent developer workflow integration.
-*   **Netlify**: Powerful automation features and a robust global CDN.
+*   **Netlify**: Powerful automation features and a reliable global CDN.
 
 ### 2. Automate the Build
 
@@ -54,8 +54,8 @@ jobs:
 
 ### 3. Verification
 
-Once deployed, you can verify your global performance using tools like PageSpeed Insights or global ping tests. You should see sub-100ms response times from almost any location worldwide.
+Once deployed, verify global performance using tools like PageSpeed Insights or global ping tests. You should see sub-100ms response times from almost any worldwide location.
 
 ## Trade-offs
 
-Global edge networks abstract away server management, which is a major advantage for documentation teams. However, debugging regional caching issues can occasionally be more complex than reviewing a single server log. Using platforms with robust "instant cache invalidation" ensures that your users always see the latest version of your documentation immediately after a deployment.
+Global edge networks abstract away server management, which benefits documentation teams. However, debugging regional caching issues can occasionally be more complex than reviewing a single server log. Using platforms with reliable "instant cache invalidation" ensures users always see the latest version immediately after a deployment.
