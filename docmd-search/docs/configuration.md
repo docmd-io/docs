@@ -7,7 +7,7 @@ No configuration is required to get started. docmd-search uses sensible defaults
 
 ## Config resolution
 
-Settings are merged in order — each layer overrides the previous:
+Settings are merged in order  -  each layer overrides the previous:
 
 ### Defaults
 
@@ -15,11 +15,11 @@ Built-in values that work for most projects.
 
 ### Global config
 
-`~/.docmd-search/config.json` — applies to all projects on your system. Created by the first-run wizard.
+`~/.docmd-search/config.json`  -  applies to all projects on your system. Created by the first-run wizard.
 
 ### Project config
 
-`.docmd-search/config.json` — per-project overrides that live in your repository.
+`.docmd-search/config.json`  -  per-project overrides that live in your repository.
 
 ### CLI flags
 

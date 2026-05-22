@@ -3,7 +3,7 @@ title: "docmd search"
 description: "Offline semantic search for any documentation. Generate vector embeddings at build time, search with pure math in the browser."
 ---
 
-Offline semantic search for any documentation. Embeddings are generated locally at build time. The browser runtime is pure math — no model weights, no cloud APIs, no data leaving the user's machine.
+Offline semantic search for any documentation. Embeddings are generated locally at build time. The browser runtime is pure math  -  no model weights, no cloud APIs, no data leaving the user's machine.
 
 ::: callout tip "Zero config"
 Run `npx docmd-search ./docs` in any folder with Markdown files. No setup, no API keys, no config file needed.
@@ -22,7 +22,7 @@ Build time (Node.js)                    Search time (Browser, <3KB)
            → Save multi-batch index
 ```
 
-All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity — no neural network inference, just arithmetic.
+All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity  -  no neural network inference, just arithmetic.
 
 ## Key capabilities
 

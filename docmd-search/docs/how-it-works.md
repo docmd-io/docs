@@ -63,7 +63,7 @@ Run the following command...
 
 ### 3. Embed
 
-Each chunk's text is fed through an ONNX Runtime model to produce a dense vector embedding — a fixed-length array of floating-point numbers that captures the chunk's semantic meaning.
+Each chunk's text is fed through an ONNX Runtime model to produce a dense vector embedding  -  a fixed-length array of floating-point numbers that captures the chunk's semantic meaning.
 
 ::: callout info "Why ONNX?"
 ONNX Runtime runs models locally without Python, CUDA, or cloud APIs. The models are downloaded once and cached globally. No data ever leaves your machine.
@@ -106,13 +106,13 @@ Chunks and vectors are saved in batches:
 
 Each batch is independently loadable. The manifest tracks which files are indexed, their modification times, and the batch structure. This enables:
 
-- **Progressive loading** — search from batch 0, load rest in background
-- **Incremental updates** — only rebuild batches containing changed files
-- **Resumable indexing** — interrupted runs resume from the last complete batch
+- **Progressive loading**  -  search from batch 0, load rest in background
+- **Incremental updates**  -  only rebuild batches containing changed files
+- **Resumable indexing**  -  interrupted runs resume from the last complete batch
 
 ## Search-time runtime
 
-The browser client is under **3KB gzipped**. It contains no model weights — only arithmetic for keyword matching and vector comparison.
+The browser client is under **3KB gzipped**. It contains no model weights  -  only arithmetic for keyword matching and vector comparison.
 
 ### Loading strategy
 
@@ -136,7 +136,7 @@ Using `requestIdleCallback` (or `setTimeout` as fallback), remaining batches loa
 
 Each search query produces results using a two-phase scoring algorithm:
 
-**Phase 1 — Keyword matching (BM25-like)**
+**Phase 1  -  Keyword matching (BM25-like)**
 
 The query is split into terms. Each chunk is scored by how many times each term appears, with BM25-style saturation to prevent long documents from dominating:
 
@@ -144,7 +144,7 @@ The query is split into terms. Each chunk is scored by how many times each term 
 keywordScore = Σ count(term) / (count(term) + 1.5)
 ```
 
-**Phase 2 — Vector reranking**
+**Phase 2  -  Vector reranking**
 
 The top keyword result's pre-built vector is used as the query vector. All candidate results are reranked by cosine similarity:
 
@@ -153,7 +153,7 @@ finalScore = keywordScore × 0.6 + cosineSimilarity × 0.4
 ```
 
 ::: callout info "No browser-side embedding"
-The browser never runs a neural network. The "query vector" is approximated from the best keyword match's pre-built vector. This keeps the runtime at pure arithmetic — no WASM, no model download, no GPU.
+The browser never runs a neural network. The "query vector" is approximated from the best keyword match's pre-built vector. This keeps the runtime at pure arithmetic  -  no WASM, no model download, no GPU.
 :::
 
 ## Index format

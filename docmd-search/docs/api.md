@@ -172,7 +172,7 @@ const vectors = await model.embed(['Hello world', 'Another text']);
 ```
 
 ::: callout warning "Peer dependencies required"
-The model manager requires `@huggingface/transformers` and `onnxruntime-node` to be installed. These are optional peer dependencies — the rest of the API works without them.
+The model manager requires `@huggingface/transformers` and `onnxruntime-node` to be installed. These are optional peer dependencies  -  the rest of the API works without them.
 :::
 
 ## Types

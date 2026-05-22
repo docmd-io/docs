@@ -56,7 +56,7 @@ docmd-search --version
 | Flag | Description |
 | :--- | :---------- |
 | `--ui` | Launch the web UI in the browser after indexing |
-| `--dev` | Verbose output — shows directory paths, model info, and debug details |
+| `--dev` | Verbose output  -  shows directory paths, model info, and debug details |
 | `--model <id>` | Override the embedding model for this run (does not modify config files) |
 | `--settings` | Open the settings TUI to configure model and options |
 | `--version`, `-v` | Print the version number |
@@ -105,15 +105,15 @@ docmd-search ./docs
 | Code | Meaning |
 | :--- | :------ |
 | `0` | Success |
-| `1` | Error — missing peer dependencies, invalid directory, or indexing failure |
+| `1` | Error  -  missing peer dependencies, invalid directory, or indexing failure |
 
 ## Environment
 
 docmd-search respects the following environment:
 
-- **Global config**: `~/.docmd-search/config.json` — model selection and wizard state
-- **Project config**: `.docmd-search/config.json` — per-project overrides
-- **Model cache**: `~/.docmd-search/` — downloaded ONNX model files
+- **Global config**: `~/.docmd-search/config.json`  -  model selection and wizard state
+- **Project config**: `.docmd-search/config.json`  -  per-project overrides
+- **Model cache**: `~/.docmd-search/`  -  downloaded ONNX model files
 
 ::: callout info "Peer dependencies"
 Embedding generation requires `@huggingface/transformers` and `onnxruntime-node`. If they are missing, the CLI prints installation instructions and exits with code `1`.

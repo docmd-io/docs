@@ -74,7 +74,7 @@ Choose an embedding model. The default (MiniLM L6 v2) works well for most projec
 
 ### Model download
 
-The selected model downloads automatically on first use. This is a one-time download — the model is cached in `~/.docmd-search/` and reused across all projects.
+The selected model downloads automatically on first use. This is a one-time download  -  the model is cached in `~/.docmd-search/` and reused across all projects.
 
 ### Global config
 
@@ -88,12 +88,12 @@ Run `docmd-search --settings` at any time to switch models or reconfigure.
 
 After the wizard, the indexer runs automatically:
 
-1. **Crawl** — discovers all `.md`, `.txt`, and `.html` files (respects exclude patterns)
-2. **Chunk** — splits each file into heading-aware sections (default: 256 tokens per chunk, 32 token overlap)
-3. **Embed** — generates vector embeddings using the selected ONNX model
-4. **Quantize** — compresses Float32 vectors to Int8 (75% size reduction, negligible quality loss)
-5. **Compress** — applies ternary or product quantization for large indexes
-6. **Save** — writes a multi-batch index to `.docmd-search/`
+1. **Crawl**  -  discovers all `.md`, `.txt`, and `.html` files (respects exclude patterns)
+2. **Chunk**  -  splits each file into heading-aware sections (default: 256 tokens per chunk, 32 token overlap)
+3. **Embed**  -  generates vector embeddings using the selected ONNX model
+4. **Quantize**  -  compresses Float32 vectors to Int8 (75% size reduction, negligible quality loss)
+5. **Compress**  -  applies ternary or product quantization for large indexes
+6. **Save**  -  writes a multi-batch index to `.docmd-search/`
 
 ```
 .docmd-search/
@@ -143,6 +143,6 @@ The indexer compares file modification times and sizes. Unchanged files are skip
 
 ## Next steps
 
-- [Configuration](configuration) — customise chunk size, include/exclude patterns, output directory
-- [CLI Reference](cli) — all available commands and flags
-- [Programmatic API](api) — use in scripts, CI pipelines, or custom tooling
+- [Configuration](configuration)  -  customise chunk size, include/exclude patterns, output directory
+- [CLI Reference](cli)  -  all available commands and flags
+- [Programmatic API](api)  -  use in scripts, CI pipelines, or custom tooling

@@ -86,7 +86,7 @@ function search(query: string, topK?: number): SearchResult[]
 
 | Parameter | Type | Default | Description |
 | :-------- | :--- | :------ | :---------- |
-| `query` | `string` | — | Search query text |
+| `query` | `string` |  -  | Search query text |
 | `topK` | `number` | `10` | Maximum number of results |
 
 **Returns:** `SearchResult[]`
@@ -179,7 +179,7 @@ The client uses a two-phase hybrid scoring approach:
 
 ::: steps
 
-### Phase 1 — Keyword matching
+### Phase 1  -  Keyword matching
 
 The query is split into terms. Each chunk is scored with BM25-style saturation:
 
@@ -187,7 +187,7 @@ The query is split into terms. Each chunk is scored with BM25-style saturation:
 keywordScore = Σ count(term) / (count(term) + 1.5)
 ```
 
-### Phase 2 — Vector reranking
+### Phase 2  -  Vector reranking
 
 The best keyword match's pre-built vector serves as the query vector. All candidates are reranked using cosine similarity:
 
@@ -203,4 +203,4 @@ The browser never runs a neural network. The top keyword match is used as a prox
 
 ## Legacy format support
 
-The client automatically detects and loads legacy single-file indexes (`search-index.json`) when no `manifest.json` is found. No code changes needed — the same `load()` function handles both formats.
+The client automatically detects and loads legacy single-file indexes (`search-index.json`) when no `manifest.json` is found. No code changes needed  -  the same `load()` function handles both formats.
