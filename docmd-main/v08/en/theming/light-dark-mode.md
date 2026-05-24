@@ -60,7 +60,7 @@ If you are using a themed design like `sky`, the attribute will be `sky-light` o
   --docmd-primary: #4f46e5; /* Primary accent for light mode */
 }
 
-body[data-theme="dark"] {
+html[data-theme="dark"] {
   --docmd-primary: #818cf8; /* Primary accent for dark mode */
 }
 ```
