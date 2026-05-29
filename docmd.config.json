@@ -2,7 +2,7 @@
   "workspace": {
     "switcher": {
       "enabled": true,
-      "position": "options-menu"
+      "position": "sidebar-top"
     },
     "projects": [
       {

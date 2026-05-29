@@ -86,11 +86,14 @@ docmd-search ./docs --ui --dev
 ```
 == tab "Model override" icon:cpu
 ```bash
-# Use a specific model for one run
-docmd-search ./docs --model Xenova/bge-small-en-v1.5
+# Use the multilingual model for i18n docs
+docmd-search ./docs --model Xenova/paraphrase-multilingual-MiniLM-L12-v2
 
-# Use the highest quality model
-docmd-search ./docs --model Xenova/all-mpnet-base-v2
+# Use the highest quality multilingual model
+docmd-search ./docs --model Xenova/paraphrase-multilingual-mpnet-base-v2
+
+# Override without touching any config file
+docmd-search ./docs --model Xenova/all-MiniLM-L6-v2
 ```
 == tab "CI/CD" icon:git-branch
 ```bash
@@ -113,7 +116,7 @@ docmd-search respects the following environment:
 
 - **Global config**: `~/.docmd-search/config.json`  -  model selection and wizard state
 - **Project config**: `.docmd-search/config.json`  -  per-project overrides
-- **Model cache**: `~/.docmd-search/`  -  downloaded ONNX model files
+- **Model cache**: `~/.docmd-search/models/`  -  downloaded ONNX model files (Int8-quantized, stable across npm installs)
 
 ::: callout info "Peer dependencies"
 Embedding generation requires `@huggingface/transformers` and `onnxruntime-node`. If they are missing, the CLI prints installation instructions and exits with code `1`.

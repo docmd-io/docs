@@ -9,7 +9,7 @@ Go from zero to working semantic search in under two minutes. No cloud accounts,
 
 ::: callout info "System requirements"
 - **Node.js 18+** (LTS recommended)
-- ~200 MB disk space for the default model
+- ~50 MB disk space for the default model (Int8-quantized, ~23 MB download)
 - Works on macOS, Linux, and Windows
 :::
 
@@ -63,25 +63,29 @@ On first run, the setup wizard appears:
 
 ### Model selection
 
-Choose an embedding model. The default (MiniLM L6 v2) works well for most projects.
+Choose an embedding model. The default (MiniLM L6 v2) is the fastest option for English-only documentation.
 
-| Model | Dimensions | Size | Best for |
-| :---- | :--------- | :--- | :------- |
-| **MiniLM L6 v2** ★ | 384 | ~30 MB | Fast, general purpose |
-| BGE Small (English) | 384 | ~45 MB | English-optimised |
-| BGE Base (English) | 768 | ~110 MB | Higher quality |
-| MPNet Base v2 | 768 | ~110 MB | Multilingual |
+| Model | Dimensions | Size | Languages | Best for |
+| :---- | :--------- | :--- | :-------- | :------- |
+| **MiniLM L6 v2** ★ | 384 | ~23 MB | English only | Fast, English docs |
+| Multilingual MiniLM L12 | 384 | ~118 MB | 50+ languages | **i18n docs** |
+| Multilingual E5 Small | 384 | ~118 MB | 100+ languages | Wide language coverage |
+| Multilingual MPNet Base | 768 | ~270 MB | 50+ languages | Best multilingual quality |
+
+::: callout warning "Multilingual documentation"
+If your docs contain Chinese, German, French, or other non-English content, select a multilingual model. The default English-only model will produce poor search results for non-English text.
+:::
 
 ### Model download
 
-The selected model downloads automatically on first use. This is a one-time download  -  the model is cached in `~/.docmd-search/` and reused across all projects.
+The selected model downloads automatically on first use. This is a one-time download  -  the model is cached at `~/.docmd-search/models/` and reused across all projects. All models run in Int8-quantized form (~4× smaller than full precision).
 
 ### Global config
 
 A global configuration file is created at `~/.docmd-search/config.json`. This stores your model choice and wizard status so you are never prompted again.
 
 ::: callout tip "Change model later"
-Run `docmd-search --settings` at any time to switch models or reconfigure.
+Run `docmd-search --settings` at any time to switch models or reconfigure. You can also pass `--model <id>` on the command line to override for a single run.
 :::
 
 ## What happens during indexing

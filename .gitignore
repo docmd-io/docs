@@ -147,3 +147,4 @@ genctx.context.md
 pnpm-workspace.yaml
 pnpm-lock.yaml
 .docmd/
+.docmd-search/

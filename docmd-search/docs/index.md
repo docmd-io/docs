@@ -1,12 +1,28 @@
 ---
-title: "docmd search"
-description: "Offline semantic search for any documentation. Generate vector embeddings at build time, search with pure math in the browser."
+title: "docmd-search"
+description: "Offline semantic search engine for documentation. Local embeddings, browser-ready indexes."
 ---
 
-Offline semantic search for any documentation. Embeddings are generated locally at build time. The browser runtime is pure math  -  no model weights, no cloud APIs, no data leaving the user's machine.
+Offline semantic search engine for documentation. Embeddings are generated locally at build time. The browser runtime is pure math — no model weights, no cloud APIs, no data leaving your machine.
 
 ::: callout tip "Zero config"
-Run `npx docmd-search ./docs` in any folder with Markdown files. No setup, no API keys, no config file needed.
+Run `npx docmd-search ./docs` in any folder. No setup, no API keys, no config file needed.
+:::
+
+## Two ways to use it
+
+docmd-search is a **completely standalone tool**. It can also integrate with [docmd](https://docmd.io) when you want semantic search in your documentation site.
+
+::: grid
+
+::: card "Standalone CLI" icon:terminal
+Run `docmd-search ./any-folder` to index any directory and get an interactive terminal search. Add `--ui` to launch a web interface powered by docmd.
+:::
+
+::: card "docmd plugin" icon:puzzle
+Add `semantic: true` to your docmd config and docmd-search powers the search. No code changes — just a config flag.
+:::
+
 :::
 
 ## How it works
@@ -22,7 +38,7 @@ Build time (Node.js)                    Search time (Browser, <3KB)
            → Save multi-batch index
 ```
 
-All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity  -  no neural network inference, just arithmetic.
+All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity — no neural network inference, just arithmetic.
 
 ## Key capabilities
 
@@ -48,29 +64,42 @@ Interrupted indexing resumes from the last checkpoint. Batch-based output means 
 
 ## Quick start
 
-::: steps
-
-### Install
-
+::: tabs
+== tab "Standalone" icon:terminal
 ```bash
+# Install globally
 npm install -g docmd-search
-```
 
-### Install embedding dependencies
-
-```bash
+# Install embedding dependencies (one-time)
 npm install -g @huggingface/transformers onnxruntime-node
+
+# Index any directory
+docmd-search ./my-folder
+
+# Or launch web UI (requires docmd)
+docmd-search ./my-folder --ui
 ```
-
-### Index your docs
-
+== tab "docmd plugin" icon:puzzle
 ```bash
-docmd-search ./docs
+# In your docmd project
+npm install docmd-search
 ```
 
+Then enable semantic search in your config:
+
+```js
+// docmd.config.js
+export default {
+  plugins: {
+    search: {
+      semantic: true,  // ← activates docmd-search
+    }
+  }
+};
+```
 :::
 
-On first run, a setup wizard lets you choose an embedding model. After that, files are crawled, chunked, embedded, and an interactive terminal search opens automatically.
+On first run, a setup wizard lets you choose an embedding model. After that, files are crawled, chunked, embedded, and search is ready.
 
 ## What's next
 
@@ -83,11 +112,40 @@ On first run, a setup wizard lets you choose an embedding model. After that, fil
 | [Programmatic API](api) | Use docmd-search in scripts and CI pipelines |
 | [Browser Client](browser-client) | Integrate search into any web page |
 
-## Part of the docmd ecosystem
+## Architecture: two independent tools
 
-docmd-search works standalone with any documentation project. It also integrates with [docmd](https://docmd.io) as a semantic search plugin.
+docmd-search and docmd are **completely independent projects** from the same brand (docmd.io). They can work together but neither depends on the other.
 
-| Tool | What it does |
-| :--- | :----------- |
-| [docmd](https://docmd.io) | Zero-config documentation generator |
-| **docmd-search** | Offline semantic search engine |
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        docmd-search (standalone)                    │
+│                                                                     │
+│  CLI → Index directory → .docmd-search/ batches → TUI search       │
+│                              │                                      │
+│                              │ --ui flag?                           │
+│                              ▼                                      │
+│                    Spawn docmd with config                          │
+│                    (docmd is just the UI shell)                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        docmd (documentation engine)                 │
+│                                                                     │
+│  Config → Build docs → plugin-search runs                           │
+│                              │                                      │
+│                              │ semantic: true?                      │
+│                              ▼                                      │
+│                    Import docmd-search, build index                 │
+│                    (docmd-search is just the indexer)               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+When docmd-search launches docmd as its UI (`--ui` flag), it:
+1. Builds the semantic index first (its own job)
+2. Generates a docmd config pointing at the pre-built index
+3. Spawns docmd — which reads the index but never calls back to docmd-search
+
+When docmd uses docmd-search as a plugin (`semantic: true`), it:
+1. Dynamically imports docmd-search at build time
+2. Runs the indexer to build `.docmd-search/` batches
+3. Serves the semantic client bundle — no runtime dependency on docmd-search

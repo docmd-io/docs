@@ -51,7 +51,7 @@ Command-line flags take highest priority and override everything else.
 
 | Option | Type | Default | Description |
 | :----- | :--- | :------ | :---------- |
-| `model` | `string` | `Xenova/all-MiniLM-L6-v2` | Embedding model identifier |
+| `model` | `string` | `Xenova/all-MiniLM-L6-v2` | Embedding model identifier (see [Model selection](#model-selection) below) |
 | `chunkSize` | `number` | `256` | Maximum tokens per chunk |
 | `chunkOverlap` | `number` | `32` | Overlap between adjacent chunks (in tokens) |
 | `include` | `string[]` | `["**/*.md", "**/*.txt", "**/*.html"]` | Glob patterns for files to index |
@@ -78,7 +78,7 @@ docmd-search --settings
 ```
 
 ::: callout tip "Model cache"
-Downloaded models are cached inside `~/.docmd-search/`. Switching models does not delete previous downloads, so you can switch back without re-downloading.
+Downloaded models are cached at `~/.docmd-search/models/` — a stable location that survives `npm install` and package upgrades. Switching models does not delete previous downloads, so you can switch back without re-downloading.
 :::
 
 ## Project config
@@ -87,7 +87,7 @@ Create `.docmd-search/config.json` in your project root to override settings for
 
 ```json
 {
-  "model": "Xenova/bge-small-en-v1.5",
+  "model": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
   "chunkSize": 512,
   "chunkOverlap": 64,
   "include": ["docs/**/*.md"],
@@ -104,7 +104,8 @@ You only need to specify the fields you want to change. Unspecified fields inher
 The `--model` flag overrides the model for a single run without modifying any config file:
 
 ```bash
-docmd-search ./docs --model Xenova/bge-base-en-v1.5
+# Use the multilingual model for a single run
+docmd-search ./docs --model Xenova/paraphrase-multilingual-MiniLM-L12-v2
 ```
 
 ## Chunk sizing guide
@@ -143,3 +144,69 @@ Patterns follow standard glob syntax:
 ```
 
 The exclude list always includes common system directories (`node_modules`, `.git`, `dist`, `build`, etc.) by default. Your custom excludes are added on top.
+
+## Model selection
+
+All models run in **Int8-quantized form** (`q8`) — 4× smaller and 2-3× faster than full precision with minimal quality loss. Models are downloaded once and cached at `~/.docmd-search/models/`.
+
+| Model | Size | Languages | Speed | Best for |
+| :---- | :--- | :-------- | :---- | :------- |
+| `Xenova/all-MiniLM-L6-v2` *(default)* | ~23 MB | English only | ⚡ Fastest | English-only documentation |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | ~118 MB | 50+ languages | Fast | **i18n docs** (Chinese, German, etc.) |
+| `Xenova/multilingual-e5-small` | ~118 MB | 100+ languages | Fast | Wide language coverage |
+| `Xenova/paraphrase-multilingual-mpnet-base-v2` | ~270 MB | 50+ languages | Medium | Best multilingual quality |
+
+::: callout warning "English-only default"
+The default model (`all-MiniLM-L6-v2`) is trained on English text only. If your docs include Chinese, German, French, or other languages, switch to a multilingual model or search quality will be poor for non-English content.
+:::
+
+::: callout tip "Custom models"
+You can use any HuggingFace model with ONNX weights compatible with Transformers.js. Browse at [huggingface.co/models](https://huggingface.co/models?pipeline_tag=feature-extraction&library=transformers.js) and filter by `transformers.js` library. Ensure the model repo contains an `onnx/` folder.
+:::
+
+## docmd integration
+
+When using docmd-search as a plugin inside a [docmd](https://docmd.io) project, configuration happens in your `docmd.config.js`:
+
+```js
+// docmd.config.js
+export default {
+  plugins: {
+    search: {
+      semantic: true,              // ← enables docmd-search
+      model: 'Xenova/bge-small-en-v1.5',  // optional model override
+      chunkSize: 512,              // optional
+      chunkOverlap: 64,            // optional
+    }
+  }
+};
+```
+
+### How it works
+
+When `semantic: true` is set:
+
+1. docmd's plugin-search dynamically imports `docmd-search` at build time
+2. The indexer runs over your docs source directory
+3. The semantic index is written to `<outputDir>/.docmd-search/`
+4. The browser client bundle is served instead of MiniSearch
+
+If `docmd-search` is not installed, plugin-search falls back to keyword search and prints a helpful install message.
+
+### Pre-built index (advanced)
+
+If you've already built an index with the standalone CLI, you can tell docmd to use it directly:
+
+```js
+// docmd.config.js
+export default {
+  plugins: {
+    search: {
+      semantic: true,
+      indexDir: '/path/to/.docmd-search',  // ← use pre-built index
+    }
+  }
+};
+```
+
+When `indexDir` is provided and contains a valid `manifest.json`, plugin-search skips indexing entirely and just serves from that directory. This is how `docmd-search --ui` works — it builds the index first, then spawns docmd with a config pointing at the pre-built index.

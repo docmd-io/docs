@@ -48,4 +48,9 @@ module.exports = defineConfig({
       copyright: `© ${new Date().getFullYear()} docmd.io`,
     }
   },
+  plugins: {
+    search: {
+      indexDir: '.docmd-search'
+    }
+  }
 });

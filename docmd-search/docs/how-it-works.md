@@ -1,6 +1,6 @@
 ---
 title: "How It Works"
-description: "Architecture deep-dive: file discovery, heading-aware chunking, ONNX embedding, vector compression, multi-batch indexing, and hybrid browser search."
+description: "Architecture deep-dive: engine adapter, file discovery, heading-aware chunking, ONNX embedding, vector compression, multi-batch indexing, and hybrid browser search."
 ---
 
 docmd-search splits the work into two distinct phases: a heavy **build-time** pipeline that runs on Node.js, and a lightweight **search-time** runtime that runs in the browser using only arithmetic.
@@ -12,12 +12,15 @@ docmd-search splits the work into two distinct phases: a heavy **build-time** pi
 │                 BUILD TIME (Node.js)                    │
 │                                                         │
 │   Crawl → Chunk → Embed (ONNX) → Quantize → Compress    │
+│              │                      │                   │
+│              └──────────────────────┘                   │
+│                        │                                │
+│               Engine Adapter (Rust → JS → built-in)     │
 │                        │                                │
 │                        ▼                                │
 │                .docmd-search/                           │
 │                ├── manifest.json                        │
-│                ├── batch-000.json                       │
-│                ├── batch-001.json                       │
+│                ├── batches/000.json, 000.bin            │
 │                └── navigation.json                      │
 └─────────────────────────────────────────────────────────┘
                          │
@@ -33,6 +36,30 @@ docmd-search splits the work into two distinct phases: a heavy **build-time** pi
 └─────────────────────────────────────────────────────────┘
 ```
 
+## Engine adapter
+
+docmd-search uses an **engine adapter** (`src/engine.ts`) that automatically selects the best available backend for CPU-bound tasks like chunking and quantization:
+
+| Priority | Engine | When used |
+| :------- | :----- | :-------- |
+| 1 | **Rust** ⚡ | `@docmd/engine-rust` installed and binary available |
+| 2 | **JS** ◆ | `@docmd/engine-js` installed (docmd is present) |
+| 3 | **Built-in** ◇ | Always available — no external dependencies |
+
+::: callout info "No hard dependency on docmd"
+docmd-search does **not** require docmd or its engines. When running standalone (`npx docmd-search ./docs`), the built-in fallback handles everything. When running inside a docmd project, the Rust engine accelerates chunking and quantization automatically.
+:::
+
+### Tasks delegated to the engine
+
+| Task | Purpose |
+| :--- | :------ |
+| `search:chunk` | Split text into overlapping chunks by heading + word count |
+| `search:quantize` | Float32[] → Int8[] per-vector quantization |
+| `search:cosine` | Batch cosine similarity scoring (for search) |
+
+ONNX inference (the actual embedding generation) stays in Node.js — it uses `onnxruntime-node` which is itself a native addon. The engine handles the pure-math tasks that benefit from Rust's speed.
+
 ## Build-time pipeline
 
 ### 1. Crawl
@@ -43,7 +70,7 @@ For incremental indexing, the crawler compares each file's modification time and
 
 ### 2. Chunk
 
-Each file is split into chunks using heading-aware boundaries:
+Each file is split into chunks using heading-aware boundaries. The chunking is delegated to the engine adapter (Rust when available, otherwise built-in JS):
 
 - Markdown headings (`#`, `##`, `###`, etc.) create natural chunk boundaries
 - Chunks respect the configured `chunkSize` (in tokens, default: 256)
@@ -66,7 +93,21 @@ Run the following command...
 Each chunk's text is fed through an ONNX Runtime model to produce a dense vector embedding  -  a fixed-length array of floating-point numbers that captures the chunk's semantic meaning.
 
 ::: callout info "Why ONNX?"
-ONNX Runtime runs models locally without Python, CUDA, or cloud APIs. The models are downloaded once and cached globally. No data ever leaves your machine.
+ONNX Runtime runs models locally without Python, CUDA, or cloud APIs. The models are downloaded once and cached at `~/.docmd-search/models/`. No data ever leaves your machine.
+:::
+
+Models run in **Int8-quantized form** (`q8`) by default  -  the `model_quantized.onnx` variant from HuggingFace. This is ~4× smaller than full-precision (`fp32`) and 2-3× faster at inference time, with negligible quality loss. The default `all-MiniLM-L6-v2` model is ~23 MB in this form.
+
+ONNX Runtime is configured to use all available CPU cores automatically. The thread count is set to the physical CPU count so ORT's internal scheduler can select the optimal parallelism for the machine — this gives a further 2-4× speedup over the default single-threaded path.
+
+| Configuration | Throughput | Notes |
+| :------------ | :--------- | :---- |
+| fp32, default threading | ~18 chunks/s | Original baseline |
+| q8, default threading | ~55 chunks/s | q8 dtype only |
+| q8, full CPU threading | ~2000+ chunks/s | **Current default** |
+
+::: callout warning "English-only default"
+The default model is trained on English text. For multilingual documentation (Chinese, German, French, etc.) switch to a multilingual model in your config. See [Model selection](/configuration#model-selection).
 :::
 
 ### 4. Quantize
