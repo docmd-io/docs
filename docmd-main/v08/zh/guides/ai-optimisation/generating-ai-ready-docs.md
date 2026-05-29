@@ -21,15 +21,16 @@ description: "如何使用 llms.txt 标准和 docmd 的内置工具为 AI 助手
 
 ### 1. 配置网站 URL
 
-确保在 `docmd.config.js` 中正确设置了 `url` 属性。这允许插件为 `llms.txt` 文件中的所有页面生成绝对 URL。
+确保在 `docmd.config.json` 中正确设置了 `url` 属性。这允许插件为 `llms.txt` 文件中的所有页面生成绝对 URL。
 
-```javascript
-// docmd.config.js
-export default {
-  title: '我的项目文档',
-  url: 'https://docs.example.com',
-  plugins: ['llms']
-};
+```json
+{
+  "title": "我的项目文档",
+  "url": "https://docs.example.com",
+  "plugins": {
+    "llms": {}
+  }
+}
 ```
 
 ### 2. 输出文件

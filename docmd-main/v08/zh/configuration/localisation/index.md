@@ -6,15 +6,14 @@ description: "通过语言区域优先路由、翻译导航和自动降级回退
 
 ## 在配置中添加语言
 
-```js
-// docmd.config.js
-export default {
-  i18n: {
-    default: 'en',
-    locales: [
-      { id: 'en', label: 'English' },
-      { id: 'hi', label: 'हिन्दी' },
-      { id: 'zh', label: '中文' }
+```json
+{
+  "i18n": {
+    "default": "en",
+    "locales": [
+      { "id": "en", "label": "English" },
+      { "id": "hi", "label": "हिन्दी" },
+      { "id": "zh", "label": "中文" }
     ]
   }
 }
