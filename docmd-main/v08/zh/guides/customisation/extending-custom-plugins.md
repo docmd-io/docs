@@ -56,6 +56,10 @@ export default {
 
 您可以通过将本地插件导入到 `docmd.config.js` 中来注册它。
 
+::: callout info "为什么使用 .js 而不是 .json？"
+插件注册需要 JavaScript 的 `import` 语句来加载模块。对于需要导入插件的配置，必须使用 `docmd.config.js`。
+:::
+
 ```javascript
 // docmd.config.js
 import VersionInjector from './plugins/version-injector.js';

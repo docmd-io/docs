@@ -30,7 +30,7 @@ my-project/
 │   ├── backend/              # 归 API 团队所有
 │   │   ├── navigation.json
 │   │   └── database.md
-│   └── docmd.config.js       # 归平台/核心团队所有
+│   └── docmd.config.json    # 归平台/核心团队所有
 ```
 
 ### 2. 全局上下文切换 (菜单栏)

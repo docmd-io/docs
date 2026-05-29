@@ -8,6 +8,7 @@ Add multi-language support to your documentation site. docmd serves each locale 
 ## Add languages to your config
 
 ```json
+{
   "i18n": {
     "default": "en",
     "locales": [
@@ -16,6 +17,7 @@ Add multi-language support to your documentation site. docmd serves each locale 
       { "id": "zh", "label": "中文" }
     ]
   }
+}
 ```
 
 The `default` locale renders at the site root (`/`). All other locales render at `/{id}/`. You choose the IDs, labels, and which locale is the default - there are no hardcoded assumptions. If you want Hindi as the default, set `default: 'hi'` and Hindi renders at `/` whilst English renders at `/en/`.

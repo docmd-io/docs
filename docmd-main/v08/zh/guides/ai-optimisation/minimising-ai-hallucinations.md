@@ -44,10 +44,10 @@ const app = init({ env: "production" });
 
 将关键要求作为注释放在代码块 *内部*，而不仅仅是在周围的 Markdown 文本中。AI 模型在生成类似片段时，会非常重视代码内部的注释。
 
-```javascript
-export default {
-  // 关键：outputPath 必须是一个绝对文件系统路径。
-  outputPath: '/var/www/html/docs'
+```json
+{
+  // 关键：out 必须是一个绝对文件系统路径。
+  "out": "/var/www/html/docs"
 };
 ```
 
