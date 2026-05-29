@@ -19,37 +19,35 @@ Favicon 是浏览器窗口中主要的视觉锚点。高质量的 OpenGraph 和 
 
 ### 1. 配置 Favicon
 
-将您的 Favicon 文件（例如 `favicon.svg` 或 `favicon.ico`）放在源目录中，并在 `docmd.config.js` 中引用它。`docmd` 会自动处理相对路径和缓存失效。
+将您的 Favicon 文件（例如 `favicon.svg` 或 `favicon.ico`）放在源目录中，并在 `docmd.config.json` 中引用它。`docmd` 会自动处理相对路径和缓存失效。
 
-```javascript
-// docmd.config.js
-export default {
-  title: '我的项目',
-  favicon: '/favicon.svg' // 相对于源目录
-};
+```json
+{
+  "title": "我的项目",
+  "favicon": "/favicon.svg"
+}
 ```
 
 ### 2. 全局 SEO 配置
 
 启用并配置 [SEO 插件](../../plugins/seo)，为整个网站设置默认的社交媒体预览。
 
-```javascript
-// docmd.config.js
-export default {
-  url: 'https://docs.example.com',
-  plugins: {
-    seo: {
-      defaultDescription: '关于我们神奇软件的终极指南。',
-      openGraph: {
-        defaultImage: '/static/og-banner.png'
+```json
+{
+  "url": "https://docs.example.com",
+  "plugins": {
+    "seo": {
+      "defaultDescription": "关于我们神奇软件的终极指南。",
+      "openGraph": {
+        "defaultImage": "/static/og-banner.png"
       },
-      twitter: {
-        siteUsername: '@myproject',
-        cardType: 'summary_large_image'
+      "twitter": {
+        "siteUsername": "@myproject",
+        "cardType": "summary_large_image"
       }
     }
   }
-};
+}
 ```
 
 ### 3. 页面级覆盖

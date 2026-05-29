@@ -37,18 +37,17 @@ my-project/
 
 中央平台团队控制 [菜单栏](../../configuration/menubar)，它作为主要的导航层，用于在不同的团队领域之间切换。
 
-```javascript
-// docmd.config.js
-export default {
-  menubar: {
-    enabled: true,
-    items: [
-      { text: '前端', url: '/frontend/components' },
-      { text: '后端', url: '/backend/database' },
-      { text: '基础设施', url: '/devops/setup' }
+```json
+{
+  "menubar": {
+    "enabled": true,
+    "items": [
+      { "text": "前端", "url": "/frontend/components" },
+      { "text": "后端", "url": "/backend/database" },
+      { "text": "基础设施", "url": "/devops/setup" }
     ]
   }
-};
+}
 ```
 
 ### 3. 利用 navigation.json 实现本地自主

@@ -30,20 +30,19 @@ my-project/
 
 ### 2. 配置版本映射
 
-在 `docmd.config.js` 中定义您的版本结构。`current`（当前）版本在根 URL 处提供服务，其他版本在 `/{id}/` 处提供服务。
+在 `docmd.config.json` 中定义您的版本结构。`current`（当前）版本在根 URL 处提供服务，其他版本在 `/{id}/` 处提供服务。
 
-```javascript
-// docmd.config.js
-export default {
-  versions: {
-    current: 'v2',           // 在 / 处提供服务
-    position: 'sidebar-top', // 切换器位置
-    all: [
-      { id: 'v2', dir: 'docs',    label: 'v2.x (最新)' },
-      { id: 'v1', dir: 'docs-v1', label: 'v1.x (LTS)' }
+```json
+{
+  "versions": {
+    "current": "v2",
+    "position": "sidebar-top",
+    "all": [
+      { "id": "v2", "dir": "docs", "label": "v2.x (最新)" },
+      { "id": "v1", "dir": "docs-v1", "label": "v1.x (LTS)" }
     ]
   }
-};
+}
 ```
 
 ### 3. 特定版本的导航

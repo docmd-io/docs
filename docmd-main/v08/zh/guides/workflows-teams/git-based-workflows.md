@@ -21,17 +21,16 @@ description: "如何使用 Git、拉取请求 (Pull Request) 和自动化的 CI/
 
 您可以配置 `docmd` 在页脚或侧边栏中自动生成“编辑此页”链接。这允许用户直接从文档页面跳转到存储库中对应的源文件。
 
-```javascript
-// docmd.config.js
-export default {
-  editLink: {
-    enabled: true,
-    baseUrl: 'https://github.com/my-org/my-docs/edit/main/docs',
-    text: '建议修改'
+```json
+{
+  "editLink": {
+    "enabled": true,
+    "baseUrl": "https://github.com/my-org/my-docs/edit/main/docs",
+    "text": "建议修改"
   }
-};
+}
 ```
-有关更多详细信息，请参阅 [编辑链接配置](../../configuration/overview.md#editlink)。
+有关更多详细信息,请参阅 [编辑链接配置](../../configuration/overview.md#editlink)。
 
 ### 2. 利用 Threads 插件进行上下文审查
 
