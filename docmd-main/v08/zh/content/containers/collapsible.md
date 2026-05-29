@@ -64,9 +64,11 @@ description: "为常见问题、深度内容和剧透内容嵌入交互式手风
 :::
 ````
 ::: collapsible "分析示例 JSON 响应"
-```javascript
+```json
+{
   "status": "success",
-  "data": { "version": "0.6.2" }
+  "data": { "version": "0.8.2" }
+}
 ```
 :::
 

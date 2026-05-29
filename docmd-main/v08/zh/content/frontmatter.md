@@ -3,7 +3,7 @@ title: "Frontmatter 参考"
 description: "docmd 中页面级元数据与配置的完整指南。"
 ---
 
-Frontmatter 允许你在单个页面上覆盖全局设置。它心须写在 Markdown 文件最顶部，以 YAML 格式编写。
+Frontmatter 允许你在单个页面上覆盖全局设置。它必须写在 Markdown 文件最顶部，以 YAML 格式编写。
 
 ## 核心元数据
 

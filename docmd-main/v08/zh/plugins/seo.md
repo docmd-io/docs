@@ -7,26 +7,33 @@ description: "通过原生的元标签生成功能，为搜索引擎优化你的
 
 ## 全局配置
 
-在 `docmd.config.js` 中配置全站的 SEO 默认设置。
+在 `docmd.config.json` 中配置全站的 SEO 默认设置。页面级设置始终优先于全局默认设置。
 
-```javascript
-import { defineConfig } from '@docmd/core';
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `defaultDescription` | `string` | `null` | 没有 frontmatter 描述的页面的回退描述。 |
+| `aiBots` | `boolean` | `true` | 设置为 `false` 以阻止常见的 AI 爬虫（GPTBot、Claude-Web 等）。 |
+| `openGraph` | `object` | `null` | 用于社交媒体（Facebook、LinkedIn）的 Open Graph 设置。 |
+| `twitter` | `object` | `null` | Twitter (X) Card 设置，包括用户名和卡片类型。 |
 
-export default defineConfig({
-  plugins: {
-    seo: {
-      defaultDescription: 'docmd 生态系统的全面文档。',
-      aiBots: false, // 设置为 false 以阻止常见的 AI 爬虫 (GPTBot 等)
-      openGraph: {
-        defaultImage: '/assets/og-image.png'
+### 示例
+
+```json
+{
+  "plugins": {
+    "seo": {
+      "defaultDescription": "docmd 生态系统的全面文档。",
+      "aiBots": false,
+      "twitter": {
+        "siteUsername": "@docmd_io",
+        "cardType": "summary_large_image"
       },
-      twitter: {
-        siteUsername: '@docmd_io',
-        cardType: 'summary_large_image'
+      "openGraph": {
+        "defaultImage": "/assets/og-image.png"
       }
     }
   }
-});
+}
 ```
 
 ## 页面级覆盖

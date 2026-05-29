@@ -1,105 +1,111 @@
 ---
 title: "配置概览"
-description: "配置 docmd.config.js 的架构、品牌、布局与引擎功能。"
+description: "配置 docmd.config.json 以管理品牌、自定义模式、路由、布局行为和构建引擎。"
 ---
 
-`docmd.config.js` 文件是你文档项目的核心配置中心，控制网站结构、品牌呈现、界面行为以及引擎级蓉处理规则。
+`docmd.config.json` 文件是你工作区的核心配置。它控制网站样式、侧边栏层级、多语言详情和编译器选项。
 
-## 配置文件
+## 1. 配置架构
 
-推荐使用 `@docmd/core` 提供的 `defineConfig` 辅助函数，它将提供完整的 IDE 自动补全和类型检查功能，让你轻松了解所有可用配置项。
+JSON 是标准配置格式。这允许引擎工作池之间的高性能序列化。
 
-```javascript
-import { defineConfig } from '@docmd/core';
+但是，如果你需要动态 JavaScript 逻辑，`docmd.config.js` 和 `docmd.config.ts` 仍然完全支持。
 
-export default defineConfig({
-  title: 'My Project',
-  url: 'https://docs.myproject.com',
-  // ... 配置项
-});
+```json
+{
+  "title": "My Project",
+  "url": "https://docs.myproject.com",
+  "src": "docs",
+  "out": "site",
+  "base": "/"
+}
 ```
 
-## 核心配置项
+## 2. 核心设置
 
-`docmd` 采用简洁的配置架构。下表列出了主要顶层配置项：
+这些顶层参数配置编译器的输入和输出基础。
 
-| 键名 | 说明 | 默认值 |
-| :--- | :--- | :--- |
-| `title` | 文档网站名称，显示在头部和浏览器标题中 | `Documentation` |
-| `url` | 生产环境基础 URL，对 SEO、站点地图和 OpenGraph 至关重要 | `null` |
-| `src` | Markdown 文件目录的相对路径 | `docs` |
-| `out` | 静态网站输出目录的相对路径 | `site` |
-| `base` | 如果托管在子目录下的基础路径（如 `/docs/`） | `/` |
-| `i18n` | [多语言支持](./localisation.md)配置 | `null` |
-| `plugins` | 标准或自定义[插件](../plugins/usage.md)配置 | `{}` |
-
-## 品牌与身份
-
-配置导航头部和浏览器标签页的品牌展示方式。
-
-```javascript
-logo: {
-  light: 'assets/images/logo-dark.png',  // 浅色模式下显示的 Logo
-  dark: 'assets/images/logo-light.png',  // 深色模式下显示的 Logo
-  href: '/',                             // 点击 Logo 时跳转的链接
-  alt: 'Company Logo',                   // 无障碍文字
-  height: '32px'                         // 可选：Logo 高度
-},
-favicon: 'assets/favicon.ico',           // 网站图标路径
-```
-
-## 布局架构
-
-`docmd` 拥有模块化布局系统。你可以通过 `layout` 对象切换 UI 组件并配置导航行为。
-
-| 分区 | 键名 | 默认值 | 说明 |
+| 参数 | 类型 | 默认值 | 描述 |
 | :--- | :--- | :--- | :--- |
-| **全局** | `spa` | `true` | 启用 SPA 无刷新跟踪导航 |
-| **头部** | `header` | `{ enabled: true }` | 切换顶部导航栏的显示 |
-| **侧边栏** | `sidebar` | `{ enabled: true, collapsible: true }` | 控制侧边栏导航树及其行为 |
-| **页脚** | `footer` | `{ style: 'minimal' }` | 支持 `'minimal'` 或 `'complete'` 页脚样式 |
+| `title` | `String` | `"Documentation"` | 你的网站的正式名称。显示在导航头部和浏览器标题标签中。 |
+| `url` | `String` | `null` | 你的规范生产 URL。对 SEO 验证、站点地图索引和 OpenGraph 元数据至关重要。 |
+| `src` | `String` | `"docs"` | 包含源 Markdown (.md) 文件的文件夹的相对路径。 |
+| `out` | `String` | `"site"` | 编译器写入优化后的生产静态网站的相对路径。 |
+| `base` | `String` | `"/"` | 你网站的根基础路径（例如，如果托管在子文件夹中，设置为 `/docs/`）。 |
+| `tmp` | `String` | `null` | 临时编译文件和缓存的自定义目录。默认为隔离的系统临时文件夹。 |
+| `i18n` | `Object` | `null` | 多语言参数。请参阅[本地化指南](localisation/translated-content.md)。 |
+| `plugins` | `Object` | `{}` | 配置标准和自定义插件的键值映射。请参阅[插件指南](../plugins/usage.md)。 |
+| `engine` | `String` | `"js"` | 活动的处理引擎：`"js"` 或 `"rust"`（预览）。 |
 
-### 工具菜单（选项菜单）
+## 3. 品牌与标识
 
-选项菜单将全局搜索、主题切换、赞助链接等实用功能整合在一起。
+管理你的品牌在头部和浏览器标签中的显示方式。
 
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // 可选值：'header'、'sidebar-top'、'sidebar-bottom'、'menubar'
-    components: {
-      search: true,      // 启用内置全文搜索
-      themeSwitch: true, // 启用明暗模式切换
-      sponsor: 'https://github.com/sponsors/your-profile' // 可选的赞助链接
+```json
+{
+  "logo": {
+    "light": "assets/images/logo-dark.png",
+    "dark": "assets/images/logo-light.png",
+    "href": "/",
+    "alt": "Company Logo",
+    "height": "32px"
+  },
+  "favicon": "assets/favicon.ico"
+}
+```
+
+## 4. UI 布局与行为
+
+引擎提供模块化的头部和侧边栏布局。自定义功能区域。更改搜索和深色模式切换等组件的可见性。启用或禁用面包屑。
+
+```json
+{
+  "layout": {
+    "spa": true,
+    "header": {
+      "enabled": true
+    },
+    "sidebar": {
+      "collapsible": true,
+      "defaultCollapsed": false
+    },
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "search": true,
+        "themeSwitch": true
+      }
     }
   }
 }
 ```
 
-::: callout info
-如果 `optionsMenu.position` 设置为 `header` 或 `menubar`，但对应容器已禁用，菜单将自动回退到 `sidebar-top`。
-:::
+有关完整的视觉自定义选项，请参阅[布局和 UI 区域](layout-ui.md)指南。
 
-## 核心引擎功能
+## 5. 核心引擎功能
 
-细化调整 `docmd` 处理和渲染文档内容的方式。
+微调解析器处理内容文件的方式。
 
-```javascript
-minify: true,           // 压缩生产资源（CSS/JS）
-autoTitleFromH1: true,  // 如果 frontmatter 未设置 title，自动提取第一个 H1 作为页面标题
-copyCode: true,         // 自动为所有代码块添加“复制”按鈕
-pageNavigation: true,   // 在页面底部添加上一页/下一页导航链接
+```json
+{
+  "minify": true,
+  "autoTitleFromH1": true,
+  "copyCode": true,
+  "pageNavigation": true,
+  "markdown": {
+    "breaks": true
+  }
+}
 ```
 
-## 兖容旧版本
+| 选项 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `minify` | `Boolean` | `true` | 压缩输出 HTML 和 JS 结构以获得最大速度。 |
+| `autoTitleFromH1` | `Boolean` | `true` | 使用文件中第一个 H1 标题解析缺失的页面标题。 |
+| `copyCode` | `Boolean` | `true` | 在语法块右上角显示"复制代码"按钮。 |
+| `pageNavigation` | `Boolean` | `true` | 自动生成右侧"本页内容"目录。 |
+| `markdown.breaks` | `Boolean` | `true` | 标准化换行符。如果你在 80 列处换行 markdown 行，请设置为 `false`。 |
 
-如果你将旧版 `docmd` 升级，以下键名会自动映射到新架构，保证向后兼容：
-
-*   `siteTitle` → `title`
-*   `siteUrl` / `baseUrl` → `url`
-*   `srcDir` / `source` → `src`
-*   `outDir` / `outputDir` → `out`
-
-::: callout tip
-运行 `docmd migrate` 可自动将配置文件升级到最新架构，同时自动备份原始配置。
+::: callout warning "独立的 editLink 已弃用" icon:alert-triangle
+独立的 `editLink` 配置已弃用。请改用核心 [Git 插件](../plugins/git.md)。它提供相同的编辑链接功能以及提交时间戳和元数据日志。
 :::

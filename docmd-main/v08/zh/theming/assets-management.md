@@ -1,5 +1,5 @@
 ---
-title: "资源管理 (Assets Management)"
+title: "静态资源管理"
 description: "docmd 如何在构建过程中处理 CSS、JavaScript 和图像资源。"
 ---
 
@@ -16,13 +16,13 @@ my-docs/
   │   ├── js/
   │   └── images/
   ├── docs/            # 内容
-  ├── docmd.config.js
+  ├── docmd.config.json
   └── site/            # 构建输出 (自动镜像)
 ```
 
 ## 自动复制
 
-当你运行 `docmd build` 或 `docmd dev` 时：
+当你运行 `npx @docmd/core build` 或 `npx @docmd/core dev` 时：
 1.  **镜像逻辑**: `assets/` 文件夹的全部内容会被递归复制到 `site/assets/`。
 2.  **稳定性**: 我们使用经过加固的复制引擎，支持自动重试，以防止在 macOS 和现代 SSD 上出现“文件忙”或“ENOENT”错误。
 3.  **引用**: 你应该始终使用 **相对于根目录的路径** 在 Markdown 或配置中引用资源：
@@ -32,15 +32,12 @@ my-docs/
 
 ## 自定义 CSS 与 JS 集成
 
-要将你的资源链接到每个页面，请将它们添加到你的主题配置中：
+要将你的资源链接到每个页面，请将它们添加到配置中：
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    customCss: ['/assets/css/branding.css']
-  },
-  customJs: ['/assets/js/utils.js']
+```json
+{
+  "customCss": ["/assets/css/branding.css"],
+  "customJs": ["/assets/js/utils.js"]
 }
 ```
 

@@ -44,7 +44,7 @@ docmd-search uses an **engine adapter** (`src/engine.ts`) that automatically sel
 | :------- | :----- | :-------- |
 | 1 | **Rust** ⚡ | `@docmd/engine-rust` installed and binary available |
 | 2 | **JS** ◆ | `@docmd/engine-js` installed (docmd is present) |
-| 3 | **Built-in** ◇ | Always available — no external dependencies |
+| 3 | **Built-in** ◇ | Always available - no external dependencies |
 
 ::: callout info "No hard dependency on docmd"
 docmd-search does **not** require docmd or its engines. When running standalone (`npx docmd-search ./docs`), the built-in fallback handles everything. When running inside a docmd project, the Rust engine accelerates chunking and quantization automatically.
@@ -58,7 +58,7 @@ docmd-search does **not** require docmd or its engines. When running standalone 
 | `search:quantize` | Float32[] → Int8[] per-vector quantization |
 | `search:cosine` | Batch cosine similarity scoring (for search) |
 
-ONNX inference (the actual embedding generation) stays in Node.js — it uses `onnxruntime-node` which is itself a native addon. The engine handles the pure-math tasks that benefit from Rust's speed.
+ONNX inference (the actual embedding generation) stays in Node.js - it uses `onnxruntime-node` which is itself a native addon. The engine handles the pure-math tasks that benefit from Rust's speed.
 
 ## Build-time pipeline
 
@@ -98,7 +98,7 @@ ONNX Runtime runs models locally without Python, CUDA, or cloud APIs. The models
 
 Models run in **Int8-quantized form** (`q8`) by default  -  the `model_quantized.onnx` variant from HuggingFace. This is ~4× smaller than full-precision (`fp32`) and 2-3× faster at inference time, with negligible quality loss. The default `all-MiniLM-L6-v2` model is ~23 MB in this form.
 
-ONNX Runtime is configured to use all available CPU cores automatically. The thread count is set to the physical CPU count so ORT's internal scheduler can select the optimal parallelism for the machine — this gives a further 2-4× speedup over the default single-threaded path.
+ONNX Runtime is configured to use all available CPU cores automatically. The thread count is set to the physical CPU count so ORT's internal scheduler can select the optimal parallelism for the machine - this gives a further 2-4× speedup over the default single-threaded path.
 
 | Configuration | Throughput | Notes |
 | :------------ | :--------- | :---- |

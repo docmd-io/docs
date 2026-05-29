@@ -1,22 +1,19 @@
 ---
-title: "自定义样式与脚本"
+title: "自定义 CSS 与 JS"
 description: "注入自定义 CSS 和 JS 文件，扩展 docmd 的功能与品牌形象。"
 ---
 
-虽然 `docmd` 主题具备高度的灵活性，你仍可能需要注入自定义样式表或交互脚本。通过在配置文件中设置 `theme.customCss` 和 `customJs` 数组即可实现。
+虽然 `docmd` 主题具备高度的灵活性，你仍可能需要注入自定义样式表或交互脚本。通过在配置文件中设置 `customCss` 和 `customJs` 数组即可实现。
 
 ## 自定义 CSS
 
-使用 `theme.customCss` 覆盖现有样式或添加新样式。
+使用 `customCss` 覆盖现有样式或添加新样式。
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    customCss: [
-      '/assets/css/branding.css' // 相对站点根目录的路径
-    ]
-  }
+```json
+{
+  "customCss": [
+    "/assets/css/branding.css"
+  ]
 }
 ```
 
@@ -27,13 +24,12 @@ export default {
 
 ## 自定义 JavaScript
 
-使用顶级 `customJs` 数组添加行为性脚本或集成第三方服务。
+使用 `customJs` 数组添加行为性脚本或集成第三方服务。
 
-```javascript
-// docmd.config.js
-export default {
-  customJs: [
-    '/assets/js/feedback-widget.js'
+```json
+{
+  "customJs": [
+    "/assets/js/feedback-widget.js"
   ]
 }
 ```

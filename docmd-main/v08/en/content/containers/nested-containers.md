@@ -6,7 +6,7 @@ description: "Use the recursive parser to combine cards, tabs, and callouts into
 docmd uses a recursive parsing engine. You can nest components within each other to build complex, interactive documentation blocks without writing custom HTML.
 
 ::: callout warning "Self-Closing Buttons"
-The `::: button` component is self-closing (single line). Never add a terminal `:::` immediately after it — doing so closes the **parent container**, resulting in a broken layout.
+The `::: button` component is self-closing (single line). Never add a terminal `:::` immediately after it - doing so closes the **parent container**, resulting in a broken layout.
 :::
 
 ## Examples
@@ -79,7 +79,7 @@ Nesting **Tabs** inside **Steps** is a standard pattern for providing platform-s
 
 | Constraint | Note |
 | :--- | :--- |
-| **Recursive Tabs** | Nesting tabs within other tabs is technically supported but strongly discouraged — it creates confusing navigation on smaller viewports. |
+| **Recursive Tabs** | Nesting tabs within other tabs is technically supported but strongly discouraged - it creates confusing navigation on smaller viewports. |
 | **Sequential Conflict** | If you need numbered steps within a tab, use a standard ordered list rather than `::: steps` to avoid layout conflicts. |
 | **Indentation** | Indentation is not required by the parser, but 2 or 4-space indentation significantly improves source readability. |
 

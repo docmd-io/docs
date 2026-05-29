@@ -30,8 +30,10 @@ description: "使用内置的交互式组件扩展标准的 Markdown，使你的
 | **[标签 (Tags)](tags.md)** | `tag` | 用于版本、状态或突出的自闭合彩色标签。 |
 | **[按钮 (Buttons)](buttons.md)** | `button` | 自闭合、突出的呼吁操作导航链接。 |
 | **[折叠区块 (Collapsibles)](collapsible.md)**| `collapsible`| 用于 FAQ 和深度技术数据的交互式手风琴切换。 |
+| **[URL 嵌入 (Embeds)](embed.md)** | `embed` | 用于视频、社交和交互式内容的安全、零延迟嵌入。 |
 | **[变更日志 (Changelogs)](changelogs.md)** | `changelog` | 结构化、基于时间线的版本历史和发布说明。 |
 | **[英雄区块 (Hero)](hero.md)** | `hero` | 具有布局和滑块支持的高影响力落地页部分。 |
+| **[嵌套容器](nested-containers.md)** | — | 用于复杂、多组件布局的递归组合模式。 |
 
 ## 容器的战略重要性
 

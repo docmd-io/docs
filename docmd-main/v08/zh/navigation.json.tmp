@@ -24,11 +24,6 @@
     ]
   },
   {
-    "title": "对比",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
     "title": "配置",
     "icon": "settings",
     "collapsible": true,
@@ -52,7 +47,7 @@
       {
         "title": "国际化",
         "path": "/configuration/localisation",
-        "collapsible": true,
+        "collapsible": false,
         "children": [
           {
             "title": "翻译内容",
@@ -70,7 +65,7 @@
       },
       {
         "title": "多项目配置",
-        "path": "/configuration/workspaces"
+        "path": "/configuration/multi-project"
       },
       {
         "title": "重定向",
@@ -81,7 +76,7 @@
   {
     "title": "内容编写",
     "icon": "pencil-line",
-    "collapsible": true,
+    "collapsible": false,
     "children": [
       {
         "title": "Frontmatter",
@@ -220,10 +215,6 @@
         "path": "/plugins/search"
       },
       {
-        "title": "Git",
-        "path": "/plugins/git"
-      },
-      {
         "title": "SEO",
         "path": "/plugins/seo"
       },
@@ -234,6 +225,10 @@
       {
         "title": "数据分析",
         "path": "/plugins/analytics"
+      },
+      {
+        "title": "PWA",
+        "path": "/plugins/pwa"
       },
       {
         "title": "LLMs",
@@ -248,16 +243,16 @@
         "path": "/plugins/mermaid"
       },
       {
-        "title": "PWA",
-        "path": "/plugins/pwa"
-      },
-      {
         "title": "讨论区",
         "path": "/plugins/threads"
       },
       {
         "title": "Math (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "Git",
+        "path": "/plugins/git"
       },
       {
         "title": "构建插件",
@@ -554,29 +549,54 @@
     ]
   },
   {
+    "title": "对比",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
     "title": "发布说明",
     "icon": "package-check",
-    "collapsible": true,
+    "collapsible": false,
     "children": [
       {
-        "title": "v0.8.4 - 部署器与安全",
-        "path": "/release-notes/0-8-4"
+        "title": "v0.7.9 - Git 插件修复",
+        "path": "/release-notes/0-7-9"
       },
       {
-        "title": "v0.8.3 - 路由稳定性",
-        "path": "/release-notes/0-8-3"
+        "title": "v0.7.8 - Git 插件",
+        "path": "/release-notes/0-7-8"
       },
       {
-        "title": "v0.8.2 - 补丁版本",
-        "path": "/release-notes/0-8-2"
+        "title": "v0.7.7 - 多项目支持",
+        "path": "/release-notes/0-7-7"
       },
       {
-        "title": "v0.8.1 - Rust 引擎预览",
-        "path": "/release-notes/0-8-1"
+        "title": "v0.7.6 - URL 引擎",
+        "path": "/release-notes/0-7-6"
       },
       {
-        "title": "v0.8.0 - 并行引擎时代",
-        "path": "/release-notes/0-8-0"
+        "title": "v0.7.5 - 安全补丁",
+        "path": "/release-notes/0-7-5"
+      },
+      {
+        "title": "v0.7.4 - Mermaid 图标",
+        "path": "/release-notes/0-7-4"
+      },
+      {
+        "title": "v0.7.3 - 迁移 CLI",
+        "path": "/release-notes/0-7-3"
+      },
+      {
+        "title": "v0.7.2 - 部署 CLI",
+        "path": "/release-notes/0-7-2"
+      },
+      {
+        "title": "v0.7.1 - 插件 API",
+        "path": "/release-notes/0-7-1"
+      },
+      {
+        "title": "v0.7.0 - i18n 发布",
+        "path": "/release-notes/0-7-0"
       }
     ]
   },

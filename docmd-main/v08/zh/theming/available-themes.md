@@ -1,18 +1,17 @@
 ---
-title: "可用主题 (Available Themes)"
+title: "可用主题"
 description: "探索 docmd 内置的主题，包括 Sky、Ruby 和 Retro。了解如何通过单行配置切换主题。"
 ---
 
-`docmd` 提供了一套专业设计的、支持浅色/深色响应的主题。你可以通过更改 `docmd.config.js` 中的一个键值来切换整个网站的美学风格。
+`docmd` 提供了一套专业设计的、支持浅色/深色响应的主题。你可以通过更改 `docmd.config.json` 中的一个键值来切换整个网站的美学风格。
 
 ## 如何切换主题
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    name: 'sky',
-    appearance: 'system', // 选项: 'light', 'dark', 'system'
+```json
+{
+  "theme": {
+    "name": "sky",
+    "appearance": "system"
   }
 }
 ```

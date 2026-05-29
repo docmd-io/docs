@@ -56,8 +56,8 @@ docmd supports common technical ecosystems out of the box:
 
 When documenting code for AI agents, follow these practices:
 
-1.  **Label every block explicitly** — use `typescript`, `bash`, `json` rather than relying on auto-detection. This ensures the parser applies the correct grammar for the `llms.txt` stream.
-2.  **Embed intent in comments** — inline comments explain complex logic and provide critical reasoning context directly inside the code.
+1.  **Label every block explicitly** - use `typescript`, `bash`, `json` rather than relying on auto-detection. This ensures the parser applies the correct grammar for the `llms.txt` stream.
+2.  **Embed intent in comments** - inline comments explain complex logic and provide critical reasoning context directly inside the code.
 
 ::: callout tip "One-Click Portability"
 Set `copyCode: true` in your configuration to enable a subtle copy button. It appears on the top-right of every block on hover, allowing readers to copy snippets instantly.

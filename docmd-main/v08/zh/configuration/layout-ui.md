@@ -1,117 +1,84 @@
 ---
-title: "布局与界面分区"
-description: "通过管理头部、侧边栏和功能插槽来控制界面结构。"
+title: "布局与 UI 区域"
+description: "通过管理头部、侧边栏和功能 UI 插槽来控制界面结构。"
 ---
 
-一个标准的 `docmd` 页面分为六个主要功能分区：
+一个标准页面包含六个主要功能区域：
 
-1. **菜单栏**：全宽顶部导航栏，用于全局站点链接。
-2. **头部**：含页面标题和工具按鈕的固定导航栏。
-3. **侧边栏**：主要导航树（通常在左侧）。
-4. **内容区**：中心 Markdown 渲染区，包含**面包屑**。
-5. **目录（TOC）**：当前页面的右侧标题导航。
-6. **页脚**：底部版权、品牌和全局链接區域。
+1.  **菜单栏**：用于全局站点链接的全宽顶部导航栏。
+2.  **头部**：一个持久的辅助栏。它包含页面标题和工具按钮。
+3.  **侧边栏**：主要导航树，通常在左侧。
+4.  **内容区**：中心的 Markdown 渲染区域。包含**面包屑**。
+5.  **目录（TOC）**：右侧当前页面的标题导航。
+6.  **页脚**：底部版权、品牌和全站链接区域。
 
-## 全局组件
+## 全局组件配置
 
-大多数 UI 分区通过 `docmd.config.js` 的 `layout` 属性选来配置。
+引擎使用模块化布局系统。在 `docmd.config.json` 的 `layout` 部分配置大多数 UI 区域。
 
 ### 菜单栏
+菜单栏提供高层导航层。支持品牌标题、常规链接和嵌套下拉菜单。
 
-菜单栏在文档上方提供高层跟踪导航。
-
-```javascript
-layout: {
-  menubar: {
-    enabled: true,
-    position: 'top', // 'top'(固定) 或 'header'(随内容流)
-    left: [
-      { type: 'title', text: '品牌', url: '/', icon: 'home' },
-      { text: '功能特性', url: '/features' }
-    ],
-    right: [
-      { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', icon: 'github' }
-    ]
-  }
-}
-```
+*   **位置**：固定在 `top` 或内联在 `header` 中。
+*   **文档**：有关架构和样式，请参阅[菜单栏配置](menubar.md)。
 
 ### 页面头部
+头部显示页面标题、面包屑和工具菜单。
 
-头部默认开启。可全局关闭，也可在页面层级的 frontmatter 中隐藏特定元素。
+*   **控制**：通过 `layout.header` 全局启用或禁用头部。通过 `layout.breadcrumbs` 切换面包屑。
+*   **覆盖**：在你的[页面 Frontmatter](../content/frontmatter.md) 中使用 `hideTitle: true` 来本地隐藏标题区域。
 
-```javascript
-// docmd.config.js
-layout: {
-  header: {
-    enabled: true // 设为 false 则全局隐藏顶部头部
-  },
-  breadcrumbs: true // 设为 false 则全局隐藏面包屑
-}
-```
+### 工具菜单（选项菜单）
+`optionsMenu` 将**全局搜索**、**主题切换**和**赞助链接**等核心实用功能分组。
 
-**页面级覆盖（Frontmatter）：**
-```yaml
----
-title: "特殊页面"
-hideTitle: true # 隐藏该页固定头部中的标题
----
-```
-
-## 工具菜单（选项菜单）
-
-`optionsMenu` 将搜索、主题切换和赞助等实用功能整合在一起。
-
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // 可选值：'header'、'sidebar-top'、'sidebar-bottom'、'menubar'
-    components: {
-      search: true,      // 启用全文搜索
-      themeSwitch: true, // 启用明暗模式切换
-      sponsor: 'https://github.com/sponsors/your-profile'
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header", 
+      "components": {
+        "search": true,      
+        "themeSwitch": true, 
+        "sponsor": "https://github.com/sponsors/mgks"
+      }
     }
   }
 }
 ```
 
-::: callout info "容器回退"
-如果所选位置对应的容器已禁用，`docmd` 将自动将选项菜单渲染到 `sidebar-top` 插槽，确保实用功能持续可用。
+::: callout info "自动回退" icon:sparkles
+如果所选位置针对的是已禁用的容器，引擎会将选项菜单移动到 `sidebar-top`。这确保实用功能保持可访问。
 :::
 
-## 侧边栏与页脚控制
+### 侧边栏与导航
+侧边栏是主要导航树。在配置或外部 JSON 文件中定义其结构。
 
-### 侧边栏行为
-```javascript
-layout: {
-  sidebar: {
-    enabled: true,
-    collapsible: true,       // 启用展开/折叠动画
-    defaultCollapsed: false,  // 设置侧边栏初始状态
-    position: 'left'
+*   **行为**：支持动画、可折叠组和自动路径保留。
+*   **文档**：请参阅[导航配置](navigation.md)。
+
+### 页脚
+引擎为你的网站页脚提供 **minimal** 和 **complete** 布局。
+
+```json
+{
+  "layout": {
+    "footer": {
+      "style": "complete", 
+      "description": "使用 docmd 构建的文档。",
+      "branding": true,
+      "columns": [
+        {
+          "title": "社区",
+          "links": [
+            { "text": "GitHub", "url": "https://github.com/docmd-io/docmd" }
+          ]
+        }
+      ]
+    }
   }
 }
 ```
 
-### 页脚品牌
-`docmd` 提供了两种页脚样式：**minimal**（简洁）和 **complete**（完整）。
-
-```javascript
-layout: {
-  footer: {
-    style: 'complete',
-    description: '本文档由 docmd 构建。',
-    branding: true, // 控制 "Built with docmd" 徽标的显示
-    columns: [
-      {
-        title: '社区',
-        links: [{ text: 'GitHub', url: '...' }]
-      }
-    ]
-  }
-}
-```
-
-::: callout tip "AI 优化界面"
-在设计自定义布局时，建议将**搜索**组件放在 `optionsMenu` 的显著位置。AI 模型在浏览文档时经常把搜索作为定位特定技术上下文的主要入口。
+::: callout tip "界面层级" icon:lightbulb
+将你的**菜单栏**用于全局链接。将你的**侧边栏**用于逻辑文档结构。AI 代理依靠这个层级来理解模块之间的关系。
 :::

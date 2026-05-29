@@ -75,7 +75,42 @@ i18n: {
 | `sidebar-top` | 带标签的完整下拉菜单，位于侧边栏顶部。 |
 | `sidebar-bottom` | 带标签的完整下拉菜单，位于侧边栏底部。 |
 
+## 字符串模式（仅适用于 noStyle 页面）
+
+标准 i18n 对每种语言区域使用单独的目录（`docs/en/`、`docs/hi/`），每个目录都有自己的 markdown 文件。**字符串模式**是一种更简单的替代方案，专为 [noStyle 页面](../../content/no-style-pages.md) 设计 - 使用原始 HTML 而非 markdown 的页面。
+
+```json
+  "i18n": {
+    "default": "en",
+    "stringMode": true,
+    "locales": [
+      { "id": "en", "label": "English" },
+      { "id": "zh", "label": "中文" }
+    ]
+  }
+```
+
+启用 `stringMode: true` 后：
+
+1. 源文件保留在根 `docs/` 目录中（无语言子目录）
+2. 默认语言区域正常在 `/` 构建
+3. 对于每种非默认语言区域，docmd 会克隆渲染的 HTML，并使用 `assets/i18n/{locale}.json` 中的 JSON 文件应用**服务器端字符串替换**
+4. 输出到 `/{locale}/` - 例如 `/zh/index.html` - 包含完整 SEO（hreflang 标签、正确的 `lang` 属性）
+5. 如果翻译文件缺失，页面将使用默认语言文本渲染
+
+有关 `data-i18n` 属性语法和 JSON 文件格式的完整详情，请参阅 [noStyle 字符串替换](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle)。
+
+::: callout warning "字符串模式不翻译 markdown 内容" icon:info
+字符串替换通过在渲染的 HTML 中查找 `data-i18n` 属性来工作。标准 markdown 内容（`## Heading`、段落、列表）渲染为普通 HTML 标签，没有这些属性 - 因此替换器找不到任何内容。
+
+- **文档站点** → 使用目录模式（默认）。每种语言区域都有自己的 markdown 文件，包含完全翻译的文章。
+- **着陆页、营销网站、仪表板** → 使用字符串模式。这些是 noStyle 页面，使用自定义 HTML，你可以控制每个标签并添加 `data-i18n` 属性。
+
+如果你的站点同时包含两者 - 例如，noStyle 着陆页 plus 文档 - 对文档使用目录模式，并在你的 noStyle 页面添加 `data-i18n` 属性。字符串模式将翻译 noStyle HTML，而目录模式处理文档内容。
+:::
+
 ## 后续步骤
 
-- [翻译内容](./translated-content) - 目录结构、编写翻译、导航
-- [UI 字符串与 SEO](./ui-strings) - 自定义系统文本、hreflang 标签
+- [翻译内容](translated-content.md) - 目录结构、编写翻译、导航
+- [UI 字符串与 SEO](ui-strings.md) - 自定义系统文本、hreflang 标签
+- [noStyle 字符串替换](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) - noStyle 页面的 `data-i18n` 属性语法和 JSON 格式

@@ -19,9 +19,9 @@ description: "The baseline formatting rules for all docmd content: typography, s
 `docmd` derives the page `<h1>` automatically from the `title` field in your frontmatter. Begin your heading structure at `##`.
 
 ```markdown
-## Level 2 — Major Section
-### Level 3 — Feature Detail
-#### Level 4 — Sub-Detail
+## Level 2 - Major Section
+### Level 3 - Feature Detail
+#### Level 4 - Sub-Detail
 ```
 
 ::: callout tip "Logical Integrity for AI"

@@ -10,18 +10,22 @@ description: "docmd 的原生 KaTeX/LaTeX 数学公式集成。"
 ## 安装
 
 ```bash
-docmd add math
+npx @docmd/core add math
 ```
 
-```javascript
-plugins: {
-  math: {}
+在 `docmd.config.json` 中启用：
+
+```json
+{
+  "plugins": {
+    "math": {}
+  }
 }
 ```
 
 ## 工作原理
 
-1. 通过 `docmd.config.js` 启用插件。
+1. 通过 `docmd.config.json` 启用插件。
 2. 用 `$`（内联）或 `$$`（块级）标识符包裹标准 LaTeX 数学公式。
 3. 服务器在静态站点构建时以原始静态 HTML 标签的形式智能处理这些数学规则。
 4. 注入的极简 CSS 自动为这些类设置作用域，用户访问页面时即刻呈现可视化效果！

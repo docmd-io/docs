@@ -7,21 +7,19 @@ description: "自动生成符合标准的 sitemap.xml，提升搜索引擎发现
 
 ## 配置
 
-提供站点的 `siteUrl` 即可开启站点地图生成。可在 `plugins` 对象中自定义各章节的爬取权重。
+提供站点的 `url` 即可开启站点地图生成。可在 `plugins` 对象中自定义各章节的爬取权重。
 
-```javascript
-import { defineConfig } from '@docmd/core';
-
-export default defineConfig({
-  siteUrl: 'https://docs.example.com', // Required for sitemap generation
-  plugins: {
-    sitemap: {
-      defaultChangefreq: 'weekly', // 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
-      defaultPriority: 0.8,        // Default weight for standard pages
-      rootPriority: 1.0            // Weight for the homepage (index.md)
+```json
+{
+  "url": "https://docs.example.com",
+  "plugins": {
+    "sitemap": {
+      "defaultChangefreq": "weekly",
+      "defaultPriority": 0.8,
+      "rootPriority": 1.0
     }
   }
-});
+}
 ```
 
 ## 页面级控制

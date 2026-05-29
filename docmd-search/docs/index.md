@@ -3,7 +3,7 @@ title: "docmd-search"
 description: "Offline semantic search engine for documentation. Local embeddings, browser-ready indexes."
 ---
 
-Offline semantic search engine for documentation. Embeddings are generated locally at build time. The browser runtime is pure math — no model weights, no cloud APIs, no data leaving your machine.
+Offline semantic search engine for documentation. Embeddings are generated locally at build time. The browser runtime is pure math - no model weights, no cloud APIs, no data leaving your machine.
 
 ::: callout tip "Zero config"
 Run `npx docmd-search ./docs` in any folder. No setup, no API keys, no config file needed.
@@ -20,7 +20,7 @@ Run `docmd-search ./any-folder` to index any directory and get an interactive te
 :::
 
 ::: card "docmd plugin" icon:puzzle
-Add `semantic: true` to your docmd config and docmd-search powers the search. No code changes — just a config flag.
+Add `semantic: true` to your docmd config and docmd-search powers the search. No code changes - just a config flag.
 :::
 
 :::
@@ -38,7 +38,7 @@ Build time (Node.js)                    Search time (Browser, <3KB)
            → Save multi-batch index
 ```
 
-All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity — no neural network inference, just arithmetic.
+All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity - no neural network inference, just arithmetic.
 
 ## Key capabilities
 
@@ -143,9 +143,9 @@ docmd-search and docmd are **completely independent projects** from the same bra
 When docmd-search launches docmd as its UI (`--ui` flag), it:
 1. Builds the semantic index first (its own job)
 2. Generates a docmd config pointing at the pre-built index
-3. Spawns docmd — which reads the index but never calls back to docmd-search
+3. Spawns docmd - which reads the index but never calls back to docmd-search
 
 When docmd uses docmd-search as a plugin (`semantic: true`), it:
 1. Dynamically imports docmd-search at build time
 2. Runs the indexer to build `.docmd-search/` batches
-3. Serves the semantic client bundle — no runtime dependency on docmd-search
+3. Serves the semantic client bundle - no runtime dependency on docmd-search

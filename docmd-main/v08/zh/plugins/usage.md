@@ -1,7 +1,62 @@
 ---
-title: "插件机制与用法 (Plugin Mechanism & Usage)"
-description: "了解 docmd 的生命周期钩子、插件安全机制以及如何扩展引擎的功能。"
+title: "使用插件"
+description: "安装、配置和管理 docmd 插件 - 从必需的默认插件到可选的附加组件。"
 ---
+
+docmd 具有模块化插件架构。必需的插件随核心一起发布，无需安装。可选插件可以通过单一 CLI 命令安装。
+
+## 安装插件
+
+使用 docmd CLI 安装和移除插件：
+
+```bash
+# 安装插件
+npx @docmd/core add <plugin-name>
+
+# 移除插件
+npx @docmd/core remove <plugin-name>
+```
+
+安装程序检测你的包管理器（npm、pnpm、yarn 或 bun）。它将短名称解析为完整的包名称，并将配置注入到你的 `docmd.config.json` 中。
+
+使用 `--verbose`（或 `-V`）获取完整的安装程序输出：
+
+```bash
+npx @docmd/core add <plugin-name> -V
+```
+
+## 必需插件
+
+这些插件与 `@docmd/core` 一起打包。无需安装。在你的 `docmd.config.json` 中启用它们：
+
+```json
+{
+  "plugins": {
+    "search": {},
+    "seo": { "aiBots": false },
+    "sitemap": {},
+    "analytics": {},
+    "llms": {},
+    "mermaid": {},
+    "openapi": {},
+    "git": {}
+  }
+}
+```
+
+::: callout tip "Git 插件"
+Git 插件检测你的项目是否是 Git 仓库。如果不是，它会自动禁用自己。无需配置即可获取最后更新时间戳。
+:::
+
+## 可选插件
+
+可选插件需要在启用之前安装。
+
+| 插件 | 安装命令 | 描述 |
+| :--- | :--- | :--- |
+| [PWA](pwa.md) | `npx @docmd/core add pwa` | 具有离线缓存的渐进式 Web 应用支持 |
+| [Threads](threads.md) | `npx @docmd/core add threads` | 存储在 Markdown 中的行内讨论评论 |
+| [Math](math.md) | `npx @docmd/core add math` | 原生 KaTeX 和 LaTeX 数学渲染 |
 
 `docmd` 采用可插拔架构。几乎所有核心功能（从搜索到 SEO 再到实时预览）都是作为插件实现的。这种设计确保了引擎保持轻量，同时允许开发者根据具体项目需求选择性地开启功能。
 

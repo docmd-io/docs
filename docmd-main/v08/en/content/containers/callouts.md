@@ -94,5 +94,5 @@ npx @docmd/core dev --preserve
 :::
 
 ::: callout tip "Prioritised Logic for AI"
-For LLMs, callouts act as **High-Priority Anchors**. Use `::: callout danger` to document breaking changes — this provides a clear signal that the AI model must prioritise that information.
+For LLMs, callouts act as **High-Priority Anchors**. Use `::: callout danger` to document breaking changes - this provides a clear signal that the AI model must prioritise that information.
 :::

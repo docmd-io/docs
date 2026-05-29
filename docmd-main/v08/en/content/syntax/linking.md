@@ -3,10 +3,10 @@ title: "Linking & Referencing"
 description: "Master internal cross-linking, external resources, new-tab behaviour, and static asset referencing."
 ---
 
-docmd provides a reliable, filesystem-aware linking system. Write links to your source `.md` files naturally in any format — the engine normalises them into clean, SEO-optimised URLs automatically.
+docmd provides a reliable, filesystem-aware linking system. Write links to your source `.md` files naturally in any format - the engine normalises them into clean, SEO-optimised URLs automatically.
 
 ::: callout info "Write Naturally, Ship Perfectly"
-You do not need special linking conventions. Write `overview.md`, `overview/`, or `overview` — the build engine produces the exact same clean, trailing-slash URL in every case.
+You do not need special linking conventions. Write `overview.md`, `overview/`, or `overview` - the build engine produces the exact same clean, trailing-slash URL in every case.
 :::
 
 ## URL Normalisation
@@ -83,7 +83,7 @@ The `::: button` and `::: tag` containers support all standard linking conventio
 
 ## Navigation Configuration
 
-Paths defined in `navigation.json` and `docmd.config.json` are normalised at build time. Write them in any format — all three entries below produce the identical canonical URL.
+Paths defined in `navigation.json` and `docmd.config.json` are normalised at build time. Write them in any format - all three entries below produce the identical canonical URL.
 
 ```json "navigation.json"
 [
@@ -121,9 +121,9 @@ When linking to a directory's index page, use the folder path rather than explic
 
 The engine respects standard browser protocols for external resources and never modifies these links.
 
-*   **HTTPS** — `[docmd Homepage](https://docmd.io)` — opens in the same tab.
-*   **Mail** — `[Support](mailto:help@docmd.io)` — opens the email client.
-*   **Assets** — `[Download CLI Binary](/assets/bin/docmd-mac.zip)` — not normalised.
+*   **HTTPS** - `[docmd Homepage](https://docmd.io)` - opens in the same tab.
+*   **Mail** - `[Support](mailto:help@docmd.io)` - opens the email client.
+*   **Assets** - `[Download CLI Binary](/assets/bin/docmd-mac.zip)` - not normalised.
 
 ## Static Assets
 

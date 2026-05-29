@@ -1,5 +1,5 @@
 ---
-title: "图标 (Icons)"
+title: "图标"
 description: "如何在你的文档中使用和自定义 Lucide 图标。"
 ---
 
@@ -7,13 +7,15 @@ description: "如何在你的文档中使用和自定义 Lucide 图标。"
 
 ## 导航图标
 
-在 `docmd.config.js` 中为任何导航项分配一个图标。请使用 Lucide 网站上找到的任何图标的短横线命名法 (kebab-case) 名称。
+在 `docmd.config.json` 中为任何导航项分配一个图标。请使用 Lucide 网站上找到的任何图标的短横线命名法 (kebab-case) 名称。
 
-```javascript
-navigation: [
-  { title: '首页', path: '/', icon: 'home' },
-  { title: '设置', path: '/setup', icon: 'settings' }
-]
+```json
+{
+  "navigation": [
+    { "title": "首页", "path": "/", "icon": "home" },
+    { "title": "设置", "path": "/setup", "icon": "settings" }
+  ]
+}
 ```
 
 ## 容器中的图标

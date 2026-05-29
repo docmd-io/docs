@@ -35,7 +35,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[Hero](hero.md)** | `hero` | High-impact landing page sections with layout and slider support. |
 | **[URL Embeds](embed.md)** | `embed` | Secure, zero-latency embeds for video, social, and interactive content. |
 | **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |
-| **[Nested Containers](nested-containers.md)** | — | Recursive composition patterns for complex, multi-component layouts. |
+| **[Nested Containers](nested-containers.md)** | - | Recursive composition patterns for complex, multi-component layouts. |
 
 ## The Strategic Importance of Containers
 

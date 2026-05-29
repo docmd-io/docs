@@ -78,7 +78,7 @@ docmd-search --settings
 ```
 
 ::: callout tip "Model cache"
-Downloaded models are cached at `~/.docmd-search/models/` — a stable location that survives `npm install` and package upgrades. Switching models does not delete previous downloads, so you can switch back without re-downloading.
+Downloaded models are cached at `~/.docmd-search/models/` - a stable location that survives `npm install` and package upgrades. Switching models does not delete previous downloads, so you can switch back without re-downloading.
 :::
 
 ## Project config
@@ -147,7 +147,7 @@ The exclude list always includes common system directories (`node_modules`, `.gi
 
 ## Model selection
 
-All models run in **Int8-quantized form** (`q8`) — 4× smaller and 2-3× faster than full precision with minimal quality loss. Models are downloaded once and cached at `~/.docmd-search/models/`.
+All models run in **Int8-quantized form** (`q8`) - 4× smaller and 2-3× faster than full precision with minimal quality loss. Models are downloaded once and cached at `~/.docmd-search/models/`.
 
 | Model | Size | Languages | Speed | Best for |
 | :---- | :--- | :-------- | :---- | :------- |
@@ -209,4 +209,4 @@ export default {
 };
 ```
 
-When `indexDir` is provided and contains a valid `manifest.json`, plugin-search skips indexing entirely and just serves from that directory. This is how `docmd-search --ui` works — it builds the index first, then spawns docmd with a config pointing at the pre-built index.
+When `indexDir` is provided and contains a valid `manifest.json`, plugin-search skips indexing entirely and just serves from that directory. This is how `docmd-search --ui` works - it builds the index first, then spawns docmd with a config pointing at the pre-built index.

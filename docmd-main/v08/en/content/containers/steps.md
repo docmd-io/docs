@@ -111,5 +111,5 @@ Each step can contain code blocks, callouts, and other nested containers.
 :::
 
 ::: callout tip "Workflow Optimisation" icon:lightbulb
-AI models interpret the `steps` container as a signal for **Sequential Workflows**. Always start each list item with a **bolded title** — this allows agents to reliably parse the objective of each step from the `llms.txt` context.
+AI models interpret the `steps` container as a signal for **Sequential Workflows**. Always start each list item with a **bolded title** - this allows agents to reliably parse the objective of each step from the `llms.txt` context.
 :::

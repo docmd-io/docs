@@ -3,18 +3,17 @@ title: "明暗模式"
 description: "如何配置默认浏览模式并管理主题切换器，以提供最佳用户体验。"
 ---
 
-`docmd` 内置支持明色和暗色配色方案。它会自动检测用户的系统偏好，并允许通过 UI 切换按鈕手动覆盖。
+`docmd` 内置支持明色和暗色配色方案。它会自动检测用户的系统偏好，并允许通过 UI 切换按钮手动覆盖。
 
 ## 默认浏览模式
 
-在 `docmd.config.js` 中指定文档的初始状态。
+在 `docmd.config.json` 中指定文档的初始状态。
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    name: 'sky',
-    appearance: 'system' // 可选值：'light'、'dark'、'system'（默认）
+```json
+{
+  "theme": {
+    "name": "sky",
+    "appearance": "system"
   }
 }
 ```
@@ -23,16 +22,18 @@ export default {
 *   **`light`**：首次加载时强制使用亮色模式。
 *   **`dark`**：首次加载时强制使用暗色模式。
 
-## 配置切换按鈕
+## 配置切换按钮
 
 主题切换器是**选项菜单**的组成部分。可通过 `layout` 对象控制其可见性和位置。
 
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // 可选：'header'、'sidebar-top'、'sidebar-bottom'
-    components: {
-      themeSwitch: true  // 显示或隐藏太阳/月亮切换按鈕
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "themeSwitch": true
+      }
     }
   }
 }
@@ -62,7 +63,7 @@ body[data-theme="dark"] {
 ```
 
 ## 用户偏好持久化
-用户手动切换模式后，居好将存入 `localStorage`。`docmd` 在每次页面加载时即时读取该值，防止“主题闪烁”（FOUC）。
+用户手动切换模式后，偏好将存入 `localStorage`。`docmd` 在每次页面加载时即时读取该值，防止“主题闪烁”（FOUC）。
 
 ::: callout tip
 生成内容时，LLM 偏幽高对比结构。`docmd` 确保代码片段和提示框在两种模式下均可正常访问，保证 `llms-full.txt` 内容无论在哪种模式下构建，都能被正确解析为语义块。

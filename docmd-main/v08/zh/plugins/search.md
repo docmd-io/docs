@@ -9,25 +9,31 @@ description: "使用 MiniSearch 为你的文档启用高速、离线优先的全
 
 在大多数 `docmd` 模板中，搜索是默认启用的。你可以通过 `layout` 配置来控制其可见性和位置。
 
-```javascript
-import { defineConfig } from '@docmd/core';
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | 启用或禁用全文搜索索引器。 |
+| `placeholder` | `string` | `'Search...'` | 搜索输入框的自定义占位文本。 |
+| `maxResults` | `number` | `10` | 弹框中显示的最大结果数量。 |
 
-export default defineConfig({
-  layout: {
-    optionsMenu: {
-      position: 'header', // 'header', 'sidebar-top', 'sidebar-bottom', 或 'menubar'
-      components: {
-        search: true // 设置为 false 以完全禁用搜索插件
+### 示例
+
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "search": true
       }
     }
   }
-});
+}
 ```
 
 ## 工作原理
 
 ### 1. 索引 (构建时)
-在 `docmd build` 过程中，搜索插件会遍历网站上的每一个页面。它会提取标题、副标题和正文文本，然后将这些数据编译成压缩的 `search-index.json` 文件。
+在 `npx @docmd/core build` 过程中，搜索插件会遍历网站上的每一个页面。它会提取标题、副标题和正文文本，然后将这些数据编译成压缩的 `search-index.json` 文件。
 
 *   **深层链接**: 索引器会自动将每个标题（`#`、`##` 等）注册为可搜索目标。
 *   **相关性提升**: 标题被赋予最高权重，其次是副标题，最后是页面内容。

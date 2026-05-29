@@ -79,7 +79,7 @@ docmd dev --preserve
 使用 preserve 标志来保留构建文件：
 
 ```bash
-docmd dev --preserve
+npx @docmd/core dev --preserve
 ```
 
 ::: button "CLI 标志参考" ./#cli-commands

@@ -3,85 +3,111 @@ title: "步骤"
 description: "将标准有序列表转化为高冲击力的可视化时间线和教程。"
 ---
 
-The `steps` container is designed specifically for "How-to" guides and technical tutorials. It transforms a standard Markdown ordered list into a polished, numbered vertical timeline with automatic spacing and visual emphasis.
+`steps` 容器将标准 Markdown 有序列表转化为带编号的垂直时间线。专为技术教程和顺序操作指南设计。
 
-## 语法
+::: callout info "无空格语法"
+`::: steps` 和 `:::steps`（无空格）均原生支持，使用你喜欢的风格即可。
+:::
 
-将任意标准有序列表包裹在 `::: steps` 块中。
+## 语法参考
+
+```markdown
+::: steps
+
+1. **步骤标题**
+   步骤描述放在这里。
+
+2. **下一步**
+   继续步骤序列。
+
+:::
+```
+
+| 容器 | 说明 |
+| :--- | :--- |
+| **`::: steps`** | 父容器，将子有序列表项转化为带编号的时间线。 |
+| **`1. `** | 任何标准 Markdown 有序列表项都作为一个步骤。加粗每项的第一行作为标题。 |
+
+## 示例
+
+### 基础工作流
 
 ```markdown
 ::: steps
 
 1.  **初始化项目**
-    运行 `docmd init` 命令搭建目录结构。
+    运行 `npx @docmd/core init` 搭建目录结构。
 
 2.  **编写内容**
     使用标准 Markdown 文件编写文档。
 
 3.  **构建与部署**
-    使用 `docmd build` 生成静态资源。
-
-:::
-```
-
-## 详细实现
-
-`steps` 组件支持在每个条目中使用丰富的 Markdown 内容，包括代码块、图片和嵌套容器。
-
-```markdown
-::: steps
-
-1.  **生成生产构建**
-    执行构建命令以生成高度优化的静态站点。
-    ```bash
-    docmd build
-    ```
-
-2.  **验证资源完整性**
-    检查 `site/` 目录，确保所有资源均已正确编译。
-
-3.  **部署到基础设施**
-    将 `site/` 目录同步到你的主要托管提供商（如 S3、Cloudflare Pages 或 Vercel）。
+    运行 `npx @docmd/core build` 生成静态站点。
 
 :::
 ```
 
 ::: steps
 
-1.  **生成生产构建**
-    执行构建命令以生成高度优化的静态站点。
-    ```bash
-    docmd build
-    ```
+1.  **初始化项目**
+    运行 `npx @docmd/core init` 搭建目录结构。
 
-2.  **验证资源完整性**
-    检查 `site/` 目录，确保所有资源均已正确编译。
+2.  **编写内容**
+    使用标准 Markdown 文件编写文档。
 
-3.  **部署到基础设施**
-    将 `site/` 目录同步到你的主要托管提供商（如 S3、Cloudflare Pages 或 Vercel）。
+3.  **构建与部署**
+    运行 `npx @docmd/core build` 生成静态站点。
 
 :::
 
-## 高级嵌套
+### 包含富内容的步骤
 
-你可以在步骤内嵌套其他文档组件（如**提示框**或**按钮**），而不会中断序列的时间流。
+每个步骤可以包含代码块、标注和其他嵌套容器。
 
 ```markdown
 ::: steps
 
 1.  **配置环境**
-    在 `docmd.config.js` 中定义项目特定变量。
+    在 `docmd.config.json` 中定义项目变量。
 
     ::: callout tip
-    使用 `defineConfig` 可为配置键启用 IDE 自动补全。
+    使用 `defineConfig` 可为所有配置键启用 IDE 自动补全。
     :::
 
-2.  **验证架构**
-    运行 `docmd verify` 确保配置结构正确。
+2.  **生成生产构建**
+    执行构建命令生成高度优化的静态站点。
+
+    ```bash
+    npx @docmd/core build
+    ```
+
+3.  **部署到基础设施**
+    将 `site/` 目录同步到 S3、Cloudflare Pages 或 Vercel。
 
 :::
 ```
 
-::: callout tip "工作流优化"
-现代 AI 模型将 `steps` 容器解读为**顺序工作流**的高保真信号。为最大化 `llms-full.txt` 上下文中的 AI 准确性，请始终以**加粗标题**开头每个列表项。这允许 Agent 在处理实现细节之前可靠地解析每个步骤的目标。
+::: steps
+
+1.  **配置环境**
+    在 `docmd.config.json` 中定义项目变量。
+
+    ::: callout tip
+    使用 `defineConfig` 可为所有配置键启用 IDE 自动补全。
+    :::
+
+2.  **生成生产构建**
+    执行构建命令生成高度优化的静态站点。
+
+    ```bash
+    npx @docmd/core build
+    ```
+
+3.  **部署到基础设施**
+    将 `site/` 目录同步到 S3、Cloudflare Pages 或 Vercel。
+
+:::
+
+::: callout tip "工作流优化" icon:lightbulb
+AI 模型将 `steps` 容器解读为**顺序工作流**的高保真信号。始终以**加粗标题**开头每个列表项——这让 AI Agent 能在处理实现细节之前，可靠地从 `llms.txt` 上下文中解析每个步骤的目标。
 :::

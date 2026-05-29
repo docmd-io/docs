@@ -10,18 +10,36 @@ description: "高保真语法高亮与一键复制按钮，清晰呈现技术实
 使用标准 Markdown 代码围斜线语法编写技术示例。始终指定语言标识符，确保高亮引擎应用正确的词法规则。
 
 ````markdown
-```javascript
-function initialize() {
-  console.log("docmd engine active.");
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
 }
 ```
 ````
 
-**Rendered Result:**
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
+}
+```
 
-```javascript
-function initialize() {
-  console.log("docmd engine active.");
+## 块标题
+
+在语言标识符后跟一个带引号的文件名，以在块上方渲染标签头。这对于直接引用配置文件和源路径很有用。
+
+````markdown
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
+}
+```
+````
+
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
 }
 ```
 
@@ -38,7 +56,7 @@ function initialize() {
 
 ## 支持的语言
 
-`docmd` 开筱即用地支持最常用的技术生态系统，包括：
+`docmd` 开箱即用地支持最常用的技术生态系统，包括：
 
 *   **逻辑语言**：`javascript`、`typescript`、`python`、`rust`、`go`、`ruby`、`csharp`。
 *   **Web**：`html`、`css`、`markdown`。

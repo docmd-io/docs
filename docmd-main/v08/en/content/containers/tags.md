@@ -3,7 +3,7 @@ title: "Tags"
 description: "Use the tag container to label versions, statuses, or highlight short text snippets inline."
 ---
 
-The `tag` container is a self-closing component that inserts small, pill-shaped badges inline. Tags retain their compact proportions everywhere — they do not inherit heading sizes or surrounding text styles.
+The `tag` container is a self-closing component that inserts small, pill-shaped badges inline. Tags retain their compact proportions everywhere - they do not inherit heading sizes or surrounding text styles.
 
 ## Syntax Reference
 

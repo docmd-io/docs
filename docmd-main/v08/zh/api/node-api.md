@@ -23,7 +23,7 @@ npm install @docmd/core
 import { buildSite } from '@docmd/core';
 
 async function runBuild() {
-  await buildSite('./docmd.config.js', {
+  await buildSite('./docmd.config.json', {
     isDev: false,      // 设置为 true 以启用监视模式逻辑
     offline: false,    // 设置为 true 以优化 file:// 访问
     zeroConfig: false  // 设置为 true 以跳过配置文件检测
@@ -59,7 +59,7 @@ async function deploy() {
   await fs.writeFile('./docs/dynamic.md', '# Generated Content');
 
   // 2. 执行 docmd 构建
-  await buildSite('./docmd.config.js');
+  await buildSite('./docmd.config.json');
 
   // 3. 移动输出结果
   await fs.move('./site', './public/docs');
@@ -157,7 +157,7 @@ resolveHref('raw:docs/readme.md');
 
 ### 预计算的页面 URL
 
-每个页面对象都包含预计算的 URL 数据。插件可以直接读取这些数据  -  -  无需计算。
+每个页面对象都包含预计算的 URL 数据。插件可以直接读取这些数据——无需计算。
 
 ```javascript
 export async function onPostBuild({ pages, config }) {

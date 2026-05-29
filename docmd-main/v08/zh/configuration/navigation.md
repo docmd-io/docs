@@ -1,70 +1,116 @@
 ---
-title: "导航设置 (Navigation)"
-description: "通过全局配置、目录级 navigation.json 或自动文件扫描来定义网站的侧边栏结构。"
+title: "导航配置"
+description: "构建你的侧边栏、分类链接，并为读者和搜索引擎配置图标。"
 ---
 
-`docmd` 提供了一个极其灵活的导航系统，可以从简单的单文件夹项目扩展到复杂的多版本、多语言文档中心。
+编译器提供对你网站导航的明确控制。清晰的导航层级创建了逻辑阅读序列。这优化了 SPA 体验，并为搜索索引和 AI 模型提供了清晰的上下文映射。
 
-## 导航定义方式
+## 1. 导航架构
 
-你可以通过三种方式定义导航。如果同时使用多种方式，`docmd` 会按照以下优先级进行解析：
+你 `docmd.config.json` 文件中的链接对象数组控制侧边栏。每个对象是一个直接链接或嵌套分类组。
 
-### 1. 全局配置 (`docmd.config.js`)
-适用于小型项目。所有导航逻辑都保存在主配置文件中。
+<!-- SCREENSHOT: The sidebar navigation menu showing a two-level hierarchy with Lucide icons, an active page highlighted, and a collapsible section. -->
 
-```javascript
-export default {
-  navigation: [
-    { title: '开始使用', path: '/intro' },
-    { title: 'API 参考', path: '/api', children: [...] }
+```json
+{
+  "navigation": [
+    { "title": "概览", "path": "/", "icon": "home" },
+    { "title": "快速开始", "path": "/getting-started/quick-start", "icon": "rocket" }
   ]
 }
 ```
 
-### 2. 目录级配置 (`navigation.json`)
-这是处理大规模文档的 **推荐方式**。在你的 `docs/` 目录（或任何子目录）中放置一个 `navigation.json` 文件。
+## 2. 支持的属性
+
+每个项目都支持以下设置：
+
+| 属性 | 类型 | 必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `title` | `String` | 是 | 侧边栏菜单中显示的文本。 |
+| `path` | `String` | 否 | 目标 URL。相对本地路径必须以正斜杠 (`/`) 开头。 |
+| `icon` | `String` | 否 | 任何 [Lucide 图标](https://lucide.dev/icons) 的名称，使用 kebab-case 格式（例如 `git-branch`）。 |
+| `children` | `Array` | 否 | 嵌套导航项数组，用于建立子菜单。 |
+| `collapsible`| `Boolean`| 否 | 当为 `true` 时，用户可以展开或折叠分类文件夹。 |
+| `external` | `Boolean`| 否 | 当为 `true` 时，在新浏览器标签页中打开链接。 |
+
+## 3. 组织分类组
+
+使用两种主要分组方法构建你的侧边栏：
+
+### 点击分组（直接页面 + 子文件夹）
+为分类头部指定 `path` 以及 `children`。点击标题会加载首页并展开子链接。
 
 ```json
-[
-  { "title": "概览", "path": "overview.md" },
-  { "title": "高级话题", "children": [...] }
-]
+{
+  "title": "云服务",
+  "path": "/cloud/overview", 
+  "children": [
+    { "title": "AWS 设置", "path": "/cloud/aws" },
+    { "title": "GCP 设置", "path": "/cloud/gcp" }
+  ]
+}
 ```
 
-### 3. 自动文件扫描 (降级方案)
-如果既没有定义全局配置也没有 `navigation.json`，`docmd` 会自动扫描你的文件系统并按照字母顺序构建侧边栏。
+### 静态标签（仅分类头部）
+省略 `path` 参数。头部作为不可点击的标题来分组相关链接。用于在没有一个着陆页的情况下划分主要技术分类。
 
-## 侧边栏对象属性
+```json
+{
+  "title": "格式与元素",
+  "icon": "layout-grid",
+  "children": [
+    { "title": "语法指南", "path": "/content/syntax" },
+    { "title": "丰富容器", "path": "/content/containers" }
+  ]
+}
+```
 
-每个导航项都支持以下属性：
+## 4. 自动面包屑
 
-| 属性 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `title` | `string` | 侧边栏中显示的标签文本。 |
-| `path` | `string` | 相对于当前目录的源文件路径（如 `intro.md`）。 |
-| `icon` | `string` | 来自 Lucide 库的图标名称（如 `home`）。 |
-| `collapsible` | `boolean` | 是否允许该分组在侧边栏中折叠（默认为 `true`）。 |
-| `collapsed` | `boolean` | 初始加载时该分组是否处于折叠状态。 |
-| `external` | `boolean` | 是否在新标签页中打开链接。 |
-| `children` | `array` | 子导航项的嵌套列表。 |
+引擎为每个页面自动生成上下文面包屑。这些直接显示在主页面头部上方，以帮助快速定位。
 
-## 导航解析优先级
+<!-- SCREENSHOT: The breadcrumb navigation bar showing 'Overview > Configuration > Navigation' in a clean, small grey font above the H1 page header. -->
 
-当用户访问一个页面时，侧边栏是根据该页面所在的目录深度动态计算的：
+### 关键行为
+*   **自动解析**：引擎通过导航树追踪活动路由来构建层级结构。
+*   **活动指示器**：当前页面是最后一个未链接的面包屑项目。
+*   **移动端优化**：面包屑在小屏幕上会简化或动态隐藏以节省屏幕空间。
 
-1.  **最近邻匹配**: 引擎首先在当前页面所在的文件夹中查找 `navigation.json`。
-2.  **向上递归**: 如果未找到，它会向父目录查找，直到到达根目录。
-3.  **全局降级**: 如果整个文件系统中都没有 `navigation.json`，则使用 `docmd.config.js` 中的定义。
+### 禁用面包屑
+面包屑默认启用。更新你的网站布局选项以全局禁用它们：
 
-::: callout tip "基于上下文的导航"
-这种解析逻辑允许你为网站的不同部分定义 **完全不同** 的侧边栏。例如，你的 `/api/` 目录可以有一套专注于技术定义的侧边栏，而你的 `/guides/` 目录则可以显示一套专注于教程的侧边栏。
-:::
+```json
+{
+  "layout": {
+    "breadcrumbs": false
+  }
+}
+```
 
-## 自动排序与隐藏
+## 5. 导航解析层叠
 
-*   **排除文件**: 如果你不想让某个文件出现在自动生成的侧边栏中，但仍希望它能被访问，请在 Frontmatter 中设置 `unlisted: true`。
-*   **排序**: `navigation.json` 中的顺序即为最终渲染的顺序。
+编译器使用"最近文件获胜"的层叠解析系统。这支持多个版本或语言，而不会使你的全局配置膨胀。
 
-::: callout warning "路径规范化"
-在 `navigation.json` 中，你可以编写 `overview.md`、`overview` 或 `./overview`。构建引擎会自动将这些格式规范化为干净的生产环境 URL。详见 [链接与引用](../content/syntax/linking.md)。
+```text
+my-project/
+├── docmd.config.json           [级别 3：全局配置] - 默认后备
+├── docs-v1.0/ 
+│   ├── navigation.json       [级别 2：版本导航] - 覆盖全局
+│   └── zh/
+│       └── navigation.json   [级别 1：语言导航] - 绝对优先
+```
+
+1.  **级别 1：语言特定**（语言文件夹内的 `navigation.json`）：覆盖此特定语言和版本的所有设置。
+2.  **级别 2：版本特定**（版本文件夹内的 `navigation.json`）：覆盖此版本在所有语言中的全局配置。
+3.  **级别 3：全局配置**（`config.navigation`）：中央配置文件中的基础后备定义。
+
+### 智能断链预防
+引擎在级别 2 或 3 导航后备时自动检查目标文件是否存在。缺失的文件会动态从侧边栏中过滤掉。这消除了旧版本或缺失翻译的断链。
+
+## 6. 图标集成
+
+编译器包含完整的 **Lucide 图标** 系统。使用官方 Lucide 名称（kebab-case 格式，例如 `settings`、`folder-open`、`book-marked-line`）来应用图标。
+
+::: callout tip "优化侧边栏标签" icon:sparkles
+保持侧边栏标题清晰且描述性强。简洁的导航结构允许 AI 代理从编译的 `llms.txt` 提要轻松解析你的站点地图。
 :::

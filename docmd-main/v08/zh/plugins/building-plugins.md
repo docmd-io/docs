@@ -88,16 +88,15 @@ export default {
 };
 ```
 
-在您的 `docmd.config.js` 中通过**完整包名**引用插件：
+在您的 `docmd.config.json` 中通过**完整包名**引用插件：
 
-```javascript
-import { defineConfig } from '@docmd/core';
-
-export default defineConfig({
-  plugins: {
-    'my-awesome-plugin': {
-      // 您的自定义选项放在这里
-    }
+```json
+{
+  "plugins": {
+    "my-plugin": {}
+  }
+}
+```
   }
 });
 ```
@@ -260,7 +259,7 @@ export default {
 | `ctx.config` | 当前 docmd 站点配置。 |
 
 ::: callout info "仅开发模式 🛡️"
-WebSocket RPC 系统仅在 `docmd dev` 期间活跃。生产构建不包含 API 客户端或任何服务器端动作处理。
+WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间活跃。生产构建不包含 API 客户端或任何服务器端动作处理。
 :::
 
 ## 最佳实践
