@@ -11,10 +11,10 @@ Beyond standard Markdown, `docmd` supports several high-fidelity extensions deri
 Create interactive or read-only checklists for roadmap tracking.
 ```markdown
 - [x] Engine Optimisation Complete
-- [ ] Plugin API Finalization
+- [ ] Plugin API Finalisation
 ```
 - [x] Engine Optimisation Complete
-- [ ] Plugin API Finalization
+- [ ] Plugin API Finalisation
 
 ### Automatic Link Resolution
 Standard URLs and email addresses are automatically identified and linked without additional markup: `https://docmd.io`
@@ -36,7 +36,7 @@ Useful for deep-linking directly to technical subsections.
 ### Functional CSS Classes
 Apply styling utilities to specific elements.
 ```markdown
-## Center-Aligned Section {.text-centre .text-blue}
+## Centre-Aligned Section {.text-centre .text-blue}
 ```
 
 ### Actionable Button Links

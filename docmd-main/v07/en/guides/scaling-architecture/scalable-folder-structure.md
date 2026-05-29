@@ -5,11 +5,11 @@ description: "How to organise large-scale documentation projects using the Diát
 
 ## Problem
 
-Small documentation sites often start with a flat `docs/` folder. However, as the project grows to include multiple modules, tutorials, APIs, and conceptual deep-dives, a disorganized folder structure becomes a significant maintenance burden. Files become difficult to locate, and the navigation sidebar becomes an overwhelming "wall of links."
+Small documentation sites often start with a flat `docs/` folder. However, as the project grows to include multiple modules, tutorials, APIs, and conceptual deep-dives, a disorganised folder structure becomes a significant maintenance burden. Files become difficult to locate, and the navigation sidebar becomes an overwhelming "wall of links."
 
 ## Why it matters
 
-A disorganized folder structure directly results in a confusing user experience, as `docmd`'s routing and default navigation are derived from your file system. For authors, a lack of clear structure leads to content duplication and inconsistent naming, making the documentation harder to manage as more contributors join the project.
+A disorganised folder structure directly results in a confusing user experience, as `docmd`'s routing and default navigation are derived from your file system. For authors, a lack of clear structure leads to content duplication and inconsistent naming, making the documentation harder to manage as more contributors join the project.
 
 ## Approach
 

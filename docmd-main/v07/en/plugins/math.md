@@ -24,7 +24,7 @@ plugins: {
 1. Enable the plugin via your `docmd.config.js`.
 2. Wrap your standard LaTeX mathematics in `$` (inline) or `$$` (block) indicators.
 3. The server intelligently processes these math rules during the static-site build exactly as raw static HTML tags.
-4. Minimal injected CSS automatically scopes these classes directly, yielding immediate visualization the moment the user views the page!
+4. Minimal injected CSS automatically scopes these classes directly, yielding immediate visualisation the moment the user views the page!
 
 ## Usage
 

@@ -35,7 +35,7 @@ For more details, see the [Edit Link Configuration](../../configuration/overview
 
 ### 2. Contextual Reviews with Threads
 
-For complex updates that require detailed feedback, use the [Threads Plugin](../../plugins/usage.md). This allows authors and reviewers to leave inline comments directly within the Markdown content during the review phase, keeping discussions contextualized.
+For complex updates that require detailed feedback, use the [Threads Plugin](../../plugins/usage.md). This allows authors and reviewers to leave inline comments directly within the Markdown content during the review phase, keeping discussions contextualised.
 
 ```markdown
 ::: thread "Reviewer Name"

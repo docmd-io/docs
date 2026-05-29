@@ -13,7 +13,7 @@ Your documentation homepage is often the first interaction a developer has with 
 
 ## Approach
 
-`docmd` provides specialized [Hero](../../content/containers/hero.md) and [Grids](../../content/containers/grids.md) containers designed specifically for building premium landing pages. For total creative freedom, you can also use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
+`docmd` provides specialised [Hero](../../content/containers/hero.md) and [Grids](../../content/containers/grids.md) containers designed specifically for building premium landing pages. For total creative freedom, you can also use the `noStyle` frontmatter property to take complete control over a page's HTML and styling.
 
 ## Implementation
 

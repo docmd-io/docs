@@ -54,7 +54,7 @@ For managing workspaces programmatically, use the dedicated workspace functions.
 Returns `true` if the provided configuration object follows the Workspace schema.
 
 ### `detectWorkspace(configPath)`
-Detects and loads a workspace configuration file. Returns a normalized `WorkspaceRootConfig` or `null`.
+Detects and loads a workspace configuration file. Returns a normalised `WorkspaceRootConfig` or `null`.
 
 ### `buildWorkspace(config, options)`
 Builds all projects within a workspace. Handles shared assets and project-specific prefixing.
@@ -99,7 +99,7 @@ The programmatic API is highly compatible with **AI-Driven Documentation**. Agen
 
 ## Plugin API (`@docmd/api`)
 
-The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and **centralized URL utilities**.
+The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and **centralised URL utilities**.
 
 ```bash
 npm install @docmd/api
@@ -107,7 +107,7 @@ npm install @docmd/api
 
 ### URL Utilities
 
-Plugins should use these centralized utilities instead of rolling their own URL logic.
+Plugins should use these centralised utilities instead of rolling their own URL logic.
 
 #### `outputPathToSlug(outputPath)`
 
@@ -165,7 +165,7 @@ buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
 
 #### `resolveHref(href)`
 
-Normalize user-written hrefs to clean URLs. Handles `.md` stripping, trailing slashes, `external:` and `raw:` prefixes.
+Normalise user-written hrefs to clean URLs. Handles `.md` stripping, trailing slashes, `external:` and `raw:` prefixes.
 
 ```javascript
 import { resolveHref } from "@docmd/api";

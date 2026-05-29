@@ -69,7 +69,7 @@ The standard `>` syntax highlights external quotes or background context.
 docmd has raw HTML parsing enabled. Inject custom layouts or unique styling directly within Markdown files for specialised UI requirements.
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
   Bespoke UI elements live here.
 </div>
 ```

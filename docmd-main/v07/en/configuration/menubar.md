@@ -87,7 +87,7 @@ You can fine-tune the menubar's appearance using CSS variables in your `customCs
 :root {
   --menubar-height: 56px;
   --menubar-bg: var(--docmd-bg-secondary);
-  --menubar-border: var(--docmd-border-color);
+  --menubar-border: var(--docmd-border-colour);
   --menubar-text: var(--docmd-text-primary);
 }
 ```

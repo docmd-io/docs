@@ -3,7 +3,7 @@ title: "Images & Visual Media"
 description: "Master media management: Responsive images, styling attributes, and automated Lightbox effects."
 ---
 
-`docmd` utilises standard Markdown syntax for media integration. We recommend centralizing your media assets in the `assets/images/` directory within your project source.
+`docmd` utilises standard Markdown syntax for media integration. We recommend centralising your media assets in the `assets/images/` directory within your project source.
 
 ```markdown
 ![Technical Diagram](/assets/images/architecture.png "Optional Tooltip Title")

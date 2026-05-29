@@ -3,7 +3,7 @@ title: "Nested Containers"
 description: "Use docmd's recursive parser to combine cards, tabs, and callouts into high-fidelity page layouts."
 ---
 
-One of `docmd`’s most powerful technical capabilities is its **Recursive Parsing Engine**. You can nest components within each other infinitely to synthesize complex, interactive documentation blocks that would otherwise require deep HTML knowledge or custom templates.
+One of `docmd`’s most powerful technical capabilities is its **Recursive Parsing Engine**. You can nest components within each other infinitely to synthesise complex, interactive documentation blocks that would otherwise require deep HTML knowledge or custom templates.
 
 ## The Architectural Rule
 

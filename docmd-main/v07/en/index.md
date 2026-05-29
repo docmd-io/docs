@@ -11,7 +11,7 @@ titleAppend: false
 Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
 
 ::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#333 icon:github
+::: button "GitHub" external:https://github.com/docmd-io/docmd colour:#333 icon:github
 :::
 
 ## Start

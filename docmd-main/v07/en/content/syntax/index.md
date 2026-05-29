@@ -61,7 +61,7 @@ The standard `>` syntax is ideal for highlighting outside quotes or background c
 As `docmd` is built with raw HTML parsing enabled, you can inject complex layouts or unique styling directly within your Markdown files for specialised UI requirements.
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: centre;">
+<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
   Bespoke UI elements live here.
 </div>
 ```

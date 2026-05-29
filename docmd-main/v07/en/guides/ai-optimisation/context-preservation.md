@@ -1,6 +1,6 @@
 ---
 title: "Context Preservation for AI-Friendly Documentation"
-description: "How to ensure that AI models can understand and utilize the relationships between different parts of your documentation."
+description: "How to ensure that AI models can understand and utilise the relationships between different parts of your documentation."
 ---
 
 ## Problem

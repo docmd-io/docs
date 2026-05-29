@@ -9,11 +9,11 @@ description: "A complete reference of docmd's CSS variables and component classe
 
 | Variable | Default (Light) | Default (Dark) | Description |
 | :--- | :--- | :--- | :--- |
-| `--bg-color` | `#ffffff` | `#09090b` | Main page background. |
-| `--text-color` | `#3f3f46` | `#a1a1aa` | Standard body text. |
+| `--bg-colour` | `#ffffff` | `#09090b` | Main page background. |
+| `--text-colour` | `#3f3f46` | `#a1a1aa` | Standard body text. |
 | `--text-heading` | `#09090b` | `#fafafa` | Title and Header colours. |
-| `--link-color` | `#068ad5` | `#068ad5` | Primary accent / links. |
-| `--border-color` | `#e4e4e7` | `#27272a` | Dividers and borders. |
+| `--link-colour` | `#068ad5` | `#068ad5` | Primary accent / links. |
+| `--border-colour` | `#e4e4e7` | `#27272a` | Dividers and borders. |
 | `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation background. |
 | `--ui-border-radius` | `6px` | `6px` | Rounding for all UI items. |
 | `--sidebar-width` | `260px` | `260px` | Sidebar column width. |
@@ -24,11 +24,11 @@ To change your site's primary accent colour, add this to your `customCss`:
 
 ```css
 :root {
-  --link-color: #f43f5e; /* Rose 500 */
+  --link-colour: #f43f5e; /* Rose 500 */
 }
 
 body[data-theme="dark"] {
-  --link-color: #fb7185; /* Rose 400 */
+  --link-colour: #fb7185; /* Rose 400 */
 }
 ```
 
@@ -47,5 +47,5 @@ If you need to style specific components, use these top-level classes:
 Most `docmd` styles use low specificity. If your overrides aren't applying, ensure your `customCss` is registered correctly and check if adding a `body` prefix (e.g., `body .main-content`) helps.
 
 ::: callout tip
-Because `docmd` uses standard CSS variables, you can ask an AI: *"Give me a professional colour palette using --link-color and --bg-color for docmd"*. The model will be able to provide ready-to-paste CSS that integrates perfectly with the built-in themes.
+Because `docmd` uses standard CSS variables, you can ask an AI: *"Give me a professional colour palette using --link-colour and --bg-colour for docmd"*. The model will be able to provide ready-to-paste CSS that integrates perfectly with the built-in themes.
 :::

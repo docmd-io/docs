@@ -92,7 +92,7 @@ The `::: button` container supports the same linking conventions as standard Mar
 Tags with `link:` values also benefit from the unified normaliser:
 
 ```markdown
-::: tag "v0.7.6" link:release-notes/0-7-6.md icon:tag color:#22c55e
+::: tag "v0.7.6" link:release-notes/0-7-6.md icon:tag colour:#22c55e
 
 ::: tag "GitHub" link:https://github.com/docmd-io/docmd icon:github
 

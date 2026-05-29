@@ -37,7 +37,7 @@ All icons are rendered as inline SVGs with the class `.lucide-icon`. You can glo
 
 /* Target a specific icon */
 .icon-rocket {
-  color: #ff5733;
+  colour: #ff5733;
 }
 ```
 

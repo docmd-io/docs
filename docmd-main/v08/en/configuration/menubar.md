@@ -89,7 +89,7 @@ Use CSS variables in your custom stylesheets to override the menubar appearance.
 :root {
   --menubar-height: 56px;
   --menubar-bg: var(--docmd-bg-secondary);
-  --menubar-border: var(--docmd-border-color);
+  --menubar-border: var(--docmd-border-colour);
   --menubar-text: var(--docmd-text-primary);
 }
 ```

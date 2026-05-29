@@ -34,7 +34,7 @@ Use the `== side` separator to divide content into a primary text area and a sec
     # docmd
     Isomorphic execution. AI-optimised.
 
-    ::: button "Quickstart" ../../getting-started/quick-start.md color:blue
+    ::: button "Quickstart" ../../getting-started/quick-start.md colour:blue
 
     == side
         ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -45,7 +45,7 @@ Use the `== side` separator to divide content into a primary text area and a sec
 # docmd
 Isomorphic execution. AI-optimised.
 
-::: button "Quickstart" ../../getting-started/quick-start.md color:blue
+::: button "Quickstart" ../../getting-started/quick-start.md colour:blue
 
 == side
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"

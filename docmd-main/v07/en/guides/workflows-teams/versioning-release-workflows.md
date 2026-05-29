@@ -5,11 +5,11 @@ description: "How to synchronise documentation releases with software deployment
 
 ## Problem
 
-Synchronizing software releases with corresponding documentation updates is a significant coordination challenge. Frequently, documentation is updated on the live site before the new code is deployed (confusing current users) or delayed several days after the release (frustrating early adopters).
+Synchronising software releases with corresponding documentation updates is a significant coordination challenge. Frequently, documentation is updated on the live site before the new code is deployed (confusing current users) or delayed several days after the release (frustrating early adopters).
 
 ## Why it matters
 
-Desynchronization between software behaviour and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
+Desynchronisation between software behaviour and its documentation is a major source of developer friction. For documentation to be effective, it must strictly map to the specific version of the software the user is currently running. Providing the correct context for every version ensures a smooth onboarding and troubleshooting experience.
 
 ## Approach
 

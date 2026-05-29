@@ -9,11 +9,11 @@ As a software product matures, its documentation naturally expands. When a proje
 
 ## Why it matters
 
-If documentation generation takes minutes instead of seconds, authors are discouraged from making small corrections, leading to stale and inaccurate content. For users, a massive, unorganized sidebar menu makes finding information frustrating, leading to increased support tickets and a poor developer experience.
+If documentation generation takes minutes instead of seconds, authors are discouraged from making small corrections, leading to stale and inaccurate content. For users, a massive, unorganised sidebar menu makes finding information frustrating, leading to increased support tickets and a poor developer experience.
 
 ## Approach
 
-`docmd` is architected for speed and scalability. By utilizing a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimised SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
+`docmd` is architected for speed and scalability. By utilising a high-performance parsing engine and a granular file-based build strategy, it can process thousands of pages in seconds. Its optimised SPA (Single Page Application) delivery ensures that navigating through a large site remains instantaneous for the end user.
 
 ## Implementation
 

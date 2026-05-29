@@ -32,7 +32,7 @@ When a user attempts to access a non-existent URL, most static hosting providers
 
 ### Customising Error Content
 
-You can personalize the 404 error message within your configuration:
+You can personalise the 404 error message within your configuration:
 
 ```javascript
 export default defineConfig({

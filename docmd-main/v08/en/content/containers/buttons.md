@@ -15,7 +15,7 @@ Buttons are interactive components designed for navigation and call-to-actions. 
 | :--- | :--- | :--- |
 | **Path** | `/path/` | Relative project URL. Resolves automatically for SPA navigation. |
 | **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
-| **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). |
+| **Colour** | `colour:VALUE` | Applies a background colour (supports CSS names or Hex codes). |
 | **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the label. |
 
 ## Examples
@@ -45,13 +45,13 @@ Prepend `external:` to the URL to force the link to open in a new tab.
 Match buttons to your brand identity using colour overrides and Lucide icons to enhance visual clarity.
 
 ```markdown
-::: button "Success Confirmation" ./#success color:#228B22
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
+::: button "Success Confirmation" ./#success colour:#228B22
+::: button "Danger Action" ./#delete colour:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 ```
 
-::: button "Success Confirmation" ./#success color:#228B22
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
+::: button "Success Confirmation" ./#success colour:#228B22
+::: button "Danger Action" ./#delete colour:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
 ## Critical Note: Self-Closing Logic

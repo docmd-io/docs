@@ -76,5 +76,5 @@ layout: {
 ```
 
 ::: callout tip "Interface Hierarchy"
-For the best user experience, keep your **Menubar** for global external links and your **Sidebar** for logical documentation structure. AI agents frequently utilize this hierarchy to understand the relationship between different documentation modules.
+For the best user experience, keep your **Menubar** for global external links and your **Sidebar** for logical documentation structure. AI agents frequently utilise this hierarchy to understand the relationship between different documentation modules.
 :::

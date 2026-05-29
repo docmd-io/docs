@@ -13,7 +13,7 @@ Readability is not just an aesthetic choice - it is a functional requirement. If
 
 ## Approach
 
-Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers/index.md) to highlight critical information. By utilizing `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
+Establish a predictable visual rhythm by breaking up long sections of text and using [Thematic Containers](../../content/containers/index.md) to highlight critical information. By utilising `docmd`'s built-in structural tools, you can create a hierarchy that guides the reader's eye naturally toward the most important parts of the page.
 
 ## Implementation
 
@@ -49,4 +49,4 @@ For tutorials and step-by-step guides, avoid narrative descriptions of actions. 
 
 ## Trade-offs
 
-Using specialized containers like `::: steps` or `::: callout` requires contributors to learn `docmd`-specific Markdown extensions. While this adds a small learning curve, the significant improvement in information density, clarity, and professional presentation far outweighs the minimal effort of learning these powerful structural tags.
+Using specialised containers like `::: steps` or `::: callout` requires contributors to learn `docmd`-specific Markdown extensions. While this adds a small learning curve, the significant improvement in information density, clarity, and professional presentation far outweighs the minimal effort of learning these powerful structural tags.

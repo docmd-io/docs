@@ -9,7 +9,7 @@ Search engines prioritise content based on structure. If a high-quality guide us
 
 ## Why it matters
 
-Users typically search for specific technical terms (e.g., "authentication token" or "deployment limit") rather than full sentences. If your documentation structure doesn't emphasize these terms, the search engine cannot confidently rank your content. High search relevance is the difference between a self-service documentation portal and a high volume of support tickets.
+Users typically search for specific technical terms (e.g., "authentication token" or "deployment limit") rather than full sentences. If your documentation structure doesn't emphasise these terms, the search engine cannot confidently rank your content. High search relevance is the difference between a self-service documentation portal and a high volume of support tickets.
 
 ## Approach
 

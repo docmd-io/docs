@@ -77,7 +77,7 @@ The `::: button` and `::: tag` containers support all standard linking conventio
 ::: button "View on GitHub" external:https://github.com/docmd-io/docmd icon:github
 ::: button "Download Source" raw:docs/readme.md icon:download
 
-::: tag "v0.8.2" link:release-notes/0-8-2.md icon:tag color:#22c55e
+::: tag "v0.8.2" link:release-notes/0-8-2.md icon:tag colour:#22c55e
 ::: tag "Open Externally" link:external:./configuration/overview.md icon:external-link
 ```
 

@@ -13,7 +13,7 @@ A large JavaScript payload directly impacts "Time to Interactive" (TTI). In tech
 
 ## Approach
 
-`docmd` uses a **zero-framework** architecture for its core client-side logic. By utilizing Vanilla JavaScript and native browser APIs instead of a heavy Virtual DOM, we keep the total JS payload for a standard site under **20KB**. This lightweight foundation ensures maximum performance across all devices and network conditions.
+`docmd` uses a **zero-framework** architecture for its core client-side logic. By utilising Vanilla JavaScript and native browser APIs instead of a heavy Virtual DOM, we keep the total JS payload for a standard site under **20KB**. This lightweight foundation ensures maximum performance across all devices and network conditions.
 
 ## Implementation
 

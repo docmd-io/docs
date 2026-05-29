@@ -14,7 +14,7 @@ By default, the `hero` centres its content, making it perfect for banners and si
     # Build Faster.
     Markdown to production docs in one command.
 
-    ::: button "Get Started" /intro color:blue
+    ::: button "Get Started" /intro colour:blue
 :::
 ```
 
@@ -37,7 +37,7 @@ Use the `== side` separator to define what content goes in the primary text area
     # docmd 2.0
     Isomorphic execution. AI-optimised.
 
-    ::: button "Quickstart" /getting-started/basic-usage color:blue
+    ::: button "Quickstart" /getting-started/basic-usage colour:blue
 
     == side
         ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -48,7 +48,7 @@ Use the `== side` separator to define what content goes in the primary text area
 # docmd 2.0
 Isomorphic execution. AI-optimised.
 
-::: button "Quickstart" /getting-started/basic-usage color:blue
+::: button "Quickstart" /getting-started/basic-usage colour:blue
 
 == side
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
