@@ -30,15 +30,15 @@ Create a file named `custom.css` in your source directory and override the `:roo
   --font-family-sans: "Outfit", system-ui, -apple-system, sans-serif;
   
   /* Brand Colours (Light Mode) */
-  --link-colour: #8a2be2;      /* Your primary brand colour */
+  --link-color: #8a2be2;      /* Your primary brand colour */
   --link-colour-hover: #7b1fa2;
-  --bg-colour: #fcfcfd;        /* Subtle background tint */
+  --bg-color: #fcfcfd;        /* Subtle background tint */
 }
 
 /* Dark Mode Overrides */
 :root[data-theme="dark"] {
-  --bg-colour: #0d1117;
-  --link-colour: #a855f7;
+  --bg-color: #0d1117;
+  --link-color: #a855f7;
 }
 ```
 

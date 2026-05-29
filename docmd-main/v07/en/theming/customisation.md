@@ -24,11 +24,11 @@ To change your site's primary accent colour, add this to your `customCss`:
 
 ```css
 :root {
-  --link-colour: #f43f5e; /* Rose 500 */
+  --link-color: #f43f5e; /* Rose 500 */
 }
 
 body[data-theme="dark"] {
-  --link-colour: #fb7185; /* Rose 400 */
+  --link-color: #fb7185; /* Rose 400 */
 }
 ```
 

@@ -18,7 +18,7 @@ customHead: |
       padding: 0;
       line-height: 1.6;
       background: var(--bg-primary);
-      colour: var(--text-primary);
+      color: var(--text-primary);
     }
     .demo-container {
       max-width: 900px;
@@ -32,11 +32,11 @@ customHead: |
     .demo-hero h1 {
       font-size: 3.5rem;
       margin-bottom: 20px;
-      colour: var(--brand-primary, #4a6cf7);
+      color: var(--brand-primary, #4a6cf7);
     }
     .demo-hero p {
       font-size: 1.25rem;
-      colour: var(--text-secondary);
+      color: var(--text-secondary);
     }
     .demo-card {
       background: var(--bg-secondary, #f8f9fa);
@@ -48,8 +48,8 @@ customHead: |
     .demo-button {
       display: inline-block;
       padding: 14px 28px;
-      background-colour: var(--brand-primary, #4a6cf7);
-      colour: white;
+      background-color: var(--brand-primary, #4a6cf7);
+      color: white;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;

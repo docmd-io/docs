@@ -14,7 +14,7 @@ The `tag` container is a self-closing component that inserts small, pill-shaped 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | **Label** | `"String"` | The text displayed inside the pill-shaped badge. |
-| **Colour** | `colour:VALUE` | Applies a background colour (supports CSS names or Hex codes). Automatically calculates a contrasting text colour. |
+| **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). Automatically calculates a contrasting text colour. |
 | **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
 | **Link** | `link:URL` | Makes the tag a clickable hyperlink. External URLs open in a new tab. |
 
@@ -25,26 +25,26 @@ The `tag` container is a self-closing component that inserts small, pill-shaped 
 Use a coloured tag inline to mark when a feature was introduced.
 
 ```markdown
-This feature was added in ::: tag "v0.8.2" colour:blue and works perfectly.
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
 ```
 
-This feature was added in ::: tag "v0.8.2" colour:blue and works perfectly.
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
 
 ### Status Labels
 
 Use tags for status indicators across a page. Colours are fully customisable.
 
 ```markdown
-::: tag "Deprecated" colour:#ef4444
-::: tag "Beta" colour:#eab308
-::: tag "Stable" colour:#22c55e
-::: tag "Verified" icon:check-circle colour:#10b981
+::: tag "Deprecated" color:#ef4444
+::: tag "Beta" color:#eab308
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
 ```
 
-::: tag "Deprecated" colour:#ef4444
-::: tag "Beta" colour:#eab308
-::: tag "Stable" colour:#22c55e
-::: tag "Verified" icon:check-circle colour:#10b981
+::: tag "Deprecated" color:#ef4444
+::: tag "Beta" color:#eab308
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
 
 ### Linked Tag
 

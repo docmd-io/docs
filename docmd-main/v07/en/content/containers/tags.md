@@ -11,7 +11,7 @@ To create a basic tag, simply provide the text you want to display:
 
 ::: tabs
     == tab "Preview"
-        This feature was added in ::: tag "v0.7.4" colour:blue and works perfectly.
+        This feature was added in ::: tag "v0.7.4" color:blue and works perfectly.
     == tab "Markdown Source"
         ```markdown
         This feature was added in ::: tag "v0.7.4" and works perfectly.
@@ -20,19 +20,19 @@ To create a basic tag, simply provide the text you want to display:
 
 ## Customising Colours
 
-You can override the default tag styling by providing any valid CSS colour string (e.g., `#ff0000`, `blue`, or `hsl(...)`) using the `colour:` attribute. `docmd` will automatically calculate a beautiful tinted background with perfectly contrasted text and borders!
+You can override the default tag styling by providing any valid CSS colour string (e.g., `#ff0000`, `blue`, or `hsl(...)`) using the `color:` attribute. `docmd` will automatically calculate a beautiful tinted background with perfectly contrasted text and borders!
 
 ::: tabs
 
 == tab "Preview"
-::: tag "Deprecated" colour:#ef4444
-::: tag "Beta" colour:#eab308
-::: tag "Stable" colour:#22c55e
+::: tag "Deprecated" color:#ef4444
+::: tag "Beta" color:#eab308
+::: tag "Stable" color:#22c55e
 == tab "Markdown Source"
 ````markdown
-::: tag "Deprecated" colour:#ef4444
-::: tag "Beta" colour:#eab308
-::: tag "Stable" colour:#22c55e
+::: tag "Deprecated" color:#ef4444
+::: tag "Beta" color:#eab308
+::: tag "Stable" color:#22c55e
 ````
 
 :::
@@ -44,10 +44,10 @@ Just like buttons and callouts, you can easily attach an icon from the `docmd` i
 ::: tabs
 
 == tab "Preview"
-::: tag "Verified" icon:check-circle colour:#10b981
+::: tag "Verified" icon:check-circle color:#10b981
 == tab "Markdown Source"
 ````markdown
-::: tag "Verified" icon:check-circle colour:#10b981
+::: tag "Verified" icon:check-circle color:#10b981
 ````
 
 :::
@@ -74,10 +74,10 @@ Because tags are true inline elements, they look gorgeous when used to label maj
 ::: tabs
 
 == tab "Preview"
-# Search Filtering ::: tag "New" colour:#8b5cf6
+# Search Filtering ::: tag "New" color:#8b5cf6
 == tab "Markdown Source"
 ````bash
-# Search Filtering ::: tag "New" colour:#8b5cf6
+# Search Filtering ::: tag "New" color:#8b5cf6
 ````
 
 :::

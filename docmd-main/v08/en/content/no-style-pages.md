@@ -66,8 +66,8 @@ components:
 # Build Documentation that Wows.
 The zero-config engine for modern engineering teams.
 
-::: button "Get Started" ../getting-started/quick-start.md colour:blue
-::: button "GitHub" github:docmd-io/docmd colour:gray
+::: button "Get Started" ../getting-started/quick-start.md color:blue
+::: button "GitHub" github:docmd-io/docmd color:gray
 
 == side
 ::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
