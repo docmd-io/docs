@@ -12,7 +12,7 @@ Configure site-wide SEO defaults in your `docmd.config.json`. Page-level setting
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `defaultDescription` | `string` | `null` | Fallback description for pages without frontmatter descriptions. |
-| `aiBots` | `boolean` | `true` | Set to `false` to block common AI crawlers (GPTBot, Claude-Web, etc.). |
+| `aiBots` | `boolean` | `true` | Allow (`true`) or block (`false`) AI training bots. When `false`, blocks GPTBot, ChatGPT-User, Google-Extended, CCBot, and other AI crawlers. |
 | `openGraph` | `object` | `null` | Open Graph settings for social media (Facebook, LinkedIn). |
 | `twitter` | `object` | `null` | Twitter (X) Card settings including username and card type. |
 
@@ -35,11 +35,45 @@ Configure site-wide SEO defaults in your `docmd.config.json`. Page-level setting
 
 ## Features
 
+- **Automatic robots.txt**: Generates `robots.txt` if missing, with sitemap reference and AI bot directives.
 - **Smart Fallbacks**: Automatically extracts the first 150 characters of prose if no description is provided.
-- **AI Bot Governance**: Easily block or allow AI crawlers to differentiate between indexing and LLM training.
+- **AI Bot Governance**: By default, AI bots are allowed to index content. Set `aiBots: false` to block AI training bots whilst still allowing traditional search engines.
 - **Canonical Resolution**: Automatically generates `<link rel="canonical">` tags to prevent duplicate content issues.
 - **Rich Social Previews**: Native support for Open Graph and Twitter Cards for professional link sharing.
 - **Structured Data**: Supports LD+JSON Article Schema for rich search snippets.
+
+## robots.txt Auto-Generation
+
+The plugin automatically generates a `robots.txt` file during the build process if one doesn't exist in your output directory.
+
+**Generated content includes:**
+
+```txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://your-domain.com/sitemap.xml
+```
+
+**Blocking AI Training Bots:**
+
+When `aiBots: false` is set, the generated `robots.txt` includes:
+
+```txt
+# Block AI training bots
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+# ... (additional AI crawlers)
+```
+
+::: callout warning "Existing robots.txt Preserved"
+If you've already created a custom `robots.txt` file in your assets directory, the plugin will not overwrite it. This ensures your custom configurations remain intact.
+:::
 
 ## Page-Level Overrides
 
