@@ -71,8 +71,44 @@ Disallow: /
 # ... (additional AI crawlers)
 ```
 
-::: callout warning "Existing robots.txt Preserved"
-If you've already created a custom `robots.txt` file in your assets directory, the plugin will not overwrite it. This ensures your custom configurations remain intact.
+### robots.txt Location Strategy
+
+The plugin intelligently handles `robots.txt` across multiple locations:
+
+**Priority Order:**
+1. **Site root** (`site/robots.txt`) — Checked first, highest priority
+2. **Assets folder** (`site/assets/robots.txt`) — Copied to site root if found
+
+**Behaviour:**
+
+- If `robots.txt` exists in **site root**: Preserved, no action taken
+- If `robots.txt` exists in **assets folder**: Automatically copied to site root (recommended location for SEO)
+- If `robots.txt` not found: Auto-generated based on SEO configuration
+
+**Recommended Practice:**
+
+Place your custom `robots.txt` in the `assets/` folder of your documentation source. The plugin will copy it to the site root during build:
+
+```
+your-docs/
+├── assets/
+│   └── robots.txt    ← Place here
+├── index.md
+└── docmd.config.json
+```
+
+After build, it appears at the correct location:
+
+```
+site/
+├── robots.txt        ← Copied here (SEO standard location)
+├── assets/
+│   └── robots.txt    ← Also preserved here
+└── index.html
+```
+
+::: callout tip "Why Site Root?"
+Search engines expect `robots.txt` at the domain root (`https://example.com/robots.txt`). The plugin ensures your file is always in the correct location, whether you provide a custom one or let it auto-generate.
 :::
 
 ## Page-Level Overrides
