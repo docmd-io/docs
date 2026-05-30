@@ -75,3 +75,97 @@ Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. W
 | **Offline** | **Yes** | No |
 | **Cost** | **Free** | Free tier limits or Paid |
 | **Speed** | **Instant** (In-memory) | Fast (Network latency dependent) |
+
+## Semantic Search (Alpha Preview)
+
+> **Experimental Feature** — Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
+
+Semantic search uses local embeddings to understand the meaning behind queries, enabling more intelligent results beyond simple keyword matching.
+
+### Enabling Semantic Search
+
+First, install the `docmd-search` package:
+
+```bash
+npm install docmd-search
+```
+
+Then enable it in your configuration:
+
+```json
+{
+  "plugins": {
+    "search": {
+      "semantic": true
+    }
+  }
+}
+```
+
+### How Semantic Search Works
+
+Unlike keyword search which matches exact terms, semantic search:
+
+*   **Understands context** — A query for "authentication" finds relevant pages even if they use different terminology like "login" or "sign-in"
+*   **Handles typos naturally** — No need for fuzzy matching; the model understands intent
+*   **Finds related concepts** — Searching "API" returns relevant endpoint documentation, not just pages containing "API"
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `semantic` | `boolean` | `false` | Enable semantic search (requires `docmd-search` package) |
+| `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Embedding model to use |
+| `chunkSize` | `number` | `512` | Maximum chunk size in characters |
+| `chunkOverlap` | `number` | `50` | Overlap between chunks in characters |
+| `indexDir` | `string` | — | Path to pre-built semantic index |
+
+### Comparison: Semantic vs Keyword
+
+| Feature | Semantic Search | Keyword Search |
+| :--- | :--- | :--- |
+| **Understanding** | Context-aware | Exact match only |
+| **Typo tolerance** | High | Limited (fuzzy matching) |
+| **Synonyms** | Yes | No |
+| **Setup** | Requires `docmd-search` | Built-in |
+| **Index size** | Larger (1-2MB per 100 files) | Smaller |
+| **Privacy** | 100% Private (client-side) | 100% Private (client-side) |
+| **Offline** | Yes | Yes |
+
+### Fallback Behaviour
+
+If semantic search is enabled but `docmd-search` is not installed, the plugin automatically falls back to keyword search. This ensures your documentation remains searchable regardless of configuration.
+
+::: callout warning "Alpha Limitations"
+Semantic search is experimental. Current limitations include:
+
+*   English-only models (multilingual model available but less tested)
+*   No incremental updates (full rebuild required)
+*   Higher memory usage (~50-100MB in browser)
+*   First load may be slower as embeddings are fetched
+:::
+
+### Best Practices
+
+For optimal semantic search performance:
+
+1.  **Exclude noise** — Don't index changelogs or draft content:
+    ```json
+    {
+      "plugins": {
+        "search": {
+          "semantic": true,
+          "exclude": ["**/release-notes/**", "**/drafts/**"]
+        }
+      }
+    }
+    ```
+
+2.  **Pre-build for CI/CD** — Use the `indexDir` option to pre-generate indexes:
+    ```bash
+    npx docmd-search --ui
+    ```
+
+3.  **Monitor index size** — Check the `.docmd-search/` directory size regularly
+
+4.  **Test thoroughly** — Verify search results quality before deploying to production
