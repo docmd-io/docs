@@ -46,7 +46,7 @@ When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-in
 
 ## Customising Search Behaviour
 
-While the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
+Whilst the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
 
 ```yaml
 ---
@@ -66,7 +66,7 @@ Because the search happens entirely on the client, no data - not even keystrokes
 
 ## Comparison
 
-Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. While Algolia is powerful, it introduces friction:
+Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. Whilst Algolia is powerful, it introduces friction:
 
 | Feature | docmd Search | Algolia / External |
 | :--- | :--- | :--- |
@@ -128,7 +128,7 @@ Unlike keyword search which matches exact terms, semantic search:
 | **Typo tolerance** | High | Limited (fuzzy matching) |
 | **Synonyms** | Yes | No |
 | **Setup** | Requires `docmd-search` | Built-in |
-| **Index size** | Larger (1-2MB per 100 files) | Smaller |
+| **Index size** | Larger (1–2 MB per 100 files) | Smaller |
 | **Privacy** | 100% Private (client-side) | 100% Private (client-side) |
 | **Offline** | Yes | Yes |
 
@@ -141,7 +141,7 @@ Semantic search is experimental. Current limitations include:
 
 *   English-only models (multilingual model available but less tested)
 *   No incremental updates (full rebuild required)
-*   Higher memory usage (~50-100MB in browser)
+*   Higher memory usage (~50–100 MB in browser)
 *   First load may be slower as embeddings are fetched
 :::
 
