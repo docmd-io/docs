@@ -144,9 +144,15 @@ Unlike keyword search which matches exact terms, semantic search:
 | **Privacy** | 100% Private (client-side) | 100% Private (client-side) |
 | **Offline** | Yes | Yes |
 
+### Automatic Installation
+
+When `semantic: true` is enabled, the plugin automatically installs `docmd-search` if it's not already available. This works with npm, pnpm, yarn, and bun — detecting your project's package manager automatically.
+
+If the automatic installation fails (e.g., in restricted CI environments), the plugin gracefully falls back to keyword search.
+
 ### Fallback Behaviour
 
-If semantic search is enabled but `docmd-search` is not installed, the plugin automatically falls back to keyword search. This ensures your documentation remains searchable regardless of configuration.
+If semantic search is enabled but `docmd-search` cannot be installed or found, the plugin automatically falls back to keyword search. This ensures your documentation remains searchable regardless of configuration.
 
 ::: callout warning "Alpha Limitations"
 Semantic search is experimental. Current limitations include:
