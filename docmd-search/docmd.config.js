@@ -52,7 +52,8 @@ module.exports = defineConfig({
     search: {
       semantic: true,
       showConfidence: true,
-      indexDir: '.docmd-search'
+      indexDir: '.docmd-search',
+      exclude: ['**/_site/**', '**/_ui/**']
     }
   }
 });
