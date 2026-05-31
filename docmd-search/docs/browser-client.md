@@ -189,11 +189,14 @@ keywordScore = Σ count(term) / (count(term) + 1.5)
 
 ### Phase 2  -  Vector reranking
 
-The best keyword match's pre-built vector serves as the query vector. All candidates are reranked using cosine similarity:
+The best keyword match's pre-built vector serves as the query vector. All candidates are reranked using cosine similarity. The keyword score is normalized to [0,1] before combining:
 
 ```
-finalScore = keywordScore × 0.6 + cosineSimilarity × 0.4
+normalizedKw = keywordScore / (keywordScore + 1)
+finalScore = normalizedKw × 0.6 + cosineSimilarity × 0.4
 ```
+
+This ensures final scores are always in the range [0, 1].
 
 :::
 
