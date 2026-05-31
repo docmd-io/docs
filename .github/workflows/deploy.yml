@@ -33,6 +33,16 @@ jobs:
           node-version: "24"
           cache: 'npm'
 
+      # Cache embedding models to avoid re-downloading on every build
+      # Models are ~23-270MB and stored in ~/.docmd-search/models/
+      - name: Cache embedding models
+        uses: actions/cache@v4
+        with:
+          path: ~/.docmd-search/models
+          key: docmd-search-models-${{ runner.os }}-${{ hashFiles('**/docmd.config.js', '**/docmd.config.json') }}
+          restore-keys: |
+            docmd-search-models-${{ runner.os }}-
+
       - name: Install dependencies
         run: npm install
 
