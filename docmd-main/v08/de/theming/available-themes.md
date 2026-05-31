@@ -3,16 +3,15 @@ title: "Verfügbare Themes"
 description: "Entdecken Sie die integrierten Themes von docmd, darunter Sky, Ruby und Retro. Erfahren Sie, wie Sie Themes mit einer einzigen Konfigurationszeile wechseln."
 ---
 
-`docmd` bietet eine Reihe von professionell gestalteten Themes mit responsivem Light/Dark-Mode. Sie können die gesamte Ästhetik Ihrer Website durch Ändern eines einzigen Schlüssels in der `docmd.config.js` anpassen.
+`docmd` bietet eine Reihe von professionell gestalteten Themes mit responsivem Light/Dark-Mode. Sie können die gesamte Ästhetik Ihrer Website durch Ändern eines einzigen Schlüssels in der `docmd.config.json` anpassen.
 
 ## So wechseln Sie Themes
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    name: 'sky',
-    appearance: 'system', // Optionen: 'light', 'dark', 'system'
+```json
+{
+  "theme": {
+    "name": "sky",
+    "appearance": "system"
   }
 }
 ```

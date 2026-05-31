@@ -1,70 +1,112 @@
 ---
-title: "Navigation"
-description: "Definieren Sie die Seitenleistenstruktur Ihrer Website über die globale Konfiguration, verzeichnisspezifische navigation.json-Dateien oder automatisches Dateiscannen."
+title: "Navigations-Konfiguration"
+description: "Strukturieren Sie Ihre Seitenleiste, kategorisieren Sie Links und konfigurieren Sie Icons für Leser und Suchmaschinen."
 ---
 
-`docmd` bietet ein hochflexibles Navigationssystem, das von einfachen Projekten mit nur einem Ordner bis hin zu komplexen Dokumentations-Hubs mit mehreren Versionen und Sprachen skaliert.
+Der Compiler bietet eine explizite Kontrolle über Ihre Website-Navigation. Eine klare Navigationshierarchie schafft eine logische Lesereihenfolge. Dies optimiert das SPA-Erlebnis und bietet eine eindeutige Kontextkarte für die Suchindexierung und KI-Modelle.
 
-## Methoden der Navigationsdefinition
+## 1. Das Navigations-Schema
 
-Es gibt drei Möglichkeiten, die Navigation zu definieren. Wenn mehrere Methoden gleichzeitig verwendet werden, löst `docmd` diese in der folgenden Prioritätsreihenfolge auf:
+Ein Array von Link-Objekten in Ihrer `docmd.config.json`-Datei steuert die Seitenleiste. Jedes Objekt ist ein direkter Link oder eine geschachtelte Kategoriegruppe.
 
-### 1. Globale Konfiguration (`docmd.config.js`)
-Ideal für kleinere Projekte. Die gesamte Navigationslogik wird in der Hauptkonfigurationsdatei gehalten.
-
-```javascript
-export default {
-  navigation: [
-    { title: 'Erste Schritte', path: '/intro' },
-    { title: 'API-Referenz', path: '/api', children: [...] }
+```json
+{
+  "navigation": [
+    { "title": "Übersicht", "path": "/", "icon": "home" },
+    { "title": "Schnellstart", "path": "/getting-started/quick-start", "icon": "rocket" }
   ]
 }
 ```
 
-### 2. Verzeichnisspezifische Konfiguration (`navigation.json`)
-Dies ist die **empfohlene Methode** für umfangreiche Dokumentationen. Platzieren Sie eine `navigation.json`-Datei in Ihrem `docs/`-Verzeichnis (oder einem beliebigen Unterverzeichnis).
+## 2. Unterstützte Eigenschaften
+
+Jedes Element unterstützt folgende Einstellungen:
+
+| Eigenschaft | Typ | Erforderlich | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `title` | `String` | Ja | Der in der Seitenleiste angezeigte Menütext. |
+| `path` | `String` | Nein | Ziel-URL. Relative lokale Pfade müssen mit einem Schrägstrich (`/`) beginnen. |
+| `icon` | `String` | Nein | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons) im Kebab-Case-Format (z. B. `git-branch`). |
+| `children` | `Array` | Nein | Ein Array von verschachtelten Navigationselementen, um ein Untermenü zu erstellen. |
+| `collapsible`| `Boolean`| Nein | Wenn `true`, kann der Benutzer den Kategorieordner erweitern oder einklappen. |
+| `external` | `Boolean`| Nein | Wenn `true`, wird der Link in einem neuen Browser-Tab geöffnet. |
+
+## 3. Organisation von Bereichsgruppen
+
+Strukturieren Sie Ihre Seitenleiste mithilfe von zwei primären Gruppierungsmethoden:
+
+### Klickbare Gruppe (Direkte Seite + Unterordner)
+Geben Sie neben `children` auch einen `path` für eine Kategorieüberschrift an. Durch Klicken auf den Titel wird die Landingpage geladen und die untergeordneten Links werden ausgeklappt.
 
 ```json
-[
-  { "title": "Übersicht", "path": "overview.md" },
-  { "title": "Fortgeschrittene Themen", "children": [...] }
-]
+{
+  "title": "Cloud-Dienste",
+  "path": "/cloud/overview", 
+  "children": [
+    { "title": "AWS Setup", "path": "/cloud/aws" },
+    { "title": "GCP Setup", "path": "/cloud/gcp" }
+  ]
+}
 ```
 
-### 3. Automatisches Dateiscannen (Fallback)
-Wenn weder eine globale Konfiguration noch eine `navigation.json` definiert ist, scannt `docmd` automatisch Ihr Dateisystem und erstellt eine alphabetische Seitenleiste.
+### Statisches Label (Nur Kategorieüberschriften)
+Lassen Sie den Parameter `path` weg. Die Überschrift dient als nicht anklickbarer Titel zur Gruppierung verwandter Links. Verwenden Sie dies, um größere technische Kategorien ohne eine eigene Landingpage zu unterteilen.
 
-## Attribute von Navigationsobjekten
+```json
+{
+  "title": "Formatierung & Elemente",
+  "icon": "layout-grid",
+  "children": [
+    { "title": "Syntax-Leitfaden", "path": "/content/syntax" },
+    { "title": "Rich Container", "path": "/content/containers" }
+  ]
+}
+```
 
-Jeder Navigationseintrag unterstützt die folgenden Attribute:
+## 4. Automatische Breadcrumbs
 
-| Attribut | Typ | Beschreibung |
-| :--- | :--- | :--- |
-| `title` | `string` | Der in der Seitenleiste angezeigte Text. |
-| `path` | `string` | Der Pfad zur Quelldatei relativ zum aktuellen Verzeichnis (z. B. `intro.md`). |
-| `icon` | `string` | Der Name eines Icons aus der Lucide-Bibliothek (z. B. `home`). |
-| `collapsible` | `boolean` | Ob die Gruppe in der Seitenleiste ein- und ausgeklappt werden kann (Standard: `true`). |
-| `collapsed` | `boolean` | Ob die Gruppe beim ersten Laden eingeklappt sein soll. |
-| `external` | `boolean` | Ob der Link in einem neuen Tab geöffnet werden soll. |
-| `children` | `array` | Eine verschachtelte Liste von Unter-Navigationselementen. |
+Die Engine generiert automatisch kontextbezogene Breadcrumbs (Brotkrümelnavigation) für jede Seite. Diese werden direkt über der Hauptüberschrift der Seite angezeigt, um eine schnelle Orientierung zu erleichtern.
 
-## Priorität der Navigationsauflösung
+### Wichtigste Verhaltensweisen
+*   **Automatische Auflösung**: Die Engine verfolgt die aktive Route durch Ihren Navigationsbaum, um die Hierarchie zu erstellen.
+*   **Aktiver Indikator**: Die aktuelle Seite ist das letzte, nicht verlinkte Breadcrumb-Element.
+*   **Mobile Optimierung**: Breadcrumbs werden auf kleinen Bildschirmen vereinfacht oder dynamisch ausgeblendet, um Platz zu sparen.
 
-Wenn ein Benutzer eine Seite besucht, wird die Seitenleiste dynamisch basierend auf der Verzeichnistiefe der Seite berechnet:
+### Deaktivieren von Breadcrumbs
+Breadcrumbs sind standardmäßig aktiviert. Aktualisieren Sie Ihre Website-Layout-Optionen, um sie global zu deaktivieren:
 
-1.  **Nearest-Neighbor-Match**: Die Engine sucht zuerst nach einer `navigation.json` im selben Ordner wie die aktuelle Seite.
-2.  **Rekursiver Aufstieg**: Wird keine gefunden, sucht sie im übergeordneten Verzeichnis, bis das Root-Verzeichnis erreicht ist.
-3.  **Globaler Fallback**: Wenn im gesamten Dateisystem keine `navigation.json` vorhanden ist, werden die Definitionen aus der `docmd.config.js` verwendet.
+```json
+{
+  "layout": {
+    "breadcrumbs": false
+  }
+}
+```
 
-::: callout tip "Kontextbasierte Navigation"
-Diese Auflösungslogik ermöglicht es Ihnen, für verschiedene Bereiche Ihrer Website **völlig unterschiedliche** Seitenleisten zu definieren. Beispielsweise kann Ihr `/api/`-Verzeichnis eine Seitenleiste haben, die sich auf technische Definitionen konzentriert, während Ihr `/guides/`-Verzeichnis eine auf Tutorials ausgerichtete Seitenleiste anzeigt.
-:::
+## 5. Kaskadierende Navigationsauflösung
 
-## Automatisches Sortieren und Verbergen
+Der Compiler verwendet ein kaskadierendes Auflösungssystem nach dem Prinzip „nächste Datei gewinnt“. Dies unterstützt mehrere Versionen oder Sprachen, ohne Ihre globale Konfiguration aufzublähen.
 
-*   **Dateien ausschließen**: Wenn eine Datei nicht in der automatisch generierten Seitenleiste erscheinen, aber dennoch erreichbar sein soll, setzen Sie `unlisted: true` im Frontmatter.
-*   **Sortierung**: Die Reihenfolge in der `navigation.json` entspricht exakt der gerenderten Reihenfolge.
+```text
+my-project/
+├── docmd.config.json           [Ebene 3: Globale Konfiguration] - Standard-Fallback
+├── docs-v1.0/ 
+│   ├── navigation.json       [Ebene 2: Versions-Navigation] - Überschreibt Global
+│   └── zh/
+│       └── navigation.json   [Ebene 1: Sprach-Navigation] - Absolute Priorität
+```
 
-::: callout warning "Pfad-Normalisierung"
-In der `navigation.json` können Sie `overview.md`, `overview` oder `./overview` schreiben. Die Build-Engine normalisiert diese Formate automatisch in saubere URLs für die Produktion. Siehe [Verlinkung & Referenzierung](../content/syntax/linking.md).
+1.  **Ebene 1: Sprachspezifisch** (`navigation.json` in einem Sprachordner): Überschreibt alle Einstellungen für diese spezifische Sprache und Version.
+2.  **Ebene 2: Versionsspezifisch** (`navigation.json` in einem Versionsordner): Überschreibt die globale Konfiguration für diese Version über alle Sprachen hinweg.
+3.  **Ebene 3: Globale Konfiguration** (`config.navigation`): Die grundlegende Fallback-Definition in der zentralen Konfigurationsdatei.
+
+### Intelligenter Schutz vor toten Links
+Die Engine prüft beim Navigations-Fallback auf Ebene 2 oder 3 automatisch, ob die Zieldateien existieren. Fehlende Dateien werden dynamisch aus der Seitenleiste gefiltert. Dies verhindert tote Links für ältere Versionen oder fehlende Übersetzungen.
+
+## 6. Icon-Integration
+
+Der Compiler enthält das vollständige **Lucide-Icon-System**. Verwenden Sie den offiziellen Lucide-Namen im Kebab-Case-Format (z. B. `settings`, `folder-open`, `book-marked`), um ein Icon anzuwenden.
+
+::: callout tip "Optimierung von Seitenleisten-Labels"
+Halten Sie die Titel in der Seitenleiste klar und prägnant. Eine saubere Navigationsstruktur ermöglicht es KI-Agenten, Ihre Sitemap problemlos aus dem kompilierten `llms.txt`-Feed zu analysieren.
 :::

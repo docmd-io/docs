@@ -113,6 +113,7 @@ npm install docmd-search
 | 选项 | 类型 | 默认值 | 说明 |
 | :--- | :--- | :--- | :--- |
 | `semantic` | `boolean` | `false` | 启用语义搜索（需要安装 `docmd-search` 包） |
+| `showConfidence` | `boolean` | `false` | 在语义搜索结果中显示相似度匹配置信度徽章 |
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | 使用的嵌入模型 |
 | `chunkSize` | `number` | `512` | 文本块的最大字符数 |
 | `chunkOverlap` | `number` | `50` | 文本块之间的重叠字符数 |

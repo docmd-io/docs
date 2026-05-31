@@ -16,7 +16,7 @@ my-docs/
   │   ├── js/
   │   └── images/
   ├── docs/            # Inhalt
-  ├── docmd.config.js
+  ├── docmd.config.json
   └── site/            # Build-Output (automatisch gespiegelt)
 ```
 
@@ -34,13 +34,12 @@ Wenn Sie `docmd build` oder `docmd dev` ausführen:
 
 Um Ihre Assets auf jeder Seite einzubinden, fügen Sie sie Ihrer Theme-Konfiguration hinzu:
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    customCss: ['/assets/css/branding.css']
+```json
+{
+  "theme": {
+    "customCss": ["/assets/css/branding.css"]
   },
-  customJs: ['/assets/js/utils.js']
+  "customJs": ["/assets/js/utils.js"]
 }
 ```
 

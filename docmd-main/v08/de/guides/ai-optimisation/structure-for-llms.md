@@ -40,11 +40,12 @@ Da LLMs Bilder oder Diagramme nicht "sehen" können, müssen Sie den architekton
 
 Geben Sie für jeden Fenced Code Block immer die Sprache mithilfe von [Syntax Highlighting](../../content/syntax/index.md) an. Dies ermöglicht es LLMs, den Abstract Syntax Tree (AST) des Codes korrekt zu parsen.
 
-```javascript
-// docmd.config.js
-export default {
-  plugins: ['llms']
-};
+```json
+{
+  "plugins": {
+    "llms": {}
+  }
+}
 ```
 
 ### 4. Semantische Container

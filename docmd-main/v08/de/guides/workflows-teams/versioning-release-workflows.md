@@ -25,30 +25,29 @@ Behalten Sie Ihre stabile Dokumentation im primären `docs/`-Ordner bei und erst
 projekt-root/
 ├── docs/       # Aktuell Stabil (v1.x)
 ├── docs-v2/    # Kommendes Release (v2.0)
-└── docmd.config.js
+└── docmd.config.json
 ```
 
 ### 2. Versionen konfigurieren
 
 Registrieren Sie beide Versionen in Ihrer Konfiguration. Sie können die kommende Version als "Beta" oder "Next" kennzeichnen, um den Benutzern über den Versions-Switcher den Status zu signalisieren.
 
-```javascript
-// docmd.config.js
-export default {
-  versions: {
-    current: 'v1.0',
-    all: [
-      { id: 'v1.0', dir: 'docs', label: 'v1.x (Stabil)' },
-      { id: 'v2.0', dir: 'docs-v2', label: 'v2.0 (Beta)' }
+```json
+{
+  "versions": {
+    "current": "v1.0",
+    "all": [
+      { "id": "v1.0", "dir": "docs", "label": "v1.x (Stabil)" },
+      { "id": "v2.0", "dir": "docs-v2", "label": "v2.0 (Beta)" }
     ]
   }
-};
+}
 ```
 
 ### 3. Der Promotions-Prozess
 
 Wenn Sie bereit sind, die neue Version offiziell zu veröffentlichen:
-1.  **Konfiguration aktualisieren**: Ändern Sie die `current` Versions-ID in `docmd.config.js` auf `v2.0`.
+1.  **Konfiguration aktualisieren**: Ändern Sie die `current` Versions-ID in `docmd.config.json` auf `v2.0`.
 2.  **Labels aktualisieren**: Entfernen Sie den "(Beta)"-Tag vom `label` im `all`-Array.
 3.  **Alte Dokumentation archivieren**: Behalten Sie den `v1.0`-Eintrag im `all`-Array bei, damit Benutzer älterer Versionen weiterhin auf die für sie relevante Dokumentation zugreifen können.
 

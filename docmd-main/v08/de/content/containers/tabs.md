@@ -53,13 +53,13 @@ Halten Sie Ihre Logik sauber, indem Sie verschiedene Programmiersprachen oder Um
 == tab "TypeScript" icon:hexagon
 ```typescript
 import { build } from '@docmd/core';
-await build('./docmd.config.js');
+await build('./docmd.config.json');
 ```
 
 == tab "JavaScript" icon:braces
 ```javascript
 const { build } = require('@docmd/core');
-build('./docmd.config.js');
+build('./docmd.config.json');
 ```
 
 :::

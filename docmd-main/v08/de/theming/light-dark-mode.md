@@ -9,14 +9,13 @@ description: "So konfigurieren Sie den Standard-Ansichtsmodus und verwalten den 
 
 ## Standard-Ansichtsmodus
 
-Sie legen den Anfangszustand Ihrer Dokumentation in der `docmd.config.js` fest.
+Sie legen den Anfangszustand Ihrer Dokumentation in der `docmd.config.json` fest.
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    name: 'sky',
-    appearance: 'system' // Optionen: 'light', 'dark', 'system' (Standard)
+```json
+{
+  "theme": {
+    "name": "sky",
+    "appearance": "system"
   }
 }
 ```
@@ -29,12 +28,14 @@ export default {
 
 Der Theme-Umschalter ist Teil des **Optionsmenüs**. Sie können dessen Sichtbarkeit und Position innerhalb des `layout`-Objekts steuern.
 
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // Optionen: 'header', 'sidebar-top', 'sidebar-bottom'
-    components: {
-      themeSwitch: true  // Sun/Moon-Umschalter ein- oder ausblenden
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "themeSwitch": true
+      }
     }
   }
 }

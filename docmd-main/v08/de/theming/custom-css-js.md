@@ -9,12 +9,11 @@ Obwohl `docmd`-Themes hochflexibel sind, möchten Sie möglicherweise Ihre eigen
 
 Verwenden Sie `theme.customCss`, um bestehende Styles zu überschreiben oder neue hinzuzufügen.
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    customCss: [
-      '/assets/css/branding.css' // Pfad relativ zum Website-Root
+```json
+{
+  "theme": {
+    "customCss": [
+      "/assets/css/branding.css"
     ]
   }
 }
@@ -29,11 +28,10 @@ export default {
 
 Verwenden Sie das übergeordnete `customJs`-Array für Skripte, die Verhalten hinzufügen oder Dienste von Drittanbietern integrieren.
 
-```javascript
-// docmd.config.js
-export default {
-  customJs: [
-    '/assets/js/feedback-widget.js'
+```json
+{
+  "customJs": [
+    "/assets/js/feedback-widget.js"
   ]
 }
 ```

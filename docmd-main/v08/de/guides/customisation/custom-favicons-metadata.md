@@ -19,37 +19,35 @@ Ihr Favicon ist der primäre visuelle Anker in einem überfüllten Browserfenste
 
 ### 1. Konfiguration des Favicons
 
-Platzieren Sie Ihre Favicon-Datei (z. B. `favicon.svg` oder `favicon.ico`) in Ihrem Quellverzeichnis und referenzieren Sie diese in Ihrer `docmd.config.js`. `docmd` kümmert sich automatisch um die relativen Pfade und das Cache-Busting.
+Platzieren Sie Ihre Favicon-Datei (z. B. `favicon.svg` oder `favicon.ico`) in Ihrem Quellverzeichnis und referenzieren Sie diese in Ihrer `docmd.config.json`. `docmd` kümmert sich automatisch um die relativen Pfade und das Cache-Busting.
 
-```javascript
-// docmd.config.js
-export default {
-  title: 'Mein Projekt',
-  favicon: '/favicon.svg' // Relativ zum Quellverzeichnis
-};
+```json
+{
+  "title": "Mein Projekt",
+  "favicon": "/favicon.svg"
+}
 ```
 
 ### 2. Globale SEO-Konfiguration
 
 Aktivieren und konfigurieren Sie das [SEO-Plugin](../../plugins/seo), um Standard-Vorschauen für Ihre gesamte Website festzulegen.
 
-```javascript
-// docmd.config.js
-export default {
-  url: 'https://docs.example.com',
-  plugins: {
-    seo: {
-      defaultDescription: 'Der ultimative Leitfaden zu unserer fantastischen Software.',
-      openGraph: {
-        defaultImage: '/static/og-banner.png'
+```json
+{
+  "url": "https://docs.example.com",
+  "plugins": {
+    "seo": {
+      "defaultDescription": "Der ultimative Leitfaden zu unserer fantastischen Software.",
+      "openGraph": {
+        "defaultImage": "/static/og-banner.png"
       },
-      twitter: {
-        siteUsername: '@meinprojekt',
-        cardType: 'summary_large_image'
+      "twitter": {
+        "siteUsername": "@meinprojekt",
+        "cardType": "summary_large_image"
       }
     }
   }
-};
+}
 ```
 
 ### 3. Seitenspezifische Overrides

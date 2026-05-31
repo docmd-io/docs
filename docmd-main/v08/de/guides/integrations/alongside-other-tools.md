@@ -21,19 +21,18 @@ Nutzen Sie `docmd` als Ihren primären Dokumentations-Hub oder "Single Pane of G
 
 Verwenden Sie die `menubar`-Konfiguration, um Ihre verschiedenen Dokumentationsportale miteinander zu verknüpfen. Dies stellt sicher, dass Benutzer immer den Weg zurück zu den Hauptanleitungen finden, unabhängig davon, auf welcher Subdomain sie sich gerade befinden.
 
-```javascript
-// docmd.config.js
-export default {
-  layout: {
-    menubar: {
-      left: [
-        { text: 'Anleitungen', url: '/' }, // docmd-Seite
-        { text: 'API-Referenz', url: 'https://api.example.com' }, // Externes Tool
-        { text: 'Community', url: 'https://forum.example.com', external: true }
+```json
+{
+  "layout": {
+    "menubar": {
+      "left": [
+        { "text": "Anleitungen", "url": "/" },
+        { "text": "API-Referenz", "url": "https://api.example.com" },
+        { "text": "Community", "url": "https://forum.example.com" }
       ]
     }
   }
-};
+}
 ```
 
 ### 2. Nahtloses Embedding

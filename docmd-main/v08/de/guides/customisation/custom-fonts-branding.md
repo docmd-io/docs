@@ -44,15 +44,14 @@ Erstellen Sie eine Datei namens `custom.css` in Ihrem Quellverzeichnis (oder ein
 
 ### 2. Registrieren des Stylesheets
 
-Fügen Sie Ihre benutzerdefinierte CSS-Datei dem Array `theme.customCss` in Ihrer `docmd.config.js` hinzu.
+Fügen Sie Ihre benutzerdefinierte CSS-Datei dem Array `theme.customCss` in Ihrer `docmd.config.json` hinzu.
 
-```javascript
-// docmd.config.js
-export default {
-  theme: {
-    customCss: ['/custom.css']
+```json
+{
+  "theme": {
+    "customCss": ["/custom.css"]
   }
-};
+}
 ```
 
 ## Abwägungen

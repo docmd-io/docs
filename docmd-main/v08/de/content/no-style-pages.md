@@ -120,13 +120,15 @@ assets/
 
 2. Jede JSON-Datei ist eine flache Schlüssel-Wert-Zuordnung:
 
-```javascript
+```json
+{
   "hero.title": "Markdown → Produktions-Docs",
   "hero.subtitle": "Die Zero-Config-Dokumentations-Engine.",
   "nav.docs": "Dokumentation",
   "nav.editor": "Live-Editor",
   "cta.getStarted": "Erste Schritte",
   "cta.install": "npm i @docmd/core"
+}
 ```
 
 3. Verwenden Sie `data-i18n`-Attribute in Ihren HTML-Elementen:
@@ -201,15 +203,16 @@ Das Skript erkennt die aktive Sprache anhand des URL-Pfad-Präfixes (z. B. `/hi/
 
 Für One-Page-Websites (wie Landingpages) möchten Sie beim Sprachwechsel nicht zu einer anderen URL navigieren. Setzen Sie `inPlace: true` in Ihrer i18n-Konfiguration, um Strings ohne URL-Weiterleitung auszutauschen:
 
-```js
-// docmd.config.js
-i18n: {
-  defaultLocale: "en",
-  locales: [
-    { id: "en", label: "English" },
-    { id: "zh", label: "中文" }
-  ],
-  inPlace: true
+```json
+{
+  "i18n": {
+    "default": "en",
+    "locales": [
+      { "id": "en", "label": "English" },
+      { "id": "zh", "label": "中文" }
+    ],
+    "inPlace": true
+  }
 }
 ```
 

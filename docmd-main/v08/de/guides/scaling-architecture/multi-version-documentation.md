@@ -25,25 +25,24 @@ Bewahren Sie Ihre aktuellste Dokumentation in einem Standardverzeichnis (z. B. `
 mein-projekt/
 ├── docs/             # v2.x (Aktuell)
 ├── docs-v1/          # v1.x (Legacy LTS)
-└── docmd.config.js
+└── docmd.config.json
 ```
 
 ### 2. Versions-Map konfigurieren
 
-Definieren Sie Ihre Versionsstruktur in der `docmd.config.js`. Die `current`-Version wird unter der Root-URL bereitgestellt, während andere unter `/{id}/` erreichbar sind.
+Definieren Sie Ihre Versionsstruktur in der `docmd.config.json`. Die `current`-Version wird unter der Root-URL bereitgestellt, während andere unter `/{id}/` erreichbar sind.
 
-```javascript
-// docmd.config.js
-export default {
-  versions: {
-    current: 'v2',           // Erreichbar unter /
-    position: 'sidebar-top', // Position des Switchers
-    all: [
-      { id: 'v2', dir: 'docs',    label: 'v2.x (Aktuell)' },
-      { id: 'v1', dir: 'docs-v1', label: 'v1.x (LTS)' }
+```json
+{
+  "versions": {
+    "current": "v2",
+    "position": "sidebar-top",
+    "all": [
+      { "id": "v2", "dir": "docs", "label": "v2.x (Aktuell)" },
+      { "id": "v1", "dir": "docs-v1", "label": "v1.x (LTS)" }
     ]
   }
-};
+}
 ```
 
 ### 3. Navigation pro Version

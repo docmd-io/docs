@@ -54,17 +54,16 @@ export default {
 
 ### 2. Registrieren des Plugins
 
-Sie können Ihr lokales Plugin registrieren, indem Sie es in Ihre `docmd.config.js` importieren.
+Sie können Ihr lokales Plugin registrieren, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Importe verwenden - nutzen Sie das `.js`- oder `.ts`-Format für die Registrierung von Plugins.
 
 ```javascript
-// docmd.config.js
 import VersionInjector from './plugins/version-injector.js';
 
 export default {
-  title: 'Meine Projekt-Docs',
-  plugins: {
+  "title": "Meine Projekt-Docs",
+  "plugins": {
     // Registrierung durch Angabe des importierten Moduls
-    'version-injector': VersionInjector
+    "version-injector": VersionInjector
   }
 };
 ```

@@ -30,25 +30,24 @@ mein-projekt/
 │   ├── backend/              # Gehört dem API-Team
 │   │   ├── navigation.json
 │   │   └── datenbank.md
-│   └── docmd.config.js       # Gehört dem Plattform-/Core-Team
+│   └── docmd.config.json     # Gehört dem Plattform-/Core-Team
 ```
 
 ### 2. Globaler Kontextwechsel (Die Menüleiste)
 
 Das zentrale Plattform-Team steuert die [Menüleiste](../../configuration/menubar), die als primäre Navigationsebene dient, um zwischen den verschiedenen Team-Domänen zu wechseln.
 
-```javascript
-// docmd.config.js
-export default {
-  menubar: {
-    enabled: true,
-    items: [
-      { text: 'Frontend', url: '/frontend/komponenten' },
-      { text: 'Backend', url: '/backend/datenbank' },
-      { text: 'Infrastruktur', url: '/devops/setup' }
+```json
+{
+  "menubar": {
+    "enabled": true,
+    "items": [
+      { "text": "Frontend", "url": "/frontend/komponenten" },
+      { "text": "Backend", "url": "/backend/datenbank" },
+      { "text": "Infrastruktur", "url": "/devops/setup" }
     ]
   }
-};
+}
 ```
 
 ### 3. Lokale Autonomie mit navigation.json

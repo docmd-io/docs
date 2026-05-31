@@ -396,6 +396,10 @@
           {
             "title": "Local-First Opt",
             "path": "/guides/search/local-first-search"
+          },
+          {
+            "title": "Semantic Integration",
+            "path": "/guides/search/semantic-search"
           }
         ]
       },

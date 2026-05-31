@@ -7,13 +7,15 @@ description: "So verwenden und passen Sie Lucide-Icons in Ihrer Dokumentation an
 
 ## Navigations-Icons
 
-Weisen Sie jedem Navigationselement in Ihrer `docmd.config.js` ein Icon zu. Verwenden Sie den Kebab-Case-Namen eines beliebigen Icons, das Sie auf der Lucide-Website finden.
+Weisen Sie jedem Navigationselement in Ihrer `docmd.config.json` ein Icon zu. Verwenden Sie den Kebab-Case-Namen eines beliebigen Icons, das Sie auf der Lucide-Website finden.
 
-```javascript
-navigation: [
-  { title: 'Home', path: '/', icon: 'home' },
-  { title: 'Setup', path: '/setup', icon: 'settings' }
-]
+```json
+{
+  "navigation": [
+    { "title": "Home", "path": "/", "icon": "home" },
+    { "title": "Setup", "path": "/setup", "icon": "settings" }
+  ]
+}
 ```
 
 ## Icons in Containern

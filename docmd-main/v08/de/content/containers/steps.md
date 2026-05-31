@@ -70,7 +70,7 @@ Sie können andere Dokumentationskomponenten (wie **Callouts** oder **Buttons**)
 ::: steps
 
 1.  **Umgebung konfigurieren**
-    Definieren Sie Ihre projektspezifischen Variablen in der `docmd.config.js`.
+    Definieren Sie Ihre projektspezifischen Variablen in der `docmd.config.json`.
 
     ::: callout tip
     Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschlüssel zu aktivieren.

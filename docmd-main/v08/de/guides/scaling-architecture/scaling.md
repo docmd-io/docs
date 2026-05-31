@@ -29,17 +29,16 @@ Für große Websites ist das [Search-Plugin](../../plugins/search) unerlässlich
 
 Nutzen Sie die [Versioning Engine](../../configuration/versioning), um Legacy-Inhalte von der aktiven Dokumentation zu trennen. Durch die Isolierung älterer Versionen in eigene Build-Kontexte reduzieren Sie die Anzahl der Seiten, die bei täglichen Updates neu verarbeitet werden müssen, was die Entwicklungsgeschwindigkeit erheblich verbessert.
 
-```javascript
-// docmd.config.js
-export default {
-  versions: {
-    current: 'v3',
-    all: [
-      { id: 'v3', dir: 'docs/current', label: 'v3.x (Aktuell)' },
-      { id: 'v2', dir: 'docs/v2',      label: 'v2.x (Legacy)' }
+```json
+{
+  "versions": {
+    "current": "v3",
+    "all": [
+      { "id": "v3", "dir": "docs/current", "label": "v3.x (Aktuell)" },
+      { "id": "v2", "dir": "docs/v2",      "label": "v2.x (Legacy)" }
     ]
   }
-};
+}
 ```
 
 ### 4. Komponentenbasierte Navigation

@@ -45,10 +45,8 @@ const app = init({ env: "production" });
 Platzieren Sie kritische Anforderungen als Kommentare *innerhalb* des Codeblocks, anstatt nur im umgebenden Markdown-Text. KI-Modelle bewerten Kommentare innerhalb des Codes bei der Generierung ähnlicher Snippets sehr hoch.
 
 ```javascript
-export default {
-  // KRITISCH: Der outputPath muss ein absoluter Dateisystempfad sein.
-  outputPath: '/var/www/html/docs'
-};
+  // ERFORDERLICH: Muss ein absoluter Dateisystempfad sein.
+  outputPath: "/var/www/html/docs"
 ```
 
 ### 4. Kategorisierte Warnungen

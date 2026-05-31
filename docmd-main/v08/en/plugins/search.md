@@ -115,6 +115,7 @@ Unlike keyword search which matches exact terms, semantic search:
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `semantic` | `boolean` | `false` | Enable semantic search (requires `docmd-search` package) |
+| `showConfidence` | `boolean` | `false` | Display similarity confidence score badges in semantic search results |
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Embedding model to use |
 | `chunkSize` | `number` | `512` | Maximum chunk size in characters |
 | `chunkOverlap` | `number` | `50` | Overlap between chunks in characters |

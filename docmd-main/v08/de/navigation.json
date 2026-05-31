@@ -24,6 +24,11 @@
     ]
   },
   {
+    "title": "Vergleich",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
     "title": "Konfiguration",
     "icon": "settings",
     "collapsible": true,
@@ -47,7 +52,7 @@
       {
         "title": "Lokalisierung",
         "path": "/configuration/localisation",
-        "collapsible": false,
+        "collapsible": true,
         "children": [
           {
             "title": "Übersetzte Inhalte",
@@ -64,8 +69,8 @@
         "path": "/configuration/versioning"
       },
       {
-        "title": "Multi-Projekt",
-        "path": "/configuration/multi-project"
+        "title": "Workspaces",
+        "path": "/configuration/workspaces"
       },
       {
         "title": "Weiterleitungen",
@@ -76,7 +81,7 @@
   {
     "title": "Inhalte schreiben",
     "icon": "pencil-line",
-    "collapsible": false,
+    "collapsible": true,
     "children": [
       {
         "title": "Frontmatter",
@@ -100,7 +105,7 @@
             "path": "/content/syntax/linking"
           },
           {
-            "title": "Fortgeschritten",
+            "title": "Erweiterte Formatierung",
             "path": "/content/syntax/advanced"
           }
         ]
@@ -115,39 +120,39 @@
             "path": "/content/containers/callouts"
           },
           {
+            "title": "Karten",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "Raster (Grids)",
+            "path": "/content/containers/grids"
+          },
+          {
             "title": "Tabs",
             "path": "/content/containers/tabs"
           },
           {
-            "title": "Steps",
+            "title": "Schritte (Steps)",
             "path": "/content/containers/steps"
-          },
-          {
-            "title": "Cards",
-            "path": "/content/containers/cards"
-          },
-          {
-            "title": "Grids",
-            "path": "/content/containers/grids"
           },
           {
             "title": "Ausklappbar",
             "path": "/content/containers/collapsible"
           },
           {
-            "title": "Buttons",
+            "title": "Schaltflächen",
             "path": "/content/containers/buttons"
-          },
-          {
-            "title": "Hero-Bereiche",
-            "path": "/content/containers/hero"
           },
           {
             "title": "Tags",
             "path": "/content/containers/tags"
           },
           {
-            "title": "URL-Embed",
+            "title": "Hero-Bereiche",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL-Embeds",
             "path": "/content/containers/embed"
           },
           {
@@ -161,7 +166,7 @@
         ]
       },
       {
-        "title": "No-Style Pages",
+        "title": "Stilfreie Seiten (noStyle)",
         "path": "/content/no-style-pages"
       },
       {
@@ -188,7 +193,7 @@
         "path": "/theming/light-dark-mode"
       },
       {
-        "title": "Eigenes CSS & JS",
+        "title": "Benutzerdefiniertes CSS & JS",
         "path": "/theming/custom-css-js"
       },
       {
@@ -196,7 +201,7 @@
         "path": "/theming/icons"
       },
       {
-        "title": "Assets",
+        "title": "Asset-Verwaltung",
         "path": "/theming/assets-management"
       }
     ]
@@ -207,12 +212,16 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Plugins nutzen",
+        "title": "Übersicht",
         "path": "/plugins/usage"
       },
       {
         "title": "Suche",
         "path": "/plugins/search"
+      },
+      {
+        "title": "Git-Integration",
+        "path": "/plugins/git"
       },
       {
         "title": "SEO",
@@ -227,10 +236,6 @@
         "path": "/plugins/analytics"
       },
       {
-        "title": "PWA",
-        "path": "/plugins/pwa"
-      },
-      {
         "title": "LLMs",
         "path": "/plugins/llms"
       },
@@ -243,16 +248,16 @@
         "path": "/plugins/mermaid"
       },
       {
+        "title": "PWA-Unterstützung",
+        "path": "/plugins/pwa"
+      },
+      {
         "title": "Threads",
         "path": "/plugins/threads"
       },
       {
-        "title": "Mathe (KaTeX)",
+        "title": "Mathematik (KaTeX)",
         "path": "/plugins/math"
-      },
-      {
-        "title": "Git",
-        "path": "/plugins/git"
       },
       {
         "title": "Plugins erstellen",
@@ -270,6 +275,10 @@
         "path": "/deployment"
       },
       {
+        "title": "Deployer-Paket",
+        "path": "/deployment/deployer-package"
+      },
+      {
         "title": "Docker",
         "path": "/deployment/docker"
       },
@@ -282,8 +291,239 @@
         "path": "/deployment/caddy"
       },
       {
-        "title": "CI/CD",
-        "path": "/deployment/ci-cd"
+        "title": "GitHub Pages",
+        "path": "/deployment/github-pages"
+      },
+      {
+        "title": "Vercel",
+        "path": "/deployment/vercel"
+      },
+      {
+        "title": "Netlify",
+        "path": "/deployment/netlify"
+      },
+      {
+        "title": "Cloudflare Pages",
+        "path": "/deployment/cloudflare-pages"
+      },
+      {
+        "title": "Firebase",
+        "path": "/deployment/firebase"
+      }
+    ]
+  },
+  {
+    "title": "Anleitungen",
+    "icon": "book-open",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Skalierung & Architektur",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Mehr als 1.000 Seiten",
+            "path": "/guides/scaling-architecture/scaling"
+          },
+          {
+            "title": "Ordnerstruktur",
+            "path": "/guides/scaling-architecture/scalable-folder-structure"
+          },
+          {
+            "title": "Mehrversionen-Doku",
+            "path": "/guides/scaling-architecture/multi-version-documentation"
+          },
+          {
+            "title": "Breaking Changes & Deprecations",
+            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
+          },
+          {
+            "title": "Teamarbeit",
+            "path": "/guides/scaling-architecture/multi-team-collaboration"
+          },
+          {
+            "title": "Große Repositories verwalten",
+            "path": "/guides/scaling-architecture/organising-large-repositories"
+          },
+          {
+            "title": "Workspace & Monorepo",
+            "path": "/guides/scaling-architecture/workspace-monorepo"
+          }
+        ]
+      },
+      {
+        "title": "KI & LLMs",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Struktur für LLMs",
+            "path": "/guides/ai-optimisation/structure-for-llms"
+          },
+          {
+            "title": "KI-bereite Ausgabe",
+            "path": "/guides/ai-optimisation/generating-ai-ready-docs"
+          },
+          {
+            "title": "KI-Halluzinationen minimieren",
+            "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
+          },
+          {
+            "title": "Semantische Suche",
+            "path": "/guides/ai-optimisation/semantic-search-design"
+          },
+          {
+            "title": "Segmentierbare Inhalte",
+            "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
+          },
+          {
+            "title": "Kontext-Erhaltung",
+            "path": "/guides/ai-optimisation/context-preservation"
+          }
+        ]
+      },
+      {
+        "title": "Suche",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Relevanz & Struktur",
+            "path": "/guides/search/improving-search-relevance"
+          },
+          {
+            "title": "Geschwindigkeit & Genauigkeit",
+            "path": "/guides/search/fast-accurate-search"
+          },
+          {
+            "title": "Lokales Suchen",
+            "path": "/guides/search/local-first-search"
+          },
+          {
+            "title": "Semantische Integration",
+            "path": "/guides/search/semantic-search"
+          }
+        ]
+      },
+      {
+        "title": "Performance",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Navigation unter 100 ms",
+            "path": "/guides/performance-delivery/sub-100ms-navigation"
+          },
+          {
+            "title": "CDN- & Edge-Bereitstellung",
+            "path": "/guides/performance-delivery/deploying-cdn-edge"
+          },
+          {
+            "title": "Reduzierung des JS-Payloads",
+            "path": "/guides/performance-delivery/reducing-javascript-payload"
+          },
+          {
+            "title": "Schwächere Geräte",
+            "path": "/guides/performance-delivery/low-end-devices"
+          },
+          {
+            "title": "Caching-Strategien",
+            "path": "/guides/performance-delivery/caching-strategies"
+          }
+        ]
+      },
+      {
+        "title": "Workflows & Teams",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Workflow-Einrichtung",
+            "path": "/guides/workflows-teams/setting-up-workflow"
+          },
+          {
+            "title": "Git-basierte Workflows",
+            "path": "/guides/workflows-teams/git-based-workflows"
+          },
+          {
+            "title": "Änderungen vorschauen",
+            "path": "/guides/workflows-teams/previewing-changes"
+          },
+          {
+            "title": "Konsistenz bewahren",
+            "path": "/guides/workflows-teams/maintaining-consistency"
+          },
+          {
+            "title": "Release-Workflows",
+            "path": "/guides/workflows-teams/versioning-release-workflows"
+          }
+        ]
+      },
+      {
+        "title": "Integrationen",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "OpenAPI-Generierung",
+            "path": "/guides/integrations/openapi-generation"
+          },
+          {
+            "title": "GitHub Actions",
+            "path": "/guides/integrations/github-actions-cicd"
+          },
+          {
+            "title": "Bestehende Repositories",
+            "path": "/guides/integrations/existing-markdown-repos"
+          },
+          {
+            "title": "Nutzung mit anderen Tools",
+            "path": "/guides/integrations/alongside-other-tools"
+          }
+        ]
+      },
+      {
+        "title": "Inhalte & UX",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Skalierbares Schreiben",
+            "path": "/guides/content-ux/scalable-technical-writing"
+          },
+          {
+            "title": "Navigation auf großen Sites",
+            "path": "/guides/content-ux/navigation-large-sites"
+          },
+          {
+            "title": "Lesbarkeit & Hierarchie",
+            "path": "/guides/content-ux/improving-readability"
+          },
+          {
+            "title": "Aufgabe vs. Konzept",
+            "path": "/guides/content-ux/task-vs-concept"
+          },
+          {
+            "title": "Anti-Patterns vermeiden",
+            "path": "/guides/content-ux/avoiding-anti-patterns"
+          }
+        ]
+      },
+      {
+        "title": "Individuelle Anpassung",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Landingpages",
+            "path": "/guides/customisation/custom-landing-pages"
+          },
+          {
+            "title": "Schriftarten & Branding",
+            "path": "/guides/customisation/custom-fonts-branding"
+          },
+          {
+            "title": "Favicons & Metadaten",
+            "path": "/guides/customisation/custom-favicons-metadata"
+          },
+          {
+            "title": "Benutzerdefinierte Plugins",
+            "path": "/guides/customisation/extending-custom-plugins"
+          }
+        ]
       }
     ]
   },
@@ -324,279 +564,66 @@
         "path": "/api/cli-commands"
       },
       {
-        "title": "Node-API",
+        "title": "Node API",
         "path": "/api/node-api"
       },
       {
-        "title": "Browser-API",
+        "title": "Browser API",
         "path": "/api/browser-api"
       },
       {
-        "title": "Client-Ereignisse",
+        "title": "Clientseitige Events",
         "path": "/api/client-side-events"
       },
       {
-        "title": "Live-Editor-API",
+        "title": "Live Editor API",
         "path": "/api/live-api"
       }
     ]
   },
   {
-    "title": "Leitfäden",
-    "icon": "book-open",
+    "title": "Engines",
+    "icon": "cpu",
     "collapsible": true,
     "children": [
       {
-        "title": "Skalierung & Architektur",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "1000+ Seiten",
-            "path": "/guides/scaling-architecture/scaling"
-          },
-          {
-            "title": "Ordnerstruktur",
-            "path": "/guides/scaling-architecture/scalable-folder-structure"
-          },
-          {
-            "title": "Multi-Versions-Dokumentation",
-            "path": "/guides/scaling-architecture/multi-version-documentation"
-          },
-          {
-            "title": "Breaking Changes",
-            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
-          },
-          {
-            "title": "Zusammenarbeit im Team",
-            "path": "/guides/scaling-architecture/multi-team-collaboration"
-          },
-          {
-            "title": "Große Repositories",
-            "path": "/guides/scaling-architecture/organising-large-repositories"
-          }
-        ]
+        "title": "Übersicht",
+        "path": "/engines/overview"
       },
       {
-        "title": "KI & LLMs",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Struktur für LLMs",
-            "path": "/guides/ai-optimisation/structure-for-llms"
-          },
-          {
-            "title": "KI-bereite Ausgabe",
-            "path": "/guides/ai-optimisation/generating-ai-ready-docs"
-          },
-          {
-            "title": "Halluzinationen minimieren",
-            "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
-          },
-          {
-            "title": "Semantische Suche",
-            "path": "/guides/ai-optimisation/semantic-search-design"
-          },
-          {
-            "title": "Zerlegbare Inhalte",
-            "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
-          },
-          {
-            "title": "Kontexterhaltung",
-            "path": "/guides/ai-optimisation/context-preservation"
-          }
-        ]
+        "title": "JavaScript-Engine",
+        "path": "/engines/js"
       },
       {
-        "title": "Suche",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Relevanz & Struktur",
-            "path": "/guides/search/improving-search-relevance"
-          },
-          {
-            "title": "Geschwindigkeit & Genauigkeit",
-            "path": "/guides/search/fast-accurate-search"
-          },
-          {
-            "title": "Local-First Optimierung",
-            "path": "/guides/search/local-first-search"
-          }
-        ]
-      },
-      {
-        "title": "Leistung",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Sub-100ms Navigation",
-            "path": "/guides/performance-delivery/sub-100ms-navigation"
-          },
-          {
-            "title": "CDN & Edge Deploy",
-            "path": "/guides/performance-delivery/deploying-cdn-edge"
-          },
-          {
-            "title": "JS-Anteil reduzieren",
-            "path": "/guides/performance-delivery/reducing-javascript-payload"
-          },
-          {
-            "title": "Low-End-Geräte",
-            "path": "/guides/performance-delivery/low-end-devices"
-          },
-          {
-            "title": "Caching-Strategien",
-            "path": "/guides/performance-delivery/caching-strategies"
-          }
-        ]
-      },
-      {
-        "title": "Workflows & Teams",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Workflow-Konfiguration",
-            "path": "/guides/workflows-teams/setting-up-workflow"
-          },
-          {
-            "title": "Git-basierte Workflows",
-            "path": "/guides/workflows-teams/git-based-workflows"
-          },
-          {
-            "title": "Änderungenvorschau",
-            "path": "/guides/workflows-teams/previewing-changes"
-          },
-          {
-            "title": "Skalierte Konsistenz",
-            "path": "/guides/workflows-teams/maintaining-consistency"
-          },
-          {
-            "title": "Release-Workflows",
-            "path": "/guides/workflows-teams/versioning-release-workflows"
-          }
-        ]
-      },
-      {
-        "title": "Integrationen",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "OpenAPI-Erstellung",
-            "path": "/guides/integrations/openapi-generation"
-          },
-          {
-            "title": "GitHub Actions",
-            "path": "/guides/integrations/github-actions-cicd"
-          },
-          {
-            "title": "Bestehende Repos",
-            "path": "/guides/integrations/existing-markdown-repos"
-          },
-          {
-            "title": "Parallele Tools",
-            "path": "/guides/integrations/alongside-other-tools"
-          }
-        ]
-      },
-      {
-        "title": "Inhalt & UX",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Skalierbarer Inhalt",
-            "path": "/guides/content-ux/scalable-technical-writing"
-          },
-          {
-            "title": "Navigation großer Sites",
-            "path": "/guides/content-ux/navigation-large-sites"
-          },
-          {
-            "title": "Lesbarkeit & Hierarchie",
-            "path": "/guides/content-ux/improving-readability"
-          },
-          {
-            "title": "Aufgabe vs. Konzept",
-            "path": "/guides/content-ux/task-vs-concept"
-          },
-          {
-            "title": "Anti-Patterns",
-            "path": "/guides/content-ux/avoiding-anti-patterns"
-          }
-        ]
-      },
-      {
-        "title": "Anpassung",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Startseiten",
-            "path": "/guides/customisation/custom-landing-pages"
-          },
-          {
-            "title": "Schriftarten & Branding",
-            "path": "/guides/customisation/custom-fonts-branding"
-          },
-          {
-            "title": "Favicons & Meta",
-            "path": "/guides/customisation/custom-favicons-metadata"
-          },
-          {
-            "title": "Benutzerdefinierte Plugins",
-            "path": "/guides/customisation/extending-custom-plugins"
-          }
-        ]
+        "title": "Rust-Engine",
+        "path": "/engines/rust"
       }
     ]
   },
   {
-    "title": "Vergleich",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
     "title": "Release Notes",
     "icon": "package-check",
-    "collapsible": false,
+    "collapsible": true,
     "children": [
       {
-        "title": "v0.7.9 - Git-Plugin Fixes",
-        "path": "/release-notes/0-7-9"
+        "title": "v0.8.4 - Deployer & Sicherheit",
+        "path": "/release-notes/0-8-4"
       },
       {
-        "title": "v0.7.8 - Git-Plugin",
-        "path": "/release-notes/0-7-8"
+        "title": "v0.8.3 - Routing-Stabilität",
+        "path": "/release-notes/0-8-3"
       },
       {
-        "title": "v0.7.7 - Multi-Projekt",
-        "path": "/release-notes/0-7-7"
+        "title": "v0.8.2 - Patch-Release",
+        "path": "/release-notes/0-8-2"
       },
       {
-        "title": "v0.7.6 - URL Engine",
-        "path": "/release-notes/0-7-6"
+        "title": "v0.8.1 - Vorschau der Rust-Engine",
+        "path": "/release-notes/0-8-1"
       },
       {
-        "title": "v0.7.5 - Sicherheitspatch",
-        "path": "/release-notes/0-7-5"
-      },
-      {
-        "title": "v0.7.4 - Mermaid-Icons",
-        "path": "/release-notes/0-7-4"
-      },
-      {
-        "title": "v0.7.3 - Migrate CLI",
-        "path": "/release-notes/0-7-3"
-      },
-      {
-        "title": "v0.7.2 - Deploy CLI",
-        "path": "/release-notes/0-7-2"
-      },
-      {
-        "title": "v0.7.1 - Plugin API",
-        "path": "/release-notes/0-7-1"
-      },
-      {
-        "title": "v0.7.0 - i18n Release",
-        "path": "/release-notes/0-7-0"
+        "title": "v0.8.0 - Die Ära der parallelen Engine",
+        "path": "/release-notes/0-8-0"
       }
     ]
   },

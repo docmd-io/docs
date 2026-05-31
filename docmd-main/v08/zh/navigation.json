@@ -426,6 +426,10 @@
           {
             "title": "本地优先优化",
             "path": "/guides/search/local-first-search"
+          },
+          {
+            "title": "语义搜索集成",
+            "path": "/guides/search/semantic-search"
           }
         ]
       },

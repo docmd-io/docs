@@ -9,19 +9,25 @@ Das `@docmd/plugin-search`-Plugin bietet ein leistungsstarkes, clientseitiges Su
 
 Die Suche ist in den meisten `docmd`-Templates standardmäßig aktiviert. Sie können ihre Sichtbarkeit und Platzierung über die `layout`-Konfiguration steuern.
 
-```javascript
-import { defineConfig } from '@docmd/core';
+| Option | Typ | Standardwert | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `Boolean` | `true` | Aktiviert oder deaktiviert den Volltext-Suchindexer. |
+| `placeholder` | `String` | `'Search...'` | Benutzerdefinierter Platzhaltertext für das Sucheingabefeld. |
+| `maxResults` | `Number` | `10` | Maximale Anzahl an Suchergebnissen, die im Modal angezeigt werden. |
 
-export default defineConfig({
-  layout: {
-    optionsMenu: {
-      position: 'header', // 'header', 'sidebar-top', 'sidebar-bottom' oder 'menubar'
-      components: {
-        search: true // Auf false setzen, um das Such-Plugin vollständig zu deaktivieren
+### Beispiel
+
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "search": true
       }
     }
   }
-});
+}
 ```
 
 ## Funktionsweise
@@ -67,3 +73,98 @@ Viele Dokumentationsgeneratoren (wie Docusaurus) verlassen sich auf **Algolia Do
 | **Offline** | **Ja** | Nein |
 | **Kosten** | **Kostenlos** | Kostenloses Kontingent oder kostenpflichtig |
 | **Geschwindigkeit** | **Sofort** (In-Memory) | Schnell (Abhängig von Netzwerklatenz) |
+
+## Semantische Suche (Alpha-Vorschau)
+
+> **Experimentelles Feature** — Die semantische Suche befindet sich derzeit in der Alpha-Vorschau. Die standardmäßige keyword-basierte Suche bleibt die empfohlene Option für den produktiven Einsatz.
+
+Die semantische Suche verwendet lokale Embeddings, um die Bedeutung hinter Suchanfragen zu verstehen. Dies ermöglicht intelligentere Ergebnisse über einfache Keyword-Treffer hinaus.
+
+### Semantische Suche aktivieren
+
+Installieren Sie zuerst das Paket `docmd-search`:
+
+```bash
+npm install docmd-search
+```
+
+Aktivieren Sie es dann in Ihrer Konfiguration:
+
+```json
+{
+  "plugins": {
+    "search": {
+      "semantic": true
+    }
+  }
+}
+```
+
+### Wie die semantische Suche funktioniert
+
+Im Gegensatz zur Keyword-Suche, die exakte Begriffe abgleicht, bietet die semantische Suche:
+
+*   **Kontextverständnis** — Eine Anfrage nach „Authentifizierung“ findet relevante Seiten, selbst wenn dort Begriffe wie „Anmeldung“ oder „Login“ verwendet werden.
+*   **Natürliche Fehlertoleranz** — Keine Notwendigkeit für klassische Fuzzy-Logik; das Modell versteht die Absicht.
+*   **Erkennung verwandter Konzepte** — Die Suche nach „API“ gibt relevante Endpoint-Dokumentationen zurück, nicht nur Seiten, die das Wort „API“ enthalten.
+
+### Konfigurationsoptionen
+
+| Option | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `semantic` | `boolean` | `false` | Semantische Suche aktivieren (erfordert das Paket `docmd-search`) |
+| `showConfidence` | `boolean` | `false` | Ähnlichkeits-Konfidenz-Badges (Übereinstimmungs-Scores) in den semantischen Suchergebnissen anzeigen |
+| `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Zu verwendendes Embedding-Modell |
+| `chunkSize` | `number` | `512` | Maximale Chunk-Größe in Zeichen |
+| `chunkOverlap` | `number` | `50` | Überlappung zwischen Chunks in Zeichen |
+| `indexDir` | `string` | — | Pfad zum vorgefertigten semantischen Index |
+
+### Vergleich: Semantisch vs. Keyword
+
+| Feature | Semantische Suche | Keyword-Suche |
+| :--- | :--- | :--- |
+| **Verständnis** | Kontextsensitiv | Nur exakte Treffer |
+| **Fehlertoleranz** | Hoch | Begrenzt (Fuzzy-Matching) |
+| **Synonyme** | Ja | Nein |
+| **Einrichtung** | Erfordert `docmd-search` | Integriert |
+| **Indexgröße** | Größer (1–2 MB pro 100 Dateien) | Kleiner |
+| **Datenschutz** | 100 % privat (clientseitig) | 100 % privat (clientseitig) |
+| **Offline** | Ja | Ja |
+
+### Fallback-Verhalten
+
+Wenn die semantische Suche aktiviert ist, das Paket `docmd-search` jedoch nicht installiert ist, fällt das Plugin automatisch auf die Keyword-Suche zurück. Dadurch bleibt Ihre Dokumentation in jedem Fall suchbar.
+
+::: callout warning "Alpha-Einschränkungen"
+Die semantische Suche ist experimentell. Zu den aktuellen Einschränkungen gehören:
+
+*   Modelle nur für Englisch (mehrsprachige Modelle verfügbar, aber weniger getestet)
+*   Keine inkrementellen Updates (vollständiger Rebuild erforderlich)
+*   Höhere Speichernutzung (~50–100 MB im Browser)
+*   Das erste Laden kann langsamer sein, da die Embeddings geladen werden müssen
+:::
+
+### Best Practices
+
+Für optimale Leistung der semantischen Suche:
+
+1.  **Rauschen ausschließen** — Indizieren Sie keine Changelogs oder Entwürfe:
+    ```json
+    {
+      "plugins": {
+        "search": {
+          "semantic": true,
+          "exclude": ["**/release-notes/**", "**/drafts/**"]
+        }
+      }
+    }
+    ```
+
+2.  **Für CI/CD vorbauen** — Nutzen Sie die Option `indexDir`, um Indizes vorab zu generieren:
+    ```bash
+    npx docmd-search --ui
+    ```
+
+3.  **Indexgröße überwachen** — Überprüfen Sie regelmäßig die Größe des Ordners `.docmd-search/`
+
+4.  **Gründlich testen** — Überprüfen Sie die Qualität der Suchergebnisse, bevor Sie sie in der Produktion bereitstellen

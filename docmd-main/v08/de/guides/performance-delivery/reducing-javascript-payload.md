@@ -21,12 +21,11 @@ Ein großer JavaScript-Payload beeinflusst direkt die "Time to Interactive" (TTI
 
 Vermeiden Sie den Import schwerer Bibliotheken wie jQuery oder Lodash für einfache Aufgaben. Moderne Browser verfügen über robuste native APIs, die fast jede dokumentationsbezogene Anforderung ohne Overhead bewältigen können.
 
-```javascript
-// docmd.config.js
-export default {
-  // ✅ Nutzen Sie ein kleines, zweckgebundenes Skript anstelle einer schweren Bibliothek
-  customJs: ['/static/js/meine-eigene-logik.js']
-};
+```json
+{
+  // Fügen Sie benutzerdefinierte Skripte in docmd.config.json hinzu
+  "customJs": ["/static/js/meine-eigene-logik.js"]
+}
 ```
 
 ### 2. Strategisches Plugin-Management

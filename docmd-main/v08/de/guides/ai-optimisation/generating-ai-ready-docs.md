@@ -21,15 +21,16 @@ Das `llms`-Plugin ist in `docmd >= 0.7.0` verfügbar und kann in Ihrer [Plugin-K
 
 ### 1. Konfiguration der Website-URL
 
-Stellen Sie sicher, dass die Eigenschaft `url` in Ihrer `docmd.config.js` korrekt gesetzt ist. Dies ermöglicht es dem Plugin, absolute URLs für alle Seiten in der Datei `llms.txt` zu generieren.
+Stellen Sie sicher, dass die Eigenschaft `url` in Ihrer `docmd.config.json` korrekt gesetzt ist. Dies ermöglicht es dem Plugin, absolute URLs für alle Seiten in der Datei `llms.txt` zu generieren.
 
-```javascript
-// docmd.config.js
-export default {
-  title: 'Mein Projekt Docs',
-  url: 'https://docs.example.com',
-  plugins: ['llms']
-};
+```json
+{
+  "title": "Mein Projekt Docs",
+  "url": "https://docs.example.com",
+  "plugins": {
+    "llms": {}
+  }
+}
 ```
 
 ### 2. Ausgabedateien
