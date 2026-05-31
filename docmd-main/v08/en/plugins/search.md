@@ -146,9 +146,24 @@ Unlike keyword search which matches exact terms, semantic search:
 
 ### Automatic Installation
 
-When `semantic: true` is enabled, the plugin automatically installs `docmd-search` if it's not already available. This works with npm, pnpm, yarn, and bun — detecting your project's package manager automatically.
+When `semantic: true` is enabled, the plugin automatically installs `docmd-search` and its peer dependencies (`@huggingface/transformers`, `onnxruntime-node`) if they're not already available. This works with npm, pnpm, yarn, and bun — detecting your project's package manager automatically.
 
 If the automatic installation fails (e.g., in restricted CI environments), the plugin gracefully falls back to keyword search.
+
+### Available Models
+
+The `model` option lets you choose an embedding model. Models are downloaded once and cached locally.
+
+| Model | Size | Languages | Best For |
+| :---- | :--- | :-------- | :------- |
+| `Xenova/all-MiniLM-L6-v2` *(default)* | ~23 MB | English only | Fast, English-only documentation |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | ~118 MB | 50+ languages | **i18n docs** (Chinese, German, French, etc.) |
+| `Xenova/multilingual-e5-small` | ~118 MB | 100+ languages | Wide language coverage |
+| `Xenova/paraphrase-multilingual-mpnet-base-v2` | ~270 MB | 50+ languages | Best multilingual quality |
+
+::: callout info "Custom models"
+You can use any HuggingFace model compatible with Transformers.js. Browse at [huggingface.co/models](https://huggingface.co/models?pipeline_tag=feature-extraction&library=transformers.js) and filter by `transformers.js` library.
+:::
 
 ### Fallback Behaviour
 
