@@ -76,8 +76,8 @@ Disallow: /
 The plugin intelligently handles `robots.txt` across multiple locations:
 
 **Priority Order:**
-1. **Site root** (`site/robots.txt`) — Checked first, highest priority
-2. **Assets folder** (`site/assets/robots.txt`) — Copied to site root if found
+1. **Site root** (`site/robots.txt`) - Checked first, highest priority
+2. **Assets folder** (`site/assets/robots.txt`) - Copied to site root if found
 
 **Behaviour:**
 

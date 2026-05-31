@@ -50,6 +50,8 @@ module.exports = defineConfig({
   },
   plugins: {
     search: {
+      semantic: true,
+      showConfidence: true,
       indexDir: '.docmd-search'
     }
   }

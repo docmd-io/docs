@@ -79,14 +79,14 @@ Viele Dokumentationsgeneratoren (wie Docusaurus) verlassen sich auf **Algolia Do
 ::: callout tip "Neu: docmd-search"
 Wir haben etwas gebaut, auf das wir ziemlich stolz sind.
 
-**`docmd-search`** ist nach unserem Wissen die erste vollständig offline-fähige semantische Suchmaschine für Dokumentationen — und sie ist nicht an docmd gebunden. Sie läuft vollständig im Browser, benötigt weder Server noch API-Schlüssel, und keine Nutzerdaten verlassen das Gerät. Integrierbar in jede Dokumentations-Engine, jede statische Website oder jede beliebige Webseite. Einfach einstecken und loslegen.
+**`docmd-search`** ist nach unserem Wissen die erste vollständig offline-fähige semantische Suchmaschine für Dokumentationen - und sie ist nicht an docmd gebunden. Sie läuft vollständig im Browser, benötigt weder Server noch API-Schlüssel, und keine Nutzerdaten verlassen das Gerät. Integrierbar in jede Dokumentations-Engine, jede statische Website oder jede beliebige Webseite. Einfach einstecken und loslegen.
 
-Dies ist eine frühe Alpha-Version. Vieles wird sich verbessern und weiterentwickeln. Doch das Fundament — private, offline und wirklich intelligente Suche — steht bereits.
+Dies ist eine frühe Alpha-Version. Vieles wird sich verbessern und weiterentwickeln. Doch das Fundament - private, offline und wirklich intelligente Suche - steht bereits.
 
-[→ Auf GitHub ansehen]() <!-- Link folgt in Kürze -->
+[→ Auf GitHub ansehen](https://github.com/docmd-io/docmd-search)
 :::
 
-> **Experimentelles Feature** — Die semantische Suche befindet sich derzeit in der Alpha-Vorschau. Die standardmäßige keyword-basierte Suche bleibt die empfohlene Option für den produktiven Einsatz.
+> **Experimentelles Feature** - Die semantische Suche befindet sich derzeit in der Alpha-Vorschau. Die standardmäßige keyword-basierte Suche bleibt die empfohlene Option für den produktiven Einsatz.
 
 Die semantische Suche verwendet lokale Embeddings, um die Bedeutung hinter Suchanfragen zu verstehen. Dies ermöglicht intelligentere Ergebnisse über einfache Keyword-Treffer hinaus.
 
@@ -114,9 +114,9 @@ Aktivieren Sie es dann in Ihrer Konfiguration:
 
 Im Gegensatz zur Keyword-Suche, die exakte Begriffe abgleicht, bietet die semantische Suche:
 
-*   **Kontextverständnis** — Eine Anfrage nach „Authentifizierung“ findet relevante Seiten, selbst wenn dort Begriffe wie „Anmeldung“ oder „Login“ verwendet werden.
-*   **Natürliche Fehlertoleranz** — Keine Notwendigkeit für klassische Fuzzy-Logik; das Modell versteht die Absicht.
-*   **Erkennung verwandter Konzepte** — Die Suche nach „API“ gibt relevante Endpoint-Dokumentationen zurück, nicht nur Seiten, die das Wort „API“ enthalten.
+*   **Kontextverständnis** - Eine Anfrage nach „Authentifizierung“ findet relevante Seiten, selbst wenn dort Begriffe wie „Anmeldung“ oder „Login“ verwendet werden.
+*   **Natürliche Fehlertoleranz** - Keine Notwendigkeit für klassische Fuzzy-Logik; das Modell versteht die Absicht.
+*   **Erkennung verwandter Konzepte** - Die Suche nach „API“ gibt relevante Endpoint-Dokumentationen zurück, nicht nur Seiten, die das Wort „API“ enthalten.
 
 ### Konfigurationsoptionen
 
@@ -128,7 +128,7 @@ Im Gegensatz zur Keyword-Suche, die exakte Begriffe abgleicht, bietet die semant
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Zu verwendendes Embedding-Modell |
 | `chunkSize` | `number` | `512` | Maximale Chunk-Größe in Zeichen |
 | `chunkOverlap` | `number` | `50` | Überlappung zwischen Chunks in Zeichen |
-| `indexDir` | `string` | — | Pfad zum vorgefertigten semantischen Index |
+| `indexDir` | `string` | - | Pfad zum vorgefertigten semantischen Index |
 
 ### Vergleich: Semantisch vs. Keyword
 
@@ -159,7 +159,7 @@ Die semantische Suche ist experimentell. Zu den aktuellen Einschränkungen gehö
 
 Für optimale Leistung der semantischen Suche:
 
-1.  **Rauschen ausschließen** — Indizieren Sie keine Changelogs oder Entwürfe:
+1.  **Rauschen ausschließen** - Indizieren Sie keine Changelogs oder Entwürfe:
     ```json
     {
       "plugins": {
@@ -171,11 +171,11 @@ Für optimale Leistung der semantischen Suche:
     }
     ```
 
-2.  **Für CI/CD vorbauen** — Nutzen Sie die Option `indexDir`, um Indizes vorab zu generieren:
+2.  **Für CI/CD vorbauen** - Nutzen Sie die Option `indexDir`, um Indizes vorab zu generieren:
     ```bash
     npx docmd-search --ui
     ```
 
-3.  **Indexgröße überwachen** — Überprüfen Sie regelmäßig die Größe des Ordners `.docmd-search/`
+3.  **Indexgröße überwachen** - Überprüfen Sie regelmäßig die Größe des Ordners `.docmd-search/`
 
-4.  **Gründlich testen** — Überprüfen Sie die Qualität der Suchergebnisse, bevor Sie sie in der Produktion bereitstellen
+4.  **Gründlich testen** - Überprüfen Sie die Qualität der Suchergebnisse, bevor Sie sie in der Produktion bereitstellen

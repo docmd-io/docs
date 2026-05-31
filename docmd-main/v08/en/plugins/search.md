@@ -81,14 +81,14 @@ Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. W
 ::: callout tip "Introducing docmd-search"
 We built something we're rather proud of.
 
-**`docmd-search`** is, to our knowledge, the first fully offline semantic search engine designed for documentation — and it isn't tied to docmd at all. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. Plug it into any documentation engine, any static site, or any webpage. It just works.
+**`docmd-search`** is, to our knowledge, the first fully offline semantic search engine designed for documentation - and it isn't tied to docmd at all. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. Plug it into any documentation engine, any static site, or any webpage. It just works.
 
-This is an early alpha. Things will change, improve, and grow. But the foundation — private, offline, genuinely intelligent search — is already here.
+This is an early alpha. Things will change, improve, and grow. But the foundation - private, offline, genuinely intelligent search - is already here.
 
-[→ View on GitHub]() <!-- link coming soon -->
+[→ View on GitHub](https://github.com/docmd-io/docmd-search)
 :::
 
-> **Experimental Feature** — Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
+> **Experimental Feature** - Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
 
 Semantic search uses local embeddings to understand the meaning behind queries, enabling more intelligent results beyond simple keyword matching.
 
@@ -116,9 +116,9 @@ Then enable it in your configuration:
 
 Unlike keyword search which matches exact terms, semantic search:
 
-*   **Understands context** — A query for "authentication" finds relevant pages even if they use different terminology like "login" or "sign-in"
-*   **Handles typos naturally** — No need for fuzzy matching; the model understands intent
-*   **Finds related concepts** — Searching "API" returns relevant endpoint documentation, not just pages containing "API"
+*   **Understands context** - A query for "authentication" finds relevant pages even if they use different terminology like "login" or "sign-in"
+*   **Handles typos naturally** - No need for fuzzy matching; the model understands intent
+*   **Finds related concepts** - Searching "API" returns relevant endpoint documentation, not just pages containing "API"
 
 ### Configuration Options
 
@@ -130,7 +130,7 @@ Unlike keyword search which matches exact terms, semantic search:
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Embedding model to use |
 | `chunkSize` | `number` | `512` | Maximum chunk size in characters |
 | `chunkOverlap` | `number` | `50` | Overlap between chunks in characters |
-| `indexDir` | `string` | — | Path to pre-built semantic index |
+| `indexDir` | `string` | - | Path to pre-built semantic index |
 
 ### Comparison: Semantic vs Keyword
 
@@ -161,7 +161,7 @@ Semantic search is experimental. Current limitations include:
 
 For optimal semantic search performance:
 
-1.  **Exclude noise** — Don't index changelogs or draft content:
+1.  **Exclude noise** - Don't index changelogs or draft content:
     ```json
     {
       "plugins": {
@@ -173,11 +173,11 @@ For optimal semantic search performance:
     }
     ```
 
-2.  **Pre-build for CI/CD** — Use the `indexDir` option to pre-generate indexes:
+2.  **Pre-build for CI/CD** - Use the `indexDir` option to pre-generate indexes:
     ```bash
     npx docmd-search --ui
     ```
 
-3.  **Monitor index size** — Check the `.docmd-search/` directory size regularly
+3.  **Monitor index size** - Check the `.docmd-search/` directory size regularly
 
-4.  **Test thoroughly** — Verify search results quality before deploying to production
+4.  **Test thoroughly** - Verify search results quality before deploying to production
