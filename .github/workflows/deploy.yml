@@ -49,12 +49,6 @@ jobs:
       - name: Build website
         run: npm run build
 
-      # GitHub Pages (Jekyll) silently drops files/dirs starting with '.'.
-      # .nojekyll disables Jekyll so .docmd-search/ and .docmd-search-client.js
-      # are served correctly.
-      - name: Disable Jekyll (required for dot-prefixed files)
-        run: touch site/.nojekyll
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
