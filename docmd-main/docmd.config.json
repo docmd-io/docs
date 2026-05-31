@@ -1,5 +1,4 @@
 {
-  "engine": "rust",
   "title": "docmd docs",
   "url": "https://docs.docmd.io",
   "src": ".",
