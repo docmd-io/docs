@@ -114,6 +114,7 @@ Im Gegensatz zur Keyword-Suche, die exakte Begriffe abgleicht, bietet die semant
 | :--- | :--- | :--- | :--- |
 | `semantic` | `boolean` | `false` | Semantische Suche aktivieren (erfordert das Paket `docmd-search`) |
 | `showConfidence` | `boolean` | `false` | Ähnlichkeits-Konfidenz-Badges (Übereinstimmungs-Scores) in den semantischen Suchergebnissen anzeigen |
+| `showFilters` | `boolean` | `true` | Versionsfilter-Leiste über den Suchergebnissen anzeigen (auf `false` setzen, um sie auszublenden) |
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Zu verwendendes Embedding-Modell |
 | `chunkSize` | `number` | `512` | Maximale Chunk-Größe in Zeichen |
 | `chunkOverlap` | `number` | `50` | Überlappung zwischen Chunks in Zeichen |
