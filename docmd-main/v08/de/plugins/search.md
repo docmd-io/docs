@@ -76,6 +76,16 @@ Viele Dokumentationsgeneratoren (wie Docusaurus) verlassen sich auf **Algolia Do
 
 ## Semantische Suche (Alpha-Vorschau)
 
+::: callout tip "Neu: docmd-search"
+Wir haben etwas gebaut, auf das wir ziemlich stolz sind.
+
+**`docmd-search`** ist nach unserem Wissen die erste vollständig offline-fähige semantische Suchmaschine für Dokumentationen — und sie ist nicht an docmd gebunden. Sie läuft vollständig im Browser, benötigt weder Server noch API-Schlüssel, und keine Nutzerdaten verlassen das Gerät. Integrierbar in jede Dokumentations-Engine, jede statische Website oder jede beliebige Webseite. Einfach einstecken und loslegen.
+
+Dies ist eine frühe Alpha-Version. Vieles wird sich verbessern und weiterentwickeln. Doch das Fundament — private, offline und wirklich intelligente Suche — steht bereits.
+
+[→ Auf GitHub ansehen]() <!-- Link folgt in Kürze -->
+:::
+
 > **Experimentelles Feature** — Die semantische Suche befindet sich derzeit in der Alpha-Vorschau. Die standardmäßige keyword-basierte Suche bleibt die empfohlene Option für den produktiven Einsatz.
 
 Die semantische Suche verwendet lokale Embeddings, um die Bedeutung hinter Suchanfragen zu verstehen. Dies ermöglicht intelligentere Ergebnisse über einfache Keyword-Treffer hinaus.

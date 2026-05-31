@@ -78,6 +78,16 @@ Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. W
 
 ## Semantic Search (Alpha Preview)
 
+::: callout tip "Introducing docmd-search"
+We built something we're rather proud of.
+
+**`docmd-search`** is, to our knowledge, the first fully offline semantic search engine designed for documentation — and it isn't tied to docmd at all. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. Plug it into any documentation engine, any static site, or any webpage. It just works.
+
+This is an early alpha. Things will change, improve, and grow. But the foundation — private, offline, genuinely intelligent search — is already here.
+
+[→ View on GitHub]() <!-- link coming soon -->
+:::
+
 > **Experimental Feature** — Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
 
 Semantic search uses local embeddings to understand the meaning behind queries, enabling more intelligent results beyond simple keyword matching.

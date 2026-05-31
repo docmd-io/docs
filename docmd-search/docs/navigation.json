@@ -35,6 +35,16 @@
     "icon": "globe"
   },
   {
+    "title": "Release Notes",
+    "icon": "scroll",
+    "children": [
+      {
+        "title": "v0.1.0-alpha.0",
+        "path": "/release-notes/0-1-0-alpha-0"
+      }
+    ]
+  },
+  {
     "title": "GitHub",
     "path": "https://github.com/docmd-io/docmd-search",
     "icon": "github",
