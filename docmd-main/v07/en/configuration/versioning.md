@@ -18,9 +18,6 @@ my-project/
 
 ## Configuration
 
-
-<!-- SCREENSHOT: Version switcher dropdown in the sidebar showing "v2.x (Latest)" selected, with "v1.x" as an option. -->
-
 Define your versions within the `versions` object:
 
 ```javascript
@@ -48,8 +45,6 @@ Non-current versions are automatically built into subfolders matching their `id`
 
 ### 3. Sticky Switching (Path Preservation)
 
-
-<!-- SCREENSHOT: Two browser windows side by side - left showing v2 of a page, right showing the same page path in v1 after switching, demonstrating path preservation. -->
 `docmd` preserves the relative path when a user switches versions. If a user is reading `mysite.com/getting-started` and switches to **v1**, they are automatically redirected to `mysite.com/v1/getting-started` (if the page exists) rather than being returned to the home page.
 
 ### 4. Asset Isolation

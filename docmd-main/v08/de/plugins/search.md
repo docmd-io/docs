@@ -32,6 +32,8 @@ Die Suche ist in den meisten `docmd`-Templates standardmäßig aktiviert. Sie k�
 
 ## Funktionsweise
 
+<img width="720" class="with-border" src="/assets/previews/search-ui-default.webp">
+
 ### 1. Indizierung (Build-Zeit)
 Während des `docmd build`-Prozesses iteriert das Such-Plugin über jede Seite Ihrer Website. Es extrahiert den Titel, Überschriften und den Fließtext und komprimiert diese Daten dann in eine `search-index.json`-Datei.
 
@@ -87,6 +89,8 @@ Dies ist eine frühe Alpha-Version. Vieles wird sich verbessern und weiterentwic
 :::
 
 > **Experimentelles Feature** - Die semantische Suche befindet sich derzeit in der Alpha-Vorschau. Die standardmäßige keyword-basierte Suche bleibt die empfohlene Option für den produktiven Einsatz.
+
+<img width="720" class="with-border" src="/assets/previews/search-ui-semantic.webp">
 
 Die semantische Suche verwendet lokale Embeddings, um die Bedeutung hinter Suchanfragen zu verstehen. Dies ermöglicht intelligentere Ergebnisse über einfache Keyword-Treffer hinaus.
 

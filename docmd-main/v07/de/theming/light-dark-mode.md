@@ -5,8 +5,6 @@ description: "So konfigurieren Sie den Standard-Ansichtsmodus und verwalten den 
 
 `docmd` bietet integrierte Unterstützung für helle und dunkle Farbschemata. Es erkennt automatisch die Systemeinstellungen der Benutzer und ermöglicht manuelle Überschreibungen über einen UI-Umschalter.
 
-<!-- SCREENSHOT: Geteilter Bildschirm, der dieselbe Dokumentationsseite im Hellmodus (links) und im Dunkelmodus (rechts) zeigt, wobei die Schaltfläche zum Umschalten des Themes in beiden eingekreist ist. -->
-
 ## Standard-Ansichtsmodus
 
 Sie legen den Anfangszustand Ihrer Dokumentation in der `docmd.config.js` fest.

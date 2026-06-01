@@ -18,8 +18,7 @@ my-project/
 
 ## 配置
 
-
-<!-- SCREENSHOT: Version switcher dropdown in the sidebar showing "v2.x (Latest)" selected, with "v1.x" as an option. -->
+<img width="500" class="with-border" src="/assets/previews/menu-versioning.webp">
 
 在 `versions` 对象中定义你的版本：
 
@@ -48,8 +47,6 @@ my-project/
 
 ### 3. 粘性切换（路径保留）
 
-
-<!-- SCREENSHOT: Two browser windows side by side - left showing v2 of a page, right showing the same page path in v1 after switching, demonstrating path preservation. -->
 docmd 在用户切换版本时保留相对路径。如果用户正在阅读 `mysite.com/getting-started` 并切换到 **v1**，他们会自动重定向到 `mysite.com/v1/getting-started`（如果该页面存在）。
 
 ### 4. 资源隔离

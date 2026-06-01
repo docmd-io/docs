@@ -15,15 +15,11 @@ Das Git-Plugin ist in `@docmd/core` enthalten und standardmäßig aktiviert. Es 
 
 Jede Seite zeigt automatisch an, wann sie zuletzt geändert wurde. Der Zeitstempel wird aus dem letzten Git-Commit abgeleitet, der die Quelldatei betrifft.
 
-<!-- SCREENSHOT: Seitenfußzeile mit "Zuletzt aktualisiert: vor 3 Tagen" links und "Diese Seite bearbeiten" rechts -->
-
 Zeitstempel verwenden relative Formatierung für aktuelle Änderungen ("vor 2 Std.", "vor 3 T.") und wechseln zu absoluten Daten für ältere Inhalte ("15. März 2026").
 
 ### Commit-Verlauf-Tooltip
 
 Bewegen Sie den Mauszeiger über den Text "Zuletzt aktualisiert", um einen Tooltip mit den letzten Commits für diese Seite anzuzeigen. Jeder Eintrag zeigt die Commit-Nachricht, den Autor (mit Gravatar-Avatar) und den relativen Zeitstempel.
-
-<!-- SCREENSHOT: Commit-Verlauf-Tooltip mit 4-5 aktuellen Commits mit Autor-Avataren und Nachrichten -->
 
 Dies bietet schnellen Kontext über aktuelle Änderungen, ohne die Seite zu verlassen - nützlich, um zu verstehen, was aktualisiert wurde und von wem.
 

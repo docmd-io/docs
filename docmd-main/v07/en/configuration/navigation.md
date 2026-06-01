@@ -7,8 +7,7 @@ description: "Structure your sidebar, categorise links, and assign icons for hum
 
 ## The Navigation Array
 
-
-<!-- SCREENSHOT: Sidebar navigation showing a two-level hierarchy with icons, an active page highlighted, and a collapsible group. -->
+<img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
 Each object in the array defines a **Link** or a **Category Group**.
 
@@ -66,8 +65,7 @@ If you **omit the `path`**, the item becomes a static category header. This is t
 
 ## Automated Breadcrumbs
 
-
-<!-- SCREENSHOT: Breadcrumb bar above the page title showing "Home > Getting Started > Installation" with clickable links. -->
+<img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
 `docmd` automatically generates breadcrumbs for every page based on your navigation hierarchy. These crumbs are rendered above the main page title to improve orientation and navigation speed.
 

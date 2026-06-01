@@ -35,6 +35,8 @@ docmd-search --ui
 
 Launches a standalone search UI using an existing index without rebuilding.
 
+<img width="720" class="with-border" src="/assets/previews/search-ui-semantic.webp">
+
 Additional options:
 
 ```bash
@@ -56,8 +58,6 @@ Additional options:
 ### Automatic Fallback
 
 If `docmd-search` is not installed, `@docmd/plugin-search` automatically falls back to keyword search. Documentation remains fully searchable without any additional configuration.
-
-<!-- Screenshot: semantic search results -->
 
 ## Known Limitations
 

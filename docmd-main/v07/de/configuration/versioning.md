@@ -18,8 +18,6 @@ mein-projekt/
 
 ## Konfiguration
 
-<!-- SCREENSHOT: Dropdown-Versionsumschalter in der Seitenleiste, der „v2.x (Aktuell)“ als ausgewählt zeigt, mit „v1.x“ als Option. -->
-
 Definieren Sie Ihre Versionen innerhalb des `versions`-Objekts:
 
 ```javascript
@@ -47,7 +45,6 @@ Nicht-aktuelle Versionen werden automatisch in Unterordnern erstellt, die ihrer 
 
 ### 3. Permanenter Wechsel (Pfadbeibehaltung)
 
-<!-- SCREENSHOT: Zwei Browserfenster nebeneinander - links wird v2 einer Seite gezeigt, rechts derselbe Seitenpfad in v1 nach dem Wechsel, was die Pfadbeibehaltung demonstriert. -->
 `docmd` behält den relativen Pfad bei, wenn ein Benutzer die Version wechselt. Wenn ein Benutzer `meineseite.de/erste-schritte` liest und auf **v1** wechselt, wird er automatisch zu `meineseite.de/v1/erste-schritte` weitergeleitet (sofern die Seite existiert), anstatt zur Startseite zurückgeführt zu werden.
 
 ### 4. Asset-Isolation

@@ -59,11 +59,13 @@ description: "通过语言区域优先路由、翻译导航和自动降级回退
 
 ## 语言切换器位置
 
+<img width="500" class="with-border" src="/assets/previews/menu-versioning.webp">
+
 使用 `position` 选项控制语言切换器的显示位置：
 
 ```js
 i18n: {
-  position: 'options-menu',  // 默认
+  position: 'sidebar-top',  // 默认
   // ...
 }
 ```

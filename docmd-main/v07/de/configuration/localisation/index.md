@@ -63,8 +63,6 @@ Dies verhindert 404-Fehler, wenn Sie geplante Sprachen auflisten, bevor deren In
 
 ## Positionierung des Sprachumschalters
 
-<!-- SCREENSHOT: Drei Varianten des Sprachumschalters - options-menu (Erdkugel-Icon im Header), sidebar-top (Dropdown oben in der Seitenleiste), sidebar-bottom (Dropdown unten). Zeige alle drei nebeneinander. -->
-
 Steuern Sie die Position des Sprachumschalters mit der Option `position`:
 
 ```js

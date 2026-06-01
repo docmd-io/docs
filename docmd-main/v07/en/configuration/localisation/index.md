@@ -63,9 +63,6 @@ This prevents 404 errors when you list planned languages before their content is
 
 ## Position the language switcher
 
-
-<!-- SCREENSHOT: Three variants of the language switcher - options-menu (globe icon in header), sidebar-top (dropdown at top of sidebar), sidebar-bottom (dropdown at bottom). Show all three side by side. -->
-
 Control where the language switcher appears using the `position` option:
 
 ```js

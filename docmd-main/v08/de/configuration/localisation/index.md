@@ -62,14 +62,14 @@ Dies verhindert 404-Fehler, wenn Sie geplante Sprachen auflisten, bevor deren In
 
 ## Positionierung des Sprachumschalters
 
-<!-- SCREENSHOT: Drei Varianten des Sprachumschalters - options-menu (Erdkugel-Icon im Header), sidebar-top (Dropdown oben in der Seitenleiste), sidebar-bottom (Dropdown unten). Zeige alle drei nebeneinander. -->
+<img width="500" class="with-border" src="/assets/previews/menu-i18n.webp">
 
 Steuern Sie die Position des Sprachumschalters mit der Option `position`:
 
 ```json
 {
   "i18n": {
-    "position": "options-menu"
+    "position": "sidebar-top"
   }
 }
 ```

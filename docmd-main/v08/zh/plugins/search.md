@@ -32,6 +32,8 @@ description: "使用 MiniSearch 为你的文档启用高速、离线优先的全
 
 ## 工作原理
 
+<img width="720" class="with-border" src="/assets/previews/search-ui-default.webp">
+
 ### 1. 索引（构建时）
 在 `npx @docmd/core build` 过程中，搜索插件会遍历网站上的每一个页面。它会提取标题、副标题和正文文本，然后将这些数据编译成压缩的 `search-index.json` 文件。
 
@@ -87,6 +89,8 @@ noindex: true # 此页面将不会出现在搜索结果或站点地图中
 :::
 
 > **实验性功能** — 语义搜索目前处于 Alpha 预览阶段。默认的关键词搜索仍是生产环境的推荐选项。
+
+<img width="720" class="with-border" src="/assets/previews/search-ui-semantic.webp">
 
 语义搜索使用本地向量嵌入来理解查询的含义，可提供超越简单关键词匹配的智能搜索结果。
 

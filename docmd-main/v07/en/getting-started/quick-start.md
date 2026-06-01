@@ -21,8 +21,6 @@ bunx @docmd/core dev
 
 Opens `http://localhost:3000`. Your documentation is live.
 
-<!-- SCREENSHOT: Terminal output after running docmd dev showing the local dev server URL and build summary with page count. -->
-
 ## What happens automatically
 
 docmd scans your project and sets everything up:

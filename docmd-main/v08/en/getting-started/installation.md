@@ -53,7 +53,7 @@ bunx @docmd/core init
 ```
 :::
 
-<!-- SCREENSHOT: Terminal interactive prompt for `docmd init` showing file detection, directory creation steps, and the success confirmation message. -->
+<img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
 ::: callout tip "Shorthand Scripts" icon:sparkles
 Once installed locally, you can use `npx @docmd/core dev` or add it directly to your `package.json` scripts.

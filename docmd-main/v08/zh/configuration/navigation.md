@@ -9,7 +9,7 @@ description: "构建你的侧边栏、分类链接，并为读者和搜索引擎
 
 你 `docmd.config.json` 文件中的链接对象数组控制侧边栏。每个对象是一个直接链接或嵌套分类组。
 
-<!-- SCREENSHOT: The sidebar navigation menu showing a two-level hierarchy with Lucide icons, an active page highlighted, and a collapsible section. -->
+<img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
 ```json
 {
@@ -69,7 +69,7 @@ description: "构建你的侧边栏、分类链接，并为读者和搜索引擎
 
 引擎为每个页面自动生成上下文面包屑。这些直接显示在主页面头部上方，以帮助快速定位。
 
-<!-- SCREENSHOT: The breadcrumb navigation bar showing 'Overview > Configuration > Navigation' in a clean, small grey font above the H1 page header. -->
+<img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
 ### 关键行为
 *   **自动解析**：引擎通过导航树追踪活动路由来构建层级结构。

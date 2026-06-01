@@ -20,7 +20,7 @@ bunx @docmd/core dev
 
 访问 `http://localhost:3000`。你的文档已上线。
 
-<!-- SCREENSHOT: Terminal window showing a successful local dev server startup, with the green local access URL http://localhost:3000 and initial build statistics. -->
+<img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "自动端口故障转移"
 如果端口 `3000` 已被占用，docmd 会自动寻找下一个可用端口（例如 `3001`）。
@@ -54,7 +54,5 @@ bunx @docmd/core build
 :::
 
 编译器将静态网站输出到 `./site/`。
-
-<!-- SCREENSHOT: Terminal output showing a successful production build with compilation times, sitemap generation, and total page count summary. -->
 
 可以将此静态输出托管在任何地方。部署到 GitHub Pages、Vercel、Netlify 或任何静态主机。

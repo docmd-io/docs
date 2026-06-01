@@ -5,6 +5,10 @@ description: "将 docmd 渲染引擎集成到你自己的 Web 界面中，以实
 
 `docmd` 实时预览架构允许你将生产级的 Markdown 渲染引擎直接引入到自定义编辑器、CMS 仪表板或基于 Web 的 IDE 中。
 
+<img width="720" class="with-border" src="/assets/previews/live-editor-preview.webp">
+
+::: button "Open Live Editor" external:https://live.docmd.io
+
 ### 1. 资源集成
 
 从你的资源目录或 CDN 中包含所需的 CSS 和 JavaScript 捆绑包：

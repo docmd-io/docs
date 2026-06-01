@@ -9,6 +9,8 @@ Der Compiler bietet eine explizite Kontrolle über Ihre Website-Navigation. Eine
 
 Ein Array von Link-Objekten in Ihrer `docmd.config.json`-Datei steuert die Seitenleiste. Jedes Objekt ist ein direkter Link oder eine geschachtelte Kategoriegruppe.
 
+<img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
+
 ```json
 {
   "navigation": [
@@ -66,6 +68,8 @@ Lassen Sie den Parameter `path` weg. Die Überschrift dient als nicht anklickbar
 ## 4. Automatische Breadcrumbs
 
 Die Engine generiert automatisch kontextbezogene Breadcrumbs (Brotkrümelnavigation) für jede Seite. Diese werden direkt über der Hauptüberschrift der Seite angezeigt, um eine schnelle Orientierung zu erleichtern.
+
+<img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
 ### Wichtigste Verhaltensweisen
 *   **Automatische Auflösung**: Die Engine verfolgt die aktive Route durch Ihren Navigationsbaum, um die Hierarchie zu erstellen.

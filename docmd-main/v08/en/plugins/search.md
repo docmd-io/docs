@@ -32,8 +32,7 @@ Search is enabled by default in most `docmd` templates. You can control its visi
 
 ## How It Works
 
-
-<!-- SCREENSHOT: Search modal open with a query typed, showing matching results with highlighted titles and deep-linked headings. The keyboard shortcut hint (Ctrl+K or /) should be visible. -->
+<img width="720" class="with-border" src="/assets/previews/search-ui-default.webp">
 
 ### 1. Indexing (Build-time)
 During the `npx @docmd/core build` process, the search plugin iterates through every page on your site. It extracts the title, headings, and plain-text prose, then compiles this data into a compressed `search-index.json` file.
@@ -89,6 +88,8 @@ This is an early alpha. Things will change, improve, and grow. But the foundatio
 :::
 
 > **Experimental Feature** - Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
+
+<img width="720" class="with-border" src="/assets/previews/search-ui-semantic.webp">
 
 Semantic search uses local embeddings to understand the meaning behind queries, enabling more intelligent results beyond simple keyword matching.
 

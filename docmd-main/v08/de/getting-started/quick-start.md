@@ -20,7 +20,7 @@ bunx @docmd/core dev
 
 Öffnet `http://localhost:3000`. Ihre Dokumentation ist live.
 
-<!-- SCREENSHOT: Terminal window showing a successful local dev server startup, with the green local access URL http://localhost:3000 and initial build statistics. -->
+<img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "Automatische Port-Umleitung"
 Wenn Port `3000` bereits verwendet wird, findet docmd automatisch den nächsten verfügbaren Port (z. B. `3001`).
@@ -54,7 +54,5 @@ bunx @docmd/core build
 :::
 
 Der Compiler gibt eine statische Website in `./site/` aus.
-
-<!-- SCREENSHOT: Terminal output showing a successful production build with compilation times, sitemap generation, and total page count summary. -->
 
 Hosten Sie diese statische Ausgabe überall. Stellen Sie auf GitHub Pages, Vercel, Netlify oder einem anderen statischen Host bereit.

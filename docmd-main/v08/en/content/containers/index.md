@@ -9,8 +9,6 @@ Standard Markdown excels at basic text formatting, but professional technical do
 `docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g., `:::tabs` instead of `::: tabs`) is also supported for all containers.
 :::
 
-<!-- SCREENSHOT: Montage of all container types on a single page - callouts (info, warning, danger, tip), tabs with code, steps, cards grid, hero section, and collapsible sections. -->
-
 ## Block Syntax Reference
 
 All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.

@@ -50,8 +50,6 @@ favicon: 'assets/favicon.ico',           // Pfad zum Favicon Ihrer Website
 
 ## Layout-Architektur
 
-<!-- SCREENSHOT: Volle Seite mit Seitenleiste, Header, Breadcrumbs, Inhaltsverzeichnis und Footer - versehen mit Pfeilen, die auf jeden konfigurierbaren Bereich zeigen (Sidebar, TOC, Breadcrumbs, Footer, Optionsmenü). -->
-
 `docmd` verfügt über ein modulares Layout-System. Über das `layout`-Objekt können Sie UI-Komponenten umschalten und das Navigationsverhalten konfigurieren.
 
 | Bereich | Schlüssel | Standard | Beschreibung |

@@ -40,9 +40,6 @@ plugins: {
 
 ## How It Works
 
-
-<!-- SCREENSHOT: The thread creation flow - (1) text selected on page, (2) comment popover appearing, (3) highlighted text with thread card below. Show the flow as 3 numbered steps. -->
-
 1. **Select text** on any documentation page during `docmd dev`
 2. A **comment popover** appears - write your comment and submit
 3. The selected text gets **highlighted** with a thread marker

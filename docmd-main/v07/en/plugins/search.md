@@ -34,9 +34,6 @@ export default defineConfig({
 
 ## How It Works
 
-
-<!-- SCREENSHOT: Search modal open with a query typed, showing matching results with highlighted titles and deep-linked headings. The keyboard shortcut hint (Ctrl+K or /) should be visible. -->
-
 ### 1. Indexing (Build-time)
 During the `docmd build` process, the search plugin iterates through every page on your site. It extracts the title, headings, and plain-text prose, then compiles this data into a compressed `search-index.json` file. 
 

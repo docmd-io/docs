@@ -5,6 +5,10 @@ description: "Integrieren Sie die docmd-Rendering-Engine in Ihre eigenen Web-Int
 
 Die `docmd`-Live-Vorschau-Architektur ermöglicht es Ihnen, die produktionsreife Markdown-Rendering-Engine direkt in benutzerdefinierte Editoren, CMS-Dashboards oder webbasierte IDEs zu bringen.
 
+<img width="720" class="with-border" src="/assets/previews/live-editor-preview.webp">
+
+::: button "Open Live Editor" external:https://live.docmd.io
+
 ### 1. Ressourcen-Integration
 
 Binden Sie die erforderlichen CSS- und JavaScript-Bundles aus Ihren Assets oder einem CDN ein:

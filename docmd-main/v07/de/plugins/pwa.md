@@ -40,8 +40,6 @@ Das Plugin generiert automatisch eine `service-worker.js`-Datei, die eine „Sta
 
 ### 2. Mobile Installation
 
-<!-- SCREENSHOT: Mobiles Gerät (iOS oder Android), das die Aufforderung „Zum Home-Bildschirm hinzufügen“ für eine docmd-basierte Website zeigt, sowie das resultierende App-Icon auf dem Home-Bildschirm. -->
-
 Durch die Erstellung einer `manifest.webmanifest` und das Einfügen der erforderlichen `<meta>`-Tags ermöglicht das Plugin Benutzern unter iOS und Android die Funktion „Zum Home-Bildschirm hinzufügen“. Ihre Dokumentation verhält sich dann wie eine eigenständige Anwendung mit eigenem Startbildschirm und Fensterrahmen.
 
 ### 3. Intelligente Asset-Auflösung

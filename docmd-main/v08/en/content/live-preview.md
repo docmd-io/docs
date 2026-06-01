@@ -5,7 +5,7 @@ description: "Run the engine entirely in the browser without a backend server us
 
 The compiler features a modular architecture separating filesystem operations from core logic. This enables the engine to run entirely within the browser. It facilitates live editors and CMS previews without a Node.js backend.
 
-<!-- SCREENSHOT: A live preview window embedded in a documentation page, showing a code editor on the left and the rendered HTML output on the right, with the preview updating in real-time. -->
+<img width="720" class="with-border" src="/assets/previews/live-editor-preview.webp">
 
 ::: button "Open Live Editor" external:https://live.docmd.io
 

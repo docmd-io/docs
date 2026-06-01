@@ -9,7 +9,7 @@ The compiler provides explicit control over your site navigation. A clear naviga
 
 An array of link objects in your `docmd.config.json` file controls the sidebar. Each object is a direct link or a nested category group.
 
-<!-- SCREENSHOT: The sidebar navigation menu showing a two-level hierarchy with Lucide icons, an active page highlighted, and a collapsible section. -->
+<img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
 ```json
 {
@@ -69,7 +69,7 @@ Omit the `path` parameter. The header serves as a non-clickable title grouping r
 
 The engine automatically generates contextual breadcrumbs for every page. These display directly above the main page header to assist with rapid orientation.
 
-<!-- SCREENSHOT: The breadcrumb navigation bar showing 'Overview > Configuration > Navigation' in a clean, small grey font above the H1 page header. -->
+<img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
 ### Key Behaviours
 *   **Automatic Resolution**: The engine traces the active route through your navigation tree to construct the hierarchy.
