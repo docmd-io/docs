@@ -36,7 +36,7 @@ jobs:
       # Cache embedding models to avoid re-downloading on every build
       # Models are ~23-270MB and stored in ~/.docmd-search/models/
       - name: Cache embedding models
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.docmd-search/models
           key: docmd-search-models-${{ runner.os }}-${{ hashFiles('**/docmd.config.js', '**/docmd.config.json') }}
