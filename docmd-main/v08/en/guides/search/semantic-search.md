@@ -13,7 +13,7 @@ Modern developers expect natural language interfaces that understand intent, syn
 
 ## Approach
 
-Use docmd's native **Semantic Search Plugin**. It operates entirely client-side using a highly optimized browser runtime. It generates structured vector chunk indices at build time using local Hugging Face model pipelines, then re-ranks matches using hybrid BM25 keyword frequency and vector cosine similarity. No data is ever sent to third-party APIs.
+Use docmd's native **Semantic Search Plugin**. It operates entirely client-side using a highly optimised browser runtime. It generates structured vector chunk indices at build time using local Hugging Face model pipelines, then re-ranks matches using hybrid BM25 keyword frequency and vector cosine similarity. No data is ever sent to third-party APIs.
 
 ## Implementation
 
@@ -54,7 +54,7 @@ npx docmd-search --build
 npx @docmd/core build
 ```
 
-This generates highly optimized static Vecto-JSON chunks in `.docmd-search/`. When a user performs a search, the client progressively loads these chunks in the background, keeping the UI instantly interactive.
+This generates highly optimised static Vecto-JSON chunks in `.docmd-search/`. When a user performs a search, the client progressively loads these chunks in the background, keeping the UI instantly interactive.
 
 ## Trade-offs
 
