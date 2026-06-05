@@ -360,6 +360,10 @@
         "collapsible": true,
         "children": [
           {
+            "title": "MCP & Agent-Skills",
+            "path": "/guides/ai-optimisation/mcp-and-agent-skills"
+          },
+          {
             "title": "Struktur für LLMs",
             "path": "/guides/ai-optimisation/structure-for-llms"
           },

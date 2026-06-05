@@ -394,6 +394,10 @@
         "collapsible": true,
         "children": [
           {
+            "title": "MCP 与 Agent 技能",
+            "path": "/guides/ai-optimisation/mcp-and-agent-skills"
+          },
+          {
             "title": "LLM 文档结构",
             "path": "/guides/ai-optimisation/structure-for-llms"
           },
