@@ -89,7 +89,26 @@ docmd dev   # Lokalen Entwicklungsserver starten
 docmd build # Statische Ausgabe erstellen
 ```
 
-## 3. Nur-Browser-Integration
+## 3. Docker
+
+Verwenden Sie das offizielle Docker-Image, um Dokumentationen zu erstellen und in der Vorschau anzuzeigen, ohne Node.js lokal zu installieren.
+
+```bash
+# Ziehen Sie das offizielle Image
+docker pull ghcr.io/docmd-io/docmd:latest
+
+# Erstellen Sie Ihre Dokumentation (mounten Sie Ihre Quell- und Ausgabeordner)
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+
+# Starten Sie die Demo-Site
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+```
+
+Unterstützt `linux/amd64` und `linux/arm64`. Alpine-basiert, als non-root ausgeführt, mit integrierten Health-Checks.
+
+Siehe [Docker-Bereitstellung](../deployment/docker.md) für Dockerfile-Generierung, Docker Compose und Kubernetes-Beispiele.
+
+## 4. Nur-Browser-Integration
 
 Betten Sie die Engine direkt über ein CDN in eine bestehende Web-Anwendung ein.
 

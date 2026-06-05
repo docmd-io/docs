@@ -576,6 +576,10 @@
         "path": "/api/client-side-events"
       },
       {
+        "title": "MCP-Server",
+        "path": "/api/mcp-server"
+      },
+      {
         "title": "Live Editor API",
         "path": "/api/live-api"
       }
@@ -606,6 +610,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.6 - AI-First & MCP",
+        "path": "/release-notes/0-8-6"
+      },
+      {
         "title": "v0.8.4 - Deployer & Sicherheit",
         "path": "/release-notes/0-8-4"
       },
@@ -631,6 +639,12 @@
     "title": "Mitwirken",
     "path": "/contributing",
     "icon": "git-pull-request"
+  },
+  {
+    "title": "Agent Skills",
+    "path": "https://github.com/docmd-io/docmd-skills",
+    "icon": "bot",
+    "external": true
   },
   {
     "title": "GitHub",

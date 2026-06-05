@@ -126,6 +126,9 @@ Docusaurus achieves something similar with multi-instance plugins, but requires 
 | **Native i18n** | ✅ | ✅ | Manual | Plugin | ✅ | ✅ |
 | **Built-in search** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
 | **llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **MCP Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Docker Image** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Inline discussions** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **PWA support** | ✅ | Community | ❌ | ❌ | ❌ | ❌ |
 | **Self-hosted** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |

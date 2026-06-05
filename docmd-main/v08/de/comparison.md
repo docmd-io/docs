@@ -84,17 +84,51 @@ Hier scheitern die meisten Tools. Sie fügen 6 Sprachen hinzu, übersetzen 3 Sei
 Wenn ein Leser auf Hindi wechselt und diese Seite nicht übersetzt ist, erhält er eine **404-Fehlermeldung**. Die einzige Abhilfe sind serverseitige Weiterleitungen oder das Schreiben einer eigenen React/Vue-Komponente. docmd regelt dies zum Build-Zeitpunkt - nicht verfügbare Locales erhalten ein "N/A"-Badge, und nicht übersetzte Seiten fallen lautlos auf den Standard zurück, begleitet von einem lokalisierten Warnungs-Callout.
 :::
 
+## Workspace (Arbeitsbereich)
+
+Organisationen, die mehrere Tools unter einer Domain verwalten, benötigen für jedes eigene Dokumentationen - unterschiedliche Versionen, unterschiedliche Navigationen, unterschiedliche Release-Zyklen. Die meisten Generatoren zwingen Sie entweder dazu, separate Websites zu pflegen oder sich mit Plugin-Systemen zu behelfen.
+
+| Funktion | docmd | Docusaurus | VitePress | MkDocs | Starlight |
+|:-----------|:-----:|:----------:|:---------:|:------:|:---------:|
+| Native Workspace-Unterstützung | ✅ | Plugin | ❌ | Plugin | ❌ |
+| Einzelne Konfigurationszeile pro Projekt | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Unabhängige Versionierung pro Projekt | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Unabhängiges i18n pro Projekt | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Gemeinsam genutzte Assets über Projekte hinweg | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Einzige `site/`-Ausgabe (kein Proxy erforderlich) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Zero-Config-Erkennung | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+::: callout info "Wie docmd es macht"
+```json
+{
+  "workspace": {
+    "projects": [
+      { "prefix": "/", "src": "main-docs", "title": "Docs" },
+      { "prefix": "/sdk", "src": "sdk-docs", "title": "SDK" }
+    ]
+  }
+}
+```
+Jeder Projektordner hat seine eigene `docmd.config.json` mit unabhängiger Konfiguration. Ein `npx @docmd/core build` erzeugt ein einziges bereitstellbares Verzeichnis - kein Reverse-Proxy, kein Nginx, keine separaten CI-Pipelines.
+:::
+
+Docusaurus erreicht Ähnliches mit Multi-Instance-Plugins, erfordert jedoch eine komplexe Konfiguration - jede Instanz benötigt separate Plugin-Einträge, Sidebar-Dateien und manuelle Routenkonfiguration. MkDocs erfordert das Drittanbieter-Plugin `mkdocs-monorepo-plugin`. VitePress, Starlight und Mintlify bieten keine native Workspace-Unterstützung.
+
 ## Vollständige Feature-Matrix
 
 | Feature | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
 |:--------|:-----:|:----------:|:---------:|:---------------:|:---------:|:--------:|
 | **Zero-Config Start** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Konfiguration erforderlich** | Keine | `docusaurus.config.js` | `config.mts` | `mkdocs.yml` | `astro.config.mjs` | `mint.json` |
+| **Workspace-Unterstützung** | ✅ | Plugin | ❌ | Plugin | ❌ | ❌ |
 | **SPA-Navigation** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | **Native Versionierung** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **Natives i18n** | ✅ | ✅ | Manuell | Plugin | ✅ | ✅ |
 | **Integrierte Suche** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
 | **llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **MCP-Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Docker-Image** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Inline-Diskussionen** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **PWA-Unterstützung** | ✅ | Community | ❌ | ❌ | ❌ | ❌ |
 | **Self-hosted** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |

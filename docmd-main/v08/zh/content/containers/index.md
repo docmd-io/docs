@@ -1,9 +1,9 @@
 ---
-title: "容器概览 (Containers Overview)"
-description: "使用内置的交互式组件扩展标准的 Markdown，使你的文档从静态页面转变为功能丰富的应用。"
+title: "自定义交互式容器"
+description: "docmd 中可用的交互式 UI 构建块的完整目录。"
 ---
 
-`docmd` 容器允许你在不编写任何 HTML 或 CSS 的情况下，将复杂的 UI 元素（如按钮、卡片、折叠区块和选项卡）直接注入到你的文档源文件中。
+标准的 Markdown 擅长基础文本格式化，但专业的开发文档需要丰富的结构组件来有效传达复杂的逻辑。`docmd` 通过一系列**同构容器**扩展了 Markdown，这些容器可直接渲染为响应式、高保真 UI 元素。
 
 ::: callout tip "从其他文档引擎迁移？"
 `docmd` 开箱即支持 **VitePress** 和 **Docusaurus** 的语法别名。`:::tip`、`:::warning`、`:::note`、`:::details` 和 `:::caution` 等容器无需修改即可工作。所有容器也支持无空格语法（例如 `:::tabs` 而不是 `::: tabs`）。
@@ -22,18 +22,18 @@ description: "使用内置的交互式组件扩展标准的 Markdown，使你的
 
 | 组件 | 关键字 | 主要用例 |
 | :--- | :--- | :--- |
-| **[标注 (Callouts)](callouts.md)** | `callout` | 用于技巧、警告和警报的语义化突出显示。 |
-| **[卡片 (Cards)](cards.md)** | `card` | 用于功能网格和布局控制的有框结构块。 |
-| **[网格 (Grids)](grids.md)** | `grids` | 自动调整的多列结构组。 |
-| **[选项卡 (Tabs)](tabs.md)** | `tabs` | 用于替代平台说明的交互式可切换面板。 |
-| **[步骤 (Steps)](steps.md)** | `steps` | 用于“如何操作”指南和教程的视觉数字时间线。 |
-| **[标签 (Tags)](tags.md)** | `tag` | 用于版本、状态或突出的自闭合彩色标签。 |
-| **[按钮 (Buttons)](buttons.md)** | `button` | 自闭合、突出的呼吁操作导航链接。 |
-| **[折叠区块 (Collapsibles)](collapsible.md)**| `collapsible`| 用于 FAQ 和深度技术数据的交互式手风琴切换。 |
-| **[URL 嵌入 (Embeds)](embed.md)** | `embed` | 用于视频、社交和交互式内容的安全、零延迟嵌入。 |
-| **[变更日志 (Changelogs)](changelogs.md)** | `changelog` | 结构化、基于时间线的版本历史和发布说明。 |
-| **[英雄区块 (Hero)](hero.md)** | `hero` | 具有布局和滑块支持的高影响力落地页部分。 |
-| **[嵌套容器](nested-containers.md)** | — | 用于复杂、多组件布局的递归组合模式。 |
+| **[标注](callouts.md)** | `callout` | 用于技巧、警告和警报的语义化突出显示。 |
+| **[卡片](cards.md)** | `card` | 用于功能网格和布局控制的有框结构块。 |
+| **[网格](grids.md)** | `grids` | 自动调整的多列结构组。 |
+| **[选项卡](tabs.md)** | `tabs` | 用于替代平台说明的交互式可切换面板。 |
+| **[步骤](steps.md)** | `steps` | 用于“如何操作”指南和教程的视觉数字时间线。 |
+| **[折叠区块](collapsible.md)** | `collapsible` | 用于 FAQ 和深度技术数据的交互式手风琴切换。 |
+| **[按钮](buttons.md)** | `button` | 自闭合、突出的呼吁操作导航链接。 |
+| **[标签](tags.md)** | `tag` | 用于版本、状态或突出的自闭合彩色标签。 |
+| **[英雄区块](hero.md)** | `hero` | 具有布局和滑块支持的高影响力落地页部分。 |
+| **[URL 嵌入](embed.md)** | `embed` | 用于视频、社交和交互式内容的安全、零延迟嵌入。 |
+| **[变更日志](changelogs.md)** | `changelog` | 结构化、基于时间线的版本历史和发布说明。 |
+| **[嵌套容器](nested-containers.md)** | - | 用于复杂、多组件布局的递归组合模式。 |
 
 ## 容器的战略重要性
 
@@ -55,3 +55,5 @@ description: "使用内置的交互式组件扩展标准的 Markdown，使你的
     ::: button "深入核心引擎" /advanced/developer-guide
 :::
 ```
+
+[掌握嵌套指南](nested-containers.md)

@@ -341,6 +341,10 @@
         "path": "/api/client-side-events"
       },
       {
+        "title": "MCP 服务端",
+        "path": "/api/mcp-server"
+      },
+      {
         "title": "实时编辑器 API",
         "path": "/api/live-api"
       }
@@ -563,6 +567,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.6 - AI-First 与 MCP",
+        "path": "/release-notes/0-8-6"
+      },
+      {
         "title": "v0.8.4 - 部署器与安全",
         "path": "/release-notes/0-8-4"
       },
@@ -588,6 +596,12 @@
     "title": "参与贡献",
     "path": "/contributing",
     "icon": "git-pull-request"
+  },
+  {
+    "title": "Agent 技能",
+    "path": "https://github.com/docmd-io/docmd-skills",
+    "icon": "bot",
+    "external": true
   },
   {
     "title": "GitHub",

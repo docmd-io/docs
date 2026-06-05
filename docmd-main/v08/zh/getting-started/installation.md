@@ -89,7 +89,26 @@ docmd dev   # 启动本地开发服务器
 docmd build # 构建静态输出
 ```
 
-## 3. 仅浏览器集成
+## 3. Docker
+
+使用官方 Docker 镜像，无需在本地安装 Node.js 即可构建和预览文档。
+
+```bash
+# 拉取官方镜像
+docker pull ghcr.io/docmd-io/docmd:latest
+
+# 构建文档（挂载您的源目录和输出目录）
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+
+# 运行演示站点
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+```
+
+支持 `linux/amd64` 和 `linux/arm64`。基于 Alpine 镜像、以非 root 用户运行，并内置健康检查。
+
+详情见 [Docker 部署](../deployment/docker.md)，了解 Dockerfile 生成、Docker Compose 和 Kubernetes 示例。
+
+## 4. 仅浏览器集成
 
 通过 CDN 直接将引擎嵌入现有 Web 应用中。
 

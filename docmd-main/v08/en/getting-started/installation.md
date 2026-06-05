@@ -89,7 +89,26 @@ docmd dev   # Start a dev server locally
 docmd build # Build static output
 ```
 
-## 3. Browser-Only Integration
+## 3. Docker
+
+Use the official Docker image to build and preview docs without installing Node.js locally.
+
+```bash
+# Pull the official image
+docker pull ghcr.io/docmd-io/docmd:latest
+
+# Build your docs (mount your source and output directories)
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+
+# Run the demo site
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+```
+
+Supports `linux/amd64` and `linux/arm64`. Alpine-based, non-root, with health checks.
+
+See [Docker Deployment](../deployment/docker.md) for Dockerfile generation, Docker Compose, and Kubernetes examples.
+
+## 4. Browser-Only Integration
 
 Embed the engine directly inside an existing web application via CDN.
 
