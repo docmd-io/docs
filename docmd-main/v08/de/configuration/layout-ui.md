@@ -58,6 +58,27 @@ hideTitle: true # Blendet den Titel im fixierten Header für diese spezifische S
 ---
 ```
 
+### Kopier-Widgets (KI-Integration)
+Um Entwicklern und LLM-Agenten die Arbeit mit Ihrer Dokumentation zu erleichtern, enthält docmd integrierte Kopierschaltflächen in der Breadcrumbs-Leiste. Diese Schaltflächen ermöglichen das Kopieren des rohen Markdowns der Seite oder des vereinheitlichten LLM-Kontexts.
+
+Konfigurieren Sie diese Schaltflächen im Einstellungsblock `theme.copyWidgets` in Ihrer `docmd.config.json`:
+
+```json
+{
+  "theme": {
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
+    }
+  }
+}
+```
+
+*   `enabled`: Auf `false` setzen, um die Kopier-Widgets-Leiste vollständig zu deaktivieren.
+*   `raw`: Auf `false` setzen, um die Schaltfläche "Copy Markdown" auszublenden.
+*   `context`: Auf `false` setzen, um die Schaltfläche "Copy Context" auszublenden.
+
 ## Werkzeugmenüs (Optionsmenü)
 
 Das `optionsMenu` fasst Kernfunktionen wie **Suche**, **Theme-Umschalter** und **Sponsoring** zusammen.
