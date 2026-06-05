@@ -1,67 +1,68 @@
 ---
 title: "Installation"
-description: "Install @docmd/core globally, locally within a project, or integrate it directly into web applications. Requires Node.js 18+."
+description: "Install @docmd/core globally, locally within a project, or run containerised via the official Docker image. Requires Node.js 18+."
 ---
 
-Choose the installation method that fits your workflow. Node.js 18 or higher is required.
+Choose the installation method that fits your workflow. Node.js 18 or higher is required for local builds.
 
-## 1. Project-Local Install (Recommended)
+## 1. Local Installation (Recommended)
 
-Install `@docmd/core` locally as a development dependency. This locks the version in your `package.json` and ensures consistent builds across teams and CI/CD.
-
-### Install the Package
+Running `docmd` locally keeps your documentation configuration versioned with your source code.
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
+# Install as a development dependency
 npm install -D @docmd/core
+
+# Initialise a new project
+npx docmd init
 ```
 == tab "pnpm" icon:boxes
 ```bash
+# Install as a development dependency
 pnpm add -D @docmd/core
+
+# Initialise a new project
+pnpm dlx docmd init
 ```
 == tab "yarn" icon:scroll
 ```bash
+# Install as a development dependency
 yarn add -D @docmd/core
+
+# Initialise a new project
+yarn dlx docmd init
 ```
 == tab "Bun" icon:zap
 ```bash
+# Install as a development dependency
 bun add -D @docmd/core
-```
-:::
 
-### Initialise the Project
+# Initialise a new project
+bunx docmd init
+```
+== tab "Docker" icon:container
+```bash
+# Pull the official multi-architecture image
+docker pull ghcr.io/docmd-io/docmd:latest
 
-Create the standard folder structure, initial page, and config file automatically.
+# Build documentation from local docs/ to site/
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+```
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core init
-```
-== tab "pnpm" icon:boxes
-```bash
-pnpm dlx @docmd/core init
-```
-== tab "yarn" icon:scroll
-```bash
-yarn dlx @docmd/core init
-```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core init
-```
+See the [Docker Deployment Guide](../deployment/docker.md) for Docker Compose and Kubernetes configurations.
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
 ::: callout tip "Shorthand Scripts" icon:sparkles
-Once installed locally, you can use `npx @docmd/core dev` or add it directly to your `package.json` scripts.
+Once installed locally, you can use `npx docmd dev` to start the live preview server, or add scripts directly to your `package.json`.
 :::
 
-## 2. Global Install
+## 2. Global Installation
 
-Install the package globally to create or preview sites anywhere on your system.
+Install the package globally to create or preview sites anywhere on your system without creating a local project.
 
 ::: tabs
 == tab "npm" icon:box
@@ -82,33 +83,14 @@ bun add -g @docmd/core
 ```
 :::
 
-Once installed globally, the `docmd` binary is available everywhere. You can also always use `npx @docmd/core` without a global install.
+Once installed, the `docmd` binary is available everywhere:
 
 ```bash
 docmd dev   # Start a dev server locally
 docmd build # Build static output
 ```
 
-## 3. Docker
-
-Use the official Docker image to build and preview docs without installing Node.js locally.
-
-```bash
-# Pull the official image
-docker pull ghcr.io/docmd-io/docmd:latest
-
-# Build your docs (mount your source and output directories)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
-
-# Run the demo site
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
-```
-
-Supports `linux/amd64` and `linux/arm64`. Alpine-based, non-root, with health checks.
-
-See [Docker Deployment](../deployment/docker.md) for Dockerfile generation, Docker Compose, and Kubernetes examples.
-
-## 4. Browser-Only Integration
+## 3. Browser-Only Integration
 
 Embed the engine directly inside an existing web application via CDN.
 
@@ -126,7 +108,7 @@ Add the stylesheet and JavaScript engine to your HTML.
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-See the [Browser API](../api/browser-api.md) for full integration details.
+See the [Browser API Guide](../api/browser-api.md) for full integration details.
 
 ## 4. Troubleshooting
 

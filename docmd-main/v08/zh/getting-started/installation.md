@@ -1,67 +1,68 @@
 ---
 title: "安装"
-description: "全局安装、本地安装或直接集成到 Web 应用中安装 @docmd/core。需要 Node.js 18+。"
+description: "全局安装、本地安装 @docmd/core，或使用官方 Docker 镜像运行。需要 Node.js 18+。"
 ---
 
-选择适合你工作流的安装方法。需要 Node.js 18 或更高版本。
+选择适合你工作流的安装方法。本地构建需要 Node.js 18 或更高版本。
 
-## 1. 项目本地安装（推荐）
+## 1. 本地安装（推荐）
 
-将 `@docmd/core` 作为开发依赖安装到本地。这样可以在 `package.json` 中锁定版本，确保团队和 CI/CD 构建的一致性。
-
-### 安装包
+在本地运行 `docmd` 可以将文档配置与你的源代码一起进行版本控制。
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
+# 作为开发依赖安装
 npm install -D @docmd/core
+
+# 初始化新项目
+npx docmd init
 ```
 == tab "pnpm" icon:boxes
 ```bash
+# 作为开发依赖安装
 pnpm add -D @docmd/core
+
+# 初始化新项目
+pnpm dlx docmd init
 ```
 == tab "yarn" icon:scroll
 ```bash
+# 作为开发依赖安装
 yarn add -D @docmd/core
+
+# 初始化新项目
+yarn dlx docmd init
 ```
 == tab "Bun" icon:zap
 ```bash
+# 作为开发依赖安装
 bun add -D @docmd/core
-```
-:::
 
-### 初始化项目
+# 初始化新项目
+bunx docmd init
+```
+== tab "Docker" icon:container
+```bash
+# 拉取官方多架构镜像
+docker pull ghcr.io/docmd-io/docmd:latest
 
-自动创建标准文件夹结构、初始页面和配置文件。
+# 构建文档（从本地 docs/ 编译到 site/）
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+```
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core init
-```
-== tab "pnpm" icon:boxes
-```bash
-pnpm dlx @docmd/core init
-```
-== tab "yarn" icon:scroll
-```bash
-yarn dlx @docmd/core init
-```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core init
-```
+详情见 [Docker 部署指南](../deployment/docker.md)，了解 Docker Compose 和 Kubernetes 配置。
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
-::: callout tip "快捷脚本"
-本地安装后，你可以使用 `npx @docmd/core dev` 或直接将其添加到 `package.json` 脚本中。
+::: callout tip "快捷脚本" icon:sparkles
+本地安装后，你可以使用 `npx docmd dev` 启动实时预览服务器，或直接将其添加到 `package.json` 脚本中。
 :::
 
 ## 2. 全局安装
 
-全局安装包，可在系统任何位置创建或预览网站。
+全局安装包，可在系统任何位置创建或预览网站，无需创建本地项目。
 
 ::: tabs
 == tab "npm" icon:box
@@ -82,37 +83,18 @@ bun add -g @docmd/core
 ```
 :::
 
-全局安装后，`docmd` 二进制文件在任何地方都可用。你也可以始终使用 `npx @docmd/core`，无需全局安装。
+全局安装后，`docmd` 二进制文件在任何地方都可用：
 
 ```bash
 docmd dev   # 启动本地开发服务器
 docmd build # 构建静态输出
 ```
 
-## 3. Docker
-
-使用官方 Docker 镜像，无需在本地安装 Node.js 即可构建和预览文档。
-
-```bash
-# 拉取官方镜像
-docker pull ghcr.io/docmd-io/docmd:latest
-
-# 构建文档（挂载您的源目录和输出目录）
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
-
-# 运行演示站点
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
-```
-
-支持 `linux/amd64` 和 `linux/arm64`。基于 Alpine 镜像、以非 root 用户运行，并内置健康检查。
-
-详情见 [Docker 部署](../deployment/docker.md)，了解 Dockerfile 生成、Docker Compose 和 Kubernetes 示例。
-
-## 4. 仅浏览器集成
+## 3. 仅浏览器集成
 
 通过 CDN 直接将引擎嵌入现有 Web 应用中。
 
-::: callout info "专用库集成"
+::: callout info "专用库集成" icon:help-circle
 这绕过了 CLI，在读者的浏览器中加载解析引擎。用于动态门户，不是静态 SEO 网站。
 :::
 
@@ -126,7 +108,7 @@ docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-详见 [浏览器 API](../api/browser-api.md)。
+详情见 [浏览器 API 指南](../api/browser-api.md)。
 
 ## 4. 故障排除
 

@@ -1,67 +1,68 @@
 ---
 title: "Installation"
-description: "Installieren Sie @docmd/core global, lokal in einem Projekt oder integrieren Sie es direkt in Web-Anwendungen. Benötigt Node.js 18+."
+description: "Installieren Sie @docmd/core global, lokal in einem Projekt oder führen Sie es containerisiert über das offizielle Docker-Image aus. Benötigt Node.js 18+."
 ---
 
-Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Node.js 18 oder höher ist erforderlich.
+Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Node.js 18 oder höher ist für lokale Builds erforderlich.
 
-## 1. Projekt-lokale Installation (empfohlen)
+## 1. Lokale Installation (empfohlen)
 
-Installieren Sie `@docmd/core` lokal als Entwicklungsabhängigkeit. Dies sperrt die Version in Ihrer `package.json` und stellt sicher, dass Builds in Teams und CI/CD konsistent sind.
-
-### Paket installieren
+Die lokale Ausführung von `docmd` hält Ihre Dokumentationskonfiguration mit Ihrem Quellcode versioniert.
 
 ::: tabs
 == tab "npm" icon:box
 ```bash
+# Als Entwicklungsabhängigkeit installieren
 npm install -D @docmd/core
+
+# Ein neues Projekt initialisieren
+npx docmd init
 ```
 == tab "pnpm" icon:boxes
 ```bash
+# Als Entwicklungsabhängigkeit installieren
 pnpm add -D @docmd/core
+
+# Ein neues Projekt initialisieren
+pnpm dlx docmd init
 ```
 == tab "yarn" icon:scroll
 ```bash
+# Als Entwicklungsabhängigkeit installieren
 yarn add -D @docmd/core
+
+# Ein neues Projekt initialisieren
+yarn dlx docmd init
 ```
 == tab "Bun" icon:zap
 ```bash
+# Als Entwicklungsabhängigkeit installieren
 bun add -D @docmd/core
-```
-:::
 
-### Projekt initialisieren
+# Ein neues Projekt initialisieren
+bunx docmd init
+```
+== tab "Docker" icon:container
+```bash
+# Ziehen Sie das offizielle Multi-Architektur-Image
+docker pull ghcr.io/docmd-io/docmd:latest
 
-Erstellt automatisch die Standard-Ordnerstruktur, eine erste Seite und eine Konfigurationsdatei.
+# Dokumentation von lokalem docs/ nach site/ erstellen
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+```
 
-::: tabs
-== tab "npm" icon:box
-```bash
-npx @docmd/core init
-```
-== tab "pnpm" icon:boxes
-```bash
-pnpm dlx @docmd/core init
-```
-== tab "yarn" icon:scroll
-```bash
-yarn dlx @docmd/core init
-```
-== tab "Bun" icon:zap
-```bash
-bunx @docmd/core init
-```
+Siehe [Leitfaden zur Docker-Bereitstellung](../deployment/docker.md) für Docker Compose und Kubernetes-Konfigurationen.
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
-::: callout tip "Kurzbefehle"
-Nach der lokalen Installation können Sie `npx @docmd/core dev` verwenden oder es direkt zu Ihren `package.json`-Skripten hinzufügen.
+::: callout tip "Kurzbefehle" icon:sparkles
+Nach der lokalen Installation können Sie `npx docmd dev` verwenden, um den Live-Vorschau-Server zu starten, oder Skripte direkt zu Ihrer `package.json` hinzufügen.
 :::
 
 ## 2. Globale Installation
 
-Installieren Sie das Paket global, um überall auf Ihrem System Websites zu erstellen oder in der Vorschau zu betrachten.
+Installieren Sie das Paket global, um überall auf Ihrem System Websites zu erstellen oder in der Vorschau anzuzeigen, ohne ein lokales Projekt anzulegen.
 
 ::: tabs
 == tab "npm" icon:box
@@ -82,37 +83,18 @@ bun add -g @docmd/core
 ```
 :::
 
-Nach der globalen Installation ist die `docmd`-Binärdatei überall verfügbar. Sie können auch immer `npx @docmd/core` verwenden, ohne eine globale Installation.
+Nach der Installation ist die `docmd`-Binärdatei überall verfügbar:
 
 ```bash
 docmd dev   # Lokalen Entwicklungsserver starten
 docmd build # Statische Ausgabe erstellen
 ```
 
-## 3. Docker
-
-Verwenden Sie das offizielle Docker-Image, um Dokumentationen zu erstellen und in der Vorschau anzuzeigen, ohne Node.js lokal zu installieren.
-
-```bash
-# Ziehen Sie das offizielle Image
-docker pull ghcr.io/docmd-io/docmd:latest
-
-# Erstellen Sie Ihre Dokumentation (mounten Sie Ihre Quell- und Ausgabeordner)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
-
-# Starten Sie die Demo-Site
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
-```
-
-Unterstützt `linux/amd64` und `linux/arm64`. Alpine-basiert, als non-root ausgeführt, mit integrierten Health-Checks.
-
-Siehe [Docker-Bereitstellung](../deployment/docker.md) für Dockerfile-Generierung, Docker Compose und Kubernetes-Beispiele.
-
-## 4. Nur-Browser-Integration
+## 3. Nur-Browser-Integration
 
 Betten Sie die Engine direkt über ein CDN in eine bestehende Web-Anwendung ein.
 
-::: callout info "Spezialisierte Bibliotheksintegration"
+::: callout info "Spezialisierte Bibliotheksintegration" icon:help-circle
 Dies umgeht die CLI und lädt die Parsing-Engine im Browser des Lesers. Verwenden Sie dies für dynamische Portale, nicht für statische SEO-Websites.
 :::
 
@@ -126,7 +108,7 @@ Fügen Sie das Stylesheet und die JavaScript-Engine zu Ihrem HTML hinzu.
 <script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
 ```
 
-Siehe [Browser API](../api/browser-api.md) für vollständige Integrationsdetails.
+Siehe [Leitfaden zur Browser-API](../api/browser-api.md) für vollständige Integrationsdetails.
 
 ## 4. Fehlerbehebung
 
