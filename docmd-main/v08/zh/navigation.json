@@ -38,6 +38,10 @@
         "path": "/configuration/overview"
       },
       {
+        "title": "零配置",
+        "path": "/configuration/zero-config"
+      },
+      {
         "title": "导航",
         "path": "/configuration/navigation"
       },

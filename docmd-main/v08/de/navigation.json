@@ -38,6 +38,10 @@
         "path": "/configuration/overview"
       },
       {
+        "title": "Zero-Config",
+        "path": "/configuration/zero-config"
+      },
+      {
         "title": "Navigation",
         "path": "/configuration/navigation"
       },
