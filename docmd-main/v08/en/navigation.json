@@ -24,11 +24,6 @@
     ]
   },
   {
-    "title": "Comparison",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
     "title": "Configuration",
     "icon": "settings",
     "collapsible": true,
@@ -275,15 +270,23 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Build & Deploy",
+        "title": "Overview",
         "path": "/deployment"
       },
       {
-        "title": "Deployer Package",
-        "path": "/deployment/deployer-package"
+        "title": "Deployer",
+        "path": "/deployment/deployer"
       },
       {
-        "title": "Docker",
+        "title": "Starter Template",
+        "path": "/deployment/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/deployment/github-action"
+      },
+      {
+        "title": "Docker Image",
         "path": "/deployment/docker"
       },
       {
@@ -293,10 +296,6 @@
       {
         "title": "Caddy",
         "path": "/deployment/caddy"
-      },
-      {
-        "title": "GitHub Pages",
-        "path": "/deployment/github-pages"
       },
       {
         "title": "Vercel",
@@ -313,21 +312,6 @@
       {
         "title": "Firebase",
         "path": "/deployment/firebase"
-      }
-    ]
-  },
-  {
-    "title": "Deploy",
-    "icon": "rocket",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "Starter Template",
-        "path": "/integrations/starter-template"
-      },
-      {
-        "title": "GitHub Action",
-        "path": "/integrations/github-action"
       }
     ]
   },
@@ -580,6 +564,11 @@
         "path": "/migration/starlight"
       }
     ]
+  },
+  {
+    "title": "Comparison",
+    "path": "/comparison",
+    "icon": "scale"
   },
   {
     "title": "API Reference",

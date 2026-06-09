@@ -1,14 +1,16 @@
 ---
 title: "GitHub Action"
-description: "Use the official docmd GitHub Action to build and deploy your documentation to GitHub Pages automatically — zero config, one step, no boilerplate."
+description: "Use the official docmd GitHub Action to build and deploy your documentation to GitHub Pages — zero config, one composable step."
 ---
-
-# docmd Deploy — GitHub Action
 
 The `docmd-io/deploy` action builds your documentation site and outputs the path to the compiled assets, ready for upload to GitHub Pages or any other hosting target. It handles Node.js setup, config detection, dependency installation, and the build step in a single composable action.
 
-::: button "View on GitHub Marketplace" external:https://github.com/marketplace/actions/docmd-deploy icon:github
+::: button "View on GitHub Marketplace" external:https://github.com/marketplace/actions/build-and-deploy-documentation-with-docmd icon:github
 ::: button "Source Code" external:https://github.com/docmd-io/deploy icon:code
+
+::: callout tip "Starting a new project?"
+Use the [Starter Template](./starter-template) — it includes a pre-configured workflow file and a ready-to-go repository structure. The GitHub Action is best for adding docmd deployment to an **existing** repository.
+:::
 
 ## Quick Start
 
@@ -47,9 +49,9 @@ jobs:
         id: deploy
 ```
 
-## Reusable Workflow (Recommended)
+## Reusable Workflow
 
-If you want the absolute minimum boilerplate, use the hosted reusable workflow. It handles permissions, checkout, build, upload, and deploy in one call:
+For the absolute minimum boilerplate, use the hosted reusable workflow. It handles permissions, checkout, build, upload, and deploy in one call:
 
 ```yaml
 # .github/workflows/docs.yml
@@ -61,8 +63,6 @@ jobs:
   docs:
     uses: docmd-io/deploy/.github/workflows/deploy.yml@v1
 ```
-
-This is the recommended approach for new projects and the [docmd Template](./starter-template.md).
 
 ## Inputs
 
@@ -133,4 +133,4 @@ Ensure GitHub Pages is set to deploy from **GitHub Actions**, not from a branch.
 
 **Config not detected**
 
-The action searches up to two directory levels. If your config is deeper, pass `--cwd` manually in a custom workflow step or use the [Deployer Package](../deployment/deployer-package.md) to generate a tailored workflow.
+The action searches up to two directory levels. If your config is deeper, pass `--cwd` manually in a custom workflow step or use the [Deployer](./deployer) to generate a tailored workflow file.

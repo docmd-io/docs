@@ -110,11 +110,13 @@ docs/
 2. 在 `docs/` 目录中添加包含您域名的 `CNAME` 文件。
 3. 在 **Settings → Pages → Custom domain** 中配置域名。
 
-## 与 GitHub App 的对比
+## 起始模板 vs GitHub Action
 
-| | 起始模板 | GitHub App |
+模板从一开始就为您提供对工作流文件和配置的完全控制。[GitHub Action](./github-action) 更适合向现有仓库添加 docmd 部署而无需重构。
+
+| | 起始模板 | GitHub Action |
 |---|---|---|
 | 起点 | 新仓库 | 现有仓库 |
-| 工作流文件 | 已包含，可自由编辑 | 自动生成 |
+| 工作流文件 | 已包含，可自由编辑 | 您编写它，action 处理构建 |
 | 配置 | 预配置 | 自动检测或生成 |
 | 适用场景 | 新项目 | 为现有仓库添加文档 |

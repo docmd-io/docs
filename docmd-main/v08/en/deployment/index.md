@@ -1,70 +1,73 @@
 ---
-title: "Deployment"
-description: "Deploy your docmd documentation to Docker, Nginx, Caddy, or any cloud platform with a single command."
+title: "Deployment Overview"
+description: "Choose how to deploy your docmd documentation site — from zero-config templates to self-hosted servers and cloud platforms."
 ---
 
-docmd generates a high-performance static website. Run the build command to generate the output directory:
+docmd builds a fully static site. The output is a self-contained folder (default: `site/`) that can be hosted anywhere — no server-side runtime required.
 
 ```bash
 npx @docmd/core build
 ```
 
-The output is a self-contained `site/` folder (or whatever you configure as `out`) that can be hosted anywhere.
+## Choosing a Deployment Method
 
-## One-Command Deployment
+There are three main paths depending on your situation:
 
-::: callout tip "Deployment Generator"
-The `deploy` command reads your `docmd.config.json` and generates deployment files personalised to your project. It eliminates generic templates.
-:::
+| Method | Best For |
+|:--|:--|
+| [Starter Template](./starter-template) | Starting a new project from scratch |
+| [GitHub Action](./github-action) | Adding automated deployment to an existing repository |
+| [Deployer](./deployer) | Generating server configs (Docker, Nginx, Caddy, Vercel, Netlify) |
 
-Instead of manually writing Dockerfiles and server configs, let the engine generate them for you:
+## Starter Template
+
+The fastest way to get started. Clone the official template repository — it includes a `docmd.config.json`, a sample page, and a pre-configured GitHub Actions workflow that deploys to GitHub Pages on every push.
+
+→ [Starter Template](./starter-template)
+
+## GitHub Action
+
+The `docmd-io/deploy` action builds your site and outputs the compiled path, ready for upload to GitHub Pages or any other target. Use this to add docmd deployment to an existing repository without changing your project structure.
+
+→ [GitHub Action](./github-action)
+
+## Deployer
+
+The `deploy` command reads your `docmd.config.json` and generates provider-specific configuration files tailored to your project. No generic templates — every file reflects your actual output directory, site URL, and SPA settings.
 
 ```bash
+# Self-hosted
 npx @docmd/core deploy --docker          # Dockerfile + .dockerignore
 npx @docmd/core deploy --nginx           # Production nginx.conf
 npx @docmd/core deploy --caddy           # Production Caddyfile
+
+# Cloud / CI
 npx @docmd/core deploy --github-pages    # GitHub Actions workflow
 npx @docmd/core deploy --vercel          # vercel.json
 npx @docmd/core deploy --netlify         # netlify.toml
 ```
 
-### What Gets Personalised
+→ [Deployer Reference](./deployer)
 
-The deploy command reads your configuration (or zero-config defaults) and injects:
+## Cloud Platforms
 
-| Config Field | Used In |
-|:--|:--|
-| `title` | Comment headers in every generated file |
-| `out` | `COPY` paths in Dockerfile, `root` directives in Nginx/Caddy |
-| `url` | `server_name` in Nginx, site address in Caddy |
-| `layout.spa` | Controls whether SPA routing fallback is included |
-| Config path | Dockerfile build step uses `--config` when non-default |
+For managed hosting without running your own server:
 
-No `docmd.config.json`? No problem. The command uses the same zero-config defaults as `npx @docmd/core dev` and `npx @docmd/core build`.
+- [Docker Image](./docker) — Official multi-arch image for containerised deployments
+- [NGINX](./nginx) — Self-hosted with generated config
+- [Caddy](./caddy) — Self-hosted with automatic HTTPS
+- [Vercel](./vercel) — Zero-config cloud deployment
+- [Netlify](./netlify) — Git-connected continuous deployment
+- [Cloudflare Pages](./cloudflare-pages) — Edge-native hosting with built-in CI/CD
+- [Firebase Hosting](./firebase) — Google CDN with GitHub Actions integration
 
-### Always In Sync
+## Production Checklist
 
-Every run regenerates your deployment files to match your current config. Changed your site URL or output directory? Just re-run the deploy command. You do not need to track what changed manually.
+1. **Site URL** — Set `url` in `docmd.config.json`. This drives canonical tags, sitemaps, social previews, and generated deployment files.
+2. **Redirects** — Migrating from another tool? Use the `redirects` config to preserve SEO rankings.
+3. **Analytics** — Enable the `analytics` plugin to track engagement and search queries.
+4. **AI Context** — Enable the `llms` plugin to generate `llms.txt` for AI agent ingestion.
 
-Use `--force` only if you intentionally want to suppress future confirmation prompts. By default, files silently regenerate.
-
-### Supported Targets
-
-**Self-hosted**
-
-*   [`npx @docmd/core deploy --docker`](docker.md) - Optimised multi-stage Dockerfile with layer caching.
-*   [`npx @docmd/core deploy --nginx`](nginx.md) - Security-hardened nginx.conf with GZIP and immutable caching.
-*   [`npx @docmd/core deploy --caddy`](caddy.md) - HTTPS-ready Caddyfile with automatic routing.
-
-**Cloud & CI**
-
-*   [`npx @docmd/core deploy --github-pages`](github-pages.md) - GitHub Actions CI/CD workflow for Pages deployment.
-*   [`npx @docmd/core deploy --vercel`](vercel.md) - vercel.json with build command, output directory, and cache headers.
-*   [`npx @docmd/core deploy --netlify`](netlify.md) - netlify.toml with build settings, Node version, and SPA redirects.
-
-**More Platforms**
-
-*   [Cloudflare Pages](cloudflare-pages.md) - Edge-native hosting with built-in CI/CD.
-*   [Firebase Hosting](firebase.md) - Google's global CDN with GitHub Actions CI/CD integration.
-
-Click each target above for detailed, service-specific documentation.
+::: callout tip "Custom 404 Pages"
+docmd generates a `404.html` in your output directory. Most hosting providers serve it automatically for missing routes.
+:::

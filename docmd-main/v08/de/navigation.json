@@ -24,11 +24,6 @@
     ]
   },
   {
-    "title": "Vergleich",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
     "title": "Konfiguration",
     "icon": "settings",
     "collapsible": true,
@@ -275,15 +270,23 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Bauen & Bereitstellen",
+        "title": "Übersicht",
         "path": "/deployment"
       },
       {
-        "title": "Deployer-Paket",
-        "path": "/deployment/deployer-package"
+        "title": "Deployer",
+        "path": "/deployment/deployer"
       },
       {
-        "title": "Docker",
+        "title": "Starter-Vorlage",
+        "path": "/deployment/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/deployment/github-action"
+      },
+      {
+        "title": "Docker-Image",
         "path": "/deployment/docker"
       },
       {
@@ -293,10 +296,6 @@
       {
         "title": "Caddy",
         "path": "/deployment/caddy"
-      },
-      {
-        "title": "GitHub Pages",
-        "path": "/deployment/github-pages"
       },
       {
         "title": "Vercel",
@@ -313,21 +312,6 @@
       {
         "title": "Firebase",
         "path": "/deployment/firebase"
-      }
-    ]
-  },
-  {
-    "title": "Bereitstellen",
-    "icon": "rocket",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "Starter-Vorlage",
-        "path": "/integrations/starter-template"
-      },
-      {
-        "title": "GitHub Action",
-        "path": "/integrations/github-action"
       }
     ]
   },
@@ -580,6 +564,11 @@
         "path": "/migration/starlight"
       }
     ]
+  },
+  {
+    "title": "Vergleich",
+    "path": "/comparison",
+    "icon": "scale"
   },
   {
     "title": "API-Referenz",

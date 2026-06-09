@@ -110,11 +110,13 @@ So verwenden Sie eine benutzerdefinierte Domain (z. B. `docs.example.com`):
 2. Fügen Sie eine `CNAME`-Datei mit Ihrer Domain in Ihr `docs/`-Verzeichnis ein.
 3. Konfigurieren Sie die Domain unter **Settings → Pages → Custom domain**.
 
-## Vergleich mit der GitHub App
+## Starter-Vorlage vs. GitHub Action
 
-| | Starter-Vorlage | GitHub App |
+Die Vorlage gibt Ihnen von Anfang an die volle Kontrolle über die Workflow-Datei und Konfiguration. Die [GitHub Action](./github-action) eignet sich besser zum Hinzufügen von docmd-Deployment zu einem bestehenden Repository, ohne es umzustrukturieren.
+
+| | Starter-Vorlage | GitHub Action |
 |---|---|---|
 | Ausgangspunkt | Neues Repository | Bestehendes Repository |
-| Workflow-Datei | Enthalten, frei bearbeitbar | Automatisch generiert |
-| Konfiguration | Vorkonfiguriert | Erkannt oder automatisch erstellt |
+| Workflow-Datei | Enthalten, frei bearbeitbar | Sie schreiben sie, Action übernimmt Build |
+| Konfiguration | Vorkonfiguriert | Automatisch erkannt oder generiert |
 | Geeignet für | Neue Projekte | Dokumentation zu bestehenden Repos hinzufügen |

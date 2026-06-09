@@ -24,11 +24,6 @@
     ]
   },
   {
-    "title": "对比",
-    "path": "/comparison",
-    "icon": "scale"
-  },
-  {
     "title": "配置",
     "icon": "settings",
     "collapsible": true,
@@ -270,33 +265,6 @@
     ]
   },
   {
-    "title": "部署",
-    "icon": "upload-cloud",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "构建与部署",
-        "path": "/deployment"
-      },
-      {
-        "title": "Docker",
-        "path": "/deployment/docker"
-      },
-      {
-        "title": "NGINX",
-        "path": "/deployment/nginx"
-      },
-      {
-        "title": "Caddy",
-        "path": "/deployment/caddy"
-      },
-      {
-        "title": "CI/CD",
-        "path": "/deployment/ci-cd"
-      }
-    ]
-  },
-  {
     "title": "迁移",
     "icon": "arrow-right-left",
     "collapsible": true,
@@ -356,16 +324,52 @@
   },
   {
     "title": "部署",
-    "icon": "rocket",
+    "icon": "upload-cloud",
     "collapsible": true,
     "children": [
       {
+        "title": "概览",
+        "path": "/deployment"
+      },
+      {
+        "title": "Deployer",
+        "path": "/deployment/deployer"
+      },
+      {
         "title": "起始模板",
-        "path": "/integrations/starter-template"
+        "path": "/deployment/starter-template"
       },
       {
         "title": "GitHub Action",
-        "path": "/integrations/github-action"
+        "path": "/deployment/github-action"
+      },
+      {
+        "title": "Docker 镜像",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
+        "title": "Vercel",
+        "path": "/deployment/vercel"
+      },
+      {
+        "title": "Netlify",
+        "path": "/deployment/netlify"
+      },
+      {
+        "title": "Cloudflare Pages",
+        "path": "/deployment/cloudflare-pages"
+      },
+      {
+        "title": "Firebase",
+        "path": "/deployment/firebase"
       }
     ]
   },
@@ -401,6 +405,10 @@
           {
             "title": "大型仓库",
             "path": "/guides/scaling-architecture/organising-large-repositories"
+          },
+          {
+            "title": "工作空间与 Monorepo",
+            "path": "/guides/scaling-architecture/workspace-monorepo"
           }
         ]
       },
@@ -585,6 +593,88 @@
             "path": "/guides/customisation/extending-custom-plugins"
           }
         ]
+      }
+    ]
+  },
+  {
+    "title": "迁移",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
+    "title": "对比",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "API 参考",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "CLI 命令",
+        "path": "/api/cli-commands"
+      },
+      {
+        "title": "Node API",
+        "path": "/api/node-api"
+      },
+      {
+        "title": "浏览器 API",
+        "path": "/api/browser-api"
+      },
+      {
+        "title": "客户端事件",
+        "path": "/api/client-side-events"
+      },
+      {
+        "title": "MCP 服务端",
+        "path": "/api/mcp-server"
+      },
+      {
+        "title": "实时编辑器 API",
+        "path": "/api/live-api"
+      }
+    ]
+  },
+  {
+    "title": "引擎",
+    "icon": "cpu",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/engines/overview"
+      },
+      {
+        "title": "JavaScript 引擎",
+        "path": "/engines/js"
+      },
+      {
+        "title": "Rust 引擎",
+        "path": "/engines/rust"
       }
     ]
   },

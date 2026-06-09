@@ -1,14 +1,16 @@
 ---
 title: "GitHub Action"
-description: "Nutzen Sie die offizielle docmd GitHub Action, um Ihre Dokumentationswebsite automatisch zu erstellen und auf GitHub Pages bereitzustellen – null Konfiguration, ein Schritt, kein Boilerplate."
+description: "Verwenden Sie die offizielle docmd GitHub Action, um Ihre Dokumentation auf GitHub Pages bereitzustellen — Zero-Config, ein kombinierbarer Schritt."
 ---
-
-# docmd Deploy — GitHub Action
 
 Die `docmd-io/deploy` Action erstellt Ihre Dokumentationswebsite und gibt den Pfad zu den kompilierten Assets aus, bereit zum Hochladen auf GitHub Pages oder ein anderes Hosting-Ziel. Sie übernimmt Node.js-Setup, Konfigurationserkennung, Abhängigkeitsinstallation und den Build-Schritt in einer einzigen, kombinierbaren Action.
 
-::: button "Im GitHub Marketplace ansehen" external:https://github.com/marketplace/actions/docmd-deploy icon:github
+::: button "Im GitHub Marketplace ansehen" external:https://github.com/marketplace/actions/build-and-deploy-documentation-with-docmd icon:github
 ::: button "Quellcode" external:https://github.com/docmd-io/deploy icon:code
+
+::: callout tip "Neues Projekt starten?"
+Verwenden Sie die [Starter-Vorlage](./starter-template) — sie enthält eine vorkonfigurierte Workflow-Datei und eine einsatzbereite Repository-Struktur. Die GitHub Action eignet sich am besten zum Hinzufügen von docmd-Deployment zu einem **bestehenden** Repository.
+:::
 
 ## Schnellstart
 
@@ -47,9 +49,9 @@ jobs:
         id: deploy
 ```
 
-## Wiederverwendbarer Workflow (Empfohlen)
+## Wiederverwendbarer Workflow
 
-Für minimalen Boilerplate verwenden Sie den gehosteten wiederverwendbaren Workflow:
+Für minimalen Boilerplate verwenden Sie den gehosteten wiederverwendbaren Workflow. Er übernimmt Berechtigungen, Checkout, Build, Upload und Deploy in einem Aufruf:
 
 ```yaml
 # .github/workflows/docs.yml
@@ -92,9 +94,30 @@ GitHub Pages muss so konfiguriert sein, dass die Bereitstellung über **GitHub A
 3. Wählen Sie unter **Source** die Option **GitHub Actions**.
 4. Speichern.
 
+Nach diesem Schritt löst jeder Push zu `main` automatisch ein Deployment aus.
+
 ## Unterstützung für verschachtelte Konfigurationen
 
 Befindet sich Ihre `docmd.config.json` in einem Unterverzeichnis – beispielsweise `packages/docs/docmd.config.json` in einem Monorepo – erkennt die Action dies automatisch und übergibt `--cwd` an docmd. Eine manuelle Pfadkonfiguration ist nicht erforderlich.
+
+## Benutzerdefinierte Domain
+
+So verwenden Sie eine benutzerdefinierte Domain:
+
+1. Fügen Sie eine `CNAME`-Datei mit Ihrer Domain zu Ihrem `docs/`-Verzeichnis hinzu (oder Ihrem konfigurierten Assets-Ordner), z. B. `docs.example.com`.
+2. Setzen Sie das Feld `url` in `docmd.config.json` auf Ihre benutzerdefinierte Domain, damit Sitemaps und kanonische Tags korrekt sind.
+3. Konfigurieren Sie die Domain unter **Settings → Pages → Custom domain**.
+
+## Action-Version festlegen
+
+Für Produktions-Dokumentationsseiten verwenden Sie einen spezifischen Release-Tag anstelle von `@v1`:
+
+```yaml
+- uses: docmd-io/deploy@v1.0.0
+  id: build
+```
+
+Dies verhindert unerwartetes Verhalten durch zukünftige Minor-Updates.
 
 ## Fehlerbehebung
 
@@ -104,4 +127,8 @@ Dieser Fehler tritt auf, wenn `actions/setup-node` mit `cache: 'npm'` konfigurie
 
 **Build erfolgreich, aber die Website ist nicht live**
 
-Stellen Sie sicher, dass GitHub Pages auf die Bereitstellung über **GitHub Actions** und nicht über einen Branch eingestellt ist.
+Stellen Sie sicher, dass GitHub Pages auf die Bereitstellung über **GitHub Actions** und nicht über einen Branch eingestellt ist. Siehe [Erstmalige Einrichtung](#erstmalige-einrichtung) oben.
+
+**Konfiguration nicht erkannt**
+
+Die Action durchsucht bis zu zwei Verzeichnisebenen. Wenn Ihre Konfiguration tiefer liegt, übergeben Sie `--cwd` manuell in einem benutzerdefinierten Workflow-Schritt oder verwenden Sie den [Deployer](./deployer), um eine maßgeschneiderte Workflow-Datei zu generieren.

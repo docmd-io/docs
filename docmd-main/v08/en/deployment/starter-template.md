@@ -163,13 +163,13 @@ To use a custom domain (e.g. `docs.example.com`):
 2. Add a `CNAME` file to your `docs/` directory containing your domain.
 3. Configure the domain in **Settings → Pages → Custom domain**.
 
-## Differences from the GitHub App
+## Starter Template vs GitHub Action
 
-The template gives you full ownership of the workflow file and config from the start. The [GitHub App](./github-app.md) is better suited if you want to add docmd to an existing repository without touching any files.
+The template gives you full ownership of the workflow file and config from the start. The [GitHub Action](./github-action) is better suited for adding docmd deployment to an existing repository without restructuring it.
 
-| | Starter Template | GitHub App |
+| | Starter Template | GitHub Action |
 |---|---|---|
 | Starting point | New repository | Existing repository |
-| Workflow file | Included, yours to edit | Generated automatically |
-| Config | Pre-configured | Detected or scaffolded |
+| Workflow file | Included, yours to edit | You write it, action handles build |
+| Config | Pre-configured | Detected or scaffolded automatically |
 | Best for | New projects | Adding docs to existing repos |
