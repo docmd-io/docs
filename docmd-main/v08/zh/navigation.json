@@ -355,6 +355,21 @@
     ]
   },
   {
+    "title": "部署",
+    "icon": "rocket",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "起始模板",
+        "path": "/integrations/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/integrations/github-action"
+      }
+    ]
+  },
+  {
     "title": "指南",
     "icon": "book-open",
     "collapsible": true,
@@ -501,6 +516,10 @@
         "title": "集成",
         "collapsible": true,
         "children": [
+          {
+            "title": "选择部署方式",
+            "path": "/guides/integrations/choosing-deployment-method"
+          },
           {
             "title": "OpenAPI 生成",
             "path": "/guides/integrations/openapi-generation"

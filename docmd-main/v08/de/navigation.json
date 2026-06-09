@@ -317,6 +317,21 @@
     ]
   },
   {
+    "title": "Bereitstellen",
+    "icon": "rocket",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Starter-Vorlage",
+        "path": "/integrations/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/integrations/github-action"
+      }
+    ]
+  },
+  {
     "title": "Anleitungen",
     "icon": "book-open",
     "collapsible": true,
@@ -467,6 +482,10 @@
         "title": "Integrationen",
         "collapsible": true,
         "children": [
+          {
+            "title": "Deployment-Methode wählen",
+            "path": "/guides/integrations/choosing-deployment-method"
+          },
           {
             "title": "OpenAPI-Generierung",
             "path": "/guides/integrations/openapi-generation"
