@@ -50,7 +50,7 @@ Details zur Auflösungshierarchie finden Sie in der [Navigationskonfiguration](.
 
 Die `navigation.json` einer Locale verwendet das Standardformat:
 
-```json
+```json "navigation.json"
 [
   {
     "title": "शुरू करें",
@@ -86,3 +86,4 @@ Die Ausgabe-URLs verschachteln zuerst die Locale, dann die Version:
 /hi/                     ← übersetzte Locale, aktuelle Version
 /v1/                     ← Standard-Locale, vorherige Version
 /hi/v1/                  ← übersetzte Locale, vorherige Version
+```

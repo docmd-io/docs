@@ -50,7 +50,7 @@ docs/
 
 本地化的 `navigation.json` 使用标准格式：
 
-```json
+```json "navigation.json"
 [
   {
     "title": "शुरू करें",
@@ -86,3 +86,4 @@ docs-v1/                 ← 旧版本
 /hi/                     ← 已翻译的本地化，当前版本
 /v1/                     ← 默认本地化，旧版本
 /hi/v1/                  ← 已翻译的本地化，旧版本
+```

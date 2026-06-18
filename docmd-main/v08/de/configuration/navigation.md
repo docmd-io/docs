@@ -11,7 +11,7 @@ Ein Array von Link-Objekten in Ihrer `docmd.config.json` steuert die Sidebar. Je
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
-```json
+```json "docmd.config.json"
 {
   "navigation": [
     { "title": "Overview", "path": "/", "icon": "home" },
@@ -40,7 +40,7 @@ Strukturieren Sie Ihre Sidebar mit zwei primären Gruppierungsmethoden:
 ### Klickbare Gruppe (Direkte Seite + Unterordner)
 Geben Sie sowohl `path` als auch `children` für einen Kategorie-Header an. Ein Klick auf den Titel lädt die Landingpage und klappt die untergeordneten Links auf.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Cloud Services",
   "path": "/cloud/overview", 
@@ -54,7 +54,7 @@ Geben Sie sowohl `path` als auch `children` für einen Kategorie-Header an. Ein 
 ### Statisches Label (nur Kategorie-Header)
 Lassen Sie den `path`-Parameter weg. Der Header dient als nicht klickbarer Gruppentitel. Verwenden Sie dies, um große technische Kategorien ohne eine einzelne Landingpage zu gliedern.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Formatting & Elements",
   "icon": "layout-grid",
@@ -79,7 +79,7 @@ Die Engine erzeugt automatisch kontextbezogene Brotkrumen für jede Seite. Sie e
 ### Brotkrumen deaktivieren
 Brotkrumen sind standardmäßig aktiviert. Aktualisieren Sie Ihre Site-Layout-Optionen, um sie global zu deaktivieren:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "breadcrumbs": false

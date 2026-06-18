@@ -13,7 +13,7 @@ For unsupported languages or custom phrasing, the system falls back to English. 
 
 Use the `translations` property on any locale to override system text:
 
-```json
+```json "docmd.config.json"
   "i18n": {
     "default": "en",
     "locales": [

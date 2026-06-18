@@ -9,7 +9,7 @@ Die `menubar` ist eine hochwertige Navigationsebene. Sie bietet globalen Kontext
 
 Konfigurieren Sie die Menüleiste im `layout`-Abschnitt Ihrer `docmd.config.json`.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "menubar": {
@@ -65,7 +65,7 @@ Setzen Sie `type: 'dropdown'` und stellen Sie ein `items`-Array bereit, um ein v
 
 Hosten Sie die globale Suche und den Theme-Toggle in der Menüleiste. Setzen Sie `optionsMenu.position` auf `'menubar'`.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -92,3 +92,4 @@ Verwenden Sie CSS-Variablen in Ihren eigenen Stylesheets, um das Erscheinungsbil
   --menubar-border: var(--border-color);
   --menubar-text: var(--text-color);
 }
+```

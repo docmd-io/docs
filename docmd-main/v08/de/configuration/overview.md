@@ -41,7 +41,7 @@ Diese Parameter der obersten Ebene konfigurieren die Basiseingaben und Ziele des
 
 Verwalten Sie, wie Ihre Marke im Header und in Browser-Tabs erscheint.
 
-```json
+```json "docmd.config.json"
 {
   "logo": {
     "light": "assets/images/logo-dark.png",
@@ -58,7 +58,7 @@ Verwalten Sie, wie Ihre Marke im Header und in Browser-Tabs erscheint.
 
 Die Engine bietet ein modulares Header- und Sidebar-Layout. Passen Sie funktionale Bereiche an. Schalten Sie die Sichtbarkeit von Komponenten um (Suche, Dunkelmodus-Schalter, Brotkrumen).
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "spa": true,
@@ -86,7 +86,7 @@ Vollständige visuelle Anpassungsoptionen finden Sie im [Layout- & UI-Zonen](lay
 
 Feinabstimmung, wie der Parser Ihre Inhaltsdateien verarbeitet.
 
-```json
+```json "docmd.config.json"
 {
   "minify": true,
   "autoTitleFromH1": true,

@@ -11,7 +11,7 @@ description: "构建侧边栏、为链接分类，并为读者与搜索引擎配
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
-```json
+```json "docmd.config.json"
 {
   "navigation": [
     { "title": "Overview", "path": "/", "icon": "home" },
@@ -40,7 +40,7 @@ description: "构建侧边栏、为链接分类，并为读者与搜索引擎配
 ### 点击分组（直接页面 + 子文件夹）
 为分组标题同时指定 `path` 与 `children`。点击标题会加载落地页并展开子链接。
 
-```json
+```json "docmd.config.json"
 {
   "title": "Cloud Services",
   "path": "/cloud/overview", 
@@ -54,7 +54,7 @@ description: "构建侧边栏、为链接分类，并为读者与搜索引擎配
 ### 静态标签（仅作为分组标题）
 省略 `path` 参数。标题作为不可点击的分组标题对相关链接进行归类。在没有单一落地页时，可以使用它来划分主要的技术分类。
 
-```json
+```json "docmd.config.json"
 {
   "title": "Formatting & Elements",
   "icon": "layout-grid",
@@ -79,7 +79,7 @@ description: "构建侧边栏、为链接分类，并为读者与搜索引擎配
 ### 禁用面包屑
 面包屑默认启用。更新站点布局选项即可全局禁用：
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "breadcrumbs": false

@@ -34,7 +34,7 @@ my-docs/
 
 Die Root-`docmd.config.json` verwendet den `workspace`-Schlüssel. Alle Top-Level-Schlüssel (z. B. `theme`, `menubar`, `logo`) wirken als **globale Standards** für jedes Projekt.
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "projects": [
@@ -76,7 +76,7 @@ Die Root-`docmd.config.json` verwendet den `workspace`-Schlüssel. Alle Top-Leve
 
 Jedes Projektverzeichnis kann eine eigene `docmd.config.json` haben. Hier definierte Einstellungen **überschreiben** die Workspace-Root-Standards.
 
-```json
+```json "docmd.config.json"
 {
   "title": "SDK Reference",
   "src": "docs",
@@ -111,7 +111,7 @@ Der Projekt-Switcher rendert eine schlanke UI-Komponente zur Navigation zwischen
 
 ### Konfiguration
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "switcher": {

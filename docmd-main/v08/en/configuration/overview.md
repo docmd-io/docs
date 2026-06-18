@@ -41,7 +41,7 @@ These top-level parameters configure the compiler's base inputs and destinations
 
 Manage how your brand appears in the header and browser tabs.
 
-```json
+```json "docmd.config.json"
 {
   "logo": {
     "light": "assets/images/logo-dark.png",
@@ -58,7 +58,7 @@ Manage how your brand appears in the header and browser tabs.
 
 The engine provides a modular header and sidebar layout. Customise functional regions. Toggle component visibility (search, dark-mode switch, breadcrumbs).
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "spa": true,
@@ -86,7 +86,7 @@ See the [Layout & UI Zones](layout-ui.md) guide for full visual customisation op
 
 Fine-tune how the parser processes your content files.
 
-```json
+```json "docmd.config.json"
 {
   "minify": true,
   "autoTitleFromH1": true,

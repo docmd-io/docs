@@ -9,7 +9,7 @@ Statische Hosting-Umgebungen verfügen über keine serverseitige Logik (wie Ngin
 
 Leiten Sie Traffic von alten URLs auf neue Ziele um, indem Sie Mappings im `redirects`-Objekt definieren.
 
-```json
+```json "docmd.config.json"
 {
   "redirects": {
     "/setup": "/getting-started/installation", 
@@ -34,7 +34,7 @@ Fordern Nutzer eine fehlende URL an, laden statische Hosts automatisch eine `404
 
 Personalisieren Sie die 404-Fehlermeldung in Ihrer Konfiguration:
 
-```json
+```json "docmd.config.json"
 {
   "notFound": {
     "title": "404: Page Not Found",

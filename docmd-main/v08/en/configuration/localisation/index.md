@@ -7,7 +7,7 @@ Add multi-language support to your documentation site. docmd serves each locale 
 
 ## Add languages to your config
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",
@@ -66,7 +66,7 @@ This prevents 404 errors when you list planned languages before their content is
 
 Control where the language switcher appears using the `position` option:
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "position": "sidebar-top"
@@ -84,7 +84,7 @@ Control where the language switcher appears using the `position` option:
 
 Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), each with its own markdown files. **String Mode** is a simpler alternative designed specifically for [noStyle pages](../../content/no-style-pages.md) - pages that use raw HTML instead of markdown.
 
-```json
+```json "docmd.config.json"
   "i18n": {
     "default": "en",
     "stringMode": true,

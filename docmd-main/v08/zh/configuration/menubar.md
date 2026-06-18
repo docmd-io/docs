@@ -9,7 +9,7 @@ description: "构建并定位您的菜单栏，管理导航链接，配置下拉
 
 在 `docmd.config.json` 的 `layout` 部分中配置菜单栏。
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "menubar": {
@@ -65,7 +65,7 @@ description: "构建并定位您的菜单栏，管理导航链接，配置下拉
 
 将全局搜索与主题切换托管在菜单栏中。将 `optionsMenu.position` 设为 `'menubar'`。
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -92,3 +92,4 @@ description: "构建并定位您的菜单栏，管理导航链接，配置下拉
   --menubar-border: var(--border-color);
   --menubar-text: var(--text-color);
 }
+```

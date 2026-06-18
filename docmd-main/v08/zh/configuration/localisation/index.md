@@ -7,7 +7,7 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 
 ## 在配置中添加语言
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",
@@ -66,7 +66,7 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 
 使用 `position` 选项控制语言切换器出现的位置：
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "position": "sidebar-top"
@@ -84,7 +84,7 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 
 标准 i18n 使用每个本地化版本一个目录（`docs/en/`、`docs/hi/`），每个目录有自己的 Markdown 文件。**字符串模式** 是一种更简单的替代方案，专为 [noStyle 页面](../../content/no-style-pages.md) 设计 —— 即使用原始 HTML 而非 Markdown 的页面。
 
-```json
+```json "docmd.config.json"
   "i18n": {
     "default": "en",
     "stringMode": true,

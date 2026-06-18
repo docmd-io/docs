@@ -34,7 +34,7 @@ my-docs/
 
 The root `docmd.config.json` uses the `workspace` key. Any top-level keys (e.g. `theme`, `menubar`, `logo`) act as **global defaults** for every project.
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "projects": [
@@ -76,7 +76,7 @@ The root `docmd.config.json` uses the `workspace` key. Any top-level keys (e.g. 
 
 Each project directory can have its own `docmd.config.json`. Settings defined here **override** the workspace root defaults.
 
-```json
+```json "docmd.config.json"
 {
   "title": "SDK Reference",
   "src": "docs",
@@ -111,7 +111,7 @@ The Project Switcher renders a slim UI component for navigating between workspac
 
 ### Configuration
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "switcher": {

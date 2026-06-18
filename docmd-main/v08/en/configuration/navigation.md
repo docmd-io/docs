@@ -11,7 +11,7 @@ An array of link objects in your `docmd.config.json` file controls the sidebar. 
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
-```json
+```json "docmd.config.json"
 {
   "navigation": [
     { "title": "Overview", "path": "/", "icon": "home" },
@@ -40,7 +40,7 @@ Structure your sidebar using two primary grouping methods:
 ### Clicking Group (Direct Page + Child Folders)
 Specify a `path` along with `children` for a category header. Clicking the title loads the landing page and expands the child links.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Cloud Services",
   "path": "/cloud/overview", 
@@ -54,7 +54,7 @@ Specify a `path` along with `children` for a category header. Clicking the title
 ### Static Label (Category Headers Only)
 Omit the `path` parameter. The header serves as a non-clickable title grouping related links. Use this to divide major technical categories without a single landing page.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Formatting & Elements",
   "icon": "layout-grid",
@@ -79,7 +79,7 @@ The engine automatically generates contextual breadcrumbs for every page. These 
 ### Disabling Breadcrumbs
 Breadcrumbs are enabled by default. Update your site layout options to disable them globally:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "breadcrumbs": false

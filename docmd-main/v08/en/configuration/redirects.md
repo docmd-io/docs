@@ -9,7 +9,7 @@ Static hosting environments lack server-side logic (like Nginx rules) for dynami
 
 Forward traffic from old URLs to new destinations by defining mappings in the `redirects` object.
 
-```json
+```json "docmd.config.json"
 {
   "redirects": {
     "/setup": "/getting-started/installation", 
@@ -34,7 +34,7 @@ When users request a missing URL, static hosts automatically load a root `404.ht
 
 Personalise the 404 error message in your configuration:
 
-```json
+```json "docmd.config.json"
 {
   "notFound": {
     "title": "404: Page Not Found",

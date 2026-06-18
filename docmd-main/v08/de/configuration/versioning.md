@@ -22,7 +22,7 @@ my-project/
 
 Definieren Sie Ihre Versionen im `versions`-Objekt:
 
-```json
+```json "docmd.config.json"
 {
   "versions": {
     "current": "v2",           

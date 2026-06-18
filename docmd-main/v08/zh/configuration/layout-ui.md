@@ -33,7 +33,7 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 
 在 `docmd.config.json` 的 `theme.copyWidgets` 下配置这些按钮：
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "copyWidgets": {
@@ -52,7 +52,7 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 ### 实用菜单（选项菜单）
 `optionsMenu` 将核心实用工具（**全局搜索**、**主题切换**、**赞助链接**）归为一组。
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -80,7 +80,7 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 ### 页脚 (Footer)
 引擎为站点页脚提供 **minimal**（简约）与 **complete**（完整）两种布局。
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "footer": {

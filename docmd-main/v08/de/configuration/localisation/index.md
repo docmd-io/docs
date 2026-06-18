@@ -7,7 +7,7 @@ Fügen Sie Ihrer Dokumentations-Site Mehrsprachenunterstützung hinzu. docmd lie
 
 ## Sprachen zur Konfiguration hinzufügen
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",
@@ -66,7 +66,7 @@ Dies verhindert 404-Fehler, wenn Sie geplante Sprachen auflisten, bevor deren In
 
 Steuern Sie mit der `position`-Option, wo der Sprachumschalter erscheint:
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "position": "sidebar-top"
@@ -84,7 +84,7 @@ Steuern Sie mit der `position`-Option, wo der Sprachumschalter erscheint:
 
 Standard-i18n verwendet separate Verzeichnisse pro Locale (`docs/en/`, `docs/hi/`), jedes mit eigenen Markdown-Dateien. Der **String-Modus** ist eine einfachere Alternative, die speziell für [noStyle-Seiten](../../content/no-style-pages.md) entwickelt wurde — Seiten, die rohes HTML statt Markdown verwenden.
 
-```json
+```json "docmd.config.json"
   "i18n": {
     "default": "en",
     "stringMode": true,

@@ -22,7 +22,7 @@ my-project/
 
 在 `versions` 对象中定义您的版本：
 
-```json
+```json "docmd.config.json"
 {
   "versions": {
     "current": "v2",           

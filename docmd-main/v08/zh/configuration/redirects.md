@@ -9,7 +9,7 @@ description: "为静态部署配置基于元数据的重定向以及自定义品
 
 通过在 `redirects` 对象中定义映射，将流量从旧 URL 转发到新目的地。
 
-```json
+```json "docmd.config.json"
 {
   "redirects": {
     "/setup": "/getting-started/installation", 
@@ -34,7 +34,7 @@ description: "为静态部署配置基于元数据的重定向以及自定义品
 
 在配置中个性化 404 错误消息：
 
-```json
+```json "docmd.config.json"
 {
   "notFound": {
     "title": "404: Page Not Found",

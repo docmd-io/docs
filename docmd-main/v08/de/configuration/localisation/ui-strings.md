@@ -13,7 +13,7 @@ Für nicht unterstützte Sprachen oder benutzerdefinierte Formulierungen fällt 
 
 Verwenden Sie die `translations`-Eigenschaft auf einer beliebigen Locale, um Systemtexte zu überschreiben:
 
-```json
+```json "docmd.config.json"
   "i18n": {
     "default": "en",
     "locales": [

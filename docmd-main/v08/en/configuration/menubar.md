@@ -9,7 +9,7 @@ The `menubar` is a premium navigation layer. It provides global context across y
 
 Configure the menubar in the `layout` section of your `docmd.config.json`.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "menubar": {
@@ -65,7 +65,7 @@ Set `type: 'dropdown'` and provide an `items` array to create a nested menu.
 
 Host the global search and theme toggle in the menubar. Set `optionsMenu.position` to `'menubar'`.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {

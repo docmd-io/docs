@@ -50,7 +50,7 @@ For details on the resolution hierarchy, see [Navigation Configuration](../navig
 
 A locale's `navigation.json` uses the standard format:
 
-```json
+```json "navigation.json"
 [
   {
     "title": "शुरू करें",

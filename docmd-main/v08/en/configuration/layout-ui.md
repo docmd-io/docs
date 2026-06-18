@@ -33,7 +33,7 @@ The breadcrumbs bar includes two copy buttons. One copies the page's raw Markdow
 
 Configure these buttons under `theme.copyWidgets` in your `docmd.config.json`:
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "copyWidgets": {
@@ -52,7 +52,7 @@ Configure these buttons under `theme.copyWidgets` in your `docmd.config.json`:
 ### Utility Menus (Options Menu)
 The `optionsMenu` groups core utilities like **Global Search**, **Theme Toggle**, and **Sponsorship links**.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -80,7 +80,7 @@ The sidebar is the primary navigation tree. Define its structure in your config 
 ### Footer
 The engine provides **minimal** and **complete** layouts for your site footer.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "footer": {

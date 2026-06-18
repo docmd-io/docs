@@ -33,7 +33,7 @@ Die Brotkrumen-Leiste enthält zwei Kopierschaltflächen. Eine kopiert das rohe 
 
 Konfigurieren Sie diese Schaltflächen unter `theme.copyWidgets` in Ihrer `docmd.config.json`:
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "copyWidgets": {
@@ -52,7 +52,7 @@ Konfigurieren Sie diese Schaltflächen unter `theme.copyWidgets` in Ihrer `docmd
 ### Utility-Menüs (Optionsmenü)
 Das `optionsMenu` gruppiert zentrale Utilities wie **Globale Suche**, **Theme-Umschalter** und **Sponsoring-Links**.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -80,7 +80,7 @@ Die Sidebar ist der primäre Navigationsbaum. Definieren Sie ihre Struktur in Ih
 ### Footer
 Die Engine bietet **minimal**- und **complete**-Layouts für Ihren Site-Footer.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "footer": {

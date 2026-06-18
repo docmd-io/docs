@@ -34,7 +34,7 @@ my-docs/
 
 根 `docmd.config.json` 使用 `workspace` 键。任何顶层键（例如 `theme`、`menubar`、`logo`）都充当每个项目的**全局默认值**。
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "projects": [
@@ -76,7 +76,7 @@ my-docs/
 
 每个项目目录都可以拥有自己的 `docmd.config.json`。此处定义的设置**覆盖**工作区根的默认设置。
 
-```json
+```json "docmd.config.json"
 {
   "title": "SDK Reference",
   "src": "docs",
@@ -111,7 +111,7 @@ my-docs/
 
 ### 配置
 
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "switcher": {
