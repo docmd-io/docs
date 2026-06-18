@@ -1,22 +1,22 @@
 ---
-title: "Starter-Vorlage"
-description: "Verwenden Sie die offizielle docmd Starter-Vorlage, um in unter einer Minute eine vorkonfigurierte Dokumentationswebsite mit automatischer GitHub Pages-Bereitstellung zu erstellen."
+title: "Starter-Template"
+description: "Verwenden Sie das offizielle docmd-Starter-Template, um in unter einer Minute eine vorkonfigurierte Dokumentations-Site mit GitHub-Pages-Bereitstellung zu erstellen."
 ---
 
-# docmd Starter-Vorlage
+# docmd Starter-Template
 
-Das `docmd-template`-Repository ist der schnellste Weg, eine neue Dokumentationswebsite zu starten. Es enthält eine funktionierende `docmd.config.json`, eine Beispielseite, eine `package.json` für die lokale Entwicklung und einen vorkonfigurierten GitHub Actions-Workflow, der bei jedem Push automatisch auf GitHub Pages bereitstellt.
+Das `docmd-template`-Repository ist der schnellste Weg, um eine neue Dokumentations-Site zu starten. Es enthält eine funktionierende `docmd.config.json`, eine Beispielseite, eine `package.json` für die lokale Entwicklung und einen vorkonfigurierten GitHub-Actions-Workflow, der bei jedem Push automatisch zu GitHub Pages deployt.
 
-::: button "Vorlage verwenden" external:https://github.com/docmd-io/docmd-template/generate icon:github color:#2ea44f
+::: button "Dieses Template verwenden" external:https://github.com/docmd-io/docmd-template/generate icon:github color:#2ea44f
 ::: button "Repository ansehen" external:https://github.com/docmd-io/docmd-template icon:external-link
 
-## Schnellstart
+## Erste Schritte
 
-### 1. Ihr Repository erstellen
+### 1. Erstellen Sie Ihr Repository
 
-Klicken Sie auf GitHub auf **[Vorlage verwenden](https://github.com/docmd-io/docmd-template/generate)**. Geben Sie Ihrem Repository einen Namen und klicken Sie auf **Create repository**. Sie müssen es nicht forken — die Vorlage erstellt eine saubere, unabhängige Kopie.
+Klicken Sie in GitHub auf **[Dieses Template verwenden](https://github.com/docmd-io/docmd-template/generate)**. Geben Sie Ihrem Repository einen Namen und klicken Sie auf **Create repository**. Sie müssen es nicht forken — das Template erstellt eine saubere, unabhängige Kopie.
 
-### 2. Ihre Website konfigurieren
+### 2. Konfigurieren Sie Ihre Site
 
 Öffnen Sie `docmd.config.json` in Ihrem neuen Repository und aktualisieren Sie die Felder `title` und `url`:
 
@@ -37,44 +37,97 @@ Dies ist ein einmaliger Schritt pro Repository:
 2. Wählen Sie unter **Source** die Option **GitHub Actions**.
 3. Speichern.
 
-### 4. Pushen und bereitstellen
+### 4. Pushen und Deployen
 
-Pushen Sie eine beliebige Änderung zu `main`. Der enthaltene Workflow erstellt Ihre Website und stellt sie automatisch auf GitHub Pages bereit. Ihre Dokumentation ist erreichbar unter:
+Pushen Sie eine beliebige Änderung auf `main`. Der mitgelieferte Workflow baut Ihre Site und deployt sie automatisch zu GitHub Pages. Ihre Dokumentation wird hier verfügbar sein:
 
 ```
 https://<benutzername>.github.io/<repo-name>/
 ```
 
-## Enthaltene Dateien
+## Was ist enthalten
 
 ```
 .github/
   workflows/
-    docs.yml          # Automatischer Build und Deploy bei Push zu main
-docmd.config.json     # Website-Titel, URL und Ausgabeverzeichnis
+    docs.yml          # Automatisierter Build und Deploy bei Push auf main
+docmd.config.json     # Site-Titel, URL und Ausgabeverzeichnis
 docs/
   index.md            # Ihre erste Dokumentationsseite
-package.json          # Skripte für die lokale Entwicklung
+package.json          # Lokale Entwicklungs-Skripte
 ```
 
 ## Lokale Entwicklung
 
-Klonen Sie Ihr Repository und starten Sie den Entwicklungsserver:
+Klonen Sie Ihr Repository und führen Sie den Dev-Server aus:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Die Website ist unter `http://localhost:3000` mit Live-Reload verfügbar. Änderungen an Markdown-Dateien werden sofort übernommen.
+Die Site ist unter `http://localhost:3000` mit Live-Reload verfügbar. Änderungen an Markdown-Dateien werden sofort übernommen.
 
-Lokaler Build einer Produktionskopie:
+Um lokal eine Produktionskopie zu bauen:
 
 ```bash
 npm run build
 ```
 
-Die kompilierte Website wird standardmäßig in `site/` geschrieben.
+Die kompilierte Site wird standardmäßig nach `site/` geschrieben.
+
+## Enthaltener Workflow
+
+Das Template wird mit `.github/workflows/docs.yml` ausgeliefert:
+
+```yaml ".github/workflows/docs.yml"
+name: Docs
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: docs
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install
+        run: npm install @docmd/core
+
+      - name: Build
+        run: npx @docmd/core build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4
+```
+
+Der Workflow installiert `@docmd/core` direkt ohne Lock-Datei, was beabsichtigt ist — das Template hat keine übertragene `package-lock.json`, daher wird das `actions/setup-node`-Caching nicht verwendet. Dies hält das Template abhängigkeitsfrei und stellt gleichzeitig zuverlässiges Deployment sicher.
 
 ## Ihre erste Seite hinzufügen
 
@@ -82,12 +135,12 @@ Erstellen Sie eine neue Markdown-Datei in `docs/`:
 
 ```bash
 docs/
-  index.md              # Startseite
-  erste-schritte.md
-  api-referenz.md
+  index.md        # Startseite
+  getting-started.md
+  api-reference.md
 ```
 
-Fügen Sie eine `navigation.json` hinzu, um die Seitenleiste zu steuern:
+Fügen Sie eine `navigation.json` hinzu, um die Sidebar zu steuern:
 
 ```json "navigation.json"
 [
@@ -97,26 +150,26 @@ Fügen Sie eine `navigation.json` hinzu, um die Seitenleiste zu steuern:
 ]
 ```
 
-Die vollständige Navigationskonfiguration finden Sie unter [Navigationskonfiguration](../configuration/navigation.md).
+Den vollständigen Navigations-Konfigurations-Leitfaden finden Sie unter [Navigationskonfiguration](../configuration/navigation.md).
 
 ## Benutzerdefinierte Domain
 
-So verwenden Sie eine benutzerdefinierte Domain (z. B. `docs.example.com`):
+Um eine benutzerdefinierte Domain zu verwenden (z. B. `docs.example.com`):
 
-1. Aktualisieren Sie das Feld `url` in `docmd.config.json`:
-   ```json
+1. Aktualisieren Sie das `url`-Feld in `docmd.config.json`:
+   ```json "docmd.config.json"
    { "url": "https://docs.example.com" }
    ```
-2. Fügen Sie eine `CNAME`-Datei mit Ihrer Domain in Ihr `docs/`-Verzeichnis ein.
+2. Fügen Sie eine `CNAME`-Datei in Ihr `docs/`-Verzeichnis ein, die Ihre Domain enthält.
 3. Konfigurieren Sie die Domain unter **Settings → Pages → Custom domain**.
 
-## Starter-Vorlage vs. GitHub Action
+## Starter-Template vs GitHub Action
 
-Die Vorlage gibt Ihnen von Anfang an die volle Kontrolle über die Workflow-Datei und Konfiguration. Die [GitHub Action](./github-action) eignet sich besser zum Hinzufügen von docmd-Deployment zu einem bestehenden Repository, ohne es umzustrukturieren.
+Das Template gibt Ihnen von Anfang an vollständige Kontrolle über die Workflow-Datei und die Konfiguration. Die [GitHub Action](./github-action) eignet sich besser, um die docmd-Bereitstellung zu einem bestehenden Repository hinzuzufügen, ohne es umzustrukturieren.
 
-| | Starter-Vorlage | GitHub Action |
+| | Starter-Template | GitHub Action |
 |---|---|---|
 | Ausgangspunkt | Neues Repository | Bestehendes Repository |
-| Workflow-Datei | Enthalten, frei bearbeitbar | Sie schreiben sie, Action übernimmt Build |
+| Workflow-Datei | Enthalten, yours to edit | Sie schreiben sie, die Action handhabt den Build |
 | Konfiguration | Vorkonfiguriert | Automatisch erkannt oder generiert |
-| Geeignet für | Neue Projekte | Dokumentation zu bestehenden Repos hinzufügen |
+| Am besten für | Neue Projekte | Hinzufügen von Doku zu bestehenden Repos |
