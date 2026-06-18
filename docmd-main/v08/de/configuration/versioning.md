@@ -1,65 +1,65 @@
 ---
 title: "Versionierung"
-description: "Aktivieren Sie mehrdimensionale Dokumentationen mit nahtlosem Wechsel, Beibehaltung des Pfades und isolierten Build-Verzeichnissen."
+description: "Aktivieren Sie Mehrversions-Dokumentation mit nahtlosem Wechsel, sticky Pfad-Erhaltung und isolierten Build-Verzeichnissen."
 ---
 
-`docmd` verfügt über eine native Versionierungs-Engine, mit der Sie mehrere Versionen Ihres Projekts gleichzeitig verwalten und bereitstellen können (z. B. `v1.x`, `v2.x`). Die Engine übernimmt automatisch das URL-Routing, die Aktualisierung der Seitenleiste und die Logik für den Versionswechsel.
+docmd verfügt über eine native Versionierungs-Engine. Verwalten und liefern Sie mehrere Versionen Ihres Projekts gleichzeitig. Die Engine übernimmt automatisch URL-Routing, Sidebar-Updates und Wechsel-Logik.
 
-## Verzeichnis-Organisation
+## Verzeichnisstruktur
 
-Um die Versionierung zu aktivieren, organisieren Sie Ihre Dokumentation in versionierten Quellordnern. Ein gängiges Schema ist, die aktive Version in `docs/` zu halten und archivierte Versionen in Verzeichnissen mit dem Präfix `docs-` zu speichern.
+Organisieren Sie Ihre Dokumentation in versionierten Quellordnern. Ein gängiges Muster behält die aktive Version in `docs/` und archivierte Versionen in Verzeichnissen mit dem Präfix `docs-`.
 
 ```text
-mein-projekt/
-├── docs/           # Aktuelle Version (Hauptversion)
-├── docs-v1/        # Veraltete Version
-├── docmd.config.js
+my-project/
+├── docs/           # Neueste Version (Hauptversion)
+├── docs-v1/        # Legacy-Version
+├── docmd.config.json
 ```
 
 ## Konfiguration
 
 <img width="500" class="with-border" src="/assets/previews/menu-versioning.webp">
 
-Definieren Sie Ihre Versionen innerhalb des `versions`-Objekts:
+Definieren Sie Ihre Versionen im `versions`-Objekt:
 
-```javascript
-export default defineConfig({
-  versions: {
-    current: 'v2',           // Die Version-ID, die im Root (/) erstellt wird
-    position: 'sidebar-top', // Position des Umschalters: 'sidebar-top' oder 'sidebar-bottom'
-    all: [
-      { id: 'v2', dir: 'docs',    label: 'v2.x (Aktuell)' },
-      { id: 'v1', dir: 'docs-v1', label: 'v1.x' }
+```json
+{
+  "versions": {
+    "current": "v2",           
+    "position": "sidebar-top", 
+    "all": [
+      { "id": "v2", "dir": "docs",    "label": "v2.x (Latest)" },
+      { "id": "v1", "dir": "docs-v1", "label": "v1.x" }
     ]
   }
-});
+}
 ```
 
 ## Kernfunktionen
 
-### 1. Root-SEO (Die „aktuelle“ Version)
-Die als `current` festgelegte Version wird direkt in Ihrem Ausgabe-Root generiert (z. B. `meineseite.de/`). Dies stellt sicher, dass Ihr primärer Suchtraffic immer auf Ihrer aktuellsten Dokumentation landet.
+### 1. Root-SEO (Die „aktuelle" Version)
+Die `current`-Version wird direkt im Ausgabestamm erzeugt (z. B. `mysite.com/`). So landet der Suchverkehr immer auf Ihrer aktuellsten Dokumentation.
 
 ### 2. Isolierte Unterverzeichnisse
-Nicht-aktuelle Versionen werden automatisch in Unterordnern erstellt, die ihrer `id` entsprechen.
-*   `v2 (Aktuell)` → `meineseite.de/`
-*   `v1` → `meineseite.de/v1/`
+Nicht-aktuelle Versionen werden automatisch in Unterordner gebaut, die ihrer `id` entsprechen.
+*   `v2 (Current)` → `mysite.com/`
+*   `v1` → `mysite.com/v1/`
 
-### 3. Permanenter Wechsel (Pfadbeibehaltung)
+### 3. Sticky-Switching (Pfad-Erhaltung)
 
-`docmd` behält den relativen Pfad bei, wenn ein Benutzer die Version wechselt. Wenn ein Benutzer `meineseite.de/erste-schritte` liest und auf **v1** wechselt, wird er automatisch zu `meineseite.de/v1/erste-schritte` weitergeleitet (sofern die Seite existiert), anstatt zur Startseite zurückgeführt zu werden.
+docmd erhält den relativen Pfad beim Versionswechsel. Liest ein Nutzer `mysite.com/getting-started` und wechselt zu **v1**, wird er automatisch zu `mysite.com/v1/getting-started` weitergeleitet (sofern die Seite existiert).
 
 ### 4. Asset-Isolation
-Jede Version erbt Ihr globales `assets/`-Verzeichnis, aber `docmd` stellt sicher, dass diese während des Build-Prozesses isoliert werden, um Style-Abweichungen oder Versionskonflikte zu vermeiden.
+Jede Version erbt Ihr globales `assets/`-Verzeichnis. docmd isoliert diese während des Builds, um Style-Leaks oder Konflikte zu verhindern.
 
 ### 5. Versionierte Navigation
 
-Jede Version kann ihre eigene, unabhängige Navigationsstruktur verwalten. `docmd` verwendet ein kaskadierendes Prioritätssystem, um die Seitenleiste aufzulösen. Dies ermöglicht die Verwendung einer zentralen Konfiguration oder versions-/sprachspezifischer `navigation.json`-Dateien.
+Jede Version kann eine eigene Navigationsstruktur pflegen. docmd verwendet ein Kaskadierungs-Prioritätssystem zur Auflösung der Sidebar.
 
-Einzelheiten zur Auflösungshierarchie und visuelle Beispiele finden Sie unter [Priorität der Navigationsauflösung](./navigation#prioritat-der-navigationsauflosung).
+Details zur Auflösungshierarchie finden Sie in der [Navigationskonfiguration](navigation.md).
 
 ## Best Practices
 
 1.  **Semantische IDs**: Verwenden Sie prägnante, URL-freundliche IDs wie `v1`, `v2` oder `beta`.
-2.  **Navigations-Parität**: Behalten Sie konsistente Ordnerstrukturen über die Versionen hinweg bei, um die Effektivität der „Pfadbeibehaltung“ zu maximieren.
-3.  **Einheitliche Konfiguration**: Sie benötigen keine separaten Konfigurationsdateien für jede Version; `docmd` verarbeitet alle Versionen in einem einzigen Durchgang.
+2.  **Navigationsparität**: Pflegen Sie konsistente Ordnerstrukturen über die Versionen hinweg, um das „Sticky-Switching" zu maximieren.
+3.  **Einheitliche Konfiguration**: Erstellen Sie keine separaten Konfigurationsdateien für jede Version. docmd verarbeitet alle Versionen in einem einzigen Durchlauf.

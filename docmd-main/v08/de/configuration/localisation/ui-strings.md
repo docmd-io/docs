@@ -1,20 +1,19 @@
 ---
 title: "UI-Strings & SEO"
-description: "Passen Sie System-UI-Texte pro Sprache an und verstehen Sie automatische SEO-Tags für mehrsprachige Websites."
+description: "Passen Sie System-UI-Texte pro Locale an und verstehen Sie die automatischen SEO-Tags für mehrsprachige Sites."
 ---
 
-## Integrierter Sprachsupport
+## Eingebaute Sprachunterstützung
 
-`docmd` und seine offiziellen Plugins enthalten integrierte Übersetzungen für gängige Sprachen. Wenn Sie eine unterstützte Sprache konfigurieren, übersetzt die Engine Systemtexte wie Suchplatzhalter, Navigations-Labels und Theme-Umschalter automatisch.
+docmd und seine offiziellen Plugins werden mit eingebauten Übersetzungen für gängige Sprachen ausgeliefert. Wenn Sie eine unterstützte Locale konfigurieren, übersetzt die Engine automatisch Systemtexte wie Suchplatzhalter, Navigationsbeschriftungen und Theme-Toggles.
 
-Für nicht unterstützte Sprachen oder benutzerdefinierte Formulierungen greift das System auf Englisch zurück. Sie können jeden String pro Sprache überschreiben.
+Für nicht unterstützte Sprachen oder benutzerdefinierte Formulierungen fällt das System auf Englisch zurück. Sie können jeden String pro Locale überschreiben.
 
-## Benutzerdefinierte UI-Strings
+## Eigene UI-Strings
 
-Verwenden Sie die Eigenschaft `translations` bei einer beliebigen Sprache, um Systemtexte zu überschreiben:
+Verwenden Sie die `translations`-Eigenschaft auf einer beliebigen Locale, um Systemtexte zu überschreiben:
 
 ```json
-{
   "i18n": {
     "default": "en",
     "locales": [
@@ -37,22 +36,21 @@ Verwenden Sie die Eigenschaft `translations` bei einer beliebigen Sprache, um Sy
       }
     ]
   }
-}
 ```
 
-Die Zusammenführungsreihenfolge lautet: **Systemübersetzungen → Plugin-Übersetzungen → Ihre Konfigurationsübersetzungen**. Ihre Konfiguration gewinnt immer.
+Die Merge-Reihenfolge ist: **System-Übersetzungen → Plugin-Übersetzungen → Ihre Konfigurations-Übersetzungen**. Ihre Konfiguration gewinnt immer.
 
 ## Verfügbare Schlüssel
 
-Statt eine feste Liste der verfügbaren Schlüssel bereitzustellen, können Sie die vollständige Sammlung der unterstützten Sprachen und Übersetzungsschlüssel direkt im docmd-Quellcode-Repository einsehen.
+Anstatt eine Liste verfügbarer Schlüssel fest zu codieren, können Sie den vollständigen Satz unterstützter Sprachen und Übersetzungsschlüssel direkt im docmd-Quell-Repository einsehen.
 
-**[Übersetzungsquellen auf GitHub anzeigen](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
+**[Übersetzungsquelle auf GitHub ansehen](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
 
-Der Schlüssel `fallbackMessage` unterstützt die Platzhalter `{active}` und `{default}`. Die Engine ersetzt diese zur Build-Zeit durch die entsprechenden Sprach-Labels.
+Der `fallbackMessage`-Schlüssel unterstützt die Platzhalter `{active}` und `{default}`. Die Engine ersetzt diese zur Build-Zeit durch die Locale-Labels.
 
 ## SEO und Hreflang
 
-`docmd` generiert automatisch `<link rel="alternate" hreflang="...">`-Tags für jede Seite über alle Sprachen hinweg. Die Standardsprache erhält zudem den `x-default` hreflang-Wert.
+docmd generiert automatisch `<link rel="alternate" hreflang="...">`-Tags für jede Seite über alle Locales hinweg. Die Standard-Locale erhält zusätzlich den `x-default`-hreflang-Wert.
 
 ```html
 <!-- Automatisch auf jeder Seite generiert -->
@@ -62,8 +60,8 @@ Der Schlüssel `fallbackMessage` unterstützt die Platzhalter `{active}` und `{d
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-Es ist keine Konfiguration erforderlich. Die Engine fügt diese Tags in jede Seite ein, wenn i18n aktiviert ist.
+Es ist keine Konfiguration erforderlich. Die Engine injiziert diese Tags auf jeder Seite, wenn i18n aktiviert ist.
 
-::: callout info "noStyle-Seiten"
-Das UI-Strings-System gilt für Standard-Themen-Layout-Seiten. Für noStyle-Seiten, die benutzerdefiniertes HTML verwenden, siehe [Clientseitige String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
+::: callout info "noStyle-Seiten" icon:info
+Das UI-Strings-System gilt für Seiten mit Theme-Layout. Für noStyle-Seiten mit eigenem HTML siehe [Client-seitige String-Ersetzung](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 :::

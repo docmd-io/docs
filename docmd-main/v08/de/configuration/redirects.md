@@ -1,48 +1,48 @@
 ---
 title: "Weiterleitungen & 404"
-description: "Konfigurieren Sie Metadaten-basierte Weiterleitungen und benutzerdefinierte 404-Fehlerseiten für statische Deployments."
+description: "Konfigurieren Sie metadatenbasierte Weiterleitungen und individuell gestaltete 404-Fehlerseiten für statische Deployments."
 ---
 
-In einer statischen Hosting-Umgebung gibt es keine serverseitige Logik (wie Nginx-Regeln oder `.htaccess`-Dateien), um dynamisches Routing zu verarbeiten. `docmd` löst dies durch das Generieren nativer HTML-Sicherungsmechanismen, die Weiterleitungen und Fehlerzustände automatisch behandeln.
+Statische Hosting-Umgebungen verfügen über keine serverseitige Logik (wie Nginx-Regeln) für dynamisches Routing. docmd erzeugt native HTML-Fallbacks, die Weiterleitung und Fehlerzustände automatisch behandeln.
 
-## Serverlose Weiterleitungen (Redirects)
+## Server-lose Weiterleitungen
 
-Sie können Traffic von alten URLs auf neue Ziele umleiten, indem Sie ein Mapping im `redirects`-Objekt definieren.
+Leiten Sie Traffic von alten URLs auf neue Ziele um, indem Sie Mappings im `redirects`-Objekt definieren.
 
-```javascript
-export default defineConfig({
-  redirects: {
-    '/setup': '/getting-started/installation', // Kurz-URL zu Deep-Link
-    '/v1/api': '/api-reference'                  // Alte Version zu modernem Pfad
+```json
+{
+  "redirects": {
+    "/setup": "/getting-started/installation", 
+    "/v1/api": "/api-reference"                  
   }
-});
+}
 ```
 
 ### Technische Umsetzung
 
-Wenn eine Weiterleitung definiert ist, erstellt `docmd` eine `index.html`-Datei am alten Pfad, die ein `<meta http-equiv="refresh">`-Tag enthält. Diese Strategie gewährleistet:
+Wenn Sie eine Weiterleitung definieren, erzeugt die Engine eine `index.html`-Datei am alten Pfad, die ein `<meta http-equiv="refresh">`-Tag enthält. Diese Strategie stellt sicher:
 
-1.  **Nahtlose Weiterleitung**: Benutzer werden sofort nach dem Laden der Seite zum neuen Ziel weitergeleitet.
-2.  **SEO-Erhalt**: Suchmaschinen erkennen die Weiterleitung, was hilft, die Link-Autorität (Link Equity) zu erhalten.
-3.  **Analytics-Tracking**: Seitenaufrufe werden erfasst, bevor die Weiterleitung stattfindet, wodurch Ihre Traffic-Daten erhalten bleiben.
+1.  **Nahtlose Weiterleitung**: Nutzer werden sofort zum neuen Ziel weitergeleitet.
+2.  **SEO-Erhaltung**: Suchmaschinen erkennen die Weiterleitung und erhalten die Link-Gewichtung.
+3.  **Analytics-Tracking**: Seitenaufrufe werden vor der Weiterleitung registriert.
 
-## Markenkonforme 404-Seiten
+## Marken-404-Seiten
 
-Wenn ein Benutzer versucht, auf eine nicht existierende URL zuzugreifen, suchen die meisten statischen Hosting-Anbieter (Netlify, Vercel, GitHub Pages) automatisch nach einer `404.html`-Datei im Stammverzeichnis. `docmd` generiert diese Datei standardmäßig und stellt sicher, dass sie das Theme, die Seitenleiste und die SPA-Funktionalität Ihrer Website erbt.
+Fordern Nutzer eine fehlende URL an, laden statische Hosts automatisch eine `404.html`-Datei im Stammverzeichnis. docmd erzeugt diese Datei standardmäßig. Sie übernimmt das Theme, die Sidebar und die SPA-Funktionalität Ihrer Site perfekt.
 
 ### Fehlerinhalt anpassen
 
-Sie können die 404-Fehlermeldung in Ihrer Konfiguration personalisieren:
+Personalisieren Sie die 404-Fehlermeldung in Ihrer Konfiguration:
 
-```javascript
-export default defineConfig({
-  notFound: {
-    title: '404: Seite nicht gefunden',
-    content: "Wir konnten die gesuchte Seite nicht finden. Nutzen Sie die Seitenleiste, um zurückzufinden."
+```json
+{
+  "notFound": {
+    "title": "404: Page Not Found",
+    "content": "We couldn't find the page you're looking for. Use the sidebar to find your way back."
   }
-});
+}
 ```
 
-::: callout tip "Lokale Entwicklung"
-Der `docmd dev`-Server liefert automatisch Ihre benutzerdefinierte 404-Seite aus, wann immer eine angeforderte Datei fehlt, sodass Sie das Fehlererlebnis lokal testen können.
+::: callout tip "Lokale Entwicklung" icon:lightbulb
+Der Dev-Server liefert Ihre benutzerdefinierte 404-Seite automatisch für fehlende Dateien. Testen Sie das Fehlererlebnis lokal.
 :::

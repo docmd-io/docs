@@ -1,54 +1,54 @@
 ---
 title: "Übersetzte Inhalte"
-description: "Organisieren Sie Übersetzungen in Sprach-Unterverzeichnissen mit Fallback pro Datei und sprachspezifischer Navigation."
+description: "Organisieren Sie Übersetzungen in Locale-Unterverzeichnissen mit dateiweisem Fallback und Locale-spezifischer Navigation."
 ---
 
 ## Verzeichnisstruktur
 
-Jede Sprache - einschließlich der Standardsprache - lebt in ihrem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses. Der Ordnername entspricht der Sprach-`id` aus Ihrer Konfiguration.
+Jede Locale lebt in einem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses. Der Ordnername entspricht der Locale-`id` aus Ihrer Konfiguration.
 
-```
+```text
 docs/
-├── en/                     ← Inhalt der Standardsprache
+├── en/                     ← Standard-Locale-Inhalte
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← Zweite Sprache
-│   ├── index.md            ← Übersetzte Homepage
-│   ├── navigation.json     ← Übersetzte Navigations-Labels
+├── hi/                     ← zweite Locale
+│   ├── index.md            ← übersetzte Startseite
+│   ├── navigation.json     ← übersetzte Navigationsbeschriftungen
 │   └── getting-started/
-│       └── installation.md ← Übersetzte Seite
-└── zh/                     ← Dritte Sprache
-    └── index.md            ← Nur die Homepage übersetzt
+│       └── installation.md ← übersetzte Seite
+└── zh/                     ← dritte Locale
+    └── index.md            ← nur die Startseite übersetzt
 ```
 
-Das Quellverzeichnis dient als sauberer Container - es enthält ausschließlich Sprachordner. Wenn i18n aktiviert ist, befinden sich keine Inhaltsdateien auf der Stammebene.
+Das Quellverzeichnis enthält nur Locale-Ordner. Wenn i18n aktiviert ist, liegen im Stammverzeichnis keine Inhaltsdateien.
 
-::: callout info "Ordnernamen sind Ihre Wahl"
-Die Ordnernamen stammen direkt aus den `id`-Werten in Ihrer Konfiguration. Wenn Ihre Konfiguration `{ id: 'fr-ca' }` angibt, lautet Ihr Ordner `docs/fr-ca/`. Wenn Hindi Ihre Standardsprache ist (`default: 'hi'`), dann ist `docs/hi/` das Verzeichnis für den kanonischen Inhalt.
+::: callout info "Ordnernamen sind Ihre Wahl" icon:info
+Ordnernamen entsprechen den `id`-Werten in Ihrer Konfiguration. Wenn Ihre Konfiguration `{ id: 'fr-ca' }` setzt, ist Ihr Ordner `docs/fr-ca/`.
 :::
 
-## Fallback pro Datei
+## Dateiweiser Fallback
 
-Sie müssen nicht jede Seite übersetzen. docmd scannt das **Verzeichnis der Standardsprache** als kanonische Liste der Seiten. Für jede andere Sprache wird geprüft, ob eine übersetzte Version der jeweiligen Seite existiert:
+Sie müssen nicht jede Seite übersetzen. docmd durchsucht das **Standard-Locale-Verzeichnis** als kanonische Struktur. Für jede andere Locale wird eine übersetzte Seite gesucht:
 
-- Wenn `docs/hi/getting-started/installation.md` existiert → wird die Hindi-Übersetzung ausgeliefert
-- Wenn sie nicht existiert → wird die Version der Standardsprache für diese Seite ausgeliefert
+- Wenn `docs/hi/getting-started/installation.md` existiert → wird die Hindi-Übersetzung ausgeliefert.
+- Wenn sie nicht existiert → wird die Standard-Locale-Version ausgeliefert.
 
-Wenn eine Seite auf den Fallback zurückgreift, kann docmd einen übersetzten Callout (Hinweis) anzeigen, der die Besucher informiert, dass die Seite in der Standardsprache angezeigt wird. Diese Nachricht ist über Ihre [UI-Strings](./ui-strings)-Konfiguration anpassbar.
+Greift ein Seiten-Fallback, zeigt docmd einen übersetzten Hinweis. Dieser informiert die Betrachter, dass die Seite in der Standardsprache angezeigt wird. Passen Sie diese Meldung über Ihre [UI-Strings](ui-strings.md)-Konfiguration an.
 
-## Sprach-exklusive Seiten
+## Locale-exklusive Seiten
 
-Eine Nicht-Standardsprache kann auch Seiten haben, die in der Standardsprache nicht existieren. Diese werden nur für diese Sprache gerendert - sie erscheinen nicht in anderen Sprachen.
+Eine Nicht-Standard-Locale kann Seiten hosten, die in der Standard-Locale nicht existieren. Diese werden nur für diese spezifische Locale gerendert.
 
 ## Navigation übersetzen
 
-Jedes Sprachverzeichnis kann eine eigene `navigation.json` haben. `docmd` verwendet ein kaskadierendes Prioritätssystem, um die Seitenleiste aufzulösen.
+Jedes Locale-Verzeichnis kann eine eigene `navigation.json` enthalten. docmd verwendet ein Kaskadierungs-Prioritätssystem zur Auflösung der Sidebar.
 
-Einzelheiten zur Auflösungshierarchie und visuelle Beispiele finden Sie unter [Priorität der Navigationsauflösung](../navigation#prioritat-der-navigationsauflosung).
+Details zur Auflösungshierarchie finden Sie in der [Navigationskonfiguration](../navigation.md).
 
-Die `navigation.json` einer Sprache verwendet dasselbe Format:
+Die `navigation.json` einer Locale verwendet das Standardformat:
 
 ```json
 [
@@ -62,37 +62,27 @@ Die `navigation.json` einer Sprache verwendet dasselbe Format:
 ]
 ```
 
-::: callout tip "Teilweise Navigation"
-Sie müssen nur dann eine `navigation.json` für eine Sprache erstellen, wenn Sie übersetzte Labels wünschen. Wenn sie fehlt, wird die Navigation der Standardsprache verwendet - die Seiten werden gerendert, nur mit nicht übersetzten Labels.
+::: callout tip "Teilweise Navigation" icon:info
+Erstellen Sie eine Locale-`navigation.json` nur, wenn Sie übersetzte Beschriftungen wünschen. Fehlt sie, wird die Standard-Navigation verwendet.
 :::
 
-## Versionierung und i18n zusammen
+## Versionierung und i18n
 
-Wenn sowohl Versionierung als auch i18n konfiguriert sind, sieht die Quellstruktur wie folgt aus:
+Wenn Sie Versionierung und i18n kombinieren, strukturieren Sie die Quellverzeichnisse hierarchisch:
 
-```
-docs/                    ← Aktuelle Version (Container)
-  en/                    ← Aktuelle Version, Standardsprache
-  hi/                    ← Aktuelle Version, übersetzte Sprache
-docs-v1/                 ← Alte Version
-  index.md               ← Inhalt der alten Version (keine Sprachstruktur)
-  navigation.json
-```
-
-Alte Versionen, die i18n zeitlich vorausgehen, funktionieren automatisch - docmd liest sie direkt aus, wenn keine Sprach-Unterverzeichnisse vorhanden sind. Nur die Standardsprache rendert die alte Version. Um Übersetzungen zu einer alten Version hinzuzufügen, erstellen Sie darin ein Sprach-Unterverzeichnis:
-
-```
-docs-v1/
-  hi/                    ← Hindi-Übersetzung für v1
-    index.md
-    navigation.json
+```text
+docs/                    ← aktuelle Version
+  en/                    ← aktuelle Version, Standard-Locale
+  hi/                    ← aktuelle Version, übersetzte Locale
+docs-v1/                 ← vorherige Version
+  en/                    ← v1, Standard-Locale
+  hi/                    ← v1, übersetzte Locale
 ```
 
-Die Ausgabe-URLs verschachteln zuerst die Sprache, dann die Version:
+Die Ausgabe-URLs verschachteln zuerst die Locale, dann die Version:
 
-```
-/                        ← Standardsprache, aktuelle Version
-/hi/                     ← Übersetzte Sprache, aktuelle Version
-/v1/                     ← Standardsprache, alte Version
-/hi/v1/                  ← Übersetzte Sprache, alte Version
-```
+```text
+/                        ← Standard-Locale, aktuelle Version
+/hi/                     ← übersetzte Locale, aktuelle Version
+/v1/                     ← Standard-Locale, vorherige Version
+/hi/v1/                  ← übersetzte Locale, vorherige Version
