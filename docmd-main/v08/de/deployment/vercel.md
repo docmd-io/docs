@@ -1,35 +1,35 @@
 ---
 title: "Vercel"
-description: "Stellen Sie Ihre docmd-Dokumentation unter Verwendung einer generierten vercel.json auf Vercel bereit."
+description: "Stellen Sie Ihre docmd-Dokumentation mit einer generierten vercel.json auf Vercel bereit."
 ---
 
-Der Befehl `npx @docmd/core deploy --vercel` generiert eine `vercel.json`-Datei im Root Ihres Projekts. Sie ist automatisch auf das Ausgabeverzeichnis Ihrer Website und die SPA-Routing-Einstellungen konfiguriert.
+`npx @docmd/core deploy --vercel` generiert eine `vercel.json`-Datei im Stammverzeichnis Ihres Projekts. Sie wird automatisch für das Ausgabeverzeichnis und die SPA-Routing-Einstellungen Ihrer Site konfiguriert.
 
 ```bash
 npx @docmd/core deploy --vercel
 ```
 
-## Was generiert wird
+## Was wird generiert
 
-Die `vercel.json` konfiguriert Folgendes:
+Die `vercel.json` konfiguriert:
 
-- **Build-Befehl** – Führt `npx @docmd/core build` aus.
-- **Ausgabeverzeichnis (Output Directory)** – Entspricht der Eigenschaft `out` in Ihrer Konfiguration.
-- **Installationsbefehl** – Installiert die exakte verwendete Version von `@docmd/core`.
-- **Cache-Header** – Unveränderliches Caching für Assets, no-cache für HTML.
-- **SPA-Routing** – Eine Catch-all-Route zu `index.html`, wenn `layout.spa` aktiviert ist.
+- **Build-Befehl** - führt `npx @docmd/core build` aus.
+- **Ausgabeverzeichnis** - auf die `out`-Eigenschaft in Ihrer Konfiguration gesetzt.
+- **Installationsbefehl** - installiert die exakte verwendete `@docmd/core`-Version.
+- **Cache-Header** - unveränderliches Caching für Assets, kein Cache für HTML.
+- **SPA-Routing** - eine Catch-All-Route zu `index.html`, wenn `layout.spa` aktiviert ist.
 
 ## Bereitstellung
 
-Nachdem Sie die Datei generiert haben, stellen Sie sie mit der [Vercel-CLI](https://vercel.com/docs/cli) bereit:
+Nach der Generierung der Datei stellen Sie mit der [Vercel CLI](external:https://vercel.com/docs/cli) bereit:
 
 ```bash
 npm install -g vercel
 vercel
 ```
 
-Alternativ können Sie Ihr Repository über das Dashboard mit Vercel verbinden. Es erkennt die `vercel.json` automatisch.
+Alternativ verbinden Sie Ihr Repository über das Dashboard mit Vercel. Es erkennt die `vercel.json` automatisch.
 
-## Erneutes Generieren
+## Neu generieren
 
-Wenn Sie Ihr `out`-Verzeichnis oder Ihre `url` in der `docmd.config.json` ändern, führen Sie den Befehl erneut aus, um die Datei neu zu generieren. Dies hält die Konfiguration synchron.
+Wenn Sie Ihr `out`-Verzeichnis oder Ihre `url` in `docmd.config.json` ändern, führen Sie den Befehl erneut aus, um die Datei neu zu generieren. Dies hält die Konfiguration synchron.
