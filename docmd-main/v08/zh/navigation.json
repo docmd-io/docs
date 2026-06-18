@@ -638,8 +638,16 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.7 - 自定义模板插件 API",
+        "path": "/release-notes/0-8-7"
+      },
+      {
         "title": "v0.8.6 - AI 优先与 MCP",
         "path": "/release-notes/0-8-6"
+      },
+      {
+        "title": "v0.8.5 - 语义搜索 Alpha 与 SEO 增强",
+        "path": "/release-notes/0-8-5"
       },
       {
         "title": "v0.8.4 - Deployer 与安全",

@@ -638,8 +638,16 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.7 - Custom-Template-Plugin-API",
+        "path": "/release-notes/0-8-7"
+      },
+      {
         "title": "v0.8.6 - KI-First & MCP",
         "path": "/release-notes/0-8-6"
+      },
+      {
+        "title": "v0.8.5 - Semantic-Search Alpha & SEO-Verbesserungen",
+        "path": "/release-notes/0-8-5"
       },
       {
         "title": "v0.8.4 - Deployer & Sicherheit",

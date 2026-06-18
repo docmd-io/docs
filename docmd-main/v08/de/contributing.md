@@ -75,3 +75,22 @@ Wir verwenden [Conventional Commits](https://www.conventionalcommits.org/):
 - `fix:` (Fehlerbehebungen)
 - `docs:` (Dokumentationsänderungen)
 - `refactor:` (Interne Refaktorierungen)
+### Quellcode-Header
+
+Alle neuen Dateien innerhalb des `packages/`-Verzeichnisses MÜSSEN den standardmäßigen Projekt-Copyright-Header enthalten:
+
+```javascript
+/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @licence     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+```
