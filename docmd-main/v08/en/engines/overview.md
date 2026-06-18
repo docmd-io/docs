@@ -18,7 +18,7 @@ Choose between the zero-configuration **JavaScript Engine** and the accelerated 
 
 Configure your build engine in the `docmd.config.json` file. Set the `engine` parameter directly.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Enterprise Reference",
   "engine": "js",

@@ -1,9 +1,9 @@
 ---
-title: "Node.js API"
-description: "Integrieren Sie die Build-Engine von docmd in Ihre benutzerdefinierten Node.js-Skripte und Automatisierungs-Pipelines."
+title: "Node.js-API"
+description: "Integrieren Sie docmds Build-Engine in Ihre benutzerdefinierten Node.js-Skripte und Automatisierungs-Pipelines."
 ---
 
-Für fortgeschrittene Workflows können Sie die `docmd`-Build-Engine direkt in Ihren eigenen Node.js-Anwendungen importieren und verwenden. Dies ist ideal für benutzerdefinierte CI/CD-Pipelines, automatisierte Dokumentationserstellung oder die Erweiterung von `docmd` für spezialisierte Umgebungen.
+Sie können docmds Build-Engine direkt in Ihren Node.js-Anwendungen importieren und verwenden. Das ist ideal für benutzerdefinierte CI/CD-Pipelines, automatisierte Dokumentations-Generierung oder die Erweiterung von docmd für spezielle Umgebungen.
 
 ## Installation
 
@@ -13,42 +13,69 @@ Stellen Sie sicher, dass `@docmd/core` in Ihrem Projekt installiert ist:
 npm install @docmd/core
 ```
 
-## Kernfunktionen
+## Kern-Funktionen
 
 ### `buildSite(configPath, options)`
 
-Die primäre Build-Funktion. Sie übernimmt das Laden der Konfiguration, das Parsen von Markdown und die Generierung von Assets.
+Die primäre Build-Funktion. Sie übernimmt das Laden der Konfiguration, das Markdown-Parsing und die Asset-Generierung.
 
 ```javascript
-import { buildSite } from '@docmd/core';
+import { buildSite } from "@docmd/core";
 
 async function runBuild() {
-  await buildSite('./docmd.config.js', {
-    isDev: false,      // Auf true setzen für Watch-Modus-Logik
-    offline: false,    // Auf true setzen zur Optimierung für file:// Zugriff
-    zeroConfig: false  // Auf true setzen, um die Erkennung der Konfigurationsdatei zu umgehen
+  await buildSite("./docmd.config.json", {
+    "isDev": false,
+    offline: false,
+    zeroConfig: false
   });
 }
 ```
 
 ### `buildLive(options)`
 
-Erzeugt das Bundle für den browserbasierten **Live Editor**.
+Generiert das browserbasierte **Live-Editor**-Bundle.
 
 ```javascript
-import { buildLive } from '@docmd/core';
+import { buildLive } from "@docmd/core";
 
 async function generateEditor() {
   await buildLive({
-    serve: false, // true startet einen lokalen Server; false erzeugt statische Dateien
-    port: 3000    // Benutzerdefinierter Port, wenn serve true ist
+    "serve": false,
+    port: 3000
   });
+}
+```
+
+## Workspace-Verwaltung
+
+Um Workspaces programmatisch zu verwalten, verwenden Sie die dedizierten Workspace-Funktionen.
+
+### `isWorkspace(config)`
+Gibt `true` zurück, wenn das übergebene Konfigurations-Objekt dem Workspace-Schema folgt.
+
+### `detectWorkspace(configPath)`
+Erkennt und lädt eine Workspace-Konfigurationsdatei. Gibt eine normalisierte `WorkspaceRootConfig` oder `null` zurück.
+
+### `buildWorkspace(config, options)`
+Baut alle Projekte innerhalb eines Workspace. Behandelt geteilte Assets und projekt-spezifische Prefixes.
+
+### `devWorkspace(config, options)`
+Startet den Workspace-Dev-Server. Beobachtet alle Projekte auf Änderungen und führt gezielte Rebuilds durch.
+
+```javascript
+import { detectWorkspace, buildWorkspace } from "@docmd/core";
+
+async function buildAll() {
+  const config = await detectWorkspace("./docmd.config.json");
+  if (config) {
+    await buildWorkspace(config, { quiet: false });
+  }
 }
 ```
 
 ## Beispiel: Benutzerdefinierte Pipeline
 
-Sie können `docmd` kapseln, um komplexe Dokumentations-Workflows zu erstellen.
+Sie können docmd umhüllen, um komplexe Dokumentations-Workflows zu erstellen.
 
 ```javascript
 import { buildSite } from '@docmd/core';
@@ -58,8 +85,8 @@ async function deploy() {
   // 1. Dynamische Inhalte generieren
   await fs.writeFile('./docs/dynamic.md', '# Generierter Inhalt');
 
-  // 2. docmd-Build ausführen
-  await buildSite('./docmd.config.js');
+  // 2. Build ausführen
+  await buildSite('./docmd.config.json');
 
   // 3. Ausgabe verschieben
   await fs.move('./site', './public/docs');
@@ -67,12 +94,12 @@ async function deploy() {
 ```
 
 ::: callout tip
-Die programmatische API ist hochgradig kompatibel mit **KI-gesteuerter Dokumentation**. Agenten können Builds nach Inhaltsaktualisierungen auslösen, um die Integrität zu prüfen und Bereitstellungen autonom zu verwalten.
+Die programmatische API ist hochkompatibel mit **AI-gesteuerter Dokumentation**. Agenten können nach Inhalts-Updates Builds auslösen, um die Integrität zu prüfen und Deployments autonom zu verwalten.
 :::
 
 ## Plugin-API (`@docmd/api`)
 
-Das Paket `@docmd/api` ist die dedizierte Heimat für das Plugin-System. Es bietet Hook-Registrierung, WebSocket-RPC-Dispatch, Quellcode-Editierwerkzeuge und **zentralisierte URL-Utilities**.
+Das Paket `@docmd/api` ist die dedizierte Heimat des Plugin-Systems. Es stellt Hook-Registrierung, WebSocket-RPC-Dispatch, Source-Editing-Tools und **zentrale URL-Utilities** bereit.
 
 ```bash
 npm install @docmd/api
@@ -80,11 +107,11 @@ npm install @docmd/api
 
 ### URL-Utilities
 
-Plugins sollten diese zentralisierten Utilities verwenden, anstatt eine eigene URL-Logik zu implementieren.
+Plugins sollten diese zentralen Utilities verwenden, anstatt eigene URL-Logik zu implementieren.
 
 #### `outputPathToSlug(outputPath)`
 
-Konvertiert einen Ausgabe-Pfad der Build-Engine in einen sauberen Slug im Verzeichnis-Stil.
+Konvertiert einen Build-Engine-Ausgabepfad in einen sauberen Verzeichnis-Slug.
 
 ```javascript
 import { outputPathToSlug } from '@docmd/api';
@@ -96,7 +123,7 @@ outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
 
 #### `outputPathToPathname(outputPath)`
 
-Konvertiert in einen Wurzel-relativen Pfadnamen (Pathname).
+Konvertiert in einen root-relativen Pfadnamen.
 
 ```javascript
 import { outputPathToPathname } from '@docmd/api';
@@ -110,132 +137,150 @@ outputPathToPathname('index.html');       // → '/'
 Erstellt eine vollständige kanonische URL.
 
 ```javascript
-import { outputPathToCanonical } from '@docmd/api';
+import { outputPathToCanonical } from "@docmd/api";
 
-outputPathToCanonical('guide/index.html', 'https://example.com');
-// → 'https://example.com/guide/'
+outputPathToCanonical("guide/index.html", "https://docs.example.com");
 ```
 
 #### `sanitizeUrl(url)`
 
-Fasst Doppelschrägstriche zusammen (außer nach dem Protokoll).
+Reduziert doppelte Schrägstriche (außer nach dem Protokoll).
 
 ```javascript
-import { sanitizeUrl } from '@docmd/api';
+import { sanitizeUrl } from "@docmd/api";
 
-sanitizeUrl('https://example.com//path/'); // → 'https://example.com/path/'
-sanitizeUrl('/foo//bar/');                  // → '/foo/bar/'
+sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com/guide"
+sanitizeUrl("/foo//bar"); // → "/foo/bar"
 ```
 
 #### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
 
-Erstellt eine absolute URL mit Locale- und Versions-Präfixen.
+Baut eine absolute URL mit Locale- und Versions-Prefixes.
 
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/');
-// → '/de/v1/guide/'
+buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
 ```
 
 #### `resolveHref(href)`
 
-Normalisiert vom Benutzer geschriebene Hrefs zu sauberen URLs. Behandelt das Entfernen von `.md`, abschließende Schrägstriche sowie `external:` und `raw:` Präfixe.
+Normalisiert vom Benutzer geschriebene hrefs zu sauberen URLs. Behandelt das Strippen von `.md`, Trailing-Slashes sowie die Präfixe `external:` und `raw:`.
 
 ```javascript
-import { resolveHref } from '@docmd/api';
+import { resolveHref } from "@docmd/api";
 
-resolveHref('overview.md');
-// → { href: 'overview/', isExternal: false, isRaw: false }
-
-resolveHref('external:https://github.com/docmd-io/docmd');
-// → { href: 'https://github.com/docmd-io/docmd', isExternal: true, isRaw: false }
-
-resolveHref('raw:docs/readme.md');
-// → { href: 'docs/readme.md', isExternal: false, isRaw: true }
+resolveHref("overview.md"); // → "overview/"
+resolveHref("external:https://github.com"); // → "https://github.com"
+resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
 ```
 
 ### Vorberechnete Seiten-URLs
 
-Jedes Seiten-Objekt enthält vorberechnete URL-Daten. Plugins können diese direkt lesen - keine Berechnung erforderlich.
+Jedes Page-Objekt enthält vorberechnete URL-Daten. Plugins können diese ohne weitere Berechnung direkt lesen.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {
   for (const page of pages) {
-    console.log(page.urls.slug);      // "guide/"
-    console.log(page.urls.canonical); // "https://example.com/guide/"
-    console.log(page.urls.pathname);  // "/guide/"
+    console.log(page.urls.slug);
+    console.log(page.urls.canonical);
+    console.log(page.urls.pathname);
   }
 }
 ```
 
 | Eigenschaft | Typ | Beschreibung |
-|:------------|:-----|:------------|
-| `slug` | `string` | Sauberer Slug im Verzeichnis-Stil (z. B. `guide/` oder `/`) |
+|:---------|:-----|:------------|
+| `slug` | `string` | Sauberer Verzeichnis-Slug (z. B. `guide/` oder `/`) |
 | `canonical` | `string` | Vollständige kanonische URL (nur wenn `config.url` gesetzt ist) |
-| `pathname` | `string` | Wurzel-relativer Pfad (z. B. `/guide/`) |
+| `pathname` | `string` | Root-relativer Pfad (z. B. `/guide/`) |
 
-> **Abwärtskompatibilität:** Alle Exporte aus `@docmd/api` werden auch aus `@docmd/core` re-exportiert, sodass bestehender Code ohne Änderungen weiterhin funktioniert. Neue Projekte werden ermutigt, direkt aus `@docmd/api` zu importieren.
+> **Hinweis:** Alle Exporte aus `@docmd/api` sind auch aus `@docmd/core` verfügbar. Neue Projekte sollten direkt aus `@docmd/api` importieren.
 
 ### `createActionDispatcher(hooks, options)`
 
-Erstellt einen Dispatcher, der WebSocket-RPC-Nachrichten an Plugin-Aktions-/Event-Handler leitet.
+Erzeugt einen Dispatcher, der WebSocket-RPC-Nachrichten an Plugin-Action/Event-Handler weiterleitet.
 
 ```javascript
-import { createActionDispatcher } from '@docmd/api';
+import { createActionDispatcher } from "@docmd/api";
 
 const dispatcher = createActionDispatcher(
-  { actions: myPlugin.actions, events: myPlugin.events },
-  { projectRoot: '/path/to/project', config, broadcast }
+  { "actions": myPlugin.actions, "events": myPlugin.events },
+  { "projectRoot": "/path/to/project", config, broadcast }
 );
 
-const { result, reload } = await dispatcher.handleCall('my-action', payload);
+const { result, reload } = await dispatcher.handleCall("my-action", payload);
 ```
 
 ### `createSourceTools({ projectRoot })`
 
-Erstellt Werkzeuge zur Quellcode-Bearbeitung für die Manipulation von Markdown-Dateien.
+Erzeugt Source-Editing-Utilities zur Bearbeitung von Markdown-Dateien.
 
 ```javascript
-import { createSourceTools } from '@docmd/api';
+import { createSourceTools } from "@docmd/api";
 
-const source = createSourceTools({ projectRoot: '/path/to/project' });
+const source = createSourceTools({ "projectRoot": "/path/to/project" });
 
-// Block-Informationen an einem bestimmten Zeilenbereich abrufen
-const block = await source.getBlockAt('docs/page.md', [10, 12]);
-
-// Text mit Syntax-Markierungen umschließen
-await source.wrapText('docs/page.md', [10, 12], 'important', 0, '**', '**');
+const block = await source.getBlockAt("docs/page.md", [10, 12]);
+await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 ```
 
 ### `loadPlugins(config, options)`
 
-Lädt, validiert und registriert alle in der Konfiguration deklarierten Plugins. Gibt das gefüllte Hook-Register zurück.
+Lädt, validiert und registriert alle in der Konfiguration deklarierten Plugins. Gibt die befüllte Hook-Registry zurück.
 
 ```javascript
-import { loadPlugins, hooks } from '@docmd/api';
+import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  resolvePaths: [__dirname]  // Hilft beim Auflösen von Plugins in pnpm-Workspaces
+  "resolvePaths": [__dirname]
 });
+```
+
+### Engine-Loader-API
+
+Die steckbare Engine-Architektur erlaubt die programmatische Auflösung und Instanziierung von Beschleunigungs-Schichten direkt über `@docmd/api`.
+
+#### `loadEngine(engineName)`
+
+Löst das angeforderte Build-Engine-Backend auf und initialisiert es. Falls native Architektur-Binaries nicht verfügbar sind, fällt es sauber auf die hochperformante JavaScript-Engine zurück.
+
+```javascript
+import { loadEngine } from "@docmd/api";
+
+const engine = await loadEngine("rust");
+const gitLogResult = await engine.runWorkerTask("git:log", { "paths": ["docs/guide.md"] });
+```
+
+#### `registerEngine(engineName, engineInstance)`
+
+Erlaubt benutzerdefinierten Tools oder Drittanbieter-Integratoren, eigene Ausführungs-Engines programmatisch zu registrieren.
+
+```javascript
+import { registerEngine } from "@docmd/api";
+
+registerEngine("custom", myCustomEngineImpl);
 ```
 
 ### Typ-Exporte
 
-Für TypeScript-Plugin-Autoren stehen folgende Typen zur Verfügung:
+Für TypeScript-Plugin-Autoren sind die folgenden Typen verfügbar:
 
 ```typescript
 import type {
-  PluginModule,       // Vollständiges Plugin-Vertragsinterface
-  PluginDescriptor,   // Plugin-Metadaten (Name, Version, Fähigkeiten)
-  PluginHooks,        // Form des Hook-Registers
-  PageContext,        // Kontext für Build-Hooks (sourcePath, html etc.)
-  Capability,         // Deklaration der Hook-Kategorie (init, body, actions, etc.)
-  ActionContext,      // Kontext, der an Aktions-/Event-Handler übergeben wird
-  ActionHandler,      // Signatur für Aktions-Handler
-  EventHandler,       // Signatur für Event-Handler
-  SourceTools,        // Interface für Quellcode-Editierwerkzeuge
-  BlockInfo,          // Von getBlockAt zurückgegebene Block-Informationen
-  TextLocation,       // Von findText zurückgegebene Textposition
+  PluginModule,
+  PluginDescriptor,
+  PluginHooks,
+  PageContext,
+  BeforeBuildContext,
+  PostBuildContext,
+  Capability,
+  ActionContext,
+  ActionHandler,
+  EventHandler,
+  SourceTools,
+  BlockInfo,
+  TextLocation,
+  Engine,
 } from '@docmd/api';
 ```

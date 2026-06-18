@@ -1,24 +1,24 @@
 ---
-title: "Übersicht der Engines"
+title: "Engines-Übersicht"
 description: "Verstehen Sie die steckbare Build-Engine-Architektur und wählen Sie das beste Verarbeitungs-Backend."
 ---
 
-Der Compiler verfügt über eine hochmodulare, mehrthreadige **steckbare Engine-Architektur**. Sie entkoppelt die Orchestrierung von Rechenaufgaben, um rechenintensive Workloads effizient auszuführen.
+Der Compiler verfügt über eine hochmodulare, mehrfädige **Pluggable Engine Architecture**. Sie entkoppelt Orchestrierung von Berechnungs-Tasks, um schwere Workloads effizient auszuführen.
 
-Wählen Sie zwischen der konfigurierungsfreien **JavaScript-Engine** und der beschleunigten **Rust-Engine**. Wählen Sie die Engine basierend auf der Größe Ihres Repositories, der Plattform und Ihren Leistungsanforderungen.
+Wählen Sie zwischen der Zero-Config-**JavaScript-Engine** und der beschleunigten **Rust-Engine**. Wählen Sie die Engine basierend auf Repository-Größe, Plattform und Performance-Anforderungen.
 
 ## Verfügbare Engines
 
-| Engine | Bezeichner | Standard | Ziel-Anwendungsfall | Hauptstärke |
+| Engine | Identifier | Standard | Ziel-Anwendungsfall | Kernstärke |
 | :--- | :--- | :---: | :--- | :--- |
-| **JavaScript-Engine** | `"js"` | ✅ Ja | Standard-Websites, schnelles lokales Prototyping, Portabilität. | Läuft universell auf jedem Gerät, das Node.js unterstützt. |
-| **Rust-Engine (Vorschau)** | `"rust"` | ❌ Nein | Riesige Repositories (mehr als 1000 Dateien), Enterprise CI/CD-Builds. | Maximiert parallele Datei-I/O via Tokio. |
+| **JavaScript-Engine** | `"js"` | ✅ Ja | Standard-Websites, schnelles lokales Prototyping, Portabilität. | Läuft universell auf jedem Gerät mit Node.js-Unterstützung. |
+| **Rust-Engine (Preview)** | `"rust"` | ❌ Nein | Massive Repositories (1.000+ Dateien), Enterprise-CI/CD-Builds. | Maximiert parallelen File-I/O über Tokio. |
 
-## Konfigurationsoptionen
+## Konfigurations-Optionen
 
-Konfigurieren Sie Ihre Build-Engine in der Datei `docmd.config.json`. Setzen Sie den Parameter `engine` direkt.
+Konfigurieren Sie Ihre Build-Engine in der `docmd.config.json`. Setzen Sie den Parameter `engine` direkt.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Enterprise-Referenz",
   "engine": "js",
@@ -27,32 +27,32 @@ Konfigurieren Sie Ihre Build-Engine in der Datei `docmd.config.json`. Setzen Sie
 }
 ```
 
-### Vollständige Optionsreferenz
+### Vollständige Options-Referenz
 
 | Schlüssel | Unterstützte Werte | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `engine` | `"js"`, `"rust"` | `"js"` | Die Ausführungsebene, die die Dateierkennung und Batch-Lesevorgänge verarbeitet. |
+| `engine` | `"js"`, `"rust"` | `"js"` | Die Ausführungs-Schicht, die File-Discovery und Batch-Reads verarbeitet. |
 
-## Übergreifende Funktionen & Einschränkungen
+## Übergeordnete Fähigkeiten & Einschränkungen
 
-Beide Engines teilen sich eine strikte Ausführungsgrenze. Die Core-API-Ebene erzwingt einheitliche Sicherheit und deterministische Ausgaben.
+Beide Engines teilen sich eine rigorose Ausführungs-Grenze. Die Kern-API-Schicht erzwingt einheitliche Sicherheit und deterministische Ausgabe.
 
-### Gemeinsame Funktionen
-- **Thread-Isolation**: Engines führen asynchrone Aufgaben sicher in isolierten Worker-Threads aus. Dies verhindert das Blockieren des primären Server-Loops.
-- **Aufgaben-Verifizierung**: Strikte Whitelists verhindern unbefugten Festplattenzugriff oder unbestätigte Ausführungsmuster.
-- **Nahtlose Interoperabilität**: Plugins fordern Daten über standardisierte Schnittstellen (`runWorkerTask`) an. Sie bleiben vom zugrunde liegenden Backend unabhängig.
+### Geteilte Fähigkeiten
+- **Thread-Isolation**: Engines führen asynchrone Tasks sicher in isolierten Worker-Threads aus. Das verhindert das Blockieren der primären Server-Schleife.
+- **Task-Verifikation**: Strenge Allowlists verhindern unautorisierten Disk-Zugriff oder unverifizierte Ausführungs-Muster.
+- **Nahtlose Interoperabilität**: Plugins fordern Daten über standardisierte Schnittstellen (`runWorkerTask`) an. Sie bleiben sich des zugrundeliegenden Backends nicht bewusst.
 
 ### Architektonische Einschränkungen
-- **Serialisierungs-Overhead**: Daten überschreiten native Laufzeitgrenzen (N-API). Hochgradig iterative Aufgaben, die große JSON-Objekte übergeben, verursachen eine geringe Serialisierungsgebühr.
-- **Binärkompatibilität**: Die JavaScript-Engine läuft überall nativ. Die Rust-Engine verlässt sich auf betriebssystemspezifische Plattform-Binärdateien, die über npm verteilt werden.
+- **Serialisierungs-Overhead**: Daten überqueren native Runtime-Grenzen (N-API). Hochiterative Tasks, die große JSON-Objekte übergeben, haben einen kleinen Serialisierungs-Overhead.
+- **Binärkompatibilität**: Die JavaScript-Engine läuft nativ überall. Die Rust-Engine ist auf OS-spezifische Plattform-Binaries angewiesen, die über npm verteilt werden.
 
-## So funktioniert der Engine-Loader
+## Wie der Engine-Loader funktioniert
 
-Beim Start von `@docmd/core` prüft der interne Loader Ihre aktive Konfiguration:
+Wenn `@docmd/core` startet, prüft der interne Loader Ihre aktive Konfiguration:
 
-1. **Auflösung**: Wenn für `"rust"` konfiguriert, lädt die Engine das architekturspezifische native Paket verzögert (z. B. `@docmd/engine-rust-darwin-arm64`).
-2. **Sanfter Fallback**: Wenn die Binärdatei fehlt oder nicht unterstützt wird, protokolliert die Engine einen Hinweis. Sie weicht dann transparent auf die JavaScript-Engine aus. Ihr Build gelingt in jedem Fall.
+1. **Auflösung**: Wenn `"rust"` konfiguriert ist, lädt die Engine das architektur-spezifische native Paket lazy nach (z. B. `@docmd/engine-rust-darwin-arm64`).
+2. **Graceful Fallback**: Falls die Binärdatei fehlt oder nicht unterstützt wird, loggt die Engine einen Hinweis. Dann fällt sie transparent auf die JavaScript-Engine zurück. Ihr Build gelingt immer.
 
-Erfahren Sie mehr in der Detaildokumentation für jede Engine:
-- [JavaScript-Engine Referenz](js.md)
-- [Rust-Engine Referenz](rust.md)
+Erkunden Sie die Deep-Dive-Dokumentation für jede Engine:
+- [JavaScript-Engine-Referenz](js.md)
+- [Rust-Engine-Referenz](rust.md)

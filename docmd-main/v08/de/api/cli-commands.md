@@ -1,89 +1,91 @@
 ---
 title: "CLI-Befehle"
-description: "Befehlszeilenreferenz für docmd - alle verfügbaren Befehle und Optionen."
+description: "Befehlszeilen-Referenz für docmd - alle verfügbaren Befehle und Optionen."
 ---
 
-## Befehlsübersicht
+## Befehle im Überblick
 
 | Befehl | Beschreibung |
 |:--------|:------------|
-| [`docmd init`](#docmd-init) | Erstellt ein neues Dokumentationsprojekt |
-| [`docmd dev`](#docmd-dev) | Startet den Entwicklungsserver mit Hot-Reload |
-| [`docmd build`](#docmd-build) | Erzeugt eine statische Website für die Produktion |
-| [`docmd live`](#docmd-live) | Startet den browserbasierten Live-Editor |
-| [`docmd stop`](#docmd-stop) | Beendet laufende Entwicklungsserver |
-| [`docmd deploy`](#docmd-deploy) | Erzeugt Bereitstellungskonfigurationen (Docker, Nginx, Caddy) |
-| [`docmd migrate`](#docmd-migrate) | Aktualisiert Legacy-Konfigurationen auf das V2-Schema |
-| [`docmd add <plugin>`](#docmd-add-plugin) | Installiert und konfiguriert ein Plugin |
-| [`docmd remove <plugin>`](#docmd-remove-plugin) | Entfernt ein Plugin und dessen Konfiguration |
+| [`npx @docmd/core init`](#npx-docmdcore-init) | Ein neues Dokumentations-Projekt scaffolden |
+| [`npx @docmd/core dev`](#npx-docmdcore-dev) | Development-Server mit Hot-Reload starten |
+| [`npx @docmd/core build`](#npx-docmdcore-build) | Eine produktionsreife statische Site generieren |
+| [`npx @docmd/core live`](#npx-docmdcore-live) | Den browserbasierten Live-Editor starten |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Laufende Dev-Server beenden |
+| [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Deployment-Konfigurationen generieren |
+| [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Legacy-Konfigurationen upgraden oder von anderen Tools migrieren |
+| [`npx @docmd/core validate`](#npx-docmdcore-validate) | Links validieren und Dokumentations-Dateien prüfen |
+| [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Als MCP-(Model Context Protocol-)Server über stdio betreiben |
+| [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Ein Plugin installieren und konfigurieren |
+| [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Ein Plugin und seine Konfiguration entfernen |
 
 ## Globale Optionen
 
 | Option | Alias | Beschreibung |
 |:-------|:------|:------------|
-| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei (Standard: `docmd.config.json`) |
-| `--verbose` | `-V` | Detaillierte Build-Protokolle anzeigen |
-| `--version` | `-v` | Die installierte Version ausgeben |
-| `--help` | `-h` | Hilfemenü anzeigen |
+| `--config <path>` | `-c` | Pfad zur Konfigurations-Datei (Standard: `docmd.config.json`) |
+| `--verbose` | `-V` | Detaillierte Build-Logs anzeigen |
+| `--version` | `-v` | Installierte Version ausgeben |
+| `--help` | `-h` | Hilfe-Menü anzeigen |
 | `--cwd <path>` | - | Arbeitsverzeichnis überschreiben (für Monorepos) |
 
-## `docmd init`
+## `npx @docmd/core init`
 
-Erstellt ein neues Dokumentationsprojekt im aktuellen Verzeichnis.
+Ein neues Dokumentations-Projekt im aktuellen Verzeichnis scaffolden.
 
 ```bash
-docmd init
+npx @docmd/core init
 ```
 
 Erstellt:
-- `docs/index.md` - Beispiel-Startseite
-- `docmd.config.json` - Empfohlene Standardeinstellungen
+- `docs/index.md` - Boilerplate-Startseite
+- `docmd.config.json` - empfohlene Standards
 - Aktualisierte `package.json` mit Build-Skripten
 
-## `docmd dev`
+## `npx @docmd/core dev`
 
-Startet einen Entwicklungsserver mit sofortigem Hot-Reload.
+Einen Development-Server mit sofortigem Hot-Reload starten.
 
 ```bash
-docmd dev [options]
+npx @docmd/core dev [options]
 ```
 
 | Option | Alias | Beschreibung |
 |:-------|:------|:------------|
 | `--port <number>` | `-p` | Server-Port (Standard: `3000`) |
-| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei |
+| `--config <path>` | `-c` | Pfad zur Konfigurations-Datei |
 
-## `docmd build`
+## `npx @docmd/core build`
 
-Erzeugt eine produktionsreife statische Website im Verzeichnis `site/`.
+Eine produktionsreife statische Site in `site/` generieren.
 
 ```bash
-docmd build [options]
+npx @docmd/core build [options]
 ```
 
 | Option | Alias | Beschreibung |
 |:-------|:------|:------------|
-| `--offline` | - | Links auf `.html` umschreiben für `file://` Browsing |
-| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei |
+| `--offline` | - | Links auf `.html` umschreiben für `file://`-Browsing |
+| `--config <path>` | `-c` | Pfad zur Konfigurations-Datei |
 
-## `docmd live`
+## `npx @docmd/core live`
 
-Startet den browserbasierten Live-Editor.
+Den browserbasierten Live-Editor starten.
 
 ```bash
-docmd live [options]
+npx @docmd/core live [options]
 ```
 
 | Option | Beschreibung |
 |:-------|:------------|
-| `--build-only` | Erzeugt das Editor-Bundle, ohne den Server zu starten |
+| `--build-only` | Editor-Bundle generieren, ohne den Server zu starten |
 
-## `docmd stop`
+## `npx @docmd/core stop`
 
-Beendet laufende docmd-Entwicklungsserver.
+Laufende Dev-Server beenden.
 
 ```bash
-docmd stop [options]
+npx @docmd/core stop [options]
 ```
 
 | Option | Alias | Beschreibung |
@@ -91,58 +93,96 @@ docmd stop [options]
 | `--port <number>` | `-p` | Nur den Server auf diesem Port stoppen |
 | `--force` | `-f` | Auch `serve`-Prozesse auf den Ports 3000, 3001, 8080, 8081 beenden |
 
-## `docmd deploy`
+## `npx @docmd/core deploy`
 
-Erzeugt Konfigurationsdateien für die Bereitstellung.
+Deployment-Konfigurations-Dateien generieren.
 
 ```bash
-docmd deploy [options]
+npx @docmd/core deploy [options]
 ```
 
 | Option | Beschreibung |
 |:-------|:------------|
-| `--docker` | Erzeugt ein `Dockerfile` |
-| `--nginx` | Erzeugt `nginx.conf` |
-| `--caddy` | Erzeugt `Caddyfile` |
-| `--force` | Bestehende Bereitstellungsdateien überschreiben |
+| `--docker` | Generiert eine `Dockerfile` + `.dockerignore` |
+| `--nginx` | Generiert `nginx.conf` |
+| `--caddy` | Generiert eine `Caddyfile` |
+| `--github-pages` | Generiert `.github/workflows/deploy.yml` |
+| `--vercel` | Generiert `vercel.json` |
+| `--netlify` | Generiert `netlify.toml` |
+| `--force` | Vorhandene Deployment-Dateien überschreiben |
 
-## `docmd migrate`
+## `npx @docmd/core migrate`
 
-Aktualisiert Legacy docmd V1-Konfigurationen auf das V2-Schema.
+Von einem anderen Tool migrieren oder Konfigurationen upgraden.
 
 ```bash
-docmd migrate
+npx @docmd/core migrate
 ```
 
-Ordnet automatisch veraltete Schlüssel neu zu (z. B. `siteTitle` → `title`) und strukturiert das Konfigurationsobjekt um.
+Ordnet veraltete Schlüssel automatisch neu zu (z. B. `siteTitle` → `title`) und strukturiert das Config-Objekt um.
 
-## `docmd add <plugin>`
+## `npx @docmd/core validate`
 
-Installiert und konfiguriert ein offizielles oder Community-Plugin.
+Dokumentations-Dateien validieren und auf defekte interne Links prüfen.
 
 ```bash
-docmd add <plugin-name>
+npx @docmd/core validate [options]
+```
+
+| Option | Beschreibung |
+|:-------|:------------|
+| `--json` | Fehler als maschinenlesbares JSON ausgeben (nützlich für CI-Pipelines). |
+
+Durchsucht jede Markdown-Datei, folgt relativen Links und Bild-Referenzen und meldet defekte Ziele. Beendet sich mit einem Status ungleich Null, falls ein Link ungültig ist, sodass Sie es in Pre-Merge-Hooks einbinden können.
+
+## `npx @docmd/core mcp`
+
+docmd als Model Context Protocol (MCP)-Server über stdio betreiben. Damit können AI-Agenten (Claude Desktop, Cursor usw.) Ihre Dokumentation direkt lesen und validieren.
+
+```bash
+npx @docmd/core mcp
+```
+
+Der Server kommuniziert über Standard-Ein-/Ausgabe mittels JSON-RPC. Konfigurieren Sie Ihren MCP-Client mit:
+
+```json "claude_desktop_config.json"
+{
+  "mcpServers": {
+    "docmd": {
+      "command": "npx",
+      "args": ["-y", "@docmd/core", "mcp"]
+    }
+  }
+}
+```
+
+## `npx @docmd/core add <plugin>`
+
+Ein offizielles oder Community-Plugin installieren und konfigurieren.
+
+```bash
+npx @docmd/core add <plugin-name>
 ```
 
 | Beispiel | Beschreibung |
 |:--------|:------------|
-| `docmd add analytics` | Installiert `@docmd/plugin-analytics` |
-| `docmd add search` | Installiert `@docmd/plugin-search` |
+| `npx @docmd/core add analytics` | Installiert `@docmd/plugin-analytics` |
+| `npx @docmd/core add search` | Installiert `@docmd/plugin-search` |
 
-Die CLI erkennt Ihren Paketmanager (npm, pnpm, yarn oder bun) und fügt empfohlene Standardeinstellungen in die `docmd.config.json` ein.
+Die CLI erkennt Ihren Package-Manager (npm, pnpm, yarn oder bun) und fügt empfohlene Standards in `docmd.config.json` ein.
 
-## `docmd remove <plugin>`
+## `npx @docmd/core remove <plugin>`
 
-Deinstalliert sicher ein Plugin und bereinigt dessen Konfiguration.
+Ein Plugin sicher deinstallieren und seine Konfiguration aufräumen.
 
 ```bash
-docmd remove <plugin-name>
+npx @docmd/core remove <plugin-name>
 ```
 
 Entfernt:
 - Das npm-Paket
-- Plugin-Konfiguration aus der `docmd.config.json`
+- Die Plugin-Konfiguration aus `docmd.config.json`
 
-::: callout tip "Agenten-kompatible Protokollierung :robot:"
-`docmd` verwendet strukturierte Terminal-Protokolle. KI-Agenten können die Ausgabe präzise parsen für Fehlererkennung und automatisierte Wartung.
+::: callout tip "Agent-kompatibles Logging" icon:sparkles
+docmd verwendet strukturiertes Terminal-Logging. AI-Agenten können die Ausgabe präzise für Fehlererkennung und automatisierte Wartung parsen.
 :::

@@ -11,7 +11,7 @@ By default, every docmd repository relies on the JavaScript engine. It provides 
 
 To explicitly instruct docmd to utilise the JavaScript backend, define the `engine` property as `"js"` inside `docmd.config.json`.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Developer Handbook",
   "engine": "js",

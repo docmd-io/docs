@@ -11,7 +11,7 @@ Available as an **experimental preview**, the Rust engine targets enterprise sca
 
 To activate native Rust acceleration, configure the `engine` directive to `"rust"` within your `docmd.config.json` file.
 
-```json
+```json "docmd.config.json"
 {
   "title": "Global API Registry",
   "engine": "rust",

@@ -1,19 +1,19 @@
 ---
 title: "Rust-Engine"
-description: "Erkunden Sie die optionale native Rust-Engine: Anwendungsfälle, Dateizugriffs-Funktionen, unterstützte Pakete und Einschränkungen."
+description: "Erkunden Sie die optionale native Rust-Engine: Anwendungsfälle, File-I/O-Fähigkeiten, unterstützte Pakete und Einschränkungen."
 ---
 
-Die **Rust-Engine** ist eine optionale Hochleistungs-Ausführungs-Engine. Sie beschleunigt schwere I/O-Workloads in riesigen Dokumentationsprojekten. Durch die Verwendung nativer Binärdateien über N-API umgeht sie die Einschränkungen des Standard-Event-Loops, um mehrthreadiges Dateilesen und Subprozess-Orchestrierung zu ermöglichen.
+Die **Rust-Engine** ist eine optionale, hochperformante Ausführungs-Engine. Sie beschleunigt schwere I/O-Workloads in massiven Dokumentations-Projekten. Durch die Verwendung nativer Binaries über N-API umgeht sie Standard-Event-Loop-Beschränkungen und liefert mehrfädiges File-Reading und Subprozess-Orchestrierung.
 
-Verfügbar als **experimentelle Vorschau**, richtet sich die Rust-Engine an Unternehmen. Sie glänzt dort, wo tausende von Markdown-Dateien und umfangreiche Git-Logs zu Kompilierungs-Engpässen führen.
+Verfügbar als **experimentelle Preview**, zielt die Rust-Engine auf Enterprise-Scale ab. Sie glänzt dort, wo Tausende von Markdown-Dateien und umfangreiche Git-Logs Kompilations-Engpässe verursachen.
 
 ## Konfiguration
 
-Um die native Rust-Beschleunigung zu aktivieren, konfigurieren Sie die Direktive `engine` in Ihrer Datei `docmd.config.json` als `"rust"`.
+Um native Rust-Beschleunigung zu aktivieren, setzen Sie die Direktive `engine` in Ihrer `docmd.config.json` auf `"rust"`.
 
-```json
+```json "docmd.config.json"
 {
-  "title": "Global API Registry",
+  "title": "Globale API-Registry",
   "engine": "rust",
   "src": "docs",
   "out": "site"
@@ -22,19 +22,19 @@ Um die native Rust-Beschleunigung zu aktivieren, konfigurieren Sie die Direktive
 
 ## Ideale Anwendungsfälle & Stärken
 
-Die Rust-Engine löst spezifische Kompilierungs-Engpässe. Sie bietet in folgenden Szenarien hervorragende Effizienzgewinne:
+Die Rust-Engine löst spezifische Kompilations-Engpässe. Sie bietet exzellente Effizienzgewinne unter folgenden Szenarien:
 
-- **Riesige Repositories (mehr als 1.000 Dateien)**: Monolithische Projekte profitieren immens von asynchronem, parallelem Dateisystemzugriff, der über Tokio orchestriert wird.
-- **Intensives Erfassen von Git-Metadaten**: Das Extrahieren tiefer Commit-Logs über hunderte von Seiten hinweg erfordert schweres Starten von Subprozessen. Die Rust-Engine verarbeitet `git:log`-Aufgaben bis zu **1,24× schneller** als JavaScript.
-- **Kaltstart-Beschleunigung in CI/CD**: In Umgebungen, in denen keine warmen Festplatten-Caches verfügbar sind, reduziert der rohe Dateilesedurchsatz die Gesamtverarbeitungszeit. Echte Benchmarks zeigen eine **Beschleunigung von ca. 25 % bei Kaltstarts** und eine **Verbesserung von ca. 17 % bei Warmstarts**.
+- **Massive Repositories (1.000+ Dateien)**: Monolithische Projekte profitieren enorm von asynchronem, parallelem File-System-Zugriff, orchestriert über Tokio.
+- **Intensive Git-Metadaten-Erntung**: Das Extrahieren tiefer Commit-Logs über Hunderte von Seiten erfordert schweres Subprozess-Spawning. Die Rust-Engine verarbeitet `git:log`-Tasks bis zu **1,24× schneller** als JavaScript.
+- **Cold-Build-Beschleunigung in CI/CD**: In Umgebungen ohne warme Disk-Caches reduziert der rohe File-Read-Durchsatz die Gesamtverarbeitungszeit. Praxis-Benchmarks zeigen eine **~25 % Beschleunigung bei Cold Builds** und eine **~17 % Verbesserung bei Warm Builds**.
 
 ## Unterstützte Geräte & Plattform-Pakete
 
-Die Engine führt vorkompilierten Maschinencode aus. Sie erfordert dedizierte native Binärdateien, die auf Ihre Zielarchitektur zugeschnitten sind. Das grundlegende Paket `@docmd/engine-rust` lädt beim Start automatisch die richtige Plattform-Binärdatei verzögert.
+Die Engine führt vorkompilierten Maschinencode aus. Sie benötigt dedizierte native Binaries, die auf Ihre Ziel-Host-Architektur zugeschnitten sind. Das fundamentale Paket `@docmd/engine-rust` lädt automatisch das korrekte Plattform-Binary beim Start lazy nach.
 
-Folgende Plattform-Pakete werden derzeit bereitgestellt:
+Die folgenden Plattform-Pakete werden derzeit verteilt:
 
-| Plattform-Paket | Zielarchitektur | Host-Betriebssystem |
+| Plattform-Paket | Ziel-Architektur | Host-Betriebssystem |
 | :--- | :--- | :--- |
 | `@docmd/engine-rust-darwin-arm64` | ARM64 (Apple Silicon) | macOS |
 | `@docmd/engine-rust-darwin-x64` | x64 (Intel) | macOS |
@@ -42,31 +42,31 @@ Folgende Plattform-Pakete werden derzeit bereitgestellt:
 | `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (glibc-Umgebungen) |
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
-::: callout info "Sanfter automatischer Fallback"
-Wenn in Ihrer Umgebung keine vorkompilierte Binärdatei verfügbar ist, protokolliert die Engine eine unschädliche Benachrichtigung und **weicht automatisch** auf die hochperformante JavaScript-Engine aus. Ihre Builds bleiben vollkommen deterministisch.
+::: callout info "Transparenter Graceful Fallback"
+Fehlt in Ihrer Umgebung ein passendes vorgebautes Binary, loggt die Engine eine nicht-fatale Benachrichtigung und **fällt automatisch** auf die hochperformante JavaScript-Engine zurück. Ihre Builds bleiben vollständig deterministisch.
 :::
 
-## Funktionen & Strategische Einschränkungen
+## Fähigkeiten & Strategische Einschränkungen
 
-Um den maximalen Nutzen zu erzielen, müssen Sie die architektonischen Kompromisse verstehen. Die Engine eignet sich hervorragend für I/O-gebundene Operationen, verursacht jedoch Overhead bei der grenzüberschreitenden Serialisierung.
+Um maximalen Nutzen zu erzielen, müssen Sie die architektonischen Trade-offs verstehen. Die Engine glänzt bei I/O-gebundenen Operationen, hat aber Overhead bei Cross-Boundary-Serialisierung.
 
-| Funktion / Aufgabe | Rust-Engine Leistungsprofil | Architektonisches Urteil |
+| Fähigkeit / Task | Rust-Engine-Performance-Profil | Architektonisches Urteil |
 | :--- | :--- | :--- |
-| **Batch-Dateierkennung & -Lesevorgänge** | Beschleunigt über parallele Tokio-Worker. | ✅ Äußerst effektiv für riesige Verzeichnisse. |
-| **Erfassung von Git-Commit-Logs** | Schnelle Subprozess-Orchestrierung unter Umgehung des Node-Event-Loops. | ✅ Hervorragend geeignet für Git-Metadatenextraktion bei Kaltstarts. |
-| **Dauerhaftes Festplatten-Caching** | Native Unterstützung für verankerte Festplatten-Caches, um redundante Lesevorgänge zu eliminieren. | ✅ Äußerst effektiv für Warmstarts. |
-| **CPU-gebundene Suchindizierung** | **Langsamer als native JavaScript-JIT**. | ❌ Ineffizient aufgrund des doppelten Serialisierungs-Overheads. |
+| **Batch-File-Discovery & Reads** | Beschleunigt über parallele Tokio-Worker. | ✅ Hocheffektiv für massive Verzeichnisse. |
+| **Git-Commit-Log-Erntung** | Schnelle Subprozess-Orchestrierung, die Node-Event-Loops umgeht. | ✅ Exzellent für Cold-Start-Git-Metadaten-Extraktion. |
+| **Persistentes Disk-Caching** | Native Unterstützung für verankerte Disk-Caches zur Eliminierung redundanter Reads. | ✅ Hocheffektiv für Warm Builds. |
+| **CPU-gebundene Such-Indexierung** | **Langsamer als natives JavaScript-JIT**. | ❌ Ineffizient durch doppelten Serialisierungs-Overhead. |
 
-### Die Serialisierungssteuer erklärt
+### Die Doppel-Serialisierungs-Steuer erklärt
 
-Die Kommunikation zwischen dem Core-Orchestrator von docmd und der nativen Rust-Engine beruht auf stringifiziertem JSON, das die N-API-Laufzeitgrenze überschreitet:
+Die Kommunikation zwischen docmds Core-Orchestrator und der nativen Rust-Engine beruht auf stringifiziertem JSON, das die N-API-Runtime-Grenze überquert:
 
 ```text
-JS Worker → JSON.stringify() → NAPI Boundary → Serde Deserialisierung → [Rust-Aufgabe] → Serde Serialisierung → NAPI Boundary → JSON.parse()
+JS Worker → JSON.stringify() → NAPI Boundary → Serde Deserialisation → [Rust Task] → Serde Serialisation → NAPI Boundary → JSON.parse()
 ```
 
-Bei I/O-lastigen Operationen wie dem Abfragen von Git-Historien oder dem Lesen von Festplattenpuffern überwiegt die eingesparte Verarbeitungszeit die String-Konvertierungskosten bei weitem.
+Bei I/O-lastigen Operationen wie dem Abfragen von Git-Historien oder dem Lesen von Disk-Buffern überwiegt die eingesparte Verarbeitungszeit die Kosten der String-Konversion bei Weitem.
 
-Bei hochgradig iterativen, CPU-gebundenen Aufgaben wie der Volltextsuchindizierung (`search:index`) verbraucht der **Serialisierungs-Roundtrip jedoch mehr CPU-Ressourcen als die eigentliche Aufgabe selbst**. Das Hin- und Herserialisieren großer Inhaltsarrays führt dazu, dass die Rust-Implementierung langsamer läuft als die native JIT-Stringmanipulation von Node.
+Für hochiterative, CPU-gebundene Tasks wie die Volltext-Suchindizierung (`search:index`) **verbraucht der Serialisierungs-Roundtrip jedoch mehr CPU-Ressourcen als die zugrundeliegende Aufgabe selbst**. Die Serialisierung großer Content-Arrays hin und her führt dazu, dass die Rust-Implementierung langsamer läuft als Nodes native JIT-String-Manipulation.
 
-Infolgedessen bleibt die **JavaScript-Engine die empfohlene Laufzeit für semantische Suchpipelines**. Aktivieren Sie die Rust-Engine selektiv für große Git- und Dateiverarbeitungs-Workloads.
+Infolgedessen **bleibt die JavaScript-Engine der empfohlene Runtime für semantische Such-Pipelines**. Aktivieren Sie die Rust-Engine gezielt für große Git- und File-Management-Workloads.

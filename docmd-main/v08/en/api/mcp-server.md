@@ -37,7 +37,7 @@ Add to your Claude Desktop `claude_desktop_config.json`:
 
 Add to your editor's MCP settings:
 
-```json
+```json "mcp_settings.json"
 {
   "command": "npx @docmd/core mcp",
   "transport": "stdio"

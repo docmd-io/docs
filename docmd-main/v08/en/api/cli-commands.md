@@ -145,7 +145,7 @@ npx @docmd/core mcp
 
 The server communicates over standard input/output using the JSON-RPC protocol. Configure your MCP client with:
 
-```json
+```json "claude_desktop_config.json"
 {
   "mcpServers": {
     "docmd": {

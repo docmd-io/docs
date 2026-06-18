@@ -1,34 +1,34 @@
 ---
 title: "Live-Editor"
-description: "Verständnis des docmd Live-Editors und seines browserbasierten Authoring-Workflows."
+description: "Verstehen Sie den docmd Live-Editor und seinen browserbasierten Authoring-Workflow."
 ---
 
-Der `docmd` Live-Editor ist eine spezialisierte Umgebung für das Schreiben von Dokumentationen in Echtzeit. Er nutzt den isomorphen Kern von `docmd`, um eine sofortige Side-by-Side-Vorschau Ihrer Markdown-Inhalte zu ermöglichen, ohne dass ein Backend-Build-Prozess erforderlich ist.
+Der docmd Live-Editor ist eine dedizierte Umgebung für das Echtzeit-Authoring von Dokumentation. Er verwendet den isomorphen Core, um eine sofortige, nebeneinander liegende Vorschau Ihrer Markdown-Inhalte zu bieten — ohne Backend-Build-Prozess.
 
 ## Editor starten
 
-Starten Sie den lokalen Live-Editor mit dem Befehl:
+Starten Sie den lokalen Live-Editor mit:
 
 ```bash
-docmd live
+npx @docmd/core live
 ```
 
-Der Editor ist normalerweise unter `http://localhost:3000` erreichbar.
+Der Editor ist typischerweise unter `http://localhost:3000` verfügbar.
 
 ## Architektur
 
-Im Gegensatz zum Standard-`dev`-Server, der Dateien auf der Festplatte neu baut, führt der Live-Editor die `docmd`-Engine direkt in Ihrem Browser aus. Dies ermöglicht:
+Anders als der Standard-`dev`-Server, der Dateien auf der Festplatte neu aufbaut, läuft der Live-Editor die Engine direkt in Ihrem Browser. Das ermöglicht:
 
-1.  **Sofortiges Feedback**: Inhalte werden bereits während des Schreibens neu gerendert.
-2.  **Portable Playgrounds**: Der Editor kann in eine statische Website gebündelt werden, um beispielsweise auf GitHub Pages gehostet zu werden.
-3.  **Plattformübergreifende Konsistenz**: Die Vorschau nutzt exakt dieselbe Rendering-Logik wie der Produktions-Build.
+1.  **Sofortiges Feedback**: Inhalte werden beim Tippen neu gerendert.
+2.  **Portable Playgrounds**: Der Editor kann in eine statische Site gebündelt und auf Plattformen wie GitHub Pages gehostet werden.
+3.  **Cross-Platform-Konsistenz**: Die Vorschau verwendet exakt dieselbe Render-Logik wie der Produktions-Build.
 
-## Statische Bereitstellung
+## Statisches Deployment
 
 Generieren Sie eine teilbare, eigenständige Version des Editors:
 
 ```bash
-docmd live --build-only
+npx @docmd/core live --build-only
 ```
 
-Dies erstellt ein `dist/`-Verzeichnis, das das HTML des Editors und die gebündelte isomorphe Engine enthält.
+Dies erzeugt ein `dist/`-Verzeichnis mit dem HTML des Editors und der gebündelten isomorphen Engine.
