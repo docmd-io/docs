@@ -46,3 +46,18 @@ For the full event list and usage examples, see [Client-Side Events](../api/clie
 ::: callout tip
 Adding custom CSS and JS allows AI models (like ChatGPT) to suggest much more tailored UI improvements. If you mention "I have a custom `branding.css` file", the model can provide specific selectors that won't conflict with the core `docmd` engine.
 :::
+## Asset Priority Chain (new in 0.8.7)
+
+Every CSS and JS file in a docmd build is assigned a **priority** that determines its load order. Lower priorities load first.
+
+| Priority | Layer | Notes |
+|---|---|---|
+| 0  | Base (`docmd-main.css`, `docmd-main.js`) | Always present. |
+| 5  | Theme colour overlay (`docmd-theme-sky.css`, etc.) | From `theme.name`. |
+| 10 | **Template structure** (new) | Loaded by template plugins. |
+| 15 | User `customCss` / `customJs` | **Always wins** — that's the contract. |
+| 20 | Plugin CSS/JS | lightbox, search, analytics, etc. |
+
+Within a priority bucket, files load in the order they were registered. If you need finer control, author a small plugin that returns `Asset[]` entries with explicit `priority` values.
+
+See [Templates](templates.md) for the full template plugin authoring guide.

@@ -16,7 +16,7 @@ The engine that generates static sites in Node.js can run entirely within a web 
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
 <!-- The Isomorphic Engine -->
-<script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
+<script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 ### `docmd.compile(markdown, config)`

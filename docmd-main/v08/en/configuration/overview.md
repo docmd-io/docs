@@ -11,7 +11,7 @@ JSON is the standard configuration format. This allows high-performance serialis
 
 However, `docmd.config.js` and `docmd.config.ts` remain fully supported if you need dynamic JavaScript logic.
 
-```json
+```json "docmd.config.json"
 {
   "title": "My Project",
   "url": "https://docs.myproject.com",
@@ -28,7 +28,7 @@ These top-level parameters configure the compiler's base inputs and destinations
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `title` | `String` | `"Documentation"` | The formal name of your site. Appears in navigation headers and browser title tabs. |
-| `url` | `String` | `null` | Your canonical production URL. Critical for SEO validation, Sitemap indexing, and OpenGraph metadata. |
+| `url` | `String` | `""` | Your canonical production URL. Critical for SEO validation, Sitemap indexing, and OpenGraph metadata. |
 | `src` | `String` | `"docs"` | Relative path to the folder containing your source Markdown (.md) files. |
 | `out` | `String` | `"site"` | Relative path where the compiler writes the optimised production static site. |
 | `base` | `String` | `"/"` | The root base path of your site (e.g., set to `/docs/` if hosting in a subfolder). |
@@ -54,9 +54,9 @@ Manage how your brand appears in the header and browser tabs.
 }
 ```
 
-## 4. UI Layout & Behaviour
+## 4. UI Layout and Behaviour
 
-The engine provides a modular header and sidebar layout. Customise functional regions. Change component visibility like search and dark-mode toggles. Enable or disable breadcrumbs.
+The engine provides a modular header and sidebar layout. Customise functional regions. Toggle component visibility (search, dark-mode switch, breadcrumbs).
 
 ```json
 {
@@ -103,7 +103,7 @@ Fine-tune how the parser processes your content files.
 | `minify` | `Boolean` | `true` | Compresses output HTML and JS structures for maximum speed. |
 | `autoTitleFromH1` | `Boolean` | `true` | Resolves missing page titles using the first H1 header in the file. |
 | `copyCode` | `Boolean` | `true` | Displays a "Copy Code" button on the top-right of syntax blocks. |
-| `pageNavigation` | `Boolean` | `true` | Generates a right-hand "On This Page" table of contents automatically. |
+| `pageNavigation` | `Boolean` | `true` | Adds "Previous" and "Next" page links at the bottom of every page based on the navigation order. |
 | `markdown.breaks` | `Boolean` | `true` | Standardises line breaks. Set to `false` if you wrap markdown lines at 80 columns. |
 
 ::: callout warning "Standalone editLink Deprecated" icon:alert-triangle

@@ -69,10 +69,10 @@ When you add an official plugin to your `docmd.config.json` without installing i
 ```
 
 The auto-installer:
-- Only targets official `@docmd/plugin-*` packages.
-- Installs the exact version matching your `@docmd/core` installation.
-- Uses your project's active package manager.
-- Displays progress directly in the terminal.
+- Targets official `@docmd/plugin-*` packages only.
+- Pins the version to match your `@docmd/core` installation.
+- Detects and uses your project's package manager.
+- Reports progress in the terminal as it runs.
 
 ## Third-Party & Custom Plugins
 
@@ -149,12 +149,12 @@ Plugins hook into different stages of the build and development process:
 
 The plugin system guarantees build safety:
 
-- **Validation**: Invalid plugin descriptors are rejected instantly at load time.
-- **Isolation**: Every hook invocation is wrapped in a try/catch block. A broken plugin cannot crash the build.
-- **Capability Enforcement**: Plugins can only register for explicitly declared hooks.
+- **Validation**: Invalid plugin descriptors are rejected at load time.
+- **Isolation**: Every hook invocation is wrapped in a try/catch. A broken plugin cannot crash the build.
+- **Capability enforcement**: Plugins can only register for hooks they have declared.
 
 See [Building Plugins](building-plugins.md) for the full API reference.
 
-::: callout tip "AI-Transparent Architecture :robot:"
-The architecture is **deterministic**. Every meta-tag and script is traceable. AI agents can understand exactly how the site behaves without hidden side effects.
+::: callout tip "Traceable Architecture" icon:sparkles
+Every meta-tag and script the engine emits is generated from explicit config and plugin output. There are no hidden side effects.
 :::

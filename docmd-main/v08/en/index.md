@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-Markdown to production docs in one command. Static HTML for SEO. SPA for speed. AI-ready by default.
+Markdown to production docs in one command. Static HTML for SEO. SPA for speed. Works with AI tools out of the box.
 
 ::: button "Get Started" ./getting-started/quick-start.md icon:rocket
 ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
@@ -16,17 +16,17 @@ Markdown to production docs in one command. Static HTML for SEO. SPA for speed. 
 
 ## Overview
 
-docmd is a zero-configuration documentation generator. It creates premium, high-performance static websites directly from your Markdown files.
+docmd is a zero-configuration documentation generator. It builds fast static websites directly from your Markdown files.
 
 ```bash
 npx @docmd/core dev
 ```
 
-Run this single command. The engine automatically builds your site, generates navigation, and enables instant search.
+Run this single command. The engine builds your site, generates navigation, and enables search automatically.
 
 ## Core Capabilities
 
-Everything needed for world-class documentation ships built-in. No complex plugins required for the essentials.
+Everything needed for solid documentation ships built in. No extra plugins required for the essentials.
 
 ::: grids
     ::: grid
@@ -35,8 +35,8 @@ Everything needed for world-class documentation ships built-in. No complex plugi
         :::
     :::
     ::: grid
-        ::: card "AI Optimised" icon:brain-circuit
-        Generates `llms.txt` and `llms-full.txt` automatically. Keep your documentation digestible for AI models.
+        ::: card "AI Context" icon:brain-circuit
+        Generates `llms.txt` and `llms-full.txt` automatically. Your docs stay readable to AI assistants.
         :::
     :::
     ::: grid
@@ -46,7 +46,7 @@ Everything needed for world-class documentation ships built-in. No complex plugi
     :::
     ::: grid
         ::: card "Live Previews" icon:monitor
-        Embed interactive, editable code sandboxes directly into your pages for real-time experimentation.
+        Render Markdown instantly in the browser with the `docmd.compile` API. Power live editors, CMS previews, and in-app docs.
         :::
     :::
     ::: grid

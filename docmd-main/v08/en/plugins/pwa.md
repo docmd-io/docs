@@ -3,7 +3,7 @@ title: "PWA & Offline Support"
 description: "Transform your documentation into a progressive web application with offline caching and mobile-first features."
 ---
 
-The `@docmd/plugin-pwa` plugin transforms your documentation into a Progressive Web App (PWA). It adds a web manifest for mobile installation and registers a service worker for intelligent offline caching. Your technical manuals remain accessible even in low-connectivity environments.
+The `@docmd/plugin-pwa` plugin turns your documentation into a Progressive Web App. It writes a web manifest for mobile installation and registers a service worker that caches pages for offline reading.
 
 ## Configuration
 
@@ -32,10 +32,10 @@ Customise your app branding within the `plugins` section of your `docmd.config.j
 
 ## Features
 
-- **Offline Caching**: Uses a "Stale-While-Revalidate" strategy. Pages serve instantly from the cache while updating in the background.
-- **Mobile Installation**: Generates a `manifest.webmanifest` allowing users to "Add to Home Screen" natively on iOS and Android.
-- **Smart Asset Resolution**: Automatically generates app icons from your project logo or favicon if no explicit icon is provided.
-- **SPA Compatible**: Fully compatible with Single Page Application transitions and standard directory routing.
+- **Offline caching**: stale-while-revalidate strategy. Pages load from cache, then refresh in the background.
+- **Installable**: emits a `manifest.webmanifest` so users can install the site to their home screen on iOS and Android.
+- **Auto icons**: derives PWA icons from your project logo or favicon if no explicit icon is provided.
+- **SPA friendly**: works with the SPA router and the standard directory routing.
 
 ## Icon Resolution Priority
 

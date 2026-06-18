@@ -59,7 +59,7 @@ For each path and HTTP method in the spec, the plugin renders:
 - **Deprecated notice** - operations marked `deprecated: true` are flagged inline
 
 ::: callout tip "Build-Time Rendering"
-All rendering happens at build time. The generated pages are fully static - no JavaScript is needed to display the API docs, which means fast page loads and full search indexation. This approach ensures zero-JS performance and SEO-friendliness.
+All rendering happens at build time. The generated pages are static, with no client-side JavaScript required to display them. This gives you fast page loads, full search indexation, and SEO-friendly HTML.
 :::
 
 ## Capability Support

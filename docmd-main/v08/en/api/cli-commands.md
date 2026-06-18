@@ -14,6 +14,8 @@ description: "Command-line reference for docmd - all available commands and opti
 | [`npx @docmd/core stop`](#npx-docmdcore-stop) | Kill running dev servers |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment configs |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configs or migrate from other tools |
+| [`npx @docmd/core validate`](#npx-docmdcore-validate) | Validate links and check documentation files |
+| [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Run as an MCP (Model Context Protocol) server over stdio |
 | [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Install and configure a plugin |
 | [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Remove a plugin and its config |
 
@@ -118,6 +120,41 @@ npx @docmd/core migrate
 ```
 
 Automatically re-maps deprecated keys (e.g., `siteTitle` → `title`) and restructures the config object.
+
+## `npx @docmd/core validate`
+
+Validate documentation files and check for broken internal links.
+
+```bash
+npx @docmd/core validate [options]
+```
+
+| Option | Description |
+|:-------|:------------|
+| `--json` | Output errors as machine-readable JSON (useful for CI pipelines). |
+
+Scans every Markdown file, follows relative links and image references, and reports any broken targets. Exits with a non-zero status if any link is invalid, so you can wire it into pre-merge hooks.
+
+## `npx @docmd/core mcp`
+
+Run docmd as a Model Context Protocol (MCP) server over stdio. Use this to give AI agents (Claude Desktop, Cursor, etc.) the ability to read and validate your documentation directly.
+
+```bash
+npx @docmd/core mcp
+```
+
+The server communicates over standard input/output using the JSON-RPC protocol. Configure your MCP client with:
+
+```json
+{
+  "mcpServers": {
+    "docmd": {
+      "command": "npx",
+      "args": ["-y", "@docmd/core", "mcp"]
+    }
+  }
+}
+```
 
 ## `npx @docmd/core add <plugin>`
 

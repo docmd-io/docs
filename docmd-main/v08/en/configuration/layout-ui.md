@@ -28,10 +28,10 @@ The header displays the page title, breadcrumbs, and utility menus.
 *   **Controls**: Enable or disable the header globally via `layout.header`. Toggle breadcrumbs via `layout.breadcrumbs`.
 *   **Overriding**: Use `hideTitle: true` in your [Page Frontmatter](../content/frontmatter.md) to hide the title area locally.
 
-### Copy Widgets (AI Integration)
-To help developers and LLM agents working with your documentation, docmd includes integrated copy buttons in the breadcrumbs bar. These buttons allow copy-pasting the raw Markdown of the page, or the unified LLM context.
+### Copy Widgets
+The breadcrumbs bar includes two copy buttons. One copies the page's raw Markdown, the other copies a structured context block that includes the URL, title, and description. Useful for pasting into AI chat windows or support tickets.
 
-Configure these buttons under the `theme.copyWidgets` settings block in your `docmd.config.json`:
+Configure these buttons under `theme.copyWidgets` in your `docmd.config.json`:
 
 ```json
 {
@@ -45,7 +45,7 @@ Configure these buttons under the `theme.copyWidgets` settings block in your `do
 }
 ```
 
-*   `enabled`: Set to `false` to disable the copy widgets bar completely.
+*   `enabled`: Set to `false` to disable the bar completely.
 *   `raw`: Set to `false` to hide the "Copy Markdown" button.
 *   `context`: Set to `false` to hide the "Copy Context" button.
 
@@ -101,5 +101,5 @@ The engine provides **minimal** and **complete** layouts for your site footer.
 ```
 
 ::: callout tip "Interface Hierarchy" icon:lightbulb
-Keep your **Menubar** for global links. Use your **Sidebar** for logical documentation structure. AI agents rely on this hierarchy to understand the relationships between modules.
+Use the menubar for global links and the sidebar for documentation structure. This separation keeps the navigation predictable for both human readers and crawlers.
 :::

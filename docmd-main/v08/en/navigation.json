@@ -49,6 +49,14 @@
         "path": "/configuration/menubar"
       },
       {
+        "title": "Cookie Consent",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "Site Banner",
+        "path": "/configuration/site-banner"
+      },
+      {
         "title": "Localisation",
         "path": "/configuration/localisation",
         "collapsible": true,
@@ -182,6 +190,10 @@
       {
         "title": "Available Themes",
         "path": "/theming/available-themes"
+      },
+      {
+        "title": "Templates (new in 0.8.7)",
+        "path": "/theming/templates"
       },
       {
         "title": "Customisation",

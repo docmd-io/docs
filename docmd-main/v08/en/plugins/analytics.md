@@ -34,13 +34,13 @@ Enable analytics by adding your tracking credentials to the `plugins` section of
 
 ## Tracked Events
 
-When `autoEvents` is enabled, the plugin automatically captures the following user interactions:
+When `autoEvents` is enabled, the plugin captures the following interactions automatically:
 
-- **External Links**: Track when users depart for external resources.
-- **File Downloads**: Log clicks on links with the `download` attribute or common file extensions.
-- **Table of Contents (TOC)**: Monitor section engagement by tracking clicks in the right-hand navigation.
-- **Heading Anchors**: Log when users click on "permalinks" to share specific sections.
-- **Search Queries**: Capture keywords used in the search bar (with a 1-second debounce).
+- **External links**: outbound clicks to other domains.
+- **Downloads**: clicks on links with the `download` attribute or common file extensions.
+- **TOC clicks**: section engagement via the right-hand navigation.
+- **Heading anchors**: clicks on per-section permalinks.
+- **Search queries**: keywords typed in the search bar (debounced 1 second).
 
 ::: callout info "Privacy & GDPR"
 By default, this plugin does not anonymise IP addresses as that is now handled natively by GA4. If you require advanced cookie consent management, you can manually inject scripts using a custom plugin hook.

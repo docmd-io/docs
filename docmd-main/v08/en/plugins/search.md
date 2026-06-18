@@ -61,7 +61,7 @@ The plugin injects a lightweight search modal into the `<body>` of your site. It
 ::: callout tip "Search Analytics"
 If you have the [Analytics Plugin](./analytics.md) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
 :::
-Because the search happens entirely on the client, no data - not even keystrokes - is ever sent to a server. This makes `docmd` the Gold Standard for documentation search in privacy-sensitive industries (Healthcare, Finance, Security).
+Because the search runs entirely on the client, no data, not even keystrokes, leaves the browser. This makes it suitable for privacy-sensitive industries (healthcare, finance, security).
 
 ## Comparison
 
@@ -69,20 +69,18 @@ Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. W
 
 | Feature | docmd Search | Algolia / External |
 | :--- | :--- | :--- |
-| **Setup** | **Zero Config** (Automatic) | Complex (API Keys, CI/CD crawling) |
-| **Privacy** | **100% Private** (Client-side) | Data sent to 3rd party servers |
-| **Offline** | **Yes** | No |
-| **Cost** | **Free** | Free tier limits or Paid |
-| **Speed** | **Instant** (In-memory) | Fast (Network latency dependent) |
+| Setup | Zero config (automatic) | API keys, CI crawling |
+| Privacy | Client-side, no data sent | Data sent to third-party servers |
+| Offline | Yes | No |
+| Cost | Free | Free tier limits or paid |
+| Speed | In-memory, instant | Network latency dependent |
 
 ## Semantic Search (Alpha Preview)
 
 ::: callout tip "Introducing docmd-search"
-We built something we're rather proud of.
+`docmd-search` is a fully offline semantic search engine for documentation. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. It is not tied to docmd: you can plug it into any documentation engine or static site.
 
-**`docmd-search`** is, to our knowledge, the first fully offline semantic search engine designed for documentation - and it isn't tied to docmd at all. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. Plug it into any documentation engine, any static site, or any webpage. It just works.
-
-This is an early alpha. Things will change, improve, and grow. But the foundation - private, offline, genuinely intelligent search - is already here.
+This is an early alpha. APIs and behaviour will change. The foundation (private, offline, genuinely intelligent search) is already there.
 
 [→ View on GitHub](https://github.com/docmd-io/docmd-search)
 :::

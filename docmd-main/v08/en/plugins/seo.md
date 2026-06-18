@@ -35,12 +35,12 @@ Configure site-wide SEO defaults in your `docmd.config.json`. Page-level setting
 
 ## Features
 
-- **Automatic robots.txt**: Generates `robots.txt` if missing, with sitemap reference and AI bot directives.
-- **Smart Fallbacks**: Automatically extracts the first 150 characters of prose if no description is provided.
-- **AI Bot Governance**: By default, AI bots are allowed to index content. Set `aiBots: false` to block AI training bots whilst still allowing traditional search engines.
-- **Canonical Resolution**: Automatically generates `<link rel="canonical">` tags to prevent duplicate content issues.
-- **Rich Social Previews**: Native support for Open Graph and Twitter Cards for professional link sharing.
-- **Structured Data**: Supports LD+JSON Article Schema for rich search snippets.
+- **Automatic `robots.txt`**: generated when missing, with sitemap reference and AI-bot directives.
+- **Smart fallbacks**: extracts the first 150 characters of prose if no description is set.
+- **AI bot governance**: by default AI bots can index content. Set `aiBots: false` to block AI training crawlers while still allowing traditional search engines.
+- **Canonical URLs**: emits `<link rel="canonical">` to prevent duplicate-content issues.
+- **Social previews**: native Open Graph and Twitter Cards.
+- **Structured data**: LD+JSON Article Schema for rich search snippets.
 
 ## robots.txt Auto-Generation
 

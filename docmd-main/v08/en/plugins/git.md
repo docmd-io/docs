@@ -14,7 +14,7 @@ The `@docmd/plugin-git` plugin adds repository intelligence to your documentatio
 | `editLink` | `boolean` | `true` | Show "Edit this page" link when `repo` is set. |
 | `lastUpdated` | `boolean` | `true` | Show last updated timestamp. |
 | `commitHistory` | `boolean` | `true` | Show commit history tooltip on hover. |
-| `maxCommits` | `number` | `6` | Maximum commits to show in the tooltip (if `commitHistory` is true). |
+| `maxCommits` | `number` | `5` | Maximum commits to show in the tooltip (if `commitHistory` is true). |
 | `dateFormat` | `string` | `'relative'` | Timestamp format: `relative` (default), `iso`, or `locale-aware`. |
 
 ### Example
@@ -36,10 +36,10 @@ The `@docmd/plugin-git` plugin adds repository intelligence to your documentatio
 
 ## Features
 
-- **Last Updated Timestamps**: Automatically shows when a page was last modified in the footer.
-- **Commit History Tooltip**: Hovering over the timestamp reveals recent commits for that specific page.
-- **Automated Edit Links**: Provides a link to edit the source file on GitHub, GitLab, or Bitbucket.
-- **Performance-First**: Git history is queried once and cached at build time. This ensures zero impact on site performance.
+- **Last-updated timestamps**: shown in the page footer.
+- **Commit history tooltip**: hover the timestamp to see recent commits for the page.
+- **Edit links**: optional links to edit the source file on GitHub, GitLab, or Bitbucket.
+- **Build-time caching**: Git history is queried once and cached, so site performance is unaffected.
 
 ## Behaviour
 

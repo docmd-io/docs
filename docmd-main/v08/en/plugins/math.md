@@ -34,6 +34,10 @@ Enable it in your `docmd.config.json`:
 3. The engine processes these rules during the build exactly as raw static HTML tags.
 4. Minimal injected CSS styles the classes automatically. This yields immediate visualisation on page load.
 
+## Conditional Asset Loading (new in 0.8.7)
+
+The KaTeX stylesheet (~30 KB) only loads on pages that actually render math. Pages without any equations skip the fetch entirely, so a 100-page documentation site with only 5 math pages pays for the CSS on those 5 pages only. The detection scans each page's rendered HTML for `class="katex"` or `class="katex-display"` markers and injects the asset conditionally. No configuration needed - the behaviour is automatic.
+
 ## Usage
 
 ### Inline Mathematics

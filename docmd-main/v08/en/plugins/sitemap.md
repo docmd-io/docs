@@ -32,10 +32,10 @@ Enable sitemap generation by providing your `siteUrl` in the root configuration.
 
 ## Features
 
-- **Automatic URL Construction**: Intelligently resolves page paths to their canonical public URLs with clean directory structure.
-- **Versioned Discovery**: Automatically includes all pages from all versions (e.g. `/v1/`, `/v2/`) without manual configuration.
-- **Granular Exclusions**: Exclude specific pages from the sitemap using frontmatter.
-- **SEO Ready**: Follows standard XML sitemap protocols compatible with all major search engines.
+- **Canonical URLs**: resolves page paths to clean public URLs based on your `url` config.
+- **Versioned discovery**: includes pages from every configured version (`/v1/`, `/v2/`, etc.).
+- **Per-page exclusions**: skip pages with `sitemap: false` in frontmatter.
+- **Standard XML**: output follows the sitemaps.org protocol supported by every major search engine.
 
 ## Page-Level Controls
 

@@ -13,13 +13,13 @@ The official image lets you build and serve your documentation without installin
 
 ```bash
 # Pull the latest image
-docker pull ghcr.io/docmd-io/docmd:latest
+docker pull ghcr.io/docmd-io/docmd:0.8.6
 
 # Build your documentation (mounts local docs and outputs to ./site)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 
 # Run the built-in demo site
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.6
 ```
 
 ### Docker Compose
@@ -30,7 +30,7 @@ Use Docker Compose to build and serve in a single workflow:
 version: '3.8'
 services:
   docs:
-    image: ghcr.io/docmd-io/docmd:latest
+    image: ghcr.io/docmd-io/docmd:0.8.6
     command: build
     volumes:
       - ./docs:/docs

@@ -3,7 +3,7 @@ title: "Live Preview"
 description: "Run the engine entirely in the browser without a backend server using the Live architecture."
 ---
 
-The compiler features a modular architecture separating filesystem operations from core logic. This enables the engine to run entirely within the browser. It facilitates live editors and CMS previews without a Node.js backend.
+The compiler separates filesystem operations from core logic. The core engine can therefore run entirely in the browser, powering live editors and CMS previews without a Node.js backend.
 
 <img width="720" class="with-border" src="/assets/previews/live-editor-preview.webp">
 
@@ -33,11 +33,11 @@ This generates a `dist/` directory. It contains the `index.html` entry point and
 
 ## Embedding @docmd/core
 
-Integrate the browser-compatible bundle into your applications. Provide internal Markdown rendering or preview capabilities.
+Add the browser-compatible bundle to a third-party app to render Markdown on the client.
 
 ### 1. Resource Integration
 
-Include the required CSS and JavaScript bundles from your assets or a CDN:
+Include the CSS and JavaScript bundles from your assets or a CDN:
 
 ```html
 <link rel="stylesheet" href="/assets/css/docmd-main.css">
@@ -46,7 +46,7 @@ Include the required CSS and JavaScript bundles from your assets or a CDN:
 
 ### 2. Isomorphic API
 
-The global `docmd` object provides the `compile` method for instant rendering.
+The global `docmd` object exposes a `compile` method for instant rendering.
 
 ```javascript
 const html = await docmd.compile(markdown, {

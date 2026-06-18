@@ -30,7 +30,7 @@ If port `3000` is in use, docmd automatically finds the next available port (e.g
 
 The engine sets up everything automatically:
 
-1.  **Directory Detection**: Scans for `docs/`, `src/docs/`, `documentation/`, or `.md` files.
+1.  **Directory Detection**: Scans for `docs/`, `src/docs/`, `documentation/`, `content/`, or any `.md` files in the project root.
 2.  **Navigation Structuring**: Builds a nested sidebar from your folder tree.
 3.  **Title Resolution**: Extracts page titles from the first `H1` tag automatically.
 4.  **Search Indexing**: Enables built-in full-text search immediately.

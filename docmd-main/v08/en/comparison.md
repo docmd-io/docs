@@ -3,7 +3,7 @@ title: "Comparison"
 description: "How docmd stacks up against Docusaurus, VitePress, MkDocs, Starlight, and Mintlify - real numbers, real features."
 ---
 
-You picked a documentation tool before. You'll pick one again. Here's what actually matters - and where docmd stands.
+Here is how docmd stacks up against the alternatives, with measurements from a 50-page site built on the same hardware.
 
 ## Start writing in 3 seconds, not 30 minutes
 
@@ -21,7 +21,7 @@ cd my-site
 npm install
 npm start
 ```
-Four commands, a generated project with ~250MB in `node_modules`, and a `docusaurus.config.js` you'll need to edit before anything useful happens.
+Four commands, a generated project with around 250 MB in `node_modules`, and a config file you need to edit before anything useful happens.
 
 == tab "VitePress"
 ```bash
@@ -67,9 +67,9 @@ Building the same 50-page site on an M1 MacBook Air:
 
 docmd rebuilds are fast enough that the page refreshes before you switch windows.
 
-## i18n that actually works
+## i18n that handles missing translations
 
-This is where most tools fall apart. You add 6 languages, translate 3 pages in Hindi, and suddenly your users hit 404s on every untranslated page.
+Most tools fall apart when a reader switches to a language where some pages are not yet translated. docmd falls back to the default locale at build time.
 
 | Capability | docmd | VitePress | Docusaurus | Starlight |
 |:-----------|:-----:|:---------:|:----------:|:---------:|
@@ -86,7 +86,7 @@ If a reader switches to Hindi and that page isn't translated, they get a **404 e
 
 ## Workspace
 
-Organisations maintaining multiple tools under one domain need separate docs for each - different versions, different navigation, different release cycles. Most generators force you to either maintain separate sites or hack around plugin systems.
+Teams that maintain multiple products under one domain (for example, a core platform and an SDK) often need separate docs for each, with independent navigation and release cycles. Most generators require either separate deployments or custom plugin glue.
 
 | Capability | docmd | Docusaurus | VitePress | MkDocs | Starlight |
 |:-----------|:-----:|:----------:|:---------:|:------:|:---------:|
@@ -112,7 +112,7 @@ Organisations maintaining multiple tools under one domain need separate docs for
 Each project folder has its own `docmd.config.json` with independent configuration. One `npx @docmd/core build` produces a single deployable directory - no reverse proxy, no nginx, no separate CI pipelines.
 :::
 
-Docusaurus achieves something similar with multi-instance plugins, but requires complex configuration - each instance needs separate plugin entries, sidebar files, and manual route configuration. MkDocs requires the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native workspace support.
+Docusaurus achieves similar results through multi-instance plugins, which require separate plugin entries, sidebar files, and manual route configuration per instance. MkDocs needs the third-party `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify have no native workspace support at all.
 
 ## Full feature matrix
 

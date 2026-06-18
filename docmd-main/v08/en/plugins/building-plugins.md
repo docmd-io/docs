@@ -39,6 +39,9 @@ The `capabilities` array dictates which hooks your plugin is allowed to use.
 | `actions` | `actions` | Interactive |
 | `events` | `events` | Interactive |
 | `translations`| `translations` | i18n |
+| `template` *(new in 0.8.7)* | `templates`, `templateAssets` | Render |
+
+> **Note:** the `template` capability is exclusive — if a plugin declares it, it cannot also declare `head`, `build`, `post-build`, etc. Templates ship slots and assets only; they do not run lifecycle hooks. If you need both, ship two separate packages.
 
 ## Plugin API Reference
 
@@ -54,6 +57,29 @@ A docmd plugin is a standard JavaScript object that implements one or more of th
 | `translations(localeId)` | Return an object of translated strings for the given locale. |
 | `actions` | An object of named action handlers for WebSocket RPC calls. |
 | `events` | An object of named event handlers for browser messages. |
+| `templates[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateHook` entries — each `{ type, templatePath }` overrides one EJS slot. |
+| `templateAssets[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateAssetHook` entries — each `{ type, path, priority?, position? }` ships the template's CSS/JS bundle. |
+
+### Building a template plugin (new in 0.8.7)
+
+A template is a plugin with `capabilities: ['template']`. It ships a `templates[]` array (slot overrides) and a `templateAssets[]` array (CSS/JS bundle). See the dedicated [Templates guide](../theming/templates.md) and [Theming → Templates](../theming/templates.md) for the full authoring walkthrough, slot table, and resolution chain. The minimum viable template looks like:
+
+```javascript
+export default {
+  plugin: {
+    name: 'template-foo',
+    version: '1.0.0',
+    capabilities: ['template'],
+  },
+  templates: [
+    { type: 'menubar', templatePath: '/abs/path/to/templates/partials/menubar.ejs' },
+    { type: 'footer',  templatePath: '/abs/path/to/templates/partials/footer.ejs' },
+  ],
+  templateAssets: [
+    { type: 'css', path: '/abs/path/to/assets/css/foo.css', priority: 10, position: 'head' },
+  ],
+};
+```
 
 ## Creating a Local Plugin
 

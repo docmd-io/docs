@@ -3,15 +3,15 @@ title: "Mermaid Diagrams"
 description: "Create professional architectural diagrams, flowcharts, and sequence diagrams directly in your Markdown files using Mermaid.js syntax."
 ---
 
-The `@docmd/plugin-mermaid` plugin integrates the powerful [Mermaid.js](external:https://mermaid.js.org/) engine into your documentation pipeline. It allows you to transform plain-text descriptions into high-fidelity, interactive diagrams with built-in support for themes, panning, and zooming.
+The `@docmd/plugin-mermaid` plugin integrates [Mermaid.js](external:https://mermaid.js.org/) into the build pipeline. Plain-text descriptions become interactive diagrams with theme support, panning, and zooming.
 
 ## Configuration
 
-The Mermaid plugin is bundled with `@docmd/core` and enabled by default. No mandatory configuration is required.
+The plugin is bundled with `@docmd/core` and enabled by default.
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable Mermaid diagram rendering globally. |
+| `enabled` | `boolean` | `true` | Enable or disable Mermaid rendering globally. |
 
 ### Example
 
@@ -25,10 +25,10 @@ The Mermaid plugin is bundled with `@docmd/core` and enabled by default. No mand
 
 ## Features
 
-- **Theme Awareness**: Diagrams automatically adapt to **Light** or **Dark** mode transitions.
-- **Interactive Controls**: Built-in **Pan**, **Zoom**, and **Fullscreen** buttons for every diagram.
-- **Lazy Loading**: Diagrams are initialised only as they enter the user's viewport for optimum performance.
-- **Icon Support**: Deep integration with the **Lucide** icon pack (use `icon:name` syntax).
+- **Theme aware**: diagrams adapt to light or dark mode automatically.
+- **Interactive**: built-in pan, zoom, and fullscreen controls per diagram.
+- **Lazy initialisation**: scripts load and render only as a diagram enters the viewport.
+- **Icon pack**: supports `icon:name` syntax backed by the Lucide icon set.
 
 ## Usage
 

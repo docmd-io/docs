@@ -69,5 +69,5 @@ For managed hosting without running your own server:
 4. **AI Context** — Enable the `llms` plugin to generate `llms.txt` for AI agent ingestion.
 
 ::: callout tip "Custom 404 Pages"
-docmd generates a `404.html` in your output directory. Most hosting providers serve it automatically for missing routes.
+docmd writes a `404.html` into your output directory. Most static hosts serve it automatically for missing routes.
 :::

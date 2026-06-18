@@ -3,7 +3,7 @@ title: "Light & Dark Mode"
 description: "How to configure the default viewing mode and manage the theme switcher for the best user experience."
 ---
 
-`docmd` provides built-in support for light and dark colour schemes. It detects user system preferences automatically and allows manual overrides via a UI toggle.
+`docmd` ships with light and dark colour schemes. It follows the user's system preference automatically and lets users override it from a UI toggle.
 
 ## Default Viewing Mode
 
@@ -18,7 +18,7 @@ You specify the starting state of your documentation in `docmd.config.json`.
 }
 ```
 
-*   **`system`**: Matches the user's OS preference (Recommended).
+*   **`system`** (default): Matches the user's OS preference (Recommended).
 *   **`light`**: Force light mode on initial load.
 *   **`dark`**: Force dark mode on initial load.
 
@@ -39,20 +39,20 @@ The theme switcher is part of the **Options Menu**. You can control its visibili
 }
 ```
 
-## How it works (Technical)
+## How it Works
 
-The theme engine applies a `data-theme` attribute to the `<body>` tag:
+The engine applies a `data-theme` attribute to the `<body>` tag:
 
 *   `<body data-theme="light">`
 *   `<body data-theme="dark">`
 
-If you are using a themed design like `sky`, the attribute will be `sky-light` or `sky-dark`.
+If you use a themed design like `sky`, the attribute becomes `sky-light` or `sky-dark`.
 
 ### CSS Variables
-`docmd` themes use CSS variables for all colours. You can override these variables in your own CSS to customise the look of either mode.
+
+Themes use CSS variables for all colours. Override them in your custom CSS to restyle either mode.
 
 ```css
-/* Custom CSS override */
 :root {
   --docmd-primary: #4f46e5; /* Primary accent for light mode */
 }
