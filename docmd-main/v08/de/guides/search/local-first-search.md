@@ -1,47 +1,47 @@
 ---
 title: "Local-First Suchoptimierung"
-description: "So optimieren Sie Ihre Dokumentationsinhalte für die leistungsstarke, clientseitige Suchmaschine von docmd."
+description: "Wie Sie Ihre Dokumentations-Inhalte für die hochperformante, clientseitige Such-Engine von docmd optimieren."
 ---
 
 ## Problem
 
-Local-First-Suchmaschinen laufen vollständig im Browser und liefern sofortige Ergebnisse ohne Server-Umweg. Das bedeutet jedoch auch, dass sie durch den Speicher und die Rechenleistung des Browsers begrenzt sind. Wenn ein Suchindex nicht ordnungsgemäß optimiert ist, kann er übermäßig viel RAM verbrauchen, was dazu führt, dass der Browser-Tab ruckelt oder sogar abstürzt , besonders auf mobilen Geräten.
+Local-First-Suchmaschinen laufen vollständig im Browser. Sie liefern sofortige Ergebnisse ohne Server-Roundtrip. Allerdings sind sie durch Browser-Speicher und Prozessorlimits eingeschränkt. Ein nicht optimierter Suchindex verbraucht übermäßig viel RAM. Das führt dazu, dass der Browser-Tab ruckelt oder abstürzt, insbesondere auf mobilen Geräten.
 
 ## Warum es wichtig ist
 
-Eine nahtlose Sucherfahrung ist essenziell für die Produktivität von Entwicklern. Wenn das Suchwerkzeug Performance-Probleme verursacht oder zu viel Speicher verbraucht, werden Benutzer es meiden. Die Optimierung Ihrer Inhalte für die Local-First-Suche stellt sicher, dass Ihre Dokumentation auf allen Geräten und unter allen Netzwerkbedingungen schnell, reaktionsschnell und zuverlässig bleibt.
+Eine nahtlose Sucherfahrung ist entscheidend für die Produktivität. Wenn das Suchtool Performance-Probleme oder Speicher-Bloat verursacht, wird es von Benutzern nicht mehr verwendet. Inhalte für Local-First-Suche zu optimieren stellt sicher, dass Dokumentation auf allen Geräten und unter allen Netzwerkbedingungen schnell, reaktiv und zuverlässig bleibt.
 
 ## Ansatz
 
-Das [Search-Plugin](../../plugins/search) von `docmd` verwendet während des Builds eine Extraktions-Pipeline, um einen hochoptimierten Index zu erstellen. Durch das Entfernen unnötiger Daten und die Konzentration auf hochwertige semantische Felder wird sichergestellt, dass der resultierende Index sowohl umfassend als auch leichtgewichtig ist.
+Das [Search-Plugin](../../plugins/search.md) von docmd verwendet eine Build-Time-Extraction-Pipeline, um einen optimierten Index zu erstellen. Durch das Beschneiden unnötiger Daten und die Konzentration auf hochwertige semantische Felder ist der resultierende Index umfassend und leichtgewichtig.
 
 ## Implementierung
 
-### 1. Extraktion während des Build-Prozesses
+### 1. Build-Time-Extraction
 
-Während des Builds verarbeitet `docmd` Ihre Markdown-Dateien, um nur den relevantesten Text für die Indexierung zu extrahieren. Dabei werden automatisch entfernt:
-*   HTML-Tags und struktureller Boilerplate-Code.
-*   Markdown-Syntaxzeichen, die keinen semantischen Mehrwert bieten.
-*   Reine Formatierungselemente, die den Index unnötig aufblähen würden.
+Während des Build-Prozesses verarbeitet docmd Markdown-Dateien, um relevanten Text für die Indexierung zu extrahieren. Es entfernt automatisch:
+*   HTML-Tags und strukturelles Boilerplate.
+*   Markdown-Syntaxzeichen ohne semantischen Wert.
+*   Reine Formatierungselemente, die den Index aufblähen.
 
-Dies stellt sicher, dass der Indexer nur sauberen, aussagekräftigen Text erhält, was die finale Indexgröße erheblich reduziert.
+Das stellt sicher, dass der Indexer nur sauberen, bedeutungsvollen Text erhält, was die finale Indexgröße deutlich reduziert.
 
 ### 2. Strategische Indexierung mit Frontmatter
 
-Sie können [Frontmatter](../../content/frontmatter) verwenden, um explizit zu steuern, wie eine Seite indexiert wird. Wenn eine Seite beispielsweise große Mengen an repetitiven Daten enthält (wie rohe JSON-Logs), die für die Suche nicht nützlich sind, können Sie festlegen, dass nur die Überschriften und Metadaten indexiert werden.
+Verwenden Sie [Frontmatter](../../content/frontmatter.md), um explizit zu steuern, wie eine Seite indexiert wird. Wenn eine Seite repetitive Daten (etwa rohe JSON-Logs) enthält, die für die Suche nicht nützlich sind, indexieren Sie nur die Header und Metadaten.
 
 ```yaml
 ---
-title: "API Log Referenz"
+title: "API-Log-Referenz"
 search:
-  indexBody: false  # Nur Titel und Überschriften indexieren
+  indexBody: false  # Nur Titel und Header indexieren
 ---
 ```
 
-### 3. Clientseitiges Speichermanagement
+### 3. Clientseitiges Speicher-Management
 
-`docmd` verwaltet den Lebenszyklus des Suchindex im Browser sorgfältig. Es verwendet eine On-Demand-Ladestrategie, was bedeutet, dass die Suchmaschine erst initialisiert wird, wenn der Benutzer zum ersten Mal damit interagiert. Dies hält den Footprint beim ersten Laden der Seite gering und stellt sicher, dass Systemressourcen nur bei Bedarf verbraucht werden.
+docmd verwaltet den Lebenszyklus des Suchindex im Browser sorgfältig. Es verwendet eine On-Demand-Loading-Strategie. Die Such-Engine wird erst initialisiert, wenn der Benutzer zum ersten Mal mit ihr interagiert. Das hält den initialen Seitenlade-Footprint klein und schont Systemressourcen.
 
 ## Abwägungen
 
-Das aggressive Entfernen von Inhalten aus dem Suchindex (z. B. das Ausschließen großer Codeblöcke) kann manchmal dazu führen, dass sehr spezifische Ergebnisse fehlen. Sie müssen die Notwendigkeit eines leichtgewichtigen, schnellen Index gegen die Anforderung an eine gründliche Suchabdeckung abwägen. Wir empfehlen, Überschriften und konzeptionelle Beschreibungen zu priorisieren, da dies die häufigsten Suchziele für Entwickler sind.
+Aggressives Beschneiden von Inhalten aus dem Suchindex (z. B. das Ausschließen großer Code-Blöcke) kann dazu führen, dass Nischen-Treffer fehlen. Sie müssen die Notwendigkeit eines leichtgewichtigen Index mit einer gründlichen Suchabdeckung abwägen. Wir empfehlen, Header und konzeptionelle Beschreibungen zu priorisieren, da dies die häufigsten Suchziele sind.

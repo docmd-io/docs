@@ -23,7 +23,7 @@ Configure the `llms` plugin in your [Plugin Configuration](../../plugins/llms.md
 
 Ensure the `url` property is correctly set in your `docmd.config.json`. This allows the plugin to generate absolute URLs for all pages in the `llms.txt` file.
 
-```json
+```json "docmd.config.json"
 {
   "title": "My Project Docs",
   "url": "https://docs.example.com",

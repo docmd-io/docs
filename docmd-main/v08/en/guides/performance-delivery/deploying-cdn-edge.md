@@ -28,7 +28,7 @@ docmd natively supports all modern static hosting and edge platforms. We recomme
 
 Use a CI/CD pipeline to build and deploy your site automatically whenever you push changes. See the [GitHub Actions Guide](../../guides/integrations/github-actions-cicd.md) for detailed examples.
 
-```yaml
+```yaml ".github/workflows/deploy.yml"
 # .github/workflows/deploy.yml
 jobs:
   deploy:

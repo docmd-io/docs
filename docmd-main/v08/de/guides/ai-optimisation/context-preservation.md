@@ -1,47 +1,47 @@
 ---
-title: "Kontexterhaltung für KI-freundliche Dokumentation"
-description: "Wie Sie sicherstellen, dass KI-Modelle die Beziehungen zwischen verschiedenen Teilen Ihrer Dokumentation verstehen und nutzen können."
+title: "Context Preservation für AI-freundliche Dokumentation"
+description: "Wie Sie sicherstellen, dass AI-Modelle die Zusammenhänge zwischen verschiedenen Teilen Ihrer Dokumentation verstehen und nutzen können."
 ---
 
 ## Problem
 
-Während menschliche Leser problemlos auf einen Hyperlink klicken können, um mehr über einen Begriff zu erfahren, verarbeiten KI-Modelle Dokumentationen oft in isolierten "Chunks" (Stücken). Wenn eine KI auf einen Hyperlink stößt, kann sie ihn nicht "anklicken", um mehr Kontext abzurufen. Wenn kritische Informationen hinter einem Link verborgen sind, anstatt im Kontext erklärt zu werden, kann die KI möglicherweise keine genauen Antworten liefern, was zu Halluzinationen führt.
+Menschliche Leser können Hyperlinks anklicken, um mehr zu erfahren. AI-Modelle verarbeiten Dokumentation häufig in isolierten "Chunks". Wenn eine AI auf einen Hyperlink stößt, kann sie diesen nicht "anklicken", um Kontext abzurufen. Wenn kritische Informationen hinter einem Link verborgen sind, liefert die AI möglicherweise ungenaue Antworten. Das führt zu Halluzinationen.
 
 ## Warum es wichtig ist
 
-KI-Modelle verlassen sich auf den unmittelbar umgebenden Text, um die Bedeutung und Relevanz von Informationen zu bestimmen. Wenn Ihre Dokumentation stark fragmentiert ist und eine schlechte Kontexterhaltung aufweist, werden KI-gesteuerte Suchwerkzeuge (wie solche, die auf RAG basieren) Schwierigkeiten haben, qualitativ hochwertige Antworten zu liefern.
+AI-Modelle verlassen sich auf den unmittelbaren Kontext, um Bedeutung zu bestimmen. Wenn Ihre Dokumentation stark fragmentiert ist und Kontext schlecht bewahrt, haben AI-gestützte Such-Tools (wie RAG-Systeme) Schwierigkeiten, qualitativ hochwertige Antworten zu liefern.
 
 ## Ansatz
 
-Verwenden Sie **Inline Context Unrolling** (kontextuelles Entfalten im Text), um neben jedem wichtigen Link den minimal lebensfähigen Kontext bereitzustellen. Nutzen Sie außerdem die spezifischen Funktionen von `docmd`, wie das [LLMs-Plugin](../../plugins/llms.md), um eine einheitliche, maschinenlesbare Ansicht Ihres gesamten Dokumentationssatzes bereitzustellen.
+Verwenden Sie **Inline Context Unrolling**, um den minimal benötigten Kontext neben jedem wichtigen Link bereitzustellen. Verwenden Sie das [LLMs-Plugin](../../plugins/llms.md) von docmd, um eine einheitliche, maschinenlesbare Sicht Ihrer gesamten Dokumentation bereitzustellen.
 
 ## Implementierung
 
-### 1. Beschreibende Verlinkung und Zusammenfassungen
+### 1. Beschreibende Links und Zusammenfassungen
 
-Vermeiden Sie generische Linktexte. Stellen Sie stattdessen eine kurze, einseitige Zusammenfassung des verlinkten Konzepts vor oder nach dem Link selbst bereit.
+Vermeiden Sie generische Link-Texte. Stellen Sie eine kurze, einzelne Zusammenfassung des verlinkten Konzepts neben dem Link bereit.
 
--   **❌ Schlecht (Kontext verloren)**: Um das Timeout zu konfigurieren, lesen Sie die [Allgemeine Konfiguration](../../configuration/overview.md).
--   **✅ Besser (Kontext erhalten)**: Sie können den Parameter `timeoutMs` in der [Allgemeinen Konfiguration](../../configuration/overview.md) konfigurieren, der definiert, wie lange die Engine wartet, bevor eine Netzwerkanfrage fehlschlägt.
+-   **❌ Schlecht (Kontext verloren)**: Um den Timeout zu konfigurieren, siehe [Allgemeine Konfiguration](../../configuration/overview.md).
+-   **✅ Besser (Kontext bewahrt)**: Sie können den Parameter `timeoutMs` in der [Allgemeinen Konfiguration](../../configuration/overview.md) konfigurieren, die definiert, wie lange die Engine wartet, bevor eine Netzwerkanfrage fehlschlägt.
 
-### 2. Verwendung von ausklappbaren Abschnitten für Details
+### 2. Collapsible-Sections für Details verwenden
 
-[Ausklappbare Container](../../content/containers/collapsible.md) eignen sich hervorragend für die KI-Optimierung. Der Inhalt bleibt Teil des rohen Markdown-Quellcodes (den die KI lesen kann), wird aber für menschliche Leser visuell verstaut.
+[Collapsible-Container](../../content/containers/collapsible.md) eignen sich hervorragend für AI-Optimierung. Der Inhalt bleibt Teil der rohen Markdown-Quelle für die AI, wird für menschliche Leser jedoch visuell versteckt.
 
 ```markdown
 ### Datenbankverbindung
 
-Stellen Sie die Verbindung über den primären URI her.
+Stellen Sie die Verbindung über die primäre URI her.
 
-::: collapsible "Wie lautet das URI-Format?"
-Der URI folgt dem standardmäßigen PostgreSQL-Format: `postgresql://benutzer:passwort@host:port/datenbank`.
+::: collapsible "Was ist das URI-Format?"
+Die URI folgt dem Standard-PostgreSQL-Format: `postgresql://user:password@host:port/database`.
 :::
 ```
 
-### 3. Aktivierung des LLMs-Plugins
+### 3. LLMs-Plugin aktivieren
 
-Aktivieren Sie das [LLMs-Plugin](../../plugins/llms.md) in Ihrer `docmd.config.json`. Dieses Plugin generiert nach jedem Build automatisch eine `llms-full.txt`-Datei, die Ihren gesamten Dokumentationssatz in einer einzigen Datei mit hohem Kontextgehalt zusammenfasst, die leicht von Large Language Models verarbeitet werden kann.
+Aktivieren Sie das [LLMs-Plugin](../../plugins/llms.md) in Ihrer `docmd.config.json`. Dieses Plugin generiert nach jedem Build eine `llms-full.txt`. Es verkettet Ihre gesamte Dokumentation in einer einzigen, kontextreichen Datei, die LLMs einfach konsumieren können.
 
 ## Abwägungen
 
-Inline Context Unrolling macht Ihre Dokumentation etwas wortreicher und führt zu geringfügigen Redundanzen. Diese Redundanz ist jedoch ein kleiner Preis für die Sicherstellung, dass Ihre Dokumentation "KI-bereit" ist und in der Lage ist, qualitativ hochwertige automatisierte Support- und Sucherlebnisse zu ermöglichen.
+Inline Context Unrolling macht Dokumentation etwas ausführlicher und führt zu leichter Redundanz. Das ist jedoch ein kleiner Preis, um sicherzustellen, dass Ihre Dokumentation "AI-ready" ist und hochwertigen automatisierten Support ermöglicht.

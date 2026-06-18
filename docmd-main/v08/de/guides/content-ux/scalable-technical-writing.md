@@ -1,25 +1,25 @@
 ---
 title: "Skalierbares technisches Schreiben"
-description: "Wie Sie Progressive Disclosure (schrittweise Offenlegung) und strukturelle Container nutzen, um wachsende Dokumentationskomplexität zu bewältigen, ohne Ihre Benutzer zu überfordern."
+description: "Wie Sie Progressive Disclosure und strukturelle Container nutzen, um wachsende Dokumentations-Komplexität zu managen, ohne Benutzer zu überwältigen."
 ---
 
 ## Problem
 
-In der Anfangsphase eines Produkts kann die Dokumentation einer Funktion nur wenige Absätze umfassen. Wenn sich das Produkt jedoch zu einer Unternehmensplattform entwickelt, können diese Absätze zu einem Meer aus Grenzfällen, plattformspezifischen Variationen (Docker, Kubernetes, Cloud) und komplexen Konfigurationsoptionen explodieren. Dies führt zu einem "vertikalen Aufblähen", bei dem eine einzelne Seite zu einer unlesbaren Textwüste wird, die schwer zu navigieren und zu warten ist.
+In frühen Stadien lässt sich ein Feature in wenigen Absätzen dokumentieren. Während sich das Produkt weiterentwickelt, explodieren diese Absätze in ein Meer von Edge-Cases, Plattform-Variationen und komplexen Optionen. Das führt zu "vertikalem Bloat", bei dem eine Seite zu einer unlesbaren Textwand wird.
 
 ## Warum es wichtig ist
 
-Vertikales Aufblähen zerstört das Verständnis und erhöht die kognitive Belastung. Wenn Benutzer gezwungen sind, durch seitenlange Inhalte zu scrollen, die für ihre spezifische Umgebung oder ihren Anwendungsfall irrelevant sind, werden sie überfordert und nehmen oft an, dass das Produkt komplexer ist, als es tatsächlich ist. Skalierbares Schreiben stellt sicher, dass Benutzer in jedem Moment nur die Informationen sehen, die sie benötigen, und bewahrt so einen klaren Weg zum Erfolg.
+Vertikaler Bloat zerstört Verständnis und erhöht die kognitive Last. Scrollen Benutzer durch Seiten irrelevanten Inhalts, fühlen sie sich überwältigt. Sie nehmen häufig an, dass das Produkt komplexer ist, als es tatsächlich ist. Skalierbares Schreiben stellt sicher, dass Benutzer zu jedem Zeitpunkt nur die Informationen sehen, die sie benötigen.
 
 ## Ansatz
 
-Implementieren Sie **Progressive Disclosure**. Diese Technik beinhaltet, nur die kritischsten Informationen vorab zu präsentieren (den "Happy Path") und komplexere, technische oder spezifischere Details hinter interaktiven UI-Strukturen zu verbergen. `docmd` bietet mehrere integrierte Container, die speziell entwickelt wurden, um Ihnen zu helfen, diese Komplexität effektiv und elegant zu bewältigen.
+Implementieren Sie **Progressive Disclosure**. Diese Technik beinhaltet, nur die kritischsten Informationen vorab darzustellen (den "Happy Path"). Komplexe, technische oder spezifische Details verstecken Sie hinter interaktiven UI-Strukturen. docmd bietet eingebaute Container, die speziell darauf ausgelegt sind, diese Komplexität effektiv zu managen.
 
 ## Implementierung
 
-### 1. Umgang mit Variationen durch Tabs
+### 1. Variationen mit Tabs handhaben
 
-Anstatt Anweisungen für mehrere Paketmanager, Betriebssysteme oder Cloud-Anbieter nacheinander aufzulisten, verwenden Sie den [Tabs-Container](../../content/containers/tabs.md). Dies ermöglicht es dem Benutzer, seine spezifische Umgebung auszuwählen, wodurch irrelevante Befehle sofort ausgeblendet und visuelles Rauschen reduziert wird.
+Statt Anweisungen für mehrere Paket-Manager sequenziell aufzulisten, verwenden Sie den [Tabs-Container](../../content/containers/tabs.md). Damit kann der Benutzer seine spezifische Umgebung auswählen. Irrelevante Befehle werden sofort ausgeblendet und visuelle Unordnung reduziert.
 
 ````markdown
 ::: tabs
@@ -36,22 +36,22 @@ Anstatt Anweisungen für mehrere Paketmanager, Betriebssysteme oder Cloud-Anbiet
 :::
 ````
 
-### 2. Bewältigung von Grenzfällen mit Collapsibles
+### 2. Edge-Cases mit Collapsibles managen
 
-Wenn ein Schritt zur Fehlerbehebung oder ein spezifischer Grenzfall nur für einen kleinen Prozentsatz der Benutzer gilt, lassen Sie ihn nicht den logischen Fluss Ihres Haupt-Tutorials unterbrechen. Verwenden Sie den [Collapsible-Container](../../content/containers/collapsible.md), um diese Details zu verbergen, während sie bei Bedarf leicht zugänglich bleiben.
+Trifft ein Troubleshooting-Schritt nur auf einen kleinen Prozentsatz von Benutzern zu, lassen Sie ihn nicht den logischen Fluss des Haupttutorials unterbrechen. Verwenden Sie den [Collapsible-Container](../../content/containers/collapsible.md), um diese Details zu vergraben, während sie zugänglich bleiben.
 
 ```markdown
-1. Starten Sie den Entwicklungsserver durch Ausführen von `npx @docmd/core dev`.
+1. Starten Sie den Development-Server, indem Sie `npx @docmd/core dev` ausführen.
 
-::: collapsible "Fehlerbehebung: Port wird bereits verwendet"
-Wenn Sie einen `EADDRINUSE`-Fehler erhalten, können Sie einen benutzerdefinierten Port mit dem `--port`-Flag angeben: `npx @docmd/core dev --port 4000`.
+::: collapsible "Troubleshooting: Port bereits belegt"
+Wenn Sie einen `EADDRINUSE`-Fehler erhalten, können Sie mit dem Flag `--port` einen benutzerdefinierten Port angeben: `npx @docmd/core dev --port 4000`.
 :::
 ```
 
 ### 3. Progressive Details mit Callouts
 
-Verwenden Sie [Callouts](../../content/containers/callouts.md), um ergänzende Informationen bereitzustellen, die für die Hauptaufgabe nicht erforderlich sind, aber wertvollen Kontext für fortgeschrittene Benutzer bieten.
+Verwenden Sie [Callouts](../../content/containers/callouts.md), um ergänzende Informationen bereitzustellen, die nicht für die primäre Aufgabe erforderlich sind, aber wertvollen Kontext für fortgeschrittene Benutzer bieten.
 
 ## Abwägungen
 
-Das Verbergen von Inhalten in Tabs oder Collapsibles kann es für Benutzer gelegentlich schwieriger machen, Informationen mithilfe der nativen `Strg+F`-Suche des Browsers zu finden. Die integrierte [Suchmaschine](../../plugins/search.md) von `docmd` indiziert jedoch alle Inhalte innerhalb dieser Container. So wird sichergestellt, dass Benutzer über die primäre Suchoberfläche der Website immer noch genau das finden, was sie brauchen, während sie gleichzeitig ein viel saubereres Leseerlebnis genießen.
+Inhalte in Tabs oder Collapsibles zu verbergen kann es gelegentlich erschweren, Informationen über die native `Ctrl+F`-Suche des Browsers zu finden. Allerdings indexiert docmds integrierte [Such-Engine](../../plugins/search.md) alle Inhalte innerhalb dieser Container. Das stellt sicher, dass Benutzer genau das finden, was sie benötigen, während sie ein saubereres Lese-Erlebnis genießen.

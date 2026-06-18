@@ -1,49 +1,49 @@
 ---
 title: "Caching-Strategien"
-description: "So optimieren Sie die Performance Ihrer Dokumentations-Website durch Immutable Caching, Etag-Revalidierung und produktionsreife Serverkonfigurationen."
+description: "Wie Sie die Performance Ihrer Dokumentations-Site mit Immutable Caching, Etag-Revalidation und produktionsreifen Server-Konfigurationen optimieren."
 ---
 
 ## Problem
 
-Wenn eine Dokumentations-Website ohne ordnungsgemäße `Cache-Control`-Header bereitgestellt wird, laden Browser bei jedem Besuch unnötigerweise Bilder, CSS- und JavaScript-Bundles erneut herunter. Dies führt zu visuellem Ruckeln, erhöhtem Bandbreitenverbrauch und einer schlechten Erfahrung für wiederkehrende Benutzer, die erwarten, dass die Dokumentation sofort geladen wird.
+Wenn eine Dokumentations-Site ohne korrekte Cache-Control-Header ausgeliefert wird, laden Browser unnötig Bilder, CSS und JavaScript-Bundles erneut herunter. Das führt zu visuellem Ruckeln, erhöhter Bandbreitennutzung und einer schlechten Erfahrung für wiederkehrende Benutzer.
 
 ## Warum es wichtig ist
 
-Effektives Caching ist einer der wirkungsvollsten Wege, um die "gefühlte Performance" Ihrer Website zu verbessern. Indem Sie sicherstellen, dass statische Assets lokal im Browser des Benutzers gespeichert werden, eliminieren Sie die Latenz wiederholter Netzwerkanfragen. Dadurch fühlt sich das Navigieren in Ihrer Dokumentation flüssig und zuverlässig an, selbst bei instabilen Netzwerkverbindungen.
+Effektives Caching hat eine hohe Wirkung auf die wahrgenommene Performance. Statische Assets lokal im Browser des Benutzers zu speichern eliminiert die Latenz wiederholter Netzwerk-Anfragen. Das lässt die Navigation flüssig und zuverlässig wirken, selbst bei instabilen Verbindungen.
 
 ## Ansatz
 
-Implementieren Sie eine zweistufige Caching-Strategie: **Immutable Caching** für statische Assets (CSS, JS, Bilder) und **Etag-Revalidierung** für dynamische Inhalte (HTML, JSON). `docmd` erleichtert dies durch die Generierung produktionsreifer Konfigurationen, die das Cache-Busting automatisch über Versions-Hashes abwickeln.
+Implementieren Sie eine zweistufige Caching-Strategie: **Immutable Caching** für statische Assets (CSS, JS, Bilder) und **Etag-Revalidation** für dynamische Inhalte (HTML, JSON). docmd unterstützt dies, indem produktionsreife Konfigurationen generiert werden, die Cache-Busting automatisch handhaben.
 
 ## Implementierung
 
 ### 1. Produktionsreife Server-Konfigurationen
 
-Der einfachste Weg, optimales Caching zu implementieren, ist die Verwendung des [Deploy-Befehls](../../deployment) zur Generierung Ihrer Serverkonfiguration.
+Der einfachste Weg, optimales Caching zu implementieren, ist die Verwendung des [Deploy-Befehls](../../deployment/index.md) zur Generierung Ihrer Server-Konfiguration.
 
 ```bash
-# Generieren einer optimierten Nginx-Konfiguration
+# Eine optimierte Nginx-Konfiguration generieren
 npx @docmd/core deploy --nginx
 ```
 
 ### 2. Immutable Assets
 
-Für Assets, die sich nicht häufig ändern (wie Theme-Styles und Kern-Skripte), verwenden Sie langfristiges Caching. `docmd` fügt diesen Assets Versions-Hashes hinzu, um sicherzustellen, dass Benutzer neue Versionen nur dann herunterladen, wenn Sie Ihre Dokumentation aktualisieren.
+Für Assets, die sich selten ändern (wie Theme-Styles und Kern-Skripte), verwenden Sie langfristiges Caching. docmd hängt Versions-Hashes an diese Assets an, um sicherzustellen, dass Benutzer neue Versionen nur herunterladen, wenn Sie Ihre Dokumentation aktualisieren.
 
 ```nginx
-# Beispiel einer Nginx-Regel für Immutable Assets
+# Beispiel-Nginx-Regel für immutable Assets
 location ~* \.(?:css|js|webp|png|svg|woff2)$ {
     expires 1y;
     add_header Cache-Control "public, max-age=31536000, immutable";
 }
 ```
 
-### 3. HTML- & Navigations-Revalidierung
+### 3. HTML- & Navigations-Revalidation
 
-Ihre HTML-Dateien und die `navigation.json` sollten immer auf Updates geprüft werden, damit Benutzer sofort den neuesten Inhalt und die aktuelle Struktur sehen. Verwenden Sie die Anweisung `no-cache`, um den Browser zu zwingen, die Gültigkeit beim Server mittels Etags zu validieren.
+Ihre HTML-Dateien und `navigation.json` sollten stets auf Aktualisierungen überprüft werden. Das stellt sicher, dass Benutzer neueste Inhalte sofort sehen. Verwenden Sie die Direktive `no-cache`, um den Browser zu zwingen, mit dem Server anhand von Etags zu revalidieren.
 
 ```nginx
-# Beispiel einer Nginx-Regel für HTML-Dateien
+# Beispiel-Nginx-Regel für HTML-Dateien
 location ~* \.html$ {
     add_header Cache-Control "no-cache, must-revalidate";
 }
@@ -51,8 +51,10 @@ location ~* \.html$ {
 
 ## Abwägungen
 
-### Veralteter Inhalt vs. Performance
-Die Einstellung langer Cache-Zeiten für Assets ist hochperformant, erfordert jedoch eine robuste "Cache-Busting"-Strategie. `docmd` übernimmt dies automatisch für seine Kerndateien. Wenn Sie jedoch manuell Assets zu Ihrem `static/`-Verzeichnis hinzufügen, müssen Sie sicherstellen, dass Sie deren Referenzen aktualisieren (z. B. durch Ändern des Dateinamens oder Hinzufügen eines Query-Parameters), wenn sich der Inhalt ändert.
+### Veraltete Inhalte vs. Performance
+
+Lange Cache-Zeiten für Assets zu setzen ist hochperformant, erfordert aber eine zuverlässige "Cache-Busting"-Strategie. Für Kerndateien übernimmt docmd das automatisch. Wenn Sie manuell Assets zu Ihrem `static/`-Verzeichnis hinzufügen, müssen Sie deren Referenzen aktualisieren (z. B. durch Änderung des Dateinamens oder Hinzufügen eines Query-Parameters), wenn sich der Inhalt ändert.
 
 ### CDN-Integration
-Wenn Sie ein CDN (wie Cloudflare oder AWS CloudFront) verwenden, stellen Sie sicher, dass dieses so konfiguriert ist, dass es die `Cache-Control`-Header Ihres Servers berücksichtigt. Die meisten modernen CDNs bieten "Instant Purge"-Funktionen an. Wir empfehlen, diese als Teil Ihrer CI/CD-Pipeline auszulösen, wann immer Sie eine neue Version Ihrer Dokumentation bereitstellen.
+
+Wenn Sie ein CDN verwenden (wie Cloudflare oder AWS CloudFront), stellen Sie sicher, dass es die `Cache-Control`-Header Ihres Servers respektiert. Die meisten modernen CDNs bieten "Instant Purge"-Funktionen. Wir empfehlen, dies als Teil Ihrer CI/CD-Pipeline auszulösen, wann immer Sie eine neue Version deployen.

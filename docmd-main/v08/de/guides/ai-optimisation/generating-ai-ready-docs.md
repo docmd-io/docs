@@ -1,31 +1,31 @@
 ---
-title: "Erstellung von KI-bereiter Dokumentation mit docmd"
-description: "So nutzen Sie den llms.txt-Standard und die integrierten Tools von docmd, um optimierten Kontext für KI-Assistenten bereitzustellen."
+title: "AI-bereite Dokumentation mit docmd generieren"
+description: "Wie Sie den llms.txt-Standard und die eingebauten Tools von docmd nutzen, um AI-Assistenten optimierten Kontext bereitzustellen."
 ---
 
 ## Problem
 
-Entwickler verlassen sich zunehmend auf KI-Coding-Assistenten (wie Cursor, GitHub Copilot und ChatGPT), um Dokumentationen für sie zu lesen und zu interpretieren. Wenn Ihre Dokumentation nur über einen Webbrowser zugänglich ist und mit Navigationselementen, Trackern und komplexem HTML überladen ist, verbrauchen KI-Agenten unnötig viele Token für irrelevante Daten, was ihre Kontextfenster schnell erschöpft.
+Entwickler verlassen sich zunehmend auf AI-Coding-Assistenten, um Dokumentation zu lesen und zu interpretieren. Wenn Ihre Dokumentation nur über einen Webbrowser zugänglich ist — überladen mit Navigationselementen, Trackern und komplexem HTML — verbrauchen AI-Agenten übermäßig viele Tokens für irrelevante Daten. Das erschöpft schnell ihre Kontextfenster.
 
 ## Warum es wichtig ist
 
-Die Bereitstellung einer sauberen, Token-optimierten Textversion Ihrer Dokumentation ist das moderne Äquivalent zur Bereitstellung einer hochwertigen REST-API. Sie stellt sicher, dass KI-Agenten Ihren gesamten Dokumentationssatz schnell aufnehmen können, was zu genaueren Code-Vorschlägen und einem besseren Support für Entwickler führt, die Ihr Produkt nutzen.
+Eine saubere, token-optimierte Textversion Ihrer Dokumentation bereitzustellen ist das moderne Äquivalent zur Bereitstellung einer hochwertigen REST-API. Es stellt sicher, dass AI-Agenten Ihre gesamte Dokumentation schnell ingestieren können. Das führt zu genaueren Code-Vorschlägen und besserem Support.
 
 ## Ansatz
 
-Nutzen Sie das integrierte **LLMs-Plugin** von `docmd`. Dieses Plugin implementiert nativ den aufkommenden `llms.txt`-Standard und generiert bei jedem Build-Prozess automatisch Token-optimierte Zusammenfassungen und Vollkontext-Dateien.
+Verwenden Sie das eingebaute **LLMs-Plugin** von docmd. Dieses Plugin implementiert nativ den entstehenden `llms.txt`-Standard. Es generiert automatisch token-optimierte Zusammenfassungen und Vollkontext-Dateien während jedes Build-Prozesses.
 
 ## Implementierung
 
-Das `llms`-Plugin ist in `docmd >= 0.7.0` verfügbar und kann in Ihrer [Plugin-Konfiguration](../../plugins/usage) konfiguriert werden.
+Konfigurieren Sie das `llms`-Plugin in Ihrer [Plugin-Konfiguration](../../plugins/llms.md).
 
-### 1. Konfiguration der Website-URL
+### 1. Site-URL konfigurieren
 
-Stellen Sie sicher, dass die Eigenschaft `url` in Ihrer `docmd.config.json` korrekt gesetzt ist. Dies ermöglicht es dem Plugin, absolute URLs für alle Seiten in der Datei `llms.txt` zu generieren.
+Stellen Sie sicher, dass die Eigenschaft `url` korrekt in Ihrer `docmd.config.json` gesetzt ist. Dadurch kann das Plugin absolute URLs für alle Seiten in der `llms.txt`-Datei generieren.
 
-```json
+```json "docmd.config.json"
 {
-  "title": "Mein Projekt Docs",
+  "title": "Meine Projektdokumentation",
   "url": "https://docs.example.com",
   "plugins": {
     "llms": {}
@@ -35,14 +35,14 @@ Stellen Sie sicher, dass die Eigenschaft `url` in Ihrer `docmd.config.json` korr
 
 ### 2. Ausgabedateien
 
-Während des Build-Prozesses generiert `docmd` zwei wichtige Dateien im Root-Verzeichnis Ihrer Website:
+Während des Build-Prozesses generiert docmd zwei Schlüsseldateien im Stammverzeichnis Ihrer Site:
 
--   **`llms.txt`**: Eine prägnante, strukturierte Markdown-Zusammenfassung aller Ihrer Seiten, einschließlich ihrer Titel, Beschreibungen und vollständigen URLs.
--   **`llms-full.txt`**: Eine umfassende Datei, die den rohen Markdown-Inhalt Ihrer gesamten Website enthält, zusammengeführt durch Standard-Trenner (`---`). Dies bietet die ultimative "Source of Truth" für KI-Modelle.
+-   **`llms.txt`**: Eine prägnante, strukturierte Markdown-Zusammenfassung aller Ihrer Seiten, einschließlich Titel, Beschreibungen und vollständiger URLs.
+-   **`llms-full.txt`**: Eine umfassende Datei mit dem rohen Markdown-Inhalt Ihrer gesamten Site, verkettet mit Standard-Trennern (`---`). Sie stellt die ultimative "Source of Truth" für AI-Modelle dar.
 
-### 3. Steuerung der Verarbeitung
+### 3. Ingestion steuern
 
-Sie können bestimmte Seiten von der KI-bereiten Ausgabe ausschließen, indem Sie die Eigenschaft `llms` im [Seiten-Frontmatter](../../content/frontmatter) verwenden.
+Sie können einzelne Seiten aus der AI-bereiten Ausgabe ausschließen, indem Sie die Eigenschaft `llms` im [Page-Frontmatter](../../content/frontmatter.md) verwenden.
 
 ```yaml
 ---
@@ -53,4 +53,4 @@ llms: false
 
 ## Abwägungen
 
-Die Generierung von `llms-full.txt` erzeugt eine einzige, sehr große Datei. Bei außergewöhnlich umfangreichen Dokumentations-Websites kann diese Datei mehrere Megabyte groß werden. Während dies ideal für moderne LLMs mit großen Kontextfenstern (wie Gemini 1.5 Pro oder Claude 3.5 Sonnet) ist, kann sie für kleinere Modelle zu groß sein. Stellen Sie sicher, dass Sie Ihre [Navigation](../../configuration/navigation) logisch strukturieren, damit die KI die wichtigsten Abschnitte priorisieren kann.
+Die Generierung von `llms-full.txt` erzeugt eine große einzelne Datei. Für außergewöhnlich große Dokumentations-Sites kann diese Datei mehrere Megabyte überschreiten. Sie ist ideal für moderne LLMs mit großen Kontextfenstern (wie Gemini 1.5 Pro oder Claude 3.5 Sonnet), kann aber für kleinere Modelle zu groß sein. Stellen Sie sicher, dass Sie Ihre [Navigation](../../configuration/navigation.md) logisch organisieren, damit die AI wichtige Abschnitte priorisieren kann.

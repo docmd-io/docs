@@ -1,28 +1,28 @@
 ---
 title: "GitHub Actions CI/CD"
-description: "如何使用 GitHub Actions 和 docmd 自动化您的文档构建和部署，以实现高效的文档工作流。"
+description: "如何借助 GitHub Actions 与 docmd，自动化文档的构建与部署，实现高速工作流。"
 ---
 
 ## 问题
 
-从本地机器手动构建和部署文档容易出错，且存在环境不一致（例如 Node.js 版本不同）和安全风险。此外，这还会造成瓶颈，因为部署取决于单个人员的可用性和本地设置。
+从本地机器手工构建与部署文档容易出错，且会引入环境不一致与安全风险。每次部署都依赖某个人的可用性，很快就会形成瓶颈。
 
 ## 为什么重要
 
-持续部署 (CD) 可确保您的文档始终与软件同步。当技术更新被合并时，它应该在几分钟内（而不是几天）到达用户手中。自动化保证了每次构建都在干净、可重复的环境中进行，从而保持了高质量和高可靠性的标准。
+持续部署 (CD) 能保证文档始终与软件保持同步：技术更新一旦合并，分钟之内就能触达用户。自动化让每一次构建都发生在干净、可复现的环境里，从而保障质量与稳定性。
 
 ## 方法
 
-利用 GitHub Actions 在每次推送或拉取请求 (Pull Request) 时运行 `docmd` 构建流水线。生成的静态资产随后可以自动部署到 GitHub Pages、Cloudflare Pages 等托管提供商，或使用 Docker 部署到容器化环境中。
+使用 GitHub Actions 在每次推送或 Pull Request 时运行 docmd 构建流水线。生成的静态资源随后可自动部署到 GitHub Pages、Cloudflare Pages 这类托管服务，或借助 Docker 部署到容器化环境中。
 
-## 实施
+## 实现
 
-### 1. 标准 GitHub Pages 工作流
+### 1. 标准的 GitHub Pages 工作流
 
-创建 `.github/workflows/docs.yml` 以自动化构建和部署过程。
+创建 `.github/workflows/docs.yml` 以自动化构建与部署流程。
 
-```yaml
-name: 部署文档
+```yaml ".github/workflows/docs.yml"
+name: Deploy Docs
 on:
   push:
     branches: [main]
@@ -44,33 +44,33 @@ jobs:
 
       - run: npm install
       
-      # 将站点构建到 'site/' 目录中
+      # 将站点构建到 'site/' 目录
       - run: npx @docmd/core build
 
-      - name: 上传产物
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
 
-      - name: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
 ```
 
 ### 2. 容器化部署 (Docker)
 
-如果您自行托管文档，请使用 [部署命令](../../deployment) 生成生产级 `Dockerfile` 和服务器配置。
+如果您自行托管文档，可使用 [Deploy 命令](../../deployment/index.md) 生成一份生产就绪的 `Dockerfile` 与服务器配置。
 
 ```bash
-# 在本地生成 Docker 和 Nginx 配置
+# 在本地生成 Docker 与 Nginx 配置
 npx @docmd/core deploy --docker --nginx
 ```
 
-随后，您可以更新 GitHub Action，以便在发布新版本时构建此 Docker 镜像并将其推送到注册表（如 Docker Hub 或 GitHub Container Registry）。
+您可以在 GitHub Action 中扩展：每当发布新版本时，把这个 Docker 镜像构建并推送到 Docker Hub 或 GitHub Container Registry 这类镜像仓库。
 
-### 3. 拉取请求预览
+### 3. Pull Request 预览
 
-通过为每个拉取请求生成临时的预览环境来增强您的工作流。这允许审查人员在更改合并到主分支之前查看渲染后的文档。有关更多详细信息，请参阅 [预览更改指南](../workflows-teams/previewing-changes)。
+进一步丰富您的工作流：为每个 Pull Request 生成临时预览环境，使评审者能在合并到 main 之前看到文档的渲染效果。详情可参阅 [预览变更指南](../workflows-teams/previewing-changes.md)。
 
-## 权衡
+## 取舍
 
-自动化的 CI/CD 需要初始设置时间并需要管理机密（如 API 令牌）。然而，从长远来看，“无需干预”的部署过程带来的好处 -  - 包括减少人为错误和缩短更新周期 -  - 远超初始投入。对于大型站点，请确保您的工作流仅在文档目录中的文件发生更改时才触发，以节省 CI 额度。
+自动化的 CI/CD 需要前期搭建，并妥善保管密钥（例如 API Token）。但"零接触"的部署流程带来的长期收益 —— 更少的人为错误、更短的更新周期 —— 远远超过初始投入。对于大型站点，请让工作流仅在文档目录里的文件发生变更时才触发，以节省 CI 分钟数。

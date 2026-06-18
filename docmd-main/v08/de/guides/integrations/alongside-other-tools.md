@@ -5,39 +5,37 @@ description: "Strategien zur Integration von docmd in ein Multi-Tool-Dokumentati
 
 ## Problem
 
-Große Organisationen nutzen selten ein einziges Tool für all ihre Dokumentationsanforderungen. Ihr Unternehmen verwendet vielleicht Confluence für interne Spezifikationen, Stoplight für das API-Design und GitHub für Codebeispiele. Die Integration dieser unterschiedlichen Quellen in eine einheitliche User Journey ist eine große Herausforderung, da sich Benutzer oft zwischen getrennten Portalen mit unterschiedlichen Stilen und Navigationsstrukturen wiederfinden.
+Große Organisationen verwenden selten ein einziges Tool für Dokumentation. Möglicherweise nutzen Sie Confluence für interne Specs, Stoplight für APIs und GitHub für Code. Die Integration unterschiedlicher Quellen in eine einheitliche User Journey ist eine Herausforderung. Benutzer springen häufig zwischen unverbundenen Portalen mit unterschiedlichen Stilen und Navigationen hin und her.
 
 ## Warum es wichtig ist
 
-Eine fragmentierte Dokumentationserfahrung schadet dem Vertrauen der Entwickler und erhöht die kognitive Belastung. Wenn ein Benutzer gezwungen ist, zwischen völlig unterschiedlichen Oberflächen zu wechseln, nur um einem Tutorial zu folgen, verliert er eher den Kontext oder gibt Ihr Produkt ganz auf. Die Vereinheitlichung Ihrer Tools gewährleistet eine professionelle, zusammenhängende Erfahrung, die zum Erkunden und Lernen einlädt.
+Ein fragmentiertes Dokumentations-Erlebnis ruiniert das Vertrauen von Entwicklern und erhöht die kognitive Last. Wechselt ein Benutzer zwischen völlig unterschiedlichen Oberflächen, um einem Tutorial zu folgen, verliert er den Kontext oder verlässt Ihr Produkt. Das Vereinen Ihrer Tools gewährleistet eine professionelle, kohärente Erfahrung, die zum Erkunden ermutigt.
 
 ## Ansatz
 
-Nutzen Sie `docmd` als Ihren primären Dokumentations-Hub oder "Single Pane of Glass". Durch die Verwendung des [Menübars](../../configuration/menubar) für eine einheitliche Navigation und von [Embed-Containern](../../content/containers/embed) für Drittanbieter-Inhalte können Sie eine nahtlose Oberfläche schaffen, welche die Komplexität Ihrer Multi-Tool-Infrastruktur verbirgt.
+Verwenden Sie docmd als Ihren primären Dokumentations-Hub. Durch Nutzung der [Menüleiste](../../configuration/menubar.md) für vereinte Navigation und [Embed-Container](../../content/containers/embed.md) für Drittanbieter-Inhalte können Sie eine nahtlose Oberfläche schaffen, die die Multi-Tool-Komplexität verbirgt.
 
 ## Implementierung
 
-### 1. Einheitliche globale Navigation
+### 1. Vereinte globale Navigation
 
-Verwenden Sie die `menubar`-Konfiguration, um Ihre verschiedenen Dokumentationsportale miteinander zu verknüpfen. Dies stellt sicher, dass Benutzer immer den Weg zurück zu den Hauptanleitungen finden, unabhängig davon, auf welcher Subdomain sie sich gerade befinden.
+Verwenden Sie die `menubar`-Konfiguration, um Ihre verschiedenen Dokumentations-Portale miteinander zu verknüpfen. So finden Benutzer unabhängig von der Subdomain stets den Weg zurück zu den Hauptleitfäden.
 
 ```json
-{
   "layout": {
     "menubar": {
       "left": [
-        { "text": "Anleitungen", "url": "/" },
+        { "text": "Leitfäden", "url": "/" },
         { "text": "API-Referenz", "url": "https://api.example.com" },
         { "text": "Community", "url": "https://forum.example.com" }
       ]
     }
   }
-}
 ```
 
-### 2. Nahtloses Embedding
+### 2. Nahtloses Einbetten
 
-Für Tools, die eine Weboberfläche bieten (wie interaktive API-Explorer oder Dashboard-Vorschauen), verwenden Sie den `::: embed`-Container, um diese direkt in Ihren `docmd`-Seiten anzuzeigen. Dies hält die Benutzer innerhalb Ihrer markengerechten Umgebung.
+Für Tools, die eine Web-Oberfläche bereitstellen (wie interaktive API-Explorer oder Dashboard-Vorschauen), verwenden Sie den Container `::: embed`. Diese werden direkt innerhalb Ihrer docmd-Seiten angezeigt und halten Benutzer in Ihrer Marken-Umgebung.
 
 ```markdown
 # Interaktiver API-Explorer
@@ -45,12 +43,12 @@ Für Tools, die eine Weboberfläche bieten (wie interaktive API-Explorer oder Da
 ::: embed "https://api.example.com/v1/explorer"
 :::
 ```
-Weitere Informationen finden Sie in der [Embed-Referenz](../../content/containers/embed).
+Weitere Informationen finden Sie in der [Embed-Referenz](../../content/containers/embed.md).
 
-### 3. Inhaltsaggregation
+### 3. Content-Aggregation
 
-Für externe Inhalte, die zusammen mit Ihrer Kerndokumentation durchsuchbar sein müssen, sollten Sie einen Build-Schritt in Betracht ziehen, der Daten aus anderen Quellen abruft und in Markdown umwandelt. Dies ermöglicht es `docmd`, all Ihre Informationen in einem einzigen, einheitlichen [Suchindex](../../plugins/search) zu erfassen.
+Für externe Inhalte, die zusammen mit der Kern-Dokumentation durchsuchbar sein müssen, erwägen Sie einen Build-Schritt, der Daten aus anderen Quellen abruft und in Markdown konvertiert. Dadurch kann docmd alle Informationen in einem einzigen, vereinten [Suchindex](../../plugins/search.md) indizieren.
 
 ## Abwägungen
 
-Während das Einbetten einen einheitlichen Look bietet, kann es gelegentlich Performance-Overhead oder Probleme mit verschachtelten Scrollbalken auf mobilen Geräten verursachen. Zudem werden Inhalte innerhalb eines Iframes nicht nativ von der `docmd`-Suchmaschine indiziert. Wenn die Durchsuchbarkeit aller Inhalte kritisch ist, wird die Priorisierung von [OpenAPI-Generierung](./openapi-generation) oder anderen Markdown-basierten Ingestion-Methoden empfohlen.
+Während Embedding ein einheitliches Erscheinungsbild bietet, kann es Performance-Overhead oder "Scroll-Nesting"-Probleme auf mobilen Geräten verursachen. Inhalte innerhalb eines iframe werden von docmds Such-Engine nicht nativ indexiert. Ist Such-Parität entscheidend, wird empfohlen, [OpenAPI-Generierung](openapi-generation.md) oder andere Markdown-basierte Ingestion-Methoden zu priorisieren.

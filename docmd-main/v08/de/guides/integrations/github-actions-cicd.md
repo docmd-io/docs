@@ -1,28 +1,28 @@
 ---
 title: "GitHub Actions CI/CD"
-description: "So automatisieren Sie Ihre Dokumentations-Builds und -Deployments mit GitHub Actions und docmd für einen hocheffizienten Dokumentations-Workflow."
+description: "Wie Sie Ihre Dokumentations-Builds und Deployments mit GitHub Actions und docmd für einen hochgeschwindigen Workflow automatisieren."
 ---
 
 ## Problem
 
-Das manuelle Bauen und Bereitstellen von Dokumentationen von einem lokalen Rechner aus ist anfällig für Fehler, Umgebungsinkonsistenzen (z. B. unterschiedliche Node.js-Versionen) und Sicherheitsrisiken. Zudem entsteht ein Flaschenhals, da Deployments von der Verfügbarkeit und dem lokalen Setup einer einzelnen Person abhängen.
+Dokumentation manuell von einer lokalen Maschine aus zu bauen und bereitzustellen ist fehleranfällig, anfällig für Umgebungs-Inkonsistenzen und Sicherheitsrisiken. Es schafft einen Engpass, da Deployments von der Verfügbarkeit einer Einzelperson abhängen.
 
 ## Warum es wichtig ist
 
-Continuous Deployment (CD) stellt sicher, dass Ihre Dokumentation immer synchron mit Ihrer Software ist. Wenn ein technisches Update gemergt wird, sollte es Ihre Benutzer innerhalb von Minuten erreichen, nicht erst nach Tagen. Automatisierung garantiert, dass jeder Build in einer sauberen, reproduzierbaren Umgebung stattfindet, was hohe Qualitäts- und Zuverlässigkeitsstandards wahrt.
+Continuous Deployment (CD) stellt sicher, dass Ihre Dokumentation stets mit Ihrer Software synchron ist. Wenn ein technisches Update gemergt wird, sollte es Benutzer innerhalb weniger Minuten erreichen. Automatisierung garantiert, dass jeder Build in einer sauberen, reproduzierbaren Umgebung stattfindet — Qualität und Zuverlässigkeit bleiben erhalten.
 
 ## Ansatz
 
-Nutzen Sie GitHub Actions, um die `docmd`-Build-Pipeline bei jedem Push oder Pull Request auszuführen. Die resultierenden statischen Assets können dann automatisch auf Hosting-Providern wie GitHub Pages, Cloudflare Pages oder in containerisierten Umgebungen mit Docker bereitgestellt werden.
+Verwenden Sie GitHub Actions, um die docmd-Build-Pipeline bei jedem Push oder Pull Request auszuführen. Die resultierenden statischen Assets können automatisch zu Hosting-Providern wie GitHub Pages, Cloudflare Pages oder containerisierten Umgebungen mit Docker deployt werden.
 
 ## Implementierung
 
-### 1. Standard-Workflow für GitHub Pages
+### 1. Standard GitHub-Pages-Workflow
 
 Erstellen Sie `.github/workflows/docs.yml`, um den Build- und Deployment-Prozess zu automatisieren.
 
-```yaml
-name: Docs bereitstellen
+```yaml ".github/workflows/docs.yml"
+name: Deploy Docs
 on:
   push:
     branches: [main]
@@ -44,33 +44,33 @@ jobs:
 
       - run: npm install
       
-      # Baut die Seite in das Verzeichnis 'site/'
+      # Site in das Verzeichnis 'site/' bauen
       - run: npx @docmd/core build
 
-      - name: Artefakt hochladen
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
 
-      - name: Auf GitHub Pages bereitstellen
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
 ```
 
 ### 2. Containerisiertes Deployment (Docker)
 
-Wenn Sie Ihre Dokumentation selbst hosten, verwenden Sie den [Deploy-Befehl](../../deployment), um ein produktionsreifes `Dockerfile` und Serverkonfigurationen zu generieren.
+Wenn Sie Ihre Dokumentation selbst hosten, verwenden Sie den [Deploy-Befehl](../../deployment/index.md), um ein produktionsreifes `Dockerfile` und Server-Konfigurationen zu generieren.
 
 ```bash
-# Docker- und Nginx-Configs lokal generieren
+# Docker- und Nginx-Konfigurationen lokal generieren
 npx @docmd/core deploy --docker --nginx
 ```
 
-Sie können dann Ihre GitHub Action aktualisieren, um dieses Docker-Image zu bauen und bei jedem Release in eine Registry (wie Docker Hub oder GitHub Container Registry) zu pushen.
+Sie können Ihre GitHub Action aktualisieren, um dieses Docker-Image in eine Registry (wie Docker Hub oder GitHub Container Registry) zu bauen und zu pushen, wann immer Sie eine neue Version releasen.
 
-### 3. Pull Request Previews
+### 3. Pull-Request-Vorschauen
 
-Verbessern Sie Ihren Workflow, indem Sie für jeden Pull Request kurzlebige Preview-Umgebungen generieren. Dies ermöglicht es Reviewern, die gerenderte Dokumentation zu sehen, bevor sie in den Hauptzweig gemergt wird. Weitere Details finden Sie im [Leitfaden zum Vorschauen von Änderungen](../workflows-teams/previewing-changes).
+Erweitern Sie Ihren Workflow, um für jeden Pull Request ephemere Vorschau-Umgebungen zu generieren. Das erlaubt Reviewern, die gerenderte Dokumentation zu sehen, bevor sie in den Main-Branch gemergt wird. Weitere Details finden Sie im [Previewing-Changes-Leitfaden](../workflows-teams/previewing-changes.md).
 
 ## Abwägungen
 
-Automatisiertes CI/CD erfordert initialen Setup-Aufwand und die Verwaltung von Secrets (z. B. API-Tokens). Die langfristigen Vorteile eines automatisierten Deployment-Prozesses , darunter weniger menschliche Fehler und schnellere Update-Zyklen , überwiegen jedoch bei weitem die Anfangsinvestition. Stellen Sie bei großen Sites sicher, dass Ihr Workflow nur ausgelöst wird, wenn Dateien in Ihrem Dokumentationsverzeichnis geändert wurden, um CI-Minuten zu sparen.
+Automatisierte CI/CD erfordert initialen Setup-Aufwand und die Verwaltung von Secrets (z. B. API-Tokens). Die langfristigen Vorteile eines "Hands-off"-Deployment-Prozesses — einschließlich reduzierter menschlicher Fehler und schnellerer Update-Zyklen — überwiegen jedoch die initiale Investition bei Weitem. Für große Sites stellen Sie sicher, dass Ihr Workflow nur dann ausgelöst wird, wenn sich Dateien in Ihrem Dokumentations-Verzeichnis ändern, um CI-Minuten zu sparen.

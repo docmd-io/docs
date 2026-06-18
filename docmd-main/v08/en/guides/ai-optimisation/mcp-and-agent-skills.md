@@ -13,7 +13,7 @@ The Model Context Protocol connects LLM environments directly to your local work
 
 Add the following to your desktop configuration file (typically at `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS or `%APPDATA%\Claude\claude_desktop_config.json` on Windows):
 
-```json
+```json "claude_desktop_config.json"
 {
   "mcpServers": {
     "docmd": {

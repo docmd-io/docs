@@ -21,7 +21,7 @@ Use GitHub Actions to run the docmd build pipeline on every push or Pull Request
 
 Create `.github/workflows/docs.yml` to automate the build and deployment process.
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 name: Deploy Docs
 on:
   push:

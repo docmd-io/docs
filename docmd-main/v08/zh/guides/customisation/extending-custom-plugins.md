@@ -1,78 +1,73 @@
 ---
-title: "使用自定义插件扩展 docmd"
-description: "如何使用 docmd 的生命周期钩子构建自定义功能并扩展文档引擎。"
+title: "通过自定义插件扩展 docmd"
+description: "如何借助 docmd 的生命周期钩子 (lifecycle hooks)，构建自定义功能并扩展文档引擎。"
 ---
 
 ## 问题
 
-有时您有一些非常具体的需求，内置功能或现有插件无法满足。例如，您可能需要在构建过程中从内部 API 获取数据，或者对生成的 HTML 进行超出简单 CSS 范畴的复杂转换。
+有时您有一些内置特性覆盖不到的具体需求。例如，可能需要在构建过程中从内部 API 拉取数据，或对生成的 HTML 执行复杂转换。
 
 ## 为什么重要
 
-可扩展性是静态工具与专业文档框架的区别所在。如果没有一种清晰的方式来注入自定义逻辑，团队往往不得不维护脆弱的 shell 脚本或后处理封装程序，这使得构建过程难以管理和调试。
+可扩展性是静态工具与专业级文档框架的分水岭。若没有注入自定义逻辑的清晰方式，团队就只能维护脆弱的 shell 脚本或后处理包装器，让构建过程既难管理又难调试。
 
 ## 方法
 
-`docmd` 具有强大的基于钩子的 [Plugin API](../../plugins/api)。您可以编写简单的 Node.js 模块，在文档生命周期的各个阶段（从初始配置到最终 HTML 生成）进行拦截，从而允许您任意修改内容和行为。
+docmd 提供了一套可靠、基于钩子的 [插件 API](../../plugins/building-plugins.md)。您只需编写简单的 Node.js 模块，就能在文档生命周期的不同阶段介入，在从初始配置到最终 HTML 生成的任意环节，自由修改内容与行为。
 
-## 实施
+## 实现
 
-### 1. 创建本地插件
+### 1. 创建一个本地插件
 
-插件是一个标准的 JavaScript 模块，它导出一个描述符和若干生命周期钩子。
+插件就是标准的 JavaScript 模块，导出一个描述符和一组生命周期钩子。
 
 ```javascript
 // plugins/version-injector.js
+
+let latestVersion = "0.0.0";
+
 export default {
-  // 插件元数据
+  // 插件描述符
   plugin: {
-    name: 'version-injector',
-    version: '1.0.0',
-    capabilities: ['build'] // 使用 'build' 钩子所必需的
+    "name": "version-injector",
+    "version": "1.0.0",
+    "capabilities": ["init", "build"]
   },
 
-  // 在钩子之间共享的状态
-  latestVersion: '0.0.0',
-
-  // 在配置解析完成后运行
+  // 生命周期钩子
   async onConfigResolved(config) {
-    // 从内部 API 获取数据
-    const response = await fetch('https://api.internal.com/version');
-    this.latestVersion = await response.text();
-    console.log(`[插件] 已获取版本：${this.latestVersion}`);
+    // 在初始化阶段一次性拉取外部数据
+    const response = await fetch("https://api.example.com/version");
+    latestVersion = await response.text();
+    console.log(`[Plugin] 已拉取版本：${latestVersion}`);
   },
 
-  // 在模板渲染前拦截页面上下文
+  // 在写入前修改 HTML
   async onBeforeRender(page) {
     if (!page.html) return;
-    // 在 HTML 和 frontmatter 中用动态数据替换占位符
-    page.html = page.html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
-    page.frontmatter.computedVersion = this.latestVersion;
+
+    page.html = page.html.replace(/\{\{VERSION\}\}/g, latestVersion);
+    page.frontmatter.computedVersion = latestVersion;
   }
 };
 ```
 
 ### 2. 注册插件
 
-您可以通过将本地插件导入到 `docmd.config.js` 中来注册它。
-
-::: callout info "为什么使用 .js 而不是 .json？"
-插件注册需要 JavaScript 的 `import` 语句来加载模块。对于需要导入插件的配置，必须使用 `docmd.config.js`。
-:::
+将本地插件 import 到您的 `docmd.config.js`（或 `docmd.config.ts`）中进行注册。JSON 配置文件无法使用 import —— 若要注册插件，请使用 `.js` 或 `.ts` 格式。
 
 ```javascript
-// docmd.config.js
-import VersionInjector from './plugins/version-injector.js';
+import VersionInjector from "./plugins/version-injector.js";
 
 export default {
-  title: '我的项目文档',
-  plugins: {
-    // 通过提供导入的模块进行注册
-    'version-injector': VersionInjector
+  "title": "我的项目文档",
+  "plugins": {
+    // 注入本地插件对象
+    "version-injector": VersionInjector
   }
 };
 ```
 
-## 权衡
+## 取舍
 
-自定义插件在构建时的 Node.js 环境中运行。虽然功能强大，但如果不进行优化，可能会影响构建性能。像 `onAfterParse` 或 `onPageReady` 这样的钩子逻辑会为网站中的 *每一页* 运行。请确保您的转换是高效的（例如使用优化的正则表达式），以保持快速的构建速度。
+自定义插件运行在构建时的 Node.js 环境中。它能力强大，但若不加优化，可能影响构建性能。`onAfterParse` 或 `onPageReady` 等钩子中的逻辑会对站点中**每个**页面执行。请确保您的转换是高效的（例如使用经过优化的正则），以保持构建速度。

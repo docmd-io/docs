@@ -1,34 +1,34 @@
 ---
 title: "CDN- & Edge-Deployment"
-description: "So minimieren Sie die globale Latenz, indem Sie Ihre statische Dokumentation auf einem Content Delivery Network (CDN) oder Edge-Netzwerk bereitstellen."
+description: "Wie Sie die globale Latenz minimieren, indem Sie Ihre statische Dokumentation auf einem Content Delivery Network (CDN) oder Edge Network bereitstellen."
 ---
 
 ## Problem
 
-Das Hosting Ihrer Dokumentation auf einem einzelnen Server in einer geografischen Region (z. B. US-East) bedeutet, dass Benutzer in anderen Teilen der Welt (z. B. Europa oder Asien) eine erhebliche Netzwerklatenz erfahren. Jeder Seitenaufruf, jedes Bild und jedes Skript muss Tausende von Kilometern zurücklegen, wodurch sich Ihre Dokumentation für ein globales Publikum träge und langsam anfühlt.
+Dokumentation auf einem einzelnen Server in einer geografischen Region (z. B. US-East) zu hosten erzeugt für Benutzer an anderen Standorten erhebliche Netzwerklatenz. Jeder Seitenaufruf, jedes Bild und jedes Skript legt Tausende von Kilometern zurück. Das lässt Ihre Dokumentation für ein globales Publikum träge wirken.
 
 ## Warum es wichtig ist
 
-Hohe Latenz schadet direkt der Developer Experience. Selbst wenn Ihre Dokumentation gut geschrieben und leichtgewichtig ist, wird die "Time to First Byte" (TTFB) durch die Gesetze der Physik begrenzt. Wenn sich Ihre Website langsam anfühlt, verlieren Entwickler eher den Fokus oder geben Ihr Tool ganz zugunsten eines anderen mit schnellerer, besser zugänglicher Dokumentation auf.
+Hohe Latenz beeinträchtigt die Developer Experience direkt. Selbst wenn Ihre Dokumentation gut geschrieben und leichtgewichtig ist, ist die "Time to First Byte" (TTFB) physikalisch begrenzt. Wenn Ihre Site langsam wirkt, verlieren Entwickler den Fokus oder greifen stattdessen zu schnelleren Alternativen.
 
 ## Ansatz
 
-Die optimale Lösung besteht darin, Ihre Website auf einem Edge-CDN bereitzustellen. Da `docmd` rein statische Assets generiert (HTML, CSS, JS), ist es perfekt für die Verteilung über Edge-Netzwerke geeignet. CDNs replizieren Ihre Dateien auf Hunderte von weltweit verteilten "Edge-Nodes" und bedienen Ihre Benutzer vom nächstgelegenen Rechenzentrum aus.
+Die optimale Lösung ist die Bereitstellung Ihrer Site auf einem Edge-CDN. docmd generiert rein statische Assets (HTML, CSS, JS), was sie perfekt für Edge-Distribution geeignet macht. CDNs replizieren Dateien über global verteilte "Edge-Nodes", um Benutzer aus dem nächstgelegenen Rechenzentrum zu bedienen.
 
 ## Implementierung
 
 ### 1. Plattform wählen
 
-`docmd` ist nativ kompatibel mit allen modernen statischen Hosting- und Edge-Plattformen. Wir empfehlen die folgenden aufgrund ihrer globalen Performance und einfachen Handhabung:
-*   **Cloudflare Pages**: Extrem schnelles globales Edge-Netzwerk mit integriertem DDoS-Schutz.
-*   **Vercel**: Optimiert für Performance mit exzellenter Integration in den Entwickler-Workflow.
-*   **Netlify**: Leistungsstarke Automatisierungsfunktionen und ein robustes globales CDN.
+docmd unterstützt nativ alle modernen Static-Hosting- und Edge-Plattformen. Wir empfehlen die folgenden aufgrund ihrer globalen Performance und Benutzerfreundlichkeit:
+*   **Cloudflare Pages**: Extrem schnelles globales Edge-Network mit integriertem DDoS-Schutz.
+*   **Vercel**: Auf Performance optimiert, mit ausgezeichneter Developer-Workflow-Integration.
+*   **Netlify**: Leistungsstarke Automatisierungsfunktionen und ein zuverlässiges globales CDN.
 
 ### 2. Build automatisieren
 
-Verwenden Sie eine CI/CD-Pipeline, um Ihre Website automatisch zu erstellen und bereitzustellen, wann immer Sie Änderungen pushen. Detaillierte Beispiele finden Sie im [GitHub Actions Leitfaden](../../guides/integrations/github-actions-cicd).
+Verwenden Sie eine CI/CD-Pipeline, um Ihre Site automatisch zu bauen und bereitzustellen, wann immer Sie Änderungen pushen. Detaillierte Beispiele finden Sie im [GitHub-Actions-Leitfaden](../../guides/integrations/github-actions-cicd.md).
 
-```yaml
+```yaml ".github/workflows/deploy.yml"
 # .github/workflows/deploy.yml
 jobs:
   deploy:
@@ -39,23 +39,23 @@ jobs:
         with:
           node-version: 22
       
-      # Buildet die Website in das Standard-Verzeichnis 'site/'
+      # Site ins Standard-Verzeichnis 'site/' bauen
       - run: npm install && npx @docmd/core build
       
-      # Beispiel: Deployment auf Cloudflare Pages
+      # Beispiel: Deployment zu Cloudflare Pages
       - name: Deploy
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: mein-projekt
+          projectName: my-docs
           directory: site
 ```
 
-### 3. Verifizierung
+### 3. Verifikation
 
-Nach dem Deployment können Sie Ihre globale Performance mit Tools wie PageSpeed Insights oder globalen Ping-Tests überprüfen. Sie sollten Antwortzeiten unter 100 ms von fast jedem Standort weltweit sehen.
+Verifizieren Sie nach dem Deployment die globale Performance mit Tools wie PageSpeed Insights oder globalen Ping-Tests. Sie sollten aus nahezu jedem weltweiten Standort Antwortzeiten unter 100 ms sehen.
 
 ## Abwägungen
 
-Globale Edge-Netzwerke nehmen Ihnen das Server-Management ab, was ein großer Vorteil für Dokumentationsteams ist. Das Debuggen regionaler Caching-Probleme kann jedoch gelegentlich komplexer sein als das Überprüfen eines einzelnen Server-Logs. Die Verwendung von Plattformen mit robuster "sofortiger Cache-Invalidierung" stellt sicher, dass Ihre Benutzer unmittelbar nach einem Deployment immer die neueste Version Ihrer Dokumentation sehen.
+Globale Edge-Netzwerke abstrahieren das Server-Management, was Dokumentationsteams zugutekommt. Allerdings kann die Fehlersuche bei regionalen Caching-Problemen gelegentlich komplexer sein als die Durchsicht eines einzelnen Server-Logs. Plattformen mit zuverlässiger "Instant Cache Invalidation" stellen sicher, dass Benutzer stets unmittelbar nach einem Deployment die aktuellste Version sehen.

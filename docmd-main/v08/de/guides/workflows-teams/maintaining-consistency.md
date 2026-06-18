@@ -1,60 +1,60 @@
 ---
 title: "Konsistenz wahren"
-description: "So gewährleisten Sie eine einheitliche Stimme und professionelle Qualität in großen Dokumentationsteams durch Linting und standardisierte Muster."
+description: "Wie Sie mit Linting und standardisierten Mustern eine einheitliche Stimme und professionelle Qualität in großen Dokumentationsteams sicherstellen."
 ---
 
 ## Problem
 
-In großen Teams hat jeder technische Redakteur einen anderen Stil und eigene Vorlieben. Einige verwenden Fettdruck zur Hervorhebung, andere Kursivschrift. Einige bevorzugen "Klicken Sie auf die Schaltfläche", während andere "Wählen Sie die Option" verwenden. Mit der Zeit kann Ihre Dokumentation zu einem "Flickenteppich" aus widersprüchlichen Stilen werden, was es für Benutzer erschwert, Informationen schnell zu erfassen, und das professionelle Vertrauen in Ihr Produkt mindert.
+In großen Teams hat jeder technische Autor einen anderen Stil. Manche nutzen Fettdruck zur Hervorhebung, andere Kursivschrift. Manche bevorzugen "Klicken Sie auf den Button", andere "Wählen Sie die Option". Mit der Zeit wird die Dokumentation zu einem Flickwerk aus konfliktierenden Stilen. Das erschwert es Benutzern, Informationen zu verarbeiten, und mindert das professionelle Vertrauen.
 
 ## Warum es wichtig ist
 
-Konsistenz schafft Vertrautheit. Wenn Benutzer komplexe APIs oder Workflows erlernen, verlassen sie sich auf ein konsistentes Vokabular und strukturelle Muster, um effektiv durch die Inhalte zu navigieren. Eine einheitliche Stimme sorgt dafür, dass sich Ihre Dokumentation wie ein zusammenhängendes, hochwertiges Produkt anfühlt, was wiederum das Vertrauen in die Software selbst stärkt.
+Konsistenz erzeugt Vertrautheit. Wenn Benutzer komplexe APIs oder Workflows erlernen, verlassen sie sich auf konsistente Vokabulare und strukturelle Muster, um sich effektiv zurechtzufinden. Eine einheitliche Stimme lässt Dokumentation wie ein kohärentes, hochwertiges Produkt wirken und stärkt das Vertrauen in die Software selbst.
 
 ## Ansatz
 
-Setzen Sie Konsistenz mechanisch durch [standardisierte Container](../../content/containers) und automatisierte Linting-Tools durch. Indem Sie Low-Level-Stil- und Syntaxprüfungen automatisieren, geben Sie Ihren Redakteuren den Freiraum, sich auf die High-Level-Qualität, Genauigkeit und Klarheit der Inhalte zu konzentrieren.
+Erzwingen Sie Konsistenz mechanisch durch [standardisierte Container](../../content/containers/index.md) und automatisierte Linting-Tools. Die Automatisierung niedrigstufiger Stil- und Syntax-Prüfungen befreit menschliche Editoren, sich auf die übergeordnete Qualität, Genauigkeit und Klarheit der Inhalte zu konzentrieren.
 
 ## Implementierung
 
-### 1. Standardisierte docmd-Muster nutzen
+### 1. Standardisierte docmd-Muster verwenden
 
-Ermutigen Sie alle Mitwirkenden, die integrierten thematischen Container von `docmd` zu verwenden, anstatt mit manueller Markdown-Formatierung zu improvisieren. Dies stellt sicher, dass jede Warnung, jeder Tipp oder Hinweis auf der gesamten Website identisch aussieht und funktioniert.
+Ermutigen Sie alle Mitwirkenden, die eingebauten thematischen Container von docmd anstelle manueller Markdown-Formatierung zu verwenden. Das stellt sicher, dass jede Warnung, jeder Tipp und jede Notiz über die gesamte Site hinweg identisch aussieht und sich identisch verhält.
 
 ```markdown
-<!-- ❌ Vermeiden: inkonsistent und ohne Styling -->
-**Hinweis:** Bitte starten Sie den Dienst neu.
+<!-- ❌ Vermeiden: inkonsistent und ungestaltet -->
+**Hinweis:** Bitte starten Sie den Service neu.
 
-<!-- ✅ Empfohlen: konsistent, barrierefrei und thematisch passend -->
+<!-- ✅ Verwenden: konsistent, barrierefrei und thematisch -->
 ::: callout info
-Bitte starten Sie den Dienst neu.
+Bitte starten Sie den Service neu.
 :::
 ```
 
-Die Verwendung von [Callouts](../../content/containers/callouts) stellt sicher, dass Ihre Dokumentation ein professionelles Erscheinungsbild behält und Barrierefreiheitsstandards erfüllt, ohne dass der Autor zusätzlichen Aufwand betreiben muss.
+Die Verwendung von [Callouts](../../content/containers/callouts.md) stellt sicher, dass Ihre Dokumentation ohne zusätzlichen Aufwand ein professionelles Erscheinungsbild bewahrt und Accessibility-Standards erfüllt.
 
 ### 2. Prose-Linting implementieren
 
-Integrieren Sie Tools wie **Vale** oder **Markdownlint**, um Markenterminologie, Tonfall und Grammatik durchzusetzen. Diese Tools können so konfiguriert werden, dass sie automatisch auf Passiv, voreingenommene Sprache oder falsche Schreibweisen von Produktnamen prüfen.
+Integrieren Sie Tools wie **Vale** oder **Markdownlint**, um Marken-Terminologie, Ton und Grammatik durchzusetzen. Diese Tools prüfen automatisch auf passive Formulierungen, voreingenommene Sprache oder fehlerhafte Produkt-Schreibweisen.
 
-```ini
-# Beispiel für .vale.ini
+```ini ".vale.ini"
+# .vale.ini example
 MinAlertLevel = suggestion
 Packages = Google, Microsoft
 [*]
 BasedOnStyles = Vale, Google
 ```
 
-### 3. Automatisierte Durchsetzung in der CI/CD
+### 3. Automatisierte Durchsetzung in CI/CD
 
-Integrieren Sie Konsistenzprüfungen in Ihre [GitHub Actions](../../guides/integrations/github-actions-cicd) oder andere CI/CD-Pipelines. Dies stellt sicher, dass jeder Pull Request automatisch auf Stil- und Strukturkonsistenz geprüft wird, bevor er gemergt werden kann.
+Beziehen Sie Konsistenz-Prüfungen in Ihre [GitHub Actions](../../guides/integrations/github-actions-cicd.md) oder andere CI/CD-Pipelines ein. Das stellt sicher, dass jeder Pull Request auf Stil und strukturelle Konsistenz auditiert wird, bevor er gemergt werden kann.
 
 ```bash
-# Beispiel für einen CI-Schritt zum Linting
-- name: Dokumentation prüfen
+# Beispiel-CI-Schritt zum Linten
+- name: Lint Documentation
   run: vale docs/
 ```
 
 ## Abwägungen
 
-Striktes Linting kann Community-Mitglieder entmutigen, wenn sie bei einer einfachen Tippfehler-Korrektur mit mehreren "Stilfehlern" konfrontiert werden. Wir empfehlen, die Empfindlichkeit Ihres Linters für externe Beiträge auf `warning` zu stellen und den `error`-Status für interne Team-Updates zu reservieren, um ein Gleichgewicht zwischen Konsistenz und Inklusivität zu finden.
+Strenges Linting kann Community-Mitwirkende entmutigen, wenn sie für eine einfache Tippfehler-Korrektur mit mehreren "Stilfehlern" konfrontiert werden. Wir empfehlen, die Linter-Sensitivität für externe Beiträge auf `warning` zu setzen und den Status `error` nur für interne Team-Updates zu reservieren. Das balanciert Konsistenz mit Inklusivität.

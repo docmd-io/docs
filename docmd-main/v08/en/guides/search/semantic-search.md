@@ -21,7 +21,7 @@ Use docmd's native **Semantic Search Plugin**. It operates entirely client-side 
 
 Add the `search` plugin options within your `docmd.config.json`. Configure `semantic` to `true` and enable `showConfidence` to visually identify semantic matching in search results:
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "search": {

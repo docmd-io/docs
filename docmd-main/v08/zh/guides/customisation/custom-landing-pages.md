@@ -1,71 +1,71 @@
 ---
-title: "设计自定义落地页"
-description: "如何使用 docmd 的 hero 和 grid 容器为您的文档创建高级落地页。"
+title: "设计自定义登录页 (Landing Page)"
+description: "如何借助 docmd 的 Hero 与 Grid 容器，为您的文档打造高质量的登录页。"
 ---
 
 ## 问题
 
-默认情况下，大多数文档生成器中的 `index.md` 文件看起来都像一个标准的页面。创建一个具有高冲击力的、营销级的落地页通常需要使用单独的 Web 框架（如 Next.js 或 Astro），这增加了文档工作流的复杂性。
+在大多数文档生成器中，`index.md` 默认看起来就是一篇普通的技术页面。要做出有冲击力、可对标营销质量的登录页，通常需要引入额外的 Web 框架（如 Next.js 或 Astro），这会让文档工作流变得复杂。
 
 ## 为什么重要
 
-您的文档首页通常是开发者与您产品的第一次互动。一个通俗的 Markdown 解析页面可能无法激发用户对您产品精致程度和专业质量的信心。自定义落地页可以更好地引导用户访问最重要的章节，同时强化您品牌的视觉身份。
+您的文档首页往往是开发者与产品的第一次接触。一份千篇一律、由 Markdown 直接渲染的页面，难以让人对项目质量产生信心。一个定制的登录页能把用户引导到重点章节，同时强化品牌视觉。
 
 ## 方法
 
-`docmd` 提供了专门的 [Hero](../../content/containers/hero) 和 [网格 (Grid)](../../content/containers/grids-cards) 容器，专门用于构建高级落地页。为了获得完全的创作自由，您还可以使用 `noStyle` Frontmatter 属性来完全控制页面的 HTML 和样式。
+docmd 提供了专门的 [Hero](../../content/containers/hero.md) 与 [Grid](../../content/containers/grids.md) 容器，正是为打造高质量登录页而生。若您希望拥有完全创作自由，可在 frontmatter 中使用 `noStyle` 属性，完整接管页面的 HTML 与样式。
 
-## 实施
+## 实现
 
 ### 1. 使用 Hero 容器
 
-`hero` 容器支持多种布局，包括 `split`（用于并排内容）和 `glow`（用于现代美学效果）。
+`hero` 容器支持多种布局，例如 `split`（左右并排）与 `glow`（现代感光效）。
 
 ```markdown
 ::: hero layout:split glow:true
-# 使用 docmd 更快地构建
+# 用 docmd 构建得更快
 面向现代开发团队的零配置文档引擎。
 
-[开始使用](../../getting-started/quick-start.md) [在 GitHub 上查看](https://github.com/docmd-io/docmd)
+[立即开始](/docs/start) [在 GitHub 上查看](https://github.com/docmd-io/docmd)
 
 == side
-![仪表板预览](../../static/img/hero-preview.png)
+![Dashboard 预览](../../static/img/hero-preview.png)
 :::
 ```
 
-### 2. 使用网格组织内容
+### 2. 用 Grid 组织内容
 
-使用 [网格和卡片](../../content/containers/grids.md) 创建高层级的导航区域，帮助用户快速找到所需内容。
+使用 [Grid 与 Card](../../content/containers/grids.md) 构建高层级的导航分区，让用户快速找到所需内容。
 
 ```markdown
 ::: grids
 ::: grid
-::: card "快速入门" icon:rocket
-在不到 5 分钟的时间内启动并运行。
-[了解更多](../../getting-started/quick-start.md)
+::: card "快速开始" icon:rocket
+5 分钟内即可上手。
+[了解更多](/docs/start.md)
 :::
 :::
 ::: grid
 ::: card "API 参考" icon:code
-我们所有端点的全面文档。
-[探索 API](../../api/node-api.md)
+覆盖全部端点的完整文档。
+[浏览 API](/api)
 :::
 :::
 :::
 ```
 
-### 3. 使用 noStyle 进行完全自定义
+### 3. 通过 noStyle 完全自定义
 
-如果您需要一个完全自定义的设计，且忽略标准的文档布局（无侧边栏或页眉），请在 [页面 Frontmatter](../../content/frontmatter) 中使用 `noStyle` 属性。
+如果您需要彻底摆脱默认文档布局（无侧边栏、无顶栏），可在 [页面 Frontmatter](../../content/frontmatter.md) 中使用 `noStyle` 属性。
 
 ```yaml
 ---
-title: "自定义仪表板"
+title: "自定义 Dashboard"
 noStyle: true
 ---
 ```
-设置 `noStyle: true` 后，`docmd` 将仅渲染您提供的原始 HTML/Markdown 内容，允许您注入自己的 CSS 和 JavaScript，以实现像素级的完美体验。
+当 `noStyle: true` 时，docmd 只会渲染您提供的原始 HTML/Markdown。这让您可以注入自己的 CSS 与 JavaScript，实现像素级精准的体验。
 
-## 权衡
+## 取舍
 
-使用 `noStyle: true` 意味着您放弃了 `docmd` 提供的原生导航、搜索和主题切换功能。您负责确保自定义页面是移动端自适应且符合无障碍要求的。对于大多数用例，在标准布局中结合使用 `hero` 和 `grid` 容器可以在美观和功能之间提供最佳平衡。
+使用 `noStyle: true` 意味着您将失去 docmd 原生的导航、搜索以及主题切换能力。您需要自行保证自定义页面在移动端的响应式表现与无障碍合规。对大多数场景来说，结合 `hero` 与 `grid` 容器，已能在美观与功能之间取得最佳平衡。

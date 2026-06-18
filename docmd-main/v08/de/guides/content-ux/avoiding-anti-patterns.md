@@ -1,41 +1,41 @@
 ---
 title: "Anti-Patterns vermeiden"
-description: "So identifizieren und eliminieren Sie häufige Dokumentationsfehler, welche die User Experience verschlechtern und \"Content Debt\" erhöhen."
+description: "Wie Sie häufige Dokumentations-Fehler erkennen und beseitigen, die die User Experience verschlechtern und Content Debt verursachen."
 ---
 
 ## Problem
 
-Im Laufe der Zeit sammeln sich in Dokumentations-Repositories oft "Quick Fixes" für Content-Probleme an, welche die User Experience ungewollt verschlechtern. Diese Anti-Patterns , wie vage Linktexte oder überladene Codebeispiele , verfestigen sich im Projekt, was die Dokumentation schwerer wartbar und für Entwickler weniger nützlich macht.
+In Dokumentations-Repositories sammeln sich "Quick Fixes" an, die ungewollt die User Experience erodieren. Anti-Patterns — wie vage Link-Texte oder aufgeblähte Code-Beispiele — verfestigen sich. Das macht Dokumentation schwerer wartbar und weniger nützlich für Entwickler.
 
 ## Warum es wichtig ist
 
-Anti-Patterns tragen zur "Content Debt" (Inhaltsschulden) bei. Sie verschlechtern das Ranking in Suchmaschinen (SEO), verringern die Barrierefreiheit für Menschen mit Behinderungen und erhöhen die kognitive Belastung für Leser erheblich, die lediglich eine schnelle Lösung für ein technisches Problem suchen. Eine qualitativ hochwertige Dokumentation erfordert ständige Wachsamkeit, um sie sauber, prägnant und professionell zu halten.
+Anti-Patterns tragen zu "Content Debt" bei. Sie verschlechtern SEO-Rankings, reduzieren Barrierefreiheit und erhöhen die kognitive Last für Leser, die schnelle Lösungen suchen. Hochwertige Dokumentation erfordert ständige Wachsamkeit, um sie sauber, prägnant und professionell zu halten.
 
 ## Ansatz
 
-Identifizieren und eliminieren Sie gängige Anti-Patterns konsequent während des [Peer-Review-Prozesses](../workflows-teams/git-based-workflows.md). Nutzen Sie automatisierte Prose-Linter wie Vale sowie manuelle Reviews, um sicherzustellen, dass Ihre Inhalte auf allen Seiten hochwertig, zugänglich und konsistent bleiben.
+Identifizieren und beseitigen Sie häufige Anti-Patterns rigoros während des [Peer-Review-Prozesses](../workflows-teams/git-based-workflows.md). Verwenden Sie automatisierte Prose-Linter wie Vale sowie manuelle Reviews, um sicherzustellen, dass Inhalte hochwertig, barrierefrei und konsistent bleiben.
 
 ## Implementierung
 
-### 1. Nicht-descriptive Hyperlinks
+### 1. Nicht-beschreibende Hyperlinks
 
-Vermeiden Sie generische Texte wie "hier klicken" oder "mehr lesen" für Links. Dies schadet der SEO und macht die Dokumentation unzugänglich für Nutzer von Screenreadern, die oft navigieren, indem sie von Link zu Link springen.
+Vermeiden Sie generische Texte wie "hier klicken" oder "weiterlesen" für Links. Das schadet SEO und macht Dokumentation für Screenreader-Benutzer unzugänglich, die zwischen Links navigieren.
 
 *   **❌ Schlecht**: Um Ihren Server zu konfigurieren, [klicken Sie hier](../../configuration/overview.md).
-*   **✅ Gut**: Lesen Sie die [globale Konfiguration](../../configuration/overview.md), um Ihren Produktionsserver einzurichten.
+*   **✅ Gut**: Überprüfen Sie die [Allgemeine Konfiguration](../../configuration/overview.md), um Ihren Produktionsserver einzurichten.
 
-### 2. Die "Wand aus Boilerplate"
+### 2. Die "Wall of Boilerplate"
 
-Das Einfügen dutzender Zeilen von Standard-Imports und Boilerplate-Konfiguration vor der eigentlichen Logik in Codebeispielen lenkt den Leser vom eigentlichen Punkt des Beispiels ab.
+In Code-Beispielen lenken Dutzende Zeilen von Standard-Imports und Boilerplate den Leser von der Kernlogik ab.
 
-*   **Lösung**: Konzentrieren Sie sich auf das relevante Code-Snippet. Wenn Boilerplate für den Kontext notwendig ist, verwenden Sie Kommentare, um darauf hinzuweisen, dass Standard-Imports aus Gründen der Kürze weggelassen wurden, oder nutzen Sie [Callouts](../../content/containers/callouts.md), um das erforderliche Setup zu erläutern.
+*   **Lösung**: Konzentrieren Sie sich auf das relevante Code-Snippet. Ist Boilerplate notwendig, verwenden Sie Kommentare, um Auslassungen zu kennzeichnen, oder nutzen Sie [Callouts](../../content/containers/callouts.md), um das erforderliche Setup zu erklären.
 
-### 3. FAQs als "Müllhalde" nutzen
+### 3. FAQs als "Abladeplatz" verwenden
 
-"Häufig gestellte Fragen" (FAQ) werden oft zu einem Sammelbecken für Informationen, die zu schwierig in die Hauptanleitungen zu integrieren waren. Wenn eine Frage tatsächlich "häufig gestellt" wird, ist dies ein klares Zeichen dafür, dass Ihre Kerndokumentation dieses Konzept nicht effektiv erklärt hat.
+"Frequently Asked Questions" (FAQ)-Seiten werden oft zum Ablageort für Informationen, die nicht in die Hauptleitfäden integriert wurden. Wird eine Frage tatsächlich "häufig gestellt", deutet das darauf hin, dass Ihre Kern-Dokumentation das Konzept nicht effektiv erklärt hat.
 
-*   **Lösung**: Anstatt die FAQ zu erweitern, sollten Sie das entsprechende Tutorial oder die konzeptionelle Anleitung überarbeiten, um die Unklarheit direkt dort zu beseitigen, wo der Benutzer sie zuerst bemerkt. Verwenden Sie einen [wichtigen Callout](../../content/containers/callouts.md), wenn die Information kritisch für den Erfolg ist.
+*   **Lösung**: Statt eine FAQ zu erweitern, refaktorieren Sie das relevante Tutorial oder den konzeptionellen Leitfaden, um die Verwirrung dort zu adressieren, wo der Benutzer ihr zum ersten Mal begegnet. Verwenden Sie einen [Important Callout](../../content/containers/callouts.md), falls die Information kritisch ist.
 
 ## Abwägungen
 
-Das Eliminieren von FAQs erfordert von den Autoren, bestehende Dokumentationshierarchien ständig zu überarbeiten und zu verbessern, sobald neue Support-Themen auftauchen. Dies verursacht zwar mehr initialen Wartungsaufwand als das einfache Hinzufügen eines Stichpunkts zu einer FAQ-Liste, führt aber zu einer deutlich konsistenteren, professionelleren und nützlicheren Dokumentationsseite für Ihre Benutzer.
+FAQs zu eliminieren erfordert, dass Autoren bestehende Dokumentations-Hierarchien ständig refaktorieren und verbessern. Auch wenn dies initialen Wartungs-Overhead mit sich bringt, führt es zu einer deutlich kohärenteren, professionelleren und nützlicheren Dokumentations-Site.

@@ -1,27 +1,27 @@
 ---
 title: "OpenAPI-Generierung"
-description: "So integrieren Sie OpenAPI/Swagger-Schemas in Ihren docmd-Workflow für eine automatisierte und synchronisierte API-Referenzdokumentation."
+description: "Wie Sie OpenAPI/Swagger-Schemata in Ihren docmd-Workflow integrieren, um automatisierte und synchronisierte API-Referenz-Dokumentation zu erhalten."
 ---
 
 ## Problem
 
-Die manuelle Pflege einer REST-API-Dokumentation stellt ein erhebliches betriebliches Risiko dar. In dem Moment, in dem ein Entwickler einen Endpunkt ändert oder ein Schema im Code aktualisiert, veraltet die Dokumentation. Diese manuell synchron zu halten, ist mühsam, fehleranfällig und führt häufig zu Integrationsfehlern bei Ihren API-Konsumenten.
+REST-API-Dokumentation manuell zu pflegen ist ein operatives Risiko. Wenn ein Ingenieur einen Endpoint modifiziert oder ein Schema im Code aktualisiert, veraltet die Dokumentation. Sie manuell synchron zu halten ist mühsam, fehleranfällig und führt häufig zu Integrations-Fehlern bei Konsumenten.
 
 ## Warum es wichtig ist
 
-Ungenaue API-Referenzen sind eine Hauptursache für Frustration bei Entwicklern und erhöhte Support-Tickets. Die Automatisierung stellt sicher, dass Ihre Dokumentation die "Source of Truth" (einzige Quelle der Wahrheit) bleibt und den tatsächlichen Zustand Ihrer API in Echtzeit (oder bei jedem Build) widerspiegelt. Dies ermöglicht es Entwicklern, sich auf das Erstellen von Funktionen zu konzentrieren, anstatt Dokumentationstabellen manuell zu aktualisieren.
+Fehlerhafte API-Referenzen verursachen Frustration bei Entwicklern und erhöhen die Anzahl an Support-Tickets. Automatisierung stellt sicher, dass Ihre Dokumentation die "Source of Truth" bleibt und bei jedem Build den tatsächlichen Zustand Ihrer API widerspiegelt. Das erlaubt Ingenieuren, sich auf das Bauen von Features zu konzentrieren, anstatt Tabellen manuell zu aktualisieren.
 
 ## Ansatz
 
-Implementieren Sie eine asynchrone Build-Pipeline, die Ihr `openapi.json`- oder `swagger.yaml`-Schema in Standard-Markdown-Dateien konvertiert. Da `docmd` hervorragend darin ist, Markdown mit komplexen [Containern](../../content/containers/index.md) zu rendern, fühlt sich die resultierende API-Referenz integriert und visuell konsistent mit dem Rest Ihrer Dokumentation an.
+Implementieren Sie eine asynchrone Build-Pipeline, die Ihr `openapi.json`- oder `swagger.yaml`-Schema in Standard-Markdown-Dateien konvertiert. Da docmd exzellent Markdown mit komplexen [Containern](../../content/containers/index.md) rendert, fühlt sich die resultierende API-Referenz integriert und visuell konsistent mit dem Rest Ihrer Dokumentation an.
 
 ## Implementierung
 
 ### 1. Build-Pipeline-Integration
 
-Sie können ein Tool wie `widdershins` oder ein benutzerdefiniertes Skript verwenden, um Markdown aus Ihrem OpenAPI-Schema als Pre-Build-Schritt in Ihrer CI/CD-Pipeline zu generieren.
+Verwenden Sie ein Tool wie `widdershins` oder ein benutzerdefiniertes Skript, um Markdown aus Ihrem OpenAPI-Schema als Pre-Build-Schritt in Ihrer CI/CD-Pipeline zu generieren.
 
-```json
+```json "package.json"
 // package.json
 {
   "scripts": {
@@ -31,22 +31,22 @@ Sie können ein Tool wie `widdershins` oder ein benutzerdefiniertes Skript verwe
 }
 ```
 
-### 2. Optimierung von API-Layouts
+### 2. API-Layouts optimieren
 
-API-Referenzen sind oft inhaltsdicht, mit großen Tabellen für Parameter und verschachtelten Schemas. Verwenden Sie [Frontmatter](../../content/frontmatter.md), um das Seitenlayout für eine bessere Lesbarkeit zu optimieren.
+API-Referenzen sind oft inhaltsdicht mit großen Tabellen für Parameter und verschachtelte Schemata. Verwenden Sie [Frontmatter](../../content/frontmatter.md), um das Seitenlayout für Lesbarkeit zu optimieren.
 
 ```markdown
 ---
-title: "REST-API-Referenz"
-layout: "full"  # Maximiert den horizontalen Platz für dichte Tabellen
+title: "REST API-Referenz"
+layout: "full"  # Maximiert horizontalen Platz für dichte Tabellen
 ---
 ```
 
-Durch das Setzen von `layout: "full"` wird die rechte Seitenleiste mit dem Inhaltsverzeichnis entfernt, wodurch mehr Platz für breite Codeblöcke und Antwortbeispiele entsteht.
+`layout: "full"` zu setzen entfernt das rechte Inhaltsverzeichnis und bietet mehr Raum für breite Code-Blöcke und Response-Beispiele.
 
-### 3. Erweiterung mit docmd-Containern
+### 3. Mit docmd-Containern erweitern
 
-Sie können das generierte Markdown nachbearbeiten, um `docmd`-Funktionen wie [Tabs](../../content/containers/tabs.md) für mehrsprachige Codebeispiele oder [Callouts](../../content/containers/callouts.md) für Authentifizierungswarnungen einzufügen.
+Post-Processen Sie das generierte Markdown, um docmd-Features wie [Tabs](../../content/containers/tabs.md) für mehrsprachige Code-Samples oder [Callouts](../../content/containers/callouts.md) für Authentifizierungs-Warnungen zu injizieren.
 
 ````markdown
 ::: tabs
@@ -66,4 +66,4 @@ Sie können das generierte Markdown nachbearbeiten, um `docmd`-Funktionen wie [T
 
 ## Abwägungen
 
-Maschinell generierte Dokumentationen eignen sich hervorragend für technische Genauigkeit, lassen aber oft die "menschliche Note" vermissen, die für effektives Lernen erforderlich ist. Wir empfehlen, die OpenAPI-Generierung für die **technische Referenz** (Endpunkte, Parameter, Schemas) zu verwenden, während Sie handgeschriebene **Tutorials** und **konzeptionelle Leitfäden** bereitstellen, um den Kontext und die Anwendungsfälle für Ihre API zu erläutern.
+Maschinell generierte Dokumentation ist exzellent für technische Genauigkeit, es fehlt ihr jedoch der "menschliche Touch", der für effektives Lernen erforderlich ist. Wir empfehlen, OpenAPI-Generierung für die **technische Referenz** (Endpoints, Parameter, Schemata) zu verwenden und handgeschriebene **Tutorials** und **konzeptionelle Leitfäden** bereitzustellen, um Kontext und Anwendungsfälle zu erklären.

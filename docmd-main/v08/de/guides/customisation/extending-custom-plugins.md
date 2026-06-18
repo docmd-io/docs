@@ -1,68 +1,68 @@
 ---
-title: "docmd mit benutzerdefinierten Plugins erweitern"
-description: "So nutzen Sie die Lifecycle-Hooks von docmd, um eigene Funktionen zu erstellen und die Dokumentations-Engine zu erweitern."
+title: "docmd mit eigenen Plugins erweitern"
+description: "Wie Sie docmds Lifecycle-Hooks nutzen, um benutzerdefinierte Funktionalität zu bauen und die Dokumentations-Engine zu erweitern."
 ---
 
 ## Problem
 
-Manchmal haben Sie eine sehr spezifische Anforderung, die nicht durch integrierte Funktionen oder vorhandene Plugins abgedeckt wird. Beispielsweise müssen Sie während des Build-Prozesses Daten von einer internen API abrufen oder komplexe Transformationen am generierten HTML vornehmen, die über einfaches CSS hinausgehen.
+Manchmal haben Sie spezifische Anforderungen, die nicht von eingebauten Features abgedeckt werden. Beispielsweise möchten Sie möglicherweise während des Build-Prozesses Daten aus einer internen API abrufen oder komplexe Transformationen am generierten HTML durchführen.
 
 ## Warum es wichtig ist
 
-Erweiterbarkeit ist das, was ein statisches Tool von einem professionellen Dokumentations-Framework unterscheidet. Ohne eine saubere Möglichkeit, eigene Logik einzufügen, sind Teams oft gezwungen, fragile Shell-Skripte oder Post-Processing-Wrapper zu pflegen, was den Build-Prozess schwer verwaltbar und fehleranfällig macht.
+Erweiterbarkeit unterscheidet ein statisches Tool von einem professionellen Dokumentations-Framework. Ohne saubere Möglichkeit, benutzerdefinierte Logik zu injizieren, pflegen Teams fragile Shell-Skripte oder Post-Processing-Wrapper. Das macht den Build-Prozess schwer zu verwalten und zu debuggen.
 
 ## Ansatz
 
-`docmd` verfügt über eine robuste, Hook-basierte [Plugin-API](../../plugins/api). Sie können einfache Node.js-Module schreiben, die den Dokumentations-Lifecycle in verschiedenen Phasen abfangen , von der initialen Konfiguration bis zur finalen HTML-Generierung , und so Inhalte und Verhalten beliebig anpassen.
+docmd bietet eine zuverlässige, hook-basierte [Plugin-API](../../plugins/building-plugins.md). Schreiben Sie einfache Node.js-Module, die den Dokumentations-Lebenszyklus in verschiedenen Stadien abfangen. Damit können Sie Inhalte und Verhalten beliebig modifizieren — von der initialen Konfiguration bis zur finalen HTML-Generierung.
 
 ## Implementierung
 
-### 1. Erstellen eines lokalen Plugins
+### 1. Erstellen Sie ein lokales Plugin
 
-Ein Plugin ist ein Standard-JavaScript-Modul, das einen Deskriptor und mehrere Lifecycle-Hooks exportiert.
+Ein Plugin ist ein Standard-JavaScript-Modul, das einen Deskriptor und Lifecycle-Hooks exportiert.
 
 ```javascript
 // plugins/version-injector.js
+
+let latestVersion = "0.0.0";
+
 export default {
-  // Plugin-Metadaten
+  // Plugin-Deskriptor
   plugin: {
-    name: 'version-injector',
-    version: '1.0.0',
-    capabilities: ['build'] // Erforderlich, um 'build'-Hooks zu nutzen
+    "name": "version-injector",
+    "version": "1.0.0",
+    "capabilities": ["init", "build"]
   },
 
-  // Status, der zwischen Hooks geteilt wird
-  latestVersion: '0.0.0',
-
-  // Wird ausgeführt, sobald die Konfiguration aufgelöst wurde
+  // Lifecycle-Hooks
   async onConfigResolved(config) {
-    // Daten von einer internen API abrufen
-    const response = await fetch('https://api.internal.com/version');
-    this.latestVersion = await response.text();
-    console.log(`[Plugin] Version abgerufen: ${this.latestVersion}`);
+    // Externe Daten einmal während der Initialisierung abrufen
+    const response = await fetch("https://api.example.com/version");
+    latestVersion = await response.text();
+    console.log(`[Plugin] Abgerufene Version: ${latestVersion}`);
   },
 
-  // Abfangen des Seitenkontexts vor dem Template-Rendering
+  // HTML vor dem Schreiben modifizieren
   async onBeforeRender(page) {
     if (!page.html) return;
-    // Platzhalter durch dynamische Daten in HTML und Frontmatter ersetzen
-    page.html = page.html.replace(/\{\{VERSION\}\}/g, this.latestVersion);
-    page.frontmatter.computedVersion = this.latestVersion;
+
+    page.html = page.html.replace(/\{\{VERSION\}\}/g, latestVersion);
+    page.frontmatter.computedVersion = latestVersion;
   }
 };
 ```
 
-### 2. Registrieren des Plugins
+### 2. Registrieren Sie das Plugin
 
-Sie können Ihr lokales Plugin registrieren, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Importe verwenden - nutzen Sie das `.js`- oder `.ts`-Format für die Registrierung von Plugins.
+Registrieren Sie Ihr lokales Plugin, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Imports verwenden — verwenden Sie das `.js`- oder `.ts`-Format für die Plugin-Registrierung.
 
 ```javascript
-import VersionInjector from './plugins/version-injector.js';
+import VersionInjector from "./plugins/version-injector.js";
 
 export default {
-  "title": "Meine Projekt-Docs",
+  "title": "Meine Projektdokumentation",
   "plugins": {
-    // Registrierung durch Angabe des importierten Moduls
+    // Lokales Plugin-Objekt injizieren
     "version-injector": VersionInjector
   }
 };
@@ -70,4 +70,4 @@ export default {
 
 ## Abwägungen
 
-Benutzerdefinierte Plugins laufen während des Builds in der Node.js-Umgebung. Sie sind zwar leistungsstark, können aber die Build-Performance beeinträchtigen, wenn sie nicht optimiert sind. Jede Logik in Hooks wie `onAfterParse` oder `onPageReady` wird für *jede* Seite Ihrer Website ausgeführt. Stellen Sie sicher, dass Ihre Transformationen effizient sind (z. B. durch optimierte Regex), um die Build-Zeiten kurz zu halten.
+Benutzerdefinierte Plugins laufen in der Node.js-Umgebung zur Build-Zeit. Auch wenn sie mächtig sind, können sie die Build-Performance beeinträchtigen, wenn sie nicht optimiert sind. Jede Logik in Hooks wie `onAfterParse` oder `onPageReady` läuft für *jede* Seite Ihrer Site. Stellen Sie sicher, dass Ihre Transformationen effizient sind (z. B. durch Verwendung optimierter Regex), um die Build-Zeiten kurz zu halten.

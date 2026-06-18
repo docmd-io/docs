@@ -32,7 +32,7 @@ Instead of splitting a single concept across many tiny pages, consolidate relate
 
 For large groups of related content accessed infrequently, use the `collapsible` property in your [Navigation Configuration](../../configuration/navigation.md). This keeps the interface clean by hiding secondary information until explicitly requested by the user.
 
-```json
+```json "navigation.json"
 // navigation.json
 {
   "title": "API Reference",

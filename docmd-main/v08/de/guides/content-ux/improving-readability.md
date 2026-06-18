@@ -1,52 +1,52 @@
 ---
-title: "Verbesserung der Lesbarkeit"
-description: "Wie Sie visuellen Rhythmus, Informationshierarchie und die strukturellen Werkzeuge von docmd nutzen, um hochgradig lesbare Dokumentationen zu erstellen."
+title: "Lesbarkeit verbessern"
+description: "Wie Sie visuellen Rhythmus, Informations-Hierarchie und docmds strukturelle Tools nutzen, um hochlesbare Dokumentation zu erstellen."
 ---
 
 ## Problem
 
-Technische Dokumentationen sind oft dicht, fachsprachlich überladen und schwer zu scannen. Wenn Leser auf "Textwüsten" ohne visuelle Auflockerung stoßen, neigen sie dazu, wichtige Details zu überfliegen oder kritische Sicherheitswarnungen ganz zu übersehen. Eine dichte Formatierung erhöht die kognitive Belastung und führt zu Frustration beim Benutzer sowie potenziellen Fehlern.
+Technische Dokumentation ist oft dicht, jargonlastig und schwer zu scannen. Wenn Leser auf "Textwüsten" ohne visuelle Auflockerung stoßen, überfliegen sie wichtige Details. Dichte Formatierung erhöht die kognitive Reibung, was zu Frustration und potenziellen Fehlern führt.
 
 ## Warum es wichtig ist
 
-Lesbarkeit ist nicht nur eine ästhetische Entscheidung - sie ist eine funktionale Anforderung. Wenn ein Entwickler eine Warnung übersieht, weil sie in einem langen Absatz vergraben war, können die Folgen schwerwiegend sein. Eine klare Informationshierarchie stellt sicher, dass Benutzer die benötigten Informationen schnell finden, genau verstehen und sicher danach handeln können.
+Lesbarkeit ist eine funktionale Anforderung. Verpasst ein Entwickler eine in einem langen Absatz vergrabene Warnung, können die Konsequenzen gravierend sein. Eine klare Informations-Hierarchie stellt sicher, dass Benutzer Informationen schnell finden, korrekt verstehen und sicher handeln.
 
 ## Ansatz
 
-Etablieren Sie einen vorhersehbaren visuellen Rhythmus, indem Sie lange Textabschnitte aufbrechen und [thematische Container](../../content/containers/index.md) verwenden, um kritische Informationen hervorzuheben. Durch die Nutzung der integrierten strukturellen Werkzeuge von `docmd` können Sie eine Hierarchie erstellen, die das Auge des Lesers natürlich zu den wichtigsten Teilen der Seite führt.
+Etablieren Sie einen vorhersehbaren visuellen Rhythmus, indem Sie lange Textabschnitte aufbrechen. Verwenden Sie [thematische Container](../../content/containers/index.md), um kritische Informationen hervorzuheben. Durch Nutzung von docmds eingebauten strukturellen Tools schaffen Sie eine Hierarchie, die das Auge des Lesers natürlich zu den wichtigsten Teilen der Seite führt.
 
 ## Implementierung
 
-### 1. Die "Kraft der Kürze"
+### 1. Die "Macht der Kürze"
 
-Versuchen Sie, Absätze auf nicht mehr als drei oder vier Sätze zu beschränken. Kürzere Absätze sind auf Bildschirmen leichter zu erfassen und bieten natürlichen "Atemraum" für komplexe technische Konzepte. Wenn sich ein Absatz zu lang anfühlt, erwägen Sie, ihn in eine Liste aufzuteilen oder eine Unterüberschrift zu verwenden, um die Informationen neu zu kategorisieren.
+Begrenzen Sie Absätze auf drei oder vier Sätze. Kürzere Absätze sind auf Bildschirmen leichter zu verdauen und bieten "Atemraum" für komplexe technische Konzepte. Fühlt sich ein Absatz zu lang an, brechen Sie ihn in eine Liste auf oder verwenden Sie eine Unterüberschrift.
 
-### 2. Kategorisierung mit Callouts
+### 2. Mit Callouts kategorisieren
 
-Verwenden Sie [Callouts](../../content/containers/callouts.md) konsistent, um Informationen zu kategorisieren. Dies ermöglicht es Benutzern, die den Text nur überfliegen, die Absicht eines Blocks anhand seines visuellen Stils sofort zu erkennen:
+Verwenden Sie [Callouts](../../content/containers/callouts.md) konsistent, um Informationen zu kategorisieren. Das erlaubt es überfliegenden Benutzern, die Absicht eines Blocks anhand seines visuellen Stils zu erkennen:
 
-*   **Info**: Hintergrundkontext oder ergänzende Details, die ein tieferes Verständnis vermitteln.
-*   **Tip**: Best Practices, Abkürzungen und "Pro-Tipps" für mehr Effizienz.
-*   **Warning/Danger**: Kritische Aktionen, die zu Fehlern, Datenverlust oder Sicherheitsrisiken führen könnten.
+*   **Info**: Hintergrund-Kontext oder ergänzende Details.
+*   **Tip**: Best Practices, Abkürzungen und "Pro-Tipps".
+*   **Warning/Danger**: Kritische Aktionen, die zu Fehlern, Datenverlust oder Sicherheitslücken führen können.
 
 ```markdown
 ::: callout warning "Produktionssicherheit"
-    Führen Sie diesen Befehl niemals an einer Live-Datenbank aus, ohne vorher Ihre Backups überprüft zu haben.
+    Führen Sie diesen Befehl niemals auf einer Live-Datenbank aus, ohne vorher Backups verifiziert zu haben.
 :::
 ```
 
-### 3. Sequenzielle Anweisungen mit Steps
+### 3. Sequentielle Anleitung mit Steps
 
-Vermeiden Sie bei Tutorials und Schritt-für-Schritt-Anleitungen narrative Beschreibungen von Aktionen. Verwenden Sie stattdessen den [Steps-Container](../../content/containers/steps.md), um einen klaren, nummerierten Ablauf zu erstellen, dem man leicht folgen kann.
+Vermeiden Sie für Tutorials narrative Aktionsbeschreibungen. Verwenden Sie stattdessen den [Steps-Container](../../content/containers/steps.md), um eine klare, nummerierte Abfolge zu schaffen.
 
 ```markdown
 ::: steps
-    1. **Initialisieren**: Führen Sie `npx @docmd/core init` im Projekt-Root aus.
-    2. **Konfigurieren**: Aktualisieren Sie Ihre `docmd.config.json` mit Ihrem Seitentitel und der Navigation.
-    3. **Build**: Führen Sie `npx @docmd/core build` aus, um Ihre produktionsreifen statischen Dateien zu generieren.
+    1. **Initialisieren**: Führen Sie `npx @docmd/core init` in Ihrem Projektstamm aus.
+    2. **Konfigurieren**: Aktualisieren Sie Ihre `docmd.config.json` mit Site-Titel und Navigation.
+    3. **Bauen**: Führen Sie `npx @docmd/core build` aus, um Ihre produktionsreifen statischen Dateien zu generieren.
 :::
 ```
 
 ## Abwägungen
 
-Die Verwendung spezialisierter Container wie `::: steps` oder `::: callout` erfordert von den Mitwirkenden das Erlernen von `docmd`-spezifischen Markdown-Erweiterungen. Dies bedeutet zwar eine kleine Lernkurve, aber die signifikante Verbesserung der Informationsdichte, Klarheit und professionellen Präsentation überwiegt bei weitem den minimalen Aufwand für das Erlernen dieser leistungsstarken strukturellen Tags.
+Die Verwendung spezialisierter Container wie `::: steps` oder `::: callout` erfordert, dass Mitwirkende docmd-spezifische Markdown-Erweiterungen erlernen. Auch wenn dies eine kleine Lernkurve mit sich bringt, überwiegt die signifikante Verbesserung in Informationsdichte und Klarheit den minimalen Aufwand bei Weitem.

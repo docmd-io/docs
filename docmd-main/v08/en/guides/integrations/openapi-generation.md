@@ -21,7 +21,7 @@ Implement an asynchronous build pipeline that converts your `openapi.json` or `s
 
 Use a tool like `widdershins` or a custom script to generate Markdown from your OpenAPI schema as a pre-build step in your CI/CD pipeline.
 
-```json
+```json "package.json"
 // package.json
 {
   "scripts": {

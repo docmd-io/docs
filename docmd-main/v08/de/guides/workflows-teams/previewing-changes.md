@@ -1,44 +1,44 @@
 ---
-title: "Änderungen vorschauen"
-description: "So richten Sie lokale und cloudbasierte Preview-Umgebungen ein, um sicherzustellen, dass Ihre Dokumentation vor der Veröffentlichung perfekt gerendert wird."
+title: "Änderungen in der Vorschau anzeigen"
+description: "Wie Sie lokale und Cloud-basierte Vorschau-Umgebungen einrichten, um sicherzustellen, dass Ihre Dokumentation vor der Veröffentlichung perfekt dargestellt wird."
 ---
 
 ## Problem
 
-Das Schreiben von Markdown ohne Live-Vorschau führt häufig zu Formatierungsfehlern, fehlerhaften Containern und falschen Bildpfaden, die erst sichtbar werden, wenn der Inhalt bereits live ist. Dies führt zu einer frustrierenden Erfahrung für Benutzer und zu Mehrarbeit für Maintainer, die ständig Hotfixes für einfache Rendering-Probleme nachschieben müssen.
+Markdown ohne Live-Vorschau zu schreiben führt zu Formatierungsfehlern, defekten Containern und falschen Bildpfaden. Diese werden erst sichtbar, wenn die Inhalte in Produktion sind. Das führt zu einer frustrierenden User Experience und zwingt Maintainer, Hotfixes für Rendering-Probleme zu pushen.
 
 ## Warum es wichtig ist
 
-Eine qualitativ hochwertige Dokumentation ist essenziell für das Vertrauen der Entwickler. Eine fehlerhafte Warnbox oder nicht gerenderte Syntax wirkt unprofessionell und kann Benutzer sogar über die Funktionsweise Ihrer Software irreführen. Die Dokumentation so zu sehen, wie sie später tatsächlich aussieht, ist der effektivste Weg, um Fehler abzufangen, die Lesbarkeit zu verbessern und eine nahtlose User Experience zu gewährleisten.
+Hochwertige Dokumentation ist essenziell für das Vertrauen von Entwicklern. Eine defekte Warnungs-Box oder nicht gerenderte Syntax wirkt unprofessionell und führt Benutzer in die Irre. Die "echte" Dokumentation vor dem Live-Gang zu sehen ist der beste Weg, Fehler zu erkennen, die Lesbarkeit zu verbessern und eine nahtlose User Experience sicherzustellen.
 
 ## Ansatz
 
-Implementieren Sie eine mehrstufige Preview-Strategie: Nutzen Sie den [lokalen Entwicklungsserver](../../getting-started/quick-start#local-development) von `docmd` für sofortiges Feedback während des Schreibens und setzen Sie kurzlebige Cloud-Umgebungen (wie Vercel oder Cloudflare Pages) für finale Reviews innerhalb Ihrer Pull Requests ein.
+Implementieren Sie eine mehrstufige Vorschau-Strategie: Verwenden Sie den [Local-Development](../../getting-started/quick-start.md#local-development)-Server von docmd für sofortiges Feedback beim Schreiben und ephemere Cloud-Umgebungen (wie Vercel oder Cloudflare Pages) für finale Reviews innerhalb Ihrer Pull Requests.
 
 ## Implementierung
 
-### 1. Sofortige lokale Vorschau
+### 1. Sofortige lokale Vorschauen
 
-Der schnellste Weg, Ihre Änderungen zu sehen, ist der Befehl `docmd dev`. Er bietet Hot Module Replacement (HMR), wodurch Ihr Browser automatisch aktualisiert wird, sobald Sie eine Markdown-Datei speichern.
+Der schnellste Weg, Ihre Änderungen zu sehen, ist das Starten des `npx @docmd/core dev`-Servers. Er verfügt über Hot Module Replacement (HMR). Das aktualisiert Ihren Browser automatisch in dem Moment, in dem Sie eine Markdown-Datei speichern.
 
 ```bash
-# Lokalen Entwicklungsserver starten
+# Lokalen Development-Server starten
 npx @docmd/core dev
 ```
 
-### 2. Cloudbasierte Preview-Umgebungen
+### 2. Cloud-basierte Vorschau-Umgebungen
 
-Konfigurieren Sie für die gemeinsame Review-Arbeit Ihre CI/CD-Plattform so, dass für jeden Pull Request eindeutige "Preview-URLs" generiert werden. Da `docmd` standardmäßige statische Dateien ausgibt, ist es mit allen gängigen Hosting-Anbietern kompatibel.
+Für kollaborative Reviews konfigurieren Sie Ihre CI/CD-Plattform so, dass sie für jeden Pull Request eindeutige "Preview-URLs" generiert. Da docmd Standard-Static-Files ausgibt, ist es mit allen großen Hosting-Providern kompatibel.
 
 *   **Build-Befehl**: `npx @docmd/core build`
-*   **Output-Verzeichnis**: `site`
+*   **Ausgabeverzeichnis**: `site`
 
-Dies ermöglicht es Reviewern, genau zu sehen, wie die Änderungen in einer produktionsnahen Umgebung aussehen und funktionieren, bevor sie in den Hauptzweig gemergt werden.
+So können Reviewer genau sehen, wie Änderungen in einer produktionsähnlichen Umgebung aussehen und sich verhalten, bevor sie in den Main-Branch gemergt werden.
 
-### 3. Gemeinsame Reviews mit Threads
+### 3. Kollaborative Reviews mit Threads
 
-Kombinieren Sie Ihre Cloud-Previews mit dem [Threads-Plugin](../../plugins/usage). Dies ermöglicht es Teammitgliedern, Feedback direkt auf der gerenderten Vorschauseite zu hinterlassen, wodurch die Lücke zwischen dem Markdown-Quellcode und der finalen User Experience geschlossen wird.
+Kombinieren Sie Ihre Cloud-Vorschauen mit dem [Threads-Plugin](../../plugins/threads.md). Damit können Team-Mitglieder Feedback direkt auf der gerenderten Vorschau-Seite hinterlassen. Es überbrückt die Kluft zwischen dem Markdown-Quelltext und der finalen User Experience.
 
 ## Abwägungen
 
-Das Erstellen einer vollständigen statischen Website bei jedem Commit in einem riesigen Repository (Tausende von Seiten) kann zeitaufwendig sein und CI/CD-Ressourcen kosten. Um dies zu optimieren, konfigurieren Sie Ihre CI-Pipeline so, dass ein Dokumentations-Build nur dann ausgelöst wird, wenn Dateien innerhalb Ihres Quellverzeichnisses (z. B. `/docs`) geändert wurden.
+Eine vollständige statische Site für jeden Commit in einem riesigen Repository zu bauen kann zeit- und ressourcenintensiv sein in Bezug auf CI/CD. Um dies zu optimieren, konfigurieren Sie Ihre CI-Pipeline so, dass sie einen Dokumentations-Build nur dann auslöst, wenn Dateien in Ihrem Quellverzeichnis (z. B. `/docs`) verändert wurden.

@@ -1,38 +1,38 @@
 ---
 title: "Navigation für große Sites"
-description: "So organisieren Sie komplexe Dokumentations-Sets in einer intuitiven, skalierbaren Navigationsstruktur unter Verwendung der Layout-Tools von docmd."
+description: "Wie Sie komplexe Dokumentations-Sets mit docmds Layout-Tools in eine intuitive, skalierbare Navigations-Struktur organisieren."
 ---
 
 ## Problem
 
-Wenn eine Dokumentations-Website von ein paar Dutzend Seiten auf Hunderte oder Tausende anwächst, verwandelt sich eine einfache Sidebar oft in ein verwirrendes Labyrinth aus tief verschachtelten Ordnern. Wenn Benutzer gezwungen sind, mehrere Hierarchieebenen aufzuklappen, nur um eine bestimmte Referenz zu finden, verlieren sie den Kontext, werden frustriert und geben die Dokumentation oft zugunsten von "Trial-and-Error" auf.
+Wenn eine Site auf Hunderte Seiten anwächst, wird eine einfache Sidebar schnell zum Labyrinth tief verschachtelter Ordner. Müssen Benutzer mehrere Ebenen aufklappen, um eine Referenz zu finden, verlieren sie den Kontext. Frustrierte Benutzer verlassen die Dokumentation und stochern lieber durch Trial-and-Error.
 
 ## Warum es wichtig ist
 
-Die Navigation ist die "Landkarte" der Funktionen Ihres Produkts. Wenn die Navigation schwer zu bedienen ist, verlassen sich die Benutzer ausschließlich auf die Suchleiste, was zu fragmentiertem Wissen führen kann. Ein gut strukturiertes Navigationssystem vermittelt dem Benutzer beim Durchsuchen die Logik und Taxonomie Ihres Produkts und hilft ihm, mit der Zeit kompetenter und eigenständiger zu werden.
+Navigation ist die "Karte" der Fähigkeiten Ihres Produkts. Ist Navigation schwierig, verlassen sich Benutzer ausschließlich auf die Suchleiste, was zu fragmentiertem Wissen führt. Ein gut strukturierte Navigations-System vermittelt Benutzern die Taxonomie Ihres Produkts und hilft ihnen, mit der Zeit selbstständig zu werden.
 
 ## Ansatz
 
-Priorisieren Sie **Top-Level Context Switching** gegenüber tiefer Verschachtelung. Versuchen Sie, Ihre linke Sidebar auf maximal zwei oder drei Ebenen Tiefe zu beschränken. Nutzen Sie den horizontalen [Menübar](../../configuration/menubar), um verschiedene Dokumentations-"Domänen" (z. B. Anleitungen, API-Referenz und Community) voneinander zu trennen. Dies ermöglicht es jeder einzelnen Sidebar, fokussiert, relevant und übersichtlich zu bleiben.
+Priorisieren Sie **Top-Level Context Switching** gegenüber tiefer Verschachtelung. Halten Sie Ihre linke Sidebar auf zwei bis drei Tiefen-Ebenen begrenzt. Verwenden Sie die horizontale [Menüleiste](../../configuration/menubar.md), um unterschiedliche Dokumentations-"Domänen" zu trennen (z. B. Leitfäden, API-Referenz, Community). So bleibt jede Sidebar fokussiert und überschaubar.
 
 ## Implementierung
 
-### 1. Domänenbasierte Trennung
+### 1. Domänen-basierte Trennung
 
-Verwenden Sie in Ihrer `docmd.config.json` den [Menübar](../../configuration/menubar), um Ihre Inhalte in übergeordnete Kategorien zu unterteilen. Dieser Ansatz ermöglicht es Ihnen, für jede Domäne eine völlig andere Sidebar anzuzeigen, was verhindert, dass ein einzelner Navigationsbaum überladen wird.
+Verwenden Sie in Ihrer `docmd.config.json` die [Menüleiste](../../configuration/menubar.md), um Ihre Inhalte in übergeordnete Kategorien zu gliedern. Dieser Ansatz erlaubt es Ihnen, für jede Domäne eine völlig andere Sidebar darzustellen und zu verhindern, dass ein einzelner Navigations-Baum überwältigend wird.
 
-### 2. Flachhalten der Hierarchie
+### 2. Hierarchie abflachen
 
-Anstatt ein einzelnes Konzept auf viele winzige Markdown-Seiten aufzuteilen, sollten Sie verwandte Informationen in umfassenden übergeordneten Seiten konsolidieren. Verwenden Sie eine klare [Überschriften-Hierarchie](../../content/syntax), damit Benutzer innerhalb der Seite mithilfe des automatisch generierten Inhaltsverzeichnisses (TOC) auf der rechten Seite navigieren können.
+Statt ein einzelnes Konzept über viele winzige Seiten zu verteilen, konsolidieren Sie verwandte Informationen in umfassenden übergeordneten Seiten. Verwenden Sie eine klare [Header-Hierarchie](../../content/syntax/index.md), damit Benutzer innerhalb der Seite über das automatisch generierte rechte Inhaltsverzeichnis (TOC) navigieren können.
 
-*   **❌ Schlechte IA**: Ein Ordner namens "Sicherheit", der zehn separate Dateien mit jeweils nur einem Absatz für verschiedene Protokolle enthält.
-*   **✅ Bessere IA**: Eine einzige, gut strukturierte Seite "Sicherheitsübersicht", die alle Protokolle abdeckt und Überschriften für ein sauberes Inhaltsverzeichnis nutzt.
+*   **❌ Schlechte IA**: Ein Ordner namens "Security", der zehn separate, ein-Absatz-Dateien für unterschiedliche Protokolle enthält.
+*   **✅ Bessere IA**: Eine einzelne, gut strukturierte "Security Overview"-Seite, die alle Protokolle abdeckt und Header verwendet, um ein sauberes Inhaltsverzeichnis zu liefern.
 
-### 3. Nutzung von einklappbaren Abschnitten
+### 3. Collapsible-Sections verwenden
 
-Für große Gruppen verwandter Inhalte, auf die nicht ständig zugegriffen wird, verwenden Sie die Eigenschaft `collapsible` in Ihrer [Navigations-Konfiguration](../../configuration/navigation). Dies hält die Benutzeroberfläche sauber, indem sekundäre Informationen ausgeblendet werden, bis sie vom Benutzer explizit angefordert werden.
+Für große Gruppen verwandter Inhalte, auf die selten zugegriffen wird, verwenden Sie die Eigenschaft `collapsible` in Ihrer [Navigationskonfiguration](../../configuration/navigation.md). Das hält die Oberfläche sauber, indem es sekundäre Informationen verbirgt, bis sie vom Benutzer explizit angefordert werden.
 
-```json
+```json "navigation.json"
 // navigation.json
 {
   "title": "API-Referenz",
@@ -40,11 +40,11 @@ Für große Gruppen verwandter Inhalte, auf die nicht ständig zugegriffen wird,
   "collapsed": true,
   "children": [
     { "title": "Authentifizierung", "path": "api/auth" },
-    { "title": "Endpunkte", "path": "api/endpoints" }
+    { "title": "Endpoints", "path": "api/endpoints" }
   ]
 }
 ```
 
 ## Abwägungen
 
-Das Konsolidieren von Inhalten in weniger, längeren Seiten erfordert von den Autoren Disziplin in Bezug auf strukturelle Klarheit und die Verwendung von Überschriften. Wenn eine Seite ohne ordentliche interne Navigation (TOC) zu lang wird, kann sie selbst zu einer "Textwand" werden. Die deutliche Reduzierung von "Klick-Ermüdung" und das bessere Auffinden verwandter Inhalte machen eine flachere, domänenbasierte Hierarchie für große Dokumentations-Sets jedoch deutlich überlegen.
+Inhalte auf weniger, dafür längeren Seiten zu konsolidieren erfordert Disziplin der Autoren in Bezug auf strukturelle Klarheit und Header-Verwendung. Wird eine Seite zu lang ohne angemessene interne Navigation, wird sie selbst zur "Wortwand". Die signifikante Reduktion von "Klick-Müdigkeit" und die verbesserte Auffindbarkeit machen jedoch eine flachere, domänen-basierte Hierarchie für große Dokumentations-Sets besser.

@@ -1,46 +1,46 @@
 ---
-title: "Vorhandene Markdown-Repos"
-description: "So generieren Sie aus Ihren vorhandenen Markdown-Dateien sofort eine professionelle Dokumentations-Website , ganz ohne Konfiguration."
+title: "Bestehende Markdown-Repositories"
+description: "Wie Sie aus Ihren bestehenden Markdown-Dateien sofort eine professionelle Dokumentations-Site mit Zero Configuration generieren."
 ---
 
 ## Problem
 
-Sie verfügen über ein bestehendes Repository mit hunderten oder tausenden von Markdown-Dateien , vielleicht ein altes Wiki, ein Obsidian-Vault oder eine Sammlung technischer Notizen. Das manuelle Konvertieren von Frontmatter, das Reparieren fehlerhafter Links und das Umstrukturieren von Dateien für eine neue Engine ist eine gewaltige Aufgabe, die Teams oft davon abhält, ihre Dokumentation zu modernisieren.
+Sie haben ein etabliertes Repository mit Hunderten roher Markdown-Dateien — vielleicht ein Legacy-Wiki, ein Obsidian-Vault oder technische Notizen. Frontmatter manuell zu konvertieren, defekte Links zu reparieren und Dateien für eine neue Engine umzustrukturieren ist eine schwierige Aufgabe, die Modernisierung häufig verhindert.
 
 ## Warum es wichtig ist
 
-Ihre Inhalte sollten portabel und tool-unabhängig bleiben. Eine hochwertige Dokumentations-Engine sollte sich an Ihre vorhandenen Dateien anpassen und nicht Ihre Dateien dazu zwingen, sich an die Engine anzupassen. Die Vermeidung von Vendor-Lock-in stellt sicher, dass Ihr geistiges Eigentum standardisiert, lesbar und zukunftssicher bleibt.
+Ihre Inhalte sollten portabel und tool-agnostisch bleiben. Eine hochwertige Dokumentations-Engine passt sich an Ihre bestehenden Dateien an, statt Dateien zur Engine zwingen. Vendor-Lock-in zu vermeiden stellt sicher, dass Ihr geistiges Eigentum standardisiert, lesbar und zukunftssicher bleibt.
 
 ## Ansatz
 
-`docmd` hält sich an strikte CommonMark-Spezifikationen und ist standardmäßig auf **Zero-Config** ausgelegt. Sie können die `docmd`-CLI auf ein beliebiges Verzeichnis mit Markdown-Dateien richten, und sie wird intelligent eine voll funktionsfähige Dokumentations-Website erstellen, ohne auch nur eine einzige Zeile Ihres Quellinhalts zu verändern.
+docmd hält sich strikt an die CommonMark-Spezifikation und ist standardmäßig auf **Zero-Config** ausgelegt. Zeigen Sie das docmd-CLI auf ein beliebiges Verzeichnis mit Markdown-Dateien, und es bootet intelligent eine voll funktionsfähige Dokumentations-Site, ohne eine einzige Zeile Quellinhalt zu verändern.
 
 ## Implementierung
 
 ### 1. Sofortiges Bootstrapping
 
-Navigieren Sie zu Ihrem vorhandenen Markdown-Ordner und starten Sie den Entwicklungsserver. `docmd` scannt Ihre Verzeichnisstruktur und erstellt sofort eine funktionale Website im Arbeitsspeicher.
+Navigieren Sie zu Ihrem bestehenden Markdown-Ordner und starten Sie den Development-Server. docmd scannt Ihre Verzeichnisstruktur und baut sofort eine funktionale Site im Speicher.
 
 ```bash
-cd meine-vorhandenen-docs/
+cd my-existing-docs/
 npx @docmd/core dev
 ```
 
 ### 2. Automatische Navigation (Auto-Router)
 
-Wenn keine `navigation.json` oder `docmd.config.json` gefunden wird, aktiviert `docmd` seinen [Auto-Router](../../configuration/navigation#automatic-sidebar-generation). Dieser bildet Ihre Ordnerstruktur rekursiv ab, verschönert Verzeichnisnamen (z. B. wird aus `getting-started` "Getting Started") und generiert automatisch eine logische Sidebar-Taxonomie.
+Wird keine `navigation.json` oder `docmd.config.json` gefunden, löst docmd seinen [Auto-Router](../../configuration/navigation.md#automatic-sidebar-generation) aus. Er kartiert rekursiv Ihre Ordnerstruktur, verschönert Verzeichnisnamen (z. B. wird `getting-started` zu `Getting Started`) und generiert automatisch eine logische Sidebar-Taxonomie.
 
-### 3. Intelligente Titel-Ermittlung
+### 3. Intelligente Titel-Ableitung
 
-Sie müssen nicht jeder Datei ein `title`-Frontmatter hinzufügen. `docmd` nutzt eine kaskadierende Strategie zur Ermittlung von Seitentiteln:
-1.  **Frontmatter**: Prüft auf einen `title`- oder `h1`-Key.
-2.  **Erste Überschrift**: Extrahiert die erste gefundene `# Überschrift` aus dem Dateiinhalt.
-3.  **Dateiname**: Verschönert den Dateinamen als Fallback (z. B. wird aus `install-guide.md` "Install Guide").
+Sie müssen nicht in jeder Datei `title`-Frontmatter hinzufügen. docmd verwendet eine kaskadierende Auflösungsstrategie, um Seitentitel zu bestimmen:
+1.  **Frontmatter**: Prüft auf einen Schlüssel `title` oder `h1`.
+2.  **Erste Überschrift**: Extrahiert die erste im Dateiinhalt gefundene `# Heading`.
+3.  **Dateiname**: Verschiebt den Dateinamen als Fallback (z. B. wird `install-guide.md` zu `Install Guide`).
 
-### 4. Resiliente Syntax-Verarbeitung
+### 4. Robuste Syntax-Verarbeitung
 
-`docmd` ist auf Resilienz ausgelegt. Wenn Ihre vorhandenen Dateien proprietäre Syntax oder veraltete Shortcodes von anderen Engines enthalten, werden diese sicher als Rohtext gerendert oder übersprungen. Dies stellt sicher, dass Ihr Build niemals aufgrund von Inhalten fehlschlägt, die Sie noch nicht migriert haben.
+docmd ist auf Robustheit ausgelegt. Enthalten bestehende Dateien proprietäre Syntax oder Legacy-Shortcodes anderer Engines, werden sie sicher als Rohtext gerendert oder übersprungen. Das stellt sicher, dass Ihr Build niemals aufgrund nicht migrierter Inhalte fehlschlägt.
 
 ## Abwägungen
 
-Automatisch generierte Sidebars werden in der Regel alphabetisch nach Dateinamen sortiert. Während Dateinamen wie `01-intro.md` und `02-setup.md` gut funktionieren, können rein beschreibende Dateinamen in einer nicht intuitiven Reihenfolge erscheinen. Für produktionsreife Websites empfehlen wir den Übergang zu einer manuellen [Navigations-Konfiguration](../../configuration/navigation), um die volle Kontrolle über die User Journey zu erhalten.
+Automatische Sidebars werden typischerweise alphabetisch nach Dateiname sortiert. Während Dateinamen wie `01-intro.md` und `02-setup.md` gut funktionieren, können beschreibende Dateinamen in unintuitiver Reihenfolge erscheinen. Für produktionsreife Sites empfehlen wir den Übergang zur manuellen [Navigationskonfiguration](../../configuration/navigation.md), um die User Journey vollständig zu kontrollieren.

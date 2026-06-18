@@ -1,57 +1,55 @@
 ---
-title: "Sub-100ms Navigation"
-description: "Wie der native SPA-Router von docmd und das intentionsbasierte Prefetching sofortige Seitenübergänge für ein optimales Leseerlebnis ermöglichen."
+title: "Sub-100ms-Navigation"
+description: "Wie der native SPA-Router und das Intent-basierte Prefetching von docmd sofortige Seitenübergänge für ein optimales Lese-Erlebnis liefern."
 ---
 
 ## Problem
 
-Herkömmliche Multi-Page-Navigation, bei der jeder Klick auf einen Link ein vollständiges Neuladen des Browsers auslöst, erzeugt ein störendes "weißes Blinken" und unterbricht den Lesefluss. Der Browser muss den aktuellen Status verwerfen, neues HTML anfordern und CSS sowie JavaScript neu parsen , selbst wenn sich nur der zentrale Inhaltsbereich geändert hat.
+Traditionelle Multi-Page-Navigation löst bei jedem Klick einen vollständigen Browser-Reload aus. Das erzeugt ein störendes "White-Flash" und unterbricht den Lese-Fluss. Der Browser verwirft den aktuellen Zustand, fordert neues HTML an und parst CSS und JavaScript erneut — selbst wenn sich nur der zentrale Inhaltsbereich ändert.
 
 ## Warum es wichtig ist
 
-Dokumentationsbenutzer springen häufig zwischen verschiedenen Abschnitten wie Tutorials, API-Referenzen und konzeptionellen Anleitungen hin und her. Wenn jeder Übergang eine Sekunde oder länger dauert, führt dies zu kognitiver Reibung und entmutigt eine gründliche Exploration. Eine sofortige Navigation sorgt dafür, dass sich die Dokumentation wie eine native Anwendung anfühlt, was die Benutzerzufriedenheit und das Engagement erheblich steigert.
+Benutzer springen häufig zwischen Tutorials, API-Referenzen und konzeptionellen Leitfäden. Wenn Übergänge Sekunden dauern, entsteht kognitive Reibung, die vom Erkunden abhält. Sofortige Navigation lässt Dokumentation wie eine native Anwendung wirken und steigert Benutzerzufriedenheit und Engagement erheblich.
 
 ## Ansatz
 
-`docmd` nutzt einen leistungsstarken **Single Page Application (SPA) Router**, der auf vorab generierten statischen Dateien aufbaut. Dies ermöglicht es dem Browser, Klicks auf Links abzufangen, nur die notwendigen Inhalte im Hintergrund abzurufen und die Seite dynamisch zu aktualisieren, ohne sie vollständig neu zu laden. Dieser Ansatz bewahrt den Status der Sidebar, des Inhaltsverzeichnisses und der Theme-Einstellungen, was zu nahezu sofortigen Übergängen führt.
+docmd nutzt einen hochperformanten **Single Page Application (SPA) Router**, der auf vorgenerierten statischen Dateien basiert. Der Browser fängt Link-Klicks ab, ruft nur die nötigen Inhalte im Hintergrund ab und aktualisiert die Seite dynamisch ohne vollständigen Reload. Das bewahrt den Zustand der Sidebar, des Inhaltsverzeichnisses und der Theme-Einstellungen für nahezu sofortige Übergänge.
 
 ## Implementierung
 
-Der `docmd` SPA-Router ist standardmäßig aktiviert und nutzt mehrere fortschrittliche Techniken, um Navigationsgeschwindigkeiten unter 100 ms zu erreichen:
+Der docmd-SPA-Router verwendet fortschrittliche Techniken, um Sub-100ms-Navigations-Geschwindigkeiten zu erreichen:
 
-### 1. Intentionsbasiertes Prefetching
+### 1. Intent-basiertes Prefetching
 
-Wenn ein Benutzer mit der Maus über einen Navigationslink fährt, erkennt `docmd` die Absicht zur Navigation und startet im Hintergrund das Abrufen der Inhalte der Zielseite. Bis der Benutzer den Link tatsächlich klickt, sind die Daten oft schon im Browser-Cache verfügbar, wodurch sich der Übergang augenblicklich anfühlt.
+Wenn ein Benutzer über einen Navigations-Link hovert, erkennt docmd die Absicht und initiiert einen Background-Fetch der Zielseite. Wenn der Benutzer klickt, befinden sich die Daten oft bereits im Browser-Cache. Übergänge wirken sofortig.
 
 ### 2. Partielle DOM-Updates
 
-Anstatt die gesamte Seite neu zu rendern, aktualisiert `docmd` intelligent nur die notwendigen Funktionszonen:
-*   **Hauptinhalt (Main Content)**: Der primäre, per Markdown gerenderte Textkörper.
-*   **Inhaltsverzeichnis (TOC)**: Wird aktualisiert, um den Überschriften der neuen Seite zu entsprechen.
-*   **Navigationsstatus**: Aktualisiert die aktiven und ausgeklappten Zustände in der Sidebar.
+Statt die gesamte Seite neu zu rendern, aktualisiert docmd intelligent nur die notwendigen Funktionsbereiche:
+*   **Hauptinhalt**: Der primäre Markdown-gerenderte Body.
+*   **Inhaltsverzeichnis**: Aktualisiert, um zu neuen Headern zu passen.
+*   **Navigations-Zustand**: Aktualisiert aktive und aufgeklappte Sidebar-Zustände.
 
-### 3. Lifecycle-Events für eigene Logik
+### 3. Lifecycle-Events für benutzerdefinierte Logik
 
-Da der Browser kein vollständiges Neuladen durchführt, werden Standard-Events wie `DOMContentLoaded` nur einmal ausgelöst. Um nach jeder Navigation eigenen JavaScript-Code auszuführen , wie das Neuinitialisieren eines Drittanbieter-Widgets oder das Tracking von Seitenaufrufen , sollten Sie auf das Event `docmd:page-mounted` hören.
+Da der Browser vollständige Reloads vermeidet, feuern Standard-Events wie `DOMContentLoaded` nur einmal. Um benutzerdefiniertes JavaScript nach jeder Navigation auszuführen, hören Sie auf das Event `docmd:page-mounted`.
 
 ```javascript
-// Beispiel: Neuinitialisierung einer eigenen Komponente nach der Navigation
-document.addEventListener('docmd:page-mounted', (event) => {
+document.addEventListener("docmd:page-mounted", (event) => {
   const currentPath = event.detail.path;
   console.log(`Erfolgreich navigiert zu: ${currentPath}`);
   
-  // Eigene Logik hier
-  if (currentPath.includes('/api/')) {
+  if (currentPath.includes("/api/")) {
     initApiConsole();
   }
 });
 ```
-Weitere Details finden Sie in der Dokumentation zu [Client-seitigen Events](../../api/client-side-events).
+Weitere Details finden Sie in der Dokumentation zu [Client-seitigen Events](../../api/client-side-events.md).
 
 ## Abwägungen
 
 ### Skript-Ausführung
-Der SPA-Router führt `<script>`-Tags, die sich im Markdown-Textkörper der neuen Seite befinden, automatisch neu aus. Globale Skripte, die in Ihrem Theme oder Layout definiert sind, laufen jedoch nur einmal beim ersten Laden. Verwenden Sie immer das Event `docmd:page-mounted` für Logik, die auf jeder Seite ausgeführt werden muss.
+Der SPA-Router führt automatisch `<script>`-Tags im Markdown-Body der neuen Seite erneut aus. Globale Skripte, die in Ihrem Theme definiert sind, laufen jedoch nur einmal beim initialen Laden. Verwenden Sie das Event `docmd:page-mounted` für Logik, die auf jeder Seite ausgeführt werden muss.
 
 ### SEO und Barrierefreiheit
-Trotz des SPA-ähnlichen Verhaltens generiert `docmd` weiterhin eine vollständige, eigenständige `.html`-Datei für jede Seite. Dies stellt sicher, dass Suchmaschinen-Crawler den vollständigen Inhalt sehen können und die Website auch für Benutzer mit deaktiviertem JavaScript funktionsfähig bleibt, was exzellente SEO- und Barrierefreiheitsstandards gewährleistet.
+Trotz SPA-artigem Verhalten generiert docmd für jede Seite eine vollständige `.html`-Datei. Das stellt sicher, dass Suchmaschinen-Crawler vollständige Inhalte sehen und die Site für Benutzer mit deaktiviertem JavaScript funktional bleibt. Das gewährleistet ausgezeichnete SEO- und Accessibility-Standards.

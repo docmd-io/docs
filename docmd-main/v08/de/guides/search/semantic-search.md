@@ -1,27 +1,27 @@
 ---
-title: "Semantische Suche integrieren"
-description: "So konfigurieren und deployen Sie die clientseitige hybride semantische Suche in docmd unter Verwendung lokaler Vektoreinbettungen."
+title: "Semantic Search Integration"
+description: "Wie Sie clientseitige hybride semantische Suche in docmd mit lokalen Vektor-Embeddings konfigurieren und bereitstellen."
 ---
 
-## Das Problem
+## Problem
 
-Die traditionelle Volltextsuche stützt sich vollständig auf exakte Keyword-Übereinstimmungen. Wenn ein Benutzer nach "Authentifizierung" sucht, die Seite jedoch nur Begriffe wie "OAuth2" oder "Login" verwendet, findet eine Standard-Suchmaschine den Inhalt nicht. Dies zwingt Autoren zu unnatürlichem Keyword-Stuffing und frustriert Leser, die die benötigten Informationen nicht finden.
+Traditionelle Volltextsuche basiert vollständig auf exakten Keyword-Treffern. Sucht ein Benutzer nach "authentication", die Seite verwendet jedoch nur Begriffe wie "OAuth2" oder "login", wird eine Standard-Keyword-Suchmaschine sie nicht finden. Das zwingt Autoren zu unnatürlichem Keyword-Stuffing und frustriert Leser, die nicht finden, was sie suchen.
 
 ## Warum es wichtig ist
 
-Moderne Entwickler erwarten intuitive, kontextbezogene Suchfunktionen, die Absichten und Synonyme verstehen. Die Implementierung einer serverseitigen semantischen Suche erfordert in der Regel eine komplexe Infrastruktur wie Vektordatenbanken (z. B. Pinecone oder pgvector), das Hosten von Modellen und das Erstellen von APIs, was den Wartungsaufwand und die monatlichen Hostingkosten erhöht und Sicherheits- sowie Datenschutzbedenken aufwirft.
+Moderne Entwickler erwarten natürlichsprachliche Schnittstellen, die Intent, Synonyme und Kontext verstehen. Die Implementierung von serverseitiger semantischer Suche erfordert typischerweise den Aufbau komplexer Infrastruktur wie Vektor-Datenbanken (z. B. Pinecone oder pgvector), das Hosting von Modellen und den Aufbau von APIs — was den Wartungsaufwand, monatliche Hosting-Kosten sowie Sicherheits- und Datenschutzbedenken erhöht.
 
-## Der Ansatz
+## Ansatz
 
-Verwenden Sie das native **Semantische Such-Plugin** von docmd. Es arbeitet vollständig clientseitig in einer hochoptimierten Browser-Laufzeit. Es generiert strukturierte Vektorchunks zum Build-Zeitpunkt über lokale Hugging Face-Modellpipelines und führt ein Reranking unter Verwendung einer hybriden BM25-Keyword-Frequenz und einer Vektor-Kosinus-Ähnlichkeit durch. Es werden niemals Daten an Drittanbieter-APIs gesendet.
+Verwenden Sie das native **Semantic-Search-Plugin** von docmd. Es arbeitet vollständig clientseitig mit einer hochoptimierten Browser-Runtime. Es generiert zur Build-Zeit strukturierte Vektor-Chunk-Indizes mithilfe lokaler Hugging-Face-Model-Pipelines und re-ranked Treffer anschließend mittels hybrider BM25-Keyword-Frequenz und Vektor-Cosine-Similarity. Es werden niemals Daten an Drittanbieter-APIs gesendet.
 
 ## Implementierung
 
-### 1. Semantische Suche in der Konfiguration aktivieren
+### 1. Semantic Search in der Konfiguration aktivieren
 
-Fügen Sie die Optionen für das `search`-Plugin in Ihre `docmd.config.json` ein. Setzen Sie `semantic` auf `true` und aktivieren Sie `showConfidence`, um semantische Übereinstimmungen in den Suchergebnissen visuell zu kennzeichnen:
+Fügen Sie die `search`-Plugin-Optionen in Ihrer `docmd.config.json` hinzu. Setzen Sie `semantic` auf `true` und aktivieren Sie `showConfidence`, um semantische Treffer in den Suchergebnissen visuell kenntlich zu machen:
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "search": {
@@ -32,34 +32,34 @@ Fügen Sie die Optionen für das `search`-Plugin in Ihre `docmd.config.json` ein
 }
 ```
 
-### 2. Das passende Einbettungsmodell wählen
+### 2. Wählen Sie das passende Embedding-Modell
 
-docmd unterstützt sowohl leichtgewichtige, rein englische Modelle als auch umfassende mehrsprachige Modelle. Aktualisieren Sie Ihr Modellprofil über `docmd-search --settings` or definieren Sie es explizit:
+docmd unterstützt sowohl leichtgewichtige rein englischsprachige Modelle als auch umfassende mehrsprachige Modelle. Aktualisieren Sie Ihr Modell-Profil mit `docmd-search --settings` oder definieren Sie es explizit:
 
-| Modell-ID | Dimensionen | Größe | Sprachen | Bestens geeignet für |
+| Modell-ID | Dimensionen | Größe | Sprachen | Am besten für |
 | :--- | :---: | :---: | :--- | :--- |
-| `Xenova/all-MiniLM-L6-v2` | 384 | ~90 MB | Nur Englisch | Schnelle, präzise englische Dokumentation |
-| `Xenova/LaBSE` | 768 | ~470 MB | 100+ Sprachen | Absolute beste mehrsprachige Qualität |
-| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | 384 | ~220 MB | 50+ Sprachen | Hervorragende Balance für Mehrsprachigkeit |
+| `Xenova/all-MiniLM-L6-v2` | 384 | ~90 MB | nur Englisch | schnelle, hochpräzise englische Dokumentation |
+| `Xenova/LaBSE` | 768 | ~470 MB | 100+ Sprachen | absolut beste mehrsprachige Qualität |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | 384 | ~220 MB | 50+ Sprachen | ausgezeichneter mehrsprachiger Kompromiss |
 
-### 3. Index in CI/CD vorbauen
+### 3. Pre-Building des Index in CI/CD
 
-Um Overhead im Browser beim ersten Laden zu vermeiden, generieren Sie die Vektorchunks während Ihres Builds oder in Ihrer CI/CD-Pipeline vorab mit der CLI:
+Um Overhead im Browser beim Erstladen zu vermeiden, generieren Sie die Such-Chunks vorab in Ihrer Build- oder CI/CD-Pipeline über die CLI:
 
 ```bash
-# Bauen Sie den semantischen Suchindex vorab
+# Den semantischen Suchindex bauen
 npx docmd-search --build
 
-# Führen Sie anschließend den docmd-Build aus
+# Anschließend docmd build ausführen
 npx @docmd/core build
 ```
 
-Dies erzeugt hochoptimierte statische Vektor-JSON-Chunks in `.docmd-search/`. Wenn ein Benutzer eine Suche durchführt, lädt der Client diese Chunks progressiv im Hintergrund, wodurch die Benutzeroberfläche sofort interaktiv bleibt.
+Dies erzeugt hochoptimierte statische Vecto-JSON-Chunks in `.docmd-search/`. Wenn ein Benutzer eine Suche durchführt, lädt der Client diese Chunks progressiv im Hintergrund, sodass die UI stets sofort interaktiv bleibt.
 
 ## Abwägungen
 
 ### Initiale Asset-Größe
-Clientseitige Vektoreinbettungen erfordern, dass der Browser beim ersten Suchvorgang eine WebAssembly-Laufzeitumgebung und die vorkompilierte ONNX-Modelldatei herunterlädt. Obwohl diese Assets dauerhaft im Cache-Speicher des Browsers gespeichert werden, kann die Latenz beim ersten Suchvorgang auf langsameren Verbindungen etwas höher sein (~1-2 Sekunden Verzögerung).
+Clientseitige Vektor-Embeddings erfordern, dass der Browser beim ersten Suchvorgang eine WebAssembly-Runtime und die vortrainierte ONNX-Modelldatei herunterlädt. Obwohl diese Assets im Cache Storage des Browsers dauerhaft zwischengespeichert werden, kann die Latenz bei der ersten Suche in langsamen Verbindungen etwas höher ausfallen (~1-2 Sekunden Verzögerung).
 
 ### Suchqualität vs. Payload-Größe
-Die Wahl größerer Modelle wie `LaBSE` bietet eine außergewöhnliche mehrsprachige Qualität, führt jedoch zu größeren Downloads. Für standardmäßige internationale Dokumentations-Websites ist das Modell `paraphrase-multilingual-MiniLM-L12-v2` die empfohlene goldene Mitte zwischen Genauigkeit und Netzwerklast.
+Größere Modelle wie `LaBSE` bieten außergewöhnliche mehrsprachige Qualität, führen aber zu umfangreicheren Downloads. Für internationale Standarddokumentations-Websites ist das Modell `paraphrase-multilingual-MiniLM-L12-v2` der empfohlene Sweet Spot zwischen Genauigkeit und Netzwerk-Payload.

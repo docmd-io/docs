@@ -1,48 +1,48 @@
 ---
-title: "Optimierung für Low-End-Geräte"
-description: "So erstellen Sie leistungsstarke, barrierefreie Dokumentationen, die auf schwächerer Hardware und bei langsamen Netzwerkverbindungen nahtlos funktionieren."
+title: "Low-End-Device-Optimierung"
+description: "Wie Sie leistungsstarke, zugängliche Dokumentation erstellen, die auf schwacher Hardware und langsamen Verbindungen reibungslos funktioniert."
 ---
 
 ## Problem
 
-Moderne Dokumentations-Websites verlassen sich oft auf schwere JavaScript-Runtimes, nur um statischen Text anzuzeigen. Für Benutzer mit älteren Mobiltelefonen, günstigen Laptops oder langsamen 3G/4G-Verbindungen kann das Laden dieser Seiten mehrere Sekunden dauern. Der Prozessor des Geräts hat Mühe, große JS-Bundles zu verarbeiten, was zu "Input-Lag", ruckelnden Animationen und einem insgesamt schlechten Leseerlebnis führt.
+Moderne Dokumentations-Sites verlassen sich häufig auf schwere JavaScript-Runtimes, um statischen Text anzuzeigen. Für Benutzer mit älteren Mobiltelefonen oder langsamen Verbindungen brauchen diese Sites mehrere Sekunden zum Laden. Der Prozessor hat Mühe, große JS-Bundles zu parsen, was zu "Input-Lag" und einer schlechten Lese-Erfahrung führt.
 
 ## Warum es wichtig ist
 
-Technische Dokumentationen sollten universell zugänglich sein. Wenn Benutzer in Schwellenländern oder mit eingeschränkter Hardware gezwungen sind, ein schweres Framework herunterzuladen und auszuführen, nur um ein Tutorial zu lesen, schafft dies eine unnötige Hürde beim Lernen. Eine leichtgewichtige Website stellt sicher, dass Ihre Produktinformationen für jeden verfügbar sind, unabhängig von der Hardware oder Internetgeschwindigkeit.
+Technische Dokumentation sollte universell zugänglich sein. Benutzer mit eingeschränkter Hardware zum Download eines schweren Frameworks zu zwingen, stellt eine unnötige Lernbarriere dar. Eine leichtgewichtige Site stellt sicher, dass Produktinformationen für alle verfügbar sind — unabhängig von Hardware oder Internet-Geschwindigkeit.
 
 ## Ansatz
 
-Setzen Sie auf eine **HTML-First-Strategie**. `docmd` ist mit einer Zero-Framework-Architektur konzipiert, die sicherstellt, dass der primäre Inhalt während des Build-Prozesses in Standard-HTML gerendert wird. Dies hält den Hauptthread des Browsers frei und gewährleistet flüssiges Scrollen sowie eine schnelle Navigation, selbst auf Budget-Geräten.
+Übernehmen Sie eine **HTML-First**-Strategie. docmd verwendet eine Zero-Framework-Architektur. Die primären Inhalte werden während des Build-Prozesses in Standard-HTML gerendert. Das hält den Main-Thread des Browsers frei und sorgt selbst auf günstigen Geräten für flüssiges Scrollen und snappy Navigation.
 
 ## Implementierung
 
 ### 1. Minimaler Runtime-Footprint
 
-Standardmäßig verwendet `docmd` weder React, Vue noch ein anderes schweres clientseitiges Framework für seine Kern-UI. Dieser vorgerenderte Ansatz stellt sicher, dass der erste "First Contentful Paint" fast sofort erfolgt. Um diese Performance beizubehalten:
-*   **Eigene Skripte begrenzen**: Vermeiden Sie das Hinzufügen großer Drittanbieter-Bibliotheken in Ihrer `customJs`-Konfiguration.
-*   **Native Browser-Funktionen nutzen**: Verlassen Sie sich auf Standard-CSS und HTML5-Elemente, die von allen modernen Browsern hochgradig optimiert sind.
+Standardmäßig verwendet docmd weder React noch Vue für seine Kern-UI. Dieser vorgerenderte Ansatz stellt sicher, dass das initiale "First Contentful Paint" nahezu sofort erfolgt. Um diese Performance zu erhalten:
+*   **Beschränken Sie benutzerdefinierte Skripte**: Vermeiden Sie das Hinzufügen großer Drittanbieter-Libraries in Ihrer `customJs`-Konfiguration.
+*   **Nutzen Sie native Browser-Features**: Verlassen Sie sich auf Standard-CSS und HTML5-Elemente.
 
 ### 2. Strategisches Plugin-Management
 
-Während [Plugins](../../plugins/usage) leistungsstarke Funktionen hinzufügen, können sie einen erheblichen Performance-Overhead verursachen. Zum Beispiel benötigt das [Mermaid-Plugin](../../plugins/mermaid) eine große Engine, um Diagramme zu rendern. Wenn Ihre Benutzer hauptsächlich Low-End-Geräte verwenden, sollten Sie statische Bilder für Diagramme anstelle von clientseitigem Rendering in Betracht ziehen.
+Während [Plugins](../../plugins/usage.md) leistungsstarke Features hinzufügen, bringen sie Performance-Overhead mit sich. Beispielsweise benötigt das [Mermaid-Plugin](../../plugins/mermaid.md) eine große Engine, um Diagramme zu rendern. Wenn Ihre Benutzer Low-End-Geräte verwenden, nutzen Sie statische Bilder statt clientseitigem Rendering.
 
 ### 3. Responsive und optimierte Medien
 
-Vermeiden Sie es, übergroße Bilder an mobile Benutzer auszuliefern. Verwenden Sie moderne Formate wie WebP und nutzen Sie das `<picture>`-Tag für eine granulare Kontrolle über responsive Assets.
+Vermeiden Sie es, mobilen Benutzern überdimensionierte Bilder auszuliefern. Verwenden Sie moderne Formate wie WebP und ziehen Sie das `<picture>`-Tag in Betracht, um responsiven Assets granulare Kontrolle zu geben.
 
 ```html
 <picture>
   <source srcset="/assets/mobile-hero.webp" media="(max-width: 600px)">
-  <img src="/assets/desktop-hero.webp" alt="Feature-Übersicht" loading="lazy">
+  <img src="/assets/desktop-hero.webp" alt="Funktionsübersicht" loading="lazy">
 </picture>
 ```
-Die Verwendung des Attributs `loading="lazy"` stellt sicher, dass Bilder erst heruntergeladen werden, wenn sie in den Viewport des Benutzers gelangen, was Bandbreite bei langsamen Verbindungen spart.
+Die Verwendung des Attributs `loading="lazy"` stellt sicher, dass Bilder erst dann heruntergeladen werden, wenn sie im Viewport des Benutzers erscheinen — das spart Bandbreite.
 
-### 4. Effiziente Suchindexierung
+### 4. Effiziente Such-Indexierung
 
-`docmd` generiert "gescopte" Suchindizes, um den Speicherbedarf gering zu halten. Bei extrem großen Websites kann das [Search-Plugin](../../plugins/search) jedoch weiterhin speicherintensiv sein. Ermutigen Sie mobile Benutzer, die Suchleiste nur bei Bedarf zu verwenden, oder optimieren Sie Ihren Index, wie im [Local-First Suchleitfaden](../search/local-first-search) beschrieben.
+docmd generiert gescopte Suchindizes, um den Speicher-Footprint niedrig zu halten. Für extrem große Sites kann das [Search-Plugin](../../plugins/search.md) jedoch speicherintensiv sein. Optimieren Sie Ihren Index wie im [Local-First-Search-Leitfaden](../search/local-first-search.md) beschrieben.
 
 ## Abwägungen
 
-Die Priorisierung der Performance für Low-End-Geräte bedeutet oft, auf "schwere" interaktive Funktionen wie komplexe 3D-Visualisierungen oder große clientseitige Datenverarbeitung zu verzichten. Dies ist eine bewusste Designentscheidung, die **Inklusivität und Geschwindigkeit** über visuelle Komplexität stellt und sicherstellt, dass Ihre Dokumentation für ein möglichst breites Publikum eine nützliche Ressource bleibt.
+Performance für Low-End-Geräte zu priorisieren bedeutet, auf "schwere" interaktive Features wie komplexe 3D-Visualisierungen zu verzichten. Dies ist eine bewusste Designentscheidung, die Inklusivität und Geschwindigkeit über visuelle Komplexität stellt. Sie stellt sicher, dass Ihre Dokumentation für den größtmöglichen Kreis an Benutzern nützlich bleibt.

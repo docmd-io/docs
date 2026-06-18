@@ -37,7 +37,7 @@ Using [Callouts](../../content/containers/callouts.md) ensures your documentatio
 
 Integrate tools like **Vale** or **Markdownlint** to enforce brand terminology, tone, and grammar. These tools automatically check for passive voice, biased language, or incorrect product spelling.
 
-```ini
+```ini ".vale.ini"
 # .vale.ini example
 MinAlertLevel = suggestion
 Packages = Google, Microsoft

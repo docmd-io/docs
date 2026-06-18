@@ -1,49 +1,49 @@
 ---
 title: "Aufgabe vs. Konzept"
-description: "So wenden Sie das Diátaxis-Framework an, um \"How-To\"-Anleitungen von konzeptionellen Erklärungen zu trennen und eine effektivere Dokumentationsstruktur aufzubauen."
+description: "Wie Sie das Diátaxis-Framework anwenden, um 'How-To'-Leitfäden von konzeptionellen Erklärungen zu trennen und so eine effektivere Dokumentations-Struktur zu schaffen."
 ---
 
 ## Problem
 
-Ein häufiger Fehler beim technischen Schreiben ist die Vermischung der Frage, *warum* etwas funktioniert, mit der Frage, *wie* man es tatsächlich umsetzt. Ein Tutorial zur "Konfiguration von SSO" kann beispielsweise leicht durch seitenlange Erklärungen zur Geschichte des SAML-Protokolls überladen werden, was den Benutzer von seinem unmittelbaren Ziel ablenkt, die Funktion zum Laufen zu bringen.
+Ein häufiger Fehler beim technischen Schreiben ist es, das *Warum* etwas funktioniert mit dem *Wie* es zu tun ist zu vermischen. Ein Tutorial zu "SSO konfigurieren" kann sich beispielsweise in Seiten verlieren, die die Geschichte des SAML-Protokolls erklären. Das lenkt den Benutzer von seinem unmittelbaren Ziel ab, das Feature zum Laufen zu bringen.
 
 ## Warum es wichtig ist
 
-Die Absicht des Benutzers variiert je nach aktuellem Kontext erheblich. Ein Entwickler, der nachts um 2 Uhr ein Problem in der Produktion beheben muss, sucht nach konkreten, umsetzbaren Schritten und nicht nach Architekturphilosophie. Umgekehrt muss ein technischer Leiter, der Ihre Plattform evaluiert, die zugrunde liegende Logik verstehen, bevor er sich auf eine Implementierung festlegt. Die Trennung dieser Aspekte stellt sicher, dass beide Personas die benötigten Informationen ohne unnötige Reibung finden.
+Die Benutzerabsicht variiert erheblich. Ein Ingenieur, der um 2 Uhr nachts ein Produktionsproblem behebt, braucht spezifische, umsetzbare Schritte — keine Architektur-Philosophie. Umgekehrt muss ein technischer Leiter, der Ihre Plattform evaluiert, die zugrunde liegende Logik verstehen, bevor er sich committen kann. Diese Anliegen zu trennen stellt sicher, dass beide Personas die Informationen finden, die sie benötigen, ohne unnötige Reibung.
 
 ## Ansatz
 
-Nutzen Sie das **Diátaxis-Framework**, das Dokumentation in vier Quadranten unterteilt: Tutorials, How-To-Anleitungen, Erklärungen (Konzepte) und technische Referenz. In diesem Leitfaden konzentrieren wir uns auf die kritische Trennung zwischen **aufgabenorientierten Inhalten** (umsetzbare Schritte) und **konzeptorientierten Inhalten** (tieferes Verständnis).
+Übernehmen Sie das **Diátaxis-Framework**, das Dokumentation in vier Quadranten kategorisiert: Tutorials, How-To-Leitfäden, Erklärungen (Konzepte) und technische Referenz. Für diesen Leitfaden konzentrieren wir uns auf die kritische Trennung zwischen **aufgaben-orientierten Inhalten** (umsetzbare Schritte) und **konzept-orientierten Inhalten** (tieferes Verständnis).
 
 ## Implementierung
 
-### 1. Die aufgabenorientierte Anleitung (How-To)
+### 1. Der aufgaben-orientierte Leitfaden (How-To)
 
-Konzentrieren Sie sich ganz auf ein spezifisches, eng gefasstes Ziel. Verzichten Sie auf langatmige theoretische Erklärungen und fokussieren Sie sich auf die minimalen Schritte, die zum Erreichen des Ziels erforderlich sind. Verwenden Sie den [Steps-Container](../../content/containers/steps), um einen klaren, unmissverständlichen Pfad aufzuzeigen.
+Konzentrieren Sie sich vollständig auf ein spezifisches, enges Ziel. Streifen Sie ausführliche theoretische Erklärungen und konzentrieren Sie sich auf die minimal erforderlichen Schritte zur Erreichung des Ziels. Verwenden Sie den [Steps-Container](../../content/containers/steps.md), um einen klaren, eindeutigen Pfad nach vorn zu bieten.
 
 *   **Titel-Beispiel**: "So konfigurieren Sie Webhooks"
 *   **Struktur**: 
     *   Voraussetzungen
     *   Direkte, umsetzbare Anweisungen
-    *   Verifizierungsschritte (Woran erkenne ich, dass es funktioniert hat?)
+    *   Verifikations-Schritte (wie Sie wissen, dass es funktioniert hat)
 
-### 2. Die konzeptorientierte Anleitung (Erklärung)
+### 2. Der konzept-orientierte Leitfaden (Erklärung)
 
-Konzentrieren Sie sich auf das "Big Picture", einschließlich Architektur, Designphilosophie und dem "Warum" hinter bestimmten Entscheidungen. Vermeiden Sie es, in diesen Abschnitten direkte Anweisungen oder Befehle zu geben.
+Konzentrieren Sie sich auf das "Big Picture", einschließlich Architektur, Design-Philosophie und das "Warum" hinter spezifischen Entscheidungen. Vermeiden Sie direkte Anweisungen oder Befehle in diesen Abschnitten.
 
-*   **Titel-Beispiel**: "Die Webhook-Delivery-Architektur verstehen"
+*   **Titel-Beispiel**: "Webhook-Delivery-Architektur verstehen"
 *   **Struktur**:
-    *   High-Level Architektur-Diagramme
-    *   Retry-Logik und Reliability-Philosophie
-    *   Sicherheitsaspekte
+    *   Hochrangige Architektur-Diagramme
+    *   Retry-Logik und Zuverlässigkeits-Philosophie
+    *   Sicherheits-Überlegungen
 
-### 3. Effektive Querverweise
+### 3. Effektives Cross-Referencing
 
-Anstatt beide Inhaltsarten zu vermischen, nutzen Sie die Verlinkungs-Tools von `docmd`, um eine Brücke für Benutzer zu schlagen, die mehr Kontext benötigen oder bereit für die Implementierung sind.
+Statt die beiden Inhaltstypen zu verschmelzen, nutzen Sie docmds Linking-Tools, um eine Brücke für Benutzer zu bieten, die mehr Kontext benötigen oder bereit sind zu implementieren.
 
-*   **In einer How-To-Anleitung**: "Für tiefere Einblicke in unsere Retry-Logik lesen Sie [Webhook-Architektur](../../guides/performance-delivery/caching-strategies)."
-*   **In einer konzeptionellen Anleitung**: "Bereit für den Start? Folgen Sie unserer [Anleitung zur Webhook-Konfiguration](../../guides/integrations/alongside-other-tools)."
+*   **In einem How-To-Leitfaden**: "Für eine tiefere Erkundung unserer Retry-Logik siehe [Webhook-Architektur](../../guides/performance-delivery/caching-strategies.md)."
+*   **In einem konzeptionellen Leitfaden**: "Bereit loszulegen? Folgen Sie unserem [Webhook-Konfigurations-Leitfaden](../../guides/integrations/alongside-other-tools.md)."
 
 ## Abwägungen
 
-Die Trennung von Aufgaben und Konzepten erhöht die Anzahl der Seiten in Ihrer Navigation und erfordert eine konsequentere Verlinkung. Diese modulare Struktur verbessert jedoch die langfristige Wartbarkeit, Durchsuchbarkeit und die allgemeine Professionalität Ihrer Dokumentation erheblich.
+Aufgaben und Konzepte zu trennen erhöht die Anzahl der Seiten in Ihrer Navigation und erfordert rigoroses Cross-Linking. Diese modulare Struktur verbessert jedoch signifikant die langfristige Wartbarkeit, Auffindbarkeit und allgemeine Professionalität Ihrer Dokumentations-Suite.
