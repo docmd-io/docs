@@ -1,5 +1,5 @@
 ---
-title: "docmd : Individuelle No-Style Page Demo"
+title: "docmd : Maßgeschneiderte No-Style-Seiten-Demo"
 description: "Eine funktionale Demonstration der noStyle-Architekturfunktion."
 noStyle: true
 components:
@@ -26,7 +26,7 @@ customHead: |
       padding: 80px 20px;
     }
     .demo-hero {
-      text-align: center;
+      text-align: centre;
       margin-bottom: 60px;
     }
     .demo-hero h1 {
@@ -42,7 +42,7 @@ customHead: |
       background: var(--bg-secondary, #f8f9fa);
       padding: 40px;
       border-radius: 16px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-colour);
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
     .demo-button {
@@ -64,32 +64,32 @@ customHead: |
 
 <div class="demo-container">
   <div class="demo-hero">
-    <h1>Individuelle Seitenarchitektur</h1>
-    <p>Demonstration der absoluten Layout-Kontrolle durch <code>noStyle: true</code>.</p>
+    <h1>Maßgeschneiderte Seitenarchitektur</h1>
+    <p>Demonstration der absoluten Layoutkontrolle durch <code>noStyle: true</code>.</p>
   </div>
-  
+
   <div class="demo-card">
-    <h2>Logisches Fundament</h2>
+    <h2>Logische Grundlage</h2>
     <p>
-      Diese Demonstration nutzt die Frontmatter-Direktive <code>noStyle: true</code>, um das globale Dokumentationslayout (Seitenleiste, Header und TOC) zu umgehen. Dies bietet eine "Zero-Friction"-Leinwand für die Erstellung von Marketing-Landingpages oder benutzerdefinierten Produkt-Dashboards.
+      Diese Demonstration nutzt die <code>noStyle: true</code>-Frontmatter-Direktive, um das globale Dokumentationslayout (Sidebar, Header und TOC) zu umgehen. Dies bietet eine "reibungslose" Leinwand zur Erstellung von Marketing-Landingpages oder benutzerdefinierten Produkt-Dashboards.
     </p>
-    
+
     <h3>Aktivierte Systemkomponenten</h3>
     <p>Im No-Style-Modus entscheiden Sie sich explizit für die Kernfunktionen der Dokumentations-Engine:</p>
-    
+
     <ul>
       <li><strong>SEO-Meta-Engine</strong>: Strukturierte Tags und Social-Graph-Daten bleiben erhalten.</li>
-      <li><strong>Projekt-Branding</strong>: Die globale Favicon-Injektion bleibt aktiv.</li>
-      <li><strong>Grundlegende Typografie</strong>: Das verarbeitete <code>docmd-main.css</code> liefert das Basis-Styling.</li>
-      <li><strong>Theme-Synchronisation</strong>: Der Status des Hell-/Dunkelmodus bleibt vollständig erhalten.</li>
-      <li><strong>Interaktive Funktionen</strong>: Der SPA-Router und die Komponentenlogik bleiben verfügbar.</li>
+      <li><strong>Projekt-Branding</strong>: Globale Favicon-Injection bleibt aktiv.</li>
+      <li><strong>Grundlegende Typografie</strong>: Das verarbeitete <code>docmd-main.css</code> liefert Basisstyling.</li>
+      <li><strong>Theme-Synchronisation</strong>: Hell/Dunkel-Modus-Zustand bleibt vollständig erhalten.</li>
+      <li><strong>Interaktive Fähigkeiten</strong>: SPA-Router und Komponentenlogik bleiben verfügbar.</li>
     </ul>
-    
+
     <h3>Technische Umsetzung</h3>
     <p>
-      Das Layout für diese Seite wurde mit Standard-HTML-Wrappern und gescoptem CSS erstellt, das im Frontmatter-Feld <code>customHead</code> definiert ist. Dies stellt sicher, dass kein CSS auf den Rest der Dokumentationsseite abfärbt.
+      Das Layout dieser Seite wird mit Standard-HTML-Wrappern und scoped CSS verfasst, das im <code>customHead</code>-Frontmatter-Feld definiert ist. Dies stellt null CSS-Leakage zum Rest der Dokumentations-Site sicher.
     </p>
-    
-    <a href="../content/no-style-pages.md" class="demo-button">Analyse des Implementierungs-Leitfadens →</a>
+
+    <a href="/content/no-style-pages/" class="demo-button">Implementierungs-Leitfaden analysieren →</a>
   </div>
 </div>

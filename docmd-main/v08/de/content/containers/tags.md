@@ -1,83 +1,57 @@
 ---
 title: "Tags"
-description: "Verwenden Sie den Tag-Container, um Versionen oder Status zu kennzeichnen oder kurze Textausschnitte nahtlos im Fließtext hervorzuheben."
+description: "Verwenden Sie den Tag-Container, um Versionen, Status zu kennzeichnen oder kurze Textausschnitte inline hervorzuheben."
 ---
 
-Der `tag`-Container ist eine selbstschließende Komponente, mit der kleine, pillenförmige Badges direkt in Ihren Text eingefügt werden können. Im Gegensatz zu Block-Containern erben Tags keine massiven Größen von übergeordneten Elementen wie Überschriften; sie behalten ihre kompakten, sauberen Proportionen bei, egal wo sie platziert werden.
+Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenförmige Badges inline einfügt. Tags behalten überall ihre kompakten Proportionen — sie übernehmen keine Überschriftengrößen oder umgebenden Textstile.
 
-## Grundlegende Verwendung
+## Syntax-Referenz
 
-Um einen einfachen Tag zu erstellen, geben Sie einfach den Text an, den Sie anzeigen möchten:
+```markdown
+::: tag "Label text" [property:value...]
+```
 
-::: tabs
-    == tab "Vorschau"
-        Diese Funktion wurde in ::: tag "v0.7.4" color:blue hinzugefügt und funktioniert perfekt.
-    == tab "Markdown-Quelle"
-        ```markdown
-        Diese Funktion wurde in ::: tag "v0.7.4" hinzugefügt und funktioniert perfekt.
-        ```
-:::
+| Parameter | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Label** | `"String"` | Der Text, der im pillenförmigen Badge angezeigt wird. |
+| **Farbe** | `color:VALUE` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). Berechnet automatisch eine kontrastreiche Textfarbe. |
+| **Symbol** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol im Badge hinzu. |
+| **Link** | `link:URL` | Macht den Tag zu einem klickbaren Hyperlink. Externe URLs öffnen in einem neuen Tab. |
 
-## Farben anpassen
+## Beispiele
 
-Sie können das Standard-Tag-Styling überschreiben, indem Sie einen beliebigen gültigen CSS-Farbstring (z. B. `#ff0000`, `blue` oder `hsl(...)`) über das Attribut `color:` angeben. `docmd` berechnet automatisch einen schönen getönten Hintergrund mit perfekt kontrastiertem Text und Rahmen!
+### Versions-Badge
 
-::: tabs
+Verwenden Sie einen farbigen Tag inline, um zu kennzeichnen, wann ein Feature eingeführt wurde.
 
-== tab "Vorschau"
-::: tag "Veraltet" color:#ef4444
+```markdown
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+```
+
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+
+### Status-Labels
+
+Verwenden Sie Tags für Statusindikatoren über eine Seite hinweg. Farben sind vollständig anpassbar.
+
+```markdown
+::: tag "Deprecated" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "Stabil" color:#22c55e
-== tab "Markdown-Quelle"
-````markdown
-::: tag "Veraltet" color:#ef4444
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
+```
+
+::: tag "Deprecated" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "Stabil" color:#22c55e
-````
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
 
-:::
+### Verlinkter Tag
 
-## Icons hinzufügen
+Fügen Sie `link:` hinzu, damit ein Tag als Hyperlink fungiert — nützlich für Querverweise auf Release Notes oder externe Ressourcen.
 
-Genau wie bei Buttons und Callouts können Sie ganz einfach ein Icon aus der `docmd`-Icon-Bibliothek über das Attribut `icon:` hinzufügen.
+```markdown
+Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+```
 
-::: tabs
-
-== tab "Vorschau"
-::: tag "Verifiziert" icon:check-circle color:#10b981
-== tab "Markdown-Quelle"
-````markdown
-::: tag "Verifiziert" icon:check-circle color:#10b981
-````
-
-:::
-
-## Tags verlinken
-
-Wenn Ihr Tag als Hyperlink fungieren soll (z. B. um einen Versions-Tag direkt mit seinen Versionshinweisen zu verknüpfen), können Sie das Attribut `link:` verwenden. Externe Links werden automatisch erkannt und in einem neuen Tab geöffnet.
-
-::: tabs
-
-== tab "Vorschau"
-Sehen Sie sich die neuesten ::: tag "Versionshinweise" icon:external-link link:/release-notes/0-7-4 an.
-== tab "Markdown-Quelle"
-````markdown
-Sehen Sie sich die neuesten ::: tag "Versionshinweise" icon:external-link link:/release-notes/0-7-4 an.
-````
-
-:::
-
-## Tags in Überschriften verwenden
-
-Da Tags echte Inline-Elemente sind, sehen sie hervorragend aus, wenn sie zur Kennzeichnung von Hauptüberschriften verwendet werden. Sie richten sich automatisch an der Grundlinie aus, ohne die massive Schriftgröße der Überschrift zu erben.
-
-::: tabs
-
-== tab "Vorschau"
-# Suchfilterung ::: tag "Neu" color:#8b5cf6
-== tab "Markdown-Quelle"
-````bash
-# Suchfilterung ::: tag "Neu" color:#8b5cf6
-````
-
-:::
+Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md

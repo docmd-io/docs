@@ -1,83 +1,57 @@
 ---
-title: "标签 (Tags)"
-description: "使用标签容器在行内无缝标注版本、状态或突出显示短文本片段。"
+title: "标签"
+description: "使用标签容器来标记版本、状态，或在内联中高亮显示短文本片段。"
 ---
 
-`tag` 容器是一个自闭合组件，用于直接在文本中插入小巧的药丸状徽章。与块容器不同，标签不会继承父元素（如标题）的巨大尺寸，无论放置在哪里，它们都会保留紧凑、整洁的比例。
+`tag` 容器是一个自闭合组件，可在行内插入小型胶囊形徽章。标签在各处都保持其紧凑比例 —— 它们不会继承标题尺寸或周围文本样式。
 
-## 基本用法
+## 语法参考
 
-要创建一个基本标签，只需提供你想要显示的文本：
+```markdown
+::: tag "Label text" [property:value...]
+```
 
-::: tabs
-    == tab "预览"
-        此功能已在 ::: tag "v0.7.4" color:blue 中添加，且运行完美。
-    == tab "Markdown 源码"
-        ```markdown
-        此功能已在 ::: tag "v0.7.4" 中添加，且运行完美。
-        ```
-:::
+| 参数 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| **标签** | `"String"` | 显示在胶囊形徽章内的文字。 |
+| **颜色** | `color:VALUE` | 应用背景颜色（支持 CSS 名称或十六进制代码）。自动计算对比文字颜色。 |
+| **图标** | `icon:NAME` | 在徽章内添加一个 [Lucide](external:https://lucide.dev/icons) 图标。 |
+| **链接** | `link:URL` | 将标签设为可点击的超链接。外部 URL 在新标签页中打开。 |
 
-## 自定义颜色
+## 示例
 
-你可以通过提供任何有效的 CSS 颜色字符串（例如 `#ff0000`、`blue` 或 `hsl(...)`），使用 `color:` 属性来覆盖默认的标签样式。`docmd` 会自动计算出精美的淡色背景，并配以对比完美的文本和边框！
+### 版本徽章
 
-::: tabs
+使用彩色标签内联标记某功能的引入版本。
 
-== tab "预览"
-::: tag "已弃用" color:#ef4444
+```markdown
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+```
+
+This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+
+### 状态标签
+
+使用标签在整个页面中标记状态。颜色完全可定制。
+
+```markdown
+::: tag "Deprecated" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "稳定版" color:#22c55e
-== tab "Markdown 源码"
-````markdown
-::: tag "已弃用" color:#ef4444
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
+```
+
+::: tag "Deprecated" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "稳定版" color:#22c55e
-````
+::: tag "Stable" color:#22c55e
+::: tag "Verified" icon:check-circle color:#10b981
 
-:::
+### 可链接标签
 
-## 添加图标
+添加 `link:` 让标签充当超链接，便于交叉引用发布说明或外部资源。
 
-就像按钮和标注一样，你可以使用 `icon:` 属性轻松附加来自 `docmd` 图标库的图标。
+```markdown
+Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+```
 
-::: tabs
-
-== tab "预览"
-::: tag "已验证" icon:check-circle color:#10b981
-== tab "Markdown 源码"
-````markdown
-::: tag "已验证" icon:check-circle color:#10b981
-````
-
-:::
-
-## 链接标签
-
-如果你需要标签充当超链接（例如，将版本标签直接链接到其发布说明），可以使用 `link:` 属性。外部链接会被自动检测并在新标签页中打开。
-
-::: tabs
-
-== tab "预览"
-查看最新的 ::: tag "发行说明" icon:external-link link:/release-notes/0-7-4
-== tab "Markdown 源码"
-````markdown
-查看最新的 ::: tag "发行说明" icon:external-link link:/release-notes/0-7-4
-````
-
-:::
-
-## 在标题中使用标签
-
-因为标签是真正的行内元素，所以当用于标记主标题时，它们看起来非常华丽。它们会自动对齐到基线，而不会继承标题巨大的字体大小。
-
-::: tabs
-
-== tab "预览"
-# 搜索过滤 ::: tag "新" color:#8b5cf6
-== tab "Markdown 源码"
-````bash
-# 搜索过滤 ::: tag "新" color:#8b5cf6
-````
-
-:::
+Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md

@@ -1,75 +1,84 @@
 ---
-title: "Ausklappbare Abschnitte"
-description: "Betten Sie interaktive Umschalter im Akkordeon-Stil für FAQs, vertiefende Inhalte und Spoiler ein."
+title: "Einklappbare Abschnitte"
+description: "Betten Sie interaktive Akkordeon-Umschalter für FAQs, tiefgehende Inhalte und Spoiler ein."
 ---
 
-Der `collapsible`-Container erstellt einen interaktiven, umschaltbaren Abschnitt (Akkordeon). Dieses Muster ist ideal für FAQs, detaillierte technische Konfigurationen oder alle sekundären Informationen, die zugänglich sein sollen, ohne den primären Dokumentationsfluss zu überladen.
+Der `collapsible`-Container erstellt ein interaktives, umschaltbares Akkordeon. Er ist ideal für FAQs und detaillierte technische Konfigurationen und hält sekundäre Informationen zugänglich, ohne die Hauptansicht zu überladen.
 
 ::: callout info "VitePress-Alias"
-Wenn Sie von **VitePress** migrieren, können Sie `:::details` als Alias für `:::collapsible` verwenden. Leerzeichenlose Syntax wie `:::collapsible` funktioniert ebenfalls.
+Wenn Sie von VitePress migrieren, verwenden Sie `:::details` als Alias für `:::collapsible`. Auch die schreibweise ohne Leerzeichen wie `:::collapsible` funktioniert.
 :::
 
-## Syntax
+## Syntax-Referenz
 
 ```markdown
-::: collapsible [open] "Titel-Text"
-  Der Hauptinhalt wird hier platziert.
+::: collapsible [open] "Title text" [property:value...]
+Main content goes here.
 :::
 ```
 
-### Optionen-Referenz
-- **`open`**: (Optional) Wenn angegeben, wird der Abschnitt im erweiterten Zustand initialisiert.
-- **`"Titel"`**: Der Text, der auf der interaktiven Umschaltleiste gerendert wird. Standardmäßig "Klicken zum Erweitern", wenn weggelassen.
-- **`icon:NAME`**: (Optional) Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor dem Titeltext hinzu.
+| Parameter | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Offen-Zustand** | `open` | Optional. Wenn angegeben, wird der Abschnitt initial im aufgeklappten Zustand dargestellt. |
+| **Titel** | `"String"` | Der Text, der auf der Umschaltleiste gerendert wird. Standard ist „Click to expand". |
+| **Symbol** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol vor dem Titeltext hinzu. |
 
-## Detaillierte Implementierungsbeispiele
+## Beispiele
 
-### Standardverwendung (Initialzustand: Geschlossen)
-Hauptsächlich für FAQs oder zur Reduzierung der visuellen Dichte technischer Seiten verwendet.
+### Standardzustand
 
-```markdown
-::: collapsible "Wie aktualisiere ich docmd?"
-  Führen Sie `npm update -g @docmd/core` aus, um die neueste stabile Engine abzurufen.
-:::
-```
-::: collapsible "Wie aktualisiere ich docmd?"
-  Führen Sie `npm update -g @docmd/core` aus, um die neueste stabile Engine abzurufen.
-:::
-
-### Opt-In-Sichtbarkeit (Initialzustand: Offen)
-Ideal für Abschnitte, die standardmäßig sichtbar sein sollten, dem Benutzer aber ermöglichen, sie für eine sauberere Ansicht zu minimieren.
+Ein einklappbarer Abschnitt ist standardmäßig geschlossen. Ideal für FAQs und reduzierte visuelle Dichte.
 
 ```markdown
-::: collapsible open "Umgebungsvoraussetzungen"
-  1.  Node.js v18+ (LTS empfohlen)
-  2.  PNPM-Paketmanager
+::: collapsible "How do I upgrade docmd?"
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 ```
-::: collapsible open "Umgebungsvoraussetzungen"
-1.  Node.js v18+ (LTS empfohlen)
-2.  PNPM-Paketmanager
+
+::: collapsible "How do I upgrade docmd?"
+Run `npm update -g @docmd/core` to fetch the latest stable engine.
 :::
 
-### Verschachtelte technische Daten
-Collapsibles können komplexe Markdown-Elemente enthalten, einschließlich syntax-hervorgehobener Codeblöcke.
+### Initial geöffnet
+
+Verwenden Sie das `open`-Flag für Abschnitte, die standardmäßig sichtbar sein sollen, aber vom Nutzer minimiert werden können.
+
+```markdown
+::: collapsible open "Environment Prerequisites"
+1. Node.js v18+ (LTS recommended)
+2. PNPM package manager
+:::
+```
+
+::: collapsible open "Environment Prerequisites"
+1. Node.js v18+ (LTS recommended)
+2. PNPM package manager
+:::
+
+### Reichhaltige Inhalte
+
+Einklappbare Abschnitte können beliebiges Markdown enthalten, einschließlich syntaxhervorgehobener Code-Blöcke.
 
 ````markdown
-::: collapsible "Beispiel-JSON-Antwort analysieren"
-  ```json
-  {
-    "status": "success",
-    "data": { "version": "0.6.2" }
-  }
-  ```
+::: collapsible "Sample JSON Response"
+```json
+{
+  "status": "success",
+  "data": { "version": "0.8.2" }
+}
+```
 :::
 ````
-::: collapsible "Beispiel-JSON-Antwort analysieren"
-```javascript
+
+::: collapsible "Sample JSON Response"
+```json
+{
   "status": "success",
-  "data": { "version": "0.6.2" }
+  "data": { "version": "0.8.2" }
+}
 ```
 :::
 
 ::: callout tip
-Obwohl Inhalte innerhalb eines `collapsible` für den menschlichen Benutzer verborgen sein können, bleiben sie für den `docmd`-Suchindex vollständig sichtbar und sind im einheitlichen `llms-full.txt`-Stream enthalten. Dies stellt sicher, dass KI-Agenten umfassende Antworten basierend auf verborgenen technischen Details geben können, während die für Menschen sichtbare Benutzeroberfläche sauber und priorisiert bleibt.
+Inhalte innerhalb eines `collapsible` werden vollständig von der Suche indiziert und in den `llms.txt`-Stream aufgenommen. KI-Agenten können Fragen basierend auf versteckten technischen Details beantworten, während die menschliche Oberfläche sauber bleibt.
 :::

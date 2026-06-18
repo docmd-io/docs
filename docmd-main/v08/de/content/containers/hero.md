@@ -1,43 +1,40 @@
 ---
-title: "Hero-Abschnitte"
-description: "Erstellen Sie wirkungsvolle Landingpage-Header und Marketing-Highlights rein in Markdown."
+title: "Hero-Bereiche"
+description: "Erstellen Sie wirkungsstarke Landingpage-Header und Marketing-Highlights rein in Markdown."
 ---
 
-Der `hero`-Container erstellt professionelle, visuell beeindruckende Landingpage-Header. Er übernimmt komplexe CSS-Anforderungen wie **Split-Layouts**, **Glow-Effekte** und **Slider**, während die Bearbeitungserfahrung einfach bleibt.
+Der `hero`-Container erstellt visuell beeindruckende Landingpage-Header. Er handhabt komplexe Layouts inklusive Splits, Glow-Effekten und Slidern, ohne benutzerdefiniertes HTML zu benötigen.
 
-## Basissyntax
-
-Standardmäßig zentriert der `hero`-Container seinen Inhalt, was ihn ideal für Banner und einfache Schlagzeilen macht.
+## Syntax-Referenz
 
 ```markdown
-::: hero
-    # Schneller entwickeln.
-    Vom Markdown zur Produktions-Doku mit einem Befehl.
+::: hero [property:value...]
+    # Page Title
+    A short supporting tagline.
 
-    ::: button "Erste Schritte" /intro color:blue
+    ::: button "Call to Action" /target-url
 :::
 ```
 
-## Fortgeschrittene Layouts
+| Parameter | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Layout** | `layout:split` \| `layout:slider` | `split` teilt den Hero in einen Textbereich und einen Medienbereich. `slider` erstellt ein horizontales Scroll-Snap-Karussell. |
+| **Glow** | `glow:true` | Injiziert einen subtilen radialen Gradienten-Glow im Hintergrund. |
+| **Seiten-Trenner** | `== side` | Wird mit `layout:split` verwendet. Alles nach diesem Trenner rendert im sekundären (rechten) Bereich. |
+| **Slide-Trenner** | `== slide` | Wird mit `layout:slider` verwendet. Jeder `== slide` definiert ein neues Karussell-Panel. |
 
-Der `hero`-Container unterstützt spezielle Flags zur Steuerung seines strukturellen Verhaltens.
+## Beispiele
 
-| Flag | Effekt |
-| :--- | :--- |
-| `layout:split` | Teilt den Hero in einen Textbereich (links) und einen Medienbereich (rechts). Stapelt sich auf Mobilgeräten vertikal. |
-| `layout:slider` | Verwandelt den Hero in einen horizontalen Slider mit Scroll-Snap-Verhalten. |
-| `glow:true` | Fügt ein subtiles, radiales Verlaufsleuchten im Hintergrund ein. |
+### Split-Layout
 
-### Das Split-Layout (`== side`)
-
-Verwenden Sie das Trennzeichen `== side`, um zu definieren, welche Inhalte in den primären Textbereich und welche in den sekundären "Seiten"-Bereich (normalerweise ein Bild oder ein Video-Embed) fließen.
+Verwenden Sie den `== side`-Trenner, um Inhalte in einen primären Textbereich und einen sekundären Medienbereich aufzuteilen.
 
 ```markdown
 ::: hero layout:split glow:true
-    # docmd 2.0
-    Isomorphe Ausführung. KI-optimiert.
+    # docmd
+    Isomorphic execution. AI-optimised.
 
-    ::: button "Quickstart" /getting-started/basic-usage color:blue
+    ::: button "Quickstart" ../../getting-started/quick-start.md color:blue
 
     == side
         ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -45,47 +42,39 @@ Verwenden Sie das Trennzeichen `== side`, um zu definieren, welche Inhalte in de
 ```
 
 ::: hero layout:split glow:true
-# docmd 2.0
-Isomorphe Ausführung. KI-optimiert.
+# docmd
+Isomorphic execution. AI-optimised.
 
-::: button "Quickstart" /getting-started/basic-usage color:blue
+::: button "Quickstart" ../../getting-started/quick-start.md color:blue
 
 == side
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 :::
 
-### Das Slider-Layout (`== slide`)
+### Slider-Layout
 
-Erstellen Sie einen interaktiven Hero-Slider, indem Sie das Trennzeichen `== slide` zwischen verschiedenen Inhaltsknoten verwenden.
+Verwenden Sie `== slide`-Trenner, um ein automatisch fortschreitendes Karussell von Inhalts-Panels zu erstellen.
 
 ```markdown
 ::: hero layout:slider
     == slide
-        # Isomorpher Core
-        Die Engine rendert überall.
+        # Isomorphic Core
+        The engine renders everywhere.
     == slide
-        # KI-Optimierung
-        Gebaut für das LLM-Zeitalter.
+        # AI Optimisation
+        Built for the LLM era.
 :::
 ```
 
 ::: hero layout:slider
     == slide
-        # Isomorpher Core
-        Die Engine rendert überall.
+        # Isomorphic Core
+        The engine renders everywhere.
     == slide
-        # KI-Optimierung
-        Gebaut für das LLM-Zeitalter.
+        # AI Optimisation
+        Built for the LLM era.
 :::
 
-## Responsives Verhalten
-
-Der `hero`-Container ist standardmäßig voll responsiv:
-- Auf dem **Desktop** wird `layout:split` nebeneinander angezeigt.
-- Auf **Mobilgeräten** wechselt er automatisch zu einem zentrierten, vertikalen Stapel, um eine optimale Lesbarkeit zu gewährleisten.
-
-## Best Practices
-
-1.  **Glow-Effekte**: Verwenden Sie `glow:true` sparsam auf Websites im Dark Mode für ein hochwertiges "Neon"-Gefühl.
-2.  **Medientypen**: Der "Seiten"-Inhalt eines Split-Layouts eignet sich perfekt für die `::: embed`-Komponente, hochwertige PNGs oder rohe `<video>`-Tags.
-3.  **CTA-Platzierung**: Platzieren Sie `::: button`-Elemente immer im primären "Hero Copy"-Bereich (vor dem `== side`-Trennzeichen), um sicherzustellen, dass sie das Erste sind, was Benutzer auf Mobilgeräten sehen.
+::: callout tip "Best Practices"
+Verwenden Sie `glow:true` auf dunklen Sites sparsam für ein Premium-Gefühl. Platzieren Sie `::: button`-Elemente im primären Textbereich, vor `== side`, um sicherzustellen, dass sie auf mobilen Bildschirmen sichtbar bleiben.
+:::
