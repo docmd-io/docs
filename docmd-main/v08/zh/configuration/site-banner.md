@@ -84,7 +84,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 ## 行为
 
 - **位置** —— 位于页面最顶部，menubar 与侧栏 logo bar 之上。纯 CSS 定位，关闭时不会引起布局抖动。
-- **关闭状态持久化** —— "已关闭" 状态保存在 `sessionStorage`。新的浏览器会话会重新显示。如需更长期记忆，可由一个小型插件写入 `localStorage`（横幅的 `data-docmd-banner` 属性便于定位）。
+- **关闭状态持久化** —— "已关闭" 状态保存在 `sessionStorage`。新的浏览器会话会重新显示。如需更长期记忆，可由您自己的客户端脚本写入 `localStorage`（横幅的 `data-docmd-banner` 属性便于定位）。
 - **按页覆盖** —— 0.8.7 暂不支持。如需在单个页面隐藏横幅，可在 `config.templates[page]` 条目中设置 `layout.banner: null`（计划在下个版本提供）。
 
 ## 重新定义样式
@@ -101,7 +101,6 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 }
 ```
 
-模板可通过自带 `templates/partials/banner.ejs` 整体替换横幅。默认版本随 `@docmd/ui` 一起发布。
 
 ## 禁用
 
