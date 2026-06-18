@@ -1,9 +1,9 @@
 ---
 title: "使用插件"
-description: "安装、配置和管理 docmd 插件 - 从必需的默认插件到可选的附加组件。"
+description: "安装、配置和管理 docmd 插件 —— 从必需的默认插件到可选的附加组件。"
 ---
 
-docmd 具有模块化插件架构。必需的插件随核心一起发布，无需安装。可选插件可以通过单一 CLI 命令安装。
+docmd 拥有模块化的插件架构。必需的插件随核心包一起发布，无需安装。可选插件可通过一条 CLI 命令安装。
 
 ## 安装插件
 
@@ -17,7 +17,7 @@ npx @docmd/core add <plugin-name>
 npx @docmd/core remove <plugin-name>
 ```
 
-安装程序检测你的包管理器（npm、pnpm、yarn 或 bun）。它将短名称解析为完整的包名称，并将配置注入到你的 `docmd.config.json` 中。
+安装程序会检测您的包管理器（npm、pnpm、yarn 或 bun）。它会将短名称解析为完整包名，并将配置注入到您的 `docmd.config.json` 中。
 
 使用 `--verbose`（或 `-V`）获取完整的安装程序输出：
 
@@ -25,12 +25,11 @@ npx @docmd/core remove <plugin-name>
 npx @docmd/core add <plugin-name> -V
 ```
 
-## 必需插件
+## 必需的插件
 
-这些插件与 `@docmd/core` 一起打包。无需安装。在你的 `docmd.config.json` 中启用它们：
+这些插件与 `@docmd/core` 捆绑。无需安装。在您的 `docmd.config.json` 中启用它们：
 
-```json
-{
+```json "docmd.config.json"
   "plugins": {
     "search": {},
     "seo": { "aiBots": false },
@@ -41,57 +40,122 @@ npx @docmd/core add <plugin-name> -V
     "openapi": {},
     "git": {}
   }
-}
 ```
 
 ::: callout tip "Git 插件"
-Git 插件检测你的项目是否是 Git 仓库。如果不是，它会自动禁用自己。无需配置即可获取最后更新时间戳。
+Git 插件会检测您的项目是否为 Git 仓库。如果不是，它会自动禁用自身。无需为最近更新时间戳进行任何配置。
 :::
 
 ## 可选插件
 
-可选插件需要在启用之前安装。
+可选插件需要先安装才能启用。
 
-| 插件 | 安装命令 | 描述 |
+| 插件 | 安装命令 | 说明 |
 | :--- | :--- | :--- |
-| [PWA](pwa.md) | `npx @docmd/core add pwa` | 具有离线缓存的渐进式 Web 应用支持 |
-| [Threads](threads.md) | `npx @docmd/core add threads` | 存储在 Markdown 中的行内讨论评论 |
-| [Math](math.md) | `npx @docmd/core add math` | 原生 KaTeX 和 LaTeX 数学渲染 |
+| [PWA](pwa.md) | `npx @docmd/core add pwa` | 带离线缓存的渐进式 Web 应用支持 |
+| [Threads](threads.md) | `npx @docmd/core add threads` | 以 Markdown 存储的内联讨论评论 |
+| [Math](math.md) | `npx @docmd/core add math` | 原生 KaTeX 和 LaTeX 数学公式渲染 |
 
-`docmd` 采用可插拔架构。几乎所有核心功能（从搜索到 SEO 再到实时预览）都是作为插件实现的。这种设计确保了引擎保持轻量，同时允许开发者根据具体项目需求选择性地开启功能。
+## 自动安装
 
-## 插件概览
+当您将一个官方插件添加到 `docmd.config.json` 但尚未安装时，docmd 会在下次构建时自动下载并安装它。这适用于官方注册表中的所有插件。
 
-| 插件 | 功能 |
+```json "docmd.config.json"
+{
+  "plugins": {
+    "pwa": {}
+  }
+}
+```
+
+自动安装程序：
+
+- 仅针对官方 `@docmd/plugin-*` 包。
+- 锁定版本以匹配您的 `@docmd/core` 安装。
+- 检测并使用您项目的包管理器。
+- 在终端中报告进度。
+
+## 第三方与自定义插件
+
+出于安全考虑，安装程序强制执行官方注册表白名单。第三方插件必须使用您的包管理器原生安装：
+
+```bash
+npm install my-custom-plugin
+# 或 pnpm add、yarn add、bun add
+```
+
+安装后，使用其精确的包名将插件添加到您的 `docmd.config.json`：
+
+```json "docmd.config.json"
+{
+  "plugins": {
+    "my-custom-plugin": {
+      "someOption": true
+    }
+  }
+}
+```
+
+如果该插件符合 docmd 的要求，它会在构建期间自动激活。否则，引擎会报告错误。
+
+## 插件作用域与 `noStyle` 覆盖
+
+插件会全局注入 CSS 和行为。但是，您可以配置它们以绕过特定页面，或完全禁用在无样式落地页（`noStyle: true`）上的执行。
+
+### 全局配置范围
+
+通过您的 `docmd.config.json` 指示任何插件自动跳过 `noStyle` 页面：
+
+```json "docmd.config.json"
+{
+  "plugins": {
+    "math": {
+      "noStyle": false
+    }
+  }
+}
+```
+
+### 页面本地作用域（Frontmatter）
+
+您可以通过 markdown frontmatter 为每个文档明确启用或禁用任何插件。
+
+```markdown
+---
+noStyle: true
+plugins:
+  math: true
+  threads: false
+---
+
+# Only Math renders here, Threads are completely blocked
+```
+
+## 插件生命周期
+
+插件会钩入构建和开发过程的不同阶段：
+
+| 钩子 | 说明 |
 | :--- | :--- |
-| **[搜索 (Search)](search.md)** | 提供高性能、离线优先的全文本搜索。 |
-| **[SEO](seo.md)** | 自动生成元标签、Sitemap 并控制 AI 爬虫访问。 |
-| **[Mermaid](mermaid.md)** | 渲染流程图、序列图和甘特图。 |
-| **[LLMs](llms.md)** | 生成机器可读的全量文档流以供 AI 训练或搜索。 |
-| **[实时预览 (Live)](../content/live-preview.md)** | 为自定义编辑器提供在浏览器中运行的渲染引擎。 |
+| `markdownSetup(md, opts)` | 使用自定义规则扩展 Markdown 解析器。 |
+| `generateMetaTags(config, page, root)` | 将 `<meta>` 和 `<link>` 标签注入到 `<head>`。 |
+| `generateScripts(config, opts)` | 将脚本注入到 `<head>` 或 `</body>`。 |
+| `getAssets(opts)` | 定义要注入的外部文件或 CDN 脚本。 |
+| `onPostBuild(ctx)` | 在所有 HTML 文件生成完毕后运行逻辑。 |
+| `translations(localeId)` | 返回某本地化版本的翻译 UI 字符串。 |
+| `actions` | 可通过 WebSocket RPC 调用的服务端处理器。 |
+| `events` | 浏览器推送事件的即发即弃处理器。 |
 
-## 生命周期钩子
+## 插件安全性
 
-插件可以通过连接到以下生命周期钩子来介入构建过程：
+插件系统保证构建安全：
 
-| 钩子 | 描述 |
-| :--- | :--- |
-| `onInit(ctx)` | 在引擎启动且配置加载后立即运行 |
-| `onPostBuild(ctx)` | 在所有 HTML 文件生成后运行逻辑 |
-| `translations(localeId)` | 返回语言环境翻译后的 UI 字符串 |
-| `actions` | 可从浏览器通过 WebSocket RPC 调用的服务器端处理程序 |
-| `events` | 浏览器推送事件的“发后即忘”式处理程序 |
+- **验证**：无效的插件描述符在加载时即被拒绝。
+- **隔离**：每次钩子调用都被包裹在 try/catch 中。损坏的插件不会导致构建崩溃。
+- **能力强制**：插件只能注册它们声明过的钩子。
 
-## 插件安全
+完整 API 参考请参阅 [构建插件](building-plugins.md)。
 
-插件系统提供内置的安全保证：
-
-- **验证**: 插件可以声明一个包含 `name`、`version` 和 `capabilities` 的插件描述符。无效的描述符在加载时会被拒绝。
-- **隔离**: 每次钩子调用都包裹在 try/catch 边界内。一个损坏的插件不会导致构建崩溃或影响其他插件。
-- **能力强制**: 声明了能力的插件只能注册其已明确声明的钩子。未声明的钩子将被跳过并发出警告。
-
-有关完整的 API 参考，请参阅 [开发插件](building-plugins.md)。
-
-::: callout tip "针对 AI 的透明架构 :robot:"
-插件架构旨在具有 **确定性**。插件注入的每个元标签和脚本都是可追溯的，这允许 AI 代理（和人类开发人员）准确了解网站的行为，而不会产生隐藏的副作用。
+::: callout tip "可追踪的架构" icon:sparkles
+引擎发出的每个 meta 标签和脚本都由显式配置和插件输出生成。不存在隐藏的副作用。
 :::
