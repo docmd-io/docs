@@ -16,7 +16,7 @@ Use the [Starter Template](./starter-template) — it includes a pre-configured 
 
 Add the action to any workflow file in your repository:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 # .github/workflows/docs.yml
 name: Deploy Docs
 
@@ -53,7 +53,7 @@ jobs:
 
 For the absolute minimum boilerplate, use the hosted reusable workflow. It handles permissions, checkout, build, upload, and deploy in one call:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 # .github/workflows/docs.yml
 on:
   push:
@@ -114,7 +114,7 @@ To use a custom domain:
 
 For production documentation sites, pin to a specific release tag rather than `@v1`:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 - uses: docmd-io/deploy@v1.0.0
   id: build
 ```

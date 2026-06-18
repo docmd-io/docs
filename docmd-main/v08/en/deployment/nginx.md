@@ -19,7 +19,7 @@ This generates an `nginx.conf` personalised to your project:
 
 ### What Gets Generated
 
-```nginx
+```nginx "nginx.conf"
 server {
     listen 80;
     server_name docs.example.com;

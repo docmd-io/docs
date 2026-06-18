@@ -19,7 +19,7 @@ This generates a `Caddyfile` personalised to your project:
 
 ### What Gets Generated
 
-```caddy
+```caddy "Caddyfile"
 docs.example.com {
     root * ./site
     file_server

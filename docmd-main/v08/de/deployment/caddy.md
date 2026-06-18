@@ -3,44 +3,44 @@ title: "Caddy"
 description: "Stellen Sie docmd mit einer produktionsreifen Caddyfile bereit."
 ---
 
-[Caddy](https://caddyserver.com/) ist ein moderner Webserver, der die HTTPS-Bereitstellung und Zertifikatserneuerung automatisch handhabt.
+[Caddy](https://caddyserver.com/) ist ein moderner Webserver, der die HTTPS-Bereitstellung und Zertifikatserneuerung automatisch übernimmt.
 
-## Eine Caddyfile generieren
+## Eine Caddyfile erzeugen
 
 ```bash
 npx @docmd/core deploy --caddy
 ```
 
-Dies generiert eine auf Ihr Projekt zugeschnittene `Caddyfile`:
+Dies erzeugt eine `Caddyfile`, die auf Ihr Projekt zugeschnitten ist:
 
-- **Site-Adresse** wird auf den Hostnamen aus Ihrer `url`-Konfiguration gesetzt. Caddy stellt automatisch ein SSL-Zertifikat dafür bereit. Es fällt auf `:80` zurück, wenn keine URL konfiguriert ist.
-- **Stammverzeichnis** verwendet Ihr konfiguriertes `out`-Verzeichnis (nicht fest codiert).
-- **SPA-Fallback** ist nur enthalten, wenn `layout.spa` in Ihrer Konfiguration `true` ist.
+- **Site-Adresse** wird auf den Hostnamen aus Ihrer `url`-Konfiguration gesetzt. Caddy stellt dafür automatisch ein SSL-Zertifikat bereit. Falls keine URL konfiguriert ist, wird auf `:80` zurückgefallen.
+- **Wurzelverzeichnis** verwendet Ihr konfiguriertes `out`-Verzeichnis (nicht fest codiert).
+- **SPA-Fallback** wird nur eingefügt, wenn `layout.spa` in Ihrer Konfiguration `true` ist.
 
-### Was wird generiert
+### Was erzeugt wird
 
-```caddyfile "Caddyfile"
+```caddy "Caddyfile"
 docs.example.com {
     root * ./site
     file_server
 
-    # SPA Routing Fallback (only when layout.spa is true)
+    # SPA-Routing-Fallback (nur wenn layout.spa true ist)
     try_files {path} {path}/ /index.html
 
-    # Security Headers
+    # Sicherheits-Header
     header {
         X-Content-Type-Options "nosniff"
         X-Frame-Options "SAMEORIGIN"
         -Server
     }
 
-    # Custom 404
+    # Eigene 404-Seite
     handle_errors {
         rewrite * /404.html
         file_server
     }
 
-    # Cache Static Assets (6 months)
+    # Statische Assets cachen (6 Monate)
     @static {
         file
         path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.webp *.avif *.svg *.woff *.woff2 *.eot *.ttf *.otf
@@ -49,14 +49,14 @@ docs.example.com {
 }
 ```
 
-Wenn Sie eine echte Domain als Site-Adresse verwenden (z. B. `docs.example.com` statt `:80`), stellt Caddy automatisch über Let's Encrypt ein kostenloses SSL-Zertifikat bereit. Es ist keine HTTPS-Konfiguration erforderlich.
+Wenn Sie als Site-Adresse eine echte Domain verwenden (z. B. `docs.example.com` statt `:80`), stellt Caddy über Let's Encrypt automatisch ein kostenloses SSL-Zertifikat bereit. Eine HTTPS-Konfiguration ist nicht erforderlich.
 
 ## Bereitstellungsschritte
 
 1. Bauen Sie Ihre Site: `npx @docmd/core build`
-2. Übertragen Sie Ihren Ausgabeordner und die generierte `Caddyfile` auf Ihren Server.
-3. Führen Sie `caddy start` oder `caddy run` in dem Verzeichnis aus, das Ihre `Caddyfile` enthält.
+2. Übertragen Sie Ihren Ausgabeordner und die erzeugte `Caddyfile` auf Ihren Server.
+3. Führen Sie `caddy start` oder `caddy run` in dem Verzeichnis aus, das Ihre Caddyfile enthält.
 
-### Neu generieren
+### Neu erzeugen
 
-Site-URL oder Ausgabeverzeichnis geändert? Führen Sie `npx @docmd/core deploy --caddy` erneut aus. Die Engine regeneriert die Caddyfile, um Ihrer aktuellen `docmd.config.json` zu entsprechen.
+Haben Sie Ihre Site-URL oder Ihr Ausgabeverzeichnis geändert? Führen Sie erneut `npx @docmd/core deploy --caddy` aus. Die Engine erzeugt die Caddyfile passend zu Ihrer aktuellen `docmd.config.json` neu.

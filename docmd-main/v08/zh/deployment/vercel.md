@@ -1,35 +1,35 @@
 ---
 title: "Vercel"
-description: "使用生成的 vercel.json 将 docmd 文档部署到 Vercel。"
+description: "通过生成的 vercel.json 将您的 docmd 文档部署到 Vercel。"
 ---
 
-`npx @docmd/core deploy --vercel` 在项目根目录生成一个 `vercel.json` 文件。它会根据您的站点输出目录和 SPA 路由设置自动配置。
+`npx @docmd/core deploy --vercel` 会在项目根目录生成一份 `vercel.json` 文件。它会根据您站点的输出目录和 SPA 路由设置自动配置。
 
 ```bash
 npx @docmd/core deploy --vercel
 ```
 
-## 生成的内容
+## 生成内容
 
-`vercel.json` 配置了：
+`vercel.json` 配置以下内容：
 
-- **构建命令** - 运行 `npx @docmd/core build`。
-- **输出目录** - 设置为配置中的 `out` 属性。
-- **安装命令** - 安装所用 `@docmd/core` 的确切版本。
-- **缓存头** - 资源的不可变缓存，HTML 不缓存。
-- **SPA 路由** - 当启用 `layout.spa` 时，所有路由都指向 `index.html`。
+- **构建命令 (Build command)** — 运行 `npx @docmd/core build`。
+- **输出目录 (Output directory)** — 设置为您配置中的 `out` 属性。
+- **安装命令 (Install command)** — 安装所使用的确切 `@docmd/core` 版本。
+- **缓存头 (Cache headers)** — 资源使用 immutable 缓存，HTML 使用 no-cache。
+- **SPA 路由 (SPA routing)** — 当 `layout.spa` 启用时，将所有路由兜底到 `index.html`。
 
 ## 部署
 
-生成文件后，使用 [Vercel CLI](external:https://vercel.com/docs/cli) 进行部署：
+生成该文件后，可使用 [Vercel CLI](external:https://vercel.com/docs/cli) 进行部署：
 
 ```bash
 npm install -g vercel
 vercel
 ```
 
-或者，从控制台将您的仓库连接到 Vercel。它会自动检测 `vercel.json`。
+或者从 Vercel 控制台连接您的仓库，它会自动识别 `vercel.json`。
 
 ## 重新生成
 
-如果您更改了 `docmd.config.json` 中的 `out` 目录或 `url`，请重新运行该命令以重新生成文件。这将使配置保持同步。
+如果您修改了 `docmd.config.json` 中的 `out` 目录或 `url`，请重新运行该命令以重新生成文件，使配置始终保持同步。

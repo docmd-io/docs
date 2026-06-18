@@ -1,13 +1,13 @@
 ---
 title: "Deployer"
-description: "Generieren Sie anbieterspezifische Bereitstellungskonfigurationsdateien aus Ihrer docmd-Projektkonfiguration mit einem einzigen Befehl."
+description: "Erzeugen Sie mit einem einzigen Befehl anbieterspezifische Deployment-Konfigurationsdateien aus Ihrer docmd-Projektkonfiguration."
 ---
 
-Der `deploy`-Befehl liest Ihre `docmd.config.json` und generiert Bereitstellungskonfigurationsdateien, die auf Ihr genaues Projekt zugeschnitten sind — Ausgabeverzeichnis, Site-URL, SPA-Routing und Node.js-Version werden alle automatisch berücksichtigt. Keine generischen Templates.
+Der Befehl `deploy` liest Ihre `docmd.config.json` und erzeugt Deployment-Konfigurationsdateien, die exakt auf Ihr Projekt zugeschnitten sind — Ausgabeverzeichnis, Site-URL, SPA-Routing und Node.js-Version werden automatisch berücksichtigt. Keine generischen Vorlagen.
 
 ## Unterstützte Anbieter
 
-| Anbieter | Flag | Generierte Dateien |
+| Anbieter | Flag | Erzeugte Dateien |
 | :------- | :--- | :-------------- |
 | Docker + Nginx | `--docker` | `Dockerfile`, `.dockerignore` |
 | Nginx | `--nginx` | `nginx.conf` |
@@ -18,7 +18,7 @@ Der `deploy`-Befehl liest Ihre `docmd.config.json` und generiert Bereitstellungs
 
 ## Verwendung
 
-Führen Sie den Befehl aus Ihrem Projektstamm aus (wo `docmd.config.json` lebt):
+Führen Sie den Befehl aus Ihrem Projektstamm aus (dort, wo `docmd.config.json` liegt):
 
 ```bash
 # Einzelner Anbieter
@@ -33,21 +33,21 @@ npx @docmd/core deploy --vercel --force
 
 ## Was personalisiert wird
 
-Der deploy-Befehl liest Ihre Konfiguration (oder Zero-Config-Standards) und injiziert:
+Der Deploy-Befehl liest Ihre Konfiguration (oder die Zero-Config-Standards) und fügt Folgendes ein:
 
-| Konfigurationsfeld | Verwendet in |
+| Konfigurationsfeld | Verwendung |
 |:--|:--|
-| `title` | Kommentarheader in jeder generierten Datei |
-| `out` | `COPY`-Pfade in Dockerfile, `root`-Direktiven in Nginx/Caddy |
+| `title` | Kommentar-Header in jeder erzeugten Datei |
+| `out` | `COPY`-Pfade im Dockerfile, `root`-Direktiven in Nginx/Caddy |
 | `url` | `server_name` in Nginx, Site-Adresse in Caddy |
-| `layout.spa` | Steuert, ob SPA-Routing-Fallback enthalten ist |
-| Config path | Dockerfile-Build-Schritt verwendet `--config` wenn nicht Standard |
+| `layout.spa` | Steuert, ob die SPA-Routing-Fallback-Regel eingefügt wird |
+| Konfigurationspfad | Der Build-Schritt im Dockerfile verwendet `--config`, wenn vom Standard abgewichen wird |
 
 Keine `docmd.config.json`? Kein Problem. Der Befehl verwendet dieselben Zero-Config-Standards wie `npx @docmd/core dev` und `npx @docmd/core build`.
 
 ## Immer synchron
 
-Jeder Lauf regeneriert Ihre Bereitstellungsdateien, damit sie zu Ihrer aktuellen Konfiguration passen. Site-URL oder Ausgabeverzeichnis geändert? Führen Sie einfach den deploy-Befehl erneut aus. Verwenden Sie `--force`, um vorhandene Dateien ohne Rückfragen zu überschreiben.
+Jeder Lauf erzeugt Ihre Deployment-Dateien neu, damit sie zu Ihrer aktuellen Konfiguration passen. Haben Sie Ihre Site-URL oder Ihr Ausgabeverzeichnis geändert? Führen Sie einfach den Deploy-Befehl erneut aus. Verwenden Sie `--force`, um vorhandene Dateien ohne Rückfrage zu überschreiben.
 
 ## Anbieterdetails
 
@@ -57,10 +57,10 @@ Jeder Lauf regeneriert Ihre Bereitstellungsdateien, damit sie zu Ihrer aktuellen
 npx @docmd/core deploy --github-pages
 ```
 
-Generiert `.github/workflows/deploy.yml` mit einer kompletten Build-and-Deploy-Pipeline. Der Workflow checkt Ihr Repository aus, installiert Node.js, führt `npx @docmd/core build` aus und lädt die Ausgabe zu GitHub Pages hoch.
+Erzeugt `.github/workflows/deploy.yml` mit einer vollständigen Build-and-Deploy-Pipeline. Der Workflow checkt Ihr Repository aus, installiert Node.js, führt `npx @docmd/core build` aus und lädt die Ausgabe in GitHub Pages hoch.
 
 ::: callout tip "Lieber die GitHub Action verwenden?"
-Wenn Sie ohne selbst eine Workflow-Datei zu generieren zu GitHub Pages deployen möchten, verwenden Sie die [GitHub Action](./github-action) direkt — sie handhabt alles in einem komponierbaren Schritt.
+Wenn Sie ohne eigene Workflow-Datei auf GitHub Pages bereitstellen möchten, nutzen Sie direkt die [GitHub Action](./github-action) — sie übernimmt alles in einem komponierbaren Schritt.
 :::
 
 ### Docker
@@ -69,19 +69,19 @@ Wenn Sie ohne selbst eine Workflow-Datei zu generieren zu GitHub Pages deployen 
 npx @docmd/core deploy --docker
 ```
 
-Generiert eine `Dockerfile` mit einem Multi-Stage-Build:
-1. **Build-Stage** — installiert Ihre exakte gepinnte `@docmd/core`-Version und führt den Build aus.
+Erzeugt ein `Dockerfile` mit Multi-Stage-Build:
+1. **Build-Stage** — installiert Ihre exakt festgelegte `@docmd/core`-Version und führt den Build aus.
 2. **Serve-Stage** — kopiert die Ausgabe in ein minimales `nginx:alpine`-Image.
 
-Wenn bereits eine `nginx.conf` im Projektstamm existiert, kopiert die Dockerfile sie automatisch in den Container.
+Wenn bereits eine `nginx.conf` im Projektstamm existiert, kopiert das Dockerfile sie automatisch in den Container.
 
 ```bash
-# Docker- und Nginx-Konfigurationen zusammen generieren
+# Docker- und Nginx-Konfigurationen gemeinsam erzeugen
 npx @docmd/core deploy --docker --nginx
 ```
 
 ::: callout tip "Offizielles Docker-Image"
-Möchten Sie docmd in einem Container ausführen, ohne ein benutzerdefiniertes Image zu bauen? Siehe die [Docker-Image](./docker)-Seite für das offizielle vorgefertigte Image.
+Möchten Sie docmd in einem Container ausführen, ohne ein eigenes Image zu bauen? Auf der Seite [Docker-Image](./docker) finden Sie das offizielle, vorgefertigte Image.
 :::
 
 ### Nginx
@@ -90,7 +90,7 @@ Möchten Sie docmd in einem Container ausführen, ohne ein benutzerdefiniertes I
 npx @docmd/core deploy --nginx
 ```
 
-Generiert `nginx.conf` mit SPA-Routing, gzip-Komprimierung und korrektem `root`-Pfad für Ihr Ausgabeverzeichnis. Siehe die [NGINX](./nginx)-Seite für die vollständige generierte Konfiguration.
+Erzeugt eine `nginx.conf` mit SPA-Routing, Gzip-Komprimierung und dem korrekten `root`-Pfad für Ihr Ausgabeverzeichnis. Die vollständige erzeugte Konfiguration finden Sie auf der Seite [NGINX](./nginx).
 
 ### Caddy
 
@@ -98,7 +98,7 @@ Generiert `nginx.conf` mit SPA-Routing, gzip-Komprimierung und korrektem `root`-
 npx @docmd/core deploy --caddy
 ```
 
-Generiert eine `Caddyfile` mit automatischem HTTPS, SPA-Routing und Datei-Auslieferung aus Ihrem Ausgabeverzeichnis. Siehe die [Caddy](./caddy)-Seite für die vollständige generierte Konfiguration.
+Erzeugt eine `Caddyfile` mit automatisch aktiviertem HTTPS, SPA-Routing und Datei-Auslieferung aus Ihrem Ausgabeverzeichnis. Die vollständige erzeugte Konfiguration finden Sie auf der Seite [Caddy](./caddy).
 
 ### Vercel
 
@@ -106,7 +106,7 @@ Generiert eine `Caddyfile` mit automatischem HTTPS, SPA-Routing und Datei-Auslie
 npx @docmd/core deploy --vercel
 ```
 
-Generiert `vercel.json` mit SPA-Routing-Regeln und Ihrem konfigurierten Ausgabeverzeichnis. Siehe die [Vercel](./vercel)-Seite für Bereitstellungsschritte.
+Erzeugt `vercel.json` mit SPA-Routing-Regeln und Ihrem konfigurierten Ausgabeverzeichnis. Deployment-Schritte finden Sie auf der Seite [Vercel](./vercel).
 
 ### Netlify
 
@@ -114,8 +114,8 @@ Generiert `vercel.json` mit SPA-Routing-Regeln und Ihrem konfigurierten Ausgabev
 npx @docmd/core deploy --netlify
 ```
 
-Generiert `netlify.toml` mit Ihrem Build-Befehl, Publish-Verzeichnis und SPA-Redirect-Regeln. Siehe die [Netlify](./netlify)-Seite für Bereitstellungsschritte.
+Erzeugt `netlify.toml` mit Ihrem Build-Befehl, dem Veröffentlichungsverzeichnis und den SPA-Redirect-Regeln. Deployment-Schritte finden Sie auf der Seite [Netlify](./netlify).
 
-## Trade-offs
+## Abwägungen
 
-Generierte Konfigurationen sind meinungsbasierte Ausgangspunkte. Sie sind für die Mehrheit der docmd-Bereitstellungen korrekt, erfordern jedoch möglicherweise Anpassungen für fortgeschrittene Szenarien wie benutzerdefinierte Domains, CDN-Rewrites oder Multi-Region-Bereitstellungen. Überprüfen Sie generierte Dateien immer, bevor Sie sie in der Produktion bereitstellen.
+Die erzeugten Konfigurationen sind meinungsstarke Ausgangspunkte. Sie sind für die meisten docmd-Deployments korrekt, können jedoch für fortgeschrittene Szenarien wie eigene Domains, CDN-Rewrites oder Multi-Region-Deployments Anpassungen erfordern. Überprüfen Sie erzeugte Dateien stets, bevor Sie sie in der Produktion einsetzen.

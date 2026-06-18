@@ -75,7 +75,7 @@ To ensure accurate timestamps and history, configure your CI environment to perf
 
 Add `fetch-depth: 0` to your checkout step:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 - name: Checkout
   uses: actions/checkout@v4
   with:
@@ -86,7 +86,7 @@ Add `fetch-depth: 0` to your checkout step:
 
 Set the `GIT_DEPTH` variable to `0`:
 
-```yaml
+```yaml ".gitlab-ci.yml"
 variables:
   GIT_DEPTH: 0
 ```

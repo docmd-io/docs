@@ -44,7 +44,7 @@ firebase login
 
 To deploy automatically on every push, create `.github/workflows/firebase.yml`:
 
-```yaml
+```yaml ".github/workflows/firebase.yml"
 name: Deploy to Firebase Hosting
 
 on:
