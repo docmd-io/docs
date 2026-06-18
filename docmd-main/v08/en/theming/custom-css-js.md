@@ -9,7 +9,7 @@ While `docmd` themes are highly flexible, you may want to inject your own styles
 
 Use `theme.customCss` to override existing styles or add new ones.
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "customCss": [
@@ -28,7 +28,7 @@ Use `theme.customCss` to override existing styles or add new ones.
 
 Use the top-level `customJs` array for scripts that add behaviour or integrate 3rd-party services.
 
-```json
+```json "docmd.config.json"
 {
   "customJs": [
     "/assets/js/feedback-widget.js"

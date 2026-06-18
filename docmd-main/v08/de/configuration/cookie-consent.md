@@ -11,7 +11,7 @@ Ein minimalistischer, barrierefreier Dialog im GDPR-Stil. Die Auswahl des Nutzer
 
 ## In 30 Sekunden aktivieren
 
-```json
+```json "docmd.config.json"
 {
   "cookie": {
     "enabled": true,
@@ -50,7 +50,7 @@ Erstellen Sie die Site, und der Dialog erscheint beim ersten Besuch. Folgebesuch
 
 Alle nutzerseitigen Strings unterstützen das bestehende `t(key)`-Übersetzungssystem. Überschreiben Sie die Schlüssel in Ihren `translations/<locale>.json`-Dateien:
 
-```json
+```json "translations/fr.json"
 {
   "cookieMessage": "Cette page utilise des cookies pour vous offrir la meilleure expérience.",
   "cookieAccept": "Accepter",

@@ -24,7 +24,7 @@ npx @docmd/core add summer
 
 Sie müssen nur **einen Schlüssel** setzen — `theme.name`. docmd erkennt automatisch, ob der Name auf ein reserviertes CSS-Theme (`default`, `sky`, `ruby`, `retro`) oder auf ein Template-Paket (`summer`, …) verweist.
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "summer"
@@ -116,7 +116,7 @@ Ein Template ist ein gewöhnliches npm-Paket:
 
 ### package.json
 
-```json
+```json "package.json"
 {
   "name": "@docmd/template-summer",
   "version": "0.1.0",

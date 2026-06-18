@@ -9,7 +9,7 @@ description: "How to configure the default viewing mode and manage the theme swi
 
 You specify the starting state of your documentation in `docmd.config.json`.
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "sky",
@@ -26,7 +26,7 @@ You specify the starting state of your documentation in `docmd.config.json`.
 
 The theme switcher is part of the **Options Menu**. You can control its visibility and position within the `layout` object.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {

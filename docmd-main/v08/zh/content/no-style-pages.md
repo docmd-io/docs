@@ -120,7 +120,7 @@ assets/
 
 2. 每个 JSON 文件是一个扁平的键值映射：
 
-```json
+```json "assets/i18n/en.json"
 {
   "hero.title": "Markdown → Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
@@ -202,7 +202,7 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 
 对于单页站点，请在 i18n 配置中设置 `inPlace: true` 以在无需 URL 重定向的情况下切换字符串：
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",

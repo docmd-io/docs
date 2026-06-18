@@ -11,7 +11,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 ## 30 秒启用
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -41,7 +41,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 普通公告：
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -54,7 +54,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 发布成功：
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -69,7 +69,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 富 HTML（请谨慎转义）：
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {

@@ -34,7 +34,7 @@ When you run `npx @docmd/core build` or `npx @docmd/core dev`:
 
 To link your assets to every page, add them to your theme configuration:
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "customCss": ["/assets/css/branding.css"]

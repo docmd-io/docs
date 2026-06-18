@@ -11,7 +11,7 @@ Themes bleiben der einfachste Weg, einer Site eine neue Farbgebung zu geben. Wen
 
 ## Themes wechseln
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "sky",

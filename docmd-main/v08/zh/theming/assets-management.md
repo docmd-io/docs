@@ -34,7 +34,7 @@ my-docs/
 
 要将您的资源链接到每个页面，请将它们添加到主题配置中：
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "customCss": ["/assets/css/branding.css"]
@@ -44,8 +44,6 @@ my-docs/
 ```
 
 ::: callout info "AI 识别策略 :robot:"
-
 *   **按类型组织**：将 `/css`、`/js` 和 `/images` 分开。这有助于 AI 智能体在您要求它们"编辑页头颜色"时即时定位相关的样式或脚本。
 *   **使用描述性文件名**：将图片命名为 `authentication-flow-diagram.png` 比 `img_01.png` 为 `llms.txt` 爬虫提供更多上下文。
-
 :::

@@ -9,7 +9,7 @@ description: "如何配置默认查看模式并管理主题切换器，以获得
 
 您在 `docmd.config.json` 中指定文档的初始状态。
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "sky",
@@ -26,7 +26,7 @@ description: "如何配置默认查看模式并管理主题切换器，以获得
 
 主题切换器是**选项菜单**的一部分。您可以在 `layout` 对象中控制其可见性和位置。
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {

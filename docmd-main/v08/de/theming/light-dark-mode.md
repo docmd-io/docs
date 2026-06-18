@@ -9,7 +9,7 @@ description: "So konfigurieren Sie den Standard-Anzeigemodus und verwalten den T
 
 Sie legen den Anfangszustand Ihrer Dokumentation in `docmd.config.json` fest.
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "sky",
@@ -26,7 +26,7 @@ Sie legen den Anfangszustand Ihrer Dokumentation in `docmd.config.json` fest.
 
 Der Theme-Switcher ist Teil des **Optionsmenüs**. Sie können seine Sichtbarkeit und Position im `layout`-Objekt steuern.
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {

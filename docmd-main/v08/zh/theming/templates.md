@@ -24,7 +24,7 @@ npx @docmd/core add summer
 
 您只需设置**一个键** —— `theme.name`。docmd 会自动识别这个名字指向的是一个预留的 CSS 主题（`default`、`sky`、`ruby`、`retro`），还是一个模板包（`summer`、…）。
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "summer"
@@ -116,7 +116,7 @@ CSS 主题 `default`、`sky`、`ruby`、`retro` 是预留的 —— 如果 `them
 
 ### package.json
 
-```json
+```json "package.json"
 {
   "name": "@docmd/template-summer",
   "version": "0.1.0",

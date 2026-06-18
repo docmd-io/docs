@@ -9,7 +9,7 @@ description: "So verwenden und anpassen Sie Lucide-Icons in Ihrer Dokumentation.
 
 Weisen Sie in Ihrer `docmd.config.json` jedem Navigationselement ein Icon zu. Verwenden Sie den kebab-case-Namen eines Icons, das Sie auf der Lucide-Website finden.
 
-```json
+```json "docmd.config.json"
 {
   "navigation": [
     { "title": "Home", "path": "/", "icon": "home" },

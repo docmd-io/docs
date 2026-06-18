@@ -34,7 +34,7 @@ Wenn Sie `npx @docmd/core build` oder `npx @docmd/core dev` ausführen:
 
 Um Ihre Assets mit jeder Seite zu verknüpfen, fügen Sie sie Ihrer Theme-Konfiguration hinzu:
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "customCss": ["/assets/css/branding.css"]
@@ -44,8 +44,6 @@ Um Ihre Assets mit jeder Seite zu verknüpfen, fügen Sie sie Ihrer Theme-Konfig
 ```
 
 ::: callout info "KI-Erkennungsstrategie :robot:"
-
 *   **Nach Typ organisieren**: Halten Sie `/css`, `/js` und `/images` getrennt. Dies hilft KI-Agenten, relevante Stile oder Skripte sofort zu finden, wenn Sie sie bitten, „die Header-Farbe zu bearbeiten".
 *   **Verwenden Sie beschreibende Dateinamen**: Ein Bild `authentication-flow-diagram.png` zu nennen, bietet dem `llms.txt`-Crawler viel mehr Kontext als `img_01.png`.
-
 :::

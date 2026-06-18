@@ -11,7 +11,7 @@ Verwenden Sie sie für Release-Ankündigungen, Wartungsfenster, Beta-Calls-to-Ac
 
 ## In 30 Sekunden aktivieren
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -41,7 +41,7 @@ Der Banner erscheint auf jeder Seite. Nutzer, die ihn einmal schließen, sehen i
 
 Einfache Ankündigung:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -54,7 +54,7 @@ Einfache Ankündigung:
 
 Erfolg / Release:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -69,7 +69,7 @@ Erfolg / Release:
 
 Reichhaltiges HTML (sorgfältig escapen):
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {

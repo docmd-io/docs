@@ -11,7 +11,7 @@ Use it for release announcements, maintenance windows, beta calls-to-action, or 
 
 ## Enable in 30 seconds
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -41,7 +41,7 @@ The banner appears on every page. Users who close it once won't see it again unt
 
 Plain announcement:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -54,7 +54,7 @@ Plain announcement:
 
 Success / release:
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {
@@ -69,7 +69,7 @@ Success / release:
 
 Rich HTML (escape carefully):
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "banner": {

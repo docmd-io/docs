@@ -11,7 +11,7 @@ A minimal, accessible GDPR-style consent dialog. The user's choice is persisted 
 
 ## Enable in 30 seconds
 
-```json
+```json "docmd.config.json"
 {
   "cookie": {
     "enabled": true,
@@ -50,7 +50,7 @@ Build, and the dialog appears on first visit. Subsequent visits respect the stor
 
 All user-facing strings support the existing `t(key)` translation system. Override the keys in your `translations/<locale>.json` files:
 
-```json
+```json "translations/fr.json"
 {
   "cookieMessage": "Cette page utilise des cookies pour vous offrir la meilleure expérience.",
   "cookieAccept": "Accepter",

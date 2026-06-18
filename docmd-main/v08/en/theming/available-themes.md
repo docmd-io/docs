@@ -14,7 +14,7 @@ Themes are still the easiest way to recolour a site. If you need a different **l
 
 ## How to Switch Themes
 
-```json
+```json "docmd.config.json"
 {
   "theme": {
     "name": "sky",

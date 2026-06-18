@@ -120,7 +120,7 @@ assets/
 
 2. Each JSON file is a flat key-value map:
 
-```json
+```json "assets/i18n/en.json"
 {
   "hero.title": "Markdown → Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
@@ -202,7 +202,7 @@ The script detects the active locale from the URL path prefix. For the default l
 
 For single-page sites, set `inPlace: true` in your i18n config to swap strings without URL redirects:
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",

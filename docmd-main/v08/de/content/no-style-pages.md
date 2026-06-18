@@ -120,7 +120,7 @@ assets/
 
 2. Jede JSON-Datei ist eine flache Key-Value-Map:
 
-```json
+```json "assets/i18n/en.json"
 {
   "hero.title": "Markdown → Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
@@ -202,7 +202,7 @@ Das Skript erkennt die aktive Locale aus dem URL-Pfad-Präfix. Für die Standard
 
 Für Single-Page-Sites setzen Sie `inPlace: true` in Ihrer i18n-Konfiguration, um Strings ohne URL-Weiterleitungen auszutauschen:
 
-```json
+```json "docmd.config.json"
 {
   "i18n": {
     "default": "en",

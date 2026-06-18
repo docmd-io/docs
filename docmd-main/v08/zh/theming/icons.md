@@ -9,7 +9,7 @@ description: "如何在您的文档中使用和自定义 Lucide 图标。"
 
 在 `docmd.config.json` 中为任何导航项分配图标。使用 Lucide 网站上找到的任何图标的 kebab-case 名称。
 
-```json
+```json "docmd.config.json"
 {
   "navigation": [
     { "title": "Home", "path": "/", "icon": "home" },
