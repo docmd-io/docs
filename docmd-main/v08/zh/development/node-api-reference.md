@@ -3,7 +3,9 @@ title: "Node API 参考"
 description: "面向插件作者的低层级 Node API —— URL 工具、Action 分发器、源文件工具、引擎加载器与 TypeScript 类型。"
 ---
 
-> **面向插件作者。** 如果您只是想*从 Node 脚本中*调用 docmd，请参阅 [Build API](/reference/build-api)。本页介绍的是 `@docmd/api` 为编写插件所提供的更深层工具。
+::: callout info
+**面向插件作者。** 如果您只是想*从 Node 脚本中*调用 docmd，请参阅 [Build API](/reference/build-api)。本页介绍的是 `@docmd/api` 为编写插件所提供的更深层工具。
+:::
 
 `@docmd/api` 是插件系统的专属包。它提供 hook 注册、WebSocket RPC 分发、源文件编辑工具，以及集中的 URL 工具。
 
@@ -11,7 +13,9 @@ description: "面向插件作者的低层级 Node API —— URL 工具、Action
 npm install @docmd/api
 ```
 
-> **注意：** `@docmd/api` 导出的所有内容，也可以从 `@docmd/core` 导入。建议新项目直接从 `@docmd/api` 导入。
+::: callout tip
+**注意：** `@docmd/api` 导出的所有内容，也可以从 `@docmd/core` 导入。建议新项目直接从 `@docmd/api` 导入。
+:::
 
 ## URL 工具
 

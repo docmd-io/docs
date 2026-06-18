@@ -21,7 +21,8 @@ description: "如何借助 Git、Pull Request 以及自动化 CI/CD 检查，有
 
 您可以通过 [Git 插件](../../plugins/git.md) 让 docmd 生成"编辑此页面"链接。用户可以从文档页面直接跳转到仓库中对应的源文件。
 
-```json
+```json "docmd.config.json"
+{
   "plugins": {
     "git": {
       "repo": "https://github.com/my-org/my-repo",
@@ -29,6 +30,7 @@ description: "如何借助 Git、Pull Request 以及自动化 CI/CD 检查，有
       "editLink": true
     }
   }
+}
 ```
 
 ### 2. 使用 Threads 进行上下文式评审

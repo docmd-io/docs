@@ -41,8 +41,7 @@ VitePress 使用 `themeConfig.sidebar` 中的对象数组。
 
 **待办事项**：在 `docs/` 目录下创建一份 `navigation.json`。
 
-**VitePress (`.vitepress/config.js`)：**
-```javascript
+```javascript ".vitepress/config.js"
 themeConfig: {
   "sidebar": [
     {
@@ -56,7 +55,6 @@ themeConfig: {
 }
 ```
 
-**docmd (`navigation.json`)：**
 ```json "navigation.json"
 [
   {

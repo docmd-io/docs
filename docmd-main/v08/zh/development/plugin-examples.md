@@ -21,8 +21,7 @@ docmd 提供了一套可靠、基于钩子的 [插件 API](../../plugins/buildin
 
 插件就是标准的 JavaScript 模块，导出一个描述符和一组生命周期钩子。
 
-```javascript
-// plugins/version-injector.js
+```javascript "plugins/version-injector.js"
 
 let latestVersion = "0.0.0";
 
@@ -56,7 +55,7 @@ export default {
 
 将本地插件 import 到您的 `docmd.config.js`（或 `docmd.config.ts`）中进行注册。JSON 配置文件无法使用 import —— 若要注册插件，请使用 `.js` 或 `.ts` 格式。
 
-```javascript
+```javascript "plugins/version-injector.js"
 import VersionInjector from "./plugins/version-injector.js";
 
 export default {

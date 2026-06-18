@@ -27,27 +27,19 @@ docmd 提供四种让文档上线的方式。它们产出相同的结果 —— 
 
 ::: button "安装 GitHub App" external:https://github.com/apps/docmd/installations/new icon:github color:#2ea44f
 
----
-
 ### "我要从零搭建一个全新的文档站点"
 
 使用 **[入门模板 (Starter Template)](../../integrations/starter-template.md)**。在 GitHub 上点击 "Use this template"，更新 `docmd.config.json` 填入标题与 URL，启用一次 GitHub Pages，然后推送。所有环节都已预先连接好。
 
 ::: button "使用入门模板" external:https://github.com/docmd-io/docmd-template/generate icon:github
 
----
-
 ### "我已经有 CI/CD 流水线，希望把文档加入进去"
 
 使用 **[GitHub Action](../../integrations/github-action.md)**。在现有工作流中加入 `docmd-io/deploy@v1`。它能与其它步骤干净组合 —— 运行测试、构建应用、再构建文档，全部放在同一个 Job 里。
 
----
-
 ### "我要部署到 Vercel、Netlify、Docker 或自己的服务器"
 
 使用 **[Deployer 包](../../deployment/deployer-package.md)**。运行 `npx @docmd/core deploy --vercel`（或 `--netlify`、`--docker`、`--nginx`），即可生成与您 `docmd.config.json` 匹配的平台专属配置文件。
-
----
 
 ### "我在 Monorepo 中，文档位于子目录"
 
@@ -59,13 +51,9 @@ docmd 提供四种让文档上线的方式。它们产出相同的结果 —— 
 - run: npx @docmd/core build --cwd packages/docs
 ```
 
----
-
 ### "我想在每个 Pull Request 上预览文档"
 
 将 **GitHub Action** 与 PR 预览服务结合使用（例如 Cloudflare Pages 的 Preview 部署，或自托管的预览环境）。完整的操作步骤请参阅 [预览变更](../workflows-teams/previewing-changes.md)。
-
----
 
 ## 它们如何配合
 

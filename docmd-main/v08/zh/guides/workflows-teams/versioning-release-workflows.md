@@ -32,7 +32,8 @@ project-root/
 
 在配置中注册两个版本。将即将发布的版本标注为 "Beta" 或 "Next"，以便通过版本切换器向用户传达其状态。
 
-```json
+```json "docmd.config.json"
+{
   "versions": {
     "current": "v1.0",
     "all": [
@@ -40,6 +41,7 @@ project-root/
       { "id": "v2.0", "dir": "docs-v2", "label": "v2.0 (Beta)" }
     ]
   }
+}
 ```
 
 ### 3. 晋升 (Promotion) 流程

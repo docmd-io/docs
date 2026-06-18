@@ -46,10 +46,12 @@ docmd 使用一套 CSS 自定义属性（变量）来定义布局的视觉令牌
 
 将自定义 CSS 文件加入 `docmd.config.json` 的 `theme.customCss` 数组中。
 
-```json
+```json "docmd.config.json"
+{
   "theme": {
     "customCss": ["/custom.css"]
   }
+}
 ```
 
 ## 取舍

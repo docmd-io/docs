@@ -39,8 +39,7 @@ Starlight 通过 `astro.config.mjs` 的 `sidebar` 数组定义导航。
 
 **待办事项**：在新的 `docs/` 目录下创建一份 `navigation.json`。
 
-**Starlight (`astro.config.mjs`)：**
-```javascript
+```javascript "astro.config.mjs"
 sidebar: [
   {
     "label": "指南",
@@ -51,7 +50,6 @@ sidebar: [
 ]
 ```
 
-**docmd (`navigation.json`)：**
 ```json "navigation.json"
 [
   {
