@@ -1,0 +1,31 @@
+{
+  "engine": "rust",
+  "title": "docmd search",
+  "url": "https://docs.docmd.io/search",
+
+  "logo": {
+    "light": "assets/images/docmd-logo-dark.png",
+    "dark": "assets/images/docmd-logo-light.png",
+    "alt": "docmd search",
+    "href": "https://docmd.io/search"
+  },
+  "favicon": "assets/favicon.ico",
+
+  "theme": {
+    "name": "summer"
+  },
+
+  "layout": {
+    "footer": {
+      "copyright": "© 2026 docmd.io"
+    }
+  },
+
+  "plugins": {
+    "search": {
+      "semantic": true,
+      "showConfidence": true,
+      "indexDir": ".docmd-search"
+    }
+  }
+}
