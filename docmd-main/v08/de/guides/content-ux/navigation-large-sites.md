@@ -19,7 +19,7 @@ Priorisieren Sie **Top-Level Context Switching** gegenüber tiefer Verschachtelu
 
 ### 1. Domänenbasierte Trennung
 
-Verwenden Sie in Ihrer `docmd.config.js` den [Menübar](../../configuration/menubar), um Ihre Inhalte in übergeordnete Kategorien zu unterteilen. Dieser Ansatz ermöglicht es Ihnen, für jede Domäne eine völlig andere Sidebar anzuzeigen, was verhindert, dass ein einzelner Navigationsbaum überladen wird.
+Verwenden Sie in Ihrer `docmd.config.json` den [Menübar](../../configuration/menubar), um Ihre Inhalte in übergeordnete Kategorien zu unterteilen. Dieser Ansatz ermöglicht es Ihnen, für jede Domäne eine völlig andere Sidebar anzuzeigen, was verhindert, dass ein einzelner Navigationsbaum überladen wird.
 
 ### 2. Flachhalten der Hierarchie
 

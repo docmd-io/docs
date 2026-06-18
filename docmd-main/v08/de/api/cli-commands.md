@@ -21,7 +21,7 @@ description: "Befehlszeilenreferenz für docmd - alle verfügbaren Befehle und O
 
 | Option | Alias | Beschreibung |
 |:-------|:------|:------------|
-| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei (Standard: `docmd.config.js`) |
+| `--config <path>` | `-c` | Pfad zur Konfigurationsdatei (Standard: `docmd.config.json`) |
 | `--verbose` | `-V` | Detaillierte Build-Protokolle anzeigen |
 | `--version` | `-v` | Die installierte Version ausgeben |
 | `--help` | `-h` | Hilfemenü anzeigen |
@@ -37,7 +37,7 @@ docmd init
 
 Erstellt:
 - `docs/index.md` - Beispiel-Startseite
-- `docmd.config.js` - Empfohlene Standardeinstellungen
+- `docmd.config.json` - Empfohlene Standardeinstellungen
 - Aktualisierte `package.json` mit Build-Skripten
 
 ## `docmd dev`
@@ -129,7 +129,7 @@ docmd add <plugin-name>
 | `docmd add analytics` | Installiert `@docmd/plugin-analytics` |
 | `docmd add search` | Installiert `@docmd/plugin-search` |
 
-Die CLI erkennt Ihren Paketmanager (npm, pnpm, yarn oder bun) und fügt empfohlene Standardeinstellungen in die `docmd.config.js` ein.
+Die CLI erkennt Ihren Paketmanager (npm, pnpm, yarn oder bun) und fügt empfohlene Standardeinstellungen in die `docmd.config.json` ein.
 
 ## `docmd remove <plugin>`
 
@@ -141,7 +141,7 @@ docmd remove <plugin-name>
 
 Entfernt:
 - Das npm-Paket
-- Plugin-Konfiguration aus der `docmd.config.js`
+- Plugin-Konfiguration aus der `docmd.config.json`
 
 ::: callout tip "Agenten-kompatible Protokollierung :robot:"
 `docmd` verwendet strukturierte Terminal-Protokolle. KI-Agenten können die Ausgabe präzise parsen für Fehlererkennung und automatisierte Wartung.

@@ -45,10 +45,10 @@ bunx docmd init
 == tab "Docker" icon:container
 ```bash
 # Ziehen Sie das offizielle Multi-Architektur-Image
-docker pull ghcr.io/docmd-io/docmd:latest
+docker pull ghcr.io/docmd-io/docmd:0.8.6
 
 # Dokumentation von lokalem docs/ nach site/ erstellen
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 ```
 
 Siehe [Leitfaden zur Docker-Bereitstellung](../deployment/docker.md) für Docker Compose und Kubernetes-Konfigurationen.
@@ -105,7 +105,7 @@ Fügen Sie das Stylesheet und die JavaScript-Engine zu Ihrem HTML hinzu.
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
 <!-- Isomorphe Rendering-Engine -->
-<script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
+<script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 Siehe [Leitfaden zur Browser-API](../api/browser-api.md) für vollständige Integrationsdetails.

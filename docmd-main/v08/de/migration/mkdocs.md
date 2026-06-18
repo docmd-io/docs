@@ -19,7 +19,7 @@ npx @docmd/core migrate --mkdocs
 
 1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues Verzeichnis `mkdocs-backup/` verschoben.
 2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Root-Verzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
-3.  **Konfigurationserstellung**: Eine `docmd.config.js` wird generiert, wobei der Projektname (`site_name`) aus Ihrer `mkdocs.yml` extrahiert wird.
+3.  **Konfigurationserstellung**: Eine `docmd.config.json` wird generiert, wobei der Projektname (`site_name`) aus Ihrer `mkdocs.yml` extrahiert wird.
 
 ## Schritt 2: Testen des Setups
 

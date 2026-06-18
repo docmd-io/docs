@@ -13,13 +13,13 @@ Das offizielle Image ermöglicht es Ihnen, Ihre Dokumentation zu erstellen und b
 
 ```bash
 # Ziehen Sie das neueste Image
-docker pull ghcr.io/docmd-io/docmd:latest
+docker pull ghcr.io/docmd-io/docmd:0.8.6
 
 # Erstellen Sie Ihre Dokumentation (mountet lokale Docs und gibt in ./site aus)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 
 # Führen Sie die integrierte Demo-Site aus
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.6
 ```
 
 ### Docker Compose
@@ -30,7 +30,7 @@ Verwenden Sie Docker Compose, um Build und Serving in einem Workflow zu kombinie
 version: '3.8'
 services:
   docs:
-    image: ghcr.io/docmd-io/docmd:latest
+    image: ghcr.io/docmd-io/docmd:0.8.6
     command: build
     volumes:
       - ./docs:/docs

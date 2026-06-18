@@ -7,7 +7,7 @@ Das Plugin `@docmd/plugin-analytics` ermöglicht es Ihnen, Google Analytics naht
 
 ## Konfiguration
 
-Aktivieren Sie Analytics, indem Sie Ihre Tracking-Anmeldedaten zum Abschnitt `plugins` der `docmd.config.js` hinzufügen.
+Aktivieren Sie Analytics, indem Sie Ihre Tracking-Anmeldedaten zum Abschnitt `plugins` der `docmd.config.json` hinzufügen.
 
 ```javascript
 import { defineConfig } from '@docmd/core';

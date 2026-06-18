@@ -28,7 +28,7 @@ npx @docmd/core dev
 
 ### 2. Automatische Navigation (Auto-Router)
 
-Wenn keine `navigation.json` oder `docmd.config.js` gefunden wird, aktiviert `docmd` seinen [Auto-Router](../../configuration/navigation#automatic-sidebar-generation). Dieser bildet Ihre Ordnerstruktur rekursiv ab, verschönert Verzeichnisnamen (z. B. wird aus `getting-started` "Getting Started") und generiert automatisch eine logische Sidebar-Taxonomie.
+Wenn keine `navigation.json` oder `docmd.config.json` gefunden wird, aktiviert `docmd` seinen [Auto-Router](../../configuration/navigation#automatic-sidebar-generation). Dieser bildet Ihre Ordnerstruktur rekursiv ab, verschönert Verzeichnisnamen (z. B. wird aus `getting-started` "Getting Started") und generiert automatisch eine logische Sidebar-Taxonomie.
 
 ### 3. Intelligente Titel-Ermittlung
 

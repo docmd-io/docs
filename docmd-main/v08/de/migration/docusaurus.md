@@ -19,7 +19,7 @@ npx @docmd/core migrate --docusaurus
 
 1.  **Backup**: Ihr gesamtes Projekt (außer `node_modules` und `.git`) wird sicher in ein neues Verzeichnis `docusaurus-backup/` verschoben.
 2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Root-Verzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann.
-3.  **Konfigurationserstellung**: Eine `docmd.config.js` wird generiert, wobei der Seitentitel (`title`) aus Ihrer Docusaurus-Konfiguration extrahiert wird.
+3.  **Konfigurationserstellung**: Eine `docmd.config.json` wird generiert, wobei der Seitentitel (`title`) aus Ihrer Docusaurus-Konfiguration extrahiert wird.
 
 ## Schritt 2: Testen des Setups
 
@@ -95,7 +95,7 @@ Dies ist eine Orange.
 
 Wenn Sie die `i18n`-Funktionen von Docusaurus verwendet haben, befanden sich Ihre übersetzten Dateien wahrscheinlich in `i18n/locale/docusaurus-plugin-content-docs/current/`.
 
-**Erforderliche Aktion:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Locales in der `docmd.config.js`. Siehe den [Leitfaden zur Lokalisierung](../configuration/localisation/index.md).
+**Erforderliche Aktion:** Verschieben Sie diese Dateien in die Verzeichnisstruktur von `docmd` (`docs/en/`, `docs/de/` usw.) und konfigurieren Sie die Locales in der `docmd.config.json`. Siehe den [Leitfaden zur Lokalisierung](../configuration/localisation/index.md).
 
 ## Nächste Schritte
 

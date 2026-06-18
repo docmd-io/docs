@@ -14,7 +14,7 @@ Eine Standard-`docmd`-Seite ist in sechs primäre Funktionsbereiche unterteilt:
 
 ## Globale Komponenten
 
-Die meisten UI-Zonen werden im Bereich `layout` Ihrer `docmd.config.js` konfiguriert.
+Die meisten UI-Zonen werden im Bereich `layout` Ihrer `docmd.config.json` konfiguriert.
 
 ### Menüleiste
 

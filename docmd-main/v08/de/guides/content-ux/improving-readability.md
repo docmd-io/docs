@@ -42,7 +42,7 @@ Vermeiden Sie bei Tutorials und Schritt-für-Schritt-Anleitungen narrative Besch
 ```markdown
 ::: steps
     1. **Initialisieren**: Führen Sie `npx @docmd/core init` im Projekt-Root aus.
-    2. **Konfigurieren**: Aktualisieren Sie Ihre `docmd.config.js` mit Ihrem Seitentitel und der Navigation.
+    2. **Konfigurieren**: Aktualisieren Sie Ihre `docmd.config.json` mit Ihrem Seitentitel und der Navigation.
     3. **Build**: Führen Sie `npx @docmd/core build` aus, um Ihre produktionsreifen statischen Dateien zu generieren.
 :::
 ```

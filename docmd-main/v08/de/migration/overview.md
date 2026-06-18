@@ -15,7 +15,7 @@ Der Migrationsbefehl führt Folgendes aus:
 2. **Extrahiert** grundlegende Metadaten wie den `title` Ihrer Website.
 3. **Sichert** Ihre bestehenden Dateien und Verzeichnisse sicher in einem `*-backup/`-Verzeichnis (z.B. `docusaurus-backup/`).
 4. **Kopiert** Ihre Markdown-Inhalte in das standardmäßige `docmd` `docs/`-Verzeichnis.
-5. **Erzeugt** eine neue, speziell auf Ihre Inhalte zugeschnittene `docmd.config.js`.
+5. **Erzeugt** eine neue, speziell auf Ihre Inhalte zugeschnittene `docmd.config.json`.
 
 Anschließend können Sie direkt `npx @docmd/core dev` ausführen, um Ihre Inhalte sofort in der `docmd`-Engine zu sehen.
 

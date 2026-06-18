@@ -27,4 +27,4 @@ Wenn Sie eine echte Domain als Site-Adresse verwenden (z.B. `docs.example.com` a
 
 ### Neu generieren
 
-Site-URL oder Ausgabeverzeichnis geändert? Führen Sie `docmd deploy --caddy` erneut aus - das Caddyfile wird neu generiert, um Ihre aktuelle `docmd.config.js` widerzuspiegeln.
+Site-URL oder Ausgabeverzeichnis geändert? Führen Sie `docmd deploy --caddy` erneut aus - das Caddyfile wird neu generiert, um Ihre aktuelle `docmd.config.json` widerzuspiegeln.

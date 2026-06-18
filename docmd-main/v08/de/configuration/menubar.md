@@ -7,7 +7,7 @@ Die `menubar` ist eine Navigationsschicht, die globalen Kontext über Ihre gesam
 
 ## Konfiguration
 
-Die Menüleiste wird im Bereich `layout` Ihrer `docmd.config.js` konfiguriert.
+Die Menüleiste wird im Bereich `layout` Ihrer `docmd.config.json` konfiguriert.
 
 ```javascript
 export default defineConfig({

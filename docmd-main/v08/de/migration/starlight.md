@@ -19,7 +19,7 @@ npx @docmd/core migrate --starlight
 
 1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues `starlight-backup/`-Verzeichnis verschoben.
 2.  **Inhaltsmigration**: Starlight speichert die Dokumentation in `src/content/docs/`. Die Migrations-Engine extrahiert dieses spezifische Verzeichnis automatisch und verschiebt seinen Inhalt zur Nutzung durch `docmd` in den Stammordner `docs/`.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.js` wird generiert, die Ihren Website-`title` aus der Starlight-Integration innerhalb der `astro.config.mjs` extrahiert.
+3.  **Konfigurationsgenerierung**: Eine `docmd.config.json` wird generiert, die Ihren Website-`title` aus der Starlight-Integration innerhalb der `astro.config.mjs` extrahiert.
 
 ## Schritt 2: Testen Sie das Setup
 

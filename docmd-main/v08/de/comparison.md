@@ -140,7 +140,7 @@ Erforderliche Konfigurationszeilen für eine Website mit Versionierung, i18n, Su
 
 | Generator | Konfigurationszeilen | Erforderliche Dateien |
 |:----------|:--------------------:|:---------------------:|
-| **docmd** | **~15 Zeilen** | 1 (`docmd.config.js`) |
+| **docmd** | **~15 Zeilen** | 1 (`docmd.config.json`) |
 | MkDocs Material | ~50 Zeilen | 1 + Plugins |
 | VitePress | ~80 Zeilen | 1 + Theme-Ordner |
 | Docusaurus | ~120 Zeilen | 3+ Konfig-Dateien |

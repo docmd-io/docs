@@ -40,7 +40,7 @@ Der URI folgt dem standardmäßigen PostgreSQL-Format: `postgresql://benutzer:pa
 
 ### 3. Aktivierung des LLMs-Plugins
 
-Aktivieren Sie das [LLMs-Plugin](../../plugins/llms.md) in Ihrer `docmd.config.js`. Dieses Plugin generiert nach jedem Build automatisch eine `llms-full.txt`-Datei, die Ihren gesamten Dokumentationssatz in einer einzigen Datei mit hohem Kontextgehalt zusammenfasst, die leicht von Large Language Models verarbeitet werden kann.
+Aktivieren Sie das [LLMs-Plugin](../../plugins/llms.md) in Ihrer `docmd.config.json`. Dieses Plugin generiert nach jedem Build automatisch eine `llms-full.txt`-Datei, die Ihren gesamten Dokumentationssatz in einer einzigen Datei mit hohem Kontextgehalt zusammenfasst, die leicht von Large Language Models verarbeitet werden kann.
 
 ## Abwägungen
 

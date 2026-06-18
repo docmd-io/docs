@@ -19,7 +19,7 @@ npx @docmd/core migrate --vitepress
 
 1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues `vitepress-backup/`-Verzeichnis verschoben.
 2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Stammverzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann. Der versteckte `.vitepress`-Konfigurationsordner wird vollständig aus dem neuen `docs/`-Verzeichnis entfernt, um Konflikte zu vermeiden.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.js` wird generiert, die Ihren Website-`title` aus Ihrer `.vitepress/config.js` oder `.ts` extrahiert.
+3.  **Konfigurationsgenerierung**: Eine `docmd.config.json` wird generiert, die Ihren Website-`title` aus Ihrer `.vitepress/config.js` oder `.ts` extrahiert.
 
 ## Schritt 2: Testen Sie das Setup
 
