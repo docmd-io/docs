@@ -60,7 +60,6 @@ Alle nutzerseitigen Strings unterstützen das bestehende `t(key)`-Übersetzungss
 }
 ```
 
-Templates können über `translations(localeId)` auf ihrem Plugin-Deskriptor eigene Texte bereitstellen; dieser Pfad ist gegenüber früheren Versionen unverändert.
 
 ## Auf eine Auswahl reagieren
 
@@ -91,7 +90,6 @@ Der Dialog verwendet BEM-Klassen auf dem Wurzelelement `.docmd-cookie-banner`. S
 }
 ```
 
-Templates können den Dialog neu stylen, indem sie `templates/partials/cookie-consent.ejs` in ihrem Paket überschreiben. Die Standardversion wird mit `@docmd/ui` ausgeliefert.
 
 ## Deaktivieren
 

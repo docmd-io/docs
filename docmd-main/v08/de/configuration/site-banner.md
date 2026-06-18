@@ -84,7 +84,7 @@ Reichhaltiges HTML (sorgfältig escapen):
 ## Verhalten
 
 - **Position** — Sitzt ganz oben auf der Seite, über der Menubar und der Sidebar-Logo-Leiste. Reine CSS-Positionierung, kein Layout-Shift beim Schließen.
-- **Schließen-Persistenz** — Der "geschlossen"-Zustand wird in `sessionStorage` gespeichert. Eine neue Browser-Sitzung zeigt den Banner erneut. Für längerfristige Persistenz schreiben Sie in `localStorage` aus einem kleinen Plugin (das `data-docmd-banner`-Attribut erleichtert das Auffinden).
+- **Schließen-Persistenz** — Der "geschlossen"-Zustand wird in `sessionStorage` gespeichert. Eine neue Browser-Sitzung zeigt den Banner erneut. Für längerfristige Persistenz schreiben Sie in `localStorage` aus Ihrem eigenen clientseitigen Skript — das `data-docmd-banner`-Attribut erleichtert das Auffinden.
 - **Pro-Seite-Override** — In 0.8.7 noch nicht unterstützt. Um den Banner auf einer einzelnen Seite auszublenden, setzen Sie `layout.banner: null` in einem `config.templates[page]`-Eintrag (für ein Folge-Release geplant).
 
 ## Neu stylen
@@ -101,7 +101,6 @@ Der Banner verwendet BEM-Klassen auf dem Wurzelelement `.docmd-banner`. Skinen S
 }
 ```
 
-Templates können den Banner ersetzen, indem sie ein eigenes `templates/partials/banner.ejs` mitliefern. Die Standardversion wird mit `@docmd/ui` ausgeliefert.
 
 ## Deaktivieren
 
