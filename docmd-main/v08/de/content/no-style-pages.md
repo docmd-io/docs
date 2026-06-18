@@ -1,116 +1,116 @@
 ---
-title: "Seiten ohne Stil (No-Style Pages)"
-description: "Erstellen Sie benutzerdefinierte Landingpages und einzigartige Layouts, indem Sie das Standard-Theme von docmd deaktivieren."
+title: "Seiten ohne Stil"
+description: "Erstellen Sie benutzerdefinierte Landingpages und einzigartige Layouts durch Deaktivieren des docmd-Standard-Themes."
 ---
 
-`docmd` ermöglicht es Ihnen, das Standard-Dokumentationslayout (Seitenleiste, Header und Footer) auf einer pro-Seite-Basis zu umgehen. Dies ist ideal für die Erstellung von Produkt-Landingpages, benutzerdefinierten Dashboards oder Marketing-Splash-Screens, während der Zugriff auf die Komponenten der Dokumentations-Engine erhalten bleibt.
+docmd erlaubt es Ihnen, das Standard-Dokumentationslayout (Sidebar, Header, Footer) seitenweise zu umgehen. Dies ist ideal zum Erstellen von Landingpages oder benutzerdefinierten Dashboards und behält gleichzeitig den Zugriff auf die Komponenten der Engine.
 
-## Aktivierung des No-Style-Modus
+## No-Style-Modus aktivieren
 
-Um die globale Benutzeroberfläche zu deaktivieren, fügen Sie `noStyle: true` zum Frontmatter der Seite hinzu.
+Um die globale UI zu deaktivieren, fügen Sie `noStyle: true` zum Frontmatter der Seite hinzu.
 
 ```yaml
 ---
-title: "Produkt-Showcase"
+title: "Product Showcase"
 noStyle: true
 components:
-  meta: true      # SEO- und OpenGraph-Tags beibehalten
-  favicon: true   # Website-Favicon beibehalten
-  css: true       # docmd-main.css für Typografie einfügen
+  meta: true      # SEO- und OpenGraph-Tags behalten
+  favicon: true   # Site-Favicon behalten
+  css: true       # docmd-main.css für Typografie injizieren
 ---
 
-<!-- Reines HTML oder spezielles Markdown folgt hier -->
+<!-- Hier kommt roher HTML- oder spezialisierter Markdown-Inhalt -->
 <div class="hero">
-  <h1>Dokumentation der nächsten Generation</h1>
-  <p>Zero-config. Isomorph. KI-bereit.</p>
+  <h1>Next-Gen Documentation</h1>
+  <p>Zero-config. Isomorphic. AI-Ready.</p>
 </div>
 
-::: callout info "Unterstützung für unbegrenzte Verschachtelung"
-Auch bei `noStyle: true` werden alle Standard-`docmd`-Container wie `::: card`, `::: tabs` und `::: hero` vollständig unterstützt und können in jeder Tiefe verschachtelt werden.
+::: callout info "Unendliche Verschachtelung unterstützt" icon:info
+Auch mit `noStyle: true` werden alle Standard-docmd-Container wie `::: card`, `::: tabs` und `::: hero` vollständig unterstützt und können unendlich verschachtelt werden.
 :::
 ```
 
-## Komponenten-Auswahl (Opt-In)
+## Komponenten-Opt-in
 
-Wenn `noStyle` aktiv ist, beginnen Sie mit einer leeren Leinwand. Aktivieren Sie die Kernkomponenten des Systems gezielt nach Bedarf:
+Wenn `noStyle` aktiv ist, starten Sie mit einer leeren Leinwand. Aktivieren Sie Kern-Systemkomponenten bei Bedarf selektiv neu:
 
 | Komponente | Beschreibung |
 | :--- | :--- |
-| `meta` | Fügt `<title>`, SEO-Meta-Tags und strukturierte OpenGraph-Daten ein. |
-| `favicon` | Fügt das projektweite Favicon ein. |
-| `css` | Fügt `docmd-main.css` ein. Dringend empfohlen für grundlegendes Raster und Typografie. |
-| `menubar` | Fügt die obere Menüleiste der Website ein. |
-| `theme` | Fügt die CSS-Variablen und Design-Überschreibungen des aktiven Themes ein. |
-| `scripts` | Fügt die interaktive Komponentenlogik ein (erfordert `mainScripts: true`). |
-| `spa` | Aktiviert den Single-Page-Application-Router (erfordert `scripts: true`). |
+| `meta` | Injiziert `<title>`, SEO-Meta-Tags und strukturierte OpenGraph-Daten. |
+| `favicon` | Injiziert das projektweite Favicon. |
+| `css` | Injiziert `docmd-main.css`. Sehr empfehlenswert für grundlegendes Grid und Typografie. |
+| `menubar` | Injiziert die obere Menubar der Site. |
+| `theme` | Injiziert die CSS-Variablen und Erscheinungs-Overrides des aktiven Themes. |
+| `scripts` | Injiziert interaktive Komponentenlogik (erfordert `mainScripts: true`). |
+| `spa` | Aktiviert den SPA-Router (erfordert `scripts: true`). |
 
 ## Komponierbare Landingpages
 
-Die Hauptstärke von `noStyle` liegt darin, dass Sie die gesamte Suite der `docmd`-Komponenten als hochwertige „Widgets“ auf einer leeren Leinwand verwenden können. Sie sind nicht auf reines HTML beschränkt; Sie können komplexe, strukturelle Designs rein in Markdown erstellen.
+Die Hauptstärke von `noStyle` liegt darin, docmd-Komponenten als hochwertige "Widgets" auf einer leeren Leinwand zu verwenden. Sie sind nicht auf rohen HTML-Code beschränkt; Sie können komplexe strukturelle Designs rein in Markdown erstellen.
 
-### Erstellung eines modernen Einstiegspunkts
+### Einen modernen Einstiegspunkt bauen
 
 ```yaml
 ---
-title: "Willkommen"
+title: "Welcome"
 noStyle: true
 components:
   meta: true
   css: true
-  menubar: true    # Verwenden Sie die obere Navigation der Website
+  menubar: true    # Top-Navigation der Site verwenden
   scripts: true    # Interaktive Komponenten aktivieren
   mainScripts: true
 ---
 
 ::: hero layout:split glow:true
-# Dokumentation, die begeistert.
-Die Zero-Config-Engine für moderne Entwicklerteams.
+# Build Documentation that Wows.
+The zero-config engine for modern engineering teams.
 
-::: button "Erste Schritte" ../getting-started/quick-start.md color:blue
+::: button "Get Started" ../getting-started/quick-start.md color:blue
 ::: button "GitHub" github:docmd-io/docmd color:gray
 
 == side
-::: embed [https://www.youtube.com/watch?v=dQw4w9WgXcQ]
+::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 :::
 :::
 
 ::: grids
   ::: card "Zero Configuration"
-  Schreiben Sie einfach Markdown. Keine komplexe React-Logik oder Build-Skripte.
+  Just write markdown. No complex React logic or build scripts.
   :::
-  ::: card "KI-optimiert"
-  Strukturbewusstes Parsing für die Ära der LLMs.
+  ::: card "AI Optimised"
+  Structure-aware parsing for the LLM era.
   :::
-  ::: card "Schnell ohne Framework-Last"
-  Statische Generierung mit isomorpher SPA-Navigation.
+  ::: card "Fast Without the Framework Tax"
+  Static generation with isomorphic SPA navigation.
   :::
 :::
 ```
 
-::: callout tip "KI-generierte Layouts"
-Da `noStyle`-Seiten sowohl reines HTML als auch `docmd`-Container unterstützen, eignen sie sich perfekt für **KI-gesteuertes UI-Design**. Sie können einer KI den Befehl geben: *"Entwirf eine moderne Hero-Sektion mit Tailwind-ähnlichen Utility-Klassen und docmd-Buttons, gehüllt in einen noStyle: true-Container."* Die KI kann das Design innerhalb Ihrer statischen Website-Pipeline ohne zusätzliche Konfiguration iterieren.
+::: callout tip "KI-generierte Layouts" icon:lightbulb
+Da `noStyle`-Seiten rohen HTML-Code neben docmd-Containern unterstützen, eignen sie sich perfekt für **KI-gesteuertes UI-Design**. Prompten Sie eine KI: *"Entwerfe einen modernen Hero-Bereich mit Utility-Klassen und docmd-Buttons, eingebettet in einen noStyle-Container."* Die KI kann in Ihrer statischen Site-Pipeline ohne Konfiguration iterieren.
 :::
 
 ## String-Ersetzung (i18n für noStyle)
 
-Wenn Ihre Website für [i18n konfiguriert](../configuration/localisation/index.md) ist, erhalten gewöhnliche Dokumentationsseiten automatisch serverseitige Übersetzungen - jede Sprache hat ihre eigenen Markdown-Dateien in separaten Verzeichnissen. Aber noStyle-Seiten verwenden benutzerdefiniertes HTML statt Markdown, weshalb dieser Ansatz dort nicht greift. Stattdessen bietet docmd eine **String-Ersetzung** an - die Übersetzung Ihres HTML über `data-i18n`-Attribute und JSON-Übersetzungsdateien.
+Wenn Ihre Site [i18n konfiguriert](../configuration/localisation/index.md) hat, erhalten themenbasierte Dokumentationsseiten automatisch vollständige serverseitige Übersetzungen. `noStyle`-Seiten verwenden jedoch benutzerdefinierten HTML-Code. docmd bietet **String-Ersetzung**, um HTML über `data-i18n`-Attribute und JSON-Übersetzungsdateien zu übersetzen.
 
-::: callout info "Warum dies nur für noStyle-Seiten funktioniert"
-Die String-Ersetzung findet Elemente mit `data-i18n`-Attributen im gerenderten HTML und tauscht deren Textinhalt aus. Standard-Markdown-Inhalte werden in einfache `<p>`, `<h2>`, `<li>` Tags gerendert - dort gibt es keine `data-i18n`-Attribute, die der Ersetzer findten könnte. Für die Übersetzung von in Markdown verfassten Dokumentationen verwenden Sie den [Verzeichnis-Modus](../configuration/localisation/translated-content.md) - separate Markdown-Dateien pro Sprache.
+::: callout info "Warum dies nur für noStyle-Seiten funktioniert" icon:info
+Die String-Ersetzung sucht Elemente mit `data-i18n`-Attributen und ersetzt deren Textinhalt. Standard-Markdown-Inhalte rendern zu reinen `<p>`-, `<h2>`-, `<li>`-Tags ohne diese Attribute. Für Standard-Markdown verwenden Sie den [Verzeichnismodus](../configuration/localisation/translated-content.md).
 :::
 
-### Wie es funktioniert
+### Funktionsweise
 
 Es gibt zwei Modi für die String-Ersetzung:
 
-- **Serverseitig (empfohlen)**: Mit [`stringMode: true`](../configuration/localisation/index.md#string-mode-nostyle-pages-only) in Ihrer i18n-Konfiguration löst docmd `data-i18n`-Attribute **zur Build-Zeit** auf und generiert vollständig übersetztes HTML in den Verzeichnissen `/{locale}/`. Jede Sprache erhält ihre eigene URL - vollständig indexierbar für Suchmaschinen.
-- **Clientseitig**: Das Skript `docmd-i18n-strings.js` lädt Übersetzungen zur Laufzeit via XHR. Dies wird auf noStyle-Seiten automatisch eingefügt, wenn i18n konfiguriert ist. Nützlich für den Austausch an Ort und Stelle ohne Neuladen der Seite (z. B. SPAs, Dashboards).
+- **Serverseitig (empfohlen)**: Mit `stringMode: true` in Ihrer i18n-Konfiguration löst docmd `data-i18n`-Attribute **zur Build-Zeit** auf. Es erzeugt vollständig übersetztes HTML in `/{locale}/`-Verzeichnissen für Suchmaschinen.
+- **Clientseitig**: Das `docmd-i18n-strings.js`-Skript lädt Übersetzungen zur Laufzeit per XHR. Dies ist nützlich für In-Place-Wechsel ohne Seiten-Neuladen.
 
-Beide Modi verwenden dieselbe Syntax für `data-i18n`-Attribute und dasselbe JSON-Dateiformat.
+Beide Modi verwenden dieselbe `data-i18n`-Attributsyntax und dasselbe JSON-Dateiformat.
 
-1. Platzieren Sie JSON-Übersetzungsdateien in `assets/i18n/` - eine pro Sprache:
+1. Platzieren Sie JSON-Übersetzungsdateien in `assets/i18n/` — eine pro Locale:
 
-```
+```text
 assets/
   i18n/
     en.json
@@ -118,64 +118,63 @@ assets/
     zh.json
 ```
 
-2. Jede JSON-Datei ist eine flache Schlüssel-Wert-Zuordnung:
+2. Jede JSON-Datei ist eine flache Key-Value-Map:
 
 ```json
 {
-  "hero.title": "Markdown → Produktions-Docs",
-  "hero.subtitle": "Die Zero-Config-Dokumentations-Engine.",
-  "nav.docs": "Dokumentation",
-  "nav.editor": "Live-Editor",
-  "cta.getStarted": "Erste Schritte",
+  "hero.title": "Markdown → Production Docs",
+  "hero.subtitle": "The zero-config documentation engine.",
+  "nav.docs": "Documentation",
+  "nav.editor": "Live Editor",
+  "cta.getStarted": "Get Started",
   "cta.install": "npm i @docmd/core"
 }
 ```
 
-3. Verwenden Sie `data-i18n`-Attribute in Ihren HTML-Elementen:
+3. Verwenden Sie `data-i18n`-Attribute auf Ihren HTML-Elementen:
 
 ```html
-<h1 data-i18n="hero.title">Markdown → Produktions-Docs</h1>
-<p data-i18n="hero.subtitle">Die Zero-Config-Dokumentations-Engine.</p>
-<a data-i18n="nav.docs" href="/docs">Dokumentation</a>
+<h1 data-i18n="hero.title">Markdown → Production Docs</h1>
+<p data-i18n="hero.subtitle">The zero-config documentation engine.</p>
+<a data-i18n="nav.docs" href="/docs">Documentation</a>
 ```
 
-Der Text in der Standardsprache wird direkt in das HTML geschrieben (fungiert als Fallback). Wenn eine andere Sprache aktiv ist, lädt das Skript das entsprechende JSON und ersetzt den Text.
+Der Standardsprachentext dient als Fallback. Wenn eine Nicht-Standard-Locale aktiv ist, ersetzt die Engine den Text.
 
 ### Attribut-Übersetzung
 
-Um Elementattribute wie `placeholder`, `title` oder `aria-label` zu übersetzen, verwenden Sie `data-i18n-{attr}`:
+Um Attribute wie `placeholder`, `title` oder `aria-label` zu übersetzen, verwenden Sie `data-i18n-{attr}`:
 
 ```html
-<input data-i18n-placeholder="search.placeholder" placeholder="Suche...">
-<button data-i18n-aria-label="nav.menuLabel" aria-label="Menü öffnen">☰</button>
-<a data-i18n-title="nav.tooltip" title="Zu den Docs">Docs</a>
+<input data-i18n-placeholder="search.placeholder" placeholder="Search...">
+<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">☰</button>
+<a data-i18n-title="nav.tooltip" title="Go to docs">Docs</a>
 ```
 
 ### HTML-Inhalt
 
-Für Schlüssel, die HTML-Markup enthalten, verwenden Sie `data-i18n-html` anstelle von `data-i18n`:
+Für Schlüssel, die HTML-Markup enthalten, verwenden Sie `data-i18n-html` statt `data-i18n`:
 
 ```html
-<p data-i18n-html="hero.desc">Statisches HTML für SEO. <br>SPA für Geschwindigkeit.</p>
+<p data-i18n-html="hero.desc">Static HTML for SEO. <br>SPA for speed.</p>
 ```
 
-### Sprachwechsel
+### Sprachen wechseln
 
-Das Modul für i18n-Strings stellt eine globale API unter `window.DOCMD_I18N_STRINGS` bereit:
+Das i18n-Strings-Modul stellt eine globale API unter `window.DOCMD_I18N_STRINGS` bereit:
 
-```js
-// Zu Hindi wechseln
-DOCMD_I18N_STRINGS.switchLocale('hi');
+```javascript
+// Sprache wechseln
+DOCMD_I18N_STRINGS.switchLocale("hi");
 
-// Aktuelle Sprache abrufen
-console.log(DOCMD_I18N_STRINGS.locale); // 'en'
+// Aktive Sprache abrufen
+console.log(DOCMD_I18N_STRINGS.locale);
 
-// Alle konfigurierten Sprachen abrufen
+// Alle Sprachen abrufen
 console.log(DOCMD_I18N_STRINGS.locales);
-// [{ id: 'en', label: 'English' }, { id: 'hi', label: 'हिन्दी' }]
 ```
 
-Mit dieser API können Sie einen benutzerdefinierten Sprachumschalter erstellen:
+Sie können mit dieser API einen benutzerdefinierten Sprachwechsler bauen:
 
 ```html
 <select onchange="DOCMD_I18N_STRINGS.switchLocale(this.value)">
@@ -184,24 +183,24 @@ Mit dieser API können Sie einen benutzerdefinierten Sprachumschalter erstellen:
 </select>
 ```
 
-### Ereignisse (Events)
+### Ereignisse
 
-Hören Sie auf das Ereignis `docmd:i18n-applied`, um benutzerdefinierte Logik auszuführen, nachdem die Strings angewendet wurden:
+Hören Sie auf das `docmd:i18n-applied`-Ereignis, um benutzerdefinierte Logik nach der String-Anwendung auszuführen:
 
-```js
-document.addEventListener('docmd:i18n-applied', function(e) {
-  console.log('Sprache:', e.detail.locale);
-  console.log('Strings:', e.detail.strings);
+```javascript
+document.addEventListener("docmd:i18n-applied", function(e) {
+  console.log("Locale:", e.detail.locale);
+  console.log("Strings:", e.detail.strings);
 });
 ```
 
-::: callout info "Automatische Erkennung"
-Das Skript erkennt die aktive Sprache anhand des URL-Pfad-Präfixes (z. B. `/hi/` → Hindi). Für die Standardsprache (gerendert unter `/`) prüft es den `localStorage` auf eine zuvor gespeicherte Präferenz. Die Funktion `switchLocale()` übernimmt die URL-Navigation automatisch.
+::: callout info "Automatische Erkennung" icon:info
+Das Skript erkennt die aktive Locale aus dem URL-Pfad-Präfix. Für die Standard-Locale prüft es `localStorage` auf eine zuvor gespeicherte Präferenz. Die Funktion `switchLocale()` behandelt die URL-Navigation automatisch.
 :::
 
-### In-Place-Modus (An Ort und Stelle)
+### In-Place-Modus
 
-Für One-Page-Websites (wie Landingpages) möchten Sie beim Sprachwechsel nicht zu einer anderen URL navigieren. Setzen Sie `inPlace: true` in Ihrer i18n-Konfiguration, um Strings ohne URL-Weiterleitung auszutauschen:
+Für Single-Page-Sites setzen Sie `inPlace: true` in Ihrer i18n-Konfiguration, um Strings ohne URL-Weiterleitungen auszutauschen:
 
 ```json
 {
@@ -216,4 +215,4 @@ Für One-Page-Websites (wie Landingpages) möchten Sie beim Sprachwechsel nicht 
 }
 ```
 
-Mit `inPlace: true` lädt der Aufruf von `switchLocale()` das JSON für die neue Sprache neu und ersetzt alle `data-i18n`-Strings auf der aktuellen Seite - es findet keine Navigation statt.
+Mit `inPlace: true` lädt der Aufruf von `switchLocale()` die JSON-Datei für die neue Locale neu und ersetzt sofort alle `data-i18n`-Strings. Es erfolgt keine Navigation.
