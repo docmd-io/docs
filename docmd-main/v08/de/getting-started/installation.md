@@ -1,13 +1,13 @@
 ---
 title: "Installation"
-description: "Installieren Sie @docmd/core global, lokal in einem Projekt oder führen Sie es containerisiert über das offizielle Docker-Image aus. Benötigt Node.js 18+."
+description: "Installieren Sie @docmd/core global, lokal innerhalb eines Projekts oder containerisiert über das offizielle Docker-Image. Erfordert Node.js 18+."
 ---
 
-Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Node.js 18 oder höher ist für lokale Builds erforderlich.
+Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Für lokale Builds ist Node.js 18 oder höher erforderlich.
 
 ## 1. Lokale Installation (empfohlen)
 
-Die lokale Ausführung von `docmd` hält Ihre Dokumentationskonfiguration mit Ihrem Quellcode versioniert.
+`docmd` lokal auszuführen hält Ihre Dokumentationskonfiguration mit Ihrem Quellcode versioniert.
 
 ::: tabs
 == tab "npm" icon:box
@@ -15,7 +15,7 @@ Die lokale Ausführung von `docmd` hält Ihre Dokumentationskonfiguration mit Ih
 # Als Entwicklungsabhängigkeit installieren
 npm install -D @docmd/core
 
-# Ein neues Projekt initialisieren
+# Neues Projekt initialisieren
 npx docmd init
 ```
 == tab "pnpm" icon:boxes
@@ -23,7 +23,7 @@ npx docmd init
 # Als Entwicklungsabhängigkeit installieren
 pnpm add -D @docmd/core
 
-# Ein neues Projekt initialisieren
+# Neues Projekt initialisieren
 pnpm dlx docmd init
 ```
 == tab "yarn" icon:scroll
@@ -31,7 +31,7 @@ pnpm dlx docmd init
 # Als Entwicklungsabhängigkeit installieren
 yarn add -D @docmd/core
 
-# Ein neues Projekt initialisieren
+# Neues Projekt initialisieren
 yarn dlx docmd init
 ```
 == tab "Bun" icon:zap
@@ -39,30 +39,30 @@ yarn dlx docmd init
 # Als Entwicklungsabhängigkeit installieren
 bun add -D @docmd/core
 
-# Ein neues Projekt initialisieren
+# Neues Projekt initialisieren
 bunx docmd init
 ```
 == tab "Docker" icon:container
 ```bash
-# Ziehen Sie das offizielle Multi-Architektur-Image
+# Offizielles Multi-Architektur-Image ziehen
 docker pull ghcr.io/docmd-io/docmd:0.8.6
 
-# Dokumentation von lokalem docs/ nach site/ erstellen
+# Dokumentation aus lokalem docs/ nach site/ bauen
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 ```
 
-Siehe [Leitfaden zur Docker-Bereitstellung](../deployment/docker.md) für Docker Compose und Kubernetes-Konfigurationen.
+Docker-Compose- und Kubernetes-Konfigurationen finden Sie im [Docker-Bereitstellungs-Leitfaden](../deployment/docker.md).
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
 ::: callout tip "Kurzbefehle" icon:sparkles
-Nach der lokalen Installation können Sie `npx docmd dev` verwenden, um den Live-Vorschau-Server zu starten, oder Skripte direkt zu Ihrer `package.json` hinzufügen.
+Nach der lokalen Installation können Sie `npx docmd dev` verwenden, um den Live-Vorschauserver zu starten, oder Skripte direkt zu Ihrer `package.json` hinzufügen.
 :::
 
 ## 2. Globale Installation
 
-Installieren Sie das Paket global, um überall auf Ihrem System Websites zu erstellen oder in der Vorschau anzuzeigen, ohne ein lokales Projekt anzulegen.
+Installieren Sie das Paket global, um Sites überall auf Ihrem System zu erstellen oder in der Vorschau anzuzeigen, ohne ein lokales Projekt anzulegen.
 
 ::: tabs
 == tab "npm" icon:box
@@ -83,40 +83,40 @@ bun add -g @docmd/core
 ```
 :::
 
-Nach der Installation ist die `docmd`-Binärdatei überall verfügbar:
+Nach der Installation ist das `docmd`-Binary überall verfügbar:
 
 ```bash
-docmd dev   # Lokalen Entwicklungsserver starten
-docmd build # Statische Ausgabe erstellen
+docmd dev   # Dev-Server lokal starten
+docmd build # Statische Ausgabe erzeugen
 ```
 
-## 3. Nur-Browser-Integration
+## 3. Reine Browser-Integration
 
-Betten Sie die Engine direkt über ein CDN in eine bestehende Web-Anwendung ein.
+Binden Sie die Engine direkt über CDN in eine bestehende Webanwendung ein.
 
 ::: callout info "Spezialisierte Bibliotheksintegration" icon:help-circle
 Dies umgeht die CLI und lädt die Parsing-Engine im Browser des Lesers. Verwenden Sie dies für dynamische Portale, nicht für statische SEO-Websites.
 :::
 
-Fügen Sie das Stylesheet und die JavaScript-Engine zu Ihrem HTML hinzu.
+Fügen Sie Ihrer HTML das Stylesheet und die JavaScript-Engine hinzu.
 
 ```html
-<!-- Haupt-Stylesheet -->
+<!-- Kern-Stylesheet -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
 <!-- Isomorphe Rendering-Engine -->
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
-Siehe [Leitfaden zur Browser-API](../api/browser-api.md) für vollständige Integrationsdetails.
+Vollständige Integrationsdetails finden Sie im [Browser-API-Leitfaden](../api/browser-api.md).
 
 ## 4. Fehlerbehebung
 
 ### Berechtigung verweigert (`EACCES`-Fehler)
-Verwenden Sie nicht `sudo` für globale Installationen unter macOS oder Linux. Beheben Sie Berechtigungskonflikte mit einem Node.js-Versionsmanager wie [nvm](https://github.com/nvm-sh/nvm) oder [fnm](https://github.com/Schniz/fnm).
+Verwenden Sie `sudo` für globale Installationen auf macOS oder Linux nicht. Beheben Sie Berechtigungskonflikte mit einem Node.js-Versionsmanager wie [nvm](external:https://github.com/nvm-sh/nvm) oder [fnm](external:https://github.com/Schniz/fnm).
 
 ### PowerShell-Ausführungsrichtlinien (Windows)
-Wenn Windows die Ausführung blockiert, öffnen Sie PowerShell als Administrator und aktivieren Sie die Ausführung von Skripten für den aktuellen Benutzer.
+Falls Windows die Ausführung blockiert, öffnen Sie PowerShell als Administrator und aktivieren Sie die Skriptausführung für den aktuellen Benutzer.
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser

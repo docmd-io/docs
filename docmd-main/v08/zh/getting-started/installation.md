@@ -1,13 +1,13 @@
 ---
 title: "安装"
-description: "全局安装、本地安装 @docmd/core，或使用官方 Docker 镜像运行。需要 Node.js 18+。"
+description: "全局安装 @docmd/core，或在项目内本地安装，亦可通过官方 Docker 镜像容器化运行。需要 Node.js 18 及以上。"
 ---
 
-选择适合你工作流的安装方法。本地构建需要 Node.js 18 或更高版本。
+选择适合您工作流的安装方式。本地构建需要 Node.js 18 或更高版本。
 
 ## 1. 本地安装（推荐）
 
-在本地运行 `docmd` 可以将文档配置与你的源代码一起进行版本控制。
+在本地运行 `docmd` 可让文档配置与源代码一同纳入版本管理。
 
 ::: tabs
 == tab "npm" icon:box
@@ -47,22 +47,22 @@ bunx docmd init
 # 拉取官方多架构镜像
 docker pull ghcr.io/docmd-io/docmd:0.8.6
 
-# 构建文档（从本地 docs/ 编译到 site/）
+# 从本地 docs/ 构建文档到 site/
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 ```
 
-详情见 [Docker 部署指南](../deployment/docker.md)，了解 Docker Compose 和 Kubernetes 配置。
+Docker Compose 与 Kubernetes 配置请参阅 [Docker 部署指南](../deployment/docker.md)。
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
-::: callout tip "快捷脚本" icon:sparkles
-本地安装后，你可以使用 `npx docmd dev` 启动实时预览服务器，或直接将其添加到 `package.json` 脚本中。
+::: callout tip "脚本简写" icon:sparkles
+本地安装完成后，可使用 `npx docmd dev` 启动实时预览服务器，或直接将脚本添加到 `package.json`。
 :::
 
 ## 2. 全局安装
 
-全局安装包，可在系统任何位置创建或预览网站，无需创建本地项目。
+将软件包全局安装，以便在系统任意位置创建或预览站点，无需创建本地项目。
 
 ::: tabs
 == tab "npm" icon:box
@@ -83,22 +83,22 @@ bun add -g @docmd/core
 ```
 :::
 
-全局安装后，`docmd` 二进制文件在任何地方都可用：
+安装后，`docmd` 命令在任意位置可用：
 
 ```bash
-docmd dev   # 启动本地开发服务器
+docmd dev   # 在本地启动开发服务器
 docmd build # 构建静态输出
 ```
 
 ## 3. 仅浏览器集成
 
-通过 CDN 直接将引擎嵌入现有 Web 应用中。
+通过 CDN 直接将引擎嵌入现有的 Web 应用。
 
 ::: callout info "专用库集成" icon:help-circle
-这绕过了 CLI，在读者的浏览器中加载解析引擎。用于动态门户，不是静态 SEO 网站。
+这种方式绕过 CLI，并在访客的浏览器中加载解析引擎。适用于动态门户，而非静态 SEO 网站。
 :::
 
-将样式表和 JavaScript 引擎添加到你的 HTML 中。
+在您的 HTML 中添加样式表与 JavaScript 引擎。
 
 ```html
 <!-- 核心样式表 -->
@@ -108,15 +108,15 @@ docmd build # 构建静态输出
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
-详情见 [浏览器 API 指南](../api/browser-api.md)。
+完整集成细节请参阅 [浏览器 API 指南](../api/browser-api.md)。
 
-## 4. 故障排除
+## 4. 故障排查
 
-### 权限被拒绝（`EACCES` 错误）
-在 macOS 或 Linux 上全局安装时，不要使用 `sudo`。使用 Node.js 版本管理器如 [nvm](https://github.com/nvm-sh/nvm) 或 [fnm](https://github.com/Schniz/fnm) 来解决权限冲突。
+### 权限被拒（`EACCES` 错误）
+在 macOS 或 Linux 上进行全局安装时，请勿使用 `sudo`。可通过 [nvm](external:https://github.com/nvm-sh/nvm) 或 [fnm](external:https://github.com/Schniz/fnm) 等 Node.js 版本管理器解决权限冲突。
 
 ### PowerShell 执行策略（Windows）
-如果 Windows 阻止执行，请以管理员身份打开 PowerShell 并启用当前用户脚本执行。
+如果 Windows 阻止执行脚本，请以管理员身份打开 PowerShell 并启用当前用户的脚本执行权限。
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
