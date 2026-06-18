@@ -1,67 +1,75 @@
 ---
-title: "Markdown-Syntax Grundlagen"
-description: "Meistern Sie die grundlegenden Formatierungsregeln von docmd: Überschriften, typografische Stile und technische Blöcke."
+title: "Markdown-Syntax-Grundlagen"
+description: "Die Basis-Formatierungsregeln für alle docmd-Inhalte: Typografie, Struktur, Listen und Tabellen."
 ---
 
-`docmd` hält sich an die Standard-Spezifikationen von **GitHub Flavored Markdown (GFM)**. Dieser Leitfaden legt die grundlegenden Standards für das Verfassen von Kerninhalten auf Ihrer Dokumentationsseite fest.
+`docmd` folgt der Standard-**GitHub Flavored Markdown (GFM)**-Spezifikation. Diese Seite behandelt die zentralen Formatierungsgrundelemente, die für jede Seite Ihres Projekts gelten.
 
-## Typografisches Styling
+## Typografie
 
-| Attribut | Markdown-Syntax | Visuelles Ergebnis |
+| Stil | Syntax | Wird gerendert als |
 | :--- | :--- | :--- |
-| **Hervorhebung** | `**Text**` | **Fette Begriffe** |
-| **Kursiv** | `*Text*` | *Stilisierte Variablen* |
-| **Durchgestrichen** | `~~Text~~` | ~~Veraltete Logik~~ |
-| **Inlined Code** | `` `code` `` | `engine.initialize()` |
+| **Fett** | `**text**` | **Starke Betonung** |
+| *Kursiv* | `*text*` | *Sanfte Betonung** |
+| ~~Durchgestrichen~~ | `~~text~~` | ~~Veralteter Inhalt~~ |
+| `Inline-Code` | `` `text` `` | `engine.initialise()` |
 
-## Strukturelle Elemente
+## Überschriftenhierarchie
 
-### Semantische Überschriftenhierarchie
+`docmd` leitet das Seiten-`<h1>` automatisch aus dem `title`-Feld in Ihrem Frontmatter ab. Beginnen Sie Ihre Überschriftenstruktur bei `##`.
 
 ```markdown
-# Ebene 1 (Automatisch via Frontmatter)
-## Ebene 2 (Hauptabschnitt)
-### Ebene 3 (Detailfunktion)
+## Ebene 2 - Hauptabschnitt
+### Ebene 3 - Feature-Detail
+#### Ebene 4 - Unter-Detail
 ```
 
 ::: callout tip "Logische Integrität für KI"
-Fortschrittliche KI-Modelle und interne Suchmechanismen verlassen sich auf eine strikte Überschriftenhierarchie, um ein genaues mentales Modell Ihres Projekts aufzubauen. Indem Sie das „Überspringen von Überschriften“ vermeiden (z. B. den Sprung von H2 direkt zu H4), stellen Sie sicher, dass der `llms-full.txt`-Kontextstrom chronologisch und logisch fundiert bleibt.
+KI-Modelle und Suchmaschinen-Indexer verlassen sich auf eine strenge Überschriftenhierarchie, um ein genaues mentales Modell Ihres Projekts aufzubauen. Vermeiden Sie das Überspringen von Ebenen (z. B. von `##` zu `####`), um den `llms-full.txt`-Kontextstrom logisch konsistent zu halten.
 :::
 
-### Navigation & Referenz
+## Listen
 
-Verwenden Sie die Standard-Link-Syntax sowohl für interne Dokumentationsknoten als auch für globale Ressourcen.
+Verwenden Sie unsortierte Listen für scanbare Aufzählungspunkte und sortierte Listen für sequenzielle Schritte. Erwägen Sie für nummerierte Tutorials den wirkungsvolleren [Steps-Container](../containers/steps.md).
 
 ```markdown
-[Globale Ressource](https://docmd.io)
-[Internes Modul](../api/node-api.md)
+*   Unsortierter Punkt
+*   Ein weiterer Punkt
+
+1.  Erster Schritt
+2.  Zweiter Schritt
 ```
 
-### Aufzählung & Listen
+## Blockzitate
 
-*   **Ungeordnete Segmente**: Verwenden Sie `*` oder `-` für scanbare Aufzählungspunkte.
-*   **Sequenzielle Logik**: Verwenden Sie `1.`, `2.` usw. für geordnete Anweisungen. (Für Tutorials sollten Sie den wirkungsvollen **[Schritte-Container (Steps)](../containers/steps)** in Betracht ziehen).
+Die Standard-`>`-Syntax hebt externe Zitate oder Hintergrundkontext hervor.
 
-## Technische Blockelemente
+```markdown
+> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Anwendungsauslieferung neu.
+```
 
-### Blockquotes (Zitate)
-Die Standard-`>`-Syntax ist ideal zum Hervorheben von Zitaten oder Hintergrundkontext.
+> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Anwendungsauslieferung neu.
 
-> Die docmd-Engine definiert die Grenzen zwischen der Generierung statischer Websites und der Bereitstellung dynamischer Anwendungen neu.
+## Tabellen
 
-### Datenschemata (Tabellen)
+```markdown
+| Parameter | Typ | Standard |
+| :--- | :--- | :--- |
+| `name` | `string` | `undefined` |
+| `active` | `boolean` | `true` |
+```
 
-| Attribut | Datentyp | Standard |
+| Parameter | Typ | Standard |
 | :--- | :--- | :--- |
 | `name` | `string` | `undefined` |
 | `active` | `boolean` | `true` |
 
-## Unterstützung für eingebettetes HTML
+## Eingebettetes HTML
 
-Da `docmd` so konzipiert ist, dass das Parsen von Roh-HTML aktiviert ist, können Sie komplexe Layouts oder einzigartige Formatierungen für spezielle UI-Anforderungen direkt in Ihre Markdown-Dateien einfügen.
+docmd aktiviert das Parsen von rohem HTML. Injizieren Sie benutzerdefinierte Layouts oder einzigartiges Styling direkt in Markdown-Dateien für spezielle UI-Anforderungen.
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
-  Maßgeschneiderte UI-Elemente finden hier ihren Platz.
+<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
+  Bespoke UI elements live here.
 </div>
 ```

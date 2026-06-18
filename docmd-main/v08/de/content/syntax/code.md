@@ -1,46 +1,64 @@
 ---
 title: "Code-Blöcke"
-description: "Dokumentieren Sie technische Implementierungen mit hochwertiger Syntax-Hervorhebung und interaktiven Kopierschaltflächen."
+description: "Dokumentieren Sie technische Implementierungen mit Syntax-Highlighting, Datei-Titeln und One-Click-Kopieren."
 ---
 
-`docmd` nutzt die extrem schnelle `lite-hl`-Engine, um eine automatische, kontextsensitive Syntax-Hervorhebung für hunderte von Programmiersprachen und Konfigurationsformaten bereitzustellen.
+docmd nutzt die ultraschnelle `lite-hl`-Engine für automatisches, kontextbezogenes Syntax-Highlighting. Geben Sie den Sprachbezeichner bei jedem umzäunten Block an, um die korrekten lexikalischen Regeln sicherzustellen.
 
-## Syntax-Hervorhebung
+## Syntax-Highlighting
 
-Verfassen Sie Ihre technischen Beispiele mit standardmäßigen Markdown-Code-Zäunen (Fenced Code Blocks). Geben Sie immer die Sprachkennung an, um sicherzustellen, dass die Highlighting-Engine die korrekten lexikalischen Regeln anwendet.
+Geben Sie immer die Sprache nach dem öffnenden Zaun an. Der Highlighter wendet grammatikalische Regeln an, die spezifisch für dieses Ökosystem sind.
 
 ````markdown
-```javascript
-function initialize() {
-  console.log("docmd engine active.");
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
 }
 ```
 ````
 
-**Gerendertes Ergebnis:**
-
-```javascript
-function initialize() {
-  console.log("docmd engine active.");
+```typescript
+async function build(config: string): Promise<void> {
+  await initialise(config);
 }
 ```
 
-::: callout tip "Portabilität mit einem Klick"
-Wenn `copyCode: true` in Ihrer Konfiguration aktiviert ist (Standard), erscheint automatisch eine dezente Kopierschaltfläche in der oberen rechten Ecke jedes Code-Blocks beim Darüberfahren mit der Maus. So können Benutzer Ausschnitte sofort in ihre IDE übertragen.
+## Block-Titel
+
+Folgen Sie dem Sprachbezeichner mit einem in Anführungszeichen gesetzten Dateinamen, um eine beschriftete Headerleiste über dem Block zu rendern. Dies ist nützlich, um direkt auf Konfigurationsdateien und Quellpfade zu verweisen.
+
+````markdown
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
+}
+```
+````
+
+```json "docmd.config.json"
+{
+  "title": "My Documentation",
+  "src": "docs/"
+}
+```
+
+## Sprachunterstützung
+
+docmd unterstützt gängige technische Ökosysteme out of the box:
+
+*   **Logik:** `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`
+*   **Web:** `html`, `css`, `markdown`
+*   **Daten & Shell:** `json`, `yaml`, `bash`, `powershell`, `dockerfile`
+*   **Dokumentation:** `mermaid`, `changelog`
+
+## KI-Kontext-Strategie
+
+Wenn Sie Code für KI-Agenten dokumentieren, befolgen Sie diese Praktiken:
+
+1.  **Beschriften Sie jeden Block explizit** — verwenden Sie `typescript`, `bash`, `json`, anstatt sich auf Auto-Erkennung zu verlassen. Dies stellt sicher, dass der Parser die korrekte Grammatik für den `llms.txt`-Stream anwendet.
+2.  **Betten Sie Absichten in Kommentaren ein** — Inline-Kommentare erklären komplexe Logik und liefern wichtige Begründungen direkt im Code.
+
+::: callout tip "Ein-Klick-Portabilität"
+Setzen Sie `copyCode: true` in Ihrer Konfiguration, um eine dezente Kopierschaltfläche zu aktivieren. Sie erscheint beim Hover oben rechts auf jedem Block und ermöglicht es Lesern, Snippets sofort zu kopieren.
 :::
-
-## Strategie für KI-Kontext
-
-Beachten Sie beim Dokumentieren von Code für die Nutzung durch LLMs und KI-Agenten diese technischen Best Practices:
-
-1.  **Strikte Sprachkennzeichnung**: Die explizite Kennzeichnung von Blöcken als `typescript`, `bash` oder `json` stellt sicher, dass der KI-Parser die Grammatik des Blocks innerhalb des `llms-full.txt`-Streams korrekt interpretiert.
-2.  **Eingebettete Intention**: Verwenden Sie Inline-Kommentare innerhalb Ihrer Code-Blöcke, um das *Warum* hinter komplexer Logik zu erklären. Dies liefert der KI kritischen Kontext für die Argumentation, der einfachem Text außerhalb des Blocks fehlen könnte.
-
-## Referenz der Sprachunterstützung
-
-`docmd` bietet standardmäßige Unterstützung für die gängigsten technischen Ökosysteme, darunter:
-
-*   **Logik**: `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`.
-*   **Web**: `html`, `css`, `markdown`.
-*   **Daten & Shell**: `json`, `yaml`, `bash`, `powershell`, `dockerfile`.
-*   **Dokumentation**: `mermaid`, `changelog`.

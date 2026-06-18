@@ -1,62 +1,62 @@
 ---
 title: "Frontmatter-Referenz"
-description: "Der vollständige Leitfaden zu Metadaten und Konfiguration auf Seitenebene in docmd."
+description: "Der vollständige Leitfaden zu Seitenmetadaten und Konfiguration."
 ---
 
-Frontmatter ermöglicht es Ihnen, globale Einstellungen auf einer pro-Seite-Basis zu überschreiben. Es muss im YAML-Format ganz oben in Ihrer Markdown-Datei stehen.
+Frontmatter überschreibt globale Einstellungen für bestimmte Seiten. Schreiben Sie es im YAML-Format oben in Ihre Markdown-Dateien.
 
-## Kern-Metadaten
+## Kernmetadaten
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `title` | `String` | **Erforderlich.** Legt den HTML-`<title>` und die Hauptüberschrift des Abschnitts fest. |
-| `description` | `String` | Legt die Meta-Beschreibung für SEO und Suchergebnisse fest. |
-| `keywords` | `Array` | Eine Liste von Schlüsselwörtern für den `<meta name="keywords">`-Tag. |
+| `title` | `String` | **Erforderlich.** Setzt das HTML-`<title>` und die primäre Abschnittsüberschrift. |
+| `description` | `String` | Setzt die Meta-Beschreibung für SEO und Suchergebnisse. |
+| `keywords` | `Array` | Eine Liste von Schlüsselwörtern für das `<meta name="keywords">`-Tag. |
 
-::: callout warning "Der Titel ist wichtig"
-Obwohl nicht strikt erforderlich, wird das Feld `title` dringend empfohlen. Ohne diesen greift docmd auf die erste `# H1`-Überschrift oder den Dateinamen zurück - was zu weniger idealen `<title>`-Tags und Suchergebnissen führen kann.
+::: callout warning "Titel ist wichtig" icon:triangle-alert
+Das Feld `title` wird dringend empfohlen. Ohne es fällt die Engine auf die erste `# H1`-Überschrift oder den Dateinamen zurück. Dies kann zu suboptimalen Suchergebnissen führen.
 :::
 
-## Sichtbarkeit & Indexierung
+## Sichtbarkeit & Indizierung
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
 | `noindex` | `Boolean` | Schließt die Seite aus dem internen Suchindex aus. |
-| `llms` | `Boolean` | Auf `false` setzen, um diese Seite aus den KI-Kontextdateien (`llms.txt`) auszuschließen. |
-| `hideTitle` | `Boolean` | Blendet den Titel im fixierten Header aus (nützlich bei Verwendung einer benutzerdefinierten H1). |
-| `bodyClass` | `String` | Fügt dem `<body>`-Tag dieser Seite eine benutzerdefinierte CSS-Klasse hinzu. |
+| `llms` | `Boolean` | Auf `false` setzen, um diese Seite aus KI-Kontextdateien (`llms.txt`) auszuschließen. |
+| `hideTitle` | `Boolean` | Blendet den Titel im Sticky-Header aus. Nützlich für benutzerdefinierte H1s. |
+| `bodyClass` | `String` | Fügt dem `<body>`-Tag eine benutzerdefinierte CSS-Klasse hinzu. |
 
 ## Layout-Steuerung
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `layout` | `String` | Auf `full` setzen, um die volle Inhaltsbreite zu nutzen und die Inhaltsverzeichnis-Sidebar (TOC) auszublenden. |
+| `layout` | `String` | Auf `full` setzen, um maximale Breite zu nutzen und die TOC-Sidebar auszublenden. |
 | `toc` | `Boolean` | Auf `false` setzen, um das Inhaltsverzeichnis vollständig zu deaktivieren. |
-| `noStyle` | `Boolean` | Deaktiviert die gesamte `docmd`-Benutzeroberfläche (Sidebar, Header, Footer) für benutzerdefinierte Seiten. |
-| `titleAppend` | `Boolean` | Auf `false` setzen, um zu verhindern, dass der Seitentitel an den HTML-`<title>`, OpenGraph (`og:title`) und Twitter-Metadaten-Tags angehängt wird. Standard: `true`. |
+| `noStyle` | `Boolean` | Deaktiviert die gesamte UI (Sidebar, Header, Footer) für benutzerdefinierte Seiten. |
+| `titleAppend` | `Boolean` | Auf `false` setzen, um zu verhindern, dass der Site-Titel an Metatags angehängt wird. Standard ist `true`. |
 
 ### `noStyle`-Komponentensteuerung
 
-Wenn `noStyle: true` aktiv ist, müssen Sie sich explizit für die Komponenten entscheiden, die Sie beibehalten möchten:
+Wenn `noStyle: true` aktiv ist, müssen Sie sich für die Komponenten entscheiden, die Sie behalten möchten.
 
 ```yaml
 ---
 noStyle: true
 components:
-  meta: true      # Fügt SEO-Metadaten ein
-  favicon: true   # Fügt das Website-Favicon ein
-  css: true       # Fügt docmd-main.css ein
-  theme: true     # Fügt Theme-spezifisches Styling ein
-  highlight: true # Fügt Syntax-Highlighting ein
-  scripts: true   # Fügt die SPA-Router-Logik ein
-  sidebar: true   # Fügt die Navigations-Sidebar ein
-  footer: true    # Fügt den Website-Footer ein
+  meta: true      # SEO-Metadaten einfügen
+  favicon: true   # Site-Favicon einfügen
+  css: true       # docmd-main.css einfügen
+  theme: true     # Themenspezifisches Styling einfügen
+  highlight: true # Syntax-Highlighting einfügen
+  scripts: true   # SPA-Router-Logik einfügen
+  sidebar: true   # Navigations-Sidebar einfügen
+  footer: true    # Site-Footer einfügen
 ---
 ```
 
 ## Plugin-Überschreibungen
 
 ### SEO (`seo`)
-*   `image`: Benutzerdefinierte URL für das Vorschaubild in sozialen Medien für diese Seite.
-*   `aiBots`: Auf `false` setzen, um speziell KI-Crawler von dieser Seite zu blockieren.
-*   `canonicalUrl`: Legt einen benutzerdefinierten kanonischen Link für SEO fest.
+*   `image`: Benutzerdefinierte Social-Share-Bild-URL für die Seite.
+*   `aiBots`: Auf `false` setzen, um KI-Crawler für diese Seite zu blockieren.
+*   `canonicalUrl`: Setzt einen benutzerdefinierten kanonischen Link für SEO.

@@ -1,67 +1,75 @@
 ---
 title: "Markdown 语法基础"
-description: "掌握 docmd 的基础格式规则：标题、排版样式和技术块。"
+description: "适用于所有 docmd 内容的基线格式规则：排版、结构、列表与表格。"
 ---
 
-`docmd` 遵循标准 **GitHub Flavored Markdown (GFM)** 规范。本指南建立了在整个文档网站中编写核心内容的基准标准。
+`docmd` 遵循标准的 **GitHub 风格 Markdown (GFM)** 规范。本页涵盖适用于您项目中每个页面的核心格式原语。
 
-## 排版样式
+## 排版
 
-| 属性 | Markdown 语法 | 视觉效果 |
+| 样式 | 语法 | 渲染效果 |
 | :--- | :--- | :--- |
-| **强调** | `**Text**` | **粗体技术术语** |
-| **斜体** | `*Text*` | *斜体变量* |
-| **删除线** | `~~Text~~` | ~~已废弃逻辑~~ |
-| **内联代码** | `` `code` `` | `engine.initialize()` |
+| **加粗** | `**text**` | **强调** |
+| *斜体* | `*text*` | *弱化强调* |
+| ~~删除线~~ | `~~text~~` | ~~已弃用内容~~ |
+| `行内代码` | `` `text` `` | `engine.initialise()` |
 
-## 结构元素
+## 标题层级
 
-### 语义化标题层次
+`docmd` 会从您 frontmatter 中的 `title` 字段自动派生出页面的 `<h1>`。请从 `##` 开始构建标题层级。
 
 ```markdown
-# 一级标题（通过 Frontmatter 自动生成）
-## 二级标题（主要章节）
-### 三级标题（功能细节）
+## 二级 - 主要章节
+### 三级 - 功能细节
+#### 四级 - 子细节
 ```
 
-::: callout tip "AI 逻辑完整性"
-高级 AI 模型和搜索索引器依靠严格的标题层次结构来建立对项目的精确理解。避免"跳级标题"（如从 H2 直接跳到 H4），可确保 `llms-full.txt` 上下文流在时序和逻辑上保持连贯。
+::: callout tip "AI 的逻辑完整性"
+AI 模型与搜索引擎依赖严格的标题层级来构建您项目的精确心智模型。避免跳过层级（例如从 `##` 跳到 `####`），以保持 `llms-full.txt` 上下文流的逻辑清晰。
 :::
 
-### 导航与引用
+## 列表
 
-内部文档节点和外部资源均使用标准链接语法。
+使用无序列表表示可扫描的项目，使用有序列表表示顺序步骤。对于编号教程，请考虑使用更具表现力的 [Steps 容器](../containers/steps.md)。
 
 ```markdown
-[外部资源](https://docmd.io)
-[内部模块](../api/node-api.md)
+*   无序项
+*   另一个项
+
+1.  第一步
+2.  第二步
 ```
 
-### 枚举与列表
+## 引用块
 
-*   **无序列表**：使用 `*` 或 `-` 创建易于扫描的项目符号。
-*   **有序逻辑**：使用 `1.`、`2.` 等表示有序步骤。（对于教程，建议使用高级**[步骤容器](../containers/steps)**。)
+标准的 `>` 语法用于突出外部引用或背景上下文。
 
-## 技术块级元素
-
-### 引用块
-标准 `>` 语法非常适合突出显示外部引用或背景上下文。
+```markdown
+> docmd 引擎重新定义了静态站点生成与动态应用交付之间的边界。
+```
 
 > docmd 引擎重新定义了静态站点生成与动态应用交付之间的边界。
 
-### 数据表格
+## 表格
 
-| 属性 | 数据类型 | 默认值 |
+```markdown
+| 参数 | 类型 | 默认值 |
+| :--- | :--- | :--- |
+| `name` | `string` | `undefined` |
+| `active` | `boolean` | `true` |
+```
+
+| 参数 | 类型 | 默认值 |
 | :--- | :--- | :--- |
 | `name` | `string` | `undefined` |
 | `active` | `boolean` | `true` |
 
-## 原生 HTML 支持
+## 嵌入 HTML
 
-`docmd` 启用了原生 HTML 解析，你可以直接在 Markdown 文件中嵌入复杂布局或特殊样式，满足个性化 UI 需求。
+docmd 启用了原始 HTML 解析。在 Markdown 文件中直接注入自定义布局或独特样式以满足特殊 UI 需求。
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
-  自定义 UI 元素放在这里。
+<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
+  Bespoke UI elements live here.
 </div>
 ```

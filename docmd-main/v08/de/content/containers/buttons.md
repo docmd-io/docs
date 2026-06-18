@@ -1,74 +1,74 @@
 ---
-title: "Buttons"
-description: "Fügen Sie Call-to-Action-Buttons für internes Routing oder externe Ressourcen mit einer einzeiligen Syntax ein."
+title: "Schaltflächen"
+description: "Fügen Sie klare, gut sichtbare Call-to-Actions direkt in Ihre Dokumentation ein."
 ---
 
-Buttons sind einflussreiche UI-Elemente, die für eine prominente Navigation verwendet werden. Im Gegensatz zu Block-Containern ist der `button` **selbstschließend** - er wird in einer einzigen Zeile definiert und benötigt kein schließendes `:::`-Tag.
+Schaltflächen sind interaktive Komponenten für Navigation und Call-to-Actions. Sie können auf interne Dokumentationsseiten oder externe Ressourcen verweisen.
 
-## Syntax
+## Syntax-Referenz
 
 ```markdown
-::: button "Beschriftung" Pfad [Optionen]
+::: button "Label text" target_url [property:value...]
 ```
 
-### Optionen-Referenz
-
-| Eigenschaft | Format | Beschreibung |
+| Parameter | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Pfad (Path)** | `/pfad/` | Relative Projekt-URL (wird automatisch für die SPA-Navigation aufgelöst). |
-| **Extern (External)** | `external:URL`| Öffnet die Ziel-URL in einem neuen Browser-Tab (`target="_blank"`). |
-| **Farbe (Color)** | `color:WERT` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). |
-| **Icon** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor der Button-Beschriftung hinzu. |
+| **Pfad** | `/path/` | Relative Projekt-URL. Wird automatisch für die SPA-Navigation aufgelöst. |
+| **Extern** | `external:URL`| Öffnet die Ziel-URL in einem neuen Browser-Tab (`target="_blank"`). |
+| **Farbe** | `color:VALUE` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). |
+| **Symbol** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol vor dem Label hinzu. |
 
-## Anwendungsbeispiele
+## Beispiele
 
-### 1. Interne Navigation
-Verwenden Sie relative Pfade, um nahtlose Übergänge ohne Neuladen innerhalb der `docmd` SPA zu gewährleisten.
+### Interne Navigation
+
+Verwenden Sie relative Markdown-Pfade, um nahtlose Übergänge innerhalb der docmd-SPA sicherzustellen.
+
 ```markdown
-::: button "docmd installieren" /getting-started/installation
+::: button "Install docmd" ../../getting-started/installation.md
 ```
-::: button "docmd installieren" /getting-started/installation
 
-### 2. Link zu externen Ressourcen
-Stellen Sie der URL `external:` voran, um eine sichere externe Verlinkung zu gewährleisten.
-```markdown
-::: button "GitHub-Repository anzeigen" external:https://github.com/docmd-io/docmd
-```
-::: button "GitHub-Repository anzeigen" external:https://github.com/docmd-io/docmd
+::: button "Install docmd" ../../getting-started/installation.md
 
-### 3. Semantisches & Marken-Styling
-Passen Sie Buttons durch Farbüberschreibungen an Ihre Markenidentität oder semantische Priorität an.
-```markdown
-::: button "Gefährliche Aktion" /delete color:crimson
-::: button "Erfolgreiche Bestätigung" /success color:#228B22
-```
-::: button "Gefährliche Aktion" ./#delete color:crimson
-::: button "Erfolgreiche Bestätigung" ./#success color:#228B22
+### Link zu externer Ressource
 
-### 4. Buttons mit Icons
-Fügen Sie ein Lucide-Icon hinzu, um die visuelle Klarheit zu verbessern.
+Stellen Sie `external:` der URL voran, um den Link in einem neuen Tab zu öffnen.
+
 ```markdown
-::: button "Erste Schritte" /getting-started/installation icon:arrow-right
-::: button "Quellcode anzeigen" external:https://github.com/docmd-io/docmd icon:github
+::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
 ```
-::: button "Erste Schritte" /getting-started/installation icon:arrow-right
-::: button "Quellcode anzeigen" external:https://github.com/docmd-io/docmd icon:github
+
+::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
+
+### Styling & Symbole
+
+Passen Sie Schaltflächen mit Farbüberschreibungen und Lucide-Symbolen an Ihre Markenidentität an.
+
+```markdown
+::: button "Success Confirmation" ./#success color:#228B22
+::: button "Danger Action" ./#delete color:crimson icon:alert-circle
+::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+```
+
+::: button "Success Confirmation" ./#success color:#228B22
+::: button "Danger Action" ./#delete color:crimson icon:alert-circle
+::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
 ## Wichtiger Hinweis: Selbstschließende Logik
 
-Da Buttons selbstschließend sind, beendet das Hinzufügen einer abschließenden `:::`-Zeile den **übergeordneten Container** (z. B. eine Card oder ein Tab), in dem sich der Button befindet, was potenziell Ihr Layout zerstören kann.
+Schaltflächen sind selbstschließend. Eine abschließende `:::`-Zeile unmittelbar nach einer Schaltfläche beendet den **übergeordneten Container** (z. B. eine Card oder einen Tab) und kann Ihr Layout beschädigen.
 
-**Falsche Sequenz:**
+**Falsche Reihenfolge:**
 ```markdown
 ::: card "Setup"
-    ::: button "Beginnen" /setup
+    ::: button "Begin" ../../setup.md
     :::        <-- Fehler: Dies schließt die Card vorzeitig.
 :::
 ```
 
-**Richtige Sequenz:**
+**Korrekte Reihenfolge:**
 ```markdown
 ::: card "Setup"
-    ::: button "Beginnen" /setup
-:::        <-- Richtig: Dies schließt die Card.
+    ::: button "Begin" ../../setup.md
+:::        <-- Korrekt: Dies schließt die Card sauber.
 ```

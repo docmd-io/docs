@@ -1,13 +1,13 @@
 ---
 title: "代码块"
-description: "高保真语法高亮与一键复制按钮，清晰呈现技术实现细节。"
+description: "通过语法高亮、文件标题与一键复制功能记录技术实现。"
 ---
 
-`docmd` 使用超快速的 `lite-hl` 引擎，为数百种编程语言和配置格式提供自动、上下文感知的语法高亮。
+docmd 使用超快的 `lite-hl` 引擎实现自动、上下文感知的语法高亮。在每个围栏代码块上指定语言标识符，以确保应用正确的词法规则。
 
 ## 语法高亮
 
-使用标准 Markdown 代码围斜线语法编写技术示例。始终指定语言标识符，确保高亮引擎应用正确的词法规则。
+始终在开头的围栏后指定语言。高亮器会应用该生态系统特有的语法规则。
 
 ````markdown
 ```typescript
@@ -25,7 +25,7 @@ async function build(config: string): Promise<void> {
 
 ## 块标题
 
-在语言标识符后跟一个带引号的文件名，以在块上方渲染标签头。这对于直接引用配置文件和源路径很有用。
+在语言标识符后跟一个带引号的文件名，即可在块上方渲染一个带标签的标题栏。这对于直接引用配置文件与源路径非常有用。
 
 ````markdown
 ```json "docmd.config.json"
@@ -43,22 +43,22 @@ async function build(config: string): Promise<void> {
 }
 ```
 
-::: callout tip "一键复制"
-开启配置中的 `copyCode: true`（默认开启）后，每个代码块右上角悬停时会自动显示复制按鈕，方便用户将代码片段直接复制到 IDE。
-:::
+## 语言支持
+
+docmd 开箱即支持常见的技术生态系统：
+
+*   **逻辑：** `javascript`、`typescript`、`python`、`rust`、`go`、`ruby`、`csharp`
+*   **Web：** `html`、`css`、`markdown`
+*   **数据与 Shell：** `json`、`yaml`、`bash`、`powershell`、`dockerfile`
+*   **文档：** `mermaid`、`changelog`
 
 ## AI 上下文策略
 
-编写面向 LLM 和 AI Agent 的代码文档时，建议遵循以下最佳实践：
+为 AI 智能体记录代码时，请遵循以下实践：
 
-1. **严格语言标注**：明确标注为 `typescript`、`bash` 或 `json`，确保 AI 解析器在 `llms-full.txt` 流中准确解析代码块的语法。
-2. **嵌入意图**：在代码块中使用内联注释解释复杂逻辑背后的原因。这为 AI 提供了关键的推理上下文，而这是代码块外的简单文本难以传达的。
+1.  **明确标注每个块** —— 使用 `typescript`、`bash`、`json`，而不是依赖自动检测。这确保解析器为 `llms.txt` 流应用正确的语法。
+2.  **在注释中嵌入意图** —— 内联注释解释复杂逻辑，并直接在代码内部提供关键的推理上下文。
 
-## 支持的语言
-
-`docmd` 开箱即用地支持最常用的技术生态系统，包括：
-
-*   **逻辑语言**：`javascript`、`typescript`、`python`、`rust`、`go`、`ruby`、`csharp`。
-*   **Web**：`html`、`css`、`markdown`。
-*   **数据与 Shell**：`json`、`yaml`、`bash`、`powershell`、`dockerfile`。
-*   **文档**：`mermaid`、`changelog`。
+::: callout tip "一键可移植性"
+在配置中设置 `copyCode: true` 以启用一个简洁的复制按钮。它会在悬停时出现在每个块的右上角，让读者能够即时复制代码片段。
+:::

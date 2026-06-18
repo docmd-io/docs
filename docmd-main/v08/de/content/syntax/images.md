@@ -1,68 +1,71 @@
 ---
 title: "Bilder & visuelle Medien"
-description: "Meistern Sie das Medienmanagement: Responsive Bilder, Styling-Attribute und automatische Lightbox-Effekte."
+description: "Betten Sie responsive Bilder ein, wenden Sie Styling-Attribute an und aktivieren Sie interaktives Lightbox-Zoomen."
 ---
 
-`docmd` nutzt die Standard-Markdown-Syntax für die Medienintegration. Wir empfehlen, Ihre Medien-Assets im Verzeichnis `assets/images/` innerhalb Ihres Projekt-Quellordners zu zentralisieren.
+docmd verwendet Standard-Markdown-Syntax für Bilder. Zentralisieren Sie Ihre Medien-Assets im `assets/images/`-Verzeichnis innerhalb Ihrer Projektquelle für saubere, konsistente Verweise.
 
 ```markdown
-![Technisches Diagramm](/assets/images/architecture.png "Optionaler Tooltip-Titel")
+![Alt text](/assets/images/architecture.png "Optional tooltip title")
 ```
 
-## Referenz für technisches Styling
+![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
 
-Weisen Sie Ihren Bildern spezielle CSS-Klassen und Attribute direkt mit der Attributsyntax `{ .klasse }` zu.
+## Größenanpassung
 
-### Dynamische Größenanpassung
+Wenden Sie eine Größenklasse mit der `{ }`-Attributsyntax an. Es stehen drei vordefinierte Größen zur Verfügung.
+
 ```markdown
-![Kleines Format](/assets/icon.png){ .size-small }
-![Standardansicht](/assets/preview.png){ .size-medium }
-![Großes Format](/assets/banner.png){ .size-large }
+![Small icon](/assets/icon.png){ .size-small }
+![Standard view](/assets/preview.png){ .size-medium }
+![Full width banner](/assets/banner.png){ .size-large }
 ```
 
-### Ausrichtung & Layout
+## Ausrichtung & Dekoration
+
+Kombinieren Sie Ausrichtungs- und Dekorationsklassen in einem einzigen Attributblock.
+
 ```markdown
-![Zentrierter Fokus](/assets/img.png){ .align-center }
-![Rechtsfließend](/assets/img.png){ .align-right .with-shadow .with-border }
+![Centred diagram](/assets/img.png){ .align-centre }
+![Floating right with shadow](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-![Beispiel für fortgeschrittenes Styling](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-center}
+## Bildunterschriften
 
-## Strukturierte Medienelemente
+Verwenden Sie das Standard-HTML5-`<figure>`-Element für präzise, barrierefreie Bildunterschriften.
 
-### Bildunterschriften (Figure Captions)
-Für präzise, barrierefreie Bildunterschriften verwenden Sie standardmäßige HTML5 `<figure>`-Elemente.
 ```html
 <figure>
-  <img src="/assets/diagram.png" alt="Cloud-Infrastruktur-Diagramm">
-  <figcaption>Abbildung 1.1: Architektur der Kernsystem-Infrastruktur.</figcaption>
+  <img src="/assets/diagram.png" alt="Cloud Infrastructure Diagram">
+  <figcaption>Figure 1.1: Core System Infrastructure Architecture.</figcaption>
 </figure>
 ```
 
-### Bildergalerien
-Organisieren Sie mehrere Assets in einem responsiven, ausgewogenen Raster mit der Klasse `image-gallery`.
+## Bildergalerien
+
+Umschließen Sie mehrere `<figure>` mit einem `div.image-gallery`, um ein responsives, ausgewogenes Raster zu erzeugen.
 
 ```html
 <div class="image-gallery">
   <figure>
-    <img src="/assets/screen1.jpg" alt="Benutzer-Dashboard-Ansicht">
-    <figcaption>Live-Leistungsmonitor</figcaption>
+    <img src="/assets/screen1.jpg" alt="User Dashboard View">
+    <figcaption>Live Performance Monitor</figcaption>
   </figure>
   <figure>
-    <img src="/assets/screen2.jpg" alt="Konfigurationspanel-Ansicht">
-    <figcaption>Globale Projekteinstellungen</figcaption>
+    <img src="/assets/screen2.jpg" alt="Configuration Panel View">
+    <figcaption>Project Global Settings</figcaption>
   </figure>
 </div>
 ```
 
-## Interaktiver Lightbox-Zoom
+## Lightbox-Zoom
 
-Wenn die Komponente `mainScripts` aktiviert ist (Standard), wendet `docmd` automatisch einen Vollbild-Zoomeffekt auf jedes Bild an, das in einer Galerie enthalten ist oder mit der Klasse `.lightbox` markiert wurde.
+Wenn `mainScripts` aktiv ist, wendet docmd automatisch einen Vollbild-Zoomeffekt auf jedes Bild an, das mit der `.lightbox`-Klasse markiert oder in eine Galerie eingefügt ist.
 
 ```markdown
-![Detaillierte Texturanalyse](/assets/sample.png){ .lightbox }
+![Deep texture analysis](/assets/sample.png){ .lightbox }
 ```
 
-::: callout tip "KI-Kontext & Barrierefreiheit"
-Geben Sie immer umfassende **Alt-Texte** für visuelle Medien an. Obwohl fortgeschrittene KI-Modelle über Sehfähigkeiten verfügen, liefert beschreibender Text innerhalb der Markdown-Quelle ein direktes, hochwertiges Signal für die Argumentationsebene des Modells - dies verbessert die Architekturanalyse und das Verständnis von Funktionen im `llms-full.txt`-Stream.
+::: callout tip "KI-Kontext & Barrierefreiheit" icon:sparkles
+Geben Sie immer beschreibenden **Alt-Text** für jedes Bild an. Aussagekräftiger Alt-Text ist ein direktes, hochwertiges Signal für KI-Agenten beim Parsen des `llms.txt`-Streams und verbessert die Barrierefreiheit für Screenreader-Nutzer.
 :::
