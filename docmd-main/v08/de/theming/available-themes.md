@@ -1,11 +1,15 @@
 ---
 title: "Verfügbare Themes"
-description: "Entdecken Sie die integrierten Themes von docmd, darunter Sky, Ruby und Retro. Erfahren Sie, wie Sie Themes mit einer einzigen Konfigurationszeile wechseln."
+description: "Erkunden Sie die eingebauten Themes von docmd, darunter Sky, Ruby und Retro. Lernen Sie, wie Sie mit einer einzigen Konfigurationszeile das Theme wechseln."
 ---
 
-`docmd` bietet eine Reihe von professionell gestalteten Themes mit responsivem Light/Dark-Mode. Sie können die gesamte Ästhetik Ihrer Website durch Ändern eines einzigen Schlüssels in der `docmd.config.json` anpassen.
+::: callout info "Was ist neu in 0.8.7"
+Themes bleiben der einfachste Weg, einer Site eine neue Farbgebung zu geben. Wenn Sie eine andere **Layout-Struktur** benötigen (nicht nur Farben), sehen Sie sich die neue [Templates](templates.md)-Seite an — Templates liegen über den Themes und liefern eigene EJS-Partials sowie CSS/JS-Bundles.
+:::
 
-## So wechseln Sie Themes
+`docmd` bietet eine Reihe professionell gestalteter, hell/dunkel-responsiver Themes. Sie können die gesamte Ästhetik Ihrer Site durch Änderung eines einzigen Schlüssels in `docmd.config.json` umstellen.
+
+## Themes wechseln
 
 ```json
 {
@@ -16,48 +20,37 @@ description: "Entdecken Sie die integrierten Themes von docmd, darunter Sky, Rub
 }
 ```
 
-## Galerie der integrierten Themes
+## Eingebaute Theme-Galerie
 
-| Theme | Bestens geeignet für | Vibe |
+| Theme | Am besten für | Vibes |
 | :--- | :--- | :--- |
-| `default` | Schlichte Dokumentation | Sauber, leichtgewichtig, neutral |
-| `sky` | Produktdokumentation | Modern, hochwertig, Standard |
-| `ruby` | Markenidentität | Anspruchsvoll, Serif-Header, lebendig |
-| `retro` | Entwickler-Tools | 80er-Jahre-Terminals, Monospace, Neon-Akzente |
-
-::: grids
-::: grid
-::: button "Default" javascript:switchDocTheme('default')
-:::
-::: grid
-::: button "Sky" javascript:switchDocTheme('sky')
-:::
-::: grid
-::: button "Ruby" javascript:switchDocTheme('ruby')
-:::
-::: grid
-::: button "Retro" javascript:switchDocTheme('retro')
-:::
-:::
+| `default` | Zurückhaltende Doku | Sauber, leichtgewichtig, neutral |
+| `sky` | Produktdokumentation | Modern, hochwertig, Standardausgabe |
+| `ruby` | Markenidentität | Anspruchsvoll, Serifen-Header, lebendig |
+| `retro` | Entwicklertools | 80er-Terminals, Monospace, Neon-Akzente |
 
 ### 1. `default`
-Genau das Theme, das für diese Dokumentationsseite verwendet wird. Nutzen Sie dieses, wenn Sie umfangreiches benutzerdefiniertes CSS hinzufügen möchten und keine störenden integrierten Designschichten wünschen.
+Genau das Theme, das für diese Dokumentations-Site verwendet wird. Verwenden Sie dies, wenn Sie umfangreiches eigenes CSS hinzufügen möchten und nicht möchten, dass eingebaute Designebenen stören.
 
 ### 2. `sky`
-Der Goldstandard für moderne Dokumentation. Es bietet klare Typografie, subtile Übergänge und kontrastreiche Light/Dark-Modi, die zu modernen SaaS-Plattformen passen.
+Ein moderner Dokumentations-Look mit klarer Typografie, subtilen Übergängen und kontrastreichen Hell-/Dunkel-Modi.
 
 ### 3. `ruby`
-Ein hochelegantes Theme mit Serif-Typografie für Überschriften und einer tiefen, juwelenfarbenen Farbpalette. Perfekt für Dokumentationen, die autoritär und hochwertig wirken sollen.
+Ein von Serifen getriebenes Theme mit einer tiefen, juweltonigen Palette. Gut für Dokumentation, die Autorität ausstrahlen soll.
 
 ### 4. `retro`
-Ein von Nostalgie geprägtes Theme, inspiriert von klassischem Computing. Zu den Merkmalen gehören phosphorgrüner Text auf schwarzem Hintergrund (im Dark Mode), Scanline-Effekte und Monospace-Schriftarten wie Fira Code als Standard.
+Ein Vintage-Computing-inspiriertes Theme mit Phosphor-grünem Text auf schwarzem Hintergrund (Dunkelmodus), Scanline-Effekten und Monospace-Schriftarten (standardmäßig Fira Code).
+
+::: callout warning "Reservierte Namen — nicht für Template-Namen verwenden"
+Die vier oben genannten Werte (`default`, `sky`, `ruby`, `retro`) sind die einzigen reservierten CSS-Theme-Namen. Jeder andere Wert in `theme.name` wird automatisch zu einem Template-Namen hochgestuft (siehe [Templates](templates.md)). Wenn Sie einen CSS-Theme-ähnlichen Namen auf einem Template verwenden möchten, setzen Sie stattdessen explizit `theme.template`.
+:::
 
 ## Theme-Architektur
 
-1.  **CSS-Layering**: Themes sind additiv. Die Wahl von `sky` lädt tatsächlich die Basisstile von `default` und legt dann die `sky`-Ästhetik darüber.
-2.  **Nativer Dark-Mode**: Jedes Theme enthält eine erstklassige Dark-Mode-Implementierung.
-3.  **Kein Refresh**: Wenn Benutzer Themes über die UI wechseln, aktualisiert die SPA-Engine die `--docmd-primary`-Variablen sofort ohne Neuladen der Seite.
+1.  **CSS-Layering**: Themes sind additiv. Die Wahl von `sky` lädt die Basisstile von `default` und überlagert die `sky`-Palette.
+2.  **Dunkelmodus**: Jedes Theme enthält eine eingebaute Dunkelmodus-Implementierung.
+3.  **Live-Switching**: Wenn Nutzer Themes über die UI wechseln, aktualisiert die SPA-Engine die relevanten CSS-Variablen ohne Seiten-Neuladen.
 
 ::: callout tip
-Wenn Sie Ihr Dokumentationslayout einem KI-Entwickler-Tool beschreiben, hilft die Erwähnung Ihres Themes (z. B. "Ich verwende das `retro`-Theme") dem Modell, benutzerdefinierte CSS-Überschreibungen vorzuschlagen, die zum Variablenschema dieses spezifischen Themes passen.
+Die CSS-Variablennamen unterscheiden sich leicht zwischen den Themes (zum Beispiel existiert `--sky-primary` nur unter `sky`). Wenn Sie bei der Frage nach Hilfe zu eigenem CSS Ihren Theme-Namen erwähnen, bleiben Vorschläge korrekt.
 :::

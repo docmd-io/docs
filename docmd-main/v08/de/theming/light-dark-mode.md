@@ -1,13 +1,13 @@
 ---
 title: "Hell- & Dunkelmodus"
-description: "So konfigurieren Sie den Standard-Ansichtsmodus und verwalten den Theme-Umschalter für die beste Benutzererfahrung."
+description: "So konfigurieren Sie den Standard-Anzeigemodus und verwalten den Theme-Switcher für die beste Nutzererfahrung."
 ---
 
-`docmd` bietet integrierte Unterstützung für helle und dunkle Farbschemata. Es erkennt automatisch die Systemeinstellungen der Benutzer und ermöglicht manuelle Überschreibungen über einen UI-Umschalter.
+`docmd` wird mit hellen und dunklen Farbschemata ausgeliefert. Es folgt automatisch der System-Präferenz des Nutzers und erlaubt es ihm, diese über einen UI-Umschalter zu überschreiben.
 
-## Standard-Ansichtsmodus
+## Standard-Anzeigemodus
 
-Sie legen den Anfangszustand Ihrer Dokumentation in der `docmd.config.json` fest.
+Sie legen den Anfangszustand Ihrer Dokumentation in `docmd.config.json` fest.
 
 ```json
 {
@@ -18,13 +18,13 @@ Sie legen den Anfangszustand Ihrer Dokumentation in der `docmd.config.json` fest
 }
 ```
 
-*   **`system`**: Entspricht der Betriebssystem-Präferenz des Benutzers (Empfohlen).
+*   **`system`** (Standard): Entspricht der OS-Präferenz des Nutzers (empfohlen).
 *   **`light`**: Erzwingt den Hellmodus beim ersten Laden.
 *   **`dark`**: Erzwingt den Dunkelmodus beim ersten Laden.
 
-## Konfiguration der Umschalt-Schaltfläche
+## Umschalter konfigurieren
 
-Der Theme-Umschalter ist Teil des **Optionsmenüs**. Sie können dessen Sichtbarkeit und Position innerhalb des `layout`-Objekts steuern.
+Der Theme-Switcher ist Teil des **Optionsmenüs**. Sie können seine Sichtbarkeit und Position im `layout`-Objekt steuern.
 
 ```json
 {
@@ -39,32 +39,32 @@ Der Theme-Umschalter ist Teil des **Optionsmenüs**. Sie können dessen Sichtbar
 }
 ```
 
-## Funktionsweise (Technisch)
+## Funktionsweise
 
-Die Theme-Engine wendet ein `data-theme`-Attribut auf das `<body>`-Tag an:
+Die Engine wendet ein `data-theme`-Attribut auf das `<body>`-Tag an:
 
 *   `<body data-theme="light">`
 *   `<body data-theme="dark">`
 
-Wenn Sie ein themenbasiertes Design wie `sky` verwenden, lautet das Attribut `sky-light` oder `sky-dark`.
+Wenn Sie ein themed Design wie `sky` verwenden, wird das Attribut zu `sky-light` oder `sky-dark`.
 
 ### CSS-Variablen
-`docmd`-Themes verwenden CSS-Variablen für alle Farben. Sie können diese Variablen in Ihrem eigenen CSS überschreiben, um das Aussehen beider Modi anzupassen.
+
+Themes verwenden für alle Farben CSS-Variablen. Überschreiben Sie sie in Ihrem eigenen CSS, um einen der beiden Modi neu zu stylen.
 
 ```css
-/* Benutzerdefinierte CSS-Überschreibung */
 :root {
-  --docmd-primary: #4f46e5; /* Primärer Akzent für Hellmodus */
+  --docmd-primary: #4f46e5; /* Primärer Akzent für den Hellmodus */
 }
 
-body[data-theme="dark"] {
-  --docmd-primary: #818cf8; /* Primärer Akzent für Dunkelmodus */
+html[data-theme="dark"] {
+  --docmd-primary: #818cf8; /* Primärer Akzent für den Dunkelmodus */
 }
 ```
 
-## Benutzer-Persistenz
-Wenn ein Benutzer den Modus manuell umschaltet, wird seine Präferenz im `localStorage` gespeichert. `docmd` liest diesen Wert bei jedem Seitenladen sofort aus, um "Theme-Flackern" (FOUC) zu verhindern.
+## Nutzerpersistenz
+Wenn ein Nutzer den Modus manuell umschaltet, wird seine Präferenz in `localStorage` gespeichert. `docmd` liest diesen Wert bei jedem Seitenaufruf sofort, um „Theme-Flickering" (FOUC) zu verhindern.
 
 ::: callout tip
-Bei der Generierung von Inhalten bevorzugen LLMs kontrastreiche Strukturen. `docmd` stellt sicher, dass Code-Snippets und Callouts in beiden Modi barrierefrei bleiben. Dies gewährleistet, dass `llms-full.txt`-Payloads als semantische Blöcke korrekt verstanden werden, unabhängig davon, welcher Modus während des Builds aktiv war.
+Bei der Inhaltserstellung bevorzugen LLMs hochkontrastreiche Strukturen. `docmd` stellt sicher, dass Code-Snippets und Callouts in beiden Modi zugänglich bleiben, sodass `llms-full.txt`-Payloads korrekt als semantische Blöcke verstanden werden, unabhängig davon, welcher Modus beim Build aktiv war.
 :::

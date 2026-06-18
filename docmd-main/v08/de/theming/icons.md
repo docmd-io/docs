@@ -1,13 +1,13 @@
 ---
 title: "Icons"
-description: "So verwenden und passen Sie Lucide-Icons in Ihrer Dokumentation an."
+description: "So verwenden und anpassen Sie Lucide-Icons in Ihrer Dokumentation."
 ---
 
-`docmd` verfügt über integrierte Unterstützung für die [Lucide](external:https://lucide.dev/)-Icon-Bibliothek. Icons können in Ihrer Navigations-Seitenleiste, in Buttons und in benutzerdefinierten Komponenten verwendet werden, um visuelle Hinweise zu geben und die Scannbarkeit zu verbessern.
+`docmd` bietet eingebaute Unterstützung für die [Lucide](external:https://lucide.dev/)-Icon-Bibliothek. Icons können in Ihrer Navigations-Sidebar, in Buttons und in benutzerdefinierten Komponenten verwendet werden, um visuelle Hinweise zu liefern und die Scanbarkeit zu verbessern.
 
 ## Navigations-Icons
 
-Weisen Sie jedem Navigationselement in Ihrer `docmd.config.json` ein Icon zu. Verwenden Sie den Kebab-Case-Namen eines beliebigen Icons, das Sie auf der Lucide-Website finden.
+Weisen Sie in Ihrer `docmd.config.json` jedem Navigationselement ein Icon zu. Verwenden Sie den kebab-case-Namen eines Icons, das Sie auf der Lucide-Website finden.
 
 ```json
 {
@@ -20,7 +20,7 @@ Weisen Sie jedem Navigationselement in Ihrer `docmd.config.json` ein Icon zu. Ve
 
 ## Icons in Containern
 
-Sie können Icons auch innerhalb Ihrer Buttons, Tags, Tabs und anderen Containern verwenden, indem Sie den rohen HTML-Code einbinden oder das standardmäßige `icon:`-Präfix in docmd nutzen.
+Sie können Icons auch in Buttons, Tags, Tabs und anderen Containern verwenden, indem Sie rohen HTML-Code einfügen oder den Standard-`icon:`-Präfix docmd-übergreifend nutzen.
 
 ```markdown
 ::: button "Download" /download icon:download
@@ -28,7 +28,7 @@ Sie können Icons auch innerhalb Ihrer Buttons, Tags, Tabs und anderen Container
 
 ## CSS-Styling
 
-Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie können deren Größe oder Linienstärke global in Ihrem `customCss` ändern:
+Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie können deren Größe oder Strichstärke global in Ihrem `customCss` ändern:
 
 ```css
 .lucide-icon {
@@ -37,7 +37,7 @@ Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie k
   height: 1.2rem;
 }
 
-/* Gezielte Anpassung eines Icons */
+/* Ein bestimmtes Icon ansprechen */
 .icon-rocket {
   color: #ff5733;
 }
@@ -45,6 +45,6 @@ Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie k
 
 ## Icon-Referenz
 
-Wir unterstützen die gesamte Lucide-Bibliothek. Sie können die Tausenden von verfügbaren Icons hier durchsuchen:
+Wir unterstützen die gesamte Lucide-Bibliothek. Sie können hier durch die tausenden verfügbaren Icons stöbern:
 
-::: button "Lucide-Icons durchsuchen" external:https://lucide.dev/icons icon:globe
+::: button "Lucide-Icons durchstöbern" external:https://lucide.dev/icons icon:globe
