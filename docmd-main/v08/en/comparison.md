@@ -99,7 +99,7 @@ Teams that maintain multiple products under one domain (for example, a core plat
 | Zero-config detection | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 ::: callout info "How docmd does it" icon:info
-```json
+```json "docmd.config.json"
 {
   "workspace": {
     "projects": [

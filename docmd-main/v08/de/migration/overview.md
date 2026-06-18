@@ -1,58 +1,58 @@
 ---
-title: "Migrationsübersicht"
-description: "Erfahren Sie, wie Sie Ihre bestehende Dokumentation einfach auf docmd migrieren können."
+title: "Migrations-Übersicht"
+description: "Erfahren Sie, wie Sie Ihre bestehende Dokumentation einfach zu docmd migrieren."
 ---
 
-# Migration zu docmd
+# Zu docmd migrieren
 
-`docmd` bietet eine vollautomatische **Migrations-Engine**, mit der Sie mit nur einem einzigen Befehl von alten oder konkurrierenden Dokumentationsplattformen wechseln können. Das Ziel der Migrations-Engine ist es, Ihnen die mühsame Arbeit des Verschiebens von Markdown-Dateien und der Umstrukturierung Ihres Projektverzeichnisses abzunehmen.
+docmd bietet eine vollständig automatisierte **Migration-Engine**. Wechseln Sie mit einem einzigen Befehl von Legacy-Plattformen. Die Engine eliminiert die mühselige Arbeit, Markdown-Dateien zu verschieben und Verzeichnisse umzustrukturieren.
 
 ## Wie es funktioniert
 
-Der Migrationsbefehl führt Folgendes aus:
+Der Migrate-Befehl wird:
 
-1. **Erkennt** Ihre bestehende Konfigurationsdatei (z.B. `docusaurus.config.js`, `mkdocs.yml`).
-2. **Extrahiert** grundlegende Metadaten wie den `title` Ihrer Website.
-3. **Sichert** Ihre bestehenden Dateien und Verzeichnisse sicher in einem `*-backup/`-Verzeichnis (z.B. `docusaurus-backup/`).
-4. **Kopiert** Ihre Markdown-Inhalte in das standardmäßige `docmd` `docs/`-Verzeichnis.
-5. **Erzeugt** eine neue, speziell auf Ihre Inhalte zugeschnittene `docmd.config.json`.
+1.  **Erkennen** Ihrer bestehenden Konfigurationsdatei (z. B. `docusaurus.config.js`, `mkdocs.yml`).
+2.  **Extrahieren** von Kern-Metadaten wie dem `title` Ihrer Site.
+3.  **Sichern** Ihrer bestehenden Dateien und Verzeichnisse sicher in einem `*-backup/`-Verzeichnis.
+4.  **Kopieren** Ihrer Markdown-Inhalte in das Standard `docs/`-Verzeichnis von docmd.
+5.  **Generieren** einer frischen `docmd.config.json`, die auf Ihre Inhalte zugeschnitten ist.
 
-Anschließend können Sie direkt `npx @docmd/core dev` ausführen, um Ihre Inhalte sofort in der `docmd`-Engine zu sehen.
+Sie können dann sofort `npx @docmd/core dev` ausführen, um Ihre Inhalte gerendert zu sehen.
 
-## Was wird migriert?
+## Was migriert wird
 
-| Funktion | Automatisch migriert? |
+| Feature | Automatisch migriert? |
 | :--- | :--- |
 | **Markdown-Dateien** | ✅ Ja, alle `.md` und `.mdx` Dateien werden nach `docs/` verschoben |
 | **Verzeichnisstruktur** | ✅ Ja, Ihre Ordner-Verschachtelung bleibt erhalten |
-| **Website-Titel** | ✅ Ja, aus Ihrer Konfiguration extrahiert |
+| **Site-Titel** | ✅ Ja, aus Ihrer Konfiguration extrahiert |
 | **Container-Syntax** | ✅ Ja, VitePress/Docusaurus-Container funktionieren ohne Änderungen |
-| **Navigation / Sidebar** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
-| **Lokalisierung (i18n)** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
-| **Versionierung** | ⚠️ **Nein**, erfordert eine manuelle Zuordnung |
-| **Eigene React/Vue-Komponenten** | ❌ Nein, diese müssen durch `docmd` Container ersetzt werden |
+| **Navigation / Sidebar** | ⚠️ **Nein**, erfordert manuelles Mapping |
+| **Lokalisierung (i18n)** | ⚠️ **Nein**, erfordert manuelles Mapping |
+| **Versionierung** | ⚠️ **Nein**, erfordert manuelles Mapping |
+| **Eigene React/Vue-Komponenten** | ❌ Nein, diese müssen durch docmd-Container ersetzt werden |
 
-::: callout success "Container-Syntax-Kompatibilität"
-Ab `docmd` 0.7.8 funktioniert die Container-Syntax von **VitePress** (`:::tip`, `:::warning`, `:::danger`, `:::info`, `:::details`) und **Docusaurus** (`:::note`, `:::caution`) ohne Änderung. Ihre bestehenden Admonitions und ausklappbaren Abschnitte werden in `docmd` korrekt gerendert.
+::: callout success "Kompatibilität der Container-Syntax"
+Container-Syntax von **VitePress** (`:::tip`, `:::warning`, `:::danger`, `:::info`, `:::details`) und **Docusaurus** (`:::note`, `:::caution`) funktioniert ohne Modifikation. Ihre bestehenden Admonitions und Collapsible-Sections werden in docmd korrekt gerendert.
 
-**MkDocs** verwendet `!!!`-Syntax, die eine manuelle Konvertierung in das `:::`-Format erfordert.
+**MkDocs** verwendet `!!!`-Syntax, die manuelle Konvertierung in das `:::`-Format erfordert.
 :::
 
 ## Warum Navigation und i18n nicht automatisch migriert werden
 
-Jede Dokumentationsplattform behandelt Navigations-Sidebars, Übersetzungen und Multi-Versionierung unterschiedlich. Beispielsweise verwendet Docusaurus komplexe JavaScript-Objekte oder automatisch generierte Sidebars, während MkDocs auf strikt eingerückte YAML-Strukturen setzt.
+Jede Plattform behandelt Navigations-Sidebars, Übersetzungen und Mehrfach-Versionierung anders. Beispielsweise verwendet Docusaurus komplexe JavaScript-Objekte. MkDocs verlässt sich auf streng eingerückte YAML-Strukturen.
 
-Um fehlerhafte Migrationen durch das Erraten komplexer Konfigurationen zu vermeiden, verschiebt `docmd` Ihre Inhalte sicher und bittet Sie darum, die Navigation, Lokalisierung und Versionierung mithilfe der einfachen JSON-basierten APIs von `docmd` nativ zu konfigurieren.
+Anstatt eine fehlerhafte Migration durch das Erraten komplexer Konfigurationen zu riskieren, verschiebt docmd Ihre Inhalte sicher. Sie müssen Navigation, Lokalisierung und Versionierung nativ mit docmds JSON-basierten APIs konfigurieren.
 
-- **Navigation:** Erfahren Sie unter [Navigations-Setup](../configuration/navigation.md), wie Sie eine `navigation.json` erstellen.
-- **Lokalisierung:** Lesen Sie den [Leitfaden zur Lokalisierung](../configuration/localisation/index.md), um mehrsprachige Dokumentationen einzurichten.
-- **Versionierung:** Beziehen Sie sich auf das [Versions-Setup](../configuration/versioning.md).
+- **Navigation:** Erfahren Sie, wie Sie eine `navigation.json` in der [Navigations-Einrichtung](../configuration/navigation.md) erstellen.
+- **Lokalisierung:** Siehe [Lokalisierungs-Leitfaden](../configuration/localisation/index.md) zur Einrichtung mehrsprachiger Dokumentation.
+- **Versionierung:** Siehe [Versionierungs-Einrichtung](../configuration/versioning.md).
 
 ## Unterstützte Plattformen
 
-Wählen Sie Ihre aktuelle Plattform für spezifische Migrationsanweisungen aus:
+Wählen Sie Ihre aktuelle Plattform für spezifische Migrations-Anweisungen:
 
-- [Von Docusaurus migrieren](./docusaurus.md)
-- [Von MkDocs migrieren](./mkdocs.md)
-- [Von VitePress migrieren](./vitepress.md)
-- [Von Astro Starlight migrieren](./starlight.md)
+- [Migration von Docusaurus](./docusaurus.md)
+- [Migration von MkDocs](./mkdocs.md)
+- [Migration von VitePress](./vitepress.md)
+- [Migration von Astro Starlight](./starlight.md)

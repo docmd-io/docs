@@ -1,55 +1,55 @@
 ---
-title: "Von VitePress migrieren"
-description: "Ein umfassender Leitfaden zur Migration Ihres VitePress-Projekts zu docmd."
+title: "Migration von VitePress"
+description: "Ein umfassender Leitfaden zur Überführung Ihres VitePress-Projekts zu docmd."
 ---
 
-# Von VitePress migrieren zu docmd
+# Migration von VitePress zu docmd
 
-VitePress ist ein schnelles, Vue-basiertes SSG-Framework. Genau wie VitePress ist `docmd` außergewöhnlich schnell, erreicht dies jedoch, indem absolut keine JavaScript-Framework-Logik an den Client ausgeliefert wird (kein Overhead durch Vue-Hydration).
+VitePress ist ein schnelles, Vue-basiertes SSG-Framework. docmd ist ebenso schnell, liefert jedoch keine JavaScript-Framework-Logik an den Client aus. Das eliminiert den Vue-Hydration-Overhead.
 
-## Schritt 1: Führen Sie die Migrations-Engine aus
+## Schritt 1: Migrations-Engine ausführen
 
-Führen Sie den folgenden Befehl im Hauptverzeichnis Ihres bestehenden VitePress-Projekts aus:
+Führen Sie den folgenden Befehl im Stammverzeichnis Ihres bestehenden VitePress-Projekts aus:
 
 ```bash
 npx @docmd/core migrate --vitepress
 ```
 
-### Was passiert automatisch
+### Was automatisch passiert
 
-1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues `vitepress-backup/`-Verzeichnis verschoben.
-2.  **Inhaltsmigration**: Ihr `docs/`-Ordner wird im Stammverzeichnis wiederhergestellt, damit `docmd` ihn verwenden kann. Der versteckte `.vitepress`-Konfigurationsordner wird vollständig aus dem neuen `docs/`-Verzeichnis entfernt, um Konflikte zu vermeiden.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.json` wird generiert, die Ihren Website-`title` aus Ihrer `.vitepress/config.js` oder `.ts` extrahiert.
+1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues Verzeichnis `vitepress-backup/` verschoben.
+2.  **Content-Migration**: Ihr `docs/`-Ordner wird in das Stammverzeichnis zurückgespielt, damit docmd ihn verwenden kann. Der versteckte Konfigurationsordner `.vitepress` wird vollständig entfernt, um Konflikte zu vermeiden.
+3.  **Config-Generierung**: Eine `docmd.config.json` wird generiert, die den `title` Ihrer Site aus `.vitepress/config.js` oder `.ts` extrahiert.
 
-## Schritt 2: Testen Sie das Setup
+## Schritt 2: Setup testen
 
-Sobald der Befehl abgeschlossen ist, können Sie Ihre Inhalte in `docmd` in der Vorschau anzeigen:
+Sobald der Befehl abgeschlossen ist, können Sie Ihre Inhalte in docmd in der Vorschau anzeigen:
 
 ```bash
 npx @docmd/core dev
 ```
 
-Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar bleibt zunächst leer.
+Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar wird leer sein.
 
 ## Schritt 3: Manuelle Konfiguration
 
-VitePress konfiguriert die Navigation in seiner Konfigurationsdatei und verwendet Vue-Komponenten innerhalb von Markdown. Sie müssen diese auf `docmd` umstellen.
+VitePress konfiguriert die Navigation in seiner Konfigurationsdatei und verwendet Vue-Komponenten innerhalb von Markdown. Sie müssen diese für docmd übersetzen.
 
-### 1. Navigations-Setup
+### 1. Navigations-Einrichtung
 
-VitePress verwendet ein Array von Objekten unter `themeConfig.sidebar`.
+VitePress verwendet ein Array von Objekten in `themeConfig.sidebar`.
 
-**Aktion erforderlich:** Erstellen Sie eine `navigation.json` in Ihrem `docs/`-Verzeichnis.
+**Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem `docs/`-Verzeichnis.
 
 **VitePress (`.vitepress/config.js`):**
-```js
+```javascript
 themeConfig: {
-  sidebar: [
+  "sidebar": [
     {
-      text: 'Guide',
-      items: [
-        { text: 'Introduction', link: '/introduction' },
-        { text: 'Getting Started', link: '/getting-started' }
+      "text": "Leitfaden",
+      "items": [
+        { "text": "Einführung", "link": "/introduction" },
+        { "text": "Erste Schritte", "link": "/getting-started" }
       ]
     }
   ]
@@ -57,14 +57,14 @@ themeConfig: {
 ```
 
 **docmd (`navigation.json`):**
-```json
+```json "navigation.json"
 [
   {
-    "title": "Guide",
+    "title": "Leitfaden",
     "collapsible": true,
     "children": [
-      { "title": "Introduction", "path": "/introduction" },
-      { "title": "Getting Started", "path": "/getting-started" }
+      { "title": "Einführung", "path": "/introduction" },
+      { "title": "Erste Schritte", "path": "/getting-started" }
     ]
   }
 ]
@@ -72,29 +72,40 @@ themeConfig: {
 
 ### 2. Vue-Komponenten ersetzen
 
-VitePress erlaubt es Autoren, Vue-Komponenten (z. B. `<MyComponent />`) direkt in Markdown-Dateien einzubetten. Da `docmd` Vue nicht auf dem Client ausführt, müssen Sie diese benutzerdefinierten Komponenten entfernen oder durch natives Markdown ersetzen.
+VitePress erlaubt Autoren, Vue-Komponenten direkt in Markdown-Dateien einzubetten. Da docmd Vue nicht auf dem Client ausführt, müssen Sie benutzerdefinierte Komponenten entfernen oder durch natives Markdown ersetzen.
 
-**Aktion erforderlich:** Ersetzen Sie Vue-spezifische UI-Komponenten durch `docmd` [Container](../content/containers/callouts.md).
+**Erforderliche Aktion:** Ersetzen Sie Vue-spezifische UI-Komponenten durch docmd [Container](../content/containers/callouts.md).
 
-#### Beispiel: Admonitions (Benutzerdefinierte Container)
+#### Beispiel: Admonitions (benutzerdefinierte Container)
 
-VitePress verwendet eine benutzerdefinierte Block-Syntax für markdown-it, die der von `docmd` sehr ähnlich sieht.
+VitePress verwendet eine markdown-it-Custom-Block-Syntax, die docmd ähnlich sieht.
 
 **VitePress:**
 ```markdown
 ::: info
-This is an info box.
+Dies ist eine Info-Box.
 :::
 ```
 
 **docmd:**
 ```markdown
 ::: info
-This is an info box.
+Dies ist eine Info-Box.
 :::
 ```
-*Hinweis: VitePress verwendet `info`, `tip`, `warning`, `danger`, `details`. `docmd` unterstützt diese direkt, aber Sie möchten sich möglicherweise die vollständige Liste der [docmd Callouts](../content/containers/callouts.md) ansehen.*
+
+::: callout success "Keine Änderungen erforderlich"
+VitePress-Container-Syntax funktioniert **ohne jede Modifikation**. Die folgenden Aliase werden vollständig unterstützt:
+- `:::tip` → rendert als `callout tip`
+- `:::warning` → rendert als `callout warning`
+- `:::danger` → rendert als `callout danger`
+- `:::info` → rendert als `callout info`
+- `:::details` → rendert als `collapsible`
+
+Auch die spacing-freie Syntax wird unterstützt. Ihre bestehenden VitePress-Inhalte werden in docmd ohne Änderungen korrekt gerendert.
+:::
 
 ## Nächste Schritte
 
-- Entdecken Sie den `docmd`-Leitfaden [Bauen & Bereitstellen](../deployment/index.md), da `docmd` nicht auf die Build-Pipeline von Vite angewiesen ist.
+- Erkunden Sie docmds [Build & Deploy](../deployment/index.md)-Leitfaden. docmd ist nicht auf Vites Build-Pipeline angewiesen.
+- Überprüfen Sie die vollständige Liste der [docmd-Container](../content/containers/index.md) für zusätzliche UI-Komponenten.

@@ -1,64 +1,64 @@
 ---
-title: "Von Astro Starlight migrieren"
-description: "Ein umfassender Leitfaden zur Migration Ihres Astro Starlight-Projekts zu docmd."
+title: "Migration von Astro Starlight"
+description: "Ein umfassender Leitfaden zur Überführung Ihres Astro-Starlight-Projekts zu docmd."
 ---
 
-# Von Astro Starlight migrieren zu docmd
+# Migration von Astro Starlight zu docmd
 
-Starlight ist ein hervorragendes Dokumentations-Theme, das auf dem Astro-Framework basiert. `docmd` bietet eine ähnliche Standarderfahrung ohne JavaScript, macht jedoch die Konfiguration eines vollständigen Web-Frameworks (Astro) überflüssig, was die Lernkurve für technische Redakteure drastisch reduziert.
+Starlight ist ein auf Astro basierendes Dokumentations-Theme. docmd bietet eine ähnliche Zero-JavaScript-by-default-Erfahrung. Es eliminiert die Notwendigkeit, ein vollständiges Web-Framework zu konfigurieren, und reduziert so die Lernkurve.
 
-## Schritt 1: Führen Sie die Migrations-Engine aus
+## Schritt 1: Migrations-Engine ausführen
 
-Führen Sie den folgenden Befehl im Hauptverzeichnis Ihres bestehenden Starlight-Projekts aus (dort, wo sich Ihre `astro.config.mjs` befindet):
+Führen Sie den folgenden Befehl im Stammverzeichnis Ihres bestehenden Starlight-Projekts aus:
 
 ```bash
 npx @docmd/core migrate --starlight
 ```
 
-### Was passiert automatisch
+### Was automatisch passiert
 
-1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues `starlight-backup/`-Verzeichnis verschoben.
-2.  **Inhaltsmigration**: Starlight speichert die Dokumentation in `src/content/docs/`. Die Migrations-Engine extrahiert dieses spezifische Verzeichnis automatisch und verschiebt seinen Inhalt zur Nutzung durch `docmd` in den Stammordner `docs/`.
-3.  **Konfigurationsgenerierung**: Eine `docmd.config.json` wird generiert, die Ihren Website-`title` aus der Starlight-Integration innerhalb der `astro.config.mjs` extrahiert.
+1.  **Backup**: Ihr gesamtes Projekt wird sicher in ein neues Verzeichnis `starlight-backup/` verschoben.
+2.  **Content-Migration**: Starlight bewahrt Dokumentation in `src/content/docs/`. Die Migrations-Engine extrahiert dieses Verzeichnis und verschiebt dessen Inhalt in den `docs/`-Ordner im Stammverzeichnis.
+3.  **Config-Generierung**: Eine `docmd.config.json` wird generiert, die den `title` Ihrer Site aus der Starlight-Integration innerhalb von `astro.config.mjs` extrahiert.
 
-## Schritt 2: Testen Sie das Setup
+## Schritt 2: Setup testen
 
-Sobald der Befehl abgeschlossen ist, können Sie Ihre Inhalte in `docmd` in der Vorschau anzeigen:
+Sobald der Befehl abgeschlossen ist, können Sie Ihre Inhalte in docmd in der Vorschau anzeigen:
 
 ```bash
 npx @docmd/core dev
 ```
 
-Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar bleibt zunächst leer.
+Ihre Markdown-Dateien werden kompiliert, aber Ihre Navigations-Sidebar wird leer sein.
 
 ## Schritt 3: Manuelle Konfiguration
 
-### 1. Navigations-Setup
+### 1. Navigations-Einrichtung
 
-Starlight definiert die Navigation in der `astro.config.mjs` über das Array `sidebar`.
+Starlight definiert Navigation in `astro.config.mjs` über das `sidebar`-Array.
 
-**Aktion erforderlich:** Sie müssen eine `navigation.json` in Ihrem neuen `docs/`-Ordner erstellen.
+**Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Ordner.
 
 **Starlight (`astro.config.mjs`):**
-```js
+```javascript
 sidebar: [
   {
-    label: 'Guides',
-    items: [
-      { label: 'Setup', link: '/guides/setup/' }
-    ],
-  },
+    "label": "Leitfäden",
+    "items": [
+      { "label": "Einrichtung", "link": "/guides/setup/" }
+    ]
+  }
 ]
 ```
 
 **docmd (`navigation.json`):**
-```json
+```json "navigation.json"
 [
   {
-    "title": "Guides",
+    "title": "Leitfäden",
     "collapsible": true,
     "children": [
-      { "title": "Setup", "path": "/guides/setup" }
+      { "title": "Einrichtung", "path": "/guides/setup" }
     ]
   }
 ]
@@ -66,9 +66,9 @@ sidebar: [
 
 ### 2. Astro-Komponenten ersetzen (MDX/Markdoc)
 
-Starlight verwendet Astro-Komponenten (`<Tabs>`, `<Card>` usw.), die über MDX oder Markdoc eingebettet sind. Da sich `docmd` auf reine Markdown-Syntax anstelle von UI-Komponenten verlässt, müssen diese konvertiert werden.
+Starlight verwendet Astro-Komponenten, die über MDX oder Markdoc eingebettet werden. Da docmd auf reiner Markdown-Syntax basiert, müssen diese konvertiert werden.
 
-**Aktion erforderlich:** Ersetzen Sie Astro-Komponenten durch `docmd` [Container](../content/containers/callouts.md).
+**Erforderliche Aktion:** Ersetzen Sie Astro-Komponenten durch docmd [Container](../content/containers/callouts.md).
 
 #### Beispiel: Tabs konvertieren
 
@@ -77,43 +77,43 @@ Starlight verwendet Astro-Komponenten (`<Tabs>`, `<Card>` usw.), die über MDX o
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+  <TabItem label="Sterne">Sirius, Vega, Beteigeuze</TabItem>
+  <TabItem label="Monde">Io, Europa, Ganymed</TabItem>
 </Tabs>
 ```
 
 **docmd:**
 ```markdown
 ::: tabs
-== tab "Stars"
-Sirius, Vega, Betelgeuse
+== tab "Sterne"
+Sirius, Vega, Beteigeuze
 
-== tab "Moons"
-Io, Europa, Ganymede
+== tab "Monde"
+Io, Europa, Ganymed
 :::
 ```
 
-#### Beispiel: Admonitions (Asides) konvertieren
+#### Beispiel: Asides (Admonitions) konvertieren
 
 **Starlight:**
 ```mdx
-:::note[Optional Title]
-Some note content.
+:::note[Optionaler Titel]
+Etwas Notiz-Inhalt.
 :::
 ```
 
 **docmd:**
 ```markdown
-::: note "Optional Title"
-Some note content.
+::: note "Optionaler Titel"
+Etwas Notiz-Inhalt.
 :::
 ```
 
-### 3. Frontmatter-Zuordnung
+### 3. Frontmatter-Mapping
 
-Starlight verfügt über eine strikte Frontmatter-Typisierung über Astro Content Collections. Das Frontmatter von `docmd` ist einfacher gehalten.
-Wenn Sie in Starlight `hero`- oder `banner`-Frontmatter-Eigenschaften für Landingpages verwendet haben, müssen Sie diese durch [Hero-Bereiche](../content/containers/hero.md) von `docmd` ersetzen, die direkt in den Markdown-Text geschrieben werden.
+Starlight hat strikte Frontmatter-Typisierung über Astro-Content-Collections. docmd-Frontmatter ist einfacher.
+Wenn Sie `hero` oder `banner`-Frontmatter-Eigenschaften in Starlight für Landing-Pages verwendet haben, ersetzen Sie diese durch docmds [Hero-Sections](../content/containers/hero.md), die direkt im Markdown-Body geschrieben werden.
 
 ## Nächste Schritte
 
-- Entdecken Sie das integrierte [Such-Plugin](../plugins/search.md) von `docmd` (Starlight verwendet Pagefind, während `docmd` nativ einen hochoptimierten lokalen Suchindexer mitliefert).
+- Erkunden Sie docmds eingebautes [Search-Plugin](../plugins/search.md). Starlight verwendet Pagefind, während docmd einen hochoptimierten lokalen Suchindexer nativ mitliefert.

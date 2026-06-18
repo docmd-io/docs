@@ -1,58 +1,58 @@
 ---
 title: "迁移概览"
-description: "了解如何轻松将现有文档迁移到 docmd。"
+description: "了解如何轻松地将您现有的文档迁移到 docmd。"
 ---
 
 # 迁移到 docmd
 
-`docmd` 提供了一个完全自动化的 **迁移引擎**，帮助您通过一条命令从旧的或竞争性的文档平台过渡。迁移引擎的目的是消除移动 Markdown 文件和重组项目目录的繁琐工作。
+docmd 提供一套全自动的 **迁移引擎**。只需一条命令，即可告别老旧的文档平台；引擎会替您完成搬移 Markdown 文件、重整目录结构这些繁琐工作。
 
-## 工作原理
+## 工作方式
 
-迁移命令将执行以下操作：
+`migrate` 命令会：
 
-1. **检测**您现有的配置文件（例如 `docusaurus.config.js`，`mkdocs.yml`）。
-2. **提取**站点的核心元数据，例如 `title`。
-3. **备份**您现有的文件和目录，安全地放入 `*-backup/` 目录（例如 `docusaurus-backup/`）。
-4. **复制**您的 Markdown 内容到标准的 `docmd` `docs/` 目录中。
-5. **生成**一个为您内容量身定制的全新 `docmd.config.js`。
+1.  **检测** 您现有的配置文件（例如 `docusaurus.config.js`、`mkdocs.yml`）。
+2.  **抽取** 核心元数据，例如站点的 `title`。
+3.  **备份** 您现有的文件和目录，安全地放入一个 `*-backup/` 目录。
+4.  **复制** 您的 Markdown 内容到 docmd 标准的 `docs/` 目录。
+5.  **生成** 一份新的、与您内容匹配的 `docmd.config.json`。
 
-随后，您可以立即运行 `npx @docmd/core dev`，以查看在 `docmd` 引擎中渲染的内容。
+随后您可以立刻运行 `npx @docmd/core dev`，查看内容的渲染效果。
 
-## 会迁移什么
+## 哪些内容会被迁移
 
-| 功能 | 是否自动迁移？ |
+| 特性 | 是否自动迁移 |
 | :--- | :--- |
-| **Markdown 文件** | ✅ 是的，所有 `.md` 和 `.mdx` 文件都会移到 `docs/` |
-| **目录结构** | ✅ 是的，您的文件夹嵌套会被保留 |
-| **站点标题** | ✅ 是的，从您的配置中提取 |
-| **容器语法** | ✅ 是的，VitePress/Docusaurus 容器无需更改即可工作 |
+| **Markdown 文件** | ✅ 是，所有 `.md` 与 `.mdx` 文件都会被移动到 `docs/` |
+| **目录结构** | ✅ 是，文件夹嵌套会被保留 |
+| **站点标题** | ✅ 是，从您的配置中抽取 |
+| **容器语法** | ✅ 是，VitePress / Docusaurus 容器可保持原样 |
 | **导航 / 侧边栏** | ⚠️ **否**，需要手动映射 |
-| **国际化 (i18n)** | ⚠️ **否**，需要手动映射 |
+| **本地化 (i18n)** | ⚠️ **否**，需要手动映射 |
 | **版本管理** | ⚠️ **否**，需要手动映射 |
-| **自定义 React/Vue 组件** | ❌ 否，这些必须替换为 `docmd` 容器 |
+| **自定义 React/Vue 组件** | ❌ 否，需替换为 docmd 容器 |
 
 ::: callout success "容器语法兼容性"
-**VitePress**（`:::tip`、`:::warning`、`:::danger`、`:::info`、`:::details`）和 **Docusaurus**（`:::note`、`:::caution`）的容器语法无需修改即可在 docmd 中工作。你现有的警告和可折叠部分在 docmd 中可以正确渲染。
+来自 **VitePress**（`:::tip`、`:::warning`、`:::danger`、`:::info`、`:::details`）和 **Docusaurus**（`:::note`、`:::caution`）的容器语法可保持原样。您既有的 admonition 与可折叠区在 docmd 中都能正确渲染。
 
 **MkDocs** 使用 `!!!` 语法，需要手动转换为 `:::` 格式。
 :::
 
-## 为什么不自动迁移导航和 i18n
+## 为什么导航与 i18n 不会被自动迁移
 
-每个文档平台处理导航侧边栏、翻译和多版本的方式各不相同。例如，Docusaurus 使用复杂的 JavaScript 对象或自动生成的侧边栏，而 MkDocs 依赖严格缩进的 YAML 结构。
+每个平台的导航侧边栏、翻译与多版本机制都各有不同。例如 Docusaurus 使用复杂的 JavaScript 对象，而 MkDocs 则依赖严格缩进的 YAML 结构。
 
-为了避免猜测复杂配置带来的错误和损坏迁移，`docmd` 会安全地移动您的内容，并要求您使用 `docmd` 简单的基于 JSON 的 API，原生配置导航、国际化和版本管理。
+与其靠"猜"复杂配置去冒险完成一次可能损坏的迁移，docmd 选择安全地搬移内容。您必须使用 docmd 基于 JSON 的 API 原生配置导航、本地化与版本管理。
 
-- **导航：** 请参阅 [导航设置](../configuration/navigation.md) 了解如何创建 `navigation.json`。
-- **国际化：** 了解如何设置多语言文档，请参阅 [国际化指南](../configuration/localisation/index.md)。
-- **版本管理：** 请参考 [版本管理设置](../configuration/versioning.md)。
+- **导航**：参阅 [导航配置](../configuration/navigation.md) 了解如何创建 `navigation.json`。
+- **本地化**：请见 [本地化指南](../configuration/localisation/index.md) 以搭建多语言文档。
+- **版本管理**：请参阅 [版本管理设置](../configuration/versioning.md)。
 
 ## 支持的平台
 
-选择您当前的平台以获取具体的迁移说明：
+请根据您当前的平台选择对应的迁移说明：
 
-- [由 Docusaurus 迁移](./docusaurus.md)
-- [由 MkDocs 迁移](./mkdocs.md)
-- [由 VitePress 迁移](./vitepress.md)
-- [由 Astro Starlight 迁移](./starlight.md)
+- [从 Docusaurus 迁移](./docusaurus.md)
+- [从 MkDocs 迁移](./mkdocs.md)
+- [从 VitePress 迁移](./vitepress.md)
+- [从 Astro Starlight 迁移](./starlight.md)
