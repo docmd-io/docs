@@ -18,7 +18,7 @@ Configure site-wide SEO defaults in your `docmd.config.json`. Page-level setting
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "seo": {

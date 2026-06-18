@@ -19,7 +19,7 @@ Enable it in your `docmd.config.json`:
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "math": {}

@@ -15,7 +15,7 @@ The plugin is bundled with `@docmd/core` and enabled by default.
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "mermaid": {}

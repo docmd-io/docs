@@ -18,7 +18,7 @@ Enable analytics by adding your tracking credentials to the `plugins` section of
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "analytics": {

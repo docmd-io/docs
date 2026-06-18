@@ -29,7 +29,7 @@ npx @docmd/core add <plugin-name> -V
 
 These plugins are bundled with `@docmd/core`. No installation is needed. Enable them in your `docmd.config.json`:
 
-```json
+```json "docmd.config.json"
   "plugins": {
     "search": {},
     "seo": { "aiBots": false },
@@ -60,7 +60,7 @@ Optional plugins require installation before enabling.
 
 When you add an official plugin to your `docmd.config.json` without installing it, docmd automatically downloads and installs it on the next build. This works for all plugins in the official registry.
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "pwa": {}
@@ -85,7 +85,7 @@ npm install my-custom-plugin
 
 After installation, add the plugin to your `docmd.config.json` using its exact package name:
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "my-custom-plugin": {
@@ -105,7 +105,7 @@ Plugins inject CSS and behaviour globally. However, you can configure them to by
 
 Instruct any plugin to automatically skip `noStyle` pages via your `docmd.config.json`:
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "math": {

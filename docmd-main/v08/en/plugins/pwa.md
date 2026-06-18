@@ -18,7 +18,7 @@ Customise your app branding within the `plugins` section of your `docmd.config.j
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "pwa": {

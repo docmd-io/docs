@@ -18,7 +18,7 @@ Enable sitemap generation by providing your `siteUrl` in the root configuration.
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "url": "https://docs.example.com",
   "plugins": {

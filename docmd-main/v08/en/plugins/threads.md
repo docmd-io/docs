@@ -27,7 +27,7 @@ Enable it in your `docmd.config.json`.
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "threads": {
@@ -164,7 +164,7 @@ The threads plugin exposes the following actions via the WebSocket RPC system. C
 
 Author information is stored in `<docsRoot>/.threads/authors.json`:
 
-```json
+```json ".threads/authors.json"
 {
   "alice@example.com": {
     "name": "Alice",

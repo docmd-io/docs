@@ -19,7 +19,7 @@ The `@docmd/plugin-git` plugin adds repository intelligence to your documentatio
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "git": {

@@ -17,7 +17,7 @@ The plugin is enabled by default. To produce absolute links, set `url` in your `
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "url": "https://docs.example.com",
   "plugins": {

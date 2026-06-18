@@ -17,7 +17,7 @@ Search is enabled by default in most `docmd` templates. You can control its visi
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "layout": {
     "optionsMenu": {
@@ -101,7 +101,7 @@ npm install docmd-search
 
 Then enable it in your configuration:
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "search": {
@@ -182,7 +182,7 @@ Semantic search is experimental. Current limitations include:
 For optimal semantic search performance:
 
 1.  **Exclude noise** - Don't index changelogs or draft content:
-    ```json
+    ```json "docmd.config.json"
     {
       "plugins": {
         "search": {

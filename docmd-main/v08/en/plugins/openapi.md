@@ -18,7 +18,7 @@ The OpenAPI plugin is included by default in `@docmd/core`. You can configure gl
 
 ### Example
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "openapi": {

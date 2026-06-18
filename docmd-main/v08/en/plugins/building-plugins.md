@@ -111,7 +111,7 @@ export default {
 
 To enable your plugin, reference its **full package name** in your `docmd.config.json`:
 
-```json
+```json "docmd.config.json"
   "plugins": {
     "my-awesome-plugin": {}
   }
