@@ -5,7 +5,9 @@ description: "Run this docs site locally, link to your global docmd install, and
 
 # Setup
 
-> **For docs-site contributors.** Want to *contribute* to docmd itself (the framework)? See the [GitHub Contributing guide](https://github.com/docmd-io/docmd?tab=contributing-ov-file) instead — that's where the framework development workflow lives.
+::: callout info
+**For docs-site contributors.** Want to *contribute* to docmd itself (the framework)? See the [GitHub Contributing guide](https://github.com/docmd-io/docmd?tab=contributing-ov-file) instead — that's where the framework development workflow lives.
+:::
 
 This page covers working on **this documentation site** (`docmd-io/docs`), not on the docmd framework (`docmd-io/docmd`).
 

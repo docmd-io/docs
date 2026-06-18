@@ -39,8 +39,7 @@ Starlight definiert Navigation in `astro.config.mjs` über das `sidebar`-Array.
 
 **Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem neuen `docs/`-Ordner.
 
-**Starlight (`astro.config.mjs`):**
-```javascript
+```javascript "astro.config.mjs"
 sidebar: [
   {
     "label": "Leitfäden",
@@ -51,7 +50,6 @@ sidebar: [
 ]
 ```
 
-**docmd (`navigation.json`):**
 ```json "navigation.json"
 [
   {

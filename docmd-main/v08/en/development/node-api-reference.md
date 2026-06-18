@@ -3,7 +3,9 @@ title: "Node API Reference"
 description: "Low-level Node API for plugin authors — URL utilities, action dispatchers, source tools, the engine loader, and TypeScript types."
 ---
 
-> **For plugin authors.** If you just want to *call* docmd from a Node script, see [Build API](/reference/build-api) instead. This page covers the lower-level utilities exposed by `@docmd/api` for writing plugins.
+::: callout info
+**For plugin authors.** If you just want to *call* docmd from a Node script, see [Build API](/reference/build-api) instead. This page covers the lower-level utilities exposed by `@docmd/api` for writing plugins.
+:::
 
 The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and centralised URL utilities.
 
@@ -11,7 +13,9 @@ The `@docmd/api` package is the dedicated home for the plugin system. It provide
 npm install @docmd/api
 ```
 
-> **Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
+::: callout tip
+**Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
+:::
 
 ## URL Utilities
 

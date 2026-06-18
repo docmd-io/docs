@@ -5,7 +5,9 @@ description: "Diese Dokumentations-Site lokal ausführen, mit Ihrer globalen doc
 
 # Setup
 
-> **Für Mitwirkende an der Dokumentations-Site.** Möchten Sie zu *docmd selbst* (dem Framework) beitragen? Sehen Sie stattdessen den [GitHub-Contributing-Leitfaden](https://github.com/docmd-io/docmd?tab=contributing-ov-file) an — dort befindet sich der Framework-Entwicklungs-Workflow.
+::: callout info
+**Für Mitwirkende an der Dokumentations-Site.** Möchten Sie zu *docmd selbst* (dem Framework) beitragen? Sehen Sie stattdessen den [GitHub-Contributing-Leitfaden](https://github.com/docmd-io/docmd?tab=contributing-ov-file) an — dort befindet sich der Framework-Entwicklungs-Workflow.
+:::
 
 Diese Seite behandelt die Arbeit an **dieser Dokumentations-Site** (`docmd-io/docs`), nicht am docmd-Framework (`docmd-io/docmd`).
 

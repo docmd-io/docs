@@ -41,8 +41,7 @@ VitePress verwendet ein Array von Objekten in `themeConfig.sidebar`.
 
 **Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem `docs/`-Verzeichnis.
 
-**VitePress (`.vitepress/config.js`):**
-```javascript
+```javascript ".vitepress/config.js"
 themeConfig: {
   "sidebar": [
     {
@@ -56,7 +55,6 @@ themeConfig: {
 }
 ```
 
-**docmd (`navigation.json`):**
 ```json "navigation.json"
 [
   {

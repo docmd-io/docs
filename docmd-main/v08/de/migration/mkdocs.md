@@ -41,7 +41,6 @@ In MkDocs ist die Navigation streng im Schlüssel `nav` der `mkdocs.yml` definie
 
 **Erforderliche Aktion:** Erstellen Sie eine `navigation.json` in Ihrem `docs/`-Ordner.
 
-**MkDocs (`mkdocs.yml`):**
 ```yaml "mkdocs.yml"
 nav:
   - Startseite: index.md
@@ -50,7 +49,6 @@ nav:
     - Verwendung: usage.md
 ```
 
-**docmd (`navigation.json`):**
 ```json "navigation.json"
 [
   {

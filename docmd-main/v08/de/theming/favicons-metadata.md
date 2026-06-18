@@ -30,7 +30,8 @@ Platzieren Sie Ihre Favicon-Datei (z. B. `favicon.svg` oder `favicon.ico`) in Ih
 
 Aktivieren und konfigurieren Sie das [SEO-Plugin](../../plugins/seo.md), um Standard-Social-Media-Vorschauen für Ihre gesamte Site festzulegen.
 
-```json
+```json "docmd.config.json"
+{
   "url": "https://docs.example.com",
   "plugins": {
     "seo": {
@@ -44,6 +45,7 @@ Aktivieren und konfigurieren Sie das [SEO-Plugin](../../plugins/seo.md), um Stan
       }
     }
   }
+}
 ```
 
 ### 3. Seiten-spezifische Überschreibungen

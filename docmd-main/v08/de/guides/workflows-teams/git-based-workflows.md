@@ -21,7 +21,8 @@ Implementieren Sie ein "Pull Request" (PR)-Modell, das durch automatisierte Vali
 
 Sie können docmd so konfigurieren, dass "Diese Seite bearbeiten"-Links über das [Git-Plugin](../../plugins/git.md) generiert werden. Damit können Benutzer direkt von einer Dokumentationsseite zur entsprechenden Quelldatei in Ihrem Repository springen.
 
-```json
+```json "docmd.config.json"
+{
   "plugins": {
     "git": {
       "repo": "https://github.com/my-org/my-repo",
@@ -29,6 +30,7 @@ Sie können docmd so konfigurieren, dass "Diese Seite bearbeiten"-Links über da
       "editLink": true
     }
   }
+}
 ```
 
 ### 2. Kontextbezogene Reviews mit Threads

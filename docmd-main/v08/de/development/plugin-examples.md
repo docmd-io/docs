@@ -21,8 +21,7 @@ docmd bietet eine zuverlässige, hook-basierte [Plugin-API](../../plugins/buildi
 
 Ein Plugin ist ein Standard-JavaScript-Modul, das einen Deskriptor und Lifecycle-Hooks exportiert.
 
-```javascript
-// plugins/version-injector.js
+```javascript  "plugins/version-injector.js"
 
 let latestVersion = "0.0.0";
 
@@ -56,7 +55,7 @@ export default {
 
 Registrieren Sie Ihr lokales Plugin, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Imports verwenden — verwenden Sie das `.js`- oder `.ts`-Format für die Plugin-Registrierung.
 
-```javascript
+```javascript "plugins/version-injector.js"
 import VersionInjector from "./plugins/version-injector.js";
 
 export default {

@@ -21,7 +21,8 @@ Verwenden Sie docmd als Ihren primären Dokumentations-Hub. Durch Nutzung der [M
 
 Verwenden Sie die `menubar`-Konfiguration, um Ihre verschiedenen Dokumentations-Portale miteinander zu verknüpfen. So finden Benutzer unabhängig von der Subdomain stets den Weg zurück zu den Hauptleitfäden.
 
-```json
+```json "docmd.config.json"
+{
   "layout": {
     "menubar": {
       "left": [
@@ -31,6 +32,7 @@ Verwenden Sie die `menubar`-Konfiguration, um Ihre verschiedenen Dokumentations-
       ]
     }
   }
+}
 ```
 
 ### 2. Nahtloses Einbetten

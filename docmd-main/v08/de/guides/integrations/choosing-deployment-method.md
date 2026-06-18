@@ -27,27 +27,19 @@ Verwenden Sie die **[GitHub App](../../integrations/github-app.md)**. Installier
 
 ::: button "GitHub App installieren" external:https://github.com/apps/docmd/installations/new icon:github color:#2ea44f
 
----
-
 ### "Ich starte eine brandneue Dokumentations-Site"
 
 Verwenden Sie das **[Starter-Template](../../integrations/starter-template.md)**. Klicken Sie auf GitHub auf "Use this template", aktualisieren Sie `docmd.config.json` mit Ihrem Titel und Ihrer URL, aktivieren Sie GitHub Pages einmalig und pushen Sie. Alles ist vorverkabelt.
 
 ::: button "Starter-Template verwenden" external:https://github.com/docmd-io/docmd-template/generate icon:github
 
----
-
 ### "Ich habe eine bestehende CI/CD-Pipeline und möchte Docs hinzufügen"
 
 Verwenden Sie die **[GitHub Action](../../integrations/github-action.md)**. Fügen Sie `docmd-io/deploy@v1` in Ihren bestehenden Workflow ein. Sie komponiert sich sauber mit anderen Schritten — Tests laufen lassen, Ihre App bauen, dann Docs bauen, alles in einem Job.
 
----
-
 ### "Ich deploye zu Vercel, Netlify, Docker oder meinem eigenen Server"
 
 Verwenden Sie das **[Deployer-Paket](../../deployment/deployer-package.md)**. Führen Sie `npx @docmd/core deploy --vercel` (oder `--netlify`, `--docker`, `--nginx`) aus, um anbieterspezifische Konfigurationsdateien zu generieren, die auf Ihre `docmd.config.json` zugeschnitten sind.
-
----
 
 ### "Ich bin in einem Monorepo mit Docs in einem Unterverzeichnis"
 
@@ -59,13 +51,9 @@ Bevorzugen Sie die GitHub Action, übergeben Sie `--cwd` manuell:
 - run: npx @docmd/core build --cwd packages/docs
 ```
 
----
-
 ### "Ich möchte Docs bei jedem Pull Request in der Vorschau sehen"
 
 Verwenden Sie die **GitHub Action** in Kombination mit einem PR-Preview-Service (z. B. Cloudflare Pages Preview-Deployments oder einer selbstgehosteten Preview-Umgebung). Eine vollständige Anleitung finden Sie unter [Änderungen in der Vorschau anzeigen](../workflows-teams/previewing-changes.md).
-
----
 
 ## Wie sie zusammenpassen
 

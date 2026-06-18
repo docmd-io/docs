@@ -46,10 +46,12 @@ Erstellen Sie eine Datei namens `custom.css` in Ihrem Quellverzeichnis und über
 
 Fügen Sie Ihre benutzerdefinierte CSS-Datei zum Array `theme.customCss` in Ihrer `docmd.config.json` hinzu.
 
-```json
+```json "docmd.config.json"
+{
   "theme": {
     "customCss": ["/custom.css"]
   }
+}
 ```
 
 ## Abwägungen

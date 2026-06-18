@@ -5,7 +5,9 @@ description: "Author a docmd template package — directory layout, descriptor, 
 
 # Building Templates
 
-> **For template authors.** If you want to *use* a template in your docs site, see [Templates](/theming/templates) instead.
+::: callout info
+**For template authors.** If you want to *use* a template in your docs site, see [Templates](/theming/templates) instead.
+:::
 
 A template is a regular npm package that declares `capabilities: ['template']` and ships a `templates[]` array of `.ejs` file overrides. The template resolver in `@docmd/ui` handles the per-page lookup, honours frontmatter / config overrides, and falls back to the default if anything goes wrong.
 
@@ -48,7 +50,7 @@ A template is a regular npm package that declares `capabilities: ['template']` a
 
 ## `index.js`
 
-```js
+```js "index.js"
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

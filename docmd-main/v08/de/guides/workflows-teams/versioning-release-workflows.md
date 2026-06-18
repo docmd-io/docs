@@ -32,7 +32,8 @@ project-root/
 
 Registrieren Sie beide Versionen in Ihrer Konfiguration. Beschriften Sie die kommende Version als "Beta" oder "Next", um Benutzern ihren Status über den Versions-Switcher zu signalisieren.
 
-```json
+```json "docmd.config.json"
+{
   "versions": {
     "current": "v1.0",
     "all": [
@@ -40,6 +41,7 @@ Registrieren Sie beide Versionen in Ihrer Konfiguration. Beschriften Sie die kom
       { "id": "v2.0", "dir": "docs-v2", "label": "v2.0 (Beta)" }
     ]
   }
+}
 ```
 
 ### 3. Der Promotions-Prozess
