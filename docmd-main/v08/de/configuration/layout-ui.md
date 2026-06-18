@@ -1,67 +1,37 @@
 ---
-title: "Layout & UI-Zonen"
-description: "Steuern Sie die Schnittstellenstruktur durch die Verwaltung von Headern, Seitenleisten und funktionalen UI-Slots."
+title: "Layout- und UI-Zonen"
+description: "Steuern Sie die Interface-Struktur durch die Verwaltung von Headern, Sidebars und funktionalen UI-Slots."
 ---
 
-Eine Standard-`docmd`-Seite ist in sechs primäre Funktionsbereiche unterteilt:
+Eine Standardseite enthält sechs primäre Funktionszonen:
 
-1.  **Menüleiste (Menubar)**: Eine horizontale Navigationsleiste am oberen Rand für globale Website-Links.
-2.  **Header**: Die permanente sekundäre Leiste, die den Seitentitel und Werkzeug-Schaltflächen enthält.
-3.  **Seitenleiste (Sidebar)**: Der primäre Navigationsbaum (normalerweise auf der linken Seite).
-4.  **Inhaltsbereich (Content Area)**: Der zentrale Bereich für die Markdown-Anzeige, einschließlich **Breadcrumbs**.
-5.  **Inhaltsverzeichnis (TOC)**: Navigationsmenü auf der rechten Seite für die Überschriften der aktuellen Seite.
-6.  **Fußzeile (Footer)**: Bereich am unteren Rand für Urheberrecht, Branding und website-weite Links.
+1.  **Menubar**: Eine vollbreite obere Navigationsleiste für globale Site-Links.
+2.  **Header**: Eine persistente sekundäre Leiste. Enthält den Seitentitel und Utility-Schaltflächen.
+3.  **Sidebar**: Der primäre Navigationsbaum, meist auf der linken Seite.
+4.  **Content Area**: Der zentrale Markdown-Renderbereich. Enthält **Brotkrumen**.
+5.  **Table of Contents (TOC)**: Rechtsseitige Überschriften-Navigation der aktuellen Seite.
+6.  **Footer**: Unterer Bereich für Copyright, Branding und Site-weite Links.
 
-## Globale Komponenten
+## Globale Komponentenkonfiguration
 
-Die meisten UI-Zonen werden im Bereich `layout` Ihrer `docmd.config.json` konfiguriert.
+Die Engine verwendet ein modulares Layout-System. Konfigurieren Sie die meisten UI-Zonen im `layout`-Abschnitt Ihrer `docmd.config.json`.
 
-### Menüleiste
+### Menubar
+Die Menubar stellt eine hochrangige Navigationsebene bereit. Sie unterstützt Markentitel, reguläre Links und verschachtelte Dropdowns.
 
-Die Menüleiste bietet eine übergeordnete Navigationsebene über Ihrer Dokumentation.
-
-```javascript
-layout: {
-  menubar: {
-    enabled: true,
-    position: 'top', // 'top' (fixiert) oder 'header' (im Inhaltsfluss)
-    left: [
-      { type: 'title', text: 'Marke', url: '/', icon: 'home' },
-      { text: 'Funktionen', url: '/features' }
-    ],
-    right: [
-      { text: 'GitHub', url: 'https://github.com/docmd-io/docmd', icon: 'github' }
-    ]
-  }
-}
-```
+*   **Position**: Fest fixiert am `top` oder inline innerhalb des `header`.
+*   **Dokumentation**: Schemas und Styling finden Sie unter [Menubar-Konfiguration](menubar.md).
 
 ### Der Seiten-Header
+Der Header zeigt den Seitentitel, Brotkrumen und Utility-Menüs.
 
-Der Header ist standardmäßig aktiviert. Sie können ihn website-weit deaktivieren oder bestimmte Elemente über das Frontmatter auf Seitenebene ausblenden.
+*   **Steuerung**: Aktivieren oder deaktivieren Sie den Header global über `layout.header`. Schalten Sie Brotkrumen über `layout.breadcrumbs` um.
+*   **Überschreiben**: Verwenden Sie `hideTitle: true` in Ihrem [Seiten-Frontmatter](../content/frontmatter.md), um den Titelbereich lokal auszublenden.
 
-```javascript
-// docmd.config.js
-layout: {
-  header: {
-    enabled: true // Auf false setzen, um den gesamten oberen Header website-weit auszublenden
-  },
-  breadcrumbs: true // Auf false setzen, um den Breadcrumb-Pfad website-weit auszublenden
-}
-```
+### Copy-Widgets
+Die Brotkrumen-Leiste enthält zwei Kopierschaltflächen. Eine kopiert das rohe Markdown der Seite, die andere einen strukturierten Kontextblock, der URL, Titel und Beschreibung enthält. Nützlich zum Einfügen in KI-Chatfenster oder Support-Tickets.
 
-**Überschreibung auf Seitenebene (Frontmatter):**
-```yaml
----
-title: "Spezialseite"
-hideTitle: true # Blendet den Titel im fixierten Header für diese spezifische Seite aus
----
-```
-
-### Kopier-Widgets (KI-Integration)
-Um Entwicklern und LLM-Agenten die Arbeit mit Ihrer Dokumentation zu erleichtern, enthält docmd integrierte Kopierschaltflächen in der Breadcrumbs-Leiste. Diese Schaltflächen ermöglichen das Kopieren des rohen Markdowns der Seite oder des vereinheitlichten LLM-Kontexts.
-
-Konfigurieren Sie diese Schaltflächen im Einstellungsblock `theme.copyWidgets` in Ihrer `docmd.config.json`:
+Konfigurieren Sie diese Schaltflächen unter `theme.copyWidgets` in Ihrer `docmd.config.json`:
 
 ```json
 {
@@ -75,64 +45,61 @@ Konfigurieren Sie diese Schaltflächen im Einstellungsblock `theme.copyWidgets` 
 }
 ```
 
-*   `enabled`: Auf `false` setzen, um die Kopier-Widgets-Leiste vollständig zu deaktivieren.
-*   `raw`: Auf `false` setzen, um die Schaltfläche "Copy Markdown" auszublenden.
-*   `context`: Auf `false` setzen, um die Schaltfläche "Copy Context" auszublenden.
+*   `enabled`: Auf `false` setzen, um die Leiste vollständig zu deaktivieren.
+*   `raw`: Auf `false` setzen, um die Schaltfläche „Markdown kopieren" auszublenden.
+*   `context`: Auf `false` setzen, um die Schaltfläche „Kontext kopieren" auszublenden.
 
-## Werkzeugmenüs (Optionsmenü)
+### Utility-Menüs (Optionsmenü)
+Das `optionsMenu` gruppiert zentrale Utilities wie **Globale Suche**, **Theme-Umschalter** und **Sponsoring-Links**.
 
-Das `optionsMenu` fasst Kernfunktionen wie **Suche**, **Theme-Umschalter** und **Sponsoring** zusammen.
-
-```javascript
-layout: {
-  optionsMenu: {
-    position: 'header', // Optionen: 'header', 'sidebar-top', 'sidebar-bottom', 'menubar'
-    components: {
-      search: true,      // Volltextsuche aktivieren
-      themeSwitch: true, // Hell-/Dunkelmodus-Umschalter aktivieren
-      sponsor: 'https://github.com/sponsors/dein-profil'
+```json
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header", 
+      "components": {
+        "search": true,      
+        "themeSwitch": true, 
+        "sponsor": "https://github.com/sponsors/mgks"
+      }
     }
   }
 }
 ```
 
-::: callout info "Container-Fallback"
-Wenn die gewählte Position auf einen Container zielt, der deaktiviert ist, rendert `docmd` das Optionsmenü automatisch im Slot `sidebar-top`, um sicherzustellen, dass die Kernfunktionen zugänglich bleiben.
+::: callout info "Automatischer Fallback" icon:sparkles
+Wenn die gewählte Position auf einen deaktivierten Container verweist, verschiebt die Engine das Optionsmenü auf `sidebar-top`. So bleiben die Utilities stets erreichbar.
 :::
 
-## Seitenleisten- & Fußzeilen-Steuerung
+### Sidebar & Navigation
+Die Sidebar ist der primäre Navigationsbaum. Definieren Sie ihre Struktur in Ihrer Konfiguration oder in externen JSON-Dateien.
 
-### Verhalten der Seitenleiste
-```javascript
-layout: {
-  sidebar: {
-    enabled: true,
-    collapsible: true,       // Ermöglicht die Ein-/Ausklapp-Animation
-    defaultCollapsed: false,  // Legt den initialen Status der Seitenleiste fest
-    position: 'left'
+*   **Verhalten**: Unterstützt Animationen, einklappbare Gruppen und automatische Pfad-Erhaltung.
+*   **Dokumentation**: Siehe [Navigationskonfiguration](navigation.md).
+
+### Footer
+Die Engine bietet **minimal**- und **complete**-Layouts für Ihren Site-Footer.
+
+```json
+{
+  "layout": {
+    "footer": {
+      "style": "complete", 
+      "description": "Documentation built with docmd.",
+      "branding": true,
+      "columns": [
+        {
+          "title": "Community",
+          "links": [
+            { "text": "GitHub", "url": "https://github.com/docmd-io/docmd" }
+          ]
+        }
+      ]
+    }
   }
 }
 ```
 
-### Footer-Branding
-`docmd` bietet sowohl **minimale** als auch **vollständige** Layouts für den Footer Ihrer Website.
-
-```javascript
-layout: {
-  footer: {
-    style: 'complete',
-    description: 'Dokumentation erstellt mit docmd.',
-    branding: true, // Steuert das "Build with docmd"-Badge
-    columns: [
-      {
-        title: 'Community',
-        links: [{ text: 'GitHub', url: '...' }]
-      }
-    ]
-  }
-}
-```
-
-::: callout tip "KI-optimierte Schnittstelle"
-Stellen Sie beim Entwerfen benutzerdefinierter Layouts sicher, dass die **Suche** in Ihrem `optionsMenu` prominent platziert ist. KI-Agenten nutzen die Suche häufig als primären Anker, wenn sie Ihre Dokumentation erkunden, um spezifischen technischen Kontext zu lokalisieren.
+::: callout tip "Interface-Hierarchie" icon:lightbulb
+Verwenden Sie die Menubar für globale Links und die Sidebar für die Dokumentationsstruktur. Diese Trennung hält die Navigation sowohl für menschliche Leser als auch für Crawler vorhersagbar.
 :::

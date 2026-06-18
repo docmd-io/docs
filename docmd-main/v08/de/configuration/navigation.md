@@ -1,48 +1,48 @@
 ---
-title: "Navigations-Konfiguration"
-description: "Strukturieren Sie Ihre Seitenleiste, kategorisieren Sie Links und konfigurieren Sie Icons für Leser und Suchmaschinen."
+title: "Navigationskonfiguration"
+description: "Strukturieren Sie Ihre Sidebar, kategorisieren Sie Links und konfigurieren Sie Icons für Leser und Suchmaschinen."
 ---
 
-Der Compiler bietet eine explizite Kontrolle über Ihre Website-Navigation. Eine klare Navigationshierarchie schafft eine logische Lesereihenfolge. Dies optimiert das SPA-Erlebnis und bietet eine eindeutige Kontextkarte für die Suchindexierung und KI-Modelle.
+Der Compiler bietet explizite Kontrolle über Ihre Site-Navigation. Eine klare Navigationshierarchie erzeugt eine logische Lesereihenfolge. Sie optimiert das SPA-Erlebnis und liefert eine klare Kontextkarte für die Suchindizierung und KI-Modelle.
 
 ## 1. Das Navigations-Schema
 
-Ein Array von Link-Objekten in Ihrer `docmd.config.json`-Datei steuert die Seitenleiste. Jedes Objekt ist ein direkter Link oder eine geschachtelte Kategoriegruppe.
+Ein Array von Link-Objekten in Ihrer `docmd.config.json` steuert die Sidebar. Jedes Objekt ist entweder ein direkter Link oder eine verschachtelte Kategoriegruppe.
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
 ```json
 {
   "navigation": [
-    { "title": "Übersicht", "path": "/", "icon": "home" },
-    { "title": "Schnellstart", "path": "/getting-started/quick-start", "icon": "rocket" }
+    { "title": "Overview", "path": "/", "icon": "home" },
+    { "title": "Quick Start", "path": "/getting-started/quick-start", "icon": "rocket" }
   ]
 }
 ```
 
 ## 2. Unterstützte Eigenschaften
 
-Jedes Element unterstützt folgende Einstellungen:
+Jeder Eintrag unterstützt diese Einstellungen:
 
 | Eigenschaft | Typ | Erforderlich | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | Ja | Der in der Seitenleiste angezeigte Menütext. |
+| `title` | `String` | Ja | Der in der Sidebar angezeigte Text. |
 | `path` | `String` | Nein | Ziel-URL. Relative lokale Pfade müssen mit einem Schrägstrich (`/`) beginnen. |
-| `icon` | `String` | Nein | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons) im Kebab-Case-Format (z. B. `git-branch`). |
-| `children` | `Array` | Nein | Ein Array von verschachtelten Navigationselementen, um ein Untermenü zu erstellen. |
-| `collapsible`| `Boolean`| Nein | Wenn `true`, kann der Benutzer den Kategorieordner erweitern oder einklappen. |
-| `external` | `Boolean`| Nein | Wenn `true`, wird der Link in einem neuen Browser-Tab geöffnet. |
+| `icon` | `String` | Nein | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons) im kebab-case-Format (z. B. `git-branch`). |
+| `children` | `Array` | Nein | Ein Array verschachtelter Navigationselemente zur Bildung eines Untermenüs. |
+| `collapsible`| `Boolean`| Nein | Bei `true` kann der Nutzer die Kategoriegruppe auf- und zuklappen. |
+| `external` | `Boolean`| Nein | Bei `true` wird der Link in einem neuen Browser-Tab geöffnet. |
 
-## 3. Organisation von Bereichsgruppen
+## 3. Sektionen organisieren
 
-Strukturieren Sie Ihre Seitenleiste mithilfe von zwei primären Gruppierungsmethoden:
+Strukturieren Sie Ihre Sidebar mit zwei primären Gruppierungsmethoden:
 
 ### Klickbare Gruppe (Direkte Seite + Unterordner)
-Geben Sie neben `children` auch einen `path` für eine Kategorieüberschrift an. Durch Klicken auf den Titel wird die Landingpage geladen und die untergeordneten Links werden ausgeklappt.
+Geben Sie sowohl `path` als auch `children` für einen Kategorie-Header an. Ein Klick auf den Titel lädt die Landingpage und klappt die untergeordneten Links auf.
 
 ```json
 {
-  "title": "Cloud-Dienste",
+  "title": "Cloud Services",
   "path": "/cloud/overview", 
   "children": [
     { "title": "AWS Setup", "path": "/cloud/aws" },
@@ -51,33 +51,33 @@ Geben Sie neben `children` auch einen `path` für eine Kategorieüberschrift an.
 }
 ```
 
-### Statisches Label (Nur Kategorieüberschriften)
-Lassen Sie den Parameter `path` weg. Die Überschrift dient als nicht anklickbarer Titel zur Gruppierung verwandter Links. Verwenden Sie dies, um größere technische Kategorien ohne eine eigene Landingpage zu unterteilen.
+### Statisches Label (nur Kategorie-Header)
+Lassen Sie den `path`-Parameter weg. Der Header dient als nicht klickbarer Gruppentitel. Verwenden Sie dies, um große technische Kategorien ohne eine einzelne Landingpage zu gliedern.
 
 ```json
 {
-  "title": "Formatierung & Elemente",
+  "title": "Formatting & Elements",
   "icon": "layout-grid",
   "children": [
-    { "title": "Syntax-Leitfaden", "path": "/content/syntax" },
-    { "title": "Rich Container", "path": "/content/containers" }
+    { "title": "Syntax Guide", "path": "/content/syntax" },
+    { "title": "Rich Containers", "path": "/content/containers" }
   ]
 }
 ```
 
-## 4. Automatische Breadcrumbs
+## 4. Automatische Brotkrumen
 
-Die Engine generiert automatisch kontextbezogene Breadcrumbs (Brotkrümelnavigation) für jede Seite. Diese werden direkt über der Hauptüberschrift der Seite angezeigt, um eine schnelle Orientierung zu erleichtern.
+Die Engine erzeugt automatisch kontextbezogene Brotkrumen für jede Seite. Sie erscheinen direkt über dem Hauptseiten-Header und helfen bei der schnellen Orientierung.
 
 <img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
-### Wichtigste Verhaltensweisen
-*   **Automatische Auflösung**: Die Engine verfolgt die aktive Route durch Ihren Navigationsbaum, um die Hierarchie zu erstellen.
-*   **Aktiver Indikator**: Die aktuelle Seite ist das letzte, nicht verlinkte Breadcrumb-Element.
-*   **Mobile Optimierung**: Breadcrumbs werden auf kleinen Bildschirmen vereinfacht oder dynamisch ausgeblendet, um Platz zu sparen.
+### Wichtige Verhaltensweisen
+*   **Automatische Auflösung**: Die Engine folgt der aktiven Route durch Ihren Navigationsbaum, um die Hierarchie aufzubauen.
+*   **Aktiv-Anzeige**: Die aktuelle Seite ist das letzte, unverlinkte Brotkrumen-Element.
+*   **Mobile Optimierung**: Auf kleinen Viewports werden Brotkrumen vereinfacht oder ausgeblendet, um Bildschirmplatz zu sparen.
 
-### Deaktivieren von Breadcrumbs
-Breadcrumbs sind standardmäßig aktiviert. Aktualisieren Sie Ihre Website-Layout-Optionen, um sie global zu deaktivieren:
+### Brotkrumen deaktivieren
+Brotkrumen sind standardmäßig aktiviert. Aktualisieren Sie Ihre Site-Layout-Optionen, um sie global zu deaktivieren:
 
 ```json
 {
@@ -87,30 +87,30 @@ Breadcrumbs sind standardmäßig aktiviert. Aktualisieren Sie Ihre Website-Layou
 }
 ```
 
-## 5. Kaskadierende Navigationsauflösung
+## 5. Navigations-Auflösungs-Kaskadierung
 
-Der Compiler verwendet ein kaskadierendes Auflösungssystem nach dem Prinzip „nächste Datei gewinnt“. Dies unterstützt mehrere Versionen oder Sprachen, ohne Ihre globale Konfiguration aufzublähen.
+Der Compiler verwendet ein Kaskadierungssystem nach dem Prinzip „nächste Datei gewinnt". Dies unterstützt mehrere Versionen oder Sprachen, ohne Ihre globale Konfiguration aufzublähen.
 
 ```text
 my-project/
-├── docmd.config.json           [Ebene 3: Globale Konfiguration] - Standard-Fallback
+├── docmd.config.json           [Level 3: Globale Konfiguration] - Standard-Fallback
 ├── docs-v1.0/ 
-│   ├── navigation.json       [Ebene 2: Versions-Navigation] - Überschreibt Global
+│   ├── navigation.json       [Level 2: Versions-Navigation] - überschreibt Global
 │   └── zh/
-│       └── navigation.json   [Ebene 1: Sprach-Navigation] - Absolute Priorität
+│       └── navigation.json   [Level 1: Sprach-Navigation] - absolute Priorität
 ```
 
-1.  **Ebene 1: Sprachspezifisch** (`navigation.json` in einem Sprachordner): Überschreibt alle Einstellungen für diese spezifische Sprache und Version.
-2.  **Ebene 2: Versionsspezifisch** (`navigation.json` in einem Versionsordner): Überschreibt die globale Konfiguration für diese Version über alle Sprachen hinweg.
-3.  **Ebene 3: Globale Konfiguration** (`config.navigation`): Die grundlegende Fallback-Definition in der zentralen Konfigurationsdatei.
+1.  **Level 1: Sprachspezifisch** (`navigation.json` in einem Locale-Ordner): überschreibt alle Einstellungen für diese spezifische Sprache und Version.
+2.  **Level 2: Versionsspezifisch** (`navigation.json` in einem Versionsordner): überschreibt die globale Konfiguration für diese Version über alle Sprachen hinweg.
+3.  **Level 3: Globale Konfiguration** (`config.navigation`): die Basis-Fallback-Definition in der zentralen Konfigurationsdatei.
 
-### Intelligenter Schutz vor toten Links
-Die Engine prüft beim Navigations-Fallback auf Ebene 2 oder 3 automatisch, ob die Zieldateien existieren. Fehlende Dateien werden dynamisch aus der Seitenleiste gefiltert. Dies verhindert tote Links für ältere Versionen oder fehlende Übersetzungen.
+### Intelligenter Schutz vor defekten Links
+Die Engine prüft automatisch, ob Zieldateien während des Level-2- oder Level-3-Navigations-Fallbacks existieren. Fehlende Dateien werden dynamisch aus der Sidebar herausgefiltert. Das beseitigt defekte Links für ältere Versionen oder fehlende Übersetzungen.
 
 ## 6. Icon-Integration
 
-Der Compiler enthält das vollständige **Lucide-Icon-System**. Verwenden Sie den offiziellen Lucide-Namen im Kebab-Case-Format (z. B. `settings`, `folder-open`, `book-marked`), um ein Icon anzuwenden.
+Der Compiler enthält das vollständige **Lucide-Icon**-System. Verwenden Sie den offiziellen Lucide-Namen im kebab-case-Format (z. B. `settings`, `folder-open`, `book-marked-line`), um ein Icon anzuwenden.
 
-::: callout tip "Optimierung von Seitenleisten-Labels"
-Halten Sie die Titel in der Seitenleiste klar und prägnant. Eine saubere Navigationsstruktur ermöglicht es KI-Agenten, Ihre Sitemap problemlos aus dem kompilierten `llms.txt`-Feed zu analysieren.
+::: callout tip "Sidebar-Beschriftungen optimieren" icon:sparkles
+Halten Sie Sidebar-Titel klar und beschreibend. Eine prägnante Navigationsstruktur ermöglicht es KI-Agenten, Ihre Sitemap einfach aus dem kompilierten `llms.txt`-Feed zu parsen.
 :::
