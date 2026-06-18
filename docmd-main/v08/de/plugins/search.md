@@ -182,7 +182,7 @@ Semantische Suche ist experimentell. Aktuelle Einschränkungen sind:
 Für optimale Leistung der semantischen Suche:
 
 1.  **Rauschen ausschließen** - Indizieren Sie keine Changelogs oder Entwurfsinhalte:
-    ```json
+    ```json "docmd.config.json"
     {
       "plugins": {
         "search": {

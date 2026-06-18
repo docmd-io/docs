@@ -20,7 +20,7 @@ Click **[Use this template](https://github.com/docmd-io/docmd-template/generate)
 
 Open `docmd.config.json` in your new repository and update the `title` and `url` fields:
 
-```json
+```json "docmd.config.json"
 {
   "title": "My Docs",
   "url": "https://username.github.io/repo-name"
@@ -80,7 +80,7 @@ The compiled site is written to `site/` by default.
 
 The template ships with `.github/workflows/docs.yml`:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 name: Docs
 
 on:
@@ -142,7 +142,7 @@ docs/
 
 Add a `navigation.json` to control the sidebar:
 
-```json
+```json "navigation.json"
 [
   { "title": "Home", "path": "/" },
   { "title": "Getting Started", "path": "/getting-started" },

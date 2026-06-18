@@ -16,7 +16,7 @@ Verwenden Sie die [Starter-Vorlage](./starter-template) — sie enthält eine vo
 
 Fügen Sie die Action zu einer beliebigen Workflow-Datei in Ihrem Repository hinzu:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 # .github/workflows/docs.yml
 name: Dokumentation bereitstellen
 
@@ -53,7 +53,7 @@ jobs:
 
 Für minimalen Boilerplate verwenden Sie den gehosteten wiederverwendbaren Workflow. Er übernimmt Berechtigungen, Checkout, Build, Upload und Deploy in einem Aufruf:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 # .github/workflows/docs.yml
 on:
   push:
@@ -112,7 +112,7 @@ So verwenden Sie eine benutzerdefinierte Domain:
 
 Für Produktions-Dokumentationsseiten verwenden Sie einen spezifischen Release-Tag anstelle von `@v1`:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 - uses: docmd-io/deploy@v1.0.0
   id: build
 ```

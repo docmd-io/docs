@@ -75,7 +75,7 @@ Um genaue Zeitstempel und Historie zu gewährleisten, konfigurieren Sie Ihre CI-
 
 Fügen Sie `fetch-depth: 0` zu Ihrem Checkout-Schritt hinzu:
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 - name: Checkout
   uses: actions/checkout@v4
   with:
@@ -86,7 +86,7 @@ Fügen Sie `fetch-depth: 0` zu Ihrem Checkout-Schritt hinzu:
 
 Setzen Sie die Variable `GIT_DEPTH` auf `0`:
 
-```yaml
+```yaml ".gitlab-ci.yml"
 variables:
   GIT_DEPTH: 0
 ```

@@ -163,7 +163,7 @@ docmd führt intensive Operationen über eine **Pluggable Engine Architecture** 
 
 Die Methode `runWorkerTask` wird transparent in `PageContext`, `PostBuildContext` und `ActionContext` injiziert.
 
-```javascript
+```javascript "my-plugin.js"
 {
   "plugin": { "name": "my-plugin", "version": "1.0.0", "capabilities": ["post-build"] },
 
@@ -215,7 +215,7 @@ interface PageContext {
 }
 ```
 
-```javascript
+```javascript "my-metadata-plugin.js"
 export default {
   plugin: {
     name: "my-metadata-plugin",
@@ -235,7 +235,7 @@ export default {
 
 Der `getAssets()`-Hook ermöglicht es Ihrem Plugin, Client-seitige Logik sicher zu bündeln.
 
-```javascript
+```javascript "index.js"
 export default {
   getAssets: (options) => {
     return [
@@ -261,7 +261,7 @@ Plugins, die Client-seitige UI rendern, sollten Strings über den `translations(
 
 Das Standardmuster speichert eine JSON-Datei für jede Sprache in einem `i18n/`-Verzeichnis:
 
-```javascript
+```javascript "index.js"
 import fs from "fs";
 import path from "path";
 
@@ -287,7 +287,7 @@ export default {
 
 Plugins können **Action-Handler** und **Event-Handler** auf dem Dev-Server registrieren. Sie sind über die `window.docmd`-API vom Browser aus aufrufbar.
 
-```javascript
+```javascript "index.js"
 export default {
   plugin: {
     name: "my-live-plugin",

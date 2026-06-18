@@ -26,7 +26,7 @@ docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.6
 
 Verwenden Sie Docker Compose, um Build und Serving in einem Workflow zu kombinieren:
 
-```yaml
+```yaml "docker-compose.yml"
 version: '3.8'
 services:
   docs:

@@ -182,7 +182,7 @@ npm install docmd-search
 为获得最佳语义搜索性能：
 
 1.  **排除噪音** —— 不要索引 changelog 或草稿内容：
-    ```json
+    ```json "docmd.config.json"
     {
       "plugins": {
         "search": {

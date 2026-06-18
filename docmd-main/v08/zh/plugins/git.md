@@ -75,7 +75,7 @@ Git 插件使用本地 Git 命令在构建时读取您的仓库历史。许多 C
 
 将 `fetch-depth: 0` 添加到您的 checkout 步骤：
 
-```yaml
+```yaml ".github/workflows/docs.yml"
 - name: Checkout
   uses: actions/checkout@v4
   with:
@@ -86,7 +86,7 @@ Git 插件使用本地 Git 命令在构建时读取您的仓库历史。许多 C
 
 将 `GIT_DEPTH` 变量设置为 `0`：
 
-```yaml
+```yaml ".gitlab-ci.yml"
 variables:
   GIT_DEPTH: 0
 ```

@@ -20,7 +20,7 @@ Klicken Sie auf GitHub auf **[Vorlage verwenden](https://github.com/docmd-io/doc
 
 Öffnen Sie `docmd.config.json` in Ihrem neuen Repository und aktualisieren Sie die Felder `title` und `url`:
 
-```json
+```json "docmd.config.json"
 {
   "title": "Meine Dokumentation",
   "url": "https://benutzername.github.io/repo-name"
@@ -89,7 +89,7 @@ docs/
 
 Fügen Sie eine `navigation.json` hinzu, um die Seitenleiste zu steuern:
 
-```json
+```json "navigation.json"
 [
   { "title": "Startseite", "path": "/" },
   { "title": "Erste Schritte", "path": "/erste-schritte" },
