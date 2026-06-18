@@ -1,118 +1,51 @@
 ---
 title: "PWA 与离线支持"
-description: "将文档转化为渐进式 Web 应用，支持离线缓存和移动端特性。"
+description: "通过离线缓存与移动优先特性，将您的文档转变为渐进式 Web 应用。"
 ---
 
-**PWA 插件**将你的文档转化为渐进式 Web 应用，支持离线缓存和移动端安装。它添加 Web Manifest 以支持移动端安装，并注册 Service Worker 处理智能离线缓存，确保技术文档即使在网络不稳定的环境下仍可访问。
-
-## 安装
-
-```bash
-npx @docmd/core add pwa
-```
+`@docmd/plugin-pwa` 插件将您的文档转变为渐进式 Web 应用。它会写入一个用于移动安装的 web manifest，并注册一个用于离线阅读缓存页面的 service worker。
 
 ## 配置
 
-可在 `docmd.config.json` 的 `plugins` 部分自定义 PWA 插件的品牌配置。
+在 `docmd.config.json` 的 `plugins` 部分自定义您的应用品牌。
 
-```json
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | 启用或禁用 PWA manifest 与 service worker 生成。 |
+| `themeColor` | `string` | `'#1e293b'` | 移动 UI 浏览器 chrome 的主色。 |
+| `bgColor` | `string` | `'#ffffff'` | 安装过程中启动画面的背景色。 |
+| `logo` | `string` | `null` | 应用图标的路径（相对于项目源）。 |
+
+### 示例
+
+```json "docmd.config.json"
 {
   "plugins": {
     "pwa": {
-      "enabled": true,
       "themeColor": "#1e293b",
       "bgColor": "#ffffff",
-      "logo": "/assets/logo.png"
+      "logo": "assets/app-icon.png"
     }
   }
 }
 ```
 
-## 核心功能
+## 功能
 
-### 1. 离线缓存
-插件会自动生成实现“旧数据优先更新”（Stale-While-Revalidate）缓存策略的 `service-worker.js` 文件。用户访问页面时，Service Worker 将：
-*   立即返回缓存版本以实现最大速度。
-*   在后台从网络获取最新版本。
-*   为下次访问更新缓存。
+- **离线缓存**：stale-while-revalidate 策略。页面从缓存加载，然后在后台刷新。
+- **可安装**：发出 `manifest.webmanifest`，以便用户可以将其安装到 iOS 和 Android 主屏幕。
+- **自动图标**：如果没有提供显式图标，则从您的项目 logo 或 favicon 派生 PWA 图标。
+- **对 SPA 友好**：与 SPA 路由器和标准目录路由配合使用。
 
-### 2. 移动端安装
+## 图标解析优先级
 
-通过生成 `manifest.webmanifest` 并注入所需的 `<meta>` 标签，插件允许用户在 iOS 和 Android 上“添加到主屏幕”。你的文档将表现得像一个独立应用，拥有自己的启动画面和窗口框架。
+插件根据以下优先级解析您的 PWA 图标：
 
-### 3. 智能资源解析
-插件会通过查找项目的 `logo` 或 `favicon` 自动生成应用图标。如需更多控制，可提供明确的 `icons` 数组：
+1. `pwa.icons` - 配置中的显式数组。
+2. `pwa.logo` - 相对于源的路径。
+3. `config.logo` - 全局站点 logo。
+4. `config.favicon` - 全局 favicon。
 
-```json
-{
-  "plugins": {
-    "pwa": {
-      "icons": [
-        { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
-        { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png" }
-      ]
-    }
-  }
-}
-```
-
-## 技术实现
-
-Service Worker 将与单页应用（SPA）路由兼容地设计。它包含针对 Safari 严格安全策略（涉及重定向流）的安全防护逻辑，确保在所有现代浏览器上的稳定性。
-
-::: callout tip "开发模式"
-在本地开发（`npx @docmd/core dev`）中，Service Worker 通常会被禁用或绕过，以防止积极缓存干扰你的编辑。如需测试 PWA 功能，请使用 `npx @docmd/core build` 执行生产构建，并使用静态托管服务输出目录。
+::: callout tip "测试 PWA 功能"
+Service worker 在 `npx @docmd/core dev` 中会被绕过，以防止编辑期间出现缓存问题。要测试 PWA 功能，请运行 `npx @docmd/core build` 并使用静态主机为 `site/` 目录提供服务。
 :::
-
-### 完全移除
-
-只需删除 `plugins` 中的 `pwa` 块即可。下次运行 `npx @docmd/core build` 时不会生成新的 manifest。当用户访问站点时，docmd 的客户端引导程序（`docmd-main.js`）会检查 `<link rel="manifest">` 的存在。如果它不存在但 Service Worker 已注册，将自动**注销所有现存 Service Worker** 并清除缓存外壳——无需用户操作。
-
-::: callout warning
-上次构建产生的 `manifest.webmanifest` 和 `service-worker.js` 文件会在磁盘上持久存在，直到你使用 `npx @docmd/core build` 或 `rm -rf site` 清除输出目录（默认为 `site/`）为止。这是文件系统残留物，不是活跃的 PWA。
-:::
-
-## 配置参考
-
-所有字段均为可选。默认值设计为零配置即用。
-
-```json
-{
-  "plugins": {
-    "pwa": {
-      "logo": "assets/images/app-icon.png",
-      "icons": [
-        { "src": "/assets/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
-        { "src": "/assets/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
-      ],
-      "themeColor": "#1e293b",
-      "bgColor": "#ffffff",
-      "enabled": false
-    }
-  }
-}
-```
-
-图标解析优先级：`pwa.logo` > `config.logo` > `config.favicon` > （无图标）
-
-### 图标解析优先级
-
-docmd 按以下层级解析 PWA 图标：
-
-1. `pwa.icons` - 手动数组，直接使用
-2. `pwa.logo` - 单一图片路径，用于 192x192 和 512x512 条目
-3. `config.logo` - 全局站点 logo
-4. `config.favicon` - 全局 favicon
-5. *（manifest 中未声明图标）* - 以上均未设置时
-
-## 本地测试
-
-浏览器将 Service Worker 限制在 `https://` 或 `localhost`。使用：
-
-```bash
-npx @docmd/core dev
-```
-
-打开 Chrome DevTools → **Application** → **Manifest** 和 **Service Workers**，即可实时查看已激活的注册信息。
-
-Safari → **Develop** → **Service Workers** 面板同样适用。

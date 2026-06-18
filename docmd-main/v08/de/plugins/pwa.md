@@ -1,24 +1,24 @@
 ---
-title: "PWA & Offline-Support"
-description: "Verwandeln Sie Ihre Dokumentation in eine progressive Webanwendung mit Offline-Caching und mobil-optimierten Funktionen."
+title: "PWA & Offline-Unterstützung"
+description: "Verwandeln Sie Ihre Dokumentation in eine Progressive Web App mit Offline-Caching und Mobile-First-Funktionen."
 ---
 
-Das `@docmd/plugin-pwa`-Plugin verwandelt Ihre Dokumentation in eine Progressive Web App (PWA). Es fügt ein Web-Manifest für die mobile Installation hinzu und registriert einen Service Worker für das intelligente Offline-Caching. So bleibt Ihre technische Dokumentation auch in Umgebungen mit schlechter Internetverbindung zugänglich.
+Das `@docmd/plugin-pwa`-Plugin verwandelt Ihre Dokumentation in eine Progressive Web App. Es schreibt ein Web-Manifest für die mobile Installation und registriert einen Service Worker, der Seiten für das Offline-Lesen zwischenspeichert.
 
 ## Konfiguration
 
-Passen Sie Ihre App-Branding-Einstellungen innerhalb des `plugins`-Abschnitts Ihrer `docmd.config.json` an.
+Passen Sie Ihr App-Branding im `plugins`-Abschnitt Ihrer `docmd.config.json` an.
 
-| Option | Typ | Standardwert | Beschreibung |
+| Option | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Aktiviert oder deaktiviert die Generierung des PWA-Manifests und Service Workers. |
-| `themeColor` | `string` | `'#1e293b'` | Die Primärfarbe der mobilen Benutzeroberfläche des Browsers. |
-| `bgColor` | `string` | `'#ffffff'` | Hintergrundfarbe für den Startbildschirm (Splash Screen) während der Installation. |
-| `logo` | `string` | `null` | Pfad zum App-Icon (relativ zur Projektquelle). |
+| `enabled` | `boolean` | `true` | Aktiviert/deaktiviert die PWA-Manifest- und Service-Worker-Erzeugung. |
+| `themeColor` | `string` | `'#1e293b'` | Die Hauptfarbe der mobilen UI-Browser-Chrome. |
+| `bgColor` | `string` | `'#ffffff'` | Hintergrundfarbe für den Splash-Screen während der Installation. |
+| `logo` | `string` | `null` | Pfad zum App-Symbol (relativ zur Projektquelle). |
 
 ### Beispiel
 
-```json
+```json "docmd.config.json"
 {
   "plugins": {
     "pwa": {
@@ -32,20 +32,20 @@ Passen Sie Ihre App-Branding-Einstellungen innerhalb des `plugins`-Abschnitts Ih
 
 ## Funktionen
 
-- **Offline-Caching**: Verwendet eine „Stale-While-Revalidate“-Strategie. Seiten werden sofort aus dem Cache geladen, während im Hintergrund nach Updates gesucht wird.
-- **Mobile Installation**: Generiert eine `manifest.webmanifest`-Datei, die es Benutzern unter iOS und Android ermöglicht, die App nativ „Zum Home-Bildschirm hinzuzufügen“.
-- **Intelligente Asset-Auflösung**: Erstellt App-Icons automatisch aus dem Logo oder Favicon Ihres Projekts, falls kein explizites Icon angegeben ist.
-- **SPA-Kompatibel**: Vollständig kompatibel mit Single-Page-Application-Übergängen und Standard-Verzeichnis-Routing.
+- **Offline-Caching**: stale-while-revalidate-Strategie. Seiten werden aus dem Cache geladen und dann im Hintergrund aktualisiert.
+- **Installierbar**: emittiert ein `manifest.webmanifest`, damit Nutzer die Site auf iOS und Android auf ihrem Startbildschirm installieren können.
+- **Automatische Icons**: leitet PWA-Icons aus Ihrem Projekt-Logo oder Favicon ab, wenn kein explizites Symbol angegeben ist.
+- **SPA-freundlich**: funktioniert mit dem SPA-Router und dem Standard-Verzeichnis-Routing.
 
-## Priorität der Icon-Auflösung
+## Icon-Auflösungs-Priorität
 
-Das Plugin löst Ihre PWA-Icons anhand der folgenden Rangfolge auf:
+Das Plugin löst Ihre PWA-Icons nach folgender Priorität auf:
 
 1. `pwa.icons` - Explizites Array in der Konfiguration.
 2. `pwa.logo` - Pfad relativ zur Quelle.
-3. `config.logo` - Globales Website-Logo.
+3. `config.logo` - Globales Site-Logo.
 4. `config.favicon` - Globales Favicon.
 
-::: callout tip "Testen von PWA-Funktionen"
-Service Worker werden in `npx @docmd/core dev` umgangen, um Caching-Probleme während der Bearbeitung zu vermeiden. Um PWA-Funktionen zu testen, führen Sie `npx @docmd/core build` aus und stellen Sie das `site/`-Verzeichnis über einen statischen Host bereit.
+::: callout tip "PWA-Funktionen testen"
+Service Worker werden in `npx @docmd/core dev` umgangen, um Cache-Probleme beim Bearbeiten zu vermeiden. Um PWA-Funktionen zu testen, führen Sie `npx @docmd/core build` aus und bedienen Sie das `site/`-Verzeichnis über einen Static Host.
 :::

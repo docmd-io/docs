@@ -1,15 +1,23 @@
 ---
 title: "LLM 上下文插件"
-description: "通过自动生成 llms.txt 和 llms-full.txt，为 AI 消费优化你的文档。"
+description: "通过自动生成 llms.txt 和 llms-full.txt 来优化您的文档以供 AI 消费。"
 ---
 
-`@docmd/plugin-llms` 插件确保你的文档针对大型语言模型 (LLMs) 和 AI 代理进行了完美优化。它遵循不断增长的行业标准，即提供高层摘要和全面的上下文文件，AI 工具可以提取这些文件，以在产生极少幻觉的情况下理解你的项目。
+`@docmd/plugin-llms` 插件遵循 `llms.txt` 标准。它在构建时生成两个文件：结构化摘要（`llms.txt`）和完整连接上下文（`llms-full.txt`）。理解该标准的 AI 助手和工具可以直接使用这些文件来摄取您的文档。
 
 ## 配置
 
-LLM 插件默认启用。为了使其正常运行，你必须在 `docmd.config.json` 中提供一个 `url`。
+该插件默认启用。要生成绝对链接，请在 `docmd.config.json` 中设置 `url`。
 
-```json
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | 启用或禁用 LLM 上下文生成。 |
+| `fullContext` | `boolean` | `true` | 若为 true，则生成包含所有页面内容的 `llms-full.txt` 文件。 |
+| `maxTokenLimit` | `number` | `null` | 可选，限制上下文文件的总字符数/token 数。 |
+
+### 示例
+
+```json "docmd.config.json"
 {
   "url": "https://docs.example.com",
   "plugins": {
@@ -20,17 +28,21 @@ LLM 插件默认启用。为了使其正常运行，你必须在 `docmd.config.j
 }
 ```
 
-### 排除页面
+## 生成的输出
 
-如果页面包含敏感信息或你不希望 AI 模型学习的内部笔记，请在 frontmatter 中使用 `llms: false` 标志：
+配置完成后，插件会在每次构建期间自动在站点根目录生成 `llms.txt` 和 `llms-full.txt`。这些文件在页面的 `<head>` 中链接，供 AI 工具自动发现。
 
-```yaml
+### 排除某个页面
+
+如果某个页面包含敏感信息或您不希望 AI 模型学习的内部备注，请在 frontmatter 中使用 `llms: false` 标志：
+
+```markdown
 ---
 title: "内部开发机密"
 llms: false
 ---
 ```
 
-::: callout tip "最大化 AI 准确性 :robot:"
-有关构建 Markdown（语义标题、替代文本等）的详细最佳实践，请参阅我们的 [针对 AI 代理进行优化](../guides/ai-optimisation/generating-ai-ready-docs.md) 指南。
+::: callout tip "最大化 AI 准确性"
+有关如何构建 Markdown（语义化标题、替代文本等）的详细最佳实践，请参阅我们的 [为 AI 智能体优化](../guides/ai-optimisation/generating-ai-ready-docs.md) 指南。
 :::

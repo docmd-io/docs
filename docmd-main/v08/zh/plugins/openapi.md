@@ -1,49 +1,75 @@
 ---
 title: "OpenAPI 插件"
-description: "直接在 Markdown 页面中从 JSON 或 YAML 规范文件渲染 OpenAPI 3.x API 参考文档。"
+description: "在构建时直接从 OpenAPI 3.x 规范渲染静态 API 参考文档。"
 ---
 
-**OpenAPI 插件**将 OpenAPI 3.x 规范文件转换为结构化的 API 参考页面——在构建时渲染，无需客户端 JavaScript，无需第三方依赖。每个端点、参数、请求体和响应都转换为语义化 HTML 表格。
+`@docmd/plugin-openapi` 插件将 OpenAPI 3.x 规范文件转换为结构化的、可搜索的 API 参考页面。它遵循 docmd 的"零 JavaScript"理念 —— 在构建过程中将每个端点、参数和响应渲染到语义化 HTML 表格中，确保最佳性能和 SEO。
 
-::: callout info "核心插件"
-OpenAPI 插件已**内置**于 `@docmd/core` 中，无需单独安装。它遵循 docmd 的构建时渲染理念——插件在构建时读取你的规范并输出干净、可访问的 HTML 表格，无需客户端 JavaScript。
-:::
+## 配置
 
-## 启用
+OpenAPI 插件默认包含在 `@docmd/core` 中。您可以在 `docmd.config.json` 中配置全局渲染选项。
 
-在 `docmd.config.json` 中启用：
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `info` | `boolean` | `true` | 显示规范中 `info` 对象的 API 标题、版本和描述。 |
+| `download` | `boolean` | `false` | 若为 true，则在规范头部添加一个下载原始 JSON/YAML 文件的链接。 |
+| `summaryOnly` | `boolean` | `false` | 若为 true，则仅渲染方法、路径和摘要。适用于大型 API 索引。 |
+| `allowRawHtml` | `boolean` | `false` | 若为 true，则阻止对描述中 HTML 标签的转义。 |
 
-```json
+### 示例
+
+```json "docmd.config.json"
 {
   "plugins": {
-    "openapi": {}
+    "openapi": {
+      "info": true,
+      "download": true,
+      "summaryOnly": false
+    }
   }
 }
 ```
 
-## 使用方法
+## 用法
 
-在任何 Markdown 页面中使用带 `openapi` 语言标签的围栏代码块嵌入 OpenAPI 规范：
+在 Markdown 中使用带有 `openapi` 标记的围栏代码块嵌入 OpenAPI 规范。路径相对于您的项目源解析。
 
 ````markdown
 ```openapi
-assets/docmd-api.json
+assets/openapi.json
 ```
 ````
 
-路径相对于你的 `src` 目录解析。支持 **JSON** 和 **YAML** 格式。
+### 渲染结果
+
+```openapi
+assets/docmd-api.json
+```
 
 ## 渲染内容
 
-对于规范中的每个路径和 HTTP 方法，插件渲染：
+对于规范中的每个路径和 HTTP 方法，插件会渲染：
 
-*   **方法徽章** — 颜色编码（`GET`、`POST`、`PUT`、`PATCH`、`DELETE`）
-*   **路径** — 完整端点路径
-*   **摘要和描述** — 来自操作对象
-*   **参数** — 路径、查询、请求头参数，包含类型和必填标记
-*   **请求体** — 包含 JSON Schema 示例
-*   **响应** — 按状态码列出，包含描述和 Schema
+- **方法徽章** - 颜色编码（`GET`、`POST`、`PUT`、`PATCH`、`DELETE`）
+- **路径** - 带高亮参数的完整端点路径
+- **摘要和描述** - 来自 operation 对象
+- **参数表格** - 名称、位置（`path`、`query`、`header`、`cookie`）、类型、必需标志、描述
+- **请求体表格** - 带类型和默认值的 schema 属性
+- **响应表格** - 带描述和响应 schema 类型的状态码
+- **已弃用通知** - 标记为 `deprecated: true` 的操作会被内联标记
 
-::: callout tip "AI 上下文"
-OpenAPI 规范提供了精确的机器可读 API 合约。当与 `llms-full.txt` 结合使用时，AI 代理可以直接从你的文档中理解你的 API 结构，无需额外说明。
+::: callout tip "构建时渲染"
+所有渲染都在构建时进行。生成的页面是静态的，无需客户端 JavaScript 即可显示。这为您带来快速的页面加载、完整的搜索索引和对 SEO 友好的 HTML。
 :::
+
+## 能力支持
+
+| 特性 | 支持 |
+| :--- | :--- |
+| OpenAPI 3.x | ✓ (JSON & YAML*) |
+| Swagger 2.x | ✗ (请先转换为 3.x) |
+| `$ref` 解析 | ✓ (内部 schemas) |
+| `oneOf` / `anyOf` | ✓ (显示为联合类型) |
+| `deprecated` 标记 | ✓ |
+
+*\*YAML 支持需要在项目中安装 `js-yaml` 包。*

@@ -1,54 +1,55 @@
 ---
 title: "Sitemap-Plugin"
-description: "Generieren Sie automatisch eine standardkonforme sitemap.xml für eine bessere Sichtbarkeit in Suchmaschinen."
+description: "Generieren Sie automatisch eine standardkonforme sitemap.xml für eine bessere Suchmaschinen-Entdeckung."
 ---
 
-Das Plugin `@docmd/plugin-sitemap` generiert automatisch eine `sitemap.xml`-Datei im Stammverzeichnis Ihres Build-Ordners. Diese Datei bietet Suchmaschinen wie Google und Bing eine umfassende Karte der Architektur Ihrer Website und stellt sicher, dass alle Seiten - einschließlich Deep-Links innerhalb versionierter Dokumentationen - gecrawlt und indexiert werden.
+Das `@docmd/plugin-sitemap`-Plugin erzeugt eine `sitemap.xml`-Datei im Stammverzeichnis Ihres Build-Verzeichnisses. Dies bietet Suchmaschinen eine umfassende Karte der Architektur Ihrer Site und stellt sicher, dass alle Seiten — einschließlich versionierter Dokumentation — gecrawlt und indiziert werden.
 
 ## Konfiguration
 
-Aktivieren Sie die Sitemap-Generierung, indem Sie Ihre `siteUrl` in der Hauptkonfiguration angeben. Sie können die Crawling-Gewichtung verschiedener Abschnitte innerhalb des `plugins`-Objekts anpassen.
+Aktivieren Sie die Sitemap-Generierung, indem Sie Ihre `siteUrl` in der Root-Konfiguration angeben. Sie können das Crawl-Gewicht im `plugins`-Objekt anpassen.
 
-```javascript
-import { defineConfig } from '@docmd/core';
+| Option | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Aktiviert/deaktiviert die Sitemap-Generierung. |
+| `defaultChangefreq` | `string` | `'weekly'` | Hinweis an Crawler, wie oft sich Seiten ändern. |
+| `defaultPriority` | `number` | `0.8` | Standardgewicht für Standardseiten (0.0 bis 1.0). |
+| `rootPriority` | `number` | `1.0` | Gewicht für die Startseite (`index.md`). |
 
-export default defineConfig({
-  siteUrl: 'https://docs.beispiel.de', // Erforderlich für die Sitemap-Generierung
-  plugins: {
-    sitemap: {
-      defaultChangefreq: 'weekly', // 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
-      defaultPriority: 0.8,        // Standardgewichtung für normale Seiten
-      rootPriority: 1.0            // Gewichtung für die Startseite (index.md)
+### Beispiel
+
+```json "docmd.config.json"
+{
+  "url": "https://docs.example.com",
+  "plugins": {
+    "sitemap": {
+      "defaultChangefreq": "weekly",
+      "defaultPriority": 0.8
     }
   }
-});
+}
 ```
 
-## Steuerungen auf Seitenebene
+## Funktionen
 
-Sie können das Sitemap-Verhalten für spezifische Seiten über das Frontmatter überschreiben.
+- **Kanonische URLs**: löst Seitenpfade zu sauberen öffentlichen URLs basierend auf Ihrer `url`-Konfiguration auf.
+- **Versionierte Entdeckung**: enthält Seiten aus jeder konfigurierten Version (`/v1/`, `/v2/` usw.).
+- **Pro-Seite-Ausschlüsse**: überspringt Seiten mit `sitemap: false` im Frontmatter.
+- **Standard-XML**: die Ausgabe folgt dem sitemaps.org-Protokoll, das von jeder großen Suchmaschine unterstützt wird.
 
-```yaml
+## Steuerung auf Seitenebene
+
+Überschreiben Sie das Sitemap-Verhalten für bestimmte Seiten über das Frontmatter:
+
+```markdown
 ---
-title: "Archiv-Seite"
-priority: 0.3          # Niedrigere Gewichtung für alte Inhalte
-changefreq: "monthly"   # Hinweis an Crawler, dass sich diese Seite selten ändert
-lastmod: "2024-03-15"   # Explizites Setzen des letzten Änderungsdatums
-sitemap: false         # Diese spezifische Seite aus der sitemap.xml ausschließen
+title: "Archivseite"
+priority: 0.3          # Niedrigeres Gewicht für Legacy-Inhalte
+changefreq: "monthly"   # Hinweis an Crawler
+sitemap: false         # Diese spezifische Seite ausschließen
 ---
 ```
-
-## Kernfunktionen
-
-### 1. Automatische URL-Konstruktion
-Das Plugin löst Seitenpfade intelligent in ihre kanonischen öffentlichen URLs auf. Es verarbeitet Verzeichnis-Indizes automatisch und stellt sicher, dass `guide/index.html` als `https://meineseite.de/guide/` aufgeführt wird, um eine saubere URL-Struktur beizubehalten.
-
-### 2. Entdeckung von Versionen
-Wenn Ihr Projekt [Versionierung](../configuration/versioning) verwendet, schließt das Sitemap-Plugin automatisch alle Seiten aus allen Versionen ein (z. B. `/v1/erste-schritte`, `/v2/erste-schritte`). Dies ermöglicht es Suchmaschinen, Ihre archivierten Dokumentationen ohne manuelle Konfiguration zu entdecken.
-
-### 3. Intelligente Ausschlüsse
-Seiten, die in ihrem Frontmatter mit `noindex: true` oder `sitemap: false` markiert sind, werden automatisch von der generierten `sitemap.xml` ausgeschlossen. Dies gibt Ihnen eine granulare Kontrolle darüber, was den Suchmaschinen präsentiert wird.
 
 ::: callout tip "Validierung"
-Nach dem Build Ihrer Website finden Sie die Sitemap normalerweise unter `ihr-ausgabe-ordner/sitemap.xml`. Die meisten Search-Engine-Konsolen ermöglichen es Ihnen, diese Datei direkt einzureichen, um die Indexierung zu beschleunigen.
+Nach dem Build Ihrer Site finden Sie die Sitemap unter `site/sitemap.xml`. Sie können diese URL direkt in Suchmaschinen-Konsolen einreichen, um die Indizierung zu beschleunigen.
 :::

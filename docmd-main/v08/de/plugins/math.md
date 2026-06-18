@@ -3,44 +3,56 @@ title: "Math-Plugin"
 description: "Native KaTeX/LaTeX-Mathematik-Integration für docmd."
 ---
 
-Das **Math-Plugin** fügt Ihren docmd-Websites native Unterstützung für LaTeX und KaTeX hinzu.
+Das **Math-Plugin** fügt Ihren docmd-Sites native LaTeX- und KaTeX-Unterstützung hinzu.
 
-Es nutzt `markdown-it-texmath` in sicherer Integration mit der `katex`-Engine, um sowohl Inline-Mathematik als auch mathematische Blöcke reibungslos zu rendern, ohne dass komplexe clientseitige JavaScript-Bibliotheken erforderlich sind.
+Es verwendet `markdown-it-texmath`, integriert mit der `katex`-Berechnungs-Engine. Dies rendert Inline- und Block-Formeln reibungslos ohne komplexe clientseitige JavaScript-Bibliotheken.
 
-## Setup
+## Konfiguration
+
+Das Math-Plugin ist ein optionales Plugin. Installieren Sie es über die CLI:
 
 ```bash
-docmd add math
+npx @docmd/core add math
 ```
 
-```javascript
-plugins: {
-  math: {}
+Aktivieren Sie es in Ihrer `docmd.config.json`:
+
+### Beispiel
+
+```json "docmd.config.json"
+{
+  "plugins": {
+    "math": {}
+  }
 }
 ```
 
 ## Funktionsweise
 
-1. Aktivieren Sie das Plugin über Ihre `docmd.config.js`.
-2. Umschließen Sie Ihre Standard-LaTeX-Mathematik mit `$` (inline) oder `$$` (Block).
-3. Der Server verarbeitet diese mathematischen Regeln während des Static-Site-Builds intelligent als reine statische HTML-Tags.
-4. Minimal eingefügtes CSS übernimmt das Styling dieser Klassen automatisch, was zu einer sofortigen Visualisierung führt, sobald der Benutzer die Seite aufruft!
+1. Aktivieren Sie das Plugin über Ihre `docmd.config.json`.
+2. Umschließen Sie Ihre Standard-LaTeX-Mathematik mit `$` (Inline) oder `$$` (Block)-Markierungen.
+3. Die Engine verarbeitet diese Regeln während des Builds genau wie rohe statische HTML-Tags.
+4. Minimal injizierte CSS-Styles stylen die Klassen automatisch. Dies führt zu sofortiger Visualisierung beim Laden der Seite.
+
+## Bedingtes Asset-Laden (neu in 0.8.7)
+
+Das KaTeX-Stylesheet (~30 KB) wird nur auf Seiten geladen, die tatsächlich Mathematik rendern. Seiten ohne Gleichungen überspringen den Fetch komplett, sodass eine 100-Seiten-Dokumentation mit nur 5 Mathematikseiten die CSS nur für diese 5 Seiten bezahlt. Die Erkennung scannt das gerenderte HTML jeder Seite nach `class="katex"`- oder `class="katex-display"`-Markern und injiziert das Asset bedingt. Keine Konfiguration erforderlich - das Verhalten ist automatisch.
 
 ## Verwendung
 
 ### Inline-Mathematik
 
-Sie können Standard-Gleichungen mithilfe von einfachen Dollarzeichen `$` nahtlos in einen Textabschnitt einfügen:
+Fügen Sie Standardgleichungen in einem Absatz mit einfachen Dollarzeichen `$` ein:
 
 ```markdown
-Hier ist eine Inline-Gleichung: $E = mc^2$
+Here is an inline equation: $E = mc^2$
 ```
 
-Hier ist eine Inline-Gleichung: $E = mc^2$
+Here is an inline equation: $E = mc^2$
 
-### Mathematische Blöcke
+### Block-Mathematik
 
-Verwenden Sie für umfangreichere mathematische Beweise oder eigenständige Formeln doppelte Dollarzeichen `$$` für die Blockformatierung:
+Für breitere mathematische Beweise oder unterschiedliche Formulierungen verwenden Sie doppelte Dollarzeichen `$$` für die Blockformatierung:
 
 ```markdown
 $$

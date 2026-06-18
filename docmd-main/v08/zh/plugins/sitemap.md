@@ -1,52 +1,55 @@
 ---
 title: "Sitemap 插件"
-description: "自动生成符合标准的 sitemap.xml，提升搜索引擎发现效率。"
+description: "自动生成符合标准的 sitemap.xml，以实现更好的搜索引擎发现。"
 ---
 
-`@docmd/plugin-sitemap` 插件在构建目录根目录自动生成 `sitemap.xml` 文件。该文件为 Google、Bing 等搜索引擎提供完整的站点架构地图，确保包括版本化文档中深层链接在内的所有页面都能被爬取和索引。
+`@docmd/plugin-sitemap` 插件在构建目录的根目录生成一个 `sitemap.xml` 文件。这为搜索引擎提供了您站点架构的综合地图，确保所有页面（包括版本化文档）都会被抓取和索引。
 
 ## 配置
 
-提供站点的 `url` 即可开启站点地图生成。可在 `plugins` 对象中自定义各章节的爬取权重。
+通过在根配置中提供您的 `siteUrl` 来启用 sitemap 生成。您可以在 `plugins` 对象中自定义抓取权重。
 
-```json
+| 选项 | 类型 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | 启用或禁用 sitemap 生成。 |
+| `defaultChangefreq` | `string` | `'weekly'` | 提示爬虫页面更改的频率。 |
+| `defaultPriority` | `number` | `0.8` | 标准页面的默认权重（0.0 至 1.0）。 |
+| `rootPriority` | `number` | `1.0` | 首页（`index.md`）的权重。 |
+
+### 示例
+
+```json "docmd.config.json"
 {
   "url": "https://docs.example.com",
   "plugins": {
     "sitemap": {
       "defaultChangefreq": "weekly",
-      "defaultPriority": 0.8,
-      "rootPriority": 1.0
+      "defaultPriority": 0.8
     }
   }
 }
 ```
 
+## 功能
+
+- **规范 URL**：根据您的 `url` 配置，将页面路径解析为干净的公开 URL。
+- **版本化发现**：包含来自每个已配置版本（`/v1/`、`/v2/` 等）的页面。
+- **按页面排除**：跳过在 frontmatter 中带有 `sitemap: false` 的页面。
+- **标准 XML**：输出遵循每个主要搜索引擎都支持的 sitemaps.org 协议。
+
 ## 页面级控制
 
-可使用 frontmatter 覆盖特定页面的站点地图行为。
+使用 frontmatter 覆盖特定页面的 sitemap 行为：
 
-```yaml
+```markdown
 ---
 title: "归档页面"
-priority: 0.3          # 旧版内容的较低权重
-changefreq: "monthly"   # 提示爬虫此页面变更频率较低
-lastmod: "2024-03-15"   # 明确设置最后修改日期
-sitemap: false         # 将此页面从 sitemap.xml 中排除
+priority: 0.3          # 旧内容的较低权重
+changefreq: "monthly"   # 提示爬虫
+sitemap: false         # 排除此特定页面
 ---
 ```
 
-## 核心功能
-
-### 1. 自动 URL 构建
-插件智能地将页面路径解析为规范的公开 URL。它自动处理目录索引，确保 `guide/index.html` 列为 `https://yoursite.com/guide/`，以维护简洁的 URL 结构。
-
-### 2. 版本化发现
-如果你的项目使用[版本控制](../configuration/versioning)，站点地图插件会自动включать所有版本的所有页面（如 `/v1/getting-started`、`/v2/getting-started`），无需手动配置即可让搜索引擎发现你的归档文档。
-
-### 3. 智能排除
-在 frontmatter 中标记 `noindex: true` 或 `sitemap: false` 的页面会自动从生成的 `sitemap.xml` 中排除，让你精细控制呈现给搜索引擎的内容。
-
 ::: callout tip "验证"
-构建站点后，通常可在 `your-output-dir/sitemap.xml` 找到站点地图。大多数搜索引擎控制台允许你直接提交此文件以加速索引。
+构建站点后，您可以在 `site/sitemap.xml` 找到 sitemap。您可以将此 URL 直接提交到搜索引擎控制台以加速索引。
 :::
