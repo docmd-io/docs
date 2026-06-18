@@ -49,12 +49,20 @@
         "path": "/configuration/menubar"
       },
       {
+        "title": "Cookie 同意",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "站点横幅",
+        "path": "/configuration/site-banner"
+      },
+      {
         "title": "国际化",
         "path": "/configuration/localisation",
         "collapsible": true,
         "children": [
           {
-            "title": "翻译内容",
+            "title": "翻译后的内容",
             "path": "/configuration/localisation/translated-content"
           },
           {
@@ -68,7 +76,7 @@
         "path": "/configuration/versioning"
       },
       {
-        "title": "多项目配置",
+        "title": "工作区",
         "path": "/configuration/workspaces"
       },
       {
@@ -104,7 +112,7 @@
             "path": "/content/syntax/linking"
           },
           {
-            "title": "高级用法",
+            "title": "高级格式",
             "path": "/content/syntax/advanced"
           }
         ]
@@ -115,16 +123,8 @@
         "collapsible": true,
         "children": [
           {
-            "title": "提示框",
+            "title": "标注",
             "path": "/content/containers/callouts"
-          },
-          {
-            "title": "标签页",
-            "path": "/content/containers/tabs"
-          },
-          {
-            "title": "步骤",
-            "path": "/content/containers/steps"
           },
           {
             "title": "卡片",
@@ -135,7 +135,15 @@
             "path": "/content/containers/grids"
           },
           {
-            "title": "折叠面板",
+            "title": "标签页",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "步骤",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "可折叠",
             "path": "/content/containers/collapsible"
           },
           {
@@ -143,12 +151,12 @@
             "path": "/content/containers/buttons"
           },
           {
-            "title": "主页横幅",
-            "path": "/content/containers/hero"
-          },
-          {
             "title": "标签",
             "path": "/content/containers/tags"
+          },
+          {
+            "title": "Hero 区块",
+            "path": "/content/containers/hero"
           },
           {
             "title": "URL 嵌入",
@@ -184,11 +192,15 @@
         "path": "/theming/available-themes"
       },
       {
-        "title": "自定义与变量",
+        "title": "模板（0.8.7 新增）",
+        "path": "/theming/templates"
+      },
+      {
+        "title": "自定义",
         "path": "/theming/customisation"
       },
       {
-        "title": "明暗模式",
+        "title": "亮色与暗色模式",
         "path": "/theming/light-dark-mode"
       },
       {
@@ -200,7 +212,7 @@
         "path": "/theming/icons"
       },
       {
-        "title": "静态资源",
+        "title": "资源管理",
         "path": "/theming/assets-management"
       }
     ]
@@ -211,7 +223,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "使用插件",
+        "title": "概览",
         "path": "/plugins/usage"
       },
       {
@@ -219,7 +231,7 @@
         "path": "/plugins/search"
       },
       {
-        "title": "Git",
+        "title": "Git 集成",
         "path": "/plugins/git"
       },
       {
@@ -231,7 +243,7 @@
         "path": "/plugins/sitemap"
       },
       {
-        "title": "数据分析",
+        "title": "分析",
         "path": "/plugins/analytics"
       },
       {
@@ -243,82 +255,24 @@
         "path": "/plugins/openapi"
       },
       {
-        "title": "Mermaid 图表",
+        "title": "Mermaid",
         "path": "/plugins/mermaid"
       },
       {
-        "title": "PWA",
+        "title": "PWA 支持",
         "path": "/plugins/pwa"
       },
       {
-        "title": "讨论区",
+        "title": "Threads",
         "path": "/plugins/threads"
       },
       {
-        "title": "Math (KaTeX)",
+        "title": "数学公式（KaTeX）",
         "path": "/plugins/math"
       },
       {
         "title": "构建插件",
         "path": "/plugins/building-plugins"
-      }
-    ]
-  },
-  {
-    "title": "迁移",
-    "icon": "arrow-right-left",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "概览",
-        "path": "/migration/overview"
-      },
-      {
-        "title": "Docusaurus",
-        "path": "/migration/docusaurus"
-      },
-      {
-        "title": "MkDocs",
-        "path": "/migration/mkdocs"
-      },
-      {
-        "title": "VitePress",
-        "path": "/migration/vitepress"
-      },
-      {
-        "title": "Astro Starlight",
-        "path": "/migration/starlight"
-      }
-    ]
-  },
-  {
-    "title": "API 参考",
-    "icon": "braces",
-    "collapsible": true,
-    "children": [
-      {
-        "title": "CLI 命令",
-        "path": "/api/cli-commands"
-      },
-      {
-        "title": "Node API",
-        "path": "/api/node-api"
-      },
-      {
-        "title": "浏览器 API",
-        "path": "/api/browser-api"
-      },
-      {
-        "title": "客户端事件",
-        "path": "/api/client-side-events"
-      },
-      {
-        "title": "MCP 服务端",
-        "path": "/api/mcp-server"
-      },
-      {
-        "title": "实时编辑器 API",
-        "path": "/api/live-api"
       }
     ]
   },
@@ -336,7 +290,7 @@
         "path": "/deployment/deployer"
       },
       {
-        "title": "起始模板",
+        "title": "入门模板",
         "path": "/deployment/starter-template"
       },
       {
@@ -379,7 +333,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "扩展与架构",
+        "title": "规模化与架构",
         "collapsible": true,
         "children": [
           {
@@ -387,7 +341,7 @@
             "path": "/guides/scaling-architecture/scaling"
           },
           {
-            "title": "文件夹结构",
+            "title": "目录结构",
             "path": "/guides/scaling-architecture/scalable-folder-structure"
           },
           {
@@ -395,7 +349,7 @@
             "path": "/guides/scaling-architecture/multi-version-documentation"
           },
           {
-            "title": "破坏性更改",
+            "title": "破坏性变更",
             "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           },
           {
@@ -407,25 +361,25 @@
             "path": "/guides/scaling-architecture/organising-large-repositories"
           },
           {
-            "title": "工作空间与 Monorepo",
+            "title": "工作区与 Monorepo",
             "path": "/guides/scaling-architecture/workspace-monorepo"
           }
         ]
       },
       {
-        "title": "人工智能与大语言模型",
+        "title": "AI 与 LLMs",
         "collapsible": true,
         "children": [
           {
-            "title": "MCP 与 Agent 技能",
+            "title": "MCP 与 Agent Skills",
             "path": "/guides/ai-optimisation/mcp-and-agent-skills"
           },
           {
-            "title": "LLM 文档结构",
+            "title": "为 LLMs 优化结构",
             "path": "/guides/ai-optimisation/structure-for-llms"
           },
           {
-            "title": "AI 就绪输出",
+            "title": "AI 就绪的输出",
             "path": "/guides/ai-optimisation/generating-ai-ready-docs"
           },
           {
@@ -455,15 +409,15 @@
             "path": "/guides/search/improving-search-relevance"
           },
           {
-            "title": "速度与准确度",
+            "title": "速度与准确性",
             "path": "/guides/search/fast-accurate-search"
           },
           {
-            "title": "本地优先优化",
+            "title": "本地优先选项",
             "path": "/guides/search/local-first-search"
           },
           {
-            "title": "语义搜索集成",
+            "title": "语义集成",
             "path": "/guides/search/semantic-search"
           }
         ]
@@ -473,7 +427,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "百毫秒级导航响应",
+            "title": "亚 100 毫秒导航",
             "path": "/guides/performance-delivery/sub-100ms-navigation"
           },
           {
@@ -481,11 +435,11 @@
             "path": "/guides/performance-delivery/deploying-cdn-edge"
           },
           {
-            "title": "精简 JS 载荷",
+            "title": "减少 JS 负载",
             "path": "/guides/performance-delivery/reducing-javascript-payload"
           },
           {
-            "title": "低端设备适配",
+            "title": "低端设备",
             "path": "/guides/performance-delivery/low-end-devices"
           },
           {
@@ -499,7 +453,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "配置工作流",
+            "title": "工作流设置",
             "path": "/guides/workflows-teams/setting-up-workflow"
           },
           {
@@ -507,11 +461,11 @@
             "path": "/guides/workflows-teams/git-based-workflows"
           },
           {
-            "title": "预览更改",
+            "title": "预览变更",
             "path": "/guides/workflows-teams/previewing-changes"
           },
           {
-            "title": "规模化一致性",
+            "title": "大规模一致性",
             "path": "/guides/workflows-teams/maintaining-consistency"
           },
           {
@@ -537,21 +491,21 @@
             "path": "/guides/integrations/github-actions-cicd"
           },
           {
-            "title": "兼容现有仓库",
+            "title": "现有仓库",
             "path": "/guides/integrations/existing-markdown-repos"
           },
           {
-            "title": "并发工具集成",
+            "title": "并行工具",
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
       },
       {
-        "title": "内容与体验",
+        "title": "内容与用户体验",
         "collapsible": true,
         "children": [
           {
-            "title": "内容伸缩管理",
+            "title": "可扩展内容",
             "path": "/guides/content-ux/scalable-technical-writing"
           },
           {
@@ -563,7 +517,7 @@
             "path": "/guides/content-ux/improving-readability"
           },
           {
-            "title": "任务与概念导向",
+            "title": "任务 vs 概念",
             "path": "/guides/content-ux/task-vs-concept"
           },
           {
@@ -573,11 +527,11 @@
         ]
       },
       {
-        "title": "自定义与定制",
+        "title": "自定义",
         "collapsible": true,
         "children": [
           {
-            "title": "产品首页",
+            "title": "着陆页",
             "path": "/guides/customisation/custom-landing-pages"
           },
           {
@@ -585,11 +539,11 @@
             "path": "/guides/customisation/custom-fonts-branding"
           },
           {
-            "title": "收藏夹图标与元数据",
+            "title": "Favicon 与元数据",
             "path": "/guides/customisation/custom-favicons-metadata"
           },
           {
-            "title": "扩展与插件",
+            "title": "自定义插件",
             "path": "/guides/customisation/extending-custom-plugins"
           }
         ]
@@ -650,11 +604,11 @@
         "path": "/api/client-side-events"
       },
       {
-        "title": "MCP 服务端",
+        "title": "MCP 服务器",
         "path": "/api/mcp-server"
       },
       {
-        "title": "实时编辑器 API",
+        "title": "Live Editor API",
         "path": "/api/live-api"
       }
     ]
@@ -684,11 +638,11 @@
     "collapsible": true,
     "children": [
       {
-        "title": "v0.8.6 - AI-First 与 MCP",
+        "title": "v0.8.6 - AI 优先与 MCP",
         "path": "/release-notes/0-8-6"
       },
       {
-        "title": "v0.8.4 - 部署器与安全",
+        "title": "v0.8.4 - Deployer 与安全",
         "path": "/release-notes/0-8-4"
       },
       {
@@ -696,7 +650,7 @@
         "path": "/release-notes/0-8-3"
       },
       {
-        "title": "v0.8.2 - 补丁版本",
+        "title": "v0.8.2 - 补丁发布",
         "path": "/release-notes/0-8-2"
       },
       {
@@ -710,12 +664,12 @@
     ]
   },
   {
-    "title": "参与贡献",
+    "title": "贡献",
     "path": "/contributing",
     "icon": "git-pull-request"
   },
   {
-    "title": "Agent 技能",
+    "title": "Agent Skills",
     "path": "https://github.com/docmd-io/docmd-skills",
     "icon": "bot",
     "external": true
@@ -727,7 +681,7 @@
     "external": true
   },
   {
-    "title": "讨论区",
+    "title": "Discussions",
     "path": "https://github.com/orgs/docmd-io/discussions",
     "icon": "message-circle",
     "external": true

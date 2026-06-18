@@ -49,6 +49,14 @@
         "path": "/configuration/menubar"
       },
       {
+        "title": "Cookie-Zustimmung",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "Site-Banner",
+        "path": "/configuration/site-banner"
+      },
+      {
         "title": "Lokalisierung",
         "path": "/configuration/localisation",
         "collapsible": true,
@@ -100,7 +108,7 @@
             "path": "/content/syntax/images"
           },
           {
-            "title": "Verlinkung",
+            "title": "Verlinken",
             "path": "/content/syntax/linking"
           },
           {
@@ -115,7 +123,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Callouts",
+            "title": "Hinweise",
             "path": "/content/containers/callouts"
           },
           {
@@ -123,7 +131,7 @@
             "path": "/content/containers/cards"
           },
           {
-            "title": "Raster (Grids)",
+            "title": "Raster",
             "path": "/content/containers/grids"
           },
           {
@@ -131,11 +139,11 @@
             "path": "/content/containers/tabs"
           },
           {
-            "title": "Schritte (Steps)",
+            "title": "Schritte",
             "path": "/content/containers/steps"
           },
           {
-            "title": "Ausklappbar",
+            "title": "Einklappbar",
             "path": "/content/containers/collapsible"
           },
           {
@@ -151,7 +159,7 @@
             "path": "/content/containers/hero"
           },
           {
-            "title": "URL-Embeds",
+            "title": "URL-Einbettungen",
             "path": "/content/containers/embed"
           },
           {
@@ -165,7 +173,7 @@
         ]
       },
       {
-        "title": "Stilfreie Seiten (noStyle)",
+        "title": "Seiten ohne Stil",
         "path": "/content/no-style-pages"
       },
       {
@@ -184,6 +192,10 @@
         "path": "/theming/available-themes"
       },
       {
+        "title": "Templates (neu in 0.8.7)",
+        "path": "/theming/templates"
+      },
+      {
         "title": "Anpassung",
         "path": "/theming/customisation"
       },
@@ -192,7 +204,7 @@
         "path": "/theming/light-dark-mode"
       },
       {
-        "title": "Benutzerdefiniertes CSS & JS",
+        "title": "Eigene CSS & JS",
         "path": "/theming/custom-css-js"
       },
       {
@@ -231,7 +243,7 @@
         "path": "/plugins/sitemap"
       },
       {
-        "title": "Analytics",
+        "title": "Analyse",
         "path": "/plugins/analytics"
       },
       {
@@ -259,7 +271,7 @@
         "path": "/plugins/math"
       },
       {
-        "title": "Plugins erstellen",
+        "title": "Plugins entwickeln",
         "path": "/plugins/building-plugins"
       }
     ]
@@ -278,7 +290,7 @@
         "path": "/deployment/deployer"
       },
       {
-        "title": "Starter-Vorlage",
+        "title": "Starter-Template",
         "path": "/deployment/starter-template"
       },
       {
@@ -325,7 +337,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Mehr als 1.000 Seiten",
+            "title": "1000+ Seiten",
             "path": "/guides/scaling-architecture/scaling"
           },
           {
@@ -333,19 +345,19 @@
             "path": "/guides/scaling-architecture/scalable-folder-structure"
           },
           {
-            "title": "Mehrversionen-Doku",
+            "title": "Mehrversions-Dokumentation",
             "path": "/guides/scaling-architecture/multi-version-documentation"
           },
           {
-            "title": "Breaking Changes & Deprecations",
+            "title": "Breaking Changes",
             "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           },
           {
-            "title": "Teamarbeit",
+            "title": "Team-Zusammenarbeit",
             "path": "/guides/scaling-architecture/multi-team-collaboration"
           },
           {
-            "title": "Große Repositories verwalten",
+            "title": "Große Repositories",
             "path": "/guides/scaling-architecture/organising-large-repositories"
           },
           {
@@ -359,7 +371,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "MCP & Agent-Skills",
+            "title": "MCP & Agent Skills",
             "path": "/guides/ai-optimisation/mcp-and-agent-skills"
           },
           {
@@ -371,7 +383,7 @@
             "path": "/guides/ai-optimisation/generating-ai-ready-docs"
           },
           {
-            "title": "KI-Halluzinationen minimieren",
+            "title": "Halluzinationen minimieren",
             "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
           },
           {
@@ -379,11 +391,11 @@
             "path": "/guides/ai-optimisation/semantic-search-design"
           },
           {
-            "title": "Segmentierbare Inhalte",
+            "title": "Chunk-fähige Inhalte",
             "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
           },
           {
-            "title": "Kontext-Erhaltung",
+            "title": "Kontexterhalt",
             "path": "/guides/ai-optimisation/context-preservation"
           }
         ]
@@ -401,7 +413,7 @@
             "path": "/guides/search/fast-accurate-search"
           },
           {
-            "title": "Lokales Suchen",
+            "title": "Local-First-Option",
             "path": "/guides/search/local-first-search"
           },
           {
@@ -415,7 +427,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Navigation unter 100 ms",
+            "title": "Unter-100-ms-Navigation",
             "path": "/guides/performance-delivery/sub-100ms-navigation"
           },
           {
@@ -423,11 +435,11 @@
             "path": "/guides/performance-delivery/deploying-cdn-edge"
           },
           {
-            "title": "Reduzierung des JS-Payloads",
+            "title": "JS-Payload-Reduktion",
             "path": "/guides/performance-delivery/reducing-javascript-payload"
           },
           {
-            "title": "Schwächere Geräte",
+            "title": "Schwache Geräte",
             "path": "/guides/performance-delivery/low-end-devices"
           },
           {
@@ -441,19 +453,19 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Workflow-Einrichtung",
+            "title": "Workflow einrichten",
             "path": "/guides/workflows-teams/setting-up-workflow"
           },
           {
-            "title": "Git-basierte Workflows",
+            "title": "Git-basierte Flows",
             "path": "/guides/workflows-teams/git-based-workflows"
           },
           {
-            "title": "Änderungen vorschauen",
+            "title": "Änderungen vorab ansehen",
             "path": "/guides/workflows-teams/previewing-changes"
           },
           {
-            "title": "Konsistenz bewahren",
+            "title": "Konsistenz im großen Maßstab",
             "path": "/guides/workflows-teams/maintaining-consistency"
           },
           {
@@ -467,7 +479,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Deployment-Methode wählen",
+            "title": "Bereitstellungsmethode wählen",
             "path": "/guides/integrations/choosing-deployment-method"
           },
           {
@@ -483,21 +495,21 @@
             "path": "/guides/integrations/existing-markdown-repos"
           },
           {
-            "title": "Nutzung mit anderen Tools",
+            "title": "Parallele Tools",
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
       },
       {
-        "title": "Inhalte & UX",
+        "title": "Inhalt & UX",
         "collapsible": true,
         "children": [
           {
-            "title": "Skalierbares Schreiben",
+            "title": "Skalierbare Inhalte",
             "path": "/guides/content-ux/scalable-technical-writing"
           },
           {
-            "title": "Navigation auf großen Sites",
+            "title": "Große Site-Navigation",
             "path": "/guides/content-ux/navigation-large-sites"
           },
           {
@@ -509,17 +521,17 @@
             "path": "/guides/content-ux/task-vs-concept"
           },
           {
-            "title": "Anti-Patterns vermeiden",
+            "title": "Antimuster",
             "path": "/guides/content-ux/avoiding-anti-patterns"
           }
         ]
       },
       {
-        "title": "Individuelle Anpassung",
+        "title": "Anpassung",
         "collapsible": true,
         "children": [
           {
-            "title": "Landingpages",
+            "title": "Landing Pages",
             "path": "/guides/customisation/custom-landing-pages"
           },
           {
@@ -527,11 +539,11 @@
             "path": "/guides/customisation/custom-fonts-branding"
           },
           {
-            "title": "Favicons & Metadaten",
+            "title": "Favicons & Meta",
             "path": "/guides/customisation/custom-favicons-metadata"
           },
           {
-            "title": "Benutzerdefinierte Plugins",
+            "title": "Eigene Plugins",
             "path": "/guides/customisation/extending-custom-plugins"
           }
         ]
@@ -580,15 +592,15 @@
         "path": "/api/cli-commands"
       },
       {
-        "title": "Node API",
+        "title": "Node-API",
         "path": "/api/node-api"
       },
       {
-        "title": "Browser API",
+        "title": "Browser-API",
         "path": "/api/browser-api"
       },
       {
-        "title": "Clientseitige Events",
+        "title": "Client-Ereignisse",
         "path": "/api/client-side-events"
       },
       {
@@ -596,7 +608,7 @@
         "path": "/api/mcp-server"
       },
       {
-        "title": "Live Editor API",
+        "title": "Live-Editor-API",
         "path": "/api/live-api"
       }
     ]
@@ -626,7 +638,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "v0.8.6 - AI-First & MCP",
+        "title": "v0.8.6 - KI-First & MCP",
         "path": "/release-notes/0-8-6"
       },
       {
@@ -642,11 +654,11 @@
         "path": "/release-notes/0-8-2"
       },
       {
-        "title": "v0.8.1 - Vorschau der Rust-Engine",
+        "title": "v0.8.1 - Rust-Engine-Vorschau",
         "path": "/release-notes/0-8-1"
       },
       {
-        "title": "v0.8.0 - Die Ära der parallelen Engine",
+        "title": "v0.8.0 - Die Ära der parallelen Engines",
         "path": "/release-notes/0-8-0"
       }
     ]
@@ -669,7 +681,7 @@
     "external": true
   },
   {
-    "title": "Diskussionen",
+    "title": "Discussions",
     "path": "https://github.com/orgs/docmd-io/discussions",
     "icon": "message-circle",
     "external": true
