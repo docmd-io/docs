@@ -45,10 +45,10 @@ bunx docmd init
 == tab "Docker" icon:container
 ```bash
 # 拉取官方多架构镜像
-docker pull ghcr.io/docmd-io/docmd:latest
+docker pull ghcr.io/docmd-io/docmd:0.8.6
 
 # 构建文档（从本地 docs/ 编译到 site/）
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
 ```
 
 详情见 [Docker 部署指南](../deployment/docker.md)，了解 Docker Compose 和 Kubernetes 配置。
@@ -105,7 +105,7 @@ docmd build # 构建静态输出
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
 <!-- 同构渲染引擎 -->
-<script src="https://unpkg.com/@docmd/live/dist/docmd-live.js"></script>
+<script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 详情见 [浏览器 API 指南](../api/browser-api.md)。
