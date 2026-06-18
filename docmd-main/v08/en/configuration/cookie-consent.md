@@ -60,7 +60,6 @@ All user-facing strings support the existing `t(key)` translation system. Overri
 }
 ```
 
-Templates may supply their own copy via `translations(localeId)` on their plugin descriptor; that path is unchanged from previous releases.
 
 ## Reacting to a choice
 
@@ -91,7 +90,6 @@ The dialog is built from BEM-style classes on the `.docmd-cookie-banner` root. R
 }
 ```
 
-Templates can re-style the dialog by overriding `templates/partials/cookie-consent.ejs` in their package. The defaults ship from `@docmd/ui`.
 
 ## Disabling
 

@@ -84,7 +84,7 @@ Rich HTML (escape carefully):
 ## Behaviour
 
 - **Position** — Sits at the very top of the page, above the menubar and sidebar logo bar. CSS-only positioning, no layout shift when dismissed.
-- **Dismissal persistence** — The "dismissed" state is stored in `sessionStorage`. A fresh browser session re-shows the banner. If you need longer persistence, write to `localStorage` from a small plugin (the banner's `data-docmd-banner` attribute makes it easy to find).
+- **Dismissal persistence** — The "dismissed" state is stored in `sessionStorage`. A fresh browser session re-shows the banner. If you need longer persistence, write to `localStorage` from your own client-side script — the banner's `data-docmd-banner` attribute makes it easy to find.
 - **Per-page override** — Not yet supported in 0.8.7. To hide the banner on a single page, set `layout.banner: null` in a `config.templates[page]` entry (planned for a follow-up).
 
 ## Re-styling
@@ -101,7 +101,6 @@ The banner is built from BEM-style classes on the `.docmd-banner` root. Re-skin 
 }
 ```
 
-Templates can replace the banner entirely by shipping their own `templates/partials/banner.ejs`. The default ships from `@docmd/ui`.
 
 ## Disabling
 

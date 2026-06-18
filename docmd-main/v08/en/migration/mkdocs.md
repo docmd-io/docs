@@ -41,7 +41,6 @@ In MkDocs, navigation is strictly defined in the `nav` key of `mkdocs.yml`.
 
 **Action required:** Create a `navigation.json` inside your `docs/` folder.
 
-**MkDocs (`mkdocs.yml`):**
 ```yaml "mkdocs.yml"
 nav:
   - Home: index.md
@@ -50,8 +49,7 @@ nav:
     - Usage: usage.md
 ```
 
-**docmd (`navigation.json`):**
-```json
+```json "navigation.json"
 [
   {
     "title": "Home",

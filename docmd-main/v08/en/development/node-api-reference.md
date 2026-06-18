@@ -1,115 +1,23 @@
 ---
-title: "Node.js API"
-description: "Integrate docmd's build engine into your custom Node.js scripts and automation pipelines."
+title: "Node API Reference"
+description: "Low-level Node API for plugin authors — URL utilities, action dispatchers, source tools, the engine loader, and TypeScript types."
 ---
 
-You can import and use the docmd build engine directly within your Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, or extending docmd for specialised environments.
+> **For plugin authors.** If you just want to *call* docmd from a Node script, see [Build API](/reference/build-api) instead. This page covers the lower-level utilities exposed by `@docmd/api` for writing plugins.
 
-## Installation
-
-Ensure `@docmd/core` is installed in your project:
-
-```bash
-npm install @docmd/core
-```
-
-## Core Functions
-
-### `buildSite(configPath, options)`
-
-The primary build function. It handles configuration loading, Markdown parsing, and asset generation.
-
-```javascript
-import { buildSite } from "@docmd/core";
-
-async function runBuild() {
-  await buildSite("./docmd.config.json", {
-    "isDev": false,      
-    offline: false,    
-    zeroConfig: false  
-  });
-}
-```
-
-### `buildLive(options)`
-
-Generates the browser-based **Live Editor** bundle.
-
-```javascript
-import { buildLive } from "@docmd/core";
-
-async function generateEditor() {
-  await buildLive({
-    "serve": false, 
-    port: 3000    
-  });
-}
-```
-
-## Workspace Management
-
-For managing workspaces programmatically, use the dedicated workspace functions.
-
-### `isWorkspace(config)`
-Returns `true` if the provided configuration object follows the Workspace schema.
-
-### `detectWorkspace(configPath)`
-Detects and loads a workspace configuration file. Returns a normalised `WorkspaceRootConfig` or `null`.
-
-### `buildWorkspace(config, options)`
-Builds all projects within a workspace. Handles shared assets and project-specific prefixing.
-
-### `devWorkspace(config, options)`
-Starts the workspace dev server. Watches all projects for changes and performs targeted rebuilds.
-
-```javascript
-import { detectWorkspace, buildWorkspace } from "@docmd/core";
-
-async function buildAll() {
-  const config = await detectWorkspace("./docmd.config.json");
-  if (config) {
-    await buildWorkspace(config, { quiet: false });
-  }
-}
-```
-
-## Example: Custom Pipeline
-
-You can wrap docmd to create complex documentation workflows.
-
-```javascript
-import { buildSite } from '@docmd/core';
-import fs from 'fs-extra';
-
-async function deploy() {
-  // 1. Generate dynamic content
-  await fs.writeFile('./docs/dynamic.md', '# Generated Content');
-
-  // 2. Execute build
-  await buildSite('./docmd.config.json');
-
-  // 3. Move output
-  await fs.move('./site', './public/docs');
-}
-```
-
-::: callout tip
-The programmatic API is highly compatible with **AI-Driven Documentation**. Agents can trigger builds after content updates to verify integrity and manage deployments autonomously.
-:::
-
-## Plugin API (`@docmd/api`)
-
-The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and **centralised URL utilities**.
+The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and centralised URL utilities.
 
 ```bash
 npm install @docmd/api
 ```
 
-### URL Utilities
+> **Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
+
+## URL Utilities
 
 Plugins should use these centralised utilities instead of rolling their own URL logic.
 
-#### `outputPathToSlug(outputPath)`
+### `outputPathToSlug(outputPath)`
 
 Convert a build engine output path to a clean directory-style slug.
 
@@ -121,7 +29,7 @@ outputPathToSlug('index.html');         // → '/'
 outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
 ```
 
-#### `outputPathToPathname(outputPath)`
+### `outputPathToPathname(outputPath)`
 
 Convert to a root-relative pathname.
 
@@ -132,7 +40,7 @@ outputPathToPathname('guide/index.html'); // → '/guide/'
 outputPathToPathname('index.html');       // → '/'
 ```
 
-#### `outputPathToCanonical(outputPath, siteUrl)`
+### `outputPathToCanonical(outputPath, siteUrl)`
 
 Build a full canonical URL.
 
@@ -142,7 +50,7 @@ import { outputPathToCanonical } from "@docmd/api";
 outputPathToCanonical("guide/index.html", "https://docs.example.com");
 ```
 
-#### `sanitizeUrl(url)`
+### `sanitizeUrl(url)`
 
 Collapse double slashes (except after protocol).
 
@@ -153,7 +61,7 @@ sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com
 sanitizeUrl("/foo//bar"); // → "/foo/bar"
 ```
 
-#### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
+### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
 
 Build an absolute URL with locale and version prefixes.
 
@@ -163,7 +71,7 @@ import { buildAbsoluteUrl } from '@docmd/api';
 buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
 ```
 
-#### `resolveHref(href)`
+### `resolveHref(href)`
 
 Normalise user-written hrefs to clean URLs. Handles `.md` stripping, trailing slashes, `external:` and `raw:` prefixes.
 
@@ -175,16 +83,16 @@ resolveHref("external:https://github.com"); // → "https://github.com"
 resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
 ```
 
-### Pre-computed Page URLs
+## Pre-computed Page URLs
 
 Every page object includes pre-computed URL data. Plugins can read these directly with zero computation needed.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {
   for (const page of pages) {
-    console.log(page.urls.slug);      
-    console.log(page.urls.canonical); 
-    console.log(page.urls.pathname);  
+    console.log(page.urls.slug);
+    console.log(page.urls.canonical);
+    console.log(page.urls.pathname);
   }
 }
 ```
@@ -195,7 +103,7 @@ export async function onPostBuild({ pages, config }) {
 | `canonical` | `string` | Full canonical URL (only if `config.url` is set) |
 | `pathname` | `string` | Root-relative path (e.g., `/guide/`) |
 
-> **Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
+## Action & Event Dispatch
 
 ### `createActionDispatcher(hooks, options)`
 
@@ -233,15 +141,15 @@ Loads, validates, and registers all plugins declared in the config. Returns the 
 import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  "resolvePaths": [__dirname]  
+  "resolvePaths": [__dirname]
 });
 ```
 
-### Engine Loader API
+## Engine Loader API
 
 The pluggable engine architecture allows programmatic resolution and instantiation of acceleration layers directly via `@docmd/api`.
 
-#### `loadEngine(engineName)`
+### `loadEngine(engineName)`
 
 Resolves and initialises the requested build engine backend. If native architecture binaries are unavailable, it gracefully falls back to the high-performance JavaScript engine.
 
@@ -252,7 +160,7 @@ const engine = await loadEngine("rust");
 const gitLogResult = await engine.runWorkerTask("git:log", { "paths": ["docs/guide.md"] });
 ```
 
-#### `registerEngine(engineName, engineInstance)`
+### `registerEngine(engineName, engineInstance)`
 
 Allows custom tools or third-party integrators to register custom execution engines programmatically.
 
@@ -262,25 +170,31 @@ import { registerEngine } from "@docmd/api";
 registerEngine("custom", myCustomEngineImpl);
 ```
 
-### Type Exports
+## Type Exports
 
 For TypeScript plugin authors, the following types are available:
 
 ```typescript
 import type {
-  PluginModule,       
-  PluginDescriptor,   
-  PluginHooks,        
-  PageContext,        
-  BeforeBuildContext, 
-  PostBuildContext,   
-  Capability,         
-  ActionContext,      
-  ActionHandler,      
-  EventHandler,       
-  SourceTools,        
-  BlockInfo,          
-  TextLocation,       
-  Engine,             
+  PluginModule,
+  PluginDescriptor,
+  PluginHooks,
+  PageContext,
+  BeforeBuildContext,
+  PostBuildContext,
+  Capability,
+  ActionContext,
+  ActionHandler,
+  EventHandler,
+  SourceTools,
+  BlockInfo,
+  TextLocation,
+  Engine,
 } from '@docmd/api';
 ```
+
+## What's Next
+
+- [Building Plugins](/development/building-plugins) — start here.
+- [Plugin Examples](/development/plugin-examples) — see a full plugin walkthrough.
+- [Engines & Architecture](/development/engines/overview) — Rust engine, N-API, and engine loader internals.
