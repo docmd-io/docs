@@ -45,10 +45,10 @@ bunx docmd init
 == tab "Docker" icon:container
 ```bash
 # 拉取官方多架构镜像
-docker pull ghcr.io/docmd-io/docmd:0.8.6
+docker pull ghcr.io/docmd-io/docmd:latest
 
 # 从本地 docs/ 构建文档到 site/
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
 ```
 
 Docker Compose 与 Kubernetes 配置请参阅 [Docker 部署指南](../deployment/docker.md)。

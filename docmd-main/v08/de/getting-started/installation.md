@@ -45,10 +45,10 @@ bunx docmd init
 == tab "Docker" icon:container
 ```bash
 # Offizielles Multi-Architektur-Image ziehen
-docker pull ghcr.io/docmd-io/docmd:0.8.6
+docker pull ghcr.io/docmd-io/docmd:latest
 
 # Dokumentation aus lokalem docs/ nach site/ bauen
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.6 build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
 ```
 
 Docker-Compose- und Kubernetes-Konfigurationen finden Sie im [Docker-Bereitstellungs-Leitfaden](../deployment/docker.md).
