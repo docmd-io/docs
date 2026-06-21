@@ -16,7 +16,7 @@ The `tag` container is a self-closing component that inserts small, pill-shaped 
 | **Label** | `"String"` | The text displayed inside the pill-shaped badge. |
 | **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). Automatically calculates a contrasting text colour. |
 | **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
-| **Link** | `link:URL` | Makes the tag a clickable hyperlink. External URLs open in a new tab. |
+| **URL** | `url:URL` | Makes the tag a clickable hyperlink. Prefix with `external:` to force a new tab. Matches the unquoted-URL convention used by [buttons](button). |
 
 ## Examples
 
@@ -48,10 +48,20 @@ Use tags for status indicators across a page. Colours are fully customisable.
 
 ### Linked Tag
 
-Add `link:` to make a tag act as a hyperlink, useful for cross-referencing release notes or external resources.
+Add `url:` to make a tag act as a hyperlink, useful for cross-referencing release notes or external resources. The value is unquoted to match the convention used by [buttons](buttons.md).
 
 ```markdown
-Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:/release-notes/0-8-2.md
 ```
 
-Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:/release-notes/0-8-2.md
+
+### External Link
+
+Prefix the URL with `external:` to force the link to open in a new tab, even when the target lives on your own domain.
+
+```markdown
+::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd
+```
+
+::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

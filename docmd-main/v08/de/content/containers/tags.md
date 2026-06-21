@@ -16,7 +16,7 @@ Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenf�
 | **Label** | `"String"` | Der Text, der im pillenförmigen Badge angezeigt wird. |
 | **Farbe** | `color:VALUE` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). Berechnet automatisch eine kontrastreiche Textfarbe. |
 | **Symbol** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol im Badge hinzu. |
-| **Link** | `link:URL` | Macht den Tag zu einem klickbaren Hyperlink. Externe URLs öffnen in einem neuen Tab. |
+| **URL** | `url:URL` | Macht den Tag zu einem klickbaren Hyperlink. Mit dem Präfix `external:` öffnet der Link in einem neuen Tab. Folgt der unquoted-URL-Konvention von [Buttons](button). |
 
 ## Beispiele
 
@@ -48,10 +48,20 @@ Verwenden Sie Tags für Statusindikatoren über eine Seite hinweg. Farben sind v
 
 ### Verlinkter Tag
 
-Fügen Sie `link:` hinzu, damit ein Tag als Hyperlink fungiert — nützlich für Querverweise auf Release Notes oder externe Ressourcen.
+Fügen Sie `url:` hinzu, damit ein Tag als Hyperlink fungiert — nützlich für Querverweise auf Release Notes oder externe Ressourcen. Der Wert steht ohne Anführungszeichen, passend zur Konvention der [Buttons](buttons.md).
 
 ```markdown
-Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:/de/release-notes/0-8-2.md
 ```
 
-Check out the latest ::: tag "Release Notes" icon:external-link link:../../release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:/de/release-notes/0-8-2.md
+
+### Externer Link
+
+Mit dem Präfix `external:` vor der URL öffnet der Link in einem neuen Tab, auch wenn das Ziel in Ihrer eigenen Domain liegt.
+
+```markdown
+::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd
+```
+
+::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

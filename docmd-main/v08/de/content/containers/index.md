@@ -56,4 +56,4 @@ Container bieten mehr als nur optischen Glanz; sie liefern hochpräzise **semant
 :::
 ```
 
-[Meistern Sie die Verschachtelungs-Anleitung](nested-containers.md)
+::: button "Meistern Sie die Verschachtelungs-Anleitung" nested-containers.md
