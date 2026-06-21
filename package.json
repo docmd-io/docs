@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@docmd/core": "^0.8.7",
-    "@docmd/plugin-math": "^0.8.7"
+    "@docmd/plugin-math": "^0.8.7",
+    "@docmd/template-summer": "^0.8.7",
+    "docmd-search": "^0.1.0-alpha.1"
   }
 }
