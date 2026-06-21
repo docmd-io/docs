@@ -12,15 +12,19 @@ The official image lets you build and serve your documentation without installin
 ### Quick Start
 
 ```bash
-# Pull the latest image
-docker pull ghcr.io/docmd-io/docmd:latest
+# Pull a specific version (recommended — substitute the version you need)
+docker pull ghcr.io/docmd-io/docmd:0.8.7
 
 # Build your documentation (mounts local docs and outputs to ./site)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.7 build
 
 # Run the built-in demo site
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:latest
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.7
 ```
+
+::: callout tip "Pinning a version"
+We recommend pinning a specific version (e.g. `0.8.7`) for reproducible builds. The `:latest` tag is published automatically starting with 0.8.7, but for production pipelines you should always pin a specific release.
+:::
 
 ### Docker Compose
 
@@ -30,7 +34,7 @@ Use Docker Compose to build and serve in a single workflow:
 version: '3.8'
 services:
   docs:
-    image: ghcr.io/docmd-io/docmd:latest
+    image: ghcr.io/docmd-io/docmd:0.8.7
     command: build
     volumes:
       - ./docs:/docs
@@ -52,10 +56,33 @@ services:
 | Property | Value |
 |:--|:--|
 | Base | Alpine Linux (minimal footprint) |
-| Security | Runs as non-root user |
+| User | Non-root `docmd` (UID 1001) |
+| Working directory | `/docs` (mount anywhere; use `-w` to override) |
 | Health checks | Built-in container health monitoring |
 | SBOM | Software Bill of Materials attestation included |
 | Architectures | `linux/amd64`, `linux/arm64` |
+
+### Custom working directory and file ownership
+
+The image is configured with `WORKDIR /docs`, but you can mount and run from any path inside the container. Pass `-w` to override the working directory and use a mount path that matches your project layout:
+
+```bash
+# Run from a custom working directory inside the container
+docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
+```
+
+Because the image runs as the non-root user `docmd` (UID 1001), any files written into a mounted volume will be owned by UID 1001 on the host. If your host UID is different (the default first user is usually 1000), pass `-u` so the generated files stay owned by you:
+
+```bash
+# Keep host ownership of generated files
+docker run -u $(id -u):$(id -g) \
+  -v $(pwd):/workspace -w /workspace \
+  ghcr.io/docmd-io/docmd:0.8.7 init
+```
+
+::: callout warning "Read-only bind mounts"
+When using a read-only bind mount (`:ro`) for the config file, make sure the working directory and other mount points remain writable, or `docmd` will fail with a permission error.
+:::
 
 ## Custom Dockerfile (via Deployer)
 
