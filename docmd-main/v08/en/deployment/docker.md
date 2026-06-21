@@ -56,7 +56,7 @@ services:
 | Property | Value |
 |:--|:--|
 | Base | Alpine Linux (minimal footprint) |
-| User | Non-root `docmd` (UID 1001) |
+| User | Starts as root, remaps to host uid automatically via `su-exec` |
 | Working directory | `/docs` (mount anywhere; use `-w` to override) |
 | Health checks | Built-in container health monitoring |
 | SBOM | Software Bill of Materials attestation included |
@@ -71,14 +71,7 @@ The image is configured with `WORKDIR /docs`, but you can mount and run from any
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
 ```
 
-Because the image runs as the non-root user `docmd` (UID 1001), any files written into a mounted volume will be owned by UID 1001 on the host. If your host UID is different (the default first user is usually 1000), pass `-u` so the generated files stay owned by you:
-
-```bash
-# Keep host ownership of generated files
-docker run -u $(id -u):$(id -g) \
-  -v $(pwd):/workspace -w /workspace \
-  ghcr.io/docmd-io/docmd:0.8.7 init
-```
+The entrypoint automatically detects the uid:gid that owns the mounted directory and re-execs as that identity before running any command. Files written by `docmd init`, `docmd build`, or `docmd dev` are always owned by the correct host user — no `-u` flag required.
 
 ::: callout warning "Read-only bind mounts"
 When using a read-only bind mount (`:ro`) for the config file, make sure the working directory and other mount points remain writable, or `docmd` will fail with a permission error.

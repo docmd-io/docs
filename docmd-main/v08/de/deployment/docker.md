@@ -56,7 +56,7 @@ services:
 | Eigenschaft | Wert |
 |:--|:--|
 | Basis | Alpine Linux (minimaler Footprint) |
-| Benutzer | Nicht-Root-Benutzer `docmd` (UID 1001) |
+| Benutzer | Startet als root, ordnet automatisch die Host-UID via `su-exec` zu |
 | Arbeitsverzeichnis | `/docs` (beliebig mountbar; mit `-w` überschreibbar) |
 | Health Checks | Eingebaute Container-Health-Überwachung |
 | SBOM | Software Bill of Materials-Attest enthalten |
@@ -71,14 +71,7 @@ Das Image ist mit `WORKDIR /docs` konfiguriert, aber Sie können jeden Pfad im C
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
 ```
 
-Da das Image als Nicht-Root-Benutzer `docmd` (UID 1001) läuft, gehören alle in ein eingebundenes Volume geschriebenen Dateien auf dem Host der UID 1001. Falls Ihre Host-UID abweicht (üblicherweise 1000 für den ersten Benutzer), übergeben Sie `-u`, damit die erzeugten Dateien Ihnen gehören:
-
-```bash
-# Host-Eigentum an den erzeugten Dateien erhalten
-docker run -u $(id -u):$(id -g) \
-  -v $(pwd):/workspace -w /workspace \
-  ghcr.io/docmd-io/docmd:0.8.7 init
-```
+Der Entrypoint erkennt automatisch die UID:GID des eingehängten Verzeichnisses und führt sich selbst mit dieser Identität aus, bevor ein Befehl gestartet wird. Dateien, die von `docmd init`, `docmd build` oder `docmd dev` geschrieben werden, gehören immer dem richtigen Host-Benutzer — kein `-u`-Flag erforderlich.
 
 ::: callout warning "Read-only Mounts"
 Wenn Sie eine Konfigurationsdatei als `:ro` read-only einbinden, stellen Sie sicher, dass das Arbeitsverzeichnis und andere Mount-Punkte schreibbar bleiben, sonst schlägt `docmd` mit einem Berechtigungsfehler fehl.

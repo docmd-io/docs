@@ -56,7 +56,7 @@ services:
 | 属性 | 值 |
 |:--|:--|
 | 基础镜像 | Alpine Linux（占用极小） |
-| 用户 | 非 root 用户 `docmd`（UID 1001） |
+| 用户 | 以 root 启动，通过 `su-exec` 自动映射到宿主机 uid |
 | 工作目录 | `/docs`（可挂载到任意路径，使用 `-w` 覆盖） |
 | 健康检查 | 内置容器健康监测 |
 | SBOM | 附带软件物料清单 (Software Bill of Materials) 证明 |
@@ -71,14 +71,7 @@ services:
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
 ```
 
-由于镜像是以非 root 用户 `docmd`（UID 1001）运行的，凡是被写入挂载卷的文件在宿主机上都会归属 UID 1001。如果宿主机的 UID 不同（默认首个用户通常为 1000），请通过 `-u` 指定，保持生成的文件归你所有：
-
-```bash
-# 保持宿主机对生成文件的归属
-docker run -u $(id -u):$(id -g) \
-  -v $(pwd):/workspace -w /workspace \
-  ghcr.io/docmd-io/docmd:0.8.7 init
-```
+入口脚本会自动检测挂载目录的 uid:gid，并在执行任何命令前通过 `su-exec` 切换到该身份。`docmd init`、`docmd build` 或 `docmd dev` 写入的文件始终归属正确的宿主机用户，无需传递 `-u` 参数。
 
 ::: callout warning "只读挂载"
 当以 `:ro` 只读挂载配置文件时，请确保工作目录与其他挂载点仍可写，否则 `docmd` 会因权限错误而失败。
