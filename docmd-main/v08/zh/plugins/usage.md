@@ -36,6 +36,7 @@ npx @docmd/core add <plugin-name> -V
     "sitemap": {},
     "analytics": {},
     "llms": {},
+    "okf": {},
     "mermaid": {},
     "openapi": {},
     "git": {}
@@ -44,6 +45,12 @@ npx @docmd/core add <plugin-name> -V
 
 ::: callout tip "Git 插件"
 Git 插件会检测您的项目是否为 Git 仓库。如果不是，它会自动禁用自身。无需为最近更新时间戳进行任何配置。
+:::
+
+::: callout info "OKF Bundle（0.8.8 新增）"
+`@docmd/plugin-okf` 会生成一个 [Open Knowledge Format][okf-spec] bundle（`site/okf/`）—— 一个类型化清单加上供 AI 智能体直接消费的概念文件。该插件**默认启用**；可通过设置 `"plugins": { "okf": false }` 退出。完整契约请参阅 [OKF Bundle 插件文档](./okf.md)。
+
+[okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 :::
 
 ## 可选插件

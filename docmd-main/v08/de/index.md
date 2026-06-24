@@ -40,6 +40,11 @@ Generiert automatisch `llms.txt` und `llms-full.txt`. Halten Sie Ihre Dokumentat
 :::
 :::
 ::: grid
+::: card "OKF-Bundles" icon:database
+Erzeugt ein Open-Knowledge-Format-Bundle — typisierter Konzeptgraph für KI-Agenten. Siehe [Spezifikation](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+:::
+:::
+::: grid
 ::: card "Lokale Suche" icon:search
 Schnelle clientseitige Volltextsuche mit MiniSearch. Funktioniert sofort über Versionen und Sprachen hinweg.
 :::

@@ -36,6 +36,7 @@ Diese Plugins werden mit `@docmd/core` gebündelt. Es ist keine Installation erf
     "sitemap": {},
     "analytics": {},
     "llms": {},
+    "okf": {},
     "mermaid": {},
     "openapi": {},
     "git": {}
@@ -44,6 +45,12 @@ Diese Plugins werden mit `@docmd/core` gebündelt. Es ist keine Installation erf
 
 ::: callout tip "Git-Plugin"
 Das Git-Plugin erkennt, ob Ihr Projekt ein Git-Repository ist. Falls nicht, deaktiviert es sich automatisch. Für Zeitstempel der letzten Aktualisierung ist keine Konfiguration erforderlich.
+:::
+
+::: callout info "OKF-Bundle (neu in 0.8.8)"
+`@docmd/plugin-okf` erzeugt ein [Open Knowledge Format][okf-spec]-Bundle (`site/okf/`) — ein typisiertes Manifest plus Concept-Dateien pro Seite, die KI-Agenten direkt konsumieren können. Das Plugin ist **standardmäßig aktiviert**; setzen Sie `"plugins": { "okf": false }`, um es zu deaktivieren. Den vollständigen Vertrag finden Sie in der [OKF-Bundle-Plugin-Dokumentation](./okf.md).
+
+[okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 :::
 
 ## Optionale Plugins

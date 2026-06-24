@@ -13,17 +13,17 @@ Das offizielle Image ermöglicht es Ihnen, Ihre Dokumentation zu bauen und auszu
 
 ```bash
 # Eine bestimmte Version ziehen (empfohlen — die gewünschte Version einsetzen)
-docker pull ghcr.io/docmd-io/docmd:0.8.7
+docker pull ghcr.io/docmd-io/docmd:0.8.8
 
 # Dokumentation bauen (mountet lokale Docs und schreibt nach ./site)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.7 build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.8 build
 
 # Eingebaute Demo-Site ausführen
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.7
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.8
 ```
 
 ::: callout tip "Version pinnen"
-Für reproduzierbare Builds empfehlen wir, eine bestimmte Version zu pinnen (z. B. `0.8.7`). Der `:latest`-Tag wird ab 0.8.7 zwar automatisch veröffentlicht, in Produktions-Pipelines sollten Sie jedoch immer eine bestimmte Version fixieren.
+Für reproduzierbare Builds empfehlen wir, eine bestimmte Version zu pinnen (z. B. `0.8.8`). Der `:latest`-Tag wird ab 0.8.8 zwar automatisch veröffentlicht, in Produktions-Pipelines sollten Sie jedoch immer eine bestimmte Version fixieren.
 :::
 
 ### Docker Compose
@@ -34,7 +34,7 @@ Verwenden Sie Docker Compose, um Build und Serve in einem einzigen Workflow abzu
 version: '3.8'
 services:
   docs:
-    image: ghcr.io/docmd-io/docmd:0.8.7
+    image: ghcr.io/docmd-io/docmd:0.8.8
     command: build
     volumes:
       - ./docs:/docs
@@ -68,7 +68,7 @@ Das Image ist mit `WORKDIR /docs` konfiguriert, aber Sie können jeden Pfad im C
 
 ```bash
 # Aus einem eigenen Arbeitsverzeichnis im Container ausführen
-docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
+docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.8 init
 ```
 
 Der Entrypoint erkennt automatisch die UID:GID des eingehängten Verzeichnisses und führt sich selbst mit dieser Identität aus, bevor ein Befehl gestartet wird. Dateien, die von `docmd init`, `docmd build` oder `docmd dev` geschrieben werden, gehören immer dem richtigen Host-Benutzer — kein `-u`-Flag erforderlich.

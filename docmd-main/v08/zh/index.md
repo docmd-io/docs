@@ -40,6 +40,11 @@ npx @docmd/core dev
         :::
     :::
     ::: grid
+        ::: card "OKF Bundle" icon:database
+        自动生成 Open Knowledge Format bundle —— 面向 AI 智能体的类型化概念图谱。详见 [规范](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)。
+        :::
+    :::
+    ::: grid
         ::: card "本地优先搜索" icon:search
         基于 MiniSearch 的客户端全文搜索，开箱即用，支持多版本和多语言。
         :::
