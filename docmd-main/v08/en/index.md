@@ -40,6 +40,11 @@ Everything needed for solid documentation ships built in. No extra plugins requi
         :::
     :::
     ::: grid
+        ::: card "OKF Bundles" icon:database
+        Generates an Open Knowledge Format bundle — typed concept graph for AI agents. See [spec](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        :::
+    :::
+    ::: grid
         ::: card "Local-First Search" icon:search
         Fast, client-side full-text search powered by MiniSearch. Works out of the box across versions and locales.
         :::

@@ -13,17 +13,17 @@ The official image lets you build and serve your documentation without installin
 
 ```bash
 # Pull a specific version (recommended — substitute the version you need)
-docker pull ghcr.io/docmd-io/docmd:0.8.7
+docker pull ghcr.io/docmd-io/docmd:0.8.8
 
 # Build your documentation (mounts local docs and outputs to ./site)
-docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.7 build
+docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.8.8 build
 
 # Run the built-in demo site
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.7
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.8.8
 ```
 
 ::: callout tip "Pinning a version"
-We recommend pinning a specific version (e.g. `0.8.7`) for reproducible builds. The `:latest` tag is published automatically starting with 0.8.7, but for production pipelines you should always pin a specific release.
+We recommend pinning a specific version (e.g. `0.8.8`) for reproducible builds. The `:latest` tag is published automatically starting with 0.8.8, but for production pipelines you should always pin a specific release.
 :::
 
 ### Docker Compose
@@ -34,7 +34,7 @@ Use Docker Compose to build and serve in a single workflow:
 version: '3.8'
 services:
   docs:
-    image: ghcr.io/docmd-io/docmd:0.8.7
+    image: ghcr.io/docmd-io/docmd:0.8.8
     command: build
     volumes:
       - ./docs:/docs
@@ -68,7 +68,7 @@ The image is configured with `WORKDIR /docs`, but you can mount and run from any
 
 ```bash
 # Run from a custom working directory inside the container
-docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.7 init
+docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.8.8 init
 ```
 
 The entrypoint automatically detects the uid:gid that owns the mounted directory and re-execs as that identity before running any command. Files written by `docmd init`, `docmd build`, or `docmd dev` are always owned by the correct host user — no `-u` flag required.
