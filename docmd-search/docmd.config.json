@@ -12,7 +12,7 @@
   "favicon": "assets/favicon.ico",
 
   "theme": {
-    "name": "summer"
+    "template": "summer"
   },
 
   "layout": {

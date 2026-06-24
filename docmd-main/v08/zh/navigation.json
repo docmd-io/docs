@@ -1,6 +1,6 @@
 [
   {
-    "title": "Overview",
+    "title": "概览",
     "path": "/",
     "icon": "home"
   },
@@ -14,7 +14,7 @@
         "path": "/getting-started/quick-start"
       },
       {
-        "title": "Installation",
+        "title": "安装",
         "path": "/getting-started/installation"
       },
       {
@@ -69,7 +69,7 @@
         "path": "/configuration/zero-config"
       },
       {
-        "title": "Navigation",
+        "title": "导航",
         "path": "/configuration/navigation"
       },
       {
@@ -104,11 +104,11 @@
         ]
       },
       {
-        "title": "Versioning",
+        "title": "版本管理",
         "path": "/configuration/versioning"
       },
       {
-        "title": "Workspaces",
+        "title": "工作区",
         "path": "/configuration/workspaces"
       },
       {
@@ -127,7 +127,7 @@
         "path": "/content/frontmatter"
       },
       {
-        "title": "Syntax",
+        "title": "语法",
         "path": "/content/syntax/",
         "collapsible": true,
         "children": [
@@ -167,7 +167,7 @@
             "path": "/content/containers/grids"
           },
           {
-            "title": "Tabs",
+            "title": "选项卡",
             "path": "/content/containers/tabs"
           },
           {
@@ -183,7 +183,7 @@
             "path": "/content/containers/buttons"
           },
           {
-            "title": "Tags",
+            "title": "标签",
             "path": "/content/containers/tags"
           },
           {
@@ -195,7 +195,7 @@
             "path": "/content/containers/embed"
           },
           {
-            "title": "Changelogs",
+            "title": "更新日志",
             "path": "/content/containers/changelogs"
           },
           {
@@ -236,7 +236,7 @@
         "path": "/theming/custom-css-js"
       },
       {
-        "title": "Icons",
+        "title": "图标",
         "path": "/theming/icons"
       },
       {
@@ -307,7 +307,7 @@
         "path": "/plugins/threads"
       },
       {
-        "title": "Math (KaTeX)",
+        "title": "数学公式 (KaTeX)",
         "path": "/plugins/math"
       }
     ]
@@ -381,7 +381,7 @@
         "path": "/reference/client-side-events"
       },
       {
-        "title": "Live Editor",
+        "title": "实时编辑器",
         "path": "/reference/live-api"
       },
       {
@@ -404,7 +404,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Scalable Technical Writing",
+            "title": "可扩展的技术写作",
             "path": "/guides/writing-quality/scalable-technical-writing"
           },
           {
@@ -474,7 +474,7 @@
         "collapsible": true,
         "children": [
           {
-            "title": "Sub-100ms Navigation",
+            "title": "100 毫秒以内的导航",
             "path": "/guides/performance-delivery/sub-100ms-navigation"
           },
           {
@@ -538,11 +538,11 @@
             "path": "/guides/integrations/choosing-deployment-method"
           },
           {
-            "title": "OpenAPI 生成",
+            "title": "OpenAPI 集成",
             "path": "/guides/integrations/openapi-generation"
           },
           {
-            "title": "GitHub Actions",
+            "title": "GitHub Actions 集成",
             "path": "/guides/integrations/github-actions-cicd"
           },
           {
@@ -563,7 +563,7 @@
     "collapsible": true,
     "children": [
       {
-        "title": "Setup",
+        "title": "环境设置",
         "path": "/development/setup"
       },
       {

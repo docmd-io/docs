@@ -1,6 +1,6 @@
 [
   {
-    "title": "Overview",
+    "title": "Übersicht",
     "path": "/",
     "icon": "home"
   },
@@ -104,7 +104,7 @@
         ]
       },
       {
-        "title": "Versioning",
+        "title": "Versionierung",
         "path": "/configuration/versioning"
       },
       {

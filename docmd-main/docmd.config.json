@@ -107,8 +107,40 @@
     "position": "sidebar-top",
     "locales": [
       { "id": "en", "label": "English", "dir": "ltr" },
-      { "id": "zh", "label": "中文", "dir": "ltr" },
-      { "id": "de", "label": "Deutsch", "dir": "ltr" }
+      { "id": "zh", "label": "中文", "dir": "ltr",
+        "translations": {
+          "Resources": "资源",
+          "Ecosystem": "生态",
+          "Community": "社区",
+          "Installation": "安装",
+          "Configuration": "配置",
+          "CLI Commands": "CLI 命令",
+          "Versioning": "版本管理",
+          "Plugins": "插件",
+          "Themes": "主题",
+          "Live Editor": "实时编辑器",
+          "Discussions": "讨论区",
+          "Contributing": "贡献指南",
+          "Reports & Issues": "问题反馈"
+        }
+      },
+      { "id": "de", "label": "Deutsch", "dir": "ltr",
+        "translations": {
+          "Resources": "Ressourcen",
+          "Ecosystem": "Ökosystem",
+          "Community": "Community",
+          "Installation": "Installation",
+          "Configuration": "Konfiguration",
+          "CLI Commands": "CLI-Befehle",
+          "Versioning": "Versionierung",
+          "Plugins": "Plugins",
+          "Themes": "Themen",
+          "Live Editor": "Live-Editor",
+          "Discussions": "Diskussionen",
+          "Contributing": "Mitwirken",
+          "Reports & Issues": "Fehler melden"
+        }
+      }
     ]
   },
 
