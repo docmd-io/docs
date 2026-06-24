@@ -3,8 +3,6 @@ title: "OKF Bundle Plugin"
 description: "Generate an Open Knowledge Format (OKF) bundle from your docmd site so AI agents can consume your documentation directly."
 ---
 
-# OKF Bundle Plugin
-
 The `@docmd/plugin-okf` plugin generates an **[Open Knowledge Format][okf-spec]** (OKF) bundle for AI-agent consumption. OKF is a vendor-neutral, agent- and human-friendly standard for representing the metadata, context, and curated knowledge that modern AI systems need. The bundle sits next to your site (e.g. `site/okf/`) so agents can be pointed at it directly.
 
 The plugin is **enabled by default** in 0.8.8 — no configuration is required. The bundle is generated on every `docmd build`.
