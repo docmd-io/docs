@@ -60,8 +60,8 @@ Betten Sie interaktive, editierbare Code-Sandboxes direkt in Ihre Seiten ein fü
 :::
 :::
 ::: grid
-::: card "Flexible Themes" icon:palette
-Wechseln Sie zwischen integrierten Themes oder wenden Sie benutzerdefiniertes Styling an. Vollständige Unterstützung für dunklen Modus und Systemvoreinstellungen.
+::: card "Anpassbare Templates" icon:palette
+Personalisieren Sie Ihre Dokumentation mit Templates oder nutzen Sie integrierte Themes mit eigenem CSS. Unterstützt dunklen Modus und Systemvoreinstellungen.
 :::
 :::
 ::: grid
