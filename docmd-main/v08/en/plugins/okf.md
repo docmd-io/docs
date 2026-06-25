@@ -29,10 +29,11 @@ OKF represents organisational knowledge as a directory of markdown files with YA
 site/okf/
 ├── okf.yaml              ← typed manifest (bundle summary)
 ├── index.md              ← Karpathy-style catalog grouped by type
-├── graph.html            ← interactive force-directed viewer
-├── graph.json            ← graph data (nodes + edges)
-├── graph.js              ← viewer runtime (vanilla, no CDN deps)
-├── graph.css             ← viewer styles (theme-aware)
+├── graph/                ← opt-in: only when `plugins.okf.graph: true`
+│   ├── index.html        ← interactive force-directed viewer (open at /okf/graph/)
+│   ├── graph.json        ← graph data (nodes + edges)
+│   ├── graph.js          ← viewer runtime (vanilla, no CDN deps)
+│   └── graph.css         ← viewer styles (theme-aware)
 ├── concepts/
 │   └── <slug>.md         ← one markdown file per page
 └── _meta/
@@ -95,7 +96,8 @@ All keys are optional. Listed values are the defaults:
 | `typeField` | `string` | `'type'` | Frontmatter field name for OKF type. |
 | `warnOnMissingType` | `boolean` | `true` | Emit a TUI warning for pages that fell back to `defaultType`. |
 | `includeFullMarkdown` | `boolean` | `true` | Copy raw `.md` body into each concept file. |
-| `generateGraphViewer` | `boolean` | `true` | Emit `graph.html` + `graph.js` + `graph.css` + `graph.json`. |
+| `graph` | `boolean` | `false` | Emit a `graph/` subdirectory with `index.html`, `graph.js`, `graph.css`, and `graph.json`. Opt-in since 0.8.8 — the OKF spec does not require a viewer, so a clean spec-compliant bundle ships without it. The viewer fetches `graph.json` at runtime from the same directory, so opening `site/okf/graph/index.html` over `file://` works as long as the four files stay together. |
+| `generateGraphViewer` | `boolean` | — | **Deprecated** alias for `graph`. Honoured for one release so existing configs do not silently drop the viewer; a deprecation warning is printed at build time. Migrate to `graph: true`. |
 | `localeStrategy` | `'default-only' \| 'folders' \| 'mixed' \| 'latest-only'` | `'default-only'` | Default: only the default locale, at the bundle root. Set to `'folders'` to nest non-default locales under `<locale>/`. |
 | `versionStrategy` | `'folders' \| 'mixed' \| 'latest-only'` | `'latest-only'` | Nest concepts by version id when versioning is enabled. |
 | `excludePatterns` | `string[]` | `[]` | Additional glob patterns to skip on top of `frontmatter.noindex` / `frontmatter.okf === false`. |
@@ -129,7 +131,7 @@ site/okf/                    ← default locale (en) at bundle root
 ├── okf.yaml
 ├── index.md
 ├── concepts/<slug>.md
-└── _meta/, graph.html, ...
+└── _meta/, graph/, ...
 
 site/okf/ja/                 ← Japanese — nested under <locale>/
 ├── okf.yaml
@@ -171,7 +173,7 @@ The path-prefix map covers `guides/`, `api/`, `reference/`, `concepts/`, `runboo
 The OKF spec defines three "implementation surfaces" — the same bundle file can be consumed by any of them without translation:
 
 - **AI agent loader** — point your agent at `site/okf/index.md` or any concept file under `site/okf/concepts/`. The YAML frontmatter gives the agent a typed index, the markdown body gives it the full content.
-- **Visualizer** — open `site/okf/graph.html` in a browser. The force-directed graph shows the relationships between concepts based on internal markdown links.
+- **Visualizer** — open `site/okf/graph/index.html` in a browser (or visit `/okf/graph/` on a hosted site). The force-directed graph shows the relationships between concepts based on internal markdown links. Requires `plugins.okf.graph: true` (off by default).
 - **Programmatic** — read `site/okf/_meta/bundle.json` (or `site/okf/okf.yaml`) for a machine-readable manifest of every concept, with type, path, locale, version, and tags.
 
 The bundle is also compatible with Google's published reference implementations — see the [OKF spec page][okf-spec] for details.

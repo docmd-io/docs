@@ -27,10 +27,11 @@ The two structures look the same on disk (markdown files in directories), but th
 site/okf/
 ├── okf.yaml              ← typed manifest
 ├── index.md              ← Karpathy-style catalog
-├── graph.html            ← interactive force-directed viewer
-├── graph.json            ← graph data
-├── graph.js              ← viewer runtime
-├── graph.css             ← viewer styles
+├── graph/                ← opt-in: only when plugins.okf.graph: true
+│   ├── index.html        ← interactive force-directed viewer
+│   ├── graph.json        ← graph data
+│   ├── graph.js          ← viewer runtime
+│   └── graph.css         ← viewer styles
 ├── concepts/
 │   ├── weekly-active-users.md
 │   ├── orders-table.md

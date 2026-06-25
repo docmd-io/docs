@@ -29,10 +29,11 @@ OKF repräsentiert organisatorisches Wissen als ein Verzeichnis von Markdown-Dat
 site/okf/
 ├── okf.yaml              ← typisiertes Manifest (Bundle-Zusammenfassung)
 ├── index.md              ← Karpathy-ähnlicher Katalog, nach Typ gruppiert
-├── graph.html            ← interaktiver Force-Directed-Viewer
-├── graph.json            ← Graph-Daten (Knoten + Kanten)
-├── graph.js              ← Viewer-Laufzeit (Vanilla, keine CDN-Abhängigkeiten)
-├── graph.css             ← Viewer-Styles (Theme-fähig)
+├── graph/                ← optional: nur wenn `plugins.okf.graph: true`
+│   ├── index.html        ← interaktiver Force-Directed-Viewer (öffnen unter /okf/graph/)
+│   ├── graph.json        ← Graph-Daten (Knoten + Kanten)
+│   ├── graph.js          ← Viewer-Laufzeit (Vanilla, keine CDN-Abhängigkeiten)
+│   └── graph.css         ← Viewer-Styles (Theme-fähig)
 ├── concepts/
 │   └── <slug>.md         ← eine Markdown-Datei pro Seite
 └── _meta/
@@ -95,7 +96,8 @@ Alle Schlüssel sind optional. Die aufgeführten Werte sind die Standardwerte:
 | `typeField` | `string` | `'type'` | Frontmatter-Feldname für den OKF-Typ. |
 | `warnOnMissingType` | `boolean` | `true` | TUI-Warnung für Seiten ausgeben, die auf `defaultType` zurückgefallen sind. |
 | `includeFullMarkdown` | `boolean` | `true` | Rohtext des `.md`-Body in jede Konzeptdatei kopieren. |
-| `generateGraphViewer` | `boolean` | `true` | `graph.html` + `graph.js` + `graph.css` + `graph.json` ausgeben. |
+| `graph` | `boolean` | `false` | Ein `graph/`-Unterverzeichnis mit `index.html`, `graph.js`, `graph.css` und `graph.json` ausgeben. Ab 0.8.8 Opt-in — die OKF-Spezifikation verlangt keinen Viewer, daher wird standardmäßig ein sauberes Bundle ohne ihn ausgeliefert. Der Viewer ruft `graph.json` zur Laufzeit aus demselben Verzeichnis ab, sodass `site/okf/graph/index.html` auch über `file://` funktioniert, solange die vier Dateien zusammen bleiben. |
+| `generateGraphViewer` | `boolean` | — | **Veralteter** Alias für `graph`. Wird für ein Release berücksichtigt, damit bestehende Konfigurationen den Viewer nicht stillschweigend verlieren; beim Build wird eine Veralteter-Warnung ausgegeben. Migrieren Sie zu `graph: true`. |
 | `localeStrategy` | `'default-only' \| 'folders' \| 'mixed' \| 'latest-only'` | `'default-only'` | Standard: nur die Standard-Locale, im Bundle-Stammverzeichnis. Auf `'folders'` setzen, um Nicht-Standard-Locales unter `<locale>/` zu verschachteln. |
 | `versionStrategy` | `'folders' \| 'mixed' \| 'latest-only'` | `'latest-only'` | Verschachtelt Konzepte nach Versions-ID, wenn Versionierung aktiviert ist. |
 | `excludePatterns` | `string[]` | `[]` | Zusätzliche Glob-Muster, die zusätzlich zu `frontmatter.noindex` / `frontmatter.okf === false` übersprungen werden. |
@@ -129,7 +131,7 @@ site/okf/                    ← Standard-Locale (en) im Bundle-Stammverzeichnis
 ├── okf.yaml
 ├── index.md
 ├── concepts/<slug>.md
-└── _meta/, graph.html, ...
+└── _meta/, graph/, ...
 
 site/okf/ja/                 ← Japanisch — verschachtelt unter <locale>/
 ├── okf.yaml
