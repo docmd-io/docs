@@ -97,7 +97,6 @@ All keys are optional. Listed values are the defaults:
 | `warnOnMissingType` | `boolean` | `true` | Emit a TUI warning for pages that fell back to `defaultType`. |
 | `includeFullMarkdown` | `boolean` | `true` | Copy raw `.md` body into each concept file. |
 | `graph` | `boolean` | `false` | Emit a `graph/` subdirectory with `index.html`, `graph.js`, `graph.css`, and `graph.json`. Opt-in since 0.8.8 — the OKF spec does not require a viewer, so a clean spec-compliant bundle ships without it. The viewer fetches `graph.json` at runtime from the same directory, so opening `site/okf/graph/index.html` over `file://` works as long as the four files stay together. |
-| `generateGraphViewer` | `boolean` | — | **Deprecated** alias for `graph`. Honoured for one release so existing configs do not silently drop the viewer; a deprecation warning is printed at build time. Migrate to `graph: true`. |
 | `localeStrategy` | `'default-only' \| 'folders' \| 'mixed' \| 'latest-only'` | `'default-only'` | Default: only the default locale, at the bundle root. Set to `'folders'` to nest non-default locales under `<locale>/`. |
 | `versionStrategy` | `'folders' \| 'mixed' \| 'latest-only'` | `'latest-only'` | Nest concepts by version id when versioning is enabled. |
 | `excludePatterns` | `string[]` | `[]` | Additional glob patterns to skip on top of `frontmatter.noindex` / `frontmatter.okf === false`. |
