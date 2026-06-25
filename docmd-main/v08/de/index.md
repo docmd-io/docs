@@ -45,6 +45,11 @@ Erzeugt ein Open-Knowledge-Format-Bundle — typisierter Konzeptgraph für KI-Ag
 :::
 :::
 ::: grid
+::: card "Nativer MCP-Server" icon:terminal
+Integrierter Model-Context-Protocol-Server mit den Tools `search_docs`, `read_doc`, `validate_docs` und `get_llms_context`. KI-Agenten durchsuchen und validieren Ihre Dokumentation über eine lokale stdio-Verbindung — kein Netzwerk, kein externer Dienst.
+:::
+:::
+::: grid
 ::: card "Lokale Suche" icon:search
 Schnelle clientseitige Volltextsuche mit MiniSearch. Funktioniert sofort über Versionen und Sprachen hinweg.
 :::

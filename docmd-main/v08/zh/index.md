@@ -45,6 +45,11 @@ npx @docmd/core dev
         :::
     :::
     ::: grid
+        ::: card "原生 MCP 服务" icon:terminal
+        内置 Model Context Protocol 服务，配备 `search_docs`、`read_doc`、`validate_docs` 与 `get_llms_context` 工具。AI 智能体可通过本地 stdio 连接查询与校验文档 —— 无需联网，无需远程服务。
+        :::
+    :::
+    ::: grid
         ::: card "本地优先搜索" icon:search
         基于 MiniSearch 的客户端全文搜索，开箱即用，支持多版本和多语言。
         :::

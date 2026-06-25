@@ -41,7 +41,12 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     :::
     ::: grid
         ::: card "OKF Bundles" icon:database
-        Generates an Open Knowledge Format bundle — typed concept graph for AI agents. See [spec](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        Generates an Open Knowledge Format bundle, typed concept graph for AI agents. Read [more](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        :::
+    :::
+    ::: grid
+        ::: card "Native MCP Server" icon:terminal
+        Built-in Model Context Protocol server with `search_docs`, `read_doc`, `validate_docs`, and `get_llms_context` tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
         :::
     :::
     ::: grid
@@ -55,8 +60,8 @@ Everything needed for solid documentation ships built in. No extra plugins requi
         :::
     :::
     ::: grid
-        ::: card "Flexible Theming" icon:palette
-        Switch between built-in themes or apply custom styling. Fully supports dark mode and system preferences.
+        ::: card "Custom Templates" icon:palette
+        Personalise your documentation with templates or try built-in themes with custom CSS. Supports dark mode and system prefs.
         :::
     :::
     ::: grid
