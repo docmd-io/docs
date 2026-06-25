@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -36,7 +36,7 @@ jobs:
       # Cache embedding models to avoid re-downloading on every build
       # Models are ~23-270MB and stored in ~/.docmd-search/models/
       - name: Cache embedding models
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.docmd-search/models
           key: docmd-search-models-${{ runner.os }}-${{ hashFiles('**/docmd.config.js', '**/docmd.config.json') }}
