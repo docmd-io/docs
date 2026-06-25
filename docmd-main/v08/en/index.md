@@ -46,7 +46,7 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     :::
     ::: grid
         ::: card "Native MCP Server" icon:terminal
-        Built-in Model Context Protocol server with `search_docs`, `read_doc`, `validate_docs`, and `get_llms_context` tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
+        Built-in Model Context Protocol server with native tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
         :::
     :::
     ::: grid
