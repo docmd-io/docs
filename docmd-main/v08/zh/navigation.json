@@ -254,6 +254,10 @@
       {
         "title": "Favicon 与元数据",
         "path": "/theming/favicons-metadata"
+      },
+      {
+        "title": "自定义与变量",
+        "path": "/theming/customisation"
       }
     ]
   },
@@ -309,6 +313,10 @@
       {
         "title": "数学公式 (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "OKF Bundles",
+        "path": "/plugins/okf"
       }
     ]
   },
@@ -387,6 +395,10 @@
       {
         "title": "MCP 服务器",
         "path": "/reference/mcp-server"
+      },
+      {
+        "title": "Build API",
+        "path": "/reference/build-api"
       }
     ]
   },
@@ -526,6 +538,10 @@
           {
             "title": "上下文保留",
             "path": "/guides/ai-optimisation/context-preservation"
+          },
+          {
+            "title": "OKF Bundles —— 深度剖析",
+            "path": "/guides/ai-optimisation/okf-bundles"
           }
         ]
       },
@@ -552,6 +568,41 @@
           {
             "title": "并行工具",
             "path": "/guides/integrations/alongside-other-tools"
+          }
+        ]
+      },
+      {
+        "title": "Scaling & Architecture",
+        "icon": "layers",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "扩展到 1000+ 页面",
+            "path": "/guides/scaling-architecture/scaling"
+          },
+          {
+            "title": "可扩展的文件夹结构",
+            "path": "/guides/scaling-architecture/scalable-folder-structure"
+          },
+          {
+            "title": "管理多版本文档",
+            "path": "/guides/scaling-architecture/multi-version-documentation"
+          },
+          {
+            "title": "组织大型仓库",
+            "path": "/guides/scaling-architecture/organising-large-repositories"
+          },
+          {
+            "title": "多团队协作",
+            "path": "/guides/scaling-architecture/multi-team-collaboration"
+          },
+          {
+            "title": "工作区与 Monorepo 架构",
+            "path": "/guides/scaling-architecture/workspace-monorepo"
+          },
+          {
+            "title": "破坏性变更与弃用",
+            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           }
         ]
       }
@@ -607,6 +658,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.8.8 - 硬化发布版",
+        "path": "/release-notes/0-8-8"
+      },
       {
         "title": "v0.8.7 - 自定义模板插件 API",
         "path": "/release-notes/0-8-7"

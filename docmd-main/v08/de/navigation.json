@@ -254,6 +254,10 @@
       {
         "title": "Favicons & Meta",
         "path": "/theming/favicons-metadata"
+      },
+      {
+        "title": "Anpassung & Variablen",
+        "path": "/theming/customisation"
       }
     ]
   },
@@ -309,6 +313,10 @@
       {
         "title": "Math (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "OKF-Bundles",
+        "path": "/plugins/okf"
       }
     ]
   },
@@ -387,6 +395,10 @@
       {
         "title": "MCP-Server",
         "path": "/reference/mcp-server"
+      },
+      {
+        "title": "Build-API",
+        "path": "/reference/build-api"
       }
     ]
   },
@@ -526,6 +538,10 @@
           {
             "title": "Kontext-Erhaltung",
             "path": "/guides/ai-optimisation/context-preservation"
+          },
+          {
+            "title": "OKF-Bundles — Tiefeneinblick",
+            "path": "/guides/ai-optimisation/okf-bundles"
           }
         ]
       },
@@ -607,6 +623,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.8.8 - Hardening-Release",
+        "path": "/release-notes/0-8-8"
+      },
       {
         "title": "v0.8.7 - Custom-Template-Plugin-API",
         "path": "/release-notes/0-8-7"

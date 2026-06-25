@@ -254,6 +254,10 @@
       {
         "title": "Favicons & Meta",
         "path": "/theming/favicons-metadata"
+      },
+      {
+        "title": "Customisation & Variables",
+        "path": "/theming/customisation"
       }
     ]
   },
@@ -309,6 +313,10 @@
       {
         "title": "Math (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "OKF Bundle Plugin",
+        "path": "/plugins/okf"
       }
     ]
   },
@@ -387,6 +395,10 @@
       {
         "title": "MCP Server",
         "path": "/reference/mcp-server"
+      },
+      {
+        "title": "Build API",
+        "path": "/reference/build-api"
       }
     ]
   },
@@ -526,6 +538,10 @@
           {
             "title": "Context Preservation",
             "path": "/guides/ai-optimisation/context-preservation"
+          },
+          {
+            "title": "OKF Bundles — Deep Dive",
+            "path": "/guides/ai-optimisation/okf-bundles"
           }
         ]
       },
@@ -552,6 +568,41 @@
           {
             "title": "Parallel Tools",
             "path": "/guides/integrations/alongside-other-tools"
+          }
+        ]
+      },
+      {
+        "title": "Scaling & Architecture",
+        "icon": "layers",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Scaling to 1000+ Pages",
+            "path": "/guides/scaling-architecture/scaling"
+          },
+          {
+            "title": "Scalable Folder Structure",
+            "path": "/guides/scaling-architecture/scalable-folder-structure"
+          },
+          {
+            "title": "Managing Multi-Version Documentation",
+            "path": "/guides/scaling-architecture/multi-version-documentation"
+          },
+          {
+            "title": "Organising Large Repositories",
+            "path": "/guides/scaling-architecture/organising-large-repositories"
+          },
+          {
+            "title": "Multi-Team Collaboration",
+            "path": "/guides/scaling-architecture/multi-team-collaboration"
+          },
+          {
+            "title": "Workspace & Monorepo Architecture",
+            "path": "/guides/scaling-architecture/workspace-monorepo"
+          },
+          {
+            "title": "Breaking Changes & Deprecations",
+            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
           }
         ]
       }
@@ -607,6 +658,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.8.8 - Hardening Release",
+        "path": "/release-notes/0-8-8"
+      },
       {
         "title": "v0.8.7 - Custom Template Plugin API",
         "path": "/release-notes/0-8-7"
