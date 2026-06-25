@@ -570,41 +570,6 @@
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
-      },
-      {
-        "title": "Scaling & Architecture",
-        "icon": "layers",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "扩展到 1000+ 页面",
-            "path": "/guides/scaling-architecture/scaling"
-          },
-          {
-            "title": "可扩展的文件夹结构",
-            "path": "/guides/scaling-architecture/scalable-folder-structure"
-          },
-          {
-            "title": "管理多版本文档",
-            "path": "/guides/scaling-architecture/multi-version-documentation"
-          },
-          {
-            "title": "组织大型仓库",
-            "path": "/guides/scaling-architecture/organising-large-repositories"
-          },
-          {
-            "title": "多团队协作",
-            "path": "/guides/scaling-architecture/multi-team-collaboration"
-          },
-          {
-            "title": "工作区与 Monorepo 架构",
-            "path": "/guides/scaling-architecture/workspace-monorepo"
-          },
-          {
-            "title": "破坏性变更与弃用",
-            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
-          }
-        ]
       }
     ]
   },

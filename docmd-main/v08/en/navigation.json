@@ -570,41 +570,6 @@
             "path": "/guides/integrations/alongside-other-tools"
           }
         ]
-      },
-      {
-        "title": "Scaling & Architecture",
-        "icon": "layers",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "Scaling to 1000+ Pages",
-            "path": "/guides/scaling-architecture/scaling"
-          },
-          {
-            "title": "Scalable Folder Structure",
-            "path": "/guides/scaling-architecture/scalable-folder-structure"
-          },
-          {
-            "title": "Managing Multi-Version Documentation",
-            "path": "/guides/scaling-architecture/multi-version-documentation"
-          },
-          {
-            "title": "Organising Large Repositories",
-            "path": "/guides/scaling-architecture/organising-large-repositories"
-          },
-          {
-            "title": "Multi-Team Collaboration",
-            "path": "/guides/scaling-architecture/multi-team-collaboration"
-          },
-          {
-            "title": "Workspace & Monorepo Architecture",
-            "path": "/guides/scaling-architecture/workspace-monorepo"
-          },
-          {
-            "title": "Breaking Changes & Deprecations",
-            "path": "/guides/scaling-architecture/breaking-changes-deprecations"
-          }
-        ]
       }
     ]
   },
