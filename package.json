@@ -12,6 +12,7 @@
   "dependencies": {
     "@docmd/core": "^0.8.8",
     "@docmd/plugin-math": "^0.8.8",
+    "@docmd/template-summer": "^0.8.8",
     "docmd-search": "^0.1.0-alpha.1",
     "@huggingface/transformers": "^4.2.0",
     "onnxruntime-node": "^1.26.0"
