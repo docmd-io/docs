@@ -40,6 +40,14 @@
     "collapsible": false,
     "children": [
       {
+        "title": "v0.1.0",
+        "path": "/release-notes/0-1-0"
+      },
+      {
+        "title": "v0.1.0-alpha.1",
+        "path": "/release-notes/0-1-0-alpha-1"
+      },
+      {
         "title": "v0.1.0-alpha.0",
         "path": "/release-notes/0-1-0-alpha-0"
       }
