@@ -7,12 +7,13 @@
     "dev:local": "node ../docmd/packages/core/dist/bin/docmd.js dev",
     "build": "docmd build",
     "build:local": "node ../docmd/packages/core/dist/bin/docmd.js build",
+    "doctor:local": "node ../docmd/packages/core/dist/bin/docmd.js doctor",
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.8",
-    "@docmd/plugin-math": "^0.8.8",
-    "@docmd/template-summer": "^0.8.8",
+    "@docmd/core": "^0.8.9",
+    "@docmd/plugin-math": "^0.8.9",
+    "@docmd/template-summer": "^0.8.9",
     "docmd-search": "^0.1.0",
     "@huggingface/transformers": "^4.2.0",
     "onnxruntime-node": "^1.26.0"
