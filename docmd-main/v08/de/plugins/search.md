@@ -149,6 +149,15 @@ Wenn `semantic: true` aktiviert ist, installiert das Plugin automatisch `docmd-s
 
 Wenn die automatische Installation fehlschlägt (z. B. in eingeschränkten CI-Umgebungen), fällt das Plugin elegant auf die Schlüsselwortsuche zurück.
 
+::: callout info "Resolver-Robustheit (neu in 0.8.9)"
+Der Resolver, der `docmd-search` innerhalb von `node_modules` findet,
+verwendet beim Lesen des Paket-Manifests nun eine Fallback-Kette
+`import` → `default` → `require` → `main` und als Rückfallebene eine
+manuelle `node_modules`-Suche, die auch bei pnmps isoliertem
+node_modules-Layout funktioniert. Ihrerseits ist keine Aktion nötig –
+dies ist ausschließlich eine Zuverlässigkeitsverbesserung.
+:::
+
 ### Verfügbare Modelle
 
 Die Option `model` ermöglicht die Auswahl eines Embedding-Modells. Modelle werden einmal heruntergeladen und lokal zwischengespeichert.

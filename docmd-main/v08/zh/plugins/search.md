@@ -149,6 +149,13 @@ npm install docmd-search
 
 如果自动安装失败（例如在受限的 CI 环境中），插件会优雅地回退到关键字搜索。
 
+::: callout info "解析器健壮性(0.8.9 新增)"
+在 `node_modules` 中定位 `docmd-search` 的解析器,现在在读取包清单
+时使用 `import` → `default` → `require` → `main` 回退链,并以手动
+遍历 `node_modules` 作为后备,以应对 pnpm 隔离的布局。您无需任何操
+作 —— 这纯粹是构建可靠性的提升。
+:::
+
 ### 可用模型
 
 `model` 选项让您选择嵌入模型。模型下载一次并在本地缓存。

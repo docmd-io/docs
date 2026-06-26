@@ -81,6 +81,15 @@ The auto-installer:
 - Detects and uses your project's package manager.
 - Reports progress in the terminal as it runs.
 
+::: callout tip "Resilient auto-install (new in 0.8.9)"
+The auto-installer uses dynamic `import()` for the final load step, so it
+works for ESM packages that declare only an `import` condition in their
+`exports` field. The set of *names* it can install is still restricted to
+the official plugin registry allowlist — a registry re-check runs inside
+the retry path as defense-in-depth, so a future change to the installer
+cannot silently turn it into a generic npm-loader.
+:::
+
 ## Third-Party & Custom Plugins
 
 For security, the installer enforces an official registry allowlist. Third-party plugins must be installed natively using your package manager:

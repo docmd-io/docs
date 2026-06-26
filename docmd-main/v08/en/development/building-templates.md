@@ -48,6 +48,29 @@ A template is a regular npm package that declares `capabilities: ['template']` a
 }
 ```
 
+## ESM Exports — the `default` Condition
+
+Your template's `package.json` **must** include a `"default"` condition in
+`exports["."]`, alongside the `import` condition:
+
+```json
+"exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "default": "./dist/index.js"
+  }
+}
+```
+
+If you declare only `import`, the auto-installer's first attempt throws
+`ERR_PACKAGE_PATH_NOT_EXPORTED` because Node's CommonJS resolver cannot
+match any condition. The retry path will still succeed (it uses dynamic
+`import()` directly), but the build will print a redundant "Plugin
+installed" TUI line every time. Plugins (`@docmd/plugin-*`) have the same
+requirement — see the [plugin development guide](building-plugins.md#esm-exports--the-default-condition)
+for the full context.
+
 ## `index.js`
 
 ```js "index.js"

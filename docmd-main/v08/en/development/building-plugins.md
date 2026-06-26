@@ -22,6 +22,41 @@ Every plugin must export a `plugin` descriptor declaring its identity and capabi
 
 > **Note:** The descriptor is strictly required. Plugins without it will fail to load.
 
+## The `docmd` Namespace (new in 0.8.9)
+
+In addition to the runtime `plugin` descriptor, every official plugin **must** declare a `docmd` namespace in its `package.json`. This namespace is the build-time contract that the registry generator reads to build the single source of truth that the runtime loader consumes.
+
+```json "package.json"
+{
+  "name": "@docmd/plugin-foo",
+  "version": "1.0.0",
+  "docmd": {
+    "key": "foo",
+    "kind": "plugin",
+    "displayName": "Foo",
+    "tagline": "What this plugin does in one line",
+    "capabilities": ["head", "body", "post-build"]
+  }
+}
+```
+
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| `key` | Recommended | The user-facing identifier (`config.plugins.<key>`). Derived from the package name if omitted. |
+| `kind` | Recommended | One of `plugin`, `template`, `engine`. Derived from the directory layout if omitted. |
+| `displayName` | Recommended | Human-readable name shown in catalogs and `docmd doctor` output. |
+| `tagline` | Recommended | One-line description; used as a fallback for the npm description. |
+| `capabilities` | Required for plugins and templates | The same hook capabilities the JS descriptor declares. The build-time cross-check warns if the two diverge. |
+| `preview` | Optional | Path to a preview asset (template only); shown in catalogs. |
+
+Engines have the same `docmd` namespace but **no `capabilities`** — they don't participate in the hook system, only in the engine loader.
+
+The build-time cross-check (also new in 0.8.9) surfaces drift between the JS descriptor and the manifest, including the "implemented hook without declared capability" silent-drop bug that was previously invisible.
+
+::: callout warning "Bundled registry removal in 0.9.0"
+The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalog of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
+:::
+
 ## Core Capabilities
 
 The `capabilities` array dictates which hooks your plugin is allowed to use.
@@ -345,3 +380,28 @@ The WebSocket RPC system is only active during `npx @docmd/core dev`. Production
 ::: callout tip "AI-Ready Design 🤖"
 The docmd plugin API is **LLM-Optimal**. Because the hooks use standard JavaScript objects, AI agents can generate bug-free plugins with minimal instruction.
 :::
+
+## ESM Exports — the `default` Condition
+
+Your plugin's `package.json` **must** include a `"default"` condition in
+`exports["."]`, alongside the `import` condition:
+
+```json
+"exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "default": "./dist/index.js"
+  }
+}
+```
+
+If you declare only `import`, the auto-installer's first attempt throws
+`ERR_PACKAGE_PATH_NOT_EXPORTED` because Node's CommonJS resolver cannot
+match any condition. The retry path will still succeed (it uses dynamic
+`import()` directly), but the build will print a redundant "Plugin
+installed" TUI line every time.
+
+This convention matches what `@docmd/plugin-git`, `@docmd/plugin-openapi`,
+and `@docmd/plugin-threads` already ship with. Templates (`@docmd/template-*`)
+have the same requirement.

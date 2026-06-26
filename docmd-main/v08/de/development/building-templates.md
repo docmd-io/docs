@@ -46,6 +46,30 @@ Ein Template ist ein reguläres npm-Paket, das `capabilities: ['template']` dekl
 }
 ```
 
+## ESM-Exports – die `default`-Bedingung
+
+Ihre `package.json` **muss** in `exports["."]` zusätzlich zur
+`import`-Bedingung eine `"default"`-Bedingung deklarieren:
+
+```json
+"exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "default": "./dist/index.js"
+  }
+}
+```
+
+Wenn Sie nur `import` deklarieren, wirft der erste Versuch des
+Auto-Installers `ERR_PACKAGE_PATH_NOT_EXPORTED`, weil der
+CommonJS-Resolver von Node keine Bedingung finden kann. Der Retry-Pfad
+gelingt zwar (er verwendet dynamisches `import()` direkt), aber der
+Build gibt bei jedem Lauf eine überflüssige Meldung „Plugin installed"
+aus. Plugins (`@docmd/plugin-*`) haben die gleiche Anforderung – siehe
+den [Plugin-Entwicklungs-Leitfaden](building-plugins.md#esm-exports--die-default-bedingung)
+für den vollständigen Kontext.
+
 ## `index.js`
 
 ```js "index.js"

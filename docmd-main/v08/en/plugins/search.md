@@ -149,6 +149,14 @@ When `semantic: true` is enabled, the plugin automatically installs `docmd-searc
 
 If the automatic installation fails (e.g., in restricted CI environments), the plugin gracefully falls back to keyword search.
 
+::: callout info "Resolver robustness (new in 0.8.9)"
+The resolver that locates `docmd-search` inside `node_modules` now uses an
+`import` → `default` → `require` → `main` fallback chain when reading the
+package manifest, plus a manual `node_modules` walk as a backstop for pnpm's
+isolated layout. No action required on your side — this is purely a build
+reliability improvement.
+:::
+
 ### Available Models
 
 The `model` option lets you choose an embedding model. Models are downloaded once and cached locally.

@@ -82,6 +82,17 @@ Der automatische Installer:
 - Erkennt und verwendet den Package-Manager Ihres Projekts.
 - Meldet den Fortschritt im Terminal während der Ausführung.
 
+::: callout tip "Robuste Auto-Installation (neu in 0.8.9)"
+Der Auto-Installer verwendet für den eigentlichen Lade-Schritt dynamisches
+`import()`, sodass er auch für ESM-Pakete funktioniert, die in ihrem
+`exports`-Feld nur eine `import`-Bedingung deklarieren. Die Menge der
+*Namen*, die er installieren darf, ist weiterhin auf die offizielle
+Plugin-Registry-Allowlist beschränkt – im Retry-Pfad läuft eine
+Registry-Reprüfung als Defense-in-Depth, sodass eine künftige Änderung
+am Installer ihn nicht stillschweigend in einen generischen
+npm-Loader verwandeln kann.
+:::
+
 ## Drittanbieter- & benutzerdefinierte Plugins
 
 Aus Sicherheitsgründen erzwingt der Installer eine offizielle Register-Zulassungsliste. Drittanbieter-Plugins müssen nativ mit Ihrem Package-Manager installiert werden:

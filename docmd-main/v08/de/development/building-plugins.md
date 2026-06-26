@@ -22,6 +22,41 @@ Jedes Plugin muss einen `plugin`-Deskriptor exportieren, der seine Identität un
 
 > **Hinweis:** Der Deskriptor ist zwingend erforderlich. Plugins ohne ihn können nicht geladen werden.
 
+## Der `docmd`-Namespace (neu in 0.8.9)
+
+Zusätzlich zum Laufzeit-`plugin`-Deskriptor **muss** jedes offizielle Plugin einen `docmd`-Namespace in seiner `package.json` deklarieren. Dieser Namespace ist der Build-Zeit-Vertrag, den der Registry-Generator liest, um die einzige Quelle der Wahrheit aufzubauen, die der Laufzeit-Loader verwendet.
+
+```json "package.json"
+{
+  "name": "@docmd/plugin-foo",
+  "version": "1.0.0",
+  "docmd": {
+    "key": "foo",
+    "kind": "plugin",
+    "displayName": "Foo",
+    "tagline": "Was dieses Plugin tut (eine Zeile)",
+    "capabilities": ["head", "body", "post-build"]
+  }
+}
+```
+
+| Feld | Erforderlich | Beschreibung |
+| :--- | :--- | :--- |
+| `key` | Empfohlen | Der benutzerorientierte Bezeichner (`config.plugins.<key>`). Wird aus dem Paketnamen abgeleitet, falls weggelassen. |
+| `kind` | Empfohlen | Eines aus `plugin`, `template`, `engine`. Wird aus der Verzeichnisstruktur abgeleitet, falls weggelassen. |
+| `displayName` | Empfohlen | Menschenlesbarer Name in Katalogen und `docmd doctor`-Ausgabe. |
+| `tagline` | Empfohlen | Einzeilige Beschreibung; fällt auf die npm-Beschreibung zurück. |
+| `capabilities` | Erforderlich für Plugins und Templates | Dieselben Hook-Fähigkeiten, die der JS-Deskriptor deklariert. Die Build-Zeit-Prüfung warnt bei Abweichung. |
+| `preview` | Optional | Pfad zu einer Vorschau-Asset (nur Template); wird in Katalogen angezeigt. |
+
+Engines haben denselben `docmd`-Namespace, aber **keine `capabilities`** — sie nehmen nicht am Hook-System teil, sondern nur am Engine-Loader.
+
+Die Build-Zeit-Prüfung (ebenfalls neu in 0.8.9) erkennt Drift zwischen JS-Deskriptor und Manifest, einschließlich des Bugs "implementierter Hook ohne deklarierte Fähigkeit", der zuvor unsichtbar war.
+
+::: callout warning "Entfernung des gebündelten Registers in 0.9.0"
+Die handgepflegte `packages/plugins/installer/registry/plugins.json`, die früher der Katalog offizieller Plugins war, ist **seit 0.8.9 veraltet** und wird **in 0.9.0 entfernt**. Der Build-Zeit-Registry-Generator ist jetzt die einzige Quelle der Wahrheit — Ihr Plugin benötigt lediglich einen korrekten `docmd`-Namespace in seiner `package.json`, und der Generator nimmt es beim nächsten `pnpm build` von `@docmd/api` auf. Für bestehende offizielle Plugins sind keine Code-Änderungen erforderlich.
+:::
+
 ## Kernfähigkeiten
 
 Das `capabilities`-Array bestimmt, welche Hooks Ihr Plugin verwenden darf.
@@ -345,3 +380,27 @@ Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktio
 ::: callout tip "KI-bereites Design 🤖"
 Die docmd-Plugin-API ist **LLM-optimal**. Da die Hooks Standard-JavaScript-Objekte verwenden, können KI-Agenten mit minimaler Anleitung fehlerfreie Plugins generieren.
 :::
+
+## ESM-Exports – die `default`-Bedingung
+
+Ihre `package.json` **muss** in `exports["."]` zusätzlich zur
+`import`-Bedingung eine `"default"`-Bedingung deklarieren:
+
+```json
+"exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "default": "./dist/index.js"
+  }
+}
+```
+
+Wenn Sie nur `import` deklarieren, wirft der erste Versuch des
+Auto-Installers `ERR_PACKAGE_PATH_NOT_EXPORTED`, weil der
+CommonJS-Resolver von Node keine Bedingung finden kann. Der Retry-Pfad
+gelingt zwar (er verwendet dynamisches `import()` direkt), aber der
+Build gibt bei jedem Lauf eine überflüssige Meldung „Plugin installed"
+aus. Diese Konvention entspricht den Paketen `@docmd/plugin-git`,
+`@docmd/plugin-openapi` und `@docmd/plugin-threads`. Templates
+(`@docmd/template-*`) haben die gleiche Anforderung.
