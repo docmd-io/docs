@@ -15,6 +15,7 @@ description: "Befehlszeilen-Referenz für docmd - alle verfügbaren Befehle und 
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Deployment-Konfigurationen generieren |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Legacy-Konfigurationen upgraden oder von anderen Tools migrieren |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Links validieren und Dokumentations-Dateien prüfen |
+| [`npx @docmd/core doctor`](#npx-docmdcore-doctor) | Vorabprüfung: fehlende Plugins, defekte Konfigurationen, nicht passende Engines melden |
 | [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Als MCP-(Model Context Protocol-)Server über stdio betreiben |
 | [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Ein Plugin installieren und konfigurieren |
 | [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Ein Plugin und seine Konfiguration entfernen |
@@ -134,6 +135,22 @@ npx @docmd/core validate [options]
 | `--json` | Fehler als maschinenlesbares JSON ausgeben (nützlich für CI-Pipelines). |
 
 Durchsucht jede Markdown-Datei, folgt relativen Links und Bild-Referenzen und meldet defekte Ziele. Beendet sich mit einem Status ungleich Null, falls ein Link ungültig ist, sodass Sie es in Pre-Merge-Hooks einbinden können.
+
+## `npx @docmd/core doctor`
+
+Vorabprüfung, die fehlende Plugins, defekte Konfigurationen und nicht passende Engines meldet. Keine Datei-Schreibvorgänge, keine Build-Nebenwirkungen — rein diagnostisch.
+
+```bash
+npx @docmd/core doctor [Optionen]
+```
+
+| Option | Beschreibung |
+|:-------|:------------|
+| `--config <Pfad>` | Pfad zu einer abweichenden `docmd.config.json` (oder `.ts`/`.js`/`.mjs`). |
+| `--fix` | Fehlende offizielle Plugins oder Templates automatisch installieren. |
+| `--json` | Den Bericht als maschinenlesbares JSON ausgeben (für CI und Tools). |
+
+Standardmäßig druckt `doctor` eine menschenlesbare Zusammenfassung mit: installierter `@docmd/core`-Version, allen konfigurierten Plugins (mit Version und Status `✓ installiert` / `⚠ fehlt`), dem aktiven Template, den angeforderten Engines (`js` immer aktiv, `rust` optional) und einer Liste der Auto-Install-Kandidaten. Mit `--fix` ruft es den Paket-Manager des Projekts auf (`pnpm add`, `npm install --save`, `yarn add` oder `bun add`), um die Kandidaten zu installieren, und beendet sich mit Code 0, wenn alles aufgelöst wurde. Mit `--json` werden dieselben Daten als einzelnes JSON-Objekt ausgegeben — nützlich für Pre-Commit-Hooks und CI-Gates. Exit-Code 0 bedeutet, das Projekt ist gesund; ungleich Null bedeutet, dass nach einem `--fix`-Lauf mindestens ein Problem verbleibt.
 
 ## `npx @docmd/core mcp`
 

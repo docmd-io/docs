@@ -15,6 +15,7 @@ description: "Command-line reference for docmd - all available commands and opti
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment configs |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configs or migrate from other tools |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Validate links and check documentation files |
+| [`npx @docmd/core doctor`](#npx-docmdcore-doctor) | Pre-flight check: report missing plugins, broken configs, mismatched engines |
 | [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Run as an MCP (Model Context Protocol) server over stdio |
 | [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Install and configure a plugin |
 | [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Remove a plugin and its config |
@@ -134,6 +135,22 @@ npx @docmd/core validate [options]
 | `--json` | Output errors as machine-readable JSON (useful for CI pipelines). |
 
 Scans every Markdown file, follows relative links and image references, and reports any broken targets. Exits with a non-zero status if any link is invalid, so you can wire it into pre-merge hooks.
+
+## `npx @docmd/core doctor`
+
+Pre-flight check that reports missing plugins, broken configs, and mismatched engines. No filesystem writes, no build side-effects — purely diagnostic.
+
+```bash
+npx @docmd/core doctor [options]
+```
+
+| Option | Description |
+|:-------|:------------|
+| `--config <path>` | Path to a non-default `docmd.config.json` (or `.ts`/`.js`/`.mjs`). |
+| `--fix` | Auto-install any missing official plugin or template that `doctor` flags. |
+| `--json` | Output the full report as machine-readable JSON (for CI and tooling). |
+
+By default, `doctor` prints a human-readable summary covering: the installed `@docmd/core` version, every configured plugin (with version and `✓ installed` / `⚠ missing` status), the active template, requested engines (`js` always-on, `rust` opt-in), and a list of auto-install candidates. With `--fix`, it shells out to the project's package manager (`pnpm add`, `npm install --save`, `yarn add`, or `bun add`) to install the candidates, then exits with code 0 if everything resolved. With `--json`, the same data is emitted as a single JSON object — useful for pre-commit hooks and CI gates. Exit code 0 means the project is healthy; non-zero means at least one issue remains after any `--fix` run.
 
 ## `npx @docmd/core mcp`
 
