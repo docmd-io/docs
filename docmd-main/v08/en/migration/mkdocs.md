@@ -15,11 +15,14 @@ Run the following command at the root of your existing MkDocs project:
 npx @docmd/core migrate --mkdocs
 ```
 
+> **0.8.10 polish** — `package.json` and lockfiles stay in place during the backup; your original `site_dir` is preserved; the top-level `nav:` block is auto-translated to docmd's `navigation` format (with multi-level `children`). Add `--dry-run` to preview without writing, or `--upgrade` to translate a legacy `docmd.config` to the modern schema.
+
 ### What Happens Automatically
 
-1.  **Backup**: Your entire project is safely moved into a new `mkdocs-backup/` directory.
+1.  **Backup**: Your entire project is safely moved into a new `mkdocs-backup/` directory (lockfiles and `package.json` stay in place).
 2.  **Content Migration**: Your `docs/` folder is restored to the root directory for docmd to use.
-3.  **Config Generation**: A `docmd.config.json` is generated, extracting your `site_name` from `mkdocs.yml`.
+3.  **Config Generation**: A `docmd.config.json` is generated, extracting your `site_name` (and, since 0.8.10, your `site_dir`) from `mkdocs.yml`.
+4.  **Navigation**: A top-level `nav:` block is translated to docmd's `navigation` array automatically.
 
 ## Step 2: Test the Setup
 
@@ -39,7 +42,9 @@ MkDocs uses `mkdocs.yml` to define site navigation and extensions. You must tran
 
 In MkDocs, navigation is strictly defined in the `nav` key of `mkdocs.yml`.
 
-**Action required:** Create a `navigation.json` inside your `docs/` folder.
+**As of 0.8.10:** a top-level `nav:` block is auto-translated to docmd's `navigation` array (multi-level sections become nested `children`). You only need to create a manual `navigation.json` if your nav is more complex than the simple form below (e.g. external links, anchors, conditional nav).
+
+**Action required (if needed):** Create a `navigation.json` inside your `docs/` folder.
 
 ```yaml "mkdocs.yml"
 nav:

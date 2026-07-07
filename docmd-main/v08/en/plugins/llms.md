@@ -75,6 +75,15 @@ Notice the pattern: **the default locale never gets a suffix** — its files kee
 
 For sites with only one locale configured, no per-locale files are written regardless of the `i18n` flag (the suffix would just add noise).
 
+## Security: Sanitised Output (0.8.10)
+
+Since 0.8.10, all user-controlled strings (page titles, descriptions) are sanitised before they land in `llms.txt`, `llms-full.txt`, and `llms.json`:
+
+- Markdown-special characters (`` ` ``, `[`, `]`, newlines) in titles are escaped so a malicious frontmatter can't break out of the `[title](url)` link form.
+- Strings starting with `=`, `+`, `-`, or `@` are prefixed with a single-quote so opening the file in a spreadsheet (Excel / Sheets / LibreOffice) does not execute a formula.
+
+The body in `llms-full.txt` is preserved verbatim — the file is treated as a first-party channel, and consumers that render it in an HTML context should sanitise on their side.
+
 ## Excluding a Page
 
 If a page contains sensitive information or internal notes you don't want AI models to learn, use the `llms: false` flag in your frontmatter:

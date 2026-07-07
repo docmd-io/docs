@@ -17,6 +17,8 @@ The migration command will:
 4. **Copy** your Markdown content into the standard docmd `docs/` directory.
 5. **Generate** a fresh `docmd.config.json` tailored for your content.
 
+> **0.8.10 polish** — lockfiles (`package.json`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `bun.lock*`) stay in place during the backup; Docusaurus `staticDir` and MkDocs `site_dir` are preserved; MkDocs `nav:` is auto-translated to docmd's `navigation` (with multi-level `children`); and `--dry-run` previews the migration without writing. See the [0.8.10 release notes](../release-notes/0-8-10.md).
+
 You can then run `npx @docmd/core dev` immediately to see your content rendered.
 
 ## What is Migrated
@@ -27,7 +29,7 @@ You can then run `npx @docmd/core dev` immediately to see your content rendered.
 | **Directory Structure** | ✅ Yes, your folder nesting is preserved |
 | **Site Title** | ✅ Yes, extracted from your config |
 | **Container Syntax** | ✅ Yes, VitePress/Docusaurus containers work without changes |
-| **Navigation / Sidebar** | ⚠️ **No**, requires manual mapping |
+| **Navigation / Sidebar** | ⚠️ Mostly — MkDocs `nav:` is auto-translated since 0.8.10; other sources still need manual mapping |
 | **Localisation (i18n)** | ⚠️ **No**, requires manual mapping |
 | **Versioning** | ⚠️ **No**, requires manual mapping |
 | **Custom React/Vue Components** | ❌ No, these must be replaced with docmd Containers |

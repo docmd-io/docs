@@ -122,6 +122,11 @@ npx @docmd/core migrate
 
 Automatically re-maps deprecated keys (e.g., `siteTitle` → `title`) and restructures the config object.
 
+**0.8.10 polish** — the command now also handles:
+
+- `--upgrade` — translate a legacy `docmd.config` (pre-0.7.x keys) to the modern schema in place.
+- `--dry-run` — preview the migration plan (files to move, new `docmd.config.json` body) without writing anything. The default-locale's `nav:` is also auto-translated for MkDocs sources.
+
 ## `npx @docmd/core validate`
 
 Validate documentation files and check for broken internal links.
