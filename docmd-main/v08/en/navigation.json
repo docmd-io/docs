@@ -624,6 +624,14 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.10 - CLI Polish and Workspace UX",
+        "path": "/release-notes/0-8-10"
+      },
+      {
+        "title": "v0.8.9 - Plugin Loader Hardening",
+        "path": "/release-notes/0-8-9"
+      },
+      {
         "title": "v0.8.8 - Hardening Release",
         "path": "/release-notes/0-8-8"
       },

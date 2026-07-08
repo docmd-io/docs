@@ -624,6 +624,14 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.10 - CLI 打磨与 Workspace UX",
+        "path": "/release-notes/0-8-10"
+      },
+      {
+        "title": "v0.8.9 - 插件加载器加固",
+        "path": "/release-notes/0-8-9"
+      },
+      {
         "title": "v0.8.8 - 硬化发布版",
         "path": "/release-notes/0-8-8"
       },
