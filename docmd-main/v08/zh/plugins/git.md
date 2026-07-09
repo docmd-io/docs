@@ -103,4 +103,4 @@ Netlify 默认获取完整历史。如果遇到问题，请确保您的构建命
 
 ## 本地化
 
-该插件包含英语、德语和中文的内置翻译。自定义字符串可以通过 [UI 本地化](../configuration/localisation/ui-strings.md) 系统提供。
+该插件包含多种常用语言（英语、德语、中文、韩语等）的内置翻译。完整的内置语言列表维护在[源代码仓库](external:https://github.com/docmd-io/docmd/tree/main/packages/plugins/git/i18n)中。自定义字符串可以通过 [UI 本地化](../configuration/localisation/ui-strings.md) 系统提供。

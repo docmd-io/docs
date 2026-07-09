@@ -103,4 +103,4 @@ Das `.git`-Verzeichnis muss in der Build-Umgebung vorhanden sein. Wenn Sie in ei
 
 ## Lokalisierung
 
-Das Plugin enthält eingebaute Übersetzungen für Englisch, Deutsch und Chinesisch. Benutzerdefinierte Zeichenfolgen können über das [UI-Lokalisierung](../configuration/localisation/ui-strings.md)-System bereitgestellt werden.
+Das Plugin enthält eingebaute Übersetzungen für mehrere gängige Sprachen (Englisch, Deutsch, Chinesisch, Koreanisch und weitere). Die vollständige Liste der mitgelieferten Locales wird im [Quell-Repository](external:https://github.com/docmd-io/docmd/tree/main/packages/plugins/git/i18n) gepflegt. Benutzerdefinierte Zeichenfolgen können über das [UI-Lokalisierung](../configuration/localisation/ui-strings.md)-System bereitgestellt werden.

@@ -103,4 +103,4 @@ The `.git` directory must be present in the build environment. If building insid
 
 ## Localisation
 
-The plugin includes built-in translations for English, German, and Chinese. Custom strings can be provided through the [UI Localisation](../configuration/localisation/ui-strings.md) system.
+The plugin includes built-in translations for several common languages (English, German, Chinese, Korean, and others). The full set of bundled locales is maintained in the [source repository](external:https://github.com/docmd-io/docmd/tree/main/packages/plugins/git/i18n). Custom strings can be provided through the [UI Localisation](../configuration/localisation/ui-strings.md) system.
