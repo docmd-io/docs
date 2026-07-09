@@ -37,9 +37,11 @@ In your editor's MCP settings panel, add a new server using the `stdio` transpor
 Once connected, the following tools become available to the agent:
 
 1.  `search_docs(query)`: Performs a workspace-wide full-text search.
-2.  `read_doc(route)`: Retrieves the raw Markdown contents of a specific route.
-3.  `validate_docs()`: Lints the entire documentation and returns validation errors (e.g., broken links).
-4.  `get_llms_context()`: Fetches the consolidated `llms-full.txt` context file.
+2.  `list_docs(subdir?)`: Lists every markdown file in the project, optionally scoped to a subdirectory (a locale, a version, a guide section). Use this to navigate the docs tree before reading individual files.
+3.  `read_doc(route)`: Retrieves the raw Markdown contents of a specific route. The route must resolve inside the project root.
+4.  `get_config()`: Returns the resolved `docmd.config` — title, source and output directories, locales, versions, and enabled plugins. Sensitive values (API keys, analytics IDs) are stripped from the response.
+5.  `validate_docs()`: Lints the entire documentation and returns validation errors (e.g., broken links).
+6.  `get_llms_context()`: Fetches the consolidated `llms-full.txt` context file.
 
 ## Leveraging Agent Skills (`SKILL.md`)
 

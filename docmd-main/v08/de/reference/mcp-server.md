@@ -46,12 +46,14 @@ Fügen Sie dies zu den MCP-Einstellungen Ihres Editors hinzu:
 
 ## Verfügbare Tools
 
-Der MCP-Server stellt vier Tools bereit, die Agenten aufrufen können:
+Der MCP-Server stellt sechs Tools bereit, die Agenten aufrufen können:
 
 | Tool | Beschreibung |
 | :--- | :--- |
 | **`search_docs`** | Volltextsuche über alle Dokumentations-Dateien. Gibt passende Zeilen mit Dateipfaden und Zeilennummern zurück. |
-| **`read_doc`** | Liest den rohen Markdown-Inhalt einer beliebigen Dokumentations-Datei über ihren relativen Pfad. |
+| **`list_docs`** | Listet alle Markdown-Dateien im Projekt auf (optional beschränkt auf ein Unterverzeichnis wie eine Locale oder Version). Gibt relative Pfade zurück, damit der Agent den Dokumentationsbaum navigieren kann, bevor er einzelne Dateien liest. |
+| **`read_doc`** | Liest den rohen Markdown-Inhalt einer beliebigen Dokumentations-Datei über ihren relativen Pfad. Der Pfad ist auf das Projekt-Wurzelverzeichnis beschränkt. |
+| **`get_config`** | Ruft die aufgelöste `docmd.config` ab — Titel, Quell-/Ausgabeverzeichnisse, konfigurierte Locales, Versionen und aktivierte Plugins. Sensible Werte (API-Schlüssel, Analytics-IDs) werden aus der Antwort entfernt. |
 | **`validate_docs`** | Führt eine Link-Validierung über alle Markdown-Dateien aus. Gibt eine Liste defekter Links mit Datei, Zeile und Ziel zurück. |
 | **`get_llms_context`** | Ruft den vollständigen `llms-full.txt`-Kontext ab — die vereinte Inhaltsdarstellung der gesamten Dokumentations-Site, optimiert für die LLM-Ingestion. |
 
@@ -72,6 +74,20 @@ Der MCP-Server stellt vier Tools bereit, die Agenten aufrufen können:
 }
 ```
 
+#### `list_docs`
+
+```json
+{
+  "name": "list_docs",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "subdir": { "type": "string", "description": "Optionales Unterverzeichnis zur Einschränkung der Auflistung (z. B. 'en', 'v1', 'guides'). Der Pfad ist auf das konfigurierte Quellverzeichnis beschränkt." }
+    }
+  }
+}
+```
+
 #### `read_doc`
 
 ```json
@@ -80,9 +96,21 @@ Der MCP-Server stellt vier Tools bereit, die Agenten aufrufen können:
   "inputSchema": {
     "type": "object",
     "properties": {
-      "route": { "type": "string", "description": "Relativer Pfad zur Markdown-Datei (z. B. docs/getting-started.md)." }
+      "route": { "type": "string", "description": "Relativer Pfad zur Markdown-Datei (z. B. docs/getting-started.md). Muss innerhalb des Projekt-Wurzelverzeichnisses aufgelöst werden." }
     },
     "required": ["route"]
+  }
+}
+```
+
+#### `get_config`
+
+```json
+{
+  "name": "get_config",
+  "inputSchema": {
+    "type": "object",
+    "properties": {}
   }
 }
 ```

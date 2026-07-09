@@ -46,12 +46,14 @@ docmd mcp
 
 ## 可用工具
 
-MCP 服务器向 Agent 暴露四个工具：
+MCP 服务器向 Agent 暴露六个工具：
 
 | 工具 | 说明 |
 | :--- | :--- |
 | **`search_docs`** | 在所有文档文件中进行全文搜索。返回匹配行及其文件路径和行号。 |
-| **`read_doc`** | 读取任意文档文件的原始 Markdown 内容（按相对路径）。 |
+| **`list_docs`** | 列出项目中的全部 Markdown 文件（可选择限定到某个子目录，如某个 locale 或版本）。返回相对路径，让 Agent 在读取单文件前能够先浏览整个文档树。 |
+| **`read_doc`** | 读取任意文档文件的原始 Markdown 内容（按相对路径）。路径被沙箱化到项目根目录之内。 |
+| **`get_config`** | 拉取已解析的 `docmd.config` —— 标题、源/输出目录、已配置的 locale、版本、已启用的插件。敏感字段（API 密钥、analytics ID）会在响应中被剔除。 |
 | **`validate_docs`** | 跨所有 Markdown 文件执行链接校验，返回失效链接的列表（含文件、行号、目标）。 |
 | **`get_llms_context`** | 拉取完整的 `llms-full.txt` 上下文 —— 整个文档站点内容的统一聚合，已为 LLM 摄取优化。 |
 
@@ -72,6 +74,20 @@ MCP 服务器向 Agent 暴露四个工具：
 }
 ```
 
+#### `list_docs`
+
+```json
+{
+  "name": "list_docs",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "subdir": { "type": "string", "description": "可选的子目录，用于把列表限定到其中（如 'en'、'v1'、'guides'）。路径被沙箱化到已配置的源目录之内。" }
+    }
+  }
+}
+```
+
 #### `read_doc`
 
 ```json
@@ -80,9 +96,21 @@ MCP 服务器向 Agent 暴露四个工具：
   "inputSchema": {
     "type": "object",
     "properties": {
-      "route": { "type": "string", "description": "Markdown 文件的相对路径（例如 docs/getting-started.md）。" }
+      "route": { "type": "string", "description": "Markdown 文件的相对路径（例如 docs/getting-started.md）。必须在项目根目录之内解析。" }
     },
     "required": ["route"]
+  }
+}
+```
+
+#### `get_config`
+
+```json
+{
+  "name": "get_config",
+  "inputSchema": {
+    "type": "object",
+    "properties": {}
   }
 }
 ```

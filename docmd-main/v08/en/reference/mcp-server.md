@@ -46,12 +46,14 @@ Add to your editor's MCP settings:
 
 ## Available Tools
 
-The MCP server exposes four tools that agents can call:
+The MCP server exposes six tools that agents can call:
 
 | Tool | Description |
 | :--- | :--- |
 | **`search_docs`** | Full-text search across all documentation files. Returns matching lines with file paths and line numbers. |
-| **`read_doc`** | Read the raw markdown content of any documentation file by its relative path. |
+| **`list_docs`** | List every markdown file in the project (optionally scoped to a subdirectory such as a locale or version). Returns relative paths so the agent can navigate the docs tree before reading individual files. |
+| **`read_doc`** | Read the raw markdown content of any documentation file by its relative path. Path is sandboxed to the project root. |
+| **`get_config`** | Retrieve the resolved `docmd.config` — title, source/output directories, configured locales, versions, and enabled plugins. Sensitive values (API keys, analytics IDs) are stripped from the response. |
 | **`validate_docs`** | Run link validation across all markdown files. Returns a list of broken links with file, line, and target. |
 | **`get_llms_context`** | Retrieve the complete `llms-full.txt` context — the unified content of the entire documentation site, optimised for LLM ingestion. |
 
@@ -72,6 +74,20 @@ The MCP server exposes four tools that agents can call:
 }
 ```
 
+#### `list_docs`
+
+```json
+{
+  "name": "list_docs",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "subdir": { "type": "string", "description": "Optional subdirectory to scope the listing (e.g. 'en', 'v1', 'guides'). Path is sandboxed to the configured source directory." }
+    }
+  }
+}
+```
+
 #### `read_doc`
 
 ```json
@@ -80,9 +96,21 @@ The MCP server exposes four tools that agents can call:
   "inputSchema": {
     "type": "object",
     "properties": {
-      "route": { "type": "string", "description": "Relative path to the markdown file (e.g. docs/getting-started.md)." }
+      "route": { "type": "string", "description": "Relative path to the markdown file (e.g. docs/getting-started.md). Must resolve inside the project root." }
     },
     "required": ["route"]
+  }
+}
+```
+
+#### `get_config`
+
+```json
+{
+  "name": "get_config",
+  "inputSchema": {
+    "type": "object",
+    "properties": {}
   }
 }
 ```
