@@ -11,11 +11,6 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.10",
-    "@docmd/plugin-math": "^0.8.10",
-    "@docmd/template-summer": "^0.8.10",
-    "@huggingface/transformers": "^4.2.0",
-    "docmd-search": "^0.1.0",
-    "onnxruntime-node": "^1.27.0"
+    "@docmd/core": "^0.8.11"
   }
 }
