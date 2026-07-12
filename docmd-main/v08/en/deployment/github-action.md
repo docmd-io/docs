@@ -102,6 +102,25 @@ After this, every push to `main` triggers a deployment automatically.
 
 If your `docmd.config.json` lives in a subdirectory — for example, `packages/docs/docmd.config.json` in a monorepo — the action detects it and passes `--cwd` to docmd automatically. No manual path configuration is required.
 
+## Project Pages (Subpath Deployment)
+
+GitHub Pages serves project sites at `https://<username>.github.io/<repo-name>/`, not at the domain root. docmd handles this automatically — set `url` to your full GitHub Pages URL and docmd derives the correct asset paths from it:
+
+```json "docmd.config.json"
+{
+  "url": "https://username.github.io/my-repo"
+}
+```
+
+That's it. docmd reads the `/my-repo/` subpath from your URL and uses it for every internal link and asset reference. No additional configuration is needed.
+
+::: callout tip "How docmd knows your deployment path"
+docmd derives the asset base path from your `url` config. The `url` you set for SEO and sitemaps is the same value docmd uses to figure out where your assets live. Set it once, everything follows.
+
+If your deployment path ever differs from your URL path (rare, e.g. a CDN that strips a prefix), you can override with `base`. docmd normalises slashes for you, so any of these work:
+`"my-repo"`, `"/my-repo"`, `"/my-repo/"`. You don't have to remember which slashes are required.
+:::
+
 ## Custom Domain
 
 To use a custom domain:
