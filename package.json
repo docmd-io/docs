@@ -8,9 +8,11 @@
     "build": "docmd build",
     "build:local": "node ../docmd/packages/core/dist/bin/docmd.js build",
     "doctor:local": "node ../docmd/packages/core/dist/bin/docmd.js doctor",
+    "sim": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --skip-monorepo-build",
+    "sim:dev": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --dev --skip-monorepo-build",
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.11"
+    "@docmd/core": "^0.8.12"
   }
 }
