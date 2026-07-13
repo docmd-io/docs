@@ -8,11 +8,13 @@
     "build": "docmd build",
     "build:local": "node ../docmd/packages/core/dist/bin/docmd.js build",
     "doctor:local": "node ../docmd/packages/core/dist/bin/docmd.js doctor",
-    "sim": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --skip-monorepo-build",
-    "sim:dev": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --dev --skip-monorepo-build",
+    "sim": "node ../docmd/tools/simulate-consumer.mjs --local --skip-monorepo-build",
+    "sim:dev": "node ../docmd/tools/simulate-consumer.mjs --local --dev --skip-monorepo-build",
+    "sim:in-place": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --skip-monorepo-build",
+    "sim:in-place:dev": "node ../docmd/tools/simulate-consumer.mjs --local --in-place --dev --skip-monorepo-build",
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.12"
+    "@docmd/core": "^0.8.13"
   }
 }
