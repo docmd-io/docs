@@ -624,6 +624,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.13 – 集中式 Base 标签与自动安装缓存修复",
+        "path": "/release-notes/0-8-13"
+      },
+      {
         "title": "v0.8.12 - 自动安装加固与 GitHub Pages 修复",
         "path": "/release-notes/0-8-12"
       },

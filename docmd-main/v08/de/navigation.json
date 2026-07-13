@@ -624,6 +624,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.13 – Zentralisiertes Base-Tag und Auto-Install-Cache-Fix",
+        "path": "/release-notes/0-8-13"
+      },
+      {
         "title": "v0.8.12 - Auto-Install-Härtung und GitHub-Pages-Fix",
         "path": "/release-notes/0-8-12"
       },
