@@ -56,6 +56,10 @@ npx @docmd/core build
 
 This generates highly optimised static Vecto-JSON chunks in `.docmd-search/`. When a user performs a search, the client progressively loads these chunks in the background, keeping the UI instantly interactive.
 
+::: callout tip
+**Commit or Cache `.docmd-search/`:** Because `docmd-search` supports incremental indexing, committing the generated `.docmd-search/` directory to your git repository or caching it in your CI/CD workflow will make subsequent builds run instantly (under 300ms) by only re-indexing changed files.
+:::
+
 ## Trade-offs
 
 ### Initial Asset Size

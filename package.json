@@ -15,6 +15,17 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.13"
+    "@docmd/core": "^0.8.14",
+    "@docmd/template-summer": "^0.8.14",
+    "@huggingface/transformers": "^4.2.0",
+    "docmd-search": "^0.1.1",
+    "onnxruntime-node": "^1.27.0"
+  },
+  "allowScripts": {
+    "@docmd/engine-rust": true,
+    "esbuild": true,
+    "onnxruntime-node": true,
+    "protobufjs": true,
+    "sharp": true
   }
 }

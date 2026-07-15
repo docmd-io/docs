@@ -180,7 +180,6 @@ If semantic search is enabled but `docmd-search` cannot be installed or found, t
 Semantic search is experimental. Current limitations include:
 
 *   English-only models (multilingual model available but less tested)
-*   No incremental updates (full rebuild required)
 *   Higher memory usage (~50–100 MB in browser)
 *   First load may be slower as embeddings are fetched
 :::
