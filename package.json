@@ -15,11 +15,7 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.8.14",
-    "@docmd/template-summer": "^0.8.14",
-    "@huggingface/transformers": "^4.2.0",
-    "docmd-search": "^0.1.1",
-    "onnxruntime-node": "^1.27.0"
+    "@docmd/core": "^0.8.15"
   },
   "allowScripts": {
     "@docmd/engine-rust": true,
