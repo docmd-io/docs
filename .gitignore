@@ -148,4 +148,5 @@ pnpm-workspace.yaml
 pnpm-lock.yaml
 .docmd/
 .docmd-search/
+_docmd-search/
 .vscode/
