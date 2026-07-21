@@ -624,6 +624,18 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.17 - Page-Relative Navigation, Local Dev Switcher Fixes, and --offline Build Support",
+        "path": "/release-notes/0-8-17"
+      },
+      {
+        "title": "v0.8.16 - Dev Server Base Fix, Unified Search Folder, and Auto-Install Hardening",
+        "path": "/release-notes/0-8-16"
+      },
+      {
+        "title": "v0.8.15 - Subpath Deploy Fix, Local Search Bundle, and Auto-Install Cleanup",
+        "path": "/release-notes/0-8-15"
+      },
+      {
         "title": "v0.8.14 - Offline Navigation Robustness, Secure Spawning, and Test Speed-up",
         "path": "/release-notes/0-8-14"
       },

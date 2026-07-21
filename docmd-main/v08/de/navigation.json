@@ -624,6 +624,22 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.8.17 - Seitenrelative Navigation, Fehlerbehebungen für lokale Dev-Switcher und --offline-Build-Unterstützung",
+        "path": "/release-notes/0-8-17"
+      },
+      {
+        "title": "v0.8.16 - Dev Server Base Fix, Unified Search Folder, and Auto-Install Hardening",
+        "path": "/release-notes/0-8-16"
+      },
+      {
+        "title": "v0.8.15 - Subpath-Deploy-Fix, lokales Search-Bundle und Auto-Install-Bereinigung",
+        "path": "/release-notes/0-8-15"
+      },
+      {
+        "title": "v0.8.14 - Robuste Offline-Navigation, sicheres Spawning, schnellere Tests",
+        "path": "/release-notes/0-8-14"
+      },
+      {
         "title": "v0.8.13 – Zentralisiertes Base-Tag und Auto-Install-Cache-Fix",
         "path": "/release-notes/0-8-13"
       },
