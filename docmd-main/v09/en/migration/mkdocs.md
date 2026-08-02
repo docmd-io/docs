@@ -1,0 +1,131 @@
+---
+title: "Migrating from MkDocs"
+description: "A comprehensive guide on moving your MkDocs (or Material for MkDocs) project to docmd."
+---
+
+# Migrating from MkDocs to docmd
+
+MkDocs is a popular Python-based generator. docmd provides a similar Markdown-first experience. It relies on Node.js/Bun for incredibly fast builds without complex Python extensions.
+
+## Step 1: Run the Migration Engine
+
+Run the following command at the root of your existing MkDocs project:
+
+```bash
+npx @docmd/core migrate --mkdocs
+```
+
+> **0.8.10 polish** — `package.json` and lockfiles stay in place during the backup; your original `site_dir` is preserved; the top-level `nav:` block is auto-translated to docmd's `navigation` format (with multi-level `children`). Add `--dry-run` to preview without writing, or `--upgrade` to translate a legacy `docmd.config` to the modern schema.
+
+### What Happens Automatically
+
+1.  **Backup**: Your entire project is safely moved into a new `mkdocs-backup/` directory (lockfiles and `package.json` stay in place).
+2.  **Content Migration**: Your `docs/` folder is restored to the root directory for docmd to use.
+3.  **Config Generation**: A `docmd.config.json` is generated, extracting your `site_name` (and, since 0.8.10, your `site_dir`) from `mkdocs.yml`.
+4.  **Navigation**: A top-level `nav:` block is translated to docmd's `navigation` array automatically.
+
+## Step 2: Test the Setup
+
+Once the command finishes, preview your content in docmd:
+
+```bash
+npx @docmd/core dev
+```
+
+Your Markdown files will compile, but your navigation sidebar will be empty.
+
+## Step 3: Manual Configuration
+
+MkDocs uses `mkdocs.yml` to define site navigation and extensions. You must translate this setup to docmd manually.
+
+### 1. Navigation Setup
+
+In MkDocs, navigation is strictly defined in the `nav` key of `mkdocs.yml`.
+
+**As of 0.8.10:** a top-level `nav:` block is auto-translated to docmd's `navigation` array (multi-level sections become nested `children`). You only need to create a manual `navigation.json` if your nav is more complex than the simple form below (e.g. external links, anchors, conditional nav).
+
+**Action required (if needed):** Create a `navigation.json` inside your `docs/` folder.
+
+```yaml "mkdocs.yml"
+nav:
+  - Home: index.md
+  - Guide:
+    - Setup: setup.md
+    - Usage: usage.md
+```
+
+```json "navigation.json"
+[
+  {
+    "title": "Home",
+    "path": "/"
+  },
+  {
+    "title": "Guide",
+    "collapsible": true,
+    "children": [
+      { "title": "Setup", "path": "/setup" },
+      { "title": "Usage", "path": "/usage" }
+    ]
+  }
+]
+```
+
+### 2. Replacing Python Markdown Extensions
+
+If you used "Material for MkDocs", you likely relied on Python Markdown extensions for tabs or admonitions.
+
+**Action required:** Convert MkDocs-specific extension syntax to docmd's native [Containers](../content/containers/callouts.md).
+
+#### Example: Converting Admonitions
+
+**MkDocs (PyMdown):**
+```markdown
+!!! note "Optional Title"
+    This is an admonition content block.
+```
+
+::: callout warning "Manual Conversion Required"
+MkDocs uses `!!!` syntax for admonitions, which differs from docmd's `:::` syntax. You must convert these manually or use a find-and-replace tool.
+
+**Mapping:**
+- `!!! note` → `::: callout info` or `:::note`
+- `!!! tip` → `::: callout tip` or `:::tip`
+- `!!! warning` → `::: callout warning` or `:::warning`
+- `!!! danger` → `::: callout danger` or `:::danger`
+- `!!! example` → `::: callout info`
+:::
+
+**docmd:**
+```markdown
+::: callout info "Optional Title"
+This is an admonition content block.
+:::
+```
+
+#### Example: Converting Tabs
+
+**MkDocs (SuperFences):**
+```markdown
+=== "Tab 1"
+    Content for tab 1.
+
+=== "Tab 2"
+    Content for tab 2.
+```
+
+**docmd:**
+```markdown
+::: tabs
+== tab "Tab 1"
+Content for tab 1.
+
+== tab "Tab 2"
+Content for tab 2.
+:::
+```
+
+## Next Steps
+
+- docmd has native search. You do not need to configure a search plugin.
+- Explore the [Theming options](../theming/customisation.md) to customise colours to match your old Material theme.
