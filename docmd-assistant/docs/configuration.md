@@ -21,6 +21,7 @@ interface AssistantOptions {
   endpoint?: string;
   projectId?: string;
   systemPrompt?: string;
+  reasoning?: boolean;
   history?: ChatMessage[];
   tools?: AssistantTool[];
   temperature?: number;
@@ -33,14 +34,15 @@ interface AssistantOptions {
 
 | Field | Type | Description | Default |
 | :--- | :--- | :--- | :--- |
-| `provider` | `string` | Target AI provider (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'minimax'`, `'ollama'`) | `'openai'` |
-| `model` | `string` | Target model name (e.g. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | `'gpt-4o-mini'` |
+| `provider` | `string` | Target AI provider (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'minimax'`, `'ollama'`) | Dynamic |
+| `model` | `string` | Target model name (e.g. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | Dynamic |
 | `apiKey` | `string` | Provider API key for direct client/server connectivity | `undefined` |
 | `baseURL` | `string` | Custom base API gateway URL | `undefined` |
 | `relayUrl` | `string` | Cloud Relay endpoint URL for keyless proxy routing | `undefined` |
 | `endpoint` | `string` | Alias for `relayUrl` | `'https://api.docmd.io/v1/ai/chat'` |
 | `projectId` | `string` | Project or site identifier for Cloud Relay requests | `undefined` |
-| `systemPrompt` | `string` | Base system instructions provided to the model | `'You are a helpful AI Documentation Assistant.'` |
+| `systemPrompt` | `string` | Base system instructions provided to the model | Default system prompt |
+| `reasoning` | `boolean` | Toggle extended reasoning / thinking mode for supported models | `false` |
 | `history` | `ChatMessage[]` | Pre-populated conversation turn history | `[]` |
 | `tools` | `AssistantTool[]` | Initial array of registered tools | `[]` |
 
