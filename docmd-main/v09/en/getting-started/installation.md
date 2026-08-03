@@ -1,6 +1,6 @@
 ---
 title: "Installation"
-description: "Install @docmd/core globally, locally within a project, or run containerised via the official Docker image. Requires Node.js 18+."
+description: "Install @docmd/core globally, locally within a project, or run containerised via the official Docker image. Requires Node.js 20+."
 ---
 
 Choose the installation method that fits your workflow. Node.js 20 or higher is required for local builds.
