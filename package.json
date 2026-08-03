@@ -16,9 +16,9 @@
   "dependencies": {
     "@docmd/core": "^0.8.17",
     "@docmd/template-summer": "0.8.17",
-    "@huggingface/transformers": "^4.2.0",
+    "@huggingface/transformers": "^4.0.0",
     "docmd-search": "^0.1.2",
-    "onnxruntime-node": "^1.27.0"
+    "onnxruntime-node": "^1.20.0"
   },
   "allowScripts": {
     "@docmd/engine-rust": true,
@@ -26,20 +26,5 @@
     "onnxruntime-node": true,
     "protobufjs": true,
     "sharp": true
-  },
-  "overrides": {
-    "adm-zip": ">=0.6.0",
-    "sharp": ">=0.35.0",
-    "protobufjs": ">=7.6.5",
-    "onnxruntime-node": {
-      "adm-zip": ">=0.6.0"
-    },
-    "@huggingface/transformers": {
-      "adm-zip": ">=0.6.0",
-      "sharp": ">=0.35.0",
-      "onnxruntime-node": {
-        "adm-zip": ">=0.6.0"
-      }
-    }
   }
 }
