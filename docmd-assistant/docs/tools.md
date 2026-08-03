@@ -71,15 +71,21 @@ assistant.registerTool({
 import { DocmdAssistantEngine, createStandardTools } from 'docmd-assistant';
 
 const assistant = new DocmdAssistantEngine({
-  tools: createStandardTools(async (query) => {
-    // Custom search callback (Algolia, FlexSearch, Fuse.js, or custom REST API)
-    const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-    return await res.json();
-  })
+  tools: createStandardTools(
+    // 1. Custom search callback (Algolia, FlexSearch, Fuse.js, or REST API)
+    async (query) => {
+      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+      return await res.json();
+    },
+    // 2. Custom page reader callback (CMS API, raw Markdown endpoint, or backend DB)
+    async (path) => {
+      const res = await fetch(`/api/page?path=${encodeURIComponent(path)}`);
+      const data = await res.json();
+      return { title: data.title, content: data.markdownProse };
+    }
+  )
 });
 ```
-
----
 
 ## 🔍 How Documentation Search Indexing Works
 
@@ -121,8 +127,9 @@ If no `customSearch` callback is provided, `createStandardTools()` defaults to a
 
 ## 📖 Full Page Reading (`read_documentation_page`)
 
-When a search result snippet does not contain full instructions, the AI engine automatically invokes `read_documentation_page({ path })`. This tool:
-1. Fetches the page at `window.location.origin + path`.
-2. Extracts `<main>`, `<article>`, or body content using DOMParser.
-3. Returns the full prose and code blocks to the assistant context.
-4. Allows the assistant to cite the page with clickable Markdown links `[Page Title](path)`.
+When a search result snippet does not contain full instructions, the AI engine automatically invokes `read_documentation_page({ path })`.
+
+### Reader Execution Options:
+1. **Custom Reader Callback (`customReader`)**: If provided, `docmd-assistant` delegates directly to your custom page content loader (e.g. fetching raw Markdown files, headless CMS API endpoints, or database queries).
+2. **DOM Parser Fallback**: If no `customReader` is provided, `read_documentation_page` fetches `window.location.origin + path` using `fetch()` and extracts `<main>`, `<article>`, or body content via browser `DOMParser()`.
+3. **Hyperlinked Citations**: Returns parsed content to the assistant context, allowing it to cite sources using clickable Markdown links `[Page Title](path)`.
