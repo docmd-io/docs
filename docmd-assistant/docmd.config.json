@@ -1,0 +1,30 @@
+{
+  "engine": "rust",
+  "title": "docmd assistant",
+  "url": "https://docs.docmd.io/assistant",
+
+  "logo": {
+    "light": "assets/images/docmd-logo-dark.png",
+    "dark": "assets/images/docmd-logo-light.png",
+    "alt": "docmd assistant",
+    "href": "https://docmd.io/assistant"
+  },
+  "favicon": "assets/favicon.ico",
+
+  "theme": {
+    "template": "summer"
+  },
+
+  "layout": {
+    "footer": {
+      "copyright": "© 2026 docmd.io"
+    }
+  },
+
+  "plugins": {
+    "search": {
+      "semantic": true,
+      "showConfidence": true
+    }
+  }
+}

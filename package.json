@@ -16,9 +16,7 @@
   "dependencies": {
     "@docmd/core": "^0.8.17",
     "@docmd/template-summer": "0.8.17",
-    "@huggingface/transformers": "^4.2.0",
-    "docmd-search": "0.1.1",
-    "onnxruntime-node": "^1.27.0"
+    "docmd-search": "^0.1.3"
   },
   "allowScripts": {
     "@docmd/engine-rust": true,

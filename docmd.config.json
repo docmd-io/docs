@@ -11,6 +11,11 @@
         "src": "docmd-main"
       },
       {
+        "title": "docmd assistant",
+        "prefix": "/assistant",
+        "src": "docmd-assistant"
+      },
+      {
         "title": "docmd search",
         "prefix": "/search",
         "src": "docmd-search"

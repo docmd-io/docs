@@ -1,0 +1,59 @@
+---
+title: "Custom Interactive Containers"
+description: "A comprehensive directory of the interactive UI building blocks available in docmd."
+---
+
+Standard Markdown excels at basic text formatting, but professional technical documentation requires rich structural components to effectively communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
+
+::: callout tip "Migrating from Other Documentation Engines?"
+`docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g., `:::tabs` instead of `::: tabs`) is also supported for all containers.
+:::
+
+## Block Syntax Reference
+
+All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.
+
+```markdown
+::: type "Optional Header Title"
+This is the primary content area.
+It supports **Markdown**, imagery, and deep component nesting.
+:::
+```
+
+| Component | Keyword | Primary Use Case |
+| :--- | :--- | :--- |
+| **[Callouts](callouts.md)** | `callout` | Semantic highlights for tips, warnings, and alerts. |
+| **[Cards](cards.md)** | `card` | Framed structural blocks for feature grids and layout control. |
+| **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column structural groups. |
+| **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
+| **[Steps](steps.md)** | `steps` | Visual numbered timelines for how-to guides and tutorials. |
+| **[Collapsibles](collapsible.md)** | `collapsible` | Interactive accordion toggles for FAQs and deep-dive technical data. |
+| **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
+| **[Tags](tags.md)** | `tag` | Self-closing, coloured labels for versions, statuses, or inline highlights. |
+| **[Hero](hero.md)** | `hero` | High-impact landing page sections with layout and slider support. |
+| **[URL Embeds](embed.md)** | `embed` | Secure, zero-latency embeds for video, social, and interactive content. |
+| **[Changelogs](changelogs.md)** | `changelog` | Structured, timeline-based version history and release notes. |
+| **[Nested Containers](nested-containers.md)** | - | Recursive composition patterns for complex, multi-component layouts. |
+
+## The Strategic Importance of Containers
+
+Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` engine and downstream AI agents:
+
+1.  **AI Context Mapping**: Marking a block as a `callout warning` explicitly tells LLMs to prioritise that information during its reasoning and generation phases.
+2.  **Structural Integrity**: Combining `cards` with standard CSS allows for the creation of sophisticated landing pages without ever leaving the Markdown environment.
+3.  **Source Maintainability**: Eliminates "HTML Bloat" in your documentation source, keeping your `.md` files clean and machine-readable.
+
+## Recursive Composition
+
+`docmd` supports **Infinite Nesting Depth**. You can compose any container within another to build complex, interactive documentation nodes purely in Markdown.
+
+```markdown
+::: card "Architecture Overview"
+    ::: callout info
+        This module utilises an asynchronous I/O pipeline.
+    :::
+    ::: button "Deep Explore Core Engine" /advanced/developer-guide
+:::
+```
+
+[Master the Nesting Guide](nested-containers.md)

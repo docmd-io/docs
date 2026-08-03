@@ -1,0 +1,210 @@
+---
+title: "Search Plugin"
+description: "Enable high-speed, offline-first full-text search for your documentation using MiniSearch."
+---
+
+The `@docmd/plugin-search` plugin provides a powerful, client-side search experience for your documentation. It uses [MiniSearch](external:https://github.com/lucaong/minisearch) to build a lightweight index during the build process, allowing users to find technical information instantly without a server-side database.
+
+## Configuration
+
+Search is enabled by default in most `docmd` templates. You can control its visibility and placement via the `layout` configuration.
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Enable or disable the full-text search indexer. |
+| `placeholder` | `string` | `'Search...'` | Custom placeholder text for the search input. |
+| `maxResults` | `number` | `10` | Maximum number of results to display in the modal. |
+
+### Example
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "optionsMenu": {
+      "position": "header",
+      "components": {
+        "search": true
+      }
+    }
+  }
+}
+```
+
+## How It Works
+
+<img width="720" class="with-border" src="/assets/previews/search-ui-default.webp">
+
+### 1. Indexing (Build-time)
+During the `npx @docmd/core build` process, the search plugin iterates through every page on your site. It extracts the title, headings, and plain-text prose, then compiles this data into a compressed `search-index.json` file.
+
+*   **Deep Linking**: The indexer automatically registers every heading (`#`, `##`, etc.) as a searchable target.
+*   **Relevancy Boosting**: Titles are given the highest weight, followed by headings, then page content.
+
+### 2. Retrieval (Client-side)
+When a user opens the search modal (usually via `/` or `Ctrl+K`), the `search-index.json` is fetched by the browser. Searches are performed locally using fuzzy matching (allowing for small typos) and instant prefix matching.
+
+## Customising Search Behaviour
+
+Whilst the search plugin is designed for zero-config simplicity, you can exclude specific pages from the index by using the `noindex` flag in their frontmatter:
+
+```yaml
+---
+title: "Internal Specification"
+noindex: true # This page will not appear in search results or sitemaps
+---
+```
+
+## Technical Implementation
+
+The plugin injects a lightweight search modal into the `<body>` of your site. It is fully accessible (ARIA compliant) and supports keyboard navigation for a native app-like experience.
+
+::: callout tip "Search Analytics"
+If you have the [Analytics Plugin](./analytics.md) enabled, search keywords used by your readers are automatically captured and sent to your analytics provider, giving you insights into what information is missing or hardest to find.
+:::
+Because the search runs entirely on the client, no data, not even keystrokes, leaves the browser. This makes it suitable for privacy-sensitive industries (healthcare, finance, security).
+
+## Comparison
+
+Many documentation generators (like Docusaurus) rely on **Algolia DocSearch**. Whilst Algolia is powerful, it introduces friction:
+
+| Feature | docmd Search | Algolia / External |
+| :--- | :--- | :--- |
+| Setup | Zero config (automatic) | API keys, CI crawling |
+| Privacy | Client-side, no data sent | Data sent to third-party servers |
+| Offline | Yes | No |
+| Cost | Free | Free tier limits or paid |
+| Speed | In-memory, instant | Network latency dependent |
+
+## Semantic Search (Alpha Preview)
+
+::: callout tip "Introducing docmd-search"
+`docmd-search` is a fully offline semantic search engine for documentation. It runs entirely in the browser, requires no server, no API keys, and sends nothing to anyone. It is not tied to docmd: you can plug it into any documentation engine or static site.
+
+This is an early alpha. APIs and behaviour will change. The foundation (private, offline, genuinely intelligent search) is already there.
+
+[→ View on GitHub](https://github.com/docmd-io/docmd-search)
+:::
+
+> **Experimental Feature** - Semantic search is currently in alpha preview. The default keyword-based search remains the recommended option for production use.
+
+<img width="720" class="with-border" src="/assets/previews/search-ui-semantic.webp">
+
+Semantic search uses local embeddings to understand the meaning behind queries, enabling more intelligent results beyond simple keyword matching.
+
+### Enabling Semantic Search
+
+First, install the `docmd-search` package:
+
+```bash
+npm install docmd-search
+```
+
+Then enable it in your configuration:
+
+```json "docmd.config.json"
+{
+  "plugins": {
+    "search": {
+      "semantic": true
+    }
+  }
+}
+```
+
+### How Semantic Search Works
+
+Unlike keyword search which matches exact terms, semantic search:
+
+*   **Understands context** - A query for "authentication" finds relevant pages even if they use different terminology like "login" or "sign-in"
+*   **Handles typos naturally** - No need for fuzzy matching; the model understands intent
+*   **Finds related concepts** - Searching "API" returns relevant endpoint documentation, not just pages containing "API"
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `semantic` | `boolean` | `false` | Enable semantic search (requires `docmd-search` package) |
+| `showConfidence` | `boolean` | `false` | Display similarity confidence score badges in semantic search results |
+| `showFilters` | `boolean` | `true` | Show the version filter bar above search results (set `false` to hide it) |
+| `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Embedding model to use |
+| `chunkSize` | `number` | `512` | Maximum chunk size in characters |
+| `chunkOverlap` | `number` | `50` | Overlap between chunks in characters |
+| `indexDir` | `string` | - | Path to pre-built semantic index |
+
+### Comparison: Semantic vs Keyword
+
+| Feature | Semantic Search | Keyword Search |
+| :--- | :--- | :--- |
+| **Understanding** | Context-aware | Exact match only |
+| **Typo tolerance** | High | Limited (fuzzy matching) |
+| **Synonyms** | Yes | No |
+| **Setup** | Requires `docmd-search` | Built-in |
+| **Index size** | Larger (1–2 MB per 100 files) | Smaller |
+| **Privacy** | 100% Private (client-side) | 100% Private (client-side) |
+| **Offline** | Yes | Yes |
+
+### Automatic Installation
+
+When `semantic: true` is enabled, the plugin automatically installs `docmd-search` and its peer dependencies (`@huggingface/transformers`, `onnxruntime-node`) if they're not already available. This works with npm, pnpm, yarn, and bun — detecting your project's package manager automatically.
+
+If the automatic installation fails (e.g., in restricted CI environments), the plugin gracefully falls back to keyword search.
+
+::: callout info "Resolver robustness (new in 0.8.9)"
+The resolver that locates `docmd-search` inside `node_modules` now uses an
+`import` → `default` → `require` → `main` fallback chain when reading the
+package manifest, plus a manual `node_modules` walk as a backstop for pnpm's
+isolated layout. No action required on your side — this is purely a build
+reliability improvement.
+:::
+
+### Available Models
+
+The `model` option lets you choose an embedding model. Models are downloaded once and cached locally.
+
+| Model | Size | Languages | Best For |
+| :---- | :--- | :-------- | :------- |
+| `Xenova/all-MiniLM-L6-v2` *(default)* | ~23 MB | English only | Fast, English-only documentation |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | ~118 MB | 50+ languages | **i18n docs** (Chinese, German, French, etc.) |
+| `Xenova/multilingual-e5-small` | ~118 MB | 100+ languages | Wide language coverage |
+| `Xenova/paraphrase-multilingual-mpnet-base-v2` | ~270 MB | 50+ languages | Best multilingual quality |
+
+::: callout info "Custom models"
+You can use any HuggingFace model compatible with Transformers.js. Browse at [huggingface.co/models](https://huggingface.co/models?pipeline_tag=feature-extraction&library=transformers.js) and filter by `transformers.js` library.
+:::
+
+### Fallback Behaviour
+
+If semantic search is enabled but `docmd-search` cannot be installed or found, the plugin automatically falls back to keyword search. This ensures your documentation remains searchable regardless of configuration.
+
+::: callout warning "Alpha Limitations"
+Semantic search is experimental. Current limitations include:
+
+*   English-only models (multilingual model available but less tested)
+*   Higher memory usage (~50–100 MB in browser)
+*   First load may be slower as embeddings are fetched
+:::
+
+### Best Practices
+
+For optimal semantic search performance:
+
+1.  **Exclude noise** - Don't index changelogs or draft content:
+    ```json "docmd.config.json"
+    {
+      "plugins": {
+        "search": {
+          "semantic": true,
+          "exclude": ["**/release-notes/**", "**/drafts/**"]
+        }
+      }
+    }
+    ```
+
+2.  **Pre-build for CI/CD** - Use the `indexDir` option to pre-generate indexes:
+    ```bash
+    npx docmd-search --ui
+    ```
+
+3.  **Monitor index size** - Check the `.docmd-search/` directory size regularly
+
+4.  **Test thoroughly** - Verify search results quality before deploying to production
