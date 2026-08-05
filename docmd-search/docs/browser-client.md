@@ -1,14 +1,14 @@
 ---
 title: "Browser Client"
-description: "Integrate semantic search into any web page. Under 3KB gzipped, no model weights, pure math scoring."
+description: "Integrate semantic search into any web page. Under 3KB gzipped, no model weights, pure arithmetic scoring."
 ---
 
-The browser client is a lightweight runtime (under 3KB gzipped) that loads pre-built search indexes and performs hybrid keyword + vector search using only arithmetic. No neural network inference, no WASM, no external dependencies.
+The browser client is a lightweight search runtime (<3KB gzipped) that loads pre-built static search index files and scores results using keyword matching and integer vector cosine similarity without web workers, WASM, or neural network model weights.
 
-## Installation
+## Package Installation & Import
 
 ::: tabs
-== tab "npm" icon:package
+== tab "npm Package" icon:package
 ```bash
 npm install docmd-search
 ```
@@ -16,7 +16,7 @@ npm install docmd-search
 ```javascript
 import { load, search, isReady } from 'docmd-search/client';
 ```
-== tab "CDN" icon:globe
+== tab "CDN Bundle" icon:globe
 ```html
 <script src="https://unpkg.com/docmd-search/dist/client/index.js"></script>
 <script>
@@ -25,15 +25,15 @@ import { load, search, isReady } from 'docmd-search/client';
 ```
 :::
 
-## Quick start
+## Basic Usage Example
 
 ```javascript
 import { load, search } from 'docmd-search/client';
 
-// Load the index (path to .docmd-search directory)
-await load('/assets/search-index');
+// Initialise index from pre-built _docmd-search directory
+await load('/assets/_docmd-search');
 
-// Search
+// Execute search query
 const results = search('deploy kubernetes', 10);
 
 for (const result of results) {
@@ -41,11 +41,11 @@ for (const result of results) {
 }
 ```
 
-## API reference
+## Client API Reference
 
 ### load(basePath, onBatchLoaded?)
 
-Loads the search index from a URL path. Fetches `manifest.json`, loads batch 0 for instant search, then background-loads remaining batches.
+Fetches index files from `basePath`. Reads `manifest.json`, loads `batches/000.json` so search is ready immediately, and streams remaining index batches asynchronously in the background.
 
 ```typescript
 function load(
@@ -58,25 +58,25 @@ function load(
 
 | Parameter | Type | Description |
 | :-------- | :--- | :---------- |
-| `basePath` | `string` | URL path to the directory containing `manifest.json` and batch files |
-| `onBatchLoaded` | `function` | Optional callback fired after each batch loads |
+| `basePath` | `string` | Relative or absolute URL path containing `manifest.json` and batch files |
+| `onBatchLoaded` | `function` | Callback triggered whenever a batch finishes loading |
 
-**Example with progress:**
+**Batch Stream Callback Example:**
 
 ```javascript
-await load('/search-index', (loaded, total) => {
-  const pct = Math.round((loaded / total) * 100);
-  console.log(`Loading: ${pct}% (${loaded}/${total} batches)`);
+await load('/_docmd-search', (loaded, total) => {
+  const percent = Math.round((loaded / total) * 100);
+  console.log(`Index loading progress: ${percent}% (${loaded}/${total} batches)`);
 });
 ```
 
-::: callout info "Progressive availability"
-Search becomes available as soon as batch 0 loads. The `onBatchLoaded` callback lets you update the UI to show loading progress while remaining batches load in the background.
+::: callout info "Asynchronous Batch Availability"
+Search works as soon as `batches/000.json` completes loading. The `onBatchLoaded` callback lets you update loading indicators in your UI while background batches stream in.
 :::
 
 ### search(query, topK?)
 
-Searches the loaded index using hybrid scoring.
+Evaluates queries against loaded index batches using hybrid scoring.
 
 ```typescript
 function search(query: string, topK?: number): SearchResult[]
@@ -86,30 +86,30 @@ function search(query: string, topK?: number): SearchResult[]
 
 | Parameter | Type | Default | Description |
 | :-------- | :--- | :------ | :---------- |
-| `query` | `string` |  -  | Search query text |
-| `topK` | `number` | `10` | Maximum number of results |
+| `query` | `string` |  -  | Search query string |
+| `topK` | `number` | `10` | Maximum results returned |
 
-**Returns:** `SearchResult[]`
+**Return Value:** `SearchResult[]`
 
 ```typescript
 interface SearchResult {
-  score: number;       // Relevance score (0-1)
+  score: number;       // Normalised relevance score (0.0 to 1.0)
   chunk: {
-    file: string;      // Source file path
-    heading?: string;   // Section heading
-    text: string;       // Chunk text content
-    range: [number, number]; // Byte offset in source file
+    file: string;      // Relative source document file path
+    heading?: string;  // Heading section context
+    text: string;      // Chunk text snippet
+    range: [number, number]; // Offset byte range in original source
   };
 }
 ```
 
-::: callout warning "Call load() first"
-Calling `search()` before `load()` completes throws an error. Check `isReady()` if you need to guard against this.
+::: callout warning "Call load() First"
+Running `search()` before `load()` finishes will throw an error. Use `isReady()` to check if the index is loaded before searching.
 :::
 
 ### isReady()
 
-Returns `true` if at least one batch has loaded and the index is searchable.
+Returns `true` if at least one batch has loaded and search is ready.
 
 ```typescript
 function isReady(): boolean
@@ -117,7 +117,7 @@ function isReady(): boolean
 
 ### getProgress()
 
-Returns the current loading progress.
+Returns current batch loading progress.
 
 ```typescript
 function getProgress(): { loaded: number; total: number }
@@ -125,18 +125,18 @@ function getProgress(): { loaded: number; total: number }
 
 ### getChunkCount()
 
-Returns the total number of chunks loaded so far.
+Returns the total count of document chunks loaded into memory.
 
 ```typescript
 function getChunkCount(): number
 ```
 
-## Integration example
+## HTML UI Integration Example
 
-A complete search box integration:
+A complete standalone search bar integration:
 
 ```html
-<input type="text" id="search-input" placeholder="Search docs..." disabled />
+<input type="text" id="search-input" placeholder="Loading search index..." disabled />
 <div id="search-results"></div>
 
 <script type="module">
@@ -145,20 +145,21 @@ A complete search box integration:
   const input = document.getElementById('search-input');
   const resultsEl = document.getElementById('search-results');
 
-  // Load index
-  await load('/assets/.docmd-search', (loaded, total) => {
-    input.placeholder = `Loading... ${Math.round((loaded / total) * 100)}%`;
+  // Load static search index
+  await load('/assets/_docmd-search', (loaded, total) => {
+    input.placeholder = `Loading index... ${Math.round((loaded / total) * 100)}%`;
   });
 
-  input.placeholder = 'Search docs...';
+  input.placeholder = 'Search documentation...';
   input.disabled = false;
   input.focus();
 
-  // Search on input
-  let debounce;
+  // Debounced input search
+  let timer;
   input.addEventListener('input', () => {
-    clearTimeout(debounce);
-    debounce = setTimeout(() => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (!isReady()) return;
       const results = search(input.value, 8);
       resultsEl.innerHTML = results
         .map(r => `
@@ -173,37 +174,24 @@ A complete search box integration:
 </script>
 ```
 
-## Scoring algorithm
+## Hybrid Scoring System
 
-The client uses a two-phase hybrid scoring approach:
+Query ranking calculates candidate scores through a two-phase hybrid algorithm:
 
-::: steps
+### Stage 1: BM25 Term Matching
 
-### Phase 1  -  Keyword matching
+Term occurrences in document text are scored with term-saturation dampening:
 
-The query is split into terms. Each chunk is scored with BM25-style saturation:
+$$\text{keywordScore} = \sum \frac{\text{count}(t)}{\text{count}(t) + 1.5}$$
 
-```
-keywordScore = Σ count(term) / (count(term) + 1.5)
-```
+### Stage 2: Vector Cosine Reranking
 
-### Phase 2  -  Vector reranking
+The top keyword match vector serves as candidate reference. Cosine similarity is computed against candidate vectors, and scores are normalised to $[0, 1]$:
 
-The best keyword match's pre-built vector serves as the query vector. All candidates are reranked using cosine similarity. The keyword score is normalized to [0,1] before combining:
+$$\text{normalisedKw} = \frac{\text{keywordScore}}{\text{keywordScore} + 1}$$
 
-```
-normalizedKw = keywordScore / (keywordScore + 1)
-finalScore = normalizedKw × 0.6 + cosineSimilarity × 0.4
-```
+$$\text{finalScore} = (\text{normalisedKw} \times 0.6) + (\text{cosineSimilarity} \times 0.4)$$
 
-This ensures final scores are always in the range [0, 1].
+## Index Version Compatibility
 
-:::
-
-::: callout tip "No browser-side embedding"
-The browser never runs a neural network. The top keyword match is used as a proxy for semantic similarity, which is surprisingly effective in practice.
-:::
-
-## Legacy format support
-
-The client automatically detects and loads legacy single-file indexes (`search-index.json`) when no `manifest.json` is found. No code changes needed  -  the same `load()` function handles both formats.
+The client automatically detects legacy single-file search index schemas (`search-index.json`) when `manifest.json` is missing, maintaining full backward compatibility with older docmd versions.

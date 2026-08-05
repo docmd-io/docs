@@ -3,203 +3,141 @@ title: "How It Works"
 description: "Architecture deep-dive: engine adapter, file discovery, heading-aware chunking, ONNX embedding, vector compression, multi-batch indexing, and hybrid browser search."
 ---
 
-docmd-search splits the work into two distinct phases: a heavy **build-time** pipeline that runs on Node.js, and a lightweight **search-time** runtime that runs in the browser using only arithmetic.
+`docmd-search` works in two distinct phases: a **build-time** pipeline running on Node.js, and a lightweight **search-time** client running in the browser.
 
-## Architecture overview
+## Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                 BUILD TIME (Node.js)                    │
 │                                                         │
-│   Crawl → Chunk → Embed (ONNX) → Quantize → Compress    │
+│   Crawl → Chunk → Embed (ONNX) → Quantise → Compress    │
 │              │                      │                   │
 │              └──────────────────────┘                   │
 │                        │                                │
 │               Engine Adapter (Rust → JS → built-in)     │
 │                        │                                │
 │                        ▼                                │
-│                .docmd-search/                           │
+│                _docmd-search/                           │
 │                ├── manifest.json                        │
-│                ├── batches/000.json, 000.bin            │
-│                └── navigation.json                      │
+│                ├── navigation.json                      │
+│                └── batches/ (000.json + 000.bin)        │
 └─────────────────────────────────────────────────────────┘
                          │
-                    deploy / serve
+                    Deploy / Host
                          │
 ┌─────────────────────────────────────────────────────────┐
 │               SEARCH TIME (Browser, <3KB)               │
 │                                                         │
-│  Load manifest → Load batch 000 → Search immediately    │
-│                → Background-load remaining batches      │
-│                → Keyword scoring + Cosine similarity    │
-│                → Ranked results                         │
+│  Load manifest → Load batches/000.json → Search ready   │
+│                → Stream remaining batches in background │
+│                → BM25 term scoring + Cosine similarity  │
+│                → Ranked search results                  │
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Engine adapter
+## Engine Adapter Integration
 
-docmd-search uses an **engine adapter** (`src/engine.ts`) that automatically selects the best available backend for CPU-bound tasks like chunking and quantization:
+`docmd-search` uses an **engine adapter** (`src/engine.ts`) to assign CPU-heavy work (such as text chunking and vector quantisation) to the fastest available engine:
 
-| Priority | Engine | When used |
-| :------- | :----- | :-------- |
-| 1 | **Rust** ⚡ | `@docmd/engine-rust` installed and binary available |
-| 2 | **JS** ◆ | `@docmd/engine-js` installed (docmd is present) |
-| 3 | **Built-in** ◇ | Always available - no external dependencies |
+| Priority | Engine | Selection Condition |
+| :------- | :----- | :------------------ |
+| 1 | **Rust Engine** | `@docmd/engine-rust` binary installed in system `node_modules` |
+| 2 | **JS Engine** | `@docmd/engine-js` module present (within docmd environment) |
+| 3 | **Built-in Fallback** | Native TypeScript/JavaScript fallback engine |
 
-::: callout info "No hard dependency on docmd"
-docmd-search does **not** require docmd or its engines. When running standalone (`npx docmd-search ./docs`), the built-in fallback handles everything. When running inside a docmd project, the Rust engine accelerates chunking and quantization automatically.
+::: callout info "Runs Standalone"
+`docmd-search` does not require `docmd` or native binary engines. When running standalone (`npx docmd-search ./docs`), the built-in fallback engine handles all chunking and vector processing automatically.
 :::
 
-### Tasks delegated to the engine
+### Delegated Engine Functions
 
-| Task | Purpose |
-| :--- | :------ |
-| `search:chunk` | Split text into overlapping chunks by heading + word count |
-| `search:quantize` | Float32[] → Int8[] per-vector quantization |
-| `search:cosine` | Batch cosine similarity scoring (for search) |
+| Operation | Purpose |
+| :-------- | :------ |
+| `search:chunk` | Splits documents into overlapping chunks by heading structure |
+| `search:quantize` | Quantises Float32 vectors to Int8 arrays |
+| `search:cosine` | Batch vector dot product and similarity scoring |
 
-ONNX inference (the actual embedding generation) stays in Node.js - it uses `onnxruntime-node` which is itself a native addon. The engine handles the pure-math tasks that benefit from Rust's speed.
+ONNX Runtime model execution runs inside Node.js using `onnxruntime-node`. Native engine providers handle text splitting and post-processing tasks.
 
-## Build-time pipeline
+## Build-Time Pipeline Details
 
-### 1. Crawl
+### 1. File Discovery (Crawl)
 
-The crawler walks your directory and discovers files matching the `include` patterns while respecting `exclude` patterns. Default file types: `.md`, `.txt`, `.html`.
+The crawler scans target directories for files matching `include` patterns while respecting `exclude` rules. Default file extensions: `.md`, `.txt`, `.html`.
 
-For incremental indexing, the crawler compares each file's modification time and size against the stored manifest. Unchanged files are skipped entirely.
+During incremental builds, the crawler checks file modification times (`mtime`) and file sizes against records stored in `manifest.json`. Unchanged files are skipped.
 
-### 2. Chunk
+### 2. Heading-Aware Chunking
 
-Each file is split into chunks using heading-aware boundaries. The chunking is delegated to the engine adapter (Rust when available, otherwise built-in JS):
+Documents are split into sections along Markdown heading markers (`#`, `##`, `###`):
 
-- Markdown headings (`#`, `##`, `###`, etc.) create natural chunk boundaries
-- Chunks respect the configured `chunkSize` (in tokens, default: 256)
-- Adjacent chunks share `chunkOverlap` tokens (default: 32) to prevent information loss at boundaries
-- Each chunk retains its source file path, heading context, and byte range
+- Headings mark section boundaries.
+- Chunk sizes follow the configured `chunkSize` (default: 256 tokens).
+- Neighbouring chunks share `chunkOverlap` tokens (default: 32 tokens) to preserve context across section splits.
+- Chunks record relative file paths, heading contexts, and byte offset ranges.
 
-```
-# Installation Guide              ← chunk boundary
+### 3. ONNX Vector Embedding
 
-## Prerequisites                  ← chunk boundary
-You need Node.js 18+...
-Make sure npm is installed...
+Text chunks pass into the ONNX Runtime model to produce dense vector representations:
 
-## Quick Start                    ← chunk boundary
-Run the following command...
-```
-
-### 3. Embed
-
-Each chunk's text is fed through an ONNX Runtime model to produce a dense vector embedding  -  a fixed-length array of floating-point numbers that captures the chunk's semantic meaning.
-
-::: callout info "Why ONNX?"
-ONNX Runtime runs models locally without Python, CUDA, or cloud APIs. The models are downloaded once and cached at `~/.docmd-search/models/`. No data ever leaves your machine.
+::: callout info "Local ONNX Runtime"
+ONNX Runtime processes models locally without cloud APIs or CUDA requirements. Models download once and are saved in `~/.docmd-search/models/`.
 :::
 
-Models run in **Int8-quantized form** (`q8`) by default  -  the `model_quantized.onnx` variant from HuggingFace. This is ~4× smaller than full-precision (`fp32`) and 2-3× faster at inference time, with negligible quality loss. The default `all-MiniLM-L6-v2` model is ~23 MB in this form.
+Models run in **Int8-quantised form** (`q8`). Quantised models take ~75% less disk space than 32-bit float models with minimal retrieval impact.
 
-ONNX Runtime is configured to use all available CPU cores automatically. The thread count is set to the physical CPU count so ORT's internal scheduler can select the optimal parallelism for the machine - this gives a further 2-4× speedup over the default single-threaded path.
+The ONNX execution environment configures CPU threading based on physical core counts to maximize SIMD throughput.
 
-| Configuration | Throughput | Notes |
-| :------------ | :--------- | :---- |
-| fp32, default threading | ~18 chunks/s | Original baseline |
-| q8, default threading | ~55 chunks/s | q8 dtype only |
-| q8, full CPU threading | ~2000+ chunks/s | **Current default** |
+### 4. Vector Quantisation
 
-::: callout warning "English-only default"
-The default model is trained on English text. For multilingual documentation (Chinese, German, French, etc.) switch to a multilingual model in your config. See [Model selection](/configuration#model-selection).
-:::
+Raw embedding vectors (384 dimensions × 4 bytes = 1,536 bytes per chunk) are quantised to signed 8-bit integers (`Int8`), reducing memory usage to 384 bytes per chunk.
 
-### 4. Quantize
+### 5. Multi-Batch Index Storage
 
-Raw embeddings are Float32 arrays (e.g., 384 dimensions × 4 bytes = 1,536 bytes per chunk). Quantization compresses them to Int8 (1 byte per dimension), reducing size by **75%** with negligible impact on search quality.
+Index files are written into batches under `_docmd-search/`:
 
 ```
-Float32: [0.234, -0.891, 0.045, ...]  →  Int8: [30, -114, 6, ...]
+_docmd-search/
+├── manifest.json         # Index schema version, model ID, file timestamps
+├── navigation.json       # Structural navigation tree
+└── batches/
+    ├── 000.json          # First batch chunk metadata
+    ├── 000.bin           # First batch quantised vector data
+    └── ...
 ```
 
-### 5. Compress
+## Search-Time Client Runtime
 
-For larger indexes, additional compression kicks in automatically:
+The browser client bundle is under **3KB gzipped** and contains no neural network model weights.
 
-| Chunk count | Compression | Ratio | Description |
-| :---------- | :---------- | :---- | :---------- |
-| ≤ 100 | None | 1:1 | Raw Int8 vectors, no overhead |
-| 101-1000 | Ternary | ~12:1 | Vectors reduced to {-1, 0, +1} values |
-| > 1000 | Product Quantization | ~24:1 | Codebook-based, highest compression |
+### Asynchronous Loading Strategy
 
-::: callout tip "Automatic selection"
-You don't need to configure compression. The indexer selects the optimal strategy based on the number of chunks.
-:::
+1. **Manifest Fetch**: Loads `manifest.json` to inspect batch counts and vector dimensions.
+2. **Initial Batch Load**: Loads `batches/000.json` and `batches/000.bin` so search is ready immediately.
+3. **Background Streaming**: Asynchronously fetches remaining batches during idle browser cycles (`requestIdleCallback`).
 
-### 6. Save (multi-batch)
+### Hybrid Scoring Strategy
 
-Chunks and vectors are saved in batches:
+Queries are scored using a two-stage hybrid ranking strategy:
 
-```
-.docmd-search/
-├── manifest.json         # Index metadata, batch list, file records
-├── batch-000.json        # First 500 chunks + vectors
-├── batch-001.json        # Next 500 chunks + vectors
-├── ...
-└── navigation.json       # Auto-generated nav tree from file structure
-```
+#### Stage 1: BM25 Term Matching
 
-Each batch is independently loadable. The manifest tracks which files are indexed, their modification times, and the batch structure. This enables:
+The query is tokenised into terms, and candidate chunks are scored using term frequency saturation:
 
-- **Progressive loading**  -  search from batch 0, load rest in background
-- **Incremental updates**  -  only rebuild batches containing changed files
-- **Resumable indexing**  -  interrupted runs resume from the last complete batch
+$$\text{keywordScore} = \sum \frac{\text{count}(t)}{\text{count}(t) + 1.5}$$
 
-## Search-time runtime
+#### Stage 2: Vector Cosine Reranking
 
-The browser client is under **3KB gzipped**. It contains no model weights  -  only arithmetic for keyword matching and vector comparison.
+Candidate chunks undergo cosine similarity reranking against the top match's vector. Scores are normalised to $[0, 1]$:
 
-### Loading strategy
+$$\text{normalisedKw} = \frac{\text{keywordScore}}{\text{keywordScore} + 1}$$
 
-::: steps
+$$\text{finalScore} = (\text{normalisedKw} \times 0.6) + (\text{cosineSimilarity} \times 0.4)$$
 
-### Fetch manifest
+## Index File Format Schema
 
-The client loads `manifest.json` to learn how many batches exist and the vector dimensions.
-
-### Load batch 0
-
-The first batch loads and search becomes available immediately.
-
-### Background-load remaining
-
-Using `requestIdleCallback` (or `setTimeout` as fallback), remaining batches load without blocking the UI. Search results improve as more content becomes available.
-
-:::
-
-### Hybrid scoring
-
-Each search query produces results using a two-phase scoring algorithm:
-
-**Phase 1  -  Keyword matching (BM25-like)**
-
-The query is split into terms. Each chunk is scored by how many times each term appears, with BM25-style saturation to prevent long documents from dominating:
-
-```
-keywordScore = Σ count(term) / (count(term) + 1.5)
-```
-
-**Phase 2  -  Vector reranking**
-
-The top keyword result's pre-built vector is used as the query vector. All candidate results are reranked by cosine similarity:
-
-```
-finalScore = keywordScore × 0.6 + cosineSimilarity × 0.4
-```
-
-::: callout info "No browser-side embedding"
-The browser never runs a neural network. The "query vector" is approximated from the best keyword match's pre-built vector. This keeps the runtime at pure arithmetic  -  no WASM, no model download, no GPU.
-:::
-
-## Index format
-
-### manifest.json
+### manifest.json Schema
 
 ```json
 {
@@ -216,13 +154,13 @@ The browser never runs a neural network. The "query vector" is approximated from
 }
 ```
 
-### batch-NNN.json
+### batch-NNN.json Schema
 
 ```json
 {
   "batchId": 0,
   "dimensions": 384,
-  "compression": "ternary",
+  "compression": "none",
   "vectorCount": 500,
   "chunks": [
     {
@@ -232,6 +170,6 @@ The browser never runs a neural network. The "query vector" is approximated from
       "range": [0, 256]
     }
   ],
-  "vectors": "<base64-encoded compressed vectors>"
+  "vectors": "..."
 }
 ```

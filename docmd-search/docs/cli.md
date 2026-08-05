@@ -3,41 +3,41 @@ title: "CLI Reference"
 description: "Complete command-line reference for docmd-search. All commands, flags, and usage examples."
 ---
 
-docmd-search provides a single command with flags for different modes of operation.
+`docmd-search` provides a command-line interface to index documentation and search your files directly.
 
-## Usage
+## Usage Syntax
 
 ```bash
 docmd-search [directory] [options]
 ```
 
-If no directory is specified, the current working directory is used.
+If no target directory is specified, `docmd-search` indexes the current directory (`.`).
 
-## Commands
+## Primary Commands & Modes
 
-### Index + interactive search
+### Index & Terminal Search
 
 ```bash
 docmd-search ./docs
 ```
 
-Indexes the directory and opens an interactive terminal search. If an index already exists, only changed files are re-indexed.
+Indexes the specified folder and launches an interactive terminal search interface. Incremental indexing automatically skips unchanged files.
 
-### Index + web UI
+### Index & Web Interface Server
 
 ```bash
 docmd-search ./docs --ui
 ```
 
-Indexes the directory and launches a browser-based search interface powered by docmd.
+Indexes the folder and starts a local web server to preview the web search interface.
 
-### Settings
+### Interactive Settings Menu
 
 ```bash
 docmd-search --settings
 ```
 
-Opens the settings TUI to change your embedding model or reconfigure global options.
+Opens the terminal configuration menu to select embedding models or update global preferences.
 
 ### Help
 
@@ -51,73 +51,71 @@ docmd-search --help
 docmd-search --version
 ```
 
-## Options
+## Command Line Flags
 
-| Flag | Description |
-| :--- | :---------- |
-| `--ui` | Launch the web UI in the browser after indexing |
-| `--dev` | Verbose output  -  shows directory paths, model info, and debug details |
-| `--model <id>` | Override the embedding model for this run (does not modify config files) |
-| `--settings` | Open the settings TUI to configure model and options |
-| `--version`, `-v` | Print the version number |
-| `--help`, `-h` | Show help message |
+| Flag | Abbreviation | Description |
+| :--- | :----------- | :---------- |
+| `--ui` | | Starts a local browser preview server after indexing completes |
+| `--dev` | | Enables verbose logging output (file paths, model settings, debug timing) |
+| `--model <id>` | | Overrides the embedding model for the current run |
+| `--settings` | | Opens the interactive terminal settings menu |
+| `--version` | `-v` | Displays the installed package version number |
+| `--help` | `-h` | Displays usage syntax and available flags |
 
-## Examples
+## Usage Examples
 
 ::: tabs
-== tab "Basic indexing" icon:folder
+== tab "Directory Indexing" icon:folder
 ```bash
-# Index the docs/ folder in current directory
+# Index the docs/ subfolder in your workspace
 docmd-search ./docs
 
 # Index current directory
 docmd-search .
 
-# Index with no arguments (uses current dir)
+# Run without arguments (indexes current directory)
 docmd-search
 ```
-== tab "Web UI" icon:globe
+== tab "Web Interface Server" icon:globe
 ```bash
-# Index and launch browser UI
+# Index and launch browser preview UI
 docmd-search ./docs --ui
 
-# With verbose output
+# Launch with verbose logging enabled
 docmd-search ./docs --ui --dev
 ```
-== tab "Model override" icon:cpu
+== tab "Model Overrides" icon:cpu
 ```bash
-# Use the multilingual model for i18n docs
+# Force multilingual model for i18n site build
 docmd-search ./docs --model Xenova/paraphrase-multilingual-MiniLM-L12-v2
 
-# Use the highest quality multilingual model
+# Force high-dimensional multilingual model
 docmd-search ./docs --model Xenova/paraphrase-multilingual-mpnet-base-v2
 
-# Override without touching any config file
+# Override model without changing global config.json
 docmd-search ./docs --model Xenova/all-MiniLM-L6-v2
 ```
-== tab "CI/CD" icon:git-branch
+== tab "CI/CD Build Pipelines" icon:git-branch
 ```bash
-# Index as part of a build pipeline
+# Index docs as part of a build script
 docmd-search ./docs
-# The .docmd-search/ directory is the output artifact
+# The _docmd-search/ folder is generated as a static output asset
 ```
 :::
 
-## Exit codes
+## Exit Codes
 
-| Code | Meaning |
-| :--- | :------ |
-| `0` | Success |
-| `1` | Error  -  missing peer dependencies, invalid directory, or indexing failure |
+| Exit Code | Meaning |
+| :-------- | :------ |
+| `0` | Success (indexing completed, terminal search exited normally, or help/version printed) |
+| `1` | Failure (missing required peer dependencies, invalid path, or unexpected error) |
 
-## Environment
+## File & Configuration Paths
 
-docmd-search respects the following environment:
+- **Global Config File**: `~/.docmd-search/config.json` (Stores global model selection and settings)
+- **Project Config File**: `_docmd-search/config.json` (Stores project-level overrides)
+- **Model Weight Cache**: `~/.docmd-search/models/` (Stores cached ONNX model files)
 
-- **Global config**: `~/.docmd-search/config.json`  -  model selection and wizard state
-- **Project config**: `.docmd-search/config.json`  -  per-project overrides
-- **Model cache**: `~/.docmd-search/models/`  -  downloaded ONNX model files (Int8-quantized, stable across npm installs)
-
-::: callout info "Peer dependencies"
-Embedding generation requires `@huggingface/transformers` and `onnxruntime-node`. If they are missing, the CLI prints installation instructions and exits with code `1`.
+::: callout info "Peer Dependencies"
+Generating vector embeddings requires `@huggingface/transformers` and `onnxruntime-node`. If they are not installed, the CLI displays installation instructions and exits with code `1`.
 :::

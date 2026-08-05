@@ -24,8 +24,7 @@
   "plugins": {
     "search": {
       "semantic": true,
-      "showConfidence": true,
-      "indexDir": ".docmd-search"
+      "showConfidence": true
     }
   }
 }

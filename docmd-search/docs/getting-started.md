@@ -1,43 +1,43 @@
 ---
 title: "Getting Started"
-description: "Install docmd-search, choose an embedding model, and index your first documentation project."
+description: "Install docmd-search, configure an embedding model, and index a documentation directory."
 ---
 
-Go from zero to working semantic search in under two minutes. No cloud accounts, no API keys, no configuration files.
+Set up offline semantic search for your documentation without third-party cloud services or API keys.
 
-## Requirements
+## System Requirements
 
-::: callout info "System requirements"
-- **Node.js 18+** (LTS recommended)
-- ~50 MB disk space for the default model (Int8-quantized, ~23 MB download)
+::: callout info "Prerequisites"
+- **Node.js 20.0.0+**
+- ~50 MB disk space for default model weights (Int8 quantised, ~23 MB initial download)
 - Works on macOS, Linux, and Windows
 :::
 
 ## Installation
 
 ::: tabs
-== tab "Global (recommended)" icon:globe
+== tab "Global Installation" icon:globe
 ```bash
 npm install -g docmd-search
 ```
 
-Then install the embedding dependencies (one-time):
+Install global embedding engine dependencies:
 
 ```bash
 npm install -g @huggingface/transformers onnxruntime-node
 ```
-== tab "npx (no install)" icon:zap
+== tab "npx Execution" icon:zap
 ```bash
 npx docmd-search ./docs
 ```
 
-You will still need the embedding dependencies installed globally.
-== tab "Project dependency" icon:package
+Global embedding dependencies (`@huggingface/transformers` and `onnxruntime-node`) must be installed on your environment path.
+== tab "Project Dependency" icon:package
 ```bash
 npm install -D docmd-search @huggingface/transformers onnxruntime-node
 ```
 
-Add to `package.json` scripts:
+Add execution scripts to `package.json`:
 
 ```json
 {
@@ -49,71 +49,73 @@ Add to `package.json` scripts:
 ```
 :::
 
-## First run
+## First Run
 
-Run docmd-search against any directory containing Markdown files:
+Run `docmd-search` against any directory containing Markdown or HTML files:
 
 ```bash
 docmd-search ./docs
 ```
 
-### Setup wizard
+### Initial Configuration Prompt
 
-On first run, the setup wizard appears:
+On your first run, an interactive CLI prompt appears so you can choose an embedding model.
 
-### Model selection
+### Available Embedding Models
 
-Choose an embedding model. The default (MiniLM L6 v2) is the fastest option for English-only documentation.
+Choose a model based on the languages in your documentation:
 
-| Model | Dimensions | Size | Languages | Best for |
-| :---- | :--------- | :--- | :-------- | :------- |
-| **MiniLM L6 v2** ★ | 384 | ~23 MB | English only | Fast, English docs |
-| Multilingual MiniLM L12 | 384 | ~118 MB | 50+ languages | **i18n docs** |
+| Model | Dimensions | Quantised Size | Languages | Recommended For |
+| :---- | :--------- | :------------- | :-------- | :-------------- |
+| **MiniLM L6 v2** (Default) | 384 | ~23 MB | English only | Fast search for English-only docs |
+| Multilingual MiniLM L12 | 384 | ~118 MB | 50+ languages | Multilingual and i18n sites |
 | Multilingual E5 Small | 384 | ~118 MB | 100+ languages | Wide language coverage |
-| Multilingual MPNet Base | 768 | ~270 MB | 50+ languages | Best multilingual quality |
+| Multilingual MPNet Base | 768 | ~270 MB | 50+ languages | High-precision multilingual search |
 
-::: callout warning "Multilingual documentation"
-If your docs contain Chinese, German, French, or other non-English content, select a multilingual model. The default English-only model will produce poor search results for non-English text.
+::: callout warning "Multilingual Content"
+If your documentation includes non-English text (such as Chinese, German, or Spanish), choose a multilingual model. The default English-only model will produce poor search results for non-English text.
 :::
 
-### Model download
+### Model Storage & Caching
 
-The selected model downloads automatically on first use. This is a one-time download  -  the model is cached at `~/.docmd-search/models/` and reused across all projects. All models run in Int8-quantized form (~4× smaller than full precision).
+The selected model downloads automatically on initial setup. Models are cached globally at `~/.docmd-search/models/` and shared across all local projects. All models run in Int8-quantised form (`q8`).
 
-### Global config
+### Configuration Persistence
 
-A global configuration file is created at `~/.docmd-search/config.json`. This stores your model choice and wizard status so you are never prompted again.
+Your settings are saved in `~/.docmd-search/config.json` so you do not need to configure them again.
 
-::: callout tip "Change model later"
-Run `docmd-search --settings` at any time to switch models or reconfigure. You can also pass `--model <id>` on the command line to override for a single run.
+::: callout tip "Reconfiguring Models"
+Run `docmd-search --settings` at any time to change your global model, or pass `--model <id>` on the command line to override the model for a single run.
 :::
 
-## What happens during indexing
+## Indexing Steps
 
-After the wizard, the indexer runs automatically:
+When indexing runs, the tool completes six steps:
 
-1. **Crawl**  -  discovers all `.md`, `.txt`, and `.html` files (respects exclude patterns)
-2. **Chunk**  -  splits each file into heading-aware sections (default: 256 tokens per chunk, 32 token overlap)
-3. **Embed**  -  generates vector embeddings using the selected ONNX model
-4. **Quantize**  -  compresses Float32 vectors to Int8 (75% size reduction, negligible quality loss)
-5. **Compress**  -  applies ternary or product quantization for large indexes
-6. **Save**  -  writes a multi-batch index to `.docmd-search/`
+1. **Crawl**: Discovers target files (`.md`, `.txt`, `.html`) while skipping excluded patterns.
+2. **Chunk**: Splits documents into sections by heading (default: 256 tokens per chunk, 32 token overlap).
+3. **Embed**: Generates vector embeddings using the selected ONNX model.
+4. **Quantise**: Converts Float32 vectors to Int8 values (reducing memory usage by 75%).
+5. **Compress**: Applies ternary or product quantisation when chunk counts are large.
+6. **Save**: Writes multi-batch index JSON files to `_docmd-search/`.
 
 ```
-.docmd-search/
-├── manifest.json         # Index metadata + batch listing
-├── batch-000.json        # First batch (search available immediately)
-├── batch-001.json        # Additional batches...
-└── navigation.json       # Generated navigation tree
+_docmd-search/
+├── manifest.json         # Index metadata, schema version, and file timestamps
+├── navigation.json       # Navigation tree structure
+└── batches/
+    ├── 000.json          # First batch chunk metadata
+    ├── 000.bin           # First batch vector data
+    └── ...
 ```
 
-::: callout info "Progressive indexing"
-Search is available as soon as the first batch is written. Remaining batches load in the background, progressively improving result coverage.
+::: callout info "Progressive Batch Loading"
+Search is ready as soon as `batches/000.json` and `batches/000.bin` are written. Subsequent batches load asynchronously in the background.
 :::
 
-## Interactive search
+## Interactive Terminal Search
 
-After indexing, an interactive terminal search opens automatically. Type a query and results appear instantly with file paths, headings, and relevance scores.
+Once indexing completes, an interactive terminal search interface opens automatically:
 
 ```
    ◆ Search: deploy kubernetes
@@ -123,30 +125,28 @@ After indexing, an interactive terminal search opens automatically. Type a query
    3. docs/getting-started/production.md → Production Setup      0.63
 ```
 
-Press `Ctrl+C` to exit.
+Press `Ctrl+C` to exit terminal search.
 
-## Web UI
+## Web Browser Interface
 
-Launch a browser-based search interface powered by docmd:
+To launch a local web interface served by docmd:
 
 ```bash
 docmd-search ./docs --ui
 ```
 
-This starts a local server and opens your browser with a full-featured search UI including navigation, syntax highlighting, and theme support.
+This starts a local development server with a web search UI, navigation tree, and theme support.
 
-## Incremental re-indexing
+## Incremental Re-Indexing
 
-On subsequent runs, only changed files are re-indexed:
+On subsequent runs, the indexer checks file modification times (`mtime`) and file sizes against `manifest.json`. Unchanged files are skipped:
 
 ```bash
 docmd-search ./docs
 ```
 
-The indexer compares file modification times and sizes. Unchanged files are skipped, making re-indexing near-instant for small changes.
+## Related Documentation
 
-## Next steps
-
-- [Configuration](configuration)  -  customise chunk size, include/exclude patterns, output directory
-- [CLI Reference](cli)  -  all available commands and flags
-- [Programmatic API](api)  -  use in scripts, CI pipelines, or custom tooling
+- [Configuration](configuration)  -  Options for chunking, glob exclusions, and paths
+- [CLI Reference](cli)  -  Command line options and flags
+- [Programmatic API](api)  -  Node.js API methods

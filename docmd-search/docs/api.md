@@ -3,17 +3,17 @@ title: "Programmatic API"
 description: "Use docmd-search in scripts, CI pipelines, and custom tooling. Full Node.js API reference with examples."
 ---
 
-Import docmd-search as a library to build custom indexing pipelines, integrate with CI/CD workflows, or create your own search interfaces.
+Import `docmd-search` as a library to build custom indexing pipelines, integrate with CI/CD build workflows, or create search applications.
 
 ```bash
 npm install docmd-search
 ```
 
-## Core pipeline
+## Primary Pipeline Methods
 
 ### indexDirectory
 
-The primary function for indexing a directory. Returns a `SearchIndex` object containing all chunks and vectors.
+Indexes a documentation directory programmatically. Returns a Promise that resolves to a `SearchIndex` object containing chunks and vector arrays.
 
 ```typescript
 import { indexDirectory } from 'docmd-search';
@@ -21,7 +21,7 @@ import { indexDirectory } from 'docmd-search';
 const index = await indexDirectory(
   {
     rootDir: './docs',
-    outDir: '.docmd-search',
+    outDir: '_docmd-search',
     model: 'Xenova/all-MiniLM-L6-v2',
     include: ['**/*.md'],
     exclude: ['**/drafts/**'],
@@ -36,176 +36,176 @@ const index = await indexDirectory(
 console.log(`Indexed ${index.chunks.length} chunks`);
 ```
 
-**Options:**
+**Options Schema:**
 
 | Parameter | Type | Description |
 | :-------- | :--- | :---------- |
-| `rootDir` | `string` | Directory to index |
-| `outDir` | `string` | Output directory for the index |
-| `model` | `string` | Embedding model identifier |
-| `include` | `string[]` | Glob patterns for files to index |
-| `exclude` | `string[]` | Glob patterns to skip |
-| `chunkSize` | `number` | Max tokens per chunk |
-| `chunkOverlap` | `number` | Token overlap between chunks |
-| `config` | `SearchConfig` | Full config object (overrides individual options) |
+| `rootDir` | `string` | Path to the directory to index |
+| `outDir` | `string` | Destination folder for index files (default: `_docmd-search`) |
+| `model` | `string` | HuggingFace embedding model ID |
+| `include` | `string[]` | Glob patterns for included file types |
+| `exclude` | `string[]` | Glob patterns for excluded directories |
+| `chunkSize` | `number` | Maximum tokens per chunk |
+| `chunkOverlap` | `number` | Token overlap between neighbouring chunks |
+| `config` | `SearchConfig` | Full configuration object (overrides individual options) |
 
-**Progress callback phases:**
+**Progress Callback Phases:**
 
-| Phase | Description |
-| :---- | :---------- |
-| `crawling` | Discovering files |
-| `chunking` | Splitting content into chunks |
-| `downloading-model` | Downloading the ONNX model (first run only) |
-| `embedding` | Generating vector embeddings |
-| `saving` | Writing batches to disk |
+| Phase Identifier | Description |
+| :--------------- | :---------- |
+| `crawling` | Discovering files matching glob patterns |
+| `chunking` | Splitting files into token-bounded chunks |
+| `downloading-model` | Downloading ONNX model weights (first run only) |
+| `embedding` | Generating vector embeddings using ONNX Runtime |
+| `saving` | Writing JSON index batch files to disk |
 | `complete` | Indexing finished |
 
-## Index I/O
+## Index Storage & I/O
 
-### Loading indexes
+### Reading Index Files
 
 ```typescript
 import { loadAllBatches, loadBatch, loadManifest, hasSearchableIndex } from 'docmd-search';
 
 // Check if a valid index exists
-if (hasSearchableIndex('.docmd-search')) {
-  // Load everything
-  const index = await loadAllBatches('.docmd-search');
+if (hasSearchableIndex('_docmd-search')) {
+  // Load complete index into memory
+  const index = await loadAllBatches('_docmd-search');
 
-  // Or load individual batches
-  const manifest = await loadManifest('.docmd-search');
-  const batch0 = await loadBatch('.docmd-search', 0);
+  // Or read manifest and specific batches individually
+  const manifest = await loadManifest('_docmd-search');
+  const batch0 = await loadBatch('_docmd-search', 0);
 }
 ```
 
-### Creating indexes manually
+### Manual Index Construction
 
 ```typescript
 import { createSearchIndex, saveBatch, saveManifest, createEmptyManifest } from 'docmd-search';
 
-// Create an index from existing data
+// Create an in-memory index object
 const index = createSearchIndex(chunks, vectors, {
   model: 'Xenova/all-MiniLM-L6-v2',
   dimensions: 384,
 });
 
-// Or build batches manually
+// Save batches and manifest manually
 const manifest = createEmptyManifest('Xenova/all-MiniLM-L6-v2', 384);
-await saveBatch('.docmd-search', 0, chunks, vectors, 384);
-await saveManifest('.docmd-search', manifest);
+await saveBatch('_docmd-search', 0, chunks, vectors, 384);
+await saveManifest('_docmd-search', manifest);
 ```
 
-### Compression
+### Vector Quantisation & Compression
 
 ```typescript
 import { compressVectors, decompressVectors, getCompressionType } from 'docmd-search';
 
-// Determine compression based on chunk count
+// Select compression scheme based on chunk count
 const type = getCompressionType(chunkCount);
 // Returns: 'none' | 'ternary' | 'pq'
 
-// Compress vectors
+// Compress raw vector array
 const compressed = compressVectors(vectors, type);
 
-// Decompress
+// Decompress stored vectors
 const restored = decompressVectors(compressed, dimensions, type);
 ```
 
-## Configuration
+## Configuration Resolution
 
-### Resolve config
+### Resolving Config Hierarchies
 
 ```typescript
 import { resolveConfig, loadGlobalConfig, loadProjectConfig } from 'docmd-search';
 
-// Full resolution: defaults → global → project → overrides
+// Full tier merging: defaults → global → project → CLI overrides
 const config = await resolveConfig('./my-project', {
   chunkSize: 512,
 });
 
-// Or load individual layers
-const global = await loadGlobalConfig();
-const project = await loadProjectConfig('./my-project');
+// Or load individual configuration layers
+const globalConfig = await loadGlobalConfig();
+const projectConfig = await loadProjectConfig('./my-project');
 ```
 
-### Model profiles
+### Model Inspection API
 
 ```typescript
 import { AVAILABLE_MODELS, getModelProfile, getDefaultModel } from 'docmd-search';
 
-// List all available models
+// List pre-configured model profiles
 for (const model of AVAILABLE_MODELS) {
   console.log(`${model.name} (${model.dimensions}d, ${model.size})`);
 }
 
-// Get a specific model's profile
+// Get metadata for a specific model ID
 const profile = getModelProfile('Xenova/bge-small-en-v1.5');
 
-// Get the default recommended model
+// Get default system model profile
 const defaultModel = getDefaultModel();
 ```
 
-## Embedding model
+## Model Initialisation & Embedding
 
-### Create and use the model manager
+### Initialising the Model Manager
 
 ```typescript
 import { createModelManager, checkPeerDeps, formatMissingDepsMessage } from 'docmd-search';
 
-// Check if peer dependencies are installed
+// Check required peer dependencies
 const missing = checkPeerDeps();
 if (missing) {
   console.error(formatMissingDepsMessage(missing.missing));
   process.exit(1);
 }
 
-// Create a model manager
-const model = await createModelManager(
+// Initialise ONNX model manager
+const modelManager = await createModelManager(
   'Xenova/all-MiniLM-L6-v2',
   (progress) => {
-    console.log(`Model: ${progress.status} ${progress.progress}%`);
+    console.log(`Model status: ${progress.status} ${progress.progress}%`);
   }
 );
 
-// Generate embeddings
-const vectors = await model.embed(['Hello world', 'Another text']);
+// Generate vector embeddings for text strings
+const vectors = await modelManager.embed(['Text string 1', 'Text string 2']);
 ```
 
-::: callout warning "Peer dependencies required"
-The model manager requires `@huggingface/transformers` and `onnxruntime-node` to be installed. These are optional peer dependencies  -  the rest of the API works without them.
+::: callout warning "Peer Dependency Notice"
+The ONNX model manager requires `@huggingface/transformers` and `onnxruntime-node`. Index loading and query utilities function independently without native embedding dependencies.
 :::
 
-## Types
+## Exported Types
 
-All types are exported from the main package:
+All TypeScript type definitions are exported directly from `docmd-search`:
 
 ```typescript
 import type {
-  // Core
+  // Core Data Structures
   SearchIndex,
   SearchResult,
   Chunk,
   VectorEntry,
   IndexOptions,
 
-  // Config
+  // Configuration Types
   SearchConfig,
   ModelProfile,
   GlobalConfig,
 
-  // Index I/O
+  // Index Storage & Manifests
   IndexManifest,
   BatchMeta,
   NavNode,
   CompressionType,
   FileRecord,
 
-  // Pipeline
+  // Pipeline Progress
   IndexDirectoryOptions,
   IndexProgress,
   IndexPhase,
 
-  // Model
+  // Model Manager Types
   ModelManager,
   ModelProgress,
 } from 'docmd-search';

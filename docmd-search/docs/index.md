@@ -3,149 +3,149 @@ title: "docmd-search"
 description: "Offline semantic search engine for documentation. Local embeddings, browser-ready indexes."
 ---
 
-Offline semantic search engine for documentation. Embeddings are generated locally at build time. The browser runtime is pure math - no model weights, no cloud APIs, no data leaving your machine.
+Offline semantic search engine for documentation. Vector embeddings are generated locally at build time using ONNX Runtime. The browser client performs keyword matching and integer vector cosine similarity  -  sending no data to cloud services and shipping no neural network weights to the user.
 
-::: callout tip "Zero config"
-Run `npx docmd-search ./docs` in any folder. No setup, no API keys, no config file needed.
+::: callout tip "Zero-Config CLI"
+Run `npx docmd-search ./docs` in any directory. Works out of the box with no setup, API keys, or manual config files.
 :::
 
-## Two ways to use it
+## Ways to Use It
 
-docmd-search is a **completely standalone tool**. It can also integrate with [docmd](https://docmd.io) when you want semantic search in your documentation site.
+`docmd-search` works as a standalone command-line tool or as a plugin for [docmd](https://docmd.io) documentation sites.
 
 ::: grid
 
 ::: card "Standalone CLI" icon:terminal
-Run `docmd-search ./any-folder` to index any directory and get an interactive terminal search. Add `--ui` to launch a web interface powered by docmd.
+Run `docmd-search ./my-folder` to index any directory and search directly from your terminal. Add `--ui` to open a local browser interface.
 :::
 
 ::: card "docmd plugin" icon:puzzle
-Add `semantic: true` to your docmd config and docmd-search powers the search. No code changes - just a config flag.
+Add `semantic: true` to your `docmd.config.js` to build search indexes automatically when building your site.
 :::
 
 :::
 
-## How it works
+## Overview
 
 ```
 Build time (Node.js)                    Search time (Browser, <3KB)
 ───────────────────                     ──────────────────────────
- Crawl files                             Load manifest.json
-   → Chunk by heading                      → Load batch 000 (instant)
-     → Embed via ONNX                        → Background-load rest
-       → Quantize Float32 → Int8               → Keyword + cosine
-         → Compress (ternary/PQ)                 → Ranked results
-           → Save multi-batch index
+ Crawl markdown files                    Load manifest.json
+   → Heading-aware chunking                → Load batches/000.json (search immediately)
+     → ONNX vector embedding                 → Load remaining batches in background
+       → Float32 → Int8 quantisation           → BM25 keyword + cosine scoring
+         → Product / ternary compression         → Display ranked search results
+           → Save index files (_docmd-search/)
 ```
 
-All embedding computation happens at build time using ONNX Runtime on your machine. The browser receives only pre-computed integer vectors and performs keyword matching + cosine similarity - no neural network inference, just arithmetic.
+At build time, embeddings are calculated using ONNX Runtime on your computer. The browser client receives pre-computed integer vectors and calculates term matching and vector scores locally.
 
-## Key capabilities
+## Key Features
 
 ::: grid
 
-::: card "Offline by default" icon:wifi-off
-All embeddings generated locally with ONNX Runtime. No data leaves your machine. No cloud API keys needed.
+::: card "Runs Locally" icon:wifi-off
+All vector embeddings are generated on your machine using ONNX Runtime. No data leaves your computer and no cloud API keys are needed.
 :::
 
-::: card "Instant search" icon:zap
-Progressive indexing means search is available from the first batch. Incremental re-indexing only processes changed files.
+::: card "Fast Batch Loading" icon:zap
+Search is ready as soon as the first batch loads. Incremental re-indexing checks modification times and only re-indexes changed files.
 :::
 
-::: card "Tiny client" icon:package
-Browser runtime under **3KB gzipped**. No model weights shipped to the browser. Hybrid keyword + vector scoring.
+::: card "Tiny Client Runtime" icon:package
+The browser runtime is under **3KB gzipped**. It runs without neural network weights or heavy WASM modules.
 :::
 
-::: card "Resumable" icon:refresh-cw
-Interrupted indexing resumes from the last checkpoint. Batch-based output means partial indexes are always usable.
+::: card "Resumable Builds" icon:refresh-cw
+If indexing is interrupted, it resumes from the last completed batch. Output index files stay usable even if partial.
 :::
 
 :::
 
-## Quick start
+## Quick Start
 
 ::: tabs
-== tab "Standalone" icon:terminal
+== tab "Standalone CLI" icon:terminal
 ```bash
 # Install globally
 npm install -g docmd-search
 
-# Install embedding dependencies (one-time)
+# Install embedding dependencies (one-time setup)
 npm install -g @huggingface/transformers onnxruntime-node
 
-# Index any directory
+# Index any folder
 docmd-search ./my-folder
 
-# Or launch web UI (requires docmd)
+# Launch browser preview
 docmd-search ./my-folder --ui
 ```
 == tab "docmd plugin" icon:puzzle
 ```bash
-# In your docmd project
+# In your docmd project repository
 npm install docmd-search
 ```
 
-Then enable semantic search in your config:
+Enable semantic search in your config file:
 
 ```js
 // docmd.config.js
 export default {
   plugins: {
     search: {
-      semantic: true,  // ← activates docmd-search
+      semantic: true,  // Activates the docmd-search indexer
     }
   }
 };
 ```
 :::
 
-On first run, a setup wizard lets you choose an embedding model. After that, files are crawled, chunked, embedded, and search is ready.
+On your first run, a interactive prompt helps you select an embedding model. Your documentation is crawled, split into sections by heading, embedded, and saved to `_docmd-search/`.
 
-## What's next
+## Documentation Pages
 
 | Page | Description |
 | :--- | :---------- |
 | [Getting Started](getting-started) | Installation, first run, and model selection |
-| [Configuration](configuration) | Global, project, and CLI configuration options |
-| [How It Works](how-it-works) | Architecture, chunking, compression, and scoring |
-| [CLI Reference](cli) | All commands, flags, and examples |
-| [Programmatic API](api) | Use docmd-search in scripts and CI pipelines |
-| [Browser Client](browser-client) | Integrate search into any web page |
+| [Configuration](configuration) | Global, project, and command-line configuration options |
+| [How It Works](how-it-works) | Architecture, chunking, quantisation, and hybrid scoring |
+| [CLI Reference](cli) | Command-line options, flags, and exit codes |
+| [Programmatic API](api) | Node.js API methods for custom build scripts |
+| [Browser Client](browser-client) | Browser client integration API and scoring logic |
 
-## Architecture: two independent tools
+## Architecture
 
-docmd-search and docmd are **completely independent projects** from the same brand (docmd.io). They can work together but neither depends on the other.
+`docmd-search` and `docmd` are independent tools designed to work seamlessly together:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        docmd-search (standalone)                    │
 │                                                                     │
-│  CLI → Index directory → .docmd-search/ batches → TUI search       │
+│  CLI → Index directory → _docmd-search/ batches → Terminal search   │
 │                              │                                      │
-│                              │ --ui flag?                           │
+│                              │ --ui flag                            │
 │                              ▼                                      │
-│                    Spawn docmd with config                          │
-│                    (docmd is just the UI shell)                     │
+│                    Start docmd preview server                       │
+│                    (docmd serves the web UI)                        │
 └─────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        docmd (documentation engine)                 │
 │                                                                     │
-│  Config → Build docs → plugin-search runs                           │
+│  Config → Build site → plugin-search execution                      │
 │                              │                                      │
-│                              │ semantic: true?                      │
+│                              │ semantic: true                       │
 │                              ▼                                      │
-│                    Import docmd-search, build index                 │
-│                    (docmd-search is just the indexer)               │
+│                    Run docmd-search indexer                         │
+│                    (Generates _docmd-search/ asset bundle)          │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-When docmd-search launches docmd as its UI (`--ui` flag), it:
-1. Builds the semantic index first (its own job)
-2. Generates a docmd config pointing at the pre-built index
-3. Spawns docmd - which reads the index but never calls back to docmd-search
+When running standalone with the `--ui` flag:
+1. `docmd-search` builds the search index.
+2. It generates a temporary `docmd` config pointing to `_docmd-search/`.
+3. It starts `docmd` as a local preview server to display the search UI.
 
-When docmd uses docmd-search as a plugin (`semantic: true`), it:
-1. Dynamically imports docmd-search at build time
-2. Runs the indexer to build `.docmd-search/` batches
-3. Serves the semantic client bundle - no runtime dependency on docmd-search
+When used as a plugin (`semantic: true`):
+1. `docmd` imports `docmd-search` during site builds.
+2. The indexer writes multi-batch JSON files into `_docmd-search/` in the output build directory.
+3. The browser client searches these pre-built index files directly.
