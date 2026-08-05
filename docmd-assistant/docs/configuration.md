@@ -1,15 +1,11 @@
 ---
-title: Configuration Reference
-description: Complete configuration options for docmd-assistant engine initialisation and runtime updates.
+title: "Configuration"
+description: "Complete options reference for docmd-assistant engine initialisation and dynamic runtime updates."
 ---
-
-# Configuration
 
 `docmd-assistant` accepts a flexible `AssistantOptions` configuration object upon initialisation. All settings can also be updated dynamically at runtime.
 
----
-
-## Options Reference
+## Options Schema Reference
 
 ```typescript
 interface AssistantOptions {
@@ -21,55 +17,88 @@ interface AssistantOptions {
   endpoint?: string;
   projectId?: string;
   systemPrompt?: string;
-  reasoning?: boolean;
   history?: ChatMessage[];
   tools?: AssistantTool[];
   temperature?: number;
   maxTokens?: number;
+  reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
 }
 ```
 
-### Parameter Details
+## Parameter Details
 
 | Field | Type | Description | Default |
-| :--- | :--- | :--- | :--- |
+| :---- | :--- | :---------- | :------ |
 | `provider` | `string` | Target AI provider (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'minimax'`, `'ollama'`) | Dynamic |
-| `model` | `string` | Target model name (e.g. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | Dynamic |
-| `apiKey` | `string` | Provider API key for direct client/server connectivity | `undefined` |
+| `model` | `string` | Target model identifier (e.g. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | Dynamic |
+| `apiKey` | `string` | Provider API key for direct connectivity via `aiplug` | `undefined` |
 | `baseURL` | `string` | Custom base API gateway URL | `undefined` |
 | `relayUrl` | `string` | Cloud Relay endpoint URL for keyless proxy routing | `undefined` |
 | `endpoint` | `string` | Alias for `relayUrl` | `'https://api.docmd.io/v1/ai/chat'` |
-| `projectId` | `string` | Project or site identifier for Cloud Relay requests | `undefined` |
-| `systemPrompt` | `string` | Base system instructions provided to the model | Default system prompt |
-| `reasoning` | `boolean` | Toggle extended reasoning / thinking mode for supported models | `false` |
-| `history` | `ChatMessage[]` | Pre-populated conversation turn history | `[]` |
+| `projectId` | `string` | Project or site identifier sent with relay requests | `undefined` |
+| `systemPrompt` | `string` | Base instructions guiding assistant identity and behaviour | System default prompt |
+| `history` | `ChatMessage[]` | Pre-populated conversation history | `[]` |
 | `tools` | `AssistantTool[]` | Initial array of registered tools | `[]` |
+| `temperature` | `number` | Sampling temperature (0.0 to 1.0) | Provider default |
+| `maxTokens` | `number` | Maximum tokens returned per response turn | Provider default |
+| `reasoning` | `boolean \| string` | Toggle extended reasoning mode (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
+| `headers` | `Record<string, string>` | Custom HTTP headers sent with relay requests | `{}` |
 
----
+::: callout tip "Default System Prompt"
+If no `systemPrompt` is provided, the engine applies a default prompt that enforces docmd assistant identity rules, search-first tool calling, concise Markdown output, and clickable citation links.
+:::
 
-## Updating Configuration at Runtime
+## Updating Options at Runtime
 
-You can modify options dynamically using `updateOptions()`:
+Modify configuration options dynamically during an active session using `updateOptions()`:
 
 ```typescript
 assistant.updateOptions({
   provider: 'anthropic',
   model: 'claude-3-5-haiku-20241022',
-  systemPrompt: 'You are now an expert in TypeScript debugging.'
+  temperature: 0.2
 });
 ```
 
----
+## System Prompt Management
 
-## System Prompt Reinforcement
-
-`docmd-assistant` allows you to set or append system instructions dynamically:
+`docmd-assistant` provides dedicated methods to update or append system instructions:
 
 ```typescript
 // Replace system prompt completely
-assistant.setSystemPrompt('You are a technical editor.');
+assistant.setSystemPrompt('You are a technical support specialist for a cloud developer platform.');
 
-// Append additional instructions
-assistant.appendSystemPrompt('Always respond using British English spelling and concise code examples.');
+// Append additional context or instructions
+assistant.appendSystemPrompt('Always respond using British English spelling and provide step-by-step code snippets.');
+
+// Retrieve current active system prompt
+const currentPrompt = assistant.getSystemPrompt();
+```
+
+## Reasoning Mode Support
+
+For models supporting extended reasoning (such as DeepSeek-R1 or OpenAI o3-mini), set the `reasoning` option to control reasoning depth:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  provider: 'deepseek',
+  model: 'deepseek-reasoner',
+  apiKey: process.env.DEEPSEEK_API_KEY,
+  reasoning: 'medium'
+});
+```
+
+## Custom Relay Headers
+
+Pass custom headers when routing turns through enterprise API gateways or authenticated relay endpoints:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  relayUrl: 'https://internal-ai-gateway.company.com/v1/chat',
+  headers: {
+    'Authorization': 'Bearer my_enterprise_token',
+    'X-Custom-Tenant-ID': 'tenant_12345'
+  }
+});
 ```

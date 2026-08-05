@@ -1,15 +1,15 @@
 ---
-title: How docmd-assistant Works
-description: Technical breakdown of the docmd-assistant engine architecture, execution pipeline, and event model.
+title: "Engine Architecture"
+description: "Technical breakdown of the docmd-assistant engine architecture, execution pipeline, and event model."
 ---
 
-`docmd-assistant` operates as a decoupled, headless execution engine. It decouples conversational AI state management, dynamic system prompt synthesis, multi-provider model communication, and client tool execution from user interface presentation.
+`docmd-assistant` operates as a decoupled, headless execution engine. It separates conversational state management, system prompt synthesis, multi-provider model communication, and client tool execution from user interface rendering.
 
-## High-Level Architecture
+## Architecture Overview
 
 ```
                                ┌─────────────────────────────┐
-                               │     Application Layer       │
+                               │      Application Layer      │
                                │ (React, Vue, CLI, Custom UI)│
                                └──────────────┬──────────────┘
                                               │ sendMessage()
@@ -18,7 +18,7 @@ description: Technical breakdown of the docmd-assistant engine architecture, exe
 │                                  DocmdAssistantEngine                                  │
 │                                                                                        │
 │  ┌───────────────────────┐   ┌───────────────────────┐   ┌──────────────────────────┐  │
-│  │   History Manager     │   │ System Prompt Manager │   │    Tool Registry         │  │
+│  │    History State      │   │ System Prompt Manager │   │      Tool Registry       │  │
 │  └───────────────────────┘   └───────────────────────┘   └──────────────────────────┘  │
 │                                                                                        │
 │                             Turn Processing Pipeline                                   │
@@ -28,35 +28,91 @@ description: Technical breakdown of the docmd-assistant engine architecture, exe
                     │                                         │
                     ▼                                         ▼
         ┌────────────────────────┐             ┌────────────────────────┐
-        │     Direct Mode        │             │      Relay Mode        │
-        │ (aiplug LLM Adapter)   │             │   (Cloud Relay API)    │
+        │      Direct Mode       │             │       Relay Mode       │
+        │  (aiplug LLM Adapter)  │             │   (Cloud Relay API)    │
         └────────────────────────┘             └────────────────────────┘
 ```
 
-## Conversation Turn Execution Flow
+## Conversation Turn Steps
 
-When `sendMessage(text)` is invoked:
+When `sendMessage(text)` is called, the engine processes the turn in five steps:
 
-1. **User Message Ingestion**: The input string is appended to internal history as a user message and a `'message'` event is emitted.
-2. **Context Assembly**: The engine combines system instructions, historical messages, and available tool definitions into a unified conversation context.
-3. **Execution Routing**:
-   - If an `apiKey` is provided, `docmd-assistant` dynamically initialises an `aiplug` adapter for direct LLM communication.
-   - If `relayUrl` or `endpoint` is provided, requests are dispatched as JSON payloads to the configured relay backend.
-4. **Tool Calling Loop**: If the LLM requests a tool execution (such as `search_documentation`), `docmd-assistant` executes the registered tool handler, appends the result to context, and completes the turn.
-5. **Response Emission**: The assistant's final response is appended to history and emitted via the `'message'` event bus.
+::: steps
 
-## Event Bus System
+### Step 1  -  User Message Ingestion
 
-`docmd-assistant` includes a built-in event emitter surface:
+The input string is appended to internal history as a user message, and a `'message'` event is emitted.
 
-| Event Type | Triggered When | Data Payload |
-| :--- | :--- | :--- |
-| `'message'` | User or Assistant message is added to history | `ChatMessage` object |
-| `'tool_call'` | Engine begins executing a tool | `{ name: string, args: any }` |
-| `'tool_result'`| Tool execution completes successfully | `{ name: string, args: any, result: any }` |
-| `'error'` | An unexpected error or relay failure occurs | Error object or failure detail |
+### Step 2  -  Context Assembly
+
+The engine combines the active system prompt, historical messages, and registered tool definitions into a conversation payload.
+
+### Step 3  -  Execution Routing
+
+- **Direct Mode**: If an `apiKey` or local provider setup is detected, `docmd-assistant` initialises an `aiplug` adapter for direct provider communication.
+- **Relay Mode**: If `relayUrl` or `endpoint` is used, the engine POSTs a JSON payload containing the user query, page URL, page title, and conversation history to the relay endpoint.
+
+### Step 4  -  Tool Execution Loop
+
+If the model returns a tool call request (such as `search_documentation`), `docmd-assistant` executes the registered tool handler, emits `'tool_call'` and `'tool_result'` events, and passes the result back to complete the turn.
+
+### Step 5  -  Response Emission
+
+The assistant's reply text is appended to history as an assistant message and emitted via the `'message'` event bus.
+
+:::
+
+## Event Bus Reference
+
+`docmd-assistant` includes a built-in event bus. Attach listeners using `on(event, listener)`:
+
+| Event Type | Triggered When | Data Payload Schema |
+| :--------- | :------------- | :------------------ |
+| `'message'` | User or assistant message is added to history | `ChatMessage` object |
+| `'tool_call'` | Engine starts executing a tool | `{ name: string, args: any }` |
+| `'tool_result'`| Tool handler completes execution | `{ name: string, args: any, result: any }` |
+| `'error'` | Error or relay failure occurs | Error object or details |
 | `'clear'` | Conversation history is reset | `null` |
+
+```typescript
+// Subscribing to engine events
+assistant.on('message', (event) => {
+  console.log(`Message from ${event.data.sender}:`, event.data.content);
+});
+
+assistant.on('tool_result', (event) => {
+  console.log(`Tool ${event.data.name} returned:`, event.data.result);
+});
+```
+
+## Context Data Sent in Relay Mode
+
+When running in Relay Mode, `docmd-assistant` automatically captures and includes contextual browser details with every request:
+
+```json
+{
+  "projectId": "prj_my_docs_site",
+  "siteId": "prj_my_docs_site",
+  "message": "How do I configure search?",
+  "pageUrl": "https://docs.example.com/setup",
+  "pageTitle": "Setup & Configuration",
+  "history": [
+    { "sender": "user", "text": "Hello" },
+    { "sender": "assistant", "text": "Hi! How can I help you today?" }
+  ],
+  "systemPrompt": "You are docmd assistant...",
+  "reasoning": false
+}
+```
+
+::: callout info "Automatic Page Context"
+Capturing `pageUrl` and `pageTitle` allows server-side relays to provide page-aware answers without requiring manual context setup in client applications.
+:::
 
 ## Error Handling & Fallbacks
 
-`docmd-assistant` gracefully catches network timeouts, authentication failures, and tool execution errors. When a tool fails during execution, an error payload is returned to the model context, allowing the assistant to inform the user or attempt alternative strategies.
+The engine catches network errors, authentication failures, and tool execution exceptions gracefully:
+
+- **Tool Execution Errors**: Caught and emitted via `'error'` without crashing the turn process. An error object is returned to the model context so the assistant can explain the issue or retry with alternative arguments.
+- **Relay Errors**: Handled cleanly with descriptive error messages emitted via `'error'`.
+- **Unconfigured Relay Status**: If a cloud relay returns `{ unconfigured: true }`, the engine returns a structured `ChatResponse` object with `unconfigured: true`, allowing client UIs to display guided onboarding setups.
