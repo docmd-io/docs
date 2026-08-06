@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Visión General",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Primeros Pasos",
+    "path": "/getting-started",
+    "icon": "rocket"
+  },
+  {
+    "title": "Configuración",
+    "path": "/configuration",
+    "icon": "settings"
+  },
+  {
+    "title": "Cómo Funciona",
+    "path": "/how-it-works",
+    "icon": "cpu"
+  },
+  {
+    "title": "Referencia CLI",
+    "path": "/cli",
+    "icon": "terminal"
+  },
+  {
+    "title": "API Programable",
+    "path": "/api",
+    "icon": "braces"
+  },
+  {
+    "title": "Cliente del Navegador",
+    "path": "/browser-client",
+    "icon": "globe"
+  },
+  {
+    "title": "Notas de Versión",
+    "icon": "scroll",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "v0.1.3",
+        "path": "/release-notes/0-1-3"
+      },
+      {
+        "title": "v0.1.2",
+        "path": "/release-notes/0-1-2"
+      },
+      {
+        "title": "v0.1.1",
+        "path": "/release-notes/0-1-1"
+      },
+      {
+        "title": "v0.1.0",
+        "path": "/release-notes/0-1-0"
+      },
+      {
+        "title": "v0.1.0-alpha.1",
+        "path": "/release-notes/0-1-0-alpha-1"
+      },
+      {
+        "title": "v0.1.0-alpha.0",
+        "path": "/release-notes/0-1-0-alpha-0"
+      }
+    ]
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd-search",
+    "icon": "github",
+    "external": true
+  }
+]

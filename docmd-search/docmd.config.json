@@ -2,6 +2,7 @@
   "engine": "rust",
   "title": "docmd search",
   "url": "https://docs.docmd.io/search",
+  "src": ".",
 
   "logo": {
     "light": "assets/images/docmd-logo-dark.png",
@@ -19,6 +20,17 @@
     "footer": {
       "copyright": "© 2026 docmd.io"
     }
+  },
+
+  "i18n": {
+    "default": "en",
+    "position": "sidebar-top",
+    "locales": [
+      { "id": "en", "label": "English", "dir": "ltr" },
+      { "id": "zh", "label": "中文", "dir": "ltr" },
+      { "id": "de", "label": "Deutsch", "dir": "ltr" },
+      { "id": "es", "label": "Español", "dir": "ltr" }
+    ]
   },
 
   "plugins": {
