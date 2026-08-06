@@ -82,7 +82,7 @@ docs/
 
 ## Nächste Schritte
 
-- [Plugins entwickeln](/development/building-plugins) — schreiben Sie ein benutzerdefiniertes docmd-Plugin.
-- [Plugin-Beispiele](/development/plugin-examples) — sehen Sie einen vollständigen Plugin-Walkthrough.
-- [Templates entwickeln](/development/building-templates) — erstellen Sie ein docmd-Template.
-- [Node-API-Referenz](/development/node-api-reference) — programmatische Build-API.
+- [Plugins entwickeln](./building-plugins.md) — schreiben Sie ein benutzerdefiniertes docmd-Plugin.
+- [Plugin-Beispiele](./plugin-examples.md) — sehen Sie einen vollständigen Plugin-Walkthrough.
+- [Templates entwickeln](./building-templates.md) — erstellen Sie ein docmd-Template.
+- [Node-API-Referenz](./node-api-reference.md) — programmatische Build-API.

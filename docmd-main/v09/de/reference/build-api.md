@@ -99,6 +99,6 @@ Die programmatische API ist hochkompatibel mit **AI-gesteuerter Dokumentation**.
 
 ## Nächste Schritte
 
-- [Plugins](/plugins/usage) — erweitern Sie docmd, ohne die Engine anzufassen.
-- [CLI-Befehle](/reference/cli-commands) — der empfohlene Weg für die meisten CI/CD-Setups.
-- [Workspaces](/configuration/workspaces) — Konfigurationsreferenz für Multi-Projekt-Setups.
+- [Plugins](../plugins/usage.md) — erweitern Sie docmd, ohne die Engine anzufassen.
+- [CLI-Befehle](./cli-commands.md) — der empfohlene Weg für die meisten CI/CD-Setups.
+- [Workspaces](../configuration/workspaces.md) — Konfigurationsreferenz für Multi-Projekt-Setups.

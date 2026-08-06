@@ -1,45 +1,68 @@
 ---
 title: "General Configuration"
-description: "Configure docmd.config.json to manage branding, custom schemas, routing, layout behaviour, and build engines."
+description: "Master docmd.config.json to manage branding, site metadata, routing, layout zones, and build compilers in docmd."
 ---
 
-The `docmd.config.json` file is the central configuration for your workspace. It controls site styling, sidebar hierarchies, localisation details, and compiler options.
+The `docmd.config.json` file serves as the central configuration manifest for your documentation workspace. It manages site branding, navigation sidebars, localisation parameters, and static site compiler options.
 
-## 1. The Configuration Schema
+## Configuration Schema Formats
 
-JSON is the standard configuration format. This allows high-performance serialisation across the engine's worker pools. 
-
-However, `docmd.config.js` and `docmd.config.ts` remain fully supported if you need dynamic JavaScript logic.
+JSON is the primary configuration format, allowing high-performance serialisation across worker threads during parallel builds:
 
 ```json "docmd.config.json"
 {
-  "title": "My Project",
-  "url": "https://docs.myproject.com",
+  "title": "My Technical Docs",
+  "url": "https://docs.example.com",
   "src": "docs",
   "out": "site",
   "base": "/"
 }
 ```
 
-## 2. Core Settings
+For dynamic setups requiring environment variables or programmatic logic, `docmd.config.ts` and `docmd.config.js` are fully supported:
 
-These top-level parameters configure the compiler's base inputs and destinations.
+::: tabs
+== tab "TypeScript" icon:code-2
+```typescript "docmd.config.ts"
+import { UserConfig } from '@docmd/api';
 
-| Parameter | Type | Default | Description |
+const config: UserConfig = {
+  title: process.env.DOCS_TITLE || 'My Technical Docs',
+  src: 'docs',
+  out: 'site'
+};
+
+export default config;
+```
+== tab "JavaScript" icon:file-code
+```javascript "docmd.config.js"
+module.exports = {
+  title: process.env.DOCS_TITLE || 'My Technical Docs',
+  src: 'docs',
+  out: 'site'
+};
+```
+:::
+
+## Core Settings
+
+These top-level properties configure base paths and global compiler options:
+
+| Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | `"Documentation"` | The formal name of your site. Appears in navigation headers and browser title tabs. |
-| `url` | `String` | `""` | Your canonical production URL. Critical for SEO validation, Sitemap indexing, and OpenGraph metadata. |
-| `src` | `String` | `"docs"` | Relative path to the folder containing your source Markdown (.md) files. |
-| `out` | `String` | `"site"` | Relative path where the compiler writes the optimised production static site. |
-| `base` | `String` | `"/"` | The root base path of your site (e.g., set to `/docs/` if hosting in a subfolder). |
-| `tmp` | `String` | `null` | Custom directory for temporary compile files and caching. Defaults to an isolated system temp folder. |
-| `i18n` | `Object` | `null` | Multi-language parameters. See the [Localisation Guide](localisation/translated-content.md). |
-| `plugins` | `Object` | `{}` | Key-value mapping to configure standard and custom plugins. See [Plugins Guide](../plugins/usage.md). |
-| `engine` | `String` | `"js"` | The active processing engine: `"js"` or `"rust"` (preview). |
+| `title` | `String` | `"Documentation"` | Formal site title displayed in navigation headers and browser tabs. |
+| `url` | `String` | `""` | Canonical site URL. Essential for search engine optimization, sitemap generation, and OpenGraph metadata. |
+| `src` | `String` | `"docs"` | Relative directory containing source Markdown (`.md`) files. |
+| `out` | `String` | `"site"` | Relative path where the compiler generates the production static bundle. |
+| `base` | `String` | `"/"` | Root URL path prefix (e.g. `/docs/` when hosted in a subfolder). |
+| `tmp` | `String` | `null` | Temporary build cache directory. Defaults to an isolated system temp folder. |
+| `i18n` | `Object` | `null` | Multi-language parameters. See the [Localisation Guide](./localisation/translated-content.md). |
+| `plugins` | `Object` | `{}` | Standard and third-party plugin configuration map. See [Plugins Guide](../plugins/usage.md). |
+| `engine` | `String` | `"js"` | Processing engine: `"js"` or `"rust"` (alpha preview). |
 
-## 3. Branding & Identity
+## Branding & Identity
 
-Manage how your brand appears in the header and browser tabs.
+Configure brand logos and browser favicons in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -54,9 +77,9 @@ Manage how your brand appears in the header and browser tabs.
 }
 ```
 
-## 4. UI Layout and Behaviour
+## UI Layout and Behaviour
 
-The engine provides a modular header and sidebar layout. Customise functional regions. Toggle component visibility (search, dark-mode switch, breadcrumbs).
+Configure headers, sidebars, search placement, and theme toggles:
 
 ```json "docmd.config.json"
 {
@@ -80,11 +103,11 @@ The engine provides a modular header and sidebar layout. Customise functional re
 }
 ```
 
-See the [Layout & UI Zones](layout-ui.md) guide for full visual customisation options.
+Refer to the [Layout & UI Zones](./layout-ui.md) guide for comprehensive visual customisation options.
 
-## 5. Core Engine Features
+## Core Compiler Options
 
-Fine-tune how the parser processes your content files.
+Fine-tune how `docmd` parses and transforms your Markdown content:
 
 ```json "docmd.config.json"
 {
@@ -100,12 +123,12 @@ Fine-tune how the parser processes your content files.
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `minify` | `Boolean` | `true` | Compresses output HTML and JS structures for maximum speed. |
-| `autoTitleFromH1` | `Boolean` | `true` | Resolves missing page titles using the first H1 header in the file. |
-| `copyCode` | `Boolean` | `true` | Displays a "Copy Code" button on the top-right of syntax blocks. |
-| `pageNavigation` | `Boolean` | `true` | Adds "Previous" and "Next" page links at the bottom of every page based on the navigation order. |
-| `markdown.breaks` | `Boolean` | `true` | Standardises line breaks. Set to `false` if you wrap markdown lines at 80 columns. |
+| `minify` | `Boolean` | `true` | Minifies compiled HTML, CSS, and JS assets for maximum load performance. |
+| `autoTitleFromH1` | `Boolean` | `true` | Uses the document's first `# H1` heading as the title when frontmatter `title` is omitted. |
+| `copyCode` | `Boolean` | `true` | Renders a "Copy Code" button on syntax-highlighted code blocks. |
+| `pageNavigation` | `Boolean` | `true` | Renders "Previous" and "Next" page navigation links at the bottom of articles. |
+| `markdown.breaks` | `Boolean` | `true` | Converts soft line breaks into line breaks. Set `false` if wrapping text manually at 80 columns. |
 
-::: callout warning "Standalone editLink Deprecated" icon:alert-triangle
-The standalone `editLink` configuration is deprecated. Use the core [Git plugin](../plugins/git.md) instead. It provides identical edit link functionality alongside commit timestamps and metadata logs.
+::: callout info "Git Integration replacing editLink" icon:git-branch
+The standalone `editLink` configuration has been unified into the native [Git plugin](../plugins/git.md). It displays edit links, commit timestamps, and contributor metadata.
 :::

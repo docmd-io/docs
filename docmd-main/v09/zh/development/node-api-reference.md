@@ -4,7 +4,7 @@ description: "面向插件作者的低层级 Node API —— URL 工具、Action
 ---
 
 ::: callout info
-**面向插件作者。** 如果您只是想*从 Node 脚本中*调用 docmd，请参阅 [Build API](/reference/build-api)。本页介绍的是 `@docmd/api` 为编写插件所提供的更深层工具。
+**面向插件作者。** 如果您只是想*从 Node 脚本中*调用 docmd，请参阅 [Build API](../reference/build-api.md)。本页介绍的是 `@docmd/api` 为编写插件所提供的更深层工具。
 :::
 
 `@docmd/api` 是插件系统的专属包。它提供 hook 注册、WebSocket RPC 分发、源文件编辑工具，以及集中的 URL 工具。
@@ -199,6 +199,6 @@ import type {
 
 ## 下一步
 
-- [开发插件](/development/building-plugins) —— 起点。
-- [插件示例](/development/plugin-examples) —— 查看完整的插件演练。
-- [引擎与架构](/development/engines/overview) —— Rust 引擎、N-API 与引擎加载器内部。
+- [开发插件](./building-plugins.md) —— 起点。
+- [插件示例](./plugin-examples.md) —— 查看完整的插件演练。
+- [引擎与架构](./engines/overview.md) —— Rust 引擎、N-API 与引擎加载器内部。

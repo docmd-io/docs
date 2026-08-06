@@ -26,7 +26,7 @@ Der `hero`-Container unterstützt mehrere Layouts, einschließlich `split` (für
 # Schneller bauen mit docmd
 Die Zero-Config-Dokumentations-Engine für moderne Entwicklerteams.
 
-[Loslegen](/docs/start) [Auf GitHub ansehen](https://github.com/docmd-io/docmd)
+[Loslegen](../docs/start.md) [Auf GitHub ansehen](https://github.com/docmd-io/docmd)
 
 == side
 ![Dashboard-Vorschau](../../static/img/hero-preview.png)
@@ -42,13 +42,13 @@ Verwenden Sie [Grids und Cards](../../content/containers/grids.md), um übergeor
 ::: grid
 ::: card "Schnellstart" icon:rocket
 In weniger als 5 Minuten einsatzbereit.
-[Mehr erfahren](/docs/start.md)
+[Mehr erfahren](../docs/start.md)
 :::
 :::
 ::: grid
 ::: card "API-Referenz" icon:code
 Umfassende Dokumentation für alle unsere Endpoints.
-[API erkunden](/api)
+[API erkunden](../api.md)
 :::
 :::
 :::

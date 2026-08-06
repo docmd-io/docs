@@ -1,45 +1,68 @@
 ---
 title: "Allgemeine Konfiguration"
-description: "Konfigurieren Sie docmd.config.json für Branding, benutzerdefinierte Schemas, Routing, Layout-Verhalten und Build-Engines."
+description: "Meistern Sie docmd.config.json zur Verwaltung von Branding, Website-Metadaten, Routing, Layout-Zonen und Build-Compilern in docmd."
 ---
 
-Die Datei `docmd.config.json` ist die zentrale Konfiguration Ihres Workspaces. Sie steuert Site-Styling, Sidebar-Hierarchien, Lokalisierungsdetails und Compiler-Optionen.
+Die Datei `docmd.config.json` dient als zentrales Konfigurationsmanifest für Ihren Dokumentations-Workspace. Sie verwaltet Website-Branding, Navigations-Sidebars, Lokalisierungsparameter und Optionen des statischen Website-Compilers.
 
-## 1. Das Konfigurations-Schema
+## Konfigurations-Schema-Formate
 
-JSON ist das Standard-Konfigurationsformat. Dies ermöglicht Hochleistungs-Serialisierung über die Worker-Pools der Engine.
-
-`docmd.config.js` und `docmd.config.ts` bleiben jedoch vollständig unterstützt, falls Sie dynamische JavaScript-Logik benötigen.
+JSON ist das primäre Konfigurationsformat, das eine hochperformante Serialisierung über Worker-Threads hinweg bei parallelen Builds ermöglicht:
 
 ```json "docmd.config.json"
 {
-  "title": "My Project",
-  "url": "https://docs.myproject.com",
+  "title": "Meine Technische Dokumentation",
+  "url": "https://docs.example.com",
   "src": "docs",
   "out": "site",
   "base": "/"
 }
 ```
 
-## 2. Kerneinstellungen
+Für dynamische Setups, die Umgebungsvariablen oder programmgesteuerte Logik erfordern, werden `docmd.config.ts` und `docmd.config.js` vollständig unterstützt:
 
-Diese Parameter der obersten Ebene konfigurieren die Basiseingaben und Ziele des Compilers.
+::: tabs
+== tab "TypeScript" icon:code-2
+```typescript "docmd.config.ts"
+import { UserConfig } from '@docmd/api';
 
-| Parameter | Typ | Standard | Beschreibung |
+const config: UserConfig = {
+  title: process.env.DOCS_TITLE || 'Meine Technische Dokumentation',
+  src: 'docs',
+  out: 'site'
+};
+
+export default config;
+```
+== tab "JavaScript" icon:file-code
+```javascript "docmd.config.js"
+module.exports = {
+  title: process.env.DOCS_TITLE || 'Meine Technische Dokumentation',
+  src: 'docs',
+  out: 'site'
+};
+```
+:::
+
+## Kerneinstellungen
+
+Diese Top-Level-Eigenschaften konfigurieren Basispfade und globale Compiler-Optionen:
+
+| Eigenschaft | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | `"Documentation"` | Der formelle Name Ihrer Site. Erscheint in Navigations-Headern und Browser-Titelleisten. |
-| `url` | `String` | `""` | Ihre kanonische Produktions-URL. Entscheidend für SEO-Validierung, Sitemap-Indexierung und OpenGraph-Metadaten. |
-| `src` | `String` | `"docs"` | Relativer Pfad zum Ordner mit Ihren Markdown- (.md) Quelldateien. |
-| `out` | `String` | `"site"` | Relativer Pfad, unter dem der Compiler die optimierte statische Produktions-Site ausgibt. |
-| `base` | `String` | `"/"` | Der Basispfad Ihrer Site (z. B. auf `/docs/` setzen, wenn Sie in einem Unterordner hosten). |
-| `tmp` | `String` | `null` | Benutzerdefiniertes Verzeichnis für temporäre Compile-Dateien und Caching. Standardmäßig ein isoliertes System-Temp-Verzeichnis. |
-| `i18n` | `Object` | `null` | Mehrsprachigkeits-Parameter. Siehe den [Lokalisierungs-Leitfaden](localisation/translated-content.md). |
-| `plugins` | `Object` | `{}` | Key-Value-Mapping zur Konfiguration von Standard- und benutzerdefinierten Plugins. Siehe [Plugins-Leitfaden](../plugins/usage.md). |
-| `engine` | `String` | `"js"` | Die aktive Verarbeitungs-Engine: `"js"` oder `"rust"` (Vorschau). |
+| `title` | `String` | `"Documentation"` | Formaler Seitentitel, der in Navigations-Headern und Browser-Tabs angezeigt wird. |
+| `url` | `String` | `""` | Kanonische Website-URL. Wichtig für Suchmaschinenoptimierung, Sitemap-Generierung und OpenGraph-Metadaten. |
+| `src` | `String` | `"docs"` | Relatives Verzeichnis mit den Quell-Markdown-Dateien (`.md`). |
+| `out` | `String` | `"site"` | Relativer Pfad, in dem der Compiler das statische Produktionspaket generiert. |
+| `base` | `String` | `"/"` | Root-URL-Pfadpräfix (z. B. `/docs/` bei Hosting in einem Unterordner). |
+| `tmp` | `String` | `null` | Temporäres Build-Cache-Verzeichnis. Standardmäßig ein isolierter System-Temp-Ordner. |
+| `i18n` | `Object` | `null` | Mehrsprachigkeitsparameter. Siehe den [Lokalisierungs-Leitfaden](./localisation/translated-content.md). |
+| `plugins` | `Object` | `{}` | Konfigurationsmap für Standard- und Drittanbieter-Plugins. Siehe [Plugins-Leitfaden](../plugins/usage.md). |
+| `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` oder `"rust"` (Alpha-Vorschau). |
 
-## 3. Branding & Identität
+## Branding & Identität
 
-Verwalten Sie, wie Ihre Marke im Header und in Browser-Tabs erscheint.
+Konfigurieren Sie Marken-Logos und Browser-Favicons in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -47,16 +70,16 @@ Verwalten Sie, wie Ihre Marke im Header und in Browser-Tabs erscheint.
     "light": "assets/images/logo-dark.png",
     "dark": "assets/images/logo-light.png",
     "href": "/",
-    "alt": "Company Logo",
+    "alt": "Unternehmens-Logo",
     "height": "32px"
   },
   "favicon": "assets/favicon.ico"
 }
 ```
 
-## 4. UI-Layout und -Verhalten
+## UI-Layout und Verhalten
 
-Die Engine bietet ein modulares Header- und Sidebar-Layout. Passen Sie funktionale Bereiche an. Schalten Sie die Sichtbarkeit von Komponenten um (Suche, Dunkelmodus-Schalter, Brotkrumen).
+Konfigurieren Sie Header, Sidebars, Suchplatzierung und Theme-Umschalter:
 
 ```json "docmd.config.json"
 {
@@ -80,11 +103,11 @@ Die Engine bietet ein modulares Header- und Sidebar-Layout. Passen Sie funktiona
 }
 ```
 
-Vollständige visuelle Anpassungsoptionen finden Sie im [Layout- & UI-Zonen](layout-ui.md)-Leitfaden.
+Weitere Informationen finden Sie im Leitfaden für [Layout & UI-Zonen](./layout-ui.md).
 
-## 5. Kern-Engine-Funktionen
+## Kern-Compiler-Optionen
 
-Feinabstimmung, wie der Parser Ihre Inhaltsdateien verarbeitet.
+Feinabstimmung der Analyse und Transformation Ihrer Markdown-Inhalte durch `docmd`:
 
 ```json "docmd.config.json"
 {
@@ -100,12 +123,12 @@ Feinabstimmung, wie der Parser Ihre Inhaltsdateien verarbeitet.
 
 | Option | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `minify` | `Boolean` | `true` | Komprimiert die ausgegebene HTML- und JS-Struktur für maximale Geschwindigkeit. |
-| `autoTitleFromH1` | `Boolean` | `true` | Löst fehlende Seitentitel anhand der ersten H1-Überschrift in der Datei auf. |
-| `copyCode` | `Boolean` | `true` | Zeigt oben rechts auf Syntax-Blöcken eine Schaltfläche „Code kopieren". |
-| `pageNavigation` | `Boolean` | `true` | Fügt unten auf jeder Seite Links auf die vorherige und nächste Seite basierend auf der Navigationsreihenfolge hinzu. |
-| `markdown.breaks` | `Boolean` | `true` | Standardisiert Zeilenumbrüche. Auf `false` setzen, wenn Sie Markdown-Zeilen bei 80 Spalten umbrechen. |
+| `minify` | `Boolean` | `true` | Minimiert kompilierte HTML-, CSS- und JS-Assets für maximale Ladeleistung. |
+| `autoTitleFromH1` | `Boolean` | `true` | Verwendet die erste `# H1`-Überschrift des Dokuments als Titel, wenn `title` im Frontmatter fehlt. |
+| `copyCode` | `Boolean` | `true` | Rendert eine "Code kopieren"-Schaltfläche auf syntax-hervorgehobenen Codeblöcken. |
+| `pageNavigation` | `Boolean` | `true` | Rendert "Vorherige" und "Nächste" Navigationslinks am Ende von Artikeln. |
+| `markdown.breaks` | `Boolean` | `true` | Wandelt weiche Zeilenumbrüche in Umbrüche um. Auf `false` setzen, wenn Text manuell bei 80 Spalten umgebrochen wird. |
 
-::: callout warning "Eigenständige editLink-Konfiguration veraltet" icon:alert-triangle
-Die eigenständige `editLink`-Konfiguration ist veraltet. Verwenden Sie stattdessen das zentrale [Git-Plugin](../plugins/git.md). Es bietet dieselbe Edit-Link-Funktionalität sowie Commit-Zeitstempel und Metadaten-Logs.
+::: callout info "Git-Integration ersetzt editLink" icon:git-branch
+Die eigenständige `editLink`-Konfiguration wurde im nativen [Git-Plugin](../plugins/git.md) vereinheitlicht. Es zeigt Bearbeitungs-Links, Commit-Zeitstempel und Mitwirkenden-Metadaten an.
 :::

@@ -18,9 +18,24 @@ Markdown to production docs in one command. Static HTML for SEO. SPA for speed. 
 
 docmd is a zero-configuration documentation generator. It builds fast static websites directly from your Markdown files.
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core dev
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core dev
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
 Run this single command. The engine builds your site, generates navigation, and enables search automatically.
 
@@ -41,7 +56,7 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     :::
     ::: grid
         ::: card "OKF Bundles" icon:database
-        Generates an Open Knowledge Format bundle, typed concept graph for AI agents. Read [more](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        Generates an Open Knowledge Format bundle and typed concept graph for AI agents. Read [more](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
         :::
     :::
     ::: grid
@@ -61,7 +76,7 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     :::
     ::: grid
         ::: card "Custom Templates" icon:palette
-        Personalise your documentation with templates or try built-in themes with custom CSS. Supports dark mode and system prefs.
+        Personalise your documentation with templates or try built-in themes with custom CSS. Supports dark mode and system preferences.
         :::
     :::
     ::: grid
@@ -72,6 +87,6 @@ Everything needed for solid documentation ships built in. No extra plugins requi
 :::
 
 ::: callout info "Rich Content Containers" icon:info
-    Go beyond standard Markdown. Use structured visual patterns like steps, tabs, cards, grids, and callouts directly in your text.
-    ::: button "Explore Containers" ./content/containers/index.md icon:blocks
+Go beyond standard Markdown. Use structured visual patterns like steps, tabs, cards, grids, and callouts directly in your text.
+::: button "Explore Containers" ./content/containers/index.md icon:blocks
 :::

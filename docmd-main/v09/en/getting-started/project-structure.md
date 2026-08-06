@@ -3,7 +3,7 @@ title: "Project Structure"
 description: "Learn how `@docmd/core` maps physical folders and Markdown files to dynamic URLs and clean navigation."
 ---
 
-The compiler uses your local filesystem as the source of truth. Folders become navigation sections. Markdown files become content pages. Your directory hierarchy translates directly into web URLs.
+The compiler uses your local filesystem as the ground truth. Directories become navigation sections, Markdown files become content pages, and your filesystem hierarchy translates directly into web URLs.
 
 ## 1. Standard Project Scaffold
 
@@ -19,11 +19,11 @@ my-docs/
 │   └── images/           ← Brand logos, icons, and inline illustrations
 ├── docmd.config.json     ← Central configuration schema
 ├── package.json          ← Node dependency manifest and scripts
-└── site/                 ← Optimised production build output folder
+└── site/                 ← Optimised production build output directory
 ```
 
 ::: callout info "Configuration File Resolution" icon:settings
-`docmd.config.json` (or `docmd.config.ts`) is the recommended, primary configuration format. The legacy `docmd.config.js` format remains supported but acts strictly as a fallback when `.json` or `.ts` configuration files are missing.
+`docmd.config.json` (or `docmd.config.ts`) is the recommended, primary configuration format. The legacy `docmd.config.js` format acts strictly as a fallback when `.json` or `.ts` configuration files are missing.
 :::
 
 ## 2. Directory and URL Mapping
@@ -38,7 +38,7 @@ The compiler maps files within your source folder directly to public URLs. There
 | `docs/getting-started/quick-start.md` | `/getting-started/quick-start` | Multi-level deep page |
 
 ::: callout tip "Automatic Header Parsing" icon:info
-If a file lacks a `title` in its YAML frontmatter, the engine extracts the first `H1` tag (`# Heading`). This title represents the page in breadcrumbs and search.
+If a file lacks an explicit `title` in its YAML frontmatter, the engine automatically extracts the first `H1` heading tag (`# Heading`). This title represents the page in breadcrumbs and search indexing.
 :::
 
 ## 3. Workspace Monorepo Structure
@@ -64,8 +64,22 @@ my-docs-monorepo/
 
 ### Key Workspace Directory Patterns
 
-*   **Global Configuration Cascading:** Any configuration defined in the root `docmd.config.json` (such as `theme` or `menubar`) acts as a fallback default. Individual projects can selectively override these defaults in their own local config files.
-*   **Asset Sharing and Priority:** Shared logos, global custom styles, and common scripts are placed in the root `assets/` directory. Projects can also define their own local `assets/` directories; in the event of filename conflicts, project-specific assets always take precedence.
-*   **Output Consolidation:** During the build process (`npx @docmd/core build`), the engine automatically merges all projects into a single consolidated production output directory (e.g. `./site/` and `./site/sdk/`), negating the need for complex reverse proxy setups or isolated build pipeline configuration.
+::: grids
+    ::: grid
+        ::: card "Global Configuration Cascading" icon:layers
+        Any configuration defined in the root `docmd.config.json` (such as `theme` or `menubar`) acts as a fallback default. Individual projects selectively override these defaults in their local config files.
+        :::
+    :::
+    ::: grid
+        ::: card "Asset Sharing & Priority" icon:folder-tree
+        Shared logos, global custom styles, and common scripts sit in the root `assets/` directory. Project-specific assets override root assets in the event of filename collisions.
+        :::
+    :::
+    ::: grid
+        ::: card "Output Consolidation" icon:package-check
+        During the build process (`npx @docmd/core build`), the engine merges all workspace projects into a single consolidated output directory (e.g. `./site/` and `./site/sdk/`), removing the need for complex reverse proxy setups.
+        :::
+    :::
+:::
 
 For complete setup steps and advanced cascading rules, refer to the [Workspaces Configuration Guide](../configuration/workspaces.md).

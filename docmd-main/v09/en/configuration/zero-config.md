@@ -1,102 +1,83 @@
 ---
-title: "Zero-Config"
-description: "Understand the heuristics engine of docmd that automatically structures your site without files."
+title: "Zero-Config Architecture"
+description: "Discover docmd's zero-config heuristics engine that automatically discovers documentation files, routes paths, and structures sites without configuration."
 ---
 
-`docmd` features a smart heuristics engine designed to parse and structure your documentation automatically. You can start building, serving, and translating your documentation without writing a single line of configuration.
+`docmd` features an intelligent heuristics engine designed to parse, discover, and structure documentation automatically. Developers can compile, serve, and translate technical sites without writing a single line of initial configuration.
 
-## How It Works
+## How Heuristic Discovery Works
 
-When run without a `docmd.config.json` file, the engine automatically triggers **Zero-Config Mode**. It scans the workspace directory for content and applies the following heuristics:
+When executed in a directory without a `docmd.config.json` manifest, the engine initializes **Zero-Config Mode**. It scans the workspace for documentation content and applies automated heuristics:
 
-### 1. Source Directory Detection
+::: steps
 
-The engine looks for documentation files in these candidate directories in order:
-1.  `docs/`
-2.  `src/docs/`
-3.  `documentation/`
-4.  `content/`
-5.  `.` (Root directory fallback)
+1. **Source Directory Discovery**: Scans candidate directories in priority order: `docs/`, `src/docs/`, `documentation/`, `content/`, and `.` (root directory fallback).
+2. **Version & Locale Extraction**: Automatically parses version folders matching `v[0-9]+` (e.g. `v1.0`, `v09`) and two-letter locale codes (e.g. `en`, `de`, `zh`).
+3. **Automated Sidebar Routing**: Generates a clean navigation tree by analyzing file hierarchies and converting hyphenated basenames (`getting-started.md` → `Getting Started`).
 
-If one of the candidate directories is found and contains Markdown files, it is selected as the source. If no directory is found, but the project root has Markdown files, the root directory is used (automatically ignoring `node_modules`, `.git`, output folders like `site/`, `dist/`, and `out/`).
-
-If no documentation content is found at all, `docmd` initializes a fresh starter structure automatically.
-
-### 2. Heuristics for Versions and Locales
-
-The folder structure is scanned to dynamically extract versioning and localization metadata:
--   **Versions**: Subdirectories matching `v[0-9]+` (e.g., `v1.0`, `v08`) are parsed as documentation versions.
--   **Locales**: Subdirectories with two-letter language codes (e.g., `en`, `de`, `zh`) are treated as localized variants.
--   **Structure Extraction**: The highest version is designated as the current release, and the first locale found (prioritizing `en` if present) is set as the default language.
-
-### 3. Automatic Navigation Routing
-
-If there are no root-level versions or locales, the engine builds a navigation tree dynamically by analyzing the file structure:
--   Subdirectories are mapped to navigation groups.
--   Titles are generated dynamically from file basenames. E.g., `getting-started.md` is formatted as `Getting Started`.
--   Index files (`index.md`, `README.md`) are routed as the landing page of the current directory.
-
-## Zero-Config Best Practices
-
-To get the most out of Zero-Config mode, follow these structure recommendations:
-
--   **Explicit file naming**: Use clear, hyphenated or camelCase file names. The autoloader converts them to readable titles.
--   **Folder-based sections**: Place related documents inside subfolders to automatically group them in the sidebar.
--   **Index fallback**: Always place an `index.md` or `README.md` at the root of your source folder to serve as the landing page.
--   **Clean output path**: If you are using the root folder `.` as your source, keep your built assets in the default `site/` folder which is automatically ignored.
-
-## Built-in Defaults (new in 0.8.7)
-
-A `docmd.config.json` (or no config at all) gives you a usable site out of the box. The following keys ship with sensible defaults, so you only need to set them when you want a different value.
-
-::: callout info "How to opt out"
-Set the key to `false` (or the appropriate empty value) to disable a default. For example, `pageNavigation: false` removes prev/next links; `theme.appearance: "dark"` overrides the colour mode.
 :::
 
-### Top-level QoL defaults
+If no documentation content is located in the target workspace, `docmd` initialises a fresh starter template automatically.
 
-| Key | Default | Notes |
-|---|---|---|
-| `pageNavigation` | `true` | prev/next links at the bottom of each article |
-| `copyCode` | `true` | copy-code buttons on `<pre>` blocks |
-| `autoTitleFromH1` | `true` | use the first `# H1` as the page title when frontmatter is absent |
+## Zero-Config Directory Conventions
 
-### Layout & sidebar defaults
+To maximise the effectiveness of Zero-Config mode, adopt these directory conventions:
 
-| Key | Default | Notes |
-|---|---|---|
-| `layout.spa` | `true` | SPA navigation between pages |
-| `layout.breadcrumbs` | `true` | breadcrumb row above the page header |
-| `layout.header.enabled` | `true` | top page header |
-| `layout.sidebar.collapsible` | `true` | sidebar can collapse on desktop |
-| `layout.sidebar.defaultCollapsed` | `false` | sidebar starts expanded |
-| `layout.optionsMenu.position` | `"header"` | options menu (search / theme switch / sponsor) goes in the header |
-| `layout.optionsMenu.components.search` | `true` | search trigger in the menu |
-| `layout.optionsMenu.components.themeSwitch` | `true` | light/dark toggle in the menu |
-| `layout.optionsMenu.components.sponsor` | `null` | opt-in — set to a URL to enable |
+- **Explicit File Naming**: Use clear, hyphenated or camelCase filenames. The autoloader converts them into human-readable sidebar labels.
+- **Directory Grouping**: Group related Markdown documents inside subfolders to automatically build collapsible sidebar categories.
+- **Index Fallback**: Place an `index.md` or `README.md` at the root of each content folder to serve as its default landing page.
+- **Clean Output Path**: When using root `.` as your source folder, built static assets output to `./site/`, which is ignored automatically by source controls and compilers.
 
-### Footer defaults
+## Built-in Default Behaviours
 
-| Key | Default | Notes |
-|---|---|---|
-| `layout.footer.style` | `"minimal"` | one-line footer bar |
-| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | auto-generated current-year copyright |
-| `layout.footer.branding` | `true` | show "Built with docmd" by default |
+A `docmd` site operates out of the box with sensible defaults. Configure individual properties in `docmd.config.json` only when overriding default values.
 
-### Theme defaults
+::: callout info "Opting out of defaults" icon:sliders
+To disable a default behaviour, set its key to `false` or an empty value. For instance, setting `pageNavigation: false` removes bottom previous/next page links.
+:::
 
-| Key | Default | Notes |
-|---|---|---|
-| `theme.name` | `"default"` | base CSS theme; reserved values: `default`, `sky`, `ruby`, `retro`. Any other value is auto-promoted to a [template name](../theming/templates.md). |
-| `theme.appearance` | `"system"` | default colour mode (follows `prefers-color-scheme`). Set to `"light"` or `"dark"` to force. |
-| `theme.codeHighlight` | `true` | syntax highlighting on `<pre>` blocks |
+### Top-Level Defaults
 
-### New opt-in features (off by default)
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `pageNavigation` | `true` | Renders previous/next article links at the bottom of pages. |
+| `copyCode` | `true` | Appends copy buttons to code blocks. |
+| `autoTitleFromH1` | `true` | Resolves missing page titles using the first `# H1` heading in the file. |
 
-| Key | Default | Notes |
-|---|---|---|
-| `cookie` | `null` | opt-in cookie consent dialog — see [Cookie Consent](cookie-consent.md) |
-| `layout.banner` | `null` | opt-in site-wide announcement banner — see [Site Banner](site-banner.md) |
-| `theme.template` | `null` | opt-in template selection — see [Templates](../theming/templates.md) |
+### Layout & UI Defaults
 
-The defaults were chosen to give brand-new sites a usable look and feel without any config. Older configs keep their explicit values untouched — only `undefined` keys are filled in.
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `layout.spa` | `true` | Single Page Application client-side route navigation. |
+| `layout.breadcrumbs` | `true` | Contextual breadcrumb bar above page headers. |
+| `layout.header.enabled` | `true` | Persistent top navigation header bar. |
+| `layout.sidebar.collapsible` | `true` | Collapsible sidebar category groups on desktop viewports. |
+| `layout.sidebar.defaultCollapsed` | `false` | Sidebar categories start in an expanded state. |
+| `layout.optionsMenu.position` | `"header"` | Positions search and theme controls in the header. |
+| `layout.optionsMenu.components.search` | `true` | Enables built-in full-text search modal trigger. |
+| `layout.optionsMenu.components.themeSwitch` | `true` | Enables light/dark appearance mode switch. |
+| `layout.optionsMenu.components.sponsor` | `null` | Optional sponsorship link URL. |
+
+### Footer Defaults
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `layout.footer.style` | `"minimal"` | Compact single-line footer bar. |
+| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | Dynamic current-year copyright string. |
+| `layout.footer.branding` | `true` | Displays "Built with docmd" attribution link. |
+
+### Theme & Styling Defaults
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `theme.name` | `"default"` | Base theme (`default`, `sky`, `ruby`, `retro`). Custom names auto-promote to [template names](../theming/templates.md). |
+| `theme.appearance` | `"system"` | Default colour mode following system preferences (`system`, `light`, `dark`). |
+| `theme.codeHighlight` | `true` | Syntax highlighting on code blocks. |
+
+### Opt-in Extended Features
+
+| Property | Default | Description |
+| :--- | :--- | :--- |
+| `cookie` | `null` | Opt-in cookie consent dialog. See [Cookie Consent](./cookie-consent.md). |
+| `layout.banner` | `null` | Opt-in site announcement banner. See [Site Banner](./site-banner.md). |
+| `theme.template` | `null` | Opt-in custom site template selection. See [Templates](../theming/templates.md). |

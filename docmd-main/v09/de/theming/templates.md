@@ -121,6 +121,6 @@ Die aktive Locale wird Ihrem Template als normale Local übergeben. Übersetzung
 
 ## Nächste Schritte
 
-- [Templates entwickeln](/development/building-templates) — schreiben Sie Ihr eigenes Template-Paket.
-- [Theming](/theming/custom-css-js) — legen Sie `customCss` über ein beliebiges Template.
-- [Eigene Landing-Pages gestalten](/theming/landing-pages) — machen Sie die Startseite eines Templates zu Ihrer eigenen.
+- [Templates entwickeln](../development/building-templates.md) — schreiben Sie Ihr eigenes Template-Paket.
+- [Theming](./custom-css-js.md) — legen Sie `customCss` über ein beliebiges Template.
+- [Eigene Landing-Pages gestalten](./landing-pages.md) — machen Sie die Startseite eines Templates zu Ihrer eigenen.

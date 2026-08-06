@@ -121,6 +121,6 @@ CSS 主题 `default`、`sky`、`ruby`、`retro` 属于保留名 —— 若 `them
 
 ## 接下来
 
-- [开发模板](/development/building-templates) —— 编写您自己的模板包。
-- [主题定制](/theming/custom-css-js) —— 在任意模板上叠加 `customCss`。
-- [自定义登录页](/theming/landing-pages) —— 把模板首页改成您自己的样子。
+- [开发模板](../development/building-templates.md) —— 编写您自己的模板包。
+- [主题定制](./custom-css-js.md) —— 在任意模板上叠加 `customCss`。
+- [自定义登录页](./landing-pages.md) —— 把模板首页改成您自己的样子。

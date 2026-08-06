@@ -1,102 +1,83 @@
 ---
-title: "Zero-Config"
-description: "Verstehen Sie die Heuristik-Engine von docmd, die Ihre Site ohne Konfigurationsdateien automatisch strukturiert."
+title: "Zero-Config-Architektur"
+description: "Entdecken Sie docmds Zero-Config-Heuristik-Engine, die Dokumentationsdateien automatisch findet, Pfade routet und Websites ohne Konfiguration strukturiert."
 ---
 
-`docmd` verfügt über eine intelligente Heuristik-Engine, die Ihre Dokumentation automatisch parst und strukturiert. Sie können mit dem Erstellen, Bereitstellen und Übersetzen Ihrer Dokumentation beginnen, ohne eine einzige Zeile Konfiguration zu schreiben.
+`docmd` verfügt über eine intelligente Heuristik-Engine, die entwickelt wurde, um Dokumentationen automatisch zu analysieren, zu entdecken und zu strukturieren. Entwickler können technische Websites kompilieren, bereitstellen und übersetzen, ohne eine einzige Zeile anfänglicher Konfiguration zu schreiben.
 
-## Funktionsweise
+## Wie die heuristische Erkennung funktioniert
 
-Wird `docmd` ohne `docmd.config.json`-Datei ausgeführt, wechselt die Engine automatisch in den **Zero-Config-Modus**. Sie durchsucht das Workspace-Verzeichnis nach Inhalten und wendet die folgenden Heuristiken an:
+Wird `docmd` in einem Verzeichnis ohne `docmd.config.json`-Manifest ausgeführt, initialisiert die Engine den **Zero-Config-Modus**. Sie scannt den Workspace nach Dokumentationsinhalten und wendet automatisierte Heuristiken an:
 
-### 1. Quellverzeichniserkennung
+::: steps
 
-Die Engine sucht in dieser Reihenfolge nach Dokumentationsdateien in den folgenden Kandidatenverzeichnissen:
-1.  `docs/`
-2.  `src/docs/`
-3.  `documentation/`
-4.  `content/`
-5.  `.` (Root-Verzeichnis-Fallback)
+1. **Quellverzeichnis-Erkennung**: Scannt Kandidatenverzeichnisse in Prioritätsreihenfolge: `docs/`, `src/docs/`, `documentation/`, `content/` und `.` (Root-Verzeichnis-Fallback).
+2. **Versions- & Locale-Extraktion**: Parst automatisch Versionsordner, die `v[0-9]+` entsprechen (z. B. `v1.0`, `v09`), und zweistellige Sprachcodes (z. B. `en`, `de`, `zh`).
+3. **Automatisierte Sidebar-Routierung**: Generiert einen sauberen Navigationsbaum durch Analyse von Dateihierarchien und Konvertierung von mit Bindestrich versehenen Dateinamen (`getting-started.md` → `Getting Started`).
 
-Wird eines der Kandidatenverzeichnisse gefunden und enthält es Markdown-Dateien, wird es als Quelle gewählt. Wird kein Verzeichnis gefunden, der Projektstamm enthält jedoch Markdown-Dateien, wird der Root verwendet (automatisch ausgeschlossen werden `node_modules`, `.git` sowie Ausgabeordner wie `site/`, `dist/` und `out/`).
-
-Wird überhaupt kein Dokumentationsinhalt gefunden, initialisiert `docmd` automatisch eine neue Starter-Struktur.
-
-### 2. Heuristiken für Versionen und Sprachen
-
-Die Ordnerstruktur wird gescannt, um Versions- und Lokalisierungsmetadaten dynamisch zu extrahieren:
--   **Versionen**: Unterverzeichnisse, die `v[0-9]+` entsprechen (z. B. `v1.0`, `v08`), werden als Dokumentationsversionen geparst.
--   **Sprachen**: Unterverzeichnisse mit zweistelligen Sprachcodes (z. B. `en`, `de`, `zh`) werden als lokalisierte Varianten behandelt.
--   **Strukturextraktion**: Die höchste Version wird als aktuelle Veröffentlichung festgelegt, und die zuerst gefundene Sprache (mit Priorität auf `en`) wird als Standardsprache gesetzt.
-
-### 3. Automatisches Navigations-Routing
-
-Existieren keine Root-Versionen oder Sprachen, baut die Engine die Navigationsstruktur dynamisch aus der Dateistruktur auf:
-- Unterverzeichnisse werden auf Navigationsgruppen abgebildet.
-- Titel werden dynamisch aus den Datei-Basenamen erzeugt. Z. B. wird `getting-started.md` zu `Getting Started` formatiert.
-- Indexdateien (`index.md`, `README.md`) werden als Landingpage des aktuellen Verzeichnisses geroutet.
-
-## Zero-Config-Best Practices
-
-Um das Beste aus dem Zero-Config-Modus herauszuholen, befolgen Sie diese Struktur-Empfehlungen:
-
--   **Explizite Dateibenennung**: Verwenden Sie klare, mit Bindestrichen versehene oder camelCase-Dateinamen. Der Autoloader konvertiert sie in lesbare Titel.
--   **Ordnerbasierte Sektionen**: Platzieren Sie zusammengehörige Dokumente in Unterordnern, um sie in der Sidebar automatisch zu gruppieren.
--   **Index-Fallback**: Legen Sie immer eine `index.md` oder `README.md` im Stamm Ihres Quellverzeichnisses ab, die als Landingpage dient.
--   **Sauberer Ausgabepfad**: Falls Sie den Root-Ordner `.` als Quelle verwenden, belassen Sie Ihre Build-Artefakte im Standard-Ordner `site/`, der automatisch ignoriert wird.
-
-## Eingebaute Standardwerte (neu in 0.8.7)
-
-Eine `docmd.config.json` (oder gar keine Konfiguration) liefert eine sofort nutzbare Site. Die folgenden Schlüssel werden mit sinnvollen Standards ausgeliefert, sodass Sie sie nur setzen müssen, wenn Sie einen anderen Wert wünschen.
-
-::: callout info "So deaktivieren Sie einen Standard"
-Setzen Sie den Schlüssel auf `false` (oder einen passenden leeren Wert), um einen Standard zu deaktivieren. Beispielsweise entfernt `pageNavigation: false` die Vor/Zurück-Links; `theme.appearance: "dark"` überschreibt den Farbmodus.
 :::
 
-### QoL-Standards auf oberster Ebene
+Wenn im Ziel-Workspace kein Dokumentationsinhalt gefunden wird, initialisiert `docmd` automatisch ein frisches Starter-Template.
 
-| Schlüssel | Standard | Hinweise |
-|---|---|---|
-| `pageNavigation` | `true` | Vor/Zurück-Links am Ende jedes Artikels |
-| `copyCode` | `true` | Code-Kopierschaltflächen auf `<pre>`-Blöcken |
-| `autoTitleFromH1` | `true` | Erste `# H1` als Seitentitel verwenden, wenn das Frontmatter fehlt |
+## Zero-Config-Verzeichnis-Konventionen
 
-### Layout- und Sidebar-Standards
+Um die Effektivität des Zero-Config-Modus zu maximieren, übernehmen Sie diese Verzeichnis-Konventionen:
 
-| Schlüssel | Standard | Hinweise |
-|---|---|---|
-| `layout.spa` | `true` | SPA-Navigation zwischen Seiten |
-| `layout.breadcrumbs` | `true` | Brotkrumen-Zeile über dem Seiten-Header |
-| `layout.header.enabled` | `true` | oberer Seiten-Header |
-| `layout.sidebar.collapsible` | `true` | Sidebar kann auf Desktop zugeklappt werden |
-| `layout.sidebar.defaultCollapsed` | `false` | Sidebar startet aufgeklappt |
-| `layout.optionsMenu.position` | `"header"` | Optionsmenü (Suche / Theme-Switch / Sponsor) im Header |
-| `layout.optionsMenu.components.search` | `true` | Suchauslöser im Menü |
-| `layout.optionsMenu.components.themeSwitch` | `true` | Hell/Dunkel-Umschalter im Menü |
-| `layout.optionsMenu.components.sponsor` | `null` | Opt-in — auf eine URL setzen, um zu aktivieren |
+- **Explizite Benennung**: Verwenden Sie klare Dateinamen mit Bindestrich oder camelCase. Der Autoloader wandelt sie in lesbare Sidebar-Beschriftungen um.
+- **Verzeichnisgruppierung**: Gruppieren Sie zusammengehörige Markdown-Dokumente in Unterordnern, um automatisch einklappbare Sidebar-Kategorien aufzubauen.
+- **Index-Fallback**: Platzieren Sie eine `index.md` oder `README.md` im Root jedes Inhaltsordners, damit diese als Standard-Startseite dient.
+- **Sauberer Ausgabepfad**: Wenn Sie das Root-Verzeichnis `.` als Quellordner nutzen, werden erstellte statische Assets nach `./site/` ausgegeben, was von Versionskontrollen und Compilern automatisch ignoriert wird.
+
+## Integrierte Standard-Verhaltensweisen
+
+Eine `docmd`-Website funktioniert direkt nach der Installation mit vernünftigen Standardeinstellungen. Konfigurieren Sie individuelle Eigenschaften in `docmd.config.json` nur, wenn Sie Standardwerte überschreiben möchten.
+
+::: callout info "Deaktivierung von Standards" icon:sliders
+Um ein Standardverhalten zu deaktivieren, setzen Sie seinen Schlüssel auf `false` oder einen leeren Wert. Das Setzen von `pageNavigation: false` entfernt beispielsweise die unteren Navigationslinks für vorherige/nächste Seiten.
+:::
+
+### Top-Level-Standards
+
+| Eigenschaft | Standard | Beschreibung |
+| :--- | :--- | :--- |
+| `pageNavigation` | `true` | Rendert Links zum vorherigen/nächsten Artikel am Ende von Seiten. |
+| `copyCode` | `true` | Fügt Schaltflächen zum Kopieren an Codeblöcke an. |
+| `autoTitleFromH1` | `true` | Löst fehlende Seitentitel mit der ersten `# H1`-Überschrift der Datei auf. |
+
+### Layout- & UI-Standards
+
+| Eigenschaft | Standard | Beschreibung |
+| :--- | :--- | :--- |
+| `layout.spa` | `true` | Clientseitiges Single-Page-Application-Routen-Routing. |
+| `layout.breadcrumbs` | `true` | Kontextbezogene Breadcrumb-Leiste über den Seiten-Headern. |
+| `layout.header.enabled` | `true` | Dauerhaft angezeigte obere Navigations-Headerleiste. |
+| `layout.sidebar.collapsible` | `true` | Einklappbare Sidebar-Kategoriegruppen auf Desktop-Ansichten. |
+| `layout.sidebar.defaultCollapsed` | `false` | Sidebar-Kategorien starten im ausgeklappten Zustand. |
+| `layout.optionsMenu.position` | `"header"` | Platziert Such- und Theme-Bedienelemente im Header. |
+| `layout.optionsMenu.components.search` | `true` | Aktiviert den integrierten Volltext-Such-Modal-Auslöser. |
+| `layout.optionsMenu.components.themeSwitch` | `true` | Aktiviert den Schalter für den hellen/dunklen Erscheinungsmodus. |
+| `layout.optionsMenu.components.sponsor` | `null` | Optionaler Sponsoring-Link-URL. |
 
 ### Footer-Standards
 
-| Schlüssel | Standard | Hinweise |
-|---|---|---|
-| `layout.footer.style` | `"minimal"` | einzeilige Footer-Leiste |
-| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | automatisch generiertes Copyright mit aktuellem Jahr |
-| `layout.footer.branding` | `true` | "Built with docmd" standardmäßig anzeigen |
+| Eigenschaft | Standard | Beschreibung |
+| :--- | :--- | :--- |
+| `layout.footer.style` | `"minimal"` | Kompakte einzeilige Footer-Leiste. |
+| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | Dynamische Urheberrechtszeile für das aktuelle Jahr. |
+| `layout.footer.branding` | `true` | Zeigt den "Built with docmd"-Zuordnungslink an. |
 
-### Theme-Standards
+### Theme- & Styling-Standards
 
-| Schlüssel | Standard | Hinweise |
-|---|---|---|
-| `theme.name` | `"default"` | Basis-CSS-Theme; reservierte Werte: `default`, `sky`, `ruby`, `retro`. Jeder andere Wert wird automatisch zu einem [Template-Namen](../theming/templates.md) hochgestuft. |
-| `theme.appearance` | `"system"` | Standard-Farbmodus (folgt `prefers-color-scheme`). Auf `"light"` oder `"dark"` setzen, um zu erzwingen. |
-| `theme.codeHighlight` | `true` | Syntax-Highlighting auf `<pre>`-Blöcken |
+| Eigenschaft | Standard | Beschreibung |
+| :--- | :--- | :--- |
+| `theme.name` | `"default"` | Basistheme (`default`, `sky`, `ruby`, `retro`). Eigene Namen werden automatisch zu [Template-Namen](../theming/templates.md) befördert. |
+| `theme.appearance` | `"system"` | Standardfarbmodus nach Systemeinstellungen (`system`, `light`, `dark`). |
+| `theme.codeHighlight` | `true` | Syntaxhervorhebung auf Codeblöcken. |
 
-### Neue Opt-in-Funktionen (standardmäßig aus)
+### Erweitertes Opt-in-Funktionsangebot
 
-| Schlüssel | Standard | Hinweise |
-|---|---|---|
-| `cookie` | `null` | Optionaler Cookie-Zustimmungsdialog — siehe [Cookie-Zustimmung](cookie-consent.md) |
-| `layout.banner` | `null` | Optionale seitenweite Ankündigungsleiste — siehe [Site-Banner](site-banner.md) |
-| `theme.template` | `null` | Optionale Template-Auswahl — siehe [Templates](../theming/templates.md) |
-
-Die Standards wurden so gewählt, dass brandneue Sites ohne Konfiguration ein nutzbares Erscheinungsbild erhalten. Ältere Konfigurationen behalten ihre expliziten Werte — nur `undefined`-Schlüssel werden aufgefüllt.
+| Eigenschaft | Standard | Beschreibung |
+| :--- | :--- | :--- |
+| `cookie` | `null` | Opt-in-Cookie-Einwilligungsdialog. Siehe [Cookie-Zustimmung](./cookie-consent.md). |
+| `layout.banner` | `null` | Opt-in-Website-Ankündigungsbanner. Siehe [Site-Banner](./site-banner.md). |
+| `theme.template` | `null` | Opt-in-Auswahl eigener Website-Templates. Siehe [Templates](../theming/templates.md). |

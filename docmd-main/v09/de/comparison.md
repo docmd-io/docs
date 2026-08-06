@@ -1,104 +1,104 @@
 ---
 title: "Vergleich"
-description: "Wie sich docmd gegen Docusaurus, VitePress, MkDocs, Starlight und Mintlify schlägt — mit echten Zahlen und echten Features."
+description: "Wie sich docmd gegen Docusaurus, VitePress, MkDocs, Starlight und Mintlify schlägt — echte Zahlen, echte Features."
 ---
 
-So schlägt sich docmd im Vergleich zu den Alternativen — mit Messwerten aus einer 50-Seiten-Site, die auf derselben Hardware gebaut wurde.
+So schlägt sich `docmd` im Vergleich zu den Alternativen — gemessen an einer 50-Seiten-Dokumentationsseite auf identischer Hardware.
 
-## Schreiben Sie in 3 Sekunden los, nicht in 30 Minuten
+## In 3 Sekunden schreiben statt in 30 Minuten
 
 ::: tabs
-== tab "docmd"
+== tab "docmd" icon:rocket
 ```bash
 npx @docmd/core dev
 ```
-Fertig. Ihre Docs sind live. Keine Config-Dateien, kein Projekt-Scaffolding, kein Dependency-Dschungel.
+Fertig. Ihre Dokumentation ist live. Keine Konfigurationsdateien, kein Projekt-Scaffolding, kein Dependency-Dschungel.
 
-== tab "Docusaurus"
+== tab "Docusaurus" icon:box
 ```bash
 npx create-docusaurus@latest my-site classic
 cd my-site
 npm install
 npm start
 ```
-Vier Befehle, ein generiertes Projekt mit rund 250 MB in `node_modules` und eine Config-Datei, die Sie bearbeiten müssen, bevor irgendetwas Sinnvolles passiert.
+Vier Befehle, ein generiertes Projekt mit rund 250 MB in `node_modules` und eine Konfigurationsdatei, die bearbeitet werden muss, bevor irgendetwas Sinnvolles rendert.
 
-== tab "VitePress"
+== tab "VitePress" icon:zap
 ```bash
 npx vitepress init
 ```
-Stellt 5 Fragen, generiert eine Config-Datei, dann führen Sie `vitepress dev` aus. Sauber — aber Scaffolding bleibt erforderlich.
+Stellt 5 interaktive Fragen, generiert Konfigurationsdateien und führt dann `vitepress dev` aus. Sauber, erfordert aber dennoch Projekt-Scaffolding.
 
-== tab "MkDocs"
+== tab "MkDocs" icon:terminal
 ```bash
 pip install mkdocs-material
 mkdocs new my-site && cd my-site
 mkdocs serve
 ```
-Python-Ökosystem. Sie brauchen `pip`, eine virtuelle Umgebung und eine `mkdocs.yml`, bevor die erste Seite rendert.
+Python-Ökosystem-Abhängigkeit. Erfordert `pip`, eine virtuelle Umgebung und eine `mkdocs.yml`, bevor die erste Seite rendert.
 :::
 
 ## Der Payload-Unterschied ist real
 
-Ihre Leser sollten keine React-App herunterladen, nur um einen Absatz zu lesen. Das hier erhält der Browser tatsächlich bei einer 50-Seiten-Site:
+Leser sollten kein mehere Megabyte großes JavaScript-Framework-Bundle herunterladen müssen, um technischen Text zu lesen. Hier ist der tatsächliche Browser-Netzwerk-Payload bei einer 50-Seiten-Seite:
 
 | Generator | Gesamter initialer Load | JS-Payload | CSS-Payload |
-|:----------|:----------------------:|:----------:|:----------:|
-| **docmd** | **~18 KB** | ~12 KB | ~6 KB |
+| :--- | :---: | :---: | :---: |
+| **docmd** | **~18 KB** | **~12 KB** | **~6 KB** |
 | MkDocs Material | ~40 KB | ~25 KB | ~15 KB |
 | VitePress | ~50 KB | ~35 KB | ~15 KB |
 | Mintlify | ~120 KB | ~80 KB | ~40 KB |
 | Docusaurus | ~250 KB | ~200 KB | ~50 KB |
 
-::: callout tip "Warum das wichtig ist" icon:lightbulb
-Jede 100 KB JavaScript kosten auf einem Mittelklasse-Smartphone ~50 ms Parse-Zeit. docmds 12 KB JS bedeuten, dass Ihre Docs selbst in 3G-Netzen sofort laden. Docusaurus liefert für dieselben Inhalte 16× mehr JavaScript aus.
+::: callout tip "Warum die Payload-Größe wichtig ist" icon:lightbulb
+Jede 100 KB JavaScript kosten ~50ms Parse- und Ausführungszeit auf einem Mittelklasse-Mobilprozessor. `docmd`s 12 KB JavaScript-Fußabdruck sorgt für sofortiges Seitenrendering selbst auf eingeschränkten Mobilverbindungen. Docusaurus überträgt 16× mehr JavaScript für identische Inhalte.
 :::
 
-## Build-Geschwindigkeit
+## Build-Performance
 
-Build der gleichen 50-Seiten-Site auf einem M1 MacBook Air:
+Cold-Build- und Hot-Rebuild-Benchmarks für eine 50-Seiten-Seite auf einem M1 MacBook Air:
 
 | Generator | Cold Build | Hot Rebuild (Dev) |
-|:----------|:----------:|:-----------------:|
-| **docmd** | **~1,2 s** | **~80 ms** |
-| VitePress | ~2,5 s | ~150 ms |
-| MkDocs Material | ~3,0 s | ~500 ms |
-| Docusaurus | ~15 s | ~2 s |
+| :--- | :---: | :---: |
+| **docmd** | **~1,2s** | **~80ms** |
+| VitePress | ~2,5s | ~150ms |
+| MkDocs Material | ~3,0s | ~500ms |
+| Docusaurus | ~15s | ~2s |
 
-docmd-Rebuilds sind so schnell, dass die Seite aktualisiert ist, bevor Sie das Fenster wechseln.
+`docmd`-Rebuilds erfolgen sofort und aktualisieren den Browser, bevor der Fensterfokus wechselt.
 
-## i18n, die mit fehlenden Übersetzungen umgeht
+## i18n, die fehlende Übersetzungen elegant handhabt
 
-Die meisten Tools brechen zusammen, wenn ein Leser auf eine Sprache wechselt, in der einige Seiten noch nicht übersetzt sind. docmd fällt zur Build-Zeit auf die Standard-Locale zurück.
+Die meisten Dokumentationsgeneratoren schlagen fehl, wenn ein Benutzer zu einer Sprache wechselt, in der bestimmte Seiten keine Übersetzung haben. `docmd` löst Fallbacks auf die Standard-Locale automatisch zur Build-Zeit auf.
 
-| Fähigkeit | docmd | VitePress | Docusaurus | Starlight |
-|:-----------|:-----:|:---------:|:----------:|:---------:|
+| Funktion | docmd | VitePress | Docusaurus | Starlight |
+| :--- | :---: | :---: | :---: | :---: |
 | Pro-Seite-Fallback auf Standard-Locale | ✅ | ❌ (404) | ❌ (404) | ✅ |
 | Lokalisierter "Nicht übersetzt"-Hinweis | ✅ | ❌ | ❌ | ✅ |
-| Fehlende Locales im Switcher automatisch ausblenden | ✅ | ❌ | ❌ | ❌ |
+| Fehlende Locales im Umschalter automatisch ausblenden | ✅ | ❌ | ❌ | ❌ |
 | Sofortige Page-Existence-Prüfung (ohne Netzwerk) | ✅ | ❌ | ❌ | ❌ |
 | Versionierung + i18n kombiniert | ✅ | ❌ | ❌ | ❌ |
-| Zero-Config (kein eigenes React/Vue) | ✅ | Teilweise | ❌ | ✅ |
+| Zero-Config (kein benutzerdefiniertes React/Vue) | ✅ | Teilweise | ❌ | ✅ |
 
-::: callout warning "Was in VitePress und Docusaurus passiert" icon:info
-Wechselt ein Leser auf Hindi und ist diese Seite nicht übersetzt, erhält er einen **404-Fehler**. Der einzige Workaround sind serverseitige Redirects oder das Schreiben einer benutzerdefinierten React/Vue-Komponente. docmd handhabt dies zur Build-Zeit — nicht verfügbare Locales zeigen ein "N/A"-Badge, und unübersetzte Seiten fallen still mit einem lokalisierten Warn-Callout zurück.
+::: callout warning "404-Fehler in VitePress und Docusaurus" icon:info
+Wechselt ein Leser zu einer Locale, in der eine bestimmte Seite nicht übersetzt wurde, lösen VitePress und Docusaurus einen **404-Fehler** aus. Dies zu verhindern erfordert benutzerdefinierte Server-Redirects oder eigene Framework-Komponenten. `docmd` handhabt fehlende Übersetzungen zur Build-Zeit — unübersetzte Seiten fallen nahtlos mit einem lokalisierten Benachrichtigungs-Callout zurück.
 :::
 
-## Workspace
+## Multi-Projekt-Workspace-Unterstützung
 
-Teams, die mehrere Produkte unter einer Domain pflegen (zum Beispiel eine Kern-Plattform und ein SDK), benötigen oft separate Docs mit unabhängiger Navigation und unabhängigen Release-Zyklen. Die meisten Generatoren erfordern entweder separate Deployments oder eigene Plugin-Verklebung.
+Teams, die mehrere Produkte unter einer einzigen Domain verwalten (wie eine Plattform-Core, SDKs und CLI-Tools), benötigen eine unabhängige Navigation, unterschiedliche Konfigurationen und separate Release-Zyklen.
 
-| Fähigkeit | docmd | Docusaurus | VitePress | MkDocs | Starlight |
-|:-----------|:-----:|:----------:|:---------:|:------:|:---------:|
+| Funktion | docmd | Docusaurus | VitePress | MkDocs | Starlight |
+| :--- | :---: | :---: | :---: | :---: | :---: |
 | Native Workspace-Unterstützung | ✅ | Plugin | ❌ | Plugin | ❌ |
-| Eine Config-Zeile pro Projekt | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Einzelne Config-Zeile pro Projekt | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Unabhängige Versionierung pro Projekt | ✅ | ✅ | ❌ | ❌ | ❌ |
 | Unabhängige i18n pro Projekt | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Geteilte Assets über Projekte hinweg | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Ein einziges `site/`-Output (kein Proxy nötig) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Einzelne `site/`-Ausgabe (kein Proxy nötig) | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Zero-Config-Erkennung | ✅ | ❌ | ❌ | ❌ | ❌ |
 
-::: callout info "Wie docmd das macht" icon:info
+::: callout info "Native Workspace-Konfiguration" icon:info
 ```json "docmd.config.json"
 {
   "workspace": {
@@ -109,24 +109,24 @@ Teams, die mehrere Produkte unter einer Domain pflegen (zum Beispiel eine Kern-P
   }
 }
 ```
-Jeder Projektordner hat seine eigene `docmd.config.json` mit unabhängiger Konfiguration. Ein einziger `npx @docmd/core build` erzeugt ein einziges deploybares Verzeichnis — kein Reverse-Proxy, kein Nginx, keine separaten CI-Pipelines.
+Jeder Projektordner im Workspace behält seine eigene `docmd.config.json` für Overrides auf Projektebene. Die Ausführung von `npx @docmd/core build` kompiliert ein einheitliches, konsolidiertes Distributionsverzeichnis ohne Reverse-Proxies oder mehrstufige CI-Pipelines.
 :::
 
-Docusaurus erreicht ähnliche Ergebnisse durch Multi-Instance-Plugins, die separate Plugin-Einträge, Sidebar-Dateien und manuelle Routen-Konfiguration pro Instanz erfordern. MkDocs benötigt das Drittanbieter-Plugin `mkdocs-monorepo-plugin`. VitePress, Starlight und Mintlify haben keinerlei native Workspace-Unterstützung.
+Docusaurus erfordert komplexe Multi-Instanz-Plugin-Setups mit duplizierten Konfigurationsdateien. MkDocs ist vom `mkdocs-monorepo-plugin` abhängig. VitePress, Starlight und Mintlify bieten keine native Workspace-Unterstützung.
 
-## Vollständige Feature-Matrix
+## Umfassende Feature-Matrix
 
 | Feature | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
-|:--------|:-----:|:----------:|:---------:|:---------------:|:---------:|:--------:|
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Zero-Config-Start** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Config erforderlich** | Keine | `docusaurus.config.js` | `config.mts` | `mkdocs.yml` | `astro.config.mjs` | `mint.json` |
-| **Workspace** | ✅ | Plugin | ❌ | Plugin | ❌ | ❌ |
+| **Workspace-Monorepos** | ✅ | Plugin | ❌ | Plugin | ❌ | ❌ |
 | **SPA-Navigation** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | **Native Versionierung** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **Native i18n** | ✅ | ✅ | Manuell | Plugin | ✅ | ✅ |
 | **Eingebaute Suche** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
-| **llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **MCP-Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **llms.txt-Unterstützung** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Nativer MCP-Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Docker-Image** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Inline-Diskussionen** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -134,26 +134,24 @@ Docusaurus erreicht ähnliche Ergebnisse durch Multi-Instance-Plugins, die separ
 | **Self-hosted** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
 | **Deploy-Config-Generator** | ✅ | ❌ | ❌ | ❌ | ❌ | N/A |
 
-## Config-Overhead
+## Konfigurations-Overhead
 
-Anzahl der Config-Zeilen für eine Site mit Versionierung, i18n, Suche und Sitemap:
+Anzahl der Konfigurationszeilen für eine Seite mit Versionierung, i18n, Suche und Sitemap-Generierung:
 
 | Generator | Config-Zeilen | Erforderliche Dateien |
-|:----------|:-------------:|:---------------------:|
+| :--- | :---: | :---: |
 | **docmd** | **~15 Zeilen** | 1 (`docmd.config.json`) |
 | MkDocs Material | ~50 Zeilen | 1 + Plugins |
 | VitePress | ~80 Zeilen | 1 + Theme-Verzeichnis |
 | Docusaurus | ~120 Zeilen | 3+ Config-Dateien |
 
-## Qualitätssicherung
+## Automatische Qualitätssicherung
 
-docmd wird mit einer Brute-Test-Suite ausgeliefert, die **25 verschiedene Szenarien** über **85 Assertions** validiert — und jedes Feature sowohl isoliert als auch in Kombination abdeckt. Jedes Release muss alle 85 Assertions und 13 interne Failsafe-Prüfungen bestehen, bevor es ausgeliefert wird.
+`docmd` wird mit einer umfassenden Integrationstest-Suite ausgeliefert, die **25 verschiedene Szenarien** über **85 Assertions** validiert — und jedes Kernfeature sowie Plugin isoliert und in Kombination abdeckt. Jedes Release muss alle 85 Assertions und 13 interne Failsafe-Prüfungen vor der Veröffentlichung bestehen.
 
-::: callout tip "Tests selbst ausführen" icon:lightbulb
+::: callout tip "Test-Suite lokal ausführen" icon:lightbulb
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js
 ```
 :::
-
-Kein anderer Dokumentations-Generator dieser Klasse veröffentlicht eine vergleichbare End-to-End-Feature-Test-Suite als Teil seiner Quelle.

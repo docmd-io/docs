@@ -5,7 +5,7 @@ description: "编写 docmd 模板包 —— 目录结构、描述符、EJS 上�
 
 # 开发模板
 
-> **面向模板作者。** 若您只是想在文档站点中*使用*模板，请参阅 [模板 (Templates)](/theming/templates)。
+> **面向模板作者。** 若您只是想在文档站点中*使用*模板，请参阅 [模板 (Templates)](../theming/templates.md)。
 
 模板就是一个普通的 npm 包，声明 `capabilities: ['template']` 并提供一个 `templates[]` 数组（包含一组 `.ejs` 覆盖文件）。`@docmd/ui` 中的模板解析器负责按页查找、识别 frontmatter 与 config 中的覆盖，并在必要时回退到默认实现。
 

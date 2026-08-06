@@ -1,27 +1,25 @@
 ---
 title: "MCP Server"
-description: "Connect AI development agents to your documentation workspace using the Model Context Protocol."
+description: "Model Context Protocol (MCP) server reference for integration with AI development tools."
 ---
 
-docmd includes a native Model Context Protocol (MCP) server, enabling AI development agents to interact with your documentation workspace programmatically over a secure, local connection.
+docmd incorporates a native Model Context Protocol (MCP) server, enabling AI development agents to interact with your documentation workspace programmatically over local transport channels.
 
-## What is MCP?
+## Technical Overview
 
-The [Model Context Protocol](external:https://modelcontextprotocol.io/) is an open standard for connecting AI models to external tools and data sources. It uses JSON-RPC 2.0 messages over a transport layer (stdio, HTTP). docmd implements the `stdio` transport — the agent spawns `docmd mcp` as a child process and communicates via stdin/stdout.
+The [Model Context Protocol](external:https://modelcontextprotocol.io/) is an open specification for interfacing AI models with local workspace tools. docmd implements the `stdio` transport layer — clients launch `docmd mcp` as a subprocess and exchange JSON-RPC 2.0 messages over standard input/output streams.
 
-## Quick Start
+## Launch & Configuration
 
 ```bash
 docmd mcp
 ```
 
-This starts the MCP server over `stdio`. No network ports are opened — all communication happens through standard input/output streams.
+### Claude Desktop Integration
 
-### Claude Desktop Configuration
+Add to your `claude_desktop_config.json`:
 
-Add to your Claude Desktop `claude_desktop_config.json`:
-
-```json
+```json "claude_desktop_config.json"
 {
   "mcpServers": {
     "docmd": {
@@ -33,9 +31,9 @@ Add to your Claude Desktop `claude_desktop_config.json`:
 }
 ```
 
-### Cursor / Windsurf Configuration
+### Cursor & IDE Settings
 
-Add to your editor's MCP settings:
+Configure in editor MCP settings:
 
 ```json "mcp_settings.json"
 {
@@ -44,105 +42,33 @@ Add to your editor's MCP settings:
 }
 ```
 
-## Available Tools
+## Available Tool Handlers
 
-The MCP server exposes six tools that agents can call:
+The MCP server exposes 6 primary tool handlers:
 
-| Tool | Description |
+| Tool | Technical Purpose |
 | :--- | :--- |
-| **`search_docs`** | Full-text search across all documentation files. Returns matching lines with file paths and line numbers. |
-| **`list_docs`** | List every markdown file in the project (optionally scoped to a subdirectory such as a locale or version). Returns relative paths so the agent can navigate the docs tree before reading individual files. |
-| **`read_doc`** | Read the raw markdown content of any documentation file by its relative path. Path is sandboxed to the project root. |
-| **`get_config`** | Retrieve the resolved `docmd.config` — title, source/output directories, configured locales, versions, and enabled plugins. Sensitive values (API keys, analytics IDs) are stripped from the response. |
-| **`validate_docs`** | Run link validation across all markdown files. Returns a list of broken links with file, line, and target. |
-| **`get_llms_context`** | Retrieve the complete `llms-full.txt` context — the unified content of the entire documentation site, optimised for LLM ingestion. |
+| **`search_docs`** | Execute full-text search queries across Markdown source files. Returns file locations and matching line numbers. |
+| **`list_docs`** | List relative Markdown file paths within the workspace (optionally scoped by subdirectories). |
+| **`read_doc`** | Read raw Markdown source contents for specified file paths. Access is strictly sandboxed to project roots. |
+| **`get_config`** | Inspect resolved configuration parameters (`docmd.config.json`). Sensitive keys (API tokens, secret IDs) are redacted automatically. |
+| **`validate_docs`** | Execute link validation checks across Markdown sources. Returns broken link reports with target locations. |
+| **`get_llms_context`** | Retrieve unified `llms-full.txt` context payloads optimised for LLM prompt ingestion. |
 
-### Tool Schemas
+## Protocol Compliance Details
 
-#### `search_docs`
+docmd supports the standard MCP specification:
 
-```json
-{
-  "name": "search_docs",
-  "inputSchema": {
-    "type": "object",
-    "properties": {
-      "query": { "type": "string", "description": "The term or phrase to search for." }
-    },
-    "required": ["query"]
-  }
-}
-```
+* **Transport Mechanism**: `stdio` (JSON-RPC 2.0 messages over standard I/O).
+* **Logging**: Out-of-band diagnostic logs emitted via `stderr`.
+* **Lifecycle Flow**: `initialize` → `notifications/initialized` → Tool invocations.
+* **Capabilities**: Exposes `tools`, `resources`, and `prompts`.
 
-#### `list_docs`
+## Security Controls
 
-```json
-{
-  "name": "list_docs",
-  "inputSchema": {
-    "type": "object",
-    "properties": {
-      "subdir": { "type": "string", "description": "Optional subdirectory to scope the listing (e.g. 'en', 'v1', 'guides'). Path is sandboxed to the configured source directory." }
-    }
-  }
-}
-```
+* **Local Process Sandbox**: Operates strictly as a child process without opening external network ports.
+* **Path Boundary Verification**: File I/O operations are restricted within the project root directory.
 
-#### `read_doc`
-
-```json
-{
-  "name": "read_doc",
-  "inputSchema": {
-    "type": "object",
-    "properties": {
-      "route": { "type": "string", "description": "Relative path to the markdown file (e.g. docs/getting-started.md). Must resolve inside the project root." }
-    },
-    "required": ["route"]
-  }
-}
-```
-
-#### `get_config`
-
-```json
-{
-  "name": "get_config",
-  "inputSchema": {
-    "type": "object",
-    "properties": {}
-  }
-}
-```
-
-#### `validate_docs` / `get_llms_context`
-
-No input parameters required.
-
-## Protocol Details
-
-docmd implements the MCP specification (protocol version `2025-03-26`):
-
-- **Transport**: `stdio` — JSON-RPC 2.0 messages over stdin/stdout, one per line
-- **Diagnostics**: Logged to `stderr` (does not interfere with the JSON-RPC stream)
-- **Lifecycle**: `initialize` → `notifications/initialized` → tool calls
-- **Ping**: Responds to `ping` requests with `{}` (required for connection health checks)
-- **Capabilities**: Declares `tools`, `resources`, and `prompts` (tools are the primary interface)
-
-## Privacy & Security
-
-- **Local only**: The server runs as a child process — no network exposure, no ports opened
-- **Sandboxed**: File operations are restricted to the project working directory
-- **No telemetry**: No data is sent anywhere — all processing happens on your machine
-
-## Complementary Features
-
-The MCP server works alongside other AI-first features in docmd:
-
-- **`llms.txt` / `llms-full.txt`**: Generated at build time by the `llms` plugin. Any agent can fetch these from your deployed site without MCP.
-- **Copy Context widget**: Browser UI button that copies page content optimised for pasting into AI chat windows.
-- **SKILL.md**: Agent instruction manual auto-generated by `docmd init`. Points to the [docmd-skills](external:https://github.com/docmd-io/docmd-skills) knowledge base.
-
-::: callout tip "When to use MCP vs llms.txt"
-Use **MCP** when an agent needs to search, read specific files, or validate links interactively during development. Use **llms-full.txt** when an agent needs the entire documentation context in a single fetch (e.g., for RAG or pre-prompting).
+::: callout tip "MCP vs llms.txt Usage" icon:zap
+Use **MCP** when AI agents need interactive tool access to search files or validate links during code editing. Use **`llms-full.txt`** when delivering complete site context payloads in single prompt operations.
 :::

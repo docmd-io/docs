@@ -1,38 +1,36 @@
 ---
-title: "Workspaces"
-description: "Build multiple independent documentation projects from a single docmd instance, with global configuration cascading and a built-in Project Switcher."
+title: "Multi-Project Workspaces"
+description: "Build and deploy multi-project documentation sites from a single repository with shared assets and project switchers in docmd."
 ---
 
-Workspaces let you build and deploy multiple documentation projects from one repository. Each project keeps its own configuration. Global settings defined at the workspace root cascade automatically into every project.
+Workspaces allow you to build and deploy multiple independent documentation projects from a single repository. Each sub-project maintains its own configuration options while inheriting global defaults defined at the workspace root.
 
 ```text
-docs.example.com/           → Main documentation
-docs.example.com/sdk/       → SDK reference
-docs.example.com/cli/       → CLI documentation
+docs.example.com/           → Main Product Documentation
+docs.example.com/sdk/       → SDK API Reference
+docs.example.com/cli/       → CLI Tooling Guide
 ```
 
-## Setup
+## Directory Setup
 
-### 1. Directory Structure
-
-One directory per project. Shared assets and global configuration live at the repository root.
+Organise your repository into separate project subdirectories. Shared static assets and global workspace configurations reside at the repository root:
 
 ```text
 my-docs/
-├── assets/                   ← shared assets (all projects inherit these)
+├── assets/                   ← shared static assets (inherited by all projects)
 ├── main-docs/
-│   ├── docmd.config.json     ← project config (overrides root defaults)
-│   └── docs/                 ← project content
+│   ├── docmd.config.json     ← project-level config (overrides root defaults)
+│   └── docs/                 ← main project Markdown content
 ├── sdk-docs/
-│   ├── docmd.config.json
-│   └── docs/
-├── docmd.config.json         ← workspace root config
+│   ├── docmd.config.json     ← SDK project config
+│   └── docs/                 ← SDK project Markdown content
+├── docmd.config.json         ← workspace root configuration
 └── package.json
 ```
 
-### 2. Root Workspace Config
+## Workspace Configuration Schema
 
-The root `docmd.config.json` uses the `workspace` key. Any top-level keys (e.g. `theme`, `menubar`, `logo`) act as **global defaults** for every project.
+The root `docmd.config.json` file uses the `workspace` key to declare projects. Top-level parameters (e.g. `theme`, `menubar`, `logo`) act as **global defaults** across all sub-projects:
 
 ```json "docmd.config.json"
 {
@@ -52,29 +50,29 @@ The root `docmd.config.json` uses the `workspace` key. Any top-level keys (e.g. 
     "dark": "assets/logo-light.svg"
   },
   "menubar": [
-    { "text": "GitHub", "url": "https://github.com/my-org/my-repo", "external": true }
+    { "text": "GitHub", "url": "https://github.com/docmd-io/docmd", "external": true }
   ]
 }
 ```
 
-#### `workspace` Options
+### `workspace` Options
 
-| Key | Type | Description |
-| :-- | :--- | :---------- |
-| `projects` | `Array` | List of project entries. At least one must use `prefix: "/"`. |
-| `switcher` | `Object` | Controls the [Project Switcher](#project-switcher) visibility and position. |
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `projects` | `Array` | List of project entries. Exactly one project must assign `prefix: "/"`. |
+| `switcher` | `Object` | Controls the [Project Switcher](#project-switcher) position and rendering. |
 
-#### Project Entry Fields
+### Project Entry Fields
 
-| Key | Type | Required | Description |
-| :-- | :--- | :------- | :---------- |
-| `prefix` | `String` | ✅ | URL prefix. Use `"/"` for the root project. |
-| `src` | `String` | ✅ | Directory path (relative to CWD) containing the project's content and optional `docmd.config.json`. |
-| `title` | `String` | - | Display name shown in the Project Switcher UI. |
+| Field | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `prefix` | `String` | Yes | URL route prefix. Use `"/"` for the root project. |
+| `src` | `String` | Yes | Subdirectory path containing project content and optional `docmd.config.json`. |
+| `title` | `String` | No | Display name rendered in the Project Switcher UI dropdown. |
 
-### 3. Project-Level Config
+## Project-Level Overrides
 
-Each project directory can have its own `docmd.config.json`. Settings defined here **override** the workspace root defaults.
+Sub-projects can maintain dedicated `docmd.config.json` manifests. Parameters defined at the project level **override** workspace root defaults:
 
 ```json "docmd.config.json"
 {
@@ -87,29 +85,25 @@ Each project directory can have its own `docmd.config.json`. Settings defined he
 }
 ```
 
-If no local config file is found, the engine applies zero-config auto-routing using the workspace defaults.
+If a sub-project omits a local config file, the compiler applies zero-config automatic routing using workspace defaults.
 
-### 4. Global Configuration Cascading
+## Configuration Cascading Hierarchy
 
-Any key defined in the root workspace config automatically applies to every project. Project configs can selectively override any of these globals.
+Configuration options cascade through a 3-layer precedence model:
 
-| Layer | Precedence |
-| :---- | :--------- |
-| Root workspace config | Lowest (applied first as defaults) |
-| Project `docmd.config.json` | Higher (overrides root defaults) |
-| Project `navigation.json` | Highest (always wins for navigation) |
+| Layer | Priority | Description |
+| :--- | :--- | :--- |
+| **Root Workspace Config** | Base Default | Applied first across all workspace projects. |
+| **Project Config (`docmd.config.json`)** | Higher | Overrides root workspace defaults for that specific project. |
+| **Project Navigation (`navigation.json`)** | Top Priority | Always takes precedence for rendering sidebars. |
 
-**Example**: Define your global `theme` and `menubar` once at the root. Each project only needs to set `title`, `src`, and its own `plugins`.
-
-::: callout info "Navigation Priority" icon:info
-A project-level `navigation.json` file **always takes precedence** over any `navigation` array defined in the workspace root config. If neither exists, docmd falls back to automatic directory scanning.
+::: callout info "Navigation Precedence" icon:info
+A project-level `navigation.json` manifest **always takes precedence** over any global `navigation` array defined in the root workspace config.
 :::
 
-## Project Switcher
+## The Project Switcher UI
 
-The Project Switcher renders a slim UI component for navigating between workspace projects.
-
-### Configuration
+The Project Switcher renders an accessible dropdown component enabling readers to jump between workspace sub-projects:
 
 ```json "docmd.config.json"
 {
@@ -122,49 +116,46 @@ The Project Switcher renders a slim UI component for navigating between workspac
 }
 ```
 
-| Position | Description |
-| :------- | :---------- |
-| `sidebar-top` (default) | Pinned at the top of the sidebar, above navigation. |
+| Position | Rendering Location |
+| :--- | :--- |
+| `sidebar-top` (default) | Pinned at the top of the sidebar, above navigation links. |
 | `sidebar-bottom` | Pinned at the bottom of the sidebar. |
-| `options-menu` | Integrated into the header options menu alongside search and theme toggles. |
+| `options-menu` | Integrated into the header options menu alongside search and theme switches. |
 
-The switcher only renders when two or more projects are defined.
+The Project Switcher renders automatically when two or more workspace projects are declared.
 
-## Assets
+## Asset Management
 
-### Shared Assets
-Place logos, favicons, and global CSS in the root `assets/` directory. The engine copies these into every project's output automatically during both `dev` and `build`.
+- **Shared Assets**: Place logos, favicons, and global custom CSS in the root `assets/` directory. All workspace projects inherit these assets during development and build compilation.
+- **Project Assets**: Sub-projects can maintain local `assets/` subdirectories. Project-specific assets override shared root assets when filenames collide.
 
-### Project-Specific Assets
-Each project can have its own `assets/` directory. Project assets take priority over shared assets when filenames conflict.
+## Development & Build Commands
 
-## Building & Development
-
-### Dev Server
+::: tabs
+== tab "Development Server" icon:play
+Run the multi-project dev server:
 ```bash
 npx @docmd/core dev
 ```
-Builds all projects and serves them from a single port. File changes trigger **targeted, per-project** rebuilds - only the modified project re-renders, not the whole workspace. Root config changes trigger a full workspace rebuild.
-
-### Production Build
+Builds all workspace projects and serves them on a single HTTP port. File edits trigger targeted, per-project hot updates without rebuilding the whole workspace.
+== tab "Production Build" icon:box
+Generate production bundle:
 ```bash
 npx @docmd/core build
 ```
-Outputs a single static directory. All projects merge into their respective subpaths. No reverse proxy or complex CI pipelines are required.
+Outputs a single unified static directory. All projects compile into their respective subpaths without requiring reverse proxy setups.
+:::
 
-## Rules & Constraints
+## Workspace Constraints
 
-1. **Root Project Required**: Exactly one project must have `prefix: "/"`.
-2. **Unique Prefixes**: Every project must use a unique URL prefix.
-3. **`out` in Root Only**: Only the root workspace config controls the output directory. Child project configs must not define `out`.
-4. **No Prefix Conflicts**: If a root project has a folder named `sdk/`, and another project uses `prefix: "/sdk"`, the engine emits a conflict warning. The prefixed project always wins.
+1. **Root Project Requirement**: Exactly one project must assign `prefix: "/"`.
+2. **Unique Route Prefixes**: Every project must use a unique URL prefix string.
+3. **Root-Level `out` Control**: Output directory (`out`) is configured exclusively at the workspace root level; sub-project configs must not specify `out`.
 
-## Migrating from Legacy Configurations
+## Configuration Schema Migration
 
-The pre-0.8.3 `projects` array syntax and other legacy configuration keys are automatically normalised to the modern `workspace` schema for backward compatibility. 
+To upgrade legacy workspace definitions to the modern `workspace` schema format, execute the automated CLI migration helper:
 
-While manual updates are strictly not required, you can automatically upgrade your configuration file to the modern schema using the CLI.
-
-::: callout tip "Migrate with one command" icon:lightbulb
-Run `npx @docmd/core migrate --upgrade` to automatically rewrite your root configuration to the current schema.
+::: callout tip "Automated Config Upgrade" icon:sparkles
+Run `npx @docmd/core migrate --upgrade` to automatically rewrite legacy configuration files to the v0.9.0 workspace schema.
 :::
