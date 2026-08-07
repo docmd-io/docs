@@ -1,5 +1,4 @@
 {
-  "engine": "rust",
   "title": "docmd search",
   "url": "https://docs.docmd.io/search",
   "src": ".",

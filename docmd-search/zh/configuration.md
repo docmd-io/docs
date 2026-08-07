@@ -3,7 +3,7 @@ title: "配置说明"
 description: "docmd-search 的全局、项目和 CLI 配置选项。覆盖模型、分块大小、包含/排除模式以及输出目录。"
 ---
 
-`docmd-search` 使用简单四级配置系统，设置从默认值依次解析并合并到命令行 Flag。
+`docmd-search` 使用简单的四级配置系统，设置从默认值依次解析并合并到命令行 Flag。
 
 ## 配置解析顺序
 
