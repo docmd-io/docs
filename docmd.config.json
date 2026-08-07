@@ -22,6 +22,18 @@
       }
     ]
   },
+  "cookie": {
+    "enabled": true,
+    "position": "bottom-right"
+  },
+  "layout": {
+    "banner": {
+      "content": "**v0.9.0 is live!** — Read the latest technical documentation and migration guides.",
+      "type": "info",
+      "dismissible": true,
+      "icon": "sparkles"
+    }
+  },
   "plugins": {
     "ai": {
       "assistant": true,
