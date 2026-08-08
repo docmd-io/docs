@@ -1,19 +1,18 @@
 ---
-title: "UI Strings & SEO"
-description: "Customise system UI text per locale and understand automatic SEO tags for multi-language sites."
+title: "UI Strings & SEO Localisation"
+description: "Customise system UI strings per locale and understand automated hreflang SEO meta tags in docmd."
 ---
 
-## Built-in Language Support
+`docmd` ships with built-in translations for common system strings across major languages. When configuring a supported locale, system labels—such as search placeholders, navigation buttons, and theme mode toggles—translate automatically.
 
-docmd and its official plugins ship with built-in translations for common languages. When you configure a supported locale, the engine automatically translates system text like search placeholders, navigation labels, and theme toggles.
+For unsupported languages or custom phrasing, the system falls back to English while allowing custom string overrides per locale.
 
-For unsupported languages or custom phrasing, the system falls back to English. You can override any string per locale.
+## Customising UI Strings
 
-## Custom UI Strings
-
-Use the `translations` property on any locale to override system text:
+Define custom labels in the `translations` object of any locale configuration:
 
 ```json "docmd.config.json"
+{
   "i18n": {
     "default": "en",
     "locales": [
@@ -36,32 +35,33 @@ Use the `translations` property on any locale to override system text:
       }
     ]
   }
+}
 ```
 
-The merge order is: **system translations → plugin translations → your config translations**. Your config always wins.
+Translation resolution follows a strict priority order: **system defaults → plugin strings → configuration overrides**. User configuration always takes highest precedence.
 
-## Available Keys
+## Available Translation Keys
 
-Instead of hardcoding a list of available keys, you can review the complete set of supported languages and translation keys directly in the docmd source repository.
+The complete set of supported languages and system translation keys is available directly in the core source repository:
 
 **[View Translation Source on GitHub](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
 
-The `fallbackMessage` key supports `{active}` and `{default}` placeholders. The engine replaces these with locale labels at build time.
+The `fallbackMessage` string supports `{active}` and `{default}` template placeholders, which are substituted dynamically at build time with active locale labels.
 
-## SEO and Hreflang
+## Automated SEO Meta Tags (`hreflang`)
 
-docmd automatically generates `<link rel="alternate" hreflang="...">` tags for every page across all locales. The default locale also receives the `x-default` hreflang value.
+When i18n is enabled, `docmd` automatically generates `<link rel="alternate" hreflang="...">` tags for every page across all configured locales. The default locale is assigned the `x-default` fallback tag:
 
 ```html
-<!-- Generated automatically on every page -->
+<!-- Injected automatically into HTML document headers -->
 <link rel="alternate" hreflang="en" href="/">
 <link rel="alternate" hreflang="x-default" href="/">
 <link rel="alternate" hreflang="hi" href="/hi/">
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-No configuration is required. The engine injects these tags into every page when i18n is enabled.
+No manual configuration is required; the engine injects these tags into all generated static pages automatically.
 
-::: callout info "noStyle Pages" icon:info
-The UI strings system applies to themed layout pages. For noStyle pages using custom HTML, see [Client-Side String Replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
+::: callout info "Un-styled Custom Pages" icon:info
+The UI strings translation system applies to standard themed pages. For standalone custom HTML pages using `noStyle: true`, refer to [No-Style Example Pages](../../content/no-style-example.md).
 :::

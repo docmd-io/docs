@@ -1,26 +1,26 @@
 ---
 title: "Sitemap-Plugin"
-description: "Generieren Sie automatisch eine standardkonforme sitemap.xml für eine bessere Suchmaschinen-Entdeckung."
+description: "Generieren Sie automatisch standardkonforme sitemap.xml-Dateien für mehrversionige Dokumentationsseiten in docmd."
 ---
 
-Das `@docmd/plugin-sitemap`-Plugin erzeugt eine `sitemap.xml`-Datei im Stammverzeichnis Ihres Build-Verzeichnisses. Dies bietet Suchmaschinen eine umfassende Karte der Architektur Ihrer Site und stellt sicher, dass alle Seiten — einschließlich versionierter Dokumentation — gecrawlt und indiziert werden.
+Das `@docmd/plugin-sitemap`-Plugin generiert während der Kompilierung eine Standard-`sitemap.xml`-Datei im Stammverzeichnis Ihres Site-Ausgabeverzeichnisses. Dies bietet Web-Crawlern und Suchmaschinen eine Karte Ihrer Site-Struktur und stellt sicher, dass alle Seiten und Versionsrouten effizient indiziert werden.
 
-## Konfiguration
+## Konfigurationsoptionen
 
-Aktivieren Sie die Sitemap-Generierung, indem Sie Ihre `siteUrl` in der Root-Konfiguration angeben. Sie können das Crawl-Gewicht im `plugins`-Objekt anpassen.
+Konfigurieren Sie Parameter für die Sitemap-Generierung in `docmd.config.json`:
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Aktiviert/deaktiviert die Sitemap-Generierung. |
-| `defaultChangefreq` | `string` | `'weekly'` | Hinweis an Crawler, wie oft sich Seiten ändern. |
-| `defaultPriority` | `number` | `0.8` | Standardgewicht für Standardseiten (0.0 bis 1.0). |
-| `rootPriority` | `number` | `1.0` | Gewicht für die Startseite (`index.md`). |
+| `enabled` | `boolean` | `true` | Aktivieren oder deaktivieren Sie die Sitemap-Generierung. |
+| `defaultChangefreq` | `string` | `'weekly'` | Crawl-Frequenzhinweis für Suchmaschinen-Bots. |
+| `defaultPriority` | `number` | `0.8` | Prioritätsgewichtung für Standard-Dokumentationsseiten (`0.0` bis `1.0`). |
+| `rootPriority` | `number` | `1.0` | Prioritätsgewichtung für die Startseite der Website (`index.md`). |
 
-### Beispiel
+### Globales Sitemap-Beispiel
 
 ```json "docmd.config.json"
 {
-  "url": "https://docs.example.com",
+  "url": "https://docs.docmd.io",
   "plugins": {
     "sitemap": {
       "defaultChangefreq": "weekly",
@@ -30,26 +30,26 @@ Aktivieren Sie die Sitemap-Generierung, indem Sie Ihre `siteUrl` in der Root-Kon
 }
 ```
 
-## Funktionen
+## Hauptfunktionen
 
-- **Kanonische URLs**: löst Seitenpfade zu sauberen öffentlichen URLs basierend auf Ihrer `url`-Konfiguration auf.
-- **Versionierte Entdeckung**: enthält Seiten aus jeder konfigurierten Version (`/v1/`, `/v2/` usw.).
-- **Pro-Seite-Ausschlüsse**: überspringt Seiten mit `sitemap: false` im Frontmatter.
-- **Standard-XML**: die Ausgabe folgt dem sitemaps.org-Protokoll, das von jeder großen Suchmaschine unterstützt wird.
+* **Kanonische Domain-Zuordnung**: Löst relative Seitenrouten basierend auf `config.url` in absolute URLs auf.
+* **Indizierung von Versionsrouten**: Indiziert automatisch Seiten über alle konfigurierten Dokumentationsversionen hinweg (`/v09/`, `/v08/` usw.).
+* **Ausschluss pro Seite**: Überspringt Seiten, die `sitemap: false` oder `noindex: true` im Frontmatter enthalten.
+* **Protokoll-Compliance**: Erzeugt XML, das gemäß der Standard-Spezifikation von sitemaps.org formatiert ist.
 
 ## Steuerung auf Seitenebene
 
-Überschreiben Sie das Sitemap-Verhalten für bestimmte Seiten über das Frontmatter:
+Überschreiben Sie Sitemap-Parameter für bestimmte Dokumente über [Seiten-Frontmatter](../content/frontmatter.md):
 
-```markdown
+```yaml
 ---
-title: "Archivseite"
-priority: 0.3          # Niedrigeres Gewicht für Legacy-Inhalte
-changefreq: "monthly"   # Hinweis an Crawler
-sitemap: false         # Diese spezifische Seite ausschließen
+title: "Legacy-Migrationsleitfaden"
+priority: 0.3          # Niedrigeres Crawl-Gewicht für Legacy-Inhalte
+changefreq: "monthly"   # Hinweis an Suchmaschinen-Crawler
+sitemap: false         # Seite aus sitemap.xml ausschließen
 ---
 ```
 
-::: callout tip "Validierung"
-Nach dem Build Ihrer Site finden Sie die Sitemap unter `site/sitemap.xml`. Sie können diese URL direkt in Suchmaschinen-Konsolen einreichen, um die Indizierung zu beschleunigen.
+::: callout tip "Sitemap-Überprüfung" icon:check-circle
+Suchen Sie `sitemap.xml` nach der Kompilierung unter `site/sitemap.xml`. Reichen Sie diese URL direkt in Search-Console-Dashboards ein, um die Seitenentdeckung zu beschleunigen.
 :::

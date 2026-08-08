@@ -1,62 +1,63 @@
 ---
 title: "Frontmatter-Referenz"
-description: "Der vollständige Leitfaden zu Seitenmetadaten und Konfiguration."
+description: "Konfigurieren Sie Metadaten auf Seitenebene, Suchindizierung, Layout-Überschreibungen und Komponentiensteuerungen in docmd."
 ---
 
-Frontmatter überschreibt globale Einstellungen für bestimmte Seiten. Schreiben Sie es im YAML-Format oben in Ihre Markdown-Dateien.
+Frontmatter ermöglicht Konfigurationsüberschreibungen auf Seitenebene. Deklarieren Sie YAML-Metadaten ganz oben in Ihren Markdown-Dateien zwischen Dreifach-Bindestrich-Trennzeichen (`---`).
 
-## Kernmetadaten
+## Kernmetadaten-Eigenschaften
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `title` | `String` | **Erforderlich.** Setzt das HTML-`<title>` und die primäre Abschnittsüberschrift. |
-| `description` | `String` | Setzt die Meta-Beschreibung für SEO und Suchergebnisse. |
-| `keywords` | `Array` | Eine Liste von Schlüsselwörtern für das `<meta name="keywords">`-Tag. |
+| `title` | `String` | **Empfohlen.** Setzt das HTML-`<title>`-Tag und den primären Seiten-Header. |
+| `description` | `String` | Setzt die Meta-Beschreibung für SEO und Suchmaschinen-Vorschauen. |
+| `keywords` | `Array` | Liste von Suchschlüsselwörtern, die in `<meta name="keywords">` injiziert werden. |
 
-::: callout warning "Titel ist wichtig" icon:triangle-alert
-Das Feld `title` wird dringend empfohlen. Ohne es fällt die Engine auf die erste `# H1`-Überschrift oder den Dateinamen zurück. Dies kann zu suboptimalen Suchergebnissen führen.
+::: callout tip "Best Practices für Metadaten" icon:sparkles
+Die Bereitstellung eines expliziten `title` und einer `description` im Frontmatter stellt sicher, dass Suchmaschinen und KI-Kontextgeneratoren Ihre Dokumentation genau indizieren.
 :::
 
-## Sichtbarkeit & Indizierung
+## Steuerung von Indizierung & Sichtbarkeit
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `noindex` | `Boolean` | Schließt die Seite aus dem internen Suchindex aus. |
-| `llms` | `Boolean` | Auf `false` setzen, um diese Seite aus KI-Kontextdateien (`llms.txt`) auszuschließen. |
-| `hideTitle` | `Boolean` | Blendet den Titel im Sticky-Header aus. Nützlich für benutzerdefinierte H1s. |
-| `bodyClass` | `String` | Fügt dem `<body>`-Tag eine benutzerdefinierte CSS-Klasse hinzu. |
+| `noindex` | `Boolean` | Bei `true` wird die Seite aus der Suchindizierung und Sitemap-Generierung ausgeschlossen. |
+| `llms` | `Boolean` | Auf `false` setzen, um das Dokument aus kompilierten KI-Kontextdateien (`llms.txt`) auszuschließen. |
+| `hideTitle` | `Boolean` | Bei `true` wird der Haupttitel im Seiten-Headerbereich ausgeblendet. |
+| `bodyClass` | `String` | Fügt dem übergeordneten `<body>`-Element benutzerdefinierte CSS-Klassen hinzu. |
 
-## Layout-Steuerung
+## Layout- & Viewport-Konfiguration
 
 | Schlüssel | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `layout` | `String` | Auf `full` setzen, um maximale Breite zu nutzen und die TOC-Sidebar auszublenden. |
-| `toc` | `Boolean` | Auf `false` setzen, um das Inhaltsverzeichnis vollständig zu deaktivieren. |
-| `noStyle` | `Boolean` | Deaktiviert die gesamte UI (Sidebar, Header, Footer) für benutzerdefinierte Seiten. |
-| `titleAppend` | `Boolean` | Auf `false` setzen, um zu verhindern, dass der Site-Titel an Metatags angehängt wird. Standard ist `true`. |
+| `layout` | `String` | Auf `"full"` setzen, um die Inhaltsbreite zu erweitern und das Inhaltsverzeichnis (TOC) zu deaktivieren. |
+| `toc` | `Boolean` | Auf `false` setzen, um die rechtsseitige Inhaltsverzeichnis-Sidebar zu deaktivieren. |
+| `noStyle` | `Boolean` | Deaktiviert standardmäßige UI-Elemente (Sidebar, Header, Footer) für benutzerdefinierte HTML-Seiten. |
+| `titleAppend` | `Boolean` | Auf `false` setzen, um zu verhindern, dass der globale Site-Titel an Metadaten-Tags angehängt wird. |
 
-### `noStyle`-Komponentensteuerung
+### Feingranulare Komponentiensteuerung (`noStyle`)
 
-Wenn `noStyle: true` aktiv ist, müssen Sie sich für die Komponenten entscheiden, die Sie behalten möchten.
+Wenn `noStyle: true` aktiv ist, geben Sie einzelne zu erhaltende UI-Komponenten an:
 
 ```yaml
 ---
 noStyle: true
 components:
-  meta: true      # SEO-Metadaten einfügen
-  favicon: true   # Site-Favicon einfügen
-  css: true       # docmd-main.css einfügen
-  theme: true     # Themenspezifisches Styling einfügen
-  highlight: true # Syntax-Highlighting einfügen
-  scripts: true   # SPA-Router-Logik einfügen
-  sidebar: true   # Navigations-Sidebar einfügen
-  footer: true    # Site-Footer einfügen
+  meta: true      # Injiziert SEO-Metadaten
+  favicon: true   # Injiziert Site-Favicon
+  css: true       # Injiziert docmd-main.css
+  theme: true     # Injiziert themenspezifisches Styling
+  highlight: true # Injiziert Syntaxhervorhebung
+  scripts: true   # Injiziert die SPA-Router-Logik
+  sidebar: true   # Injiziert die Navigations-Sidebar
+  footer: true    # Injiziert den Site-Footer
 ---
 ```
 
-## Plugin-Überschreibungen
+## Plugin- & SEO-Überschreibungen
 
-### SEO (`seo`)
-*   `image`: Benutzerdefinierte Social-Share-Bild-URL für die Seite.
-*   `aiBots`: Auf `false` setzen, um KI-Crawler für diese Seite zu blockieren.
-*   `canonicalUrl`: Setzt einen benutzerdefinierten kanonischen Link für SEO.
+| Schlüssel | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| `image` | `String` | URL für Vorschaukarten beim Teilen in sozialen Netzwerken (`og:image`). |
+| `aiBots` | `Boolean` | Auf `false` setzen, um zu verhindern, dass KI-Crawler die Seite auslesen. |
+| `canonicalUrl` | `String` | Benutzerdefinierte kanonische URL für die SEO-Indizierung. |

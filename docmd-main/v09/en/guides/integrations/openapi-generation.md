@@ -1,28 +1,32 @@
 ---
 title: "OpenAPI Generation"
-description: "How to integrate OpenAPI/Swagger schemas into your docmd workflow for automated and synchronised API reference documentation."
+description: "Integrate OpenAPI and Swagger REST schemas into docmd workflows for automated API documentation rendering."
 ---
 
-## Problem
+Manually maintaining REST API documentation is prone to drift as code endpoints evolve. Automation ensures your documentation remains the single source of truth, updated automatically during build steps.
 
-Manually maintaining REST API documentation is an operational risk. When an engineer modifies an endpoint or updates a schema in code, documentation becomes obsolete. Keeping these in sync manually is tedious, error-prone, and frequently leads to integration failures for consumers.
+docmd provides native rendering for OpenAPI / Swagger specifications via `@docmd/plugin-openapi` or automated pre-build Markdown generation.
 
-## Why it matters
+## Configuration
 
-Inaccurate API references cause developer frustration and increase support tickets. Automation ensures your documentation remains the "source of truth", reflecting the actual state of your API at every build. This allows engineers to focus on building features rather than updating tables manually.
+Enable OpenAPI rendering in `docmd.config.json`:
 
-## Approach
+```json "docmd.config.json"
+{
+  "plugins": {
+    "openapi": {
+      "spec": "./schemas/openapi.json",
+      "route": "/api/reference"
+    }
+  }
+}
+```
 
-Implement an asynchronous build pipeline that converts your `openapi.json` or `swagger.yaml` schema into standard Markdown files. Because docmd excels at rendering Markdown with complex [Containers](../../content/containers/index.md), the resulting API reference feels integrated and visually consistent with the rest of your documentation.
+## Automated Pre-Build Markdown Pipeline
 
-## Implementation
-
-### 1. Build Pipeline Integration
-
-Use a tool like `widdershins` or a custom script to generate Markdown from your OpenAPI schema as a pre-build step in your CI/CD pipeline.
+Alternatively, compile schemas to Markdown before running `docmd build`:
 
 ```json "package.json"
-// package.json
 {
   "scripts": {
     "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
@@ -31,39 +35,17 @@ Use a tool like `widdershins` or a custom script to generate Markdown from your 
 }
 ```
 
-### 2. Optimising API Layouts
+## Optimising API Layouts
 
-API references are often content-dense, with large tables for parameters and nested schemas. Use [Frontmatter](../../content/frontmatter.md) to optimise the page layout for readability.
+API references contain wide parameter tables and response payloads. Use `layout: "full"` in page frontmatter to grant maximum horizontal width:
 
 ```markdown
 ---
 title: "REST API Reference"
-layout: "full"  # Maximises horizontal space for dense tables
+layout: "full"
 ---
 ```
 
-Setting `layout: "full"` removes the right-hand Table of Contents sidebar, providing more room for wide code blocks and response examples.
-
-### 3. Enhancing with docmd Containers
-
-Post-process the generated Markdown to inject docmd features like [Tabs](../../content/containers/tabs.md) for multi-language code samples or [Callouts](../../content/containers/callouts.md) for authentication warnings.
-
-````markdown
-::: tabs
-
-  == tab "cURL"
-    ```bash
-    curl -X GET "https://api.example.com/v1/users"
-    ```
-
-  == tab "Node.js"
-    ```javascript
-    const users = await client.getUsers();
-    ```
-
+::: callout tip "Multi-Language Request Examples" icon:code
+Enhance generated endpoint pages by wrapping multi-language code snippets inside [Tabs Containers](../../content/containers/tabs.md) for cURL, JavaScript, Python, and Go request examples.
 :::
-````
-
-## Trade-offs
-
-Machine-generated documentation is excellent for technical accuracy but lacks the "human touch" required for effective learning. We recommend using OpenAPI generation for the **Technical Reference** (endpoints, parameters, schemas) while providing handwritten **Tutorials** and **Conceptual Guides** to explain the context and use cases.

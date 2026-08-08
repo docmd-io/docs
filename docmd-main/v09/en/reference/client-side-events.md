@@ -1,35 +1,35 @@
 ---
 title: "Client-Side Events"
-description: "Hook into the docmd SPA lifecycle to add interactive features."
+description: "Subscribe to client-side lifecycle events in docmd Single Page Application (SPA) navigation."
 ---
 
-docmd uses a lightweight Single Page Application (SPA) router to provide instant page transitions. Because the browser does not perform a full reload during navigation, scripts relying on `DOMContentLoaded` will not re-execute.
+docmd incorporates a lightweight Single Page Application (SPA) router to execute client-side page transitions. Because client-side routing dynamically updates DOM elements without triggering full browser reloads, standard `DOMContentLoaded` listeners will not fire on sub-page transitions.
 
-To handle this, docmd dispatches custom lifecycle events that you can listen for in your `customJs` files.
+To accommodate custom UI scripts and component re-initialisation, docmd emits dedicated DOM lifecycle events.
 
 ## `docmd:page-mounted`
 
-This event is dispatched whenever a new page has been successfully fetched and injected into the DOM.
+Dispatched on the `document` node immediately after a new page payload is rendered into the DOM.
 
-### Usage
+### Implementation Pattern
 
-Add a listener to the `document` object to re-initialise third-party libraries or trigger custom animations.
+Attach an event listener to `document` to re-initialise interactive libraries or trigger UI transitions:
 
 ```javascript
 document.addEventListener("docmd:page-mounted", (event) => {
   const { url } = event.detail;
-  console.log(`Navigated to: ${url}`);
+  console.log(`Mounted route: ${url}`);
 });
 ```
 
-### Event Details (`event.detail`)
+### Event Payload (`event.detail`)
 
-| Property | Type | Description |
+| Attribute | Type | Technical Description |
 | :--- | :--- | :--- |
-| `url` | `String` | The absolute URL of the page that was just mounted. |
+| `url` | `string` | Absolute URL path of the newly mounted page view. |
 
-## Best Practices
+## Implementation Guidelines
 
-1.  **Idempotency**: Ensure your initialisation logic can be safely called multiple times on the same page or cleaned up before the next navigation.
-2.  **Global Scope**: Scripts added via `customJs` execute in the global scope. Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the `window` object.
-3.  **Cleanup**: If your script adds global event listeners (e.g., `window.onresize`), consider tracking the current path to remove them when the user navigates away.
+1. **Idempotent Execution**: Structure setup handlers to ensure they execute safely across repeated route changes without binding duplicate event handlers.
+2. **Global Namespace Protection**: Wrap custom scripts inside IIFE (Immediately Invoked Function Expression) blocks to avoid scope pollution.
+3. **Event Cleanup**: Detach window-level event listeners (e.g. `resize` or `scroll`) prior to handling subsequent route transitions.

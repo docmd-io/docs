@@ -1,89 +1,90 @@
 ---
 title: "Linking & Referencing"
-description: "Master internal cross-linking, external resources, new-tab behaviour, and static asset referencing."
+description: "Master internal cross-linking, URL normalisation, external new-tab triggers, and static asset references in docmd."
 ---
 
-docmd provides a reliable, filesystem-aware linking system. Write links to your source `.md` files naturally in any format - the engine normalises them into clean, SEO-optimised URLs automatically.
+`docmd` provides a filesystem-aware linking system. Write links referencing source `.md` files naturally—the compiler normalises target paths into clean, canonical URLs automatically.
 
-::: callout info "Write Naturally, Ship Perfectly"
-You do not need special linking conventions. Write `overview.md`, `overview/`, or `overview` - the build engine produces the exact same clean, trailing-slash URL in every case.
+::: callout info "Automatic Path Normalisation" icon:info
+Write target paths using `.md` extensions, trailing slashes, or direct filenames (`overview.md`, `overview/`, or `overview`). The build compiler resolves them to identical canonical URLs.
 :::
 
-## URL Normalisation
+## URL Normalisation Mechanics
 
-During the build process, the engine normalises every internal link automatically. This applies to Markdown text, button containers, tags, and navigation configuration.
+During build compilation, `docmd` normalises internal link targets automatically across Markdown prose, button containers, tags, and navigation trees:
 
-| What You Write | What Gets Rendered | Why |
+| Input Path | Compiled Output URL | Resolution Rule |
 | :--- | :--- | :--- |
-| `overview.md` | `overview/` | `.md` extension stripped, trailing `/` added. |
-| `overview` | `overview/` | Trailing `/` added automatically. |
-| `overview/` | `overview/` | Already correct. No change. |
-| `api/commands.md` | `api/commands/` | Subdirectory link normalised. |
-| `localisation/index.md` | `localisation/` | `index` stripped, the folder is the canonical URL. |
-| `../index.md` | `../` | Parent directory index resolved cleanly. |
-| `overview.md#settings` | `overview/#settings` | Hash fragment preserved. |
-| `https://example.com` | `https://example.com` | External links pass through untouched. |
+| `overview.md` | `overview/` | Strips `.md` extension, appends trailing `/`. |
+| `overview` | `overview/` | Appends trailing `/` automatically. |
+| `overview/` | `overview/` | Retains existing canonical format. |
+| `api/commands.md` | `api/commands/` | Normalises subdirectory route. |
+| `localisation/index.md` | `localisation/` | Strips `index`, resolves directory root. |
+| `../index.md` | `../` | Resolves parent directory root. |
+| `overview.md#settings` | `overview/#settings` | Preserves URL hash fragment. |
+| `https://example.com` | `https://example.com` | Retains external URL untouched. |
 
-## Internal Links
+## Internal Document Links
 
-Link to other pages using relative paths to the source `.md` files. The engine resolves them correctly regardless of directory depth.
+Reference internal documents using relative filesystem paths:
 
-| Target | Example |
+| Link Target | Syntax Example |
 | :--- | :--- |
-| Sibling page | `[System Overview](overview.md)` |
-| Subdirectory page | `[API Reference](api/node-api.md)` |
-| Subdirectory index | `[Localisation](localisation/index.md)` |
-| Parent directory | `[Back to Home](../index.md)` |
+| **Sibling Page** | `[System Overview](overview.md)` |
+| **Subdirectory Page** | `[API Reference](api/node-api.md)` |
+| **Directory Index** | `[Localisation](localisation/index.md)` |
+| **Parent Directory** | `[Back to Home](../index.md)` |
 
-## Section Anchors
+## Section Anchor Links
 
-Navigate directly to a heading using standard URL hash fragments.
+Navigate to specific document headings using URL hash fragments:
 
 ```markdown
-<!-- Intra-page anchor -->
+<!-- Intra-page section anchor -->
 [Jump to Roadmap](#project-roadmap)
 
-<!-- Cross-page anchor -->
+<!-- Cross-page section anchor -->
 [Review CLI Flags](../api/cli-commands.md#available-flags)
 ```
 
-Hash fragments are preserved through normalisation. The cross-page link above renders as `../api/cli-commands/#available-flags` in production.
+Hash fragments are preserved through URL normalisation. The cross-page link above compiles to `../api/cli-commands/#available-flags`.
 
-## Opening in a New Tab
+## Opening External Links in New Tabs
 
-Prepend `external:` to any link URL to force it to open in a new browser tab. This works in standard Markdown links, buttons, and tags.
+Prepend `external:` to any URL target to force the link to open in a new browser tab (`target="_blank"`):
 
 ```markdown
 [Open in New Tab](external:./configuration/overview.md)
-[GitHub](external:https://github.com/docmd-io/docmd)
+[GitHub Repository](external:https://github.com/docmd-io/docmd)
 ```
 
-The `external:` prefix is stripped from the rendered URL. By default, all links open in the same window.
+The `external:` prefix string is stripped from rendered HTML href attributes.
 
-## Linking to Raw Files
+## Direct Unprocessed Asset Links (`raw:`)
 
-Use the `raw:` prefix to bypass normalisation and link directly to a downloadable file. The extension and path are preserved exactly as written.
+Use the `raw:` prefix to bypass URL normalisation and target static downloadable files directly:
 
 ```markdown
-[View Raw Source](raw:docs/readme.md)
+[Download Raw Source](raw:docs/readme.md)
 ```
 
-## Buttons & Tags
+## Rich Containers & Interactive Elements
 
-The `::: button` and `::: tag` containers support all standard linking conventions, including `external:` and `raw:` prefixes.
+Button (`::: button`) and Tag (`::: tag`) containers support all linking prefixes, including `external:` and `raw:` modifiers:
 
 ```markdown
-::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd icon:github
-::: button "Download Source" raw:docs/readme.md icon:download
+::: button "Quick Start Guide" ./getting-started/quick-start.md icon:rocket
+::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:github
+::: button "Download Manifest" raw:docs/manifest.json icon:download
 
-::: tag "v0.8.2" link:release-notes/0-8-2.md icon:tag color:#22c55e
-::: tag "Open Externally" link:external:./configuration/overview.md icon:external-link
+::: tag "v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
+::: tag "External Site" link:external:https://docmd.io icon:external-link
+:::
 ```
 
-## Navigation Configuration
+## Navigation Configuration Links
 
-Paths defined in `navigation.json` and `docmd.config.json` are normalised at build time. Write them in any format - all three entries below produce the identical canonical URL.
+Route entries in `navigation.json` and `docmd.config.json` are normalised automatically during build compilation:
 
 ```json "navigation.json"
 [
@@ -93,7 +94,7 @@ Paths defined in `navigation.json` and `docmd.config.json` are normalised at bui
 ]
 ```
 
-For items that should open in a new tab, set the `external` flag.
+To force a navigation item to open in a new tab, set `"external": true`:
 
 ```json "navigation.json"
 [
@@ -105,35 +106,18 @@ For items that should open in a new tab, set the `external` flag.
 ]
 ```
 
-::: callout warning "Index Pages in Navigation"
-When linking to a directory's index page, use the folder path rather than explicitly referencing `index.md`. Both work identically, but the folder path is cleaner.
-
-```markdown
-<!-- Preferred -->
-[Localisation](localisation/)
-
-<!-- Also works -->
-[Localisation](localisation/index.md)
-```
+::: callout tip "Linking to Category Directories" icon:lightbulb
+When linking to a subdirectory's index page, reference the folder path directly (`localisation/`) rather than appending `index.md`.
 :::
 
-## Protocols & External Resources
+## Protocols & Asset Paths
 
-The engine respects standard browser protocols for external resources and never modifies these links.
+The compiler preserves standard network protocols and static asset paths:
 
-*   **HTTPS** - `[docmd Homepage](https://docmd.io)` - opens in the same tab.
-*   **Mail** - `[Support](mailto:help@docmd.io)` - opens the email client.
-*   **Assets** - `[Download CLI Binary](/assets/bin/docmd-mac.zip)` - not normalised.
+- **HTTPS Protocols**: `[docmd Homepage](https://docmd.io)` (opens in same tab unless `external:` is prefixed).
+- **Mail Protocols**: `[Support Desk](mailto:help@docmd.io)` (triggers email client).
+- **Static Assets**: `[Download Asset](/assets/bin/docmd-mac.zip)` (bypasses URL normalisation).
 
-## Static Assets
-
-Place downloadable files within your project's `assets/` directory. The builder moves these files to the production root without path modifications.
-
-```markdown
-[Download Documentation PDF](/assets/pdf/handbook.pdf)
-[View Raw Global Config](/assets/config/docmd.config.json)
-```
-
-::: callout tip "Semantic Linkage for AI"
-Prefer **descriptive anchor text** (e.g., `[Optimise PWA caching](../plugins/pwa.md)`) over generic labels (e.g., `[Read more](../plugins/pwa.md)`). Detailed link labels give AI agents a high-fidelity map of semantic relationships in the `llms.txt` stream.
+::: callout tip "Descriptive Anchors for AI Context" icon:sparkles
+Use **descriptive anchor text** (`[Configure PWA caching](../plugins/pwa.md)`) instead of generic labels (`[Read more](../plugins/pwa.md)`). Explicit link text improves semantic understanding for search indexers and AI agents.
 :::

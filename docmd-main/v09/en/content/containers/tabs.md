@@ -1,12 +1,12 @@
 ---
 title: "Tabs"
-description: "Organise dense, alternative, or multi-language information into switchable interactive panes."
+description: "Organise alternative code snippets, platform instructions, and multi-language content into switchable tabs in docmd."
 ---
 
-Tabs present mutually exclusive or related data sets - such as "pnpm vs npm" or "macOS vs Windows". They condense information into a compact, interactive format.
+Tabs present mutually exclusive or alternative data sets (such as package manager choices or operating system commands). They condense technical instructions into clean, interactive tabbed containers.
 
-::: callout info "Spaceless Syntax"
-Both `::: tabs` and `:::tabs` (spaceless) work natively. Use whichever style you prefer.
+::: callout info "Spaceless Syntax Support" icon:info
+Both `::: tabs` and `:::tabs` (spaceless) syntax render identically. Choose whichever style suits your authoring workflow.
 :::
 
 ## Syntax Reference
@@ -14,40 +14,40 @@ Both `::: tabs` and `:::tabs` (spaceless) work natively. Use whichever style you
 ```markdown
 ::: tabs
 
-== tab "Label" [property:value...]
-Content for this tab.
+== tab "Tab Label" [property:value...]
+Tab content goes here.
 
-== tab "Another Label"
-Content for the second tab.
+== tab "Secondary Label"
+Secondary tab content goes here.
 
 :::
 ```
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | The text displayed on the tab trigger button. |
-| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the label text. |
+| **Label** | `"String"` | Text displayed on the tab selector button. |
+| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the label string. |
 
-## Examples
+## Usage Examples
 
-### Package Manager Instructions
+### Package Manager Switcher
 
-Show installation commands for multiple package managers in a single compact block.
+Display installation commands across multiple package managers in a single compact block:
 
 ````markdown
 ::: tabs
 
-== tab "pnpm"
+== tab "pnpm" icon:box
 ```bash
 pnpm add @docmd/core
 ```
 
-== tab "npm"
+== tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
 
-== tab "yarn"
+== tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
@@ -57,17 +57,17 @@ yarn add @docmd/core
 
 ::: tabs
 
-== tab "pnpm"
+== tab "pnpm" icon:box
 ```bash
 pnpm add @docmd/core
 ```
 
-== tab "npm"
+== tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
 
-== tab "yarn"
+== tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
@@ -76,7 +76,7 @@ yarn add @docmd/core
 
 ### Multi-Language Code Snippets
 
-Keep programming environments cleanly separated with tab icons for quick visual identification.
+Group language-specific implementations using tab icons for instant identification:
 
 ````markdown
 ::: tabs
@@ -112,15 +112,15 @@ build('./docmd.config.json');
 
 :::
 
-## Constraints
+## Constraints & Behavior Rules
 
-| Constraint | Note |
+| Rule | Technical Note |
 | :--- | :--- |
-| **Nesting Depth** | Tabs cannot nest inside other tab components. |
-| **Interactive Conflict** | Do not nest `::: steps` inside a tab. Use a standard ordered list instead. |
-| **Responsive Limit** | Limit tab counts to 6 per block for mobile compatibility. |
-| **State Persistence** | The active tab is tracked by the SPA router. Selecting "pnpm" on one page activates it on subsequent pages. |
+| **Nesting Limit** | Tabs cannot nest directly within other tab containers. |
+| **Steps Compatibility** | Do not nest `::: steps` inside a tab pane. Use a standard ordered list instead. |
+| **Viewport Limits** | Keep tab counts below 6 entries per block for mobile compatibility. |
+| **State Persistence** | Selected tab states persist across page transitions during SPA navigation. |
 
-::: callout tip "AI Context Mapping"
-Always include the target language or platform in the tab label (e.g., `== tab "TypeScript"`). This helps AI agents instantly identify the correct context stream without having to infer it from code content.
+::: callout tip "Contextual Labeling for AI" icon:sparkles
+Specify target languages or operating systems in tab labels (e.g. `== tab "TypeScript"`). Explicit labels allow AI indexers to map alternative code blocks to their respective ecosystems accurately.
 :::

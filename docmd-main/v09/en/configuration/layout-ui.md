@@ -1,37 +1,38 @@
 ---
 title: "Layout & UI Zones"
-description: "Control the interface structure by managing headers, sidebars, and functional UI slots."
+description: "Configure documentation layout regions, header widgets, sidebar trees, and footer parameters in docmd.config.json."
 ---
 
-A standard page contains six primary functional zones:
+A standard `docmd` page consists of six core functional UI zones:
 
-1.  **Menubar**: A full-width top navigation bar for global site links.
-2.  **Header**: A persistent secondary bar. It contains the page title and utility buttons.
-3.  **Sidebar**: The primary navigation tree, usually on the left.
-4.  **Content Area**: The central Markdown rendering zone. Includes **Breadcrumbs**.
-5.  **Table of Contents (TOC)**: Right-hand heading navigation for the current page.
-6.  **Footer**: Bottom area for copyright, branding, and site-wide links.
+1. **Menubar**: Full-width top navigation bar for global cross-project links.
+2. **Header**: Persistent secondary header displaying page title, breadcrumbs, and options menu.
+3. **Sidebar**: Primary navigation tree for site content structure.
+4. **Content Area**: Central Markdown rendering container with automated breadcrumbs.
+5. **Table of Contents (TOC)**: Right-hand heading navigation for active articles.
+6. **Footer**: Bottom region displaying copyright notices, branding attribution, and footer link columns.
 
-## Global Component Configuration
+## Component Layout Options
 
-The engine uses a modular layout system. Configure most UI zones in the `layout` section of your `docmd.config.json`.
+Configure interface zones in the `layout` section of your `docmd.config.json` manifest.
 
-### Menubar
-The menubar provides a high-level navigation layer. It supports brand titles, regular links, and nested dropdowns.
+### The Menubar Zone
 
-*   **Location**: Fixed at the `top` or inline within the `header`.
-*   **Documentation**: See [Menubar Configuration](menubar.md) for schemas and styling.
+The menubar provides global site navigation, supporting logos, links, and nested dropdown menus:
 
-### The Page Header
-The header displays the page title, breadcrumbs, and utility menus. 
+- **Placement**: Fixed at the absolute viewport `top` or positioned within the `header`.
+- **Documentation**: See [Menubar Configuration](./menubar.md) for full properties and customisation options.
 
-*   **Controls**: Enable or disable the header globally via `layout.header`. Toggle breadcrumbs via `layout.breadcrumbs`.
-*   **Overriding**: Use `hideTitle: true` in your [Page Frontmatter](../content/frontmatter.md) to hide the title area locally.
+### The Page Header Zone
 
-### Copy Widgets
-The breadcrumbs bar includes two copy buttons. One copies the page's raw Markdown, the other copies a structured context block that includes the URL, title, and description. Useful for pasting into AI chat windows or support tickets.
+The header displays active page titles, breadcrumbs, and options menus:
 
-Configure these buttons under `theme.copyWidgets` in your `docmd.config.json`:
+- **Global Toggle**: Enable or disable the header globally via `layout.header.enabled`. Toggle breadcrumbs via `layout.breadcrumbs`.
+- **Per-Page Override**: Add `hideTitle: true` to a document's [Frontmatter](../content/frontmatter.md) to hide its header title locally.
+
+### Context Copy Widgets
+
+The header region includes contextual copy utilities: one-click copying of raw Markdown source and structured AI context prompts (containing page URL, title, description, and prose):
 
 ```json "docmd.config.json"
 {
@@ -45,12 +46,13 @@ Configure these buttons under `theme.copyWidgets` in your `docmd.config.json`:
 }
 ```
 
-*   `enabled`: Set to `false` to disable the bar completely.
-*   `raw`: Set to `false` to hide the "Copy Markdown" button.
-*   `context`: Set to `false` to hide the "Copy Context" button.
+- `enabled`: Set to `false` to disable the copy widgets bar completely.
+- `raw`: Set to `false` to hide the "Copy Markdown" button.
+- `context`: Set to `false` to hide the "Copy Context" button.
 
-### Utility Menus (Options Menu)
-The `optionsMenu` groups core utilities like **Global Search**, **Theme Toggle**, and **Sponsorship links**.
+### Options Menu (Utilities)
+
+The `optionsMenu` groups global utilities such as **Search**, **Theme Mode Toggle**, and **Sponsorship links**:
 
 ```json "docmd.config.json"
 {
@@ -67,18 +69,20 @@ The `optionsMenu` groups core utilities like **Global Search**, **Theme Toggle**
 }
 ```
 
-::: callout info "Automatic Fallback" icon:sparkles
-If the chosen position targets a disabled container, the engine moves the options menu to `sidebar-top`. This ensures utilities remain accessible.
+::: callout info "Automatic Relocation Fallback" icon:sparkles
+If `optionsMenu` is assigned to a container that is disabled, the compiler automatically moves the options menu to `sidebar-top` to preserve accessibility.
 :::
 
 ### Sidebar & Navigation
-The sidebar is the primary navigation tree. Define its structure in your config or external JSON files.
 
-*   **Behaviour**: Supports animations, collapsible groups, and automatic path preservation.
-*   **Documentation**: See [Navigation Configuration](navigation.md).
+The sidebar serves as the primary navigation hierarchy:
 
-### Footer
-The engine provides **minimal** and **complete** layouts for your site footer.
+- **Behaviour**: Supports desktop collapsing, smooth state transitions, and persistent route tracking.
+- **Documentation**: See [Navigation Configuration](./navigation.md).
+
+### Footer Region
+
+`docmd` provides `minimal` and `complete` footer layouts:
 
 ```json "docmd.config.json"
 {
@@ -100,6 +104,6 @@ The engine provides **minimal** and **complete** layouts for your site footer.
 }
 ```
 
-::: callout tip "Interface Hierarchy" icon:lightbulb
-Use the menubar for global links and the sidebar for documentation structure. This separation keeps the navigation predictable for both human readers and crawlers.
+::: callout tip "Visual Hierarchy Guidelines" icon:lightbulb
+Reserve the top menubar for cross-domain navigation and use the sidebar for in-depth documentation structure. Clear separation keeps navigation intuitive for both users and web crawlers.
 :::

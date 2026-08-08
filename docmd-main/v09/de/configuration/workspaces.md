@@ -1,38 +1,36 @@
 ---
-title: "Workspaces"
-description: "Erstellen Sie mehrere unabhängige Dokumentationsprojekte aus einer einzigen docmd-Instanz, mit kaskadierender globaler Konfiguration und eingebautem Projekt-Switcher."
+title: "Multi-Projekt-Workspaces"
+description: "Bauen und deployen Sie Multi-Projekt-Dokumentations-Websites aus einem einzigen Repository mit geteilten Assets und Projekt-Umschaltern in docmd."
 ---
 
-Workspaces ermöglichen es Ihnen, mehrere Dokumentationsprojekte aus einem Repository zu erstellen und bereitzustellen. Jedes Projekt behält seine eigene Konfiguration. Globale Einstellungen, die am Workspace-Stamm definiert sind, kaskadieren automatisch in jedes Projekt.
+Workspaces ermöglichen es Ihnen, mehrere unabhängige Dokumentationsprojekte aus einem einzigen Repository zu bauen und zu deployen. Jedes Unterprojekt behält seine eigenen Konfigurationsoptionen und erbt gleichzeitig globale Standards, die im Workspace-Root definiert sind.
 
 ```text
-docs.example.com/           → Hauptdokumentation
-docs.example.com/sdk/       → SDK-Referenz
-docs.example.com/cli/       → CLI-Dokumentation
+docs.example.com/           → Haupt-Produktdokumentation
+docs.example.com/sdk/       → SDK-API-Referenz
+docs.example.com/cli/       → CLI-Tooling-Leitfaden
 ```
 
-## Einrichtung
+## Verzeichnis-Einrichtung
 
-### 1. Verzeichnisstruktur
-
-Ein Verzeichnis pro Projekt. Geteilte Assets und globale Konfiguration leben im Repository-Stamm.
+Organisieren Sie Ihr Repository in separate Projekt-Unterverzeichnisse. Geteilte statische Assets und globale Workspace-Konfigurationen befinden sich im Repository-Root:
 
 ```text
 my-docs/
-├── assets/                   ← geteilte Assets (alle Projekte erben diese)
+├── assets/                   ← Geteilte statische Assets (von allen Projekten vererbt)
 ├── main-docs/
-│   ├── docmd.config.json     ← Projekt-Konfiguration (überschreibt Root-Standards)
-│   └── docs/                 ← Projektinhalte
+│   ├── docmd.config.json     ← Projektkonfiguration (überschreibt Root-Standards)
+│   └── docs/                 ← Hauptprojekt Markdown-Inhalte
 ├── sdk-docs/
-│   ├── docmd.config.json
-│   └── docs/
+│   ├── docmd.config.json     ← SDK-Projektkonfiguration
+│   └── docs/                 ← SDK-Projekt Markdown-Inhalte
 ├── docmd.config.json         ← Workspace-Root-Konfiguration
 └── package.json
 ```
 
-### 2. Root-Workspace-Konfiguration
+## Workspace-Konfigurationsschema
 
-Die Root-`docmd.config.json` verwendet den `workspace`-Schlüssel. Alle Top-Level-Schlüssel (z. B. `theme`, `menubar`, `logo`) wirken als **globale Standards** für jedes Projekt.
+Die Datei `docmd.config.json` im Root verwendet den Schlüssel `workspace` zur Deklaration von Projekten. Top-Level-Parameter (z. B. `theme`, `menubar`, `logo`) dienen als **globale Standards** für alle Unterprojekte:
 
 ```json "docmd.config.json"
 {
@@ -52,29 +50,29 @@ Die Root-`docmd.config.json` verwendet den `workspace`-Schlüssel. Alle Top-Leve
     "dark": "assets/logo-light.svg"
   },
   "menubar": [
-    { "text": "GitHub", "url": "https://github.com/my-org/my-repo", "external": true }
+    { "text": "GitHub", "url": "https://github.com/docmd-io/docmd", "external": true }
   ]
 }
 ```
 
-#### `workspace`-Optionen
+### `workspace`-Optionen
 
-| Schlüssel | Typ | Beschreibung |
-| :-- | :--- | :---------- |
-| `projects` | `Array` | Liste der Projekt-Einträge. Mindestens einer muss `prefix: "/"` verwenden. |
-| `switcher` | `Object` | Steuert Sichtbarkeit und Position des [Projekt-Switchers](#projekt-switcher). |
+| Eigenschaft | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| `projects` | `Array` | Liste von Projekteinträgen. Genau ein Projekt muss `prefix: "/"` zuweisen. |
+| `switcher` | `Object` | Steuert Position und Rendering des [Projekt-Umschaltmenüs](#das-projekt-umschaltmenü-ui). |
 
-#### Felder der Projekt-Einträge
+### Felder der Projekteinträge
 
-| Schlüssel | Typ | Erforderlich | Beschreibung |
-| :-- | :--- | :------- | :---------- |
-| `prefix` | `String` | ✅ | URL-Präfix. Für das Root-Projekt `"/"` verwenden. |
-| `src` | `String` | ✅ | Verzeichnispfad (relativ zu CWD) mit Projektinhalten und optionaler `docmd.config.json`. |
-| `title` | `String` | - | Anzeigename in der Projekt-Switcher-UI. |
+| Feld | Typ | Erforderlich | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `prefix` | `String` | Ja | URL-Routenpräfix. Verwenden Sie `"/"` für das Root-Projekt. |
+| `src` | `String` | Ja | Unterverzeichnispfad mit Projektinhalten und optionaler `docmd.config.json`. |
+| `title` | `String` | Nein | Im Projekt-Umschaltmenü angezeigter Name. |
 
-### 3. Projekt-Konfiguration
+## Übersteuerungen auf Projektebene
 
-Jedes Projektverzeichnis kann eine eigene `docmd.config.json` haben. Hier definierte Einstellungen **überschreiben** die Workspace-Root-Standards.
+Unterprojekte können eigene `docmd.config.json`-Manifeste führen. Auf Projektebene definierte Parameter **überschreiben** die Standards des Workspace-Roots:
 
 ```json "docmd.config.json"
 {
@@ -87,29 +85,25 @@ Jedes Projektverzeichnis kann eine eigene `docmd.config.json` haben. Hier defini
 }
 ```
 
-Wird keine lokale Konfigurationsdatei gefunden, wendet die Engine Zero-Config-Auto-Routing mit den Workspace-Standards an.
+Wenn ein Unterprojekt keine lokale Konfigurationsdatei hat, wendet der Compiler automatisches Zero-Config-Routing mit den Workspace-Standards an.
 
-### 4. Globale Konfigurations-Kaskadierung
+## Konfigurations-Kaskadierungshierarchie
 
-Jeder in der Root-Workspace-Konfiguration definierte Schlüssel wird automatisch auf jedes Projekt angewendet. Projektkonfigurationen können diese Globalen selektiv überschreiben.
+Konfigurationsoptionen kaskadieren über ein 3-stufiges Rangfolgemodell:
 
-| Ebene | Priorität |
-| :---- | :--------- |
-| Root-Workspace-Konfiguration | Niedrigste (zuerst als Standards angewendet) |
-| Projekt-`docmd.config.json` | Höher (überschreibt Root-Standards) |
-| Projekt-`navigation.json` | Höchste (gewinnt immer für Navigation) |
+| Stufe | Priorität | Beschreibung |
+| :--- | :--- | :--- |
+| **Root-Workspace-Konfiguration** | Basis-Standard | Wird zuerst auf alle Workspace-Projekte angewendet. |
+| **Projektkonfiguration (`docmd.config.json`)** | Höher | Überschreibt Root-Workspace-Standards für dieses spezifische Projekt. |
+| **Projektnavigation (`navigation.json`)** | Höchste Priorität | Hat immer Vorrang beim Rendering der Sidebars. |
 
-**Beispiel**: Definieren Sie Ihr globales `theme` und `menubar` einmal am Root. Jedes Projekt muss nur `title`, `src` und seine eigenen `plugins` setzen.
-
-::: callout info "Navigations-Priorität" icon:info
-Eine projektweite `navigation.json` **hat immer Vorrang** vor jedem in der Workspace-Root-Konfiguration definierten `navigation`-Array. Existiert weder das eine noch das andere, fällt docmd auf automatisches Verzeichnis-Scanning zurück.
+::: callout info "Navigations-Vorrang" icon:info
+Ein `navigation.json`-Manifest auf Projektebene **hat immer Vorrang** vor jedem globalen `navigation`-Array, das in der Root-Workspace-Konfiguration definiert ist.
 :::
 
-## Projekt-Switcher
+## Das Projekt-Umschaltmenü UI
 
-Der Projekt-Switcher rendert eine schlanke UI-Komponente zur Navigation zwischen Workspace-Projekten.
-
-### Konfiguration
+Der Projekt-Umschalter rendert eine barrierefreie Dropdown-Komponente, die es Lesern ermöglicht, zwischen Workspace-Unterprojekten zu wechseln:
 
 ```json "docmd.config.json"
 {
@@ -122,49 +116,46 @@ Der Projekt-Switcher rendert eine schlanke UI-Komponente zur Navigation zwischen
 }
 ```
 
-| Position | Beschreibung |
-| :------- | :---------- |
-| `sidebar-top` (Standard) | Oben in der Sidebar fixiert, über der Navigation. |
-| `sidebar-bottom` | Unten in der Sidebar fixiert. |
-| `options-menu` | In das Header-Optionsmenü neben Suche und Theme-Toggles integriert. |
+| Position | Rendering-Ort |
+| :--- | :--- |
+| `sidebar-top` (Standard) | Oben in der Sidebar angeheftet, über den Navigationslinks. |
+| `sidebar-bottom` | Unten in der Sidebar angeheftet. |
+| `options-menu` | In das Header-Optionsmenü neben Suche und Theme-Schaltern integriert. |
 
-Der Switcher rendert nur, wenn zwei oder mehr Projekte definiert sind.
+Der Projekt-Umschalter wird automatisch gerendert, wenn zwei oder mehr Workspace-Projekte deklariert sind.
 
-## Assets
+## Asset-Verwaltung
 
-### Geteilte Assets
-Platzieren Sie Logos, Favicons und globales CSS im Root-`assets/`-Verzeichnis. Die Engine kopiert diese sowohl bei `dev` als auch bei `build` automatisch in die Ausgabe jedes Projekts.
+- **Geteilte Assets**: Platzieren Sie Logos, Favicons und globales benutzerdefiniertes CSS im Root-Verzeichnis `assets/`. Alle Workspace-Projekte erben diese Assets während der Entwicklung und Build-Kompilierung.
+- **Projekt-Assets**: Unterprojekte können lokale `assets/`-Unterverzeichnisse führen. Projektspezifische Assets überschreiben geteilte Root-Assets bei Dateinamenskonflikten.
 
-### Projekt-spezifische Assets
-Jedes Projekt kann ein eigenes `assets/`-Verzeichnis haben. Bei Dateinamen-Konflikten haben Projekt-Assets Vorrang vor geteilten Assets.
+## Entwicklungs- & Build-Befehle
 
-## Build & Entwicklung
-
-### Dev-Server
+::: tabs
+== tab "Entwicklungsserver" icon:play
+Führen Sie den Multi-Projekt-Dev-Server aus:
 ```bash
 npx @docmd/core dev
 ```
-Baut alle Projekte und stellt sie über einen einzigen Port bereit. Dateiänderungen lösen **gezielte, projektweise** Rebuilds aus — nur das geänderte Projekt rendert neu, nicht der gesamte Workspace. Änderungen an der Root-Konfiguration lösen einen vollständigen Workspace-Rebuild aus.
-
-### Produktions-Build
+Baut alle Workspace-Projekte und stellt sie auf einem einzigen HTTP-Port bereit. Dateibearbeitungen lösen gezielte Hot-Updates pro Projekt aus, ohne den gesamten Workspace neu zu bauen.
+== tab "Produktions-Build" icon:box
+Generieren Sie das Produktionspaket:
 ```bash
 npx @docmd/core build
 ```
-Gibt ein einzelnes statisches Verzeichnis aus. Alle Projekte werden in ihre jeweiligen Unterpfade zusammengeführt. Kein Reverse-Proxy oder komplexe CI-Pipelines erforderlich.
+Gibt ein einzelnes konsolidiertes statisches Verzeichnis aus. Alle Projekte kompilieren in ihre jeweiligen Unterpfade, ohne dass Reverse-Proxy-Setups erforderlich sind.
+:::
 
-## Regeln & Einschränkungen
+## Workspace-Einschränkungen
 
-1. **Root-Projekt erforderlich**: Genau ein Projekt muss `prefix: "/"` haben.
-2. **Eindeutige Präfixe**: Jedes Projekt muss ein eindeutiges URL-Präfix verwenden.
-3. **`out` nur am Root**: Nur die Root-Workspace-Konfiguration steuert das Ausgabeverzeichnis. Projekt-Konfigurationen dürfen kein `out` definieren.
-4. **Keine Präfix-Konflikte**: Wenn ein Root-Projekt einen Ordner namens `sdk/` hat und ein anderes Projekt `prefix: "/sdk"` verwendet, gibt die Engine eine Konfliktwarnung aus. Das Projekt mit Präfix gewinnt immer.
+1. **Root-Projekt-Anforderung**: Genau ein Projekt muss `prefix: "/"` zuweisen.
+2. **Eindeutige Routenpräfixe**: Jedes Projekt muss eine eindeutige URL-Präfix-Zeichenkette verwenden.
+3. **Root-Level `out`-Steuerung**: Das Ausgabeverzeichnis (`out`) wird ausschließlich auf Workspace-Root-Ebene konfiguriert; Unterprojekt-Konfigurationen dürfen `out` nicht angeben.
 
-## Migration von Legacy-Konfigurationen
+## Konfigurations-Schema-Migration
 
-Die Pre-0.8.3-`projects`-Array-Syntax und andere Legacy-Konfigurationsschlüssel werden automatisch auf das moderne `workspace`-Schema normalisiert, um Abwärtskompatibilität zu gewährleisten.
+Um ältere Workspace-Definitionen auf das moderne `workspace`-Schemaformat zu aktualisieren, führen Sie den automatisierten CLI-Migrationshelfer aus:
 
-Obwohl manuelle Aktualisierungen nicht zwingend erforderlich sind, können Sie Ihre Konfigurationsdatei mit der CLI automatisch auf das moderne Schema aktualisieren.
-
-::: callout tip "Mit einem Befehl migrieren" icon:lightbulb
-Führen Sie `npx @docmd/core migrate --upgrade` aus, um Ihre Root-Konfiguration automatisch auf das aktuelle Schema umzuschreiben.
+::: callout tip "Automatisches Konfigurations-Upgrade" icon:sparkles
+Führen Sie `npx @docmd/core migrate --upgrade` aus, um alte Konfigurationsdateien automatisch auf das v0.9.0-Workspace-Schema umzuschreiben.
 :::

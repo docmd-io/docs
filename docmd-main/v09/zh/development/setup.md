@@ -82,7 +82,7 @@ docs/
 
 ## 下一步
 
-- [开发插件](/development/building-plugins) —— 编写自定义 docmd 插件。
-- [插件示例](/development/plugin-examples) —— 查看完整的插件演练。
-- [开发模板](/development/building-templates) —— 编写 docmd 模板。
-- [Node API 参考](/development/node-api-reference) —— 程序化构建 API。
+- [开发插件](./building-plugins.md) —— 编写自定义 docmd 插件。
+- [插件示例](./plugin-examples.md) —— 查看完整的插件演练。
+- [开发模板](./building-templates.md) —— 编写 docmd 模板。
+- [Node API 参考](./node-api-reference.md) —— 程序化构建 API。

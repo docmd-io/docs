@@ -99,6 +99,6 @@ async function deploy() {
 
 ## 下一步
 
-- [插件](/plugins/usage) —— 扩展 docmd 而无需改动引擎。
-- [CLI 命令](/reference/cli-commands) —— 大多数 CI/CD 场景下的推荐路径。
-- [Workspaces](/configuration/workspaces) —— 多项目场景下的配置参考。
+- [插件](../plugins/usage.md) —— 扩展 docmd 而无需改动引擎。
+- [CLI 命令](./cli-commands.md) —— 大多数 CI/CD 场景下的推荐路径。
+- [Workspaces](../configuration/workspaces.md) —— 多项目场景下的配置参考。

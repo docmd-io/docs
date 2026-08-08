@@ -1,106 +1,106 @@
 ---
 title: "Advanced Markdown Syntax"
-description: "Extended formatting features: task lists, custom element attributes, footnotes, and semantic definitions."
+description: "Master extended GFM features: task lists, element attributes, footnotes, definition lists, and abbreviations in docmd."
 ---
 
-Beyond standard Markdown, docmd supports high-fidelity extensions derived from GitHub Flavored Markdown (GFM) and custom attribute plugins. These tools provide fine-grained control over document structure and styling.
+Beyond standard Markdown primitives, `docmd` supports GitHub Flavored Markdown (GFM) extensions and custom element attribute parsers. These primitives provide fine-grained control over document semantics and element styling.
 
 ## Task Lists
 
-Create interactive or read-only checklists for roadmap tracking and release planning.
+Render interactive or read-only task lists for release planning and feature tracking:
 
 ```markdown
-- [x] Engine optimisation complete
+- [x] Engine performance optimisation complete
 - [ ] Plugin API finalisation
-- [ ] Documentation audit
+- [ ] Documentation audit & localisation sync
 ```
 
-- [x] Engine optimisation complete
+- [x] Engine performance optimisation complete
 - [ ] Plugin API finalisation
-- [ ] Documentation audit
+- [ ] Documentation audit & localisation sync
 
-## Emojis
+## Inline Emojis
 
-Use standard shortcodes to add visual personality. Emoji codes render inline with surrounding text.
+Incorporate standard emoji shortcodes inline within Markdown prose:
 
 ```markdown
-We :heart: high-performance documentation! :rocket: :sparkles:
+We :heart: high-performance documentation engines! :rocket: :sparkles:
 ```
 
-We :heart: high-performance documentation! :rocket: :sparkles:
+We :heart: high-performance documentation engines! :rocket: :sparkles:
 
-## Custom Element Attributes
+## Custom Element Attributes (`{ }`)
 
-Assign unique IDs and CSS classes to headings, images, and links using the `{}` syntax.
+Attach unique IDs, custom CSS classes, and inline styles to headings, images, and links using attribute block notation `{ }`.
 
-### Custom IDs
+### Element Identifiers (`#id`)
 
-Useful for deep-linking directly to technical subsections.
+Assign custom HTML element IDs to enable direct deep-linking to technical subsections:
 
 ```markdown
 ## Performance Benchmarks {#benchmarks-2026}
 ```
 
-### CSS Classes
+### CSS Utility Classes (`.class`)
 
-Apply styling utilities to specific elements without touching your CSS.
+Apply utility classes directly without writing custom inline HTML:
 
 ```markdown
-## Centre-Aligned Section {.text-centre .text-blue}
+## Centred Section Title {.text-centre .text-accent}
 ```
 
-### Button-Style Links
+### Button-Styled Links
 
-Transform any standard Markdown link into a styled call-to-action button.
+Transform standard Markdown links into call-to-action buttons:
 
 ```markdown
 [Download Latest Release](#download){.docmd-button}
 ```
 
-## Footnotes
+## Document Footnotes
 
-Add citations or technical deep-dives as footnotes. The engine automatically collects and renders them at the page bottom.
+Inject technical citations or reference details as footnotes. The compiler collects and renders footnotes at the bottom of the document automatically:
 
 ```markdown
 Architectural decisions are documented in the RFC.[^1]
 
-[^1]: RFC-42: Isomorphic Rendering Pipeline.
+[^1]: RFC-42: Isomorphic Rendering Engine Architecture.
 ```
 
 Architectural decisions are documented in the RFC.[^1]
 
-[^1]: RFC-42: Isomorphic Rendering Pipeline.
+[^1]: RFC-42: Isomorphic Rendering Engine Architecture.
 
 ## Definition Lists
 
-Perfect for API parameter descriptions and glossaries.
+Structure API parameter reference lists and terminology glossaries:
 
 ```markdown
 PropName
-: The unique identifier for the configuration key.
+: The unique identifier string for the configuration property.
 
 DefaultValue
-: The value used when no override is specified.
+: The fallback value applied when no property override is specified.
 ```
 
 PropName
-: The unique identifier for the configuration key.
+: The unique identifier string for the configuration property.
 
 DefaultValue
-: The value used when no override is specified.
+: The fallback value applied when no property override is specified.
 
-## Abbreviations
+## Global Abbreviations
 
-Define abbreviations globally within a page. Hovering over the term reveals its full definition.
+Define term abbreviations globally across a document. Hovering over the defined term displays an interactive tooltip explanation:
 
 ```markdown
 *[SPA]: Single Page Application
-The docmd router enables a seamless SPA experience.
+The docmd router delivers a high-performance SPA reading experience.
 ```
 
 *[SPA]: Single Page Application
-The docmd router enables a seamless SPA experience.
+The docmd router delivers a high-performance SPA reading experience.
 
-::: callout tip "Contextual Precision for AI"
-Definitions and abbreviations provide high-quality technical signals to AI agents. Explicit semantic definitions prevent lexical ambiguity in the `llms.txt` context stream.
+::: callout tip "Semantic Precision for AI Agents" icon:sparkles
+Explicit semantic definitions, footnotes, and abbreviations supply high-fidelity technical context to AI agents reading the `llms.txt` context stream.
 :::

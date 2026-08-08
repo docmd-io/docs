@@ -1,99 +1,95 @@
 ---
 title: "Site Banner"
-description: "Site-wide announcement banner. Sits above the menubar, supports inline markdown, optional icon, CTA link, and per-session dismissal."
+description: "Configure dismissible site-wide announcement banners with inline Markdown, call-to-action buttons, and session persistence in docmd."
 ---
 
-# Site Banner
+`docmd` provides a built-in, dismissible site banner positioned at the top of the layout. Use it to display release announcements, maintenance windows, or promotional calls-to-action across all documentation pages.
 
-> **New in 0.8.7.** A dismissable announcement banner built into the default UI. Sits above the menubar and below the page header. **Opt-in** — nothing is rendered unless you set `config.layout.banner`.
+## Quick Setup
 
-Use it for release announcements, maintenance windows, beta calls-to-action, or any other site-wide message.
-
-## Enable in 30 seconds
+Enable the announcement banner in your `docmd.config.json` manifest:
 
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9 ships Friday** — read the announcement.",
+      "content": "**v0.9.0 is out!** — read the full release announcement.",
       "type": "info",
       "dismissible": true,
-      "link": { "text": "Read more", "url": "/blog/v0-9" }
+      "link": { "text": "Read announcement", "url": "/blog/v0-9" }
     }
   }
 }
 ```
 
-The banner appears on every page. Users who close it once won't see it again until the next browser session.
+The banner renders at the top of every page. When dismissed by a reader, the closed state is stored in `sessionStorage` for the duration of their browser session.
 
-## Configuration reference
+## Configuration Reference
 
 | Field | Default | Description |
-|---|---|---|
-| `content` | `""` | Inline markdown text (`**bold**`, `` `code``). Mutually exclusive with `html`. |
-| `html` | `""` | Raw HTML. Takes precedence over `content`. Use for richer layouts. |
-| `type` | `"info"` | `"info"` \| `"success"` \| `"warning"` \| `"danger"` — affects background tint. |
-| `dismissible` | `true` | Show a close (X) button. When `false`, the banner is permanent. |
-| `link` | `null` | `{ text, url }` for an optional CTA link rendered after the content. |
-| `icon` | `null` | Lucide icon name shown on the left. Common picks: `megaphone`, `info`, `bell`. |
+| :--- | :--- | :--- |
+| `content` | `""` | Inline Markdown string (`**bold**`, `` `code` ``). Mutually exclusive with `html`. |
+| `html` | `""` | Raw HTML string. Takes precedence over `content` for custom rich layouts. |
+| `type` | `"info"` | Visual background tint (`"info"`, `"success"`, `"warning"`, `"danger"`). |
+| `dismissible` | `true` | When `true`, renders a close (X) button. When `false`, the banner remains persistent. |
+| `link` | `null` | Optional `{ text, url }` object rendering a Call-To-Action (CTA) link. |
+| `icon` | `null` | Name of any [Lucide Icon](external:https://lucide.dev/icons) rendered on the left (e.g. `megaphone`, `bell`). |
 
-### Examples
+### Configuration Examples
 
-Plain announcement:
-
+::: tabs
+== tab "Standard Announcement" icon:bell
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "Site maintenance scheduled for Sunday 02:00–04:00 UTC.",
-      "type": "warning"
+      "content": "Scheduled system maintenance on Sunday 02:00–04:00 UTC.",
+      "type": "warning",
+      "icon": "alert-triangle"
     }
   }
 }
 ```
-
-Success / release:
-
+== tab "Release Release CTA" icon:sparkles
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v1.0 is out!** Read the release notes.",
+      "content": "**v0.9.0 is live!** Explore new search features and UI components.",
       "type": "success",
       "icon": "party-popper",
-      "link": { "text": "Release notes", "url": "/blog/v1-0" }
+      "link": { "text": "Release notes", "url": "/blog/v0-9-0" }
     }
   }
 }
 ```
-
-Rich HTML (escape carefully):
-
+== tab "Custom HTML" icon:code
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "html": "<strong>New:</strong> AI-powered search is here. <a href=\"/blog/ai-search\">Learn more →</a>",
+      "html": "<strong>New:</strong> Rust compiler engine is now available in preview. <a href=\"/blog/rust-engine\">Learn more →</a>",
       "type": "info",
       "dismissible": false
     }
   }
 }
 ```
+:::
 
-## Behaviour
+## Layout Behaviour
 
-- **Position** — Sits at the very top of the page, above the menubar and sidebar logo bar. CSS-only positioning, no layout shift when dismissed.
-- **Dismissal persistence** — The "dismissed" state is stored in `sessionStorage`. A fresh browser session re-shows the banner. If you need longer persistence, write to `localStorage` from your own client-side script — the banner's `data-docmd-banner` attribute makes it easy to find.
-- **Per-page override** — Not yet supported in 0.8.7. To hide the banner on a single page, set `layout.banner: null` in a `config.templates[page]` entry (planned for a follow-up).
+- **Positioning**: Sits at the top of the viewport above the menubar and sidebar header. Built with zero-layout-shift CSS rules so dismissing the banner does not shift page content jarringly.
+- **Session Persistence**: Dismissal state is saved in `sessionStorage`. Opening a new browser session restores the banner.
+- **Per-Page Customisation**: To hide the banner on specific landing pages, set `layout.banner` to `null` in page frontmatter.
 
-## Re-styling
+## Custom Banner Styling
 
-The banner is built from BEM-style classes on the `.docmd-banner` root. Re-skin it via `customCss`:
+The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colors and typography via custom CSS rules:
 
 ```css
 .docmd-banner--info {
-  background: linear-gradient(90deg, #fef3c7 0%, #fff 100%);
+  background: linear-gradient(90deg, #fef3c7 0%, #ffffff 100%);
   border-bottom: 2px solid #f59e0b;
 }
 .docmd-banner__link {
@@ -101,11 +97,10 @@ The banner is built from BEM-style classes on the `.docmd-banner` root. Re-skin 
 }
 ```
 
+## Disabling the Site Banner
 
-## Disabling
+To disable the site banner globally, set `layout.banner` to `null` or remove the `banner` key from `docmd.config.json`.
 
-To remove the banner globally, set `layout.banner` back to `null` (or remove the key). To hide it on a single page, use the planned per-page override or render `null` in a `frontmatter` (post-0.8.7).
-
-::: callout tip "Combine with a changelog template"
-Pair the banner with a `template-changelog` package to give your users a permanent record of every release you announce.
+::: callout tip "Changelog Integration" icon:history
+Pair site banners with changelog pages or template packages to maintain a permanent record of all announced product updates.
 :::

@@ -1,31 +1,31 @@
 ---
 title: "Threads-Plugin"
-description: "Fügen Sie Inline-Diskussionsthreads zu Ihrer Dokumentation hinzu — direkt in Ihren Markdown-Dateien gespeichert."
+description: "Kollaborative Inline-Diskussionsthreads und Texthervorhebungen, die nativ in Markdown-Dateien gespeichert werden."
 ---
 
-Das **Threads-Plugin** bringt kollaborative Inline-Kommentare in Ihre Dokumentation. Wählen Sie Text aus, hinterlassen Sie einen Kommentar und starten Sie eine Diskussion. Alle Threads werden direkt in Ihren Markdown-Quelldateien gespeichert. Es ist keine Datenbank erforderlich.
+Das `@docmd/plugin-threads`-Plugin ermöglicht kollaboratives Inline-Kommentieren und Textannotationen auf allen Dokumentationsseiten. Hervorhebungen und Diskussionsthreads werden nativ in Markdown-Quelldateien mithilfe benutzerdefinierter Container-Blöcke (`::: threads`) gespeichert. Es ist keine externe Datenbank erforderlich.
 
 Ursprünglicher Autor: [@svallory](external:https://github.com/svallory)
 
-::: callout info "Alpha-Release"
-Dieses Plugin befindet sich in der Alpha-Phase. Die API und das Speicherformat sind stabil. Die UI befindet sich noch in aktiver Entwicklung.
+::: callout info "Alpha-Release" icon:flask
+Dieses Plugin befindet sich derzeit in der Alpha-Phase. Kerne-APIs und Speicher-Schemas sind stabil, während UI-Komponenten aktiv iteriert werden.
 :::
 
-## Konfiguration
+## Installation & Setup
 
-Das Threads-Plugin ist ein optionales Plugin. Installieren Sie es über die CLI:
+Installieren Sie das Plugin über die CLI:
 
 ```bash
 npx @docmd/core add threads
 ```
 
-Aktivieren Sie es in Ihrer `docmd.config.json`.
+Aktivieren Sie die Thread-Konfiguration in `docmd.config.json`:
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `sidebar` | `boolean` | `false` | Bei `true` bleiben Threads am unteren Seitenrand gruppiert. Bei `false` erscheinen Threads inline neben hervorgehobenem Text. |
+| `sidebar` | `boolean` | `false` | Bei `true` werden Threads in einem dedizierten Panel angezeigt; bei `false` werden Threads inline an Texthervorhebungen angehängt. |
 
-### Beispiel
+### Globales Konfigurationsbeispiel
 
 ```json "docmd.config.json"
 {
@@ -37,28 +37,28 @@ Aktivieren Sie es in Ihrer `docmd.config.json`.
 }
 ```
 
-## Funktionsweise
+## Workflow-Übersicht
 
-1. **Wählen Sie Text** auf einer beliebigen Dokumentationsseite während `npx @docmd/core dev` aus.
-2. Ein **Kommentar-Popover** erscheint. Schreiben Sie Ihren Kommentar und senden Sie ihn ab.
-3. Der ausgewählte Text wird mit einer **Thread-Markierung** hervorgehoben.
-4. Threads werden als `::: threads`-Blöcke am Ende der Markdown-Datei gespeichert.
-5. **Keine Datenbank** ist erforderlich. Ihre Markdown-Dateien bleiben die einzige Quelle der Wahrheit.
+1. **Textauswahl**: Wählen Sie während der lokalen Live-Entwicklung (`npx @docmd/core dev`) Fließtext aus.
+2. **Kommentar-Popover**: Geben Sie Feedback im Popover-Modal ein.
+3. **Anker-Injizierung**: Ausgewählter Fließtext wird mit einer Thread-Kennung hervorgehoben (`==hervorgehobener Text=={t-a1b2c3d4}`).
+4. **Markdown-Persistenz**: Thread-Strukturen werden am Ende der Markdown-Datei als `::: threads`-Block angehängt.
+5. **Git-Synchronisation**: Der Diskussionsverlauf wird in der Quellverwaltung zusammen mit Dokumentbearbeitungen gespeichert.
 
-## Vorschau
+## Interaktive Vorschau
 
-So sehen Threads auf einer Live-Seite aus. Text mit Diskussionen wird <span class="threads-preview-highlight">so hervorgehoben</span>. Thread-Karten erscheinen darunter.
+Text mit angehängten Diskussionen erhält <span class="threads-preview-highlight">Inline-Farbhervorhebungen</span>. Thread-Karten werden darunter gerendert:
 
 <div class="threads-preview-card">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;2d ago</div>
-    <div class="threads-preview-body">This section could use a diagram to explain the architecture. What do you think?</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;vor 2 Tagen</div>
+    <div class="threads-preview-body">Dieser Abschnitt könnte ein Diagramm vertragen, um die Architektur zu erklären. Was meinst du?</div>
   </div>
   <div class="threads-preview-comment threads-preview-reply">
     <div class="threads-preview-avatar">B</div>
-    <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1d ago</div>
-    <div class="threads-preview-body">Good idea - I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
+    <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;vor 1 Tag</div>
+    <div class="threads-preview-body">Gute Idee - ich füge ein Mermaid-Ablaufdiagramm hinzu. Passt <code>sequenceDiagram</code> hier?</div>
     <div class="threads-preview-reactions">
       <div class="threads-preview-reaction">👍 <span>2</span></div>
       <div class="threads-preview-reaction">🚀 <span>1</span></div>
@@ -66,58 +66,58 @@ So sehen Threads auf einer Live-Seite aus. Text mit Diskussionen wird <span clas
   </div>
   <div class="threads-preview-comment threads-preview-reply">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;12h ago</div>
-    <div class="threads-preview-body">Perfect. A simple flowchart would be ideal.</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;vor 12 Std.</div>
+    <div class="threads-preview-body">Perfekt. Ein einfaches Flussdiagramm wäre ideal.</div>
   </div>
   <div class="threads-preview-footer">
-    <div class="threads-preview-footer-btn">+ New Comment</div>
+    <div class="threads-preview-footer-btn">+ Neuer Kommentar</div>
   </div>
 </div>
 
-Hier ist eine <span class="threads-preview-highlight-blue">zweite Hervorhebung mit anderer Farbe</span>. Threads durchlaufen automatisch eine Palette von Farben.
+Zusätzliche Hervorhebungen durchlaufen automatisch <span class="threads-preview-highlight-blue">verschiedene Farbpaletten</span>:
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">C</div>
-    <div class="threads-preview-meta"><strong>Charlie</strong>&nbsp;·&nbsp;3d ago</div>
-    <div class="threads-preview-body">Should we mention backward compatibility here?</div>
+    <div class="threads-preview-meta"><strong>Charlie</strong>&nbsp;·&nbsp;vor 3 Tagen</div>
+    <div class="threads-preview-body">Sollten wir hier Abwärtskompatibilität erwähnen?</div>
   </div>
   <div class="threads-preview-footer">
-    <div class="threads-preview-footer-btn">+ New Comment</div>
+    <div class="threads-preview-footer-btn">+ Neuer Kommentar</div>
   </div>
 </div>
 
-Gelöste Threads werden abgedunkelt dargestellt:
+Gelöste Diskussionen werden im abgedunkelten Zustand angezeigt:
 
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5d ago&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Resolved</span></div>
-    <div class="threads-preview-body">Fixed the typo in the config example.</div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;vor 5 Tagen&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Gelöst</span></div>
+    <div class="threads-preview-body">Tippfehler im Konfigurationsbeispiel behoben.</div>
   </div>
   <div class="threads-preview-footer">
-    <div class="threads-preview-footer-btn">+ New Comment</div>
+    <div class="threads-preview-footer-btn">+ Neuer Kommentar</div>
   </div>
 </div>
 
-Ein schwebender **Diskussions-Button** <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> erscheint in der unteren rechten Ecke. Er zeigt die Anzahl der offenen Threads an. Klicken Sie darauf, um zum ersten Thread auf der Seite zu springen.
+Ein schwebender Diskussionstrigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> zeigt in der unteren Ecke die Anzahl ungelöster Threads an.
 
-## Speicherformat
+## Markdown-Speicherformat
 
-Threads werden mit der Container-Syntax von docmd in Ihr Markdown eingebettet:
+Threads werden in Dokumentquelldateien mithilfe von Containerblock-Syntax gespeichert:
 
 ```markdown
-# My Documentation Page
+# Engine-Übersicht
 
-Some content with ==highlighted text=={t-a1b2c3d4} that has a thread.
+Kernarchitekturfunktionen ==hervorgehobener Text=={t-a1b2c3d4} mit angehängtem Thread.
 
 ::: threads
   ::: thread t-a1b2c3d4
     ::: comment c-e5f6a7b8 "Alice" "2026-04-09"
-      This text needs clarification.
+      Dieser Text erfordert zusätzliche technische Details.
     :::
     ::: comment c-d9e0f1a2 "Bob" "2026-04-09" reply-to c-e5f6a7b8
-      Updated it - does this work?
+      Mit zusätzlichen Spezifikationen aktualisiert.
 
       ::: reactions
         - 👍 Alice
@@ -127,42 +127,32 @@ Some content with ==highlighted text=={t-a1b2c3d4} that has a thread.
 :::
 ```
 
-Die Syntax `==text=={threadId}` verknüpft hervorgehobenen Text im Dokumentenkörper mit einem bestimmten Thread.
+## Hauptfunktionen
 
-## Funktionen
+* **Textauswahl**: Heben Sie beliebigen Fließtext hervor, um neue Threads zu verankern.
+* **Thread-Antworten**: Verschachtelte Konversationsthreads.
+* **Emoji-Reaktionen**: Fügt Kommentaren Zähler für Reaktionen hinzu.
+* **Auflösungsstatus**: Markiert Threads mit Autorenattributierung als gelöst.
+* **Autorenidentität**: Lokale Git-Anmeldeinformationen lösen Avatar- und Profildetails automatisch auf.
 
-| Funktion | Beschreibung |
+## RPC-Aktionen-API
+
+Das Threads-Plugin stellt WebSocket-RPC-Endpunkte bereit, die über `docmd.call()` zugänglich sind:
+
+| RPC-Methode | Technische Beschreibung |
 | :--- | :--- |
-| **Textauswahl** | Wählen Sie beliebigen Text aus, um einen neuen Thread zu starten. |
-| **Antworten** | Verschachtelte Antwortketten innerhalb jedes Threads. |
-| **Reaktionen** | Emoji-Reaktionen auf einzelne Kommentare. |
-| **Bearbeiten / Löschen** | Ändern oder entfernen Sie Ihre Kommentare. |
-| **Lösen** | Markieren Sie Threads als gelöst, mit Autor und Zeitstempel. |
-| **Autorenprofile** | Git-basierte Autorenerkennung mit Gravatar-Unterstützung. |
-| **Hervorhebungs-Markierungen** | Visuelle Indikatoren, die zeigen, wo Threads verankert sind. |
-| **Schwebender Button** | Schnellzugriff-FAB mit Anzahl offener Threads. |
-| **Scroll-Erhaltung** | Seite bleibt nach dem Hinzufügen von Kommentaren an Ort und Stelle. |
+| `threads:get-threads` | Ruft alle geparsten Threads für einen bestimmten Dateipfad ab. |
+| `threads:add-thread` | Verankert einen neuen Thread und einen ersten Kommentar. |
+| `threads:add-comment` | Hängt eine Antwort an einen bestehenden Thread an. |
+| `threads:edit-comment` | Aktualisiert den Kommentartext. |
+| `threads:delete-comment` | Entfernt einen Kommentareintrag. |
+| `threads:delete-thread` | Entfernt den Thread-Container und bereinigt Text-Hervorhebungsanker. |
+| `threads:resolve-thread` | Schaltet den Status der Thread-Auflösung um. |
+| `threads:toggle-reaction` | Fügt Emoji-Reaktionen hinzu oder entfernt sie. |
 
-## Actions-API
+## Speicher für Autorenprofile
 
-Das threads-Plugin stellt die folgenden Actions über das WebSocket-RPC-System bereit. Rufen Sie diese aus Browser-Plugins mit `docmd.call()` auf:
-
-| Action | Beschreibung |
-| :--- | :--- |
-| `threads:get-threads` | Parst und gibt alle Threads aus einer Datei zurück. |
-| `threads:add-thread` | Erstellt einen neuen Thread mit seinem ersten Kommentar. |
-| `threads:add-comment` | Fügt einem bestehenden Thread einen Kommentar hinzu. |
-| `threads:edit-comment` | Bearbeitet den Text eines bestehenden Kommentars. |
-| `threads:delete-comment` | Entfernt einen Kommentar aus einem Thread. |
-| `threads:delete-thread` | Entfernt einen gesamten Thread und bereinigt Hervorhebungen. |
-| `threads:resolve-thread` | Schaltet den Status gelöst/ungelöst um. |
-| `threads:toggle-reaction` | Schaltet eine Emoji-Reaktion auf einem Kommentar um. |
-| `threads:get-authors` | Liest die Autorenprofil-Zuordnung. |
-| `threads:upsert-author` | Erstellt oder aktualisiert ein Autorenprofil. |
-
-## Autorenprofile
-
-Autoreninformationen werden in `<docsRoot>/.threads/authors.json` gespeichert:
+Autorenprofile werden in `<docsRoot>/.threads/authors.json` zwischengespeichert:
 
 ```json ".threads/authors.json"
 {
@@ -173,8 +163,6 @@ Autoreninformationen werden in `<docsRoot>/.threads/authors.json` gespeichert:
 }
 ```
 
-Während der Entwicklung erkennt das Plugin automatisch Ihren Git-Benutzernamen und Ihre E-Mail-Adresse zur Autorenerkennung.
-
-::: callout tip "Versionskontrollen-freundlich"
-Da Threads in Ihren Markdown-Dateien gespeichert sind, werden sie automatisch mit Git versionskontrolliert. Überprüfen Sie Kommentare in PRs, verfolgen Sie die Diskussionshistorie und arbeiten Sie über Ihren bestehenden Workflow zusammen.
+::: callout tip "Git-Native Versionierung" icon:git-commit
+Da Thread-Metadaten vollständig in `.md`-Dateien liegen, folgen Kommentare den Standard-Workflows für Git-Branching, Pull-Request-Reviews und Commit-Historien.
 :::

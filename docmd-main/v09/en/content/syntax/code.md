@@ -1,13 +1,13 @@
 ---
-title: "Code Blocks"
-description: "Document technical implementations with syntax highlighting, file titles, and one-click copying."
+title: "Code Blocks & Highlighting"
+description: "Document technical implementations with high-performance syntax highlighting, code block titles, and copy controls in docmd."
 ---
 
-docmd uses the ultra-fast `lite-hl` engine for automatic, context-aware syntax highlighting. Specify the language identifier on every fenced block to ensure the correct lexical rules apply.
+`docmd` uses the fast `lite-hl` engine for native syntax highlighting. Specify the language identifier on every fenced block to apply appropriate lexical rules.
 
 ## Syntax Highlighting
 
-Always name the language after the opening fence. The highlighter applies grammar rules specific to that ecosystem.
+Declare the language identifier after the opening fence delimiter:
 
 ````markdown
 ```typescript
@@ -23,9 +23,9 @@ async function build(config: string): Promise<void> {
 }
 ```
 
-## Block Titles
+## Code Block Titles
 
-Follow the language identifier with a quoted filename to render a labelled header above the block. This is useful for referencing configuration files and source paths directly.
+Supply a double-quoted filename string after the language tag to render a styled title bar above the code container:
 
 ````markdown
 ```json "docmd.config.json"
@@ -43,22 +43,22 @@ Follow the language identifier with a quoted filename to render a labelled heade
 }
 ```
 
-## Language Support
+## Supported Languages
 
-docmd supports common technical ecosystems out of the box:
+`docmd` supports popular programming languages and data formats out of the box:
 
-*   **Logic:** `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`
-*   **Web:** `html`, `css`, `markdown`
-*   **Data & Shell:** `json`, `yaml`, `bash`, `powershell`, `dockerfile`
-*   **Documentation:** `mermaid`, `changelog`
+- **Programming:** `javascript`, `typescript`, `python`, `rust`, `go`, `ruby`, `csharp`, `c`, `cpp`
+- **Web Languages:** `html`, `css`, `markdown`
+- **Data & Shell:** `json`, `yaml`, `bash`, `powershell`, `dockerfile`, `toml`
+- **Diagrams & Logs:** `mermaid`, `changelog`
 
 ## AI Context Strategy
 
-When documenting code for AI agents, follow these practices:
+When writing code snippets for human readers and AI agents:
 
-1.  **Label every block explicitly** - use `typescript`, `bash`, `json` rather than relying on auto-detection. This ensures the parser applies the correct grammar for the `llms.txt` stream.
-2.  **Embed intent in comments** - inline comments explain complex logic and provide critical reasoning context directly inside the code.
+1. **Explicit Language Tags**: Use explicit language identifiers (`typescript`, `bash`, `json`) rather than relying on auto-detection to ensure accurate tokenization for `llms.txt`.
+2. **Explanatory Inline Comments**: Use inline comments to explain architectural decisions and non-obvious logic.
 
-::: callout tip "One-Click Portability"
-Set `copyCode: true` in your configuration to enable a subtle copy button. It appears on the top-right of every block on hover, allowing readers to copy snippets instantly.
+::: callout tip "One-Click Copy Utilities" icon:copy
+Enable `theme.copyCode: true` in `docmd.config.json` to display interactive copy-to-clipboard buttons on code block headers.
 :::

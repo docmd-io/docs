@@ -1,34 +1,34 @@
 ---
 title: "Live Editor"
-description: "Understanding the docmd Live Editor and its browser-based authoring workflow."
+description: "Architecture and execution reference for the docmd browser-based Live Editor environment."
 ---
 
-The docmd Live Editor is a dedicated environment for real-time documentation authoring. It uses the isomorphic core to provide an instant, side-by-side preview of your Markdown content without requiring a backend build process.
+The docmd Live Editor provides a browser-native authoring environment. Utilizing the isomorphic compilation core, it presents instant, side-by-side Markdown previews without requiring local disk compilation steps.
 
-## Launching the Editor
+## Launch Commands
 
-Start the local Live Editor by running:
+Start the local Live Editor instance:
 
 ```bash
 npx @docmd/core live
 ```
 
-The editor will typically be available at `http://localhost:3000`.
+The editor opens at `http://localhost:3000` by default.
 
 ## Architecture
 
-Unlike the standard `dev` server which rebuilds files on the disk, the Live Editor runs the engine directly in your browser. This enables:
+Unlike the `dev` server process which monitors file changes on disk, the Live Editor runs the compilation engine directly within the browser runtime:
 
-1.  **Instant Feedback**: Content is re-rendered as you type.
-2.  **Portable Playgrounds**: The editor can be bundled into a static site for hosting on platforms like GitHub Pages.
-3.  **Cross-Platform Consistency**: The preview uses the exact same rendering logic as the production build.
+1. **Instant Feedback**: Content re-renders in real-time during user typing.
+2. **Standalone Playgrounds**: The editor can be exported as a static Web bundle for hosting on GitHub Pages or static host providers.
+3. **Parity**: Previews leverage the identical rendering pipeline as production `build` outputs.
 
-## Static Deployment
+## Standalone Static Builds
 
-Generate a shareable, standalone version of the editor:
+Export a standalone, shareable Live Editor bundle:
 
 ```bash
 npx @docmd/core live --build-only
 ```
 
-This creates a `dist/` directory containing the editor's HTML and the bundled isomorphic engine.
+Emits a `dist/` directory containing the editor HTML application and bundled isomorphic engine.

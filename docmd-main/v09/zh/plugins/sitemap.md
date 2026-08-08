@@ -3,24 +3,24 @@ title: "Sitemap 插件"
 description: "自动生成符合标准的 sitemap.xml，以实现更好的搜索引擎发现。"
 ---
 
-`@docmd/plugin-sitemap` 插件在构建目录的根目录生成一个 `sitemap.xml` 文件。这为搜索引擎提供了您站点架构的综合地图，确保所有页面（包括版本化文档）都会被抓取和索引。
+`@docmd/plugin-sitemap` 插件在编译期间于站点输出目录根部生成标准的 `sitemap.xml` 文件。这为网络爬虫和搜索引擎提供了您站点结构的完整地图，确保所有页面与版本路由都能得到高效索引。
 
-## 配置
+## 配置选项
 
-通过在根配置中提供您的 `siteUrl` 来启用 sitemap 生成。您可以在 `plugins` 对象中自定义抓取权重。
+在 `docmd.config.json` 中配置 Sitemap 生成参数：
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | 启用或禁用 sitemap 生成。 |
-| `defaultChangefreq` | `string` | `'weekly'` | 提示爬虫页面更改的频率。 |
-| `defaultPriority` | `number` | `0.8` | 标准页面的默认权重（0.0 至 1.0）。 |
-| `rootPriority` | `number` | `1.0` | 首页（`index.md`）的权重。 |
+| `enabled` | `boolean` | `true` | 启用或禁用 Sitemap 生成。 |
+| `defaultChangefreq` | `string` | `'weekly'` | 供搜索引擎机器人参考的抓取频率提示。 |
+| `defaultPriority` | `number` | `0.8` | 标准文档页面的优先级权重（`0.0` 至 `1.0`）。 |
+| `rootPriority` | `number` | `1.0` | 站点首页（`index.md`）的优先级权重。 |
 
-### 示例
+### 全局 Sitemap 配置示例
 
 ```json "docmd.config.json"
 {
-  "url": "https://docs.example.com",
+  "url": "https://docs.docmd.io",
   "plugins": {
     "sitemap": {
       "defaultChangefreq": "weekly",
@@ -30,26 +30,26 @@ description: "自动生成符合标准的 sitemap.xml，以实现更好的搜索
 }
 ```
 
-## 功能
+## 核心能力
 
-- **规范 URL**：根据您的 `url` 配置，将页面路径解析为干净的公开 URL。
-- **版本化发现**：包含来自每个已配置版本（`/v1/`、`/v2/` 等）的页面。
-- **按页面排除**：跳过在 frontmatter 中带有 `sitemap: false` 的页面。
-- **标准 XML**：输出遵循每个主要搜索引擎都支持的 sitemaps.org 协议。
+* **规范域名映射**: 根据 `config.url` 将相对页面路由解析为绝对 URL。
+* **版本路由索引**: 自动索引所有配置的文档版本（`/v09/`、`/v08/` 等）中的页面。
+* **按页面排除**: 跳过 Frontmatter 中包含 `sitemap: false` 或 `noindex: true` 的页面。
+* **协议合规性**: 生成符合标准 sitemaps.org 规范的 XML。
 
 ## 页面级控制
 
-使用 frontmatter 覆盖特定页面的 sitemap 行为：
+使用 [页面 Frontmatter](../content/frontmatter.md) 为特定文档覆盖 Sitemap 参数：
 
-```markdown
+```yaml
 ---
-title: "归档页面"
-priority: 0.3          # 旧内容的较低权重
-changefreq: "monthly"   # 提示爬虫
-sitemap: false         # 排除此特定页面
+title: "旧版迁移指南"
+priority: 0.3          # 针对旧版内容使用较低的抓取权重
+changefreq: "monthly"   # 给搜索引擎爬虫的提示
+sitemap: false         # 从 sitemap.xml 中排除该页面
 ---
 ```
 
-::: callout tip "验证"
-构建站点后，您可以在 `site/sitemap.xml` 找到 sitemap。您可以将此 URL 直接提交到搜索引擎控制台以加速索引。
+::: callout tip "Sitemap 验证" icon:check-circle
+编译完成后，可在 `site/sitemap.xml` 处找到 `sitemap.xml`。将此 URL 直接提交至 Search Console 控制台即可加速页面收录。
 :::

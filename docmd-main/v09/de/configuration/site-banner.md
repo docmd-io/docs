@@ -1,99 +1,95 @@
 ---
 title: "Site-Banner"
-description: "Seitenweite Ankündigungsleiste. Sitzt über der Menubar, unterstützt Inline-Markdown, optionales Icon, CTA-Link und pro Sitzung gemerktes Schließen."
+description: "Konfigurieren Sie schließbare website-weite Ankündigungsbanner mit Inline-Markdown, Call-to-Action-Schaltflächen und Sitzungspersistenz in docmd."
 ---
 
-# Site-Banner
+`docmd` bietet einen integrierten, schließbaren Site-Banner, der sich oben im Layout befindet. Verwenden Sie ihn, um Release-Ankündigungen, Wartungsfenster oder werbliche Calls-to-Action auf allen Dokumentationsseiten anzuzeigen.
 
-> **Neu in 0.8.7.** Eine schließbare Ankündigungsleiste im Standard-UI. Sitzt über der Menubar und unter dem Seiten-Header. **Opt-in** — es wird nichts gerendert, sofern Sie nicht `config.layout.banner` setzen.
+## Schnelleinrichtung
 
-Verwenden Sie sie für Release-Ankündigungen, Wartungsfenster, Beta-Calls-to-Action oder jede andere seitenweite Nachricht.
-
-## In 30 Sekunden aktivieren
+Aktivieren Sie den Ankündigungsbanner in Ihrem `docmd.config.json`-Manifest:
 
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9 erscheint am Freitag** — lesen Sie die Ankündigung.",
+      "content": "**v0.9.0 ist da!** — lesen Sie die vollständige Release-Ankündigung.",
       "type": "info",
       "dismissible": true,
-      "link": { "text": "Mehr lesen", "url": "/blog/v0-9" }
+      "link": { "text": "Ankündigung lesen", "url": "/blog/v0-9" }
     }
   }
 }
 ```
 
-Der Banner erscheint auf jeder Seite. Nutzer, die ihn einmal schließen, sehen ihn bis zur nächsten Browser-Sitzung nicht erneut.
+Der Banner wird oben auf jeder Seite gerendert. Wenn er von einem Leser geschlossen wird, wird der geschlossene Zustand für die Dauer seiner Browsersitzung im `sessionStorage` gespeichert.
 
 ## Konfigurationsreferenz
 
 | Feld | Standard | Beschreibung |
-|---|---|---|
-| `content` | `""` | Inline-Markdown-Text (`**fett**`, `` `code``). Schließt sich gegenseitig mit `html` aus. |
-| `html` | `""` | Roher HTML-Code. Hat Vorrang vor `content`. Für umfangreichere Layouts. |
-| `type` | `"info"` | `"info"` \| `"success"` \| `"warning"` \| `"danger"` — beeinflusst die Hintergrundfarbe. |
-| `dismissible` | `true` | Schließen-Schaltfläche (X) anzeigen. Bei `false` ist der Banner dauerhaft sichtbar. |
-| `link` | `null` | `{ text, url }` für einen optionalen CTA-Link, der nach dem Inhalt gerendert wird. |
-| `icon` | `null` | Lucide-Iconname, der links angezeigt wird. Häufige Werte: `megaphone`, `info`, `bell`. |
+| :--- | :--- | :--- |
+| `content` | `""` | Inline-Markdown-Zeichenfolge (`**fett**`, `` `code` ``). Schließt sich gegenseitig mit `html` aus. |
+| `html` | `""` | Rohe HTML-Zeichenfolge. Hat Vorrang vor `content` für benutzerdefinierte inhaltsreiche Layouts. |
+| `type` | `"info"` | Visueller Hintergrund-Farbton (`"info"`, `"success"`, `"warning"`, `"danger"`). |
+| `dismissible` | `true` | Wenn `true`, wird eine Schließen-Schaltfläche (X) gerendert. Wenn `false`, bleibt der Banner dauerhaft sichtbar. |
+| `link` | `null` | Optionales `{ text, url }`-Objekt, das einen Call-To-Action (CTA)-Link rendert. |
+| `icon` | `null` | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons), das links gerendert wird (z. B. `megaphone`, `bell`). |
 
-### Beispiele
+### Konfigurationsbeispiele
 
-Einfache Ankündigung:
-
+::: tabs
+== tab "Standard-Ankündigung" icon:bell
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "Site-Wartung Sonntag 02:00–04:00 UTC.",
-      "type": "warning"
+      "content": "Geplante Systemwartung am Sonntag von 02:00 bis 04:00 Uhr UTC.",
+      "type": "warning",
+      "icon": "alert-triangle"
     }
   }
 }
 ```
-
-Erfolg / Release:
-
+== tab "Release-CTA" icon:sparkles
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v1.0 ist da!** Lesen Sie die Release Notes.",
+      "content": "**v0.9.0 ist live!** Entdecken Sie neue Suchfunktionen und UI-Komponenten.",
       "type": "success",
       "icon": "party-popper",
-      "link": { "text": "Release Notes", "url": "/blog/v1-0" }
+      "link": { "text": "Release Notes", "url": "/blog/v0-9-0" }
     }
   }
 }
 ```
-
-Reichhaltiges HTML (sorgfältig escapen):
-
+== tab "Benutzerdefiniertes HTML" icon:code
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "html": "<strong>Neu:</strong> KI-gestützte Suche ist da. <a href=\"/blog/ai-search\">Mehr erfahren →</a>",
+      "html": "<strong>Neu:</strong> Die Rust-Compiler-Engine ist jetzt als Vorschau verfügbar. <a href=\"/blog/rust-engine\">Mehr erfahren →</a>",
       "type": "info",
       "dismissible": false
     }
   }
 }
 ```
+:::
 
-## Verhalten
+## Layout-Verhalten
 
-- **Position** — Sitzt ganz oben auf der Seite, über der Menubar und der Sidebar-Logo-Leiste. Reine CSS-Positionierung, kein Layout-Shift beim Schließen.
-- **Schließen-Persistenz** — Der "geschlossen"-Zustand wird in `sessionStorage` gespeichert. Eine neue Browser-Sitzung zeigt den Banner erneut. Für längerfristige Persistenz schreiben Sie in `localStorage` aus Ihrem eigenen clientseitigen Skript — das `data-docmd-banner`-Attribut erleichtert das Auffinden.
-- **Pro-Seite-Override** — In 0.8.7 noch nicht unterstützt. Um den Banner auf einer einzelnen Seite auszublenden, setzen Sie `layout.banner: null` in einem `config.templates[page]`-Eintrag (für ein Folge-Release geplant).
+- **Positionierung**: Sitzt oben im Viewport über der Menubar und dem Sidebar-Header. Erstellt mit Zero-Layout-Shift-CSS-Regeln, sodass das Schließen des Banners Inhaltszeilen nicht störend verschiebt.
+- **Sitzungspersistenz**: Der Schließen-Zustand wird im `sessionStorage` gespeichert. Das Öffnen einer neuen Browsersitzung stellt den Banner wieder her.
+- **Anpassung pro Seite**: Um den Banner auf bestimmten Landingpages auszublenden, setzen Sie `layout.banner` im Seiten-Frontmatter auf `null`.
 
-## Neu stylen
+## Benutzerdefiniertes Banner-Styling
 
-Der Banner verwendet BEM-Klassen auf dem Wurzelelement `.docmd-banner`. Skinen Sie ihn über `customCss` neu:
+Der Banner verwendet BEM-Klassennamen mit dem Präfix `.docmd-banner`. Passen Sie Farben und Typografie über benutzerdefinierte CSS-Regeln an:
 
 ```css
 .docmd-banner--info {
-  background: linear-gradient(90deg, #fef3c7 0%, #fff 100%);
+  background: linear-gradient(90deg, #fef3c7 0%, #ffffff 100%);
   border-bottom: 2px solid #f59e0b;
 }
 .docmd-banner__link {
@@ -101,11 +97,10 @@ Der Banner verwendet BEM-Klassen auf dem Wurzelelement `.docmd-banner`. Skinen S
 }
 ```
 
+## Deaktivieren des Site-Banners
 
-## Deaktivieren
+Um den Site-Banner global zu deaktivieren, setzen Sie `layout.banner` auf `null` oder entfernen Sie den Schlüssel `banner` aus `docmd.config.json`.
 
-Um den Banner global zu entfernen, setzen Sie `layout.banner` zurück auf `null` (oder entfernen Sie den Schlüssel). Um ihn auf einer einzelnen Seite auszublenden, verwenden Sie das geplante Pro-Seite-Override oder rendern Sie `null` im Frontmatter (post-0.8.7).
-
-::: callout tip "Mit einem Changelog-Template kombinieren"
-Kombinieren Sie den Banner mit einem `template-changelog`-Paket, um Ihren Nutzern eine permanente Aufzeichnung jedes angekündigten Releases zu bieten.
+::: callout tip "Changelog-Integration" icon:history
+Kombinieren Sie Site-Banner mit Changelog-Seiten oder Vorlagenpaketen, um eine permanente Aufzeichnung aller angekündigten Produktupdates zu führen.
 :::

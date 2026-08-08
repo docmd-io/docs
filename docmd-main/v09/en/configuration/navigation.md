@@ -1,13 +1,13 @@
 ---
 title: "Navigation Configuration"
-description: "Structure your sidebar, categorise links, and configure icons for readers and search engines."
+description: "Structure sidebar navigation, organise categories, and configure icons for readers and search engines in docmd."
 ---
 
-The compiler provides explicit control over your site navigation. A clear navigation hierarchy creates a logical reading sequence. This optimises the SPA experience and provides a clear context map for search indexing and AI models.
+`docmd` provides explicit control over your site's navigation hierarchy. A structured sidebar creates a logical reading sequence, optimising both the Single Page Application (SPA) user experience and search engine indexability.
 
-## 1. The Navigation Schema
+## The Navigation Schema
 
-An array of link objects in your `docmd.config.json` file controls the sidebar. Each object is a direct link or a nested category group.
+The `navigation` array in `docmd.config.json` controls the sidebar. Each object represents a direct page link or a nested category group:
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
@@ -20,25 +20,26 @@ An array of link objects in your `docmd.config.json` file controls the sidebar. 
 }
 ```
 
-## 2. Supported Properties
+## Supported Link Properties
 
-Every item supports these settings:
+Every item in the navigation array supports the following properties:
 
 | Property | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | Yes | The text displayed in the sidebar menu. |
-| `path` | `String` | No | Target URL. Relative local paths must begin with a forward slash (`/`). |
-| `icon` | `String` | No | Name of any [Lucide Icon](external:https://lucide.dev/icons) in kebab-case format (e.g., `git-branch`). |
-| `children` | `Array` | No | An array of nested navigation items to establish a submenu. |
-| `collapsible`| `Boolean`| No | When `true`, the user can expand or collapse the category folder. |
-| `external` | `Boolean`| No | When `true`, opens the link in a new browser tab. |
+| `title` | `String` | Yes | Menu label displayed in the sidebar. |
+| `path` | `String` | No | Target URL route. Relative local paths must start with a leading slash (`/`). |
+| `icon` | `String` | No | Name of any [Lucide Icon](external:https://lucide.dev/icons) in kebab-case format (e.g. `git-branch`). |
+| `children` | `Array` | No | Array of nested navigation items defining a submenu. |
+| `collapsible`| `Boolean`| No | When `true`, enables expanding or collapsing category groups. |
+| `external` | `Boolean`| No | When `true`, opens the destination link in a new browser tab. |
 
-## 3. Organising Section Groups
+## Organising Navigation Groups
 
-Structure your sidebar using two primary grouping methods:
+Structure your sidebar using two primary grouping patterns:
 
-### Clicking Group (Direct Page + Child Folders)
-Specify a `path` along with `children` for a category header. Clicking the title loads the landing page and expands the child links.
+### Interactive Category Headers (Landing Page + Children)
+
+Specify a `path` alongside `children` for a category section. Clicking the header navigates to the landing page and toggles child items:
 
 ```json "docmd.config.json"
 {
@@ -51,8 +52,9 @@ Specify a `path` along with `children` for a category header. Clicking the title
 }
 ```
 
-### Static Label (Category Headers Only)
-Omit the `path` parameter. The header serves as a non-clickable title grouping related links. Use this to divide major technical categories without a single landing page.
+### Static Category Labels (Group Headers Only)
+
+Omit the `path` property. The category header acts as a non-clickable title grouping related links:
 
 ```json "docmd.config.json"
 {
@@ -65,19 +67,17 @@ Omit the `path` parameter. The header serves as a non-clickable title grouping r
 }
 ```
 
-## 4. Automated Breadcrumbs
+## Contextual Breadcrumbs
 
-The engine automatically generates contextual breadcrumbs for every page. These display directly above the main page header to assist with rapid orientation.
+The engine resolves contextual breadcrumbs for every page dynamically, rendering them above the main page header:
 
 <img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
-### Key Behaviours
-*   **Automatic Resolution**: The engine traces the active route through your navigation tree to construct the hierarchy.
-*   **Active Indicator**: The current page is the final, unlinked breadcrumb item.
-*   **Mobile Optimisation**: Breadcrumbs simplify or hide dynamically on small viewports to save screen space.
+- **Automatic Path Tracing**: The engine traces the active route through the navigation tree to build breadcrumb segments.
+- **Active Page Indicator**: The current document is displayed as the unlinked final item.
+- **Responsive Layout**: Breadcrumbs adapt dynamically to small mobile viewports.
 
-### Disabling Breadcrumbs
-Breadcrumbs are enabled by default. Update your site layout options to disable them globally:
+To disable breadcrumbs globally, update `layout.breadcrumbs`:
 
 ```json "docmd.config.json"
 {
@@ -87,30 +87,31 @@ Breadcrumbs are enabled by default. Update your site layout options to disable t
 }
 ```
 
-## 5. Navigation Resolution Cascading
+## Cascading Navigation Resolution
 
-The compiler uses a "closest file wins" cascading resolution system. This supports multiple versions or languages without bloating your global configuration.
+`docmd` uses a "closest file wins" cascading resolution system. This allows versioned or localised subfolders to define dedicated sidebars without duplicating global options:
 
 ```text
 my-project/
-├── docmd.config.json           [Level 3: Global Config] - Default Fallback
+├── docmd.config.json         [Level 3: Global Config] - Default Fallback
 ├── docs-v1.0/ 
 │   ├── navigation.json       [Level 2: Version Navigation] - Overrides Global
 │   └── zh/
-│       └── navigation.json   [Level 1: Language Navigation] - Absolute Priority
+│       └── navigation.json   [Level 1: Language Navigation] - Top Priority
 ```
 
-1.  **Level 1: Language-Specific** (`navigation.json` inside a locale folder): Overrides all settings for this specific language and version.
-2.  **Level 2: Version-Specific** (`navigation.json` inside a version folder): Overrides global configuration for this version across all languages.
-3.  **Level 3: Global Configuration** (`config.navigation`): The base fallback definition in the central configuration file.
+1. **Level 1 (Language Specific)**: `navigation.json` inside a locale folder overrides navigation for that language and version.
+2. **Level 2 (Version Specific)**: `navigation.json` inside a version folder overrides global navigation for that specific release.
+3. **Level 3 (Global Base)**: `navigation` array in `docmd.config.json` serves as the base fallback.
 
-### Smart Broken-Link Prevention
-The engine automatically checks if targeted files exist during Level 2 or 3 navigation fallback. Missing files are filtered out of the sidebar dynamically. This eliminates broken links for older versions or missing translations.
+### Broken-Link Failsafe
 
-## 6. Icon Integration
+During Level 2 or 3 fallback resolution, the engine checks whether targeted files exist on disk. Non-existent paths are filtered out of the rendered sidebar automatically.
 
-The compiler includes the complete **Lucide Icon** system. Use the official Lucide name in kebab-case format (e.g., `settings`, `folder-open`, `book-marked-line`) to apply an icon.
+## Icon System Integration
 
-::: callout tip "Optimising Sidebar Labels" icon:sparkles
-Keep sidebar titles clear and descriptive. A concise navigation structure allows AI agents to parse your site map easily from the compiled `llms.txt` feed.
+`docmd` embeds the complete **Lucide Icon** set natively. Pass any official Lucide icon name in kebab-case format (e.g. `settings`, `folder-open`, `book-marked`) to apply an icon.
+
+::: callout tip "Optimising Sidebar Labels for AI Engines" icon:sparkles
+Keep sidebar titles clear and concise. A structured navigation tree helps AI agents parse your documentation structure efficiently via the compiled `llms.txt` endpoint.
 :::

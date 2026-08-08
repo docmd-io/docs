@@ -1,73 +1,71 @@
 ---
 title: "Deployment-Übersicht"
-description: "Wählen Sie, wie Sie Ihre docmd-Dokumentation bereitstellen möchten — von Zero-Config-Vorlagen bis hin zu selbstgehosteten Servern und Cloud-Plattformen."
+description: "Stellen Sie von docmd generierte statische Dokumentation auf Zero-Config-Vorlagen, selbstgehosteten Webservern, Docker oder Cloud-Plattformen bereit."
 ---
 
-docmd erzeugt eine vollständig statische Website. Die Ausgabe ist ein in sich geschlossener Ordner (Standard: `site/`), der überall gehostet werden kann — ohne serverseitige Laufzeitumgebung.
+`docmd` kompiliert statische Dokumentations-Websites in in sich geschlossene Ausgabeverzeichnisse (Standard: `site/`), die keine serverseitigen Laufzeitumgebungen erfordern.
 
 ```bash
 npx @docmd/core build
 ```
 
-## Eine Bereitstellungsmethode wählen
+## Auswahl einer Bereitstellungsmethode
 
-Es gibt drei Hauptwege, je nach Ausgangslage:
+Wählen Sie ein Bereitstellungsmuster basierend auf den Infrastrukturanforderungen:
 
-| Methode | Am besten geeignet für |
-|:--|:--|
-| [Starter-Template](./starter-template) | Ein neues Projekt von Grund auf starten |
-| [GitHub Action](./github-action) | Automatisierte Bereitstellung zu einem bestehenden Repository hinzufügen |
-| [Deployer](./deployer) | Server-Konfigurationen erzeugen (Docker, Nginx, Caddy, Vercel, Netlify) |
+| Strategie | Primärer Anwendungsfall | Zielort |
+| :--- | :--- | :--- |
+| **[Starter-Template](./starter-template)** | Schnelle Erstellung neuer Repositories mit vorkonfigurierten GitHub Actions. | GitHub Pages |
+| **[GitHub Action](./github-action)** | Automatisierte CI/CD-Integration für bestehende Quell-Repositories. | GitHub Pages / Eigene CI |
+| **[Deployer CLI-Tool](./deployer)** | Automatisierte Generierung von Serverkonfigurationen und Containerdateien. | Docker, NGINX, Caddy, Vercel, Netlify |
 
 ## Starter-Template
 
-Der schnellste Weg zum Einstieg. Klonen Sie das offizielle Template-Repository — es enthält eine `docmd.config.json`, eine Beispielseite und einen vorkonfigurierten GitHub-Actions-Workflow, der bei jedem Push zu GitHub Pages bereitstellt.
+Der schnellste Weg für eigenständige Dokumentationsprojekte. Klonen Sie das offizielle Template-Repository, das eine Standard-`docmd.config.json`, Beispielseiten und einen vorkonfigurierten GitHub Actions-Workflow für automatisierte Bereitstellungen beim Push enthält.
 
-→ [Starter-Template](./starter-template)
+→ [Starter-Template-Leitfaden](./starter-template)
 
 ## GitHub Action
 
-Die Action `docmd-io/deploy` baut Ihre Website und gibt den kompilierten Pfad aus, bereit zum Hochladen auf GitHub Pages oder ein beliebiges anderes Ziel. Verwenden Sie dies, um die docmd-Bereitstellung zu einem bestehenden Repository hinzuzufügen, ohne Ihre Projektstruktur zu ändern.
+Die GitHub Action `docmd-io/deploy` kompiliert Ihre Dokumentation und stellt den Ausgabeverzeichnispfad für nachgelagerte Veröffentlichungsschritte bereit. Verwenden Sie dies, um docmd in bestehende CI/CD-Pipelines zu integrieren, ohne Projektdateistrukturen zu ändern.
 
-→ [GitHub Action](./github-action)
+→ [GitHub Action-Leitfaden](./github-action)
 
-## Deployer
+## Deployer-Tool
 
-Der Befehl `deploy` liest Ihre `docmd.config.json` und erzeugt anbieterspezifische Konfigurationsdateien, die auf Ihr Projekt zugeschnitten sind. Keine generischen Vorlagen — jede Datei spiegelt Ihr tatsächliches Ausgabeverzeichnis, Ihre Site-URL und Ihre SPA-Einstellungen wider.
+Der Befehl `deploy` parst Ihre Konfiguration `docmd.config.json` und generiert produktionsbereite Konfigurationsdateien, die auf Ihre Projekteinstellungen, SPA-Routing-Präferenzen und Asset-Verzeichnisse zugeschnitten sind:
 
 ```bash
-# Selbstgehostet
-npx @docmd/core deploy --docker          # Dockerfile + .dockerignore
-npx @docmd/core deploy --nginx           # Produktionsfähige nginx.conf
-npx @docmd/core deploy --caddy           # Produktionsfähige Caddyfile
+# Selbstgehostete Infrastruktur
+npx @docmd/core deploy --docker          # Multi-Stage-Dockerfile + .dockerignore
+npx @docmd/core deploy --nginx           # Produktions-NGINX-Konfiguration
+npx @docmd/core deploy --caddy           # Caddyfile mit automatischem HTTPS
 
-# Cloud / CI
-npx @docmd/core deploy --github-pages    # GitHub-Actions-Workflow
-npx @docmd/core deploy --vercel          # vercel.json
-npx @docmd/core deploy --netlify         # netlify.toml
+# Cloud- & Serverless-Plattformen
+npx @docmd/core deploy --github-pages    # GitHub Actions-Workflow
+npx @docmd/core deploy --vercel          # vercel.json-Konfiguration
+npx @docmd/core deploy --netlify         # netlify.toml-Konfiguration
 ```
 
-→ [Deployer-Referenz](./deployer)
+→ [Deployer CLI-Referenz](./deployer)
 
-## Cloud-Plattformen
+## Unterstützte Hosting-Plattformen
 
-Für verwaltetes Hosting ohne eigenen Server:
+* **[Docker-Image](./docker)** — Offizielles Multi-Architektur-Image für containerisierte Umgebungen.
+* **[NGINX](./nginx)** — Selbstgehostete Reverse-Proxy-Konfiguration.
+* **[Caddy](./caddy)** — Selbstgehosteter Webserver mit automatischer TLS-Zertifikatsverwaltung.
+* **[Vercel](./vercel)** — Cloud-Bereitstellungskonfiguration mit Optimierung statischer Assets.
+* **[Netlify](./netlify)** — Git-gestütztes Continuous Deployment.
+* **[Cloudflare Pages](./cloudflare-pages)** — Edge-natives statisches Site-Hosting mit integrierter CI/CD.
+* **[Firebase Hosting](./firebase)** — Google-CDN-Bereitstellung mit GitHub Actions-Integration.
 
-- [Docker-Image](./docker) — Offizielles Multi-Arch-Image für containerisierte Bereitstellungen
-- [NGINX](./nginx) — Selbstgehostet mit generierter Konfiguration
-- [Caddy](./caddy) — Selbstgehostet mit automatisch aktiviertem HTTPS
-- [Vercel](./vercel) — Zero-Config-Bereitstellung in der Cloud
-- [Netlify](./netlify) — Git-verbundene Continuous Deployment
-- [Cloudflare Pages](./cloudflare-pages) — Edge-natives Hosting mit eingebauter CI/CD
-- [Firebase Hosting](./firebase) — Google-CDN mit GitHub-Actions-Integration
+## Produktions-Checkliste
 
-## Checkliste für die Produktion
+1. **Kanonische Site-URL**: Geben Sie `url` in `docmd.config.json` an, um genaue kanonische Tags, Open-Graph-URLs und Sitemap-Einträge zu generieren.
+2. **Pfad-Weiterleitungen**: Bewahren Sie alte URL-Pfade während der Migration unter Verwendung der `redirects`-Konfiguration auf.
+3. **Analytics-Integration**: Aktivieren Sie das `analytics`-Plugin, um Besucherverkehr und Suchmetriken zu verfolgen.
+4. **KI-Kontextdateien**: Aktivieren Sie das `llms`-Plugin, um maschinenlesbare `llms.txt`- und `llms-full.txt`-Dateien auszugeben.
 
-1. **Site-URL** — Setzen Sie `url` in der `docmd.config.json`. Diese steuert kanonische Tags, Sitemaps, Social-Previews und generierte Bereitstellungsdateien.
-2. **Weiterleitungen** — Migrieren Sie von einem anderen Tool? Verwenden Sie die `redirects`-Konfiguration, um SEO-Rankings zu erhalten.
-3. **Analyse** — Aktivieren Sie das `analytics`-Plugin, um Engagement und Suchanfragen zu verfolgen.
-4. **KI-Kontext** — Aktivieren Sie das `llms`-Plugin, um eine `llms.txt` für die Aufnahme durch KI-Agenten zu erzeugen.
-
-::: callout tip "Eigene 404-Seiten"
-docmd schreibt eine `404.html` in Ihr Ausgabeverzeichnis. Die meisten statischen Hosts liefern diese automatisch für fehlende Routen aus.
+::: callout tip "Benutzerdefinierte 404-Seiten" icon:info
+`docmd` kompiliert eine eigenständige `404.html`-Seite im Ausgabestamm Ihrer Website. Die meisten statischen Hosts liefern diese Datei automatisch für nicht zugeordnete Routen aus.
 :::

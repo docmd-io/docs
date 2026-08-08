@@ -1,9 +1,9 @@
 ---
 title: "Tags"
-description: "Use the tag container to label versions, statuses, or highlight short text snippets inline."
+description: "Use tag containers to label versions, statuses, or highlight short text snippets inline in docmd."
 ---
 
-The `tag` container is a self-closing component that inserts small, pill-shaped badges inline. Tags retain their compact proportions everywhere - they do not inherit heading sizes or surrounding text styles.
+The `tag` container is a self-closing component that inserts compact, pill-shaped badges inline. Tags retain their compact proportions across all contexts—they do not inherit surrounding heading font sizes or text weights.
 
 ## Syntax Reference
 
@@ -13,26 +13,26 @@ The `tag` container is a self-closing component that inserts small, pill-shaped 
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | The text displayed inside the pill-shaped badge. |
-| **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). Automatically calculates a contrasting text colour. |
+| **Label** | `"String"` | Text string displayed inside the pill badge. |
+| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). Automatically calculates contrasting text color. |
 | **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
-| **URL** | `url:URL` | Makes the tag a clickable hyperlink. Prefix with `external:` to force a new tab. Matches the unquoted-URL convention used by [buttons](button). |
+| **URL** | `url:URL` | Converts the tag into a clickable link. Prefix with `external:` to open in a new tab. Uses unquoted URL strings matching [buttons](buttons.md). |
 
-## Examples
+## Usage Examples
 
-### Version Badge
+### Inline Version Badges
 
-Use a coloured tag inline to mark when a feature was introduced.
+Use a coloured tag inline to indicate feature introductions or version constraints:
 
 ```markdown
-This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+This capability was introduced in ::: tag "v0.9.0" color:blue and is fully supported.
 ```
 
-This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
+This capability was introduced in ::: tag "v0.9.0" color:blue and is fully supported.
 
-### Status Labels
+### Status Indicators
 
-Use tags for status indicators across a page. Colours are fully customisable.
+Insert status labels across your documentation pages with custom color accents:
 
 ```markdown
 ::: tag "Deprecated" color:#ef4444
@@ -46,19 +46,19 @@ Use tags for status indicators across a page. Colours are fully customisable.
 ::: tag "Stable" color:#22c55e
 ::: tag "Verified" icon:check-circle color:#10b981
 
-### Linked Tag
+### Linked Tag Badges
 
-Add `url:` to make a tag act as a hyperlink, useful for cross-referencing release notes or external resources. The value is unquoted to match the convention used by [buttons](buttons.md).
+Add `url:` to make a tag act as a hyperlink, useful for cross-referencing release notes or external resources.
 
 ```markdown
-Check out the latest ::: tag "Release Notes" icon:external-link url:/release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:./#release-notes
 ```
 
-Check out the latest ::: tag "Release Notes" icon:external-link url:/release-notes/0-8-2.md
+Check out the latest ::: tag "Release Notes" icon:external-link url:./#release-notes
 
-### External Link
+### External Links
 
-Prefix the URL with `external:` to force the link to open in a new tab, even when the target lives on your own domain.
+Prefix the URL with `external:` to force the link to open in a new browser tab:
 
 ```markdown
 ::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

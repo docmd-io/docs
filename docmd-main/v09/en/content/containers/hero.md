@@ -1,9 +1,9 @@
 ---
 title: "Hero Sections"
-description: "Build high-impact landing page headers and marketing highlights purely in Markdown."
+description: "Build high-impact landing page headers and marketing highlights in Markdown in docmd."
 ---
 
-The `hero` container creates visually striking landing page headers. It handles complex layouts including splits, glow effects, and sliders without requiring custom HTML.
+The `hero` container creates visually striking landing page headers. It handles split media layouts, background glow effects, and interactive carousels without requiring raw HTML markup.
 
 ## Syntax Reference
 
@@ -12,29 +12,29 @@ The `hero` container creates visually striking landing page headers. It handles 
     # Page Title
     A short supporting tagline.
 
-    ::: button "Call to Action" /target-url
+    ::: button "Call to Action" ./#target-url
 :::
 ```
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **Layout** | `layout:split` \| `layout:slider` | `split` divides the hero into a text area and a side media area. `slider` creates a horizontal scroll-snap carousel. |
-| **Glow** | `glow:true` | Injects a subtle radial gradient glow in the background. |
-| **Side Separator** | `== side` | Used with `layout:split`. Everything after this delimiter renders in the secondary (right-hand) area. |
-| **Slide Separator** | `== slide` | Used with `layout:slider`. Each `== slide` defines a new carousel panel. |
+| **Layout** | `layout:split` \| `layout:slider` | `split` divides the hero into primary text and secondary media areas. `slider` creates a horizontal scroll-snap carousel. |
+| **Glow** | `glow:true` | Injects a subtle radial gradient glow behind the hero header. |
+| **Side Separator** | `== side` | Delimiter for `layout:split`. Content after this renders in the right-hand media area. |
+| **Slide Separator** | `== slide` | Delimiter for `layout:slider`. Each `== slide` defines a new carousel panel. |
 
-## Examples
+## Usage Examples
 
 ### Split Layout
 
-Use the `== side` separator to divide content into a primary text area and a secondary media area.
+Use the `== side` separator to divide content into a primary hero text area and a secondary media area:
 
 ```markdown
 ::: hero layout:split glow:true
     # docmd
-    Isomorphic execution. AI-optimised.
+    Isomorphic execution engine. AI-optimised documentation.
 
-    ::: button "Quickstart" ../../getting-started/quick-start.md color:blue
+    ::: button "Quickstart Guide" ../../getting-started/quick-start.md color:blue
 
     == side
         ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -43,9 +43,9 @@ Use the `== side` separator to divide content into a primary text area and a sec
 
 ::: hero layout:split glow:true
 # docmd
-Isomorphic execution. AI-optimised.
+Isomorphic execution engine. AI-optimised documentation.
 
-::: button "Quickstart" ../../getting-started/quick-start.md color:blue
+::: button "Quickstart Guide" ../../getting-started/quick-start.md color:blue
 
 == side
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -53,28 +53,28 @@ Isomorphic execution. AI-optimised.
 
 ### Slider Layout
 
-Use `== slide` separators to build an auto-advancing carousel of content panels.
+Use `== slide` separators to build an interactive carousel of hero content panels:
 
 ```markdown
 ::: hero layout:slider
     == slide
-        # Isomorphic Core
-        The engine renders everywhere.
+        # Isomorphic Core Engine
+        Renders statically and executes client-side seamlessly.
     == slide
-        # AI Optimisation
-        Built for the LLM era.
+        # AI Context Optimisation
+        Structure-aware parsing for LLM agents.
 :::
 ```
 
 ::: hero layout:slider
     == slide
-        # Isomorphic Core
-        The engine renders everywhere.
+        # Isomorphic Core Engine
+        Renders statically and executes client-side seamlessly.
     == slide
-        # AI Optimisation
-        Built for the LLM era.
+        # AI Context Optimisation
+        Structure-aware parsing for LLM agents.
 :::
 
-::: callout tip "Best Practices"
-Use `glow:true` sparingly on dark mode sites for a premium feel. Place `::: button` elements in the primary text section, before `== side`, to ensure they remain visible on mobile screens.
+::: callout tip "Hero Design Best Practices" icon:lightbulb
+Use `glow:true` on dark-themed sites for a premium visual effect. Place `::: button` elements in the primary text section before `== side` to guarantee proper mobile stacking order.
 :::

@@ -1,46 +1,38 @@
 ---
-title: "Favicons und Metadaten anpassen"
-description: "Wie Sie die visuelle Identität Ihrer Site im Browser konfigurieren und Social-Media-Previews optimieren."
+title: "Anpassen von Favicons & Metadaten"
+description: "Konfigurieren Sie Website-Favicons, OpenGraph-Karten und Twitter-Metadaten in docmd für Social Sharing und Suchmaschinen."
 ---
 
-## Problem
+Benutzerdefinierte Favicons und OpenGraph-Metadaten stellen sicher, dass Ihre Dokumentation professionell aussieht, wenn sie in Browser-Tabs als Lesezeichen gespeichert oder über soziale Netzwerke und Kommunikationskanäle geteilt wird.
 
-Eine Standard-Dokumentations-Site hat oft keine ausgeprägte visuelle Identität im Browser. Sie verwendet generische Favicons und liefert schlechte Vorschauen, wenn Links in sozialen Medien oder Kommunikations-Tools geteilt werden. Das reduziert Markenbekanntheit und Klickraten.
+## Favicon-Konfiguration
 
-## Warum es wichtig ist
-
-Ihr Favicon ist der primäre visuelle Anker in einem überfüllten Browser-Fenster. Hochwertige OpenGraph- und Twitter-Metadaten stellen sicher, dass Ihre Dokumentation beim Teilen professionell und vertrauenswürdig wirkt. Sie liefern Kontext durch Titel, Beschreibungen und Hero-Bilder.
-
-## Ansatz
-
-docmd bietet eine eingebaute Eigenschaft `favicon` zur einfachen Icon-Konfiguration. Für erweiterte SEO- und Social-Metadaten verwenden Sie das [SEO-Plugin](../../plugins/seo.md). Es automatisiert die Generierung von Meta-Tags basierend auf Ihrer Projektkonfiguration und dem Page-Frontmatter.
-
-## Implementierung
-
-### 1. Favicon konfigurieren
-
-Platzieren Sie Ihre Favicon-Datei (z. B. `favicon.svg` oder `favicon.ico`) in Ihrem Quellverzeichnis und referenzieren Sie sie in Ihrer `docmd.config.json`. docmd übernimmt automatisch die relative Pfad-Auflösung und das Cache-Busting.
-
-```json
-  "title": "Mein Projekt",
-  "favicon": "/favicon.svg"
-```
-
-### 2. Globale SEO-Konfiguration
-
-Aktivieren und konfigurieren Sie das [SEO-Plugin](../../plugins/seo.md), um Standard-Social-Media-Vorschauen für Ihre gesamte Site festzulegen.
+Platzieren Sie Ihre Favicon-Datei (z. B. `favicon.svg` oder `favicon.ico`) in Ihrem `assets/`-Verzeichnis und konfigurieren Sie die Eigenschaft `favicon` in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
-  "url": "https://docs.example.com",
+  "title": "Dokumentations-Kern",
+  "favicon": "/assets/favicon.svg"
+}
+```
+
+`docmd` verwaltet die Pfadauflösung und Cache-Busting-Header während der Kompilierung automatisch.
+
+## Globale SEO- & Social-Metadaten
+
+Konfigurieren Sie das integrierte [SEO-Plugin](../plugins/seo.md) in `docmd.config.json`, um website-weite Meta-Tags und Social-Card-Vorschauen zu generieren:
+
+```json "docmd.config.json"
+{
+  "url": "https://docs.docmd.io",
   "plugins": {
     "seo": {
-      "defaultDescription": "Der ultimative Leitfaden für unsere großartige Software.",
+      "defaultDescription": "Technische Dokumentation für docmd.",
       "openGraph": {
-        "defaultImage": "/static/og-banner.png"
+        "defaultImage": "/assets/og-banner.png"
       },
       "twitter": {
-        "siteUsername": "@meinprojekt",
+        "siteUsername": "@docmd_io",
         "cardType": "summary_large_image"
       }
     }
@@ -48,20 +40,20 @@ Aktivieren und konfigurieren Sie das [SEO-Plugin](../../plugins/seo.md), um Stan
 }
 ```
 
-### 3. Seiten-spezifische Überschreibungen
+## Metadaten-Überschreibungen auf Seitenebene
 
-Sie können SEO-Einstellungen für einzelne Seiten über die Eigenschaft `seo` im [Frontmatter](../../content/frontmatter.md) überschreiben.
+Überschreiben Sie website-weite SEO-Standards für bestimmte Seiten mithilfe der Eigenschaft `seo` im [Seiten-Frontmatter](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Major Release v2.0"
-description: "Alles, was Sie über unsere neue Engine wissen müssen."
+title: "Ankündigung des Haupt-Releases"
+description: "Übersicht über neue Funktionen in docmd."
 seo:
-  image: "/assets/v2-hero-banner.png"
-  keywords: ["release", "v2", "update", "performance"]
+  image: "/assets/v09-banner.png"
+  keywords: ["release", "v09", "dokumentation", "performance"]
 ---
 ```
 
-## Abwägungen
-
-Während die Eigenschaft `favicon` praktisch ist, unterstützt sie nur eine einzelne Datei. Für komplexe Multi-Size-Favicon-Sets (Apple Touch Icons, Android-Manifests usw.) müssen Sie möglicherweise ein benutzerdefiniertes Plugin verwenden, um zusätzliche `<link>`-Tags in den `<head>` zu injizieren.
+::: callout tip "Favicons mit mehreren Auflösungen" icon:lightbulb
+Die Konfigurationseinstellung `favicon` auf oberster Ebene deckt primäre Browseranforderungen ab. Für Favicon-Sets mit mehreren Auflösungen (wie Apple Touch Icons oder Android-Web-Manifeste) injizieren Sie zusätzliche `<link>`-Header über benutzerdefinierte Plugins oder Template-Head-Slots.
+:::

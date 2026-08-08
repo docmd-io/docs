@@ -1,13 +1,13 @@
 ---
-title: "Menüleiste"
-description: "Strukturieren und positionieren Sie Ihre Menüleiste, verwalten Sie Navigationslinks und konfigurieren Sie Dropdown-Menüs."
+title: "Menubar-Konfiguration"
+description: "Konfigurieren Sie die obere Navigations-Menubar, Dropdown-Links, Brand-Logos und Utility-Menüs in docmd."
 ---
 
-Die `menubar` ist eine hochwertige Navigationsebene. Sie bietet globalen Kontext auf Ihrer gesamten Site. Positionieren Sie sie als feste Leiste am oberen Rand des Viewports oder relativ über dem Seiten-Header.
+Die `menubar` ist eine primäre obere Navigationsleiste, die einen globalen Kontext über Ihre Dokumentations-Subsites hinweg bietet. Positionieren Sie sie als feste Leiste am absoluten oberen Rand des Viewports oder inline über dem Seiten-Header.
 
-## Konfiguration
+## Konfigurationsschema
 
-Konfigurieren Sie die Menüleiste im `layout`-Abschnitt Ihrer `docmd.config.json`.
+Konfigurieren Sie Menubar-Elemente im `layout.menubar`-Block von `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -35,35 +35,35 @@ Konfigurieren Sie die Menüleiste im `layout`-Abschnitt Ihrer `docmd.config.json
 }
 ```
 
-### Optionen
+### Konfigurationsoptionen
 
-| Option | Typ | Standard | Beschreibung |
+| Eigenschaft | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `Boolean` | `false` | Schaltet die Sichtbarkeit der Menüleiste um. |
-| `position` | `String` | `'top'` | `'top'` (fest am absoluten oberen Rand) oder `'header'` (über dem Seitentitel positioniert). |
-| `left` | `Array` | `[]` | Linksbündige Navigationselemente. |
-| `right` | `Array` | `[]` | Rechtsbündige Navigationselemente. |
+| `enabled` | `Boolean` | `false` | Hauptschalter für die Sichtbarkeit der Menubar. |
+| `position` | `String` | `'top'` | `'top'` (fest am absoluten oberen Rand des Viewports) oder `'header'` (inline über dem Seitentitel). |
+| `left` | `Array` | `[]` | Linksbündige Navigationselemente der Menubar. |
+| `right` | `Array` | `[]` | Rechtsbündige Navigationselemente der Menubar. |
 
-## Elementtypen
+## Unterstützte Elementtypen
 
-Die `left`- und `right`-Arrays unterstützen verschiedene Elementtypen.
+Die `left`- und `right`-Arrays unterstützen drei primäre Elementtypen:
 
 ### 1. Standard-Link
-Der häufigste Elementtyp.
-- `text`: Anzeigetext.
-- `url`: Pfad oder externe URL.
+Rendert einen Textlink mit optionalem Icon und Verhalten für neue Tabs:
+- `text`: Text der Link-Beschriftung.
+- `url`: Relativer Pfad oder externe URL.
 - `icon`: Optionaler Lucide-Iconname.
-- `external`: Auf `true` setzen, um in einem neuen Tab zu öffnen.
+- `external`: Bei `true` wird der Link in einem neuen Browser-Tab geöffnet.
 
-### 2. Titel (Marke)
-Setzen Sie `type: 'title'`, um Markenstile anzuwenden (z. B. fette Schrift).
+### 2. Marken-Titel (Brand Title)
+Setzen Sie `"type": "title"`, um gestaltete Marken-Header zu rendern (z. B. fette Schriftgewichte mit Home-Icon-Triggern).
 
-### 3. Dropdown-Menü
-Setzen Sie `type: 'dropdown'` und stellen Sie ein `items`-Array bereit, um ein verschachteltes Menü zu erstellen.
+### 3. Verschachteltes Dropdown-Menü
+Setzen Sie `"type": "dropdown"` und stellen Sie ein `items`-Array bereit, um interaktive Flyout-Dropdown-Untermenüs zu rendern.
 
-## Utility-Integration
+## Integration von Utility-Menüs
 
-Hosten Sie die globale Suche und den Theme-Toggle in der Menüleiste. Setzen Sie `optionsMenu.position` auf `'menubar'`.
+Um globale Utilities (wie Volltextsuche, Dunkel-/Hell-Theme-Umschalter und Sponsoring-Links) in der Menubar zu positionieren, setzen Sie `optionsMenu.position` auf `'menubar'`:
 
 ```json "docmd.config.json"
 {
@@ -75,15 +75,15 @@ Hosten Sie die globale Suche und den Theme-Toggle in der Menüleiste. Setzen Sie
 }
 ```
 
-Das Optionsmenü richtet sich automatisch am **rechten Bereich** aus. Es erscheint nach allen in `right` definierten Links.
+Utilities richten sich automatisch am **rechten Bereich** aus und werden nach allen in `right` definierten benutzerdefinierten Links gerendert.
 
-::: callout info "Automatischer Fallback"
-Wenn die `menubar` deaktiviert ist, fallen zugewiesene Utilities automatisch auf die Position `sidebar-top` zurück.
+::: callout info "Neupositionierungs-Fallback" icon:sparkles
+Wenn die `menubar` deaktiviert ist, während `optionsMenu.position` auf `'menubar'` gesetzt ist, fallen Utilities automatisch auf die Position `sidebar-top` zurück.
 :::
 
-## Eigene Gestaltung
+## Benutzerdefinierte Stile
 
-Verwenden Sie CSS-Variablen in Ihren eigenen Stylesheets, um das Erscheinungsbild der Menüleiste anzupassen. Details finden Sie unter [Eigene CSS & JS](../theming/custom-css-js.md).
+Passen Sie das Menubar-Styling an, indem Sie benutzerdefinierte CSS-Eigenschaften in Ihren eigenen Stylesheets überschreiben. Siehe [Benutzerdefiniertes CSS & JS](../theming/custom-css-js.md):
 
 ```css
 :root {

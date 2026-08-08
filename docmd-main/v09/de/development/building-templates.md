@@ -5,7 +5,9 @@ description: "Erstellen Sie ein docmd-Template-Paket — Verzeichnislayout, Desk
 
 # Templates entwickeln
 
-> **Für Template-Autoren.** Wenn Sie ein Template *verwenden* möchten, lesen Sie stattdessen [Templates](/theming/templates).
+::: callout info "Template-Nutzung" icon:palette
+**Für Template-Autoren.** Wenn Sie ein Template *verwenden* möchten, lesen Sie stattdessen [Templates](../theming/templates.md).
+:::
 
 Ein Template ist ein reguläres npm-Paket, das `capabilities: ['template']` deklariert und ein `templates[]`-Array mit `.ejs`-Datei-Überschreibungen ausliefert. Der Template-Resolver in `@docmd/ui` übernimmt die seitenweise Suche, berücksichtigt Frontmatter- / Config-Überschreibungen und fällt auf den Standard zurück, wenn etwas schiefgeht.
 

@@ -1,13 +1,13 @@
 ---
-title: "Weiterleitungen & 404"
-description: "Konfigurieren Sie metadatenbasierte Weiterleitungen und individuell gestaltete 404-Fehlerseiten für statische Deployments."
+title: "Weiterleitungen & 404-Seiten"
+description: "Konfigurieren Sie statische HTML-Weiterleitungen und benutzerdefinierte Marken-404-Fehlerseiten in docmd."
 ---
 
-Statische Hosting-Umgebungen verfügen über keine serverseitige Logik (wie Nginx-Regeln) für dynamisches Routing. docmd erzeugt native HTML-Fallbacks, die Weiterleitung und Fehlerzustände automatisch behandeln.
+Statischen Hosting-Umgebungen fehlen dynamische serverseitige Routing-Engines (wie Nginx-Rewrite-Regeln). `docmd` generiert native HTML-Ausfallsicherungen, um URL-Weiterleitungen und benutzerdefinierte Fehlerzustände automatisch zu verarbeiten.
 
-## Server-lose Weiterleitungen
+## Server-lose HTML-Weiterleitungen
 
-Leiten Sie Traffic von alten URLs auf neue Ziele um, indem Sie Mappings im `redirects`-Objekt definieren.
+Leiten Sie Traffic von Legacy-URLs zu neuen Dokumentzielen weiter, indem Sie Pfadzuordnungen im `redirects`-Objekt deklarieren:
 
 ```json "docmd.config.json"
 {
@@ -18,31 +18,31 @@ Leiten Sie Traffic von alten URLs auf neue Ziele um, indem Sie Mappings im `redi
 }
 ```
 
-### Technische Umsetzung
+### Technischer Weiterleitungsmechanismus
 
-Wenn Sie eine Weiterleitung definieren, erzeugt die Engine eine `index.html`-Datei am alten Pfad, die ein `<meta http-equiv="refresh">`-Tag enthält. Diese Strategie stellt sicher:
+Bei der Deklaration einer Weiterleitungszuordnung generiert der Compiler eine `index.html`-Datei an der Ziel-Legacy-Route, die ein `<meta http-equiv="refresh">`-HTML-Tag enthält:
 
-1.  **Nahtlose Weiterleitung**: Nutzer werden sofort zum neuen Ziel weitergeleitet.
-2.  **SEO-Erhaltung**: Suchmaschinen erkennen die Weiterleitung und erhalten die Link-Gewichtung.
-3.  **Analytics-Tracking**: Seitenaufrufe werden vor der Weiterleitung registriert.
+1. **Sofortige Benutzer-Weiterleitung**: Leser werden beim Landen sofort zur neuen Zielroute weitergeleitet.
+2. **SEO-Wert-Erhaltung**: Suchmaschinen erkennen die Meta-Refresh-Richtung an, wodurch Link-Wert und Indizierungsautorität erhalten bleiben.
+3. **Analytics-Tracking**: Clientseitige Analytics-Skripte protokollieren eingehende Seitenaufrufe vor der Weiterleitung.
 
-## Marken-404-Seiten
+## Benutzerdefinierte Marken-404-Fehlerseiten
 
-Fordern Nutzer eine fehlende URL an, laden statische Hosts automatisch eine `404.html`-Datei im Stammverzeichnis. docmd erzeugt diese Datei standardmäßig. Sie übernimmt das Theme, die Sidebar und die SPA-Funktionalität Ihrer Site perfekt.
+Wenn Besucher eine nicht vorhandene URL-Route anfordern, stellen statische Hosting-Plattformen das Stamm-`404.html`-Dokument bereit. `docmd` kompiliert standardmäßig eine benutzerdefinierte `404.html`-Seite, die das Branding Ihrer Website, die Sidebar-Navigation und die SPA-Laufzeit erbt.
 
-### Fehlerinhalt anpassen
+### Anpassen von 404-Fehlerinhalten
 
-Personalisieren Sie die 404-Fehlermeldung in Ihrer Konfiguration:
+Passen Sie 404-Seitentitel und Fehler-Fließtext in `docmd.config.json` an:
 
 ```json "docmd.config.json"
 {
   "notFound": {
-    "title": "404: Page Not Found",
-    "content": "We couldn't find the page you're looking for. Use the sidebar to find your way back."
+    "title": "404: Seite nicht gefunden",
+    "content": "Wir konnten die angeforderte Seite nicht finden. Verwenden Sie die Sidebar-Navigation, um zur aktiven Dokumentation zurückzukehren."
   }
 }
 ```
 
-::: callout tip "Lokale Entwicklung" icon:lightbulb
-Der Dev-Server liefert Ihre benutzerdefinierte 404-Seite automatisch für fehlende Dateien. Testen Sie das Fehlererlebnis lokal.
+::: callout tip "Lokales Testen von Fehlerseiten" icon:lightbulb
+Der lokale Entwicklungsserver von `docmd` stellt Ihre benutzerdefinierte 404-Seite automatisch für fehlende Dateirouten bereit.
 :::

@@ -1,37 +1,35 @@
 ---
-title: "Browser API (Client-Side)"
-description: "Interact with docmd from the browser - live compilation and dev-mode plugin communication."
+title: "Browser API"
+description: "Client-side APIs for docmd — isomorphic rendering engine and dev-mode WebSocket plugin communication."
 ---
 
-docmd provides two browser APIs: the **isomorphic compile engine** for rendering markdown in the browser, and the **dev-mode plugin API** for real-time communication with the dev server.
+docmd exposes two client-side APIs: the **Isomorphic Compilation Engine** for rendering Markdown in browser contexts, and the **Dev-Mode Plugin API** for communicating with the local dev server.
 
-## Isomorphic Compile Engine
+## Isomorphic Compilation Engine
 
-The engine that generates static sites in Node.js can run entirely within a web browser. This is ideal for building CMS previews, interactive playgrounds, or embedding documentation.
+The Markdown rendering engine runs seamlessly inside browser environments. Use this to construct live editor previews, interactive playgrounds, or embedded documentation widgets.
 
-### Installation via CDN
+### CDN Integration
 
 ```html
-<!-- Core Styles -->
+<!-- Main Theme Styles -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- The Isomorphic Engine -->
+<!-- Isomorphic Rendering Engine -->
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 ### `docmd.compile(markdown, config)`
 
-Compiles raw Markdown into a full HTML document string using the default docmd layout.
+Compiles raw Markdown into a complete HTML document using docmd page templates.
 
-**Parameters:**
-- `markdown` (String): The raw Markdown content.
-- `config` (Object): Configuration overrides (same schema as `docmd.config.json`).
+* **`markdown`** (`string`): Raw Markdown source text.
+* **`config`** (`object`): Configuration overrides (matching `docmd.config.json` schema).
+* **Returns**: `Promise<string>` resolving to the compiled HTML document.
 
-**Returns:** `Promise<String>`: The complete HTML document.
+### Live Preview Implementation Example
 
-### Example: Live Preview
-
-To ensure style isolation, render the output inside an `<iframe>` using the `srcdoc` attribute.
+Render outputs inside `<iframe>` elements using `srcdoc` to guarantee complete style isolation:
 
 ```javascript
 const editor = document.getElementById("editor");
@@ -39,8 +37,8 @@ const preview = document.getElementById("preview");
 
 async function updatePreview() {
   const html = await docmd.compile(editor.value, {
-    "title": "Preview",
-    "theme": { "appearance": "light" }
+    title: "Preview",
+    theme: { appearance: "light" }
   });
   preview.srcdoc = html;
 }
@@ -50,70 +48,55 @@ editor.addEventListener("input", updatePreview);
 
 ## Dev-Mode Plugin API
 
-During `npx @docmd/core dev`, a `window.docmd` global is injected into every page automatically. This API enables real-time communication between browser-side plugin code and server-side action handlers via WebSocket RPC.
+During `npx @docmd/core dev` execution, a `window.docmd` global object is injected into served pages. This interface allows browser-side plugin components to interact with server-side action handlers via WebSocket RPC.
 
-::: callout info "Dev Mode Only" icon:code
-The plugin API methods below are only available during `npx @docmd/core dev`. They are not included in production builds.
+::: callout info "Development Mode Only" icon:code
+The dev-mode plugin API is available exclusively during `npx @docmd/core dev` sessions and is omitted from production builds.
 :::
 
 ### `docmd.call(action, payload)`
 
-Call a server-side action handler registered by a plugin. Returns a promise that resolves with the handler's return value.
+Dispatches RPC calls to server-side action handlers registered by plugins. Returns a promise resolving to the handler output:
 
 ```javascript
 const threads = await docmd.call("threads:get-threads", {
-  "file": "docs/getting-started.md"
+  file: "docs/getting-started.md"
 });
-console.log(threads); 
+console.log(threads);
 ```
-
-If the action modifies source files, the page automatically reloads after the promise resolves.
 
 ### `docmd.send(name, data)`
 
-Send a fire-and-forget event to the server. No response is returned.
+Transmits fire-and-forget events to the dev server without awaiting responses:
 
 ```javascript
 docmd.send("analytics:page-view", {
-  "path": window.location.pathname
+  path: window.location.pathname
 });
 ```
 
 ### `docmd.on(name, callback)`
 
-Subscribe to server-pushed events. Returns an unsubscribe function.
+Subscribes to server-pushed WebSocket events. Returns an unsubscription function:
 
 ```javascript
-const unsub = docmd.on("threads:updated", (data) => {
+const unsubscribe = docmd.on("threads:updated", (data) => {
   console.log("Threads updated:", data);
 });
 
-unsub();
+unsubscribe();
 ```
 
-### `docmd.afterReload(name, callback)`
-
-Declare a handler that runs after a page reload. If context was stashed with `scheduleReload`, the callback receives it.
+### State Persistence across Hot Reloads
 
 ```javascript
-// Restore scroll position after a live-reload
-docmd.afterReload('scroll-restore', (ctx) => {
+// Stash context before hot-reload
+docmd.scheduleReload("scroll-restore", {
+  scrollY: window.scrollY
+});
+
+// Restore context post-reload
+docmd.afterReload("scroll-restore", (ctx) => {
   window.scrollTo(0, ctx.scrollY);
 });
 ```
-
-### `docmd.scheduleReload(name, context)`
-
-Stash context into `sessionStorage` for a named `afterReload` handler. The matching handler fires with this context after the next page reload.
-
-```javascript
-docmd.scheduleReload("scroll-restore", {
-  "scrollY": window.scrollY
-});
-```
-
-## Considerations
-
-- **No File System**: The browser engine cannot scan folders. You must provide the `navigation` array explicitly in the config object if you need a sidebar.
-- **Node-Only Plugins**: Plugins that rely on Node.js APIs (like Sitemap or LLM text generation) are disabled in the browser environment.
-- **WebSocket Connection**: The dev-mode API requires an active WebSocket connection to the dev server. It auto-reconnects with exponential backoff if the connection drops.

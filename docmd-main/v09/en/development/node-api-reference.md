@@ -199,6 +199,6 @@ import type {
 
 ## What's Next
 
-- [Building Plugins](/development/building-plugins) — start here.
-- [Plugin Examples](/development/plugin-examples) — see a full plugin walkthrough.
-- [Engines & Architecture](/development/engines/overview) — Rust engine, N-API, and engine loader internals.
+- [Building Plugins](./building-plugins.md) — start here.
+- [Plugin Examples](./plugin-examples.md) — see a full plugin walkthrough.
+- [Engines & Architecture](./engines/overview.md) — Rust engine, N-API, and engine loader internals.

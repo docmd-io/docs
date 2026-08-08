@@ -1,22 +1,22 @@
 ---
 title: "OpenAPI-Plugin"
-description: "Statische API-Referenzdokumentation, die direkt aus OpenAPI 3.x-Spezifikationen zur Build-Zeit gerendert wird."
+description: "Statische API-Referenzdokumentation, die während des Builds direkt aus OpenAPI 3.x-Spezifikationen gerendert wird."
 ---
 
-Das `@docmd/plugin-openapi`-Plugin konvertiert OpenAPI 3.x-Spezifikationsdateien in strukturierte, durchsuchbare API-Referenzseiten. Es folgt der docmd-„Zero-JS"-Philosophie — rendert jeden Endpunkt, Parameter und jede Antwort in semantische HTML-Tabellen während des Build-Prozesses, was maximale Leistung und SEO gewährleistet.
+Das `@docmd/plugin-openapi`-Plugin konvertiert OpenAPI 3.x-Spezifikationsdateien (JSON oder YAML) in strukturierte, durchsuchbare API-Referenzseiten. Gemäß der Zero-JS-Laufzeitphilosophie von Docmd wird jeder Endpunkt, jede Parametertabelle und jedes Schemamodell während der Build-Verarbeitung in statisches HTML kompiliert.
 
-## Konfiguration
+## Konfigurationsoptionen
 
-Das OpenAPI-Plugin ist standardmäßig in `@docmd/core` enthalten. Sie können globale Rendering-Optionen in Ihrer `docmd.config.json` konfigurieren.
+Konfigurieren Sie globale OpenAPI-Rendering-Parameter in `docmd.config.json`:
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `info` | `boolean` | `true` | Zeigt API-Titel, Version und Beschreibung aus dem `info`-Objekt der Spezifikation an. |
-| `download` | `boolean` | `false` | Wenn true, wird oben in der Spezifikation ein Link zum Herunterladen der rohen JSON/YAML-Datei hinzugefügt. |
-| `summaryOnly` | `boolean` | `false` | Wenn true, werden nur Methode, Pfad und Zusammenfassung gerendert. Nützlich für große API-Indizes. |
-| `allowRawHtml` | `boolean` | `false` | Wenn true, wird das Escapen von HTML-Tags in Beschreibungen verhindert. |
+| `info` | `boolean` | `true` | Zeigt API-Titel, Version und Beschreibung aus dem `info`-Block der Spezifikation an. |
+| `download` | `boolean` | `false` | Fügt einen direkten Download-Link für die rohe JSON/YAML-Spezifikationsdatei hinzu. |
+| `summaryOnly` | `boolean` | `false` | Rendert Methoden- und Pfadzusammenfassungen auf hoher Ebene ohne vollständige Parameterschemas. |
+| `allowRawHtml` | `boolean` | `false` | Erlaubt unmaskiertes rohes HTML in Spezifikationsbeschreibungszeichenfolgen. |
 
-### Beispiel
+### Globales Konfigurationsbeispiel
 
 ```json "docmd.config.json"
 {
@@ -30,9 +30,9 @@ Das OpenAPI-Plugin ist standardmäßig in `@docmd/core` enthalten. Sie können g
 }
 ```
 
-## Verwendung
+## Verwendung & Syntax
 
-Betten Sie eine OpenAPI-Spezifikation überall in Ihrem Markdown mit einem umzäunten Codeblock und dem `openapi`-Tag ein. Der Pfad wird relativ zu Ihrer Projektquelle aufgelöst.
+Betten Sie OpenAPI-Spezifikationen mithilfe von umzäunten Codeblöcken ein, die mit `openapi` versehen sind. Geben Sie relative Dateipfade an, die von Ihrem Dokumentationsquellstamm aus gehen:
 
 ````markdown
 ```openapi
@@ -40,36 +40,27 @@ assets/openapi.json
 ```
 ````
 
-### Rendering-Ergebnis
+### Spezifikationsausgabe
 
-```openapi
-assets/docmd-api.json
-```
+Das Plugin parst und rendert:
 
-## Was gerendert wird
+* **HTTP-Methoden-Badges**: Farbcodierte Badges (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
+* **Endpunkt-Pfade**: Parametrisierte Pfadzeichenfolgen.
+* **Parameter-Tabellen**: Name, Position (`path`, `query`, `header`, `cookie`), Datentyp, Pflichtfeld-Flag und Beschreibungen.
+* **Anfrage- & Antwort-Modelle**: Strukturierte Schematabellen mit Feldtypen und Standardwerten.
+* **Deprecation-Banner**: Inline-Warnungen für Endpunkte, die mit `deprecated: true` gekennzeichnet sind.
 
-Für jeden Pfad und jede HTTP-Methode in der Spezifikation rendert das Plugin:
-
-- **Methoden-Badge** - farbcodiert (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)
-- **Pfad** - der vollständige Endpunktpfad mit hervorgehobenen Parametern
-- **Zusammenfassung und Beschreibung** - aus dem Operation-Objekt
-- **Parameter-Tabelle** - Name, Ort (`path`, `query`, `header`, `cookie`), Typ, Pflicht-Flag, Beschreibung
-- **Request-Body-Tabelle** - Schema-Eigenschaften mit Typen und Standardwerten
-- **Responses-Tabelle** - Status-Codes mit Beschreibungen und Response-Schema-Typen
-- **Deprecated-Hinweis** - als `deprecated: true` markierte Operationen werden inline markiert
-
-::: callout tip "Rendering zur Build-Zeit"
-Das gesamte Rendering findet zur Build-Zeit statt. Die generierten Seiten sind statisch und benötigen kein clientseitiges JavaScript zur Anzeige. Dies bietet schnelle Seitenladung, vollständige Suchindizierung und SEO-freundliches HTML.
+::: callout tip "Zero-JS-Ausführung zur Build-Zeit" icon:zap
+Alle OpenAPI-Spezifikationen werden während der Kompilierung in statisches HTML geparst. Zur Laufzeit werden keine schweren clientseitigen JavaScript-Bibliotheken geladen, was die Seitenladezeiten minimal hält und eine vollständige Suchindizierbarkeit gewährleistet.
 :::
 
-## Funktionsunterstützung
+## Technische Kompatibilität
 
-| Funktion | Unterstützung |
+| Spezifikationsfunktion | Kompatibilitätsstufe |
 | :--- | :--- |
-| OpenAPI 3.x | ✓ (JSON & YAML*) |
-| Swagger 2.x | ✗ (Zuerst auf 3.x konvertieren) |
-| `$ref`-Auflösung | ✓ (Interne Schemas) |
-| `oneOf` / `anyOf` | ✓ (Als Union-Typen dargestellt) |
-| `deprecated`-Flag | ✓ |
-
-*\*YAML-Unterstützung erfordert die Installation des Pakets `js-yaml` in Ihrem Projekt.*
+| OpenAPI 3.x (JSON) | Native Unterstützung |
+| OpenAPI 3.x (YAML) | Unterstützt (`js-yaml`-Abhängigkeit) |
+| Swagger 2.0 | Veraltet (Vor dem Build auf OpenAPI 3.x konvertieren) |
+| Interne `$ref`-Schemas | Vollständige Auflösung |
+| Polymorphe `oneOf` / `anyOf` | Werden als Union-Typen gerendert |
+| Veraltete Operationen | Inline unterstützt |

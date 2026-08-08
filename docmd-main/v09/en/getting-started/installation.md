@@ -7,7 +7,7 @@ Choose the installation method that fits your workflow. Node.js 20 or higher is 
 
 ## 1. Local Installation (Recommended)
 
-Running `docmd` locally keeps your documentation configuration versioned with your source code.
+Running `docmd` locally keeps your documentation configuration versioned directly with your source code.
 
 ::: tabs
 == tab "npm" icon:box
@@ -57,7 +57,7 @@ See the [Docker Deployment Guide](../deployment/docker.md) for Docker Compose an
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
 ::: callout tip "Shorthand Scripts" icon:sparkles
-Once installed locally, you can use `npx docmd dev` to start the live preview server, or add scripts directly to your `package.json`.
+Once installed locally, you can use `npx docmd dev` to start the live preview server, or add build scripts directly to your `package.json`.
 :::
 
 ## 2. Global Installation
@@ -83,22 +83,22 @@ bun add -g @docmd/core
 ```
 :::
 
-Once installed, the `docmd` binary is available everywhere:
+Once installed, the `docmd` binary is available globally:
 
 ```bash
-docmd dev   # Start a dev server locally
-docmd build # Build static output
+docmd dev   # Start a local development server
+docmd build # Build static site output
 ```
 
 ## 3. Browser-Only Integration
 
-Embed the engine directly inside an existing web application via CDN.
+Embed the rendering engine directly inside an existing web application via CDN.
 
 ::: callout info "Specialised Library Integration" icon:help-circle
-This bypasses the CLI and loads the parsing engine in the reader's browser. Use this for dynamic portals, not static SEO websites.
+This bypasses the CLI and loads the parsing engine directly in the browser. Use this for dynamic portals and interactive client-side rendering rather than static SEO websites.
 :::
 
-Add the stylesheet and JavaScript engine to your HTML.
+Add the stylesheet and JavaScript engine to your HTML header.
 
 ```html
 <!-- Core Stylesheet -->
@@ -108,7 +108,7 @@ Add the stylesheet and JavaScript engine to your HTML.
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
-See the [Browser API Guide](../api/browser-api.md) for full integration details.
+See the [Browser API Guide](../reference/browser-api.md) for complete integration details.
 
 ## 4. Troubleshooting
 
@@ -116,7 +116,7 @@ See the [Browser API Guide](../api/browser-api.md) for full integration details.
 Do not use `sudo` for global installs on macOS or Linux. Fix permission conflicts using a Node.js version manager like [nvm](external:https://github.com/nvm-sh/nvm) or [fnm](external:https://github.com/Schniz/fnm).
 
 ### PowerShell Execution Policies (Windows)
-If Windows blocks execution, open PowerShell as administrator and enable current-user script execution.
+If Windows blocks command execution, open PowerShell as administrator and enable current-user script execution.
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser

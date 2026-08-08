@@ -1,61 +1,55 @@
 ---
 title: "OKF-Bundle-Plugin"
-description: "Erzeugen Sie ein Open Knowledge Format (OKF)-Bundle aus Ihrer docmd-Site, damit KI-Agenten Ihre Dokumentation direkt konsumieren können."
+description: "Erzeugen Sie Open Knowledge Format (OKF)-Wissens-Bundles und interaktive Konzeptgraphen für KI-Agenten."
 ---
 
-Das `@docmd/plugin-okf`-Plugin erzeugt ein **[Open Knowledge Format][okf-spec]**-Bundle (OKF) für den Konsum durch KI-Agenten. OKF ist ein herstellerneutraler, agenten- und menschenfreundlicher Standard zur Repräsentation der Metadaten, des Kontexts und des kuratierten Wissens, das moderne KI-Systeme benötigen. Das Bundle liegt neben Ihrer Site (z. B. `site/okf/`), sodass Agenten direkt darauf verwiesen werden können.
+Das `@docmd/plugin-okf`-Plugin baut während der statischen Kompilierung ein **[Open Knowledge Format][okf-spec]**-Wissens-Bundle (OKF). OKF ist eine offene, herstellerneutrale Spezifikation zur Strukturierung von Dokumentationsmetadaten, Konzeptgraphen und Domainkontexten für KI-Agenten und LLM-Tool-Ketten.
 
-Das Plugin ist in 0.8.8 **standardmäßig aktiviert** — keine Konfiguration erforderlich. Das Bundle wird bei jedem `docmd build` erzeugt.
+Das Plugin ist **standardmäßig aktiviert**. OKF-Bundles werden bei jeder Site-Kompilierung in `site/okf/` platziert.
 
 [okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 
-## Was ist OKF?
+## Architektur-Übersicht
 
-OKF ist eine offene Spezifikation, die Google Cloud im Juni 2026 angekündigt hat und die das [LLM-Wiki-Muster](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) in ein portables, interoperables Format formalisiert. Die Motivation:
+OKF formalisiert die Wissensarchitektur in eine portable Verzeichnisstruktur, die YAML-Manifeste, Markdown-Konzeptdateien und visuelle kraftgesteuerte Graph-Assets enthält.
 
-::: callout info
-Da Foundation-Modelle weiterhin besser werden, begrenzt das Fehlen relevanter Kontexte oft, was sie tun können, insbesondere wenn sie zum Aufbau agentenbasierter Systeme verwendet werden. Diese Modelle können zwar beim Schreiben von Code, beim Zusammenfassen von Dokumenten oder beim Analysieren von Datensätzen helfen, benötigen aber dennoch die richtigen Informationen, um genaue und umsetzbare Ergebnisse zu liefern — [Introducing the Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)
-:::
+### Designprinzipien
 
-OKF repräsentiert organisatorisches Wissen als ein Verzeichnis von Markdown-Dateien mit YAML-Frontmatter, plus ein typisiertes Manifest, einen interaktiven Graph-Viewer und eine maschinenlesbare Bundle-Zusammenfassung. Die drei Designprinzipien:
+1. **Minimale strukturelle Anforderungen**: Jeder Konzepteintrag erfordert lediglich ein `type`-Feld.
+2. **Produzent-/Konsument-Unabhängigkeit**: Von Menschen verfasste Markdown-Dateien werden in Standard-Schemas kompiliert, die von beliebigen LLM-Frameworks abgefragt werden können.
+3. **Herstellerneutralität**: Unabhängig von spezifischen Cloud-Anbietern, Modell-Hosts oder Vektordatenbank-Engines.
 
-1. **Minimal eigenwillig.** OKF verlangt von jedem Konzept genau eine Sache: ein `type`-Feld. Alles andere (welche Typen existieren, welche weiteren Felder enthalten sind, welche Abschnitte der Body hat) bleibt dem Produzenten überlassen.
-2. **Produzent-/Konsument-Unabhängigkeit.** Ein von einem Menschen handverfasstes Bundle kann von einem KI-Agenten konsumiert werden. Ein von einer Metadaten-Export-Pipeline erzeugtes Bundle kann in einem Visualizer durchsucht werden. Ein von einem LLM synthetisiertes Bundle kann von einem anderen abgefragt werden. Das Format ist der Vertrag; die Werkzeuge an jedem Ende sind unabhängig austauschbar.
-3. **Format, nicht Plattform.** OKF ist an keine spezifische Cloud, Datenbank, Modell-Anbieter oder Agenten-Framework gebunden.
+## Generierte Ausgabe-Assets
 
-## Was Sie erhalten
+Die Kompilierung erzeugt den folgenden Verzeichnisbaum:
 
 ```text
 site/okf/
-├── okf.yaml              ← typisiertes Manifest (Bundle-Zusammenfassung)
-├── index.md              ← Karpathy-ähnlicher Katalog, nach Typ gruppiert
-├── graph/                ← optional: nur wenn `plugins.okf.graph: true`
-│   ├── index.html        ← interaktiver Force-Directed-Viewer (öffnen unter /okf/graph/)
-│   ├── graph.json        ← Graph-Daten (Knoten + Kanten)
-│   ├── graph.js          ← Viewer-Laufzeit (Vanilla, keine CDN-Abhängigkeiten)
-│   └── graph.css         ← Viewer-Styles (Theme-fähig)
+├── okf.yaml              ← Manifest-Zusammenfassungsdatei
+├── index.md              ← Nach Typ gruppierter Konzeptkatalog
+├── graph/                ← Interaktive Graph-Assets (wenn graph: true)
+│   ├── index.html        ← Kraftgesteuerter Graph-Visualisierer
+│   ├── graph.json        ← Graphknoten und Kanten
+│   ├── graph.js          ← Eigenständige Graph-Laufzeit
+│   └── graph.css         ← Themenbewusstes Styling
 ├── concepts/
-│   └── <slug>.md         ← eine Markdown-Datei pro Seite
+│   └── <slug>.md         ← Einzelne Konzept-Markdown-Dateien
 └── _meta/
     ├── bundle.json       ← JSON-Spiegel von okf.yaml
-    └── lint-report.txt   ← während der Erzeugung erzeugte Warnungen
+    └── lint-report.txt   ← Build-Linting-Berichte
 ```
 
-Jede Konzeptdatei trägt das OKF-vorgeschriebene `type`-Feld im Frontmatter sowie den ursprünglichen Markdown-Body wörtlich, sodass ein Agent sowohl das Manifest navigieren als auch ganze Seiten lesen kann.
+## Standard-Build-Verhalten
 
-## Standardverhalten
+Das OKF-Plugin wird während der Kompilierung automatisch geladen:
 
-OKF ist in 0.8.8 ein **Kern-Plugin**. Der Build lädt es automatisch und erzeugt das Bundle mit sinnvollen Standardwerten:
-
-- **Nur Standard-Locale** standardmäßig (das Bundle enthält nur Seiten der Standard-Locale; die Dateien der Standard-Locale liegen im Bundle-Stammverzeichnis).
-- **Typ-Inferenz** — Seiten unter `/api/`, `/guides/`, `/reference/`, `/concepts/`, `/runbooks/`, `/datasets/`, `/metrics/`, `/tables/` werden automatisch klassifiziert; alles andere fällt auf `concept` zurück.
-- **Vollständiges Markdown** in jeder Konzeptdatei (der ursprüngliche Seiten-Body wird eingebunden, nicht nur ein Frontmatter-Stub).
-
-Sie müssen `docmd.config.json` nichts hinzufügen, um ein OKF-Bundle zu erhalten. Das Plugin läuft mit leeren Optionen und verwendet alle Standardwerte.
+* **Standard-Locale-Bereich**: Gibt Konzepte für die Primärsprache im Bundle-Stammverzeichnis aus.
+* **Automatische Typ-Inferenz**: Klassifiziert Pfade unter `/api/`, `/guides/`, `/reference/`, `/concepts/`, `/runbooks/`, `/datasets/`, `/metrics/` und `/tables/` in typisierte Konzepte.
+* **Wörtliches Markdown**: Kopiert Seiteninhalte und Frontmatter in Konzeptdateien.
 
 ### Deaktivieren
 
-Drei Deaktivierungspfade werden unterstützt:
+Deaktivieren Sie die OKF-Bundle-Generierung in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -65,90 +59,96 @@ Drei Deaktivierungspfade werden unterstützt:
 }
 ```
 
-```json "docmd.config.json"
-{
-  "plugins": {
-    "okf": { "enabled": false }
-  }
-}
-```
+Alternativ setzen Sie `enabled: false`:
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "okf": { "capabilities": ["head"] }
+    "okf": {
+      "enabled": false
+    }
   }
 }
 ```
 
-Die letzte Form verwendet das Plugin-Vertrauensmodell — das `okf`-Plugin deklariert `capabilities: ['post-build']`; wenn Ihr `config.plugins.okf.capabilities`-Array `post-build` nicht enthält, wird das Plugin geladen, aber sein `onPostBuild`-Hook läuft nicht. Dies ist konsistent mit allen anderen Kern-Plugins.
+## Konfigurationsoptionen
 
-## Konfiguration
+Konfigurieren Sie OKF-Bundle-Parameter in `docmd.config.json`:
 
-Alle Schlüssel sind optional. Die aufgeführten Werte sind die Standardwerte:
-
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Aktivieren oder deaktivieren Sie die OKF-Bundle-Erzeugung. |
-| `outputDir` | `string` | `'okf'` | Bundle-Verzeichnis, relativ zur Site-Ausgabe. |
-| `bundleName` | `string` | slugifizierter `config.title` | Name, der in `okf.yaml` und im Graph-Viewer-Titel verwendet wird. |
-| `defaultType` | `string` | `'concept'` | Typ, der Seiten ohne expliziten Typ zugewiesen wird. |
-| `typeField` | `string` | `'type'` | Frontmatter-Feldname für den OKF-Typ. |
-| `warnOnMissingType` | `boolean` | `true` | TUI-Warnung für Seiten ausgeben, die auf `defaultType` zurückgefallen sind. |
-| `includeFullMarkdown` | `boolean` | `true` | Rohtext des `.md`-Body in jede Konzeptdatei kopieren. |
-| `graph` | `boolean` | `false` | Ein `graph/`-Unterverzeichnis mit `index.html`, `graph.js`, `graph.css` und `graph.json` ausgeben. Ab 0.8.8 Opt-in — die OKF-Spezifikation verlangt keinen Viewer, daher wird standardmäßig ein sauberes Bundle ohne ihn ausgeliefert. Der Viewer ruft `graph.json` zur Laufzeit aus demselben Verzeichnis ab, sodass `site/okf/graph/index.html` auch über `file://` funktioniert, solange die vier Dateien zusammen bleiben. |
-| `localeStrategy` | `'default-only' \| 'folders' \| 'mixed' \| 'latest-only'` | `'default-only'` | Standard: nur die Standard-Locale, im Bundle-Stammverzeichnis. Auf `'folders'` setzen, um Nicht-Standard-Locales unter `<locale>/` zu verschachteln. |
-| `versionStrategy` | `'folders' \| 'mixed' \| 'latest-only'` | `'latest-only'` | Verschachtelt Konzepte nach Versions-ID, wenn Versionierung aktiviert ist. |
-| `excludePatterns` | `string[]` | `[]` | Zusätzliche Glob-Muster, die zusätzlich zu `frontmatter.noindex` / `frontmatter.okf === false` übersprungen werden. |
+| `enabled` | `boolean` | `true` | Aktivieren oder deaktivieren Sie die OKF-Bundle-Kompilierung. |
+| `outputDir` | `string` | `'okf'` | Ziel-Ausgabeverzeichnis relativ zum Stammverzeichnis der Website. |
+| `bundleName` | `string` | `config.title` | Bundle-Bezeichner, der in `okf.yaml` und Graph-Headern verwendet wird. |
+| `defaultType` | `string` | `'concept'` | Fallback-Konzepttyp für getaggte Seiten ohne Typ. |
+| `typeField` | `string` | `'type'` | Frontmatter-Schlüssel für die Typ-Klassifizierung. |
+| `warnOnMissingType` | `boolean` | `true` | Gibt CLI-Warnungen für Seiten aus, die `defaultType` verwenden. |
+| `includeFullMarkdown` | `boolean` | `true` | Kopiert den vollständigen Markdown-Text in Konzeptdateien. |
+| `graph` | `boolean` | `false` | Generiert einen interaktiven kraftgesteuerten Graph-Visualisierer unter `graph/`. |
+| `localeStrategy` | `'default-only' \| 'folders'` | `'default-only'` | Strategie für die mehrsprachige Bundle-Kompilierung. |
 
-### Beispiel — benutzerdefiniertes Ausgabeverzeichnis + benutzerdefinierter Standardtyp
+### Globales Konfigurationsbeispiel
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "okf": {
       "outputDir": "knowledge",
-      "defaultType": "doc",
-      "warnOnMissingType": true
+      "defaultType": "concept",
+      "graph": true
     }
   }
 }
 ```
 
-### Beispiel — mehrsprachige Ausgabe (opt-in)
+### Mehrsprachige Ordnerstrategie
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "okf": { "localeStrategy": "folders" }
+    "okf": {
+      "localeStrategy": "folders"
+    }
   }
 }
 ```
 
+Ausgabeverzeichnisstruktur:
+
 ```text
-site/okf/                    ← Standard-Locale (en) im Bundle-Stammverzeichnis
+site/okf/                    ← Standard-Locale (Stammverzeichnis)
 ├── okf.yaml
 ├── index.md
-├── concepts/<slug>.md
-└── _meta/, graph/, ...
+└── concepts/
 
-site/okf/ja/                 ← Japanisch — verschachtelt unter <locale>/
+site/okf/de/                 ← Deutsche Locale (verschachtelt)
 ├── okf.yaml
-└── concepts/<slug>.md
+└── concepts/
 ```
 
-Die Dateien der Standard-Locale liegen **immer** im Bundle-Stammverzeichnis, damit bestehende Konsumenten nicht beeinträchtigt werden. Nur Nicht-Standard-Locales erhalten ein `<locale>/`-Unterverzeichnis.
+## Ausschluss von Seiten aus OKF
 
-## Pro-Seite-Opt-out
+Schließen Sie bestimmte Seiten mithilfe von Frontmatter-Flags aus:
 
-Seiten können auf zwei Arten aus dem OKF-Bundle ausgenommen werden:
-
-```markdown
+```yaml
 ---
-noindex: true   # schließt auch aus sitemap, llms.txt usw. aus
----
-
----
-okf: false       # schließt nur aus dem OKF-Bundle aus
+title: "Interne Betriebsnotiz"
+okf: false # Schließt die Seite ausschließlich aus OKF-Bundles aus
 ---
 ```
+
+Um eine Seite global über Sitemaps, Suche, LLM-Dateien und OKF hinweg auszuschließen, setzen Sie `noindex: true`.
+
+## Auflösung des Konzepttyps
+
+Das Plugin bestimmt Konzepttypen in folgender Reihenfolge:
+
+1. `frontmatter.okf.type` — Verschachtelte explizite Deklaration.
+2. `frontmatter.type` — Explizite Deklaration auf oberster Ebene.
+3. `frontmatter.okfType` — Älterer Alias.
+4. **Pfad-Präfix-Inferenz**: Automatische Zuordnung für `/guides/`, `/api/`, `/reference/`, `/concepts/` usw.
+5. `defaultType`-Fallback (`'concept'`).
+
+::: callout tip "Wissensgraph-Visualisierung" icon:git-fork
+Aktivieren Sie `graph: true` in Ihrer OKF-Plugin-Konfiguration, um interaktive kraftgesteuerte Graph-Visualisierungen (`site/okf/graph/index.html`) zu erstellen, die Querverweise und Konzeptbeziehungen abbilden.
+:::

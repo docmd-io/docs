@@ -1,13 +1,13 @@
 ---
-title: "Menubar"
-description: "Structure and position your menubar, manage navigation links, and configure drop-down menus."
+title: "Menubar Configuration"
+description: "Configure the top navigation menubar, dropdown links, brand logos, and utility menus in docmd."
 ---
 
-The `menubar` is a premium navigation layer. It provides global context across your site. Position it as a fixed bar at the viewport top or relatively above the page header.
+The `menubar` is a primary top navigation bar that provides global context across your documentation sub-sites. Position it as a fixed bar at the absolute viewport top or inline above the page header.
 
-## Configuration
+## Configuration Schema
 
-Configure the menubar in the `layout` section of your `docmd.config.json`.
+Configure menubar items in the `layout.menubar` block of `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -35,35 +35,35 @@ Configure the menubar in the `layout` section of your `docmd.config.json`.
 }
 ```
 
-### Options
+### Configuration Options
 
-| Option | Type | Default | Description |
+| Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `Boolean` | `false` | Toggles menubar visibility. |
-| `position` | `String` | `'top'` | `'top'` (fixed at absolute top) or `'header'` (positioned above the page title). |
-| `left` | `Array` | `[]` | Left-aligned navigation items. |
-| `right` | `Array` | `[]` | Right-aligned navigation items. |
+| `enabled` | `Boolean` | `false` | Master toggle for menubar visibility. |
+| `position` | `String` | `'top'` | `'top'` (fixed at absolute top of viewport) or `'header'` (inline above the page title). |
+| `left` | `Array` | `[]` | Navigation items aligned to the left of the menubar. |
+| `right` | `Array` | `[]` | Navigation items aligned to the right of the menubar. |
 
-## Item Types
+## Supported Item Types
 
-The `left` and `right` arrays support various item types.
+The `left` and `right` arrays support three primary element types:
 
 ### 1. Standard Link
-The most common item type.
-- `text`: Display label.
-- `url`: Path or external URL.
+Renders a text link with optional icon and new-tab behaviour:
+- `text`: Link label text.
+- `url`: Relative path or external URL.
 - `icon`: Optional Lucide icon name.
-- `external`: Set to `true` to open in a new tab.
+- `external`: When `true`, opens in a new browser tab.
 
-### 2. Title (Brand)
-Set `type: 'title'` to apply branding styles (e.g. bold fonts).
+### 2. Brand Title
+Set `"type": "title"` to render styled brand headers (e.g. bold weights with home icon triggers).
 
-### 3. Dropdown Menu
-Set `type: 'dropdown'` and provide an `items` array to create a nested menu.
+### 3. Nested Dropdown Menu
+Set `"type": "dropdown"` and supply an `items` array to render interactive flyout dropdown submenus.
 
-## Utility Integration
+## Utility Menu Integration
 
-Host the global search and theme toggle in the menubar. Set `optionsMenu.position` to `'menubar'`.
+To position global utilities (such as full-text search, dark/light theme switch, and sponsorship links) in the menubar, set `optionsMenu.position` to `'menubar'`:
 
 ```json "docmd.config.json"
 {
@@ -75,15 +75,15 @@ Host the global search and theme toggle in the menubar. Set `optionsMenu.positio
 }
 ```
 
-The options menu automatically aligns to the **right region**. It appears after any links defined in the `right` array.
+Utilities align to the **right region** automatically, rendering after any custom links defined in `right`.
 
-::: callout info "Automatic Fallback"
-If the `menubar` is disabled, assigned utilities automatically fall back to the `sidebar-top` position.
+::: callout info "Relocation Fallback" icon:sparkles
+If the `menubar` is disabled while `optionsMenu.position` is set to `'menubar'`, utilities fall back automatically to the `sidebar-top` position.
 :::
 
 ## Custom Styling
 
-Use CSS variables in your custom stylesheets to override the menubar appearance. See [Custom CSS & JS](../theming/custom-css-js.md) for details.
+Customise menubar styling by overriding CSS custom properties in your custom stylesheets. See [Custom CSS & JS](../theming/custom-css-js.md):
 
 ```css
 :root {

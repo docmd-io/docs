@@ -1,9 +1,9 @@
 ---
 title: "Build API"
-description: "Programmatic build API — call docmd from Node.js to build sites, live editor bundles, and workspace projects."
+description: "Programmatic Node.js API reference for docmd — build sites, live editor bundles, and multi-project workspaces."
 ---
 
-You can import and use the docmd build engine directly from your Node.js applications. This is ideal for custom CI/CD pipelines, automated documentation generation, and pre-rendering docs in monorepos.
+You can import and execute the docmd build engine programmatically from Node.js applications. This enables custom build pipelines, automated documentation generation, and monorepo integrations.
 
 ## Installation
 
@@ -13,18 +13,18 @@ Ensure `@docmd/core` is installed in your project:
 npm install @docmd/core
 ```
 
-## Core Functions
+## Primary Build Export Functions
 
 ### `buildSite(configPath, options)`
 
-The primary build function. Handles configuration loading, Markdown parsing, and asset generation.
+Executes standard static site compilation:
 
 ```javascript
 import { buildSite } from "@docmd/core";
 
 async function runBuild() {
   await buildSite("./docmd.config.json", {
-    "isDev": false,
+    isDev: false,
     offline: false,
     zeroConfig: false
   });
@@ -33,39 +33,32 @@ async function runBuild() {
 
 ### `buildLive(options)`
 
-Generates the browser-based **Live Editor** bundle.
+Compiles the browser-based Live Editor application:
 
 ```javascript
 import { buildLive } from "@docmd/core";
 
 async function generateEditor() {
   await buildLive({
-    "serve": false,
+    serve: false,
     port: 3000
   });
 }
 ```
 
-## Workspace Management
+## Workspace Functions
 
-For managing workspaces programmatically, use the dedicated workspace functions.
+Functions for managing multi-project workspaces programmatically:
 
-### `isWorkspace(config)`
-Returns `true` if the provided configuration object follows the Workspace schema.
-
-### `detectWorkspace(configPath)`
-Detects and loads a workspace configuration file. Returns a normalised `WorkspaceRootConfig` or `null`.
-
-### `buildWorkspace(config, options)`
-Builds all projects within a workspace. Handles shared assets and project-specific prefixing.
-
-### `devWorkspace(config, options)`
-Starts the workspace dev server. Watches all projects for changes and performs targeted rebuilds.
+* **`isWorkspace(config)`**: Evaluates whether a configuration object conforms to workspace schemas.
+* **`detectWorkspace(configPath)`**: Resolves workspace configurations, returning normalized `WorkspaceRootConfig` or `null`.
+* **`buildWorkspace(config, options)`**: Compiles all projects defined in a workspace root.
+* **`devWorkspace(config, options)`**: Starts workspace development server with targeted rebuild tracking.
 
 ```javascript
 import { detectWorkspace, buildWorkspace } from "@docmd/core";
 
-async function buildAll() {
+async function buildAllWorkspaces() {
   const config = await detectWorkspace("./docmd.config.json");
   if (config) {
     await buildWorkspace(config, { quiet: false });
@@ -73,32 +66,26 @@ async function buildAll() {
 }
 ```
 
-## Example: Custom Pipeline
+## Custom Pipeline Example
 
-Wrap docmd to compose complex documentation workflows — generate dynamic content, build, then move the output to your final location.
+Compose docmd compilation with custom build scripts:
 
 ```javascript
-import { buildSite } from '@docmd/core';
-import fs from 'fs-extra';
+import { buildSite } from "@docmd/core";
+import fs from "fs-extra";
 
-async function deploy() {
-  // 1. Generate dynamic content
-  await fs.writeFile('./docs/dynamic.md', '# Generated Content');
+async function deployPipeline() {
+  // 1. Generate dynamic content sources
+  await fs.writeFile("./docs/dynamic.md", "# Dynamically Generated Page");
 
-  // 2. Execute build
-  await buildSite('./docmd.config.json');
+  // 2. Execute static compilation
+  await buildSite("./docmd.config.json");
 
-  // 3. Move output
-  await fs.move('./site', './public/docs');
+  // 3. Move output directory
+  await fs.move("./site", "./public/docs");
 }
 ```
 
-::: callout tip
-The programmatic API is highly compatible with **AI-driven documentation**. Agents can trigger builds after content updates to verify integrity and manage deployments autonomously.
+::: callout tip "AI Automation Compatibility" icon:cpu
+The programmatic Build API allows background workers and AI agents to trigger builds after source modifications to verify site integrity automatically.
 :::
-
-## What's Next
-
-- [Plugins](/plugins/usage) — extend docmd without touching the engine.
-- [CLI Commands](/reference/cli-commands) — the recommended path for most CI/CD.
-- [Workspaces](/configuration/workspaces) — multi-project configuration reference.

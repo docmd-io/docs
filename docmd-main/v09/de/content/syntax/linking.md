@@ -1,43 +1,43 @@
 ---
 title: "Verlinken & Referenzieren"
-description: "Meistern Sie interne Querverweise, externe Ressourcen, neue-Tab-Verhalten und statische Asset-Referenzen."
+description: "Meistern Sie interne Querverweise, URL-Normalisierung, externe Neue-Tab-Auslöser und statische Asset-Referenzen in docmd."
 ---
 
-docmd bietet ein zuverlässiges, dateisystembewusstes Linksystem. Schreiben Sie Links zu Ihren `.md`-Quelldateien in beliebigem Format — die Engine normalisiert sie automatisch zu sauberen, SEO-optimierten URLs.
+`docmd` bietet ein dateisystembewusstes Verlinkungssystem. Schreiben Sie Links mit Referenzen auf `.md`-Quelldateien ganz natürlich — der Compiler normalisiert Zielpfade automatisch in saubere, kanonische URLs.
 
-::: callout info "Natürlich schreiben, perfekt ausliefern"
-Sie benötigen keine speziellen Link-Konventionen. Schreiben Sie `overview.md`, `overview/` oder `overview` — die Build-Engine erzeugt in jedem Fall exakt dieselbe saubere, nachgestellte-Schrägstrich-URL.
+::: callout info "Automatische Pfadnormalisierung" icon:info
+Schreiben Sie Zielpfade mit `.md`-Erweiterungen, nachgestellten Schrägstrichen oder direkten Dateinamen (`overview.md`, `overview/` oder `overview`). Der Build-Compiler löst sie in identische kanonische URLs auf.
 :::
 
-## URL-Normalisierung
+## Mechanik der URL-Normalisierung
 
-Während des Build-Prozesses normalisiert die Engine automatisch jeden internen Link. Dies gilt für Markdown-Text, Button-Container, Tags und Navigationskonfiguration.
+Während der Build-Kompilierung normalisiert `docmd` interne Linkziele automatisch über Markdown-Fließtext, Button-Container, Tags und Navigationsbäume hinweg:
 
-| Was Sie schreiben | Was gerendert wird | Warum |
+| Eingabepfad | Kompilierte Ausgabe-URL | Auflösungsregel |
 | :--- | :--- | :--- |
-| `overview.md` | `overview/` | `.md`-Erweiterung entfernt, nachgestellter `/` hinzugefügt. |
-| `overview` | `overview/` | Nachgestellter `/` automatisch hinzugefügt. |
-| `overview/` | `overview/` | Bereits korrekt. Keine Änderung. |
-| `api/commands.md` | `api/commands/` | Unterverzeichnis-Link normalisiert. |
-| `localisation/index.md` | `localisation/` | `index` entfernt, der Ordner ist die kanonische URL. |
-| `../index.md` | `../` | Übergeordneter Verzeichnisindex sauber aufgelöst. |
-| `overview.md#settings` | `overview/#settings` | Hash-Fragment erhalten. |
-| `https://example.com` | `https://example.com` | Externe Links bleiben unverändert. |
+| `overview.md` | `overview/` | Entfernt `.md`-Erweiterung, fügt nachgestellten `/` an. |
+| `overview` | `overview/` | Fügt nachgestellten `/` automatisch an. |
+| `overview/` | `overview/` | Behält das bestehende kanonische Format bei. |
+| `api/commands.md` | `api/commands/` | Normalisiert Unterverzeichnis-Route. |
+| `localisation/index.md` | `localisation/` | Entfernt `index`, löst Verzeichnis-Stamm auf. |
+| `../index.md` | `../` | Löst übergeordneten Verzeichnis-Stamm auf. |
+| `overview.md#settings` | `overview/#settings` | Behält URL-Hash-Fragment bei. |
+| `https://example.com` | `https://example.com` | Behält externe URL unverändert bei. |
 
-## Interne Links
+## Interne Dokumentenlinks
 
-Verlinken Sie zu anderen Seiten mit relativen Pfaden zu den `.md`-Quelldateien. Die Engine löst sie unabhängig von der Verzeichnistiefe korrekt auf.
+Referenzieren Sie interne Dokumente unter Verwendung relativer Dateisystempfade:
 
-| Ziel | Beispiel |
+| Link-Ziel | Syntax-Beispiel |
 | :--- | :--- |
-| Gleichrangige Seite | `[System Overview](overview.md)` |
-| Unterverzeichnis-Seite | `[API Reference](api/node-api.md)` |
-| Unterverzeichnis-Index | `[Localisation](localisation/index.md)` |
-| Übergeordnetes Verzeichnis | `[Back to Home](../index.md)` |
+| **Gleichrangige Seite** | `[System Overview](overview.md)` |
+| **Unterverzeichnis-Seite** | `[API Reference](api/node-api.md)` |
+| **Verzeichnis-Index** | `[Localisation](localisation/index.md)` |
+| **Übergeordnetes Verzeichnis** | `[Back to Home](../index.md)` |
 
-## Abschnitts-Anker
+## Abschnitts-Anker-Links
 
-Navigieren Sie direkt zu einer Überschrift mit Standard-URL-Hash-Fragmenten.
+Navigieren Sie zu bestimmten Dokument-Überschriften unter Verwendung von URL-Hash-Fragmenten:
 
 ```markdown
 <!-- Seiteninterner Anker -->
@@ -47,43 +47,44 @@ Navigieren Sie direkt zu einer Überschrift mit Standard-URL-Hash-Fragmenten.
 [Review CLI Flags](../api/cli-commands.md#available-flags)
 ```
 
-Hash-Fragmente bleiben durch die Normalisierung erhalten. Der seitenübergreifende Link oben wird in der Produktion als `../api/cli-commands/#available-flags` gerendert.
+Hash-Fragmente bleiben durch die URL-Normalisierung erhalten. Der seitenübergreifende Link oben kompiliert zu `../api/cli-commands/#available-flags`.
 
-## In neuem Tab öffnen
+## Öffnen externer Links in neuen Tabs
 
-Stellen Sie `external:` jedem Link-URL voran, um ihn in einem neuen Browser-Tab zu öffnen. Dies funktioniert in Standard-Markdown-Links, Buttons und Tags.
+Stellen Sie `external:` vor jedes URL-Ziel, um das Öffnen des Links in einem neuen Browser-Tab zu erzwingen (`target="_blank"`):
 
 ```markdown
 [Open in New Tab](external:./configuration/overview.md)
-[GitHub](external:https://github.com/docmd-io/docmd)
+[GitHub Repository](external:https://github.com/docmd-io/docmd)
 ```
 
-Das `external:`-Präfix wird aus der gerenderten URL entfernt. Standardmäßig öffnen alle Links im selben Fenster.
+Die Präfix-Zeichenfolge `external:` wird aus den gerenderten HTML-href-Attributen entfernt.
 
-## Links zu Rohdateien
+## Direkte unverarbeitete Asset-Links (`raw:`)
 
-Verwenden Sie das `raw:`-Präfix, um die Normalisierung zu umgehen und direkt auf eine herunterladbare Datei zu verlinken. Erweiterung und Pfad bleiben genau wie geschrieben erhalten.
+Verwenden Sie das Präfix `raw:`, um die URL-Normalisierung zu umgehen und direkt auf statische herunterladbare Dateien zu verweisen:
 
 ```markdown
-[View Raw Source](raw:docs/readme.md)
+[Download Raw Source](raw:docs/readme.md)
 ```
 
-## Buttons & Tags
+## Reichhaltige Container & interaktive Elemente
 
-Die `::: button`- und `::: tag`-Container unterstützen alle Standard-Link-Konventionen, einschließlich `external:`- und `raw:`-Präfixen.
+Button- (`::: button`) und Tag- (`::: tag`) Container unterstützen alle Verlinkungs-Präfixe, einschließlich der Modifikatoren `external:` und `raw:`:
 
 ```markdown
-::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd icon:github
-::: button "Download Source" raw:docs/readme.md icon:download
+::: button "Quick Start Guide" ./getting-started/quick-start.md icon:rocket
+::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:github
+::: button "Download Manifest" raw:docs/manifest.json icon:download
 
-::: tag "v0.8.2" link:release-notes/0-8-2.md icon:tag color:#22c55e
-::: tag "Open Externally" link:external:./configuration/overview.md icon:external-link
+::: tag "v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
+::: tag "External Site" link:external:https://docmd.io icon:external-link
+:::
 ```
 
-## Navigationskonfiguration
+## Navigations-Konfigurations-Links
 
-In `navigation.json` und `docmd.config.json` definierte Pfade werden zur Build-Zeit normalisiert. Schreiben Sie sie in beliebigem Format — alle drei folgenden Einträge erzeugen die identische kanonische URL.
+Routeneinträge in `navigation.json` und `docmd.config.json` werden während der Build-Kompilierung automatisch normalisiert:
 
 ```json "navigation.json"
 [
@@ -93,7 +94,7 @@ In `navigation.json` und `docmd.config.json` definierte Pfade werden zur Build-Z
 ]
 ```
 
-Für Einträge, die in einem neuen Tab geöffnet werden sollen, setzen Sie das `external`-Flag.
+Um das Öffnen eines Navigationselements in einem neuen Tab zu erzwingen, setzen Sie `"external": true`:
 
 ```json "navigation.json"
 [
@@ -105,35 +106,18 @@ Für Einträge, die in einem neuen Tab geöffnet werden sollen, setzen Sie das `
 ]
 ```
 
-::: callout warning "Indexseiten in der Navigation"
-Wenn Sie auf die Indexseite eines Verzeichnisses verlinken, verwenden Sie den Ordnerpfad statt explizit auf `index.md` zu verweisen. Beides funktioniert identisch, aber der Ordnerpfad ist sauberer.
-
-```markdown
-<!-- Bevorzugt -->
-[Localisation](localisation/)
-
-<!-- Funktioniert auch -->
-[Localisation](localisation/index.md)
-```
+::: callout tip "Verlinkung zu Kategorie-Verzeichnissen" icon:lightbulb
+Wenn Sie auf die Indexseite eines Unterverzeichnisses verlinken, referenzieren Sie den Ordnerpfad direkt (`localisation/`), anstatt `index.md` anzuhängen.
 :::
 
-## Protokolle & externe Ressourcen
+## Protokolle & Asset-Pfade
 
-Die Engine respektiert Standard-Browser-Protokolle für externe Ressourcen und ändert diese Links niemals.
+Der Compiler behält standardmäßige Netzwerkprotokolle und statische Asset-Pfade bei:
 
-*   **HTTPS** - `[docmd Homepage](https://docmd.io)` - öffnet im selben Tab.
-*   **E-Mail** - `[Support](mailto:help@docmd.io)` - öffnet den E-Mail-Client.
-*   **Assets** - `[Download CLI Binary](/assets/bin/docmd-mac.zip)` - wird nicht normalisiert.
+- **HTTPS-Protokolle**: `[docmd Homepage](https://docmd.io)` (öffnet im selben Tab, außer `external:` ist vorangestellt).
+- **Mail-Protokolle**: `[Support Desk](mailto:help@docmd.io)` (löst E-Mail-Client aus).
+- **Statische Assets**: `[Download Asset](/assets/bin/docmd-mac.zip)` (umgeht URL-Normalisierung).
 
-## Statische Assets
-
-Platzieren Sie herunterladbare Dateien im `assets/`-Verzeichnis Ihres Projekts. Der Builder verschiebt diese Dateien ohne Pfadänderungen in das Produktions-Root.
-
-```markdown
-[Download Documentation PDF](/assets/pdf/handbook.pdf)
-[View Raw Global Config](/assets/config/docmd.config.json)
-```
-
-::: callout tip "Semantische Verlinkung für KI"
-Bevorzugen Sie **beschreibende Ankertexte** (z. B. `[Optimise PWA caching](../plugins/pwa.md)`) gegenüber generischen Labels (z. B. `[Read more](../plugins/pwa.md)`). Detaillierte Link-Labels liefern KI-Agenten eine hochwertige Karte semantischer Beziehungen im `llms.txt`-Stream.
+::: callout tip "Beschreibende Anker für KI-Kontext" icon:sparkles
+Verwenden Sie **beschreibenden Ankertext** (`[PWA-Caching konfigurieren](../plugins/pwa.md)`) anstelle generischer Beschriftungen (`[Mehr lesen](../plugins/pwa.md)`). Expliziter Linktext verbessert das semantische Verständnis für Such-Indexierer und KI-Agenten.
 :::

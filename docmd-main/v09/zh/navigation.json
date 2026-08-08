@@ -220,10 +220,6 @@
     "collapsible": true,
     "children": [
       {
-        "title": "可用主题",
-        "path": "/theming/available-themes"
-      },
-      {
         "title": "模板",
         "path": "/theming/templates"
       },
@@ -416,50 +412,20 @@
         "path": "/guides/overview"
       },
       {
-        "title": "写作质量",
+        "title": "AI 与自动化",
         "collapsible": true,
         "children": [
           {
-            "title": "可扩展的技术写作",
-            "path": "/guides/writing-quality/scalable-technical-writing"
+            "title": "AI 助手配置",
+            "path": "/guides/ai/ai-assistant"
           },
           {
-            "title": "提升可读性",
-            "path": "/guides/writing-quality/improving-readability"
+            "title": "MCP 与 Agent Skills",
+            "path": "/guides/ai/mcp-and-agent-skills"
           },
           {
-            "title": "任务型 vs. 概念型",
-            "path": "/guides/writing-quality/task-vs-concept"
-          },
-          {
-            "title": "避免反模式",
-            "path": "/guides/writing-quality/avoiding-anti-patterns"
-          }
-        ]
-      },
-      {
-        "title": "工作流与团队",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "搭建工作流",
-            "path": "/guides/workflows-teams/setting-up-workflow"
-          },
-          {
-            "title": "基于 Git 的工作流",
-            "path": "/guides/workflows-teams/git-based-workflows"
-          },
-          {
-            "title": "预览变更",
-            "path": "/guides/workflows-teams/previewing-changes"
-          },
-          {
-            "title": "大规模的一致性",
-            "path": "/guides/workflows-teams/maintaining-consistency"
-          },
-          {
-            "title": "发布工作流",
-            "path": "/guides/workflows-teams/versioning-release-workflows"
+            "title": "OKF 知识包",
+            "path": "/guides/ai/okf-bundles"
           }
         ]
       },
@@ -468,84 +434,8 @@
         "collapsible": true,
         "children": [
           {
-            "title": "相关性与结构",
-            "path": "/guides/search/improving-search-relevance"
-          },
-          {
-            "title": "速度与精度",
-            "path": "/guides/search/fast-accurate-search"
-          },
-          {
-            "title": "Local-First 优化",
-            "path": "/guides/search/local-first-search"
-          },
-          {
-            "title": "语义搜索集成",
+            "title": "语义搜索",
             "path": "/guides/search/semantic-search"
-          }
-        ]
-      },
-      {
-        "title": "性能",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "100 毫秒以内的导航",
-            "path": "/guides/performance-delivery/sub-100ms-navigation"
-          },
-          {
-            "title": "CDN 与边缘部署",
-            "path": "/guides/performance-delivery/deploying-cdn-edge"
-          },
-          {
-            "title": "缩减 JS 载荷",
-            "path": "/guides/performance-delivery/reducing-javascript-payload"
-          },
-          {
-            "title": "低端设备",
-            "path": "/guides/performance-delivery/low-end-devices"
-          },
-          {
-            "title": "缓存策略",
-            "path": "/guides/performance-delivery/caching-strategies"
-          }
-        ]
-      },
-      {
-        "title": "AI 与 LLM",
-        "collapsible": true,
-        "children": [
-          {
-            "title": "MCP & Agent Skills",
-            "path": "/guides/ai-optimisation/mcp-and-agent-skills"
-          },
-          {
-            "title": "为 LLM 规划文档结构",
-            "path": "/guides/ai-optimisation/structure-for-llms"
-          },
-          {
-            "title": "AI 就绪的文档",
-            "path": "/guides/ai-optimisation/generating-ai-ready-docs"
-          },
-          {
-            "title": "减少 AI 幻觉",
-            "path": "/guides/ai-optimisation/minimising-ai-hallucinations"
-          },
-          {
-            "title": "语义搜索设计",
-            "path": "/guides/ai-optimisation/semantic-search-design"
-          },
-          {
-            "title": "可分块的内容",
-            "path": "/guides/ai-optimisation/deterministic-chunkable-docs"
-          },
-          {
-            "title": "上下文保留",
-            "path": "/guides/ai-optimisation/context-preservation"
-          },
-          {
-            "title": "OKF Bundles —— 深度剖析",
-            "path": "/guides/ai-optimisation/okf-bundles"
           }
         ]
       },
@@ -554,24 +444,8 @@
         "collapsible": true,
         "children": [
           {
-            "title": "选择部署方式",
-            "path": "/guides/integrations/choosing-deployment-method"
-          },
-          {
-            "title": "OpenAPI 集成",
+            "title": "OpenAPI 生成",
             "path": "/guides/integrations/openapi-generation"
-          },
-          {
-            "title": "GitHub Actions 集成",
-            "path": "/guides/integrations/github-actions-cicd"
-          },
-          {
-            "title": "已有仓库",
-            "path": "/guides/integrations/existing-markdown-repos"
-          },
-          {
-            "title": "并行工具",
-            "path": "/guides/integrations/alongside-other-tools"
           }
         ]
       }

@@ -1,48 +1,41 @@
 ---
-title: "Firebase Hosting"
-description: "Stellen Sie Ihre docmd-Dokumentation auf Firebase Hosting bereit. Funktioniert manuell oder über GitHub Actions."
+title: "Firebase Hosting-Bereitstellung"
+description: "Stellen Sie statische docmd-Dokumentation manuell oder über GitHub Actions auf Firebase Hosting bereit."
 ---
 
-[Firebase Hosting](https://firebase.google.com/products/hosting) liefert Ihre docmd-Statik-Site über ein globales CDN mit enthaltenem SSL aus. Es lässt sich sauber in CI/CD-Pipelines über die Firebase CLI oder GitHub Actions integrieren.
+[Firebase Hosting](https://firebase.google.com/products/hosting) stellt statische docmd-Websites über die globale CDN-Infrastruktur von Google mit automatischer SSL-Zertifikatsbereitstellung bereit.
 
-## Voraussetzungen
+## Erstes Setup & CLI-Tools
 
-Installieren Sie die Firebase CLI:
+Installieren Sie die Firebase CLI-Tools:
 
 ```bash
 npm install -g firebase-tools
 firebase login
 ```
 
-## Einrichtung
+### Initialisierungsschritte
 
-1.  Bauen Sie Ihre Site:
+1. Kompilieren Sie Ihre Website:
+   ```bash
+   npx @docmd/core build
+   ```
+2. Initialisieren Sie die Firebase Hosting-Konfiguration:
+   ```bash
+   firebase init hosting
+   ```
+   Wählen Sie die Parameter aus, wenn Sie dazu aufgefordert werden:
+   * **Öffentliches Verzeichnis**: `site`
+   * **Single-Page-App-Rewrite**: `Nein` (docmd kompiliert einzelne `index.html`-Seiten).
+   * **`site/index.html` überschreiben**: `Nein`
+3. Assets bereitstellen:
+   ```bash
+   firebase deploy --only hosting
+   ```
 
-    ```bash
-    npx @docmd/core build
-    ```
+## GitHub Actions CI/CD-Integration
 
-2.  Initialisieren Sie Firebase Hosting im Projektstamm:
-
-    ```bash
-    firebase init hosting
-    ```
-
-    Wenn Sie dazu aufgefordert werden:
-    - Wählen Sie Ihr Firebase-Projekt (oder erstellen Sie ein neues).
-    - Setzen Sie das **public-Verzeichnis** auf `site`.
-    - Als Single-Page-App konfigurieren: **Nein** (docmd generiert einzelne `index.html`-Dateien pro Seite. Es ist kein Catch-All-Rewrite erforderlich).
-    - Überschreiben Sie `site/index.html` nicht.
-
-3.  Bereitstellen:
-
-    ```bash
-    firebase deploy --only hosting
-    ```
-
-## CI/CD mit GitHub Actions
-
-Um bei jedem Push automatisch bereitzustellen, erstellen Sie `.github/workflows/firebase.yml`:
+Um die Veröffentlichung beim Push auf `main` zu automatisieren, erstellen Sie `.github/workflows/firebase.yml`:
 
 ```yaml ".github/workflows/firebase.yml"
 name: Deploy to Firebase Hosting
@@ -69,14 +62,8 @@ jobs:
           channelId: live
 ```
 
-Setzen Sie `FIREBASE_SERVICE_ACCOUNT` in den **Settings → Secrets** Ihres Repository mit einem Firebase-Servicekonto-JSON-Schlüssel.
+Speichern Sie `FIREBASE_SERVICE_ACCOUNT` in Ihrem Repository unter **Settings → Secrets and variables → Actions**.
 
-::: callout info "Warum `npx @docmd/core`?"
-In CI/CD-Umgebungen, in denen docmd nicht global installiert ist, ruft `npx @docmd/core` das Paket direkt ab und führt es aus. Wenn Ihr Projekt `@docmd/core` als `devDependency` auflistet, funktioniert die Ausführung von `npx @docmd/core build` nach `npm install` einwandfrei.
+::: callout tip "Zuordnung benutzerdefinierter Domains" icon:globe
+Fügen Sie benutzerdefinierte Domains in der Firebase Console unter **Hosting → Custom domain** hinzu. Aktualisieren Sie die Eigenschaft `url` in `docmd.config.json` so, dass sie mit Ihrer Domain übereinstimmt, damit Sitemaps und Open-Graph-Metadaten korrekt generiert werden.
 :::
-
-## Benutzerdefinierte Domain
-
-Fügen Sie in der Firebase-Konsole unter **Hosting → Add custom domain** eine benutzerdefinierte Domain hinzu. Firebase stellt SSL automatisch bereit.
-
-Setzen Sie das `url`-Feld in `docmd.config.json` so, dass es mit Ihrer Domain übereinstimmt. Dies stellt sicher, dass kanonische Tags und Sitemaps korrekte absolute URLs generieren.

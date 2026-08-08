@@ -1,37 +1,38 @@
 ---
-title: "Layout- und UI-Zonen"
-description: "Steuern Sie die Interface-Struktur durch die Verwaltung von Headern, Sidebars und funktionalen UI-Slots."
+title: "Layout- & UI-Zonen"
+description: "Konfigurieren Sie Dokumentations-Layoutbereiche, Header-Widgets, Sidebar-Bäume und Footer-Parameter in docmd.config.json."
 ---
 
-Eine Standardseite enthält sechs primäre Funktionszonen:
+Eine Standard-`docmd`-Seite besteht aus sechs zentralen funktionalen UI-Zonen:
 
-1.  **Menubar**: Eine vollbreite obere Navigationsleiste für globale Site-Links.
-2.  **Header**: Eine persistente sekundäre Leiste. Enthält den Seitentitel und Utility-Schaltflächen.
-3.  **Sidebar**: Der primäre Navigationsbaum, meist auf der linken Seite.
-4.  **Content Area**: Der zentrale Markdown-Renderbereich. Enthält **Brotkrumen**.
-5.  **Table of Contents (TOC)**: Rechtsseitige Überschriften-Navigation der aktuellen Seite.
-6.  **Footer**: Unterer Bereich für Copyright, Branding und Site-weite Links.
+1. **Menubar**: Vollbreite obere Navigationsleiste für globale projektübergreifende Links.
+2. **Header**: Persistenter sekundärer Header, der Seitentitel, Brotkrumen und das Optionsmenü anzeigt.
+3. **Sidebar**: Primärer Navigationsbaum für die Inhaltsstruktur der Website.
+4. **Inhaltsbereich (Content Area)**: Zentraler Markdown-Rendering-Container mit automatisierten Brotkrumen.
+5. **Inhaltsverzeichnis (TOC)**: Rechtsseitige Überschriften-Navigation für aktive Artikel.
+6. **Footer**: Unterer Bereich zur Anzeige von Copyright-Hinweisen, Branding-Attributierung und Footer-Link-Spalten.
 
-## Globale Komponentenkonfiguration
+## Komponenten-Layoutoptionen
 
-Die Engine verwendet ein modulares Layout-System. Konfigurieren Sie die meisten UI-Zonen im `layout`-Abschnitt Ihrer `docmd.config.json`.
+Konfigurieren Sie Schnittstellenzonen im `layout`-Abschnitt Ihres `docmd.config.json`-Manifests.
 
-### Menubar
-Die Menubar stellt eine hochrangige Navigationsebene bereit. Sie unterstützt Markentitel, reguläre Links und verschachtelte Dropdowns.
+### Die Menubar-Zone
 
-*   **Position**: Fest fixiert am `top` oder inline innerhalb des `header`.
-*   **Dokumentation**: Schemas und Styling finden Sie unter [Menubar-Konfiguration](menubar.md).
+Die Menubar bietet eine globale Website-Navigation und unterstützt Logos, Links und verschachtelte Dropdown-Menüs:
 
-### Der Seiten-Header
-Der Header zeigt den Seitentitel, Brotkrumen und Utility-Menüs.
+- **Platzierung**: Fixiert am absoluten Viewport-`top` oder innerhalb des `header` positioniert.
+- **Dokumentation**: Siehe [Menubar-Konfiguration](./menubar.md) für vollständige Eigenschaften und Anpassungsoptionen.
 
-*   **Steuerung**: Aktivieren oder deaktivieren Sie den Header global über `layout.header`. Schalten Sie Brotkrumen über `layout.breadcrumbs` um.
-*   **Überschreiben**: Verwenden Sie `hideTitle: true` in Ihrem [Seiten-Frontmatter](../content/frontmatter.md), um den Titelbereich lokal auszublenden.
+### Die Seiten-Header-Zone
 
-### Copy-Widgets
-Die Brotkrumen-Leiste enthält zwei Kopierschaltflächen. Eine kopiert das rohe Markdown der Seite, die andere einen strukturierten Kontextblock, der URL, Titel und Beschreibung enthält. Nützlich zum Einfügen in KI-Chatfenster oder Support-Tickets.
+Der Header zeigt aktive Seitentitel, Brotkrumen und Optionsmenüs an:
 
-Konfigurieren Sie diese Schaltflächen unter `theme.copyWidgets` in Ihrer `docmd.config.json`:
+- **Globaler Umschalter**: Aktivieren oder deaktivieren Sie den Header global über `layout.header.enabled`. Schalten Sie Brotkrumen über `layout.breadcrumbs` um.
+- **Überschreibung pro Seite**: Fügen Sie `hideTitle: true` zum [Frontmatter](../content/frontmatter.md) eines Dokuments hinzu, um dessen Header-Titel lokal auszublenden.
+
+### Kontextuelle Kopier-Widgets
+
+Der Header-Bereich enthält kontextuelle Kopierwerkzeuge: Ein-Klick-Kopieren des rohen Markdown-Quellcodes und strukturierter KI-Kontext-Prompts (enthält Seiten-URL, Titel, Beschreibung und Fließtext):
 
 ```json "docmd.config.json"
 {
@@ -45,12 +46,13 @@ Konfigurieren Sie diese Schaltflächen unter `theme.copyWidgets` in Ihrer `docmd
 }
 ```
 
-*   `enabled`: Auf `false` setzen, um die Leiste vollständig zu deaktivieren.
-*   `raw`: Auf `false` setzen, um die Schaltfläche „Markdown kopieren" auszublenden.
-*   `context`: Auf `false` setzen, um die Schaltfläche „Kontext kopieren" auszublenden.
+- `enabled`: Auf `false` setzen, um die Kopier-Widget-Leiste vollständig zu deaktivieren.
+- `raw`: Auf `false` setzen, um die Schaltfläche „Markdown kopieren" auszublenden.
+- `context`: Auf `false` setzen, um die Schaltfläche „Kontext kopieren" auszublenden.
 
-### Utility-Menüs (Optionsmenü)
-Das `optionsMenu` gruppiert zentrale Utilities wie **Globale Suche**, **Theme-Umschalter** und **Sponsoring-Links**.
+### Optionsmenü (Dienstprogramme)
+
+Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus-Umschalter** und **Sponsoring-Links**:
 
 ```json "docmd.config.json"
 {
@@ -67,25 +69,27 @@ Das `optionsMenu` gruppiert zentrale Utilities wie **Globale Suche**, **Theme-Um
 }
 ```
 
-::: callout info "Automatischer Fallback" icon:sparkles
-Wenn die gewählte Position auf einen deaktivierten Container verweist, verschiebt die Engine das Optionsmenü auf `sidebar-top`. So bleiben die Utilities stets erreichbar.
+::: callout info "Automatischer Neupositionierungs-Fallback" icon:sparkles
+Wenn `optionsMenu` einem Container zugewiesen ist, der deaktiviert ist, verschiebt der Kompiler das Optionsmenü automatisch nach `sidebar-top`, um die Barrierefreiheit zu gewährleisten.
 :::
 
 ### Sidebar & Navigation
-Die Sidebar ist der primäre Navigationsbaum. Definieren Sie ihre Struktur in Ihrer Konfiguration oder in externen JSON-Dateien.
 
-*   **Verhalten**: Unterstützt Animationen, einklappbare Gruppen und automatische Pfad-Erhaltung.
-*   **Dokumentation**: Siehe [Navigationskonfiguration](navigation.md).
+Die Sidebar dient als primäre Navigationshierarchie:
 
-### Footer
-Die Engine bietet **minimal**- und **complete**-Layouts für Ihren Site-Footer.
+- **Verhalten**: Unterstützt Desktop-Einklappen, sanfte Zustandsübergänge und verfolgechtes Routing.
+- **Dokumentation**: Siehe [Navigationskonfiguration](./navigation.md).
+
+### Footer-Bereich
+
+`docmd` bietet `minimal`- und `complete`-Footer-Layouts:
 
 ```json "docmd.config.json"
 {
   "layout": {
     "footer": {
       "style": "complete", 
-      "description": "Documentation built with docmd.",
+      "description": "Dokumentation erstellt mit docmd.",
       "branding": true,
       "columns": [
         {
@@ -100,6 +104,6 @@ Die Engine bietet **minimal**- und **complete**-Layouts für Ihren Site-Footer.
 }
 ```
 
-::: callout tip "Interface-Hierarchie" icon:lightbulb
-Verwenden Sie die Menubar für globale Links und die Sidebar für die Dokumentationsstruktur. Diese Trennung hält die Navigation sowohl für menschliche Leser als auch für Crawler vorhersagbar.
+::: callout tip "Richtlinien für die visuelle Hierarchie" icon:lightbulb
+Reservieren Sie die obere Menubar für domänenübergreifende Navigation und verwenden Sie die Sidebar für eine tiefe Dokumentationsstruktur. Eine klare Trennung hält die Navigation sowohl für Benutzer als auch für Web-Crawler intuitiv.
 :::

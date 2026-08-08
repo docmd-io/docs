@@ -1,7 +1,7 @@
 {
-  "engine": "rust",
   "title": "docmd assistant",
   "url": "https://docs.docmd.io/assistant",
+  "src": ".",
 
   "logo": {
     "light": "assets/images/docmd-logo-dark.png",
@@ -21,9 +21,20 @@
     }
   },
 
+  "i18n": {
+    "default": "en",
+    "position": "sidebar-top",
+    "locales": [
+      { "id": "en", "label": "English", "dir": "ltr" },
+      { "id": "zh", "label": "中文", "dir": "ltr" },
+      { "id": "de", "label": "Deutsch", "dir": "ltr" },
+      { "id": "es", "label": "Español", "dir": "ltr" }
+    ]
+  },
+
   "plugins": {
     "search": {
-      "semantic": true,
+      "semantic": false,
       "showConfidence": true
     }
   }

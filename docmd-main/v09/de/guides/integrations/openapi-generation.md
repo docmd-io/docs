@@ -1,28 +1,32 @@
 ---
 title: "OpenAPI-Generierung"
-description: "Wie Sie OpenAPI/Swagger-Schemata in Ihren docmd-Workflow integrieren, um automatisierte und synchronisierte API-Referenz-Dokumentation zu erhalten."
+description: "Integrieren Sie OpenAPI- und Swagger-REST-Schemas in docmd-Workflows für automatisierte API-Dokumentations-Renderings."
 ---
 
-## Problem
+Das manuelle Pflegen von REST-API-Dokumentationen ist anfällig für Abweichungen, wenn sich Code-Endpunkte weiterentwickeln. Automatisierung stellt sicher, dass Ihre Dokumentation die einzige Quelle der Wahrheit bleibt, die während der Build-Schritte automatisch aktualisiert wird.
 
-REST-API-Dokumentation manuell zu pflegen ist ein operatives Risiko. Wenn ein Ingenieur einen Endpoint modifiziert oder ein Schema im Code aktualisiert, veraltet die Dokumentation. Sie manuell synchron zu halten ist mühsam, fehleranfällig und führt häufig zu Integrations-Fehlern bei Konsumenten.
+docmd bietet natives Rendering für OpenAPI- / Swagger-Spezifikationen über `@docmd/plugin-openapi` oder automatisierte Pre-Build-Markdown-Generierung.
 
-## Warum es wichtig ist
+## Konfiguration
 
-Fehlerhafte API-Referenzen verursachen Frustration bei Entwicklern und erhöhen die Anzahl an Support-Tickets. Automatisierung stellt sicher, dass Ihre Dokumentation die "Source of Truth" bleibt und bei jedem Build den tatsächlichen Zustand Ihrer API widerspiegelt. Das erlaubt Ingenieuren, sich auf das Bauen von Features zu konzentrieren, anstatt Tabellen manuell zu aktualisieren.
+Aktivieren Sie das OpenAPI-Rendering in `docmd.config.json`:
 
-## Ansatz
+```json "docmd.config.json"
+{
+  "plugins": {
+    "openapi": {
+      "spec": "./schemas/openapi.json",
+      "route": "/api/reference"
+    }
+  }
+}
+```
 
-Implementieren Sie eine asynchrone Build-Pipeline, die Ihr `openapi.json`- oder `swagger.yaml`-Schema in Standard-Markdown-Dateien konvertiert. Da docmd exzellent Markdown mit komplexen [Containern](../../content/containers/index.md) rendert, fühlt sich die resultierende API-Referenz integriert und visuell konsistent mit dem Rest Ihrer Dokumentation an.
+## Automatisiertes Pre-Build-Markdown-Pipeline
 
-## Implementierung
-
-### 1. Build-Pipeline-Integration
-
-Verwenden Sie ein Tool wie `widdershins` oder ein benutzerdefiniertes Skript, um Markdown aus Ihrem OpenAPI-Schema als Pre-Build-Schritt in Ihrer CI/CD-Pipeline zu generieren.
+Alternativ kompilieren Sie Schemas vor der Ausführung von `docmd build` zu Markdown:
 
 ```json "package.json"
-// package.json
 {
   "scripts": {
     "docs:generate-api": "npx widdershins --search false openapi.yaml -o docs/api/reference.md",
@@ -31,39 +35,17 @@ Verwenden Sie ein Tool wie `widdershins` oder ein benutzerdefiniertes Skript, um
 }
 ```
 
-### 2. API-Layouts optimieren
+## API-Layouts optimieren
 
-API-Referenzen sind oft inhaltsdicht mit großen Tabellen für Parameter und verschachtelte Schemata. Verwenden Sie [Frontmatter](../../content/frontmatter.md), um das Seitenlayout für Lesbarkeit zu optimieren.
+API-Referenzen enthalten breite Parametertabellen und Antwort-Payloads. Verwenden Sie `layout: "full"` im Seiten-Frontmatter, um die maximale horizontale Breite zu gewähren:
 
 ```markdown
 ---
-title: "REST API-Referenz"
-layout: "full"  # Maximiert horizontalen Platz für dichte Tabellen
+title: "REST API Referenz"
+layout: "full"
 ---
 ```
 
-`layout: "full"` zu setzen entfernt das rechte Inhaltsverzeichnis und bietet mehr Raum für breite Code-Blöcke und Response-Beispiele.
-
-### 3. Mit docmd-Containern erweitern
-
-Post-Processen Sie das generierte Markdown, um docmd-Features wie [Tabs](../../content/containers/tabs.md) für mehrsprachige Code-Samples oder [Callouts](../../content/containers/callouts.md) für Authentifizierungs-Warnungen zu injizieren.
-
-````markdown
-::: tabs
-
-  == tab "cURL"
-    ```bash
-    curl -X GET "https://api.example.com/v1/users"
-    ```
-
-  == tab "Node.js"
-    ```javascript
-    const users = await client.getUsers();
-    ```
-
+::: callout tip "Mehrsprachige Anfragebeispiele" icon:code
+Verbessern Sie generierte Endpunkt-Seiten, indem Sie mehrsprachige Code-Snippets in [Tabs-Container](../../content/containers/tabs.md) für cURL-, JavaScript-, Python- und Go-Beispiele einbetten.
 :::
-````
-
-## Abwägungen
-
-Maschinell generierte Dokumentation ist exzellent für technische Genauigkeit, es fehlt ihr jedoch der "menschliche Touch", der für effektives Lernen erforderlich ist. Wir empfehlen, OpenAPI-Generierung für die **technische Referenz** (Endpoints, Parameter, Schemata) zu verwenden und handgeschriebene **Tutorials** und **konzeptionelle Leitfäden** bereitzustellen, um Kontext und Anwendungsfälle zu erklären.

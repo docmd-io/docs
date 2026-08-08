@@ -1,71 +1,85 @@
 ---
 title: "Projektstruktur"
-description: "Erfahren Sie, wie `@docmd/core` physische Ordner und Markdown-Dateien auf dynamische URLs und saubere Navigation abbildet."
+description: "Erfahren Sie, wie `@docmd/core` physische Ordner und Markdown-Dateien dynamischen URLs und sauberer Navigation zuordnet."
 ---
 
-Der Compiler verwendet Ihr lokales Dateisystem als Quelle der Wahrheit. Ordner werden zu Navigationsabschnitten, Markdown-Dateien zu Inhaltsseiten, und Ihre Verzeichnishierarchie übersetzt sich direkt in Web-URLs.
+Der Compiler nutzt Ihr lokales Dateisystem als Quelle der Wahrheit. Verzeichnisse werden zu Navigationsabschnitten, Markdown-Dateien zu Inhaltsseiten, und Ihre Dateisystemhierarchie übersetzt sich direkt in Web-URLs.
 
-## 1. Standard-Projektgerüst
+## 1. Standard-Projektstruktur
 
-Führen Sie `npx @docmd/core init` aus, um ein minimales Workspace-Layout einzurichten. Diese Struktur trennt Quellinhalte von Assets und Produktions-Builds.
+Führen Sie `npx @docmd/core init` aus, um ein minimales Workspace-Layout zu erstellen. Diese Struktur hält Quellinhalte von Assets und Produktions-Builds getrennt.
 
 ```text
 my-docs/
-├── docs/                 ← Quellverzeichnis mit Ihren Markdown- (.md) Seiten
-│   └── index.md          ← Die Landingpage (löst zu / auf)
+├── docs/                 ← Quellverzeichnis mit Ihren Markdown (.md)-Seiten
+│   └── index.md          ← Die Startseite (wird zu / aufgelöst)
 ├── assets/               ← Statische Web-Assets, die direkt von der Engine geladen werden
-│   ├── css/              ← Eigene Stylesheets zur Layoutanpassung
-│   ├── js/               ← Eigene Skripte zur Erweiterung der Browser-Logik
+│   ├── css/              ← Eigene Stylesheets zur Anpassung des Seitenlayouts
+│   ├── js/               ← Eigene Skripte zur Erweiterung browserseitiger Logik
 │   └── images/           ← Markenlogos, Icons und Inline-Illustrationen
-├── docmd.config.json     ← Zentrales Konfigurations-Schema
-├── package.json          ← Node-Abhängigkeits-Manifest und Skripte
-└── site/                 ← Optimiertes Produktions-Build-Ausgabeverzeichnis
+├── docmd.config.json     ← Zentrale Konfigurationsdatei
+├── package.json          ← Node-Abhängigkeitsmanifest und Skripte
+└── site/                 ← Optimiertes Verzeichnis für Produktions-Build-Ausgabe
 ```
 
-::: callout info "Konfigurationsdatei-Auflösung" icon:settings
-`docmd.config.json` (oder `docmd.config.ts`) ist das empfohlene primäre Konfigurationsformat. Das Legacy-Format `docmd.config.js` bleibt unterstützt, dient aber ausschließlich als Fallback, wenn `.json`- oder `.ts`-Konfigurationsdateien fehlen.
+::: callout info "Auflösung von Konfigurationsdateien" icon:settings
+`docmd.config.json` (oder `docmd.config.ts`) ist das empfohlene primäre Konfigurationsformat. Das veraltete `docmd.config.js`-Format dient strikt als Fallback, wenn keine `.json`- oder `.ts`-Konfigurationsdateien vorhanden sind.
 :::
 
-## 2. Verzeichnis- und URL-Abbildung
+## 2. Verzeichnis- und URL-Zuordnung
 
-Der Compiler bildet Dateien in Ihrem Quellverzeichnis direkt auf öffentliche URLs ab. Es gibt keine nachgestellten `.html`-Erweiterungen und keine komplexen Routing-Regeln.
+Der Compiler ordnet Dateien innerhalb Ihres Quellordners direkt öffentlichen URLs zu. Es gibt keine nachgestellten `.html`-Dateiendungen oder komplexen Routing-Regeln.
 
 | Quelldatei | Aufgelöster URL-Pfad | Zweck |
 | :--- | :--- | :--- |
-| `docs/index.md` | `/` | Home-Landingpage |
+| `docs/index.md` | `/` | Startseite |
 | `docs/api.md` | `/api` | Haupt-API-Referenz |
-| `docs/guides/setup.md` | `/guides/setup` | Technischer Leitfaden einer Untersektion |
-| `docs/getting-started/quick-start.md` | `/getting-started/quick-start` | Mehrstufige tiefe Seite |
+| `docs/guides/setup.md` | `/guides/setup` | Technischer Leitfaden für Unterabschnitte |
+| `docs/getting-started/quick-start.md` | `/getting-started/quick-start` | Mehrebene tiefe Seite |
 
-::: callout tip "Automatisches Header-Parsing" icon:info
-Fehlt einer Datei der `title` im YAML-Frontmatter, extrahiert die Engine den ersten `H1`-Tag (`# Heading`). Dieser Titel repräsentiert die Seite in Brotkrumen und Suche.
+::: callout tip "Automatische Header-Analyse" icon:info
+Fehlt einer Datei ein expliziter `title` in ihrem YAML-Frontmatter, extrahiert die Engine automatisch den ersten `H1`-Überschriften-Tag (`# Überschrift`). Dieser Titel repräsentiert die Seite in Breadcrumbs und der Suchindexierung.
 :::
 
 ## 3. Workspace-Monorepo-Struktur
 
-Für komplexe Layouts oder große Projekte mit mehreren unterschiedlichen Produkten (z. B. eine Kernplattform, ein SDK und ein CLI-Tool) unterstützt `docmd` nativ eine **Workspace-Monorepo**-Verzeichnisstruktur. Damit können Sie mehrere unabhängige Dokumentations-Sites aus einem einzigen Root-Repository verwalten und gleichzeitig ein einheitliches Branding wahren.
+Für komplexe Layouts oder große Projekte mit mehreren verschiedenen Produkten (wie einer Kern-Plattform, einem SDK und einem CLI-Tool) unterstützt `docmd` nativ eine **Workspace-Monorepo**-Verzeichnisstruktur. Dies ermöglicht es Ihnen, mehrere unabhängige Dokumentationsseiten aus einem einzigen Root-Repository zu verwalten und gleichzeitig ein einheitliches Branding zu wahren.
 
 ```text
 my-docs-monorepo/
 ├── docmd.config.json         ← Root-Konfiguration (definiert globale Einstellungen)
-├── assets/                   ← Geteilte globale Assets (von allen Projekten geerbt)
+├── assets/                   ← Geteilte globale Assets (von allen Projekten vererbt)
 │   ├── css/                  ← Geteilte globale Stylesheets
 │   └── images/               ← Geteilte Logos und Icons
-├── package.json              ← Root-Abhängigkeits-Manifest
-├── main-site/                ← Root-Projektverzeichnis
+├── package.json              ← Root-Abhängigkeitsmanifest
+├── main-site/                ← Hauptprojekt-Verzeichnis
 │   ├── docmd.config.json     ← Projektspezifische Konfigurations-Overrides
-│   └── docs/                 ← Inhalte für main-site (löst zu / auf)
+│   └── docs/                 ← Inhalt für main-site (wird zu / aufgelöst)
 │       └── index.md
-└── sdk-reference/            ← Sekundäres Projektverzeichnis
+└── sdk-reference/            ← Sekundäres Projekt-Verzeichnis
     ├── docmd.config.json     ← Projektspezifische Konfigurations-Overrides
-    └── docs/                 ← Inhalte für sdk-reference (löst zu /sdk auf)
+    └── docs/                 ← Inhalt für sdk-reference (wird zu /sdk aufgelöst)
         └── index.md
 ```
 
-### Wichtige Workspace-Verzeichnismuster
+### Wichtige Workspace-Verzeichnis-Muster
 
-*   **Globale Konfigurations-Kaskadierung:** Jede in der Root-`docmd.config.json` definierte Konfiguration (wie `theme` oder `menubar`) dient als Fallback-Standard. Einzelne Projekte können diese Standards in ihren eigenen lokalen Konfigurationsdateien selektiv überschreiben.
-*   **Asset-Freigabe und Priorität:** Geteilte Logos, globale eigene Stile und gängige Skripte werden im Root-`assets/`-Verzeichnis abgelegt. Projekte können auch eigene lokale `assets/`-Verzeichnisse definieren; bei Dateinamen-Konflikten haben projektspezifische Assets immer Vorrang.
-*   **Ausgabezusammenführung:** Während des Build-Prozesses (`npx @docmd/core build`) führt die Engine automatisch alle Projekte in einem einzigen konsolidierten Produktions-Ausgabeverzeichnis zusammen (z. B. `./site/` und `./site/sdk/`), sodass keine komplexen Reverse-Proxy-Setups oder isolierten Build-Pipelines erforderlich sind.
+::: grids
+    ::: grid
+        ::: card "Globale Konfigurationskaskadierung" icon:layers
+        Jede in der Root-`docmd.config.json` definierte Konfiguration (wie `theme` oder `menubar`) dient als Fallback-Standard. Einzelne Projekte überschreiben diese Standards selektiv in ihren lokalen Konfigurationsdateien.
+        :::
+    :::
+    ::: grid
+        ::: card "Asset-Freigabe & Priorität" icon:folder-tree
+        Gemeinsame Logos, globale benutzerdefinierte Stile und allgemeine Skripte befinden sich im Root-Verzeichnis `assets/`. Projektspezifische Assets überschreiben Root-Assets im Falle von Dateinamenskonflikten.
+        :::
+    :::
+    ::: grid
+        ::: card "Ausgabenkonsolidierung" icon:package-check
+        Während des Build-Prozesses (`npx @docmd/core build`) führt die Engine alle Workspace-Projekte in ein einziges konsolidiertes Ausgabeverzeichnis zusammen (z. B. `./site/` und `./site/sdk/`), wodurch komplexe Reverse-Proxy-Setups überflüssig werden.
+        :::
+    :::
+:::
 
-Vollständige Einrichtungsschritte und erweiterte Kaskadierungsregeln finden Sie im [Workspace-Konfigurations-Leitfaden](../configuration/workspaces.md)。
+Für vollständige Einrichtungsschritte und erweiterte Kaskadierungsregeln lesen Sie den [Workspace-Konfigurations-Leitfaden](../configuration/workspaces.md).

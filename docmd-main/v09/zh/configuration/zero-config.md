@@ -1,102 +1,83 @@
 ---
-title: "零配置"
-description: "了解 docmd 的启发式引擎 —— 它无需配置文件即可自动构建您的站点结构。"
+title: "零配置架构"
+description: "探索 docmd 的零配置启发式引擎，无需配置即可自动发现文档文件、路由路径并构建站点结构。"
 ---
 
-`docmd` 具备一套智能启发式引擎，可在无需编写任何配置的情况下自动解析并构建文档结构。您无需编写一行配置即可开始构建、预览和翻译文档。
+`docmd` 拥有智能启发式引擎，旨在自动解析、发现和构建文档结构。开发者无需编写任何初始配置行，即可编译、服务和翻译技术站点。
 
-## 工作原理
+## 启发式发现如何工作
 
-在没有 `docmd.config.json` 文件的情况下运行时，引擎会自动进入 **零配置模式**。它扫描工作区目录中的内容并应用以下启发式规则：
+在没有 `docmd.config.json` 清单的目录中运行时，引擎将初始化 **零配置模式**。它会扫描工作区中的文档内容并应用自动化启发式规则：
 
-### 1. 源目录检测
+::: steps
 
-引擎按顺序在这些候选目录中查找文档文件：
-1.  `docs/`
-2.  `src/docs/`
-3.  `documentation/`
-4.  `content/`
-5.  `.`（根目录回退）
+1. **源目录发现**: 按优先级顺序扫描候选目录：`docs/`、`src/docs/`、`documentation/`、`content/` 以及 `.`（根目录备用）。
+2. **版本与语言提取**: 自动解析匹配 `v[0-9]+` 的版本文件夹（如 `v1.0`、`v09`）和双字母语言代码（如 `en`、`de`、`zh`）。
+3. **自动化侧边栏路由**: 通过分析文件层级并将带连字符的基文件名转换为可读文本（`getting-started.md` → `Getting Started`），生成干净的导航树。
 
-如果找到某个候选目录且其中包含 Markdown 文件，则将其选为源目录。若未找到任何目录，但项目根目录中存在 Markdown 文件，则使用根目录（自动忽略 `node_modules`、`.git`，以及 `site/`、`dist/`、`out/` 等输出文件夹）。
-
-若完全没有找到文档内容，`docmd` 会自动初始化一份全新的入门结构。
-
-### 2. 版本与语言的启发式规则
-
-引擎扫描目录结构以动态提取版本与本地化元数据：
--   **版本**：匹配 `v[0-9]+` 的子目录（例如 `v1.0`、`v08`）会被解析为文档版本。
--   **语言**：使用两个字母语言代码的子目录（例如 `en`、`de`、`zh`）会被视为本地化变体。
--   **结构提取**：最高版本被指定为当前发布版本，找到的第一种语言（优先 `en`）被设为默认语言。
-
-### 3. 自动导航路由
-
-如果不存在顶层版本或语言目录，引擎会通过分析文件结构动态构建导航树：
-- 子目录映射为导航分组。
-- 标题由文件基本名称动态生成。例如 `getting-started.md` 会被格式化为 `Getting Started`。
-- 索引文件（`index.md`、`README.md`）被路由为当前目录的落地页。
-
-## 零配置最佳实践
-
-要充分发挥零配置模式的优势，请遵循以下结构建议：
-
--   **显式命名文件**：使用清晰、连字符或驼峰式命名的文件。自动加载器会将它们转换为可读的标题。
--   **基于文件夹的分区**：将相关文档放在子文件夹中，以便在侧边栏中自动归类。
--   **索引回退**：始终在源文件夹的根目录放置一份 `index.md` 或 `README.md`，作为落地页。
--   **清晰的输出路径**：若使用根目录 `.` 作为源，请将构建产物放在默认的 `site/` 文件夹中（会被自动忽略）。
-
-## 内置默认值（0.8.7 新增）
-
-一份 `docmd.config.json`（或不提供任何配置）即可开箱即用地获得一个可用的站点。以下键附带合理的默认值，只有在您希望使用不同值时才需要显式设置。
-
-::: callout info "如何退出默认值"
-将键设为 `false`（或相应的空值）即可关闭某个默认值。例如 `pageNavigation: false` 会移除上/下页链接；`theme.appearance: "dark"` 会覆盖色彩模式。
 :::
 
-### 顶层体验默认值
+如果目标工作区中未找到任何文档内容，`docmd` 会自动初始化全新的入门模板。
 
-| 键 | 默认值 | 说明 |
-|---|---|---|
-| `pageNavigation` | `true` | 每篇文章底部的上/下页链接 |
-| `copyCode` | `true` | `<pre>` 代码块上的复制按钮 |
-| `autoTitleFromH1` | `true` | 当 frontmatter 缺失时，使用首个 `# H1` 作为页面标题 |
+## 零配置目录约定
 
-### 布局与侧边栏默认值
+为充分发挥零配置模式的作用，请采用以下目录约定：
 
-| 键 | 默认值 | 说明 |
-|---|---|---|
-| `layout.spa` | `true` | 页面间启用 SPA 导航 |
-| `layout.breadcrumbs` | `true` | 页头上方显示面包屑行 |
-| `layout.header.enabled` | `true` | 顶部页头 |
-| `layout.sidebar.collapsible` | `true` | 桌面端侧边栏可折叠 |
-| `layout.sidebar.defaultCollapsed` | `false` | 侧边栏默认展开 |
-| `layout.optionsMenu.position` | `"header"` | 选项菜单（搜索 / 主题切换 / 赞助）位于页头 |
-| `layout.optionsMenu.components.search` | `true` | 菜单中显示搜索触发器 |
-| `layout.optionsMenu.components.themeSwitch` | `true` | 菜单中显示亮/暗模式切换 |
-| `layout.optionsMenu.components.sponsor` | `null` | 按需启用 —— 设置为 URL 即可开启 |
+- **显式文件命名**: 使用清晰的连字符或 camelCase 文件名。自动加载器会将其转换为人类可读的侧边栏标签。
+- **目录分组**: 将相关 Markdown 文档分组在子文件夹中，以自动构建可折叠的侧边栏分类。
+- **Index 备用**: 在每个内容文件夹的根目录放置 `index.md` 或 `README.md`，作为其默认落地页。
+- **干净的输出路径**: 使用根目录 `.` 作为源文件夹时，构建的静态资源会输出到 `./site/`，版本控制和编译器会自动忽略该目录。
+
+## 内置默认行为
+
+`docmd` 站点开箱即用，带有合理的默认值。仅在需要覆盖默认值时才在 `docmd.config.json` 中配置个别属性。
+
+::: callout info "选择性禁用默认行为" icon:sliders
+要禁用某项默认行为，可将其键设置为 `false` 或空值。例如，设置 `pageNavigation: false` 会移除底部的上一页/下一页链接。
+:::
+
+### 顶层默认值
+
+| 属性 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `pageNavigation` | `true` | 在页面底部渲染上一篇/下一篇文章链接。 |
+| `copyCode` | `true` | 为代码块附加复制按钮。 |
+| `autoTitleFromH1` | `true` | 当缺少 frontmatter `title` 时，使用文件中的第一个 `# H1` 标题解析页面标题。 |
+
+### 布局与 UI 默认值
+
+| 属性 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `layout.spa` | `true` | 单页应用客户端路由导航。 |
+| `layout.breadcrumbs` | `true` | 页面标头下方的上下文面包屑栏。 |
+| `layout.header.enabled` | `true` | 固定的顶部导航标头栏。 |
+| `layout.sidebar.collapsible` | `true` | 桌面视口上可折叠的侧边栏分类组。 |
+| `layout.sidebar.defaultCollapsed` | `false` | 侧边栏分类默认处于展开状态。 |
+| `layout.optionsMenu.position` | `"header"` | 在标头中定位搜索和主题控件。 |
+| `layout.optionsMenu.components.search` | `true` | 启用内置全文搜索模态框触发器。 |
+| `layout.optionsMenu.components.themeSwitch` | `true` | 启用浅色/深色外观模式切换。 |
+| `layout.optionsMenu.components.sponsor` | `null` | 可选的赞助链接 URL。 |
 
 ### 页脚默认值
 
-| 键 | 默认值 | 说明 |
-|---|---|---|
-| `layout.footer.style` | `"minimal"` | 单行页脚栏 |
-| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | 自动生成当前年份的版权 |
-| `layout.footer.branding` | `true` | 默认显示 "Built with docmd" |
+| 属性 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `layout.footer.style` | `"minimal"` | 紧凑的单行页脚栏。 |
+| `layout.footer.copyright` | `` `© ${new Date().getFullYear()}` `` | 动态的当前年份版权字符串。 |
+| `layout.footer.branding` | `true` | 显示 "Built with docmd" 属性归属链接。 |
 
-### 主题默认值
+### 主题与样式默认值
 
-| 键 | 默认值 | 说明 |
-|---|---|---|
-| `theme.name` | `"default"` | 基础 CSS 主题；预留值：`default`、`sky`、`ruby`、`retro`。任何其他值会被自动提升为 [模板名](../theming/templates.md)。 |
-| `theme.appearance` | `"system"` | 默认色彩模式（跟随 `prefers-color-scheme`）。若需强制，请设为 `"light"` 或 `"dark"`。 |
-| `theme.codeHighlight` | `true` | `<pre>` 块启用语法高亮 |
+| 属性 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `theme.name` | `"default"` | 基础主题 (`default`, `sky`, `ruby`, `retro`)。自定义名称会自动升级为 [模板名称](../theming/templates.md)。 |
+| `theme.appearance` | `"system"` | 遵循系统偏好的默认颜色模式 (`system`, `light`, `dark`)。 |
+| `theme.codeHighlight` | `true` | 在代码块上开启语法高亮。 |
 
-### 新增的可选功能（默认关闭）
+### 可选扩展功能
 
-| 键 | 默认值 | 说明 |
-|---|---|---|
-| `cookie` | `null` | 可选的 Cookie 同意对话框 —— 请参阅 [Cookie 同意](cookie-consent.md) |
-| `layout.banner` | `null` | 可选的全站公告横幅 —— 请参阅 [站点横幅](site-banner.md) |
-| `theme.template` | `null` | 可选的模板选择 —— 请参阅 [模板](../theming/templates.md) |
-
-这些默认值的设定目标是让全新站点在没有任何配置的情况下也能立即可用。较旧的配置文件会保留其显式值 —— 只有未定义的键才会被填充。
+| 属性 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `cookie` | `null` | 可选的 Cookie 同意对话框。参阅 [Cookie 同意](./cookie-consent.md)。 |
+| `layout.banner` | `null` | 可选的站点公告横幅。参阅 [站点横幅](./site-banner.md)。 |
+| `theme.template` | `null` | 可选的自定义站点模板选择。参阅 [模板](../theming/templates.md)。 |

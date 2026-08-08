@@ -1,38 +1,40 @@
 ---
-title: "Mermaid-Diagramme"
-description: "Erstellen Sie professionelle Architekturdiagramme, Flussdiagramme und Sequenzdiagramme direkt in Ihren Markdown-Dateien mit Mermaid.js-Syntax."
+title: "Mermaid-Diagramme-Plugin"
+description: "Rendern Sie interaktive Flussdiagramme, Sequenzdiagramme und Architekturkarten mithilfe von Mermaid.js-Syntax."
 ---
 
-Das `@docmd/plugin-mermaid`-Plugin integriert [Mermaid.js](external:https://mermaid.js.org/) in die Build-Pipeline. Klartext-Beschreibungen werden zu interaktiven Diagrammen mit Theme-Unterstützung, Schwenken und Zoomen.
+Das `@docmd/plugin-mermaid`-Plugin integriert [Mermaid.js](external:https://mermaid.js.org/) in docmd. Es rendert Diagrammdeklarationen in Klartext in interaktive SVG-Grafiken mit automatischer Themenanpassung, Schwenk- und Zoomfunktionen.
 
-## Konfiguration
+## Konfigurationsoptionen
 
-Das Plugin wird mit `@docmd/core` gebündelt und ist standardmäßig aktiviert.
+Konfigurieren Sie Mermaid-Rendering-Optionen in `docmd.config.json`:
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Mermaid-Rendering global aktivieren oder deaktivieren. |
+| `enabled` | `boolean` | `true` | Mermaid-Diagramm-Rendering global aktivieren oder deaktivieren. |
 
-### Beispiel
+### Globales Konfigurationsbeispiel
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "mermaid": {}
+    "mermaid": {
+      "enabled": true
+    }
   }
 }
 ```
 
-## Funktionen
+## Hauptfunktionen
 
-- **Theme-bewusst**: Diagramme passen sich automatisch dem Hell- oder Dunkelmodus an.
-- **Interaktiv**: eingebaute Schwenk-, Zoom- und Vollbild-Steuerelemente pro Diagramm.
-- **Lazy-Initialisierung**: Skripte werden nur geladen und gerendert, wenn ein Diagramm in den Viewport eintritt.
-- **Icon-Pack**: unterstützt die `icon:name`-Syntax, unterstützt durch den Lucide-Icon-Satz.
+* **Erscheinungsbild-Synchronisation**: Diagramm-Farbschemata passen sich dynamisch an die aktiven hellen und dunklen Erscheinungsbildmodi an.
+* **Interaktive Zeichenfläche**: Eingebaute Schwenk-, Zoom- und Vollbild-Erweiterungstrigger.
+* **Lazy-Initialisierung**: Diagramm-Rendering-Skripte werden nur dann asynchron geladen, wenn das Diagramm den Viewport schneidet.
+* **Icon-Integration**: Unterstützt die `icon:name`-Syntax, angetrieben von Lucide-Icons in Knotendefinitionen.
 
-## Verwendung
+## Verwendung & Syntax
 
-Betten Sie Diagramme mit einem umzäunten Codeblock und dem `mermaid`-Sprachbezeichner ein.
+Schreiben Sie Diagramme mit umzäunten Codeblöcken, die mit dem Sprachbezeichner `mermaid` versehen sind.
 
 ### Sequenzdiagramm-Beispiel
 
@@ -44,21 +46,21 @@ sequenceDiagram
     participant User
     participant Browser
     participant Server
-
+    
     User->>Browser: Enters URL
     Browser->>Server: HTTP Request
     Server-->>Browser: HTTP Response
     Browser-->>User: Displays Page
 ```
 
-== tab "Quelle"
+== tab "Quelltext"
 ````markdown
 ```mermaid
 sequenceDiagram
     participant User
     participant Browser
     participant Server
-
+    
     User->>Browser: Enters URL
     Browser->>Server: HTTP Request
     Server-->>Browser: HTTP Response
@@ -68,7 +70,7 @@ sequenceDiagram
 
 :::
 
-### Architektur-Beispiel
+### Architekturdiagramm-Beispiel
 
 ```mermaid
 architecture-beta
@@ -78,6 +80,6 @@ architecture-beta
     db:L -- R:disk
 ```
 
-::: callout tip "KI-Lesbarkeit"
-Da Mermaid-Diagramme als reiner Text in Ihrem Markdown definiert sind, sind sie für KI-Agenten vollständig lesbar. Dies ermöglicht es LLMs, Ihre Systemarchitektur direkt aus Ihrer Dokumentationsquelle zu verstehen und zu erklären.
+::: callout tip "KI-Wissensextraktion" icon:cpu
+Da Mermaid-Diagramme in Klartext innerhalb von Markdown-Quelldateien verfasst sind, erfassen KI-Agenten und LLM-Scraper Diagrammstrukturen direkt, ohne dass eine OCR-Bildverarbeitung erforderlich ist.
 :::

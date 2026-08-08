@@ -3,59 +3,53 @@ title: "OKF Bundle 插件"
 description: "从您的 docmd 站点生成 Open Knowledge Format（OKF）bundle，让 AI 智能体可以直接消费您的文档。"
 ---
 
-`@docmd/plugin-okf` 插件会生成一个 **[Open Knowledge Format][okf-spec]**（OKF）bundle，供 AI 智能体消费。OKF 是一种供应商中立、对智能体和人类都友好的标准，用于表示现代 AI 系统所需的元数据、上下文和策划知识。bundle 位于您的站点旁边（例如 `site/okf/`），智能体可以直接指向它。
+`@docmd/plugin-okf` 插件在静态编译期间生成一个 **[Open Knowledge Format][okf-spec]** (OKF) 知识包。OKF 是一种开放、供应商中立的规范，用于为 AI 智能体与 LLM 工具链结构化文档元数据、概念图谱与领域上下文。
 
-该插件在 0.8.8 中**默认启用**——无需任何配置。每次执行 `docmd build` 都会生成 bundle。
+该插件 **默认启用**。在每次站点编译过程中，OKF 知识包都会被输出至 `site/okf/` 目录。
 
 [okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 
-## 什么是 OKF？
+## 架构概览
 
-OKF 是 Google Cloud 在 2026 年 6 月发布的开放规范，它将 [LLM-wiki 模式](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)形式化为一种可移植、可互操作的格式。其动机：
+OKF 将知识架构规范化为一个包含 YAML 清单、Markdown 概念文件和可视化力导向图谱资源的便携式目录结构。
 
-::: callout info
-随着基础模型持续改进，相关上下文的缺乏往往限制了它们的能力，尤其是在用于构建智能体系统时。虽然这些模型可以帮助您编写代码、汇总文档或分析数据集，但它们仍然需要正确的信息才能产生准确且可操作的结果——[Introducing the Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)
-:::
+### 设计原则
 
-OKF 将组织知识表示为一个带有 YAML frontmatter 的 markdown 文件目录，外加一个类型化清单、一个交互式图形查看器，以及一个机器可读的 bundle 摘要。其设计背后的三条原则：
+1. **最小化结构约束**: 每个概念条目仅要求包含一个 `type` 字段。
+2. **生产者/消费者独立性**: 人类编写的 Markdown 文件编译为标准 Schema，可由任意 LLM 框架进行查询。
+3. **供应商中立**: 独立于具体的云服务商、模型托管商或向量数据库引擎。
 
-1. **最小主观性。** OKF 对每个概念只要求一件事：一个 `type` 字段。其他一切都由生产者决定——存在哪些类型、包含哪些其他字段、正文有哪些章节。
-2. **生产者/消费者独立。** 人类手写的 bundle 可以被 AI 智能体消费。由元数据导出管道生成的 bundle 可以在可视化器中浏览。由一个 LLM 综合的 bundle 可以被另一个 LLM 查询。格式是契约；两端的工具可独立替换。
-3. **格式，而非平台。** OKF 不绑定任何特定的云、数据库、模型提供商或智能体框架。
+## 生成的产物目录
 
-## 您将获得
+编译将生成以下目录树：
 
 ```text
 site/okf/
-├── okf.yaml              ← 类型化清单（bundle 摘要）
-├── index.md              ← Karpathy 风格的按类型分组的目录
-├── graph/                ← 可选：仅在 `plugins.okf.graph: true` 时生成
-│   ├── index.html        ← 交互式力导向图形查看器（在 /okf/graph/ 打开）
-│   ├── graph.json        ← 图形数据（节点 + 边）
-│   ├── graph.js          ← 查看器运行时（原生，无 CDN 依赖）
-│   └── graph.css         ← 查看器样式（支持主题）
+├── okf.yaml              ← 清单摘要文件
+├── index.md              ← 按类型分组的概念目录
+├── graph/                ← 交互式图谱资源（仅当 graph: true 时生成）
+│   ├── index.html        ← 力导向图谱可视化器
+│   ├── graph.json        ← 图形节点与边数据
+│   ├── graph.js          ← 独立图形运行时
+│   └── graph.css         ← 主题感知的样式文件
 ├── concepts/
-│   └── <slug>.md         ← 每个页面一个 markdown 文件
+│   └── <slug>.md         ← 独立概念 Markdown 文件
 └── _meta/
     ├── bundle.json       ← okf.yaml 的 JSON 镜像
-    └── lint-report.txt   ← 生成过程中产生的警告
+    └── lint-report.txt   ← 构建 Linting 报告
 ```
 
-每个概念文件在 frontmatter 中携带 OKF 必需的 `type` 字段，以及原始 markdown 正文原样保留，因此智能体既能浏览清单，又能阅读完整的页面。
+## 默认构建行为
 
-## 默认行为
+OKF 插件会在编译期间自动加载：
 
-OKF 在 0.8.8 中是一个**核心插件**。构建过程会自动加载它，并使用合理的默认值生成 bundle：
+* **默认语言作用域**: 在包根目录下输出主语言的概念文件。
+* **自动类型推断**: 自动将 `/api/`、`/guides/`、`/reference/`、`/concepts/`、`/runbooks/`、`/datasets/`、`/metrics/` 和 `/tables/` 路径下的文件归类为对应的类型化概念。
+* **逐字 Markdown 复制**: 将页面内容与 Frontmatter 复制到概念文件中。
 
-- 默认**仅包含默认语言**（bundle 仅包含默认语言的页面；默认语言的文件位于 bundle 根目录）。
-- **类型推断** —— `/api/`、`/guides/`、`/reference/`、`/concepts/`、`/runbooks/`、`/datasets/`、`/metrics/`、`/tables/` 路径下的页面会被自动分类；其他所有页面都回退到 `concept`。
-- 每个概念文件中包含**完整 markdown**（包含原始页面正文，而不仅仅是 frontmatter 存根）。
+### 选择退出
 
-您无需向 `docmd.config.json` 添加任何内容即可获得 OKF bundle。插件以空选项运行，并使用所有默认值。
-
-### 退出启用
-
-支持三种退出方式：
+在 `docmd.config.json` 中禁用 OKF 知识包生成：
 
 ```json "docmd.config.json"
 {
@@ -65,90 +59,96 @@ OKF 在 0.8.8 中是一个**核心插件**。构建过程会自动加载它，�
 }
 ```
 
-```json "docmd.config.json"
-{
-  "plugins": {
-    "okf": { "enabled": false }
-  }
-}
-```
+或者设置 `enabled: false`：
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "okf": { "capabilities": ["head"] }
+    "okf": {
+      "enabled": false
+    }
   }
 }
 ```
 
-最后一种形式使用了插件信任模型——`okf` 插件声明 `capabilities: ['post-build']`；如果您的 `config.plugins.okf.capabilities` 数组不包含 `post-build`，插件会被加载，但其 `onPostBuild` 钩子不会运行。这与所有其他核心插件一致。
+## 配置选项
 
-## 配置
+在 `docmd.config.json` 中配置 OKF 知识包参数：
 
-所有键均为可选。列出的值为默认值：
-
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | 启用或禁用 OKF bundle 生成。 |
-| `outputDir` | `string` | `'okf'` | bundle 目录，相对于站点输出。 |
-| `bundleName` | `string` | slug 化的 `config.title` | 在 `okf.yaml` 和图形查看器标题中使用的名称。 |
-| `defaultType` | `string` | `'concept'` | 分配给没有显式类型的页面的类型。 |
-| `typeField` | `string` | `'type'` | OKF 类型的 frontmatter 字段名称。 |
-| `warnOnMissingType` | `boolean` | `true` | 对回退到 `defaultType` 的页面发出 TUI 警告。 |
-| `includeFullMarkdown` | `boolean` | `true` | 将原始 `.md` 正文复制到每个概念文件中。 |
-| `graph` | `boolean` | `false` | 输出一个 `graph/` 子目录，包含 `index.html`、`graph.js`、`graph.css` 和 `graph.json`。0.8.8 起改为按需启用 —— OKF 规范本身并不要求可视化查看器，因此默认的干净 bundle 不会附带它。查看器在运行时从同一目录获取 `graph.json`，所以只要四个文件放在一起，通过 `file://` 打开 `site/okf/graph/index.html` 也可以正常工作。 |
-| `localeStrategy` | `'default-only' \| 'folders' \| 'mixed' \| 'latest-only'` | `'default-only'` | 默认：仅默认语言，位于 bundle 根目录。设置为 `'folders'` 可将非默认语言嵌套在 `<locale>/` 下。 |
-| `versionStrategy` | `'folders' \| 'mixed' \| 'latest-only'` | `'latest-only'` | 启用版本控制时，按版本 id 嵌套概念。 |
-| `excludePatterns` | `string[]` | `[]` | 在 `frontmatter.noindex` / `frontmatter.okf === false` 之外要跳过的额外 glob 模式。 |
+| `enabled` | `boolean` | `true` | 启用或禁用 OKF 知识包编译。 |
+| `outputDir` | `string` | `'okf'` | 相对于站点根目录的目标输出目录。 |
+| `bundleName` | `string` | `config.title` | 在 `okf.yaml` 和图谱标头中使用的知识包标识符。 |
+| `defaultType` | `string` | `'concept'` | 未标记页面的回退概念类型。 |
+| `typeField` | `string` | `'type'` | 用于类型分类的 Frontmatter 键名。 |
+| `warnOnMissingType` | `boolean` | `true` | 对使用 `defaultType` 的页面输出 CLI 警告。 |
+| `includeFullMarkdown` | `boolean` | `true` | 将完整 Markdown 正文复制到概念文件中。 |
+| `graph` | `boolean` | `false` | 在 `graph/` 下生成交互式力导向图谱可视化器。 |
+| `localeStrategy` | `'default-only' \| 'folders'` | `'default-only'` | 多语言知识包编译策略。 |
 
-### 示例 — 自定义输出目录 + 自定义默认类型
+### 全局配置示例
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "okf": {
       "outputDir": "knowledge",
-      "defaultType": "doc",
-      "warnOnMissingType": true
+      "defaultType": "concept",
+      "graph": true
     }
   }
 }
 ```
 
-### 示例 — 多语言输出（opt-in）
+### 多语言文件夹策略
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "okf": { "localeStrategy": "folders" }
+    "okf": {
+      "localeStrategy": "folders"
+    }
   }
 }
 ```
 
+输出目录结构：
+
 ```text
-site/okf/                    ← 默认语言（en）位于 bundle 根目录
+site/okf/                    ← 默认语言（根目录）
 ├── okf.yaml
 ├── index.md
-├── concepts/<slug>.md
-└── _meta/, graph/, ...
+└── concepts/
 
-site/okf/ja/                 ← 日语 —— 嵌套在 <locale>/ 下
+site/okf/de/                 ← 德语（嵌套）
 ├── okf.yaml
-└── concepts/<slug>.md
+└── concepts/
 ```
 
-默认语言的文件**始终**位于 bundle 根目录，这样现有的消费者不会受到影响。只有非默认语言才会获得 `<locale>/` 子目录。
+## 从 OKF 中排除页面
 
-## 按页面退出
+使用 Frontmatter 标记排除特定页面：
 
-页面可以通过两种方式退出 OKF bundle：
-
-```markdown
+```yaml
 ---
-noindex: true   # 同时也会从 sitemap、llms.txt 等中排除
----
-
----
-okf: false       # 仅从 OKF bundle 中排除
+title: "内部运维说明"
+okf: false # 仅从 OKF 知识包中排除该页面
 ---
 ```
+
+若要在 Sitemap、搜索、LLM 文件和 OKF 中全局排除页面，请设置 `noindex: true`。
+
+## 概念类型解析
+
+插件使用自顶向下的优先级确定概念类型：
+
+1. `frontmatter.okf.type` — 嵌套显式声明。
+2. `frontmatter.type` — 顶层显式声明。
+3. `frontmatter.okfType` — 旧版别名。
+4. **路径前缀推断**: 针对 `/guides/`、`/api/`、`/reference/`、`/concepts/` 等路径自动映射。
+5. `defaultType` 回退 (`'concept'`)。
+
+::: callout tip "知识图谱可视化" icon:git-fork
+在 OKF 插件配置中启用 `graph: true`，以生成可交互的力导向图谱可视化页面 (`site/okf/graph/index.html`)，映射交叉引用和概念关联。
+:::

@@ -1,57 +1,50 @@
 ---
-title: "Anpassung & Variablen"
-description: "Eine vollständige Referenz der CSS-Variablen und Komponentenklassen von docmd für fortgeschrittenes Styling."
+title: "Anpassung & CSS-Variablen"
+description: "Referenzhandbuch für docmd CSS-Variablen, visuelle Tokens und Komponentenklassen für fortgeschrittenes Styling."
 ---
 
-`docmd` ist mit einer CSS-Variablen-zentrierten Architektur aufgebaut. Das bedeutet, Sie können den gesamten Stil Ihrer Site neu definieren, indem Sie einfach einige Schlüssel in einem `:root`-Block überschreiben — ohne komplexe CSS-Selektoren zu schreiben.
+`docmd` verwendet eine Design-Token-Architektur, die auf CSS-Variablen basiert. Gestalten Sie Kern-Website-Themes und Komponenten neu, indem Sie benutzerdefinierte Eigenschaften in `:root` in einem benutzerdefinierten Stylesheet überschreiben.
 
-## Globale Variablenreferenz
+## CSS-Variablenreferenz
 
-| Variable | Standard (Hell) | Standard (Dunkel) | Beschreibung |
+| CSS-Variable | Standard (Heller Modus) | Standard (Dunkler Modus) | Ziel des visuellen Tokens |
 | :--- | :--- | :--- | :--- |
-| `--bg-color` | `#ffffff` | `#0d0d0f` | Hauptseitenhintergrund. |
-| `--text-color` | `#27272a` | `#d4d4d8` | Standard-Body-Text. |
-| `--text-heading` | `#09090b` | `#fafafa` | Titel- und Header-Farben. |
-| `--link-color` | `#068ad5` | `#38bdf8` | Primäre Akzentfarbe / Links. |
-| `--border-color` | `#e4e4e7` | `#27272a` | Trenner und Rahmen. |
-| `--sidebar-bg` | `#fafafa` | `#09090b` | Navigations-Hintergrund. |
-| `--ui-border-radius` | `6px` | `6px` | Rundung aller UI-Elemente. |
-| `--sidebar-width` | `260px` | `260px` | Breite der Sidebar-Spalte. |
+| `--bg-color` | `#ffffff` | `#0d0d0f` | Primärer Seitenhintergrund |
+| `--text-color` | `#27272a` | `#d4d4d8` | Standard-Fließtext-Typografie |
+| `--text-heading` | `#09090b` | `#fafafa` | Titel- und Überschriften-Elemente (`h1`–`h6`) |
+| `--link-color` | `#068ad5` | `#38bdf8` | Primäre Akzent- und Hyperlink-Farbe |
+| `--border-color` | `#e4e4e7` | `#27272a` | Linientrenner und Kartenränder |
+| `--sidebar-bg` | `#fafafa` | `#09090b` | Navigations-Seitenleisten-Hintergrund |
+| `--ui-border-radius` | `6px` | `6px` | UI-Eckenrundung für Buttons, Karten und Tags |
+| `--sidebar-width` | `260px` | `260px` | Breite der Navigations-Seitenleistenspalte |
 
-## Beispielüberschreibung
+## Beispiele für CSS-Überschreibungen
 
-Um die primäre Akzentfarbe Ihrer Site zu ändern, fügen Sie dies zu Ihrer `customCss` hinzu:
+Um die primäre Akzentfarbe Ihrer Website im hellen und dunklen Modus zu ändern, definieren Sie benutzerdefinierte Regeln in `assets/css/branding.css`:
 
 ```css
 :root {
-  --link-color: #f43f5e; /* Rose 500 */
+  --link-color: #f43f5e; /* Rose-Akzent (Heller Modus) */
 }
 
 body[data-theme="dark"] {
-  --link-color: #fb7185; /* Rose 400 */
+  --link-color: #fb7185; /* Rose-Akzent (Dunkler Modus) */
 }
 ```
 
-## Komponenten ansprechen
+## Hauptkomponentenklassen
 
-Wenn Sie bestimmte Komponenten stylen müssen, verwenden Sie diese Top-Level-Klassen:
+Richten Sie sich mit visuellen Layout-Klassen an spezifische UI-Komponenten:
 
-*   `.main-content`: Der Wrapper für alle Markdown-Inhalte.
-*   `.sidebar-nav`: Die interne Navigationsliste.
-*   `.page-header`: Die obere Navigationsleiste.
-*   `.docmd-search-modal`: Das Such-Overlay.
-*   `.docmd-tabs`: Tab-Container-Komponenten.
-*   `.callout`: Die Alarm-/Hinweis-Boxen.
+* `.main-content`: Container für geparste Markdown-Fließtext-Inhalte.
+* `.sidebar-nav`: Navigationsbaumliste innerhalb der Seitenleiste.
+* `.page-header`: Obere Navigationsleiste (Menüleiste).
+* `.docmd-search-modal`: Volltext-Such-Modal-Overlay.
+* `.docmd-tabs`: Interaktive Tab-Container-Blöcke.
+* `.callout`: Callout-Alert- und Hinweis-Container.
 
-## Spezifität-Fehlerbehebung
-Die meisten `docmd`-Stile verwenden eine geringe Spezifität. Wenn Ihre Überschreibungen nicht angewendet werden, stellen Sie sicher, dass Ihre `customCss` korrekt registriert ist, und prüfen Sie, ob das Hinzufügen eines `body`-Präfixes (z. B. `body .main-content`) hilft.
+## Strukturelle Layout-Überschreibungen
 
-::: callout tip
-Da `docmd` Standard-CSS-Variablen verwendet, können Sie eine KI fragen: *"Gib mir eine professionelle Farbpalette mit --link-color und --bg-color für docmd"*. Das Modell wird in der Lage sein, fertig einfügbares CSS bereitzustellen, das perfekt mit den eingebauten Themes integriert.
-:::
+Wenn CSS-Variablen-Überschreibungen nicht ausreichen und Sie die HTML-Layoutstruktur selbst ändern müssen (z. B. benutzerdefinierte Seitenleisten oder Fußzeilen), erstellen Sie ein **Template-Plugin**. Templates liefern benutzerdefinierte `.ejs`-Partials und werden direkt über CSS-Themes gelegt.
 
-## Brauchen Sie ein völlig anderes Layout?
-
-Wenn CSS-Überschreibungen nicht ausreichen, schreiben Sie ein **Template-Plugin** — ein Paket, das sein eigenes `layout.ejs` (und alle Partials, die Sie überschreiben möchten) sowie ein CSS/JS-Bundle liefert. Templates sind erstklassige Plugins mit `capabilities: ['template']` und werden über das bestehende Theme-+-customCss-System gelegt.
-
-Den vollständigen Leitfaden und eine Beispiel-Template-Paketstruktur finden Sie unter [Templates](templates.md).
+Siehe [Templates](templates.md) für vollständige Richtlinien zur Template-Entwicklung.

@@ -4,7 +4,7 @@ description: "Low-Level Node-API für Plugin-Autoren — URL-Utilities, Action-D
 ---
 
 ::: callout info
-**Für Plugin-Autoren.** Wenn Sie docmd einfach nur *aus einem Node-Skript aufrufen* möchten, sehen Sie stattdessen [Build-API](/reference/build-api). Diese Seite behandelt die tieferen Utilities, die `@docmd/api` für das Schreiben von Plugins bereitstellt.
+**Für Plugin-Autoren.** Wenn Sie docmd einfach nur *aus einem Node-Skript aufrufen* möchten, sehen Sie stattdessen [Build-API](../reference/build-api.md). Diese Seite behandelt die tieferen Utilities, die `@docmd/api` für das Schreiben von Plugins bereitstellt.
 :::
 
 Das Paket `@docmd/api` ist die dedizierte Heimat des Plugin-Systems. Es stellt Hook-Registrierung, WebSocket-RPC-Dispatch, Source-Editing-Tools und zentrale URL-Utilities bereit.
@@ -199,6 +199,6 @@ import type {
 
 ## Nächste Schritte
 
-- [Plugins entwickeln](/development/building-plugins) — Einstiegspunkt.
-- [Plugin-Beispiele](/development/plugin-examples) — vollständiger Plugin-Walkthrough.
-- [Engines & Architektur](/development/engines/overview) — Rust-Engine, N-API und Engine-Loader-Internals.
+- [Plugins entwickeln](./building-plugins.md) — Einstiegspunkt.
+- [Plugin-Beispiele](./plugin-examples.md) — vollständiger Plugin-Walkthrough.
+- [Engines & Architektur](./engines/overview.md) — Rust-Engine, N-API und Engine-Loader-Internals.

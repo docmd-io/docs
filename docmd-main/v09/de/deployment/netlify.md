@@ -1,35 +1,43 @@
 ---
-title: "Netlify"
-description: "Stellen Sie Ihre docmd-Dokumentation mit einer generierten netlify.toml auf Netlify bereit."
+title: "Netlify-Bereitstellung"
+description: "Stellen Sie docmd-Dokumentation auf Netlify unter Verwendung generierter netlify.toml-Konfigurationen bereit."
 ---
 
-`npx @docmd/core deploy --netlify` generiert eine `netlify.toml`-Datei im Stammverzeichnis Ihres Projekts. Sie ist mit dem korrekten Build-Befehl, Publish-Verzeichnis, Cache-Headern und SPA-Weiterleitungen vorkonfiguriert.
+Generieren Sie Netlify-Build-Manifeste entsprechend Ihrer Projektkonfiguration:
 
 ```bash
 npx @docmd/core deploy --netlify
 ```
 
-## Was wird generiert
+## Generierte Konfiguration
 
-Die `netlify.toml` konfiguriert:
+Die ausgegebene Datei `netlify.toml` konfiguriert Build-Umgebungen, Ausgabeverzeichnisse und Header-Steuerelemente:
 
-- **Build-Befehl** - installiert `@docmd/core` und führt `npx @docmd/core build` aus.
-- **Publish-Verzeichnis** - auf Ihr konfiguriertes `out`-Verzeichnis gesetzt.
-- **Node-Version** - auf Node 20 festgelegt.
-- **Cache-Header** - unveränderlich für Assets, kein Cache für HTML-Seiten.
-- **SPA-Weiterleitungen** - ein `/*` → `/index.html`-Rewrite, wenn `layout.spa` aktiviert ist.
+* **Build-Befehl**: Führt `npm install @docmd/core && npx @docmd/core build` aus.
+* **Veröffentlichungsverzeichnis**: Synchronisiert mit `config.out` (`site`).
+* **Header-Richtlinien**: Erzwingt unveränderliches Caching für statische Assets und No-Cache-Regeln für HTML-Einträge.
+* **Weiterleitungsregeln**: Konfiguriert `/*` → `/index.html`-Rewrites, wenn `layout.spa: true` ist.
 
-## Bereitstellung
+```toml "netlify.toml"
+[build]
+  command = "npx @docmd/core build"
+  publish = "site"
 
-Verbinden Sie Ihr Repository über das [Netlify-Dashboard](external:https://app.netlify.com) mit Netlify. Es erkennt die `netlify.toml` automatisch und stellt bei jedem Push bereit.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+```
 
-Alternativ verwenden Sie die [Netlify CLI](external:https://docs.netlify.com/cli/get-started/):
+## Bereitstellungsausführung
+
+Verbinden Sie Ihr Git-Repository in Netlify für automatisierte Builds beim Push oder stellen Sie über die Netlify CLI bereit:
 
 ```bash
 npm install -g netlify-cli
 netlify deploy --prod
 ```
 
-## Neu generieren
-
-Führen Sie `npx @docmd/core deploy --netlify` jedes Mal erneut aus, wenn Sie `out` oder andere Konfigurationsfelder ändern. Dies hält die `netlify.toml` synchron.
+::: callout tip "Neu-Generierung" icon:refresh-cw
+Führen Sie `npx @docmd/core deploy --netlify --force` erneut aus, wenn Sie `out`- oder `url`-Werte in `docmd.config.json` ändern.
+:::

@@ -1,11 +1,13 @@
 ---
-title: "Translated Content"
-description: "Organise translations in locale subdirectories with per-file fallback and per-locale navigation."
+title: "Translated Content & i18n Routing"
+description: "Organise multi-language documentation directories, fallback mechanics, and localised navigation structures in docmd."
 ---
+
+`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localized content, fall back seamlessly to default languages, and provide localised navigation sidebars.
 
 ## Directory Structure
 
-Every locale lives in its own subdirectory inside the source directory. The folder name matches the locale `id` from your config.
+Every locale resides in its own subdirectory inside the source root (`src`). Folder names match the locale `id` defined in your configuration:
 
 ```text
 docs/
@@ -14,41 +16,37 @@ docs/
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← second locale
+├── hi/                     ← secondary locale (Hindi)
 │   ├── index.md            ← translated homepage
 │   ├── navigation.json     ← translated navigation labels
 │   └── getting-started/
-│       └── installation.md ← translated page
-└── zh/                     ← third locale
-    └── index.md            ← only the homepage translated
+│       └── installation.md ← translated installation guide
+└── zh/                     ← tertiary locale (Chinese)
+    └── index.md            ← translated homepage
 ```
 
-The source directory holds only locale folders. No content files sit at the root level when i18n is enabled.
+When i18n is enabled, all Markdown source content lives inside locale directories. No content files sit at the root level.
 
-::: callout info "Folder Names Are Your Choice" icon:info
-Folder names match the `id` values in your config. If your config sets `{ id: 'fr-ca' }`, your folder is `docs/fr-ca/`.
+::: callout info "Custom Directory Identifiers" icon:info
+Subdirectory names correspond directly to `id` values in your configuration. If your config defines `{ "id": "fr-ca" }`, the corresponding content directory is `docs/fr-ca/`.
 :::
 
-## Per-file Fallback
+## Per-File Fallback Resolution
 
-You do not need to translate every page. docmd scans the **default locale directory** as the canonical structure. For every other locale, it checks for a translated page:
+`docmd` does not require translating every document upfront. The engine treats the **default locale directory** as the canonical content tree. When a requested page is missing in a secondary locale:
 
-- If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation.
-- If it does not exist → serves the default locale version.
+1. If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation.
+2. If `docs/hi/getting-started/installation.md` is missing → falls back to `docs/en/getting-started/installation.md`.
 
-When a page falls back, docmd displays a translated callout. This informs viewers the page is shown in the default language. Customise this message via your [UI strings](ui-strings.md) configuration.
+When falling back to the default locale, `docmd` displays an informative callout banner to readers. Customise this message via your [UI Strings Configuration](./ui-strings.md).
 
 ## Locale-Exclusive Pages
 
-A non-default locale can host pages that do not exist in the default locale. These render only for that specific locale.
+Secondary locales can host unique documents that do not exist in the default locale directory. These pages render exclusively within their respective language routes.
 
-## Translate the Navigation
+## Localising Sidebar Navigation
 
-Each locale directory can include its own `navigation.json`. docmd uses a cascading priority system to resolve the sidebar.
-
-For details on the resolution hierarchy, see [Navigation Configuration](../navigation.md).
-
-A locale's `navigation.json` uses the standard format:
+Each locale directory can include an independent `navigation.json` manifest. `docmd` uses a cascading priority resolution system for sidebars. Refer to [Navigation Configuration](../navigation.md) for full hierarchy details.
 
 ```json "navigation.json"
 [
@@ -62,28 +60,28 @@ A locale's `navigation.json` uses the standard format:
 ]
 ```
 
-::: callout tip "Partial Navigation" icon:info
-Create a locale `navigation.json` only when you want translated labels. If missing, the default navigation is used.
+::: callout tip "Partial Navigation Overrides" icon:lightbulb
+Provide a `navigation.json` file inside a locale directory only when translating menu labels. If omitted, the default locale's navigation tree applies automatically.
 :::
 
-## Versioning and i18n
+## Combining Versioning with Localisation
 
-When combining versioning and i18n, structure the source directories hierarchically:
+When combining versioning and multi-language routing, organize directories hierarchically with locales nested inside version folders:
 
 ```text
-docs/                    ← current version
-  en/                    ← current version, default locale
-  hi/                    ← current version, translated locale
-docs-v1/                 ← previous version
-  en/                    ← v1, default locale
-  hi/                    ← v1, translated locale
+docs/                    ← current release
+  en/                    ← default locale
+  hi/                    ← translated locale
+docs-v1/                 ← legacy release
+  en/                    ← default locale
+  hi/                    ← translated locale
 ```
 
-The output URLs nest locale first, then version:
+The output URL hierarchy prioritises locale prefixes, followed by version routes:
 
 ```text
 /                        ← default locale, current version
 /hi/                     ← translated locale, current version
-/v1/                     ← default locale, previous version
-/hi/v1/                  ← translated locale, previous version
+/v1/                     ← default locale, legacy version
+/hi/v1/                  ← translated locale, legacy version
 ```

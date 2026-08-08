@@ -1,9 +1,9 @@
 ---
 title: "Buttons"
-description: "Inject clear, highly visible call-to-actions directly into your documentation."
+description: "Inject prominent call-to-action buttons for internal SPA navigation and external links in docmd."
 ---
 
-Buttons are interactive components designed for navigation and call-to-actions. They can point to internal documentation pages or external resources.
+Buttons are interactive components designed for navigation and explicit call-to-actions. They support internal SPA routing, external links, custom color overrides, and Lucide icons.
 
 ## Syntax Reference
 
@@ -13,55 +13,55 @@ Buttons are interactive components designed for navigation and call-to-actions. 
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **Path** | `/path/` | Relative project URL. Resolves automatically for SPA navigation. |
-| **External** | `external:URL`| Opens the target URL in a new browser tab (`target="_blank"`). |
-| **Colour** | `color:VALUE` | Applies a background colour (supports CSS names or Hex codes). |
-| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the label. |
+| **Path** | `/path/` | Relative project URL. Resolves automatically via the SPA router. |
+| **External** | `external:URL` | Opens the target URL in a new browser tab (`target="_blank"`). |
+| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). |
+| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the label text. |
 
-## Examples
+## Usage Examples
 
-### Internal Navigation
+### Internal SPA Navigation
 
-Use relative Markdown paths to ensure seamless transitions within the docmd SPA.
+Use relative Markdown paths to ensure seamless transitions within the single-page router:
 
 ```markdown
-::: button "Install docmd" ../../getting-started/installation.md
+::: button "Installation Guide" ../../getting-started/installation.md
 ```
 
-::: button "Install docmd" ../../getting-started/installation.md
+::: button "Installation Guide" ../../getting-started/installation.md
 
-### External Resource Link
+### External Resource Links
 
-Prepend `external:` to the URL to force the link to open in a new tab.
+Prepend `external:` to the URL to force links to open in a new browser tab:
 
 ```markdown
-::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
+::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
 ```
 
-::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
+::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
 
-### Styling & Icons
+### Custom Branding & Iconography
 
-Match buttons to your brand identity using colour overrides and Lucide icons to enhance visual clarity.
+Match buttons to your brand identity using colour overrides and Lucide icon names:
 
 ```markdown
-::: button "Success Confirmation" ./#success color:#228B22
+::: button "Success Action" ./#success color:#228B22 icon:check
 ::: button "Danger Action" ./#delete color:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 ```
 
-::: button "Success Confirmation" ./#success color:#228B22
+::: button "Success Action" ./#success color:#228B22 icon:check
 ::: button "Danger Action" ./#delete color:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
-## Critical Note: Self-Closing Logic
+## Self-Closing Parsing Behavior
 
-Buttons are self-closing. Adding a terminal `:::` line immediately after a button will terminate the **parent container** (e.g., a Card or Tab), potentially breaking your layout.
+Buttons are single-line, self-closing components. Adding a terminal `:::` line immediately after a button terminates the **parent container** (e.g. an enclosing Card or Tab), which will disrupt your layout.
 
 **Incorrect Sequence:**
 ```markdown
 ::: card "Setup"
-    ::: button "Begin" ../../setup.md
+    ::: button "Begin Setup" ../../setup.md
     :::        <-- Error: This closes the Card prematurely.
 :::
 ```
@@ -69,6 +69,6 @@ Buttons are self-closing. Adding a terminal `:::` line immediately after a butto
 **Correct Sequence:**
 ```markdown
 ::: card "Setup"
-    ::: button "Begin" ../../setup.md
+    ::: button "Begin Setup" ../../setup.md
 :::        <-- Correct: This closes the Card cleanly.
 ```

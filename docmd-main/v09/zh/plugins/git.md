@@ -3,27 +3,29 @@ title: "Git 插件"
 description: "从 Git 历史派生的仓库感知元数据、最近更新时间戳和自动编辑链接。"
 ---
 
-`@docmd/plugin-git` 插件为您的文档添加仓库智能。它在构建时直接从 Git 历史中提取数据。它会显示页面的最后修改时间、贡献者，并提供一个可选的"编辑此页面"链接。
+`@docmd/plugin-git` 插件为您的文档网站添加仓库智能。它在编译期间直接查询本地 Git 历史，以展示页面修改时间戳、作者贡献以及自动化的“编辑此页面”链接。
 
-## 配置
+## 配置选项
 
-| 选项 | 类型 | 默认值 | 说明 |
+在 `docmd.config.json` 中配置仓库参数：
+
+| 选项 | 类型 | 默认值 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `repo` | `string` | `null` | 仓库 URL（例如 `https://github.com/org/repo`）。编辑链接所必需。 |
-| `branch` | `string` | `'main'` | 编辑链接的分支名称。 |
-| `editLink` | `boolean` | `true` | 设置 `repo` 后显示"编辑此页面"链接。 |
-| `lastUpdated` | `boolean` | `true` | 显示最近更新时间戳。 |
-| `commitHistory` | `boolean` | `true` | 悬停时显示提交历史工具提示。 |
-| `maxCommits` | `number` | `5` | 工具提示中显示的最大提交数（如果 `commitHistory` 为 true）。 |
-| `dateFormat` | `string` | `'relative'` | 时间戳格式：`relative`（默认）、`iso` 或 `locale-aware`。 |
+| `repo` | `string` | `null` | 公开仓库 URL（例如 `https://github.com/org/repo`）。编辑链接所必需。 |
+| `branch` | `string` | `'main'` | 源码编辑链接的目标分支。 |
+| `editLink` | `boolean` | `true` | 在页面页脚中显示“编辑此页面”按钮。 |
+| `lastUpdated` | `boolean` | `true` | 在页面页脚中显示最近更新时间戳。 |
+| `commitHistory` | `boolean` | `true` | 鼠标悬停时间戳时显示提交历史提示框。 |
+| `maxCommits` | `number` | `5` | 悬停提示框中显示的最大提交数量。 |
+| `dateFormat` | `string` | `'relative'` | 日期格式模式：`relative`（默认）、`iso` 或 `locale-aware`。 |
 
-### 示例
+### 配置示例
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "git": {
-      "repo": "https://github.com/org/repo",
+      "repo": "https://github.com/docmd-io/docmd",
       "branch": "main",
       "editLink": true,
       "lastUpdated": true,
@@ -34,40 +36,30 @@ description: "从 Git 历史派生的仓库感知元数据、最近更新时间�
 }
 ```
 
-## 功能
+## 核心能力
 
-- **最近更新时间戳**：显示在页脚中。
-- **提交历史工具提示**：悬停时间戳可查看该页面的最近提交。
-- **编辑链接**：可选地链接到 GitHub、GitLab 或 Bitbucket 上的源文件编辑。
-- **构建时缓存**：Git 历史只查询一次并缓存，因此不影响站点性能。
+* **最近更新时间戳**: 为每个文件自动计算并显示在页面页脚中。
+* **提交历史提示框**: 鼠标悬停在时间戳上时渲染最近的 Commit Hash、提交信息和作者头像。
+* **自动化编辑链接**: 生成直接指向 GitHub、GitLab 或 Bitbucket 的编辑 URL。
+* **构建期缓存**: Git 查询在编译期间执行并自动在本地缓存结果，确保零运行时开销。
 
-## 行为
+## 页面级控制
 
-配置完成后，插件会自动工作。时间戳和编辑链接会出现在页脚中。
+使用 [页面 Frontmatter](../content/frontmatter.md) 为特定文档禁用 Git 功能：
 
-### 页脚示例
-
-::: callout info "渲染结果"
-本页的页脚由 Git 插件渲染。滚动到底部查看效果。将鼠标悬停在**最近更新**日期上可查看提交历史。
-:::
-
-## 按页面控制
-
-通过 frontmatter 禁用特定页面的 Git 功能：
-
-```markdown
+```yaml
 ---
-title: "内部备注"
+title: "内部说明"
 plugins:
   git: false
 ---
 ```
 
-## CI/CD 集成
+## CI/CD 流水线集成
 
-Git 插件使用本地 Git 命令在构建时读取您的仓库历史。许多 CI/CD 提供商默认使用"浅克隆"（仅获取最后一次提交）。这会导致插件在所有页面上只显示最近的更改。
+Git 插件在站点编译期间执行本地 `git` CLI 命令。许多 CI/CD 执行器（例如 GitHub Actions 或 GitLab CI）执行浅克隆（`fetch-depth: 1`），这会导致提交历史被截断，使所有页面显示完全相同的时间戳日期。
 
-为了确保准确的时间戳和历史记录，请配置您的 CI 环境以执行完整获取。
+请确保您的构建工作流拉取完整的 Git 历史：
 
 ::: tabs
 
@@ -76,7 +68,7 @@ Git 插件使用本地 Git 命令在构建时读取您的仓库历史。许多 C
 将 `fetch-depth: 0` 添加到您的 checkout 步骤：
 
 ```yaml ".github/workflows/docs.yml"
-- name: Checkout
+- name: Checkout Repository
   uses: actions/checkout@v4
   with:
     fetch-depth: 0
@@ -84,7 +76,7 @@ Git 插件使用本地 Git 命令在构建时读取您的仓库历史。许多 C
 
 == tab "GitLab CI"
 
-将 `GIT_DEPTH` 变量设置为 `0`：
+将 `GIT_DEPTH` 环境变量设置为 `0`：
 
 ```yaml ".gitlab-ci.yml"
 variables:
@@ -93,14 +85,14 @@ variables:
 
 == tab "Netlify"
 
-Netlify 默认获取完整历史。如果遇到问题，请确保您的构建命令可以访问 `.git` 目录。
+Netlify 默认拉取完整历史。如果使用自定义构建脚本，请确保在构建工作区中保留 `.git` 目录。
 
 :::
 
-::: callout warning "Git 数据要求"
-构建环境中必须存在 `.git` 目录。如果在 Docker 容器或受限的 CI 环境中构建，请确保保留 Git 历史并安装了 `git` 二进制文件。
+::: callout warning "Git CLI 可用性" icon:alert-triangle
+在您的编译容器或构建环境中，`.git` 目录和 `git` 二进制可执行文件必须可访问。
 :::
 
-## 本地化
+## 本地化支持
 
-该插件包含多种常用语言（英语、德语、中文、韩语等）的内置翻译。完整的内置语言列表维护在[源代码仓库](external:https://github.com/docmd-io/docmd/tree/main/packages/plugins/git/i18n)中。自定义字符串可以通过 [UI 本地化](../configuration/localisation/ui-strings.md) 系统提供。
+Git 插件支持用于页脚字符串和时间戳格式的多语言翻译映射。可通过 [UI 本地化](../configuration/localisation/ui-strings.md) 配置提供自定义字符串。

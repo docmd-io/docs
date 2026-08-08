@@ -1,13 +1,13 @@
 ---
-title: "Redirects & 404"
-description: "Configure metadata-based redirects and custom branded 404 error pages for static deployments."
+title: "Redirects & 404 Pages"
+description: "Configure static HTML redirects and custom branded 404 error pages in docmd."
 ---
 
-Static hosting environments lack server-side logic (like Nginx rules) for dynamic routing. docmd generates native HTML failsafes to handle redirection and error states automatically.
+Static hosting environments lack dynamic server-side routing engines (such as Nginx rewrite rules). `docmd` generates native HTML failsafes to handle URL redirection and custom error states automatically.
 
-## Server-less Redirects
+## Server-less HTML Redirects
 
-Forward traffic from old URLs to new destinations by defining mappings in the `redirects` object.
+Forward traffic from legacy URLs to new document destinations by declaring path mappings in the `redirects` object:
 
 ```json "docmd.config.json"
 {
@@ -18,31 +18,31 @@ Forward traffic from old URLs to new destinations by defining mappings in the `r
 }
 ```
 
-### Technical Implementation
+### Technical Redirection Mechanism
 
-When you define a redirect, the engine creates an `index.html` file at the old path containing a `<meta http-equiv="refresh">` tag. This strategy ensures:
+When declaring a redirect mapping, the compiler generates an `index.html` file at the target legacy route containing a `<meta http-equiv="refresh">` HTML tag:
 
-1.  **Seamless Redirection**: Users forward to the new destination instantly.
-2.  **SEO Preservation**: Search engines recognise the redirection to maintain link equity.
-3.  **Analytics Tracking**: Page views register before the redirect occurs.
+1. **Instant User Redirection**: Readers are forwarded to the new destination route instantly upon landing.
+2. **SEO Equity Preservation**: Search engines recognise the meta refresh direction, preserving link equity and indexing authority.
+3. **Analytics Tracking**: Client-side analytics scripts log incoming pageviews prior to redirection.
 
-## Branded 404 Pages
+## Custom Branded 404 Error Pages
 
-When users request a missing URL, static hosts automatically load a root `404.html` file. docmd generates this file by default. It inherits your site's theme, sidebar, and SPA functionality perfectly.
+When visitors request a non-existent URL route, static hosting platforms serve the root `404.html` document. `docmd` compiles a custom `404.html` page by default, inheriting your site's branding, sidebar navigation, and SPA runtime.
 
-### Customising Error Content
+### Customising 404 Error Content
 
-Personalise the 404 error message in your configuration:
+Customise 404 page titles and error body copy in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
   "notFound": {
     "title": "404: Page Not Found",
-    "content": "We couldn't find the page you're looking for. Use the sidebar to find your way back."
+    "content": "We couldn't locate the requested page. Use the sidebar navigation to return to active documentation."
   }
 }
 ```
 
-::: callout tip "Local Development" icon:lightbulb
-The development server automatically serves your custom 404 page for missing files. Test the error experience locally.
+::: callout tip "Testing Error Pages Locally" icon:lightbulb
+The `docmd` local development server automatically serves your custom 404 page for missing file routes.
 :::

@@ -26,7 +26,7 @@ docmd 提供了专门的 [Hero](../../content/containers/hero.md) 与 [Grid](../
 # 用 docmd 构建得更快
 面向现代开发团队的零配置文档引擎。
 
-[立即开始](/docs/start) [在 GitHub 上查看](https://github.com/docmd-io/docmd)
+[立即开始](../docs/start.md) [在 GitHub 上查看](https://github.com/docmd-io/docmd)
 
 == side
 ![Dashboard 预览](../../static/img/hero-preview.png)
@@ -42,13 +42,13 @@ docmd 提供了专门的 [Hero](../../content/containers/hero.md) 与 [Grid](../
 ::: grid
 ::: card "快速开始" icon:rocket
 5 分钟内即可上手。
-[了解更多](/docs/start.md)
+[了解更多](../docs/start.md)
 :::
 :::
 ::: grid
 ::: card "API 参考" icon:code
 覆盖全部端点的完整文档。
-[浏览 API](/api)
+[浏览 API](../api.md)
 :::
 :::
 :::

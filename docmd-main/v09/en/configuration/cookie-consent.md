@@ -1,15 +1,13 @@
 ---
 title: "Cookie Consent"
-description: "Opt-in cookie consent dialog shipped with the default UI. Stores the user's choice in localStorage, supports translations, and emits a docmd:cookie-consent CustomEvent so plugins and templates can react."
+description: "Configure docmd's accessible GDPR cookie consent dialog with custom expiration, localisation, and CustomEvent integrations."
 ---
 
-# Cookie Consent
+`docmd` includes an accessible, zero-dependency GDPR cookie consent banner built directly into the UI engine. It stores user preferences in `localStorage` with configurable TTL and emits a custom DOM event for analytics script triggers.
 
-> **New in 0.8.7.** The cookie consent dialog is a built-in feature of the default `@docmd/ui` package. No plugin install required. **Opt-in** — nothing is rendered unless you set `config.cookie`.
+## Quick Setup
 
-A minimal, accessible GDPR-style consent dialog. The user's choice is persisted in `localStorage` with a configurable TTL. A `docmd:cookie-consent` `CustomEvent` fires on `window` after a choice is made so plugins and templates can react (e.g. enable analytics, load third-party scripts).
-
-## Enable in 30 seconds
+Enable cookie consent in your `docmd.config.json` manifest:
 
 ```json "docmd.config.json"
 {
@@ -22,33 +20,33 @@ A minimal, accessible GDPR-style consent dialog. The user's choice is persisted 
 }
 ```
 
-Build, and the dialog appears on first visit. Subsequent visits respect the stored choice.
+The banner displays on initial visit. Choice preferences are persisted in local browser storage across page loads.
 
-## Configuration reference
+## Configuration Reference
 
 | Field | Default | Description |
-|---|---|---|
-| `enabled` | `true` (when `cookie` object is present) | Master switch. |
-| `message` | Translation key `cookieMessage` | Dialog body text. Inline HTML allowed via the `t()` helper. |
+| :--- | :--- | :--- |
+| `enabled` | `true` (when `cookie` object exists) | Master toggle for the consent banner. |
+| `message` | Translation key `cookieMessage` | Body text for the cookie prompt. Supports inline HTML. |
 | `acceptText` | Translation key `cookieAccept` | Accept button label. |
 | `declineText` | Translation key `cookieDecline` | Decline button label. |
-| `policyUrl` | `null` | Optional link to your privacy policy. |
-| `position` | `"bottom"` | `"bottom"` \| `"bottom-left"` \| `"bottom-right"` \| `"center"` |
-| `dismissible` | `true` | Show an "X" close button. |
-| `expiryDays` | `180` | How long the choice is remembered in `localStorage`. |
+| `policyUrl` | `null` | Optional link to your privacy policy page. |
+| `position` | `"bottom"` | Modal position (`"bottom"`, `"bottom-left"`, `"bottom-right"`, `"center"`). |
+| `dismissible` | `true` | When `true`, renders a close (X) button. |
+| `expiryDays` | `180` | Number of days before consent choices expire in `localStorage`. |
 
-### Position values
+### Position Modes
 
-| Value | Effect |
-|---|---|
-| `bottom` | Centered horizontally along the bottom edge. |
-| `bottom-left` | Anchored to the bottom-left corner. |
-| `bottom-right` | Anchored to the bottom-right corner. |
-| `center` | Centered modal. |
+| Value | Rendering Behaviour |
+| :--- | :--- |
+| `bottom` | Centered horizontally along the bottom edge of the viewport. |
+| `bottom-left` | Anchored to the bottom-left corner of the viewport. |
+| `bottom-right` | Anchored to the bottom-right corner of the viewport. |
+| `center` | Centered floating modal overlay. |
 
-## Localisation
+## Localisation (i18n)
 
-All user-facing strings support the existing `t(key)` translation system. Override the keys in your `translations/<locale>.json` files:
+All user-facing strings support `docmd`'s translation system. Override consent keys in your `translations/<locale>.json` files:
 
 ```json "translations/fr.json"
 {
@@ -60,24 +58,23 @@ All user-facing strings support the existing `t(key)` translation system. Overri
 }
 ```
 
+## Reacting to User Consent Events
 
-## Reacting to a choice
+A `CustomEvent` named `docmd:cookie-consent` is dispatched on the `window` object when a user accepts, declines, or dismisses the banner:
 
-A `CustomEvent` named `docmd:cookie-consent` is dispatched on `window` after the user accepts, declines, or dismisses:
-
-```js
-window.addEventListener('docmd:cookie-consent', (e) => {
-  if (e.detail.value === 'accept') {
-    // Load analytics, marketing scripts, etc.
+```javascript
+window.addEventListener('docmd:cookie-consent', (event) => {
+  if (event.detail.value === 'accept') {
+    // Initialise analytics, marketing, or tracking scripts
   }
 });
 ```
 
-The `detail.value` is one of `"accept"`, `"decline"`, or `"dismissed"`. If you need to read the choice synchronously (e.g. before any other script runs), `localStorage.getItem('docmd-cookie-consent')` returns the same payload.
+The `detail.value` property returns `"accept"`, `"decline"`, or `"dismissed"`.
 
-## Re-styling
+## Custom Styling & Themes
 
-The dialog is built from BEM-style classes on the `.docmd-cookie-banner` root. Re-skin it via `customCss` (always wins at priority 15):
+The banner uses BEM class naming prefixed with `.docmd-cookie-banner`. Customise styling via custom CSS rules:
 
 ```css
 .docmd-cookie-banner {
@@ -90,11 +87,10 @@ The dialog is built from BEM-style classes on the `.docmd-cookie-banner` root. R
 }
 ```
 
+## Disabling Cookie Consent
 
-## Disabling
+To disable the cookie banner, omit or remove the `cookie` configuration block from `docmd.config.json`.
 
-To remove the dialog entirely, simply remove the `cookie` key from your config. There is no plugin to disable.
-
-::: callout tip "GDPR best practice"
-If you are subject to GDPR, leave the dialog **enabled by default** and link to a real privacy policy via `policyUrl`. The default message is intentionally generic so you can supply your own via `message` or the translation system.
+::: callout tip "GDPR Compliance Best Practice" icon:shield-check
+For GDPR compliance, keep cookie consent enabled and provide a link to your privacy policy via `policyUrl`.
 :::

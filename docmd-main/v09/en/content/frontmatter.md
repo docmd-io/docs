@@ -1,43 +1,43 @@
 ---
 title: "Frontmatter Reference"
-description: "The complete guide to page-level metadata and configuration."
+description: "Configure page-level metadata, search indexing, layout overrides, and component controls in docmd."
 ---
 
-Frontmatter overrides global settings for specific pages. Write it in YAML format at the top of your Markdown files.
+Frontmatter enables page-level configuration overrides. Declare YAML metadata at the absolute top of your Markdown files between triple-dash delimiters (`---`).
 
-## Core Metadata
+## Core Metadata Properties
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `title` | `String` | **Required.** Sets the HTML `<title>` and the primary section header. |
-| `description` | `String` | Sets the meta description for SEO and search results. |
-| `keywords` | `Array` | A list of keywords for the `<meta name="keywords">` tag. |
+| `title` | `String` | **Recommended.** Sets the HTML `<title>` tag and primary page header. |
+| `description` | `String` | Sets the meta description for SEO and search engine previews. |
+| `keywords` | `Array` | List of search keywords injected into `<meta name="keywords">`. |
 
-::: callout warning "Title is Important" icon:triangle-alert
-The `title` field is strongly recommended. Without it, the engine falls back to the first `# H1` heading or the filename. This can produce less ideal search results.
+::: callout tip "Metadata Best Practices" icon:sparkles
+Providing an explicit `title` and `description` in frontmatter ensures search engines and AI context generators index your documentation accurately.
 :::
 
-## Visibility & Indexing
+## Indexing & Visibility Controls
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `noindex` | `Boolean` | Excludes the page from the internal search index. |
-| `llms` | `Boolean` | Set to `false` to exclude this page from AI context files (`llms.txt`). |
-| `hideTitle` | `Boolean` | Hides the title from the sticky header. Useful for custom H1s. |
-| `bodyClass` | `String` | Adds a custom CSS class to the `<body>` tag. |
+| `noindex` | `Boolean` | When `true`, excludes the page from search indexing and sitemap generation. |
+| `llms` | `Boolean` | Set to `false` to exclude the document from compiled AI context files (`llms.txt`). |
+| `hideTitle` | `Boolean` | When `true`, hides the main title from the page header area. |
+| `bodyClass` | `String` | Appends custom CSS classes to the top-level `<body>` element. |
 
-## Layout Control
+## Layout & Viewport Configuration
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `layout` | `String` | Set to `full` to use maximum width and hide the TOC sidebar. |
-| `toc` | `Boolean` | Set to `false` to disable the Table of Contents entirely. |
-| `noStyle` | `Boolean` | Disables the entire UI (Sidebar, Header, Footer) for custom pages. |
-| `titleAppend` | `Boolean` | Set to `false` to prevent appending the site title to metadata tags. Default is `true`. |
+| `layout` | `String` | Set to `"full"` to expand content width and disable the Table of Contents (TOC). |
+| `toc` | `Boolean` | Set to `false` to disable the right-hand Table of Contents sidebar. |
+| `noStyle` | `Boolean` | Disables standard UI chrome (Sidebar, Header, Footer) for bespoke HTML pages. |
+| `titleAppend` | `Boolean` | Set to `false` to prevent appending the global site title to metadata tags. |
 
-### `noStyle` Component Control
+### Component Fine-Grained Controls (`noStyle`)
 
-When `noStyle: true` is active, you must opt-in to the components you wish to retain.
+When `noStyle: true` is active, specify individual UI components to preserve:
 
 ```yaml
 ---
@@ -54,9 +54,10 @@ components:
 ---
 ```
 
-## Plugin Overrides
+## Plugin & SEO Overrides
 
-### SEO (`seo`)
-*   `image`: Custom social share image URL for the page.
-*   `aiBots`: Set to `false` to block AI crawlers from this page.
-*   `canonicalUrl`: Sets a custom canonical link for SEO.
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| `image` | `String` | URL for social sharing preview cards (`og:image`). |
+| `aiBots` | `Boolean` | Set to `false` to prevent AI crawlers from scraping the page. |
+| `canonicalUrl` | `String` | Custom canonical URL for SEO indexing. |

@@ -1,75 +1,77 @@
 ---
 title: "Markdown Syntax Foundation"
-description: "The baseline formatting rules for all docmd content: typography, structure, lists, and tables."
+description: "Master baseline Markdown typography, heading hierarchy, lists, tables, and raw HTML extensions in docmd."
 ---
 
-`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This page covers the core formatting primitives that apply across every page in your project.
+`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This page covers baseline typography and structural primitives used across your documentation.
 
-## Typography
+## Typography Primitives
 
-| Style | Syntax | Renders As |
+| Style | Syntax | Rendering Output |
 | :--- | :--- | :--- |
 | **Bold** | `**text**` | **Strong emphasis** |
 | *Italic* | `*text*` | *Soft emphasis* |
 | ~~Strikethrough~~ | `~~text~~` | ~~Deprecated content~~ |
 | `Inline code` | `` `text` `` | `engine.initialise()` |
 
-## Heading Hierarchy
+## Heading Hierarchy Rules
 
-`docmd` derives the page `<h1>` automatically from the `title` field in your frontmatter. Begin your heading structure at `##`.
+`docmd` derives the main document `<h1>` header automatically from the frontmatter `title` property. Structure section headings starting at `##` (`h2`):
 
 ```markdown
 ## Level 2 - Major Section
-### Level 3 - Feature Detail
-#### Level 4 - Sub-Detail
+### Level 3 - Feature Subtopic
+#### Level 4 - Detailed Subsection
 ```
 
-::: callout tip "Logical Integrity for AI"
-AI models and search indexers rely on a strict heading hierarchy to build an accurate mental model of your project. Avoid skipping levels (e.g., jumping from `##` to `####`) to keep the `llms-full.txt` context stream logically sound.
+::: callout tip "Heading Structure for Search & AI" icon:sparkles
+Maintain a sequential heading hierarchy without skipping levels (e.g. jumping directly from `##` to `####`). Consistent structure allows AI agents and search indexers to map your content accurately.
 :::
 
 ## Lists
 
-Use unordered lists for scannable bullet points and ordered lists for sequential steps. For numbered tutorials, consider the higher-impact [Steps container](../containers/steps.md).
+Use bullet lists for scannable summaries and ordered lists for sequential workflows. For multi-step tutorials, use the dedicated [Steps Container](../containers/steps.md):
 
 ```markdown
-*   Unordered item
-*   Another item
+*   Unordered feature list
+*   Secondary bullet point
 
-1.  First step
-2.  Second step
+1.  Initialise workspace environment
+2.  Execute build command
 ```
 
 ## Blockquotes
 
-The standard `>` syntax highlights external quotes or background context.
+Standard `>` blockquotes highlight external quotes or contextual notices:
 
 ```markdown
-> The docmd engine redefines the boundaries between static site generation and dynamic application delivery.
+> The docmd engine redefines the boundaries between static site generation and dynamic web delivery.
 ```
 
-> The docmd engine redefines the boundaries between static site generation and dynamic application delivery.
+> The docmd engine redefines the boundaries between static site generation and dynamic web delivery.
 
 ## Tables
 
+Format tabular data using GFM pipe syntax:
+
 ```markdown
-| Parameter | Type | Default |
-| :--- | :--- | :--- |
-| `name` | `string` | `undefined` |
-| `active` | `boolean` | `true` |
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `String` | `undefined` | Key identifier. |
+| `active` | `Boolean` | `true` | Enable status toggle. |
 ```
 
-| Parameter | Type | Default |
-| :--- | :--- | :--- |
-| `name` | `string` | `undefined` |
-| `active` | `boolean` | `true` |
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `String` | `undefined` | Key identifier. |
+| `active` | `Boolean` | `true` | Enable status toggle. |
 
-## Embedded HTML
+## Raw HTML Integration
 
-docmd has raw HTML parsing enabled. Inject custom layouts or unique styling directly within Markdown files for specialised UI requirements.
+`docmd` parses inline HTML directly. Use raw HTML elements when designing bespoke landing components or embedded widgets:
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
-  Bespoke UI elements live here.
+<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+  Bespoke HTML elements render inline seamlessly.
 </div>
 ```

@@ -1,13 +1,13 @@
 ---
 title: "Navigationskonfiguration"
-description: "Strukturieren Sie Ihre Sidebar, kategorisieren Sie Links und konfigurieren Sie Icons für Leser und Suchmaschinen."
+description: "Strukturieren Sie die Sidebar-Navigation, organisieren Sie Kategorien und konfigurieren Sie Icons für Leser und Suchmaschinen in docmd."
 ---
 
-Der Compiler bietet explizite Kontrolle über Ihre Site-Navigation. Eine klare Navigationshierarchie erzeugt eine logische Lesereihenfolge. Sie optimiert das SPA-Erlebnis und liefert eine klare Kontextkarte für die Suchindizierung und KI-Modelle.
+`docmd` bietet explizite Kontrolle über die Navigationshierarchie Ihrer Website. Eine strukturierte Sidebar erstellt eine logische Lesereihenfolge und optimiert sowohl die Single-Page-Application-Benutzererfahrung (SPA) als auch die Indizierbarkeit für Suchmaschinen.
 
-## 1. Das Navigations-Schema
+## Das Navigations-Schema
 
-Ein Array von Link-Objekten in Ihrer `docmd.config.json` steuert die Sidebar. Jedes Objekt ist entweder ein direkter Link oder eine verschachtelte Kategoriegruppe.
+Das `navigation`-Array in `docmd.config.json` steuert die Sidebar. Jedes Objekt stellt einen direkten Seiten-Link oder eine verschachtelte Kategoriegruppe dar:
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
@@ -20,25 +20,26 @@ Ein Array von Link-Objekten in Ihrer `docmd.config.json` steuert die Sidebar. Je
 }
 ```
 
-## 2. Unterstützte Eigenschaften
+## Unterstützte Link-Eigenschaften
 
-Jeder Eintrag unterstützt diese Einstellungen:
+Jedes Element im Navigations-Array unterstützt die folgenden Eigenschaften:
 
 | Eigenschaft | Typ | Erforderlich | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | Ja | Der in der Sidebar angezeigte Text. |
-| `path` | `String` | Nein | Ziel-URL. Relative lokale Pfade müssen mit einem Schrägstrich (`/`) beginnen. |
-| `icon` | `String` | Nein | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons) im kebab-case-Format (z. B. `git-branch`). |
-| `children` | `Array` | Nein | Ein Array verschachtelter Navigationselemente zur Bildung eines Untermenüs. |
-| `collapsible`| `Boolean`| Nein | Bei `true` kann der Nutzer die Kategoriegruppe auf- und zuklappen. |
-| `external` | `Boolean`| Nein | Bei `true` wird der Link in einem neuen Browser-Tab geöffnet. |
+| `title` | `String` | Ja | In der Sidebar angezeigte Menübeschriftung. |
+| `path` | `String` | Nein | Ziel-URL-Route. Relative lokale Pfade müssen mit einem führenden Schrägstrich (`/`) beginnen. |
+| `icon` | `String` | Nein | Name eines beliebigen [Lucide-Icons](external:https://lucide.dev/icons) im Kebab-Case-Format (z. B. `git-branch`). |
+| `children` | `Array` | Nein | Array verschachtelter Navigationselemente, die ein Untermenü definieren. |
+| `collapsible`| `Boolean`| Nein | Bei `true` wird das Auf- und Einklappen von Kategoriegruppen aktiviert. |
+| `external` | `Boolean`| Nein | Bei `true` wird der Ziel-Link in einem neuen Browser-Tab geöffnet. |
 
-## 3. Sektionen organisieren
+## Organisieren von Navigationsgruppen
 
-Strukturieren Sie Ihre Sidebar mit zwei primären Gruppierungsmethoden:
+Strukturieren Sie Ihre Sidebar mithilfe von zwei primären Gruppierungsmustern:
 
-### Klickbare Gruppe (Direkte Seite + Unterordner)
-Geben Sie sowohl `path` als auch `children` für einen Kategorie-Header an. Ein Klick auf den Titel lädt die Landingpage und klappt die untergeordneten Links auf.
+### Interaktive Kategorie-Header (Landingpage + untergeordnete Elemente)
+
+Geben Sie neben `children` einen `path` für einen Kategorieabschnitt an. Ein Klick auf den Header navigiert zur Landingpage und schaltet untergeordnete Elemente um:
 
 ```json "docmd.config.json"
 {
@@ -51,8 +52,9 @@ Geben Sie sowohl `path` als auch `children` für einen Kategorie-Header an. Ein 
 }
 ```
 
-### Statisches Label (nur Kategorie-Header)
-Lassen Sie den `path`-Parameter weg. Der Header dient als nicht klickbarer Gruppentitel. Verwenden Sie dies, um große technische Kategorien ohne eine einzelne Landingpage zu gliedern.
+### Statische Kategorie-Beschriftungen (nur Gruppen-Header)
+
+Lassen Sie die Eigenschaft `path` weg. Der Kategorie-Header fungiert als nicht klickbarer Titel, der verwandte Links gruppiert:
 
 ```json "docmd.config.json"
 {
@@ -65,19 +67,17 @@ Lassen Sie den `path`-Parameter weg. Der Header dient als nicht klickbarer Grupp
 }
 ```
 
-## 4. Automatische Brotkrumen
+## Kontextuelle Brotkrumen
 
-Die Engine erzeugt automatisch kontextbezogene Brotkrumen für jede Seite. Sie erscheinen direkt über dem Hauptseiten-Header und helfen bei der schnellen Orientierung.
+Die Engine löst dynamisch kontextuelle Brotkrumen für jede Seite auf und rendert sie über dem Hauptseiten-Header:
 
 <img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
-### Wichtige Verhaltensweisen
-*   **Automatische Auflösung**: Die Engine folgt der aktiven Route durch Ihren Navigationsbaum, um die Hierarchie aufzubauen.
-*   **Aktiv-Anzeige**: Die aktuelle Seite ist das letzte, unverlinkte Brotkrumen-Element.
-*   **Mobile Optimierung**: Auf kleinen Viewports werden Brotkrumen vereinfacht oder ausgeblendet, um Bildschirmplatz zu sparen.
+- **Automatische Pfadverfolgung**: Die Engine verfolgt die aktive Route durch den Navigationsbaum, um Brotkrumensegmente aufzubauen.
+- **Aktiv-Seiten-Indikator**: Das aktuelle Dokument wird als unverlinktes altes Element angezeigt.
+- **Responsives Layout**: Brotkrumen passen sich dynamisch an kleine mobile Viewports an.
 
-### Brotkrumen deaktivieren
-Brotkrumen sind standardmäßig aktiviert. Aktualisieren Sie Ihre Site-Layout-Optionen, um sie global zu deaktivieren:
+Um Brotkrumen global zu deaktivieren, aktualisieren Sie `layout.breadcrumbs`:
 
 ```json "docmd.config.json"
 {
@@ -87,30 +87,31 @@ Brotkrumen sind standardmäßig aktiviert. Aktualisieren Sie Ihre Site-Layout-Op
 }
 ```
 
-## 5. Navigations-Auflösungs-Kaskadierung
+## Kaskadierende Navigationsauflösung
 
-Der Compiler verwendet ein Kaskadierungssystem nach dem Prinzip „nächste Datei gewinnt". Dies unterstützt mehrere Versionen oder Sprachen, ohne Ihre globale Konfiguration aufzublähen.
+`docmd` verwendet ein kaskadierendes Auflösungssystem nach dem Prinzip „nächste Datei gewinnt". Dies ermöglicht es versionierten oder lokalisierten Unterordnern, dedizierte Sidebars zu definieren, ohne globale Optionen zu duplizieren:
 
 ```text
 my-project/
-├── docmd.config.json           [Level 3: Globale Konfiguration] - Standard-Fallback
+├── docmd.config.json         [Level 3: Globale Konfiguration] - Standard-Fallback
 ├── docs-v1.0/ 
-│   ├── navigation.json       [Level 2: Versions-Navigation] - überschreibt Global
+│   ├── navigation.json       [Level 2: Versions-Navigation] - Überschreibt Global
 │   └── zh/
-│       └── navigation.json   [Level 1: Sprach-Navigation] - absolute Priorität
+│       └── navigation.json   [Level 1: Sprach-Navigation] - Höchste Priorität
 ```
 
-1.  **Level 1: Sprachspezifisch** (`navigation.json` in einem Locale-Ordner): überschreibt alle Einstellungen für diese spezifische Sprache und Version.
-2.  **Level 2: Versionsspezifisch** (`navigation.json` in einem Versionsordner): überschreibt die globale Konfiguration für diese Version über alle Sprachen hinweg.
-3.  **Level 3: Globale Konfiguration** (`config.navigation`): die Basis-Fallback-Definition in der zentralen Konfigurationsdatei.
+1. **Level 1 (Sprachspezifisch)**: `navigation.json` in einem Locale-Ordner überschreibt die Navigation für diese Sprache und Version.
+2. **Level 2 (Versionsspezifisch)**: `navigation.json` in einem Versionsordner überschreibt die globale Navigation für dieses spezifische Release.
+3. **Level 3 (Globale Basis)**: Das `navigation`-Array in `docmd.config.json` dient als Basis-Fallback.
 
-### Intelligenter Schutz vor defekten Links
-Die Engine prüft automatisch, ob Zieldateien während des Level-2- oder Level-3-Navigations-Fallbacks existieren. Fehlende Dateien werden dynamisch aus der Sidebar herausgefiltert. Das beseitigt defekte Links für ältere Versionen oder fehlende Übersetzungen.
+### Ausfallsicherheit bei defekten Links
 
-## 6. Icon-Integration
+Während der Fallback-Auflösung von Level 2 oder 3 prüft die Engine, ob die Zieldateien auf der Festplatte existieren. Nicht vorhandene Pfade werden automatisch aus der gerenderten Sidebar herausgefiltert.
 
-Der Compiler enthält das vollständige **Lucide-Icon**-System. Verwenden Sie den offiziellen Lucide-Namen im kebab-case-Format (z. B. `settings`, `folder-open`, `book-marked-line`), um ein Icon anzuwenden.
+## Integration des Icon-Systems
 
-::: callout tip "Sidebar-Beschriftungen optimieren" icon:sparkles
-Halten Sie Sidebar-Titel klar und beschreibend. Eine prägnante Navigationsstruktur ermöglicht es KI-Agenten, Ihre Sitemap einfach aus dem kompilierten `llms.txt`-Feed zu parsen.
+`docmd` bettet das vollständige **Lucide-Icon**-Set nativ ein. Übergeben Sie einen beliebigen offiziellen Lucide-Iconnamen im Kebab-Case-Format (z. B. `settings`, `folder-open`, `book-marked`), um ein Icon anzuwenden.
+
+::: callout tip "Optimieren von Sidebar-Beschriftungen für KI-Engines" icon:sparkles
+Halten Sie Sidebar-Titel klar und prägnant. Ein strukturierter Navigationsbaum hilft KI-Agenten, Ihre Dokumentationsstruktur über den kompilierten `llms.txt`-Endpunkt effizient zu parsen.
 :::

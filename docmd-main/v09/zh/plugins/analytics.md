@@ -3,20 +3,20 @@ title: "Analytics 插件"
 description: "集成 Google Analytics 4 或旧版 Universal Analytics，并自动跟踪用户交互。"
 ---
 
-`@docmd/plugin-analytics` 插件让您可以轻松地将 Google Analytics 集成到您的文档中。它支持现代的 Google Analytics 4 (GA4) 标准、旧版的 Universal Analytics (UA)，并针对交互密集型文档站点提供原生事件跟踪。
+`@docmd/plugin-analytics` 插件将 Google Analytics 跟踪脚本集成到您的文档页面中。它支持 Google Analytics 4 (GA4) 和旧版 Universal Analytics (UA)，针对技术文档门户提供自动化的交互跟踪。
 
-## 配置
+## 配置选项
 
-通过将您的跟踪凭证添加到 `docmd.config.json` 的 `plugins` 部分来启用 analytics。
+在 `docmd.config.json` 中配置分析跟踪 ID：
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `googleV4` | `object` | `null` | Google Analytics 4 配置（需要 `measurementId`）。 |
-| `googleUA` | `object` | `null` | Universal Analytics 配置（需要 `trackingId`）。 |
-| `autoEvents` | `boolean` | `true` | 自动跟踪点击、下载和目录交互。 |
-| `trackSearch` | `boolean` | `true` | 跟踪读者使用的搜索关键词。 |
+| `googleV4` | `object` | `null` | Google Analytics 4 配置对象（需要 `measurementId`）。 |
+| `googleUA` | `object` | `null` | Universal Analytics 配置对象（需要 `trackingId`）。 |
+| `autoEvents` | `boolean` | `true` | 自动跟踪出站链接、文件下载、锚点点击和右侧 TOC 目录导航。 |
+| `trackSearch` | `boolean` | `true` | 自动捕获在搜索模态框中输入的搜索关键词。 |
 
-### 示例
+### 全局分析配置示例
 
 ```json "docmd.config.json"
 {
@@ -32,16 +32,16 @@ description: "集成 Google Analytics 4 或旧版 Universal Analytics，并自�
 }
 ```
 
-## 跟踪的事件
+## 自动跟踪的事件
 
-启用 `autoEvents` 后，插件会自动捕获以下交互：
+当 `autoEvents` 设置为 `true` 时，分析插件无需额外自定义脚本即可捕获以下用户交互：
 
-- **外部链接**：对其他域的出站点击。
-- **下载**：对带有 `download` 属性或常见文件扩展名的链接的点击。
-- **目录点击**：通过右侧导航进行的章节互动。
-- **标题锚点**：对各小节永久链接的点击。
-- **搜索查询**：在搜索栏中输入的关键词（防抖 1 秒）。
+* **外部出站链接**: 点击导航至外部域名目标的链接。
+* **文件下载**: 点击包含 `download` 属性或常见二进制扩展名（`.zip`、`.pdf`、`.gz`）的资源。
+* **目录 (TOC) 互动**: 使用右侧 TOC 面板进行的导航跳转。
+* **章节标题锚点**: 点击标题永久链接锚点。
+* **搜索关键词**: 在搜索模态框中输入的搜索关键词（防抖 1 秒）。
 
-::: callout info "隐私与 GDPR"
-默认情况下，此插件不会对 IP 地址进行匿名化处理，因为 GA4 现在已原生处理该问题。如果您需要高级 Cookie 同意管理，可以通过自定义插件 hook 手动注入脚本。
+::: callout info "隐私与数据保护" icon:shield-check
+Google Analytics 4 原生处理 IP 匿名化。如果您的组织需要显式的 Cookie 同意横幅或 GDPR opt-in 控制，可通过自定义插件钩子注入自定义脚本。
 :::

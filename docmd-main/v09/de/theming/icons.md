@@ -1,13 +1,13 @@
 ---
 title: "Icons"
-description: "So verwenden und anpassen Sie Lucide-Icons in Ihrer Dokumentation."
+description: "Integrieren Sie Lucide-Icons in Navigations-Seitenleisten, Buttons, Tags und benutzerdefinierte Komponenten in docmd."
 ---
 
-`docmd` bietet eingebaute Unterstützung für die [Lucide](external:https://lucide.dev/)-Icon-Bibliothek. Icons können in Ihrer Navigations-Sidebar, in Buttons und in benutzerdefinierten Komponenten verwendet werden, um visuelle Hinweise zu liefern und die Scanbarkeit zu verbessern.
+`docmd` bietet native Unterstützung für die [Lucide](external:https://lucide.dev/)-Icon-Bibliothek. Weisen Sie Navigationselementen, Buttons, Tags und Tabs Icons zu, um die visuelle Erfassbarkeit auf Ihrer gesamten Website zu verbessern.
 
-## Navigations-Icons
+## Seitenleisten-Navigations-Icons
 
-Weisen Sie in Ihrer `docmd.config.json` jedem Navigationselement ein Icon zu. Verwenden Sie den kebab-case-Namen eines Icons, das Sie auf der Lucide-Website finden.
+Weisen Sie Navigationsknoten in `docmd.config.json` Lucide-Icon-Namen zu. Verwenden Sie den Kebab-Case-Bezeichner jedes beliebigen Icons aus der Lucide-Sammlung:
 
 ```json "docmd.config.json"
 {
@@ -18,33 +18,35 @@ Weisen Sie in Ihrer `docmd.config.json` jedem Navigationselement ein Icon zu. Ve
 }
 ```
 
-## Icons in Containern
+## Icons in UI-Containern
 
-Sie können Icons auch in Buttons, Tags, Tabs und anderen Containern verwenden, indem Sie rohen HTML-Code einfügen oder den Standard-`icon:`-Präfix docmd-übergreifend nutzen.
+Übergeben Sie die Eigenschaft `icon:` an Container wie Buttons, Tags, Tabs oder Karten:
 
 ```markdown
-::: button "Download" /download icon:download
+::: button "Release herunterladen" /download icon:download
+::: tag "Verifiziert" icon:check-circle color:green
+:::
 ```
 
-## CSS-Styling
+## Benutzerdefiniertes CSS-Styling
 
-Alle Icons werden als Inline-SVGs mit der Klasse `.lucide-icon` gerendert. Sie können deren Größe oder Strichstärke global in Ihrem `customCss` ändern:
+Alle Icons werden als Inline-SVGs mit der CSS-Klasse `.lucide-icon` gerendert. Passen Sie Icon-Abmessungen oder Strichstärken in `customCss` an:
 
 ```css
 .lucide-icon {
-  stroke-width: 1.5px; /* Dünnere Icons für einen modernen Look */
+  stroke-width: 1.5px; /* Dünnere Strichstärke für moderne Ästhetik */
   width: 1.2rem;
   height: 1.2rem;
 }
 
-/* Ein bestimmtes Icon ansprechen */
+/* Bestimmte Icon-Bezeichner ansprechen */
 .icon-rocket {
   color: #ff5733;
 }
 ```
 
-## Icon-Referenz
+## Icon-Explorer-Referenz
 
-Wir unterstützen die gesamte Lucide-Bibliothek. Sie können hier durch die tausenden verfügbaren Icons stöbern:
+Durchsuchen Sie Tausende von Vektoricons, die in der integrierten Lucide-Bibliothek verfügbar sind:
 
-::: button "Lucide-Icons durchstöbern" external:https://lucide.dev/icons icon:globe
+::: button "Lucide-Icon-Verzeichnis durchstöbern" external:https://lucide.dev/icons icon:globe

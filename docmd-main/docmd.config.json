@@ -61,15 +61,15 @@
           "links": [
             { "text": "Installation", "url": "/getting-started/installation" },
             { "text": "Configuration", "url": "/configuration/general" },
-            { "text": "CLI Commands", "url": "/api/cli-commands" }
+            { "text": "CLI Commands", "url": "/reference/cli-commands" }
           ]
         },
         {
           "title": "Ecosystem",
           "links": [
             { "text": "Versioning", "url": "/configuration/versioning" },
-            { "text": "Plugins", "url": "/plugins/usage" },
-            { "text": "Themes", "url": "/theming/customisation" },
+            { "text": "Plugins", "url": "/plugins/overview" },
+            { "text": "Themes", "url": "/configuration/theming" },
             { "text": "Live Editor", "url": "/content/live-preview" }
           ]
         },
@@ -139,6 +139,23 @@
           "Discussions": "Diskussionen",
           "Contributing": "Mitwirken",
           "Reports & Issues": "Fehler melden"
+        }
+      },
+      { "id": "es", "label": "Español", "dir": "ltr",
+        "translations": {
+          "Resources": "Recursos",
+          "Ecosystem": "Ecosistema",
+          "Community": "Comunidad",
+          "Installation": "Instalación",
+          "Configuration": "Configuración",
+          "CLI Commands": "Comandos CLI",
+          "Versioning": "Versionado",
+          "Plugins": "Plugins",
+          "Themes": "Temas",
+          "Live Editor": "Editor en vivo",
+          "Discussions": "Discusiones",
+          "Contributing": "Contribución",
+          "Reports & Issues": "Reportes y Problemas"
         }
       }
     ]

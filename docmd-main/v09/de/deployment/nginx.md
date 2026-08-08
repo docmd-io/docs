@@ -1,23 +1,25 @@
 ---
-title: "NGINX"
-description: "Stellen Sie docmd mit einer produktionsreifen NGINX-Konfiguration bereit."
+title: "NGINX-Bereitstellung"
+description: "Stellen Sie kompilierte statische docmd-Dokumentation auf NGINX-Webservern bereit."
 ---
 
-NGINX ist einer der zuverlässigsten verfügbaren Webserver. Da die Ausgabe von docmd vollständig statisch ist, kann NGINX sie mit nahezu null Latenz ausliefern.
+NGINX bietet eine hochperformante Auslieferung statischer Dateien für docmd-Kompilierungen.
 
-## nginx.conf erzeugen
+## Manifest-Generierung
+
+Generieren Sie eine vorkonfigurierte `nginx.conf`, die Ihren Projekteinstellungen entspricht:
 
 ```bash
 npx @docmd/core deploy --nginx
 ```
 
-Dies erzeugt eine `nginx.conf`, die auf Ihr Projekt zugeschnitten ist:
+Die generierte Konfiguration umfasst:
 
-- **`server_name`** wird auf den Hostnamen gesetzt, der aus Ihrer `url`-Konfiguration extrahiert wurde. Falls nicht gesetzt, wird auf `localhost` zurückgefallen.
-- **SPA-Fallback** (`try_files ... /index.html`) wird nur eingefügt, wenn `layout.spa` in Ihrer Konfiguration `true` ist.
-- **Sicherheits-Header**, GZIP-Komprimierung und unveränderliches Asset-Caching sind standardmäßig enthalten.
+* **`server_name`**: Aus der Eigenschaft `url` in `docmd.config.json` extrahiert (Standard ist `localhost`).
+* **SPA-Fallback**: Enthält bedingt `try_files $uri $uri/ /index.html;`, wenn `layout.spa: true` ist.
+* **Sicherheit & Komprimierung**: Konfiguriert GZIP-Komprimierung und Sicherheits-Header (`X-Content-Type-Options`, `X-Frame-Options`).
 
-### Was erzeugt wird
+## Konfigurationsstruktur
 
 ```nginx "nginx.conf"
 server {
@@ -26,7 +28,7 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
-    # Sicherheit
+    # Sicherheits-Header
     server_tokens off;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -39,15 +41,15 @@ server {
                text/xml application/xml application/xml+rss text/javascript
                image/svg+xml;
 
-    # SPA-Routing-Fallback (nur wenn layout.spa true ist)
+    # SPA-Routing-Fallback (bedingt bei layout.spa)
     location / {
         try_files $uri $uri/ /index.html;
     }
 
-    # Eigene 404-Seite
+    # Eigene 404-Weiterleitung
     error_page 404 /404.html;
 
-    # Statische Assets cachen (6 Monate, immutable)
+    # Statisches Asset-Caching (6 Monate, unveränderlich)
     location ~* \.(?:ico|css|js|gif|jpe?g|png|webp|avif|woff2?|eot|ttf|otf|svg)$ {
         expires 6M;
         access_log off;
@@ -58,11 +60,11 @@ server {
 
 ## Bereitstellungsschritte
 
-1. Bauen Sie Ihre Site: `npx @docmd/core build`
-2. Laden Sie den Inhalt Ihres Ausgabeverzeichnisses in das Web-Root Ihres Servers hoch (z. B. `/var/www/html/` oder `/usr/share/nginx/html/`).
-3. Legen Sie die erzeugte `nginx.conf` in die Konfiguration Ihres Servers (z. B. `/etc/nginx/conf.d/default.conf`).
-4. Starten Sie NGINX neu: `sudo systemctl restart nginx`
+1. Website kompilieren: `npx @docmd/core build`
+2. Kompilierte Assets (`site/`) in den Web-Stamm Ihres Servers übertragen (z. B. `/var/www/html/` oder `/usr/share/nginx/html/`).
+3. `nginx.conf` in `/etc/nginx/conf.d/default.conf` kopieren.
+4. NGINX neu laden: `sudo systemctl reload nginx`
 
-### Neu erzeugen
-
-Haben Sie Ihre Site-URL geändert oder den SPA-Modus deaktiviert? Führen Sie einfach erneut `npx @docmd/core deploy --nginx` aus. Die Konfigurationsdatei wird automatisch passend zu Ihrer aktuellen `docmd.config.json` neu erzeugt.
+::: callout tip "Neu-Generierung" icon:refresh-cw
+Führen Sie beim Aktualisieren von `url` oder `layout.spa` in `docmd.config.json` erneut `npx @docmd/core deploy --nginx --force` aus, um Konfigurationsänderungen zu synchronisieren.
+:::

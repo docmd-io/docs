@@ -1,13 +1,13 @@
 ---
 title: "Installation"
-description: "Installieren Sie @docmd/core global, lokal innerhalb eines Projekts oder containerisiert über das offizielle Docker-Image. Erfordert Node.js 20+."
+description: "Installieren Sie @docmd/core global, lokal innerhalb eines Projekts oder führen Sie es containerisiert über das offizielle Docker-Image aus. Erfordert Node.js 20+."
 ---
 
 Wählen Sie die Installationsmethode, die zu Ihrem Workflow passt. Für lokale Builds ist Node.js 20 oder höher erforderlich.
 
-## 1. Lokale Installation (empfohlen)
+## 1. Lokale Installation (Empfohlen)
 
-`docmd` lokal auszuführen hält Ihre Dokumentationskonfiguration mit Ihrem Quellcode versioniert.
+Die lokale Ausführung von `docmd` hält Ihre Dokumentationskonfiguration direkt zusammen mit Ihrem Quellcode versioniert.
 
 ::: tabs
 == tab "npm" icon:box
@@ -51,18 +51,18 @@ docker pull ghcr.io/docmd-io/docmd:latest
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:latest build
 ```
 
-Docker-Compose- und Kubernetes-Konfigurationen finden Sie im [Docker-Bereitstellungs-Leitfaden](../deployment/docker.md).
+Siehe den [Docker-Deployment-Leitfaden](../deployment/docker.md) für Docker Compose- und Kubernetes-Konfigurationen.
 :::
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-init.webp">
 
-::: callout tip "Kurzbefehle" icon:sparkles
-Nach der lokalen Installation können Sie `npx docmd dev` verwenden, um den Live-Vorschauserver zu starten, oder Skripte direkt zu Ihrer `package.json` hinzufügen.
+::: callout tip "Kurzbefehl-Skripte" icon:sparkles
+Sobald lokal installiert, können Sie `npx docmd dev` verwenden, um den Live-Vorschau-Server zu starten, oder Build-Skripte direkt zu Ihrer `package.json` hinzufügen.
 :::
 
 ## 2. Globale Installation
 
-Installieren Sie das Paket global, um Sites überall auf Ihrem System zu erstellen oder in der Vorschau anzuzeigen, ohne ein lokales Projekt anzulegen.
+Installieren Sie das Paket global, um Websites überall auf Ihrem System zu erstellen oder in der Vorschau anzuzeigen, ohne ein lokales Projekt anzulegen.
 
 ::: tabs
 == tab "npm" icon:box
@@ -83,22 +83,22 @@ bun add -g @docmd/core
 ```
 :::
 
-Nach der Installation ist das `docmd`-Binary überall verfügbar:
+Sobald installiert, ist die `docmd`-Binärdatei global verfügbar:
 
 ```bash
-docmd dev   # Dev-Server lokal starten
-docmd build # Statische Ausgabe erzeugen
+docmd dev   # Lokalen Entwicklungsserver starten
+docmd build # Statische Website-Ausgabe bauen
 ```
 
 ## 3. Reine Browser-Integration
 
-Binden Sie die Engine direkt über CDN in eine bestehende Webanwendung ein.
+Binden Sie die Rendering-Engine direkt über CDN in eine bestehende Webanwendung ein.
 
-::: callout info "Spezialisierte Bibliotheksintegration" icon:help-circle
-Dies umgeht die CLI und lädt die Parsing-Engine im Browser des Lesers. Verwenden Sie dies für dynamische Portale, nicht für statische SEO-Websites.
+::: callout info "Spezialisierte Bibliotheks-Integration" icon:help-circle
+Dies umgeht die CLI und lädt die Parsing-Engine direkt im Browser. Nutzen Sie dies für dynamische Portale und interaktives clientseitiges Rendering anstelle statischer SEO-Websites.
 :::
 
-Fügen Sie Ihrer HTML das Stylesheet und die JavaScript-Engine hinzu.
+Fügen Sie das Stylesheet und die JavaScript-Engine zu Ihrem HTML-Header hinzu.
 
 ```html
 <!-- Kern-Stylesheet -->
@@ -108,15 +108,15 @@ Fügen Sie Ihrer HTML das Stylesheet und die JavaScript-Engine hinzu.
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
-Vollständige Integrationsdetails finden Sie im [Browser-API-Leitfaden](../api/browser-api.md).
+Siehe die [Browser-API-Referenz](../reference/browser-api.md) für vollständige Integrationsdetails.
 
 ## 4. Fehlerbehebung
 
-### Berechtigung verweigert (`EACCES`-Fehler)
-Verwenden Sie `sudo` für globale Installationen auf macOS oder Linux nicht. Beheben Sie Berechtigungskonflikte mit einem Node.js-Versionsmanager wie [nvm](external:https://github.com/nvm-sh/nvm) oder [fnm](external:https://github.com/Schniz/fnm).
+### Keine Berechtigung (`EACCES`-Fehler)
+Verwenden Sie bei globalen Installationen auf macOS oder Linux kein `sudo`. Beheben Sie Berechtigungskonflikte mit einem Node.js-Versionsmanager wie [nvm](external:https://github.com/nvm-sh/nvm) oder [fnm](external:https://github.com/Schniz/fnm).
 
 ### PowerShell-Ausführungsrichtlinien (Windows)
-Falls Windows die Ausführung blockiert, öffnen Sie PowerShell als Administrator und aktivieren Sie die Skriptausführung für den aktuellen Benutzer.
+Wenn Windows die Befehlsausführung blockiert, öffnen Sie PowerShell als Administrator und aktivieren Sie die Skriptausführung für den aktuellen Benutzer.
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser

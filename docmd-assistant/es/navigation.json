@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Visión General",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Primeros Pasos",
+    "path": "/getting-started",
+    "icon": "rocket"
+  },
+  {
+    "title": "Arquitectura del Motor",
+    "path": "/how-it-works",
+    "icon": "cpu"
+  },
+  {
+    "title": "Configuración",
+    "path": "/configuration",
+    "icon": "settings"
+  },
+  {
+    "title": "Sistema de Herramientas",
+    "path": "/tools",
+    "icon": "wrench"
+  },
+  {
+    "title": "API Programable",
+    "path": "/api",
+    "icon": "braces"
+  },
+  {
+    "title": "Notas de Versión",
+    "icon": "scroll",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "v0.1.7",
+        "path": "/release-notes/0-1-7"
+      },
+      {
+        "title": "v0.1.6",
+        "path": "/release-notes/0-1-6"
+      },
+      {
+        "title": "v0.1.5",
+        "path": "/release-notes/0-1-5"
+      },
+      {
+        "title": "v0.1.4",
+        "path": "/release-notes/0-1-4"
+      },
+      {
+        "title": "v0.1.3",
+        "path": "/release-notes/0-1-3"
+      },
+      {
+        "title": "v0.1.2",
+        "path": "/release-notes/0-1-2"
+      },
+      {
+        "title": "v0.1.1",
+        "path": "/release-notes/0-1-1"
+      },
+      {
+        "title": "v0.1.0",
+        "path": "/release-notes/0-1-0"
+      }
+    ]
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd-assistant",
+    "icon": "github",
+    "external": true
+  }
+]

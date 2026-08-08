@@ -1,40 +1,36 @@
 ---
-title: "Cloudflare Pages"
-description: "Stellen Sie Ihre docmd-Dokumentation auf Cloudflares globalem Edge-Netzwerk bereit. CI/CD-bereit mit automatischen Builds."
+title: "Cloudflare Pages-Bereitstellung"
+description: "Stellen Sie statische docmd-Dokumentations-Websites auf dem Cloudflare Pages Edge-Hosting bereit."
 ---
 
-[Cloudflare Pages](https://pages.cloudflare.com/) hostet Ihre docmd-Site auf Cloudflares globalem Edge-Netzwerk mit Zero-Config-CI/CD. Verbinden Sie Ihr Repository, und jeder Push löst einen automatischen Build und eine Bereitstellung aus.
+[Cloudflare Pages](https://pages.cloudflare.com/) hostet statische docmd-Dokumentations-Websites über das globale Edge-Netzwerk von Cloudflare mit integrierter Git-CI/CD-Integration.
 
-## Dashboard-Einrichtung
+## Dashboard-Einrichtungsschritte
 
-1.  Gehen Sie zum [Cloudflare-Dashboard](https://dash.cloudflare.com/) und navigieren Sie zu **Workers & Pages → Create → Pages**.
-2.  Verbinden Sie Ihren Git-Anbieter (GitHub oder GitLab) und wählen Sie Ihr Repository aus.
-3.  Konfigurieren Sie die Build-Einstellungen:
+1. Navigieren Sie im Cloudflare Dashboard zu **Workers & Pages → Create → Pages**.
+2. Verknüpfen Sie Ihr Git-Anbieterkonto und wählen Sie das Ziel-Repository aus.
+3. Konfigurieren Sie die Build-Variablen:
 
-    | Einstellung | Wert |
-    |---------|-------|
-    | Framework preset | `None` |
-    | Build command | `npx @docmd/core build` |
-    | Build output directory | `site` |
+| Einstellungs-Parameter | Konfigurationswert |
+| :--- | :--- |
+| **Framework-Preset** | `None` |
+| **Build-Befehl** | `npx @docmd/core build` |
+| **Build-Ausgabeverzeichnis** | `site` |
 
-4.  Klicken Sie auf **Save and Deploy**.
+4. Speichern und bereitstellen.
 
-Cloudflare Pages erkennt die statische Ausgabe und verteilt sie automatisch über sein Edge-Netzwerk.
+## Konfiguration benutzerdefinierter Domains
 
-## Benutzerdefinierte Domain
+Fügen Sie benutzerdefinierte Domains in **Pages → Projekt → Benutzerdefinierte Domains** hinzu. TLS-Zertifikate werden automatisch bereitgestellt.
 
-Fügen Sie unter **Pages → your project → Custom domains** eine benutzerdefinierte Domain hinzu. Cloudflare stellt automatisch ein SSL-Zertifikat bereit.
+Setzen Sie die Eigenschaft `url` in `docmd.config.json` so, dass sie mit Ihrer Domain übereinstimmt:
 
-Setzen Sie das `url`-Feld in `docmd.config.json` so, dass es mit Ihrer Domain übereinstimmt. Dies stellt sicher, dass kanonische Tags, Sitemaps und das LLMs-Plugin korrekte absolute URLs generieren.
+```json "docmd.config.json"
+{
+  "url": "https://docs.example.com"
+}
+```
 
-## CI/CD-Hinweise
-
-Cloudflare Pages führt bei jedem Push auf den verbundenen Branch einen frischen CI/CD-Build aus. Sie benötigen keinen separaten GitHub-Actions-Workflow. Cloudflare verwaltet die Build-Pipeline.
-
-::: callout info "Warum `npx @docmd/core`?"
-In CI/CD-Umgebungen, in denen docmd nicht global installiert ist, ruft `npx @docmd/core` das Paket direkt ab und führt es aus. Wenn Ihr Projekt `@docmd/core` als `devDependency` auflistet, funktioniert die Ausführung von `npx @docmd/core build` nach `npm install` einwandfrei.
+::: callout info "Build-Ausführung in CI/CD" icon:info
+Die Ausführung von `npx @docmd/core build` in Cloudflare-Build-Umgebungen ruft `@docmd/core` bei Bedarf ab. Wenn `@docmd/core` in Ihren `devDependencies` der `package.json` aufgeführt ist, verwendet Cloudflare automatisch die installierte Version.
 :::
-
-## SPA-Routing
-
-docmd generiert jede Seite als eigene `index.html`. Direkter URL-Zugriff funktioniert ohne Rewrite-Regeln. Es ist keine zusätzliche Cloudflare-Konfiguration erforderlich.

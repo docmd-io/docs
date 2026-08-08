@@ -1,9 +1,9 @@
 ---
 title: "Changelogs"
-description: "Generate structured, timeline-based version history and release notes."
+description: "Generate structured, timeline-based version histories and release notes in docmd."
 ---
 
-The `changelog` container provides a specialised layout for documenting project evolution. It parses version or date headers into a vertical timeline, ensuring historical updates are easily scannable.
+The `changelog` container provides a specialised layout for documenting project evolution. It parses version or date headers into vertical timeline entries, ensuring release notes remain clear and scannable.
 
 ## Syntax Reference
 
@@ -18,14 +18,14 @@ Description of the entry goes here.
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **Entry Marker** | `==` | The delimiter that defines a new timeline entry within the changelog. |
-| **Label** | `String` | The text (e.g., version number or date) that renders as a timeline badge on the left. |
+| **Entry Marker** | `==` | Delimiter that initiates a new timeline entry within the changelog block. |
+| **Label** | `String` | Text string (e.g. version number or ISO date) rendered as a timeline badge on the left margin. |
 
-## Examples
+## Usage Examples
 
-### Release History
+### Release History Timeline
 
-Changelogs support rich Markdown within each entry, including lists, callouts, and code blocks.
+Changelogs support full Markdown formatting within each entry, including lists, callouts, and code snippets:
 
 ```markdown
 ::: changelog
@@ -34,16 +34,16 @@ Changelogs support rich Markdown within each entry, including lists, callouts, a
 ### Major System Overhaul
 The core engine has been rearchitected for isomorphic execution.
 
-*   Implemented **SPA Router** for zero-reload navigation.
-*   Introduced the **Isomorphic Plugin** system.
+*   Implemented **SPA Router** for zero-reload page navigation.
+*   Introduced the **Isomorphic Plugin** architecture.
 
 ::: callout success
-This release offers a 40% improvement in initial build speed.
+This release delivers a 40% improvement in initial build compilation speed.
 :::
 
 == v1.5.1 (2025-12-10)
 ### Security Patch
-*   Resolved high-severity vulnerability in the internal parser.
+*   Resolved high-severity vulnerability in internal parser.
 *   Updated dependency `flatted` to `v3.3.2`.
 
 == v1.0.0 (2024-05-01)
@@ -58,16 +58,16 @@ Initial public release.
 ### Major System Overhaul
 The core engine has been rearchitected for isomorphic execution.
 
-*   Implemented **SPA Router** for zero-reload navigation.
-*   Introduced the **Isomorphic Plugin** system.
+*   Implemented **SPA Router** for zero-reload page navigation.
+*   Introduced the **Isomorphic Plugin** architecture.
 
 ::: callout success
-This release offers a 40% improvement in initial build speed.
+This release delivers a 40% improvement in initial build compilation speed.
 :::
 
 == v1.5.1 (2025-12-10)
 ### Security Patch
-*   Resolved high-severity vulnerability in the internal parser.
+*   Resolved high-severity vulnerability in internal parser.
 *   Updated dependency `flatted` to `v3.3.2`.
 
 == v1.0.0 (2024-05-01)
@@ -75,6 +75,6 @@ Initial public release.
 
 :::
 
-::: callout tip "Historical Context for AI"
-Changelogs provide a temporal map for AI agents. The `::: changelog` structure allows an LLM to accurately parse when specific features or security fixes were introduced in the `llms.txt` context stream.
+::: callout tip "Historical Context for AI Agents" icon:sparkles
+Changelog containers supply a temporal roadmap for AI agents. The `::: changelog` structure allows LLMs to parse when specific APIs or security fixes were introduced in the `llms.txt` context stream.
 :::

@@ -1,75 +1,77 @@
 ---
 title: "Markdown-Syntax-Grundlagen"
-description: "Die Basis-Formatierungsregeln für alle docmd-Inhalte: Typografie, Struktur, Listen und Tabellen."
+description: "Meistern Sie grundlegende Markdown-Typografie, Überschriftenhierarchie, Listen, Tabellen und Roh-HTML-Erweiterungen in docmd."
 ---
 
-`docmd` folgt der Standard-**GitHub Flavored Markdown (GFM)**-Spezifikation. Diese Seite behandelt die zentralen Formatierungsgrundelemente, die für jede Seite Ihres Projekts gelten.
+`docmd` hält sich an die Standard-Spezifikationen von **GitHub Flavored Markdown (GFM)**. Diese Seite behandelt grundlegende Typografie und strukturelle Primitiven, die in Ihrer gesamten Dokumentation verwendet werden.
 
-## Typografie
+## Typografie-Primitiven
 
-| Stil | Syntax | Wird gerendert als |
+| Stil | Syntax | Renderausgabe |
 | :--- | :--- | :--- |
 | **Fett** | `**text**` | **Starke Betonung** |
-| *Kursiv* | `*text*` | *Sanfte Betonung** |
+| *Kursiv* | `*text*` | *Sanfte Betonung* |
 | ~~Durchgestrichen~~ | `~~text~~` | ~~Veralteter Inhalt~~ |
 | `Inline-Code` | `` `text` `` | `engine.initialise()` |
 
-## Überschriftenhierarchie
+## Regeln für die Überschriftenhierarchie
 
-`docmd` leitet das Seiten-`<h1>` automatisch aus dem `title`-Feld in Ihrem Frontmatter ab. Beginnen Sie Ihre Überschriftenstruktur bei `##`.
+`docmd` leitet den Haupt-`<h1>`-Seitenheader automatisch aus der Frontmatter-Eigenschaft `title` ab. Strukturieren Sie Abschnittsüberschriften beginnend bei `##` (`h2`):
 
 ```markdown
 ## Ebene 2 - Hauptabschnitt
-### Ebene 3 - Feature-Detail
-#### Ebene 4 - Unter-Detail
+### Ebene 3 - Feature-Unterthema
+#### Ebene 4 - Detaillierter Unterabschnitt
 ```
 
-::: callout tip "Logische Integrität für KI"
-KI-Modelle und Suchmaschinen-Indexer verlassen sich auf eine strenge Überschriftenhierarchie, um ein genaues mentales Modell Ihres Projekts aufzubauen. Vermeiden Sie das Überspringen von Ebenen (z. B. von `##` zu `####`), um den `llms-full.txt`-Kontextstrom logisch konsistent zu halten.
+::: callout tip "Überschriftenstruktur für Suche & KI" icon:sparkles
+Behalten Sie eine sequenzielle Überschriftenhierarchie bei, ohne Ebenen zu überspringen (z. B. direkt von `##` zu `####` zu springen). Eine konsistente Struktur ermöglicht es KI-Agenten und Such-Indexierern, Ihre Inhalte genau zuzuordnen.
 :::
 
 ## Listen
 
-Verwenden Sie unsortierte Listen für scanbare Aufzählungspunkte und sortierte Listen für sequenzielle Schritte. Erwägen Sie für nummerierte Tutorials den wirkungsvolleren [Steps-Container](../containers/steps.md).
+Verwenden Sie Aufzählungslisten für scannbare Zusammenfassungen und geordnete Listen für sequenzielle Workflows. Für mehrstufige Tutorials verwenden Sie den dedizierten [Steps-Container](../containers/steps.md):
 
 ```markdown
-*   Unsortierter Punkt
-*   Ein weiterer Punkt
+*   Unsortierte Feature-Liste
+*   Sekundärer Aufzählungspunkt
 
-1.  Erster Schritt
-2.  Zweiter Schritt
+1.  Workspace-Umgebung initialisieren
+2.  Build-Befehl ausführen
 ```
 
 ## Blockzitate
 
-Die Standard-`>`-Syntax hebt externe Zitate oder Hintergrundkontext hervor.
+Standardmäßige `>`-Blockzitate heben externe Zitate oder kontextbezogene Hinweise hervor:
 
 ```markdown
-> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Anwendungsauslieferung neu.
+> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Web-Auslieferung neu.
 ```
 
-> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Anwendungsauslieferung neu.
+> Die docmd-Engine definiert die Grenzen zwischen statischer Site-Generierung und dynamischer Web-Auslieferung neu.
 
 ## Tabellen
 
+Formatieren Sie tabellarische Daten mithilfe der GFM-Pipe-Syntax:
+
 ```markdown
-| Parameter | Typ | Standard |
-| :--- | :--- | :--- |
-| `name` | `string` | `undefined` |
-| `active` | `boolean` | `true` |
+| Parameter | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `name` | `String` | `undefined` | Schlüssel-Bezeichner. |
+| `active` | `Boolean` | `true` | Status-Umschalter aktivieren. |
 ```
 
-| Parameter | Typ | Standard |
-| :--- | :--- | :--- |
-| `name` | `string` | `undefined` |
-| `active` | `boolean` | `true` |
+| Parameter | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `name` | `String` | `undefined` | Schlüssel-Bezeichner. |
+| `active` | `Boolean` | `true` | Status-Umschalter aktivieren. |
 
-## Eingebettetes HTML
+## Roh-HTML-Integration
 
-docmd aktiviert das Parsen von rohem HTML. Injizieren Sie benutzerdefinierte Layouts oder einzigartiges Styling direkt in Markdown-Dateien für spezielle UI-Anforderungen.
+`docmd` parst Inline-HTML direkt. Verwenden Sie Roh-HTML-Elemente beim Entwerfen massgeschneiderter Landing-Komponenten oder eingebetteter Widgets:
 
 ```html
-<div style="padding: 2rem; border: 1px solid var(--border-colour); border-radius: 12px; text-align: centre;">
-  Bespoke UI elements live here.
+<div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
+  Maßgeschneiderte HTML-Elemente werden nahtlos inline gerendert.
 </div>
 ```

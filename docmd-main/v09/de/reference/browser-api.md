@@ -1,37 +1,35 @@
 ---
-title: "Browser API (Client-Seite)"
-description: "Interagieren Sie mit docmd aus dem Browser - Live-Kompilierung und Plugin-Kommunikation im Dev-Modus."
+title: "Browser API"
+description: "Clientseitige APIs für docmd – isomorphe Rendering-Engine und Dev-Modus-WebSocket-Plugin-Kommunikation."
 ---
 
-docmd bietet zwei Browser-APIs: die **isomorphe Compile-Engine** zum Rendern von Markdown im Browser und die **Dev-Mode-Plugin-API** zur Echtzeit-Kommunikation mit dem Dev-Server.
+docmd bietet zwei clientseitige APIs: die **Isomorphe Kompilierungs-Engine** zum Rendern von Markdown in Browserkontexten und die **Dev-Modus Plugin API** zur Kommunikation mit dem lokalen Entwicklungsserver.
 
-## Isomorphe Compile-Engine
+## Isomorphe Kompilierungs-Engine
 
-Die Engine, die statische Sites in Node.js generiert, kann vollständig in einem Webbrowser laufen. Das ist ideal für den Bau von CMS-Vorschauen, interaktiven Playgrounds oder zum Einbetten von Dokumentation.
+Die Markdown-Rendering-Engine läuft nahtlos in Browserumgebungen. Verwenden Sie sie, um Live-Editor-Vorschauen, interaktive Playgrounds oder eingebettete Dokumentations-Widgets zu erstellen.
 
-### Installation via CDN
+### CDN-Integration
 
 ```html
-<!-- Kern-Styles -->
+<!-- Haupt-Theme-Stylesheets -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- Die isomorphe Engine -->
+<!-- Isomorphe Rendering-Engine -->
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 ### `docmd.compile(markdown, config)`
 
-Kompiliert rohes Markdown in einen vollständigen HTML-Dokument-String unter Verwendung des docmd-Standard-Layouts.
+Kompiliert rohes Markdown unter Verwendung von docmd-Seitenvorlagen in ein vollständiges HTML-Dokument.
 
-**Parameter:**
-- `markdown` (String): Der rohe Markdown-Inhalt.
-- `config` (Object): Konfigurations-Überschreibungen (gleiches Schema wie `docmd.config.json`).
+* **`markdown`** (`string`): Roher Markdown-Quelltext.
+* **`config`** (`object`): Konfigurations-Overrides (entspricht dem `docmd.config.json`-Schema).
+* **Rückgabe**: `Promise<string>`, das zum kompilierten HTML-Dokument aufgelöst wird.
 
-**Rückgabe:** `Promise<String>`: Das vollständige HTML-Dokument.
+### Beispiel für eine Live-Vorschau-Implementierung
 
-### Beispiel: Live-Vorschau
-
-Um Style-Isolation zu gewährleisten, rendern Sie die Ausgabe in einem `<iframe>` unter Verwendung des Attributs `srcdoc`.
+Rendern Sie Ausgaben in `<iframe>`-Elementen mit `srcdoc`, um eine vollständige Stil-Isolierung zu gewährleisten:
 
 ```javascript
 const editor = document.getElementById("editor");
@@ -39,8 +37,8 @@ const preview = document.getElementById("preview");
 
 async function updatePreview() {
   const html = await docmd.compile(editor.value, {
-    "title": "Vorschau",
-    "theme": { "appearance": "light" }
+    title: "Vorschau",
+    theme: { appearance: "light" }
   });
   preview.srcdoc = html;
 }
@@ -48,72 +46,57 @@ async function updatePreview() {
 editor.addEventListener("input", updatePreview);
 ```
 
-## Dev-Mode-Plugin-API
+## Dev-Modus Plugin API
 
-Während `npx @docmd/core dev` wird automatisch eine globale Variable `window.docmd` in jede Seite injiziert. Diese API ermöglicht Echtzeit-Kommunikation zwischen Browser-seitigem Plugin-Code und serverseitigen Action-Handlern via WebSocket-RPC.
+Während der Ausführung von `npx @docmd/core dev` wird ein globales `window.docmd`-Objekt in bereitgestellte Seiten injiziert. Diese Schnittstelle ermöglicht es browserseitigen Plugin-Komponenten, über WebSocket-RPC mit serverseitigen Action-Handlern zu kommunizieren.
 
-::: callout info "Nur im Dev-Modus" icon:code
-Die Plugin-API-Methoden unten sind nur während `npx @docmd/core dev` verfügbar. Sie sind in Produktions-Builds nicht enthalten.
+::: callout info "Nur im Entwicklungsmodus" icon:code
+Die Dev-Modus Plugin API ist ausschließlich während `npx @docmd/core dev`-Sitzungen verfügbar und wird in Produktions-Builds weggelassen.
 :::
 
 ### `docmd.call(action, payload)`
 
-Ruft einen serverseitigen Action-Handler auf, der von einem Plugin registriert wurde. Gibt ein Promise zurück, das mit dem Rückgabewert des Handlers aufgelöst wird.
+Sendet RPC-Aufrufe an serverseitige Action-Handler, die von Plugins registriert wurden. Gibt ein Promise zurück, das zum Handler-Ergebnis aufgelöst wird:
 
 ```javascript
 const threads = await docmd.call("threads:get-threads", {
-  "file": "docs/getting-started.md"
+  file: "docs/getting-started.md"
 });
 console.log(threads);
 ```
 
-Wenn die Action Quelldateien verändert, wird die Seite automatisch neu geladen, sobald das Promise aufgelöst wird.
-
 ### `docmd.send(name, data)`
 
-Sendet ein "Fire-and-forget"-Event an den Server. Es wird keine Antwort zurückgegeben.
+Überträgt Fire-and-Forget-Events an den Dev-Server, ohne auf Antworten zu warten:
 
 ```javascript
 docmd.send("analytics:page-view", {
-  "path": window.location.pathname
+  path: window.location.pathname
 });
 ```
 
 ### `docmd.on(name, callback)`
 
-Abonniert vom Server gesendete Events. Gibt eine Unsubscribe-Funktion zurück.
+Abonniert vom Server gesendete WebSocket-Events. Gibt eine Abmeldefunktion zurück:
 
 ```javascript
-const unsub = docmd.on("threads:updated", (data) => {
+const unsubscribe = docmd.on("threads:updated", (data) => {
   console.log("Threads aktualisiert:", data);
 });
 
-unsub();
+unsubscribe();
 ```
 
-### `docmd.afterReload(name, callback)`
-
-Registriert einen Handler, der nach einem Page-Reload ausgeführt wird. Wenn Kontext via `scheduleReload` gespeichert wurde, empfängt der Callback diese Daten.
+### Status-Persistenz bei Hot-Reloads
 
 ```javascript
-// Scroll-Position nach einem Live-Reload wiederherstellen
-docmd.afterReload('scroll-restore', (ctx) => {
+// Kontext vor Hot-Reload speichern
+docmd.scheduleReload("scroll-restore", {
+  scrollY: window.scrollY
+});
+
+// Kontext nach Reload wiederherstellen
+docmd.afterReload("scroll-restore", (ctx) => {
   window.scrollTo(0, ctx.scrollY);
 });
 ```
-
-### `docmd.scheduleReload(name, context)`
-
-Speichert Kontext im `sessionStorage` für einen benannten `afterReload`-Handler. Der passende Handler wird nach dem nächsten Page-Reload mit diesem Kontext aufgerufen.
-
-```javascript
-docmd.scheduleReload("scroll-restore", {
-  "scrollY": window.scrollY
-});
-```
-
-## Hinweise
-
-- **Kein Dateisystem**: Die Browser-Engine kann keine Ordner scannen. Sie müssen das `navigation`-Array explizit im Config-Objekt angeben, falls Sie eine Sidebar benötigen.
-- **Node-only Plugins**: Plugins, die auf Node.js-APIs angewiesen sind (wie Sitemap oder LLM-Text-Generierung), sind in der Browser-Umgebung deaktiviert.
-- **WebSocket-Verbindung**: Die Dev-Mode-API erfordert eine aktive WebSocket-Verbindung zum Dev-Server. Sie verbindet sich automatisch mit exponentiellem Backoff neu, falls die Verbindung abbricht.

@@ -1,26 +1,26 @@
 ---
-title: "Versioning"
-description: "Enable multi-version documentation with seamless switching, sticky path preservation, and isolated build directories."
+title: "Versioning Engine"
+description: "Serve multi-version documentation with seamless version switching, sticky URL path preservation, and isolated build outputs in docmd."
 ---
 
-docmd features a native Versioning Engine. Manage and serve multiple versions of your project simultaneously. The engine automatically handles URL routing, sidebar updates, and switching logic.
+`docmd` features a native Versioning Engine that allows you to manage and serve multiple release versions simultaneously. The compiler automatically handles URL routing, version switcher menus, and sticky navigation state preservation.
 
 ## Directory Organisation
 
-Organise your documentation into versioned source folders. A common pattern keeps the active version in `docs/` and archived versions in directories prefixed with `docs-`.
+Organise documentation into versioned source directories. The standard convention maintains the current active version in `docs/` and legacy or preview releases in directories prefixed with `docs-`:
 
 ```text
 my-project/
-├── docs/           # Latest Version (Main)
-├── docs-v1/        # Legacy Version
+├── docs/           # Current Active Release (Main)
+├── docs-v1/        # Legacy Release
 ├── docmd.config.json
 ```
 
-## Configuration
+## Configuration Schema
 
 <img width="500" class="with-border" src="/assets/previews/menu-versioning.webp">
 
-Define your versions within the `versions` object:
+Configure versions in the `versions` block of `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -35,31 +35,27 @@ Define your versions within the `versions` object:
 }
 ```
 
-## Core Features
+## Core Engine Features
 
-### 1. Root SEO (The "Current" Version)
-The `current` version generates directly at your output root (e.g., `mysite.com/`). This ensures search traffic always lands on your most up-to-date documentation.
+### 1. Root SEO Route (Active Version)
+The `current` version builds directly into your site root (e.g. `example.com/`). This ensures organic search traffic and external links land on your latest documentation.
 
-### 2. Isolated Sub-directories
-Non-current versions build automatically into subfolders matching their `id`.
-*   `v2 (Current)` → `mysite.com/`
-*   `v1` → `mysite.com/v1/`
+### 2. Isolated Version Subdirectories
+Non-current releases build into dedicated subfolders named after their `id`:
+- `v2` (Active Release) → `example.com/`
+- `v1` (Legacy Release) → `example.com/v1/`
 
-### 3. Sticky Switching (Path Preservation)
+### 3. Sticky Route Preservation
+When readers toggle between versions using the dropdown selector, `docmd` preserves relative path locations. If a user is reading `example.com/getting-started` and switches to **v1**, they are redirected automatically to `example.com/v1/getting-started` (if the target document exists).
 
-docmd preserves the relative path when users switch versions. If a user reads `mysite.com/getting-started` and switches to **v1**, they automatically redirect to `mysite.com/v1/getting-started` (if the page exists).
+### 4. Static Asset Isolation
+Each version inherits shared assets from the global `assets/` directory. The compiler isolates compiled assets during build time to prevent styling or script conflicts across versions.
 
-### 4. Asset Isolation
-Each version inherits your global `assets/` directory. docmd isolates them during the build to prevent style leakage or conflicts.
+### 5. Version-Specific Navigation Sidebars
+Each version can maintain an independent `navigation.json` manifest. Refer to [Navigation Configuration](./navigation.md) for cascading resolution details.
 
-### 5. Versioned Navigation
+## Versioning Guidelines
 
-Each version can maintain an independent navigation structure. docmd uses a cascading priority system to resolve the sidebar.
-
-See [Navigation Configuration](navigation.md) for details on the resolution hierarchy.
-
-## Best Practices
-
-1.  **Semantic IDs**: Use concise, URL-friendly IDs like `v1`, `v2`, or `beta`.
-2.  **Navigation Parity**: Maintain consistent folder structures across versions to maximise "Sticky Switching".
-3.  **Unified Configuration**: Do not create separate config files for each version. docmd processes all versions in a single pass.
+1. **URL-Friendly IDs**: Use concise, alphanumeric identifiers such as `v1`, `v2`, or `beta`.
+2. **Consistent File Hierarchies**: Maintain parallel directory structures across versions to maximize sticky path switching accuracy.
+3. **Single Configuration File**: Do not create separate configuration manifests for each version; `docmd` processes all versions in a single unified build pass.

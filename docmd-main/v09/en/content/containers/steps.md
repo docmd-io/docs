@@ -1,12 +1,12 @@
 ---
 title: "Steps"
-description: "Convert standard ordered lists into high-impact visual timelines and tutorials."
+description: "Convert standard ordered lists into high-impact visual timelines and tutorials in docmd."
 ---
 
-The `steps` container transforms a standard Markdown ordered list into a numbered vertical timeline. It is designed for technical tutorials and sequential how-to guides.
+The `steps` container transforms standard Markdown ordered lists into numbered vertical timelines with hover permalinks. It is designed for technical tutorials and sequential how-to guides.
 
-::: callout info "Spaceless Syntax"
-Both `::: steps` and `:::steps` (spaceless) work natively. Use whichever style you prefer.
+::: callout info "Spaceless Syntax Support" icon:info
+Both `::: steps` and `:::steps` (spaceless) syntax render identically. Choose whichever style suits your authoring workflow.
 :::
 
 ## Syntax Reference
@@ -14,37 +14,37 @@ Both `::: steps` and `:::steps` (spaceless) work natively. Use whichever style y
 ```markdown
 ::: steps
 
-1. **Step Title**
-   Step description goes here.
+1.  **Step Title**
+    Step description copy goes here.
 
-2. **Next Step**
-   Continue the sequence.
+2.  **Next Step Title**
+    Continue the sequence.
 
 :::
 ```
 
-| Container | Description |
+| Component | Description |
 | :--- | :--- |
-| **`::: steps`** | The parent container that transforms child ordered list items into a numbered timeline. |
-| **`1. `** | Any standard Markdown ordered list item acts as a chronological step. Bold the first line of each item to create a clear title. |
+| **`::: steps`** | Parent container that transforms child ordered list items into a numbered timeline. |
+| **`1. `** | Standard Markdown ordered list item. Bold the first line of each item to create a step title. |
 
-## Examples
+## Usage Examples
 
-### Basic Workflow
+### Basic Workflow Sequence
 
-A straightforward sequence for a common task.
+A straightforward sequence for common developer onboarding tasks:
 
 ```markdown
 ::: steps
 
 1.  **Initialise Project**
-    Run `npx @docmd/core init` to scaffold your directory.
+    Run `npx @docmd/core init` to scaffold your directory structure.
 
 2.  **Author Content**
-    Write your documentation using standard Markdown files.
+    Write documentation using standard Markdown files.
 
 3.  **Build & Deploy**
-    Run `npx @docmd/core build` to generate your static site.
+    Run `npx @docmd/core build` to compile production static output.
 
 :::
 ```
@@ -52,39 +52,39 @@ A straightforward sequence for a common task.
 ::: steps
 
 1.  **Initialise Project**
-    Run `npx @docmd/core init` to scaffold your directory.
+    Run `npx @docmd/core init` to scaffold your directory structure.
 
 2.  **Author Content**
-    Write your documentation using standard Markdown files.
+    Write documentation using standard Markdown files.
 
 3.  **Build & Deploy**
-    Run `npx @docmd/core build` to generate your static site.
+    Run `npx @docmd/core build` to compile production static output.
 
 :::
 
-### Steps with Rich Content
+### Steps with Rich Embedded Content
 
-Each step can contain code blocks, callouts, and other nested containers.
+Steps support embedded code blocks, callout alerts, and other nested containers:
 
 ```markdown
 ::: steps
 
 1.  **Configure Environment**
-    Define your project variables in `docmd.config.json`.
+    Define project options in `docmd.config.json`.
 
     ::: callout tip
-    Use `defineConfig` to enable IDE autocompletion for all configuration keys.
+    Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
     :::
 
 2.  **Generate Production Build**
-    Execute the build command to generate a highly optimised static site.
+    Execute the build command to generate an optimised static site.
 
     ```bash
     npx @docmd/core build
     ```
 
 3.  **Deploy to Infrastructure**
-    Synchronise the `site/` directory with S3, Cloudflare Pages, or Vercel.
+    Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
 
 :::
 ```
@@ -92,24 +92,24 @@ Each step can contain code blocks, callouts, and other nested containers.
 ::: steps
 
 1.  **Configure Environment**
-    Define your project variables in `docmd.config.json`.
+    Define project options in `docmd.config.json`.
 
     ::: callout tip
-    Use `defineConfig` to enable IDE autocompletion for all configuration keys.
+    Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
     :::
 
 2.  **Generate Production Build**
-    Execute the build command to generate a highly optimised static site.
+    Execute the build command to generate an optimised static site.
 
     ```bash
     npx @docmd/core build
     ```
 
 3.  **Deploy to Infrastructure**
-    Synchronise the `site/` directory with S3, Cloudflare Pages, or Vercel.
+    Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
 
 :::
 
-::: callout tip "Workflow Optimisation" icon:lightbulb
-AI models interpret the `steps` container as a signal for **Sequential Workflows**. Always start each list item with a **bolded title** - this allows agents to reliably parse the objective of each step from the `llms.txt` context.
+::: callout tip "Workflow Optimization for AI Agents" icon:lightbulb
+AI models interpret the `steps` container as a signal for **Sequential Workflows**. Always start each list item with a **bolded title**—this allows AI agents to parse each step's objective reliably from the `llms.txt` context.
 :::
