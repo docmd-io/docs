@@ -114,6 +114,25 @@ Each workspace project folder retains its own `docmd.config.json` for project-le
 
 Docusaurus requires complex multi-instance plugin setups with duplicated configuration files. MkDocs depends on `mkdocs-monorepo-plugin`. VitePress, Starlight, and Mintlify provide no native workspace support.
 
+## Native AI Assistant & BYOK Architecture
+
+Unlike legacy documentation tools that rely on expensive proprietary SaaS extensions or third-party cloud widgets, `docmd` includes a native RAG-powered AI Assistant (`@docmd/plugin-ai`) directly in the open-source engine.
+
+| AI & Knowledge Capability | docmd | Docusaurus | VitePress | MkDocs Material | Mintlify |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Interactive AI Widget** | ✅ (Built-in) | ❌ (3rd Party) | ❌ (3rd Party) | ❌ | ✅ (Cloud) |
+| **BYOK (Bring Your Own Key)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Local Model Support (Ollama / LocalAI)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Zero-Config Cloud Relay** | ✅ | ❌ | ❌ | ❌ | ✅ (SaaS only) |
+| **Domain Origin Security Guard** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open Knowledge Format (OKF)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Native MCP Server (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **Context files (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+
+::: callout tip "Why BYOK Matters for Documentation Teams" icon:shield
+Cloud documentation SaaS providers lock teams into per-query subscription fees and proprietary AI models. `docmd` gives teams complete freedom with **BYOK (Bring Your Own Key)**: connect to OpenAI, Anthropic, Gemini, DeepSeek, Groq, or self-hosted Ollama models while retaining total control over API budgets and data privacy.
+:::
+
 ## Comprehensive feature matrix
 
 | Feature | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
@@ -125,8 +144,11 @@ Docusaurus requires complex multi-instance plugin setups with duplicated configu
 | **Native versioning** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **Native i18n** | ✅ | ✅ | Manual | Plugin | ✅ | ✅ |
 | **Built-in search** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
-| **llms.txt support** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Native MCP Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Interactive AI Assistant** | ✅ (BYOK) | ❌ | ❌ | ❌ | ❌ | ✅ (Cloud) |
+| **BYOK (Bring Your Own Key)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **llms.txt support** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **OKF Bundles (Knowledge)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Native MCP Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Docker Image** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Inline discussions** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |

@@ -114,6 +114,25 @@ Jeder Projektordner im Workspace behält seine eigene `docmd.config.json` für O
 
 Docusaurus erfordert komplexe Multi-Instanz-Plugin-Setups mit duplizierten Konfigurationsdateien. MkDocs ist vom `mkdocs-monorepo-plugin` abhängig. VitePress, Starlight und Mintlify bieten keine native Workspace-Unterstützung.
 
+## Nativer KI-Assistent & BYOK-Architektur
+
+Im Gegensatz zu älteren Dokumentationswerkzeugen, die auf teure proprietäre SaaS-Erweiterungen oder Cloud-Widgets von Drittanbietern angewiesen sind, enthält `docmd` einen nativen, RAG-gestützten KI-Assistenten (`@docmd/plugin-ai`) direkt in der Open-Source-Engine.
+
+| KI- & Wissensfunktionen | docmd | Docusaurus | VitePress | MkDocs Material | Mintlify |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Interaktives KI-Widget** | ✅ (Eingebaut) | ❌ (Drittanbieter) | ❌ (Drittanbieter) | ❌ | ✅ (Cloud) |
+| **BYOK (Bring Your Own Key)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Lokale Modell-Unterstützung (Ollama)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Zero-Config Cloud Relay** | ✅ | ❌ | ❌ | ❌ | ✅ (Nur SaaS) |
+| **Domain-Origin-Sicherheitsprüfung** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open Knowledge Format (OKF)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Nativer MCP-Server (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **Kontextdateien (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+
+::: callout tip "Warum BYOK für Dokumentationsteams wichtig ist" icon:shield
+Cloud-Dokumentations-SaaS-Anbieter binden Teams an Gebühren pro Anfrage und proprietäre KI-Modelle. `docmd` bietet Teams vollständige Freiheit mit **BYOK (Bring Your Own Key)**: Verbinden Sie OpenAI, Anthropic, Gemini, DeepSeek, Groq oder lokal gehostete Ollama-Modelle bei voller Kontrolle über API-Budgets und Datenschutz.
+:::
+
 ## Umfassende Feature-Matrix
 
 | Feature | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
@@ -125,8 +144,11 @@ Docusaurus erfordert komplexe Multi-Instanz-Plugin-Setups mit duplizierten Konfi
 | **Native Versionierung** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **Native i18n** | ✅ | ✅ | Manuell | Plugin | ✅ | ✅ |
 | **Eingebaute Suche** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Cloud |
-| **llms.txt-Unterstützung** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Nativer MCP-Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Interaktiver KI-Assistent** | ✅ (BYOK) | ❌ | ❌ | ❌ | ❌ | ✅ (Cloud) |
+| **BYOK (Bring Your Own Key)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **llms.txt-Unterstützung** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **OKF-Pakete (Wissen)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Nativer MCP-Server** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Docker-Image** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Inline-Diskussionen** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |

@@ -114,6 +114,25 @@ Python 生态依赖。在渲染第一页前需要 `pip`、虚拟环境和 `mkdoc
 
 Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。MkDocs 依赖 `mkdocs-monorepo-plugin`。VitePress、Starlight 和 Mintlify 不提供原生工作区支持。
 
+## 原生 AI 助手与 BYOK 架构
+
+不同于依赖昂贵专有 SaaS 插件或第三方云端组件的传统文档工具，`docmd` 在开源引擎中直接内置了 RAG 驱动的交互式 AI 助手（`@docmd/plugin-ai`）。
+
+| AI 与知识库能力 | docmd | Docusaurus | VitePress | MkDocs Material | Mintlify |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **交互式 AI 小部件** | ✅ (内置) | ❌ (第三方) | ❌ (第三方) | ❌ | ✅ (云端) |
+| **BYOK (自带 API 密钥)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **本地模型支持 (Ollama / LocalAI)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **零配置云中继** | ✅ | ❌ | ❌ | ❌ | ✅ (仅限 SaaS) |
+| **域名来源安全防护** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open Knowledge Format (OKF)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **原生 MCP 服务 (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **上下文文件 (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+
+::: callout tip "为什么 BYOK 对文档团队至关重要" icon:shield
+云端文档 SaaS 供应商会将团队绑定在按查询付费的订阅模式和专有 AI 模型上。`docmd` 通过 **BYOK (自带 API 密钥)** 赋予团队完全的自由度：可连接 OpenAI、Anthropic、Gemini、DeepSeek、Groq 或本地私有化部署的 Ollama 模型，同时保持对 API 预算与数据隐私的绝对掌控。
+:::
+
 ## 综合功能矩阵
 
 | 功能 | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
@@ -125,8 +144,11 @@ Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。
 | **原生版本控制** | ✅ | ✅ | ❌ | 插件 | ❌ | ✅ |
 | **原生 i18n** | ✅ | ✅ | 手动 | 插件 | ✅ | ✅ |
 | **内置搜索** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | 云端 |
-| **llms.txt 支持** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **原生 MCP 服务** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **交互式 AI 助手** | ✅ (BYOK) | ❌ | ❌ | ❌ | ❌ | ✅ (云端) |
+| **BYOK (自带 API 密钥)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **llms.txt 支持** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **OKF 包 (知识库)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **原生 MCP 服务** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Docker 镜像** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **行内讨论** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |

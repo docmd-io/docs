@@ -114,6 +114,25 @@ Cada carpeta de proyecto del espacio de trabajo conserva su propio `docmd.config
 
 Docusaurus requiere configuraciones complejas de plugins con múltiples instancias con archivos de configuración duplicados. MkDocs depende de `mkdocs-monorepo-plugin`. VitePress, Starlight y Mintlify no proporcionan soporte nativo para espacios de trabajo.
 
+## Asistente de IA nativo y arquitectura BYOK
+
+A diferencia de las herramientas de documentación heredadas que dependen de costosas extensiones SaaS propietarias o widgets en la nube de terceros, `docmd` incluye un Asistente de IA nativo impulsado por RAG (`@docmd/plugin-ai`) directamente en el motor de código abierto.
+
+| Capacidad de IA y conocimiento | docmd | Docusaurus | VitePress | MkDocs Material | Mintlify |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Widget de IA interactivo** | ✅ (Integrado) | ❌ (Terceros) | ❌ (Terceros) | ❌ | ✅ (Nube) |
+| **BYOK (Trae tu propia clave)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Soporte de modelo local (Ollama)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Relé en la nube sin configuración** | ✅ | ❌ | ❌ | ❌ | ✅ (Solo SaaS) |
+| **Protección de origen de dominio** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open Knowledge Format (OKF)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Servidor MCP nativo (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **Archivos de contexto (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
+
+::: callout tip "Por qué BYOK es importante para los equipos de documentación" icon:shield
+Los proveedores de SaaS de documentación en la nube bloquean a los equipos con tarifas de suscripción por consulta y modelos de IA propietarios. `docmd` otorga a los equipos libertad completa con **BYOK (Trae tu propia clave)**: conecta modelos OpenAI, Anthropic, Gemini, DeepSeek, Groq u Ollama autohospedados manteniendo un control total sobre los presupuestos de API y la privacidad de los datos.
+:::
+
 ## Matriz de características completa
 
 | Característica | docmd | Docusaurus | VitePress | MkDocs Material | Starlight | Mintlify |
@@ -125,8 +144,11 @@ Docusaurus requiere configuraciones complejas de plugins con múltiples instanci
 | **Control de versiones nativo** | ✅ | ✅ | ❌ | Plugin | ❌ | ✅ |
 | **i18n nativo** | ✅ | ✅ | Manual | Plugin | ✅ | ✅ |
 | **Búsqueda integrada** | ✅ | ❌ (Algolia) | ✅ | ✅ | ✅ | Nube |
-| **Soporte llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Servidor MCP nativo** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Asistente de IA interactivo** | ✅ (BYOK) | ❌ | ❌ | ❌ | ❌ | ✅ (Nube) |
+| **BYOK (Trae tu propia clave)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Soporte llms.txt** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Paquetes OKF (Conocimiento)** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Servidor MCP nativo** | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | **Agent Skills** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | **Imagen Docker** | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Discusiones integradas** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
