@@ -1,6 +1,6 @@
 ---
-title: "docmd : Bespoke No-Style Page Demo"
-description: "A functional demonstration of the noStyle architectural feature."
+title: "docmd : Demostración de página noStyle a medida"
+description: "Una demostración funcional de la característica arquitectónica noStyle."
 noStyle: true
 components:
   meta: true
@@ -64,32 +64,32 @@ customHead: |
 
 <div class="demo-container">
   <div class="demo-hero">
-    <h1>Bespoke Page Architecture</h1>
-    <p>Demonstrating the absolute layout control enabled via <code>noStyle: true</code>.</p>
+    <h1>Arquitectura de página a medida</h1>
+    <p>Demostración del control absoluto de diseño habilitado mediante <code>noStyle: true</code>.</p>
   </div>
   
   <div class="demo-card">
-    <h2>Logical Foundation</h2>
+    <h2>Base lógica</h2>
     <p>
-      This demonstration utilises the <code>noStyle: true</code> frontmatter directive to bypass the global documentation layout (Sidebar, Header, and TOC). This provides a "Zero-Friction" canvas for creating marketing landing pages or custom product dashboards.
+      Esta demostración utiliza la directiva de frontmatter <code>noStyle: true</code> para omitir el diseño global de la documentación (Barra lateral, Encabezado y TOC). Esto proporciona un lienzo "sin fricción" para crear páginas de inicio de marketing o paneles de control de productos personalizados.
     </p>
     
-    <h3>Enabled System Components</h3>
-    <p>When in No-Style mode, you explicitly opt-in to the documentation engine's core features:</p>
+    <h3>Componentes del sistema habilitados</h3>
+    <p>Cuando está en modo No-Style, usted elige explícitamente las características principales del motor de documentación:</p>
     
     <ul>
-      <li><strong>SEO Meta Engine</strong>: Structured tags and social graph data are retained.</li>
-      <li><strong>Project Branding</strong>: Global favicon injection remains active.</li>
-      <li><strong>Foundational Typography</strong>: The processed <code>docmd-main.css</code> provides base styling.</li>
-      <li><strong>Theme Synchronisation</strong>: Light/Dark mode state is fully preserved.</li>
-      <li><strong>Interactive Capabilities</strong>: The SPA router and component logic remain available.</li>
+      <li><strong>Motor de metadatos SEO</strong>: Se conservan las etiquetas estructuradas y los datos del grafo social.</li>
+      <li><strong>Marca del proyecto</strong>: La inyección global del favicon permanece activa.</li>
+      <li><strong>Tipografía fundamental</strong>: El archivo procesado <code>docmd-main.css</code> proporciona el estilo base.</li>
+      <li><strong>Sincronización de temas</strong>: El estado del modo claro/oscuro se preserva por completo.</li>
+      <li><strong>Capacidades interactivas</strong>: El enrutador SPA y la lógica de componentes permanecen disponibles.</li>
     </ul>
     
-    <h3>Technical Implementation</h3>
+    <h3>Implementación técnica</h3>
     <p>
-      The layout for this page is authored using standard HTML wrappers and scoped CSS defined within the <code>customHead</code> frontmatter field. This ensures zero CSS leakage to the rest of the documentation site.
+      El diseño de esta página está escrito utilizando contenedores HTML estándar y CSS de ámbito definido en el campo de frontmatter <code>customHead</code>. Esto garantiza que no haya filtración de CSS al resto del sitio de documentación.
     </p>
     
-    <a href="./no-style-pages.md" class="demo-button">Analyse the Implementation Guide →</a>
+    <a href="./no-style-pages.md" class="demo-button">Analizar la guía de implementación →</a>
   </div>
 </div>

@@ -1,15 +1,15 @@
 ---
-title: "OpenAPI Generation"
-description: "Integrate OpenAPI and Swagger REST schemas into docmd workflows for automated API documentation rendering."
+title: "Generación de OpenAPI"
+description: "Integre esquemas REST OpenAPI y Swagger en los flujos de trabajo de docmd para el renderizado automatizado de la documentación de API."
 ---
 
-Manually maintaining REST API documentation is prone to drift as code endpoints evolve. Automation ensures your documentation remains the single source of truth, updated automatically during build steps.
+Mantener manualmente la documentación de la API REST es propenso a desviaciones a medida que evolucionan los extremos del código. La automatización garantiza que su documentación siga siendo la única fuente de verdad, actualizándose automáticamente durante los pasos de compilación.
 
-docmd provides native rendering for OpenAPI / Swagger specifications via `@docmd/plugin-openapi` or automated pre-build Markdown generation.
+docmd proporciona un renderizado nativo para especificaciones OpenAPI / Swagger a través de `@docmd/plugin-openapi` o la generación automatizada de Markdown previa a la compilación.
 
-## Configuration
+## Configuración
 
-Enable OpenAPI rendering in `docmd.config.json`:
+Habilite el renderizado de OpenAPI en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -22,9 +22,9 @@ Enable OpenAPI rendering in `docmd.config.json`:
 }
 ```
 
-## Automated Pre-Build Markdown Pipeline
+## Canalización de Markdown previa a la compilación automatizada
 
-Alternatively, compile schemas to Markdown before running `docmd build`:
+Alternativamente, compile esquemas a Markdown antes de ejecutar `docmd build`:
 
 ```json "package.json"
 {
@@ -35,17 +35,17 @@ Alternatively, compile schemas to Markdown before running `docmd build`:
 }
 ```
 
-## Optimising API Layouts
+## Optimización de los diseños de API
 
-API references contain wide parameter tables and response payloads. Use `layout: "full"` in page frontmatter to grant maximum horizontal width:
+Las referencias de API contienen tablas de parámetros anchas y cargas útiles de respuesta. Utilice `layout: "full"` en el frontmatter de la página para otorgar el ancho horizontal máximo:
 
 ```markdown
 ---
-title: "REST API Reference"
+title: "Referencia de API REST"
 layout: "full"
 ---
 ```
 
-::: callout tip "Multi-Language Request Examples" icon:code
-Enhance generated endpoint pages by wrapping multi-language code snippets inside [Tabs Containers](../../content/containers/tabs.md) for cURL, JavaScript, Python, and Go request examples.
+::: callout tip "Ejemplos de solicitud multilingüe" icon:code
+Mejore las páginas de extremos generadas envolviendo fragmentos de código multilingües dentro de [Contenedores de pestañas](../../content/containers/tabs.md) para ejemplos de solicitudes cURL, JavaScript, Python y Go.
 :::

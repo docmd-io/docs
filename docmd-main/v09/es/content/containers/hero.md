@@ -1,40 +1,40 @@
 ---
-title: "Hero Sections"
-description: "Build high-impact landing page headers and marketing highlights in Markdown in docmd."
+title: "Secciones Hero"
+description: "Cree encabezados de páginas de inicio de gran impacto y destacados de marketing en Markdown en docmd."
 ---
 
-The `hero` container creates visually striking landing page headers. It handles split media layouts, background glow effects, and interactive carousels without requiring raw HTML markup.
+El contenedor `hero` crea encabezados de páginas de inicio visualmente impactantes. Gestiona diseños de medios divididos, efectos de resplandor de fondo y carruseles interactivos sin requerir marcado HTML sin procesar.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: hero [property:value...]
-    # Page Title
-    A short supporting tagline.
+::: hero [propiedad:valor...]
+    # Título de la página
+    Un eslogan secundario corto.
 
-    ::: button "Call to Action" ./#target-url
+    ::: button "Llamada a la acción" ./#target-url
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Layout** | `layout:split` \| `layout:slider` | `split` divides the hero into primary text and secondary media areas. `slider` creates a horizontal scroll-snap carousel. |
-| **Glow** | `glow:true` | Injects a subtle radial gradient glow behind the hero header. |
-| **Side Separator** | `== side` | Delimiter for `layout:split`. Content after this renders in the right-hand media area. |
-| **Slide Separator** | `== slide` | Delimiter for `layout:slider`. Each `== slide` defines a new carousel panel. |
+| **Diseño** | `layout:split` \| `layout:slider` | `split` divide el hero en áreas de texto principal y medios secundarios. `slider` crea un carrusel con desplazamiento horizontal. |
+| **Resplandor** | `glow:true` | Inyecta un resplandor de gradiente radial sutil detrás del encabezado hero. |
+| **Separador lateral** | `== side` | Delimitador para `layout:split`. El contenido después de esto se renderiza en el área de medios de la derecha. |
+| **Separador de diapositiva** | `== slide` | Delimitador para `layout:slider`. Cada `== slide` define un nuevo panel de carrusel. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Split Layout
+### Diseño dividido
 
-Use the `== side` separator to divide content into a primary hero text area and a secondary media area:
+Utilice el separador `== side` para dividir el contenido en un área de texto hero principal y un área de medios secundaria:
 
 ```markdown
 ::: hero layout:split glow:true
     # docmd
-    Isomorphic execution engine. AI-optimised documentation.
+    Motor de ejecución isomórfico. Documentación optimizada para IA.
 
-    ::: button "Quickstart Guide" ../../getting-started/quick-start.md color:blue
+    ::: button "Guía de inicio rápido" ../../getting-started/quick-start.md color:blue
 
     == side
         ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -43,38 +43,38 @@ Use the `== side` separator to divide content into a primary hero text area and 
 
 ::: hero layout:split glow:true
 # docmd
-Isomorphic execution engine. AI-optimised documentation.
+Motor de ejecución isomórfico. Documentación optimizada para IA.
 
-::: button "Quickstart Guide" ../../getting-started/quick-start.md color:blue
+::: button "Guía de inicio rápido" ../../getting-started/quick-start.md color:blue
 
 == side
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 :::
 
-### Slider Layout
+### Diseño deslizante
 
-Use `== slide` separators to build an interactive carousel of hero content panels:
+Utilice separadores `== slide` para crear un carrusel interactivo de paneles de contenido hero:
 
 ```markdown
 ::: hero layout:slider
     == slide
-        # Isomorphic Core Engine
-        Renders statically and executes client-side seamlessly.
+        # Motor principal isomórfico
+        Se renderiza estáticamente y se ejecuta del lado del cliente sin problemas.
     == slide
-        # AI Context Optimisation
-        Structure-aware parsing for LLM agents.
+        # Optimización de contexto de IA
+        Análisis sintáctico consciente de la estructura para agentes LLM.
 :::
 ```
 
 ::: hero layout:slider
     == slide
-        # Isomorphic Core Engine
-        Renders statically and executes client-side seamlessly.
+        # Motor principal isomórfico
+        Se renderiza estáticamente y se ejecuta del lado del cliente sin problemas.
     == slide
-        # AI Context Optimisation
-        Structure-aware parsing for LLM agents.
+        # Optimización de contexto de IA
+        Análisis sintáctico consciente de la estructura para agentes LLM.
 :::
 
-::: callout tip "Hero Design Best Practices" icon:lightbulb
-Use `glow:true` on dark-themed sites for a premium visual effect. Place `::: button` elements in the primary text section before `== side` to guarantee proper mobile stacking order.
+::: callout tip "Mejores prácticas de diseño Hero" icon:lightbulb
+Utilice `glow:true` en sitios de tema oscuro para obtener un efecto visual de primera calidad. Coloque los elementos `::: button` en la sección de texto principal antes de `== side` para garantizar un orden de apilamiento móvil adecuado.
 :::

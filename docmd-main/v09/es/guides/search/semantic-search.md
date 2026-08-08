@@ -1,15 +1,15 @@
 ---
-title: "Semantic Search Integration"
-description: "Configure and deploy client-side hybrid semantic search in docmd using local vector embeddings."
+title: "Integración de búsqueda semántica"
+description: "Configure y despliegue la búsqueda semántica híbrida del lado del cliente en docmd utilizando incrustaciones de vectores locales."
 ---
 
-Traditional full-text search relies on exact keyword matches. If a user searches for "authentication" but the page only uses terms like "OAuth2" or "login", standard keyword search engines fail to discover it.
+La búsqueda de texto completo tradicional depende de coincidencias exactas de palabras clave. Si un usuario busca "autenticación" pero la página solo usa términos como "OAuth2" o "inicio de sesión", los motores de búsqueda de palabras clave estándar no logran descubrirla.
 
-docmd provides client-side **Hybrid Semantic Search** powered by `@docmd/plugin-search`. It runs local Hugging Face ONNX model pipelines inside the browser, combining BM25 keyword frequency with vector cosine similarity for natural language understanding without third-party API calls.
+docmd proporciona **Búsqueda semántica híbrida** del lado del cliente impulsada por `@docmd/plugin-search`. Ejecuta canalizaciones de modelos ONNX de Hugging Face locales dentro del navegador, combinando la frecuencia de palabras clave BM25 con la similitud cosenoidal de vectores para la comprensión del lenguaje natural sin llamadas a APIs de terceros.
 
-## Configuration
+## Configuración
 
-Enable semantic search in `docmd.config.json`:
+Habilite la búsqueda semántica en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -22,28 +22,28 @@ Enable semantic search in `docmd.config.json`:
 }
 ```
 
-## Embedding Model Profiles
+## Perfiles de modelos de incrustación
 
-| Model ID | Dimensions | Size | Languages | Primary Use Case |
+| ID de modelo | Dimensiones | Tamaño | Idiomas | Caso de uso principal |
 | :--- | :---: | :---: | :--- | :--- |
-| `Xenova/all-MiniLM-L6-v2` | 384 | ~90 MB | English only | High-accuracy English documentation. |
-| `Xenova/LaBSE` | 768 | ~470 MB | 100+ languages | Comprehensive multi-language support. |
-| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | 384 | ~220 MB | 50+ languages | Recommended balance for international sites. |
+| `Xenova/all-MiniLM-L6-v2` | 384 | ~90 MB | Solo inglés | Documentación en inglés de alta precisión. |
+| `Xenova/LaBSE` | 768 | ~470 MB | 100+ idiomas | Soporte multilingüe integral. |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | 384 | ~220 MB | 50+ idiomas | Equilibrio recomendado para sitios internacionales. |
 
-## Pre-Building Vectors in CI/CD
+## Precompilación de vectores en CI/CD
 
-Pre-generate vector index chunks during build steps to accelerate browser execution:
+Genere previamente fragmentos de índices de vectores durante los pasos de compilación para acelerar la ejecución del navegador:
 
 ```bash
-# Build semantic search vector chunks
+# Compilar fragmentos de vectores de búsqueda semántica
 npx docmd-search --build
 
-# Compile static site
+# Compilar sitio estático
 npx @docmd/core build
 ```
 
-This emits static Vecto-JSON chunks into `.docmd-search/`.
+Esto emite fragmentos Vecto-JSON estáticos en `.docmd-search/`.
 
-::: callout tip "Caching Vector Chunks" icon:zap
-Commit `.docmd-search/` to version control or cache it in CI/CD workflows. `docmd-search` performs incremental re-indexing, completing subsequent builds in under 300ms.
+::: callout tip "Almacenamiento en caché de fragmentos de vectores" icon:zap
+Confirme `.docmd-search/` en el control de versiones o almacénelo en caché en los flujos de trabajo de CI/CD. `docmd-search` realiza reindexación incremental, completando las compilaciones posteriores en menos de 300 ms.
 :::

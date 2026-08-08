@@ -1,52 +1,52 @@
 ---
-title: "Translated Content & i18n Routing"
-description: "Organise multi-language documentation directories, fallback mechanics, and localised navigation structures in docmd."
+title: "Contenido traducido y enrutamiento i18n"
+description: "Organice directorios de documentación multilingüe, mecánicas de respaldo y estructuras de navegación localizadas en docmd."
 ---
 
-`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localized content, fall back seamlessly to default languages, and provide localised navigation sidebars.
+`docmd` proporciona soporte multilingüe (i18n) al organizar el contenido en subdirectorios de idioma dedicados. Puede gestionar el contenido localizado, recurrir sin problemas a los idiomas predeterminados y proporcionar barras laterales de navegación localizadas.
 
-## Directory Structure
+## Estructura de directorios
 
-Every locale resides in its own subdirectory inside the source root (`src`). Folder names match the locale `id` defined in your configuration:
+Cada idioma reside en su propio subdirectorio dentro de la raíz fuente (`src`). Los nombres de las carpetas coinciden con el `id` de idioma definido en su configuración:
 
 ```text
 docs/
-├── en/                     ← default locale content
+├── en/                     ← contenido del idioma predeterminado
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← secondary locale (Hindi)
-│   ├── index.md            ← translated homepage
-│   ├── navigation.json     ← translated navigation labels
+├── hi/                     ← idioma secundario (Hindi)
+│   ├── index.md            ← página de inicio traducida
+│   ├── navigation.json     ← etiquetas de navegación traducidas
 │   └── getting-started/
-│       └── installation.md ← translated installation guide
-└── zh/                     ← tertiary locale (Chinese)
-    └── index.md            ← translated homepage
+│       └── installation.md ← guía de instalación traducida
+└── zh/                     ← idioma terciario (Chino)
+    └── index.md            ← página de inicio traducida
 ```
 
-When i18n is enabled, all Markdown source content lives inside locale directories. No content files sit at the root level.
+Cuando i18n está habilitado, todo el contenido de origen Markdown vive dentro de los directorios de idioma. Ningún archivo de contenido se ubica en el nivel raíz.
 
-::: callout info "Custom Directory Identifiers" icon:info
-Subdirectory names correspond directly to `id` values in your configuration. If your config defines `{ "id": "fr-ca" }`, the corresponding content directory is `docs/fr-ca/`.
+::: callout info "Identificadores de directorio personalizados" icon:info
+Los nombres de los subdirectorios corresponden directamente a los valores `id` en su configuración. Si su configuración define `{ "id": "fr-ca" }`, el directorio de contenido correspondiente es `docs/fr-ca/`.
 :::
 
-## Per-File Fallback Resolution
+## Resolución de respaldo archivo por archivo
 
-`docmd` does not require translating every document upfront. The engine treats the **default locale directory** as the canonical content tree. When a requested page is missing in a secondary locale:
+`docmd` no requiere traducir cada documento por adelantado. El motor trata el **directorio de idioma predeterminado** como el árbol de contenido canónico. Cuando falta una página solicitada en un idioma secundario:
 
-1. If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation.
-2. If `docs/hi/getting-started/installation.md` is missing → falls back to `docs/en/getting-started/installation.md`.
+1. Si existe `docs/hi/getting-started/installation.md` → sirve la traducción al hindi.
+2. Si falta `docs/hi/getting-started/installation.md` → recurre a `docs/en/getting-started/installation.md`.
 
-When falling back to the default locale, `docmd` displays an informative callout banner to readers. Customise this message via your [UI Strings Configuration](./ui-strings.md).
+Al recurrir al idioma predeterminado, `docmd` muestra un banner aviso informativo a los lectores. Personalice este mensaje a través de su [Configuración de cadenas de interfaz de usuario](./ui-strings.md).
 
-## Locale-Exclusive Pages
+## Páginas exclusivas por idioma
 
-Secondary locales can host unique documents that do not exist in the default locale directory. These pages render exclusively within their respective language routes.
+Los idiomas secundarios pueden albergar documentos únicos que no existen en el directorio del idioma predeterminado. Estas páginas se renderizan exclusivamente dentro de sus respectivas rutas de idioma.
 
-## Localising Sidebar Navigation
+## Localización de la navegación de la barra lateral
 
-Each locale directory can include an independent `navigation.json` manifest. `docmd` uses a cascading priority resolution system for sidebars. Refer to [Navigation Configuration](../navigation.md) for full hierarchy details.
+Cada directorio de idioma puede incluir un manifiesto `navigation.json` independiente. `docmd` utiliza un sistema de resolución de prioridad en cascada para las barras laterales. Consulte la [Configuración de navegación](../navigation.md) para conocer los detalles completos de la jerarquía.
 
 ```json "navigation.json"
 [
@@ -60,28 +60,28 @@ Each locale directory can include an independent `navigation.json` manifest. `do
 ]
 ```
 
-::: callout tip "Partial Navigation Overrides" icon:lightbulb
-Provide a `navigation.json` file inside a locale directory only when translating menu labels. If omitted, the default locale's navigation tree applies automatically.
+::: callout tip "Anulaciones parciales de navegación" icon:lightbulb
+Proporcione un archivo `navigation.json` dentro de un directorio de idioma solo cuando traduzca etiquetas de menú. Si se omite, el árbol de navegación del idioma predeterminado se aplica automáticamente.
 :::
 
-## Combining Versioning with Localisation
+## Combinación del control de versiones con la localización
 
-When combining versioning and multi-language routing, organize directories hierarchically with locales nested inside version folders:
+Al combinar el control de versiones y el enrutamiento multilingüe, organice los directorios jerárquicamente con los idiomas anidados dentro de las carpetas de versión:
 
 ```text
-docs/                    ← current release
-  en/                    ← default locale
-  hi/                    ← translated locale
-docs-v1/                 ← legacy release
-  en/                    ← default locale
-  hi/                    ← translated locale
+docs/                    ← versión actual
+  en/                    ← idioma predeterminado
+  hi/                    ← idioma traducido
+docs-v1/                 ← versión heredada
+  en/                    ← idioma predeterminado
+  hi/                    ← idioma traducido
 ```
 
-The output URL hierarchy prioritises locale prefixes, followed by version routes:
+La jerarquía de URL de salida prioriza los prefijos de idioma, seguidos de las rutas de versión:
 
 ```text
-/                        ← default locale, current version
-/hi/                     ← translated locale, current version
-/v1/                     ← default locale, legacy version
-/hi/v1/                  ← translated locale, legacy version
+/                        ← idioma predeterminado, versión actual
+/hi/                     ← idioma traducido, versión actual
+/v1/                     ← idioma predeterminado, versión heredada
+/hi/v1/                  ← idioma traducido, versión heredada
 ```

@@ -1,44 +1,44 @@
 ---
-title: "Grids"
-description: "Organise responsive multi-column layouts using native Markdown flexbox containers in docmd."
+title: "Rejillas (Grids)"
+description: "Organice diseños adaptables de múltiples columnas utilizando contenedores flexbox nativos de Markdown en docmd."
 ---
 
-Grids provide a native, Markdown-driven layout system. Use the `grids` container to structure elements side-by-side. Columns automatically balance available space and stack vertically on mobile viewports.
+Las rejillas proporcionan un sistema de diseño nativo impulsado por Markdown. Utilice el contenedor `grids` para estructurar elementos lado a lado. Las columnas equilibran automáticamente el espacio disponible y se apilan verticalmente en ventanas gráficas móviles.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
 ::: grids
     ::: grid
-        Content for the first column.
+        Contenido para la primera columna.
     :::
     ::: grid
-        Content for the second column.
+        Contenido para la segunda columna.
     :::
 :::
 ```
 
-| Container | Description |
+| Contenedor | Descripción |
 | :--- | :--- |
-| **`::: grids`** | Outer wrapper container that initiates the responsive flexbox layout. |
-| **`::: grid`** | Inner column container. Declare as many `grid` blocks as required. |
+| **`::: grids`** | Contenedor envolvente exterior que inicia el diseño flexbox adaptable. |
+| **`::: grid`** | Contenedor de columna interior. Declare tantos bloques `grid` como sea necesario. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Side-by-Side Cards
+### Tarjetas lado a lado
 
-Combine `grids` with `cards` to present multiple feature blocks in a responsive row:
+Combine `grids` con `cards` para presentar múltiples bloques de características en una fila adaptable:
 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Speed" icon:zap
-        Built on an asynchronous non-blocking I/O engine for maximum performance.
+        ::: card "Velocidad" icon:zap
+        Creado sobre un motor de E/S asíncrono no bloqueante para un rendimiento máximo.
         :::
     :::
     ::: grid
-        ::: card "Scalability" icon:layers
-        Designed for large monorepos and multi-project workspaces.
+        ::: card "Escalabilidad" icon:layers
+        Diseñado para grandes monorepositorios y espacios de trabajo multiproyecto.
         :::
     :::
 :::
@@ -46,36 +46,36 @@ Combine `grids` with `cards` to present multiple feature blocks in a responsive 
 
 ::: grids
     ::: grid
-        ::: card "Speed" icon:zap
-        Built on an asynchronous non-blocking I/O engine for maximum performance.
+        ::: card "Velocidad" icon:zap
+        Creado sobre un motor de E/S asíncrono no bloqueante para un rendimiento máximo.
         :::
     :::
     ::: grid
-        ::: card "Scalability" icon:layers
-        Designed for large monorepos and multi-project workspaces.
+        ::: card "Escalabilidad" icon:layers
+        Diseñado para grandes monorepositorios y espacios de trabajo multiproyecto.
         :::
     :::
 :::
 
-### Three-Column Layout
+### Diseño de tres columnas
 
-Add a third `grid` block to create a three-column row:
+Agregue un tercer bloque `grid` para crear una fila de tres columnas:
 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Search Engine" icon:search
-        Built-in full-text search indexer.
+        ::: card "Motor de búsqueda" icon:search
+        Indexador de búsqueda de texto completo integrado.
         :::
     :::
     ::: grid
-        ::: card "Localisation" icon:globe
-        Multi-language directory routing and localized search indexes.
+        ::: card "Localización" icon:globe
+        Enrutamiento de directorios multilingüe e índices de búsqueda localizados.
         :::
     :::
     ::: grid
-        ::: card "Theming Engine" icon:palette
-        Built-in dark mode and full CSS variable customisation.
+        ::: card "Motor de temas" icon:palette
+        Modo oscuro integrado y personalización completa de variables CSS.
         :::
     :::
 :::
@@ -83,22 +83,22 @@ Add a third `grid` block to create a three-column row:
 
 ::: grids
     ::: grid
-        ::: card "Search Engine" icon:search
-        Built-in full-text search indexer.
+        ::: card "Motor de búsqueda" icon:search
+        Indexador de búsqueda de texto completo integrado.
         :::
     :::
     ::: grid
-        ::: card "Localisation" icon:globe
-        Multi-language directory routing and localized search indexes.
+        ::: card "Localización" icon:globe
+        Enrutamiento de directorios multilingüe e índices de búsqueda localizados.
         :::
     :::
     ::: grid
-        ::: card "Theming Engine" icon:palette
-        Built-in dark mode and full CSS variable customisation.
+        ::: card "Motor de temas" icon:palette
+        Modo oscuro integrado y personalización completa de variables CSS.
         :::
     :::
 :::
 
-::: callout tip "Clean Structural Signals" icon:lightbulb
-The `grids` container maintains layout structure purely in Markdown. This eliminates raw HTML bloat and ensures AI context indexers interpret side-by-side relationship signals cleanly.
+::: callout tip "Señales estructurales limpias" icon:lightbulb
+El contenedor `grids` mantiene la estructura de diseño puramente en Markdown. Esto elimina el exceso de HTML sin procesar y garantiza que los indexadores de contexto de IA interpreten limpiamente las señales de relación lado a lado.
 :::

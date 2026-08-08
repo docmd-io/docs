@@ -1,158 +1,158 @@
 ---
-title: "CLI Commands"
-description: "Command-line interface reference for docmd — commands, flags, and options for building and managing documentation."
+title: "Comandos de la CLI"
+description: "Referencia de la interfaz de línea de comandos para docmd: comandos, marcadores y opciones para compilar y gestionar la documentación."
 ---
 
-## Commands Overview
+## Descripción general de comandos
 
-| Command | Technical Function |
+| Comando | Función técnica |
 | :--- | :--- |
-| [`npx @docmd/core init`](#npx-docmdcore-init) | Initialise a new documentation workspace. |
-| [`npx @docmd/core dev`](#npx-docmdcore-dev) | Launch local development server with hot-reloading. |
-| [`npx @docmd/core build`](#npx-docmdcore-build) | Compile production-ready static site. |
-| [`npx @docmd/core live`](#npx-docmdcore-live) | Launch browser-based Live Editor environment. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active development servers. |
-| [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment manifests and container files. |
-| [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configurations or migrate from third-party tools. |
-| [`npx @docmd/core validate`](#npx-docmdcore-validate) | Run link validation and check Markdown document integrity. |
-| [`npx @docmd/core doctor`](#npx-docmdcore-doctor) | Run pre-flight environment diagnostics and inspect dependencies. |
-| [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Execute Model Context Protocol (MCP) server over `stdio`. |
-| [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Install and configure docmd plugins. |
-| [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Uninstall plugins and remove configuration entries. |
+| [`npx @docmd/core init`](#npx-docmdcore-init) | Inicializar un nuevo espacio de trabajo de documentación. |
+| [`npx @docmd/core dev`](#npx-docmdcore-dev) | Iniciar el servidor de desarrollo local con recarga rápida. |
+| [`npx @docmd/core build`](#npx-docmdcore-build) | Compilar un sitio estático listo para producción. |
+| [`npx @docmd/core live`](#npx-docmdcore-live) | Iniciar el entorno del Editor en vivo basado en el navegador. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Finalizar los servidores de desarrollo activos. |
+| [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generar manifiestos de despliegue y archivos de contenedor. |
+| [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Actualizar configuraciones heredadas o migrar desde herramientas de terceros. |
+| [`npx @docmd/core validate`](#npx-docmdcore-validate) | Ejecutar la validación de enlaces y comprobar la integridad del documento Markdown. |
+| [`npx @docmd/core doctor`](#npx-docmdcore-doctor) | Ejecutar diagnósticos de entorno previos al vuelo e inspeccionar dependencias. |
+| [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Ejecutar el servidor del Protocolo de Contexto de Modelo (MCP) a través de `stdio`. |
+| [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Instalar y configurar plugins de docmd. |
+| [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Desinstalar plugins y eliminar entradas de configuración. |
 
-## Global Options
+## Opciones globales
 
-| Parameter Flag | Alias | Technical Description |
+| Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
-| `--config <path>` | `-c` | Specify custom path to configuration file (default: `docmd.config.json`). |
-| `--verbose` | `-V` | Output detailed execution logs. |
-| `--version` | `-v` | Output installed package version. |
-| `--help` | `-h` | Output command CLI help instructions. |
-| `--cwd <path>` | - | Override target working directory path. |
+| `--config <path>` | `-c` | Especificar ruta personalizada al archivo de configuración (predeterminado: `docmd.config.json`). |
+| `--verbose` | `-V` | Emitir registros de ejecución detallados. |
+| `--version` | `-v` | Emitir la versión del paquete instalado. |
+| `--help` | `-h` | Emitir instrucciones de ayuda de la CLI de comandos. |
+| `--cwd <path>` | - | Anular la ruta del directorio de trabajo de destino. |
 
 ## `npx @docmd/core init`
 
-Initialise a documentation repository layout inside the working directory.
+Inicializa un diseño de repositorio de documentación dentro del directorio de trabajo.
 
 ```bash
 npx @docmd/core init
 ```
 
-Generates:
-* `docs/index.md` — Default landing page.
-* `docmd.config.json` — Standard configuration options.
-* Updated `package.json` build scripts.
+Genera:
+* `docs/index.md`: página de inicio predeterminada.
+* `docmd.config.json`: opciones de configuración estándar.
+* Scripts de compilación de `package.json` actualizados.
 
 ## `npx @docmd/core dev`
 
-Launch local development server with real-time hot-reloading.
+Inicia el servidor de desarrollo local con recarga rápida en tiempo real.
 
 ```bash
-npx @docmd/core dev [options]
+npx @docmd/core dev [opciones]
 ```
 
-| Parameter Flag | Alias | Technical Description |
+| Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
-| `--port <number>` | `-p` | Specify web server port (default: `3000`). |
-| `--config <path>` | `-c` | Custom path to configuration file. |
+| `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000`). |
+| `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ## `npx @docmd/core build`
 
-Compile a production static site into your configured output directory (`site/`).
+Compila un sitio estático de producción en su directorio de salida configurado (`site/`).
 
 ```bash
-npx @docmd/core build [options]
+npx @docmd/core build [opciones]
 ```
 
-| Parameter Flag | Alias | Technical Description |
+| Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
-| `--offline` | - | Rewrite asset and link paths to `.html` relative files for local file system browsing. |
-| `--config <path>` | `-c` | Custom path to configuration file. |
+| `--offline` | - | Reescribir rutas de recursos y enlaces a archivos relacionales `.html` para la navegación local en el sistema de archivos. |
+| `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ## `npx @docmd/core live`
 
-Launch browser-based Live Editor environment.
+Inicia el entorno del Editor en vivo basado en el navegador.
 
 ```bash
-npx @docmd/core live [options]
+npx @docmd/core live [opciones]
 ```
 
-| Parameter Flag | Technical Description |
+| Marcador de parámetro | Descripción técnica |
 | :--- | :--- |
-| `--build-only` | Compile standalone Live Editor bundle without starting preview web server. |
+| `--build-only` | Compilar el paquete independiente del Editor en vivo sin iniciar el servidor web de vista previa. |
 
 ## `npx @docmd/core stop`
 
-Terminate running development servers.
+Finaliza los servidores de desarrollo en ejecución.
 
 ```bash
-npx @docmd/core stop [options]
+npx @docmd/core stop [opciones]
 ```
 
-| Parameter Flag | Alias | Technical Description |
+| Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
-| `--port <number>` | `-p` | Terminate process running on specified port. |
-| `--force` | `-f` | Kill processes running on standard ports (3000, 3001, 8080, 8081). |
+| `--port <number>` | `-p` | Finalizar el proceso que se ejecuta en el puerto especificado. |
+| `--force` | `-f` | Forzar la detención de procesos que se ejecutan en puertos estándar (3000, 3001, 8080, 8081). |
 
 ## `npx @docmd/core deploy`
 
-Generate deployment manifests and configuration files.
+Genera manifiestos de despliegue y archivos de configuración.
 
 ```bash
-npx @docmd/core deploy [options]
+npx @docmd/core deploy [opciones]
 ```
 
-| Parameter Flag | Technical Description |
+| Marcador de parámetro | Descripción técnica |
 | :--- | :--- |
-| `--docker` | Emit multi-stage `Dockerfile` and `.dockerignore`. |
-| `--nginx` | Emit production `nginx.conf`. |
-| `--caddy` | Emit `Caddyfile`. |
-| `--github-pages` | Emit `.github/workflows/deploy.yml`. |
-| `--vercel` | Emit `vercel.json`. |
-| `--netlify` | Emit `netlify.toml`. |
-| `--force` | Overwrite existing deployment manifests. |
+| `--docker` | Emitir `Dockerfile` multietapa y `.dockerignore`. |
+| `--nginx` | Emitir `nginx.conf` para producción. |
+| `--caddy` | Emitir `Caddyfile`. |
+| `--github-pages` | Emitir `.github/workflows/deploy.yml`. |
+| `--vercel` | Emitir `vercel.json`. |
+| `--netlify` | Emitir `netlify.toml`. |
+| `--force` | Sobrescribir los manifiestos de despliegue existentes. |
 
 ## `npx @docmd/core migrate`
 
-Migrate configurations from legacy versions or third-party engines.
+Migra configuraciones desde versiones heredadas o motores de terceros.
 
 ```bash
-npx @docmd/core migrate [options]
+npx @docmd/core migrate [opciones]
 ```
 
-Option flags:
-* `--upgrade`: Translate legacy pre-0.7.x configuration keys in place.
-* `--dry-run`: Preview migration changes without modifying disk contents.
+Marcadores de opción:
+* `--upgrade`: Traducir las claves de configuración heredadas anteriores a 0.7.x en el lugar.
+* `--dry-run`: Previsualizar los cambios de migración sin modificar el contenido del disco.
 
 ## `npx @docmd/core validate`
 
-Validate internal link targets and document structure across Markdown sources.
+Valida los destinos de enlaces internos y la estructura de documentos en las fuentes Markdown.
 
 ```bash
-npx @docmd/core validate [options]
+npx @docmd/core validate [opciones]
 ```
 
-| Parameter Flag | Technical Description |
+| Marcador de parámetro | Descripción técnica |
 | :--- | :--- |
-| `--json` | Output validation errors as machine-readable JSON for CI integration. |
+| `--json` | Emitir errores de validación como JSON legible por máquina para la integración con CI. |
 
 ## `npx @docmd/core doctor`
 
-Run pre-flight environment diagnostics and inspect plugin/template installation states.
+Ejecuta diagnósticos de entorno previos al vuelo e inspecciona los estados de instalación de plugins/plantillas.
 
 ```bash
-npx @docmd/core doctor [options]
+npx @docmd/core doctor [opciones]
 ```
 
-| Parameter Flag | Technical Description |
+| Marcador de parámetro | Descripción técnica |
 | :--- | :--- |
-| `--config <path>` | Path to non-default configuration file. |
-| `--fix` | Auto-install missing official plugins or templates identified during check. |
-| `--json` | Output diagnostic report in machine-readable JSON format. |
+| `--config <path>` | Ruta a un archivo de configuración que no sea el predeterminado. |
+| `--fix` | Autoinstalar plugins o plantillas oficiales que falten e identificados durante la comprobación. |
+| `--json` | Emitir el informe de diagnóstico en formato JSON legible por máquina. |
 
 ## `npx @docmd/core mcp`
 
-Execute Model Context Protocol (MCP) server over `stdio` for agentic integrations.
+Ejecuta el servidor del Protocolo de Contexto de Modelo (MCP) a través de `stdio` para integraciones de agentes.
 
 ```bash
 npx @docmd/core mcp
@@ -171,25 +171,25 @@ npx @docmd/core mcp
 
 ## `npx @docmd/core add <plugin>`
 
-Install and configure official or third-party plugins.
+Instala y configura plugins oficiales o de terceros.
 
 ```bash
-npx @docmd/core add <plugin-name>
+npx @docmd/core add <nombre-del-plugin>
 ```
 
-| Command Example | Technical Function |
+| Ejemplo de comando | Función técnica |
 | :--- | :--- |
-| `npx @docmd/core add analytics` | Install `@docmd/plugin-analytics`. |
-| `npx @docmd/core add search` | Install `@docmd/plugin-search`. |
+| `npx @docmd/core add analytics` | Instalar `@docmd/plugin-analytics`. |
+| `npx @docmd/core add search` | Instalar `@docmd/plugin-search`. |
 
 ## `npx @docmd/core remove <plugin>`
 
-Uninstall plugins and clean up corresponding `docmd.config.json` configuration blocks.
+Desinstala plugins y limpia los bloques de configuración correspondientes en `docmd.config.json`.
 
 ```bash
-npx @docmd/core remove <plugin-name>
+npx @docmd/core remove <nombre-del-plugin>
 ```
 
-::: callout tip "Agentic Terminal Logging" icon:sparkles
-docmd formats CLI output using structured terminal logging to simplify parsing by automated CI jobs and AI dev agents.
+::: callout tip "Registro de terminal para agentes" icon:sparkles
+docmd da formato a la salida de la CLI mediante registros de terminal estructurados para simplificar el análisis por parte de trabajos de CI automatizados y agentes de desarrollo de IA.
 :::

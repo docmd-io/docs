@@ -1,38 +1,38 @@
 ---
-title: "Layout & UI Zones"
-description: "Configure documentation layout regions, header widgets, sidebar trees, and footer parameters in docmd.config.json."
+title: "Diseño y zonas de la interfaz"
+description: "Configure regiones de diseño de documentación, widgets de encabezado, árboles de barra lateral y parámetros de pie de página en docmd.config.json."
 ---
 
-A standard `docmd` page consists of six core functional UI zones:
+Una página estándar de `docmd` consta de seis zonas funcionales principales en la interfaz de usuario:
 
-1. **Menubar**: Full-width top navigation bar for global cross-project links.
-2. **Header**: Persistent secondary header displaying page title, breadcrumbs, and options menu.
-3. **Sidebar**: Primary navigation tree for site content structure.
-4. **Content Area**: Central Markdown rendering container with automated breadcrumbs.
-5. **Table of Contents (TOC)**: Right-hand heading navigation for active articles.
-6. **Footer**: Bottom region displaying copyright notices, branding attribution, and footer link columns.
+1. **Barra de menú**: Barra de navegación superior de ancho completo para enlaces globales entre proyectos.
+2. **Encabezado**: Encabezado secundario persistente que muestra el título de la página, las migas de pan y el menú de opciones.
+3. **Barra lateral**: Árbol de navegación principal para la estructura de contenido del sitio.
+4. **Área de contenido**: Container central de renderizado Markdown con migas de pan automatizadas.
+5. **Tabla de contenidos (TOC)**: Navegación de encabezados a la derecha para artículos activos.
+6. **Pie de página**: Región inferior que muestra avisos de derechos de autor, atribución de marca y columnas de enlaces de pie de página.
 
-## Component Layout Options
+## Opciones de diseño de componentes
 
-Configure interface zones in the `layout` section of your `docmd.config.json` manifest.
+Configure las zonas de la interfaz en la sección `layout` de su manifiesto `docmd.config.json`.
 
-### The Menubar Zone
+### La zona de la barra de menú
 
-The menubar provides global site navigation, supporting logos, links, and nested dropdown menus:
+La barra de menú proporciona navegación global por el sitio, admitiendo logotipos, enlaces y menús desplegables anidados:
 
-- **Placement**: Fixed at the absolute viewport `top` or positioned within the `header`.
-- **Documentation**: See [Menubar Configuration](./menubar.md) for full properties and customisation options.
+- **Ubicación**: Fijada en la parte `top` absoluta de la ventana gráfica o posicionada dentro del `header`.
+- **Documentación**: Consulte la [Configuración de la barra de menú](./menubar.md) para conocer las propiedades completas y opciones de personalización.
 
-### The Page Header Zone
+### La zona del encabezado de página
 
-The header displays active page titles, breadcrumbs, and options menus:
+El encabezado muestra los títulos de las páginas activas, las migas de pan y los menús de opciones:
 
-- **Global Toggle**: Enable or disable the header globally via `layout.header.enabled`. Toggle breadcrumbs via `layout.breadcrumbs`.
-- **Per-Page Override**: Add `hideTitle: true` to a document's [Frontmatter](../content/frontmatter.md) to hide its header title locally.
+- **Interruptor global**: Habilite o deshabilite el encabezado globalmente a través de `layout.header.enabled`. Active o desactive las migas de pan a través de `layout.breadcrumbs`.
+- **Anulación por página**: Agregue `hideTitle: true` al [Frontmatter](../content/frontmatter.md) de un documento para ocultar el título de su encabezado localmente.
 
-### Context Copy Widgets
+### Widgets de copia de contexto
 
-The header region includes contextual copy utilities: one-click copying of raw Markdown source and structured AI context prompts (containing page URL, title, description, and prose):
+La región del encabezado incluye utilidades de copia contextual: copia en un solo clic del código fuente Markdown no procesado y avisos de contexto de IA estructurados (que contienen la URL de la página, título, descripción y prosa):
 
 ```json "docmd.config.json"
 {
@@ -46,13 +46,13 @@ The header region includes contextual copy utilities: one-click copying of raw M
 }
 ```
 
-- `enabled`: Set to `false` to disable the copy widgets bar completely.
-- `raw`: Set to `false` to hide the "Copy Markdown" button.
-- `context`: Set to `false` to hide the "Copy Context" button.
+- `enabled`: Establezca en `false` para desactivar la barra de widgets de copia por completo.
+- `raw`: Establezca en `false` para ocultar el botón "Copiar Markdown".
+- `context`: Establezca en `false` para ocultar el botón "Copiar contexto".
 
-### Options Menu (Utilities)
+### Menú de opciones (Utilidades)
 
-The `optionsMenu` groups global utilities such as **Search**, **Theme Mode Toggle**, and **Sponsorship links**:
+El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de modo de tema** y **Enlaces de patrocinio**:
 
 ```json "docmd.config.json"
 {
@@ -69,31 +69,31 @@ The `optionsMenu` groups global utilities such as **Search**, **Theme Mode Toggl
 }
 ```
 
-::: callout info "Automatic Relocation Fallback" icon:sparkles
-If `optionsMenu` is assigned to a container that is disabled, the compiler automatically moves the options menu to `sidebar-top` to preserve accessibility.
+::: callout info "Respaldo de reubicación automática" icon:sparkles
+Si `optionsMenu` se asigna a un contenedor que está desactivado, el compilador mueve automáticamente el menú de opciones a `sidebar-top` para preservar la accesibilidad.
 :::
 
-### Sidebar & Navigation
+### Barra lateral y navegación
 
-The sidebar serves as the primary navigation hierarchy:
+La barra lateral sirve como la jerarquía de navegación principal:
 
-- **Behaviour**: Supports desktop collapsing, smooth state transitions, and persistent route tracking.
-- **Documentation**: See [Navigation Configuration](./navigation.md).
+- **Comportamiento**: Admite colapso en escritorio, transiciones de estado suaves y seguimiento de rutas persistente.
+- **Documentación**: Consulte la [Configuración de navegación](./navigation.md).
 
-### Footer Region
+### Región del pie de página
 
-`docmd` provides `minimal` and `complete` footer layouts:
+`docmd` proporciona diseños de pie de página `minimal` y `complete`:
 
 ```json "docmd.config.json"
 {
   "layout": {
     "footer": {
       "style": "complete", 
-      "description": "Documentation built with docmd.",
+      "description": "Documentación creada con docmd.",
       "branding": true,
       "columns": [
         {
-          "title": "Community",
+          "title": "Comunidad",
           "links": [
             { "text": "GitHub", "url": "https://github.com/docmd-io/docmd" }
           ]
@@ -104,6 +104,6 @@ The sidebar serves as the primary navigation hierarchy:
 }
 ```
 
-::: callout tip "Visual Hierarchy Guidelines" icon:lightbulb
-Reserve the top menubar for cross-domain navigation and use the sidebar for in-depth documentation structure. Clear separation keeps navigation intuitive for both users and web crawlers.
+::: callout tip "Directrices de jerarquía visual" icon:lightbulb
+Reserve la barra de menú superior para la navegación entre dominios y use la barra lateral para la estructura detallada de la documentación. Una separación clara mantiene la navegación intuitiva tanto para los usuarios como para los rastreadores web.
 :::

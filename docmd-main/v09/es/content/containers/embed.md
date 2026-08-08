@@ -1,34 +1,34 @@
 ---
-title: "URL Embeds"
-description: "Safely embed dynamic video, social media, and interactive content using the embed-lite parser in docmd."
+title: "Incrustaciones de URL (Embeds)"
+description: "Incruste de forma segura video dinámico, redes sociales y contenido interactivo utilizando el analizador embed-lite en docmd."
 ---
 
-`docmd` ships natively with the high-performance **[embed-lite](external:https://github.com/docmd-io/docmd)** parser. It automatically transforms external URLs into secure, zero-latency UI components.
+`docmd` incluye de forma nativa el analizador de alto rendimiento **[embed-lite](external:https://github.com/docmd-io/docmd)**. Transforma automáticamente las URLs externas en componentes de interfaz de usuario seguros y de latencia cero.
 
-## Supported Media Platforms
+## Plataformas de medios compatibles
 
-The engine includes built-in formatters for popular networks:
+El motor incluye formateadores integrados para redes populares:
 
-* **Video:** YouTube (including Shorts), Vimeo, Dailymotion, TikTok
+* **Video:** YouTube (incluidos Shorts), Vimeo, Dailymotion, TikTok
 * **Social:** X (Twitter), Reddit, Instagram, Facebook, LinkedIn
-* **Code & Prototyping:** GitHub Gists, CodePen, Figma, Google Maps
+* **Código y prototipado:** GitHub Gists, CodePen, Figma, Google Maps
 * **Audio:** Spotify, SoundCloud
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: embed "target_url"
+::: embed "URL_destino"
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **URL** | `"String"` | Absolute URL of the external resource to embed (e.g. YouTube video, Figma canvas, or GitHub Gist). |
+| **URL** | `"String"` | URL absoluta del recurso externo a incrustar (por ejemplo, video de YouTube, lienzo de Figma o GitHub Gist). |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Video Embed
+### Incrustación de video
 
-Paste any YouTube, Vimeo, or TikTok URL to render a responsive media player:
+Pegue cualquier URL de YouTube, Vimeo o TikTok para renderizar un reproductor de medios adaptable:
 
 ```markdown
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
@@ -36,9 +36,9 @@ Paste any YouTube, Vimeo, or TikTok URL to render a responsive media player:
 
 ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
 
-### Fallback Behaviour
+### Comportamiento de respaldo
 
-If the parser encounters an unsupported URL, `docmd` gracefully falls back to a formatted hyperlink button rather than throwing a build error:
+Si el analizador encuentra una URL no compatible, `docmd` recurre de forma elegante a un botón de hipervínculo formateado en lugar de lanzar un error de compilación:
 
 ```markdown
 ::: embed "https://docs.docmd.io/content/containers/embed/"

@@ -1,106 +1,106 @@
 ---
-title: "Advanced Markdown Syntax"
-description: "Master extended GFM features: task lists, element attributes, footnotes, definition lists, and abbreviations in docmd."
+title: "Sintaxis avanzada de Markdown"
+description: "Domine las características extendidas de GFM: listas de tareas, atributos de elementos, notas al pie, listas de definiciones y abreviaturas en docmd."
 ---
 
-Beyond standard Markdown primitives, `docmd` supports GitHub Flavored Markdown (GFM) extensions and custom element attribute parsers. These primitives provide fine-grained control over document semantics and element styling.
+Más allá de las primitivas de Markdown estándar, `docmd` admite extensiones de GitHub Flavored Markdown (GFM) y analizadores de atributos de elementos personalizados. Estas primitivas proporcionan un control detallado sobre la semántica del documento y el estilo de los elementos.
 
-## Task Lists
+## Listas de tareas
 
-Render interactive or read-only task lists for release planning and feature tracking:
-
-```markdown
-- [x] Engine performance optimisation complete
-- [ ] Plugin API finalisation
-- [ ] Documentation audit & localisation sync
-```
-
-- [x] Engine performance optimisation complete
-- [ ] Plugin API finalisation
-- [ ] Documentation audit & localisation sync
-
-## Inline Emojis
-
-Incorporate standard emoji shortcodes inline within Markdown prose:
+Renderice listas de tareas interactivas o de solo lectura para la planificación de lanzamientos y el seguimiento de características:
 
 ```markdown
-We :heart: high-performance documentation engines! :rocket: :sparkles:
+- [x] Optimización del rendimiento del motor completada
+- [ ] Finalización de la API de plugins
+- [ ] Auditoría de documentación y sincro de localización
 ```
 
-We :heart: high-performance documentation engines! :rocket: :sparkles:
+- [x] Optimización del rendimiento del motor completada
+- [ ] Finalización de la API de plugins
+- [ ] Auditoría de documentación y sincro de localización
 
-## Custom Element Attributes (`{ }`)
+## Emojis en línea
 
-Attach unique IDs, custom CSS classes, and inline styles to headings, images, and links using attribute block notation `{ }`.
-
-### Element Identifiers (`#id`)
-
-Assign custom HTML element IDs to enable direct deep-linking to technical subsections:
+Incorpore códigos cortos de emojis estándar en línea dentro de la prosa Markdown:
 
 ```markdown
-## Performance Benchmarks {#benchmarks-2026}
+¡Nos encanta :heart: los motores de documentación de alto rendimiento! :rocket: :sparkles:
 ```
 
-### CSS Utility Classes (`.class`)
+¡Nos encanta :heart: los motores de documentación de alto rendimiento! :rocket: :sparkles:
 
-Apply utility classes directly without writing custom inline HTML:
+## Atributos de elementos personalizados (`{ }`)
+
+Adjunte ID únicos, clases CSS personalizadas y estilos en línea a encabezados, imágenes y enlaces mediante la notación de bloques de atributos `{ }`.
+
+### Identificadores de elementos (`#id`)
+
+Asigne ID de elementos HTML personalizados para permitir enlaces profundos directos a subsecciones técnicas:
 
 ```markdown
-## Centred Section Title {.text-centre .text-accent}
+## Puntos de referencia de rendimiento {#benchmarks-2026}
 ```
 
-### Button-Styled Links
+### Clases de utilidad CSS (`.class`)
 
-Transform standard Markdown links into call-to-action buttons:
+Aplique clases de utilidad directamente sin escribir HTML en línea personalizado:
 
 ```markdown
-[Download Latest Release](#download){.docmd-button}
+## Título de sección centrado {.text-centre .text-accent}
 ```
 
-## Document Footnotes
+### Enlaces con estilo de botón
 
-Inject technical citations or reference details as footnotes. The compiler collects and renders footnotes at the bottom of the document automatically:
+Transforme enlaces Markdown estándar en botones de llamada a la acción:
 
 ```markdown
-Architectural decisions are documented in the RFC.[^1]
-
-[^1]: RFC-42: Isomorphic Rendering Engine Architecture.
+[Descargar último lanzamiento](#download){.docmd-button}
 ```
 
-Architectural decisions are documented in the RFC.[^1]
+## Notas al pie del documento
 
-[^1]: RFC-42: Isomorphic Rendering Engine Architecture.
-
-## Definition Lists
-
-Structure API parameter reference lists and terminology glossaries:
+Inyecte citas técnicas o detalles de referencia como notas al pie. El compilador recopila y renderiza las notas al pie en la parte inferior del documento automáticamente:
 
 ```markdown
-PropName
-: The unique identifier string for the configuration property.
+Las decisiones arquitectónicas se documentan en la RFC.[^1]
 
-DefaultValue
-: The fallback value applied when no property override is specified.
+[^1]: RFC-42: Arquitectura del motor de renderizado isomórfico.
 ```
 
-PropName
-: The unique identifier string for the configuration property.
+Las decisiones arquitectónicas se documentan en la RFC.[^1]
 
-DefaultValue
-: The fallback value applied when no property override is specified.
+[^1]: RFC-42: Arquitectura del motor de renderizado isomórfico.
 
-## Global Abbreviations
+## Listas de definiciones
 
-Define term abbreviations globally across a document. Hovering over the defined term displays an interactive tooltip explanation:
+Estructure listas de referencias de parámetros de API y glosarios de terminología:
+
+```markdown
+NombrePropiedad
+: La cadena identificadora única para la propiedad de configuración.
+
+ValorPredeterminado
+: El valor de respaldo aplicado cuando no se especifica ninguna anulación de propiedad.
+```
+
+NombrePropiedad
+: La cadena identificadora única para la propiedad de configuración.
+
+ValorPredeterminado
+: El valor de respaldo aplicado cuando no se especifica ninguna anulación de propiedad.
+
+## Abreviaturas globales
+
+Defina abreviaturas de términos globalmente en un documento. Al pasar el cursor sobre el término definido se muestra una explicación emergente interactiva:
 
 ```markdown
 *[SPA]: Single Page Application
-The docmd router delivers a high-performance SPA reading experience.
+El enrutador docmd ofrece una experiencia de lectura SPA de alto rendimiento.
 ```
 
 *[SPA]: Single Page Application
-The docmd router delivers a high-performance SPA reading experience.
+El enrutador docmd ofrece una experiencia de lectura SPA de alto rendimiento.
 
-::: callout tip "Semantic Precision for AI Agents" icon:sparkles
-Explicit semantic definitions, footnotes, and abbreviations supply high-fidelity technical context to AI agents reading the `llms.txt` context stream.
+::: callout tip "Precisión semántica para agentes de IA" icon:sparkles
+Las definiciones semánticas explícitas, las notas al pie y las abreviaturas proporcionan contexto técnico de alta fidelidad a los agentes de IA que leen el flujo de contexto `llms.txt`.
 :::

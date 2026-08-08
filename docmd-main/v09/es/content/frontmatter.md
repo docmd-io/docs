@@ -1,63 +1,63 @@
 ---
-title: "Frontmatter Reference"
-description: "Configure page-level metadata, search indexing, layout overrides, and component controls in docmd."
+title: "Referencia de Frontmatter"
+description: "Configure metadatos a nivel de página, indexación de búsqueda, anulaciones de diseño y controles de componentes en docmd."
 ---
 
-Frontmatter enables page-level configuration overrides. Declare YAML metadata at the absolute top of your Markdown files between triple-dash delimiters (`---`).
+El Frontmatter permite realizar anulaciones de configuración a nivel de página. Declare metadatos YAML en la parte superior absoluta de sus archivos Markdown entre delimitadores de triple guion (`---`).
 
-## Core Metadata Properties
+## Propiedades de metadatos principales
 
-| Key | Type | Description |
+| Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `title` | `String` | **Recommended.** Sets the HTML `<title>` tag and primary page header. |
-| `description` | `String` | Sets the meta description for SEO and search engine previews. |
-| `keywords` | `Array` | List of search keywords injected into `<meta name="keywords">`. |
+| `title` | `String` | **Recomendado.** Establece la etiqueta HTML `<title>` y el encabezado principal de la página. |
+| `description` | `String` | Establece la metadescripción para SEO y vistas previas de motores de búsqueda. |
+| `keywords` | `Array` | Lista de palabras clave de búsqueda inyectadas en `<meta name="keywords">`. |
 
-::: callout tip "Metadata Best Practices" icon:sparkles
-Providing an explicit `title` and `description` in frontmatter ensures search engines and AI context generators index your documentation accurately.
+::: callout tip "Mejores prácticas de metadatos" icon:sparkles
+Proporcionar un `title` y una `description` explícitos en el frontmatter garantiza que los motores de búsqueda y los generadores de contexto de IA indexen su documentación con precisión.
 :::
 
-## Indexing & Visibility Controls
+## Controles de indexación y visibilidad
 
-| Key | Type | Description |
+| Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `noindex` | `Boolean` | When `true`, excludes the page from search indexing and sitemap generation. |
-| `llms` | `Boolean` | Set to `false` to exclude the document from compiled AI context files (`llms.txt`). |
-| `hideTitle` | `Boolean` | When `true`, hides the main title from the page header area. |
-| `bodyClass` | `String` | Appends custom CSS classes to the top-level `<body>` element. |
+| `noindex` | `Boolean` | Cuando es `true`, excluye la página de la indexación de búsqueda y la generación del mapa del sitio. |
+| `llms` | `Boolean` | Establezca en `false` para excluir el documento de los archivos de contexto de IA compilados (`llms.txt`). |
+| `hideTitle` | `Boolean` | Cuando es `true`, oculta el título principal del área del encabezado de la página. |
+| `bodyClass` | `String` | Añade clases CSS personalizadas al elemento `<body>` de nivel superior. |
 
-## Layout & Viewport Configuration
+## Configuración de diseño y ventana gráfica
 
-| Key | Type | Description |
+| Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `layout` | `String` | Set to `"full"` to expand content width and disable the Table of Contents (TOC). |
-| `toc` | `Boolean` | Set to `false` to disable the right-hand Table of Contents sidebar. |
-| `noStyle` | `Boolean` | Disables standard UI chrome (Sidebar, Header, Footer) for bespoke HTML pages. |
-| `titleAppend` | `Boolean` | Set to `false` to prevent appending the global site title to metadata tags. |
+| `layout` | `String` | Establezca en `"full"` para expandir el ancho del contenido y desactivar la tabla de contenidos (TOC). |
+| `toc` | `Boolean` | Establezca en `false` para desactivar la barra lateral de la tabla de contenidos de la derecha. |
+| `noStyle` | `Boolean` | Desactiva los elementos de la interfaz estándar (Barra lateral, Encabezado, Pie de página) para páginas HTML a medida. |
+| `titleAppend` | `Boolean` | Establezca en `false` para evitar añadir el título global del sitio a las etiquetas de metadatos. |
 
-### Component Fine-Grained Controls (`noStyle`)
+### Controles detallados de componentes (`noStyle`)
 
-When `noStyle: true` is active, specify individual UI components to preserve:
+Cuando `noStyle: true` está activo, especifique componentes de la interfaz individuales para preservar:
 
 ```yaml
 ---
 noStyle: true
 components:
-  meta: true      # Injects SEO metadata
-  favicon: true   # Injects site favicon
-  css: true       # Injects docmd-main.css
-  theme: true     # Injects theme-specific styling
-  highlight: true # Injects syntax highlighting
-  scripts: true   # Injects the SPA router logic
-  sidebar: true   # Injects the navigation sidebar
-  footer: true    # Injects the site footer
+  meta: true      # Inyecta metadatos SEO
+  favicon: true   # Inyecta el favicon del sitio
+  css: true       # Inyecta docmd-main.css
+  theme: true     # Inyecta estilos específicos del tema
+  highlight: true # Inyecta el resaltado de sintaxis
+  scripts: true   # Inyecta la lógica del enrutador SPA
+  sidebar: true   # Inyecta la barra lateral de navegación
+  footer: true    # Inyecta el pie de página del sitio
 ---
 ```
 
-## Plugin & SEO Overrides
+## Anulaciones de plugins y SEO
 
-| Key | Type | Description |
+| Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `image` | `String` | URL for social sharing preview cards (`og:image`). |
-| `aiBots` | `Boolean` | Set to `false` to prevent AI crawlers from scraping the page. |
-| `canonicalUrl` | `String` | Custom canonical URL for SEO indexing. |
+| `image` | `String` | URL para tarjetas de vista previa en redes sociales (`og:image`). |
+| `aiBots` | `Boolean` | Establezca en `false` para evitar que los rastreadores de IA raspen la página. |
+| `canonicalUrl` | `String` | URL canónica personalizada para indexación SEO. |

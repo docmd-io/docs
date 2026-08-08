@@ -1,71 +1,71 @@
 ---
-title: "Images & Visual Media"
-description: "Embed responsive images, apply attribute classes for sizing and alignment, and configure interactive lightboxes in docmd."
+title: "Imágenes y medios visuales"
+description: "Incruste imágenes adaptables, aplique clases de atributos para tamaño y alineación, y configure cajas de luz interactivas en docmd."
 ---
 
-`docmd` uses standard Markdown image syntax. Centralise media assets within the `assets/` directory in your project root for consistent path references.
+`docmd` utiliza la sintaxis de imagen estándar de Markdown. Centralice los recursos multimedia dentro del directorio `assets/` en la raíz de su proyecto para referencias de ruta consistentes.
 
 ```markdown
-![Alt text](/assets/images/architecture.png "Optional tooltip title")
+![Texto alternativo](/assets/images/architecture.png "Título de información emergente opcional")
 ```
 
-![Advanced Styling Example](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
+![Ejemplo de estilo avanzado](/assets/images/docmd-preview.png){.with-border .with-shadow .size-medium .align-centre}
 
-## Image Sizing Classes
+## Clases de tamaño de imagen
 
-Apply explicit sizing using attribute class notation `{ }`:
+Aplique un tamaño explícito utilizando la notación de clase de atributo `{ }`:
 
 ```markdown
-![Small icon preview](/assets/icon.png){ .size-small }
-![Standard UI view](/assets/preview.png){ .size-medium }
-![Full-width layout banner](/assets/banner.png){ .size-large }
+![Vista previa de icono pequeño](/assets/icon.png){ .size-small }
+![Vista de interfaz de usuario estándar](/assets/preview.png){ .size-medium }
+![Banner de diseño de ancho completo](/assets/banner.png){ .size-large }
 ```
 
-## Alignment & Styling Attributes
+## Atributos de alineación y estilo
 
-Combine alignment and visual decoration classes in a single attribute block:
+Combine clases de alineación y decoración visual en un solo bloque de atributos:
 
 ```markdown
-![Centred architectural diagram](/assets/img.png){ .align-centre }
-![Right-aligned preview with shadow](/assets/img.png){ .align-right .with-shadow .with-border }
+![Diagrama arquitectónico centrado](/assets/img.png){ .align-centre }
+![Vista previa alineada a la derecha con sombra](/assets/img.png){ .align-right .with-shadow .with-border }
 ```
 
-## HTML5 Figure Captions
+## Leyendas de figuras HTML5
 
-Use standard HTML5 `<figure>` and `<figcaption>` elements for accessible image captions:
+Utilice elementos HTML5 estándar `<figure>` y `<figcaption>` para leyendas de imágenes accesibles:
 
 ```html
 <figure>
-  <img src="/assets/diagram.png" alt="Cloud Infrastructure Architecture">
-  <figcaption>Figure 1.1: Multi-Region Cloud Deployment Architecture.</figcaption>
+  <img src="/assets/diagram.png" alt="Arquitectura de infraestructura en la nube">
+  <figcaption>Figura 1.1: Arquitectura de despliegue en la nube multirregión.</figcaption>
 </figure>
 ```
 
-## Responsive Image Galleries
+## Galerías de imágenes adaptables
 
-Wrap multiple `<figure>` components in a `div.image-gallery` container to render responsive media grids:
+Envuelva múltiples componentes `<figure>` en un contenedor `div.image-gallery` para renderizar rejillas de medios adaptables:
 
 ```html
 <div class="image-gallery">
   <figure>
-    <img src="/assets/screen1.jpg" alt="Dashboard Analytics Screen">
-    <figcaption>Real-Time Performance Dashboard</figcaption>
+    <img src="/assets/screen1.jpg" alt="Pantalla de analítica de panel de control">
+    <figcaption>Panel de control de rendimiento en tiempo real</figcaption>
   </figure>
   <figure>
-    <img src="/assets/screen2.jpg" alt="Configuration Panel Screen">
-    <figcaption>Global Settings Interface</figcaption>
+    <img src="/assets/screen2.jpg" alt="Pantalla de panel de configuración">
+    <figcaption>Interfaz de configuración global</figcaption>
   </figure>
 </div>
 ```
 
-## Lightbox Zoom Overlays
+## Superposiciones de zoom con caja de luz (Lightbox)
 
-When client scripts are active, `docmd` automatically attaches full-screen lightbox zoom behavior to images tagged with `.lightbox` or nested within `.image-gallery` containers:
+Cuando los scripts del cliente están activos, `docmd` adjunta automáticamente un comportamiento de zoom de caja de luz a pantalla completa a las imágenes etiquetadas con `.lightbox` o anidadas dentro de contenedores `.image-gallery`:
 
 ```markdown
-![System schematic preview](/assets/sample.png){ .lightbox }
+![Vista previa del esquema del sistema](/assets/sample.png){ .lightbox }
 ```
 
-::: callout tip "Accessibility & Search Optimization" icon:sparkles
-Always supply descriptive **alt text** for every image. High-quality alt text provides semantic context for screen readers and AI agents parsing the `llms.txt` context stream.
+::: callout tip "Accesibilidad y optimización de búsqueda" icon:sparkles
+Proporcione siempre un **texto alternativo** descriptivo para cada imagen. Un texto alternativo de alta calidad proporciona contexto semántico para lectores de pantalla y agentes de IA que analizan el flujo de contexto `llms.txt`.
 :::

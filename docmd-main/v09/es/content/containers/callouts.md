@@ -1,98 +1,98 @@
 ---
-title: "Callouts"
-description: "Highlight critical warnings, pro-tips, and background context using semantic visual blocks in docmd."
+title: "Avisos (Callouts)"
+description: "Destaque advertencias críticas, consejos profesionales y contexto de fondo mediante bloques visuales semánticos en docmd."
 ---
 
-Callouts isolate information that requires the reader's immediate attention. `docmd` provides five semantic callout types, each with distinct styling, background accenting, and iconography.
+Los avisos (callouts) aíslan la información que requiere la atención inmediata del lector. `docmd` proporciona cinco tipos de avisos semánticos, cada uno con un estilo, acentos de fondo e iconografía distintivos.
 
-::: callout info "Migration-Friendly Aliases" icon:info
-When migrating from VitePress or Docusaurus, native container aliases work out of the box:
+::: callout info "Alias compatibles con la migración" icon:info
+Al migrar desde VitePress o Docusaurus, los alias de contenedores nativos funcionan sin modificaciones:
 - `:::tip`, `:::warning`, `:::danger`, `:::info` (VitePress)
 - `:::note`, `:::caution` (Docusaurus)
 
-These aliases render identically to native `docmd` callouts. Spaceless syntax like `:::callout` is also supported.
+Estos alias se renderizan de forma idéntica a los avisos nativos de `docmd`. La sintaxis sin espacios como `:::callout` también es compatible.
 :::
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: callout type "Title text" [property:value...]
-The content or warning copy goes here.
+::: callout type "Texto del título" [propiedad:valor...]
+El contenido o texto de advertencia va aquí.
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Type** | `info` \| `tip` \| `warning` \| `danger` \| `success` | Semantic intent defining default background accents and iconography. |
-| **Title** | `"String"` | Optional. Overrides the default semantic header label with a custom title. |
-| **Icon** | `icon:NAME` | Optional. Overrides the default icon with a custom [Lucide](external:https://lucide.dev/icons) icon. |
+| **Tipo** | `info` \| `tip` \| `warning` \| `danger` \| `success` | Intención semántica que define los acentos de fondo y la iconografía predeterminados. |
+| **Título** | `"String"` | Opcional. Anula la etiqueta de encabezado semántica predeterminada con un título personalizado. |
+| **Icono** | `icon:NOMBRE` | Opcional. Anula el icono predeterminado con un icono de [Lucide](external:https://lucide.dev/icons) personalizado. |
 
-### Supported Callout Types
+### Tipos de avisos compatibles
 
-| Type | Visual Intent |
+| Tipo | Intención visual |
 | :--- | :--- |
-| `info` | Contextual background or helpful non-critical information. |
-| `tip` | Performance shortcuts or best practices. |
-| `warning` | Potential issues or deprecated features to monitor. |
-| `danger` | Risk of data loss, breaking changes, or critical failures. |
-| `success` | Confirmation of a successful configuration or build step. |
+| `info` | Contexto de fondo o información útil no crítica. |
+| `tip` | Accesos directos de rendimiento o mejores prácticas. |
+| `warning` | Problemas potenciales o características en desuso a supervisar. |
+| `danger` | Riesgo de pérdida de datos, cambios importantes o fallos críticos. |
+| `success` | Confirmación de una configuración exitosa o paso de compilación. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Basic Callout
+### Aviso básico
 
-A minimal callout without an explicit title uses the type key as its header label:
+Un aviso mínimo sin un título explícito utiliza la clave de tipo como su etiqueta de encabezado:
 
 ```markdown
 ::: callout info
-Legacy configuration schemas remain supported but are no longer recommended.
+Los esquemas de configuración heredados siguen siendo compatibles, pero ya no se recomiendan.
 :::
 ```
 
 ::: callout info
-Legacy configuration schemas remain supported but are no longer recommended.
+Los esquemas de configuración heredados siguen siendo compatibles, pero ya no se recomiendan.
 :::
 
-### Custom Title & Icon
+### Título e icono personalizados
 
-Override the default label and icon with a custom title and any Lucide icon name:
+Anule la etiqueta e icono predeterminados con un título personalizado y cualquier nombre de icono de Lucide:
 
 ```markdown
-::: callout warning "Breaking Change Notice" icon:alert-triangle
-The internal WebSocket RPC system is officially deprecated.
+::: callout warning "Aviso de cambios importantes" icon:alert-triangle
+El sistema RPC de WebSocket interno está oficialmente en desuso.
 :::
 ```
 
-::: callout warning "Breaking Change Notice" icon:alert-triangle
-The internal WebSocket RPC system is officially deprecated.
+::: callout warning "Aviso de cambios importantes" icon:alert-triangle
+El sistema RPC de WebSocket interno está oficialmente en desuso.
 :::
 
-### Rich Content Composition
+### Composición de contenido enriquecido
 
-Callouts support full Markdown parsing. Embed code blocks and buttons directly within callout containers:
+Los avisos admiten el análisis sintáctico completo de Markdown. Incruste bloques de código y botones directamente dentro de los contenedores de avisos:
 
 ````markdown
-::: callout tip "Optimised Local Testing" icon:command
-Use the preserve flag to maintain build files during local development sessions:
+::: callout tip "Pruebas locales optimizadas" icon:command
+Utilice el marcador de preservación para mantener los archivos de compilación durante las sesiones de desarrollo local:
 
 ```bash
 npx @docmd/core dev --preserve
 ```
 
-::: button "CLI Flag Reference" ./#cli-commands
+::: button "Referencia de marcadores de CLI" ./#cli-commands
 :::
 ````
 
-::: callout tip "Optimised Local Testing" icon:command
-Use the preserve flag to maintain build files during local development sessions:
+::: callout tip "Pruebas locales optimizadas" icon:command
+Utilice el marcador de preservación para mantener los archivos de compilación durante las sesiones de desarrollo local:
 
 ```bash
 npx @docmd/core dev --preserve
 ```
 
-::: button "CLI Flag Reference" ./#cli-commands
+::: button "Referencia de marcadores de CLI" ./#cli-commands
 :::
 
-::: callout tip "Prioritised Context for AI" icon:sparkles
-Callout containers serve as **High-Priority Anchors** in the compiled `llms.txt` context stream. Use `::: callout danger` for breaking changes—this signals to AI models that the enclosed instruction overrides default assumptions.
+::: callout tip "Contexto priorizado para IA" icon:sparkles
+Los contenedores de avisos sirven como **Anclas de alta prioridad** en el flujo de contexto `llms.txt` compilado. Utilice `::: callout danger` para cambios importantes; esto indica a los modelos de IA que la instrucción adjunta anula las suposiciones predeterminadas.
 :::

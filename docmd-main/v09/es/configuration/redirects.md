@@ -1,13 +1,13 @@
 ---
-title: "Redirects & 404 Pages"
-description: "Configure static HTML redirects and custom branded 404 error pages in docmd."
+title: "Redirecciones y páginas 404"
+description: "Configure redirecciones HTML estáticas y páginas de error 404 con marca personalizada en docmd."
 ---
 
-Static hosting environments lack dynamic server-side routing engines (such as Nginx rewrite rules). `docmd` generates native HTML failsafes to handle URL redirection and custom error states automatically.
+Los entornos de alojamiento estático carecen de motores de enrutamiento dinámico en el servidor (como las reglas de reescritura de Nginx). `docmd` genera sistemas de protección HTML nativos para gestionar la redirección de URL y los estados de error personalizados automáticamente.
 
-## Server-less HTML Redirects
+## Redirecciones HTML sin servidor
 
-Forward traffic from legacy URLs to new document destinations by declaring path mappings in the `redirects` object:
+Redirija el tráfico desde URLs heredadas a nuevos destinos de documentos declarando mapas de rutas en el objeto `redirects`:
 
 ```json "docmd.config.json"
 {
@@ -18,31 +18,31 @@ Forward traffic from legacy URLs to new document destinations by declaring path 
 }
 ```
 
-### Technical Redirection Mechanism
+### Mecanismo técnico de redirección
 
-When declaring a redirect mapping, the compiler generates an `index.html` file at the target legacy route containing a `<meta http-equiv="refresh">` HTML tag:
+Al declarar un mapa de redirección, el compilador genera un archivo `index.html` en la ruta heredada de destino que contiene una etiqueta HTML `<meta http-equiv="refresh">`:
 
-1. **Instant User Redirection**: Readers are forwarded to the new destination route instantly upon landing.
-2. **SEO Equity Preservation**: Search engines recognise the meta refresh direction, preserving link equity and indexing authority.
-3. **Analytics Tracking**: Client-side analytics scripts log incoming pageviews prior to redirection.
+1. **Redirección instantánea del usuario**: Los lectores son redirigidos a la nueva ruta de destino al instante al acceder.
+2. **Preservación de equidad SEO**: Los motores de búsqueda reconocen la dirección de actualización meta, preservando la autoridad del enlace y la indexación.
+3. **Seguimiento de analítica**: Los scripts de analítica del lado del cliente registran las visitas a páginas entrantes antes de la redirección.
 
-## Custom Branded 404 Error Pages
+## Páginas de error 404 con marca personalizada
 
-When visitors request a non-existent URL route, static hosting platforms serve the root `404.html` document. `docmd` compiles a custom `404.html` page by default, inheriting your site's branding, sidebar navigation, and SPA runtime.
+Cuando los visitantes solicitan una ruta URL inexistente, las plataformas de alojamiento estático sirven el documento `404.html` de la raíz. `docmd` compila una página `404.html` personalizada de forma predeterminada, heredando la marca de su sitio, la navegación de la barra lateral y el entorno de ejecución SPA.
 
-### Customising 404 Error Content
+### Personalización del contenido de error 404
 
-Customise 404 page titles and error body copy in `docmd.config.json`:
+Personalice los títulos de las páginas 404 y el texto del cuerpo del error en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
   "notFound": {
-    "title": "404: Page Not Found",
-    "content": "We couldn't locate the requested page. Use the sidebar navigation to return to active documentation."
+    "title": "404: Página no encontrada",
+    "content": "No pudimos ubicar la página solicitada. Utilice la navegación de la barra lateral para volver a la documentación activa."
   }
 }
 ```
 
-::: callout tip "Testing Error Pages Locally" icon:lightbulb
-The `docmd` local development server automatically serves your custom 404 page for missing file routes.
+::: callout tip "Prueba local de páginas de error" icon:lightbulb
+El servidor de desarrollo local de `docmd` sirve automáticamente su página 404 personalizada para las rutas de archivos que faltan.
 :::

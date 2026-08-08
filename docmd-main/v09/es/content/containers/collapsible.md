@@ -1,66 +1,66 @@
 ---
-title: "Collapsible Sections"
-description: "Embed interactive accordion toggles for FAQs, deep-dive technical data, and optional content in docmd."
+title: "Secciones plegables (Collapsible)"
+description: "Incruste despegables de acordeón interactivos para preguntas frecuentes, datos técnicos detallados y contenido opcional en docmd."
 ---
 
-The `collapsible` container creates an interactive, toggleable HTML `<details>` accordion. It is ideal for FAQs and extensive configuration options, keeping secondary details accessible without cluttering the primary documentation view.
+El contenedor `collapsible` crea un acordeón HTML `<details>` interactivo y conmutable. Es ideal para preguntas frecuentes y opciones de configuración extensas, manteniendo los detalles secundarios accesibles sin sobrecargar la vista de la documentación principal.
 
-::: callout info "VitePress Alias Support" icon:info
-When migrating from VitePress, `:::details` works as a native alias for `:::collapsible`. Spaceless syntax like `:::collapsible` is also supported.
+::: callout info "Soporte de alias de VitePress" icon:info
+Al migrar desde VitePress, `:::details` funciona como un alias nativo para `:::collapsible`. La sintaxis sin espacios como `:::collapsible` también es compatible.
 :::
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: collapsible [open] "Title text" [property:value...]
-Main content goes here.
+::: collapsible [open] "Texto del título" [propiedad:valor...]
+El contenido principal va aquí.
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Open State** | `open` | Optional. Initialises the accordion element in an expanded state. |
-| **Title** | `"String"` | Header text rendered on the summary toggle bar. Defaults to "Click to expand". |
-| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the title string. |
+| **Estado abierto** | `open` | Opcional. Inicializa el elemento de acordeón en un estado expandido. |
+| **Título** | `"String"` | Texto de encabezado renderizado en la barra de resumen. Por defecto es "Haga clic para expandir". |
+| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes de la cadena del título. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Default Closed State
+### Estado cerrado predeterminado
 
-A collapsible section is closed by default, reducing initial visual density:
+Una sección plegable se cierra de forma predeterminada, reduciendo la densidad visual inicial:
 
 ```markdown
-::: collapsible "How do I update @docmd/core?"
-Run `npm update -g @docmd/core` to install the latest stable engine release.
+::: collapsible "¿Cómo actualizo @docmd/core?"
+Ejecute `npm update -g @docmd/core` para instalar el último lanzamiento estable del motor.
 :::
 ```
 
-::: collapsible "How do I update @docmd/core?"
-Run `npm update -g @docmd/core` to install the latest stable engine release.
+::: collapsible "¿Cómo actualizo @docmd/core?"
+Ejecute `npm update -g @docmd/core` para instalar el último lanzamiento estable del motor.
 :::
 
-### Initially Open Accordion
+### Acordeón abierto inicialmente
 
-Use the `open` keyword for sections that should render expanded by default while allowing users to collapse them:
+Utilice la palabra clave `open` para secciones que deben renderizarse expandidas de forma predeterminada mientras se permite a los usuarios colapsarlas:
 
 ```markdown
-::: collapsible open "Environment Prerequisites"
-1. Node.js v18+ (LTS recommended)
-2. pnpm, npm, or yarn package manager
+::: collapsible open "Requisitos previos del entorno"
+1. Node.js v18+ (LTS recomendado)
+2. Gestor de paquetes pnpm, npm o yarn
 :::
 ```
 
-::: collapsible open "Environment Prerequisites"
-1. Node.js v18+ (LTS recommended)
-2. pnpm, npm, or yarn package manager
+::: collapsible open "Requisitos previos del entorno"
+1. Node.js v18+ (LTS recomendado)
+2. Gestor de paquetes pnpm, npm o yarn
 :::
 
-### Rich Markdown Content
+### Contenido Markdown enriquecido
 
-Collapsible containers accept any Markdown content, including code snippets and nested callouts:
+Los contenedores plegables aceptan cualquier contenido Markdown, incluidos fragmentos de código y avisos anidados:
 
 ````markdown
-::: collapsible "Sample API Response Payload"
+::: collapsible "Carga útil de respuesta de API de muestra"
 ```json
 {
   "status": "success",
@@ -70,7 +70,7 @@ Collapsible containers accept any Markdown content, including code snippets and 
 :::
 ````
 
-::: collapsible "Sample API Response Payload"
+::: collapsible "Carga útil de respuesta de API de muestra"
 ```json
 {
   "status": "success",
@@ -79,6 +79,6 @@ Collapsible containers accept any Markdown content, including code snippets and 
 ```
 :::
 
-::: callout tip "Search & AI Indexing" icon:sparkles
-Content inside collapsible containers is fully indexed by the client-side search engine and included in the `llms.txt` context stream. AI agents can access secondary technical details while keeping the primary human interface clean.
+::: callout tip "Búsqueda e indexación para IA" icon:sparkles
+El contenido dentro de los contenedores plegables está totalmente indexado por el motor de búsqueda del lado del cliente y se incluye en el flujo de contexto `llms.txt`. Los agentes de IA pueden acceder a detalles técnicos secundarios mientras mantienen limpia la interfaz humana principal.
 :::

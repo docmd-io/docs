@@ -1,88 +1,88 @@
 ---
-title: "Nested Containers"
-description: "Combine cards, tabs, callouts, and steps recursively into high-fidelity page layouts in docmd."
+title: "Contenedores anidados"
+description: "Combine tarjetas, pestañas, avisos y pasos de forma recursiva en diseños de página de alta fidelidad en docmd."
 ---
 
-`docmd` uses a depth-tracking recursive container parser. You can nest components within each other to build complex, interactive UI structures purely in Markdown without custom HTML.
+`docmd` utiliza un analizador sintáctico de contenedores recursivo con seguimiento de profundidad. Puede anidar componentes unos dentro de otros para crear estructuras de interfaz de usuario complejas e interactivas puramente en Markdown sin HTML personalizado.
 
-::: callout warning "Self-Closing Button Syntax" icon:alert-triangle
-The `::: button` component is self-closing (single-line). Never add a terminal `:::` immediately after a button—doing so terminates the **parent container**, resulting in broken page layouts.
+::: callout warning "Sintaxis de botón de autocierre" icon:alert-triangle
+El componente `::: button` es de autocierre (una sola línea). Nunca agregue una línea final `:::` inmediatamente después de un botón; al hacerlo, finaliza el **contenedor primario**, lo que resulta en diseños de página rotos.
 :::
 
-## Composition Examples
+## Ejemplos de composición
 
-### Interactive Resource Block
+### Bloque de recursos interactivo
 
-Combine a **Card** for structural framing, **Tabs** for environment-specific commands, and a **Callout** for alerts:
+Combine una **Tarjeta** para el marco estructural, **Pestañas** para comandos específicos del entorno y un **Aviso** para alertas:
 
 ````markdown
-::: card "Monorepo Quickstart"
-Choose your preferred initialisation path:
+::: card "Inicio rápido de monorepositorio"
+Elija su ruta de inicialización preferida:
 
    ::: tabs
-   == tab "Automated"
+   == tab "Automatizado"
       ```bash
       pnpm onboard
       ```
       ::: callout success
-      This script handles package installation and workspace linking automatically.
+      Este script gestiona la instalación de paquetes y el enlace de espacios de trabajo automáticamente.
       :::
 
    == tab "Manual"
-      Manually fetch and link the core engine packages.
-      ::: button "Go to Developer Guide" ./#developer-guide
+      Obtenga y enlace manualmente los paquetes del motor principal.
+      ::: button "Ir a la guía del desarrollador" ./#developer-guide
    :::
 :::
 ````
 
-### Platform-Specific Tutorial Steps
+### Pasos de tutorial específicos de la plataforma
 
-Nesting **Tabs** inside **Steps** is a standard pattern for providing OS-specific commands within a sequential tutorial:
+Anidar **Pestañas** dentro de **Pasos** es un patrón estándar para proporcionar comandos específicos del sistema operativo dentro de un tutorial secuencial:
 
 ```markdown
 ::: steps
 
-1.  **Environment Setup**
-    Configure your local operating system.
+1.  **Configuración del entorno**
+    Configure su sistema operativo local.
 
     ::: tabs
     == tab "macOS"
-    Ensure Homebrew is installed and up to date.
+    Asegúrese de que Homebrew esté instalado y actualizado.
     == tab "Linux"
-    Verify the presence of `curl` and `bash`.
+    Verifique la presencia de `curl` y `bash`.
     :::
 
-2.  **Core Verification**
-    Execute the version check to confirm connectivity.
+2.  **Verificación principal**
+    Ejecute la comprobación de versión para confirmar la conectividad.
 
 :::
 ```
 
 ::: steps
 
-1.  **Environment Setup**
-    Configure your local operating system.
+1.  **Configuración del entorno**
+    Configure su sistema operativo local.
 
     ::: tabs
     == tab "macOS"
-    Ensure Homebrew is installed and up to date.
+    Asegúrese de que Homebrew esté instalado y actualizado.
     == tab "Linux"
-    Verify the presence of `curl` and `bash`.
+    Verifique la presencia de `curl` y `bash`.
     :::
 
-2.  **Core Verification**
-    Execute the version check to confirm connectivity.
+2.  **Verificación principal**
+    Ejecute la comprobación de versión para confirmar la conectividad.
 
 :::
 
-## Design Rules & Limits
+## Reglas de diseño y límites
 
-| Rule | Technical Note |
+| Regla | Nota técnica |
 | :--- | :--- |
-| **Recursive Tabs** | Nesting tabs within other tabs is discouraged as it creates complex UX on mobile viewports. |
-| **Sequential Conflicts** | If you need numbered steps within a tab pane, use a standard ordered list rather than `::: steps`. |
-| **Source Indentation** | Indentation is optional, but 2 or 4-space indentation improves Markdown readability. |
+| **Pestañas recursivas** | Se desaconseja anidar pestañas dentro de otras pestañas, ya que crea una experiencia de usuario compleja en ventanas gráficas móviles. |
+| **Conflictos secuenciales** | Si necesita pasos numerados dentro de un panel de pestañas, utilice una lista ordenada estándar en lugar de `::: steps`. |
+| **Sangría de código fuente** | La sangría es opcional, pero la sangría de 2 o 4 espacios mejora la legibilidad de Markdown. |
 
-::: callout tip "Knowledge Segmentation for AI" icon:sparkles
-Container nesting provides clear **Semantic Boundaries**. A `callout` nested within a `card` explicitly scopes that tip to the card's topic in the `llms.txt` stream, preventing context leakage across unrelated sections.
+::: callout tip "Segmentación de conocimientos para IA" icon:sparkles
+El anidamiento de contenedores proporciona **Límites semánticos** claros. Un `callout` anidado dentro de una `card` delimita explícitamente ese consejo al tema de la tarjeta en el flujo `llms.txt`, evitando la filtración de contexto en secciones no relacionadas.
 :::

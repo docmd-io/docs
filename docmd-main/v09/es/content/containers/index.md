@@ -1,59 +1,59 @@
 ---
-title: "Custom Interactive Containers"
-description: "A comprehensive directory of structural UI containers and interactive components in docmd."
+title: "Contenedores interactivos personalizados"
+description: "Un directorio completo de contenedores estructurales de interfaz de usuario y componentes interactivos en docmd."
 ---
 
-Standard Markdown excels at basic text formatting, but technical documentation requires structural components to communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
+El Markdown estándar destaca en el formato de texto básico, pero la documentación técnica requiere componentes estructurales para comunicar lógica compleja. `docmd` extiende Markdown con una suite de **contenedores isomórficos** que se renderizan en elementos de interfaz de usuario adaptables y de alta fidelidad.
 
-::: callout tip "Migrating from Other Documentation Engines?" icon:sparkles
-`docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g. `:::tabs` instead of `::: tabs`) is also supported across all containers.
+::: callout tip "¿Migrando desde otros motores de documentación?" icon:sparkles
+`docmd` admite alias de sintaxis de **VitePress** y **Docusaurus** de forma nativa. Los contenedores como `:::tip`, `:::warning`, `:::note`, `:::details` y `:::caution` funcionan sin modificaciones. La sintaxis sin espacios (por ejemplo, `:::tabs` en lugar de `::: tabs`) también es compatible con todos los contenedores.
 :::
 
-## Block Syntax Reference
+## Referencia de sintaxis de bloques
 
-All containers utilise a consistent block syntax, ensuring a predictable authoring experience across your entire project.
+Todos los contenedores utilizan una sintaxis de bloques consistente, lo que garantiza una experiencia de creación predecible en todo su proyecto.
 
 ```markdown
-::: type "Optional Header Title"
-This is the primary content area.
-It supports **Markdown**, imagery, and deep component nesting.
+::: type "Título de encabezado opcional"
+Esta es el área de contenido principal.
+Admite **Markdown**, imágenes y anidamiento profundo de componentes.
 :::
 ```
 
-| Component | Keyword | Primary Use Case |
+| Componente | Palabra clave | Caso de uso principal |
 | :--- | :--- | :--- |
-| **[Callouts](callouts.md)** | `callout` | Semantic alerts for tips, warnings, and critical notices. |
-| **[Cards](cards.md)** | `card` | Framed structural containers for feature grids and landing layouts. |
-| **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column flexbox groups. |
-| **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes for alternative platform instructions. |
-| **[Steps](steps.md)** | `steps` | Visual numbered timelines for step-by-step how-to guides. |
-| **[Collapsibles](collapsible.md)** | `collapsible` | Interactive accordion toggles for FAQs and deep-dive technical data. |
-| **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
-| **[Tags](tags.md)** | `tag` | Self-closing, coloured badges for version tags or status labels. |
-| **[Hero Sections](hero.md)** | `hero` | High-impact landing page headers with split and slider support. |
-| **[URL Embeds](embed.md)** | `embed` | Zero-latency embeds for video, social, and interactive media via `embed-lite`. |
-| **[Changelogs](changelogs.md)** | `changelog` | Timeline-based version histories and release notes. |
-| **[Nested Containers](nested-containers.md)** | - | Recursive composition patterns for multi-component layouts. |
+| **[Avisos](callouts.md)** | `callout` | Alertas semánticas para consejos, advertencias y avisos críticos. |
+| **[Tarjetas](cards.md)** | `card` | Contenedores estructurales con marco para rejillas de características y diseños de inicio. |
+| **[Rejillas](grids.md)** | `grids` | Grupos flexbox multicolumna de ajuste automático. |
+| **[Pestañas](tabs.md)** | `tabs` | Paneles conmutables interactivos para instrucciones de plataformas alternativas. |
+| **[Pasos](steps.md)** | `steps` | Líneas de tiempo numeradas visuales para guías paso a paso. |
+| **[Plegables](collapsible.md)** | `collapsible` | Desplegables de acordeón interactivos para preguntas frecuentes y datos técnicos detallados. |
+| **[Botones](buttons.md)** | `button` | Enlaces de navegación de llamada a la acción destacados y autocerrados. |
+| **[Etiquetas](tags.md)** | `tag` | Insignias de colores autocerradas para etiquetas de versión o etiquetas de estado. |
+| **[Secciones Hero](hero.md)** | `hero` | Encabezados de páginas de inicio de gran impacto con soporte dividido y deslizante. |
+| **[Incrustaciones de URL](embed.md)** | `embed` | Incrustaciones sin latencia para videos, medios sociales e interactivos a través de `embed-lite`. |
+| **[Registros de cambios](changelogs.md)** | `changelog` | Historiales de versiones basados en líneas de tiempo y notas de lanzamiento. |
+| **[Contenedores anidados](nested-containers.md)** | - | Patrones de composición recursivos para diseños multicomponente. |
 
-## Strategic Benefits of Containers
+## Beneficios estratégicos de los contenedores
 
-Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` compiler and downstream AI agents:
+Los contenedores facilitan más que el retoque visual; proporcionan **Señales semánticas** de alta fidelidad al compilador de `docmd` y a los agentes de IA posteriores:
 
-1. **AI Context Mapping**: Marking a block as a `callout warning` explicitly instructs LLMs to prioritize that warning during reasoning and response generation.
-2. **Structural Integrity**: Combining `cards` and `grids` enables the authoring of complex landing pages directly in Markdown without inline HTML bloat.
-3. **Source Maintainability**: Eliminates raw HTML markup, keeping your `.md` files clean, readable, and machine-parsable.
+1. **Mapeo de contexto de IA**: Marcar un bloque como `callout warning` instruye explícitamente a los LLM para que prioricen esa advertencia durante el razonamiento y la generación de respuestas.
+2. **Integridad estructural**: Combinar `cards` y `grids` permite crear páginas de inicio complejas directamente en Markdown sin el exceso de HTML en línea.
+3. **Mantenibilidad del código fuente**: Elimina el marcado HTML sin procesar, manteniendo sus archivos `.md` limpios, legibles y analizables por máquinas.
 
-## Recursive Composition
+## Composición recursiva
 
-`docmd` supports **Infinite Nesting Depth**. Compose any container within another to build multi-layered documentation components:
+`docmd` admite **Profundidad de anidamiento infinita**. Componga cualquier contenedor dentro de otro para crear componentes de documentación multicapa:
 
 ```markdown
-::: card "Architecture Overview"
+::: card "Descripción general de la arquitectura"
     ::: callout info
-    This module utilises an asynchronous non-blocking I/O pipeline.
+    Este módulo utiliza una canalización de E/S asíncrona no bloqueante.
     :::
-    ::: button "Explore Core Engine Architecture" ./#architecture
+    ::: button "Explorar arquitectura del motor principal" ./#architecture
 :::
 ```
 
-[Master the Nesting Guide](nested-containers.md)
+[Domine la guía de anidamiento](nested-containers.md)

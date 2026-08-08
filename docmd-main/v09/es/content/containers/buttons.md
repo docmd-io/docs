@@ -1,74 +1,74 @@
 ---
-title: "Buttons"
-description: "Inject prominent call-to-action buttons for internal SPA navigation and external links in docmd."
+title: "Botones"
+description: "Inyecte botones destacados de llamada a la acción para la navegación SPA interna y enlaces externos en docmd."
 ---
 
-Buttons are interactive components designed for navigation and explicit call-to-actions. They support internal SPA routing, external links, custom color overrides, and Lucide icons.
+Los botones son componentes interactivos diseñados para la navegación y llamadas a la acción explícitas. Admiten enrutamiento SPA interno, enlaces externos, anulaciones de color personalizadas e iconos de Lucide.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: button "Label text" target_url [property:value...]
+::: button "Texto de la etiqueta" URL_destino [propiedad:valor...]
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Path** | `/path/` | Relative project URL. Resolves automatically via the SPA router. |
-| **External** | `external:URL` | Opens the target URL in a new browser tab (`target="_blank"`). |
-| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). |
-| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the label text. |
+| **Ruta** | `/ruta/` | URL relativa del proyecto. Se resuelve automáticamente a través del enrutador SPA. |
+| **Externa** | `external:URL` | Abre la URL de destino en una nueva pestaña del navegador (`target="_blank"`). |
+| **Color** | `color:VALOR` | Aplica un color de fondo (admite nombres CSS estándar o códigos hexadecimales). |
+| **Icono** | `icon:NOMBRE` | Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes del texto de la etiqueta. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Internal SPA Navigation
+### Navegación SPA interna
 
-Use relative Markdown paths to ensure seamless transitions within the single-page router:
+Utilice rutas relativas de Markdown para garantizar transiciones fluidas dentro del enrutador de una sola página:
 
 ```markdown
-::: button "Installation Guide" ../../getting-started/installation.md
+::: button "Guía de instalación" ../../getting-started/installation.md
 ```
 
-::: button "Installation Guide" ../../getting-started/installation.md
+::: button "Guía de instalación" ../../getting-started/installation.md
 
-### External Resource Links
+### Enlaces a recursos externos
 
-Prepend `external:` to the URL to force links to open in a new browser tab:
+Anteponga `external:` a la URL para forzar que los enlaces se abran en una nueva pestaña del navegador:
 
 ```markdown
-::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
+::: button "Ver monorepositorio en GitHub" external:https://github.com/docmd-io/docmd
 ```
 
-::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
+::: button "Ver monorepositorio en GitHub" external:https://github.com/docmd-io/docmd
 
-### Custom Branding & Iconography
+### Marca e iconografía personalizadas
 
-Match buttons to your brand identity using colour overrides and Lucide icon names:
+Adapte los botones a la identidad de su marca utilizando anulaciones de color y nombres de iconos de Lucide:
 
 ```markdown
-::: button "Success Action" ./#success color:#228B22 icon:check
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
-::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+::: button "Acción exitosa" ./#success color:#228B22 icon:check
+::: button "Acción peligrosa" ./#delete color:crimson icon:alert-circle
+::: button "Ver código fuente" external:https://github.com/docmd-io/docmd icon:github
 ```
 
-::: button "Success Action" ./#success color:#228B22 icon:check
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
-::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+::: button "Acción exitosa" ./#success color:#228B22 icon:check
+::: button "Acción peligrosa" ./#delete color:crimson icon:alert-circle
+::: button "Ver código fuente" external:https://github.com/docmd-io/docmd icon:github
 
-## Self-Closing Parsing Behavior
+## Comportamiento de análisis de autocierre
 
-Buttons are single-line, self-closing components. Adding a terminal `:::` line immediately after a button terminates the **parent container** (e.g. an enclosing Card or Tab), which will disrupt your layout.
+Los botones son componentes de una sola línea y autocerrados. Agregar una línea final `:::` inmediatamente después de un botón finaliza el **contenedor primario** (por ejemplo, una tarjeta o pestaña envolvente), lo que interrumpirá su diseño.
 
-**Incorrect Sequence:**
+**Secuencia incorrecta:**
 ```markdown
-::: card "Setup"
-    ::: button "Begin Setup" ../../setup.md
-    :::        <-- Error: This closes the Card prematurely.
+::: card "Configuración"
+    ::: button "Iniciar configuración" ../../setup.md
+    :::        <-- Error: Esto cierra la tarjeta prematuramente.
 :::
 ```
 
-**Correct Sequence:**
+**Secuencia correcta:**
 ```markdown
-::: card "Setup"
-    ::: button "Begin Setup" ../../setup.md
-:::        <-- Correct: This closes the Card cleanly.
+::: card "Configuración"
+    ::: button "Iniciar configuración" ../../setup.md
+:::        <-- Correcto: Esto cierra la tarjeta limpiamente.
 ```

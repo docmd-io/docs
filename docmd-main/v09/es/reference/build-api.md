@@ -1,23 +1,23 @@
 ---
-title: "Build API"
-description: "Programmatic Node.js API reference for docmd — build sites, live editor bundles, and multi-project workspaces."
+title: "API de compilación"
+description: "Referencia de la API de Node.js programática para docmd: compilar sitios, paquetes de editores en vivo y espacios de trabajo multiproyecto."
 ---
 
-You can import and execute the docmd build engine programmatically from Node.js applications. This enables custom build pipelines, automated documentation generation, and monorepo integrations.
+Puede importar y ejecutar el motor de compilación de docmd mediante programación desde aplicaciones Node.js. Esto permite canalizaciones de compilación personalizadas, generación automatizada de documentación e integraciones de monorepositorios.
 
-## Installation
+## Instalación
 
-Ensure `@docmd/core` is installed in your project:
+Asegúrese de que `@docmd/core` esté instalado en su proyecto:
 
 ```bash
 npm install @docmd/core
 ```
 
-## Primary Build Export Functions
+## Funciones principales de exportación de compilación
 
 ### `buildSite(configPath, options)`
 
-Executes standard static site compilation:
+Ejecuta la compilación estándar de sitios estáticos:
 
 ```javascript
 import { buildSite } from "@docmd/core";
@@ -33,7 +33,7 @@ async function runBuild() {
 
 ### `buildLive(options)`
 
-Compiles the browser-based Live Editor application:
+Compila la aplicación Editor en vivo basada en el navegador:
 
 ```javascript
 import { buildLive } from "@docmd/core";
@@ -46,14 +46,14 @@ async function generateEditor() {
 }
 ```
 
-## Workspace Functions
+## Funciones de espacio de trabajo
 
-Functions for managing multi-project workspaces programmatically:
+Funciones para gestionar espacios de trabajo multiproyecto mediante programación:
 
-* **`isWorkspace(config)`**: Evaluates whether a configuration object conforms to workspace schemas.
-* **`detectWorkspace(configPath)`**: Resolves workspace configurations, returning normalized `WorkspaceRootConfig` or `null`.
-* **`buildWorkspace(config, options)`**: Compiles all projects defined in a workspace root.
-* **`devWorkspace(config, options)`**: Starts workspace development server with targeted rebuild tracking.
+* **`isWorkspace(config)`**: Evalúa si un objeto de configuración se ajusta a los esquemas del espacio de trabajo.
+* **`detectWorkspace(configPath)`**: Resuelve las configuraciones del espacio de trabajo, devolviendo `WorkspaceRootConfig` normalizado o `null`.
+* **`buildWorkspace(config, options)`**: Compila todos los proyectos definidos en la raíz del espacio de trabajo.
+* **`devWorkspace(config, options)`**: Inicia el servidor de desarrollo del espacio de trabajo con seguimiento de recompilación objetivo.
 
 ```javascript
 import { detectWorkspace, buildWorkspace } from "@docmd/core";
@@ -66,26 +66,26 @@ async function buildAllWorkspaces() {
 }
 ```
 
-## Custom Pipeline Example
+## Ejemplo de canalización personalizada
 
-Compose docmd compilation with custom build scripts:
+Componga la compilación de docmd con scripts de compilación personalizados:
 
 ```javascript
 import { buildSite } from "@docmd/core";
 import fs from "fs-extra";
 
 async function deployPipeline() {
-  // 1. Generate dynamic content sources
-  await fs.writeFile("./docs/dynamic.md", "# Dynamically Generated Page");
+  // 1. Generar fuentes de contenido dinámico
+  await fs.writeFile("./docs/dynamic.md", "# Página generada dinámicamente");
 
-  // 2. Execute static compilation
+  // 2. Ejecutar compilación estática
   await buildSite("./docmd.config.json");
 
-  // 3. Move output directory
+  // 3. Mover el directorio de salida
   await fs.move("./site", "./public/docs");
 }
 ```
 
-::: callout tip "AI Automation Compatibility" icon:cpu
-The programmatic Build API allows background workers and AI agents to trigger builds after source modifications to verify site integrity automatically.
+::: callout tip "Compatibilidad con la automatización por IA" icon:cpu
+La API de compilación programática permite a los trabajadores en segundo plano y a los agentes de IA activar compilaciones después de modificaciones del código fuente para verificar la integridad del sitio de forma automática.
 :::

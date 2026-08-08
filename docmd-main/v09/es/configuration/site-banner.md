@@ -1,74 +1,74 @@
 ---
-title: "Site Banner"
-description: "Configure dismissible site-wide announcement banners with inline Markdown, call-to-action buttons, and session persistence in docmd."
+title: "Banner del sitio"
+description: "Configure banners de anuncios en todo el sitio desplegables con Markdown en línea, botones de llamada a la acción y persistencia de sesión en docmd."
 ---
 
-`docmd` provides a built-in, dismissible site banner positioned at the top of the layout. Use it to display release announcements, maintenance windows, or promotional calls-to-action across all documentation pages.
+`docmd` proporciona un banner de anuncio integrado y descartable posicionado en la parte superior del diseño. Úselo para mostrar anuncios de lanzamientos, ventanas de mantenimiento o llamadas a la acción promocionales en todas las páginas de documentación.
 
-## Quick Setup
+## Configuración rápida
 
-Enable the announcement banner in your `docmd.config.json` manifest:
+Habilite el banner de anuncios en su manifiesto `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9.0 is out!** — read the full release announcement.",
+      "content": "**¡v0.9.0 ya está disponible!** — lea el anuncio completo del lanzamiento.",
       "type": "info",
       "dismissible": true,
-      "link": { "text": "Read announcement", "url": "/blog/v0-9" }
+      "link": { "text": "Leer anuncio", "url": "/blog/v0-9" }
     }
   }
 }
 ```
 
-The banner renders at the top of every page. When dismissed by a reader, the closed state is stored in `sessionStorage` for the duration of their browser session.
+El banner se renderiza en la parte superior de cada página. Al ser descartado por un lector, el estado cerrado se almacena en `sessionStorage` durante la duración de su sesión de navegador.
 
-## Configuration Reference
+## Referencia de configuración
 
-| Field | Default | Description |
+| Campo | Predeterminado | Descripción |
 | :--- | :--- | :--- |
-| `content` | `""` | Inline Markdown string (`**bold**`, `` `code` ``). Mutually exclusive with `html`. |
-| `html` | `""` | Raw HTML string. Takes precedence over `content` for custom rich layouts. |
-| `type` | `"info"` | Visual background tint (`"info"`, `"success"`, `"warning"`, `"danger"`). |
-| `dismissible` | `true` | When `true`, renders a close (X) button. When `false`, the banner remains persistent. |
-| `link` | `null` | Optional `{ text, url }` object rendering a Call-To-Action (CTA) link. |
-| `icon` | `null` | Name of any [Lucide Icon](external:https://lucide.dev/icons) rendered on the left (e.g. `megaphone`, `bell`). |
+| `content` | `""` | Cadena Markdown en línea (`**negrita**`, `` `código` ``). Mutuamente excluyente con `html`. |
+| `html` | `""` | Cadena HTML directa. Tiene prioridad sobre `content` para diseños enriquecidos personalizados. |
+| `type` | `"info"` | Tono de fondo visual (`"info"`, `"success"`, `"warning"`, `"danger"`). |
+| `dismissible` | `true` | Cuando es `true`, renderiza un botón de cierre (X). Cuando es `false`, el banner permanece persistente. |
+| `link` | `null` | Objeto opcional `{ text, url }` que renderiza un enlace de llamada a la acción (CTA). |
+| `icon` | `null` | Nombre de cualquier [Icono de Lucide](external:https://lucide.dev/icons) renderizado a la izquierda (por ejemplo, `megaphone`, `bell`). |
 
-### Configuration Examples
+### Ejemplos de configuración
 
 ::: tabs
-== tab "Standard Announcement" icon:bell
+== tab "Anuncio estándar" icon:bell
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "Scheduled system maintenance on Sunday 02:00–04:00 UTC.",
+      "content": "Mantenimiento programado del sistema el domingo de 02:00 a 04:00 UTC.",
       "type": "warning",
       "icon": "alert-triangle"
     }
   }
 }
 ```
-== tab "Release Release CTA" icon:sparkles
+== tab "Llamada a la acción de lanzamiento" icon:sparkles
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9.0 is live!** Explore new search features and UI components.",
+      "content": "¡**v0.9.0 está en vivo!** Explore las nuevas funciones de búsqueda y componentes de la interfaz de usuario.",
       "type": "success",
       "icon": "party-popper",
-      "link": { "text": "Release notes", "url": "/blog/v0-9-0" }
+      "link": { "text": "Notas del lanzamiento", "url": "/blog/v0-9-0" }
     }
   }
 }
 ```
-== tab "Custom HTML" icon:code
+== tab "HTML personalizado" icon:code
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "html": "<strong>New:</strong> Rust compiler engine is now available in preview. <a href=\"/blog/rust-engine\">Learn more →</a>",
+      "html": "<strong>Nuevo:</strong> El motor del compilador de Rust ya está disponible en vista previa. <a href=\"/blog/rust-engine\">Más información →</a>",
       "type": "info",
       "dismissible": false
     }
@@ -77,15 +77,15 @@ The banner renders at the top of every page. When dismissed by a reader, the clo
 ```
 :::
 
-## Layout Behaviour
+## Comportamiento del diseño
 
-- **Positioning**: Sits at the top of the viewport above the menubar and sidebar header. Built with zero-layout-shift CSS rules so dismissing the banner does not shift page content jarringly.
-- **Session Persistence**: Dismissal state is saved in `sessionStorage`. Opening a new browser session restores the banner.
-- **Per-Page Customisation**: To hide the banner on specific landing pages, set `layout.banner` to `null` in page frontmatter.
+- **Posicionamiento**: Se ubica en la parte superior de la ventana gráfica por encima de la barra de menú y el encabezado de la barra lateral. Creado con reglas CSS sin cambio de diseño para que descartar el banner no desplace bruscamente el contenido de la página.
+- **Persistencia de sesión**: El estado de descartado se guarda en `sessionStorage`. Abrir una nueva sesión de navegador restaura el banner.
+- **Personalización por página**: Para ocultar el banner en páginas de inicio específicas, establezca `layout.banner` en `null` en el frontmatter de la página.
 
-## Custom Banner Styling
+## Estilos de banner personalizados
 
-The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colors and typography via custom CSS rules:
+El banner utiliza nombres de clase BEM con el prefijo `.docmd-banner`. Personalice los colores y la tipografía a través de reglas CSS personalizadas:
 
 ```css
 .docmd-banner--info {
@@ -97,10 +97,10 @@ The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colors
 }
 ```
 
-## Disabling the Site Banner
+## Desactivación del banner del sitio
 
-To disable the site banner globally, set `layout.banner` to `null` or remove the `banner` key from `docmd.config.json`.
+Para desactivar el banner del sitio globalmente, establezca `layout.banner` en `null` o elimine la clave `banner` de `docmd.config.json`.
 
-::: callout tip "Changelog Integration" icon:history
-Pair site banners with changelog pages or template packages to maintain a permanent record of all announced product updates.
+::: callout tip "Integración con registro de cambios" icon:history
+Combine los banners del sitio con páginas de registro de cambios o paquetes de plantillas para mantener un registro permanente de todas las actualizaciones de productos anunciadas.
 :::

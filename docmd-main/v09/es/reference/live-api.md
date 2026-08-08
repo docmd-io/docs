@@ -1,34 +1,34 @@
 ---
-title: "Live Editor"
-description: "Architecture and execution reference for the docmd browser-based Live Editor environment."
+title: "Editor en vivo"
+description: "Referencia de arquitectura y ejecución para el entorno del Editor en vivo basado en el navegador de docmd."
 ---
 
-The docmd Live Editor provides a browser-native authoring environment. Utilizing the isomorphic compilation core, it presents instant, side-by-side Markdown previews without requiring local disk compilation steps.
+El Editor en vivo de docmd proporciona un entorno de creación nativo del navegador. Utilizando el núcleo de compilación isomórfico, presenta vistas previas instantáneas de Markdown lado a lado sin requerir pasos de compilación en el disco local.
 
-## Launch Commands
+## Comandos de inicio
 
-Start the local Live Editor instance:
+Inicie la instancia local del Editor en vivo:
 
 ```bash
 npx @docmd/core live
 ```
 
-The editor opens at `http://localhost:3000` by default.
+El editor se abre en `http://localhost:3000` de forma predeterminada.
 
-## Architecture
+## Arquitectura
 
-Unlike the `dev` server process which monitors file changes on disk, the Live Editor runs the compilation engine directly within the browser runtime:
+A diferencia del proceso del servidor `dev` que supervisa los cambios de archivos en el disco, el Editor en vivo ejecuta el motor de compilación directamente dentro del tiempo de ejecución del navegador:
 
-1. **Instant Feedback**: Content re-renders in real-time during user typing.
-2. **Standalone Playgrounds**: The editor can be exported as a static Web bundle for hosting on GitHub Pages or static host providers.
-3. **Parity**: Previews leverage the identical rendering pipeline as production `build` outputs.
+1. **Retroalimentación instantánea**: El contenido se vuelve a renderizar en tiempo real mientras el usuario escribe.
+2. **Entornos de prueba independientes**: El editor se puede exportar como un paquete Web estático para alojarlo en GitHub Pages o proveedores de alojamiento estático.
+3. **Paridad**: Las vistas previas aprovechan la misma canalización de renderizado que las salidas de `build` de producción.
 
-## Standalone Static Builds
+## Compilaciones estáticas independientes
 
-Export a standalone, shareable Live Editor bundle:
+Exporte un paquete independiente y compartible del Editor en vivo:
 
 ```bash
 npx @docmd/core live --build-only
 ```
 
-Emits a `dist/` directory containing the editor HTML application and bundled isomorphic engine.
+Emite un directorio `dist/` que contiene la aplicación HTML del editor y el motor isomórfico empaquetado.

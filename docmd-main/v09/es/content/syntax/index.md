@@ -1,77 +1,77 @@
 ---
-title: "Markdown Syntax Foundation"
-description: "Master baseline Markdown typography, heading hierarchy, lists, tables, and raw HTML extensions in docmd."
+title: "Base de sintaxis Markdown"
+description: "Domine la tipografía Markdown básica, jerarquía de encabezados, listas, tablas y extensiones HTML sin procesar en docmd."
 ---
 
-`docmd` adheres to standard **GitHub Flavored Markdown (GFM)** specifications. This page covers baseline typography and structural primitives used across your documentation.
+`docmd` cumple con las especificaciones estándar de **GitHub Flavored Markdown (GFM)**. Esta página cubre la tipografía básica y las primitivas estructurales utilizadas en toda su documentación.
 
-## Typography Primitives
+## Primitivas de tipografía
 
-| Style | Syntax | Rendering Output |
+| Estilo | Sintaxis | Salida de renderizado |
 | :--- | :--- | :--- |
-| **Bold** | `**text**` | **Strong emphasis** |
-| *Italic* | `*text*` | *Soft emphasis* |
-| ~~Strikethrough~~ | `~~text~~` | ~~Deprecated content~~ |
-| `Inline code` | `` `text` `` | `engine.initialise()` |
+| **Negrita** | `**texto**` | **Énfasis fuerte** |
+| *Cursiva* | `*texto*` | *Énfasis suave* |
+| ~~Tachado~~ | `~~texto~~` | ~~Contenido en desuso~~ |
+| `Código en línea` | `` `texto` `` | `engine.initialise()` |
 
-## Heading Hierarchy Rules
+## Reglas de jerarquía de encabezados
 
-`docmd` derives the main document `<h1>` header automatically from the frontmatter `title` property. Structure section headings starting at `##` (`h2`):
+`docmd` deriva el encabezado principal `<h1>` del documento automáticamente de la propiedad `title` del frontmatter. Estructure los encabezados de sección comenzando en `##` (`h2`):
 
 ```markdown
-## Level 2 - Major Section
-### Level 3 - Feature Subtopic
-#### Level 4 - Detailed Subsection
+## Nivel 2 - Sección principal
+### Nivel 3 - Subtema de característica
+#### Nivel 4 - Subsección detallada
 ```
 
-::: callout tip "Heading Structure for Search & AI" icon:sparkles
-Maintain a sequential heading hierarchy without skipping levels (e.g. jumping directly from `##` to `####`). Consistent structure allows AI agents and search indexers to map your content accurately.
+::: callout tip "Estructura de encabezados para búsqueda e IA" icon:sparkles
+Mantenga una jerarquía secuencial de encabezados sin omitir niveles (por ejemplo, saltar directamente de `##` a `####`). Una estructura consistente permite a los agentes de IA y a los indexadores de búsqueda mapear su contenido con precisión.
 :::
 
-## Lists
+## Listas
 
-Use bullet lists for scannable summaries and ordered lists for sequential workflows. For multi-step tutorials, use the dedicated [Steps Container](../containers/steps.md):
+Utilice listas con viñetas para resúmenes fáciles de leer y listas ordenadas para flujos de trabajo secuenciales. Para tutoriales de varios pasos, utilice el [Contenedor de pasos](../containers/steps.md) dedicado:
 
 ```markdown
-*   Unordered feature list
-*   Secondary bullet point
+*   Lista de características sin ordenar
+*   Punto secundario
 
-1.  Initialise workspace environment
-2.  Execute build command
+1.  Inicializar entorno del espacio de trabajo
+2.  Ejecutar comando de compilación
 ```
 
-## Blockquotes
+## Citas en bloque
 
-Standard `>` blockquotes highlight external quotes or contextual notices:
+Las citas en bloque estándar `>` destacan citas externas o avisos contextuales:
 
 ```markdown
-> The docmd engine redefines the boundaries between static site generation and dynamic web delivery.
+> El motor docmd redefine los límites entre la generación de sitios estáticos y la entrega web dinámica.
 ```
 
-> The docmd engine redefines the boundaries between static site generation and dynamic web delivery.
+> El motor docmd redefine los límites entre la generación de sitios estáticos y la entrega web dinámica.
 
-## Tables
+## Tablas
 
-Format tabular data using GFM pipe syntax:
+Formatee datos tabulares utilizando la sintaxis de tubos de GFM:
 
 ```markdown
-| Parameter | Type | Default | Description |
+| Parámetro | Tipo | Predeterminado | Descripción |
 | :--- | :--- | :--- | :--- |
-| `name` | `String` | `undefined` | Key identifier. |
-| `active` | `Boolean` | `true` | Enable status toggle. |
+| `name` | `String` | `undefined` | Identificador clave. |
+| `active` | `Boolean` | `true` | Interruptor de estado de habilitación. |
 ```
 
-| Parameter | Type | Default | Description |
+| Parámetro | Tipo | Predeterminado | Descripción |
 | :--- | :--- | :--- | :--- |
-| `name` | `String` | `undefined` | Key identifier. |
-| `active` | `Boolean` | `true` | Enable status toggle. |
+| `name` | `String` | `undefined` | Identificador clave. |
+| `active` | `Boolean` | `true` | Interruptor de estado de habilitación. |
 
-## Raw HTML Integration
+## Integración de HTML sin procesar
 
-`docmd` parses inline HTML directly. Use raw HTML elements when designing bespoke landing components or embedded widgets:
+`docmd` analiza HTML en línea directamente. Utilice elementos HTML sin procesar al diseñar componentes de inicio a medida o widgets incrustados:
 
 ```html
 <div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
-  Bespoke HTML elements render inline seamlessly.
+  Los elementos HTML a medida se renderizan en línea sin problemas.
 </div>
 ```

@@ -1,15 +1,15 @@
 ---
-title: "UI Strings & SEO Localisation"
-description: "Customise system UI strings per locale and understand automated hreflang SEO meta tags in docmd."
+title: "Cadenas de UI y localización SEO"
+description: "Personalice las cadenas de UI del sistema por idioma y comprenda las etiquetas meta SEO hreflang automatizadas en docmd."
 ---
 
-`docmd` ships with built-in translations for common system strings across major languages. When configuring a supported locale, system labels—such as search placeholders, navigation buttons, and theme mode toggles—translate automatically.
+`docmd` incluye traducciones integradas para cadenas del sistema comunes en los principales idiomas. Al configurar un idioma compatible, las etiquetas del sistema (como los marcadores de posición de búsqueda, botones de navegación y conmutadores de modo de tema) se traducen automáticamente.
 
-For unsupported languages or custom phrasing, the system falls back to English while allowing custom string overrides per locale.
+Para idiomas no compatibles o frases personalizadas, el sistema recurre al inglés mientras permite anulaciones de cadenas personalizadas por idioma.
 
-## Customising UI Strings
+## Personalización de cadenas de interfaz de usuario
 
-Define custom labels in the `translations` object of any locale configuration:
+Defina etiquetas personalizadas en el objeto `translations` de cualquier configuración de idioma:
 
 ```json "docmd.config.json"
 {
@@ -38,30 +38,30 @@ Define custom labels in the `translations` object of any locale configuration:
 }
 ```
 
-Translation resolution follows a strict priority order: **system defaults → plugin strings → configuration overrides**. User configuration always takes highest precedence.
+La resolución de la traducción sigue un orden de prioridad estricto: **valores predeterminados del sistema → cadenas de plugins → anulaciones de configuración**. La configuración del usuario siempre tiene la mayor prioridad.
 
-## Available Translation Keys
+## Claves de traducción disponibles
 
-The complete set of supported languages and system translation keys is available directly in the core source repository:
+El conjunto completo de idiomas compatibles y claves de traducción del sistema está disponible directamente en el repositorio de código fuente principal:
 
-**[View Translation Source on GitHub](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
+**[Ver código fuente de traducciones en GitHub](external:https://github.com/docmd-io/docmd/tree/main/packages/ui/translations)**
 
-The `fallbackMessage` string supports `{active}` and `{default}` template placeholders, which are substituted dynamically at build time with active locale labels.
+La cadena `fallbackMessage` admite los marcadores de posición de plantilla `{active}` y `{default}`, que se sustituyen dinámicamente en el momento de la compilación con las etiquetas del idioma activo.
 
-## Automated SEO Meta Tags (`hreflang`)
+## Etiquetas meta SEO automatizadas (`hreflang`)
 
-When i18n is enabled, `docmd` automatically generates `<link rel="alternate" hreflang="...">` tags for every page across all configured locales. The default locale is assigned the `x-default` fallback tag:
+Cuando i18n está habilitado, `docmd` genera automáticamente etiquetas `<link rel="alternate" hreflang="...">` para cada página en todos los idiomas configurados. Al idioma predeterminado se le asigna la etiqueta de respaldo `x-default`:
 
 ```html
-<!-- Injected automatically into HTML document headers -->
+<!-- Inyectado automáticamente en los encabezados del documento HTML -->
 <link rel="alternate" hreflang="en" href="/">
 <link rel="alternate" hreflang="x-default" href="/">
 <link rel="alternate" hreflang="hi" href="/hi/">
 <link rel="alternate" hreflang="zh" href="/zh/">
 ```
 
-No manual configuration is required; the engine injects these tags into all generated static pages automatically.
+No se requiere ninguna configuración manual; el motor inyecta estas etiquetas en todas las páginas estáticas generadas automáticamente.
 
-::: callout info "Un-styled Custom Pages" icon:info
-The UI strings translation system applies to standard themed pages. For standalone custom HTML pages using `noStyle: true`, refer to [No-Style Example Pages](../../content/no-style-example.md).
+::: callout info "Páginas personalizadas sin estilo" icon:info
+El sistema de traducción de cadenas de la interfaz se aplica a las páginas con temas estándar. Para páginas HTML personalizadas independientes que usan `noStyle: true`, consulte las [Páginas de ejemplo sin estilo](../../content/no-style-example.md).
 :::

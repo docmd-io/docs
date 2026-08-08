@@ -1,11 +1,11 @@
 ---
-title: "Localisation"
-description: "Serve documentation in multiple languages with locale-first routing, translated navigation, and automatic fallback."
+title: "Localización"
+description: "Sirva documentación en múltiples idiomas con enrutamiento prioritario por idioma, navegación traducida y respaldo automático."
 ---
 
-Add multi-language support to your documentation site. docmd serves each locale at its own URL prefix, translates system UI strings, and falls back gracefully when a translation is missing.
+Agregue soporte multilingüe a su sitio de documentación. docmd sirve cada idioma en su propio prefijo de URL, traduce cadenas del sistema de la interfaz y recurre de forma elegante cuando falta una traducción.
 
-## Add languages to your config
+## Agregar idiomas a su configuración
 
 ```json "docmd.config.json"
 {
@@ -20,51 +20,51 @@ Add multi-language support to your documentation site. docmd serves each locale 
 }
 ```
 
-The `default` locale renders at the site root (`/`). All other locales render at `/{id}/`. You choose the IDs, labels, and which locale is the default - there are no hardcoded assumptions. If you want Hindi as the default, set `default: 'hi'` and Hindi renders at `/` whilst English renders at `/en/`.
+El idioma `default` se renderiza en la raíz del sitio (`/`). Todos los demás idiomas se renderizan en `/{id}/`. Usted elige los ID, las etiquetas y qué idioma es el predeterminado: no hay suposiciones codificadas de forma rígida. Si desea el hindi como predeterminado, establezca `default: 'hi'` y el hindi se renderizará en `/` mientras que el inglés se renderizará en `/en/`.
 
-| Key | Type | Description |
+| Clave | Tipo | Descripción |
 |:----|:-----|:------------|
-| `default` | `string` | Locale ID that renders at `/`. Defaults to the first locale if omitted. |
-| `locales` | `array` | List of locale objects. Each must have an `id`. |
-| `position` | `string` | Where the language switcher appears. `options-menu` (default), `sidebar-top`, or `sidebar-bottom`. |
-| `stringMode` | `boolean` | When `true`, generates locale pages from a single source using `data-i18n` attribute replacement. Default `false`. |
-| `inPlace` | `boolean` | When `true` (with client-side script), swaps strings without URL navigation. For SPAs/dashboards only. Default `false`. |
+| `default` | `string` | ID de idioma que se renderiza en `/`. Por defecto es el primer idioma si se omite. |
+| `locales` | `array` | Lista de objetos de idioma. Cada uno debe tener un `id`. |
+| `position` | `string` | Dónde aparece el selector de idiomas. `options-menu` (predeterminado), `sidebar-top` o `sidebar-bottom`. |
+| `stringMode` | `boolean` | Cuando es `true`, genera páginas de idioma desde una sola fuente utilizando el reemplazo de atributos `data-i18n`. Por defecto es `false`. |
+| `inPlace` | `boolean` | Cuando es `true` (con script del lado del cliente), intercambia cadenas sin navegación de URL. Solo para SPA/paneles de control. Por defecto es `false`. |
 
-Each locale object accepts:
+Cada objeto de idioma acepta:
 
-| Key | Type | Default | Description |
+| Clave | Tipo | Predeterminado | Descripción |
 |:----|:-----|:--------|:------------|
-| `id` | `string` | - | Any identifier you choose (e.g. `en`, `hi`, `fr-ca`). Used as the folder name and URL prefix. Required. |
-| `label` | `string` | Same as `id` | Display name shown in the language switcher. |
-| `dir` | `string` | `ltr` | Text direction. Set to `rtl` for Arabic, Hebrew, etc. |
-| `translations` | `object` | `{}` | Custom UI string overrides (see [Custom UI strings](ui-strings.md)). |
+| `id` | `string` | - | Cualquier identificador que elija (por ejemplo, `en`, `hi`, `fr-ca`). Se utiliza como nombre de carpeta y prefijo de URL. Requerido. |
+| `label` | `string` | Igual que `id` | Nombre a mostrar mostrado en el selector de idiomas. |
+| `dir` | `string` | `ltr` | Dirección del texto. Establezca en `rtl` para árabe, hebreo, etc. |
+| `translations` | `object` | `{}` | Anulaciones de cadenas de UI personalizadas (consulte [Cadenas de UI personalizadas](ui-strings.md)). |
 
-## URL structure
+## Estructura de URL
 
-The default locale has no URL prefix. Non-default locales are nested under `/{id}/`. When combined with [versioning](../versioning.md), the URL is `/{locale}/{version}/page`.
+El idioma predeterminado no tiene prefijo de URL. Los idiomas no predeterminados se anidan en `/{id}/`. Cuando se combina con el [control de versiones](../versioning.md), la URL es `/{locale}/{version}/page`.
 
 ```
-/                       ← default locale, current version
-/getting-started        ← default locale page
-/05/                    ← default locale, old version
-/hi/                    ← non-default locale, current version
-/hi/getting-started     ← non-default locale page
-/hi/05/                 ← non-default locale, old version
+/                       ← idioma predeterminado, versión actual
+/getting-started        ← página del idioma predeterminado
+/05/                    ← idioma predeterminado, versión anterior
+/hi/                    ← idioma no predeterminado, versión actual
+/hi/getting-started     ← página del idioma no predeterminado
+/hi/05/                 ← idioma no predeterminado, versión anterior
 ```
 
-The language switcher preserves your current page and version when you switch locales. The version switcher preserves your current locale.
+El selector de idiomas conserva su página y versión actuales cuando cambia de idioma. El selector de versiones conserva su idioma actual.
 
-## Missing locale directories
+## Directorios de idioma faltantes
 
-If a locale is declared in `locales` but its source directory does not exist (e.g. no `docs/hi/` folder), docmd automatically **disables** that locale in the language switcher. The locale still appears in the dropdown - with an "N/A" badge and greyed-out styling - but clicking it does nothing.
+Si se declara un idioma en `locales` pero su directorio fuente no existe (por ejemplo, no hay carpeta `docs/hi/`), docmd **desactiva** automáticamente ese idioma en el selector de idiomas. El idioma aún aparece en el menú desplegable (con una insignia de "N/A" y un estilo grisáceo), pero al hacer clic en él no hace nada.
 
-This prevents 404 errors when you list planned languages before their content is ready.
+Esto evita errores 404 cuando enumera idiomas planificados antes de que su contenido esté listo.
 
-## Position the language switcher
+## Posicionar el selector de idiomas
 
 <img width="500" class="with-border" src="/assets/previews/menu-i18n.webp">
 
-Control where the language switcher appears using the `position` option:
+Controle dónde aparece el selector de idiomas mediante la opción `position`:
 
 ```json "docmd.config.json"
 {
@@ -74,15 +74,15 @@ Control where the language switcher appears using the `position` option:
 }
 ```
 
-| Position | Behaviour |
+| Posición | Comportamiento |
 |:---------|:----------|
-| `options-menu` | Compact globe icon alongside theme toggle and search. Default. |
-| `sidebar-top` | Full dropdown with label at the top of the sidebar. |
-| `sidebar-bottom` | Full dropdown with label at the bottom of the sidebar. |
+| `options-menu` | Icono de globo compacto junto al interruptor de tema y la búsqueda. Predeterminado. |
+| `sidebar-top` | Desplegable completo con etiqueta en la parte superior de la barra lateral. |
+| `sidebar-bottom` | Desplegable completo con etiqueta en la parte inferior de la barra lateral. |
 
-## String Mode (noStyle pages only)
+## Modo cadena (solo páginas noStyle)
 
-Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), each with its own markdown files. **String Mode** is a simpler alternative designed specifically for [noStyle pages](../../content/no-style-pages.md) - pages that use raw HTML instead of markdown.
+El i18n estándar utiliza directorios separados por idioma (`docs/en/`, `docs/hi/`), cada uno con sus propios archivos Markdown. El **Modo cadena** es una alternativa más simple diseñada específicamente para [páginas noStyle](../../content/no-style-pages.md): páginas que usan HTML directo en lugar de Markdown.
 
 ```json "docmd.config.json"
   "i18n": {
@@ -95,27 +95,27 @@ Standard i18n uses separate directories per locale (`docs/en/`, `docs/hi/`), eac
   }
 ```
 
-With `stringMode: true`:
+Con `stringMode: true`:
 
-1. Source files stay in the root `docs/` directory (no locale subdirectories)
-2. The default locale builds at `/` as normal
-3. For each non-default locale, docmd clones the rendered HTML and applies **server-side string replacement** using JSON files from `assets/i18n/{locale}.json`
-4. Output goes to `/{locale}/` - e.g. `/zh/index.html` - with full SEO (hreflang tags, correct `lang` attribute)
-5. If a translation file is missing, the page renders with the default language text
+1. Los archivos fuente permanecen en el directorio raíz `docs/` (sin subdirectorios de idioma)
+2. El idioma predeterminado se compila en `/` como de costumbre
+3. Para cada idioma no predeterminado, docmd clona el HTML renderizado y aplica **reemplazo de cadenas en el servidor** utilizando archivos JSON de `assets/i18n/{locale}.json`
+4. La salida va a `/{locale}/` (por ejemplo, `/zh/index.html`) con SEO completo (etiquetas hreflang, atributo `lang` correcto)
+5. Si falta un archivo de traducción, la página se renderiza con el texto del idioma predeterminado
 
-For full details on the `data-i18n` attribute syntax and JSON file format, see [noStyle string replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
+Para conocer todos los detalles sobre la sintaxis del atributo `data-i18n` y el formato del archivo JSON, consulte [reemplazo de cadenas noStyle](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle).
 
-::: callout warning "String Mode does not translate markdown content" icon:info
-String replacement works by finding `data-i18n` attributes in the rendered HTML. Standard markdown content (`## Heading`, paragraphs, lists) renders to plain HTML tags without these attributes - so there is nothing for the replacer to find.
+::: callout warning "El Modo cadena no traduce el contenido Markdown" icon:info
+El reemplazo de cadenas funciona buscando atributos `data-i18n` en el HTML renderizado. El contenido Markdown estándar (`## Encabezado`, párrafos, listas) se renderiza en etiquetas HTML simples sin estos atributos, por lo que no hay nada que el reemplazador pueda encontrar.
 
-- **Documentation sites** → use directory mode (the default). Each locale has its own markdown files with fully translated prose.
-- **Landing pages, marketing sites, dashboards** → use string mode. These are noStyle pages with custom HTML where you control every tag and can add `data-i18n` attributes.
+- **Sitios de documentación** → utilice el modo directorio (el predeterminado). Cada idioma tiene sus propios archivos Markdown con prosa totalmente traducida.
+- **Páginas de inicio, sitios de marketing, paneles de control** → utilice el modo cadena. Estas son páginas noStyle con HTML personalizado donde usted controla cada etiqueta y puede agregar atributos `data-i18n`.
 
-If your site has both - for example, a noStyle landing page plus documentation - use directory mode for the docs and add `data-i18n` attributes to your noStyle page. String mode will translate the noStyle HTML while directory mode handles the documentation content.
+Si su sitio tiene ambos (por ejemplo, una página de inicio noStyle más documentación), utilice el modo directorio para la documentación y agregue atributos `data-i18n` a su página noStyle. El modo cadena traducirá el HTML noStyle mientras que el modo directorio gestionará el contenido de la documentación.
 :::
 
-## Next steps
+## Próximos pasos
 
-- [Translated content](translated-content.md) - directory structure, writing translations, navigation
-- [UI strings & SEO](ui-strings.md) - customising system text, hreflang tags
-- [noStyle string replacement](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) - `data-i18n` attribute syntax and JSON format for noStyle pages
+- [Contenido traducido](translated-content.md): estructura de directorios, escritura de traducciones, navegación
+- [Cadenas de UI y SEO](ui-strings.md): personalización del texto del sistema, etiquetas hreflang
+- [Reemplazo de cadenas noStyle](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle): sintaxis de atributos `data-i18n` y formato JSON para páginas noStyle

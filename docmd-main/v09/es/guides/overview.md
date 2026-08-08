@@ -1,33 +1,33 @@
 ---
-title: "Guides Overview"
-description: "Explore technical guides for docmd — AI Assistant, MCP agent integration, OKF knowledge bundles, hybrid semantic search, and OpenAPI generation."
+title: "Descripción general de guías"
+description: "Explore guías técnicas para docmd: Asistente de IA, integración de agentes MCP, paquetes de conocimiento OKF, búsqueda semántica híbrida y generación de OpenAPI."
 ---
 
-# Guides Overview
+# Descripción general de guías
 
-Docmd guides provide in-depth technical walkthroughs for implementing advanced features like AI Assistant integration, Model Context Protocol (MCP) servers, client-side semantic search, and automated OpenAPI documentation pipelines.
+Las guías de Docmd proporcionan recorridos técnicos detallados para implementar características avanzadas como la integración del Asistente de IA, servidores de Protocolo de Contexto de Modelo (MCP), búsqueda semántica del lado del cliente y canalizaciones de documentación automatizadas de OpenAPI.
 
 ::: grids
 ::: grid
-::: card "AI & Automation" icon:bot
-Configure the interactive AI Assistant, set up Model Context Protocol (MCP) servers for AI agents, and build Open Knowledge Format (OKF) bundles.
-[Explore AI Guides →](./ai/ai-assistant)
+::: card "IA y automatización" icon:bot
+Configure el Asistente de IA interactivo, configure servidores del Protocolo de Contexto de Modelo (MCP) para agentes de IA y cree paquetes de Formato de Conocimiento Abierto (OKF).
+[Explorar guías de IA →](./ai/ai-assistant)
 :::
 :::
 ::: grid
-::: card "Search Optimisation" icon:search
-Deploy browser-native hybrid semantic search using ONNX embedding models and local vector indices.
-[Configure Semantic Search →](./search/semantic-search)
+::: card "Optimización de búsqueda" icon:search
+Despliegue búsqueda semántica híbrida nativa del navegador utilizando modelos de incrustación ONNX e índices de vectores locales.
+[Configurar búsqueda semántica →](./search/semantic-search)
 :::
 :::
 ::: grid
-::: card "Integrations" icon:plug
-Automate REST API reference generation directly from OpenAPI / Swagger specifications into docmd page layouts.
-[OpenAPI Integration →](./integrations/openapi-generation)
+::: card "Integraciones" icon:plug
+Automatice la generación de referencias de API REST directamente desde especificaciones OpenAPI / Swagger en diseños de página de docmd.
+[Integración con OpenAPI →](./integrations/openapi-generation)
 :::
 :::
 :::
 
-::: callout tip "New to docmd?" icon:rocket
-If you are setting up docmd for the first time, start with the [Quick Start](../getting-started/quick-start.md) guide before configuring advanced AI and search extensions.
+::: callout tip "¿Nuevo en docmd?" icon:rocket
+Si está configurando docmd por primera vez, comience con la guía de [Inicio rápido](../getting-started/quick-start.md) antes de configurar extensiones avanzadas de IA y búsqueda.
 :::

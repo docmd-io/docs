@@ -1,53 +1,53 @@
 ---
-title: "Changelogs"
-description: "Generate structured, timeline-based version histories and release notes in docmd."
+title: "Registros de cambios (Changelogs)"
+description: "Genere historiales de versiones basados en líneas de tiempo y notas de lanzamiento estructuradas en docmd."
 ---
 
-The `changelog` container provides a specialised layout for documenting project evolution. It parses version or date headers into vertical timeline entries, ensuring release notes remain clear and scannable.
+El contenedor `changelog` proporciona un diseño especializado para documentar la evolución del proyecto. Analiza sintácticamente los encabezados de versión o fecha en entradas verticales de línea de tiempo, garantizando que las notas de lanzamiento sigan siendo claras y fáciles de leer.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
 ::: changelog
 
-== Label Text
-Description of the entry goes here.
+== Texto de la etiqueta
+La descripción de la entrada va aquí.
 
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Entry Marker** | `==` | Delimiter that initiates a new timeline entry within the changelog block. |
-| **Label** | `String` | Text string (e.g. version number or ISO date) rendered as a timeline badge on the left margin. |
+| **Marcador de entrada** | `==` | Delimitador que inicia una nueva entrada de línea de tiempo dentro del bloque del registro de cambios. |
+| **Etiqueta** | `String` | Cadena de texto (por ejemplo, número de versión o fecha ISO) renderizada como una insignia de línea de tiempo en el margen izquierdo. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Release History Timeline
+### Línea de tiempo del historial de lanzamientos
 
-Changelogs support full Markdown formatting within each entry, including lists, callouts, and code snippets:
+Los registros de cambios admiten el formato completo de Markdown dentro de cada entrada, incluidas listas, avisos y fragmentos de código:
 
 ```markdown
 ::: changelog
 
 == v2.0.0 (2026-03-15)
-### Major System Overhaul
-The core engine has been rearchitected for isomorphic execution.
+### Reacondicionamiento principal del sistema
+El motor principal se ha rediseñado para la ejecución isomórfica.
 
-*   Implemented **SPA Router** for zero-reload page navigation.
-*   Introduced the **Isomorphic Plugin** architecture.
+*   Se implementó el **Enrutador SPA** para navegación por páginas sin recarga.
+*   Se introdujo la arquitectura de **Plugins isomórficos**.
 
 ::: callout success
-This release delivers a 40% improvement in initial build compilation speed.
+Este lanzamiento ofrece una mejora del 40% en la velocidad de compilación inicial.
 :::
 
 == v1.5.1 (2025-12-10)
-### Security Patch
-*   Resolved high-severity vulnerability in internal parser.
-*   Updated dependency `flatted` to `v3.3.2`.
+### Parche de seguridad
+*   Se resolvió una vulnerabilidad de alta gravedad en el analizador interno.
+*   Se actualizó la dependencia `flatted` a `v3.3.2`.
 
 == v1.0.0 (2024-05-01)
-Initial public release.
+Lanzamiento público inicial.
 
 :::
 ```
@@ -55,26 +55,26 @@ Initial public release.
 ::: changelog
 
 == v2.0.0 (2026-03-15)
-### Major System Overhaul
-The core engine has been rearchitected for isomorphic execution.
+### Reacondicionamiento principal del sistema
+El motor principal se ha rediseñado para la ejecución isomórfica.
 
-*   Implemented **SPA Router** for zero-reload page navigation.
-*   Introduced the **Isomorphic Plugin** architecture.
+*   Se implementó el **Enrutador SPA** para navegación por páginas sin recarga.
+*   Se introdujo la arquitectura de **Plugins isomórficos**.
 
 ::: callout success
-This release delivers a 40% improvement in initial build compilation speed.
+Este lanzamiento ofrece una mejora del 40% en la velocidad de compilación inicial.
 :::
 
 == v1.5.1 (2025-12-10)
-### Security Patch
-*   Resolved high-severity vulnerability in internal parser.
-*   Updated dependency `flatted` to `v3.3.2`.
+### Parche de seguridad
+*   Se resolvió una vulnerabilidad de alta gravedad en el analizador interno.
+*   Se actualizó la dependencia `flatted` a `v3.3.2`.
 
 == v1.0.0 (2024-05-01)
-Initial public release.
+Lanzamiento público inicial.
 
 :::
 
-::: callout tip "Historical Context for AI Agents" icon:sparkles
-Changelog containers supply a temporal roadmap for AI agents. The `::: changelog` structure allows LLMs to parse when specific APIs or security fixes were introduced in the `llms.txt` context stream.
+::: callout tip "Contexto histórico para agentes de IA" icon:sparkles
+Los contenedores de registro de cambios proporcionan una hoja de ruta temporal para los agentes de IA. La estructura `::: changelog` permite a los LLM analizar cuándo se introdujeron APIs específicas o correcciones de seguridad en el flujo de contexto `llms.txt`.
 :::

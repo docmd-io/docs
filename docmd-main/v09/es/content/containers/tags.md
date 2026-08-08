@@ -1,64 +1,64 @@
 ---
-title: "Tags"
-description: "Use tag containers to label versions, statuses, or highlight short text snippets inline in docmd."
+title: "Etiquetas (Tags)"
+description: "Utilice contenedores de etiquetas para etiquetar versiones, estados o destacar fragmentos de texto cortos en línea en docmd."
 ---
 
-The `tag` container is a self-closing component that inserts compact, pill-shaped badges inline. Tags retain their compact proportions across all contexts—they do not inherit surrounding heading font sizes or text weights.
+El contenedor `tag` es un componente de autocierre que inyecta insignias compactas en forma de píldora en línea. Las etiquetas conservan sus proporciones compactas en todos los contextos; no heredan los tamaños de fuente de encabezado circundantes ni los pesos de texto.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: tag "Label text" [property:value...]
+::: tag "Texto de la etiqueta" [propiedad:valor...]
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | Text string displayed inside the pill badge. |
-| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). Automatically calculates contrasting text color. |
-| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
-| **URL** | `url:URL` | Converts the tag into a clickable link. Prefix with `external:` to open in a new tab. Uses unquoted URL strings matching [buttons](buttons.md). |
+| **Etiqueta** | `"String"` | Cadena de texto mostrada dentro de la insignia de píldora. |
+| **Color** | `color:VALOR` | Aplica un color de fondo (admite nombres CSS estándar o códigos hexadecimales). Calcula automáticamente el color de texto en contraste. |
+| **Icono** | `icon:NOMBRE` | Agrega un icono de [Lucide](external:https://lucide.dev/icons) dentro de la insignia. |
+| **URL** | `url:URL` | Convierte la etiqueta en un enlace interactivo. Anteponga `external:` para abrir en una nueva pestaña. Utilice cadenas de URL sin comillas coincidentes con los [botones](buttons.md). |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Inline Version Badges
+### Insignias de versión en línea
 
-Use a coloured tag inline to indicate feature introductions or version constraints:
+Utilice una etiqueta de color en línea para indicar introducciones de características o restricciones de versión:
 
 ```markdown
-This capability was introduced in ::: tag "v0.9.0" color:blue and is fully supported.
+Esta capacidad se introdujo en ::: tag "v0.9.0" color:blue y es totalmente compatible.
 ```
 
-This capability was introduced in ::: tag "v0.9.0" color:blue and is fully supported.
+Esta capacidad se introdujo en ::: tag "v0.9.0" color:blue y es totalmente compatible.
 
-### Status Indicators
+### Indicadores de estado
 
-Insert status labels across your documentation pages with custom color accents:
+Inserte etiquetas de estado en todas sus páginas de documentación con acentos de color personalizados:
 
 ```markdown
-::: tag "Deprecated" color:#ef4444
+::: tag "Obsoleto" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "Stable" color:#22c55e
-::: tag "Verified" icon:check-circle color:#10b981
+::: tag "Estable" color:#22c55e
+::: tag "Verificado" icon:check-circle color:#10b981
 ```
 
-::: tag "Deprecated" color:#ef4444
+::: tag "Obsoleto" color:#ef4444
 ::: tag "Beta" color:#eab308
-::: tag "Stable" color:#22c55e
-::: tag "Verified" icon:check-circle color:#10b981
+::: tag "Estable" color:#22c55e
+::: tag "Verificado" icon:check-circle color:#10b981
 
-### Linked Tag Badges
+### Insignias de etiquetas enlazadas
 
-Add `url:` to make a tag act as a hyperlink, useful for cross-referencing release notes or external resources.
+Agregue `url:` para que una etiqueta actúe como un hipervínculo, útil para hacer referencias cruzadas de notas de lanzamiento o recursos externos.
 
 ```markdown
-Check out the latest ::: tag "Release Notes" icon:external-link url:./#release-notes
+Consulte las últimas ::: tag "Notas de lanzamiento" icon:external-link url:./#release-notes
 ```
 
-Check out the latest ::: tag "Release Notes" icon:external-link url:./#release-notes
+Consulte las últimas ::: tag "Notas de lanzamiento" icon:external-link url:./#release-notes
 
-### External Links
+### Enlaces externos
 
-Prefix the URL with `external:` to force the link to open in a new browser tab:
+Anteponga `external:` a la URL para forzar que el enlace se abra en una nueva pestaña del navegador:
 
 ```markdown
 ::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

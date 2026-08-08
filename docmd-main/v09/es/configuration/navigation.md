@@ -1,83 +1,83 @@
 ---
-title: "Navigation Configuration"
-description: "Structure sidebar navigation, organise categories, and configure icons for readers and search engines in docmd."
+title: "Configuración de navegación"
+description: "Estructure la navegación de la barra lateral, organice categorías y configure iconos para lectores y motores de búsqueda en docmd."
 ---
 
-`docmd` provides explicit control over your site's navigation hierarchy. A structured sidebar creates a logical reading sequence, optimising both the Single Page Application (SPA) user experience and search engine indexability.
+`docmd` proporciona un control explícito sobre la jerarquía de navegación de su sitio. Una barra lateral estructurada crea una secuencia de lectura lógica, optimizando tanto la experiencia del usuario de la aplicación de una sola página (SPA) como la indexación en motores de búsqueda.
 
-## The Navigation Schema
+## El esquema de navegación
 
-The `navigation` array in `docmd.config.json` controls the sidebar. Each object represents a direct page link or a nested category group:
+El array `navigation` en `docmd.config.json` controla la barra lateral. Cada objeto representa un enlace directo a una página o un grupo de categorías anidado:
 
 <img width="260" class="with-border" src="/assets/previews/navigation-hierarchy.webp">
 
 ```json "docmd.config.json"
 {
   "navigation": [
-    { "title": "Overview", "path": "/", "icon": "home" },
-    { "title": "Quick Start", "path": "/getting-started/quick-start", "icon": "rocket" }
+    { "title": "Descripción general", "path": "/", "icon": "home" },
+    { "title": "Inicio rápido", "path": "/getting-started/quick-start", "icon": "rocket" }
   ]
 }
 ```
 
-## Supported Link Properties
+## Propiedades de enlace compatibles
 
-Every item in the navigation array supports the following properties:
+Cada elemento del array de navegación admite las siguientes propiedades:
 
-| Property | Type | Required | Description |
+| Propiedad | Tipo | Requerido | Descripción |
 | :--- | :--- | :--- | :--- |
-| `title` | `String` | Yes | Menu label displayed in the sidebar. |
-| `path` | `String` | No | Target URL route. Relative local paths must start with a leading slash (`/`). |
-| `icon` | `String` | No | Name of any [Lucide Icon](external:https://lucide.dev/icons) in kebab-case format (e.g. `git-branch`). |
-| `children` | `Array` | No | Array of nested navigation items defining a submenu. |
-| `collapsible`| `Boolean`| No | When `true`, enables expanding or collapsing category groups. |
-| `external` | `Boolean`| No | When `true`, opens the destination link in a new browser tab. |
+| `title` | `String` | Sí | Etiqueta del menú mostrada en la barra lateral. |
+| `path` | `String` | No | Ruta URL de destino. Las rutas locales relativas deben comenzar con una barra diagonal (`/`). |
+| `icon` | `String` | No | Nombre de cualquier [Icono de Lucide](external:https://lucide.dev/icons) en formato kebab-case (por ejemplo, `git-branch`). |
+| `children` | `Array` | No | Array de elementos de navegación anidados que definen un submenú. |
+| `collapsible`| `Boolean`| No | Cuando es `true`, permite expandir o colapsar grupos de categorías. |
+| `external` | `Boolean`| No | Cuando es `true`, abre el enlace de destino en una nueva pestaña del navegador. |
 
-## Organising Navigation Groups
+## Organización de grupos de navegación
 
-Structure your sidebar using two primary grouping patterns:
+Estructure su barra lateral utilizando dos patrones de agrupación principales:
 
-### Interactive Category Headers (Landing Page + Children)
+### Encabezados de categoría interactivos (Página de inicio + Hijos)
 
-Specify a `path` alongside `children` for a category section. Clicking the header navigates to the landing page and toggles child items:
+Especifique un `path` junto con `children` para una sección de categoría. Hacer clic en el encabezado navega a la página de inicio y alterna los elementos hijos:
 
 ```json "docmd.config.json"
 {
-  "title": "Cloud Services",
+  "title": "Servicios en la nube",
   "path": "/cloud/overview", 
   "children": [
-    { "title": "AWS Setup", "path": "/cloud/aws" },
-    { "title": "GCP Setup", "path": "/cloud/gcp" }
+    { "title": "Configuración de AWS", "path": "/cloud/aws" },
+    { "title": "Configuración de GCP", "path": "/cloud/gcp" }
   ]
 }
 ```
 
-### Static Category Labels (Group Headers Only)
+### Etiquetas de categoría estáticas (Solo encabezados de grupo)
 
-Omit the `path` property. The category header acts as a non-clickable title grouping related links:
+Omita la propiedad `path`. El encabezado de la categoría actúa como un título no interactivo que agrupa enlaces relacionados:
 
 ```json "docmd.config.json"
 {
-  "title": "Formatting & Elements",
+  "title": "Formato y elementos",
   "icon": "layout-grid",
   "children": [
-    { "title": "Syntax Guide", "path": "/content/syntax" },
-    { "title": "Rich Containers", "path": "/content/containers" }
+    { "title": "Guía de sintaxis", "path": "/content/syntax" },
+    { "title": "Contenedores enriquecidos", "path": "/content/containers" }
   ]
 }
 ```
 
-## Contextual Breadcrumbs
+## Migas de pan contextuales
 
-The engine resolves contextual breadcrumbs for every page dynamically, rendering them above the main page header:
+El motor resuelve las migas de pan contextuales para cada página dinámicamente, renderizándolas sobre el encabezado principal de la página:
 
 <img width="500" class="with-border" src="/assets/previews/navigation-breadcrumb.webp">
 
-- **Automatic Path Tracing**: The engine traces the active route through the navigation tree to build breadcrumb segments.
-- **Active Page Indicator**: The current document is displayed as the unlinked final item.
-- **Responsive Layout**: Breadcrumbs adapt dynamically to small mobile viewports.
+- **Rastreo automático de rutas**: El motor rastrea la ruta activa a través del árbol de navegación para construir los segmentos de migas de pan.
+- **Indicador de página activa**: El documento actual se muestra como el elemento final no enlazado.
+- **Diseño adaptable**: Las migas de pan se adaptan dinámicamente a ventanas gráficas móviles pequeñas.
 
-To disable breadcrumbs globally, update `layout.breadcrumbs`:
+Para desactivar las migas de pan globalmente, actualice `layout.breadcrumbs`:
 
 ```json "docmd.config.json"
 {
@@ -87,31 +87,31 @@ To disable breadcrumbs globally, update `layout.breadcrumbs`:
 }
 ```
 
-## Cascading Navigation Resolution
+## Resolución de navegación en cascada
 
-`docmd` uses a "closest file wins" cascading resolution system. This allows versioned or localised subfolders to define dedicated sidebars without duplicating global options:
+`docmd` utiliza un sistema de resolución en cascada donde "el archivo más cercano gana". Esto permite que las subcarpetas con versión o localizadas definan barras laterales dedicadas sin duplicar opciones globales:
 
 ```text
-my-project/
-├── docmd.config.json         [Level 3: Global Config] - Default Fallback
+mi-proyecto/
+├── docmd.config.json         [Nivel 3: Config global] - Respaldo predeterminado
 ├── docs-v1.0/ 
-│   ├── navigation.json       [Level 2: Version Navigation] - Overrides Global
+│   ├── navigation.json       [Nivel 2: Navegación de versión] - Anula global
 │   └── zh/
-│       └── navigation.json   [Level 1: Language Navigation] - Top Priority
+│       └── navigation.json   [Nivel 1: Navegación de idioma] - Máxima prioridad
 ```
 
-1. **Level 1 (Language Specific)**: `navigation.json` inside a locale folder overrides navigation for that language and version.
-2. **Level 2 (Version Specific)**: `navigation.json` inside a version folder overrides global navigation for that specific release.
-3. **Level 3 (Global Base)**: `navigation` array in `docmd.config.json` serves as the base fallback.
+1. **Nivel 1 (Específico del idioma)**: `navigation.json` dentro de una carpeta de idioma anula la navegación para ese idioma y versión.
+2. **Nivel 2 (Específico de la versión)**: `navigation.json` dentro de una carpeta de versión anula la navegación global para esa versión específica.
+3. **Nivel 3 (Base global)**: El array `navigation` en `docmd.config.json` sirve como respaldo base.
 
-### Broken-Link Failsafe
+### Protección contra enlaces rotos
 
-During Level 2 or 3 fallback resolution, the engine checks whether targeted files exist on disk. Non-existent paths are filtered out of the rendered sidebar automatically.
+Durante la resolución de respaldo del Nivel 2 o 3, el motor comprueba si los archivos de destino existen en el disco. Las rutas inexistentes se filtran de la barra lateral renderizada automáticamente.
 
-## Icon System Integration
+## Integración del sistema de iconos
 
-`docmd` embeds the complete **Lucide Icon** set natively. Pass any official Lucide icon name in kebab-case format (e.g. `settings`, `folder-open`, `book-marked`) to apply an icon.
+`docmd` integra el conjunto completo de **Iconos de Lucide** de forma nativa. Pase cualquier nombre de icono oficial de Lucide en formato kebab-case (por ejemplo, `settings`, `folder-open`, `book-marked`) para aplicar un icono.
 
-::: callout tip "Optimising Sidebar Labels for AI Engines" icon:sparkles
-Keep sidebar titles clear and concise. A structured navigation tree helps AI agents parse your documentation structure efficiently via the compiled `llms.txt` endpoint.
+::: callout tip "Optimización de etiquetas de la barra lateral para motores de IA" icon:sparkles
+Mantenga los títulos de la barra lateral claros y concisos. Un árbol de navegación estructurado ayuda a los agentes de IA a analizar eficientemente la estructura de su documentación a través del extremo compilado `llms.txt`.
 :::

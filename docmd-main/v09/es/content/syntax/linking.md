@@ -1,89 +1,90 @@
 ---
-title: "Linking & Referencing"
-description: "Master internal cross-linking, URL normalisation, external new-tab triggers, and static asset references in docmd."
+title: "Enlaces y referencias"
+description: "Domine los enlaces cruzados internos, la normalización de URL, los activadores de nuevas pestañas externas y las referencias a recursos estáticos en docmd."
 ---
 
-`docmd` provides a filesystem-aware linking system. Write links referencing source `.md` files naturally—the compiler normalises target paths into clean, canonical URLs automatically.
+`docmd` proporciona un sistema de enlaces consciente del sistema de archivos. Escriba enlaces que hagan referencia a archivos `.md` de origen de forma natural; el compilador normaliza las rutas de destino en URLs canónicas y limpias automáticamente.
 
-::: callout info "Automatic Path Normalisation" icon:info
-Write target paths using `.md` extensions, trailing slashes, or direct filenames (`overview.md`, `overview/`, or `overview`). The build compiler resolves them to identical canonical URLs.
+::: callout info "Normalización automática de rutas" icon:info
+Escriba rutas de destino utilizando extensiones `.md`, barras diagonales finales o nombres de archivo directos (`overview.md`, `overview/` u `overview`). El compilador de compilación las resuelve en URLs canónicas idénticas.
 :::
 
-## URL Normalisation Mechanics
+## Mecánica de normalización de URL
 
-During build compilation, `docmd` normalises internal link targets automatically across Markdown prose, button containers, tags, and navigation trees:
+Durante la compilación, `docmd` normaliza los destinos de enlaces internos automáticamente en la prosa de Markdown, contenedores de botones, etiquetas y árboles de navegación:
 
-| Input Path | Compiled Output URL | Resolution Rule |
+| Ruta de entrada | URL de salida compilada | Regla de resolución |
 | :--- | :--- | :--- |
-| `overview.md` | `overview/` | Strips `.md` extension, appends trailing `/`. |
-| `overview` | `overview/` | Appends trailing `/` automatically. |
-| `overview/` | `overview/` | Retains existing canonical format. |
-| `api/commands.md` | `api/commands/` | Normalises subdirectory route. |
-| `localisation/index.md` | `localisation/` | Strips `index`, resolves directory root. |
-| `../index.md` | `../` | Resolves parent directory root. |
-| `overview.md#settings` | `overview/#settings` | Preserves URL hash fragment. |
-| `https://example.com` | `https://example.com` | Retains external URL untouched. |
+| `overview.md` | `overview/` | Elimina la extensión `.md`, añade la barra `/` final. |
+| `overview` | `overview/` | Añade la barra `/` final automáticamente. |
+| `overview/` | `overview/` | Conserva el formato canónico existente. |
+| `api/commands.md` | `api/commands/` | Normaliza la ruta del subdirectorio. |
+| `localisation/index.md` | `localisation/` | Elimina `index`, resuelve la raíz del directorio. |
+| `../index.md` | `../` | Resuelve la raíz del directorio primario. |
+| `overview.md#settings` | `overview/#settings` | Preserva el fragmento de hash de la URL. |
+| `https://example.com` | `https://example.com` | Conserva la URL externa sin cambios. |
 
-## Internal Document Links
+## Enlaces a documentos internos
 
-Reference internal documents using relative filesystem paths:
+Haga referencia a documentos internos utilizando rutas relativas del sistema de archivos:
 
-| Link Target | Syntax Example |
+| Destino del enlace | Ejemplo de sintaxis |
 | :--- | :--- |
-| **Sibling Page** | `[System Overview](overview.md)` |
-| **Subdirectory Page** | `[API Reference](api/node-api.md)` |
-| **Directory Index** | `[Localisation](localisation/index.md)` |
-| **Parent Directory** | `[Back to Home](../index.md)` |
+| **Página hermana** | `[Descripción general del sistema](overview.md)` |
+| **Página de subdirectorio** | `[Referencia de la API](api/node-api.md)` |
+| **Índice del directorio** | `[Localización](localisation/index.md)` |
+| **Directorio primario** | `[Volver a inicio](../index.md)` |
 
-## Section Anchor Links
+## Enlaces de ancla de sección
 
-Navigate to specific document headings using URL hash fragments:
+Navegue a encabezados de documentos específicos utilizando fragmentos de hash de URL:
 
 ```markdown
-<!-- Intra-page section anchor -->
-[Jump to Roadmap](#project-roadmap)
+<!-- Ancla de sección dentro de la página -->
+[Ir a la hoja de ruta](#project-roadmap)
 
-<!-- Cross-page section anchor -->
-[Review CLI Flags](../api/cli-commands.md#available-flags)
+<!-- Ancla de sección entre páginas -->
+[Revisar marcadores de CLI](../api/cli-commands.md#available-flags)
 ```
 
-Hash fragments are preserved through URL normalisation. The cross-page link above compiles to `../api/cli-commands/#available-flags`.
+Los fragmentos de hash se conservan mediante la normalización de URL. El enlace entre páginas anterior se compila como `../api/cli-commands/#available-flags`.
 
-## Opening External Links in New Tabs
+## Apertura de enlaces externos en nuevas pestañas
 
-Prepend `external:` to any URL target to force the link to open in a new browser tab (`target="_blank"`):
+Anteponga `external:` a cualquier destino URL para forzar que el enlace se abra en una nueva pestaña del navegador (`target="_blank"`):
 
 ```markdown
-[Open in New Tab](external:./configuration/overview.md)
-[GitHub Repository](external:https://github.com/docmd-io/docmd)
+[Abrir en nueva pestaña](external:./configuration/overview.md)
+[Repositorio de GitHub](external:https://github.com/docmd-io/docmd)
 ```
 
-The `external:` prefix string is stripped from rendered HTML href attributes.
+La cadena del prefijo `external:` se elimina de los atributos href de HTML renderizados.
 
-## Direct Unprocessed Asset Links (`raw:`)
+## Enlaces directos a recursos no procesados (`raw:`)
 
-Use the `raw:` prefix to bypass URL normalisation and target static downloadable files directly:
+Utilice el prefijo `raw:` para omitir la normalización de URL y dirigirse directamente a archivos descargables estáticos:
 
 ```markdown
-[Download Raw Source](raw:docs/readme.md)
+[Descargar código fuente no procesado](raw:docs/readme.md)
 ```
 
-## Rich Containers & Interactive Elements
+## Contenedores enriquecidos y elementos interactivos
 
-Button (`::: button`) and Tag (`::: tag`) containers support all linking prefixes, including `external:` and `raw:` modifiers:
+Los contenedores de botones (`::: button`) y etiquetas (`::: tag`) admiten todos los prefijos de enlace, incluidos los modificadores `external:` y `raw:`:
 
 ```markdown
-::: button "Quick Start Guide" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:github
-::: button "Download Manifest" raw:docs/manifest.json icon:download
+::: button "Guía de inicio rápido" ./getting-started/quick-start.md icon:rocket
+::: button "Repositorio de GitHub" external:https://github.com/docmd-io/docmd icon:github
+::: button "Descargar manifiesto" raw:docs/manifest.json icon:download
 
-::: tag "v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
-::: tag "External Site" link:external:https://docmd.io icon:external-link
+::: tag "Lanzamiento v0.9.0" link:release-notes/0-9-0.md icon:tag color:#22c55e
+::: tag "Sitio externo" link:external:https://docmd.io icon:external-link
 :::
+```
 
-## Navigation Configuration Links
+## Enlaces de configuración de navegación
 
-Route entries in `navigation.json` and `docmd.config.json` are normalised automatically during build compilation:
+Las entradas de ruta en `navigation.json` y `docmd.config.json` se normalizan automáticamente durante la compilación:
 
 ```json "navigation.json"
 [
@@ -93,7 +94,7 @@ Route entries in `navigation.json` and `docmd.config.json` are normalised automa
 ]
 ```
 
-To force a navigation item to open in a new tab, set `"external": true`:
+Para forzar que un elemento de navegación se abra en una nueva pestaña, establezca `"external": true`:
 
 ```json "navigation.json"
 [
@@ -105,18 +106,18 @@ To force a navigation item to open in a new tab, set `"external": true`:
 ]
 ```
 
-::: callout tip "Linking to Category Directories" icon:lightbulb
-When linking to a subdirectory's index page, reference the folder path directly (`localisation/`) rather than appending `index.md`.
+::: callout tip "Vincular a directorios de categorías" icon:lightbulb
+Al vincular a la página de índice de un subdirectorio, haga referencia a la ruta de la carpeta directamente (`localisation/`) en lugar de añadir `index.md`.
 :::
 
-## Protocols & Asset Paths
+## Protocolos y rutas de recursos
 
-The compiler preserves standard network protocols and static asset paths:
+El compilador conserva los protocolos de red estándar y las rutas de recursos estáticos:
 
-- **HTTPS Protocols**: `[docmd Homepage](https://docmd.io)` (opens in same tab unless `external:` is prefixed).
-- **Mail Protocols**: `[Support Desk](mailto:help@docmd.io)` (triggers email client).
-- **Static Assets**: `[Download Asset](/assets/bin/docmd-mac.zip)` (bypasses URL normalisation).
+- **Protocolos HTTPS**: `[Página de inicio de docmd](https://docmd.io)` (se abre en la misma pestaña a menos que se anteponga `external:`).
+- **Protocolos de correo**: `[Mesa de ayuda](mailto:help@docmd.io)` (activa el cliente de correo electrónico).
+- **Recursos estáticos**: `[Descargar recurso](/assets/bin/docmd-mac.zip)` (omite la normalización de URL).
 
-::: callout tip "Descriptive Anchors for AI Context" icon:sparkles
-Use **descriptive anchor text** (`[Configure PWA caching](../plugins/pwa.md)`) instead of generic labels (`[Read more](../plugins/pwa.md)`). Explicit link text improves semantic understanding for search indexers and AI agents.
+::: callout tip "Anclas descriptivas para el contexto de IA" icon:sparkles
+Utilice **texto de ancla descriptivo** (`[Configurar el almacenamiento en caché de PWA](../plugins/pwa.md)`) en lugar de etiquetas genéricas (`[Leer más](../plugins/pwa.md)`). El texto de enlace explícito mejora la comprensión semántica para los indexadores de búsqueda y los agentes de IA.
 :::

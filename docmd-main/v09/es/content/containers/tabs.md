@@ -1,40 +1,40 @@
 ---
-title: "Tabs"
-description: "Organise alternative code snippets, platform instructions, and multi-language content into switchable tabs in docmd."
+title: "Pestañas (Tabs)"
+description: "Organice fragmentos de código alternativos, instrucciones de plataformas y contenido multilingüe en pestañas conmutables en docmd."
 ---
 
-Tabs present mutually exclusive or alternative data sets (such as package manager choices or operating system commands). They condense technical instructions into clean, interactive tabbed containers.
+Las pestañas presentan conjuntos de datos mutuamente excluyentes o alternativos (como elecciones de gestores de paquetes o comandos de sistemas operativos). Condensan instrucciones técnicas en contenedores de pestañas limpios e interactivos.
 
-::: callout info "Spaceless Syntax Support" icon:info
-Both `::: tabs` and `:::tabs` (spaceless) syntax render identically. Choose whichever style suits your authoring workflow.
+::: callout info "Soporte de sintaxis sin espacios" icon:info
+Tanto la sintaxis `::: tabs` como `:::tabs` (sin espacios) se renderizan de forma idéntica. Elija el estilo que mejor se adapte a su flujo de trabajo de creación.
 :::
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
 ::: tabs
 
-== tab "Tab Label" [property:value...]
-Tab content goes here.
+== tab "Etiqueta de la pestaña" [propiedad:valor...]
+El contenido de la pestaña va aquí.
 
-== tab "Secondary Label"
-Secondary tab content goes here.
+== tab "Etiqueta secundaria"
+El contenido de la pestaña secundaria va aquí.
 
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | Text displayed on the tab selector button. |
-| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the label string. |
+| **Etiqueta** | `"String"` | Texto mostrado en el botón selector de pestañas. |
+| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes de la cadena de la etiqueta. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Package Manager Switcher
+### Conmutador de gestor de paquetes
 
-Display installation commands across multiple package managers in a single compact block:
+Muestre comandos de instalación en múltiples gestores de paquetes en un solo bloque compacto:
 
-````markdown
+```markdown
 ::: tabs
 
 == tab "pnpm" icon:box
@@ -53,7 +53,7 @@ yarn add @docmd/core
 ```
 
 :::
-````
+```
 
 ::: tabs
 
@@ -74,11 +74,11 @@ yarn add @docmd/core
 
 :::
 
-### Multi-Language Code Snippets
+### Fragmentos de código multilingües
 
-Group language-specific implementations using tab icons for instant identification:
+Agrupe implementaciones específicas del idioma utilizando iconos de pestañas para una identificación instantánea:
 
-````markdown
+```markdown
 ::: tabs
 
 == tab "TypeScript" icon:hexagon
@@ -94,7 +94,7 @@ build('./docmd.config.json');
 ```
 
 :::
-````
+```
 
 ::: tabs
 
@@ -112,15 +112,15 @@ build('./docmd.config.json');
 
 :::
 
-## Constraints & Behavior Rules
+## Restricciones y reglas de comportamiento
 
-| Rule | Technical Note |
+| Regla | Nota técnica |
 | :--- | :--- |
-| **Nesting Limit** | Tabs cannot nest directly within other tab containers. |
-| **Steps Compatibility** | Do not nest `::: steps` inside a tab pane. Use a standard ordered list instead. |
-| **Viewport Limits** | Keep tab counts below 6 entries per block for mobile compatibility. |
-| **State Persistence** | Selected tab states persist across page transitions during SPA navigation. |
+| **Límite de anidamiento** | Las pestañas no se pueden anidar directamente dentro de otros contenedores de pestañas. |
+| **Compatibilidad con pasos** | No anide `::: steps` dentro de un panel de pestañas. Utilice una lista ordenada estándar en su lugar. |
+| **Límites de ventana gráfica** | Mantenga el número de pestañas por debajo de 6 entradas por bloque para compatibilidad móvil. |
+| **Persistencia de estado** | Los estados de las pestañas seleccionadas persisten en las transiciones de página durante la navegación SPA. |
 
-::: callout tip "Contextual Labeling for AI" icon:sparkles
-Specify target languages or operating systems in tab labels (e.g. `== tab "TypeScript"`). Explicit labels allow AI indexers to map alternative code blocks to their respective ecosystems accurately.
+::: callout tip "Etiquetado contextual para IA" icon:sparkles
+Especifique los lenguajes o sistemas operativos de destino en las etiquetas de las pestañas (por ejemplo, `== tab "TypeScript"`). Las etiquetas explícitas permiten a los indexadores de IA mapear bloques de código alternativos a sus respectivos ecosistemas con precisión.
 :::

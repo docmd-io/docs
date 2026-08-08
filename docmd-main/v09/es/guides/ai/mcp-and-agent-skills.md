@@ -1,17 +1,17 @@
 ---
-title: "MCP & Agent Skills"
-description: "Configure Model Context Protocol (MCP) servers and AI agent skills for docmd workspaces."
+title: "MCP y habilidades de agente"
+description: "Configure servidores del Protocolo de Contexto de Modelo (MCP) y habilidades de agentes de IA para espacios de trabajo de docmd."
 ---
 
-Integrating AI development agents into your workflow requires structured interfaces that allow models to query, read, and validate documentation context efficiently. docmd satisfies this need via a native **Model Context Protocol (MCP)** server and auto-generated **Agent Skills** instructions.
+La integración de agentes de desarrollo de IA en su flujo de trabajo requiere interfaces estructuradas que permitan a los modelos consultar, leer y validar el contexto de la documentación de manera eficiente. docmd satisface esta necesidad a través de un servidor nativo del **Protocolo de Contexto de Modelo (MCP)** e instrucciones generadas automáticamente de **Habilidades de Agente**.
 
-## Model Context Protocol (MCP) Setup
+## Configuración del Protocolo de Contexto de Modelo (MCP)
 
-The Model Context Protocol connects LLM environments directly to your local workspace tools over `stdio`.
+El Protocolo de Contexto de Modelo conecta los entornos LLM directamente a las herramientas de su espacio de trabajo local a través de `stdio`.
 
-### 1. Claude Desktop Integration
+### 1. Integración con Claude Desktop
 
-Add the following to your `claude_desktop_config.json`:
+Agregue lo siguiente a su `claude_desktop_config.json`:
 
 ```json "claude_desktop_config.json"
 {
@@ -25,29 +25,29 @@ Add the following to your `claude_desktop_config.json`:
 }
 ```
 
-### 2. IDE Integration (Cursor / Windsurf)
+### 2. Integración con IDE (Cursor / Windsurf)
 
-In your editor's MCP settings panel, add a new server using the `stdio` transport:
+En el panel de configuración de MCP de su editor, agregue un nuevo servidor utilizando el transporte `stdio`:
 
-* **Command**: `npx @docmd/core mcp`
-* **Transport**: `stdio`
+* **Comando**: `npx @docmd/core mcp`
+* **Transporte**: `stdio`
 
-## Available MCP Tools
+## Herramientas MCP disponibles
 
-Once connected, agents can execute 6 primary tool handlers:
+Una vez conectados, los agentes pueden ejecutar 6 controladores de herramientas principales:
 
-1. `search_docs(query)`: Performs full-text searches across workspace files.
-2. `list_docs(subdir?)`: Lists relative Markdown file paths, optionally scoped to a locale or version.
-3. `read_doc(route)`: Reads raw Markdown contents for a sandboxed file route.
-4. `get_config()`: Inspects resolved `docmd.config.json` options with secret values redacted.
-5. `validate_docs()`: Lints internal link targets and reports broken anchors.
-6. `get_llms_context()`: Fetches the consolidated `llms-full.txt` context payload.
+1. `search_docs(query)`: Realiza búsquedas de texto completo en los archivos del espacio de trabajo.
+2. `list_docs(subdir?)`: Enumera las rutas relativas de los archivos Markdown, opcionalmente delimitadas a un idioma o versión.
+3. `read_doc(route)`: Lee el contenido Markdown sin procesar para una ruta de archivo aislada.
+4. `get_config()`: Inspecciona las opciones resueltas de `docmd.config.json` con los valores secretos redactados.
+5. `validate_docs()`: Analiza los destinos de enlaces internos e informa de anclas rotas.
+6. `get_llms_context()`: Obtiene la carga útil de contexto consolidada `llms-full.txt`.
 
-## Leveraging Agent Skills (`SKILL.md`)
+## Aprovechamiento de las habilidades de agente (`SKILL.md`)
 
-Running `docmd init` generates a `SKILL.md` file in your repository root. This document serves as an instruction manual for AI agents operating on your codebase.
+Ejecutar `docmd init` genera un archivo `SKILL.md` en la raíz de su repositorio. Este documento sirve como manual de instrucciones para los agentes de IA que operan en su código base.
 
-::: callout tip "Recommended Agent Workflow" icon:bot
-1. **Initialise Context**: Direct agents to inspect `SKILL.md` at the start of a session to learn custom Callouts, OpenAPI markup, and file structures.
-2. **Validate Edits**: Instruct agents to run `validate_docs` or `npx @docmd/core validate` after editing Markdown files to prevent broken link regressions.
+::: callout tip "Flujo de trabajo de agente recomendado" icon:bot
+1. **Inicializar contexto**: Inste a los agentes a inspeccionar `SKILL.md` al comienzo de una sesión para aprender sobre avisos personalizados, marcado OpenAPI y estructuras de archivos.
+2. **Validar ediciones**: Instruya a los agentes para que ejecuten `validate_docs` o `npx @docmd/core validate` después de editar archivos Markdown para evitar regresiones de enlaces rotos.
 :::

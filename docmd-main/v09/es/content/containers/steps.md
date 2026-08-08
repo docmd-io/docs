@@ -1,115 +1,115 @@
 ---
-title: "Steps"
-description: "Convert standard ordered lists into high-impact visual timelines and tutorials in docmd."
+title: "Pasos (Steps)"
+description: "Convierta listas ordenadas estándar en líneas de tiempo visuales e instructivos de gran impacto en docmd."
 ---
 
-The `steps` container transforms standard Markdown ordered lists into numbered vertical timelines with hover permalinks. It is designed for technical tutorials and sequential how-to guides.
+El contenedor `steps` transforma las listas ordenadas estándar de Markdown en líneas de tiempo verticales numeradas con enlaces permanentes al pasar el cursor. Está diseñado para tutoriales técnicos y guías paso a paso secuenciales.
 
-::: callout info "Spaceless Syntax Support" icon:info
-Both `::: steps` and `:::steps` (spaceless) syntax render identically. Choose whichever style suits your authoring workflow.
+::: callout info "Soporte de sintaxis sin espacios" icon:info
+Tanto la sintaxis `::: steps` como `:::steps` (sin espacios) se renderizan de forma idéntica. Elija el estilo que mejor se adapte a su flujo de trabajo de creación.
 :::
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
 ::: steps
 
-1.  **Step Title**
-    Step description copy goes here.
+1.  **Título del paso**
+    El texto de descripción del paso va aquí.
 
-2.  **Next Step Title**
-    Continue the sequence.
+2.  **Título del siguiente paso**
+    Continúe la secuencia.
 
 :::
 ```
 
-| Component | Description |
+| Componente | Descripción |
 | :--- | :--- |
-| **`::: steps`** | Parent container that transforms child ordered list items into a numbered timeline. |
-| **`1. `** | Standard Markdown ordered list item. Bold the first line of each item to create a step title. |
+| **`::: steps`** | Contenedor primario que transforma los elementos de la lista ordenada secundaria en una línea de tiempo numerada. |
+| **`1. `** | Elemento de lista ordenada estándar de Markdown. Ponga en negrita la primera línea de cada elemento para crear un título de paso. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Basic Workflow Sequence
+### Secuencia de flujo de trabajo básica
 
-A straightforward sequence for common developer onboarding tasks:
+Una secuencia sencilla para tareas comunes de incorporación de desarrolladores:
 
 ```markdown
 ::: steps
 
-1.  **Initialise Project**
-    Run `npx @docmd/core init` to scaffold your directory structure.
+1.  **Inicializar proyecto**
+    Ejecute `npx @docmd/core init` para estructurar el directorio de su proyecto.
 
-2.  **Author Content**
-    Write documentation using standard Markdown files.
+2.  **Crear contenido**
+    Escriba documentación utilizando archivos Markdown estándar.
 
-3.  **Build & Deploy**
-    Run `npx @docmd/core build` to compile production static output.
+3.  **Compilar y desplegar**
+    Ejecute `npx @docmd/core build` para compilar la salida estática de producción.
 
 :::
 ```
 
 ::: steps
 
-1.  **Initialise Project**
-    Run `npx @docmd/core init` to scaffold your directory structure.
+1.  **Inicializar proyecto**
+    Ejecute `npx @docmd/core init` para estructurar el directorio de su proyecto.
 
-2.  **Author Content**
-    Write documentation using standard Markdown files.
+2.  **Crear contenido**
+    Escriba documentación utilizando archivos Markdown estándar.
 
-3.  **Build & Deploy**
-    Run `npx @docmd/core build` to compile production static output.
+3.  **Compilar y desplegar**
+    Ejecute `npx @docmd/core build` para compilar la salida estática de producción.
 
 :::
 
-### Steps with Rich Embedded Content
+### Pasos con contenido enriquecido incrustado
 
-Steps support embedded code blocks, callout alerts, and other nested containers:
+Los pasos admiten bloques de código incrustados, alertas de avisos y otros contenedores anidados:
 
 ```markdown
 ::: steps
 
-1.  **Configure Environment**
-    Define project options in `docmd.config.json`.
+1.  **Configurar el entorno**
+    Defina las opciones del proyecto en `docmd.config.json`.
 
     ::: callout tip
-    Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
+    Utilice `defineConfig` para habilitar el autocompletado del IDE para las claves del esquema de configuración.
     :::
 
-2.  **Generate Production Build**
-    Execute the build command to generate an optimised static site.
+2.  **Generar compilación de producción**
+    Ejecute el comando de compilación para generar un sitio estático optimizado.
 
     ```bash
     npx @docmd/core build
     ```
 
-3.  **Deploy to Infrastructure**
-    Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
+3.  **Desplegar en la infraestructura**
+    Publique el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
 
 :::
 ```
 
 ::: steps
 
-1.  **Configure Environment**
-    Define project options in `docmd.config.json`.
+1.  **Configurar el entorno**
+    Defina las opciones del proyecto en `docmd.config.json`.
 
     ::: callout tip
-    Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
+    Utilice `defineConfig` para habilitar el autocompletado del IDE para las claves del esquema de configuración.
     :::
 
-2.  **Generate Production Build**
-    Execute the build command to generate an optimised static site.
+2.  **Generar compilación de producción**
+    Ejecute el comando de compilación para generar un sitio estático optimizado.
 
     ```bash
     npx @docmd/core build
     ```
 
-3.  **Deploy to Infrastructure**
-    Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
+3.  **Desplegar en la infraestructura**
+    Publique el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
 
 :::
 
-::: callout tip "Workflow Optimization for AI Agents" icon:lightbulb
-AI models interpret the `steps` container as a signal for **Sequential Workflows**. Always start each list item with a **bolded title**—this allows AI agents to parse each step's objective reliably from the `llms.txt` context.
+::: callout tip "Optimización de flujo de trabajo para agentes de IA" icon:lightbulb
+Los modelos de IA interpretan el contenedor `steps` como una señal para **Flujos de trabajo secuenciales**. Comience siempre cada elemento de la lista con un **título en negrita**; esto permite a los agentes de IA analizar el objetivo de cada paso de forma fiable a partir del contexto `llms.txt`.
 :::

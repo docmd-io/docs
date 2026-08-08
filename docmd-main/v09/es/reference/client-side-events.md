@@ -1,35 +1,35 @@
 ---
-title: "Client-Side Events"
-description: "Subscribe to client-side lifecycle events in docmd Single Page Application (SPA) navigation."
+title: "Eventos del lado del cliente"
+description: "Suscríbase a eventos del ciclo de vida del lado del cliente en la navegación de Aplicaciones de Una Sola Página (SPA) de docmd."
 ---
 
-docmd incorporates a lightweight Single Page Application (SPA) router to execute client-side page transitions. Because client-side routing dynamically updates DOM elements without triggering full browser reloads, standard `DOMContentLoaded` listeners will not fire on sub-page transitions.
+docmd incorpora un enrutador ligero de Aplicación de Una Sola Página (SPA) para ejecutar transiciones de página del lado del cliente. Debido a que el enrutamiento del lado del cliente actualiza dinámicamente los elementos DOM sin activar recargas completas del navegador, los escuchadores estándar `DOMContentLoaded` no se activarán en las transiciones de subpáginas.
 
-To accommodate custom UI scripts and component re-initialisation, docmd emits dedicated DOM lifecycle events.
+Para dar espacio a scripts de interfaz de usuario personalizados y a la reinicialización de componentes, docmd emite eventos del ciclo de vida DOM dedicados.
 
 ## `docmd:page-mounted`
 
-Dispatched on the `document` node immediately after a new page payload is rendered into the DOM.
+Se envía en el nodo `document` inmediatamente después de que la carga útil de una nueva página se renderice en el DOM.
 
-### Implementation Pattern
+### Patrón de implementación
 
-Attach an event listener to `document` to re-initialise interactive libraries or trigger UI transitions:
+Adjunte un escuchador de eventos a `document` para reinicializar bibliotecas interactivas o activar transiciones de interfaz de usuario:
 
 ```javascript
 document.addEventListener("docmd:page-mounted", (event) => {
   const { url } = event.detail;
-  console.log(`Mounted route: ${url}`);
+  console.log(`Ruta montada: ${url}`);
 });
 ```
 
-### Event Payload (`event.detail`)
+### Carga útil del evento (`event.detail`)
 
-| Attribute | Type | Technical Description |
+| Atributo | Tipo | Descripción técnica |
 | :--- | :--- | :--- |
-| `url` | `string` | Absolute URL path of the newly mounted page view. |
+| `url` | `string` | Ruta URL absoluta de la vista de página recién montada. |
 
-## Implementation Guidelines
+## Directrices de implementación
 
-1. **Idempotent Execution**: Structure setup handlers to ensure they execute safely across repeated route changes without binding duplicate event handlers.
-2. **Global Namespace Protection**: Wrap custom scripts inside IIFE (Immediately Invoked Function Expression) blocks to avoid scope pollution.
-3. **Event Cleanup**: Detach window-level event listeners (e.g. `resize` or `scroll`) prior to handling subsequent route transitions.
+1. **Ejecución idempotente**: Estructure los controladores de configuración para garantizar que se ejecuten de forma segura en cambios de ruta repetidos sin vincular controladores de eventos duplicados.
+2. **Protección del espacio de nombres global**: Envuelva los scripts personalizados dentro de bloques IIFE (Expresión de Función Invocada Inmediatamente) para evitar la contaminación del alcance.
+3. **Limpieza de eventos**: Desvincule los escuchadores de eventos a nivel de ventana (por ejemplo, `resize` o `scroll`) antes de gestionar transiciones de ruta posteriores.

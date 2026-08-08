@@ -1,79 +1,79 @@
 ---
-title: "Cards"
-description: "Organise information into framed, visually distinct containers for feature grids and landing pages in docmd."
+title: "Tarjetas (Cards)"
+description: "Organice la información en contenedores marcados y visualmente distintos para rejillas de características y páginas de inicio en docmd."
 ---
 
-Cards encapsulate related content into a distinct, bordered frame with an optional header, providing clear visual hierarchy across your documentation pages.
+Las tarjetas encapsulan contenido relacionado en un marco bordeado y distinto con un encabezado opcional, proporcionando una jerarquía visual clara en todas sus páginas de documentación.
 
-## Syntax Reference
+## Referencia de sintaxis
 
 ```markdown
-::: card "Title text" [property:value...]
-This is the primary content area of the card.
+::: card "Texto del título" [propiedad:valor...]
+Esta es el área de contenido principal de la tarjeta.
 :::
 ```
 
-| Parameter | Type | Description |
+| Parámetro | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Title** | `"String"` | Optional header title rendered at the top of the card frame. |
-| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon next to the header title. |
+| **Título** | `"String"` | Título de encabezado opcional renderizado en la parte superior del marco de la tarjeta. |
+| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) junto al título del encabezado. |
 
-## Usage Examples
+## Ejemplos de uso
 
-### Feature Highlight Card
+### Tarjeta de característica destacada
 
-Use a card to frame a single technical capability with an explicit title and icon:
+Utilice una tarjeta para enmarcar una sola capacidad técnica con un título e icono explícitos:
 
 ```markdown
-::: card "Asynchronous Generation" icon:zap
-The core engine uses a non-blocking I/O pipeline, compiling thousands of pages in milliseconds.
+::: card "Generación asíncrona" icon:zap
+El motor principal utiliza una canalización de E/S no bloqueante, compilando miles de páginas en milisegundos.
 :::
 ```
 
-::: card "Asynchronous Generation" icon:zap
-The core engine uses a non-blocking I/O pipeline, compiling thousands of pages in milliseconds.
+::: card "Generación asíncrona" icon:zap
+El motor principal utiliza una canalización de E/S no bloqueante, compilando miles de páginas en milisegundos.
 :::
 
-### Rich Content Composition
+### Composición de contenido enriquecido
 
-Cards accept any Markdown content, including code snippets and button containers:
+Las tarjetas aceptan cualquier contenido Markdown, incluidos fragmentos de código y contenedores de botones:
 
 ```markdown
-::: card "Instant Localisation"
-Prepare your documentation for a global audience using built-in i18n support.
+::: card "Localización instantánea"
+Prepare su documentación para una audiencia global utilizando el soporte i18n integrado.
 
 ```bash
 npx @docmd/core build
 ```
 
-::: button "Localisation Strategy Guide" ../localisation/translated-content.md
+::: button "Guía de estrategia de localización" ../localisation/translated-content.md
 :::
-````
+```
 
-::: card "Instant Localisation"
-Prepare your documentation for a global audience using built-in i18n support.
+::: card "Localización instantánea"
+Prepare su documentación para una audiencia global utilizando el soporte i18n integrado.
 
 ```bash
 npx @docmd/core build
 ```
 
-::: button "Localisation Strategy Guide" ../localisation/translated-content.md
+::: button "Guía de estrategia de localización" ../localisation/translated-content.md
 :::
 
-### Multi-Column Layout
+### Diseño de múltiples columnas
 
-Wrap multiple cards inside a `grids` container for a responsive multi-column layout:
+Envuelva múltiples tarjetas dentro de un contenedor `grids` para un diseño de múltiples columnas adaptable:
 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Primary Node"
-        Configuration options for master instances.
+        ::: card "Nodo principal"
+        Opciones de configuración para instancias maestras.
         :::
     :::
     ::: grid
-        ::: card "Secondary Node"
-        Configuration options for replica instances.
+        ::: card "Nodo secundario"
+        Opciones de configuración para instancias de réplica.
         :::
     :::
 :::
@@ -81,17 +81,17 @@ Wrap multiple cards inside a `grids` container for a responsive multi-column lay
 
 ::: grids
     ::: grid
-        ::: card "Primary Node"
-        Configuration options for master instances.
+        ::: card "Nodo principal"
+        Opciones de configuración para instancias maestras.
         :::
     :::
     ::: grid
-        ::: card "Secondary Node"
-        Configuration options for replica instances.
+        ::: card "Nodo secundario"
+        Opciones de configuración para instancias de réplica.
         :::
     :::
 :::
 
-::: callout tip "Semantic Clustering for AI" icon:lightbulb
-In the `llms.txt` context stream, content wrapped in a `card` is parsed as a **Cohesive Topic Cluster**. Using cards to segment concepts prevents context leakage across unrelated sections.
+::: callout tip "Agrupación semántica para IA" icon:lightbulb
+En el flujo de contexto `llms.txt`, el contenido envuelto en una `card` se analiza como un **Grupo de temas cohesivo**. El uso de tarjetas para segmentar conceptos evita la filtración de contexto en secciones no relacionadas.
 :::

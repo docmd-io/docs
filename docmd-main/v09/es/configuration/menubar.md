@@ -1,13 +1,13 @@
 ---
-title: "Menubar Configuration"
-description: "Configure the top navigation menubar, dropdown links, brand logos, and utility menus in docmd."
+title: "Configuración de la barra de menú"
+description: "Configure la barra de menú de navegación superior, enlaces desplegables, logotipos de marca y menús de utilidades en docmd."
 ---
 
-The `menubar` is a primary top navigation bar that provides global context across your documentation sub-sites. Position it as a fixed bar at the absolute viewport top or inline above the page header.
+La `menubar` (barra de menú) es una barra de navegación superior principal que proporciona contexto global en sus subsitios de documentación. Posiciónela como una barra fija en la parte superior absoluta de la ventana gráfica o en línea por encima del encabezado de la página.
 
-## Configuration Schema
+## Esquema de configuración
 
-Configure menubar items in the `layout.menubar` block of `docmd.config.json`:
+Configure los elementos de la barra de menú en el bloque `layout.menubar` de `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -16,54 +16,54 @@ Configure menubar items in the `layout.menubar` block of `docmd.config.json`:
       "enabled": true,
       "position": "top", 
       "left": [
-        { "type": "title", "text": "Brand", "url": "/", "icon": "home" },
-        { "text": "Documentation", "url": "/docs" },
+        { "type": "title", "text": "Marca", "url": "/", "icon": "home" },
+        { "text": "Documentación", "url": "/docs" },
         { 
           "type": "dropdown", 
-          "text": "Ecosystem", 
+          "text": "Ecosistema", 
           "items": [
             { "text": "GitHub", "url": "https://github.com/docmd-io/docmd" },
-            { "text": "Live Editor", "url": "https://live.docmd.io" }
+            { "text": "Editor en Vivo", "url": "https://live.docmd.io" }
           ]
         }
       ],
       "right": [
-        { "text": "Support", "url": "/support", "icon": "help-circle" }
+        { "text": "Soporte", "url": "/support", "icon": "help-circle" }
       ]
     }
   }
 }
 ```
 
-### Configuration Options
+### Opciones de configuración
 
-| Property | Type | Default | Description |
+| Propiedad | Tipo | Predeterminado | Descripción |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `Boolean` | `false` | Master toggle for menubar visibility. |
-| `position` | `String` | `'top'` | `'top'` (fixed at absolute top of viewport) or `'header'` (inline above the page title). |
-| `left` | `Array` | `[]` | Navigation items aligned to the left of the menubar. |
-| `right` | `Array` | `[]` | Navigation items aligned to the right of the menubar. |
+| `enabled` | `Boolean` | `false` | Interruptor principal para la visibilidad de la barra de menú. |
+| `position` | `String` | `'top'` | `'top'` (fijado en la parte superior absoluta de la ventana gráfica) o `'header'` (en línea sobre el título de la página). |
+| `left` | `Array` | `[]` | Elementos de navegación alineados a la izquierda de la barra de menú. |
+| `right` | `Array` | `[]` | Elementos de navegación alineados a la derecha de la barra de menú. |
 
-## Supported Item Types
+## Tipos de elementos compatibles
 
-The `left` and `right` arrays support three primary element types:
+Los arrays `left` y `right` admiten tres tipos de elementos principales:
 
-### 1. Standard Link
-Renders a text link with optional icon and new-tab behaviour:
-- `text`: Link label text.
-- `url`: Relative path or external URL.
-- `icon`: Optional Lucide icon name.
-- `external`: When `true`, opens in a new browser tab.
+### 1. Enlace estándar
+Renderiza un enlace de texto con icono opcional y comportamiento de nueva pestaña:
+- `text`: Texto de la etiqueta del enlace.
+- `url`: Ruta relativa o URL externa.
+- `icon`: Nombre de icono de Lucide opcional.
+- `external`: Cuando es `true`, se abre en una nueva pestaña del navegador.
 
-### 2. Brand Title
-Set `"type": "title"` to render styled brand headers (e.g. bold weights with home icon triggers).
+### 2. Título de marca
+Establezca `"type": "title"` para renderizar encabezados de marca con estilo (por ejemplo, pesos en negrita con activadores de icono de inicio).
 
-### 3. Nested Dropdown Menu
-Set `"type": "dropdown"` and supply an `items` array to render interactive flyout dropdown submenus.
+### 3. Menú desplegable anidado
+Establezca `"type": "dropdown"` y proporcione un array `items` para renderizar submenús desplegables emergentes interactivos.
 
-## Utility Menu Integration
+## Integración del menú de utilidades
 
-To position global utilities (such as full-text search, dark/light theme switch, and sponsorship links) in the menubar, set `optionsMenu.position` to `'menubar'`:
+Para posicionar utilidades globales (como la búsqueda de texto completo, el interruptor de tema oscuro/claro y enlaces de patrocinio) en la barra de menú, establezca `optionsMenu.position` en `'menubar'`:
 
 ```json "docmd.config.json"
 {
@@ -75,15 +75,15 @@ To position global utilities (such as full-text search, dark/light theme switch,
 }
 ```
 
-Utilities align to the **right region** automatically, rendering after any custom links defined in `right`.
+Las utilidades se alinean en la **región derecha** automáticamente, renderizándose después de cualquier enlace personalizado definido en `right`.
 
-::: callout info "Relocation Fallback" icon:sparkles
-If the `menubar` is disabled while `optionsMenu.position` is set to `'menubar'`, utilities fall back automatically to the `sidebar-top` position.
+::: callout info "Respaldo de reubicación" icon:sparkles
+Si la `menubar` está desactivada mientras `optionsMenu.position` está establecido en `'menubar'`, las utilidades recurren automáticamente a la posición `sidebar-top`.
 :::
 
-## Custom Styling
+## Estilos personalizados
 
-Customise menubar styling by overriding CSS custom properties in your custom stylesheets. See [Custom CSS & JS](../theming/custom-css-js.md):
+Personalice el estilo de la barra de menú anulando las propiedades personalizadas de CSS en sus hojas de estilo personalizadas. Consulte [CSS y JS personalizados](../theming/custom-css-js.md):
 
 ```css
 :root {

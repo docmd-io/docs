@@ -1,19 +1,19 @@
 ---
-title: "AI Assistant Setup & Integration"
-description: "How to configure and deploy docmd's interactive AI Assistant for RAG-powered documentation support."
+title: "Configuración e integración del Asistente de IA"
+description: "Cómo configurar y desplegar el Asistente de IA interactivo de docmd para soporte de documentación impulsado por RAG."
 ---
 
-The docmd AI Assistant provides readers with real-time, context-aware answers derived directly from your Markdown documentation. Powered by `@docmd/plugin-ai` and `aiplug`, the assistant performs Retrieval-Augmented Generation (RAG) using your site's pre-compiled search index while keeping API keys securely on the server side.
+El Asistente de IA de docmd proporciona a los lectores respuestas en tiempo real y conscientes del contexto derivadas directamente de su documentación en Markdown. Impulsado por `@docmd/plugin-ai` y `aiplug`, el asistente realiza Generación Aumentada por Recuperación (RAG) utilizando el índice de búsqueda precompilado de su sitio mientras mantiene las claves de API de forma segura en el lado del servidor.
 
-## Prerequisites
+## Requisitos previos
 
-Before configuring the AI Assistant, ensure:
-1. `@docmd/plugin-search` is enabled in `docmd.config.json` (required for RAG context extraction).
-2. You have an API key for your preferred provider (OpenAI, Anthropic, Gemini, DeepSeek, Groq, or Ollama).
+Antes de configurar el Asistente de IA, asegúrese de:
+1. `@docmd/plugin-search` esté habilitado en `docmd.config.json` (necesario para la extracción de contexto RAG).
+2. Tenga una clave de API para su proveedor preferido (OpenAI, Anthropic, Gemini, DeepSeek, Groq u Ollama).
 
-## Configuration
+## Configuración
 
-Add the `ai` plugin block to `docmd.config.json`:
+Agregue el bloque de plugin `ai` a `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -26,11 +26,11 @@ Add the `ai` plugin block to `docmd.config.json`:
       "provider": "openai",
       "model": "gpt-4o-mini",
       "position": "bottom-center",
-      "greeting": "How can I help with these docs today?",
+      "greeting": "¿Cómo puedo ayudar con esta documentación hoy?",
       "suggestions": [
-        "How do I get started?",
-        "Show configuration options",
-        "Explain key concepts"
+        "¿Cómo empiezo?",
+        "Mostrar opciones de configuración",
+        "Explicar conceptos clave"
       ],
       "contextLimit": 5,
       "captcha": false
@@ -39,13 +39,13 @@ Add the `ai` plugin block to `docmd.config.json`:
 }
 ```
 
-::: callout tip "Recommended Models" icon:sparkles
-For optimal balance between response speed and cost, we recommend using fast reasoning models such as `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic), or `gemini-1.5-flash` (Google).
+::: callout tip "Modelos recomendados" icon:sparkles
+Para un equilibrio óptimo entre la velocidad de respuesta y el costo, recomendamos utilizar modelos de razonamiento rápido como `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic) o `gemini-1.5-flash` (Google).
 :::
 
-## Setting Provider Credentials
+## Estructuración de credenciales de proveedor
 
-To maintain zero credential leakage, provider API keys are read exclusively from environment variables:
+Para mantener cero filtraciones de credenciales, las claves de API del proveedor se leen exclusivamente de variables de entorno:
 
 ```bash
 # OpenAI
@@ -57,19 +57,19 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 # Google Gemini
 export GEMINI_API_KEY="AIzaSy..."
 
-# Generic fallback key
-export AI_API_KEY="your-api-key"
+# Clave de respaldo genérica
+export AI_API_KEY="su-clave-api"
 ```
 
-Start your development or production web server after exporting the keys. The client-side assistant drawer communicates with the server via secure RPC action handlers.
+Inicie su servidor web de desarrollo o producción después de exportar las claves. El cajón del asistente del lado del cliente se comunica con el servidor a través de controladores de acciones RPC seguros.
 
-## Fine-Tuning RAG & Search Context
+## Ajuste fino de RAG y contexto de búsqueda
 
-The AI Assistant uses `@docmd/plugin-search` data to extract ground-truth documentation snippets before executing prompts.
+El Asistente de IA utiliza datos de `@docmd/plugin-search` para extraer fragmentos de documentación de verdad fundamental antes de ejecutar las indicaciones.
 
-### 1. Increasing Context Depth
+### 1. Aumento de la profundidad del contexto
 
-Adjust `contextLimit` to control how many Markdown chunks are passed to the model:
+Ajuste `contextLimit` para controlar cuántos fragmentos de Markdown se pasan al modelo:
 
 ```json
 {
@@ -81,11 +81,11 @@ Adjust `contextLimit` to control how many Markdown chunks are passed to the mode
 }
 ```
 
-Higher `contextLimit` values improve response accuracy for complex questions spanning multiple pages, but increase prompt token consumption.
+Valores más altos de `contextLimit` mejoran la precisión de la respuesta para preguntas complejas que abarcan múltiples páginas, pero aumentan el consumo de tokens de la indicación.
 
-### 2. Protecting Against Bot Overuse
+### 2. Protección contra el uso excesivo de bots
 
-Prevent automated script abuse by configuring sliding window rate limits or enabling built-in Proof-of-Work CAPTCHA challenges:
+Evite el abuso de scripts automatizados configurando límites de velocidad de ventana deslizante o habilitando desafíos CAPTCHA de Prueba de Trabajo integrados:
 
 ```json
 {
@@ -101,9 +101,9 @@ Prevent automated script abuse by configuring sliding window rate limits or enab
 }
 ```
 
-## Local LLM Deployment (Ollama)
+## Despliegue de LLM local (Ollama)
 
-For air-gapped environments or local testing, configure `@docmd/plugin-ai` to target a local Ollama instance:
+Para entornos aislados o pruebas locales, configure `@docmd/plugin-ai` para apuntar a una instancia local de Ollama:
 
 ```json "docmd.config.json"
 {
@@ -117,8 +117,8 @@ For air-gapped environments or local testing, configure `@docmd/plugin-ai` to ta
 }
 ```
 
-Ensure Ollama is running locally (`ollama serve`) before building or launching docmd.
+Asegúrese de que Ollama se esté ejecutando localmente (`ollama serve`) antes de compilar o iniciar docmd.
 
-::: callout info "Theme Integration" icon:palette
-The AI Assistant floating trigger and glassmorphic drawer automatically adapt to your active theme appearance (light or dark mode) and respect menubar layout bounds.
+::: callout info "Integración de temas" icon:palette
+El disparador flotante y el cajón glasmórfico del Asistente de IA se adaptan automáticamente a la apariencia de su tema activo (modo claro u oscuro) y respetan los límites de diseño de la barra de menú.
 :::

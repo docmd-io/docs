@@ -1,80 +1,80 @@
 ---
-title: "Cookie Consent"
-description: "Configure docmd's accessible GDPR cookie consent dialog with custom expiration, localisation, and CustomEvent integrations."
+title: "Consentimiento de cookies"
+description: "Configure el diálogo accesible de consentimiento de cookies GDPR de docmd con expiración personalizada, localización e integraciones de CustomEvent."
 ---
 
-`docmd` includes an accessible, zero-dependency GDPR cookie consent banner built directly into the UI engine. It stores user preferences in `localStorage` with configurable TTL and emits a custom DOM event for analytics script triggers.
+`docmd` incluye un banner de consentimiento de cookies GDPR accesible y sin dependencias integrado directamente en el motor de la interfaz de usuario. Almacena las preferencias del usuario en `localStorage` con TTL configurable y emite un evento DOM personalizado para activadores de scripts de analítica.
 
-## Quick Setup
+## Configuración rápida
 
-Enable cookie consent in your `docmd.config.json` manifest:
+Habilite el consentimiento de cookies en su manifiesto `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
   "cookie": {
     "enabled": true,
-    "message": "We use cookies to ensure you get the best experience.",
+    "message": "Utilizamos cookies para garantizar que obtenga la mejor experiencia.",
     "policyUrl": "/privacy",
     "position": "bottom-right"
   }
 }
 ```
 
-The banner displays on initial visit. Choice preferences are persisted in local browser storage across page loads.
+El banner se muestra en la visita inicial. Las preferencias de elección se persisten en el almacenamiento local del navegador a través de las cargas de página.
 
-## Configuration Reference
+## Referencia de configuración
 
-| Field | Default | Description |
+| Campo | Predeterminado | Descripción |
 | :--- | :--- | :--- |
-| `enabled` | `true` (when `cookie` object exists) | Master toggle for the consent banner. |
-| `message` | Translation key `cookieMessage` | Body text for the cookie prompt. Supports inline HTML. |
-| `acceptText` | Translation key `cookieAccept` | Accept button label. |
-| `declineText` | Translation key `cookieDecline` | Decline button label. |
-| `policyUrl` | `null` | Optional link to your privacy policy page. |
-| `position` | `"bottom"` | Modal position (`"bottom"`, `"bottom-left"`, `"bottom-right"`, `"center"`). |
-| `dismissible` | `true` | When `true`, renders a close (X) button. |
-| `expiryDays` | `180` | Number of days before consent choices expire in `localStorage`. |
+| `enabled` | `true` (cuando existe el objeto `cookie`) | Interruptor principal para el banner de consentimiento. |
+| `message` | Clave de traducción `cookieMessage` | Texto principal para el aviso de cookies. Admite HTML integrado. |
+| `acceptText` | Clave de traducción `cookieAccept` | Etiqueta del botón Aceptar. |
+| `declineText` | Clave de traducción `cookieDecline` | Etiqueta del botón Rechazar. |
+| `policyUrl` | `null` | Enlace opcional a su página de política de privacidad. |
+| `position` | `"bottom"` | Posición del modal (`"bottom"`, `"bottom-left"`, `"bottom-right"`, `"center"`). |
+| `dismissible` | `true` | Cuando es `true`, renderiza un botón de cierre (X). |
+| `expiryDays` | `180` | Número de días antes de que las elecciones de consentimiento expiren en `localStorage`. |
 
-### Position Modes
+### Modos de posición
 
-| Value | Rendering Behaviour |
+| Valor | Comportamiento de renderizado |
 | :--- | :--- |
-| `bottom` | Centered horizontally along the bottom edge of the viewport. |
-| `bottom-left` | Anchored to the bottom-left corner of the viewport. |
-| `bottom-right` | Anchored to the bottom-right corner of the viewport. |
-| `center` | Centered floating modal overlay. |
+| `bottom` | Centrado horizontalmente a lo largo del borde inferior de la ventana gráfica. |
+| `bottom-left` | Anclado a la esquina inferior izquierda de la ventana gráfica. |
+| `bottom-right` | Anclado a la esquina inferior derecha de la ventana gráfica. |
+| `center` | Superposición de modal flotante centrado. |
 
-## Localisation (i18n)
+## Localización (i18n)
 
-All user-facing strings support `docmd`'s translation system. Override consent keys in your `translations/<locale>.json` files:
+Todas las cadenas orientadas al usuario admiten el sistema de traducción de `docmd`. Anule las claves de consentimiento en sus archivos `translations/<locale>.json`:
 
 ```json "translations/fr.json"
 {
-  "cookieMessage": "Cette page utilise des cookies pour vous offrir la meilleure expérience.",
-  "cookieAccept": "Accepter",
-  "cookieDecline": "Refuser",
-  "cookiePolicy": "Politique de confidentialité",
-  "cookieConsent": "Consentement aux cookies"
+  "cookieMessage": "Esta página utiliza cookies para ofrecerle la mejor experiencia.",
+  "cookieAccept": "Aceptar",
+  "cookieDecline": "Rechazar",
+  "cookiePolicy": "Política de privacidad",
+  "cookieConsent": "Consentimiento de cookies"
 }
 ```
 
-## Reacting to User Consent Events
+## Reacción a eventos de consentimiento del usuario
 
-A `CustomEvent` named `docmd:cookie-consent` is dispatched on the `window` object when a user accepts, declines, or dismisses the banner:
+Se envía un `CustomEvent` llamado `docmd:cookie-consent` en el objeto `window` cuando un usuario acepta, rechaza o descarta el banner:
 
 ```javascript
 window.addEventListener('docmd:cookie-consent', (event) => {
   if (event.detail.value === 'accept') {
-    // Initialise analytics, marketing, or tracking scripts
+    // Inicializar scripts de analítica, marketing o seguimiento
   }
 });
 ```
 
-The `detail.value` property returns `"accept"`, `"decline"`, or `"dismissed"`.
+La propiedad `detail.value` devuelve `"accept"`, `"decline"` o `"dismissed"`.
 
-## Custom Styling & Themes
+## Estilos y temas personalizados
 
-The banner uses BEM class naming prefixed with `.docmd-cookie-banner`. Customise styling via custom CSS rules:
+El banner utiliza nombres de clase BEM con el prefijo `.docmd-cookie-banner`. Personalice los estilos a través de reglas CSS personalizadas:
 
 ```css
 .docmd-cookie-banner {
@@ -87,10 +87,10 @@ The banner uses BEM class naming prefixed with `.docmd-cookie-banner`. Customise
 }
 ```
 
-## Disabling Cookie Consent
+## Desactivación del consentimiento de cookies
 
-To disable the cookie banner, omit or remove the `cookie` configuration block from `docmd.config.json`.
+Para desactivar el banner de cookies, omita o elimine el bloque de configuración `cookie` de `docmd.config.json`.
 
-::: callout tip "GDPR Compliance Best Practice" icon:shield-check
-For GDPR compliance, keep cookie consent enabled and provide a link to your privacy policy via `policyUrl`.
+::: callout tip "Mejor práctica de cumplimiento del RGPD" icon:shield-check
+Para el cumplimiento del RGPD, mantenga habilitado el consentimiento de cookies y proporcione un enlace a su política de privacidad a través de `policyUrl`.
 :::

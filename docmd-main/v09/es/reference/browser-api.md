@@ -1,35 +1,35 @@
 ---
-title: "Browser API"
-description: "Client-side APIs for docmd — isomorphic rendering engine and dev-mode WebSocket plugin communication."
+title: "API del navegador"
+description: "APIs del lado del cliente para docmd: motor de renderizado isomórfico y comunicación de plugins por WebSocket en modo desarrollo."
 ---
 
-docmd exposes two client-side APIs: the **Isomorphic Compilation Engine** for rendering Markdown in browser contexts, and the **Dev-Mode Plugin API** for communicating with the local dev server.
+docmd expone dos APIs del lado del cliente: el **Motor de compilación isomórfico** para renderizar Markdown en contextos de navegador, y la **API de plugins en modo desarrollo** para comunicarse con el servidor de desarrollo local.
 
-## Isomorphic Compilation Engine
+## Motor de compilación isomórfico
 
-The Markdown rendering engine runs seamlessly inside browser environments. Use this to construct live editor previews, interactive playgrounds, or embedded documentation widgets.
+El motor de renderizado de Markdown se ejecuta sin problemas dentro de entornos de navegador. Utilice esto para construir vistas previas de editores en vivo, entornos de prueba interactivos o widgets de documentación incrustados.
 
-### CDN Integration
+### Integración por CDN
 
 ```html
-<!-- Main Theme Styles -->
+<!-- Estilos del tema principal -->
 <link rel="stylesheet" href="https://unpkg.com/@docmd/ui/assets/css/docmd-main.css">
 
-<!-- Isomorphic Rendering Engine -->
+<!-- Motor de renderizado isomórfico -->
 <script src="https://unpkg.com/@docmd/live/public/docmd-live.js"></script>
 ```
 
 ### `docmd.compile(markdown, config)`
 
-Compiles raw Markdown into a complete HTML document using docmd page templates.
+Compila Markdown sin procesar en un documento HTML completo utilizando plantillas de página de docmd.
 
-* **`markdown`** (`string`): Raw Markdown source text.
-* **`config`** (`object`): Configuration overrides (matching `docmd.config.json` schema).
-* **Returns**: `Promise<string>` resolving to the compiled HTML document.
+* **`markdown`** (`string`): Texto de origen Markdown sin procesar.
+* **`config`** (`object`): Anulaciones de configuración (coincidentes con el esquema de `docmd.config.json`).
+* **Devuelve**: `Promise<string>` que se resuelve en el documento HTML compilado.
 
-### Live Preview Implementation Example
+### Ejemplo de implementación de vista previa en vivo
 
-Render outputs inside `<iframe>` elements using `srcdoc` to guarantee complete style isolation:
+Renderice las salidas dentro de elementos `<iframe>` utilizando `srcdoc` para garantizar un aislamiento completo de estilos:
 
 ```javascript
 const editor = document.getElementById("editor");
@@ -37,7 +37,7 @@ const preview = document.getElementById("preview");
 
 async function updatePreview() {
   const html = await docmd.compile(editor.value, {
-    title: "Preview",
+    title: "Vista previa",
     theme: { appearance: "light" }
   });
   preview.srcdoc = html;
@@ -46,17 +46,17 @@ async function updatePreview() {
 editor.addEventListener("input", updatePreview);
 ```
 
-## Dev-Mode Plugin API
+## API de plugins en modo desarrollo
 
-During `npx @docmd/core dev` execution, a `window.docmd` global object is injected into served pages. This interface allows browser-side plugin components to interact with server-side action handlers via WebSocket RPC.
+Durante la ejecución de `npx @docmd/core dev`, se inyecta un objeto global `window.docmd` en las páginas servidas. Esta interfaz permite que los componentes del plugin del lado del navegador interactúen con los controladores de acciones del lado del servidor a través de RPC de WebSocket.
 
-::: callout info "Development Mode Only" icon:code
-The dev-mode plugin API is available exclusively during `npx @docmd/core dev` sessions and is omitted from production builds.
+::: callout info "Solo en modo desarrollo" icon:code
+La API de plugins en modo desarrollo está disponible exclusivamente durante las sesiones de `npx @docmd/core dev` y se omite en las compilaciones de producción.
 :::
 
 ### `docmd.call(action, payload)`
 
-Dispatches RPC calls to server-side action handlers registered by plugins. Returns a promise resolving to the handler output:
+Envía llamadas RPC a controladores de acciones del lado del servidor registrados por plugins. Devuelve una promesa que se resuelve en la salida del controlador:
 
 ```javascript
 const threads = await docmd.call("threads:get-threads", {
@@ -67,7 +67,7 @@ console.log(threads);
 
 ### `docmd.send(name, data)`
 
-Transmits fire-and-forget events to the dev server without awaiting responses:
+Transmite eventos de disparar y olvidar al servidor de desarrollo sin esperar respuestas:
 
 ```javascript
 docmd.send("analytics:page-view", {
@@ -77,25 +77,25 @@ docmd.send("analytics:page-view", {
 
 ### `docmd.on(name, callback)`
 
-Subscribes to server-pushed WebSocket events. Returns an unsubscription function:
+Se suscribe a eventos de WebSocket enviados por el servidor. Devuelve una función de cancelación de suscripción:
 
 ```javascript
 const unsubscribe = docmd.on("threads:updated", (data) => {
-  console.log("Threads updated:", data);
+  console.log("Hilos actualizados:", data);
 });
 
 unsubscribe();
 ```
 
-### State Persistence across Hot Reloads
+### Persistencia de estado en recargas rápidas
 
 ```javascript
-// Stash context before hot-reload
+// Guardar contexto antes de la recarga rápida
 docmd.scheduleReload("scroll-restore", {
   scrollY: window.scrollY
 });
 
-// Restore context post-reload
+// Restaurar contexto después de la recarga
 docmd.afterReload("scroll-restore", (ctx) => {
   window.scrollTo(0, ctx.scrollY);
 });
