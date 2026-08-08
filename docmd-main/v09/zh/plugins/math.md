@@ -3,21 +3,17 @@ title: "Math 插件"
 description: "docmd 的原生 KaTeX/LaTeX 数学集成。"
 ---
 
-**Math 插件** 为您的 docmd 站点添加原生 LaTeX 和 KaTeX 支持。
+`@docmd/plugin-math` 插件为 docmd 提供原生的 LaTeX 和 KaTeX 数学公式渲染。该插件基于 `markdown-it-texmath` 和 KaTeX 构建，公式会被编译为带有可选 CSS 资源注入的静态 HTML 元素。
 
-它使用与 `katex` 计算引擎集成的 `markdown-it-texmath`。这能流畅地渲染行内和块级方程，无需复杂的客户端 JavaScript 库。
+## 安装与设置
 
-## 配置
-
-Math 插件是可选插件。通过 CLI 安装：
+通过 CLI 安装该插件：
 
 ```bash
 npx @docmd/core add math
 ```
 
-在您的 `docmd.config.json` 中启用它：
-
-### 示例
+在 `docmd.config.json` 中启用该插件：
 
 ```json "docmd.config.json"
 {
@@ -27,32 +23,27 @@ npx @docmd/core add math
 }
 ```
 
-## 工作原理
+## 核心能力
 
-1. 通过您的 `docmd.config.json` 启用该插件。
-2. 用 `$`（行内）或 `$$`（块）包裹您的标准 LaTeX 数学公式。
-3. 引擎在构建过程中完全像处理原始静态 HTML 标签一样处理这些规则。
-4. 极少的注入 CSS 自动为这些类添加样式。这能在页面加载时立即呈现。
+* **行内与块级解析**: 解析由单个 `$`（行内）或双 `$$`（块级）定界符包围的公式。
+* **条件性资源注入**: KaTeX 样式表（~30 KB）仅在包含公式元素（`class="katex"` 或 `class="katex-display"`）的页面上注入。无公式页面产生零资源开销。
+* **快速初始化**: 数学标记在构建阶段完成评估，确保页面加载时零布局偏移（CLS）。
 
-## 条件性资源加载（0.8.7 新增）
+## 用法与语法
 
-KaTeX 样式表（约 30 KB）仅在实际渲染数学的页面上加载。没有公式的页面完全跳过获取，因此一个仅有 5 个数学页面的 100 页文档站点只需在这 5 个页面上承担 CSS 成本。检测会扫描每个页面渲染后的 HTML 中是否存在 `class="katex"` 或 `class="katex-display"` 标记，并有条件地注入资源。无需配置 —— 该行为是自动的。
+### 行内数学公式
 
-## 用法
-
-### 行内数学
-
-使用单个美元符号 `$` 在段落中注入标准方程：
+使用单个美元符号 (`$`) 在正文中嵌入表达式：
 
 ```markdown
-Here is an inline equation: $E = mc^2$
+质能方程是 $E = mc^2$。
 ```
 
-Here is an inline equation: $E = mc^2$
+质能方程是 $E = mc^2$。
 
-### 块级数学
+### 块级数学公式
 
-对于更宽的数学证明或不同的形式化表示，使用双美元符号 `$$` 进行块级格式化：
+使用双美元符号 (`$$`) 渲染多行证明与居中显示公式：
 
 ```markdown
 $$
@@ -63,3 +54,7 @@ $$
 $$
 \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
 $$
+
+::: callout tip "性能优化" icon:zap
+由于 KaTeX 资源在每个页面按需条件加载，因此在部分页面中添加数学公式不会影响整个文档站点其他页面的加载速度。
+:::

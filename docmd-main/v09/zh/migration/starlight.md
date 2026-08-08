@@ -3,54 +3,86 @@ title: "从 Astro Starlight 迁移"
 description: "一份完整的指南，帮您把 Astro Starlight 项目迁移到 docmd。"
 ---
 
-# 从 Astro Starlight 迁移到 docmd
+Starlight 是一款构建在 Astro 之上的文档主题。`docmd` 提供类似的“默认零 JavaScript”体验，无需配置完整的 Web 框架或复杂的 Astro 集成。
 
-Starlight 是构建在 Astro 之上的文档主题。docmd 提供类似的"默认零 JavaScript"体验，并且省去了配置整套 Web 框架的麻烦，从而降低学习成本。
+::: steps
 
-## 第 1 步：运行迁移引擎
+### 1. 运行迁移引擎
 
-在您现有 Starlight 项目的根目录下执行以下命令：
+在您现有 Starlight 项目的根目录下运行以下命令：
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core migrate --starlight
 ```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core migrate --starlight
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core migrate --starlight
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core migrate --starlight
+```
+:::
 
-### 自动完成的工作
+#### 自动处理流程
 
-1.  **备份**：整个项目会被安全地移入新建的 `starlight-backup/` 目录。
-2.  **内容迁移**：Starlight 将文档存放在 `src/content/docs/`，迁移引擎会提取该目录并把内容移至项目根目录的 `docs/` 文件夹。
-3.  **配置生成**：生成一份 `docmd.config.json`，从 `astro.config.mjs` 中的 Starlight 集成里抽取站点 `title`。
+::: steps
 
-## 第 2 步：验证设置
+1. **备份**：除 `node_modules`、`.git`、`package.json` 及 lockfile 之外的整个项目目录，会被安全地备份到一个新的 `starlight-backup/` 目录中。
+2. **内容迁移**：Starlight 将文档存放在 `src/content/docs/` 中。迁移引擎会提取该文件夹并将内容移动至根 `docs/` 文件夹。
+3. **配置生成**：生成一份 `docmd.config.json`，从 `astro.config.mjs` 或 `astro.config.ts` 中的 Starlight 集成中提取您的站点 `title`。
 
-命令完成后，您可以在 docmd 中预览内容：
+:::
 
+### 2. 预览迁移产物
+
+在 `docmd` 中立即预览您的 Markdown 内容：
+
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core dev
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core dev
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
-您的 Markdown 文件将被编译，但导航侧边栏还是空的。
+### 3. 手动配置与组件替换
 
-## 第 3 步：手动配置
+#### 导航设置
 
-### 1. 导航设置
+Starlight 通过 `sidebar` 数组在 `astro.config.mjs` 中定义导航侧边栏。请在 `docs/` 目录中创建 `navigation.json`：
 
-Starlight 通过 `astro.config.mjs` 的 `sidebar` 数组定义导航。
-
-**待办事项**：在新的 `docs/` 目录下创建一份 `navigation.json`。
-
-```javascript "astro.config.mjs"
+**Starlight (`astro.config.mjs`):**
+```javascript
 sidebar: [
   {
-    "label": "指南",
-    "items": [
-      { "label": "安装", "link": "/guides/setup/" }
+    label: "指南",
+    items: [
+      { label: "安装", link: "/guides/setup/" }
     ]
   }
 ]
 ```
 
-```json "navigation.json"
+**docmd (`navigation.json`):**
+```json
 [
   {
     "title": "指南",
@@ -62,56 +94,55 @@ sidebar: [
 ]
 ```
 
-### 2. 替换 Astro 组件（MDX / Markdoc）
+#### 替换 Astro 组件（MDX / Markdoc）
 
-Starlight 通过 MDX 或 Markdoc 嵌入 Astro 组件。由于 docmd 仅依赖纯 Markdown 语法，这些组件都必须转换。
+Starlight 使用通过 MDX 或 Markdoc 嵌入的 Astro 组件。请将其替换为 `docmd` 原生的 [容器](../content/containers/callouts.md)。
 
-**待办事项**：把 Astro 组件替换为 docmd [容器](../content/containers/callouts.md)。
+##### 转换选项卡组件
 
-#### 示例：转换 Tabs
-
-**Starlight：**
+**Starlight:**
 ```mdx
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="恒星">天狼星、织女星、参宿四</TabItem>
-  <TabItem label="卫星">Io、Europa、Ganymede</TabItem>
+  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
-**docmd：**
+**docmd:**
 ```markdown
 ::: tabs
-== tab "恒星"
+== tab "Stars" icon:sparkles
 天狼星、织女星、参宿四
 
-== tab "卫星"
-Io、Europa、Ganymede
+== tab "Moons" icon:moon
+Io, Europa, Ganymede
 :::
 ```
 
-#### 示例：转换 Asides（Admonition）
+##### 转换 Asides（提示框）
 
-**Starlight：**
+**Starlight:**
 ```mdx
 :::note[可选标题]
 一段注释内容。
 :::
 ```
 
-**docmd：**
+**docmd:**
 ```markdown
-::: note "可选标题"
+::: callout info "可选标题"
 一段注释内容。
 :::
 ```
 
-### 3. Frontmatter 映射
+#### Frontmatter 映射
 
-Starlight 通过 Astro Content Collections 对 Frontmatter 进行了严格的类型化约束。docmd 的 Frontmatter 更简单。
-如果您在 Starlight 中为登录页使用了 `hero` 或 `banner` 这类 frontmatter 属性，请改用直接写在 Markdown 正文里的 docmd [Hero 区域](../content/containers/hero.md)。
+Starlight 通过 Astro 内容集合强制进行严格的 Frontmatter 类型化。如果您为落地页使用了 `hero` 或 `banner` frontmatter 属性，请将其替换为直接写在 Markdown 正文中的 `docmd` 原生 [Hero 区域](../content/containers/hero.md)。
+
+:::
 
 ## 下一步
 
-- 了解 docmd 内置的 [Search 插件](../plugins/search.md)。Starlight 使用 Pagefind，而 docmd 原生自带一个高度优化的本地搜索索引器。
+- 探索 `docmd` 内置的 [Search 插件](../plugins/search.md)。Starlight 依赖 Pagefind 集成，而 `docmd` 开箱即用包含快速、零配置的本地搜索索引器。

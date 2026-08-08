@@ -3,20 +3,20 @@ title: "OpenAPI 插件"
 description: "在构建时直接从 OpenAPI 3.x 规范渲染静态 API 参考文档。"
 ---
 
-`@docmd/plugin-openapi` 插件将 OpenAPI 3.x 规范文件转换为结构化的、可搜索的 API 参考页面。它遵循 docmd 的"零 JavaScript"理念 —— 在构建过程中将每个端点、参数和响应渲染到语义化 HTML 表格中，确保最佳性能和 SEO。
+`@docmd/plugin-openapi` 插件将 OpenAPI 3.x 规范文件（JSON 或 YAML）转换为结构化的、可搜索的 API 参考页面。遵循 docmd 的“零 JS”运行时理念，每个端点、参数表格和 Schema 模型都会在构建处理期间被编译为静态 HTML。
 
-## 配置
+## 配置选项
 
-OpenAPI 插件默认包含在 `@docmd/core` 中。您可以在 `docmd.config.json` 中配置全局渲染选项。
+在 `docmd.config.json` 中配置全局 OpenAPI 渲染参数：
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
-| `info` | `boolean` | `true` | 显示规范中 `info` 对象的 API 标题、版本和描述。 |
-| `download` | `boolean` | `false` | 若为 true，则在规范头部添加一个下载原始 JSON/YAML 文件的链接。 |
-| `summaryOnly` | `boolean` | `false` | 若为 true，则仅渲染方法、路径和摘要。适用于大型 API 索引。 |
-| `allowRawHtml` | `boolean` | `false` | 若为 true，则阻止对描述中 HTML 标签的转义。 |
+| `info` | `boolean` | `true` | 显示规范 `info` 块中的 API 标题、版本与描述。 |
+| `download` | `boolean` | `false` | 添加原始 JSON/YAML 规范文件的直接下载链接。 |
+| `summaryOnly` | `boolean` | `false` | 仅渲染高层 HTTP 方法与路径摘要，不展示完整的参数 Schema。 |
+| `allowRawHtml` | `boolean` | `false` | 允许在规范描述字符串中使用未转义的原始 HTML。 |
 
-### 示例
+### 全局配置示例
 
 ```json "docmd.config.json"
 {
@@ -30,9 +30,9 @@ OpenAPI 插件默认包含在 `@docmd/core` 中。您可以在 `docmd.config.jso
 }
 ```
 
-## 用法
+## 用法与语法
 
-在 Markdown 中使用带有 `openapi` 标记的围栏代码块嵌入 OpenAPI 规范。路径相对于您的项目源解析。
+使用带有 `openapi` 语言标记的围栏代码块嵌入 OpenAPI 规范。请指定源于您文档源码根目录的相对文件路径：
 
 ````markdown
 ```openapi
@@ -40,36 +40,27 @@ assets/openapi.json
 ```
 ````
 
-### 渲染结果
+### 规范输出解析
 
-```openapi
-assets/docmd-api.json
-```
+插件会解析并渲染：
 
-## 渲染内容
+* **HTTP 方法徽章**: 颜色编码徽章 (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)。
+* **端点路径**: 带参数的路径字符串。
+* **参数表格**: 名称、位置 (`path`, `query`, `header`, `cookie`)、数据类型、必填标志以及描述。
+* **请求与响应模型**: 包含字段类型与默认值的结构化 Schema 表格。
+* **弃用警告横幅**: 针对标记有 `deprecated: true` 的端点提供内联警告。
 
-对于规范中的每个路径和 HTTP 方法，插件会渲染：
-
-- **方法徽章** - 颜色编码（`GET`、`POST`、`PUT`、`PATCH`、`DELETE`）
-- **路径** - 带高亮参数的完整端点路径
-- **摘要和描述** - 来自 operation 对象
-- **参数表格** - 名称、位置（`path`、`query`、`header`、`cookie`）、类型、必需标志、描述
-- **请求体表格** - 带类型和默认值的 schema 属性
-- **响应表格** - 带描述和响应 schema 类型的状态码
-- **已弃用通知** - 标记为 `deprecated: true` 的操作会被内联标记
-
-::: callout tip "构建时渲染"
-所有渲染都在构建时进行。生成的页面是静态的，无需客户端 JavaScript 即可显示。这为您带来快速的页面加载、完整的搜索索引和对 SEO 友好的 HTML。
+::: callout tip "零-JS 构建期执行" icon:zap
+所有 OpenAPI 规范均在编译期间解析为静态 HTML。运行时无需加载任何沉重的客户端 JavaScript 库，确保极简的页面加载时间与完全的搜索索引能力。
 :::
 
-## 能力支持
+## 技术兼容性
 
-| 特性 | 支持 |
+| 规范特性 | 兼容性级别 |
 | :--- | :--- |
-| OpenAPI 3.x | ✓ (JSON & YAML*) |
-| Swagger 2.x | ✗ (请先转换为 3.x) |
-| `$ref` 解析 | ✓ (内部 schemas) |
-| `oneOf` / `anyOf` | ✓ (显示为联合类型) |
-| `deprecated` 标记 | ✓ |
-
-*\*YAML 支持需要在项目中安装 `js-yaml` 包。*
+| OpenAPI 3.x (JSON) | 原生支持 |
+| OpenAPI 3.x (YAML) | 受支持 (需要 `js-yaml` 依赖项) |
+| Swagger 2.0 | 旧版 (构建前需转换为 OpenAPI 3.x) |
+| 内部 `$ref` Schemas | 完整解析 |
+| 多态 `oneOf` / `anyOf` | 渲染为联合类型 |
+| 已弃用的操作 | 原生支持内联标记 |

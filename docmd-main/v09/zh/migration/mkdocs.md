@@ -3,43 +3,74 @@ title: "从 MkDocs 迁移"
 description: "一份完整的指南，帮您把 MkDocs（或 Material for MkDocs）项目迁移到 docmd。"
 ---
 
-# 从 MkDocs 迁移到 docmd
+MkDocs 是一款基于 Python 的静态站点生成器。`docmd` 同样提供 Markdown 优先的体验，并且基于 Node.js/Bun 构建，可实现极速编译且无需复杂的 Python 虚拟环境或额外的 pip 依赖。
 
-MkDocs 是一款流行的 Python 文档生成器。docmd 同样提供 Markdown 优先的体验，并且基于 Node.js/Bun 构建，可实现极速构建且无需复杂的 Python 扩展。
+::: steps
 
-## 第 1 步：运行迁移引擎
+### 1. 运行迁移引擎
 
-在您现有 MkDocs 项目的根目录下执行以下命令：
+在您现有 MkDocs 项目的根目录下运行以下命令：
 
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core migrate --mkdocs
 ```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core migrate --mkdocs
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core migrate --mkdocs
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core migrate --mkdocs
+```
+:::
 
-### 自动完成的工作
+#### 自动处理流程
 
-1.  **备份**：整个项目会被安全地移入新建的 `mkdocs-backup/` 目录。
-2.  **内容迁移**：把 `docs/` 目录恢复到项目根，供 docmd 使用。
-3.  **配置生成**：生成一份 `docmd.config.json`，并从 `mkdocs.yml` 中抽取 `site_name`。
+::: steps
 
-## 第 2 步：验证设置
+1. **备份**：除 `node_modules`、`.git`、`package.json` 及 lockfile 之外的整个项目目录，会被安全地备份到一个新的 `mkdocs-backup/` 目录中。
+2. **内容迁移**：您的 `docs/` 文件夹会被恢复到根目录供 `docmd` 使用。
+3. **配置生成**：生成一份 `docmd.config.json`，从 `mkdocs.yml` 中提取您的 `site_name` 和 `site_dir`。
+4. **导航自动转换**：`mkdocs.yml` 中的顶层 `nav:` 块会被自动解析并转换为 `docmd` 的 `navigation` 数组格式（包括嵌套的 `children`）。
 
-命令完成后，您可以在 docmd 中预览内容：
+:::
 
+### 2. 预览迁移产物
+
+在 `docmd` 中立即预览您的内容：
+
+::: tabs
+== tab "npm" icon:box
 ```bash
 npx @docmd/core dev
 ```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core dev
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core dev
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
 
-您的 Markdown 文件将被编译，但导航侧边栏还是空的。
+### 3. 手动配置与扩展映射
 
-## 第 3 步：手动配置
+MkDocs 通过 `mkdocs.yml` 定义导航结构与 PyMdown 扩展。请将任何自定义设置转换为 `docmd` 容器。
 
-MkDocs 通过 `mkdocs.yml` 定义站点导航与扩展。您必须手动把这一套映射到 docmd。
+#### 导航设置
 
-### 1. 导航设置
-
-在 MkDocs 中，导航严格定义在 `mkdocs.yml` 的 `nav` 键下。
-
-**待办事项**：在 `docs/` 目录下创建一份 `navigation.json`。
+`mkdocs.yml` 中的顶层 `nav:` 块会被自动转换为 `docmd` 的 `navigation` 数组。如果您需要高级导航特性（例如自定义图标或外部 URL），请在 `docs/` 文件夹中创建 `navigation.json`：
 
 ```yaml "mkdocs.yml"
 nav:
@@ -66,41 +97,30 @@ nav:
 ]
 ```
 
-### 2. 替换 Python Markdown 扩展
+#### 替换 Python Markdown 扩展
 
-如果您用过 "Material for MkDocs"，很可能依赖 Python Markdown 扩展来实现 tabs 或 admonition。
+将 MkDocs 的 PyMdown 扩展语法转换为 `docmd` 原生的 [容器](../content/containers/callouts.md)。
 
-**待办事项**：把 MkDocs 的扩展语法转换为 docmd 原生的 [容器](../content/containers/callouts.md)。
+##### 转换提示框
 
-#### 示例：转换 Admonition
+MkDocs 使用 `!!!` 块语法，需要将其转换为 `:::` 格式。
 
-**MkDocs (PyMdown)：**
+**MkDocs (PyMdown):**
 ```markdown
 !!! note "可选标题"
-    这是一段 admonition 内容。
+    这是一段提示框内容块。
 ```
 
-::: callout warning "需要手动转换"
-MkDocs 的 admonition 使用 `!!!` 语法，与 docmd 的 `:::` 语法不同。您必须手动转换，或借助查找替换工具。
-
-**映射关系：**
-- `!!! note` → `::: callout info` 或 `:::note`
-- `!!! tip` → `::: callout tip` 或 `:::tip`
-- `!!! warning` → `::: callout warning` 或 `:::warning`
-- `!!! danger` → `::: callout danger` 或 `:::danger`
-- `!!! example` → `::: callout info`
-:::
-
-**docmd：**
+**docmd:**
 ```markdown
 ::: callout info "可选标题"
-这是一段 admonition 内容。
+这是一段提示框内容块。
 :::
 ```
 
-#### 示例：转换 Tabs
+##### 转换选项卡
 
-**MkDocs (SuperFences)：**
+**MkDocs (SuperFences):**
 ```markdown
 === "Tab 1"
     Tab 1 的内容。
@@ -109,7 +129,7 @@ MkDocs 的 admonition 使用 `!!!` 语法，与 docmd 的 `:::` 语法不同。�
     Tab 2 的内容。
 ```
 
-**docmd：**
+**docmd:**
 ```markdown
 ::: tabs
 == tab "Tab 1"
@@ -120,7 +140,9 @@ Tab 2 的内容。
 :::
 ```
 
+:::
+
 ## 下一步
 
-- docmd 自带搜索，无需再额外配置搜索插件。
-- 浏览 [主题选项](../theming/customisation.md)，定制颜色以匹配您原本的 Material 主题。
+- `docmd` 内置搜索功能。无需额外的搜索插件或外部索引器。
+- 探索 [主题选项](../theming/customisation.md) 来自定义颜色和品牌，匹配您之前的主题。

@@ -3,26 +3,26 @@ title: "SEO 插件"
 description: "通过原生 meta 标签生成优化您的文档，以适应搜索引擎并控制 AI 爬虫的访问。"
 ---
 
-`@docmd/plugin-seo` 插件为每个页面生成高质量元数据。它确保您的文档不仅可以被人类读者在搜索引擎上发现，还可以被 AI 模型和社交媒体平台正确解读。
+`@docmd/plugin-seo` 插件为您全站的每个页面生成语义化 HTML 元数据与社交媒体预览标签。它确保您的文档可被搜索引擎检索、在社交平台上得到正确呈现，并符合 AI 爬虫策略。
 
-## 配置
+## 配置选项
 
-在您的 `docmd.config.json` 中配置全站 SEO 默认值。页面级设置始终优先于全局默认值。
+在 `docmd.config.json` 中配置全站 SEO 默认值。页面级 Frontmatter 设置会覆盖全局默认值。
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
-| `defaultDescription` | `string` | `null` | 没有 frontmatter 描述的页面的后备描述。 |
-| `aiBots` | `boolean` | `true` | 允许（`true`）或阻止（`false`）AI 训练爬虫。当为 `false` 时，会阻止 GPTBot、ChatGPT-User、Google-Extended、CCBot 等 AI 爬虫。 |
-| `openGraph` | `object` | `null` | 社交媒体的 Open Graph 设置（Facebook、LinkedIn）。 |
+| `defaultDescription` | `string` | `null` | 缺乏显式 Frontmatter 描述的页面的后备描述。 |
+| `aiBots` | `boolean` | `true` | 允许 (`true`) 或阻止 (`false`) AI 训练抓取爬虫 (GPTBot, ChatGPT-User, Google-Extended, CCBot)。 |
+| `openGraph` | `object` | `null` | Open Graph 社交媒体元数据 (Facebook, LinkedIn)。 |
 | `twitter` | `object` | `null` | Twitter (X) Card 设置，包括用户名和卡片类型。 |
 
-### 示例
+### 全局 SEO 配置示例
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "seo": {
-      "defaultDescription": "Comprehensive documentation for the docmd ecosystem.",
+      "defaultDescription": "docmd 平台的完整技术文档。",
       "aiBots": false,
       "twitter": {
         "siteUsername": "@docmd_io",
@@ -33,99 +33,48 @@ description: "通过原生 meta 标签生成优化您的文档，以适应搜索
 }
 ```
 
-## 功能
+## 核心能力
 
-- **自动 `robots.txt`**：缺失时自动生成，包含 sitemap 引用和 AI 爬虫指令。
-- **智能后备**：如果未设置描述，则提取正文的前 150 个字符。
-- **AI 爬虫治理**：默认情况下，AI 爬虫可以索引内容。设置 `aiBots: false` 可阻止 AI 训练爬虫，同时仍允许传统搜索引擎。
-- **规范 URL**：发出 `<link rel="canonical">` 以防止重复内容问题。
-- **社交预览**：原生 Open Graph 和 Twitter Cards。
-- **结构化数据**：LD+JSON 文章 Schema，用于丰富的搜索摘要。
+* **自动化 `robots.txt`**: 在输出根目录生成标准 `robots.txt`，包含 Sitemap 位置与 AI 机器人规则。
+* **智能摘要提取**: 若未定义页面描述，则自动提取正文的前 150 个字符。
+* **AI 机器人治理**: 设置 `aiBots: false` 可阻止 AI 训练抓取程序，同时仍允许搜索引擎爬虫索引。
+* **规范 URL 发射**: 注入 `<link rel="canonical">` 元素以防止重复索引问题。
+* **社交预览卡片**: 生成 Open Graph 与 Twitter Card 标签。
+* **结构化数据 (JSON-LD)**: 注入文章 Schema JSON-LD 块，用于丰富搜索引擎摘要。
 
-## robots.txt 自动生成
+## `robots.txt` 解析顺序
 
-如果输出目录中没有 `robots.txt` 文件，插件会在构建过程中自动生成。
+SEO 插件按自顶向下的优先级顺序评估 `robots.txt`：
 
-**生成内容包括：**
+1. **站点根目录** (`site/robots.txt`) - 首先检查；若存在，则保留现有内容。
+2. **源码资源文件夹** (`assets/robots.txt`) - 若存在于源码资源目录中，会自动复制到站点输出根目录 (`site/robots.txt`)。
+3. **自动生成默认值** - 若未找到自定义文件，`docmd` 会根据插件配置动态生成 `robots.txt`。
 
-```txt
-User-agent: *
-Allow: /
+推荐的文件组织结构：
 
-# Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
-```
-
-**阻止 AI 训练爬虫：**
-
-当设置 `aiBots: false` 时，生成的 `robots.txt` 包含：
-
-```txt
-# Block AI training bots
-User-agent: GPTBot
-Disallow: /
-User-agent: ChatGPT-User
-Disallow: /
-User-agent: Google-Extended
-Disallow: /
-# ... (additional AI crawlers)
-```
-
-### robots.txt 位置策略
-
-插件智能地处理多个位置的 `robots.txt`：
-
-**优先级顺序：**
-1. **站点根目录**（`site/robots.txt`）—— 首先检查，最高优先级
-2. **资源文件夹**（`site/assets/robots.txt`）—— 如果找到，则复制到站点根目录
-
-**行为：**
-
-- 如果 `robots.txt` 存在于**站点根目录**：保留，不采取任何操作
-- 如果 `robots.txt` 存在于**资源文件夹**：自动复制到站点根目录（SEO 推荐位置）
-- 如果未找到 `robots.txt`：根据 SEO 配置自动生成
-
-**推荐实践：**
-
-将您的自定义 `robots.txt` 放在文档源的 `assets/` 文件夹中。插件将在构建期间将其复制到站点根目录：
-
-```
-your-docs/
+```text
+my-docs/
 ├── assets/
-│   └── robots.txt    ← Place here
+│   └── robots.txt    ← 在此编写自定义规则
 ├── index.md
 └── docmd.config.json
 ```
 
-构建后，它出现在正确的位置：
+## 页面级 SEO 覆盖
 
-```
-site/
-├── robots.txt        ← Copied here (SEO standard location)
-├── assets/
-│   └── robots.txt    ← Also preserved here
-└── index.html
-```
+使用 [页面 Frontmatter](../content/frontmatter.md) 为特定文档覆盖全站 SEO 默认设置：
 
-::: callout tip "为什么是站点根目录？"
-搜索引擎期望 `robots.txt` 位于域根目录（`https://example.com/robots.txt`）。插件确保您的文件始终位于正确的位置，无论您提供自定义文件还是让其自动生成。
-:::
-
-## 页面级覆盖
-
-使用 frontmatter 为单个页面微调设置：
-
-```markdown
+```yaml
 ---
-title: "Advanced Configuration"
-noindex: true # Hide from all search engines
+title: "高级引擎架构"
+noindex: true # 从搜索引擎索引中隐藏页面
 seo:
-  keywords: ["docmd", "javascript", "ssg"]
-  aiBots: true # Override global block for this page
-  ldJson: true # Enable Article Schema
+  keywords: ["docmd", "architecture", "engine"]
+  aiBots: true # 允许 AI 抓取程序索引此页面
+  ldJson: true # 注入文章 Schema
 ---
 ```
 
-::: callout tip "搜索发现"
-为获得最佳效果，请确保在配置的根目录中定义了 `url`。没有基础 URL，插件无法生成绝对规范链接或社交图片路径。
+::: callout tip "基础 URL 配置" icon:link
+在 `docmd.config.json` 中定义 `url` 属性（例如 `https://docs.docmd.io`），以启用有效的绝对规范链接与社交预览图片 URL。
 :::

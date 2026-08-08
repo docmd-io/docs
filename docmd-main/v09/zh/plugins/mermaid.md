@@ -3,36 +3,38 @@ title: "Mermaid 图表"
 description: "使用 Mermaid.js 语法直接在 Markdown 文件中创建专业的架构图、流程图和序列图。"
 ---
 
-`@docmd/plugin-mermaid` 插件将 [Mermaid.js](external:https://mermaid.js.org/) 集成到构建管线中。纯文本描述会变成具有主题支持、平移和缩放的交互式图表。
+`@docmd/plugin-mermaid` 插件将 [Mermaid.js](external:https://mermaid.js.org/) 无缝集成至 docmd 中。它将纯文本图表声明渲染为带有自动主题匹配、平移和缩放功能的交互式 SVG 视觉图表。
 
-## 配置
+## 配置选项
 
-该插件与 `@docmd/core` 捆绑，默认启用。
+在 `docmd.config.json` 中配置 Mermaid 渲染选项：
 
-| 选项 | 类型 | 默认值 | 说明 |
+| 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | 全局启用或禁用 Mermaid 渲染。 |
+| `enabled` | `boolean` | `true` | 全局启用或禁用 Mermaid 图表渲染。 |
 
-### 示例
+### 全局配置示例
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "mermaid": {}
+    "mermaid": {
+      "enabled": true
+    }
   }
 }
 ```
 
-## 功能
+## 核心能力
 
-- **主题感知**：图表自动适应亮色或暗色模式。
-- **交互式**：每个图表内置平移、缩放和全屏控件。
-- **惰性初始化**：脚本仅在图表进入视口时才会加载和渲染。
-- **图标包**：支持由 Lucide 图标集支持的 `icon:name` 语法。
+* **外观同步**: 图表配色方案会根据当前的亮色或暗色外观模式进行动态适应。
+* **交互式画布**: 内置平移、缩放与全屏展开控件。
+* **惰性初始化**: 图表渲染脚本仅在图表进入视口时才会异步加载。
+* **图标集成**: 支持在节点定义中使用由 Lucide 图标驱动的 `icon:name` 语法。
 
-## 用法
+## 用法与语法
 
-使用带有 `mermaid` 语言标识符的围栏代码块嵌入图表。
+使用带有 `mermaid` 语言标识符的围栏代码块编写图表。
 
 ### 序列图示例
 
@@ -44,7 +46,7 @@ sequenceDiagram
     participant User
     participant Browser
     participant Server
-
+    
     User->>Browser: Enters URL
     Browser->>Server: HTTP Request
     Server-->>Browser: HTTP Response
@@ -58,7 +60,7 @@ sequenceDiagram
     participant User
     participant Browser
     participant Server
-
+    
     User->>Browser: Enters URL
     Browser->>Server: HTTP Request
     Server-->>Browser: HTTP Response
@@ -68,7 +70,7 @@ sequenceDiagram
 
 :::
 
-### 架构示例
+### 架构图示例
 
 ```mermaid
 architecture-beta
@@ -78,6 +80,6 @@ architecture-beta
     db:L -- R:disk
 ```
 
-::: callout tip "AI 可读性"
-由于 Mermaid 图表在 Markdown 中以纯文本形式定义，它们可以被 AI 智能体完整阅读。这使得 LLM 可以直接从您的文档源理解并解释您的系统架构。
+::: callout tip "AI 知识提取" icon:cpu
+由于 Mermaid 图表在 Markdown 源码文件中以纯文本撰写，AI 智能体与 LLM 抓取程序可直接读取图表结构，无需通过 OCR 图像识别处理。
 :::

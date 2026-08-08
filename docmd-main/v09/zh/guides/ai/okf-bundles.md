@@ -3,7 +3,7 @@ title: "OKF 知识包 — 深度解析"
 description: "如何为最佳 OKF 知识包组织 docmd 内容 —— 类型化概念、交叉链接以及打造 AI 智能体友好知识库的规范。"
 ---
 
-[`@docmd/plugin-okf`](../../plugins/okf.md) 从你的 docmd 站点生成 [Open Knowledge Format][okf-spec] 知识包。本指南解释了知识包的结构、如何组织内容以供 AI 智能体最佳消费，以及 OKF 与 [`llms.txt`](../../plugins/llms.md) 扁平列表格式的区别。
+`@docmd/plugin-okf` 插件可从您的 docmd 站点生成 [Open Knowledge Format][okf-spec] 知识包。本指南详细解释了知识包的结构、如何组织内容以供 AI 智能体获得最佳消费体验，以及 OKF 与 [`llms.txt`](../../plugins/llms.md) 扁平列表格式的区别。
 
 [okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 
@@ -13,7 +13,7 @@ description: "如何为最佳 OKF 知识包组织 docmd 内容 —— 类型化�
 
 OKF 知识包是一个 **Wiki** —— 包含交叉链接的类型化概念文件的扁平目录。AI 智能体在图谱中横向导航，跟随链接从一个概念跳转到相邻概念。
 
-OKF 规范的 [三条设计原则][okf-principles] 值得完整引用：
+这两者在磁盘上的结构看起来相同（目录中的 Markdown 文件），但导航模型完全不同。OKF 规范的 [三条设计原则][okf-principles] 值得完整引用：
 
 > 1. **极简约束。** OKF 对每个概念仅要求一件事：`type` 字段。其他所有内容（存在哪些类型、包含哪些其他字段、主体包含哪些章节）均留给生产方决定。
 > 2. **生产方/消费方独立。** 由人类手写的知识包可以被 AI 智能体消费。由元数据导出管道生成的知识包可以在可视化工具中浏览。由一个 LLM 合成的知识包可以被另一个 LLM 查询。格式即契约；两端的工具可独立替换。
@@ -82,21 +82,23 @@ title: "认证 API"
 ---
 ```
 
-智能体首先读取 `type` 字段。带有 `type: runbook` 的概念被视为一步步的操作指南；带有 `type: api` 的概念被视为 API 参考；带有 `type: dataset` 的概念被视为数据字典。
+智能体首先读取 `type` 字段。带有 `type: runbook` 的概念被视为一步步的操作指南（例如“如何从局部宕机中恢复”）；带有 `type: api` 的概念被视为 API 参考；带有 `type: dataset` 的概念被视为数据字典。
 
 ## 交叉链接构建图谱
 
 OKF 是一个图，而不是树。概念之间的关系是从内部 Markdown 链接推断出来的。如果 `api-authentication.md` 链接到 `users-table.md`，OKF 知识包会在 `graph.json` 中记录该边，图谱查看器会在两个节点之间绘制一条线。
 
+`okf-bundle`（即“概念图谱”）比树状结构更有用，因为它允许智能体找到作者未曾想到要放入同一子章节的相关概念。OKF 形式化的 LLM-wiki 模式显式假设智能体会跟随链接探索相邻知识。
+
 交叉链接最佳实践：
 
 - **向前链接** — 在引入一个概念时，链接到它所依赖的概念（例如 `[MCP 设置](./mcp-and-agent-skills.md)`）。
-- **向后链接** — 在依赖此概念的页面中反向链接（例如 `[AI 助手](./ai-assistant.md)`）。
-- **切勿过度链接** — 每个链接都应当增加有效信息。
+- **向后链接** — 在依赖此概念的概念页面中反向链接（例如 `[AI 助手](./ai-assistant.md)`）。
+- **切勿过度链接** — 每个链接都应当增加有效信息。对每个词都加链接会稀释图谱权重并困扰智能体。
 
 ## 单页排除 (Opt-out)
 
-某些页面对 AI 智能体无用 —— 法律声明、内部团队介绍、营销文案。使用 `frontmatter.okf: false` 可将单个页面排除在 OKF 知识包之外：
+某些页面对 AI 智能体无用 —— 法律条款声明、内部“关于团队”页面、营销文案。使用 `frontmatter.okf: false` 可将单个页面排除在 OKF 知识包之外：
 
 ```markdown
 ---
@@ -107,7 +109,10 @@ okf: false
 ...
 ```
 
-或使用 `noindex: true` 将页面排除在所有下游消费方之外。
+或使用 `noindex: true` 将页面排除在所有下游消费方（sitemap、搜索、llms.txt、OKF）之外。这两个标志有所区别：
+
+- `okf: false` — 仅在 OKF 中排除；仍保留在搜索和 llms.txt 中
+- `noindex: true` — 从所有下游消费方中排除
 
 ## OKF 与 `llms.txt` 的区别
 
@@ -139,22 +144,28 @@ concepts:
 
 两者相互补充：
 
-- **llms.txt** 用于 **扁平消费** —— "给我所有内容"。
-- **OKF** 用于 **类型化消费** —— "给我表 X 的 Schema"。
+- **llms.txt** 用于 **扁平消费** —— “给我所有内容”。智能体读取该文件并将其完整文本置于上下文窗口中。
+- **OKF** 用于 **类型化消费** —— “给我表 X 的 Schema”。智能体读取清单，挑选所需的概念，并选择性地加载它们。
+
+对于少于 50 页的项目，仅靠 llms.txt 通常就足够了。对于 50 页以上的项目，OKF 是更高效的格式 —— 智能体无需加载每一页就能精准找到所需内容。
 
 ## 常见错误
 
 ### 1. 遗漏 `type` 字段
-为每个具有明确分类的页面显式设置 `type: <name>`。
+
+当每个概念都具有明确的 `type` 时，OKF 清单最有用。如果 80% 的页面都被推导为 `concept`，智能体将无法区分哪些是参考文档、哪些是教程、哪些是操作指南。为每一个具有明确分类的页面显式设置 `type: <name>`。
 
 ### 2. 页面没有交叉链接
-添加至少一个入站链接，使页面在图谱中保持可发现性。
+
+如果页面是一个死胡同（没有链入或链出的内部链接），图谱查看器会将其显示为一个孤立节点。智能体孤立地阅读它，会丢失上下文。为您希望展示的每一页至少添加一个入站链接（从其他页面引用）。
 
 ### 3. 在 `description` 中使用内部术语
-使用智能体可以与用户查询匹配的通俗语言。
+
+`description` 字段展示在清单和 `llms.txt` 摘要中。AI 智能体用它来判断某个概念是否相关。请使用智能体可以与用户查询相匹配的通俗英文或中文：“marketing 站点的周活跃用户，从事件流计算得出”，而不是“WAU (ms)”。
 
 ### 4. 为非 AI 智能体站点开启 OKF
-如果不需要 AI 智能体，可显式禁用该插件：
+
+如果您的文档站点没有 AI 智能体受众，OKF 不会带来额外收益。`@docmd/plugin-okf` 默认启用，因此可以显式禁用它：
 
 ```json
 {
@@ -162,23 +173,27 @@ concepts:
 }
 ```
 
-## 验证
+`llms.txt` 插件适用于“AI 可搜索的扁平文本”；OKF 则是“AI 智能体类型化知识图谱”的理想工具。
 
-运行 `docmd build` 后，在 `site/okf/` 检查知识包：
+## 如何验证
+
+在 `docmd build` 之后，在 `site/okf/` 检查生成的知识包：
 
 ```bash
-# 查看清单
+# 清单文件（每个概念、类型、路径）
 cat site/okf/okf.yaml | head -30
 
-# 查看目录
+# 目录文件（按类型分组）
 open site/okf/index.md
 
-# 查看交互式图谱
+# 交互式图谱（力导向、感知主题）
 open site/okf/graph.html
 
-# 查看插件生成的警告
+# 插件产生的警告
 cat site/okf/_meta/lint-report.txt
 ```
+
+检查报告是第一件需要查看的事情 —— 它列出了没有 `type` 字段的页面、带有失效内部链接的页面以及孤立概念（没有入站链接）。修复这些可以获得更干净的智能体体验。
 
 - [AI 助手配置](./ai-assistant.md) — RAG 驱动的交互式助手配置。
 - [MCP 与 Agent Skills](./mcp-and-agent-skills.md) — Model Context Protocol 设置与智能体工具。
