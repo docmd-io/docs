@@ -80,6 +80,7 @@ Button (`::: button`) and Tag (`::: tag`) containers support all linking prefixe
 ::: tag "v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
 ::: tag "External Site" link:external:https://docmd.io icon:external-link
 :::
+```
 
 ## Navigation Configuration Links
 
