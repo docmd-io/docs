@@ -1,22 +1,22 @@
 ---
 title: "Analytics-Plugin"
-description: "Integrieren Sie Google Analytics 4 oder das ältere Universal Analytics und verfolgen Sie Nutzerinteraktionen automatisch."
+description: "Integrieren Sie Google Analytics 4 (GA4) oder das ältere Universal Analytics mit automatisierter Ereignisverfolgung."
 ---
 
-Das `@docmd/plugin-analytics`-Plugin ermöglicht die einfache Integration von Google Analytics in Ihre Dokumentation. Es unterstützt den modernen Google Analytics 4 (GA4)-Standard, das ältere Universal Analytics (UA) und bietet native Ereignisverfolgung für interaktionsintensive Dokumentations-Sites.
+Das `@docmd/plugin-analytics`-Plugin integriert Google Analytics-Tracking-Skripte in Ihre Dokumentationsseiten. Es unterstützt Google Analytics 4 (GA4) und das ältere Universal Analytics (UA) und bietet eine automatische Interaktionsverfolgung für technische Dokumentationsportale.
 
-## Konfiguration
+## Konfigurationsoptionen
 
-Aktivieren Sie Analytics, indem Sie Ihre Tracking-Anmeldedaten zum `plugins`-Abschnitt Ihrer `docmd.config.json` hinzufügen.
+Konfigurieren Sie Analytics-Tracking-IDs in `docmd.config.json`:
 
 | Option | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `googleV4` | `object` | `null` | Google Analytics 4-Konfiguration (erfordert `measurementId`). |
-| `googleUA` | `object` | `null` | Universal Analytics-Konfiguration (erfordert `trackingId`). |
-| `autoEvents` | `boolean` | `true` | Klicks, Downloads und TOC-Interaktionen automatisch verfolgen. |
-| `trackSearch` | `boolean` | `true` | Von Lesern verwendete Suchbegriffe verfolgen. |
+| `googleV4` | `object` | `null` | Google Analytics 4-Konfigurationsobjekt (erfordert `measurementId`). |
+| `googleUA` | `object` | `null` | Universal Analytics-Konfigurationsobjekt (erfordert `trackingId`). |
+| `autoEvents` | `boolean` | `true` | Externe Links, Downloads, Anker-Klicks und TOC-Navigation automatisch verfolgen. |
+| `trackSearch` | `boolean` | `true` | In Such-Modals eingegebene Suchbegriffe automatisch erstatten. |
 
-### Beispiel
+### Globales Analytics-Beispiel
 
 ```json "docmd.config.json"
 {
@@ -32,16 +32,16 @@ Aktivieren Sie Analytics, indem Sie Ihre Tracking-Anmeldedaten zum `plugins`-Abs
 }
 ```
 
-## Verfolgte Ereignisse
+## Automatisch verfolgte Ereignisse
 
-Wenn `autoEvents` aktiviert ist, erfasst das Plugin automatisch die folgenden Interaktionen:
+Wenn `autoEvents` auf `true` gesetzt ist, erfasst das Analytics-Plugin Benutzerinteraktionen ohne benutzerdefinierte Skripte:
 
-- **Externe Links**: ausgehende Klicks zu anderen Domains.
-- **Downloads**: Klicks auf Links mit dem `download`-Attribut oder gängigen Dateiendungen.
-- **TOC-Klicks**: Abschnitts-Engagement über die rechte Navigation.
-- **Überschriften-Anker**: Klicks auf Permalink-Links pro Abschnitt.
-- **Suchanfragen**: in die Suchleiste eingegebene Schlüsselwörter (1 Sekunde entprellt).
+* **Externe ausgehende Links**: Klicks auf Links, die zu externen Domainzielen navigieren.
+* **Dateidownloads**: Klicks auf Assets mit `download`-Attributen oder gängigen binären Dateiendungen (`.zip`, `.pdf`, `.gz`).
+* **Inhaltsverzeichnis-Engagement**: Navigationssprünge über das rechte Inhaltsverzeichnis-Panel (TOC).
+* **Abschnitts-Überschriftenanker**: Klicks auf Permalink-Anker von Überschriften.
+* **Suchbegriffe**: In das Such-Modal eingegebene Suchschlüsselwörter (1 Sekunde entprellt).
 
-::: callout info "Datenschutz & DSGVO"
-Standardmäßig anonymisiert dieses Plugin IP-Adressen nicht, da dies nun nativ von GA4 gehandhabt wird. Wenn Sie eine erweiterte Cookie-Zustimmungsverwaltung benötigen, können Sie Skripte manuell über einen benutzerdefinierten Plugin-Hook injizieren.
+::: callout info "Datenschutz & Daten-Compliance" icon:shield-check
+Google Analytics 4 handhabt die IP-Anonymisierung von Haus aus nativ. Wenn Ihre Organisation explizite Cookie-Einwilligungsbanner oder DSGVO-Opt-in-Steuerelemente benötigt, injizieren Sie benutzerdefinierte Skripte über benutzerdefinierte Plugin-Hooks.
 :::

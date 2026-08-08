@@ -1,20 +1,20 @@
 ---
-title: "Setup"
-description: "Diese Dokumentations-Site lokal ausführen, mit Ihrer globalen docmd-Installation verknüpfen und die gesamte Verifizierungs-Pipeline laufen lassen."
+title: "Entwicklungs-Setup"
+description: "So richten Sie die lokale Entwicklung ein, verknüpfen lokale Framework-Builds und führen Verifizierungs-Pipelines für die docmd-Dokumentation aus."
 ---
 
-# Setup
+# Entwicklungs-Setup
 
-::: callout info
-**Für Mitwirkende an der Dokumentations-Site.** Möchten Sie zu *docmd selbst* (dem Framework) beitragen? Sehen Sie stattdessen den [GitHub-Contributing-Leitfaden](https://github.com/docmd-io/docmd?tab=contributing-ov-file) an — dort befindet sich der Framework-Entwicklungs-Workflow.
+::: callout info "Beitrag zum docmd-Kern" icon:git-pull-request
+Möchten Sie zum docmd-Kernframework beitragen? Siehe den [GitHub-Contributing-Leitfaden](external:https://github.com/docmd-io/docmd?tab=contributing-ov-file) für Anweisungen zur Einrichtung des Repositorys.
 :::
 
-Diese Seite behandelt die Arbeit an **dieser Dokumentations-Site** (`docmd-io/docs`), nicht am docmd-Framework (`docmd-io/docmd`).
+Dieser Leitfaden behandelt das Erstellen und Aktualisieren dieses Dokumentations-Repositorys (`docmd-io/docs`).
 
 ## Voraussetzungen
 
-- **Node.js**: v22.x oder neuer (LTS empfohlen)
-- **pnpm**: v10.x oder neuer
+* **Node.js**: v22.x oder neuer (LTS empfohlen)
+* **pnpm**: v10.x oder neuer
 
 ## Lokale Entwicklung
 
@@ -25,62 +25,57 @@ pnpm install
 npx @docmd/core dev
 ```
 
-Die Site wird unter `http://localhost:3000` mit Live-Reload ausgeliefert.
+Der lokale Entwicklungsserver startet unter `http://localhost:3000` mit sofortigem Hot Module Replacement (HMR).
 
-### Framework lokal beobachten
+### Verknüpfung von lokalem Framework-Code
 
-Wenn Sie Framework-Code in `docmd-io/docmd` bearbeiten und die Änderungen in dieser Dokumentations-Site sehen möchten:
+Um lokale Änderungen innerhalb von `docmd-io/docmd` gegen diese Dokumentations-Website zu testen:
 
 ```bash
-# Im Framework-Repo
+# Im docmd-Framework-Repository
 pnpm build
 
-# In diesem Docs-Repo den lokalen Build verknüpfen
+# In diesem Dokumentations-Website-Repository den lokalen Build verknüpfen
 npx @docmd/core link ../docmd/packages/core
 ```
 
-Starten Sie dann `npx @docmd/core dev` neu. Ihre Änderungen am Framework werden nach einem Framework-Rebuild übernommen.
+Starten Sie `npx @docmd/core dev` neu, um lokale Framework-Build-Aktualisierungen anzuwenden.
 
 ## Qualitäts-Gates
 
-Bevor Sie einen Pull Request öffnen:
+Führen Sie die Verifizierungs-Pipeline vor dem Einreichen von Pull Requests aus:
 
 ```bash
-# Markdown linten und auf defekte Links prüfen
+# Markdown-Dateien linten und Link-Integrität prüfen
 pnpm lint
 
-# Vollständige Verifizierungs-Pipeline (Lint + Build + Dead-Link-Check)
+# Vollständige Verifizierungs-Pipeline ausführen (Lint + Build + Dead-Link-Check)
 pnpm verify
 ```
 
-Die Verifizierungs-Pipeline spiegelt, was die Maintainer bei jedem PR ausführen. Ein grüner Durchlauf ist Voraussetzung für einen Merge.
+## Übersetzungs-Workflow
 
-## Übersetzungen
+Workflow zum Hinzufügen oder Aktualisieren von lokalisierten Inhalten in `de/` und `zh/`:
 
-Übersetzungs-Workflow zum Hinzufügen/Aktualisieren von `de/`- und `zh/`-Inhalten:
+1. Aktualisieren Sie die kanonischen englischen Quelldateien in `docmd-main/v09/en/...`.
+2. Spiegeln Sie Bearbeitungen in `de/` und `zh/` unter übereinstimmenden Pfaden, während Frontmatter-Schlüssel, Container-Marker und Code-Snippet-Dateititel erhalten bleiben.
+3. Führen Sie `pnpm verify` aus, um die Link-Integrität zu bestätigen.
 
-1. Bearbeiten Sie die EN-Quelle in `docmd-main/v08/en/...`.
-2. Spiegeln Sie die Änderung in `de/` und `zh/` (gleicher Pfad, übersetzte Prosa, erhaltene Frontmatter-Schlüssel, erhaltene Container-Marker, Code-Blöcke unverändert).
-3. Behalten Sie alle Datei-Titel in Code-Blöcken (z. B. ` ```json "docmd.config.json"`).
-4. Führen Sie `pnpm verify` aus, um zu bestätigen, dass Links und Struktur weiterhin passen.
+## Projekt-Verzeichnislayout
 
-Die Übersetzungs-Hausstil-Regeln und die Codeblock-Datei-Titel-Regel finden Sie im Projektspeicher.
-
-## Projekt-Layout
-
-```
+```text
 docs/
-├── docmd-main/v08/
+├── docmd-main/v09/
 │   ├── en/                  # Kanonische englische Quelle
 │   ├── de/                  # Deutsche Übersetzungen (spiegelt en/)
 │   ├── zh/                  # Chinesische Übersetzungen (spiegelt en/)
-│   └── navigation.json      # Eine Navigation, pro Locale repliziert
-├── docmd-search/            # Suchindex-Assets
-├── docs/                    # Andere Doc-Projekte (docmd-search, docmd-main usw.)
+│   └── navigation.json      # Gemeinsame Navigationshierarchie
+├── docmd-search/            # Suchmaschinen-Assets
+├── docs/                    # Unterprojekt-Ziele
 └── package.json
 ```
 
-## Nächste Schritte
+## Was kommt als Nächstes
 
 - [Plugins entwickeln](./building-plugins.md) — schreiben Sie ein benutzerdefiniertes docmd-Plugin.
 - [Plugin-Beispiele](./plugin-examples.md) — sehen Sie einen vollständigen Plugin-Walkthrough.

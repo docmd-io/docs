@@ -1,54 +1,52 @@
 ---
 title: "Cookie-Zustimmung"
-description: "Optionaler Cookie-Zustimmungsdialog im Standard-UI. Speichert die Auswahl in localStorage, unterstützt Übersetzungen und emittiert ein docmd:cookie-consent CustomEvent, auf das Plugins und Templates reagieren können."
+description: "Konfigurieren Sie den barrierefreien DSGVO-Cookie-Zustimmungsdialog von docmd mit benutzerdefinierter Ablaufzeit, Lokalisierung und CustomEvent-Integrationen."
 ---
 
-# Cookie-Zustimmung
+`docmd` enthält einen barrierefreien DSGVO-Cookie-Zustimmungsbanner ohne Abhängigkeiten, der direkt in die UI-Engine integriert ist. Er speichert Benutzereinstellungen im `localStorage` mit konfigurierbarer TTL und löst ein benutzerdefiniertes DOM-Ereignis für Analytics-Skript-Trigger aus.
 
-> **Neu in 0.8.7.** Der Cookie-Zustimmungsdialog ist eine eingebaute Funktion des Standard-`@docmd/ui`-Pakets. Keine Plugin-Installation erforderlich. **Opt-in** — es wird nichts gerendert, sofern Sie nicht `config.cookie` setzen.
+## Schnelleinrichtung
 
-Ein minimalistischer, barrierefreier Dialog im GDPR-Stil. Die Auswahl des Nutzers wird in `localStorage` mit konfigurierbarer TTL gespeichert. Nach der Auswahl wird auf `window` ein `docmd:cookie-consent`-`CustomEvent` ausgelöst, sodass Plugins und Templates reagieren können (z. B. Analytics aktivieren, Drittanbieter-Skripte laden).
-
-## In 30 Sekunden aktivieren
+Aktivieren Sie die Cookie-Zustimmung in Ihrem `docmd.config.json`-Manifest:
 
 ```json "docmd.config.json"
 {
   "cookie": {
     "enabled": true,
-    "message": "We use cookies to ensure you get the best experience.",
+    "message": "Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung erhalten.",
     "policyUrl": "/privacy",
     "position": "bottom-right"
   }
 }
 ```
 
-Erstellen Sie die Site, und der Dialog erscheint beim ersten Besuch. Folgebesuche respektieren die gespeicherte Auswahl.
+Der Banner wird beim ersten Besuch angezeigt. Auswahlpräferenzen werden im lokalen Browserspeicher über Seitenaufrufe hinweg beibehalten.
 
 ## Konfigurationsreferenz
 
 | Feld | Standard | Beschreibung |
-|---|---|---|
-| `enabled` | `true` (sofern `cookie`-Objekt vorhanden) | Hauptschalter. |
-| `message` | Übersetzungsschlüssel `cookieMessage` | Text des Dialogs. Inline-HTML über den `t()`-Helper erlaubt. |
+| :--- | :--- | :--- |
+| `enabled` | `true` (wenn `cookie`-Objekt existiert) | Hauptschalter für den Zustimmungsbanner. |
+| `message` | Übersetzungsschlüssel `cookieMessage` | Haupttext für die Cookie-Aufforderung. Unterstützt Inline-HTML. |
 | `acceptText` | Übersetzungsschlüssel `cookieAccept` | Beschriftung der Akzeptieren-Schaltfläche. |
 | `declineText` | Übersetzungsschlüssel `cookieDecline` | Beschriftung der Ablehnen-Schaltfläche. |
 | `policyUrl` | `null` | Optionaler Link zu Ihrer Datenschutzerklärung. |
-| `position` | `"bottom"` | `"bottom"` \| `"bottom-left"` \| `"bottom-right"` \| `"center"` |
-| `dismissible` | `true` | Schließen-Schaltfläche (X) anzeigen. |
-| `expiryDays` | `180` | Wie lange die Auswahl in `localStorage` gespeichert bleibt. |
+| `position` | `"bottom"` | Modal-Position (`"bottom"`, `"bottom-left"`, `"bottom-right"`, `"center"`). |
+| `dismissible` | `true` | Wenn `true`, wird eine Schließen-Schaltfläche (X) gerendert. |
+| `expiryDays` | `180` | Anzahl der Tage, bevor die Zustimmungsauswahl im `localStorage` abläuft. |
 
-### Positionswerte
+### Positionsmodi
 
-| Wert | Wirkung |
-|---|---|
-| `bottom` | Horizontal zentriert am unteren Rand. |
-| `bottom-left` | An der unteren linken Ecke verankert. |
-| `bottom-right` | An der unteren rechten Ecke verankert. |
-| `center` | Zentriertes Modal. |
+| Wert | Rendering-Verhalten |
+| :--- | :--- |
+| `bottom` | Horizontal zentriert am unteren Rand des Viewports. |
+| `bottom-left` | An der unteren linken Ecke des Viewports verankert. |
+| `bottom-right` | An der unteren rechten Ecke des Viewports verankert. |
+| `center` | Zentriertes schwebendes Modal-Overlay. |
 
-## Lokalisierung
+## Lokalisierung (i18n)
 
-Alle nutzerseitigen Strings unterstützen das bestehende `t(key)`-Übersetzungssystem. Überschreiben Sie die Schlüssel in Ihren `translations/<locale>.json`-Dateien:
+Alle benutzerseitigen Zeichenfolgen unterstützen das Übersetzungssystem von `docmd`. Überschreiben Sie Zustimmungsschlüssel in Ihren `translations/<locale>.json`-Dateien:
 
 ```json "translations/fr.json"
 {
@@ -60,24 +58,23 @@ Alle nutzerseitigen Strings unterstützen das bestehende `t(key)`-Übersetzungss
 }
 ```
 
+## Reagieren auf Benutzer-Zustimmungsereignisse
 
-## Auf eine Auswahl reagieren
+Ein `CustomEvent` namens `docmd:cookie-consent` wird auf dem `window`-Objekt ausgelöst, wenn ein Benutzer den Banner akzeptiert, ablehnt oder schließt:
 
-Nach Akzeptieren, Ablehnen oder Schließen wird auf `window` ein `CustomEvent` mit dem Namen `docmd:cookie-consent` ausgelöst:
-
-```js
-window.addEventListener('docmd:cookie-consent', (e) => {
-  if (e.detail.value === 'accept') {
-    // Analytics, Marketing-Skripte usw. laden
+```javascript
+window.addEventListener('docmd:cookie-consent', (event) => {
+  if (event.detail.value === 'accept') {
+    // Initialisieren Sie Analytics-, Marketing- oder Tracking-Skripte
   }
 });
 ```
 
-`detail.value` ist einer der Werte `"accept"`, `"decline"` oder `"dismissed"`. Wenn Sie die Auswahl synchron lesen müssen (z. B. bevor andere Skripte laufen), liefert `localStorage.getItem('docmd-cookie-consent')` dieselbe Payload.
+Die Eigenschaft `detail.value` gibt `"accept"`, `"decline"` oder `"dismissed"` zurück.
 
-## Neu stylen
+## Benutzerdefinierte Stile & Themes
 
-Der Dialog verwendet BEM-Klassen auf dem Wurzelelement `.docmd-cookie-banner`. Skinen Sie ihn über `customCss` neu (gewinnt immer mit Priorität 15):
+Der Banner verwendet BEM-Klassennamen mit dem Präfix `.docmd-cookie-banner`. Passen Sie Stile über benutzerdefinierte CSS-Regeln an:
 
 ```css
 .docmd-cookie-banner {
@@ -90,11 +87,10 @@ Der Dialog verwendet BEM-Klassen auf dem Wurzelelement `.docmd-cookie-banner`. S
 }
 ```
 
+## Deaktivieren der Cookie-Zustimmung
 
-## Deaktivieren
+Um den Cookie-Banner zu deaktivieren, lassen Sie den `cookie`-Konfigurationsblock in `docmd.config.json` weg oder entfernen Sie ihn.
 
-Um den Dialog vollständig zu entfernen, löschen Sie einfach den `cookie`-Schlüssel aus Ihrer Konfiguration. Es gibt kein Plugin zum Deaktivieren.
-
-::: callout tip "GDPR-Best Practice"
-Wenn Sie GDPR unterliegen, lassen Sie den Dialog **standardmäßig aktiviert** und verlinken Sie über `policyUrl` auf eine echte Datenschutzerklärung. Die Standardnachricht ist absichtlich generisch gehalten, sodass Sie sie über `message` oder das Übersetzungssystem selbst bereitstellen können.
+::: callout tip "Best Practice für DSGVO-Compliance" icon:shield-check
+Lassen Sie für die DSGVO-Compliance die Cookie-Zustimmung aktiviert und stellen Sie über `policyUrl` einen Link zu Ihrer Datenschutzerklärung bereit.
 :::

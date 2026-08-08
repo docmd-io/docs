@@ -1,28 +1,28 @@
 ---
 title: "SEO-Plugin"
-description: "Optimieren Sie Ihre Dokumentation für Suchmaschinen und steuern Sie den Zugriff von KI-Crawlern mit nativer Meta-Tag-Generierung."
+description: "Optimieren Sie Ihre Dokumentationsseite für Suchmaschinen-Indizierung, Social-Card-Vorschauen und KI-Crawler-Governance."
 ---
 
-Das `@docmd/plugin-seo`-Plugin erzeugt hochwertige Metadaten für jede Seite. Es stellt sicher, dass Ihre Dokumentation nicht nur von menschlichen Lesern in Suchmaschinen entdeckt wird, sondern auch korrekt von KI-Modellen und Social-Media-Plattformen interpretiert wird.
+Das `@docmd/plugin-seo`-Plugin generiert semantische HTML-Metadaten und Social-Media-Vorschau-Tags für jede Seite Ihrer Website. Es stellt sicher, dass Ihre Dokumentation von Suchmaschinen entdeckt werden kann, für soziale Plattformen korrekt strukturiert ist und den Richtlinien von KI-Crawlern entspricht.
 
-## Konfiguration
+## Konfigurationsoptionen
 
-Konfigurieren Sie site-weite SEO-Standards in Ihrer `docmd.config.json`. Seiteneinstellungen haben immer Vorrang vor globalen Standards.
+Konfigurieren Sie website-weite SEO-Standardwerte in `docmd.config.json`. Frontmatter-Einstellungen auf Seitenebene überschreiben globale Standardwerte.
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `defaultDescription` | `string` | `null` | Fallback-Beschreibung für Seiten ohne Frontmatter-Beschreibungen. |
-| `aiBots` | `boolean` | `true` | Erlaubt (`true`) oder blockiert (`false`) KI-Trainings-Bots. Bei `false` werden GPTBot, ChatGPT-User, Google-Extended, CCBot und andere KI-Crawler blockiert. |
-| `openGraph` | `object` | `null` | Open Graph-Einstellungen für soziale Medien (Facebook, LinkedIn). |
-| `twitter` | `object` | `null` | Twitter (X) Card-Einstellungen einschließlich Benutzername und Kartentyp. |
+| `defaultDescription` | `string` | `null` | Fallback-Beschreibung für Seiten, denen explizite Frontmatter-Beschreibungen fehlen. |
+| `aiBots` | `boolean` | `true` | Erlauben (`true`) oder blockieren (`false`) von KI-Trainings-Web-Crawlern (GPTBot, ChatGPT-User, Google-Extended, CCBot). |
+| `openGraph` | `object` | `null` | Open Graph-Social-Media-Metadaten (Facebook, LinkedIn). |
+| `twitter` | `object` | `null` | Twitter (X) Card-Einstellungen einschließlich Handle und Card-Typ. |
 
-### Beispiel
+### Globales SEO-Konfigurationsbeispiel
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "seo": {
-      "defaultDescription": "Comprehensive documentation for the docmd ecosystem.",
+      "defaultDescription": "Umfassende technische Dokumentation für die docmd-Plattform.",
       "aiBots": false,
       "twitter": {
         "siteUsername": "@docmd_io",
@@ -33,99 +33,48 @@ Konfigurieren Sie site-weite SEO-Standards in Ihrer `docmd.config.json`. Seitene
 }
 ```
 
-## Funktionen
+## Hauptfunktionen
 
-- **Automatische `robots.txt`**: wird erzeugt, wenn fehlend, mit Sitemap-Referenz und KI-Bot-Direktiven.
-- **Intelligente Fallbacks**: extrahiert die ersten 150 Zeichen der Prosa, wenn keine Beschreibung gesetzt ist.
-- **KI-Bot-Verwaltung**: standardmäßig können KI-Bots Inhalte indizieren. Setzen Sie `aiBots: false`, um KI-Trainings-Crawler zu blockieren, während traditionelle Suchmaschinen weiterhin erlaubt bleiben.
-- **Kanonische URLs**: emittiert `<link rel="canonical">`, um Duplicate-Content-Probleme zu verhindern.
-- **Social Previews**: native Open Graph- und Twitter-Karten.
-- **Strukturierte Daten**: LD+JSON Article-Schema für umfangreiche Such-Snippets.
+* **Automatisierte `robots.txt`**: Generiert eine Standard-`robots.txt` im Ausgabestammverzeichnis, einschließlich Sitemap-Speicherorten und KI-Bot-Regeln.
+* **Intelligente Auszug-Generierung**: Extrahiert automatisch die ersten 150 Zeichen des Fließtextes, wenn keine Seitenbeschreibung definiert ist.
+* **KI-Bot-Governance**: Setzen Sie `aiBots: false`, um KI-Trainings-Scraper zu blockieren, während Suchmaschinen-Crawler weiterhin zugelassen werden.
+* **Ausgabe kanonischer URLs**: Injiziert `<link rel="canonical">`-Elemente, um Probleme mit doppelter Indizierung zu verhindern.
+* **Social-Preview-Cards**: Generiert Open Graph- und Twitter Card-Tags.
+* **Strukturierte Daten (JSON-LD)**: Injiziert Article-Schema-JSON-LD-Blöcke für umfangreiche Suchmaschinen-Snippets.
 
-## robots.txt-Auto-Generierung
+## `robots.txt`-Auflösungsreihenfolge
 
-Das Plugin generiert automatisch eine `robots.txt`-Datei während des Build-Prozesses, wenn keine in Ihrem Ausgabeverzeichnis vorhanden ist.
+Das SEO-Plugin wertet `robots.txt` in Prioritätsreihenfolge von oben nach unten aus:
 
-**Generierte Inhalte umfassen:**
+1. **Site-Stammverzeichnis** (`site/robots.txt`) - Zuerst geprüft; falls vorhanden, werden bestehende Inhalte beibehalten.
+2. **Quell-Assets-Ordner** (`assets/robots.txt`) - Falls in Ihrem Quell-Assets-Verzeichnis vorhanden, wird es automatisch in das Site-Ausgabestammverzeichnis (`site/robots.txt`) kopiert.
+3. **Automatisch generierter Standardwert** - Falls keine benutzerdefinierte Datei gefunden wird, generiert `docmd` dynamisch eine `robots.txt` basierend auf Ihrer Plugin-Konfiguration.
 
-```txt
-User-agent: *
-Allow: /
+Empfohlene Dateiorganisation:
 
-# Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
-```
-
-**KI-Trainings-Bots blockieren:**
-
-Wenn `aiBots: false` gesetzt ist, enthält die generierte `robots.txt`:
-
-```txt
-# Block AI training bots
-User-agent: GPTBot
-Disallow: /
-User-agent: ChatGPT-User
-Disallow: /
-User-agent: Google-Extended
-Disallow: /
-# ... (additional AI crawlers)
-```
-
-### robots.txt-Position-Strategie
-
-Das Plugin behandelt `robots.txt` intelligent über mehrere Speicherorte hinweg:
-
-**Prioritätsreihenfolge:**
-1. **Site-Root** (`site/robots.txt`) - zuerst geprüft, höchste Priorität
-2. **Assets-Ordner** (`site/assets/robots.txt`) - bei Fund in den Site-Root kopiert
-
-**Verhalten:**
-
-- Wenn `robots.txt` im **Site-Root** existiert: erhalten, keine Aktion
-- Wenn `robots.txt` im **Assets-Ordner** existiert: automatisch in den Site-Root kopiert (empfohlener Speicherort für SEO)
-- Wenn `robots.txt` nicht gefunden: automatisch basierend auf der SEO-Konfiguration generiert
-
-**Empfohlene Praxis:**
-
-Platzieren Sie Ihre benutzerdefinierte `robots.txt` im `assets/`-Ordner Ihrer Dokumentationsquelle. Das Plugin kopiert sie während des Builds in den Site-Root:
-
-```
-your-docs/
+```text
+my-docs/
 ├── assets/
-│   └── robots.txt    ← Place here
+│   └── robots.txt    ← Schreiben Sie hier benutzerdefinierte Regeln
 ├── index.md
 └── docmd.config.json
 ```
 
-Nach dem Build erscheint sie am richtigen Speicherort:
+## SEO-Überschreibungen auf Seitenebene
 
-```
-site/
-├── robots.txt        ← Copied here (SEO standard location)
-├── assets/
-│   └── robots.txt    ← Also preserved here
-└── index.html
-```
+Überschreiben Sie website-weite SEO-Standardwerte für bestimmte Dokumente über [Seiten-Frontmatter](../content/frontmatter.md):
 
-::: callout tip "Warum der Site-Root?"
-Suchmaschinen erwarten `robots.txt` im Domain-Root (`https://example.com/robots.txt`). Das Plugin stellt sicher, dass sich Ihre Datei immer am richtigen Speicherort befindet, unabhängig davon, ob Sie eine benutzerdefinierte bereitstellen oder automatisch generieren lassen.
-:::
-
-## Überschreibungen auf Seitenebene
-
-Feinabstimmung der Einstellungen für einzelne Seiten über das Frontmatter:
-
-```markdown
+```yaml
 ---
-title: "Advanced Configuration"
-noindex: true # Hide from all search engines
+title: "Erweiterte Engine-Architektur"
+noindex: true # Seite vor Suchmaschinenindizes verbergen
 seo:
-  keywords: ["docmd", "javascript", "ssg"]
-  aiBots: true # Override global block for this page
-  ldJson: true # Enable Article Schema
+  keywords: ["docmd", "architektur", "engine"]
+  aiBots: true # KI-Scraper auf dieser Seite erlauben
+  ldJson: true # Article Schema injizieren
 ---
 ```
 
-::: callout tip "Suchmaschinen-Entdeckung"
-Für beste Ergebnisse stellen Sie sicher, dass Ihre `url` im Stammverzeichnis der Konfiguration definiert ist. Ohne Basis-URL kann das Plugin keine absoluten kanonischen Links oder Social-Image-Pfade generieren.
+::: callout tip "Basis-URL-Konfiguration" icon:link
+Definieren Sie die Eigenschaft `url` in `docmd.config.json` (z. B. `https://docs.docmd.io`), um gültige absolute kanonische Links und Bild-URLs für Social Previews zu aktivieren.
 :::

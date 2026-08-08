@@ -1,28 +1,28 @@
 ---
-title: "Templates"
-description: "Installieren Sie alternative Site-Layouts aus npm-Paketen. Jedes Template legt ein komplettes HTML/CSS/JS-Bündel über das Standard-Theme."
+title: "Templates & Themes"
+description: "Konfigurieren Sie Website-Layout-Templates und integrierte CSS-Farbschemata in docmd. Schichten Sie HTML-Strukturen, EJS-Partials und visuelle Paletten."
 ---
 
-# Templates
+In `docmd` definieren **Templates** die grundlegende HTML-Struktur, Layout-Architektur, EJS-Partials und Komponenten-Slots Ihrer Dokumentations-Website.
 
-::: callout info
-**Neu in 0.8.7.** Mit Templates können Sie ein komplettes alternatives Layout (HTML-Struktur, Partials, CSS, JS) als eigenständiges Plugin ausliefern. Sie bauen auf dem bestehenden `theme`- + `customCss`-System auf — sie ersetzen es nicht.
+::: callout info "Strukturelle Layouts vs. Farbschemata" icon:info
+* **Templates**: Steuern die strukturelle HTML-Architektur (Header, Seitenleiste, Inhaltsverzeichnis, Fußzeile, Banner, EJS-Partials).
+* **Farbschemata**: Bieten visuelle CSS-Themes (`default`, `sky`, `ruby`, `retro`), die direkt auf Templates geschichtet werden.
 :::
 
-Ein **Template** ist ein npm-Paket, das `capabilities: ['template']` deklariert und einen Satz von `.ejs`-Partial-Überschreibungen sowie ein eigenes CSS- und JS-Bündel mitliefert. Der Resolver in `@docmd/ui` durchläuft eine feste Prioritätskette, um den richtigen Partial für jeden Slot zu finden, und fällt auf den Standard zurück, wenn etwas schiefgeht. **Der Build schlägt nie wegen eines Template-Problems fehl.**
+Ein **Template** ist ein npm-Paket, das `capabilities: ['template']` deklariert und benutzerdefinierte `.ejs`-Layoutdateien sowie Asset-Bundles ausliefert. Der `@docmd/ui`-Resolver verwendet eine Fallback-Prioritätskette, die sicherstellt, dass fehlende Slots nahtlos auf Standard-Layouts zurückgreifen.
 
-## Schnellstart
+## Schnellstart-Leitfaden
 
-### 1. Template installieren
+### 1. Template-Paket installieren
 
 ```bash
-# Das erste offizielle Template erscheint mit 0.8.7 — Installation über die docmd-Add-Pipeline:
 npx @docmd/core add summer
 ```
 
-### 2. In Ihrer Konfiguration aktivieren
+### 2. Template in Konfiguration aktivieren
 
-Setzen Sie **einen Schlüssel** — `theme.name`. docmd erkennt automatisch, ob der Name auf ein reserviertes CSS-Theme (`default`, `sky`, `ruby`, `retro`) oder auf ein Template-Paket (`summer`, …) verweist.
+Setzen Sie `theme.name` in `docmd.config.json`. `docmd` erkennt automatisch, ob der Name einem integrierten CSS-Farbschema (`default`, `sky`, `ruby`, `retro`) oder einem strukturellen Template-Paket (`summer` usw.) entspricht:
 
 ```json "docmd.config.json"
 {
@@ -32,10 +32,21 @@ Setzen Sie **einen Schlüssel** — `theme.name`. docmd erkennt automatisch, ob 
 }
 ```
 
-Jede Seite verwendet nun das `layout.ejs` des `summer`-Templates. Slots, die Sie nicht überschrieben haben (Sidebar, Footer usw.), verwenden automatisch die Standard-Versionen von `@docmd/ui`.
+Jede Seite wird nun unter Verwendung des strukturellen Layouts `summer` gerendert. Nicht angegebene Slots fallen automatisch auf Standard-Partials von `@docmd/ui` zurück.
 
-::: callout info
-**Möchten Sie ein Template über einem CSS-Theme legen?** Verwenden Sie den expliziten Schlüssel `theme.template`. Er hat immer Vorrang vor `theme.name`:
+## Integrierte Farbschemata (Standard-Template)
+
+Das standardmäßige integrierte Template enthält vier kuratierte CSS-Farbpaletten, die durch Setzen von `theme.name` aktiviert werden können:
+
+| Farbschema | Am besten für | Visuelle Ästhetik |
+| :--- | :--- | :--- |
+| `default` | Unaufdringliche Dokumentation | Saubere, leichte, neutrale Palette |
+| `sky` | Produktdokumentation | Moderner, kontrastreicher Unternehmensstandard |
+| `ruby` | Markenidentität | Anspruchsvolle Serif-Header, lebendige Akzente |
+| `retro` | Entwickler-Tools | Monospace-Typografie, grüne Phosphor-Akzente |
+
+::: callout info "Schichten von Farbschemata auf externe Templates" icon:info
+Um ein bestimmtes CSS-Farbschema (`sky`, `ruby`, `retro`) auf ein benutzerdefiniertes strukturelles Template anzuwenden, setzen Sie `theme.template` neben `theme.name`:
 ```json "docmd.config.json"
 {
   "theme": {
@@ -44,83 +55,80 @@ Jede Seite verwendet nun das `layout.ejs` des `summer`-Templates. Slots, die Sie
   }
 }
 ```
-↑ die **summer**-Struktur mit der **sky**-Farbpalette.
+Dies rendert das strukturelle Layout **summer**, gestylt mit der Farbpalette **sky**.
 :::
 
-### 3. Pro Seite überschreiben
+### 3. Template-Überschreibungen auf Seitenebene
 
-Ein einziger Frontmatter-Schlüssel wechselt das Template nur für diese Seite:
+Wechseln Sie Templates für einzelne Seiten mithilfe von Seiten-Frontmatter:
 
 ```markdown
 ---
-title: "Changelog"
+title: "Release-Historie"
 template: "template-changelog"
 ---
 
-# Changelog
-…
+# Release-Historie
 ```
 
-## Auflösungs-Kette
+## Auflösungs-Prioritätskette
 
-Wenn eine Seite gerendert wird, durchläuft der Resolver diese Kette von oben nach unten und verwendet den ersten Treffer:
+Beim Rendern einer Seite wertet `docmd` Template-Pfade von oben nach unten aus:
 
-| # | Quelle | Beispiel |
-|---|---|---|
-| 1 | `frontmatter.template` | `template: "template-changelog"` |
-| 2 | `config.templates[glob]` | `"blog/*": "template-blog"` |
-| 3 | `config.theme.template` *(explizit)* | `"template": "summer"` |
-| 4 | `config.theme.name` *(automatisch zum Template befördert, falls kein bekanntes CSS-Theme)* | `"name": "summer"` |
-| 5 | Eingebauter Standard | Die mit `@docmd/ui` ausgelieferten `.ejs`-Dateien |
+| Priorität | Quelle | Syntaxbeispiel |
+| :--- | :--- | :--- |
+| **1** | `frontmatter.template` | `template: "template-changelog"` |
+| **2** | `config.templates[glob]` | `"blog/*": "template-blog"` |
+| **3** | `config.theme.template` *(Explizit)* | `"template": "summer"` |
+| **4** | `config.theme.name` *(Automatisch befördert)* | `"name": "summer"` |
+| **5** | Eingebauter Fallback | Standard-`.ejs`-Templates, die mit `@docmd/ui` ausgeliefert werden |
 
-Die CSS-Themes `default`, `sky`, `ruby` und `retro` sind reserviert — wenn `theme.name` mit einem davon übereinstimmt, bleibt es ein CSS-Theme. Jeder andere Wert wird als Template-Name behandelt und das entsprechende `@docmd/template-*`-Paket wird automatisch geladen.
+Die CSS-Theme-Namen `default`, `sky`, `ruby` und `retro` sind reservierte Farbschemata. Jeder andere Bezeichner in `theme.name` wird als Template-Paketname behandelt.
 
-Fehlt die aufgelöste Datei auf der Festplatte, protokolliert der Resolver eine einzelne TUI-Warnung und fällt auf den Standard zurück.
+## Unterstützte Layout-Slots
 
-## Unterstützte Template-Slots
+Templates können jeden der 12 UI-Layout-Slots überschreiben:
 
-Ein Template kann jeden dieser 12 Slots überschreiben. Jeder Slot, den Sie nicht überschreiben, fällt auf den Standard zurück:
+| Slot | Standard-Partial-Pfad | Technischer Zweck |
+| :--- | :--- | :--- |
+| `layout` | `templates/layout.ejs` | Haupt-HTML-Dokumentenhülle |
+| `404` | `templates/404.ejs` | Nicht-Gefunden-Fehlerseite |
+| `toc` | `templates/toc.ejs` | Inhaltsverzeichnis-Seitenleistennavigation |
+| `navigation` | `templates/navigation.ejs` | Haupt-Seitenleistennavigationsbaum |
+| `footer` | `templates/partials/footer.ejs` | Website-Fußzeilen-Partial |
+| `menubar` | `templates/partials/menubar.ejs` | Obere Navigationsleiste (Menüleiste) |
+| `options-menu` | `templates/partials/options-menu.ejs` | Such-, Theme- und Profil-Steuerungsmenü |
+| `project-switcher` | `templates/partials/project-switcher.ejs` | Multi-Projekt-Monorepo-Umschalter |
+| `version-dropdown` | `templates/partials/version-dropdown.ejs` | Versionsauswahl-Dropdown |
+| `language-switcher` | `templates/partials/language-switcher.ejs` | Locale-Sprachauswahl |
+| `banner` | `templates/partials/banner.ejs` | Website-weite Ankündigungsleiste |
+| `cookie-consent` | `templates/partials/cookie-consent.ejs` | Cookie-Zustimmungs-Datenschutzdialog |
 
-| Slot | Standard-Datei | Zweck |
-|---|---|---|
-| `layout` | `templates/layout.ejs` | Die vollständige HTML-Seite |
-| `404` | `templates/404.ejs` | Not-Found-Seite |
-| `toc` | `templates/toc.ejs` | Inhaltsverzeichnis-Sidebar |
-| `navigation` | `templates/navigation.ejs` | Der Sidebar-Navigationsbaum |
-| `footer` | `templates/partials/footer.ejs` | Seiten-Footer |
-| `menubar` | `templates/partials/menubar.ejs` | Obere Navigationsleiste |
-| `options-menu` | `templates/partials/options-menu.ejs` | Suche/Theme/Profil-Menü |
-| `project-switcher` | `templates/partials/project-switcher.ejs` | Multi-Projekt-Switcher |
-| `version-dropdown` | `templates/partials/version-dropdown.ejs` | Versions-Auswahl |
-| `language-switcher` | `templates/partials/language-switcher.ejs` | Sprach-Auswahl |
-| `banner` | `templates/partials/banner.ejs` | Site-weite Ankündigung |
-| `cookie-consent` | `templates/partials/cookie-consent.ejs` | Cookie-Zustimmungsdialog |
-
-::: callout info
-`no-style`-Seiten haben keine Template-spezifische Kopie. Sie verwenden immer den Standard `templates/no-style.ejs`, unabhängig vom aktiven Template.
+::: callout alert "No-Style-Seitenisolation" icon:alert-circle
+Seiten, die mit `noStyle: true` konfiguriert sind, umgehen aktive Templates vollständig und werden unter Verwendung des Standard-Layouts `templates/no-style.ejs` gerendert.
 :::
 
-## Asset-Priorität
+## Asset-Prioritätsreihenfolge
 
-Wenn mehrere Templates und Ihr `customCss` CSS oder JS ausliefern, laden sie in dieser Reihenfolge (niedriger lädt zuerst, höher gewinnt Kaskaden-Konflikte):
+Wenn mehrere Templates und Benutzer-Stylesheets CSS- oder JS-Assets injizieren, ordnet die Engine diese nach Prioritätsgewicht an:
 
-| Priorität | Schicht |
-|---|---|
-| 0 | Basis (`docmd-main.css`, `docmd-main.js`) |
-| 5 | Theme-Farb-Overlay (z. B. `docmd-theme-sky.css`) |
-| 10 | **Template-Struktur** (Standard für Templates) |
-| 15 | Benutzer-`customCss` / `customJs` — gewinnt immer |
-| 20 | Plugin-CSS/JS |
-| 25+ | Höher priorisierte Templates (Summer verwendet z. B. 25) |
+| Prioritätsgewicht | Schicht | Verhalten |
+| :--- | :--- | :--- |
+| `0` | Basis-Kern (`docmd-main.css`, `docmd-main.js`) | Grundlegende Stile |
+| `5` | Theme-Palette (`docmd-theme-sky.css` usw.) | Visuelles Farbschema |
+| `10` | Strukturelle Template-Stile | Strukturelle Layout-Regeln |
+| `15` | Benutzer-`customCss` / `customJs` | **Hat immer Vorrang** vor Templates |
+| `20` | Plugin-Assets | Lightbox-, Such- und Analytics-Assets |
+| `25+` | Spezialisierte Template-Überschreibungen | Benutzerdefinierte Template-Erweiterungen |
 
-Wenn Sie die Stile eines Templates überschreiben möchten, legen Sie sie im `customCss` Ihres Projekts mit Priorität 15 ab. Vermeiden Sie `!important` im Template-CSS, damit Benutzer ohne Fork überschreiben können.
+Um Standard-CSS-Regeln eines Templates zu überschreiben, fügen Sie benutzerdefinierte Deklarationen zu `theme.customCss` hinzu (Priorität `15`).
 
 ## Template-Lokalisierung
 
-Die aktive Locale wird Ihrem Template als normale Local übergeben. Übersetzungen werden wie in den Standard-Templates über den `t(key)`-Helper nachgeschlagen — Ihre bestehenden `assets/i18n/<locale>.json`-Dateien funktionieren weiterhin.
+Templates erhalten während des Renders den aktiven Locale-String. Lokalisierte Text-Strings werden über die `t(key)`-Hilfsfunktion unter Verwendung bestehender `assets/i18n/<locale>.json`-Übersetzungskarten aufgelöst.
 
-## Nächste Schritte
+## Verwandte Ressourcen
 
-- [Templates entwickeln](../development/building-templates.md) — schreiben Sie Ihr eigenes Template-Paket.
-- [Theming](./custom-css-js.md) — legen Sie `customCss` über ein beliebiges Template.
-- [Eigene Landing-Pages gestalten](./landing-pages.md) — machen Sie die Startseite eines Templates zu Ihrer eigenen.
+- [Eigene Styles & Skripte](custom-css-js.md) — Schichten Sie benutzerdefiniertes CSS über aktive Templates.
+- [Gestaltung benutzerdefinierter Landing-Pages](landing-pages.md) — Passen Sie Homepage-Layouts mit Markdown-Containern an.
+- [Konfigurationsreferenz](../configuration/overview.md) — Übersicht über globale Website-Optionen.

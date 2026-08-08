@@ -1,49 +1,50 @@
 ---
 title: "Asset-Verwaltung"
-description: "Wie docmd CSS-, JavaScript- und Bild-Assets während des Build-Prozesses handhabt."
+description: "Erfahren Sie, wie docmd CSS-, JavaScript- und Bild-Assets aus Quellverzeichnissen in Ausgabebuilds spiegelt."
 ---
 
-`docmd` verfolgt einen „Spiegeln & Zuordnen"-Ansatz für Assets. Dies stellt sicher, dass Ihre lokalen Entwicklungspfade konsistent mit dem Produktions-Build bleiben.
+`docmd` verwendet eine "Spiegeln & Zuordnen"-Architektur für statische Assets. Dies stellt sicher, dass lokale Entwicklungsdateipfade nahtlos mit kompilierten Produktions-Build-Ausgaben übereinstimmen.
 
 ## Verzeichnisstruktur
 
-Standardmäßig sucht `docmd` im Projektstamm nach einem `assets/`-Ordner.
+Standardmäßig verarbeitet `docmd` ein `assets/`-Verzeichnis im Stammverzeichnis Ihres Projekts:
 
 ```bash
 my-docs/
-  ├── assets/          # Quell-Assets
+  ├── assets/          # Quell-Assets (Bilder, Fonts, CSS, JS)
   │   ├── css/
   │   ├── js/
   │   └── images/
-  ├── docs/            # Inhalte
+  ├── docs/            # Markdown-Inhaltsdateien
   ├── docmd.config.json
-  └── site/            # Build-Ausgabe (automatisch gespiegelt)
+  └── site/            # Kompilierte Produktionsausgabe (Automatisch gespiegelt)
 ```
 
-## Automatisches Kopieren
+## Automatische Asset-Spiegelung
 
-Wenn Sie `npx @docmd/core build` oder `npx @docmd/core dev` ausführen:
-1.  **Die Spiegelungslogik**: Der gesamte Inhalt Ihres `assets/`-Ordners wird rekursiv nach `site/assets/` kopiert.
-2.  **Stabilität**: Wir verwenden eine gehärtete Kopier-Engine mit automatischen Wiederholungsversuchen, um „File Busy"- oder „ENOENT"-Fehler auf macOS und modernen SSDs zu verhindern.
-3.  **Referenzierung**: Sie sollten Assets aus Ihrem Markdown oder Ihrer Konfiguration immer über den **wurzelrelativen Pfad** referenzieren:
+Beim Ausführen von `npx @docmd/core build` oder `npx @docmd/core dev`:
+
+1. **Spiegelungslogik**: Der gesamte Inhalt von `assets/` wird rekursiv nach `site/assets/` kopiert.
+2. **Build-Stabilität**: Das Kopieren von Assets verwendet eine gehärtete, asynchrone Kopier-Engine mit exponentiellen Wiederholungsversuchen, um Dateisystem-Sperrfehler auf macOS und SSD-Volumes zu verhindern.
+3. **Pfadreferenzen**: Referenzieren Sie Assets in Markdown und Konfigurationsdateien mit **stammrelativen** Pfaden:
     ```markdown
-    ![Logo](/assets/images/logo.png)
+    ![Architektur-Diagramm](/assets/images/architecture.png)
     ```
 
 ## Integration von eigenem CSS & JS
 
-Um Ihre Assets mit jeder Seite zu verknüpfen, fügen Sie sie Ihrer Theme-Konfiguration hinzu:
+Verknüpfen Sie benutzerdefinierte Stylesheet- oder Skript-Assets über die Theme-Konfiguration in `docmd.config.json` auf allen Seiten:
 
 ```json "docmd.config.json"
 {
   "theme": {
     "customCss": ["/assets/css/branding.css"]
   },
-  "customJs": ["/assets/js/utils.js"]
+  "customJs": ["/assets/js/analytics.js"]
 }
 ```
 
-::: callout info "KI-Erkennungsstrategie :robot:"
-*   **Nach Typ organisieren**: Halten Sie `/css`, `/js` und `/images` getrennt. Dies hilft KI-Agenten, relevante Stile oder Skripte sofort zu finden, wenn Sie sie bitten, „die Header-Farbe zu bearbeiten".
-*   **Verwenden Sie beschreibende Dateinamen**: Ein Bild `authentication-flow-diagram.png` zu nennen, bietet dem `llms.txt`-Crawler viel mehr Kontext als `img_01.png`.
+::: callout tip "Asset-Organisation für KI-Indexierer" icon:lightbulb
+* **Strukturierte Unterverzeichnisse**: Halten Sie `/css`, `/js` und `/images` isoliert. Eine saubere Verzeichnistrennung ermöglicht es KI-Agenten, relevante Styling-Assets sofort zu lokalisieren.
+* **Beschreibende Dateinamen**: Die Benennung von Bildern wie `authentication-flow-diagram.png` bietet Such-Indexierern und `llms.txt`-Crawlern im Vergleich zu generischen Namen wie `image1.png` reichhaltigen Kontext.
 :::

@@ -1,37 +1,39 @@
 ---
 title: "Plugins verwenden"
-description: "Installieren, konfigurieren und verwalten Sie docmd-Plugins — von erforderlichen Standards bis zu optionalen Add-ons."
+description: "Installieren, konfigurieren und verwalten Sie docmd-Plugins, von Kern-Built-ins bis hin zu optionalen Erweiterungen von Drittanbietern."
 ---
 
-docmd verfügt über eine modulare Plugin-Architektur. Erforderliche Plugins werden mit dem Kern ausgeliefert und benötigen keine Installation. Optionale Plugins können mit einem einzigen CLI-Befehl installiert werden.
+`docmd` verfügt über eine modulare Plugin-Architektur. Integrierte Plugins werden direkt mit der Kerne-Engine ausgeliefert und erfordern keine separate Installation. Optionale Plugins und Plugins von Drittanbietern können über die CLI oder Paketmanager installiert werden.
 
 ## Plugins installieren
 
-Verwenden Sie die docmd-CLI, um Plugins zu installieren und zu entfernen:
+Verwenden Sie die `docmd`-CLI, um Plugin-Pakete zu verwalten:
 
 ```bash
-# Ein Plugin installieren
+# Ein offizielles Plugin installieren
 npx @docmd/core add <plugin-name>
 
-# Ein Plugin entfernen
+# Ein installiertes Plugin entfernen
 npx @docmd/core remove <plugin-name>
 ```
 
-Der Installer erkennt Ihren Package-Manager (npm, pnpm, yarn oder bun). Er löst Kurznamen zu vollständigen Paketnamen auf und fügt die Konfiguration in Ihre `docmd.config.json` ein.
+Der Installer erkennt Ihren aktiven Paketmanager (npm, pnpm, yarn oder bun), löst Kurznamen in vollständige `@docmd/plugin-*`-Paketnamen auf und aktualisiert Ihre `docmd.config.json` automatisch.
 
-Verwenden Sie `--verbose` (oder `-V`) für die vollständige Installer-Ausgabe:
+Verwenden Sie `--verbose` (oder `-V`), um vollständige Protokolle des Installers anzuzeigen:
 
 ```bash
 npx @docmd/core add <plugin-name> -V
 ```
 
-## Erforderliche Plugins
+## Integrierte Kern-Plugins
 
-Diese Plugins werden mit `@docmd/core` gebündelt. Es ist keine Installation erforderlich. Aktivieren Sie sie in Ihrer `docmd.config.json`:
+Diese Plugins werden gebündelt mit `@docmd/core` ausgeliefert und erfordern keine Installation. Aktivieren oder konfigurieren Sie sie in `docmd.config.json`:
 
 ```json "docmd.config.json"
+{
   "plugins": {
     "search": {},
+    "ai": {},
     "seo": { "aiBots": false },
     "sitemap": {},
     "analytics": {},
@@ -41,31 +43,30 @@ Diese Plugins werden mit `@docmd/core` gebündelt. Es ist keine Installation erf
     "openapi": {},
     "git": {}
   }
+}
 ```
 
-::: callout tip "Git-Plugin"
-Das Git-Plugin erkennt, ob Ihr Projekt ein Git-Repository ist. Falls nicht, deaktiviert es sich automatisch. Für Zeitstempel der letzten Aktualisierung ist keine Konfiguration erforderlich.
+::: callout tip "Git-Repository-Erkennung" icon:git-branch
+Das Git-Plugin erkennt, ob Ihr Projektstammverzeichnis ein gültiges Git-Repository ist. Wenn die Git-Historie nicht verfügbar ist, deaktiviert es die Generierung von Fußzeilen-Zeitstempeln automatisch.
 :::
 
-::: callout info "OKF-Bundle (neu in 0.8.8)"
-`@docmd/plugin-okf` erzeugt ein [Open Knowledge Format][okf-spec]-Bundle (`site/okf/`) — ein typisiertes Manifest plus Concept-Dateien pro Seite, die KI-Agenten direkt konsumieren können. Das Plugin ist **standardmäßig aktiviert**; setzen Sie `"plugins": { "okf": false }`, um es zu deaktivieren. Den vollständigen Vertrag finden Sie in der [OKF-Bundle-Plugin-Dokumentation](./okf.md).
-
-[okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
+::: callout info "OKF-Bundle-Unterstützung" icon:info
+Das `@docmd/plugin-okf`-Plugin generiert ein Open Knowledge Format Bundle (`site/okf/`), das typisierte Manifeste und Konzeptdateien für KI-Agenten enthält. Es ist standardmäßig aktiviert; setzen Sie `"plugins": { "okf": false }`, um es zu deaktivieren. Siehe [OKF-Bundle-Plugin](okf.md) für Details.
 :::
 
 ## Optionale Plugins
 
-Optionale Plugins müssen vor der Aktivierung installiert werden.
+Optionale Plugins erfordern vor der Aktivierung eine explizite Installation:
 
-| Plugin | Installationsbefehl | Beschreibung |
+| Plugin | Installationsbefehl | Zweck |
 | :--- | :--- | :--- |
-| [PWA](pwa.md) | `npx @docmd/core add pwa` | Progressive Web App-Unterstützung mit Offline-Caching |
-| [Threads](threads.md) | `npx @docmd/core add threads` | Inline-Diskussionskommentare in Markdown gespeichert |
-| [Math](math.md) | `npx @docmd/core add math` | Native KaTeX- und LaTeX-Mathematikdarstellung |
+| [PWA-Unterstützung](pwa.md) | `npx @docmd/core add pwa` | Progressive Web App Manifest und Offline-Service-Worker-Caching |
+| [Threads](threads.md) | `npx @docmd/core add threads` | Markdown-native Inline-Kommentardiskussionen |
+| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | Serverseitiges LaTeX- und KaTeX-Mathematikgleichungsrendering |
 
-## Automatische Installation
+## Automatische Installationsmechanismen
 
-Wenn Sie ein offizielles Plugin zu Ihrer `docmd.config.json` hinzufügen, ohne es zu installieren, lädt docmd es automatisch herunter und installiert es beim nächsten Build. Dies funktioniert für alle Plugins im offiziellen Register.
+Wenn ein offizielles Plugin in `docmd.config.json` deklariert ist, ohne in `node_modules` installiert zu sein, lädt `docmd` es bei der nächsten Build-Ausführung automatisch herunter und installiert es:
 
 ```json "docmd.config.json"
 {
@@ -75,34 +76,26 @@ Wenn Sie ein offizielles Plugin zu Ihrer `docmd.config.json` hinzufügen, ohne e
 }
 ```
 
-Der automatische Installer:
+Der Auto-Installer:
+* Beschränkt Ziele strikt auf offizielle `@docmd/plugin-*`-Pakete.
+* Gleicht Abhängigkeits-Versions-Tags mit der installierten `@docmd/core`-Version ab.
+* Erkennt automatisch Projekt-Paketmanager (npm, pnpm, yarn, bun).
+* Gibt den Installationsfortschritt direkt in der Terminal-Oberfläche aus.
 
-- Zielt nur auf offizielle `@docmd/plugin-*`-Pakete.
-- Pinnt die Version an die Ihrer `@docmd/core`-Installation.
-- Erkennt und verwendet den Package-Manager Ihres Projekts.
-- Meldet den Fortschritt im Terminal während der Ausführung.
-
-::: callout tip "Robuste Auto-Installation (neu in 0.8.9)"
-Der Auto-Installer verwendet für den eigentlichen Lade-Schritt dynamisches
-`import()`, sodass er auch für ESM-Pakete funktioniert, die in ihrem
-`exports`-Feld nur eine `import`-Bedingung deklarieren. Die Menge der
-*Namen*, die er installieren darf, ist weiterhin auf die offizielle
-Plugin-Registry-Allowlist beschränkt – im Retry-Pfad läuft eine
-Registry-Reprüfung als Defense-in-Depth, sodass eine künftige Änderung
-am Installer ihn nicht stillschweigend in einen generischen
-npm-Loader verwandeln kann.
+::: callout tip "Belastbare Modulauflösung" icon:shield-check
+Der Auto-Installer verwendet dynamische ES-Modul-Importe mit Fallback-Auflösungspfaden, die das nahtlose Laden von ESM-Paketen ermöglichen, die explizite `exports`-Zuordnungen deklarieren.
 :::
 
-## Drittanbieter- & benutzerdefinierte Plugins
+## Drittanbieter- & Benutzerdefinierte Plugins
 
-Aus Sicherheitsgründen erzwingt der Installer eine offizielle Register-Zulassungsliste. Drittanbieter-Plugins müssen nativ mit Ihrem Package-Manager installiert werden:
+Aus Sicherheitsgründen erzwingt der automatisierte Installer eine offizielle Registrierungs-Zulassungsliste. Installieren Sie Drittanbieter-Plugins direkt mit Ihrem Paketmanager:
 
 ```bash
 npm install my-custom-plugin
-# oder pnpm add, yarn add, bun add
+# oder pnpm add / yarn add / bun add
 ```
 
-Fügen Sie das Plugin nach der Installation unter seinem exakten Paketnamen zu Ihrer `docmd.config.json` hinzu:
+Fügen Sie das benutzerdefinierte Plugin unter Verwendung seiner vollständigen Paketkennung zu `docmd.config.json` hinzu:
 
 ```json "docmd.config.json"
 {
@@ -114,15 +107,13 @@ Fügen Sie das Plugin nach der Installation unter seinem exakten Paketnamen zu I
 }
 ```
 
-Wenn das Plugin die Anforderungen von docmd erfüllt, wird es beim Build automatisch aktiviert. Andernfalls meldet die Engine einen Fehler.
+## Seitenebene & `noStyle`-Plugin-Geltungsbereiche
 
-## Plugin-Bereiche und `noStyle`-Überschreibungen
+Plugins injizieren standardmäßig global Stile und Verhalten. Sie können Plugins auf ungestalteten Landing-Pages (`noStyle: true`) oder pro Seite über Frontmatter deaktivieren.
 
-Plugins injizieren CSS und Verhalten global. Sie können sie jedoch so konfigurieren, dass sie bestimmte Seiten umgehen oder ihre Ausführung auf ungestalteten Landingpages (`noStyle: true`) vollständig deaktivieren.
+### Globaler Konfigurationsbereich
 
-### Globaler Konfigurationsumfang
-
-Weisen Sie ein Plugin über Ihre `docmd.config.json` an, `noStyle`-Seiten automatisch zu überspringen:
+Konfigurieren Sie Plugins in `docmd.config.json` so, dass sie `noStyle`-Landingpages überspringen:
 
 ```json "docmd.config.json"
 {
@@ -134,46 +125,38 @@ Weisen Sie ein Plugin über Ihre `docmd.config.json` an, `noStyle`-Seiten automa
 }
 ```
 
-### Lokaler Seitenbereich (Frontmatter)
+### Bereich für Seiten-Frontmatter
 
-Sie können jedes Plugin pro Dokument über das Markdown-Frontmatter definitiv aktivieren oder deaktivieren.
+Aktivieren oder deaktivieren Sie bestimmte Plugins pro Dokument selektiv mithilfe von [Seiten-Frontmatter](../content/frontmatter.md):
 
-```markdown
+```yaml
 ---
 noStyle: true
 plugins:
   math: true
   threads: false
 ---
-
-# Only Math renders here, Threads are completely blocked
 ```
 
-## Plugin-Lebenszyklus
+## Plugin-Architektur-Lebenszyklus
 
-Plugins haken sich in verschiedene Phasen des Build- und Entwicklungsprozesses ein:
+Plugins klinken sich in Kern-Build- und Entwicklungszyklen ein:
 
-| Hook | Beschreibung |
+| Lebenszyklus-Hook | Technische Funktion |
 | :--- | :--- |
-| `markdownSetup(md, opts)` | Erweitern Sie den Markdown-Parser mit benutzerdefinierten Regeln. |
-| `generateMetaTags(config, page, root)` | Injizieren Sie `<meta>`- und `<link>`-Tags in den `<head>`. |
-| `generateScripts(config, opts)` | Injizieren Sie Skripte in den `<head>` oder `</body>`. |
-| `getAssets(opts)` | Definieren Sie externe Dateien oder CDN-Skripte zum Injizieren. |
-| `onPostBuild(ctx)` | Logik ausführen, nachdem alle HTML-Dateien generiert wurden. |
-| `translations(localeId)` | Übersetzte UI-Strings für eine Locale zurückgeben. |
-| `actions` | Serverseitige Handler, die über WebSocket-RPC aufrufbar sind. |
-| `events` | Fire-and-forget-Handler für vom Browser gesendete Ereignisse. |
+| `markdownSetup(md, opts)` | Registrieren benutzerdefinierter Markdown-it Parser-Regeln |
+| `generateMetaTags(config, page, root)` | Injizieren von `<meta>`- und `<link>`-Elementen in den `<head>` |
+| `generateScripts(config, opts)` | Injizieren von Client-Skripten in den `<head>` oder `</body>` |
+| `getAssets(opts)` | Registrieren statischer Assets oder externer CDN-Bundles |
+| `onPostBuild(ctx)` | Ausführen von Nachbearbeitungsaufgaben nach Abschluss der HTML-Ausgabe |
+| `translations(localeId)` | Registrieren lokalisierter UI-String-Zuordnungen |
+| `actions` | Registrieren serverseitiger RPC-Handler für WebSocket-Aufrufe des Dev-Servers |
+| `events` | Registrieren von Client-Event-Listenern |
 
-## Plugin-Sicherheit
+## Sicherheits- & Schutzgarantien
 
-Das Plugin-System gewährleistet Build-Sicherheit:
+* **Deskriptor-Validierung**: Fehlerhafte Plugin-Deskriptoren werden beim Start abgelehnt.
+* **Fehlerisolation**: Jeder Hook-Aufruf ist durch try/catch-Wrapper geschützt; ein Plugin-Fehler kann den Dokumentations-Build nicht zum Absturz bringen.
+* **Durchsetzung von Fähigkeiten**: Plugins erhalten Ausführungsrechte ausschließlich für Hooks, die in ihren Manifest-Fähigkeiten explizit deklariert sind.
 
-- **Validierung**: Ungültige Plugin-Deskriptoren werden beim Laden abgelehnt.
-- **Isolation**: Jeder Hook-Aufruf ist in ein try/catch eingeschlossen. Ein defektes Plugin kann den Build nicht zum Absturz bringen.
-- **Capability-Erzwingung**: Plugins können sich nur für Hooks registrieren, die sie deklariert haben.
-
-Die vollständige API-Referenz finden Sie unter [Plugins entwickeln](building-plugins.md).
-
-::: callout tip "Verfolgbare Architektur" icon:sparkles
-Jedes Meta-Tag und Skript, das die Engine ausgibt, wird aus expliziten Konfigurationen und Plugin-Ausgaben generiert. Es gibt keine versteckten Nebeneffekte.
-:::
+Siehe [Plugins erstellen](../development/building-plugins.md) für vollständige Entwicklungsrichtlinien für Plugins.

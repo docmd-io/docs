@@ -1,35 +1,42 @@
 ---
-title: "Vercel"
-description: "Stellen Sie Ihre docmd-Dokumentation mit einer generierten vercel.json auf Vercel bereit."
+title: "Vercel-Bereitstellung"
+description: "Stellen Sie statische docmd-Dokumentations-Websites auf Vercel unter Verwendung generierter vercel.json-Konfigurationen bereit."
 ---
 
-`npx @docmd/core deploy --vercel` erzeugt eine `vercel.json`-Datei im Stamm Ihres Projekts. Sie ist automatisch auf das Ausgabeverzeichnis und die SPA-Routing-Einstellungen Ihrer Site konfiguriert.
+Generieren Sie Produktions-Deployment-Manifeste für Vercel mit dem Deployer-CLI-Tool:
 
 ```bash
 npx @docmd/core deploy --vercel
 ```
 
-## Was erzeugt wird
+## Generierte Konfiguration
 
-Die `vercel.json` konfiguriert:
+Die ausgegebene Datei `vercel.json` konfiguriert Build-Befehle, Veröffentlichungsverzeichnisse und Routing-Richtlinien:
 
-- **Build-Befehl** — führt `npx @docmd/core build` aus.
-- **Ausgabeverzeichnis** — entspricht der Eigenschaft `out` in Ihrer Konfiguration.
-- **Install-Befehl** — installiert die exakte verwendete `@docmd/core`-Version.
-- **Cache-Header** — unveränderliches Caching für Assets, no-cache für HTML.
-- **SPA-Routing** — eine Catch-all-Route auf `index.html`, wenn `layout.spa` aktiviert ist.
+* **Build-Ausführung**: Führt `npx @docmd/core build` aus.
+* **Ausgabepfad**: Löst automatisch Ihre `out`-Eigenschaft auf (Standard ist `site`).
+* **Cache-Header**: Cacht statische Assets (`/assets/*`) unveränderlich, während Revalidierung für HTML-Dokumente erzwungen wird.
+* **SPA-Regeln**: Fügt Catch-All-Routen-Neuschreiben an, wenn `layout.spa: true` ist.
 
-## Bereitstellen
+```json "vercel.json"
+{
+  "buildCommand": "npx @docmd/core build",
+  "outputDirectory": "site",
+  "cleanUrls": true
+}
+```
 
-Nachdem die Datei erzeugt wurde, stellen Sie mit der [Vercel-CLI](external:https://vercel.com/docs/cli) bereit:
+## Bereitstellungsausführung
+
+Veröffentlichen Sie auf Vercel unter Verwendung der CLI oder der Dashboard-Integration:
 
 ```bash
 npm install -g vercel
-vercel
+vercel --prod
 ```
 
-Alternativ verbinden Sie Ihr Repository über das Dashboard mit Vercel. Die `vercel.json` wird dort automatisch erkannt.
+Alternativ verknüpfen Sie Ihr Git-Repository im Vercel Dashboard. Vercel erkennt `vercel.json` und verwaltet CI/CD-Auslöser automatisch.
 
-## Neu erzeugen
-
-Wenn Sie Ihr `out`-Verzeichnis oder Ihre `url` in der `docmd.config.json` ändern, führen Sie den Befehl erneut aus, um die Datei neu zu erzeugen. So bleibt die Konfiguration synchron.
+::: callout tip "Neu-Generierung" icon:refresh-cw
+Führen Sie `npx @docmd/core deploy --vercel --force` erneut aus, nachdem Sie `out`- oder `url`-Optionen in `docmd.config.json` geändert haben.
+:::

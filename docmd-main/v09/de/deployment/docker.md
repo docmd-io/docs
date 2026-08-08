@@ -1,34 +1,32 @@
 ---
-title: "Docker"
-description: "Führen Sie docmd in einem Docker-Container aus — verwenden Sie das offizielle, vorgefertigte Image oder erzeugen Sie ein eigenes Dockerfile aus Ihrer Projektkonfiguration."
+title: "Docker-Containerisierung"
+description: "Führen Sie docmd in containerisierten Umgebungen unter Verwendung offizieller Images oder generierter Dockerfiles aus."
 ---
 
-docmd erzeugt statisches HTML und eignet sich daher hervorragend für schlanke, reproduzierbare Docker-Container. Je nach Anwendungsfall gibt es zwei unterschiedliche Vorgehensweisen.
+`docmd` gibt statische Assets aus, was es ideal für containerisierte Bereitstellungen macht. Sie können das offizielle vorgefertigte Image ziehen oder ein benutzerdefiniertes `Dockerfile` über die Deployer-CLI kompilieren.
 
-## Offizielles Docker-Image
+## Offizielles Container-Image
 
-Das offizielle Image ermöglicht es Ihnen, Ihre Dokumentation zu bauen und auszuliefern, ohne lokal etwas zu installieren. Es unterstützt mehrere Architekturen (`linux/amd64` und `linux/arm64`).
+Das vorgefertigte Container-Image ermöglicht Site-Builds und lokale Vorschau-Auslieferung ohne lokale Node.js-Umgebung. Images werden für die Architekturen `linux/amd64` und `linux/arm64` veröffentlicht.
 
-### Schnellstart
+### Schnellstart-Befehle
 
 ```bash
-# Eine bestimmte Version ziehen (empfohlen — die gewünschte Version einsetzen)
+# Pinned Release Image ziehen
 docker pull ghcr.io/docmd-io/docmd:0.9.0
 
-# Dokumentation bauen (mountet lokale Docs und schreibt nach ./site)
+# Statische Ausgabe kompilieren (mountet lokales Docs-Verzeichnis)
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# Eingebaute Demo-Site ausführen
+# Lokalen Vorschau-Server starten
 docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
 ```
 
-::: callout tip "Version pinnen"
-Für reproduzierbare Builds empfehlen wir, eine bestimmte Version zu pinnen (z. B. `0.9.0`). Der `:latest`-Tag wird ab 0.9.0 zwar automatisch veröffentlicht, in Produktions-Pipelines sollten Sie jedoch immer eine bestimmte Version fixieren.
+::: callout tip "Releases pinnen" icon:pin
+Pinnen Sie spezifische Versions-Tags (z. B. `0.9.0`) in Produktions-CI-Pipelines, um die Reproduzierbarkeit von Builds zu gewährleisten.
 :::
 
-### Docker Compose
-
-Verwenden Sie Docker Compose, um Build und Serve in einem einzigen Workflow abzuwickeln:
+### Docker Compose Workflow
 
 ```yaml "docker-compose.yml"
 version: '3.8'
@@ -51,59 +49,46 @@ services:
       - docs
 ```
 
-### Image-Details
+### Image-Spezifikationen
 
-| Eigenschaft | Wert |
-|:--|:--|
-| Basis | Alpine Linux (minimaler Footprint) |
-| Benutzer | Startet als root, ordnet automatisch die Host-UID via `su-exec` zu |
-| Arbeitsverzeichnis | `/docs` (beliebig mountbar; mit `-w` überschreibbar) |
-| Health Checks | Eingebaute Container-Health-Überwachung |
-| SBOM | Software Bill of Materials-Attest enthalten |
-| Architekturen | `linux/amd64`, `linux/arm64` |
+| Eigenschaft | Spezifikationen |
+| :--- | :--- |
+| **Basis-Betriebssystem** | Alpine Linux |
+| **Benutzeridentitäts-Zuordnung** | Ordnet die Container-Root-Identität automatisch über `su-exec` der Host-UID/GID zu. |
+| **Standard-Arbeitsverzeichnis** | `/docs` (Überschreibung über `-w`-Flag). |
+| **Architekturen** | `linux/amd64`, `linux/arm64` |
 
-### Eigenes Arbeitsverzeichnis und Dateieigentum
+### Benutzerdefiniertes Arbeitsverzeichnis & Berechtigungen
 
-Das Image ist mit `WORKDIR /docs` konfiguriert, aber Sie können jeden Pfad im Container einhängen und von dort aus arbeiten. Übergeben Sie `-w`, um das Arbeitsverzeichnis zu überschreiben, sodass es zu Ihrem Projektlayout passt:
+Der Einstiegspunkt erkennt automatisch die Eigentümer-UID und -GID für eingehängte Volumes und reduziert die Berechtigungen vor der Ausführung von `init`-, `build`- oder `dev`-Befehlen. Dateien, die auf Host-Mounts geschrieben werden, behalten den Host-Benutzerbesitz.
 
 ```bash
-# Aus einem eigenen Arbeitsverzeichnis im Container ausführen
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init
 ```
 
-Der Entrypoint erkennt automatisch die UID:GID des eingehängten Verzeichnisses und führt sich selbst mit dieser Identität aus, bevor ein Befehl gestartet wird. Dateien, die von `docmd init`, `docmd build` oder `docmd dev` geschrieben werden, gehören immer dem richtigen Host-Benutzer — kein `-u`-Flag erforderlich.
+## Generiertes Multi-Stage-Dockerfile
 
-::: callout warning "Read-only Mounts"
-Wenn Sie eine Konfigurationsdatei als `:ro` read-only einbinden, stellen Sie sicher, dass das Arbeitsverzeichnis und andere Mount-Punkte schreibbar bleiben, sonst schlägt `docmd` mit einem Berechtigungsfehler fehl.
-:::
-
-## Eigenes Dockerfile (über den Deployer)
-
-Für selbstgehostete Produktion erzeugen Sie mit dem [Deployer](./deployer) ein `Dockerfile`, das auf Ihre Projektkonfiguration zugeschnitten ist:
+Generieren Sie ein benutzerdefiniertes `Dockerfile` über die [Deployer-CLI](./deployer):
 
 ```bash
 npx @docmd/core deploy --docker
 ```
 
-Dies erzeugt ein `Dockerfile` mit Multi-Stage-Build:
-1. **Build-Stage** — installiert Ihre exakt festgelegte `@docmd/core`-Version und führt den Build aus.
-2. **Serve-Stage** — kopiert die Ausgabe in ein minimales `nginx:alpine`-Image.
+Das generierte Multi-Stage-`Dockerfile`:
+1. **Build-Stufe**: Installiert die festgelegte `@docmd/core`-Version und kompiliert statische HTML/CSS/JS-Assets.
+2. **Serve-Stufe**: Kopiert kompilierte Ausgaben in ein leichtgewichtiges `nginx:alpine`-Image.
 
-Erzeugen Sie Docker- und Nginx-Konfigurationen gemeinsam für ein vollständiges Self-Hosting-Setup:
+Um Docker- und NGINX-Konfigurationen zusammen zu generieren:
 
 ```bash
 npx @docmd/core deploy --docker --nginx
 ```
 
-### Bauen und Ausführen
+### Build & Container-Ausführung
 
 ```bash
 docker build -t my-docs .
 docker run -p 8080:80 my-docs
 ```
 
-Ihre Dokumentation ist dann unter `http://localhost:8080` erreichbar.
-
-::: callout tip "Neu erzeugen"
-Haben Sie Ihre Konfiguration geändert? Führen Sie `npx @docmd/core deploy --docker` erneut aus, um sie neu zu erzeugen. Verwenden Sie `--force`, um vorhandene Dateien zu überschreiben.
-:::
+Greifen Sie unter `http://localhost:8080` auf die bereitgestellte Website zu.

@@ -1,90 +1,98 @@
 ---
 title: "Callouts"
-description: "Heben Sie kritische Warnungen, Pro-Tipps und Hintergrundkonformationen durch semantische visuelle Blöcke hervor."
+description: "Heben Sie kritische Warnungen, Pro-Tipps und Hintergrundkontexte durch semantische visuelle Blöcke in docmd hervor."
 ---
 
-Callouts werden verwendet, um Informationen hervorzuheben, die die sofortige Aufmerksamkeit des Lesers erfordern. `docmd` bietet fünf semantische Typen an, die jeweils ein unterschiedliches visuelles Design und thematische Icons besitzen.
+Callouts isolieren Informationen, die die sofortige Aufmerksamkeit des Lesers erfordern. `docmd` bietet fünf semantische Callout-Typen, jeweils mit eigenem Styling, Hintergrundakzenten und Iconografie.
 
-::: callout info "Migrationsfreundliche Aliase"
-Wenn Sie von **VitePress** oder **Docusaurus** migrieren, können Sie deren native Syntax direkt verwenden:
+::: callout info "Migrationsfreundliche Aliase" icon:info
+Beim Migrieren von VitePress oder Docusaurus funktionieren native Container-Aliase direkt nach der Installation:
 - `:::tip`, `:::warning`, `:::danger`, `:::info` (VitePress)
 - `:::note`, `:::caution` (Docusaurus)
 
-Diese Aliase werden identisch zu ihren `docmd`-Äquivalenten gerendert. Leerzeichenlose Syntax wie `:::callout` funktioniert ebenfalls.
+Diese Aliase werden identisch mit nativen `docmd`-Callouts gerendert. Leerzeichenlose Syntax wie `:::callout` wird ebenfalls unterstützt.
 :::
 
 ## Syntax-Referenz
 
 ```markdown
-::: callout typ "Optionaler Titel"
-Der technische Inhalt oder die Warnung wird hier platziert.
+::: callout typ "Titeltext" [eigenschaft:wert...]
+Der Inhalt oder die Warnmeldung wird hier platziert.
 :::
 ```
 
-Fügen Sie einen optionalen `icon:`-Parameter hinzu, um das Standard-Icon des Typs durch ein beliebiges [Lucide](external:https://lucide.dev/icons)-Icon zu ersetzen:
-```markdown
-::: callout info "Benutzerdefiniertes Icon" icon:sparkles
-Dieser Callout verwendet ein benutzerdefiniertes Icon anstelle des Standard-Info-Icons.
-:::
-```
-
-### Unterstützte semantische Typen
-
-| Typ | Absicht | Visuelles Signal |
+| Parameter | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| `info` | **Allgemeine Daten** | Kontextueller Hintergrund oder hilfreiche, nicht kritische Infos. |
-| `tip` | **Optimierung** | Performance-Shortcuts oder "Pro-Tipps". |
-| `warning`| **Vorsicht** | Potenzielle Probleme oder veraltete Funktionen, die beachtet werden sollten. |
-| `danger` | **Kritisch** | Risiko von Datenverlust, Breaking Changes oder Systemausfall. |
-| `success`| **Verifizierung** | Bestätigung einer erfolgreichen Konfiguration oder eines erfolgreichen Builds. |
+| **Typ** | `info` \| `tip` \| `warning` \| `danger` \| `success` | Semantische Absicht, die Standard-Hintergrundakzente und Iconografie definiert. |
+| **Titel** | `"String"` | Optional. Überschreibt die standardmäßige semantische Header-Beschriftung mit einem benutzerdefinierten Titel. |
+| **Icon** | `icon:NAME` | Optional. Überschreibt das Standard-Icon mit einem benutzerdefinierten [Lucide](external:https://lucide.dev/icons)-Icon. |
 
-## Implementierungsgalerie
+### Unterstützte Callout-Typen
 
-### 1. Minimalistischer Informationshinweis
+| Typ | Visuelle Absicht |
+| :--- | :--- |
+| `info` | Kontextueller Hintergrund oder hilfreiche, nicht kritische Informationen. |
+| `tip` | Performance-Shortcuts oder Best Practices. |
+| `warning` | Potenzielle Probleme oder veraltete Funktionen, die beachtet werden sollten. |
+| `danger` | Risiko von Datenverlust, Breaking Changes oder kritischen Ausfällen. |
+| `success` | Bestätigung einer erfolgreichen Konfiguration oder eines erfolgreichen Build-Schritts. |
+
+## Anwendungsbeispiele
+
+### Grundlegender Callout
+
+Ein minimaler Callout ohne expliziten Titel verwendet den Typschlüssel als Header-Beschriftung:
+
 ```markdown
 ::: callout info
-Legacy-Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
+Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr empfohlen.
 :::
 ```
+
 ::: callout info
-Legacy-Konfigurationsschemata werden weiterhin unterstützt, aber nicht mehr empfohlen.
+Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr empfohlen.
 :::
 
-### 2. Warnung mit hoher Priorität und benutzerdefiniertem Titel
+### Benutzerdefinierter Titel & Icon
+
+Überschreiben Sie die Standardbeschriftung und das Icon mit einem benutzerdefinierten Titel und einem beliebigen Lucide-Iconnamen:
+
 ```markdown
-::: callout warning "Ziel für Breaking Changes"
-Ab `v0.7.0` wird das interne WebSocket-RPC-System offiziell als veraltet eingestuft.
+::: callout warning "Hinweis zu Breaking Changes" icon:alert-triangle
+Das interne WebSocket-RPC-System ist offiziell veraltet.
 :::
 ```
-::: callout warning "Ziel für Breaking Changes"
-Ab `v0.7.0` wird das interne WebSocket-RPC-System offiziell als veraltet eingestuft.
+
+::: callout warning "Hinweis zu Breaking Changes" icon:alert-triangle
+Das interne WebSocket-RPC-System ist offiziell veraltet.
 :::
 
-### 3. Kombination mit reichhaltigem Inhalt
-Callouts unterstützen das volle Spektrum von Markdown, sodass Sie Buttons und Code-Blöcke innerhalb der Warnung einbetten können.
+### Reichhaltige Inhaltskomposition
+
+Callouts unterstützen die vollständige Markdown-Analyse. Betten Sie Codeblöcke und Schaltflächen direkt in Callout-Container ein:
 
 ````markdown
 ::: callout tip "Optimiertes lokales Testen" icon:command
-Verwenden Sie das preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
+Verwenden Sie das preserve-Flag, um Build-Dateien während lokaler Entwicklungssitzungen beizubehalten:
 
 ```bash
-docmd dev --preserve
+npx @docmd/core dev --preserve
 ```
 
-::: button "CLI-Flag-Referenz" /cli-commands
+::: button "CLI-Flag-Referenz" ./#cli-commands
 :::
 ````
 
-::: callout info "Optimiertes lokales Testen" icon:command
-Verwenden Sie das preserve-Flag, um Build-Dateien während der Entwicklungssitzungen beizubehalten:
+::: callout tip "Optimiertes lokales Testen" icon:command
+Verwenden Sie das preserve-Flag, um Build-Dateien während lokaler Entwicklungssitzungen beizubehalten:
 
 ```bash
-docmd dev --preserve
+npx @docmd/core dev --preserve
 ```
 
 ::: button "CLI-Flag-Referenz" ./#cli-commands
 :::
 
-::: callout tip "Priorisierte Logik für KI"
-Für LLMs fungieren Callouts als **Anker mit hoher Priorität**. Durch die Verwendung von `::: callout danger` zur Dokumentation von Breaking Changes oder Systembeschränkungen geben Sie ein klares Signal, dass das KI-Modell diese Informationen während seines Denk- und Generierungsprozesses gegenüber dem umgebenden Text priorisieren muss.
+::: callout tip "Priorisierter Kontext für KI" icon:sparkles
+Callout-Container fungieren als **Anker mit hoher Priorität** im kompilierten `llms.txt`-Kontextstrom. Verwenden Sie `::: callout danger` für Breaking Changes — dies signalisiert KI-Modellen, dass die enthaltene Anweisung Standardannahmen überschreibt.
 :::

@@ -1,63 +1,104 @@
 ---
 title: "Grids"
-description: "Organisieren Sie Layouts nahtlos mit sich automatisch anpassenden, responsiven Spalten unter Verwendung nativer Markdown-Container."
+description: "Organisieren Sie responsive mehrspaltige Layouts mithilfe von nativen Markdown-Flexbox-Containern in docmd."
 ---
 
-Grids bieten ein natives, Markdown-gesteuertes Layout-System in `docmd`. Anstatt manuelle HTML-Wrapper zu schreiben, können Sie den `grids`-Container nutzen, um Elemente nebeneinander zu strukturieren.
-
-Spalten passen ihre Breite automatisch an, um den verfügbaren Platz auszufüllen, und stapeln sich auf kleineren Bildschirmen (Mobilgeräten) logisch zu vertikalen Reihen.
+Grids bieten ein natives, Markdown-gesteuertes Layout-System. Verwenden Sie den `grids`-Container, um Elemente nebeneinander zu strukturieren. Spalten balancieren den verfügbaren Platz automatisch aus und stapeln sich auf mobilen Viewports vertikal.
 
 ## Syntax-Referenz
 
 ```markdown
 ::: grids
     ::: grid
-        #### Komponente A
-        Inhalt für die linke Seite.
+        Inhalt für die erste Spalte.
     :::
     ::: grid
-        #### Komponente B
-        Inhalt für die rechte Seite.
+        Inhalt für die zweite Spalte.
     :::
 :::
 ```
 
-## Praktische Implementierungsbeispiele
+| Container | Beschreibung |
+| :--- | :--- |
+| **`::: grids`** | Äußerer Wrapper-Container, der das responsive Flexbox-Layout einleitet. |
+| **`::: grid`** | Innerer Spalten-Container. Deklarieren Sie so viele `grid`-Blöcke wie erforderlich. |
 
-### 1. Präsentation von Funktionen nebeneinander
-Verwenden Sie Grids, um wichtige Funktionen nebeneinander hervorzuheben, indem Sie beispielsweise strukturelle Cards mit Informationsblöcken kombinieren.
+## Anwendungsbeispiele
+
+### Karten nebeneinander
+
+Kombinieren Sie `grids` mit `cards`, um mehrere Feature-Blöcke in einer responsiven Reihe zu präsentieren:
 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Geschwindigkeit :rocket:"
-            Basiert auf einer nicht-blockierenden I/O-Pipeline für maximale Performance.
+        ::: card "Geschwindigkeit" icon:zap
+        Basiert auf einer asynchronen, nicht-blockierenden I/O-Engine für maximale Performance.
         :::
     :::
     ::: grid
-        ::: card "Skalierbarkeit :zap:"
-            Entwickelt für massive Monorepos und umfangreiche Projektstrukturen.
+        ::: card "Skalierbarkeit" icon:layers
+        Entwickelt für große Monorepos und Multi-Projekt-Workspaces.
         :::
     :::
 :::
 ```
 
 ::: grids
-::: grid
-::: card "Geschwindigkeit :rocket:"
-Basiert auf einer nicht-blockierenden I/O-Pipeline für maximale Performance.
-:::
-:::
-::: grid
-::: card "Skalierbarkeit :zap:"
-Entwickelt für massive Monorepos und umfangreiche Projektstrukturen.
-:::
-:::
+    ::: grid
+        ::: card "Geschwindigkeit" icon:zap
+        Basiert auf einer asynchronen, nicht-blockierenden I/O-Engine für maximale Performance.
+        :::
+    :::
+    ::: grid
+        ::: card "Skalierbarkeit" icon:layers
+        Entwickelt für große Monorepos und Multi-Projekt-Workspaces.
+        :::
+    :::
 :::
 
-### 2. Layout-Balancierung
-Grids berechnen automatisch die optimale Breite pro Spalte (bis zu 4 Elemente pro Reihe auf Ultra-Wide-Bildschirmen) basierend auf dem verfügbaren Inhalt und gruppieren Reihen nahtlos auf schmalen Viewports.
+### Dreispaltiges Layout
 
-::: callout tip "Semantische Layouts"
-Die Verwendung des `grids`-Containers sorgt dafür, dass Ihre Dokumentationsstruktur rein in Markdown verfasst bleibt, was zu saubereren Quelldateien führt und sicherstellt, dass LLMs Ihre strukturellen Beziehungen fehlerfrei interpretieren!
+Fügen Sie einen dritten `grid`-Block hinzu, um eine dreispaltige Reihe zu erstellen:
+
+```markdown
+::: grids
+    ::: grid
+        ::: card "Such-Engine" icon:search
+        Integrierter Volltext-Such-Indexierer.
+        :::
+    :::
+    ::: grid
+        ::: card "Lokalisierung" icon:globe
+        Mehrsprachiges Verzeichnis-Routing und lokalisierte Suchindizes.
+        :::
+    :::
+    ::: grid
+        ::: card "Theming-Engine" icon:palette
+        Integrierter Dunkelmodus und vollständige CSS-Variablen-Anpassung.
+        :::
+    :::
+:::
+```
+
+::: grids
+    ::: grid
+        ::: card "Such-Engine" icon:search
+        Integrierter Volltext-Such-Indexierer.
+        :::
+    :::
+    ::: grid
+        ::: card "Lokalisierung" icon:globe
+        Mehrsprachiges Verzeichnis-Routing und lokalisierte Suchindizes.
+        :::
+    :::
+    ::: grid
+        ::: card "Theming-Engine" icon:palette
+        Integrierter Dunkelmodus und vollständige CSS-Variablen-Anpassung.
+        :::
+    :::
+:::
+
+::: callout tip "Saubere strukturelle Signale" icon:lightbulb
+Der `grids`-Container behält die Layout-Struktur rein in Markdown bei. Dies eliminiert rohen HTML-Overhead und stellt sicher, dass KI-Kontext-Indexierer Nebeneinander-Beziehungssignale sauber interpretieren.
 :::

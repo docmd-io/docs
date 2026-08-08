@@ -1,6 +1,6 @@
 ---
 title: "OKF-Bundles — Deep Dive"
-description: "So organisieren Sie Ihre docmd-Inhalte für das beste OKF-Bundle – typisierte Konzepte, Querverweise und die Disziplin für eine KI-agentenfreundliche Wissensbasis."
+description: "So organisieren Sie Ihre docmd-Inhalte für das beste OKF-Bundle — typisierte Konzepte, Querverweise und die Disziplin für eine KI-agentenfreundliche Wissensbasis."
 ---
 
 Das Plugin [`@docmd/plugin-okf`](../../plugins/okf.md) generiert ein [Open Knowledge Format][okf-spec]-Bundle aus Ihrer docmd-Website. Dieser Leitfaden erklärt, wie das Bundle aufgebaut ist, wie Sie Ihre Inhalte für die optimale Nutzung durch KI-Agenten strukturieren und wie sich OKF vom flachen [`llms.txt`](../../plugins/llms.md)-Format unterscheidet.
@@ -82,17 +82,19 @@ title: "Authentifizierungs-API"
 ---
 ```
 
-Der Agent liest zuerst das `type`-Feld. Ein Konzept mit `type: runbook` wird als Schritt-für-Schritt-Anleitung behandelt; ein Konzept mit `type: api` als API-Referenz; ein Konzept mit `type: dataset` als Daten-Wörterbuch.
+Der Agent liest zuerst das `type`-Feld. Ein Konzept mit `type: runbook` wird als Schritt-für-Schritt-Anleitung behandelt (z. B. "wie man sich von einem teileweisen Ausfall erholt"); ein Konzept mit `type: api` wird als API-Referenz behandelt; ein Konzept mit `type: dataset` wird als Daten-Wörterbuch behandelt.
 
 ## Querverweise bilden den Graphen
 
 OKF ist ein Graph, kein Baum. Die Beziehungen zwischen Konzepten werden aus internen Markdown-Links abgeleitet. Wenn `api-authentication.md` auf `users-table.md` verlinkt, zeichnet das OKF-Bundle diese Kante in `graph.json` auf und der Graph-Viewer zieht eine Linie zwischen den beiden Knoten.
 
+Das `okf-bundle` (sprich: "Graph von Konzepten") ist nützlicher als ein Baum, weil es dem Agenten ermöglicht, verwandte Konzepte zu finden, die der Autor nicht in einen Unterabschnitt eingeordnet hat. Das LLM-Wiki-Muster, das OKF formalisiert, geht explizit davon aus, dass der Agent Links folgt, um angrenzendes Wissen zu entdecken.
+
 Best Practices für Querverweise:
 
-- **Vorwärts verlinken** — beim Einführen eines Konzepts auf abhängige Konzepte verlinken (z. B. `[MCP-Einrichtung](./mcp-and-agent-skills.md)`).
-- **Rückwärts verlinken** — im abhängigen Konzept zurückverlinken (z. B. `[KI-Assistent](./ai-assistant.md)`).
-- **Nicht überverlinken** — jeder Link sollte Informationen hinzufügen.
+- **Vorwärts verlinken** — beim Einführen eines Konzepts auf die Konzepte verlinken, von denen es abhängt (z. B. `[MCP-Einrichtung](./mcp-and-agent-skills.md)`).
+- **Rückwärts verlinken** — in dem Konzept, das von diesem abhängt, zurückverlinken (z. B. `[KI-Assistent](./ai-assistant.md)`).
+- **Nicht überverlinken** — jeder Link sollte Informationen hinzufügen. Das Verlinken jedes Wortes verwässert den Graphen und verwirrt den Agenten.
 
 ## Seitenweise Abmeldung (Opt-out)
 
@@ -107,7 +109,10 @@ okf: false
 ...
 ```
 
-Oder nutzen Sie `noindex: true`, um eine Seite von allen nachgelagerten Konsumenten auszuschließen.
+Oder nutzen Sie `noindex: true`, um eine Seite von allen nachgelagerten Konsumenten (Sitemap, Suche, llms.txt, OKF) auszuschließen. Die beiden Flags unterscheiden sich:
+
+- `okf: false` — nur aus OKF ausgeschlossen; weiterhin in Suche und llms.txt enthalten
+- `noindex: true` — von jedem nachgelagerten Konsumenten ausgeschlossen
 
 ## Unterschied zwischen OKF und `llms.txt`
 
@@ -139,22 +144,28 @@ concepts:
 
 Beide ergänzen sich:
 
-- **llms.txt** ist für **flachen Konsum** — "gib mir alles".
-- **OKF** ist für **typisierten Konsum** — "gib mir das Schema für Tabelle X".
+- **llms.txt** ist für **flachen Konsum** — "gib mir alles". Ein Agent liest die Datei und hat den vollständigen Text in seinem Kontextfenster.
+- **OKF** ist für **typisierten Konsum** — "gib mir das Schema für Tabelle X". Ein Agent liest das Manifest, wählt die benötigten Konzepte aus und lädt sie selektiv.
+
+Für Projekte mit unter 50 Seiten reicht llms.txt allein oft aus. Für Projekte mit 50+ Seiten ist OKF das effizientere Format — der Agent muss nicht jede Seite laden, nur um die eine zu finden, die er benötigt.
 
 ## Häufige Fehler
 
 ### 1. Auslassen des `type`-Feldes
-Setzen Sie `type: <name>` explizit für jede Seite mit klarer Kategorie.
+
+Das OKF-Manifest ist am nützlichsten, wenn jedes Konzept einen eindeutigen `type` hat. Wenn 80 % Ihrer Seiten als `concept` erkannt werden, kann der Agent nicht unterscheiden, welche Referenzdokumente, welche Anleitungen und welche Runbooks sind. Setzen Sie `type: <name>` explizit für jede Seite mit klarer Kategorie.
 
 ### 2. Seiten ohne Querverweise
-Fügen Sie mindestens einen eingehenden Link hinzu, damit eine Seite im Graphen auffindbar bleibt.
+
+Wenn eine Seite eine Sackgasse ist (keine internen Links zu oder von ihr), zeigt der Graph-Viewer sie als isolierten Knoten an. Der Agent liest sie in Isolation und verpasst den Kontext. Fügen Sie mindestens einen eingehenden Link (von einer anderen Seite referenziert) für jede Seite hinzu, die eingeblendet werden soll.
 
 ### 3. Interne Fachsprache in `description`
-Verwenden Sie verständliches Deutsch, das ein Agent gegen Benutzeranfragen abgleichen kann.
+
+Das Feld `description` wird im Manifest und in `llms.txt`-Zusammenfassungen angezeigt. Ein KI-Agent nutzt es, um zu entscheiden, ob ein Konzept relevant ist. Verwenden Sie einfaches Deutsch, das der Agent gegen eine Benutzeranfrage abgleichen kann: "Wöchentlich aktive Benutzer für die Marketing-Website, berechnet aus dem Events-Stream", nicht "WAU (ms)".
 
 ### 4. OKF für Nicht-KI-Agenten-Websites
-Deaktivieren Sie das Plugin explizit, wenn Sie keinen KI-Agenten als Zielgruppe haben:
+
+Wenn Ihre Dokumentationsseite keine KI-Agenten-Zielgruppe hat, bringt OKF keinen Mehrwert. Das Plugin `@docmd/plugin-okf` ist standardmäßig aktiviert, also deaktivieren Sie es explizit:
 
 ```json
 {
@@ -162,23 +173,27 @@ Deaktivieren Sie das Plugin explizit, wenn Sie keinen KI-Agenten als Zielgruppe 
 }
 ```
 
+Das `llms.txt`-Plugin ist das richtige Werkzeug für "KI-durchsuchbaren Fließtext"; OKF ist das richtige Werkzeug für "typisierte KI-Agenten-Wissensgraphen".
+
 ## Verifizierung
 
 Inspezieren Sie das Bundle nach `docmd build` unter `site/okf/`:
 
 ```bash
-# Das Manifest
+# Das Manifest (jedes Konzept, Typ, Pfad)
 cat site/okf/okf.yaml | head -30
 
-# Der Katalog
+# Der Katalog (Karpathy-Stil gruppiert nach Typ)
 open site/okf/index.md
 
-# Der interaktive Graph
+# Der interaktive Graph (force-directed, theme-aware)
 open site/okf/graph.html
 
 # Vom Plugin erzeugte Warnungen
 cat site/okf/_meta/lint-report.txt
 ```
+
+Der Lint-Bericht ist das Erste, was zu prüfen ist — er listet Seiten ohne `type`-Feld, Seiten mit defekten internen Links und verwaiste Konzepte (keine eingehenden Links). Beheben Sie diese für ein saubereres Agenten-Erlebnis.
 
 - [KI-Assistent Einrichtung](./ai-assistant.md) — RAG-gestützte interaktive Assistenten-Konfiguration.
 - [MCP & Agent Skills](./mcp-and-agent-skills.md) — Model Context Protocol Einrichtung und Agenten-Tools.

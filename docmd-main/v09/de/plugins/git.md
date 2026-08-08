@@ -1,29 +1,31 @@
 ---
-title: "Git-Plugin"
-description: "Repository-bewusste Metadaten, Zeitstempel der letzten Aktualisierung und automatische Edit-Links aus der Git-Historie."
+title: "Git-Integrations-Plugin"
+description: "Fügen Sie Git-Repository-Intelligenz, Zeitstempel der letzten Aktualisierung, Commit-Historie-Tooltips und automatisierte Quell-Edit-Links ein."
 ---
 
-Das `@docmd/plugin-git`-Plugin fügt Ihrer Dokumentation Repository-Intelligenz hinzu. Es extrahiert Daten zur Build-Zeit direkt aus der Git-Historie. Es zeigt an, wann eine Seite zuletzt geändert wurde, wer beigetragen hat, und stellt einen optionalen „Diese Seite bearbeiten"-Link bereit.
+Das `@docmd/plugin-git`-Plugin fügt Ihrer Dokumentationsseite Repository-Intelligenz hinzu. Es fragt während der Kompilierung die lokale Git-Historie ab, um Seitenänderungszeitstempel, Autorenbeiträge und automatisierte „Diese Seite bearbeiten"-Links anzuzeigen.
 
-## Konfiguration
+## Konfigurationsoptionen
+
+Konfigurieren Sie Repository-Parameter in `docmd.config.json`:
 
 | Option | Typ | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `repo` | `string` | `null` | Repository-URL (z. B. `https://github.com/org/repo`). Für Edit-Links erforderlich. |
-| `branch` | `string` | `'main'` | Branchname für Edit-Links. |
-| `editLink` | `boolean` | `true` | „Diese Seite bearbeiten"-Link anzeigen, wenn `repo` gesetzt ist. |
-| `lastUpdated` | `boolean` | `true` | Zeitstempel der letzten Aktualisierung anzeigen. |
-| `commitHistory` | `boolean` | `true` | Commit-Historie-Tooltip beim Hover anzeigen. |
-| `maxCommits` | `number` | `5` | Maximale Anzahl der im Tooltip angezeigten Commits (wenn `commitHistory` true ist). |
-| `dateFormat` | `string` | `'relative'` | Zeitstempelformat: `relative` (Standard), `iso` oder `locale-aware`. |
+| `repo` | `string` | `null` | Öffentliche Repository-URL (z. B. `https://github.com/org/repo`). Erforderlich für Bearbeitungslinks. |
+| `branch` | `string` | `'main'` | Ziel-Branch für Quell-Bearbeitungslinks. |
+| `editLink` | `boolean` | `true` | „Diese Seite bearbeiten"-Schaltfläche in Seitenfüßen anzeigen. |
+| `lastUpdated` | `boolean` | `true` | Zeitstempel der letzten Aktualisierung in Seitenfüßen anzeigen. |
+| `commitHistory` | `boolean` | `true` | Commit-Historie-Hover-Tooltip beim Hovern über den Zeitstempel anzeigen. |
+| `maxCommits` | `number` | `5` | Maximale Anzahl der im Hover-Tooltip angezeigten Commits. |
+| `dateFormat` | `string` | `'relative'` | Datumsausgabeformat: `relative` (Standard), `iso` oder `locale-aware`. |
 
-### Beispiel
+### Beispielkonfiguration
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "git": {
-      "repo": "https://github.com/org/repo",
+      "repo": "https://github.com/docmd-io/docmd",
       "branch": "main",
       "editLink": true,
       "lastUpdated": true,
@@ -34,28 +36,18 @@ Das `@docmd/plugin-git`-Plugin fügt Ihrer Dokumentation Repository-Intelligenz 
 }
 ```
 
-## Funktionen
+## Hauptfunktionen
 
-- **Zeitstempel der letzten Aktualisierung**: im Seitenfuß angezeigt.
-- **Commit-Historie-Tooltip**: Hover über den Zeitstempel, um die letzten Commits für die Seite zu sehen.
-- **Edit-Links**: optionale Links zur Bearbeitung der Quelldatei auf GitHub, GitLab oder Bitbucket.
-- **Build-Zeit-Caching**: Git-Historie wird einmal abgefragt und zwischengespeichert, sodass die Site-Performance nicht beeinträchtigt wird.
+* **Zeitstempel der letzten Aktualisierung**: Automatisch pro Datei berechnet und in den Seitenfüßen angezeigt.
+* **Commit-Historie-Tooltips**: Beim Hovern über Zeitstempel werden aktuelle Commit-Hashes, Commit-Meldungen und Autoren-Avatare gerendert.
+* **Automatisierte Bearbeitungslinks**: Generiert direkte Bearbeitungs-URLs, die auf GitHub, GitLab oder Bitbucket verweisen.
+* **Build-Zeit-Caching**: Git-Abfragen werden während der Kompilierung ausgeführt und Ergebnisse lokal zwischengespeichert, was eine Laufzeitauswirkung von Null garantiert.
 
-## Verhalten
+## Steuerung auf Seitenebene
 
-Sobald konfiguriert, arbeitet das Plugin automatisch. Zeitstempel und Edit-Links erscheinen im Seitenfuß.
+Deaktivieren Sie Git-Funktionen für bestimmte Dokumente über [Seiten-Frontmatter](../content/frontmatter.md):
 
-### Footer-Beispiel
-
-::: callout info "Rendering-Ergebnis"
-Der Footer dieser Seite wird vom Git-Plugin gerendert. Scrollen Sie nach unten, um es in Aktion zu sehen. Bewegen Sie den Mauszeiger über das Datum **Zuletzt aktualisiert**, um die Commit-Historie zu sehen.
-:::
-
-## Pro-Seite-Steuerung
-
-Deaktivieren Sie Git-Funktionen für bestimmte Seiten über das Frontmatter:
-
-```markdown
+```yaml
 ---
 title: "Interne Notizen"
 plugins:
@@ -63,11 +55,11 @@ plugins:
 ---
 ```
 
-## CI/CD-Integration
+## Integration in CI/CD-Pipelines
 
-Das Git-Plugin liest Ihre Repository-Historie zur Build-Zeit über lokale Git-Befehle. Viele CI/CD-Anbieter verwenden standardmäßig „Shallow Clones" (nur den letzten Commit abrufen). Dies führt dazu, dass das Plugin auf allen Seiten nur die letzte Änderung anzeigt.
+Das Git-Plugin führt während der Website-Kompilierung lokale `git`-CLI-Befehle aus. Viele CI/CD-Runner (wie GitHub Actions oder GitLab CI) führen Flat-Clones durch (`fetch-depth: 1`), was die Commit-Historie abschneidet und dazu führt, dass alle Seiten identische Aktualisierungsdaten anzeigen.
 
-Um genaue Zeitstempel und Historie zu gewährleisten, konfigurieren Sie Ihre CI-Umgebung so, dass ein vollständiger Fetch durchgeführt wird.
+Stellen Sie sicher, dass Ihr Build-Workflow die vollständige Git-Historie abruft:
 
 ::: tabs
 
@@ -76,7 +68,7 @@ Um genaue Zeitstempel und Historie zu gewährleisten, konfigurieren Sie Ihre CI-
 Fügen Sie `fetch-depth: 0` zu Ihrem Checkout-Schritt hinzu:
 
 ```yaml ".github/workflows/docs.yml"
-- name: Checkout
+- name: Checkout Repository
   uses: actions/checkout@v4
   with:
     fetch-depth: 0
@@ -84,7 +76,7 @@ Fügen Sie `fetch-depth: 0` zu Ihrem Checkout-Schritt hinzu:
 
 == tab "GitLab CI"
 
-Setzen Sie die Variable `GIT_DEPTH` auf `0`:
+Setzen Sie die Umgebungsvariable `GIT_DEPTH` auf `0`:
 
 ```yaml ".gitlab-ci.yml"
 variables:
@@ -93,14 +85,14 @@ variables:
 
 == tab "Netlify"
 
-Netlify ruft standardmäßig die vollständige Historie ab. Wenn Probleme auftreten, stellen Sie sicher, dass Ihr Build-Befehl Zugriff auf das `.git`-Verzeichnis hat.
+Netlify ruft standardmäßig die vollständige Historie ab. Bei Verwendung benutzerdefinierter Build-Skripte stellen Sie sicher, dass das `.git`-Verzeichnis im Build-Workspace erhalten bleibt.
 
 :::
 
-::: callout warning "Git-Datenanforderung"
-Das `.git`-Verzeichnis muss in der Build-Umgebung vorhanden sein. Wenn Sie in einem Docker-Container oder einer eingeschränkten CI-Umgebung bauen, stellen Sie sicher, dass die Git-Historie erhalten bleibt und das `git`-Binary installiert ist.
+::: callout warning "Verfügbarkeit der Git CLI" icon:alert-triangle
+Das `.git`-Verzeichnis und das `git`-Binary müssen in Ihrem Kompilierungscontainer oder in Ihrer Build-Umgebung zugänglich sein.
 :::
 
-## Lokalisierung
+## Unterstützung für Lokalisierung
 
-Das Plugin enthält eingebaute Übersetzungen für mehrere gängige Sprachen (Englisch, Deutsch, Chinesisch, Koreanisch und weitere). Die vollständige Liste der mitgelieferten Locales wird im [Quell-Repository](external:https://github.com/docmd-io/docmd/tree/main/packages/plugins/git/i18n) gepflegt. Benutzerdefinierte Zeichenfolgen können über das [UI-Lokalisierung](../configuration/localisation/ui-strings.md)-System bereitgestellt werden.
+Das Git-Plugin unterstützt mehrsprachige Übersetzungstabellen für Fußzeilensprachen und Zeitstempelformate. Benutzerdefinierte Zeichenfolgen können über die [UI-Lokalisierung](../configuration/localisation/ui-strings.md)-Konfiguration bereitgestellt werden.

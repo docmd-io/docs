@@ -1,11 +1,13 @@
 ---
-title: "Übersetzte Inhalte"
-description: "Organisieren Sie Übersetzungen in Locale-Unterverzeichnissen mit dateiweisem Fallback und Locale-spezifischer Navigation."
+title: "Übersetzte Inhalte & i18n-Routing"
+description: "Organisieren Sie mehrsprachige Dokumentationsverzeichnisse, Fallback-Mechanismen und lokalisierte Navigationsstrukturen in docmd."
 ---
+
+`docmd` bietet Mehrsprachenunterstützung (i18n), indem Inhalte in dedizierten Locale-Unterverzeichnissen organisiert werden. Sie können lokalisierte Inhalte verwalten, nahtlos auf Standardsprachen zurückgreifen und lokalisierte Navigations-Sidebars bereitstellen.
 
 ## Verzeichnisstruktur
 
-Jede Locale lebt in einem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses. Der Ordnername entspricht der Locale-`id` aus Ihrer Konfiguration.
+Jede Locale lebt in einem eigenen Unterverzeichnis innerhalb des Quellverzeichnisses (`src`). Ordnernamen entsprechen der in Ihrer Konfiguration definierten Locale-`id`:
 
 ```text
 docs/
@@ -14,41 +16,37 @@ docs/
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← zweite Locale
+├── hi/                     ← zweite Locale (Hindi)
 │   ├── index.md            ← übersetzte Startseite
 │   ├── navigation.json     ← übersetzte Navigationsbeschriftungen
 │   └── getting-started/
-│       └── installation.md ← übersetzte Seite
-└── zh/                     ← dritte Locale
-    └── index.md            ← nur die Startseite übersetzt
+│       └── installation.md ← übersetzte Installationsanleitung
+└── zh/                     ← dritte Locale (Chinesisch)
+    └── index.md            ← übersetzte Startseite
 ```
 
-Das Quellverzeichnis enthält nur Locale-Ordner. Wenn i18n aktiviert ist, liegen im Stammverzeichnis keine Inhaltsdateien.
+Wenn i18n aktiviert ist, liegen alle Markdown-Quellinhalte innerhalb von Locale-Verzeichnissen. Auf der Stamm-Ebene befinden sich keine Inhaltsdateien.
 
-::: callout info "Ordnernamen sind Ihre Wahl" icon:info
-Ordnernamen entsprechen den `id`-Werten in Ihrer Konfiguration. Wenn Ihre Konfiguration `{ id: 'fr-ca' }` setzt, ist Ihr Ordner `docs/fr-ca/`.
+::: callout info "Benutzerdefinierte Verzeichniskennungen" icon:info
+Unterverzeichnisnamen entsprechen direkt den `id`-Werten in Ihrer Konfiguration. Wenn Ihre Konfiguration `{ "id": "fr-ca" }` definiert, lautet das entsprechende Inhaltsverzeichnis `docs/fr-ca/`.
 :::
 
-## Dateiweiser Fallback
+## Dateiweise Fallback-Auflösung
 
-Sie müssen nicht jede Seite übersetzen. docmd durchsucht das **Standard-Locale-Verzeichnis** als kanonische Struktur. Für jede andere Locale wird eine übersetzte Seite gesucht:
+`docmd` erfordert nicht, jedes Dokument im Voraus zu übersetzen. Die Engine behandelt das **Standard-Locale-Verzeichnis** als kanonischen Inhaltsbaum. Wenn eine angeforderte Seite in einer sekundären Locale fehlt:
 
-- Wenn `docs/hi/getting-started/installation.md` existiert → wird die Hindi-Übersetzung ausgeliefert.
-- Wenn sie nicht existiert → wird die Standard-Locale-Version ausgeliefert.
+1. Wenn `docs/hi/getting-started/installation.md` existiert → wird die Hindi-Übersetzung ausgeliefert.
+2. Wenn `docs/hi/getting-started/installation.md` fehlt → wird auf `docs/en/getting-started/installation.md` zurückgegriffen.
 
-Greift ein Seiten-Fallback, zeigt docmd einen übersetzten Hinweis. Dieser informiert die Betrachter, dass die Seite in der Standardsprache angezeigt wird. Passen Sie diese Meldung über Ihre [UI-Strings](ui-strings.md)-Konfiguration an.
+Beim Fallback auf die Standard-Locale zeigt `docmd` Lesern ein informatives Callout-Banner an. Passen Sie diese Nachricht über Ihre [UI-Strings-Konfiguration](./ui-strings.md) an.
 
 ## Locale-exklusive Seiten
 
-Eine Nicht-Standard-Locale kann Seiten hosten, die in der Standard-Locale nicht existieren. Diese werden nur für diese spezifische Locale gerendert.
+Sekundäre Locales können einzigartige Dokumente hosten, die im Standard-Locale-Verzeichnis nicht existieren. Diese Seiten werden ausschließlich innerhalb ihrer jeweiligen Sprachrouten gerendert.
 
-## Navigation übersetzen
+## Lokalisieren der Sidebar-Navigation
 
-Jedes Locale-Verzeichnis kann eine eigene `navigation.json` enthalten. docmd verwendet ein Kaskadierungs-Prioritätssystem zur Auflösung der Sidebar.
-
-Details zur Auflösungshierarchie finden Sie in der [Navigationskonfiguration](../navigation.md).
-
-Die `navigation.json` einer Locale verwendet das Standardformat:
+Jedes Locale-Verzeichnis kann ein unabhängiges `navigation.json`-Manifest enthalten. `docmd` verwendet ein Kaskadierungs-Prioritätsauflösungssystem für Sidebars. Lesen Sie die [Navigationskonfiguration](../navigation.md) für vollständige Hierarchiedetails.
 
 ```json "navigation.json"
 [
@@ -62,28 +60,28 @@ Die `navigation.json` einer Locale verwendet das Standardformat:
 ]
 ```
 
-::: callout tip "Teilweise Navigation" icon:info
-Erstellen Sie eine Locale-`navigation.json` nur, wenn Sie übersetzte Beschriftungen wünschen. Fehlt sie, wird die Standard-Navigation verwendet.
+::: callout tip "Teilweise Navigations-Überschreibungen" icon:lightbulb
+Stellen Sie eine `navigation.json`-Datei innerhalb eines Locale-Verzeichnisses nur dann bereit, wenn Sie Menübeschriftungen übersetzen. Wenn sie weggelassen wird, wird der Navigationsbaum der Standard-Locale automatisch angewendet.
 :::
 
-## Versionierung und i18n
+## Kombination von Versionierung mit Lokalisierung
 
-Wenn Sie Versionierung und i18n kombinieren, strukturieren Sie die Quellverzeichnisse hierarchisch:
+Bei der Kombination von Versionierung und mehrsprachigem Routing organisieren Sie Verzeichnisse hierarchisch mit in Versionsordnern verschachtelten Locales:
 
 ```text
 docs/                    ← aktuelle Version
-  en/                    ← aktuelle Version, Standard-Locale
-  hi/                    ← aktuelle Version, übersetzte Locale
-docs-v1/                 ← vorherige Version
-  en/                    ← v1, Standard-Locale
-  hi/                    ← v1, übersetzte Locale
+  en/                    ← Standard-Locale
+  hi/                    ← übersetzte Locale
+docs-v1/                 ← alte Version
+  en/                    ← Standard-Locale
+  hi/                    ← übersetzte Locale
 ```
 
-Die Ausgabe-URLs verschachteln zuerst die Locale, dann die Version:
+Die Ausgabe-URL-Hierarchie priorisiert Locale-Präfixe, gefolgt von Versionsrouten:
 
 ```text
 /                        ← Standard-Locale, aktuelle Version
 /hi/                     ← übersetzte Locale, aktuelle Version
-/v1/                     ← Standard-Locale, vorherige Version
-/hi/v1/                  ← übersetzte Locale, vorherige Version
+/v1/                     ← Standard-Locale, alte Version
+/hi/v1/                  ← übersetzte Locale, alte Version
 ```

@@ -6,7 +6,7 @@ description: "Bauen und deployen Sie Multi-Projekt-Dokumentations-Websites aus e
 Workspaces ermöglichen es Ihnen, mehrere unabhängige Dokumentationsprojekte aus einem einzigen Repository zu bauen und zu deployen. Jedes Unterprojekt behält seine eigenen Konfigurationsoptionen und erbt gleichzeitig globale Standards, die im Workspace-Root definiert sind.
 
 ```text
-docs.example.com/           → Haup-Produktdokumentation
+docs.example.com/           → Haupt-Produktdokumentation
 docs.example.com/sdk/       → SDK-API-Referenz
 docs.example.com/cli/       → CLI-Tooling-Leitfaden
 ```
@@ -28,7 +28,7 @@ my-docs/
 └── package.json
 ```
 
-## Workspace-Konfigurations-Schema
+## Workspace-Konfigurationsschema
 
 Die Datei `docmd.config.json` im Root verwendet den Schlüssel `workspace` zur Deklaration von Projekten. Top-Level-Parameter (z. B. `theme`, `menubar`, `logo`) dienen als **globale Standards** für alle Unterprojekte:
 
