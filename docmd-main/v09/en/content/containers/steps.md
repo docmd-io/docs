@@ -119,7 +119,7 @@ Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
 ::: /step
 ::: /steps
 
-::: callout note "Legacy List Syntax" icon:archive
+::: callout tip "Legacy List Syntax" icon:archive
 Existing documentation utilizing `1.` ordered lists continues to parse seamlessly:
 
 ```markdown

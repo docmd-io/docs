@@ -47,7 +47,7 @@ The core engine uses a non-blocking I/O pipeline, compiling thousands of pages i
 
 Cards accept any Markdown content, including code snippets and button containers:
 
-```markdown
+````markdown
 ::: card title:"Instant Localisation"
 Prepare your documentation for a global audience using built-in i18n support.
 

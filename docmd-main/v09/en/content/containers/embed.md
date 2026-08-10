@@ -3,7 +3,7 @@ title: "URL Embeds"
 description: "Safely embed dynamic video, social media, and interactive content using the embed-lite parser in docmd."
 ---
 
-`docmd` ships natively with the high-performance **[embed-lite](external:https://github.com/docmd-io/docmd)** parser. It automatically transforms external URLs into secure, zero-latency UI components.
+`docmd` ships natively with the high-performance **[embed-lite](external:https://github.com/mgks/embed-lite)** parser. It automatically transforms external URLs into secure, zero-latency UI components.
 
 ## Container Syntax
 
