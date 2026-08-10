@@ -39,9 +39,9 @@ Fügen Sie den `ai`-Plugin-Block zu Ihrer `docmd.config.json` hinzu:
 }
 ```
 
-::: callout tip "Empfohlene Modelle" icon:sparkles
+::: callout tip title:"Empfohlene Modelle" icon:sparkles
 Für das optimale Verhältnis von Antwortgeschwindigkeit zu Kosten empfehlen wir schnelle Reasoning-Modelle wie `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic) oder `gemini-1.5-flash` (Google).
-:::
+::: /callout
 
 ## Anbieter-Zugangsdaten festlegen
 

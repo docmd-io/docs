@@ -25,9 +25,9 @@ components:
   <p>零配置。同构。AI 就绪。</p>
 </div>
 
-::: callout info "支持无限嵌套" icon:info
+::: callout info title:"支持无限嵌套" icon:info
 即使启用了 `noStyle: true`，所有标准的 docmd 容器（如 `::: card`、`::: tabs`、`::: hero`）仍完全受支持，并且可以无限嵌套。
-:::
+::: /callout
 ```
 
 ## 组件选择启用
@@ -66,25 +66,25 @@ components:
 # 打造令人惊艳的文档。
 面向现代工程团队的零配置引擎。
 
-::: button "开始使用" ../getting-started/quick-start.md color:blue
-::: button "GitHub" github:docmd-io/docmd color:gray
+::: button title:"开始使用" url:"../getting-started/quick-start.md" color:blue
+::: button title:"GitHub" url:"github:docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 :::
 
 ::: grids
-  ::: card "零配置"
+  ::: card title:"零配置"
   只需编写 Markdown。无需复杂的 React 逻辑或构建脚本。
-  :::
-  ::: card "AI 优化"
+  ::: /card
+  ::: card title:"AI 优化"
   为 LLM 时代设计的结构感知解析。
-  :::
-  ::: card "没有框架开销的高速体验"
+  ::: /card
+  ::: card title:"没有框架开销的高速体验"
   带同构 SPA 导航的静态生成。
-  :::
-:::
+  ::: /card
+::: /grids
 ```
 
 ::: callout tip "AI 生成的布局" icon:lightbulb
@@ -194,9 +194,9 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 });
 ```
 
-::: callout info "自动检测" icon:info
+::: callout info title:"自动检测" icon:info
 该脚本从 URL 路径前缀检测当前语言。对于默认语言，它会检查 `localStorage` 中保存的偏好设置。`switchLocale()` 函数会自动处理 URL 导航。
-:::
+::: /callout
 
 ### 原地模式
 

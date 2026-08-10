@@ -187,6 +187,14 @@
             "path": "/content/containers/tags"
           },
           {
+            "title": "Tooltips (Información Emergente)",
+            "path": "/content/containers/tooltip"
+          },
+          {
+            "title": "Diagramas Mermaid",
+            "path": "/content/containers/mermaid"
+          },
+          {
             "title": "Secciones Hero",
             "path": "/content/containers/hero"
           },
@@ -501,6 +509,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.1 - Motor de contenedores estandarizado y Mermaid",
+        "path": "/release-notes/0-9-1"
+      },
       {
         "title": "v0.9.0 - Asistente de IA, Motor Headless y Arquitectura",
         "path": "/release-notes/0-9-0"

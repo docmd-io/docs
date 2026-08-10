@@ -46,13 +46,13 @@ npx @docmd/core add <plugin-name> -V
 }
 ```
 
-::: callout tip "Git 仓库检测" icon:git-branch
+::: callout tip title:"Git 仓库检测" icon:git-branch
 Git 插件会自动检测您的项目根目录是否为有效的 Git 仓库。如果 Git 历史不可用，它会自动禁用页脚时间戳生成。
-:::
+::: /callout
 
-::: callout info "OKF Bundle 支持" icon:info
+::: callout info title:"OKF Bundle 支持" icon:info
 `@docmd/plugin-okf` 插件生成一个 Open Knowledge Format bundle（`site/okf/`），其中包含面向 AI 智能体的类型化清单和概念文件。该插件默认启用；设置 `"plugins": { "okf": false }` 可选择退出。详情请参阅 [OKF Bundle 插件](okf.md)。
-:::
+::: /callout
 
 ## 可选插件
 
@@ -82,9 +82,9 @@ Git 插件会自动检测您的项目根目录是否为有效的 Git 仓库。�
 * 自动检测项目包管理器（npm、pnpm、yarn、bun）。
 * 在终端界面中直接输出安装进度。
 
-::: callout tip "弹性模块解析" icon:shield-check
+::: callout tip title:"弹性模块解析" icon:shield-check
 自动安装程序使用带有回退解析路径的动态 ES 模块导入，能够无缝加载声明了显式 `exports` 映射的 ESM 包。
-:::
+::: /callout
 
 ## 第三方与自定义插件
 

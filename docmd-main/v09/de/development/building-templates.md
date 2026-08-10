@@ -143,9 +143,9 @@ CSS und JS laden in dieser Reihenfolge (niedriger lädt zuerst, höher gewinnt K
 
 Templates dürfen eine höhere Priorität als 10 deklarieren — Summer selbst nutzt **25**, um Plugin-Stile zu überschreiben. Der empfohlene Bereich ist **10–20** für "vom Benutzer überschreibbare" Templates und **20+** für "opinionated Layout"-Templates.
 
-::: callout warning "Verwenden Sie kein !important"
+::: callout warning title:"Verwenden Sie kein !important"
 Templates sollten CSS schreiben, das von `customCss` mit Priorität 15 überschrieben werden kann. `!important` bricht diesen Vertrag und zwingt Benutzer, Ihr Template zu forken, um es anzupassen. (Sommers CSS-Datei-Header erzwingt dies — `!important` wird beim 0.8.7-Cleanup entfernt, damit Benutzer Summer endlich ohne eigenen `!important` überschreiben können.)
-:::
+::: /callout
 
 ## Auto-Promotion von `theme.name`
 

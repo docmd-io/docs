@@ -52,9 +52,9 @@ noindex: true
 ---
 ```
 
-::: callout tip "Privacy & Compliance" icon:shield-check
+::: callout tip title:"Privacy & Compliance" icon:shield-check
 Because search queries execute entirely within client memory, zero search input or keystroke telemetry leaves the user's browser.
-:::
+::: /callout
 
 ## Offline Local Semantic Search
 

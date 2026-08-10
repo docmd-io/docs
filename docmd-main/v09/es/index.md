@@ -10,8 +10,8 @@ titleAppend: false
 
 De Markdown a documentación en producción con un solo comando. HTML estático para SEO. SPA para velocidad. Funciona de forma nativa con herramientas de IA.
 
-::: button "Primeros pasos" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
+::: button "Primeros pasos" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
+
 :::
 
 ## Descripción general

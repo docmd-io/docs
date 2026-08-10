@@ -1,85 +1,58 @@
 ---
-title: "Mermaid 图表"
-description: "使用 Mermaid.js 语法直接在 Markdown 文件中创建专业的架构图、流程图和序列图。"
+title: "Mermaid 图表插件"
+description: "Mermaid.js 图表的零配置集成，支持自动主题同步与按需加载 JavaScript 资源。"
 ---
 
-`@docmd/plugin-mermaid` 插件将 [Mermaid.js](external:https://mermaid.js.org/) 无缝集成至 docmd 中。它将纯文本图表声明渲染为带有自动主题匹配、平移和缩放功能的交互式 SVG 视觉图表。
+`@docmd/plugin-mermaid` 插件将 [Mermaid.js](external:https://mermaid.js.org/) 无缝集成到 `docmd` 中。它同时注册了标准 Markdown 代码块解析器（` ```mermaid `）与显式的 `::: mermaid` 容器渲染器，为网页提供具备平移与缩放功能的交互式 SVG 图表。
 
-## 配置选项
+::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
+自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: mermaid` ... `::: /mermaid`）、显式的键值对属性（`title:"..."`、`align:center`）以及末尾的 `# 注释`。单图表的个性化定制通过容器语法处理，而全局默认值则在 `docmd.config.json` 中统一配置。
+:::
 
-在 `docmd.config.json` 中配置 Mermaid 渲染选项：
+## 插件配置项
 
-| 选项 | 类型 | 默认值 | 技术描述 |
-| :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | 全局启用或禁用 Mermaid 图表渲染。 |
-
-### 全局配置示例
+在 `docmd.config.json` 中配置全局选项：
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "mermaid": {
-      "enabled": true
+      "enabled": true,
+      "theme": "default",
+      "darkTheme": "dark",
+      "zoom": true
     }
   }
 }
 ```
 
-## 核心能力
+| 选项 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | 全局启用或禁用 Mermaid 图表渲染。 |
+| `theme` | `string` | `"default"` | 浅色模式下的默认图表主题（`default`、`forest`、`neutral`）。 |
+| `darkTheme` | `string` | `"dark"` | 深色模式下用于自动切换的主题。 |
+| `zoom` | `boolean` | `true` | 默认启用交互式缩放和平移控件。 |
 
-* **外观同步**: 图表配色方案会根据当前的亮色或暗色外观模式进行动态适应。
-* **交互式画布**: 内置平移、缩放与全屏展开控件。
-* **惰性初始化**: 图表渲染脚本仅在图表进入视口时才会异步加载。
-* **图标集成**: 支持在节点定义中使用由 Lucide 图标驱动的 `icon:name` 语法。
-
-## 用法与语法
-
-使用带有 `mermaid` 语言标识符的围栏代码块编写图表。
-
-### 序列图示例
-
-::: tabs
-
-== tab "预览"
-```mermaid
-sequenceDiagram
-    participant User
-    participant Browser
-    participant Server
-    
-    User->>Browser: Enters URL
-    Browser->>Server: HTTP Request
-    Server-->>Browser: HTTP Response
-    Browser-->>User: Displays Page
-```
-
-== tab "源码"
-````markdown
-```mermaid
-sequenceDiagram
-    participant User
-    participant Browser
-    participant Server
-    
-    User->>Browser: Enters URL
-    Browser->>Server: HTTP Request
-    Server-->>Browser: HTTP Response
-    Browser-->>User: Displays Page
-```
-````
-
+::: callout tip "禁用插件" icon:slash
+若在 `docmd.config.json` 中将 `@docmd/plugin-mermaid` 禁用或移除，`::: mermaid` 容器渲染与 ` ```mermaid ` 代码块解析均将被彻底关闭，且不会在客户端注入任何 JavaScript 静态资源。
 :::
 
-### 架构图示例
+## 图表编写与使用
 
-```mermaid
-architecture-beta
-    group api(icon:cloud)[API Service]
-    service db(icon:database)[Database] in api
-    service disk(icon:hard-drive)[Storage] in api
-    db:L -- R:disk
+`docmd` 支持图表的混合编写模式：
+
+* **[Mermaid 容器指南](../content/containers/mermaid.md)**：探索推荐使用的 `::: mermaid` 容器语法，以实现单图表标题、对齐方式、自定义主题及显式闭合标签。
+* **标准代码块**：使用标准 ` ```mermaid ` 代码块以保持 100% 的 GitHub Markdown (GFM) 兼容性。
+
+### 快速示例
+
+```markdown
+::: mermaid title:"身份验证流程" align:center zoom:true # 容器
+sequenceDiagram
+    autonumber
+    Client->>Server: POST /login
+    Server-->>Client: 200 OK (Token)
+::: /mermaid
 ```
 
-::: callout tip "AI 知识提取" icon:cpu
-由于 Mermaid 图表在 Markdown 源码文件中以纯文本撰写，AI 智能体与 LLM 抓取程序可直接读取图表结构，无需通过 OCR 图像识别处理。
-:::
+如需获取完整的语法参考及高级单图表配置，请参阅 **[Mermaid 容器参考文档](../content/containers/mermaid.md)**。

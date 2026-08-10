@@ -1,115 +1,66 @@
 ---
 title: "Pasos (Steps)"
-description: "Convierta listas ordenadas estándar en líneas de tiempo visuales e instructivos de gran impacto en docmd."
+description: "Convierte listas ordenadas y pasos numerados en líneas de tiempo visuales y tutoriales en docmd."
 ---
 
-El contenedor `steps` transforma las listas ordenadas estándar de Markdown en líneas de tiempo verticales numeradas con enlaces permanentes al pasar el cursor. Está diseñado para tutoriales técnicos y guías paso a paso secuenciales.
+El contenedor `steps` transforma instrucciones secuenciales en líneas de tiempo verticales numeradas con enlaces permanentes.
 
-::: callout info "Soporte de sintaxis sin espacios" icon:info
-Tanto la sintaxis `::: steps` como `:::steps` (sin espacios) se renderizan de forma idéntica. Elija el estilo que mejor se adapte a su flujo de trabajo de creación.
-:::
-
-## Referencia de sintaxis
+## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: steps
+::: steps # Apertura del contenedor de línea de tiempo secuencial
+::: step [title:"Encabezado del Paso"] # Apertura del paso individual
+Contenido del paso 1 (texto markdown, código, avisos, imágenes)...
+::: /step # Cierre explícito del paso
 
-1.  **Título del paso**
-    El texto de descripción del paso va aquí.
-
-2.  **Título del siguiente paso**
-    Continúe la secuencia.
-
-:::
+::: step [title:"Encabezado del Paso 2"] # Segundo paso
+Contenido del paso 2...
+::: /step
+::: /steps # Cierre explícito de la línea de tiempo
 ```
 
-| Componente | Descripción |
-| :--- | :--- |
-| **`::: steps`** | Contenedor primario que transforma los elementos de la lista ordenada secundaria en una línea de tiempo numerada. |
-| **`1. `** | Elemento de lista ordenada estándar de Markdown. Ponga en negrita la primera línea de cada elemento para crear un título de paso. |
+## Características y Atributos Soportados
 
-## Ejemplos de uso
+| Parámetro / Elemento | Tipo | Descripción |
+| :--- | :--- | :--- |
+| **Título del Paso** | `"String"` \| `title:"..."` | Texto de encabezado en la parte superior del nodo (1er parám posicional o `title:"..."`). |
+| **Nodos de Tiempo** | Automático | Cada bloque `::: step` incrementa automáticamente el índice del paso (1, 2, 3...). |
+| **Subcontenedores** | `::: step` ... `::: /step` | Envoltorios de pasos explícitos. La sintaxis de lista ordenada (`1.`, `2.`) es compatible. |
+| **Etiquetas de Cierre** | `::: /steps`, `::: /step`, `:::` | Soporta etiquetas de cierre explícitas o marcadores genéricos `:::`. |
 
-### Secuencia de flujo de trabajo básica
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
+:::
 
-Una secuencia sencilla para tareas comunes de incorporación de desarrolladores:
+
+## Ejemplos de Uso
 
 ```markdown
-::: steps
+::: steps # Secuencia de inicio
+::: step "Inicializar Proyecto" # Paso 1
+Ejecuta `npx @docmd/core init` para crear tu estructura.
+::: /step
 
-1.  **Inicializar proyecto**
-    Ejecute `npx @docmd/core init` para estructurar el directorio de su proyecto.
+::: step "Escribir Contenido" # Paso 2
+Escribe documentación usando archivos Markdown estándar.
+::: /step
 
-2.  **Crear contenido**
-    Escriba documentación utilizando archivos Markdown estándar.
-
-3.  **Compilar y desplegar**
-    Ejecute `npx @docmd/core build` para compilar la salida estática de producción.
-
-:::
+::: step "Compilar y Desplegar" # Paso 3
+Ejecuta `npx @docmd/core build` para compilar la salida de producción.
+::: /step
+::: /steps
 ```
 
-::: steps
+::: steps # Secuencia de inicio
+::: step "Inicializar Proyecto" # Paso 1
+Ejecuta `npx @docmd/core init` para crear tu estructura.
+::: /step
 
-1.  **Inicializar proyecto**
-    Ejecute `npx @docmd/core init` para estructurar el directorio de su proyecto.
+::: step "Escribir Contenido" # Paso 2
+Escribe documentación usando archivos Markdown estándar.
+::: /step
 
-2.  **Crear contenido**
-    Escriba documentación utilizando archivos Markdown estándar.
-
-3.  **Compilar y desplegar**
-    Ejecute `npx @docmd/core build` para compilar la salida estática de producción.
-
-:::
-
-### Pasos con contenido enriquecido incrustado
-
-Los pasos admiten bloques de código incrustados, alertas de avisos y otros contenedores anidados:
-
-```markdown
-::: steps
-
-1.  **Configurar el entorno**
-    Defina las opciones del proyecto en `docmd.config.json`.
-
-    ::: callout tip
-    Utilice `defineConfig` para habilitar el autocompletado del IDE para las claves del esquema de configuración.
-    :::
-
-2.  **Generar compilación de producción**
-    Ejecute el comando de compilación para generar un sitio estático optimizado.
-
-    ```bash
-    npx @docmd/core build
-    ```
-
-3.  **Desplegar en la infraestructura**
-    Publique el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
-
-:::
-```
-
-::: steps
-
-1.  **Configurar el entorno**
-    Defina las opciones del proyecto en `docmd.config.json`.
-
-    ::: callout tip
-    Utilice `defineConfig` para habilitar el autocompletado del IDE para las claves del esquema de configuración.
-    :::
-
-2.  **Generar compilación de producción**
-    Ejecute el comando de compilación para generar un sitio estático optimizado.
-
-    ```bash
-    npx @docmd/core build
-    ```
-
-3.  **Desplegar en la infraestructura**
-    Publique el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
-
-:::
-
-::: callout tip "Optimización de flujo de trabajo para agentes de IA" icon:lightbulb
-Los modelos de IA interpretan el contenedor `steps` como una señal para **Flujos de trabajo secuenciales**. Comience siempre cada elemento de la lista con un **título en negrita**; esto permite a los agentes de IA analizar el objetivo de cada paso de forma fiable a partir del contexto `llms.txt`.
-:::
+::: step "Compilar y Desplegar" # Paso 3
+Ejecuta `npx @docmd/core build` para compilar la salida de producción.
+::: /step
+::: /steps

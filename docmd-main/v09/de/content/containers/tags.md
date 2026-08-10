@@ -5,18 +5,25 @@ description: "Verwenden Sie den Tag-Container, um Versionen, Status zu kennzeich
 
 Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenförmige Badges inline einfügt. Tags behalten überall ihre kompakten Proportionen — sie übernehmen keine Überschriftengrößen oder umgebenden Textstile.
 
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: tag "Label text" [property:value...]
+::: tag [title:"Badge-Text"] [color:css_farbe|#hex] [icon:icon_name] [url:[external:]adresse]
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | Der Text, der im pillenförmigen Badge angezeigt wird. |
-| **Farbe** | `color:VALUE` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). Berechnet automatisch eine kontrastreiche Textfarbe. |
-| **Symbol** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol im Badge hinzu. |
-| **URL** | `url:URL` | Macht den Tag zu einem klickbaren Hyperlink. Mit dem Präfix `external:` öffnet der Link in einem neuen Tab. Folgt der unquoted-URL-Konvention von [Buttons](button). |
+| **Badge-Beschriftung** | `"String"` \| `title:"..."` | Text im pillenförmigen Badge (1. Parameter oder `title:"..."`). |
+| **Hintergrundfarbe** | `color:VALUE` | Wendet Hintergrundfarbe an (CSS-Namen oder Hex). Textkontrast wird berechnet. |
+| **Iconografie** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon im Badge hinzu. |
+| **Hyperlink-URL** | `url:URL` | Wandelt Tag in einen Link um. Präfix `external:` öffnet neuen Tab. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Beispiele
 
@@ -35,10 +42,10 @@ This feature was added in ::: tag "v0.8.2" color:blue and works perfectly.
 Verwenden Sie Tags für Statusindikatoren über eine Seite hinweg. Farben sind vollständig anpassbar.
 
 ```markdown
-::: tag "Deprecated" color:#ef4444
-::: tag "Beta" color:#eab308
-::: tag "Stable" color:#22c55e
-::: tag "Verified" icon:check-circle color:#10b981
+::: tag title:"Deprecated" color:#ef4444
+::: tag title:"Beta" color:#eab308
+::: tag title:"Stable" color:#22c55e
+::: tag title:"Verified" icon:check-circle color:#10b981
 ```
 
 ::: tag "Deprecated" color:#ef4444
@@ -61,7 +68,7 @@ Check out the latest ::: tag "Release Notes" icon:external-link url:/de/release-
 Mit dem Präfix `external:` vor der URL öffnet der Link in einem neuen Tab, auch wenn das Ziel in Ihrer eigenen Domain liegt.
 
 ```markdown
-::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd
+::: tag title:"GitHub" icon:github url:external:https://github.com/docmd-io/docmd
 ```
 
 ::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

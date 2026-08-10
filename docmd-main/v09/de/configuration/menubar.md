@@ -77,9 +77,9 @@ Um globale Utilities (wie Volltextsuche, Dunkel-/Hell-Theme-Umschalter und Spons
 
 Utilities richten sich automatisch am **rechten Bereich** aus und werden nach allen in `right` definierten benutzerdefinierten Links gerendert.
 
-::: callout info "Neupositionierungs-Fallback" icon:sparkles
+::: callout info title:"Neupositionierungs-Fallback" icon:sparkles
 Wenn die `menubar` deaktiviert ist, während `optionsMenu.position` auf `'menubar'` gesetzt ist, fallen Utilities automatisch auf die Position `sidebar-top` zurück.
-:::
+::: /callout
 
 ## Benutzerdefinierte Stile
 

@@ -97,9 +97,9 @@ Configuration options cascade through a 3-layer precedence model:
 | **Project Config (`docmd.config.json`)** | Higher | Overrides root workspace defaults for that specific project. |
 | **Project Navigation (`navigation.json`)** | Top Priority | Always takes precedence for rendering sidebars. |
 
-::: callout info "Navigation Precedence" icon:info
+::: callout info title:"Navigation Precedence" icon:info
 A project-level `navigation.json` manifest **always takes precedence** over any global `navigation` array defined in the root workspace config.
-:::
+::: /callout
 
 ## The Project Switcher UI
 

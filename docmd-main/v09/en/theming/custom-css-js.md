@@ -1,6 +1,6 @@
 ---
 title: "Custom Styles & Scripts"
-description: "Inject custom CSS and JavaScript files into your docmd site to extend layout styles, brand identity, and client behavior."
+description: "Inject custom CSS and JavaScript files into your docmd site to extend layout styles, brand identity, and client behaviour."
 ---
 
 While `docmd` themes provide flexible visual defaults, you can inject custom stylesheets and interactive scripts via the `theme.customCss` and `customJs` array options in `docmd.config.json`.

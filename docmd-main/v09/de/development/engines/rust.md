@@ -42,9 +42,9 @@ Die folgenden Plattform-Pakete werden derzeit verteilt:
 | `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (glibc-Umgebungen) |
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
-::: callout info "Transparenter Graceful Fallback"
+::: callout info title:"Transparenter Graceful Fallback"
 Fehlt in Ihrer Umgebung ein passendes vorgebautes Binary, loggt die Engine eine nicht-fatale Benachrichtigung und **fällt automatisch** auf die hochperformante JavaScript-Engine zurück. Ihre Builds bleiben vollständig deterministisch.
-:::
+::: /callout
 
 ## Fähigkeiten & Strategische Einschränkungen
 

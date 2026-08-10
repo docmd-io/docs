@@ -42,9 +42,9 @@ The following platform packages are currently distributed:
 | `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (glibc environments) |
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
-::: callout info "Transparent Graceful Fallback" icon:info
+::: callout info title:"Transparent Graceful Fallback" icon:info
 If your environment lacks an available pre-built binary, the engine logs a non-fatal notification and **automatically falls back** to the high-performance JavaScript engine. Your builds remain fully deterministic.
-:::
+::: /callout
 
 ## Capabilities & Strategic Limitations
 

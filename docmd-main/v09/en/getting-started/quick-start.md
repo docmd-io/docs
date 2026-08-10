@@ -50,7 +50,7 @@ No `docmd.config.json` is required. Add one later to customise layouts, plugins,
 
 ### 3. Build for production
 
-Compile your Markdown files into an optimized, static production website.
+Compile your Markdown files into an optimised, static production website.
 
 ::: tabs
 == tab "npm" icon:box

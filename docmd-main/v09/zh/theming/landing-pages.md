@@ -30,7 +30,7 @@ docmd 提供了专门的 [Hero](../../content/containers/hero.md) 与 [Grid](../
 
 == side
 ![Dashboard 预览](../../static/img/hero-preview.png)
-:::
+::: /hero
 ```
 
 ### 2. 用 Grid 组织内容
@@ -40,18 +40,18 @@ docmd 提供了专门的 [Hero](../../content/containers/hero.md) 与 [Grid](../
 ```markdown
 ::: grids
 ::: grid
-::: card "快速开始" icon:rocket
+::: card title:"快速开始" icon:rocket
 5 分钟内即可上手。
 [了解更多](../docs/start.md)
-:::
-:::
+::: /card
+::: /grid
 ::: grid
-::: card "API 参考" icon:code
+::: card title:"API 参考" icon:code
 覆盖全部端点的完整文档。
 [浏览 API](../api.md)
-:::
-:::
-:::
+::: /card
+::: /grid
+::: /grids
 ```
 
 ### 3. 通过 noStyle 完全自定义

@@ -25,9 +25,9 @@ components:
   <p>Cero configuración. Ejecución isomórfica. Optimizado para IA.</p>
 </div>
 
-::: callout info "Soporte de anidamiento infinito" icon:info
+::: callout info title:"Soporte de anidamiento infinito" icon:info
 Incluso con `noStyle: true`, todos los contenedores estándar de docmd (como `::: card`, `::: tabs` y `::: hero`) son totalmente compatibles y se pueden componer libremente.
-:::
+::: /callout
 ```
 
 ## Controles de inclusión de componentes
@@ -64,25 +64,25 @@ components:
 # Cree documentación que deslumbre.
 El motor de documentación de cero configuración para equipos de ingeniería modernos.
 
-::: button "Primeros pasos" ../getting-started/quick-start.md color:blue
-::: button "Repositorio de GitHub" external:https://github.com/docmd-io/docmd color:gray
+::: button title:"Primeros pasos" url:"../getting-started/quick-start.md" color:blue
+::: button title:"Repositorio de GitHub" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 :::
 
 ::: grids
-  ::: card "Cero configuración"
+  ::: card title:"Cero configuración"
   Cree contenido en Markdown sin complejos scripts de compilación de frontend.
-  :::
-  ::: card "Optimizado para IA"
+  ::: /card
+  ::: card title:"Optimizado para IA"
   Análisis sintáctico consciente de la estructura para el ecosistema LLM.
-  :::
-  ::: card "Rendimiento isomórfico"
+  ::: /card
+  ::: card title:"Rendimiento isomórfico"
   Compilación estática con navegación rápida por SPA.
-  :::
-:::
+  ::: /card
+::: /grids
 ```
 
 ::: callout tip "Diseños generados por IA" icon:sparkles
@@ -191,9 +191,9 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 });
 ```
 
-::: callout info "Detección automática de idioma" icon:info
+::: callout info title:"Detección automática de idioma" icon:info
 El script del cliente detecta los idiomas activos a partir del prefijo de la ruta URL. Para el idioma predeterminado, inspecciona `localStorage` en busca de preferencias guardadas. La función `switchLocale()` gestiona la navegación de URL automáticamente.
-:::
+::: /callout
 
 ### Configuración del modo en el lugar
 

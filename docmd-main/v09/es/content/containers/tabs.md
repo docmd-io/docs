@@ -1,126 +1,89 @@
 ---
 title: "Pestañas (Tabs)"
-description: "Organice fragmentos de código alternativos, instrucciones de plataformas y contenido multilingüe en pestañas conmutables en docmd."
+description: "Organiza fragmentos de código alternativos, instrucciones por plataforma y contenido multilingüe en pestañas intercambiables en docmd."
 ---
 
-Las pestañas presentan conjuntos de datos mutuamente excluyentes o alternativos (como elecciones de gestores de paquetes o comandos de sistemas operativos). Condensan instrucciones técnicas en contenedores de pestañas limpios e interactivos.
+Las pestañas presentan conjuntos de datos alternativos (como gestores de paquetes o comandos del sistema operativo) en contenedores interactivos y limpios.
 
-::: callout info "Soporte de sintaxis sin espacios" icon:info
-Tanto la sintaxis `::: tabs` como `:::tabs` (sin espacios) se renderizan de forma idéntica. Elija el estilo que mejor se adapte a su flujo de trabajo de creación.
-:::
-
-## Referencia de sintaxis
+## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: tabs
+::: tabs # Apertura del contenedor del grupo de pestañas
+::: tab [title:"Etiqueta de Pestaña"] [icon:nombre_icono] # Apertura de pestaña individual
+Contenido de la pestaña 1 (bloques de código, texto, listas)...
+::: /tab # Cierre explícito de pestaña individual
 
-== tab "Etiqueta de la pestaña" [propiedad:valor...]
-El contenido de la pestaña va aquí.
-
-== tab "Etiqueta secundaria"
-El contenido de la pestaña secundaria va aquí.
-
-:::
+::: tab [title:"Etiqueta 2"] [icon:nombre_icono] # Segunda pestaña
+Contenido de la pestaña 2...
+::: /tab
+::: /tabs # Cierre explícito del grupo de pestañas
 ```
 
-| Parámetro | Tipo | Descripción |
+## Características y Atributos Soportados
+
+| Parámetro / Propiedad | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Etiqueta** | `"String"` | Texto mostrado en el botón selector de pestañas. |
-| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes de la cadena de la etiqueta. |
+| **Etiqueta de Pestaña** | `"String"` \| `title:"..."` | Texto mostrado en el botón selector de la pestaña (1er parám posicional o `title:"..."`). |
+| **Iconografía** | `icon:NOMBRE` | Opcional. Añade un icono [Lucide](external:https://lucide.dev/icons) antes de la etiqueta. |
+| **Subcontenedores** | `::: tab` ... `::: /tab` | Envoltorios de pestañas explícitos. La sintaxis heredada `== tab` es totalmente compatible. |
+| **Etiquetas de Cierre** | `::: /tabs`, `::: /tab`, `:::` | Soporta etiquetas de cierre explícitas o marcadores genéricos `:::`. |
 
-## Ejemplos de uso
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
+:::
 
-### Conmutador de gestor de paquetes
 
-Muestre comandos de instalación en múltiples gestores de paquetes en un solo bloque compacto:
+## Ejemplos de Uso
 
 ```markdown
-::: tabs
-
-== tab "pnpm" icon:box
+::: tabs # Opciones de gestor de paquetes
+::: tab "pnpm" icon:box # Recomendado
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
-
-:::
+::: /tab
+::: /tabs
 ```
 
-::: tabs
-
-== tab "pnpm" icon:box
+::: tabs # Opciones de gestor de paquetes
+::: tab "pnpm" icon:box # Recomendado
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
+::: /tab
+::: /tabs
 
-:::
-
-### Fragmentos de código multilingües
-
-Agrupe implementaciones específicas del idioma utilizando iconos de pestañas para una identificación instantánea:
+::: callout note "Sintaxis Heredada == tab" icon:archive
+La documentación existente con sintaxis `== tab` continúa procesándose sin problemas:
 
 ```markdown
 ::: tabs
-
-== tab "TypeScript" icon:hexagon
-```typescript
-import { build } from '@docmd/core';
-await build('./docmd.config.json');
+== tab "JavaScript"
+console.log("Sintaxis heredada");
+::: /tabs
 ```
-
-== tab "JavaScript" icon:braces
-```javascript
-const { build } = require('@docmd/core');
-build('./docmd.config.json');
-```
-
-:::
-```
-
-::: tabs
-
-== tab "TypeScript" icon:hexagon
-```typescript
-import { build } from '@docmd/core';
-await build('./docmd.config.json');
-```
-
-== tab "JavaScript" icon:braces
-```javascript
-const { build } = require('@docmd/core');
-build('./docmd.config.json');
-```
-
-:::
-
-## Restricciones y reglas de comportamiento
-
-| Regla | Nota técnica |
-| :--- | :--- |
-| **Límite de anidamiento** | Las pestañas no se pueden anidar directamente dentro de otros contenedores de pestañas. |
-| **Compatibilidad con pasos** | No anide `::: steps` dentro de un panel de pestañas. Utilice una lista ordenada estándar en su lugar. |
-| **Límites de ventana gráfica** | Mantenga el número de pestañas por debajo de 6 entradas por bloque para compatibilidad móvil. |
-| **Persistencia de estado** | Los estados de las pestañas seleccionadas persisten en las transiciones de página durante la navegación SPA. |
-
-::: callout tip "Etiquetado contextual para IA" icon:sparkles
-Especifique los lenguajes o sistemas operativos de destino en las etiquetas de las pestañas (por ejemplo, `== tab "TypeScript"`). Las etiquetas explícitas permiten a los indexadores de IA mapear bloques de código alternativos a sus respectivos ecosistemas con precisión.
 :::

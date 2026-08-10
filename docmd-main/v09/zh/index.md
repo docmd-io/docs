@@ -10,8 +10,8 @@ titleAppend: false
 
 一条命令，将 Markdown 变成生产文档。静态 HTML 保障 SEO，SPA 提升速度，开箱即用支持 AI 工具。
 
-::: button "快速开始" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
+::: button "快速开始" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
+
 :::
 
 ## 概览

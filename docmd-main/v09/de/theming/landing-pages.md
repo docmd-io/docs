@@ -23,12 +23,12 @@ Der [Hero](../content/containers/hero.md)-Container unterstützt geteilte Medien
 # Schneller bauen mit docmd
 Die Zero-Config-Dokumentations-Engine für moderne Softwareteams.
 
-::: button "Schnellstart-Leitfaden" ../getting-started/quick-start.md color:blue
-::: button "GitHub-Repository" external:https://github.com/docmd-io/docmd color:gray
+::: button title:"Schnellstart-Leitfaden" url:"../getting-started/quick-start.md" color:blue
+::: button title:"GitHub-Repository" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 ```
 
 ### 2. Feature-Navigation mit Grids
@@ -38,18 +38,18 @@ Kombinieren Sie [Grids und Karten](../content/containers/grids.md), um Kern-Prod
 ```markdown
 ::: grids
   ::: grid
-    ::: card "Schnellstart" icon:rocket
+    ::: card title:"Schnellstart" icon:rocket
     In weniger als fünf Minuten einsatzbereit.
-    ::: button "Mehr erfahren" ../getting-started/quick-start.md
-    :::
-  :::
+    ::: button title:"Mehr erfahren" url:"../getting-started/quick-start.md"
+    ::: /card
+  ::: /grid
   ::: grid
-    ::: card "API-Referenz" icon:code
+    ::: card title:"API-Referenz" icon:code
     Umfassende Dokumentation für alle Kernfunktionen.
-    ::: button "API erkunden" ../api/index.md
-    :::
-  :::
-:::
+    ::: button title:"API erkunden" url:"../api/index.md"
+    ::: /card
+  ::: /grid
+::: /grids
 ```
 
 ### 3. Leere Leinwand mit `noStyle`

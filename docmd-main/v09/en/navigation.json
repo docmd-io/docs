@@ -187,6 +187,14 @@
             "path": "/content/containers/tags"
           },
           {
+            "title": "Tooltips",
+            "path": "/content/containers/tooltip"
+          },
+          {
+            "title": "Mermaid Diagrams",
+            "path": "/content/containers/mermaid"
+          },
+          {
             "title": "Hero Sections",
             "path": "/content/containers/hero"
           },
@@ -501,6 +509,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.1 - Standardised Container Engine & Mermaid",
+        "path": "/release-notes/0-9-1"
+      },
       {
         "title": "v0.9.0 - AI Assistant, Headless Engine & Architecture",
         "path": "/release-notes/0-9-0"

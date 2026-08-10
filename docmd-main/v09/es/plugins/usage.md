@@ -46,13 +46,13 @@ These plugins ship bundled with `@docmd/core` and require no installation. Enabl
 }
 ```
 
-::: callout tip "Git Repository Detection" icon:git-branch
+::: callout tip title:"Git Repository Detection" icon:git-branch
 The Git plugin detects whether your project root is a valid Git repository. If Git history is unavailable, it disables footer timestamp generation automatically.
-:::
+::: /callout
 
-::: callout info "OKF Bundle Support" icon:info
+::: callout info title:"OKF Bundle Support" icon:info
 The `@docmd/plugin-okf` plugin generates an Open Knowledge Format bundle (`site/okf/`) containing typed manifests and concept files for AI agents. It is enabled by default; set `"plugins": { "okf": false }` to opt out. See [OKF Bundle Plugin](okf.md) for details.
-:::
+::: /callout
 
 ## Optional Plugins
 
@@ -82,9 +82,9 @@ The auto-installer:
 * Auto-detects project package managers (npm, pnpm, yarn, bun).
 * Emits installation progress directly in the terminal interface.
 
-::: callout tip "Resilient Module Resolution" icon:shield-check
+::: callout tip title:"Resilient Module Resolution" icon:shield-check
 The auto-installer uses dynamic ES module imports with fallback resolution paths, allowing seamless loading of ESM packages declaring explicit `exports` maps.
-:::
+::: /callout
 
 ## Third-Party & Custom Plugins
 

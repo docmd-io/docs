@@ -69,9 +69,9 @@ El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de 
 }
 ```
 
-::: callout info "Respaldo de reubicación automática" icon:sparkles
+::: callout info title:"Respaldo de reubicación automática" icon:sparkles
 Si `optionsMenu` se asigna a un contenedor que está desactivado, el compilador mueve automáticamente el menú de opciones a `sidebar-top` para preservar la accesibilidad.
-:::
+::: /callout
 
 ### Barra lateral y navegación
 

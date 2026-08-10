@@ -1,80 +1,64 @@
 ---
 title: "Hero-Bereiche"
-description: "Erstellen Sie wirkungsstarke Landingpage-Header und Marketing-Highlights rein in Markdown."
+description: "Erstellen Sie wirkungsvolle Landing-Page-Header und Marketing-Highlights in Markdown in docmd."
 ---
 
-Der `hero`-Container erstellt visuell beeindruckende Landingpage-Header. Er handhabt komplexe Layouts inklusive Splits, Glow-Effekten und Slidern, ohne benutzerdefiniertes HTML zu benötigen.
+Der `hero`-Container erstellt visuell ansprechende Landing-Page-Header mit Unterstützung für geteilte Medien-Layouts, Hintergrund-Glow-Effekte und interaktive Karussells.
 
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: hero [property:value...]
-    # Page Title
-    A short supporting tagline.
+::: hero [layout:split|slider] [glow:true|false] # Hero-Container Öffner
+::: slide # Einzelnes Karussell-Slide Öffner
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide # Expliziter Slide-Schließer
 
-    ::: button "Call to Action" /target-url
-:::
+::: slide # Zweites Slide Öffner
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero # Expliziter Hero-Schließer
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Layout** | `layout:split` \| `layout:slider` | `split` teilt den Hero in einen Textbereich und einen Medienbereich. `slider` erstellt ein horizontales Scroll-Snap-Karussell. |
-| **Glow** | `glow:true` | Injiziert einen subtilen radialen Gradienten-Glow im Hintergrund. |
-| **Seiten-Trenner** | `== side` | Wird mit `layout:split` verwendet. Alles nach diesem Trenner rendert im sekundären (rechten) Bereich. |
-| **Slide-Trenner** | `== slide` | Wird mit `layout:slider` verwendet. Jeder `== slide` definiert ein neues Karussell-Panel. |
+| **Layout-Variante** | `layout:split` \| `layout:slider` | `split` unterteilt in Text- und Medienbereich; `slider` erstellt ein Karussell. |
+| **Glow-Effekt** | `glow:true` \| `glow:false` | Fügt einen subtilen radialen Farbverlauf hinter den Header ein. |
+| **Sub-Container** | `::: slide` ... `::: /slide` | Definiert ein einzelnes Karussell-Panel. Legacy `== slide` wird unterstützt. |
+| **Schließ-Tags** | `::: /hero`, `::: /slide`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
 
-## Beispiele
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
 
-### Split-Layout
 
-Verwenden Sie den `== side`-Trenner, um Inhalte in einen primären Textbereich und einen sekundären Medienbereich aufzuteilen.
+## Anwendungsbeispiele
 
 ```markdown
-::: hero layout:split glow:true
-    # docmd
-    Isomorphic execution. AI-optimised.
+::: hero layout:slider # Interaktiver Slider-Container
+::: slide # Panel 1
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide
 
-    ::: button "Quickstart" ../../getting-started/quick-start.md color:blue
-
-    == side
-        ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
-:::
-```
-
-::: hero layout:split glow:true
-# docmd
-Isomorphic execution. AI-optimised.
-
-::: button "Quickstart" ../../getting-started/quick-start.md color:blue
-
-== side
-::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
-:::
-
-### Slider-Layout
-
-Verwenden Sie `== slide`-Trenner, um ein automatisch fortschreitendes Karussell von Inhalts-Panels zu erstellen.
-
-```markdown
-::: hero layout:slider
-    == slide
-        # Isomorphic Core
-        The engine renders everywhere.
-    == slide
-        # AI Optimisation
-        Built for the LLM era.
-:::
+::: slide # Panel 2
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero
 ```
 
 ::: hero layout:slider
-    == slide
-        # Isomorphic Core
-        The engine renders everywhere.
-    == slide
-        # AI Optimisation
-        Built for the LLM era.
-:::
+::: slide
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide
 
-::: callout tip "Best Practices"
-Verwenden Sie `glow:true` auf dunklen Sites sparsam für ein Premium-Gefühl. Platzieren Sie `::: button`-Elemente im primären Textbereich, vor `== side`, um sicherzustellen, dass sie auf mobilen Bildschirmen sichtbar bleiben.
-:::
+::: slide
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero

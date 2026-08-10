@@ -5,6 +5,34 @@ description: "Heben Sie kritische Warnungen, Pro-Tipps und Hintergrundkontexte d
 
 Callouts isolieren Informationen, die die sofortige Aufmerksamkeit des Lesers erfordern. `docmd` bietet fünf semantische Callout-Typen, jeweils mit eigenem Styling, Hintergrundakzenten und Iconografie.
 
+## Container-Syntax
+
+```markdown
+# Standard-Callout-Container
+::: callout typ ["Header-Titel"] [icon:Icon-Name] # Container-Öffner
+Inhalt mit voller Markdown-Unterstützung, Codeblöcken und Buttons...
+::: /callout # Explizites Schließ-Tag
+
+# Migrations-Alias (VitePress / Docusaurus)
+::: typ ["Header-Titel"] [icon:Icon-Name]
+Inhalt...
+::: /typ
+```
+
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Typ-Variante** | `info` \| `tip` \| `warning` \| `danger` \| `success` | Semantische Absicht für Hintergrundakzente, Rahmenstyling und Iconografie. |
+| **Header-Titel** | `"String"` \| `title:"..."` | Optionaler Header-Titel (2. positionaler Parameter oder `title:"..."`). Überschreibt den Standardtitel. |
+| **Symbolik** | `icon:NAME` | Optional. Überschreibt das Standard-Icon mit einem [Lucide](external:https://lucide.dev/icons)-Symbol. |
+| **Migrations-Aliase** | `::: tip`, `::: warning`, `::: danger`, `::: info`, `::: note`, `::: caution` | Direkt unterstützt für Kompatibilität mit VitePress und Docusaurus. |
+| **Schließ-Tags** | `::: /callout`, `::: /tip`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 ::: callout info "Migrationsfreundliche Aliase" icon:info
 Beim Migrieren von VitePress oder Docusaurus funktionieren native Container-Aliase direkt nach der Installation:
 - `:::tip`, `:::warning`, `:::danger`, `:::info` (VitePress)
@@ -13,19 +41,6 @@ Beim Migrieren von VitePress oder Docusaurus funktionieren native Container-Alia
 Diese Aliase werden identisch mit nativen `docmd`-Callouts gerendert. Leerzeichenlose Syntax wie `:::callout` wird ebenfalls unterstützt.
 :::
 
-## Syntax-Referenz
-
-```markdown
-::: callout typ "Titeltext" [eigenschaft:wert...]
-Der Inhalt oder die Warnmeldung wird hier platziert.
-:::
-```
-
-| Parameter | Typ | Beschreibung |
-| :--- | :--- | :--- |
-| **Typ** | `info` \| `tip` \| `warning` \| `danger` \| `success` | Semantische Absicht, die Standard-Hintergrundakzente und Iconografie definiert. |
-| **Titel** | `"String"` | Optional. Überschreibt die standardmäßige semantische Header-Beschriftung mit einem benutzerdefinierten Titel. |
-| **Icon** | `icon:NAME` | Optional. Überschreibt das Standard-Icon mit einem benutzerdefinierten [Lucide](external:https://lucide.dev/icons)-Icon. |
 
 ### Unterstützte Callout-Typen
 
@@ -46,7 +61,7 @@ Ein minimaler Callout ohne expliziten Titel verwendet den Typschlüssel als Head
 ```markdown
 ::: callout info
 Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr empfohlen.
-:::
+::: /callout
 ```
 
 ::: callout info
@@ -58,9 +73,9 @@ Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr e
 Überschreiben Sie die Standardbeschriftung und das Icon mit einem benutzerdefinierten Titel und einem beliebigen Lucide-Iconnamen:
 
 ```markdown
-::: callout warning "Hinweis zu Breaking Changes" icon:alert-triangle
+::: callout warning title:"Hinweis zu Breaking Changes" icon:alert-triangle
 Das interne WebSocket-RPC-System ist offiziell veraltet.
-:::
+::: /callout
 ```
 
 ::: callout warning "Hinweis zu Breaking Changes" icon:alert-triangle
@@ -72,14 +87,14 @@ Das interne WebSocket-RPC-System ist offiziell veraltet.
 Callouts unterstützen die vollständige Markdown-Analyse. Betten Sie Codeblöcke und Schaltflächen direkt in Callout-Container ein:
 
 ````markdown
-::: callout tip "Optimiertes lokales Testen" icon:command
+::: callout tip title:"Optimiertes lokales Testen" icon:command
 Verwenden Sie das preserve-Flag, um Build-Dateien während lokaler Entwicklungssitzungen beizubehalten:
 
 ```bash
 npx @docmd/core dev --preserve
 ```
 
-::: button "CLI-Flag-Referenz" ./#cli-commands
+::: button title:"CLI-Flag-Referenz" url:"./#cli-commands"
 :::
 ````
 

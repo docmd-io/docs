@@ -77,9 +77,9 @@ Para posicionar utilidades globales (como la búsqueda de texto completo, el int
 
 Las utilidades se alinean en la **región derecha** automáticamente, renderizándose después de cualquier enlace personalizado definido en `right`.
 
-::: callout info "Respaldo de reubicación" icon:sparkles
+::: callout info title:"Respaldo de reubicación" icon:sparkles
 Si la `menubar` está desactivada mientras `optionsMenu.position` está establecido en `'menubar'`, las utilidades recurren automáticamente a la posición `sidebar-top`.
-:::
+::: /callout
 
 ## Estilos personalizados
 

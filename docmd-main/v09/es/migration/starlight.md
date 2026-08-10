@@ -118,7 +118,7 @@ Sirius, Vega, Betelgeuse
 
 == tab "Moons" icon:moon
 Io, Europa, Ganymede
-:::
+::: /tabs
 ```
 
 ##### Converting Asides (Admonitions)
@@ -132,9 +132,9 @@ Some note content.
 
 **docmd:**
 ```markdown
-::: callout info "Optional Title"
+::: callout info title:"Optional Title"
 Some note content.
-:::
+::: /callout
 ```
 
 #### Frontmatter Mapping

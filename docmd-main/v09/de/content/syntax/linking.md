@@ -73,12 +73,12 @@ Verwenden Sie das Präfix `raw:`, um die URL-Normalisierung zu umgehen und direk
 Button- (`::: button`) und Tag- (`::: tag`) Container unterstützen alle Verlinkungs-Präfixe, einschließlich der Modifikatoren `external:` und `raw:`:
 
 ```markdown
-::: button "Quick Start Guide" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:github
-::: button "Download Manifest" raw:docs/manifest.json icon:download
+::: button title:"Quick Start Guide" url:"./getting-started/quick-start.md" icon:rocket
+::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" icon:github
+::: button title:"Download Manifest" url:"raw:docs/manifest.json" icon:download
 
-::: tag "v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
-::: tag "External Site" link:external:https://docmd.io icon:external-link
+::: tag title:"v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
+::: tag title:"External Site" link:external:https://docmd.io icon:external-link
 :::
 ```
 

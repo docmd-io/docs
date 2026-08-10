@@ -25,9 +25,9 @@ components:
   <p>Zero-config. Isomorphic execution. AI-optimised.</p>
 </div>
 
-::: callout info "Unterstützung für unendliche Verschachtelung" icon:info
+::: callout info title:"Unterstützung für unendliche Verschachtelung" icon:info
 Auch mit `noStyle: true` werden alle standardmäßigen docmd-Container (wie `::: card`, `::: tabs` und `::: hero`) vollständig unterstützt und können frei komponiert werden.
-:::
+::: /callout
 ```
 
 ## Komponenten-Opt-in-Steuerungen
@@ -64,25 +64,25 @@ components:
 # Build Documentation that Wows.
 The zero-config documentation engine for modern engineering teams.
 
-::: button "Get Started" ../getting-started/quick-start.md color:blue
-::: button "GitHub Repository" external:https://github.com/docmd-io/docmd color:gray
+::: button title:"Get Started" url:"../getting-started/quick-start.md" color:blue
+::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 :::
 
 ::: grids
-  ::: card "Zero Configuration"
+  ::: card title:"Zero Configuration"
   Author content in Markdown without complex frontend build scripts.
-  :::
-  ::: card "AI Optimised"
+  ::: /card
+  ::: card title:"AI Optimised"
   Structure-aware parsing for the LLM ecosystem.
-  :::
-  ::: card "Isomorphic Performance"
+  ::: /card
+  ::: card title:"Isomorphic Performance"
   Static compilation with fast SPA navigation.
-  :::
-:::
+  ::: /card
+::: /grids
 ```
 
 ::: callout tip "KI-generierte Layouts" icon:sparkles
@@ -191,9 +191,9 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 });
 ```
 
-::: callout info "Automatische Spracherkennung" icon:info
+::: callout info title:"Automatische Spracherkennung" icon:info
 Das Client-Skript erkennt aktive Locales anhand des URL-Pfadpräfixes. Für die Standard-Locale prüft es `localStorage` auf gespeicherte Einstellungen. Die Funktion `switchLocale()` verarbeitet die URL-Navigation automatisch.
-:::
+::: /callout
 
 ### Konfiguration des In-Place-Modus
 

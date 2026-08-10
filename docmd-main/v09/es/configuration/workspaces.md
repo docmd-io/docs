@@ -97,9 +97,9 @@ Las opciones de configuración se aplican en cascada a través de un modelo de p
 | **Config. de proyecto (`docmd.config.json`)** | Superior | Anula los valores predeterminados de la raíz del espacio de trabajo para ese proyecto específico. |
 | **Navegación de proyecto (`navigation.json`)** | Máxima prioridad | Siempre tiene prioridad para renderizar barras laterales. |
 
-::: callout info "Prioridad de navegación" icon:info
+::: callout info title:"Prioridad de navegación" icon:info
 Un manifiesto `navigation.json` a nivel de proyecto **siempre tiene prioridad** sobre cualquier array global `navigation` definido en la configuración de la raíz del espacio de trabajo.
-:::
+::: /callout
 
 ## El selector de proyectos en la interfaz
 

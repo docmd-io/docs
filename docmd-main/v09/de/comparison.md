@@ -129,9 +129,9 @@ Im Gegensatz zu älteren Dokumentationswerkzeugen, die auf teure proprietäre Sa
 | **Nativer MCP-Server (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 | **Kontextdateien (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 
-::: callout tip "Warum BYOK für Dokumentationsteams wichtig ist" icon:shield
+::: callout tip title:"Warum BYOK für Dokumentationsteams wichtig ist" icon:shield
 Cloud-Dokumentations-SaaS-Anbieter binden Teams an Gebühren pro Anfrage und proprietäre KI-Modelle. `docmd` bietet Teams vollständige Freiheit mit **BYOK (Bring Your Own Key)**: Verbinden Sie OpenAI, Anthropic, Gemini, DeepSeek, Groq oder lokal gehostete Ollama-Modelle bei voller Kontrolle über API-Budgets und Datenschutz.
-:::
+::: /callout
 
 ## Umfassende Feature-Matrix
 
@@ -171,7 +171,7 @@ Anzahl der Konfigurationszeilen für eine Seite mit Versionierung, i18n, Suche u
 
 `docmd` wird mit einer umfassenden Integrationstest-Suite ausgeliefert, die **25 verschiedene Szenarien** über **85 Assertions** validiert — und jedes Kernfeature sowie Plugin isoliert und in Kombination abdeckt. Jedes Release muss alle 85 Assertions und 13 interne Failsafe-Prüfungen vor der Veröffentlichung bestehen.
 
-::: callout tip "Test-Suite lokal ausführen" icon:lightbulb
+::: callout tip title:"Test-Suite lokal ausführen" icon:lightbulb
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js

@@ -86,9 +86,9 @@ Docusaurus admonitions work **out of the box** without file modifications:
 ::: callout tip "Native Container Syntax" icon:sparkles
 For enhanced features (such as custom icons or custom badge colors), convert Docusaurus admonitions to native `docmd` syntax:
 ```markdown
-::: callout tip "Custom Title" icon:sparkles
+::: callout tip title:"Custom Title" icon:sparkles
 This is a tip container.
-:::
+::: /callout
 ```
 :::
 
@@ -117,7 +117,7 @@ Apple content.
 
 == tab "Orange" icon:citrus
 Orange content.
-:::
+::: /tabs
 ```
 
 #### Localisation (i18n)

@@ -73,9 +73,9 @@ docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init
 
 入口脚本会自动检测挂载目录的 uid:gid，并在执行任何命令前通过 `su-exec` 切换到该身份。`docmd init`、`docmd build` 或 `docmd dev` 写入的文件始终归属正确的宿主机用户，无需传递 `-u` 参数。
 
-::: callout warning "只读挂载"
+::: callout warning title:"只读挂载"
 当以 `:ro` 只读挂载配置文件时，请确保工作目录与其他挂载点仍可写，否则 `docmd` 会因权限错误而失败。
-:::
+::: /callout
 
 ## 自定义 Dockerfile（通过 Deployer）
 

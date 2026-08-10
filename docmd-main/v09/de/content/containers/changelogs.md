@@ -1,80 +1,88 @@
 ---
-title: "Changelogs"
-description: "Generieren Sie strukturierte, zeitachsenbasierte Versionshistorien und Release-Notes in docmd."
+title: "Änderungsprotokolle (Changelogs)"
+description: "Erstellen Sie strukturierte, zeitleistenbasierte Versionshistorien und Release-Notes in docmd."
 ---
 
-Der `changelog`-Container bietet ein spezialisiertes Layout für die Dokumentation der Projektentwicklung. Er parst Versions- oder Datums-Header in vertikale Zeitachseneinträge und stellt sicher, dass Release-Notes klar und scannbar bleiben.
+Der `changelog`-Container bietet ein spezialisiertes Layout zur Dokumentation der Projektentwicklung. Er parst Versions- oder Datumsangaben in vertikale Zeitleisteneinträge.
 
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: changelog
+::: changelog # Äußerer Release-Historien-Container Öffner
+::: log [title:"v1.0.0 (TT.MM.JJJJ)"] # Einzelner Versionseintrag Öffner
+Release-Details (Markdown-Überschriften, Stichpunkte, Hinweisfelder)...
+::: /log # Expliziter Log-Eintrag Schließer
 
-== Beschriftungstext
-Die Beschreibung des Eintrags wird hier platziert.
-
-:::
+::: log [title:"v0.9.0 (TT.MM.JJJJ)"] # Zweiter Versionseintrag Öffner
+Release-Notes...
+::: /log
+::: /changelog # Expliziter Changelog Schließer
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Element | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Eintragsmarkierung** | `==` | Trennzeichen, das einen neuen Zeitachseneintrag innerhalb des Changelog-Blocks einleitet. |
-| **Beschriftung** | `String` | Textzeichenfolge (z. B. Versionsnummer oder ISO-Datum), die als Zeitachsen-Badge am linken Rand gerendert wird. |
+| **Versions-Beschriftung** | `"String"` \| `title:"..."` | Versionsnummer oder Datum als Badge am linken Rand. |
+| **Sub-Container** | `::: log` ... `::: /log` | Explizite Versionseintrags-Wrapper. Alte `== Datum` Syntax wird unterstützt. |
+| **Schließ-Tags** | `::: /changelog`, `::: /log`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Anwendungsbeispiele
 
-### Release-Historien-Zeitachse
+```markdown
+::: changelog # Produktions-Release-Historie
+::: log "v2.0.0 (15.03.2026)" # Hauptrelease
+### Große Überholung des Systems
+Die Kern-Engine wurde für isomorphe Ausführung neu architektoniert.
 
-Changelogs unterstützen die vollständige Markdown-Formatierung innerhalb jedes Eintrags, einschließlich Listen, Callouts und Code-Snippets:
+*   **SPA Router** für seitenfreie Navigation implementiert.
+*   **Isomorphe Plugin**-Architektur eingeführt.
+
+::: callout success
+Dieses Release bietet eine 40%ige Verbesserung der anfänglichen Kompilierungsgeschwindigkeit.
+::: /callout
+::: /log
+
+::: log "v1.5.1 (10.12.2025)" # Patch-Update
+### Sicherheitspatch
+*   Sicherheitslücke im internen Parser behoben.
+*   Abhängigkeiten aktualisiert.
+::: /log
+::: /changelog
+```
+
+::: changelog # Produktions-Release-Historie
+::: log "v2.0.0 (15.03.2026)" # Hauptrelease
+### Große Überholung des Systems
+Die Kern-Engine wurde für isomorphe Ausführung neu architektoniert.
+
+*   **SPA Router** für seitenfreie Navigation implementiert.
+*   **Isomorphe Plugin**-Architektur eingeführt.
+
+::: callout success
+Dieses Release bietet eine 40%ige Verbesserung der anfänglichen Kompilierungsgeschwindigkeit.
+:::
+::: /log
+
+::: log "v1.5.1 (10.12.2025)" # Patch-Update
+### Sicherheitspatch
+*   Sicherheitslücke im internen Parser behoben.
+*   Abhängigkeiten aktualisiert.
+::: /log
+::: /changelog
+
+::: callout note "Legacy == Eintrags-Marker-Syntax" icon:archive
+Bestehende Dokumentationen mit `==`-Eintragsmarkern werden weiterhin verarbeitet:
 
 ```markdown
 ::: changelog
-
-== v2.0.0 (2026-03-15)
-### Umfassende Systemüberarbeitung
-Die Core-Engine wurde für die isomorphe Ausführung neu architekturiert.
-
-*   Implementiert den **SPA-Router** für Seiten-Navigation ohne Neuladen.
-*   Eingeführt wurde die **isomorphe Plugin**-Architektur.
-
-::: callout success
-Dieses Release bietet eine Verbesserung der initialen Build-Kompilierungsgeschwindigkeit um 40%.
-:::
-
-== v1.5.1 (2025-12-10)
-### Sicherheits-Patch
-*   Kritische Sicherheitslücke im internen Parser behoben.
-*   Abhängigkeit `flatted` auf `v3.3.2` aktualisiert.
-
-== v1.0.0 (2024-05-01)
-Erste öffentliche Veröffentlichung.
-
-:::
+== v1.0.0 (01.05.2024)
+Erstveröffentlichung.
+::: /changelog
 ```
-
-::: changelog
-
-== v2.0.0 (2026-03-15)
-### Umfassende Systemüberarbeitung
-Die Core-Engine wurde für die isomorphe Ausführung neu architekturiert.
-
-*   Implementiert den **SPA-Router** für Seiten-Navigation ohne Neuladen.
-*   Eingeführt wurde die **isomorphe Plugin**-Architektur.
-
-::: callout success
-Dieses Release bietet eine Verbesserung der initialen Build-Kompilierungsgeschwindigkeit um 40%.
-:::
-
-== v1.5.1 (2025-12-10)
-### Sicherheits-Patch
-*   Kritische Sicherheitslücke im internen Parser behoben.
-*   Abhängigkeit `flatted` auf `v3.3.2` aktualisiert.
-
-== v1.0.0 (2024-05-01)
-Erste öffentliche Veröffentlichung.
-
-:::
-
-::: callout tip "Historischer Kontext für KI-Agenten" icon:sparkles
-Changelog-Container liefern eine zeitliche Roadmap für KI-Agenten. Die `::: changelog`-Struktur ermöglicht es LLMs, genau zu parsen, wann spezifische APIs oder Sicherheits-Fixes im `llms.txt`-Kontextstrom eingeführt wurden.
 :::

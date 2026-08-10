@@ -86,9 +86,9 @@ Docusaurus-Admonitions funktionieren **direkt nach der Installation** ohne Datei
 ::: callout tip "Native Container-Syntax" icon:sparkles
 Für erweiterte Funktionen (z. B. benutzerdefinierte Icons oder benutzerdefinierte Badge-Farben) konvertieren Sie Docusaurus-Admonitions in die native `docmd`-Syntax:
 ```markdown
-::: callout tip "Benutzerdefinierter Titel" icon:sparkles
+::: callout tip title:"Benutzerdefinierter Titel" icon:sparkles
 Dies ist ein Tipp-Container.
-:::
+::: /callout
 ```
 :::
 
@@ -117,7 +117,7 @@ Apple content.
 
 == tab "Orange" icon:citrus
 Orange content.
-:::
+::: /tabs
 ```
 
 #### Lokalisierung (i18n)

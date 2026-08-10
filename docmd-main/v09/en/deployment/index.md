@@ -54,7 +54,7 @@ npx @docmd/core deploy --netlify         # netlify.toml configuration
 * **[Docker Image](./docker)** — Official multi-architecture image for containerised environments.
 * **[NGINX](./nginx)** — Self-hosted reverse proxy configuration.
 * **[Caddy](./caddy)** — Self-hosted web server with automatic TLS certificate management.
-* **[Vercel](./vercel)** — Cloud deployment configuration with static asset optimization.
+* **[Vercel](./vercel)** — Cloud deployment configuration with static asset optimisation.
 * **[Netlify](./netlify)** — Git-backed continuous deployment.
 * **[Cloudflare Pages](./cloudflare-pages)** — Edge-native static site hosting with integrated CI/CD.
 * **[Firebase Hosting](./firebase)** — Google CDN deployment with GitHub Actions integration.

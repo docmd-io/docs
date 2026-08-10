@@ -97,9 +97,9 @@ Konfigurationsoptionen kaskadieren über ein 3-stufiges Rangfolgemodell:
 | **Projektkonfiguration (`docmd.config.json`)** | Höher | Überschreibt Root-Workspace-Standards für dieses spezifische Projekt. |
 | **Projektnavigation (`navigation.json`)** | Höchste Priorität | Hat immer Vorrang beim Rendering der Sidebars. |
 
-::: callout info "Navigations-Vorrang" icon:info
+::: callout info title:"Navigations-Vorrang" icon:info
 Ein `navigation.json`-Manifest auf Projektebene **hat immer Vorrang** vor jedem globalen `navigation`-Array, das in der Root-Workspace-Konfiguration definiert ist.
-:::
+::: /callout
 
 ## Das Projekt-Umschaltmenü UI
 

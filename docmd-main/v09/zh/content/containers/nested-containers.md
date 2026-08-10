@@ -3,7 +3,11 @@ title: "嵌套容器"
 description: "利用 docmd 的递归解析器将卡片、标签页和提示框组合成高保真页面布局。"
 ---
 
-One of `docmd`’s most powerful technical capabilities is its **Recursive Parsing Engine**. You can nest components within each other infinitely to synthesize complex, interactive documentation blocks that would otherwise require deep HTML knowledge or custom templates.
+`docmd` 最强大的技术能力之一是其**递归解析引擎**。您可以将组件无限制地相互嵌套，以在纯 Markdown 中构建复杂的交互式 UI 结构，而无需深度 HTML 知识或自定义模板。
+
+::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
+自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
+:::
 
 ## 架构规则
 
@@ -19,7 +23,7 @@ One of `docmd`’s most powerful technical capabilities is its **Recursive Parsi
 将**卡片**用于结构框架，**标签页**用于特定环境的说明，**提示框**用于高亮关键信息。
 
 ````markdown
-::: card "Monorepo 快速开始"
+::: card title:"Monorepo 快速开始"
 选择你偏好的初始化方式：
 
    ::: tabs
@@ -29,13 +33,13 @@ One of `docmd`’s most powerful technical capabilities is its **Recursive Parsi
       ```
       ::: callout success
       此脚本自动处理所有包安装和构建任务。
-      :::
+      ::: /callout
 
    == tab "手动"
       手动获取并链接核心引擎。
-      ::: button "前往开发者指南" /advanced/developer-guide
-   :::
-:::
+      ::: button title:"前往开发者指南" url:"/advanced/developer-guide"
+   ::: /tabs
+::: /card
 ````
 
 ### 2. 多平台教程
@@ -52,12 +56,12 @@ One of `docmd`’s most powerful technical capabilities is its **Recursive Parsi
       确保 Homebrew 已安装并为最新版本。
    == tab "Linux"
       验证 `curl` 和 `bash` 是否存在。
-   :::
+   ::: /tabs
 
 2. **核心验证**
    执行版本检查以确认连接性。
 
-:::
+::: /steps
 ```
 
 ::: steps

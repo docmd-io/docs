@@ -52,9 +52,9 @@ noindex: true
 ---
 ```
 
-::: callout tip "隐私与合规" icon:shield-check
+::: callout tip title:"隐私与合规" icon:shield-check
 由于搜索查询完全在客户端内存中执行，没有任何搜索输入或按键遥测数据离开用户的浏览器。
-:::
+::: /callout
 
 ## 离线本地语义搜索
 

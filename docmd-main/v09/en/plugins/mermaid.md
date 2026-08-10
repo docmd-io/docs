@@ -1,85 +1,58 @@
 ---
 title: "Mermaid Diagrams Plugin"
-description: "Render interactive flowcharts, sequence diagrams, and architecture maps using Mermaid.js syntax."
+description: "Zero-config integration for Mermaid.js diagrams with automatic theme synchronisation and lazy asset injection."
 ---
 
-The `@docmd/plugin-mermaid` plugin integrates [Mermaid.js](external:https://mermaid.js.org/) into docmd. It renders plain-text diagram declarations into interactive SVG visuals with automatic theme matching, panning, and zooming capabilities.
+The `@docmd/plugin-mermaid` plugin integrates [Mermaid.js](external:https://mermaid.js.org/) into `docmd`. It registers both standard Markdown code block parsing (` ```mermaid `) and the explicit `::: mermaid` container renderer, providing interactive SVG diagrams with automatic theme matching, panning, and zooming capabilities.
 
-## Configuration Options
+::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
+Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: mermaid` ... `::: /mermaid`), explicit key-value properties (`title:"..."`, `align:center`), and trailing `# comments`. Per-diagram customisation is handled via the container syntax, while global defaults are specified in `docmd.config.json`.
+:::
 
-Configure Mermaid rendering options in `docmd.config.json`:
+## Plugin Configuration
 
-| Option | Type | Default | Technical Description |
-| :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable Mermaid diagram rendering globally. |
-
-### Global Configuration Example
+Configure global options in `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
   "plugins": {
     "mermaid": {
-      "enabled": true
+      "enabled": true,
+      "theme": "default",
+      "darkTheme": "dark",
+      "zoom": true
     }
   }
 }
 ```
 
-## Key Capabilities
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Enable or disable Mermaid diagram rendering globally. |
+| `theme` | `string` | `"default"` | Default light theme for diagrams (`default`, `forest`, `neutral`). |
+| `darkTheme` | `string` | `"dark"` | Default dark theme for dark mode synchronisation. |
+| `zoom` | `boolean` | `true` | Enables interactive zoom and pan controls by default. |
 
-* **Appearance Synchronization**: Diagram color schemes adapt dynamically to active light and dark appearance modes.
-* **Interactive Canvas**: Built-in panning, zooming, and fullscreen expand triggers.
-* **Lazy Initialisation**: Diagram rendering scripts load asynchronously only when the diagram intersects the viewport.
-* **Icon Integration**: Supports `icon:name` syntax powered by Lucide icons within node definitions.
-
-## Usage & Syntax
-
-Write diagrams using fenced code blocks tagged with the `mermaid` language identifier.
-
-### Sequence Diagram Example
-
-::: tabs
-
-== tab "Preview"
-```mermaid
-sequenceDiagram
-    participant User
-    participant Browser
-    participant Server
-    
-    User->>Browser: Enters URL
-    Browser->>Server: HTTP Request
-    Server-->>Browser: HTTP Response
-    Browser-->>User: Displays Page
-```
-
-== tab "Source"
-````markdown
-```mermaid
-sequenceDiagram
-    participant User
-    participant Browser
-    participant Server
-    
-    User->>Browser: Enters URL
-    Browser->>Server: HTTP Request
-    Server-->>Browser: HTTP Response
-    Browser-->>User: Displays Page
-```
-````
-
+::: callout tip "Disabling Plugin" icon:slash
+If `@docmd/plugin-mermaid` is disabled or omitted from `docmd.config.json`, both `::: mermaid` container rendering and ` ```mermaid ` diagram parsing are cleanly deactivated, and no client-side JS assets are injected.
 :::
 
-### Architecture Diagram Example
+## Usage & Diagram Authoring
 
-```mermaid
-architecture-beta
-    group api(icon:cloud)[API Service]
-    service db(icon:database)[Database] in api
-    service disk(icon:hard-drive)[Storage] in api
-    db:L -- R:disk
+`docmd` supports a hybrid authoring model for diagrams:
+
+* **[Mermaid Container Guide](../content/containers/mermaid.md)**: Explore the recommended `::: mermaid` container syntax for per-diagram titles, alignment, custom themes, and explicit closing tags.
+* **Standard Code Blocks**: Use standard ` ```mermaid ` fenced code blocks for 100% GitHub Flavored Markdown (GFM) compatibility.
+
+### Quick Example
+
+```markdown
+::: mermaid title:"Authentication Flow" align:center zoom:true # Diagram container
+sequenceDiagram
+    autonumber
+    Client->>Server: POST /login
+    Server-->>Client: 200 OK (Token)
+::: /mermaid
 ```
 
-::: callout tip "AI Knowledge Extraction" icon:cpu
-Because Mermaid diagrams are authored in plain text within Markdown source files, AI agents and LLM scrapers ingest diagram structures directly without requiring OCR image processing.
-:::
+For full syntax references and advanced per-diagram configuration, refer to the **[Mermaid Container Reference](../content/containers/mermaid.md)**.

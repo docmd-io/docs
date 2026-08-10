@@ -10,8 +10,8 @@ titleAppend: false
 
 Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisches HTML für SEO. SPA für Geschwindigkeit. Works mit KI-Tools direkt nach der Installation.
 
-::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
+::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
+
 :::
 
 ## Übersicht

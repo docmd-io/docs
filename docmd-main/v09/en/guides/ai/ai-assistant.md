@@ -39,9 +39,9 @@ Add the `ai` plugin block to `docmd.config.json`:
 }
 ```
 
-::: callout tip "Recommended Models" icon:sparkles
+::: callout tip title:"Recommended Models" icon:sparkles
 For optimal balance between response speed and cost, we recommend using fast reasoning models such as `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic), or `gemini-1.5-flash` (Google).
-:::
+::: /callout
 
 ## Setting Provider Credentials
 

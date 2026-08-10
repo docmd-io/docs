@@ -5,23 +5,28 @@ description: "Betten Sie interaktive Akkordeon-Umschalter für FAQs, tiefgehende
 
 Der `collapsible`-Container erstellt ein interaktives, umschaltbares Akkordeon. Er ist ideal für FAQs und detaillierte technische Konfigurationen und hält sekundäre Informationen zugänglich, ohne die Hauptansicht zu überladen.
 
-::: callout info "VitePress-Alias"
-Wenn Sie von VitePress migrieren, verwenden Sie `:::details` als Alias für `:::collapsible`. Auch die schreibweise ohne Leerzeichen wie `:::collapsible` funktioniert.
-:::
-
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: collapsible [open] "Title text" [property:value...]
-Main content goes here.
-:::
+::: collapsible [open] [title:"Zusammenfassungs-Text"] [icon:icon_name] # Einklappbar-Öffner
+Interaktiver Inhalt (Markdown-Text, Code-Blöcke, Listen, Hinweisfelder)...
+::: /collapsible # Expliziter Schließ-Tag
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Offen-Zustand** | `open` | Optional. Wenn angegeben, wird der Abschnitt initial im aufgeklappten Zustand dargestellt. |
-| **Titel** | `"String"` | Der Text, der auf der Umschaltleiste gerendert wird. Standard ist „Click to expand". |
-| **Symbol** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol vor dem Titeltext hinzu. |
+| **Expansion-Flag** | `open` | Optional. Stellt das Akkordeon beim ersten Laden der Seite im aufgeklappten Zustand dar. |
+| **Zusammenfassungs-Titel** | `"String"` \| `title:"..."` | Text auf der Umschaltleiste (1. Parameter oder `title:"..."`). |
+| **Iconografie** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor dem Titeltext hinzu. |
+| **Aliase** | `::: details` | `::: details` und schreibweise ohne Leerzeichen wie `:::collapsible` werden als Aliase unterstützt. |
+| **Schließ-Tags** | `::: /collapsible`, `::: /details`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Beispiele
 
@@ -30,9 +35,9 @@ Main content goes here.
 Ein einklappbarer Abschnitt ist standardmäßig geschlossen. Ideal für FAQs und reduzierte visuelle Dichte.
 
 ```markdown
-::: collapsible "How do I upgrade docmd?"
+::: collapsible title:"How do I upgrade docmd?"
 Run `npm update -g @docmd/core` to fetch the latest stable engine.
-:::
+::: /collapsible
 ```
 
 ::: collapsible "How do I upgrade docmd?"
@@ -44,10 +49,10 @@ Run `npm update -g @docmd/core` to fetch the latest stable engine.
 Verwenden Sie das `open`-Flag für Abschnitte, die standardmäßig sichtbar sein sollen, aber vom Nutzer minimiert werden können.
 
 ```markdown
-::: collapsible open "Environment Prerequisites"
+::: collapsible open title:"Environment Prerequisites"
 1. Node.js v18+ (LTS recommended)
 2. PNPM package manager
-:::
+::: /collapsible
 ```
 
 ::: collapsible open "Environment Prerequisites"
@@ -60,7 +65,7 @@ Verwenden Sie das `open`-Flag für Abschnitte, die standardmäßig sichtbar sein
 Einklappbare Abschnitte können beliebiges Markdown enthalten, einschließlich syntaxhervorgehobener Code-Blöcke.
 
 ````markdown
-::: collapsible "Sample JSON Response"
+::: collapsible title:"Sample JSON Response"
 ```json
 {
   "status": "success",

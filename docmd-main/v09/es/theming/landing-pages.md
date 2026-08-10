@@ -23,12 +23,12 @@ The [Hero](../content/containers/hero.md) container supports split media layouts
 # Build Faster with docmd
 The zero-config documentation engine for modern software teams.
 
-::: button "Quickstart Guide" ../getting-started/quick-start.md color:blue
-::: button "GitHub Repository" external:https://github.com/docmd-io/docmd color:gray
+::: button title:"Quickstart Guide" url:"../getting-started/quick-start.md" color:blue
+::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 ```
 
 ### 2. Feature Navigation with Grids
@@ -38,18 +38,18 @@ Combine [Grids and Cards](../content/containers/grids.md) to showcase core produ
 ```markdown
 ::: grids
   ::: grid
-    ::: card "Quickstart" icon:rocket
+    ::: card title:"Quickstart" icon:rocket
     Get up and running in under five minutes.
-    ::: button "Learn More" ../getting-started/quick-start.md
-    :::
-  :::
+    ::: button title:"Learn More" url:"../getting-started/quick-start.md"
+    ::: /card
+  ::: /grid
   ::: grid
-    ::: card "API Reference" icon:code
+    ::: card title:"API Reference" icon:code
     Comprehensive documentation for all core functions.
-    ::: button "Explore API" ../api/index.md
-    :::
-  :::
-:::
+    ::: button title:"Explore API" url:"../api/index.md"
+    ::: /card
+  ::: /grid
+::: /grids
 ```
 
 ### 3. Blank Canvas with `noStyle`

@@ -118,7 +118,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 == tab "Moons" icon:moon
 Io, Europa, Ganymede
-:::
+::: /tabs
 ```
 
 ##### 转换 Asides（提示框）
@@ -132,9 +132,9 @@ Io, Europa, Ganymede
 
 **docmd:**
 ```markdown
-::: callout info "可选标题"
+::: callout info title:"可选标题"
 一段注释内容。
-:::
+::: /callout
 ```
 
 #### Frontmatter 映射

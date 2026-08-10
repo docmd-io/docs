@@ -1,80 +1,48 @@
 ---
-title: "Secciones Hero"
-description: "Cree encabezados de páginas de inicio de gran impacto y destacados de marketing en Markdown en docmd."
+title: "Secciones Destacadas (Hero)"
+description: "Construye encabezados impactantes para páginas de inicio y destacados de marketing en Markdown en docmd."
 ---
 
-El contenedor `hero` crea encabezados de páginas de inicio visualmente impactantes. Gestiona diseños de medios divididos, efectos de resplandor de fondo y carruseles interactivos sin requerir marcado HTML sin procesar.
+El contenedor `hero` crea encabezados visualmente atractivos para páginas de destino con soporte para división de medios y carruseles.
 
-## Referencia de sintaxis
+## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: hero [propiedad:valor...]
-    # Título de la página
-    Un eslogan secundario corto.
+::: hero [layout:split|slider] [glow:true|false] # Apertura del contenedor hero
+::: slide # Apertura de diapositiva individual
+# Motor Isomórfico Central
+Renderiza estáticamente y se ejecuta fluidamente en el cliente.
+::: /slide # Cierre explícito de diapositiva
 
-    ::: button "Llamada a la acción" ./#target-url
-:::
+::: slide # Segunda diapositiva
+# Optimización de Contexto IA
+Análisis estructurado para agentes LLM.
+::: /slide
+::: /hero # Cierre explícito del contenedor hero
 ```
 
-| Parámetro | Tipo | Descripción |
+## Características y Atributos Soportados
+
+| Parámetro / Propiedad | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Diseño** | `layout:split` \| `layout:slider` | `split` divide el hero en áreas de texto principal y medios secundarios. `slider` crea un carrusel con desplazamiento horizontal. |
-| **Resplandor** | `glow:true` | Inyecta un resplandor de gradiente radial sutil detrás del encabezado hero. |
-| **Separador lateral** | `== side` | Delimitador para `layout:split`. El contenido después de esto se renderiza en el área de medios de la derecha. |
-| **Separador de diapositiva** | `== slide` | Delimitador para `layout:slider`. Cada `== slide` define un nuevo panel de carrusel. |
+| **Variante de Diseño** | `layout:split` \| `layout:slider` | `split` divide en áreas de texto y medios; `slider` crea un carrusel. |
+| **Efecto Glow** | `glow:true` \| `glow:false` | Inyecta un resplandor radial sutil detrás de la sección hero. |
+| **Subcontenedores** | `::: slide` ... `::: /slide` | Define diapositivas individuales. Se admite la sintaxis heredada `== slide`. |
+| **Etiquetas de Cierre** | `::: /hero`, `::: /slide`, `:::` | Soporta etiquetas de cierre explícitas o marcadores genéricos `:::`. |
 
-## Ejemplos de uso
-
-### Diseño dividido
-
-Utilice el separador `== side` para dividir el contenido en un área de texto hero principal y un área de medios secundaria:
-
-```markdown
-::: hero layout:split glow:true
-    # docmd
-    Motor de ejecución isomórfico. Documentación optimizada para IA.
-
-    ::: button "Guía de inicio rápido" ../../getting-started/quick-start.md color:blue
-
-    == side
-        ::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
-:::
-```
-
-::: hero layout:split glow:true
-# docmd
-Motor de ejecución isomórfico. Documentación optimizada para IA.
-
-::: button "Guía de inicio rápido" ../../getting-started/quick-start.md color:blue
-
-== side
-::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
 :::
 
-### Diseño deslizante
-
-Utilice separadores `== slide` para crear un carrusel interactivo de paneles de contenido hero:
-
-```markdown
-::: hero layout:slider
-    == slide
-        # Motor principal isomórfico
-        Se renderiza estáticamente y se ejecuta del lado del cliente sin problemas.
-    == slide
-        # Optimización de contexto de IA
-        Análisis sintáctico consciente de la estructura para agentes LLM.
-:::
-```
 
 ::: hero layout:slider
-    == slide
-        # Motor principal isomórfico
-        Se renderiza estáticamente y se ejecuta del lado del cliente sin problemas.
-    == slide
-        # Optimización de contexto de IA
-        Análisis sintáctico consciente de la estructura para agentes LLM.
-:::
+::: slide
+# Motor Isomórfico Central
+Renderiza estáticamente y se ejecuta fluidamente en el cliente.
+::: /slide
 
-::: callout tip "Mejores prácticas de diseño Hero" icon:lightbulb
-Utilice `glow:true` en sitios de tema oscuro para obtener un efecto visual de primera calidad. Coloque los elementos `::: button` en la sección de texto principal antes de `== side` para garantizar un orden de apilamiento móvil adecuado.
-:::
+::: slide
+# Optimización de Contexto IA
+Análisis estructurado para agentes LLM.
+::: /slide
+::: /hero

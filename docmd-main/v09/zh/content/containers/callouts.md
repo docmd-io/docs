@@ -5,6 +5,34 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 
 标注用于隔离那些需要读者立即注意的信息。`docmd` 提供了五种语义类型，每种都具有独特的视觉样式和主题图标。
 
+## 容器语法 (Container Syntax)
+
+```markdown
+# 标准标注容器模式
+::: callout 类型 ["标题文本"] [icon:图标名称] # 容器开启
+支持 Markdown、代码块与按钮的正文内容...
+::: /callout # 显式闭合标签
+
+# 迁移别名模式
+::: 类型 ["标题文本"] [icon:图标名称]
+正文内容...
+::: /类型
+```
+
+## 功能特性与支持属性 (Features & Attributes)
+
+| 参数 / 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| **语义类型** | `info` \| `tip` \| `warning` \| `danger` \| `success` | 基础语义类型，定义默认背景样式、边框颜色与主题图标。 |
+| **标题文本** | `"String"` \| `title:"..."` | 可选标题（第 2 个位置参数或 `title:"..."`）。将覆盖默认语义标题。 |
+| **图标覆盖** | `icon:NAME` | 可选。使用自定义 [Lucide](external:https://lucide.dev/icons) 图标覆盖默认类型图标。 |
+| **迁移别名** | `::: tip`, `::: warning`, `::: danger`, `::: info`, `::: note`, `::: caution` | 无缝兼容 VitePress 和 Docusaurus 的开箱即用别名。 |
+| **闭合标签** | `::: /callout`, `::: /tip`, `:::` | 支持显式命名闭合标签或通用 `:::` 闭合标记。 |
+
+::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
+自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
+:::
+
 ::: callout info "迁移友好的别名"
 如果您从 **VitePress** 或 **Docusaurus** 迁移，可以直接使用它们的原生语法：
 - `:::tip`、`:::warning`、`:::danger`、`:::info`（VitePress）
@@ -13,20 +41,6 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 这些别名的渲染效果与 `docmd` 等效语法完全相同。无空格语法如 `:::callout` 也同样支持。
 :::
 
-## 语法参考
-
-```markdown
-::: callout 类型 "可选标题"
-技术内容或警告放在这里。
-:::
-```
-
-添加可选的 `icon:` 参数，可以用任何 [Lucide](external:https://lucide.dev/icons) 图标覆盖默认的类型图标：
-```markdown
-::: callout info "自定义图标" icon:sparkles
-此标注使用自定义图标而不是默认的 info 图标。
-:::
-```
 
 ### 支持的语义类型
 
@@ -44,7 +58,7 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 ```markdown
 ::: callout info
 旧版配置架构仍然受支持，但不再推荐使用。
-:::
+::: /callout
 ```
 ::: callout info
 旧版配置架构仍然受支持，但不再推荐使用。
@@ -52,9 +66,9 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 
 ### 2. 带有自定义标题的高优先级警报
 ```markdown
-::: callout warning "破坏性变更目标"
+::: callout warning title:"破坏性变更目标"
 自 `v0.7.0` 起，内部 WebSocket RPC 系统将正式弃用。
-:::
+::: /callout
 ```
 ::: callout warning "破坏性变更目标"
 自 `v0.7.0` 起，内部 WebSocket RPC 系统将正式弃用。
@@ -64,14 +78,14 @@ description: "使用语义化的视觉区块突出显示关键警告、专业技
 标注支持全方位的 Markdown，允许你在警报中嵌入按钮和代码块。
 
 ````markdown
-::: callout tip "优化的本地测试" icon:command
+::: callout tip title:"优化的本地测试" icon:command
 在开发过程中使用 preserve 标志来保留构建文件：
 
 ```bash
 docmd dev --preserve
 ```
 
-::: button "CLI 标志参考" /cli-commands
+::: button title:"CLI 标志参考" url:"/cli-commands"
 :::
 ````
 

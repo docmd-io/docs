@@ -187,6 +187,14 @@
             "path": "/content/containers/tags"
           },
           {
+            "title": "提示工具",
+            "path": "/content/containers/tooltip"
+          },
+          {
+            "title": "Mermaid 图表",
+            "path": "/content/containers/mermaid"
+          },
+          {
             "title": "Hero 区块",
             "path": "/content/containers/hero"
           },
@@ -501,6 +509,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.1 - 标准化容器引擎与 Mermaid",
+        "path": "/release-notes/0-9-1"
+      },
       {
         "title": "v0.9.0 - AI 助手、无头引擎与架构",
         "path": "/release-notes/0-9-0"

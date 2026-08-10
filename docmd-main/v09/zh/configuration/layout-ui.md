@@ -67,9 +67,9 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 }
 ```
 
-::: callout info "自动回退" icon:sparkles
+::: callout info title:"自动回退" icon:sparkles
 若所选位置对应的容器被禁用，引擎会将选项菜单移至 `sidebar-top`。这能保证实用工具始终可访问。
-:::
+::: /callout
 
 ### 侧边栏与导航
 侧边栏是主导航树。其结构可在配置或外部 JSON 文件中定义。

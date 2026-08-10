@@ -59,9 +59,9 @@ Configure assistant options and provider credentials in `docmd.config.json`:
 
 ## Server-Side Security (Bring-Your-Own-Key)
 
-::: callout warning "Zero Credential Leakage" icon:alert-triangle
+::: callout warning title:"Zero Credential Leakage" icon:alert-triangle
 `@docmd/plugin-ai` strictly processes API credentials on the server side. Provider API keys are never rendered in client HTML or static JavaScript bundles.
-:::
+::: /callout
 
 Set provider environment keys prior to launching your documentation server:
 

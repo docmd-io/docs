@@ -5,23 +5,28 @@ description: "Incruste despegables de acordeón interactivos para preguntas frec
 
 El contenedor `collapsible` crea un acordeón HTML `<details>` interactivo y conmutable. Es ideal para preguntas frecuentes y opciones de configuración extensas, manteniendo los detalles secundarios accesibles sin sobrecargar la vista de la documentación principal.
 
-::: callout info "Soporte de alias de VitePress" icon:info
-Al migrar desde VitePress, `:::details` funciona como un alias nativo para `:::collapsible`. La sintaxis sin espacios como `:::collapsible` también es compatible.
-:::
-
-## Referencia de sintaxis
+## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: collapsible [open] "Texto del título" [propiedad:valor...]
-El contenido principal va aquí.
-:::
+::: collapsible [open] [title:"Texto del resumen"] [icon:nombre_icono] # Apertura de sección plegable
+Contenido interior interactivo (texto Markdown, código, listas, avisos)...
+::: /collapsible # Etiqueta de cierre explícita
 ```
 
-| Parámetro | Tipo | Descripción |
+## Características y Atributos Soportados
+
+| Parámetro / Propiedad | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Estado abierto** | `open` | Opcional. Inicializa el elemento de acordeón en un estado expandido. |
-| **Título** | `"String"` | Texto de encabezado renderizado en la barra de resumen. Por defecto es "Haga clic para expandir". |
-| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes de la cadena del título. |
+| **Estado abierto** | `open` | Opcional. Inicializa el acordeón en un estado expandido en la carga inicial. |
+| **Título del resumen** | `"String"` \| `title:"..."` | Texto en la barra de resumen (1er parám posicional o `title:"..."`). |
+| **Iconografía** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) antes del título. |
+| **Alias** | `::: details` | Se admite `::: details` y la sintaxis sin espacios `:::collapsible` como alias nativos. |
+| **Etiquetas de Cierre** | `::: /collapsible`, `::: /details`, `:::` | Soporta etiquetas de cierre explícitas o marcadores genéricos `:::`. |
+
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
+:::
+
 
 ## Ejemplos de uso
 
@@ -30,9 +35,9 @@ El contenido principal va aquí.
 Una sección plegable se cierra de forma predeterminada, reduciendo la densidad visual inicial:
 
 ```markdown
-::: collapsible "¿Cómo actualizo @docmd/core?"
+::: collapsible title:"¿Cómo actualizo @docmd/core?"
 Ejecute `npm update -g @docmd/core` para instalar el último lanzamiento estable del motor.
-:::
+::: /collapsible
 ```
 
 ::: collapsible "¿Cómo actualizo @docmd/core?"
@@ -44,10 +49,10 @@ Ejecute `npm update -g @docmd/core` para instalar el último lanzamiento estable
 Utilice la palabra clave `open` para secciones que deben renderizarse expandidas de forma predeterminada mientras se permite a los usuarios colapsarlas:
 
 ```markdown
-::: collapsible open "Requisitos previos del entorno"
+::: collapsible open title:"Requisitos previos del entorno"
 1. Node.js v18+ (LTS recomendado)
 2. Gestor de paquetes pnpm, npm o yarn
-:::
+::: /collapsible
 ```
 
 ::: collapsible open "Requisitos previos del entorno"
@@ -60,7 +65,7 @@ Utilice la palabra clave `open` para secciones que deben renderizarse expandidas
 Los contenedores plegables aceptan cualquier contenido Markdown, incluidos fragmentos de código y avisos anidados:
 
 ````markdown
-::: collapsible "Carga útil de respuesta de API de muestra"
+::: collapsible title:"Carga útil de respuesta de API de muestra"
 ```json
 {
   "status": "success",

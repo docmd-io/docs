@@ -5,122 +5,127 @@ description: "Organisieren Sie alternative Code-Snippets, Plattform-Anweisungen 
 
 Tabs präsentieren sich gegenseitig ausschließende oder alternative Datensätze (wie die Wahl des Paketmanagers oder Befehle für Betriebssysteme). Sie verdichten technische Anweisungen in saubere, interaktive Tab-Container.
 
-::: callout info "Unterstützung leerzeichenloser Syntax" icon:info
-Sowohl die Syntax `::: tabs` als auch `:::tabs` (ohne Leerzeichen) werden identisch gerendert. Wählen Sie den Stil, der am besten zu Ihrem Erstellungs-Workflow passt.
-:::
-
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: tabs
+::: tabs # Äußerer Tab-Gruppen-Container Öffner
+::: tab [title:"Tab-Beschriftung"] [icon:icon_name] # Einzelnes Tab-Element Öffner
+Inhalt für Tab 1 (Code-Blöcke, Text, Listen)...
+::: /tab # Expliziter Tab-Element-Schließer
 
-== tab "Tab-Beschriftung" [eigenschaft:wert...]
-Der Tab-Inhalt wird hier platziert.
-
-== tab "Sekundäre Beschriftung"
-Der sekundäre Tab-Inhalt wird hier platziert.
-
-:::
+::: tab [title:"Tab-Beschriftung 2"] [icon:icon_name] # Zweites Tab Öffner
+Inhalt für Tab 2...
+::: /tab
+::: /tabs # Expliziter Tab-Gruppen-Schließer
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Beschriftung** | `"String"` | Auf der Tab-Auswahlschaltfläche angezeigter Text. |
-| **Icon** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor der Beschriftungszeichenfolge hinzu. |
+| **Tab-Beschriftung** | `"String"` \| `title:"..."` | Text auf der Tab-Auswahlschaltfläche (1. Parameter oder `title:"..."`). |
+| **Iconografie** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon vor der Beschriftung hinzu. |
+| **Sub-Container** | `::: tab` ... `::: /tab` | Explizite Tab-Element-Wrapper. Legacy `== tab` Syntax wird ebenfalls unterstützt. |
+| **Schließ-Tags** | `::: /tabs`, `::: /tab`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Anwendungsbeispiele
 
 ### Paketmanager-Umschalter
 
-Zeigen Sie Installationsbefehle über mehrere Paketmanager hinweg in einem einzigen kompakten Block an:
+Zeigen Sie Installationsbefehle über mehrere Paketmanager hinweg mit expliziten Sub-Containern an:
 
 ````markdown
-::: tabs
-
-== tab "pnpm" icon:box
+::: tabs # Paketmanager-Optionen
+::: tab "pnpm" icon:box # Empfohlener Paketmanager
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
-
-:::
+::: /tab
+::: /tabs
 ````
 
-::: tabs
-
-== tab "pnpm" icon:box
+::: tabs # Paketmanager-Optionen
+::: tab "pnpm" icon:box # Empfohlener Paketmanager
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
-
-:::
+::: /tab
+::: /tabs
 
 ### Mehrsprachige Code-Snippets
 
-Gruppieren Sie sprachspezifische Implementierungen mithilfe von Tab-Icons zur sofortigen Identifikation:
+Gruppieren Sie sprachspezifische Implementierungen mithilfe von Tab-Icons und benannten Schließungs-Tags:
 
 ````markdown
 ::: tabs
-
-== tab "TypeScript" icon:hexagon
+::: tab title:"TypeScript" icon:hexagon
 ```typescript
 import { build } from '@docmd/core';
 await build('./docmd.config.json');
 ```
+::: /tab
 
-== tab "JavaScript" icon:braces
+::: tab title:"JavaScript" icon:braces
 ```javascript
 const { build } = require('@docmd/core');
 build('./docmd.config.json');
 ```
-
-:::
+::: /tab
+::: /tabs
 ````
 
 ::: tabs
-
-== tab "TypeScript" icon:hexagon
+::: tab title:"TypeScript" icon:hexagon
 ```typescript
 import { build } from '@docmd/core';
 await build('./docmd.config.json');
 ```
+::: /tab
 
-== tab "JavaScript" icon:braces
+::: tab title:"JavaScript" icon:braces
 ```javascript
 const { build } = require('@docmd/core');
 build('./docmd.config.json');
 ```
+::: /tab
+::: /tabs
 
-:::
+::: callout note "Legacy == tab Syntax" icon:archive
+Bestehende Dokumentationen mit `== tab`-Syntax werden weiterhin nahtlos verarbeitet:
 
-## Einschränkungen & Verhaltensregeln
-
-| Regel | Technischer Hinweis |
-| :--- | :--- |
-| **Verschachtelungslimit** | Tabs können nicht direkt in anderen Tab-Containern verschachtelt werden. |
-| **Steps-Kompatibilität** | Verschachteln Sie `::: steps` nicht in einem Tab-Bereich. Verwenden Sie stattdessen eine standardmäßige geordnete Liste. |
-| **Viewport-Grenzen** | Halten Sie die Tab-Anzahl unter 6 Eintragsblöcken für mobile Kompatibilität. |
-| **Zustandspersistenz** | Ausgewählte Tab-Zustände bleiben bei Seitenübergängen während der SPA-Navigation erhalten. |
-
-::: callout tip "Kontextbezogene Beschriftung für KI" icon:sparkles
-Geben Sie Zielsprachen oder Betriebssysteme in Tab-Beschriftungen an (z. B. `== tab "TypeScript"`). Explizite Beschriftungen ermöglichen es KI-Indexieren, alternative Codeblöcke genau ihren jeweiligen Ökosystemen zuzuordnen.
+```markdown
+::: tabs
+== tab "JavaScript"
+console.log("Legacy-Syntax");
+::: /tabs
+```
 :::

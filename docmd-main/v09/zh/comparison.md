@@ -129,9 +129,9 @@ Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。
 | **原生 MCP 服务 (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 | **上下文文件 (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 
-::: callout tip "为什么 BYOK 对文档团队至关重要" icon:shield
+::: callout tip title:"为什么 BYOK 对文档团队至关重要" icon:shield
 云端文档 SaaS 供应商会将团队绑定在按查询付费的订阅模式和专有 AI 模型上。`docmd` 通过 **BYOK (自带 API 密钥)** 赋予团队完全的自由度：可连接 OpenAI、Anthropic、Gemini、DeepSeek、Groq 或本地私有化部署的 Ollama 模型，同时保持对 API 预算与数据隐私的绝对掌控。
-:::
+::: /callout
 
 ## 综合功能矩阵
 
@@ -171,7 +171,7 @@ Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。
 
 `docmd` 随附全面的集成测试套件，在 **85 个断言** 中验证 **25 个不同场景** —— 孤立和组合地覆盖每个核心功能和插件。每个版本在发布前必须通过所有 85 个断言和 13 个内部安全检查。
 
-::: callout tip "在本地运行测试套件" icon:lightbulb
+::: callout tip title:"在本地运行测试套件" icon:lightbulb
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js

@@ -97,9 +97,9 @@ my-docs/
 | **项目配置 (`docmd.config.json`)** | 较高 | 覆盖该特定项目的根工作区默认值。 |
 | **项目导航 (`navigation.json`)** | 最高优先级 | 始终优先于渲染侧边栏。 |
 
-::: callout info "导航优先级" icon:info
+::: callout info title:"导航优先级" icon:info
 项目级 `navigation.json` 清单 **始终优先** 于根工作区配置中定义的任何全局 `navigation` 数组。
-:::
+::: /callout
 
 ## 项目切换器 UI
 

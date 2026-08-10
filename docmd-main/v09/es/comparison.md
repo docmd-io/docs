@@ -129,9 +129,9 @@ A diferencia de las herramientas de documentación heredadas que dependen de cos
 | **Servidor MCP nativo (`docmd mcp`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 | **Archivos de contexto (`llms.txt`)** | ✅ | ❌ | ❌ | ❌ | ✅ |
 
-::: callout tip "Por qué BYOK es importante para los equipos de documentación" icon:shield
+::: callout tip title:"Por qué BYOK es importante para los equipos de documentación" icon:shield
 Los proveedores de SaaS de documentación en la nube bloquean a los equipos con tarifas de suscripción por consulta y modelos de IA propietarios. `docmd` otorga a los equipos libertad completa con **BYOK (Trae tu propia clave)**: conecta modelos OpenAI, Anthropic, Gemini, DeepSeek, Groq u Ollama autohospedados manteniendo un control total sobre los presupuestos de API y la privacidad de los datos.
-:::
+::: /callout
 
 ## Matriz de características completa
 
@@ -171,7 +171,7 @@ Líneas de configuración requeridas para un sitio con control de versiones, i18
 
 `docmd` viene con un conjunto integral de pruebas de integración que valida **25 escenarios distintos** a través de **85 aserciones**, cubriendo cada característica principal y plugin de forma aislada y en combinación. Cada versión debe pasar las 85 aserciones y 13 comprobaciones internas de seguridad antes de su publicación.
 
-::: callout tip "Ejecutar la suite de pruebas localmente" icon:lightbulb
+::: callout tip title:"Ejecutar la suite de pruebas localmente" icon:lightbulb
 ```bash
 git clone https://github.com/docmd-io/docmd.git
 cd docmd && node scripts/brute-test.js

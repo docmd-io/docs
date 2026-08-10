@@ -5,18 +5,33 @@ description: "Inject prominent call-to-action buttons for internal SPA navigatio
 
 Buttons are interactive components designed for navigation and explicit call-to-actions. They support internal SPA routing, external links, custom color overrides, and Lucide icons.
 
-## Syntax Reference
+## Container Syntax
 
 ```markdown
-::: button "Label text" target_url [property:value...]
+# Standalone Line Button
+::: button ["Label Text"] ["target_url" | url:"target_url"] [icon:icon_name] [color:#hex|css_color] [::: /button]
+
+# Explicit Named Key-Value
+::: button title:"Label Text" url:"target_url" icon:icon_name color:#hex [::: /button]
+
+# Inline Sentence Button
+Click ::: button title:"Label Text" url:"target_url" icon:icon_name ::: /button to continue.
 ```
 
-| Parameter | Type | Description |
+## Features & Supported Attributes
+
+| Parameter / Property | Type | Description |
 | :--- | :--- | :--- |
-| **Path** | `/path/` | Relative project URL. Resolves automatically via the SPA router. |
-| **External** | `external:URL` | Opens the target URL in a new browser tab (`target="_blank"`). |
-| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). |
-| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon before the label text. |
+| **Title / Label** | `"String"` \| `title:"..."` | Text label displayed inside the button (positional 1st parameter or `title:"..."`). |
+| **Target URL** | `"URL"` \| `url:URL` | Navigation target (positional 2nd parameter or `url:"..."`). Supports relative SPA paths, mailto, tel, or external links. |
+| **External Link** | `external:URL` | Opens the target link in a new browser tab (`target="_blank"` with `rel="noopener noreferrer"`). |
+| **Background Color** | `color:VALUE` | Custom background and border color (supports CSS color names or Hex codes). |
+| **Iconography** | `icon:NAME` | Injects a [Lucide](external:https://lucide.dev/icons) icon before the text label. |
+| **Self-Closing & Inline** | `::: /button` \| `:::` | Self-closing by default, or optionally closed with `::: /button` when used inline inside text. |
+
+::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
+Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
+:::
 
 ## Usage Examples
 
@@ -25,7 +40,7 @@ Buttons are interactive components designed for navigation and explicit call-to-
 Use relative Markdown paths to ensure seamless transitions within the single-page router:
 
 ```markdown
-::: button "Installation Guide" ../../getting-started/installation.md
+::: button title:"Installation Guide" url:"../../getting-started/installation.md"
 ```
 
 ::: button "Installation Guide" ../../getting-started/installation.md
@@ -35,7 +50,7 @@ Use relative Markdown paths to ensure seamless transitions within the single-pag
 Prepend `external:` to the URL to force links to open in a new browser tab:
 
 ```markdown
-::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
+::: button title:"View GitHub Monorepo" url:"external:https://github.com/docmd-io/docmd"
 ```
 
 ::: button "View GitHub Monorepo" external:https://github.com/docmd-io/docmd
@@ -45,30 +60,21 @@ Prepend `external:` to the URL to force links to open in a new browser tab:
 Match buttons to your brand identity using colour overrides and Lucide icon names:
 
 ```markdown
-::: button "Success Action" ./#success color:#228B22 icon:check
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
-::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+::: button title:"Success Action" url:"./#success" color:#228B22 icon:check
+::: button title:"Danger Action" url:"./#delete" color:crimson icon:alert-circle
+::: button title:"View Source" url:"external:https://github.com/docmd-io/docmd" icon:github
 ```
 
 ::: button "Success Action" ./#success color:#228B22 icon:check
 ::: button "Danger Action" ./#delete color:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
-## Self-Closing Parsing Behavior
+### Inline Sentence Buttons
 
-Buttons are single-line, self-closing components. Adding a terminal `:::` line immediately after a button terminates the **parent container** (e.g. an enclosing Card or Tab), which will disrupt your layout.
+Buttons can be used inline within text sentences with explicit closing tags (`::: /button`):
 
-**Incorrect Sequence:**
 ```markdown
-::: card "Setup"
-    ::: button "Begin Setup" ../../setup.md
-    :::        <-- Error: This closes the Card prematurely.
-:::
+Click ::: button title:"Download v0.9.1" url:"https://docmd.io" icon:download ::: /button to get started!
 ```
 
-**Correct Sequence:**
-```markdown
-::: card "Setup"
-    ::: button "Begin Setup" ../../setup.md
-:::        <-- Correct: This closes the Card cleanly.
-```
+Click ::: button "Download v0.9.1" https://docmd.io icon:download ::: /button to get started!

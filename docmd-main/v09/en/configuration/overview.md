@@ -51,7 +51,7 @@ These top-level properties configure base paths and global compiler options:
 | Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `title` | `String` | `"Documentation"` | Formal site title displayed in navigation headers and browser tabs. |
-| `url` | `String` | `""` | Canonical site URL. Essential for search engine optimization, sitemap generation, and OpenGraph metadata. |
+| `url` | `String` | `""` | Canonical site URL. Essential for search engine optimisation, sitemap generation, and OpenGraph metadata. |
 | `src` | `String` | `"docs"` | Relative directory containing source Markdown (`.md`) files. |
 | `out` | `String` | `"site"` | Relative path where the compiler generates the production static bundle. |
 | `base` | `String` | `"/"` | Root URL path prefix (e.g. `/docs/` when hosted in a subfolder). |

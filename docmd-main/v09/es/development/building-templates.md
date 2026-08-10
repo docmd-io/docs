@@ -142,9 +142,9 @@ CSS and JS load in this order (lower loads first, higher wins cascade ties):
 
 Templates may declare a higher priority than 10 — Summer itself uses **25** so it overrides plugin styles. The recommended band is **10–20** for "user-overridable" templates and **20+** for "opinionated layout" templates.
 
-::: callout warning "Do not use !important"
+::: callout warning title:"Do not use !important"
 Templates should write CSS that can be overridden by `customCss` at priority 15. Using `!important` breaks the contract and means users can't restyle your template without forking it. (Summer's CSS file header enforces this — `!important` is removed during 0.8.7 cleanup so users can finally override Summer without resorting to `!important` themselves.)
-:::
+::: /callout
 
 ## Auto-promotion of `theme.name`
 

@@ -139,9 +139,9 @@ CSS 与 JS 按下表顺序加载（数值小的先加载，数值大的在级联
 
 模板可以将 priority 声明为高于 10 —— Summer 自身使用 **25**，以覆盖插件样式。推荐的区间是 **10–20**（"用户可覆盖"的模板）与 **20+**（"主张强烈"的布局模板）。
 
-::: callout warning "请勿使用 !important"
+::: callout warning title:"请勿使用 !important"
 模板编写的 CSS 应当能被优先级 15 的 `customCss` 覆盖。使用 `!important` 会破坏这一契约，迫使用户只能 fork 您的模板才能调整。（Summer 的 CSS 文件头会强制这一点 —— `!important` 已在 0.8.7 清理中移除，让用户最终不再需要靠自己的 `!important` 才能覆盖 Summer。）
-:::
+::: /callout
 
 ## `theme.name` 的自动提升
 

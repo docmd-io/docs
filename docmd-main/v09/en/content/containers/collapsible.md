@@ -5,23 +5,28 @@ description: "Embed interactive accordion toggles for FAQs, deep-dive technical 
 
 The `collapsible` container creates an interactive, toggleable HTML `<details>` accordion. It is ideal for FAQs and extensive configuration options, keeping secondary details accessible without cluttering the primary documentation view.
 
-::: callout info "VitePress Alias Support" icon:info
-When migrating from VitePress, `:::details` works as a native alias for `:::collapsible`. Spaceless syntax like `:::collapsible` is also supported.
-:::
-
-## Syntax Reference
+## Container Syntax
 
 ```markdown
-::: collapsible [open] "Title text" [property:value...]
-Main content goes here.
-:::
+::: collapsible [open] [title:"Summary Toggle Text"] [icon:icon_name] # Collapsible opener
+Interactive inner content (Markdown text, code blocks, lists, callouts)...
+::: /collapsible # Explicit closing tag
 ```
 
-| Parameter | Type | Description |
+## Features & Supported Attributes
+
+| Parameter / Property | Type | Description |
 | :--- | :--- | :--- |
-| **Open State** | `open` | Optional. Initialises the accordion element in an expanded state. |
-| **Title** | `"String"` | Header text rendered on the summary toggle bar. Defaults to "Click to expand". |
-| **Icon** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the title string. |
+| **Expansion Flag** | `open` | Optional. Renders the accordion in an expanded state on initial page load. |
+| **Summary Title** | `"String"` \| `title:"..."` | Heading text rendered on the summary toggle bar (1st positional arg or `title:"..."`). |
+| **Iconography** | `icon:NAME` | Optional. Adds a [Lucide](external:https://lucide.dev/icons) icon before the summary text. |
+| **Aliases** | `::: details` | `::: details` and spaceless `:::collapsible` are supported as native aliases. |
+| **Closing Tags** | `::: /collapsible`, `::: /details`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
+
+::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
+Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
+:::
+
 
 ## Usage Examples
 
@@ -30,9 +35,9 @@ Main content goes here.
 A collapsible section is closed by default, reducing initial visual density:
 
 ```markdown
-::: collapsible "How do I update @docmd/core?"
+::: collapsible title:"How do I update @docmd/core?"
 Run `npm update -g @docmd/core` to install the latest stable engine release.
-:::
+::: /collapsible
 ```
 
 ::: collapsible "How do I update @docmd/core?"
@@ -44,10 +49,10 @@ Run `npm update -g @docmd/core` to install the latest stable engine release.
 Use the `open` keyword for sections that should render expanded by default while allowing users to collapse them:
 
 ```markdown
-::: collapsible open "Environment Prerequisites"
+::: collapsible open title:"Environment Prerequisites"
 1. Node.js v18+ (LTS recommended)
 2. pnpm, npm, or yarn package manager
-:::
+::: /collapsible
 ```
 
 ::: collapsible open "Environment Prerequisites"
@@ -60,7 +65,7 @@ Use the `open` keyword for sections that should render expanded by default while
 Collapsible containers accept any Markdown content, including code snippets and nested callouts:
 
 ````markdown
-::: collapsible "Sample API Response Payload"
+::: collapsible title:"Sample API Response Payload"
 ```json
 {
   "status": "success",

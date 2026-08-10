@@ -51,7 +51,7 @@ async function generateEditor() {
 Functions for managing multi-project workspaces programmatically:
 
 * **`isWorkspace(config)`**: Evaluates whether a configuration object conforms to workspace schemas.
-* **`detectWorkspace(configPath)`**: Resolves workspace configurations, returning normalized `WorkspaceRootConfig` or `null`.
+* **`detectWorkspace(configPath)`**: Resolves workspace configurations, returning normalised `WorkspaceRootConfig` or `null`.
 * **`buildWorkspace(config, options)`**: Compiles all projects defined in a workspace root.
 * **`devWorkspace(config, options)`**: Starts workspace development server with targeted rebuild tracking.
 

@@ -5,18 +5,27 @@ description: "Organice la información en contenedores marcados y visualmente di
 
 Las tarjetas encapsulan contenido relacionado en un marco bordeado y distinto con un encabezado opcional, proporcionando una jerarquía visual clara en todas sus páginas de documentación.
 
-## Referencia de sintaxis
+## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: card "Texto del título" [propiedad:valor...]
-Esta es el área de contenido principal de la tarjeta.
-:::
+::: card [title:"Título de encabezado"] [icon:nombre_icono] # Apertura de tarjeta
+Bloque de contenido que admite Markdown, código, botones y avisos...
+::: /card # Etiqueta de cierre explícita
 ```
 
-| Parámetro | Tipo | Descripción |
+## Características y Atributos Soportados
+
+| Parámetro / Propiedad | Tipo | Descripción |
 | :--- | :--- | :--- |
-| **Título** | `"String"` | Título de encabezado opcional renderizado en la parte superior del marco de la tarjeta. |
-| **Icono** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) junto al título del encabezado. |
+| **Título** | `"String"` \| `title:"..."` | Título de encabezado opcional (1er parámetro posicional o `title:"..."`). |
+| **Iconografía** | `icon:NOMBRE` | Opcional. Agrega un icono de [Lucide](external:https://lucide.dev/icons) junto al título. |
+| **Contenido Markdown** | Texto libre | Admite cualquier elemento Markdown, listas, código, botones y contenedores anidados. |
+| **Etiquetas de Cierre** | `::: /card`, `:::` | Soporta etiquetas de cierre `::: /card` o marcadores genéricos `:::`. |
+
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
+:::
+
 
 ## Ejemplos de uso
 
@@ -25,9 +34,9 @@ Esta es el área de contenido principal de la tarjeta.
 Utilice una tarjeta para enmarcar una sola capacidad técnica con un título e icono explícitos:
 
 ```markdown
-::: card "Generación asíncrona" icon:zap
+::: card title:"Generación asíncrona" icon:zap
 El motor principal utiliza una canalización de E/S no bloqueante, compilando miles de páginas en milisegundos.
-:::
+::: /card
 ```
 
 ::: card "Generación asíncrona" icon:zap
@@ -39,14 +48,14 @@ El motor principal utiliza una canalización de E/S no bloqueante, compilando mi
 Las tarjetas aceptan cualquier contenido Markdown, incluidos fragmentos de código y contenedores de botones:
 
 ```markdown
-::: card "Localización instantánea"
+::: card title:"Localización instantánea"
 Prepare su documentación para una audiencia global utilizando el soporte i18n integrado.
 
 ```bash
 npx @docmd/core build
 ```
 
-::: button "Guía de estrategia de localización" ../localisation/translated-content.md
+::: button title:"Guía de estrategia de localización" url:"../localisation/translated-content.md"
 :::
 ```
 
@@ -67,16 +76,16 @@ Envuelva múltiples tarjetas dentro de un contenedor `grids` para un diseño de 
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Nodo principal"
+        ::: card title:"Nodo principal"
         Opciones de configuración para instancias maestras.
-        :::
-    :::
+        ::: /card
+    ::: /grid
     ::: grid
-        ::: card "Nodo secundario"
+        ::: card title:"Nodo secundario"
         Opciones de configuración para instancias de réplica.
-        :::
-    :::
-:::
+        ::: /card
+    ::: /grid
+::: /grids
 ```
 
 ::: grids

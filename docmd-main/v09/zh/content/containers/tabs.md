@@ -1,126 +1,89 @@
 ---
 title: "选项卡 (Tabs)"
-description: "将密集、替代或多语言信息组织到可切换的交互式面板中。"
+description: "在 docmd 中将备选代码片段、平台指令和多语言内容组织到可切换的选项卡中。"
 ---
 
-选项卡用于展示互斥或替代的数据集（例如包管理器选择或操作系统命令）。它们将技术说明浓缩为干净、交互式的选项卡容器中。
+选项卡呈现互斥或备选的数据集（如包管理器选择或操作系统命令）。它们将技术说明精简为整洁的交互式选项卡容器。
 
-::: callout info "支持无空格语法" icon:info
-`::: tabs` 与 `:::tabs`（无空格）语法渲染效果完全一致。选择适合您编写习惯的样式即可。
-:::
-
-## 语法参考
+## 容器语法 (Container Syntax)
 
 ```markdown
-::: tabs
+::: tabs # 外层选项卡组容器开启
+::: tab [title:"选项卡标签"] [icon:图标名称] # 单个选项卡项目开启
+选项卡 1 内容（代码块、文本、列表）...
+::: /tab # 显式选项卡项目闭合
 
-== tab "选项卡标签" [property:value...]
-选项卡内容写在这里。
-
-== tab "第二个标签"
-第二个选项卡的内容写在这里。
-
-:::
+::: tab [title:"选项卡标签 2"] [icon:图标名称] # 第二个选项卡开启
+选项卡 2 内容...
+::: /tab
+::: /tabs # 显式选项卡组闭合
 ```
 
-| 参数 | 类型 | 描述 |
+## 功能特性与支持属性 (Features & Attributes)
+
+| 参数 / 属性 | 类型 | 描述 |
 | :--- | :--- | :--- |
-| **标签 (Label)** | `"String"` | 选项卡选择按钮上显示的文本。 |
-| **图标 (Icon)** | `icon:NAME` | 可选。在标签字符串前添加 [Lucide](external:https://lucide.dev/icons) 图标。 |
+| **选项卡标签** | `"String"` \| `title:"..."` | 显示在选项卡选择按钮上的文本（第 1 个位置参数或 `title:"..."`）。 |
+| **图标支持** | `icon:名称` | 可选。在选项卡标签前添加 [Lucide](external:https://lucide.dev/icons) 图标。 |
+| **子容器包装** | `::: tab` ... `::: /tab` | 显式选项卡子容器。传统 `== tab` 语法亦获完全支持。 |
+| **闭合标签** | `::: /tabs`, `::: /tab`, `:::` | 支持显式命名闭合标签或通用 `:::` 闭合标记。 |
+
+::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
+自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
+:::
+
 
 ## 使用示例
 
-### 包管理器切换器
-
-在单个紧凑的块中跨多个包管理器展示安装命令：
-
-````markdown
-::: tabs
-
-== tab "pnpm" icon:box
+```markdown
+::: tabs # 包管理器选项
+::: tab "pnpm" icon:box # 推荐的包管理器
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
+::: /tab
+::: /tabs
+```
 
-:::
-````
-
-::: tabs
-
-== tab "pnpm" icon:box
+::: tabs # 包管理器选项
+::: tab "pnpm" icon:box # 推荐的包管理器
 ```bash
 pnpm add @docmd/core
 ```
+::: /tab
 
-== tab "npm" icon:terminal
+::: tab "npm" icon:terminal
 ```bash
 npm install @docmd/core
 ```
+::: /tab
 
-== tab "yarn" icon:package
+::: tab "yarn" icon:package
 ```bash
 yarn add @docmd/core
 ```
+::: /tab
+::: /tabs
 
-:::
+::: callout note "传统 == tab 语法" icon:archive
+使用 `== tab` 语法的现有文档仍可平滑解析：
 
-### 多语言代码片段
-
-使用选项卡图标对语言特定实现进行分组，以便即时识别：
-
-````markdown
+```markdown
 ::: tabs
-
-== tab "TypeScript" icon:hexagon
-```typescript
-import { build } from '@docmd/core';
-await build('./docmd.config.json');
+== tab "JavaScript"
+console.log("传统语法");
+::: /tabs
 ```
-
-== tab "JavaScript" icon:braces
-```javascript
-const { build } = require('@docmd/core');
-build('./docmd.config.json');
-```
-
-:::
-````
-
-::: tabs
-
-== tab "TypeScript" icon:hexagon
-```typescript
-import { build } from '@docmd/core';
-await build('./docmd.config.json');
-```
-
-== tab "JavaScript" icon:braces
-```javascript
-const { build } = require('@docmd/core');
-build('./docmd.config.json');
-```
-
-:::
-
-## 约束与行为规则
-
-| 规则 | 技术说明 |
-| :--- | :--- |
-| **嵌套限制** | 选项卡不能直接嵌套在其他选项卡容器内。 |
-| **步骤兼容性** | 请勿在选项卡面板中嵌套 `::: steps`。请改为使用标准有序列表。 |
-| **视口限制** | 建议将每个块的选项卡数量控制在 6 个以内，以保证移动设备兼容性。 |
-| **状态持久化** | 在 SPA 导航期间，选定的选项卡状态会在页面跳转时保持一致。 |
-
-::: callout tip "面向 AI 的上下文标记" icon:sparkles
-在选项卡标签中明确指定目标语言或操作系统（例如 `== tab "TypeScript"`）。显式标签允许 AI 索引器精确地将替代代码块映射到它们各自的生态系统中。
 :::

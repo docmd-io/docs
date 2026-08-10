@@ -5,18 +5,25 @@ description: "Use tag containers to label versions, statuses, or highlight short
 
 The `tag` container is a self-closing component that inserts compact, pill-shaped badges inline. Tags retain their compact proportions across all contexts—they do not inherit surrounding heading font sizes or text weights.
 
-## Syntax Reference
+## Container Syntax
 
 ```markdown
-::: tag "Label text" [property:value...]
+::: tag [title:"Badge Label"] [color:css_color|#hex] [icon:icon_name] [url:[external:]address]
 ```
 
-| Parameter | Type | Description |
+## Features & Supported Attributes
+
+| Parameter / Property | Type | Description |
 | :--- | :--- | :--- |
-| **Label** | `"String"` | Text string displayed inside the pill badge. |
-| **Colour** | `color:VALUE` | Applies a background colour (supports standard CSS names or Hex codes). Automatically calculates contrasting text color. |
-| **Icon** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
-| **URL** | `url:URL` | Converts the tag into a clickable link. Prefix with `external:` to open in a new tab. Uses unquoted URL strings matching [buttons](buttons.md). |
+| **Badge Label** | `"String"` \| `title:"..."` | Text string displayed inside the pill badge (1st positional arg or `title:"..."`). |
+| **Background Colour** | `color:VALUE` | Applies background color (CSS names or Hex). Text contrast is auto-calculated. |
+| **Iconography** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
+| **Hyperlink URL** | `url:URL` | Converts badge into a link. Prefix with `external:` to open in a new browser tab. |
+
+::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
+Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
+:::
+
 
 ## Usage Examples
 
@@ -35,10 +42,10 @@ This capability was introduced in ::: tag "v0.9.0" color:blue and is fully suppo
 Insert status labels across your documentation pages with custom color accents:
 
 ```markdown
-::: tag "Deprecated" color:#ef4444
-::: tag "Beta" color:#eab308
-::: tag "Stable" color:#22c55e
-::: tag "Verified" icon:check-circle color:#10b981
+::: tag title:"Deprecated" color:#ef4444
+::: tag title:"Beta" color:#eab308
+::: tag title:"Stable" color:#22c55e
+::: tag title:"Verified" icon:check-circle color:#10b981
 ```
 
 ::: tag "Deprecated" color:#ef4444
@@ -61,7 +68,7 @@ Check out the latest ::: tag "Release Notes" icon:external-link url:./#release-n
 Prefix the URL with `external:` to force the link to open in a new browser tab:
 
 ```markdown
-::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd
+::: tag title:"GitHub" icon:github url:external:https://github.com/docmd-io/docmd
 ```
 
 ::: tag "GitHub" icon:github url:external:https://github.com/docmd-io/docmd

@@ -60,9 +60,9 @@ Jedes Locale-Verzeichnis kann ein unabhängiges `navigation.json`-Manifest entha
 ]
 ```
 
-::: callout tip "Teilweise Navigations-Überschreibungen" icon:lightbulb
+::: callout tip title:"Teilweise Navigations-Überschreibungen" icon:lightbulb
 Stellen Sie eine `navigation.json`-Datei innerhalb eines Locale-Verzeichnisses nur dann bereit, wenn Sie Menübeschriftungen übersetzen. Wenn sie weggelassen wird, wird der Navigationsbaum der Standard-Locale automatisch angewendet.
-:::
+::: /callout
 
 ## Kombination von Versionierung mit Lokalisierung
 

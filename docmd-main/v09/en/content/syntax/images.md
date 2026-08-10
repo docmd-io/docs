@@ -60,7 +60,7 @@ Wrap multiple `<figure>` components in a `div.image-gallery` container to render
 
 ## Lightbox Zoom Overlays
 
-When client scripts are active, `docmd` automatically attaches full-screen lightbox zoom behavior to images tagged with `.lightbox` or nested within `.image-gallery` containers:
+When client scripts are active, `docmd` automatically attaches full-screen lightbox zoom behaviour to images tagged with `.lightbox` or nested within `.image-gallery` containers:
 
 ```markdown
 ![System schematic preview](/assets/sample.png){ .lightbox }

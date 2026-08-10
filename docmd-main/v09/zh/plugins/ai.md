@@ -59,9 +59,9 @@ description: "基于 aiplug 多提供者集成的交互式、感知搜索的 AI 
 
 ## 服务端安全（自带密钥 BYOK）
 
-::: callout warning "零凭据泄漏" icon:alert-triangle
+::: callout warning title:"零凭据泄漏" icon:alert-triangle
 `@docmd/plugin-ai` 严格在服务端处理 API 凭据。提供商 API 密钥绝不会渲染在客户端 HTML 或静态 JavaScript 包中。
-:::
+::: /callout
 
 在启动文档服务器前设置提供商环境变量：
 

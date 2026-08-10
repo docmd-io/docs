@@ -77,9 +77,9 @@ description: "构建并定位您的菜单栏，管理导航链接，配置下拉
 
 选项菜单会自动对齐至**右侧区域**。它会出现在 `right` 数组中定义的任何链接之后。
 
-::: callout info "自动回退"
+::: callout info title:"自动回退"
 如果 `menubar` 被禁用，分配给它的实用工具会自动回退到 `sidebar-top` 位置。
-:::
+::: /callout
 
 ## 自定义样式
 

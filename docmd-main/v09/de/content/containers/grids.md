@@ -5,23 +5,33 @@ description: "Organisieren Sie responsive mehrspaltige Layouts mithilfe von nati
 
 Grids bieten ein natives, Markdown-gesteuertes Layout-System. Verwenden Sie den `grids`-Container, um Elemente nebeneinander zu strukturieren. Spalten balancieren den verfügbaren Platz automatisch aus und stapeln sich auf mobilen Viewports vertikal.
 
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: grids
-    ::: grid
-        Inhalt für die erste Spalte.
-    :::
-    ::: grid
-        Inhalt für die zweite Spalte.
-    :::
-:::
+::: grids # Äußerer Flexbox-Grid-Wrapper Öffner
+    ::: grid # Innerer Spalten-Container Öffner
+        Inhalt für Spalte 1 (Karten, Text, Buttons, Code-Blöcke)...
+    ::: /grid # Expliziter Spalten-Schließer
+
+    ::: grid # Innerer Spalte 2 Öffner
+        Inhalt für Spalte 2...
+    ::: /grid
+::: /grids # Expliziter Wrapper-Schließer
 ```
 
-| Container | Beschreibung |
-| :--- | :--- |
-| **`::: grids`** | Äußerer Wrapper-Container, der das responsive Flexbox-Layout einleitet. |
-| **`::: grid`** | Innerer Spalten-Container. Deklarieren Sie so viele `grid`-Blöcke wie erforderlich. |
+## Funktionen & Unterstützte Attribute
+
+| Container / Element | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **`::: grids`** | Äußerer Container | Wrapper, der das responsive Flexbox-Layout einleitet. |
+| **`::: grid`** | Sub-Container | Spalten-Container. Deklarieren Sie mehrere `grid`-Blöcke innerhalb von `grids`. |
+| **Flex-Verteilung** | Responsiv | Spalten richten sich auf dem Desktop horizontal aus und stapeln sich mobil vertikal. |
+| **Schließ-Tags** | `::: /grids`, `::: /grid`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Anwendungsbeispiele
 
@@ -32,16 +42,16 @@ Kombinieren Sie `grids` mit `cards`, um mehrere Feature-Blöcke in einer respons
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Geschwindigkeit" icon:zap
+        ::: card title:"Geschwindigkeit" icon:zap
         Basiert auf einer asynchronen, nicht-blockierenden I/O-Engine für maximale Performance.
-        :::
-    :::
+        ::: /card
+    ::: /grid
     ::: grid
-        ::: card "Skalierbarkeit" icon:layers
+        ::: card title:"Skalierbarkeit" icon:layers
         Entwickelt für große Monorepos und Multi-Projekt-Workspaces.
-        :::
-    :::
-:::
+        ::: /card
+    ::: /grid
+::: /grids
 ```
 
 ::: grids
@@ -64,21 +74,21 @@ Fügen Sie einen dritten `grid`-Block hinzu, um eine dreispaltige Reihe zu erste
 ```markdown
 ::: grids
     ::: grid
-        ::: card "Such-Engine" icon:search
+        ::: card title:"Such-Engine" icon:search
         Integrierter Volltext-Such-Indexierer.
-        :::
-    :::
+        ::: /card
+    ::: /grid
     ::: grid
-        ::: card "Lokalisierung" icon:globe
+        ::: card title:"Lokalisierung" icon:globe
         Mehrsprachiges Verzeichnis-Routing und lokalisierte Suchindizes.
-        :::
-    :::
+        ::: /card
+    ::: /grid
     ::: grid
-        ::: card "Theming-Engine" icon:palette
+        ::: card title:"Theming-Engine" icon:palette
         Integrierter Dunkelmodus und vollständige CSS-Variablen-Anpassung.
-        :::
-    :::
-:::
+        ::: /card
+    ::: /grid
+::: /grids
 ```
 
 ::: grids

@@ -1,115 +1,81 @@
 ---
 title: "Schritte (Steps)"
-description: "Wandeln Sie standardmäßige geordnete Listen in visuell wirkungsvolle Zeitachsen und Tutorials in docmd um."
+description: "Wandeln Sie nummerierte Schritte und geordnete Listen in ansprechende visuelle Zeitleisten und Tutorials in docmd um."
 ---
 
-Der `steps`-Container verwandelt standardmäßige geordnete Markdown-Listen in nummerierte vertikale Zeitachsen mit Hover-Permalinks. Er wurde für technische Tutorials und sequenzielle How-To-Anleitungen entwickelt.
+Der `steps`-Container verwandelt aufeinanderfolgende Anweisungen in nummerierte vertikale Zeitleisten mit Hover-Permalinks. Er ist für technische Tutorials und Schritt-für-Schritt-Anleitungen konzipiert.
 
-::: callout info "Unterstützung leerzeichenloser Syntax" icon:info
-Sowohl die Syntax `::: steps` als auch `:::steps` (ohne Leerzeichen) werden identisch gerendert. Wählen Sie den Stil, der am besten zu Ihrem Erstellungs-Workflow passt.
-:::
-
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: steps
+::: steps # Äußerer sequentieller Zeitleisten-Container Öffner
+::: step [title:"Schritt-Überschrift"] # Einzelner Schritt Öffner
+Inhalt für Schritt 1 (Markdown-Text, Code-Blöcke, Hinweisfelder, Bilder)...
+::: /step # Expliziter Schritt-Schließer
 
-1.  **Schritt-Titel**
-    Der Beschreibungstext des Schritts wird hier platziert.
-
-2.  **Nächster Schritt-Titel**
-    Fahren Sie mit der Sequenz fort.
-
-:::
+::: step [title:"Schritt 2 Überschrift"] # Zweiter Schritt Öffner
+Inhalt für Schritt 2...
+::: /step
+::: /steps # Expliziter Zeitleisten-Schließer
 ```
 
-| Komponente | Beschreibung |
-| :--- | :--- |
-| **`::: steps`** | Übergeordneter Container, der untergeordnete Elemente einer geordneten Liste in eine nummerierte Zeitachse umwandelt. |
-| **`1. `** | Standardmäßiges Element einer geordneten Markdown-Liste. Heben Sie die erste Zeile jedes Eintrags fett hervor, um einen Schritt-Titel zu erstellen. |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Element | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Schritt-Titel** | `"String"` \| `title:"..."` | Überschriftentext am Kopf jedes Zeitleistenknotens (1. Parameter oder `title:"..."`). |
+| **Zeitleistenknoten** | Automatisch | Jeder `::: step`-Block inkrementiert den Schrittindex automatisch (1, 2, 3...). |
+| **Sub-Container** | `::: step` ... `::: /step` | Explizite Schritt-Wrapper. Alte Listen-Syntax (`1.`, `2.`) wird ebenfalls unterstützt. |
+| **Schließ-Tags** | `::: /steps`, `::: /step`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
+
 
 ## Anwendungsbeispiele
 
 ### Grundlegende Workflow-Sequenz
 
-Eine einfache Sequenz für typische Entwickler-Onboarding-Aufgaben:
+Eine einfache Sequenz für Developer-Onboarding-Aufgaben mit expliziten `::: step`-Containern:
+
+```markdown
+::: steps # Onboarding-Workflow
+::: step "Projekt initialisieren" # Schritt 1
+Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur zu erstellen.
+::: /step
+
+::: step "Inhalte verfassen" # Schritt 2
+Schreiben Sie Dokumentationen in Standard-Markdown-Dateien.
+::: /step
+
+::: step "Bauen & Bereitstellen" # Schritt 3
+Führen Sie `npx @docmd/core build` aus, um die Produktionsausgabe zu kompilieren.
+::: /step
+::: /steps
+```
+
+::: steps # Onboarding-Workflow
+::: step "Projekt initialisieren" # Schritt 1
+Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur zu erstellen.
+::: /step
+
+::: step "Inhalte verfassen" # Schritt 2
+Schreiben Sie Dokumentationen in Standard-Markdown-Dateien.
+::: /step
+
+::: step "Bauen & Bereitstellen" # Schritt 3
+Führen Sie `npx @docmd/core build` aus, um die Produktionsausgabe zu kompilieren.
+::: /step
+::: /steps
+
+::: callout note "Legacy-Listen-Syntax" icon:archive
+Bestehende Dokumentationen mit geordneten Listen (`1.`, `2.`) werden weiterhin nahtlos verarbeitet:
 
 ```markdown
 ::: steps
-
-1.  **Projekt initialisieren**
-    Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur aufzubauen.
-
-2.  **Inhalt verfassen**
-    Schreiben Sie Dokumentationen mit standardmäßigen Markdown-Dateien.
-
-3.  **Erstellen & Bereitstellen**
-    Führen Sie `npx @docmd/core build` aus, um statische Produktionsausgaben zu kompilieren.
-
-:::
-```
-
-::: steps
-
-1.  **Projekt initialisieren**
-    Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur aufzubauen.
-
-2.  **Inhalt verfassen**
-    Schreiben Sie Dokumentationen mit standardmäßigen Markdown-Dateien.
-
-3.  **Erstellen & Bereitstellen**
-    Führen Sie `npx @docmd/core build` aus, um statische Produktionsausgaben zu kompilieren.
-
-:::
-
-### Schritte mit reichhaltigem eingebettetem Inhalt
-
-Schritte unterstützen eingebettete Codeblöcke, Callout-Warnungen und andere verschachtelte Container:
-
-```markdown
-::: steps
-
 1.  **Umgebung konfigurieren**
-    Definieren Sie Projektoptionen in `docmd.config.json`.
-
-    ::: callout tip
-    Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschemaschlüssel zu aktivieren.
-    :::
-
-2.  **Produktions-Build generieren**
-    Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
-
-    ```bash
-    npx @docmd/core build
-    ```
-
-3.  **Bereitstellung auf Infrastruktur**
-    Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
-
-:::
+    Definieren Sie Optionen in `docmd.config.json`.
+::: /steps
 ```
-
-::: steps
-
-1.  **Umgebung konfigurieren**
-    Definieren Sie Projektoptionen in `docmd.config.json`.
-
-    ::: callout tip
-    Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschemaschlüssel zu aktivieren.
-    :::
-
-2.  **Produktions-Build generieren**
-    Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
-
-    ```bash
-    npx @docmd/core build
-    ```
-
-3.  **Bereitstellung auf Infrastruktur**
-    Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
-
-:::
-
-::: callout tip "Workflow-Optimierung für KI-Agenten" icon:lightbulb
-KI-Modelle interpretieren den `steps`-Container als Signal für **sequenzielle Workflows**. Beginnen Sie jedes Listenelement immer mit einem **fetten Titel** — dies ermöglicht es KI-Agenten, das Ziel jedes Schritts zuverlässig aus dem `llms.txt`-Kontext zu parsen.
 :::

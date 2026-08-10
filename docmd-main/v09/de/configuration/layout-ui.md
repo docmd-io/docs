@@ -69,9 +69,9 @@ Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus
 }
 ```
 
-::: callout info "Automatischer Neupositionierungs-Fallback" icon:sparkles
+::: callout info title:"Automatischer Neupositionierungs-Fallback" icon:sparkles
 Wenn `optionsMenu` einem Container zugewiesen ist, der deaktiviert ist, verschiebt der Kompiler das Optionsmenü automatisch nach `sidebar-top`, um die Barrierefreiheit zu gewährleisten.
-:::
+::: /callout
 
 ### Sidebar & Navigation
 

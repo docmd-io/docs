@@ -10,8 +10,8 @@ titleAppend: false
 
 Markdown to production docs in one command. Static HTML for SEO. SPA for speed. Works with AI tools out of the box.
 
-::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github
+::: button "Get Started" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
+
 :::
 
 ## Overview

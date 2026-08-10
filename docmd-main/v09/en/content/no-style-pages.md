@@ -25,9 +25,9 @@ components:
   <p>Zero-config. Isomorphic execution. AI-optimised.</p>
 </div>
 
-::: callout info "Infinite Nesting Support" icon:info
+::: callout info title:"Infinite Nesting Support" icon:info
 Even with `noStyle: true`, all standard docmd containers (such as `::: card`, `::: tabs`, and `::: hero`) are fully supported and can be composed freely.
-:::
+::: /callout
 ```
 
 ## Component Opt-In Controls
@@ -64,25 +64,25 @@ components:
 # Build Documentation that Wows.
 The zero-config documentation engine for modern engineering teams.
 
-::: button "Get Started" ../getting-started/quick-start.md color:blue
-::: button "GitHub Repository" external:https://github.com/docmd-io/docmd color:gray
+::: button title:"Get Started" url:"../getting-started/quick-start.md" color:blue
+::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
-::: embed "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-:::
+::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+::: /hero
 :::
 
 ::: grids
-  ::: card "Zero Configuration"
+  ::: card title:"Zero Configuration"
   Author content in Markdown without complex frontend build scripts.
-  :::
-  ::: card "AI Optimised"
+  ::: /card
+  ::: card title:"AI Optimised"
   Structure-aware parsing for the LLM ecosystem.
-  :::
-  ::: card "Isomorphic Performance"
+  ::: /card
+  ::: card title:"Isomorphic Performance"
   Static compilation with fast SPA navigation.
-  :::
-:::
+  ::: /card
+::: /grids
 ```
 
 ::: callout tip "AI-Generated Layouts" icon:sparkles
@@ -191,9 +191,9 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 });
 ```
 
-::: callout info "Automatic Locale Detection" icon:info
+::: callout info title:"Automatic Locale Detection" icon:info
 The client script detects active locales from the URL path prefix. For the default locale, it inspects `localStorage` for saved preferences. The `switchLocale()` function handles URL navigation automatically.
-:::
+::: /callout
 
 ### In-Place Mode Configuration
 

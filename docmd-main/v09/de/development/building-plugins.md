@@ -53,9 +53,9 @@ Engines haben denselben `docmd`-Namespace, aber **keine `capabilities`** — sie
 
 Die Build-Zeit-Prüfung (ebenfalls neu in 0.8.9) erkennt Drift zwischen JS-Deskriptor und Manifest, einschließlich des Bugs "implementierter Hook ohne deklarierte Fähigkeit", der zuvor unsichtbar war.
 
-::: callout warning "Entfernung des gebündelten Registers in 0.9.0"
+::: callout warning title:"Entfernung des gebündelten Registers in 0.9.0"
 Die handgepflegte `packages/plugins/installer/registry/plugins.json`, die früher der Katalog offizieller Plugins war, ist **seit 0.8.9 veraltet** und wird **in 0.9.0 entfernt**. Der Build-Zeit-Registry-Generator ist jetzt die einzige Quelle der Wahrheit — Ihr Plugin benötigt lediglich einen korrekten `docmd`-Namespace in seiner `package.json`, und der Generator nimmt es beim nächsten `pnpm build` von `@docmd/api` auf. Für bestehende offizielle Plugins sind keine Code-Änderungen erforderlich.
-:::
+::: /callout
 
 ## Kernfähigkeiten
 
@@ -362,9 +362,9 @@ Das `ctx` (ActionContext) bietet:
 
 Alle Dateioperationen sind auf den Projektstamm sandboxed.
 
-::: callout info "Nur Dev-Modus 🛡️"
+::: callout info title:"Nur Dev-Modus 🛡️"
 Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktions-Builds enthalten weder den API-Client noch das serverseitige Action-Handling.
-:::
+::: /callout
 
 ## Best Practices
 
@@ -377,9 +377,9 @@ Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktio
 7.  **Action-Validierung**: Definieren und verlangen Sie ein explizites Payload-Schema in Ihren Actions.
 8.  **Logging**: Verwenden Sie den bereitgestellten `log()`-Helper in `onPostBuild`, um die Ausführlichkeitseinstellungen des Benutzers zu respektieren.
 
-::: callout tip "KI-bereites Design 🤖"
+::: callout tip title:"KI-bereites Design 🤖"
 Die docmd-Plugin-API ist **LLM-optimal**. Da die Hooks Standard-JavaScript-Objekte verwenden, können KI-Agenten mit minimaler Anleitung fehlerfreie Plugins generieren.
-:::
+::: /callout
 
 ## ESM-Exports – die `default`-Bedingung
 

@@ -5,21 +5,32 @@ description: "Generate structured, timeline-based version histories and release 
 
 The `changelog` container provides a specialised layout for documenting project evolution. It parses version or date headers into vertical timeline entries, ensuring release notes remain clear and scannable.
 
-## Syntax Reference
+## Container Syntax
 
 ```markdown
-::: changelog
+::: changelog # Outer release history container opener
+::: log [title:"v1.0.0 (YYYY-MM-DD)"] # Version entry item opener
+Release details (markdown headings, bullet points, callouts)...
+::: /log # Explicit log item closer
 
-== Label Text
-Description of the entry goes here.
-
-:::
+::: log [title:"v0.9.0 (YYYY-MM-DD)"] # Secondary release entry opener
+Release notes...
+::: /log
+::: /changelog # Explicit changelog closer
 ```
 
-| Parameter | Type | Description |
+## Features & Supported Attributes
+
+| Parameter / Element | Type | Description |
 | :--- | :--- | :--- |
-| **Entry Marker** | `==` | Delimiter that initiates a new timeline entry within the changelog block. |
-| **Label** | `String` | Text string (e.g. version number or ISO date) rendered as a timeline badge on the left margin. |
+| **Version Label** | `"String"` \| `title:"..."` | Version tag or date rendered as a timeline badge on the left margin. |
+| **Sub-Containers** | `::: log` ... `::: /log` | Explicit version entry wrappers. Legacy `== Version` header markers are also supported. |
+| **Closing Tags** | `::: /changelog`, `::: /log`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
+
+::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
+Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
+:::
+
 
 ## Usage Examples
 
@@ -28,9 +39,8 @@ Description of the entry goes here.
 Changelogs support full Markdown formatting within each entry, including lists, callouts, and code snippets:
 
 ```markdown
-::: changelog
-
-== v2.0.0 (2026-03-15)
+::: changelog # Production release history
+::: log "v2.0.0 (2026-03-15)" # Major release
 ### Major System Overhaul
 The core engine has been rearchitected for isomorphic execution.
 
@@ -39,22 +49,23 @@ The core engine has been rearchitected for isomorphic execution.
 
 ::: callout success
 This release delivers a 40% improvement in initial build compilation speed.
-:::
+::: /callout
+::: /log
 
-== v1.5.1 (2025-12-10)
+::: log "v1.5.1 (2025-12-10)" # Patch update
 ### Security Patch
-*   Resolved high-severity vulnerability in internal parser.
-*   Updated dependency `flatted` to `v3.3.2`.
+*   Resolved vulnerability in internal parser.
+*   Updated dependencies.
+::: /log
 
-== v1.0.0 (2024-05-01)
+::: log "v1.0.0 (2024-05-01)"
 Initial public release.
-
-:::
+::: /log
+::: /changelog
 ```
 
-::: changelog
-
-== v2.0.0 (2026-03-15)
+::: changelog # Production release history
+::: log "v2.0.0 (2026-03-15)" # Major release
 ### Major System Overhaul
 The core engine has been rearchitected for isomorphic execution.
 
@@ -64,15 +75,28 @@ The core engine has been rearchitected for isomorphic execution.
 ::: callout success
 This release delivers a 40% improvement in initial build compilation speed.
 :::
+::: /log
 
-== v1.5.1 (2025-12-10)
+::: log "v1.5.1 (2025-12-10)" # Patch update
 ### Security Patch
-*   Resolved high-severity vulnerability in internal parser.
-*   Updated dependency `flatted` to `v3.3.2`.
+*   Resolved vulnerability in internal parser.
+*   Updated dependencies.
+::: /log
 
+::: log "v1.0.0 (2024-05-01)"
+Initial public release.
+::: /log
+::: /changelog
+
+::: callout note "Legacy == Entry Marker Syntax" icon:archive
+Existing documentation utilizing `==` entry markers continues to parse seamlessly:
+
+```markdown
+::: changelog
 == v1.0.0 (2024-05-01)
 Initial public release.
-
+::: /changelog
+```
 :::
 
 ::: callout tip "Historical Context for AI Agents" icon:sparkles

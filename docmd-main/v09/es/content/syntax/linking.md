@@ -73,12 +73,12 @@ Utilice el prefijo `raw:` para omitir la normalización de URL y dirigirse direc
 Los contenedores de botones (`::: button`) y etiquetas (`::: tag`) admiten todos los prefijos de enlace, incluidos los modificadores `external:` y `raw:`:
 
 ```markdown
-::: button "Guía de inicio rápido" ./getting-started/quick-start.md icon:rocket
-::: button "Repositorio de GitHub" external:https://github.com/docmd-io/docmd icon:github
-::: button "Descargar manifiesto" raw:docs/manifest.json icon:download
+::: button title:"Guía de inicio rápido" url:"./getting-started/quick-start.md" icon:rocket
+::: button title:"Repositorio de GitHub" url:"external:https://github.com/docmd-io/docmd" icon:github
+::: button title:"Descargar manifiesto" url:"raw:docs/manifest.json" icon:download
 
-::: tag "Lanzamiento v0.9.0" link:release-notes/0-9-0.md icon:tag color:#22c55e
-::: tag "Sitio externo" link:external:https://docmd.io icon:external-link
+::: tag title:"Lanzamiento v0.9.0" link:release-notes/0-9-0.md icon:tag color:#22c55e
+::: tag title:"Sitio externo" link:external:https://docmd.io icon:external-link
 :::
 ```
 

@@ -77,9 +77,9 @@ To position global utilities (such as full-text search, dark/light theme switch,
 
 Utilities align to the **right region** automatically, rendering after any custom links defined in `right`.
 
-::: callout info "Relocation Fallback" icon:sparkles
+::: callout info title:"Relocation Fallback" icon:sparkles
 If the `menubar` is disabled while `optionsMenu.position` is set to `'menubar'`, utilities fall back automatically to the `sidebar-top` position.
-:::
+::: /callout
 
 ## Custom Styling
 

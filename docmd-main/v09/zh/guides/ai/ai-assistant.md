@@ -39,9 +39,9 @@ docmd AI 助手基于你的 Markdown 文档直接为读者提供实时、上下�
 }
 ```
 
-::: callout tip "推荐模型" icon:sparkles
+::: callout tip title:"推荐模型" icon:sparkles
 为了在响应速度和成本之间取得最佳平衡，我们推荐使用快速推理模型，如 `gpt-4o-mini` (OpenAI)、`claude-3-5-haiku-20241022` (Anthropic) 或 `gemini-1.5-flash` (Google)。
-:::
+::: /callout
 
 ## 设置提供商凭据
 

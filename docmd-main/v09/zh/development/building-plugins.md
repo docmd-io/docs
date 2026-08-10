@@ -53,9 +53,9 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
 
 构建时交叉检查（同样在 0.8.9 中新增）会发现 JS 描述符与清单之间的 漂移，包括以前不可见的"实现了钩子但未声明能力"的静默丢弃问题。
 
-::: callout warning "0.9.0 中将移除打包的注册表"
+::: callout warning title:"0.9.0 中将移除打包的注册表"
 过去作为官方插件目录的手动维护的 `packages/plugins/installer/registry/plugins.json` 从 0.8.9 起已**弃用**，将在 **0.9.0 中移除**。构建时注册表生成器现在是唯一的真相来源 —— 您的插件只需在 `package.json` 中具有正确的 `docmd` 命名空间，生成器就会在下一次 `pnpm build` `@docmd/api` 时拾取它。现有官方插件无需任何代码更改。
-:::
+::: /callout
 
 ## 核心能力
 
@@ -362,9 +362,9 @@ export default {
 
 所有文件操作都沙箱化到项目根目录。
 
-::: callout info "仅限开发模式 🛡️"
+::: callout info title:"仅限开发模式 🛡️"
 WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间处于活动状态。生产构建不包括 API 客户端或服务端 action 处理。
-:::
+::: /callout
 
 ## 最佳实践
 
@@ -377,9 +377,9 @@ WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间处于活动状态。生�
 7.  **Action 验证**：在您的 actions 中定义并要求显式的 payload schema。
 8.  **日志记录**：在 `onPostBuild` 中使用提供的 `log()` helper 以遵守用户的详细程度设置。
 
-::: callout tip "AI 就绪的设计 🤖"
+::: callout tip title:"AI 就绪的设计 🤖"
 docmd 插件 API 是 **LLM 优化的**。由于钩子使用标准 JavaScript 对象，AI 智能体可以以最少的指令生成无错误的插件。
-:::
+::: /callout
 
 ## ESM exports — `default` 条件
 

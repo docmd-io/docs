@@ -73,12 +73,12 @@ docmd 提供可靠的、感知文件系统的链接系统。以任何格式自�
 `::: button` 和 `::: tag` 容器支持所有标准的链接约定，包括 `external:` 和 `raw:` 前缀。
 
 ```markdown
-::: button "Get Started" ./getting-started/quick-start.md icon:rocket
-::: button "View on GitHub" external:https://github.com/docmd-io/docmd icon:github
-::: button "Download Source" raw:docs/readme.md icon:download
+::: button title:"Get Started" url:"./getting-started/quick-start.md" icon:rocket
+::: button title:"View on GitHub" url:"external:https://github.com/docmd-io/docmd" icon:github
+::: button title:"Download Source" url:"raw:docs/readme.md" icon:download
 
-::: tag "v0.8.2" link:release-notes/0-8-2.md icon:tag color:#22c55e
-::: tag "Open Externally" link:external:./configuration/overview.md icon:external-link
+::: tag title:"v0.8.2" link:release-notes/0-8-2.md icon:tag color:#22c55e
+::: tag title:"Open Externally" link:external:./configuration/overview.md icon:external-link
 ```
 
 ## 导航配置
@@ -105,7 +105,7 @@ docmd 提供可靠的、感知文件系统的链接系统。以任何格式自�
 ]
 ```
 
-::: callout warning "导航中的索引页"
+::: callout warning title:"导航中的索引页"
 当链接到目录的索引页时，请使用文件夹路径而不是显式引用 `index.md`。两者效果相同，但文件夹路径更简洁。
 
 ```markdown

@@ -5,18 +5,33 @@ description: "Fügen Sie klare, gut sichtbare Call-to-Actions direkt in Ihre Dok
 
 Schaltflächen sind interaktive Komponenten für Navigation und Call-to-Actions. Sie können auf interne Dokumentationsseiten oder externe Ressourcen verweisen.
 
-## Syntax-Referenz
+## Container-Syntax
 
 ```markdown
-::: button "Label text" target_url [property:value...]
+# Einzelne Zeilenschaltfläche
+::: button ["Label-Text"] ["Ziel-URL" | url:"Ziel-URL"] [icon:Icon-Name] [color:#hex|css_farbe] [::: /button]
+
+# Explizites Key-Value
+::: button title:"Label-Text" url:"Ziel-URL" icon:Icon-Name color:#hex [::: /button]
+
+# Inline-Satzschaltfläche
+Klicken Sie ::: button title:"Label-Text" url:"Ziel-URL" icon:Icon-Name ::: /button um fortzufahren.
 ```
 
-| Parameter | Typ | Beschreibung |
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
 | :--- | :--- | :--- |
-| **Pfad** | `/path/` | Relative Projekt-URL. Wird automatisch für die SPA-Navigation aufgelöst. |
-| **Extern** | `external:URL`| Öffnet die Ziel-URL in einem neuen Browser-Tab (`target="_blank"`). |
-| **Farbe** | `color:VALUE` | Wendet eine Hintergrundfarbe an (unterstützt CSS-Namen oder Hex-Codes). |
-| **Symbol** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol vor dem Label hinzu. |
+| **Titel / Label** | `"String"` \| `title:"..."` | Textbeschriftung der Schaltfläche (1. positionaler Parameter oder `title:"..."`). |
+| **Ziel-URL** | `"URL"` \| `url:URL` | Navigationsziel (2. positionaler Parameter oder `url:"..."`). Unterstützt SPA-Pfade, Mailto, Tel oder externe Links. |
+| **Externer Link** | `external:URL` | Öffnet das Ziel in einem neuen Tab (`target="_blank"` mit `rel="noopener noreferrer"`). |
+| **Hintergrundfarbe** | `color:VALUE` | Benutzerdefinierte Hintergrund- und Rahmenfarbe (unterstützt CSS-Farbnamen oder Hex-Codes). |
+| **Symbolik** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol vor dem Text-Label ein. |
+| **Selbstschließend & Inline** | `::: /button` \| `:::` | Standardmäßig selbstschließend, optional mit `::: /button` bei Inline-Nutzung geschlossen. |
+
+::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
+Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
+:::
 
 ## Beispiele
 
@@ -25,7 +40,7 @@ Schaltflächen sind interaktive Komponenten für Navigation und Call-to-Actions.
 Verwenden Sie relative Markdown-Pfade, um nahtlose Übergänge innerhalb der docmd-SPA sicherzustellen.
 
 ```markdown
-::: button "Install docmd" ../../getting-started/installation.md
+::: button title:"Install docmd" url:"../../getting-started/installation.md"
 ```
 
 ::: button "Install docmd" ../../getting-started/installation.md
@@ -35,7 +50,7 @@ Verwenden Sie relative Markdown-Pfade, um nahtlose Übergänge innerhalb der doc
 Stellen Sie `external:` der URL voran, um den Link in einem neuen Tab zu öffnen.
 
 ```markdown
-::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
+::: button title:"View GitHub Repository" url:"external:https://github.com/docmd-io/docmd"
 ```
 
 ::: button "View GitHub Repository" external:https://github.com/docmd-io/docmd
@@ -45,30 +60,21 @@ Stellen Sie `external:` der URL voran, um den Link in einem neuen Tab zu öffnen
 Passen Sie Schaltflächen mit Farbüberschreibungen und Lucide-Symbolen an Ihre Markenidentität an.
 
 ```markdown
-::: button "Success Confirmation" ./#success color:#228B22
-::: button "Danger Action" ./#delete color:crimson icon:alert-circle
-::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
+::: button title:"Success Confirmation" url:"./#success" color:#228B22
+::: button title:"Danger Action" url:"./#delete" color:crimson icon:alert-circle
+::: button title:"View Source" url:"external:https://github.com/docmd-io/docmd" icon:github
 ```
 
 ::: button "Success Confirmation" ./#success color:#228B22
 ::: button "Danger Action" ./#delete color:crimson icon:alert-circle
 ::: button "View Source" external:https://github.com/docmd-io/docmd icon:github
 
-## Wichtiger Hinweis: Selbstschließende Logik
+### Inline-Schaltflächen in Sätzen
 
-Schaltflächen sind selbstschließend. Eine abschließende `:::`-Zeile unmittelbar nach einer Schaltfläche beendet den **übergeordneten Container** (z. B. eine Card oder einen Tab) und kann Ihr Layout beschädigen.
+Schaltflächen können inline in Fließtexten verwendet werden:
 
-**Falsche Reihenfolge:**
 ```markdown
-::: card "Setup"
-    ::: button "Begin" ../../setup.md
-    :::        <-- Fehler: Dies schließt die Card vorzeitig.
-:::
+Klicken Sie auf ::: button title:"Download v0.9.1" url:"https://docmd.io" icon:download ::: /button um zu starten!
 ```
 
-**Korrekte Reihenfolge:**
-```markdown
-::: card "Setup"
-    ::: button "Begin" ../../setup.md
-:::        <-- Korrekt: Dies schließt die Card sauber.
-```
+Klicken Sie auf ::: button "Download v0.9.1" https://docmd.io icon:download ::: /button um zu starten!

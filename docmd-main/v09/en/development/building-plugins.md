@@ -53,9 +53,9 @@ Engines have the same `docmd` namespace but **no `capabilities`** — they don't
 
 The build-time cross-check (also new in 0.8.9) surfaces drift between the JS descriptor and the manifest, including the "implemented hook without declared capability" silent-drop bug that was previously invisible.
 
-::: callout warning "Bundled registry removal in 0.9.0"
+::: callout warning title:"Bundled registry removal in 0.9.0"
 The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalog of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
-:::
+::: /callout
 
 ## Core Capabilities
 
@@ -362,9 +362,9 @@ The `ctx` (ActionContext) provides:
 
 All file operations are sandboxed to the project root.
 
-::: callout info "Dev Mode Only 🛡️"
+::: callout info title:"Dev Mode Only 🛡️"
 The WebSocket RPC system is only active during `npx @docmd/core dev`. Production builds do not include the API client or server-side action handling.
-:::
+::: /callout
 
 ## Best Practices
 
@@ -377,9 +377,9 @@ The WebSocket RPC system is only active during `npx @docmd/core dev`. Production
 7.  **Action Validation**: Define and require an explicit payload schema in your actions.
 8.  **Logging**: Use the provided `log()` helper in `onPostBuild` to respect user verbosity settings.
 
-::: callout tip "AI-Ready Design 🤖"
+::: callout tip title:"AI-Ready Design 🤖"
 The docmd plugin API is **LLM-Optimal**. Because the hooks use standard JavaScript objects, AI agents can generate bug-free plugins with minimal instruction.
-:::
+::: /callout
 
 ## ESM Exports — the `default` Condition
 

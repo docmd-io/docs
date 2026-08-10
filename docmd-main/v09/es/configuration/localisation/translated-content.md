@@ -60,9 +60,9 @@ Cada directorio de idioma puede incluir un manifiesto `navigation.json` independ
 ]
 ```
 
-::: callout tip "Anulaciones parciales de navegación" icon:lightbulb
+::: callout tip title:"Anulaciones parciales de navegación" icon:lightbulb
 Proporcione un archivo `navigation.json` dentro de un directorio de idioma solo cuando traduzca etiquetas de menú. Si se omite, el árbol de navegación del idioma predeterminado se aplica automáticamente.
-:::
+::: /callout
 
 ## Combinación del control de versiones con la localización
 

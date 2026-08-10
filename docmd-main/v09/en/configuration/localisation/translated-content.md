@@ -60,9 +60,9 @@ Each locale directory can include an independent `navigation.json` manifest. `do
 ]
 ```
 
-::: callout tip "Partial Navigation Overrides" icon:lightbulb
+::: callout tip title:"Partial Navigation Overrides" icon:lightbulb
 Provide a `navigation.json` file inside a locale directory only when translating menu labels. If omitted, the default locale's navigation tree applies automatically.
-:::
+::: /callout
 
 ## Combining Versioning with Localisation
 

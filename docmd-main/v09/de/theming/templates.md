@@ -45,7 +45,7 @@ Das standardmäßige integrierte Template enthält vier kuratierte CSS-Farbpalet
 | `ruby` | Markenidentität | Anspruchsvolle Serif-Header, lebendige Akzente |
 | `retro` | Entwickler-Tools | Monospace-Typografie, grüne Phosphor-Akzente |
 
-::: callout info "Schichten von Farbschemata auf externe Templates" icon:info
+::: callout info title:"Schichten von Farbschemata auf externe Templates" icon:info
 Um ein bestimmtes CSS-Farbschema (`sky`, `ruby`, `retro`) auf ein benutzerdefiniertes strukturelles Template anzuwenden, setzen Sie `theme.template` neben `theme.name`:
 ```json "docmd.config.json"
 {

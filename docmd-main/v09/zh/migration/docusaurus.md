@@ -86,9 +86,9 @@ Docusaurus 提示框语法 **开箱即用**，无需修改文件：
 ::: callout tip "原生容器语法" icon:sparkles
 如需增强特性（例如自定义图标或自定义徽章颜色），可将 Docusaurus 提示框转换为原生 `docmd` 语法：
 ```markdown
-::: callout tip "自定义标题" icon:sparkles
+::: callout tip title:"自定义标题" icon:sparkles
 这是一个提示框容器。
-:::
+::: /callout
 ```
 :::
 
@@ -117,7 +117,7 @@ Apple 内容。
 
 == tab "Orange" icon:citrus
 Orange 内容。
-:::
+::: /tabs
 ```
 
 #### 本地化 (i18n)

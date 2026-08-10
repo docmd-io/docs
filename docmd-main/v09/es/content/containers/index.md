@@ -1,59 +1,42 @@
 ---
-title: "Contenedores interactivos personalizados"
-description: "Un directorio completo de contenedores estructurales de interfaz de usuario y componentes interactivos en docmd."
+title: "Contenedores Interactivos Personalizados"
+description: "Directorio completo de contenedores estructurales de UI y componentes interactivos en docmd."
 ---
 
-El Markdown estándar destaca en el formato de texto básico, pero la documentación técnica requiere componentes estructurales para comunicar lógica compleja. `docmd` extiende Markdown con una suite de **contenedores isomórficos** que se renderizan en elementos de interfaz de usuario adaptables y de alta fidelidad.
+Standard Markdown es excelente para el formato básico de texto, pero la documentación técnica requiere componentes estructurales. `docmd` extiende Markdown con una suite de **contenedores isomórficos**.
+
+::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
+A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
+:::
 
 ::: callout tip "¿Migrando desde otros motores de documentación?" icon:sparkles
-`docmd` admite alias de sintaxis de **VitePress** y **Docusaurus** de forma nativa. Los contenedores como `:::tip`, `:::warning`, `:::note`, `:::details` y `:::caution` funcionan sin modificaciones. La sintaxis sin espacios (por ejemplo, `:::tabs` en lugar de `::: tabs`) también es compatible con todos los contenedores.
+`docmd` admite alias de sintaxis de **VitePress** y **Docusaurus** directamente. Contenedores como `:::tip`, `:::warning`, `:::note`, `:::details` y `:::caution` funcionan sin modificaciones.
 :::
 
-## Referencia de sintaxis de bloques
+## Referencia de Sintaxis Unificada
 
-Todos los contenedores utilizan una sintaxis de bloques consistente, lo que garantiza una experiencia de creación predecible en todo su proyecto.
+Todos los contenedores utilizan una sintaxis de bloques uniforme con etiquetas explícitas de apertura y cierre, comentarios en línea y atributos de clave-valor universales:
 
 ```markdown
-::: type "Título de encabezado opcional"
-Esta es el área de contenido principal.
+::: containerType title:"Título de Encabezado" icon:rocket # Encabezado con comentario
+::: subContainer title:"Título de Elemento" icon:code-2 # Elemento subcontenedor explícito
+Esta es el área principal de contenido.
 Admite **Markdown**, imágenes y anidamiento profundo de componentes.
-:::
+::: /subContainer # Cierre explícito de subcontenedor
+::: /containerType # Cierre explícito del contenedor principal
 ```
 
-| Componente | Palabra clave | Caso de uso principal |
+| Componente | Palabra Clave | Caso de Uso Principal |
 | :--- | :--- | :--- |
-| **[Avisos](callouts.md)** | `callout` | Alertas semánticas para consejos, advertencias y avisos críticos. |
-| **[Tarjetas](cards.md)** | `card` | Contenedores estructurales con marco para rejillas de características y diseños de inicio. |
-| **[Rejillas](grids.md)** | `grids` | Grupos flexbox multicolumna de ajuste automático. |
-| **[Pestañas](tabs.md)** | `tabs` | Paneles conmutables interactivos para instrucciones de plataformas alternativas. |
-| **[Pasos](steps.md)** | `steps` | Líneas de tiempo numeradas visuales para guías paso a paso. |
-| **[Plegables](collapsible.md)** | `collapsible` | Desplegables de acordeón interactivos para preguntas frecuentes y datos técnicos detallados. |
-| **[Botones](buttons.md)** | `button` | Enlaces de navegación de llamada a la acción destacados y autocerrados. |
-| **[Etiquetas](tags.md)** | `tag` | Insignias de colores autocerradas para etiquetas de versión o etiquetas de estado. |
-| **[Secciones Hero](hero.md)** | `hero` | Encabezados de páginas de inicio de gran impacto con soporte dividido y deslizante. |
-| **[Incrustaciones de URL](embed.md)** | `embed` | Incrustaciones sin latencia para videos, medios sociales e interactivos a través de `embed-lite`. |
-| **[Registros de cambios](changelogs.md)** | `changelog` | Historiales de versiones basados en líneas de tiempo y notas de lanzamiento. |
-| **[Contenedores anidados](nested-containers.md)** | - | Patrones de composición recursivos para diseños multicomponente. |
-
-## Beneficios estratégicos de los contenedores
-
-Los contenedores facilitan más que el retoque visual; proporcionan **Señales semánticas** de alta fidelidad al compilador de `docmd` y a los agentes de IA posteriores:
-
-1. **Mapeo de contexto de IA**: Marcar un bloque como `callout warning` instruye explícitamente a los LLM para que prioricen esa advertencia durante el razonamiento y la generación de respuestas.
-2. **Integridad estructural**: Combinar `cards` y `grids` permite crear páginas de inicio complejas directamente en Markdown sin el exceso de HTML en línea.
-3. **Mantenibilidad del código fuente**: Elimina el marcado HTML sin procesar, manteniendo sus archivos `.md` limpios, legibles y analizables por máquinas.
-
-## Composición recursiva
-
-`docmd` admite **Profundidad de anidamiento infinita**. Componga cualquier contenedor dentro de otro para crear componentes de documentación multicapa:
-
-```markdown
-::: card "Descripción general de la arquitectura"
-    ::: callout info
-    Este módulo utiliza una canalización de E/S asíncrona no bloqueante.
-    :::
-    ::: button "Explorar arquitectura del motor principal" ./#architecture
-:::
-```
-
-[Domine la guía de anidamiento](nested-containers.md)
+| **[Avisos / Callouts](callouts.md)** | `callout` | Alertas semánticas para consejos, advertencias y avisos críticos. |
+| **[Tarjetas / Cards](cards.md)** | `card` | Contenedores estructurales enmarcados para rejillas de funciones. |
+| **[Rejillas / Grids](grids.md)** | `grids` | Grupos flexbox multicolumna de ajuste automático. |
+| **[Pestañas / Tabs](tabs.md)** | `tabs` | Paneles intercambiables interactivos con elementos explícitos `::: tab`. |
+| **[Pasos / Steps](steps.md)** | `steps` | Líneas de tiempo numeradas visuales con elementos explícitos `::: step`. |
+| **[Plegables / Collapsibles](collapsible.md)** | `collapsible` | Desplegables de acordeón interactivos para preguntas frecuentes. |
+| **[Botones / Buttons](buttons.md)** | `button` | Enlaces de navegación con llamadas a la acción destacadas de autocierre. |
+| **[Etiquetas / Tags](tags.md)** | `tag` | Insignias de colores de autocierre para etiquetas de versión. |
+| **[Secciones Destacadas / Hero](hero.md)** | `hero` | Encabezados de páginas de destino con soporte dividido y `::: slide`. |
+| **[Incrustaciones / Embeds](embed.md)** | `embed` | Incrustaciones para video, redes sociales y medios interactivos con `embed-lite`. |
+| **[Registros de Cambios / Changelogs](changelogs.md)** | `changelog` | Historiales de versiones con elementos explícitos `::: log`. |
+| **[Contenedores Anidados](nested-containers.md)** | - | Patrones de composición recursiva para diseños complejos. |

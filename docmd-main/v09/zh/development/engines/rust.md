@@ -42,9 +42,9 @@ Rust 引擎针对特定的编译瓶颈而生。在以下场景中能带来显著
 | `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (glibc 环境) |
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
-::: callout info "透明的优雅回退"
+::: callout info title:"透明的优雅回退"
 若当前环境找不到可用的预编译二进制，引擎会打印一条非致命通知，并**自动回退**到高性能 JavaScript 引擎 —— 您的构建依旧完全确定性。
-:::
+::: /callout
 
 ## 能力与战略性限制
 

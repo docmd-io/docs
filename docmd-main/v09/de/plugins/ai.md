@@ -59,9 +59,9 @@ Konfigurieren Sie Assistentenoptionen und Provider-Anmeldeinformationen in `docm
 
 ## Serverseitige Sicherheit (Bring-Your-Own-Key)
 
-::: callout warning "Kein Verlust von Anmeldeinformationen" icon:alert-triangle
+::: callout warning title:"Kein Verlust von Anmeldeinformationen" icon:alert-triangle
 `@docmd/plugin-ai` verarbeitet API-Anmeldeinformationen strikt serverseitig. Provider-API-Schlüssel werden niemals im Client-HTML oder in statischen JavaScript-Bundles gerendert.
-:::
+::: /callout
 
 Setzen Sie die Umgebungsschlüssel des Anbieters vor dem Start Ihres Dokumentationsservers:
 

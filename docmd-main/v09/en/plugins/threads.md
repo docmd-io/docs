@@ -43,7 +43,7 @@ Enable thread configuration in `docmd.config.json`:
 2. **Comment Popover**: Enter feedback in the popover modal.
 3. **Anchor Injection**: Selected prose is highlighted with a thread identifier (`==highlighted text=={t-a1b2c3d4}`).
 4. **Markdown Persist**: Thread structures append to the bottom of the Markdown file as a `::: threads` block.
-5. **Git Synchronization**: Discussion history is saved in source control alongside document edits.
+5. **Git Synchronisation**: Discussion history is saved in source control alongside document edits.
 
 ## Interactive Preview
 

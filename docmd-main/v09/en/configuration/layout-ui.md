@@ -69,9 +69,9 @@ The `optionsMenu` groups global utilities such as **Search**, **Theme Mode Toggl
 }
 ```
 
-::: callout info "Automatic Relocation Fallback" icon:sparkles
+::: callout info title:"Automatic Relocation Fallback" icon:sparkles
 If `optionsMenu` is assigned to a container that is disabled, the compiler automatically moves the options menu to `sidebar-top` to preserve accessibility.
-:::
+::: /callout
 
 ### Sidebar & Navigation
 

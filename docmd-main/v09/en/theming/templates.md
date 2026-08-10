@@ -45,7 +45,7 @@ The default built-in template includes four curated CSS color palettes that can 
 | `ruby` | Brand Identity | Sophisticated, serif headers, vibrant accents |
 | `retro` | Developer Tools | Monospace typography, green phosphor accents |
 
-::: callout info "Layering Color Schemes on External Templates" icon:info
+::: callout info title:"Layering Color Schemes on External Templates" icon:info
 To apply a specific CSS color scheme (`sky`, `ruby`, `retro`) onto a custom structural template, set `theme.template` alongside `theme.name`:
 ```json "docmd.config.json"
 {

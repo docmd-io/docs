@@ -62,9 +62,9 @@ docs/
 ]
 ```
 
-::: callout tip "部分导航" icon:info
+::: callout tip title:"部分导航" icon:info
 仅在需要翻译后的标签时才创建本地化的 `navigation.json`。如果缺失，则使用默认导航。
-:::
+::: /callout
 
 ## 版本管理与 i18n
 

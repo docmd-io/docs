@@ -1,59 +1,42 @@
 ---
 title: "自定义交互式容器"
-description: "docmd 中可用的交互式 UI 构建块的完整目录。"
+description: "docmd 结构化 UI 容器和交互组件的完整指南与目录。"
 ---
 
-标准的 Markdown 擅长基础文本格式化，但专业的开发文档需要丰富的结构组件来有效传达复杂的逻辑。`docmd` 通过一系列**同构容器**扩展了 Markdown，这些容器可直接渲染为响应式、高保真 UI 元素。
+标准 Markdown 在基础文本格式化方面表现出色，但技术文档需要结构化组件来表达复杂的逻辑。`docmd` 扩展了 Markdown，提供了一整套**同构容器**。
 
-::: callout tip "从其他文档引擎迁移？"
-`docmd` 开箱即支持 **VitePress** 和 **Docusaurus** 的语法别名。`:::tip`、`:::warning`、`:::note`、`:::details` 和 `:::caution` 等容器无需修改即可工作。所有容器也支持无空格语法（例如 `:::tabs` 而不是 `::: tabs`）。
+::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
+自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
 :::
 
-## 块语法参考
+::: callout tip "从其他文档引擎迁移？" icon:sparkles
+`docmd` 开箱即用支持来自 **VitePress** 和 **Docusaurus** 的语法别名。像 `:::tip`、`:::warning`、`:::note`、`:::details` 和 `:::caution` 这样的容器无需修改即可直接使用。
+:::
 
-所有容器都使用一致的块语法，确保在整个项目中拥有可预测的编写体验。
+## 统一块级语法参考
+
+所有容器均采用统一且感知嵌套深度的块级语法，支持显式的开启与关闭标签、内联注释以及通用的键值对属性：
 
 ```markdown
-::: 类型 "可选页眉标题"
+::: containerType title:"标头标题" icon:rocket # 带有注释的容器标头
+::: subContainer title:"条目标题" icon:code-2 # 显式子容器条目
 这是主要内容区域。
-它支持 **Markdown**、图像和深层组件嵌套。
-:::
+它支持 **Markdown**、图像和深度组件嵌套。
+::: /subContainer # 显式子容器闭合标签
+::: /containerType # 显式主容器闭合标签
 ```
 
-| 组件 | 关键字 | 主要用例 |
+| 组件 | 关键字 | 主要应用场景 |
 | :--- | :--- | :--- |
-| **[标注](callouts.md)** | `callout` | 用于技巧、警告和警报的语义化突出显示。 |
-| **[卡片](cards.md)** | `card` | 用于功能网格和布局控制的有框结构块。 |
-| **[网格](grids.md)** | `grids` | 自动调整的多列结构组。 |
-| **[选项卡](tabs.md)** | `tabs` | 用于替代平台说明的交互式可切换面板。 |
-| **[步骤](steps.md)** | `steps` | 用于“如何操作”指南和教程的视觉数字时间线。 |
-| **[折叠区块](collapsible.md)** | `collapsible` | 用于 FAQ 和深度技术数据的交互式手风琴切换。 |
-| **[按钮](buttons.md)** | `button` | 自闭合、突出的呼吁操作导航链接。 |
-| **[标签](tags.md)** | `tag` | 用于版本、状态或突出的自闭合彩色标签。 |
-| **[英雄区块](hero.md)** | `hero` | 具有布局和滑块支持的高影响力落地页部分。 |
-| **[URL 嵌入](embed.md)** | `embed` | 用于视频、社交和交互式内容的安全、零延迟嵌入。 |
-| **[变更日志](changelogs.md)** | `changelog` | 结构化、基于时间线的版本历史和发布说明。 |
-| **[嵌套容器](nested-containers.md)** | - | 用于复杂、多组件布局的递归组合模式。 |
-
-## 容器的战略重要性
-
-容器的作用不仅仅是视觉上的点缀；它们向 `docmd` 引擎和下游 AI 代理提供高保真的 **语义信号 (Semantic Signals)**：
-
-1.  **AI 上下文映射**：将一个块标记为 `callout warning` 会明确告诉 LLM 在其推理和生成阶段优先考虑该信息。
-2.  **结构完整性**：将 `cards` 与标准 CSS 结合使用，可以在不离开 Markdown 环境的情况下创建复杂的落地页。
-3.  **源码可维护性**：消除文档源码中的“HTML 臃肿”，保持 `.md` 文件整洁且机器可读。
-
-## 递归组合
-
-`docmd` 支持 **无限嵌套深度**。你可以在一个容器内组合任何其他容器，纯粹用 Markdown 构建复杂的交互式文档节点。
-
-```markdown
-::: card "架构概览"
-    ::: callout info
-        此模块利用异步 I/O 流水线。
-    :::
-    ::: button "深入核心引擎" /advanced/developer-guide
-:::
-```
-
-[掌握嵌套指南](nested-containers.md)
+| **[Callouts 提示框](callouts.md)** | `callout` | 技巧、警告和关键通知的语义化提示。 |
+| **[Cards 卡片](cards.md)** | `card` | 特性网格和落地页布局的带框结构容器。 |
+| **[Grids 网格](grids.md)** | `grids` | 自动自适应的多列 Flexbox 布局组。 |
+| **[Tabs 选项卡](tabs.md)** | `tabs` | 包含显式 `::: tab` 条目的交互式可切换面板。 |
+| **[Steps 步骤](steps.md)** | `steps` | 包含显式 `::: step` 条目的可视化编号时间线。 |
+| **[Collapsibles 手风琴](collapsible.md)** | `collapsible` | 用于 FAQ 和深层技术数据的交互式折叠面板。 |
+| **[Buttons 按钮](buttons.md)** | `button` | 自闭合的显著行动号召导航链接。 |
+| **[Tags 标签](tags.md)** | `tag` | 用于版本标签或状态标识的自闭合彩色徽章。 |
+| **[Hero 区块](hero.md)** | `hero` | 支持分割布局与 `::: slide` 轮播的高冲击力落地页头部。 |
+| **[URL 嵌入](embed.md)** | `embed` | 通过 `embed-lite` 实现零延迟的视频、社交与交互式媒体嵌入。 |
+| **[Changelogs 更新日志](changelogs.md)** | `changelog` | 包含显式 `::: log` 条目的基于时间线的版本历史。 |
+| **[嵌套容器](nested-containers.md)** | - | 复杂多组件布局的递归组合模式。 |
