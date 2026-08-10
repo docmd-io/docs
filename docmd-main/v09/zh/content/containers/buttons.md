@@ -9,10 +9,10 @@ description: "在文档中直接注入清晰、高度可见的号召性用语 (c
 
 ```markdown
 # 独立单行按钮模式
-::: button ["按钮文本"] ["目标URL" | url:"目标URL"] [icon:图标名称] [color:#十六进制颜色|CSS颜色] [::: /button]
+::: button ["按钮文本"] ["目标URL" | url:"目标URL"] [icon:图标名称] [color:hex_code|CSS颜色] [::: /button]
 
 # 显式键值对模式
-::: button title:"按钮文本" url:"目标URL" icon:图标名称 color:#十六进制颜色 [::: /button]
+::: button title:"按钮文本" url:"目标URL" icon:图标名称 color:hex_code [::: /button]
 
 # 句中行内按钮模式
 点击 ::: button title:"按钮文本" url:"目标URL" icon:图标名称 ::: /button 继续操作。

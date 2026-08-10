@@ -41,3 +41,40 @@ Er unterstützt **Markdown**, Bilder und verschachtelte Komponenten.
 | **[Changelogs](changelogs.md)** | `changelog` | Zeitleistenbasierte Versionshistorien mit expliziten `::: log`-Elementen. |
 | **[Mermaid Diagramme](mermaid.md)** | `mermaid` | Flussdiagramme, Sequenzdiagramme und Architekturkarten mit Steuerung pro Diagramm. |
 | **[Verschachtelte Container](nested-containers.md)** | - | Rekursive Muster für komplexe Komponenten-Layouts. |
+
+## Universelles Attribut- & Key-Value-Parsing
+
+Alle Container-Header unterstützen Positionsparameter, benannte Key-Value-Attribute und nachfolgende Inline-Kommentare (`# Kommentar`):
+
+```markdown
+::: button title:"Dokumentation" url:"/docs/getting-started" icon:book color:#3b82f6 # Benannte Attribute
+::: card title:"Architektur-Übersicht" icon:cpu # Titel & Icon
+::: callout warning title:"Sicherheitspolitik" # Titel & Kommentar
+```
+
+- **Positions-Fallback**: Anführungszeichen-Strings (`"Mein Titel"`) werden je nach Container-Typ automatisch `title` oder `url` zugeordnet.
+- **Benannte Overrides**: `title:"..."`, `url:"..."`, `icon:...`, `color:#...` erlauben die Angabe von Attributen in beliebiger Reihenfolge.
+- **Inline-Kommentare**: `# Kommentar` am Ende der Header-Zeile wird vor dem Parsing entfernt.
+
+## Strategische Vorteile von Containern
+
+Container bieten mehr als nur visuellen Feinschliff; sie liefern hochpräzise **semantische Signale** an den `docmd`-Compiler und nachgelagerte KI-Agenten:
+
+1. **KI-Kontext-Zuordnung**: Die Kennzeichnung eines Blocks als `callout warning` weist LLMs explizit an, diese Warnung beim Schlussfolgern zu priorisieren.
+2. **Strukturelle Integrität**: Die Kombination von `cards` und `grids` ermöglicht das Verfassen komplexer Landing-Pages direkt in Markdown ohne HTML-Bloat.
+3. **Quellcode-Wartbarkeit**: Hält `.md`-Dateien sauber, lesbar und maschinell analysierbar.
+
+## Rekursive Verschachtelung & Explizite Schließer
+
+`docmd` unterstützt **unbegrenzte Verschachtelungstiefe** und deterministisches Auflösen von Schließungs-Tags über benannte Schließer (`::: /card`, `::: /tabs`):
+
+```markdown
+::: card title:"Architektur-Übersicht" # Übergeordnete Karte
+    ::: callout info title:"Asynchrones I/O" # Innere Callout
+    Dieses Modul nutzt eine asynchrone, nicht-blockierende I/O-Pipeline.
+    ::: /callout # Schließt innere Callout
+    ::: button title:"Kern-Engine erkunden" url:"/#architecture"
+::: /card # Schließt übergeordnete Karte
+```
+
+[Leitfaden für verschachtelte Container lesen](nested-containers.md)

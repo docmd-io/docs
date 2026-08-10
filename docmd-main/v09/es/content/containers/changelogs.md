@@ -52,10 +52,37 @@ El motor central ha sido rediseñado para ejecución isomórfica.
 ::: log "v2.0.0 (2026-03-15)" # Versión principal
 ### Reestructuración Principal del Sistema
 El motor central ha sido rediseñado para ejecución isomórfica.
+
+*   Se implementó el **Enrutador SPA** para una navegación de páginas sin recarga.
+*   Se introdujo la arquitectura de **Plugins Isomórficos**.
+
+::: callout success
+Este lanzamiento ofrece una mejora del 40% en la velocidad de compilación inicial.
+:::
 ::: /log
 
 ::: log "v1.5.1 (2025-12-10)" # Parche
 ### Parche de Seguridad
 *   Se corrigió vulnerabilidad en el analizador interno.
+*   Se actualizaron las dependencias.
+::: /log
+
+::: log "v1.0.0 (2024-05-01)"
+Lanzamiento público inicial.
 ::: /log
 ::: /changelog
+
+::: callout note "Sintaxis Heredada de Marcador == Entrada" icon:archive
+La documentación existente que utiliza marcadores de entrada `==` continúa procesándose sin problemas:
+
+```markdown
+::: changelog
+== v1.0.0 (2024-05-01)
+Lanzamiento público inicial.
+::: /changelog
+```
+:::
+
+::: callout tip "Contexto Histórico para Agentes de IA" icon:sparkles
+Los contenedores de registro de cambios proporcionan una hoja de ruta temporal para agentes de IA. La estructura `::: changelog` permite que los LLM analicen cuándo se introdujeron API específicas o correcciones de seguridad en el flujo de contexto `llms.txt`.
+:::

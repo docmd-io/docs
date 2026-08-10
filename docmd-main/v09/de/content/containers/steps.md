@@ -69,6 +69,56 @@ Führen Sie `npx @docmd/core build` aus, um die Produktionsausgabe zu kompiliere
 ::: /step
 ::: /steps
 
+### Schritte mit eingebettetem Content
+
+Schritte unterstützen eingebettete Code-Blöcke, Hinweisfelder (Callouts) und verschachtelte Container:
+
+````markdown
+::: steps # Komplexer Bereitstellungsleitfaden
+::: step "Umgebung konfigurieren"
+Definieren Sie Optionen in `docmd.config.json`.
+
+::: callout info title:"IDE-Hinweis"
+Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschlüssel zu aktivieren.
+::: /callout
+::: /step
+
+::: step "Produktions-Build generieren"
+Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Auf Infrastruktur bereitstellen"
+Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
+::: /step
+::: /steps
+````
+
+::: steps # Komplexer Bereitstellungsleitfaden
+::: step "Umgebung konfigurieren"
+Definieren Sie Optionen in `docmd.config.json`.
+
+::: callout info "IDE-Hinweis"
+Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschlüssel zu aktivieren.
+::: /callout
+::: /step
+
+::: step "Produktions-Build generieren"
+Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Auf Infrastruktur bereitstellen"
+Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
+::: /step
+::: /steps
+
 ::: callout note "Legacy-Listen-Syntax" icon:archive
 Bestehende Dokumentationen mit geordneten Listen (`1.`, `2.`) werden weiterhin nahtlos verarbeitet:
 

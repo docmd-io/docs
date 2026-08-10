@@ -64,3 +64,64 @@ description: "在 docmd 中将有序列表和编号步骤转换为高视觉冲�
 运行 `npx @docmd/core build` 以编译生产静态输出。
 ::: /step
 ::: /steps
+
+### 包含丰富嵌套内容的步骤
+
+步骤支持嵌入代码块、提示框警告以及嵌套容器：
+
+````markdown
+::: steps # 复杂部署指南
+::: step "配置环境"
+在 `docmd.config.json` 中定义项目选项。
+
+::: callout info title:"IDE 提示"
+使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
+::: /callout
+::: /step
+
+::: step "生成生产构建"
+执行构建命令以生成优化后的静态站点。
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "部署至基础设施"
+将编译后的 `site/` 目录发布至 S3、Cloudflare Pages 或 Vercel。
+::: /step
+::: /steps
+````
+
+::: steps # 复杂部署指南
+::: step "配置环境"
+在 `docmd.config.json` 中定义项目选项。
+
+::: callout info "IDE 提示"
+使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
+::: /callout
+::: /step
+
+::: step "生成生产构建"
+执行构建命令以生成优化后的静态站点。
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "部署至基础设施"
+将编译后的 `site/` 目录发布至 S3、Cloudflare Pages 或 Vercel。
+::: /step
+::: /steps
+
+::: callout note "传统列表语法" icon:archive
+现有使用 `1.` 有序列表的文档仍将无缝解析：
+
+```markdown
+::: steps
+1.  **配置环境**
+    在 `docmd.config.json` 中定义选项。
+::: /steps
+```
+:::

@@ -9,10 +9,10 @@ Schaltflächen sind interaktive Komponenten für Navigation und Call-to-Actions.
 
 ```markdown
 # Einzelne Zeilenschaltfläche
-::: button ["Label-Text"] ["Ziel-URL" | url:"Ziel-URL"] [icon:Icon-Name] [color:#hex|css_farbe] [::: /button]
+::: button ["Label-Text"] ["Ziel-URL" | url:"Ziel-URL"] [icon:Icon-Name] [color:hex_code|css_farbe] [::: /button]
 
 # Explizites Key-Value
-::: button title:"Label-Text" url:"Ziel-URL" icon:Icon-Name color:#hex [::: /button]
+::: button title:"Label-Text" url:"Ziel-URL" icon:Icon-Name color:hex_code [::: /button]
 
 # Inline-Satzschaltfläche
 Klicken Sie ::: button title:"Label-Text" url:"Ziel-URL" icon:Icon-Name ::: /button um fortzufahren.

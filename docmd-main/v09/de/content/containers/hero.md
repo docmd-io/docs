@@ -37,6 +37,36 @@ Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tag
 
 ## Anwendungsbeispiele
 
+### Geteiltes Layout (Split Layout)
+
+Verwenden Sie den Trenner `== side`, um Inhalte in einen Haupttextbereich und einen sekundären Medienbereich aufzuteilen:
+
+```markdown
+::: hero layout:split glow:true # Geteiltes Header-Layout
+# docmd
+Isomorphe Ausführungs-Engine. KI-optimierte Dokumentation.
+
+::: button title:"Schnellstart-Leitfaden" url:"../../getting-started/quick-start.md" color:blue
+
+== side
+::: embed url:"https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+```
+
+::: hero layout:split glow:true
+# docmd
+Isomorphe Ausführungs-Engine. KI-optimierte Dokumentation.
+
+::: button "Schnellstart-Leitfaden" ../../getting-started/quick-start.md color:blue
+
+== side
+::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+
+### Slider-Layout
+
+Verwenden Sie explizite `::: slide` Sub-Container, um ein interaktives Karussell aus Hero-Inhaltspanels zu erstellen:
+
 ```markdown
 ::: hero layout:slider # Interaktiver Slider-Container
 ::: slide # Panel 1
@@ -62,3 +92,7 @@ Rendert statisch und führt nahtlos auf Client-Seite aus.
 Strukturbewusstes Parsing für LLM-Agenten.
 ::: /slide
 ::: /hero
+
+::: callout tip "Hero Design Best Practices" icon:lightbulb
+Verwenden Sie `glow:true` auf Seiten mit dunklem Theme für einen erstklassigen visuellen Effekt. Platzieren Sie `::: button` Elemente im Haupttextbereich vor `== side`, um eine korrekte Stapelreihenfolge auf Mobilgeräten zu gewährleisten.
+:::

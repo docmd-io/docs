@@ -64,3 +64,64 @@ Escribe documentación usando archivos Markdown estándar.
 Ejecuta `npx @docmd/core build` para compilar la salida de producción.
 ::: /step
 ::: /steps
+
+### Pasos con Contenido Enriquecido Integrado
+
+Los pasos admiten bloques de código, avisos de llamada (callouts) y contenedores anidados:
+
+````markdown
+::: steps # Guía de despliegue compleja
+::: step "Configurar Entorno"
+Define opciones de proyecto en `docmd.config.json`.
+
+::: callout info title:"Pista IDE"
+Usa `defineConfig` para habilitar el autocompletado de IDE para las claves de esquema.
+::: /callout
+::: /step
+
+::: step "Generar Compilación de Producción"
+Ejecuta el comando de compilación para generar un sitio estático optimizado.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Desplegar en Infraestructura"
+Publica el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
+::: /step
+::: /steps
+````
+
+::: steps # Guía de despliegue compleja
+::: step "Configurar Entorno"
+Define opciones de proyecto en `docmd.config.json`.
+
+::: callout info "Pista IDE"
+Usa `defineConfig` para habilitar el autocompletado de IDE para las claves de esquema.
+::: /callout
+::: /step
+
+::: step "Generar Compilación de Producción"
+Ejecuta el comando de compilación para generar un sitio estático optimizado.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Desplegar en Infraestructura"
+Publica el directorio `site/` compilado en S3, Cloudflare Pages o Vercel.
+::: /step
+::: /steps
+
+::: callout note "Sintaxis de Lista Heredada" icon:archive
+La documentación existente que utiliza listas ordenadas con `1.` continúa analizándose sin problemas:
+
+```markdown
+::: steps
+1.  **Configurar Entorno**
+    Define opciones en `docmd.config.json`.
+::: /steps
+```
+:::

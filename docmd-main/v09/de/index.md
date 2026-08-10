@@ -50,18 +50,23 @@ Alles, was für eine solide Dokumentation benötigt wird, ist bereits integriert
         :::
     :::
     ::: grid
+        ::: card "KI-Assistent" icon:sparkles
+        Integrierter RAG-gestützter Chat-Assistent. Liefert sofortige, kontextbezogene Antworten direkt auf Ihrer Dokumentationsseite.
+        :::
+    :::
+    ::: grid
         ::: card "KI-Kontext" icon:brain-circuit
         Generiert `llms.txt` und `llms-full.txt` automatisch. Ihre Dokumentation bleibt für KI-Assistenten lesbar.
         :::
     :::
     ::: grid
-        ::: card "OKF-Bundles" icon:database
-        Generiert ein Open Knowledge Format Bundle und einen typisierten Konzeptgraphen für KI-Agenten. Lesen Sie [mehr](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        ::: card "Nativer MCP-Server" icon:terminal
+        Integrierter Model Context Protocol Server mit nativen Tools. KI-Agenten abfragen und validieren Ihre Docs über eine lokale stdio-Verbindung — kein Netzwerk, kein externer Dienst.
         :::
     :::
     ::: grid
-        ::: card "Nativer MCP-Server" icon:terminal
-        Integrierter Model Context Protocol Server mit nativen Tools. KI-Agenten abfragen und validieren Ihre Docs über eine lokale stdio-Verbindung — kein Netzwerk, kein externer Dienst.
+        ::: card "OKF-Bundles" icon:database
+        Generiert ein Open Knowledge Format Bundle und einen typisierten Konzeptgraphen für KI-Agenten. Lesen Sie [mehr](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
         :::
     :::
     ::: grid
@@ -72,11 +77,6 @@ Alles, was für eine solide Dokumentation benötigt wird, ist bereits integriert
     ::: grid
         ::: card "Live-Vorschau" icon:monitor
         Rendern Sie Markdown sofort im Browser mit der `docmd.compile` API. Nutzen Sie Live-Editoren, CMS-Vorschauen und In-App-Dokumentation.
-        :::
-    :::
-    ::: grid
-        ::: card "Eigene Templates" icon:palette
-        Personalisieren Sie Ihre Dokumentation mit Templates oder nutzen Sie integrierte Themes mit eigenem CSS. Unterstützt Dunkelmodus und Systemeinstellungen.
         :::
     :::
     ::: grid

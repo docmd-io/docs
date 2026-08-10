@@ -77,6 +77,44 @@ yarn add @docmd/core
 ::: /tab
 ::: /tabs
 
+### Fragmentos de Código Multilingüe (Multi-Language Code Snippets)
+
+Agrupe implementaciones específicas de lenguaje utilizando iconos de pestaña y etiquetas de cierre explícitas:
+
+````markdown
+::: tabs
+::: tab title:"TypeScript" icon:hexagon
+```typescript
+import { build } from '@docmd/core';
+await build('./docmd.config.json');
+```
+::: /tab
+
+::: tab title:"JavaScript" icon:braces
+```javascript
+const { build } = require('@docmd/core');
+build('./docmd.config.json');
+```
+::: /tab
+::: /tabs
+````
+
+::: tabs
+::: tab title:"TypeScript" icon:hexagon
+```typescript
+import { build } from '@docmd/core';
+await build('./docmd.config.json');
+```
+::: /tab
+
+::: tab title:"JavaScript" icon:braces
+```javascript
+const { build } = require('@docmd/core');
+build('./docmd.config.json');
+```
+::: /tab
+::: /tabs
+
 ::: callout note "Sintaxis Heredada == tab" icon:archive
 La documentación existente con sintaxis `== tab` continúa procesándose sin problemas:
 

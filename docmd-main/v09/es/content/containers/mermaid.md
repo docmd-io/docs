@@ -51,6 +51,13 @@ sequenceDiagram
 ::: /mermaid
 ```
 
+::: mermaid title:"Flujo de Tokens OAuth2" icon:shield-check align:center zoom:true # Flujo de secuencia
+sequenceDiagram
+    autonumber
+    Client->>AuthServer: POST /token
+    AuthServer-->>Client: 200 OK (Access Token)
+::: /mermaid
+
 ### Propiedades Principales
 
 | Propiedad | Tipo | Predeterminado | Descripción |

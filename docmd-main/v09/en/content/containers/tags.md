@@ -8,7 +8,7 @@ The `tag` container is a self-closing component that inserts compact, pill-shape
 ## Container Syntax
 
 ```markdown
-::: tag [title:"Badge Label"] [color:css_color|#hex] [icon:icon_name] [url:[external:]address]
+::: tag [title:"Badge Label"] [color:css_color|hex_code] [icon:icon_name] [url:[external:]address]
 ```
 
 ## Features & Supported Attributes

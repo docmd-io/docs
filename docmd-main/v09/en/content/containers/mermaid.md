@@ -51,6 +51,13 @@ sequenceDiagram
 ::: /mermaid
 ```
 
+::: mermaid title:"OAuth2 Token Flow" icon:shield-check align:center zoom:true # Sequence flow
+sequenceDiagram
+    autonumber
+    Client->>AuthServer: POST /token
+    AuthServer-->>Client: 200 OK (Access Token)
+::: /mermaid
+
 ### Key Properties
 
 | Property | Type | Default | Description |

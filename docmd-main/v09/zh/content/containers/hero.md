@@ -34,15 +34,64 @@ description: "在 docmd 中使用 Markdown 构建高视觉冲击力的落地页�
 自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
 :::
 
+## 使用示例 (Usage Examples)
+
+### 分割布局 (Split Layout)
+
+使用 `== side` 分隔符将内容划分为主 Hero 文本区域和次要媒体区域：
+
+```markdown
+::: hero layout:split glow:true # 分割 Header 布局
+# docmd
+同构执行引擎，AI 优化的文档。
+
+::: button title:"快速开始指南" url:"../../getting-started/quick-start.md" color:blue
+
+== side
+::: embed url:"https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+```
+
+::: hero layout:split glow:true
+# docmd
+同构执行引擎，AI 优化的文档。
+
+::: button "快速开始指南" ../../getting-started/quick-start.md color:blue
+
+== side
+::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+
+### 滑块布局 (Slider Layout)
+
+使用显式 `::: slide` 子容器构建 Hero 内容面板的交互式轮播：
+
+```markdown
+::: hero layout:slider # 交互式轮播容器
+::: slide # 面板 1
+# 同构核心引擎
+静态渲染，并在客户端无缝执行。
+::: /slide
+
+::: slide # 面板 2
+# AI 上下文优化
+面向 LLM 智能体的感知结构解析。
+::: /slide
+::: /hero
+```
 
 ::: hero layout:slider
 ::: slide
 # 同构核心引擎
-静态渲染，客户端无缝执行。
+静态渲染，并在客户端无缝执行。
 ::: /slide
 
 ::: slide
 # AI 上下文优化
-针对 LLM 代理的结构感知解析。
+面向 LLM 智能体的感知结构解析。
 ::: /slide
 ::: /hero
+
+::: callout tip "Hero 设计最佳实践" icon:lightbulb
+在深色主题站点上使用 `glow:true` 可获得高级视觉效果。在 `== side` 之前的主文本区域放置 `::: button` 元素，以保证移动端正确的堆叠顺序。
+:::

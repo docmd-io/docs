@@ -9,10 +9,10 @@ Buttons are interactive components designed for navigation and explicit call-to-
 
 ```markdown
 # Standalone Line Button
-::: button ["Label Text"] ["target_url" | url:"target_url"] [icon:icon_name] [color:#hex|css_color] [::: /button]
+::: button ["Label Text"] ["target_url" | url:"target_url"] [icon:icon_name] [color:hex_code|css_color] [::: /button]
 
 # Explicit Named Key-Value
-::: button title:"Label Text" url:"target_url" icon:icon_name color:#hex [::: /button]
+::: button title:"Label Text" url:"target_url" icon:icon_name color:hex_code [::: /button]
 
 # Inline Sentence Button
 Click ::: button title:"Label Text" url:"target_url" icon:icon_name ::: /button to continue.

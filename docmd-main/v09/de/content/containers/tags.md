@@ -8,7 +8,7 @@ Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenf�
 ## Container-Syntax
 
 ```markdown
-::: tag [title:"Badge-Text"] [color:css_farbe|#hex] [icon:icon_name] [url:[external:]adresse]
+::: tag [title:"Badge-Text"] [color:css_farbe|hex_code] [icon:icon_name] [url:[external:]adresse]
 ```
 
 ## Funktionen & Unterstützte Attribute

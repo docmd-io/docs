@@ -77,6 +77,44 @@ yarn add @docmd/core
 ::: /tab
 ::: /tabs
 
+### 多语言代码片段 (Multi-Language Code Snippets)
+
+使用选项卡图标和显式闭合标签将特定语言的实现分组：
+
+````markdown
+::: tabs
+::: tab title:"TypeScript" icon:hexagon
+```typescript
+import { build } from '@docmd/core';
+await build('./docmd.config.json');
+```
+::: /tab
+
+::: tab title:"JavaScript" icon:braces
+```javascript
+const { build } = require('@docmd/core');
+build('./docmd.config.json');
+```
+::: /tab
+::: /tabs
+````
+
+::: tabs
+::: tab title:"TypeScript" icon:hexagon
+```typescript
+import { build } from '@docmd/core';
+await build('./docmd.config.json');
+```
+::: /tab
+
+::: tab title:"JavaScript" icon:braces
+```javascript
+const { build } = require('@docmd/core');
+build('./docmd.config.json');
+```
+::: /tab
+::: /tabs
+
 ::: callout note "传统 == tab 语法" icon:archive
 使用 `== tab` 语法的现有文档仍可平滑解析：
 

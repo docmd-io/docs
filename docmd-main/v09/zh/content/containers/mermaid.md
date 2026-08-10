@@ -51,6 +51,13 @@ sequenceDiagram
 ::: /mermaid
 ```
 
+::: mermaid title:"OAuth2 令牌流向" icon:shield-check align:center zoom:true # 时序流程
+sequenceDiagram
+    autonumber
+    Client->>AuthServer: POST /token
+    AuthServer-->>Client: 200 OK (Access Token)
+::: /mermaid
+
 ### 核心属性说明
 
 | 属性 | 类型 | 默认值 | 描述 |

@@ -73,12 +73,12 @@ Run `npx @docmd/core build` to compile production static output.
 
 Steps support embedded code blocks, callout alerts, and nested containers:
 
-```markdown
+````markdown
 ::: steps # Complex deployment guide
 ::: step "Configure Environment"
 Define project options in `docmd.config.json`.
 
-::: callout tip title:"IDE Hint"
+::: callout info title:"IDE Hint"
 Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
 ::: /callout
 ::: /step
@@ -95,15 +95,15 @@ npx @docmd/core build
 Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
 ::: /step
 ::: /steps
-```
+````
 
 ::: steps # Complex deployment guide
 ::: step "Configure Environment"
 Define project options in `docmd.config.json`.
 
-::: callout tip "IDE Hint"
+::: callout info "IDE Hint"
 Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
-:::
+::: /callout
 ::: /step
 
 ::: step "Generate Production Build"

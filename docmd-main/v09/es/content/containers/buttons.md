@@ -9,10 +9,10 @@ Los botones son componentes interactivos diseñados para la navegación y llamad
 
 ```markdown
 # Botón en Línea Independiente
-::: button ["Texto de la etiqueta"] ["URL_destino" | url:"URL_destino"] [icon:nombre_icono] [color:#hex|color_css] [::: /button]
+::: button ["Texto de la etiqueta"] ["URL_destino" | url:"URL_destino"] [icon:nombre_icono] [color:hex_code|color_css] [::: /button]
 
 # Sintaxis Explícita de Clave-Valor
-::: button title:"Texto de la etiqueta" url:"URL_destino" icon:nombre_icono color:#hex [::: /button]
+::: button title:"Texto de la etiqueta" url:"URL_destino" icon:nombre_icono color:hex_code [::: /button]
 
 # Botón en Línea Dentro de Oración
 Haz clic en ::: button title:"Texto" url:"URL_destino" icon:nombre_icono ::: /button para continuar.

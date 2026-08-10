@@ -8,7 +8,7 @@ description: "使用标签容器来标记版本、状态，或在内联中高亮
 ## 容器语法 (Container Syntax)
 
 ```markdown
-::: tag [title:"徽章文本"] [color:css颜色|#十六进制] [icon:图标名称] [url:[external:]地址]
+::: tag [title:"徽章文本"] [color:css颜色|hex_code] [icon:图标名称] [url:[external:]地址]
 ```
 
 ## 功能特性与支持属性 (Features & Attributes)

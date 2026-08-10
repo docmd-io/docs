@@ -50,18 +50,23 @@ Todo lo necesario para una documentación sólida viene integrado. Sin necesidad
         :::
     :::
     ::: grid
+        ::: card "Asistente de IA" icon:sparkles
+        Asistente de chat con IA impulsado por RAG integrado. Proporciona respuestas instantáneas y adaptadas al contexto directamente en su sitio de documentación.
+        :::
+    :::
+    ::: grid
         ::: card "Contexto para IA" icon:brain-circuit
         Genera `llms.txt` y `llms-full.txt` automáticamente. Su documentación se mantiene legible para asistentes de IA.
         :::
     :::
     ::: grid
-        ::: card "Paquetes OKF" icon:database
-        Genera un paquete Open Knowledge Format y un grafo de conceptos tipados para agentes de IA. Lea [más](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        ::: card "Servidor MCP nativo" icon:terminal
+        Servidor Model Context Protocol integrado con herramientas nativas. Los agentes de IA consultan y validan su documentación a través de una conexión stdio local: sin red ni servicios remotos.
         :::
     :::
     ::: grid
-        ::: card "Servidor MCP nativo" icon:terminal
-        Servidor Model Context Protocol integrado con herramientas nativas. Los agentes de IA consultan y validan su documentación a través de una conexión stdio local: sin red ni servicios remotos.
+        ::: card "Paquetes OKF" icon:database
+        Genera un paquete Open Knowledge Format y un grafo de conceptos tipados para agentes de IA. Lea [más](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
         :::
     :::
     ::: grid
@@ -72,11 +77,6 @@ Todo lo necesario para una documentación sólida viene integrado. Sin necesidad
     ::: grid
         ::: card "Vistas previas en vivo" icon:monitor
         Renderice Markdown al instante en el navegador con la API `docmd.compile`. Impulsa editores en vivo, vistas previas de CMS y documentación integrada.
-        :::
-    :::
-    ::: grid
-        ::: card "Plantillas personalizadas" icon:palette
-        Personalice su documentación con plantillas o pruebe temas integrados con CSS personalizado. Admite modo oscuro y preferencias del sistema.
         :::
     :::
     ::: grid

@@ -50,18 +50,23 @@ bunx @docmd/core dev
         :::
     :::
     ::: grid
+        ::: card "AI 助手" icon:sparkles
+        内置 RAG 驱动的 AI 对话助手，直接在文档站点提供即时、感知上下文的智能问答。
+        :::
+    :::
+    ::: grid
         ::: card "AI 上下文" icon:brain-circuit
         自动生成 `llms.txt` 和 `llms-full.txt`，让 AI 助手轻松阅读你的文档。
         :::
     :::
     ::: grid
-        ::: card "OKF 知识包" icon:database
-        自动生成 Open Knowledge Format bundle —— 面向 AI 智能体的类型化概念图谱。阅读[更多](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)。
+        ::: card "原生 MCP 服务" icon:terminal
+        内置 Model Context Protocol 服务及原生工具。AI 智能体可通过本地 stdio 连接查询与校验文档 —— 无需联网，无需远程服务。
         :::
     :::
     ::: grid
-        ::: card "原生 MCP 服务" icon:terminal
-        内置 Model Context Protocol 服务及原生工具。AI 智能体可通过本地 stdio 连接查询与校验文档 —— 无需联网，无需远程服务。
+        ::: card "OKF 知识包" icon:database
+        自动生成 Open Knowledge Format bundle —— 面向 AI 智能体的类型化概念图谱。阅读[更多](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)。
         :::
     :::
     ::: grid
@@ -72,11 +77,6 @@ bunx @docmd/core dev
     ::: grid
         ::: card "实时预览" icon:monitor
         使用 `docmd.compile` API 在浏览器中即时渲染 Markdown。支持实时编辑器、CMS 预览和应用内文档。
-        :::
-    :::
-    ::: grid
-        ::: card "自定义模板" icon:palette
-        通过模板个性化定制你的文档，或使用内置主题与自定义 CSS。支持深色模式和系统偏好。
         :::
     :::
     ::: grid

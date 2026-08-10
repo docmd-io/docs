@@ -86,3 +86,7 @@ Erstveröffentlichung.
 ::: /changelog
 ```
 :::
+
+::: callout tip "Historischer Kontext für KI-Agenten" icon:sparkles
+Changelog-Container liefern eine zeitliche Roadmap für KI-Agenten. Die `::: changelog`-Struktur ermöglicht es LLMs, im `llms.txt`-Kontextstrom nachzuvollziehen, wann bestimmte APIs oder Sicherheitsfixes eingeführt wurden.
+:::

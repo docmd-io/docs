@@ -8,7 +8,7 @@ El contenedor `tag` es un componente de autocierre que inyecta insignias compact
 ## Sintaxis de Contenedor (Container Syntax)
 
 ```markdown
-::: tag [title:"Texto de la insignia"] [color:color_css|#hex] [icon:nombre_icono] [url:[external:]direccion]
+::: tag [title:"Texto de la insignia"] [color:color_css|hex_code] [icon:nombre_icono] [url:[external:]direccion]
 ```
 
 ## Características y Atributos Soportados

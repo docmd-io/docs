@@ -50,18 +50,23 @@ Everything needed for solid documentation ships built in. No extra plugins requi
         :::
     :::
     ::: grid
+        ::: card "AI Assistant" icon:sparkles
+        Built-in RAG-powered chat assistant. Delivers instant, context-aware answers directly on your documentation site.
+        :::
+    :::
+    ::: grid
         ::: card "AI Context" icon:brain-circuit
         Generates `llms.txt` and `llms-full.txt` automatically. Your docs stay readable to AI assistants.
         :::
     :::
     ::: grid
-        ::: card "OKF Bundles" icon:database
-        Generates an Open Knowledge Format bundle and typed concept graph for AI agents. Read [more](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        ::: card "Native MCP Server" icon:terminal
+        Built-in Model Context Protocol server with native tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
         :::
     :::
     ::: grid
-        ::: card "Native MCP Server" icon:terminal
-        Built-in Model Context Protocol server with native tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
+        ::: card "OKF Bundles" icon:database
+        Generates an Open Knowledge Format bundle and typed concept graph for AI agents. Read [more](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
         :::
     :::
     ::: grid
@@ -72,11 +77,6 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     ::: grid
         ::: card "Live Previews" icon:monitor
         Render Markdown instantly in the browser with the `docmd.compile` API. Power live editors, CMS previews, and in-app docs.
-        :::
-    :::
-    ::: grid
-        ::: card "Custom Templates" icon:palette
-        Personalise your documentation with templates or try built-in themes with custom CSS. Supports dark mode and system preferences.
         :::
     :::
     ::: grid
