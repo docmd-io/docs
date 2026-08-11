@@ -16,7 +16,16 @@
   "dependencies": {
     "@docmd/core": "^0.9.1",
     "@docmd/template-summer": "0.9.1",
+    "docmd-assistant": "^0.1.10",
     "docmd-search": "^0.1.3"
+  },
+  "overrides": {
+    "docmd-assistant": "^0.1.10"
+  },
+  "pnpm": {
+    "overrides": {
+      "docmd-assistant": "^0.1.10"
+    }
   },
   "allowScripts": {
     "@docmd/engine-rust": true,
