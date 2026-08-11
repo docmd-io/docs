@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.2 - AI Assistant Multi-Turn Stabilization & Code Block UI",
+        "path": "/release-notes/0-9-2"
+      },
+      {
         "title": "v0.9.1 - Standardised Container Engine & Mermaid",
         "path": "/release-notes/0-9-1"
       },
