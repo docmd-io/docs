@@ -47,7 +47,9 @@ Das Plugin parst und rendert:
 * **HTTP-Methoden-Badges**: Farbcodierte Badges (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
 * **Endpunkt-Pfade**: Parametrisierte Pfadzeichenfolgen.
 * **Parameter-Tabellen**: Name, Position (`path`, `query`, `header`, `cookie`), Datentyp, Pflichtfeld-Flag und Beschreibungen.
-* **Anfrage- & Antwort-Modelle**: Strukturierte Schematabellen mit Feldtypen und Standardwerten.
+* **Anfrage- & Antwort-Modelle**: Strukturierte Schematabellen mit Feldtypen, Datenformaten, Einschränkungen und Standardwerten.
+* **Beispiele & Nutzdaten**: Multi-Format-Beispiele für Request-Body und Response-Payloads (`application/json`, `application/xml` usw.).
+* **Isoliertes Schema-Scrolling**: Tief verschachtelte Schematabellen scrollen sauber innerhalb ihres `.oa-table-wrap`-Containers, ohne das Seitenlayout horizontal zu verzerren.
 * **Deprecation-Banner**: Inline-Warnungen für Endpunkte, die mit `deprecated: true` gekennzeichnet sind.
 
 ::: callout tip "Zero-JS-Ausführung zur Build-Zeit" icon:zap
@@ -61,6 +63,7 @@ Alle OpenAPI-Spezifikationen werden während der Kompilierung in statisches HTML
 | OpenAPI 3.x (JSON) | Native Unterstützung |
 | OpenAPI 3.x (YAML) | Unterstützt (`js-yaml`-Abhängigkeit) |
 | Swagger 2.0 | Veraltet (Vor dem Build auf OpenAPI 3.x konvertieren) |
+| Request- & Response-Beispiele | Vollständige Unterstützung (Einzel- und Mehrfachbeispiele) |
 | Interne `$ref`-Schemas | Vollständige Auflösung |
 | Polymorphe `oneOf` / `anyOf` | Werden als Union-Typen gerendert |
 | Veraltete Operationen | Inline unterstützt |

@@ -9,6 +9,10 @@ Das Plugin `@docmd/plugin-mermaid` integriert [Mermaid.js](external:https://merm
 Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: mermaid` ... `::: /mermaid`), explizite Key-Value-Eigenschaften (`title:"..."`, `align:center`) und nachfolgende `# Kommentare` ein. Individuelle Diagrammanpassungen erfolgen über die Container-Syntax, während globale Standardwerte in der `docmd.config.json` festgelegt werden.
 :::
 
+::: callout success "v0.9.3+ Offline- & Air-Gap-Bundling" icon:zap
+Ab **v0.9.3** bündelt `@docmd/plugin-mermaid` die vollständige Mermaid-Laufzeit lokal als eigenständiges klassisches IIFE-Skript. Diagramme rendern zu 100% offline ohne CDN-Abhängigkeiten (`jsdelivr.net`) für air-gapped Deployments und lokales `file://`-Browsing.
+:::
+
 ## Plugin-Konfiguration
 
 Konfigurieren Sie globale Optionen in Ihrer `docmd.config.json`:

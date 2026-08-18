@@ -40,27 +40,30 @@ assets/openapi.json
 ```
 ````
 
-### Specification Output
+### Salida de la Especificación
 
-The plugin parses and renders:
+El plugin analiza y renderiza:
 
-* **HTTP Method Badges**: Colour-coded badges (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
-* **Endpoint Paths**: Parameterised path strings.
-* **Parameter Tables**: Name, position (`path`, `query`, `header`, `cookie`), data type, requirement flag, and descriptions.
-* **Request & Response Models**: Structured schema tables containing field types and default values.
-* **Deprecation Banners**: Inline warnings for endpoints flagged with `deprecated: true`.
+* **Insignias de Método HTTP**: Insignias codificadas por colores (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
+* **Rutas de Endpoints**: Cadenas de rutas parametrizadas.
+* **Tablas de Parámetros**: Nombre, posición (`path`, `query`, `header`, `cookie`), tipo de datos, indicador de obligatoriedad y descripciones.
+* **Modelos de Petición y Respuesta**: Tablas de esquemas estructuradas con tipos de campo, formatos, restricciones y valores por defecto.
+* **Ejemplos y Cargas Útiles**: Ejemplos multiformato para cuerpos de solicitud y respuesta (`application/json`, `application/xml`, etc.).
+* **Desplazamiento Aislado de Esquemas**: Los modelos de esquemas anidados se desplazan limpiamente dentro de su contenedor `.oa-table-wrap` sin desbordar la página horizontalmente.
+* **Banners de Obsolescencia**: Advertencias en línea para endpoints marcados con `deprecated: true`.
 
-::: callout tip "Zero-JS Build-Time Execution" icon:zap
-All OpenAPI specs are parsed into static HTML during compilation. No heavy client-side JavaScript libraries are loaded at runtime, keeping page load times minimal and ensuring full search indexability.
+::: callout tip "Ejecución en Tiempo de Compilación Zero-JS" icon:zap
+Todas las especificaciones OpenAPI se analizan a HTML estático durante la compilación. No se cargan bibliotecas de JavaScript pesadas en el cliente en tiempo de ejecución, manteniendo los tiempos de carga mínimos e indexables.
 :::
 
-## Technical Compatibility
+## Compatibilidad Técnica
 
-| Specification Feature | Compatibility Level |
+| Característica de Especificación | Nivel de Compatibilidad |
 | :--- | :--- |
-| OpenAPI 3.x (JSON) | Native support |
-| OpenAPI 3.x (YAML) | Supported (`js-yaml` dependency) |
-| Swagger 2.0 | Legacy (Convert to OpenAPI 3.x prior to build) |
-| Internal `$ref` Schemas | Full resolution |
-| Polymorphic `oneOf` / `anyOf` | Rendered as union types |
-| Deprecated Operations | Supported inline |
+| OpenAPI 3.x (JSON) | Soporte nativo |
+| OpenAPI 3.x (YAML) | Soportado (dependencia `js-yaml`) |
+| Swagger 2.0 | Heredado (Convertir a OpenAPI 3.x antes de compilar) |
+| Ejemplos de Petición y Respuesta | Soporte completo (mapas de ejemplo único y múltiple) |
+| Esquemas `$ref` Internos | Resolución completa |
+| Polimorfismo `oneOf` / `anyOf` | Renderizado como tipos de unión |
+| Operaciones Obsoletas | Soportado en línea |

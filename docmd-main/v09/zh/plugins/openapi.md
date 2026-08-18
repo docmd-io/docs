@@ -47,7 +47,9 @@ assets/openapi.json
 * **HTTP 方法徽章**: 颜色编码徽章 (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`)。
 * **端点路径**: 带参数的路径字符串。
 * **参数表格**: 名称、位置 (`path`, `query`, `header`, `cookie`)、数据类型、必填标志以及描述。
-* **请求与响应模型**: 包含字段类型与默认值的结构化 Schema 表格。
+* **请求与响应模型**: 包含字段类型、数据格式、约束与默认值的结构化 Schema 表格。
+* **示例与请求体载荷**: 多格式请求体与响应载荷示例 (`application/json`, `application/xml` 等)。
+* **隔离 Schema 表格横向滚动**: 复杂嵌套的 Schema 表格可在 `.oa-table-wrap` 容器内独立横向滚动，避免撑开全页面视口。
 * **弃用警告横幅**: 针对标记有 `deprecated: true` 的端点提供内联警告。
 
 ::: callout tip "零-JS 构建期执行" icon:zap
@@ -61,6 +63,7 @@ assets/openapi.json
 | OpenAPI 3.x (JSON) | 原生支持 |
 | OpenAPI 3.x (YAML) | 受支持 (需要 `js-yaml` 依赖项) |
 | Swagger 2.0 | 旧版 (构建前需转换为 OpenAPI 3.x) |
+| 请求与响应示例 (Examples) | 完整支持 (单示例与多示例映射) |
 | 内部 `$ref` Schemas | 完整解析 |
 | 多态 `oneOf` / `anyOf` | 渲染为联合类型 |
 | 已弃用的操作 | 原生支持内联标记 |

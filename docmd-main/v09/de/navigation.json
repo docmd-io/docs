@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.3 - Offline Mermaid, OpenAPI-Beispiele & KI-Tool-Parser",
+        "path": "/release-notes/0-9-3"
+      },
+      {
         "title": "v0.9.2 - KI-Assistent Multi-Turn-Stabilisierung & Code-Block-UI",
         "path": "/release-notes/0-9-2"
       },

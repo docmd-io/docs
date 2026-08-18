@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.3 - Mermaid sin conexión, ejemplos OpenAPI y analizador de IA",
+        "path": "/release-notes/0-9-3"
+      },
+      {
         "title": "v0.9.2 - Estabilización de turnos del Asistente IA e interfaz de código",
         "path": "/release-notes/0-9-2"
       },
