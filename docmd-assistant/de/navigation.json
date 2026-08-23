@@ -35,6 +35,10 @@
     "collapsible": false,
     "children": [
       {
+        "title": "v0.1.15",
+        "path": "/release-notes/0-1-15"
+      },
+      {
         "title": "v0.1.14",
         "path": "/release-notes/0-1-14"
       },

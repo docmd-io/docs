@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.4 - OpenAPI Dark Mode, AI Config Disablement & Test Acceleration",
+        "path": "/release-notes/0-9-4"
+      },
+      {
         "title": "v0.9.3 - Offline Mermaid, OpenAPI Schemas & Examples, and AI Tool Parser",
         "path": "/release-notes/0-9-3"
       },

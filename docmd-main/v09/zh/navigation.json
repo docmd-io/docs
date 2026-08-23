@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.4 - OpenAPI 暗黑模式、AI 配置禁用与测试加速",
+        "path": "/release-notes/0-9-4"
+      },
+      {
         "title": "v0.9.3 - 离线 Mermaid、OpenAPI 示例与 AI 工具解析器",
         "path": "/release-notes/0-9-3"
       },

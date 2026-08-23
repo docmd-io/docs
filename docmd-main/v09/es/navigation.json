@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.4 - Modo oscuro en OpenAPI, desactivación de IA y aceleración de pruebas",
+        "path": "/release-notes/0-9-4"
+      },
+      {
         "title": "v0.9.3 - Mermaid sin conexión, ejemplos OpenAPI y analizador de IA",
         "path": "/release-notes/0-9-3"
       },
