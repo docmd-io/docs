@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.5 - Resolución de rutas de OpenAPI en Workspaces y especificaciones inline",
+        "path": "/release-notes/0-9-5"
+      },
+      {
         "title": "v0.9.4 - Modo oscuro en OpenAPI, desactivación de IA y aceleración de pruebas",
         "path": "/release-notes/0-9-4"
       },

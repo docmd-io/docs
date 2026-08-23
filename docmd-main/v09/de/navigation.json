@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.5 - OpenAPI-Pfadauflösung in Workspaces & Inline-Spezifikationen",
+        "path": "/release-notes/0-9-5"
+      },
+      {
         "title": "v0.9.4 - OpenAPI Dark Mode, KI-Deaktivierung & Test-Beschleunigung",
         "path": "/release-notes/0-9-4"
       },

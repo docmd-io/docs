@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.5 - OpenAPI 工作区路径解析与内联规范",
+        "path": "/release-notes/0-9-5"
+      },
+      {
         "title": "v0.9.4 - OpenAPI 暗黑模式、AI 配置禁用与测试加速",
         "path": "/release-notes/0-9-4"
       },

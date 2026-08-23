@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.5 - OpenAPI Workspace Path Resolution & Inline Specs",
+        "path": "/release-notes/0-9-5"
+      },
+      {
         "title": "v0.9.4 - OpenAPI Dark Mode, AI Config Disablement & Test Acceleration",
         "path": "/release-notes/0-9-4"
       },
