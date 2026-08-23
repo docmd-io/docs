@@ -40,6 +40,14 @@ assets/openapi.json
 ```
 ````
 
+### Live Gerenderte Ausgabe
+
+Nachfolgend finden Sie ein interaktives Live-Rendering von `assets/docmd-api.json`:
+
+```openapi
+assets/docmd-api.json
+```
+
 ### Spezifikationsausgabe
 
 Das Plugin parst und rendert:

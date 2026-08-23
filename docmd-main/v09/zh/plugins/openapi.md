@@ -40,6 +40,14 @@ assets/openapi.json
 ```
 ````
 
+### 实时渲染效果
+
+以下是 `assets/docmd-api.json` 的实时交互式渲染示例：
+
+```openapi
+assets/docmd-api.json
+```
+
 ### 规范输出解析
 
 插件会解析并渲染：
