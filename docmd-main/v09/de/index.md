@@ -1,6 +1,6 @@
 ---
-title: "docmd Dokumentation: Produktionsreife Docs aus Markdown"
-description: "Erstellen Sie in Sekundenschnelle produktionsreife Dokumentationen aus Markdown. Zero Setup, standardmäßig schnell, SEO-freundlich und KI-bereit."
+title: "docmd Dokumentation: Dokumentation für Menschen und Maschinen"
+description: "Open-Source Dokumentations-Compiler. Eine Markdown-Quelle, ein Befehl — generiert Website, Suche, KI-Kontext, Agent-Protokolle und Wissensformate. Alles zusammen."
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisches HTML für SEO. SPA für Geschwindigkeit. Works mit KI-Tools direkt nach der Installation.
+Dokumentation für Menschen und Maschinen. Ein Befehl kompiliert Markdown zu Website, Suchindex, KI-Kontext und Wissensformaten — keine Konfiguration nötig.
 
 ::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ Von Markdown zu produktionsreifen Dokumenten mit einem einzigen Befehl. Statisch
 
 ## Übersicht
 
-docmd ist ein Zero-Configuration-Dokumentationsgenerator. Er erstellt schnelle statische Websites direkt aus Ihren Markdown-Dateien.
+docmd ist ein Open-Source Dokumentations-Compiler. Er nimmt Ihre Markdown-Dateien und generiert einen vollständigen Dokumentations-Stack — Website, Suche, KI-Kontext und mehr — in einem einzigen Build.
 
 ::: tabs
 == tab "npm" icon:box

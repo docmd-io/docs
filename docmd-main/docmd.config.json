@@ -53,7 +53,7 @@
     },
     "footer": {
       "style": "complete",
-      "description": "Build production-ready documentation from Markdown in seconds.",
+      "description": "Documentation for humans and machines. One Markdown source, one command.",
       "copyright": "© 2025-present docmd.io",
       "columns": [
         {
@@ -88,7 +88,7 @@
 
   "plugins": {
     "seo": {
-      "defaultDescription": "Build production-ready documentation from Markdown in seconds. Zero setup, fast by default, SEO-friendly, and AI-ready.",
+      "defaultDescription": "Open-source documentation compiler. One Markdown source, one command — generates website, search, AI context, agent protocols, and knowledge formats together.",
       "aiBots": true,
       "openGraph": { "defaultImage": "assets/images/docmd-preview-en.webp" },
       "twitter": { "cardType": "summary_large_image" }

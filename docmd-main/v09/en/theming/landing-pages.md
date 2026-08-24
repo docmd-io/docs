@@ -21,7 +21,7 @@ The [Hero](../content/containers/hero.md) container supports split media layouts
 ```markdown
 ::: hero layout:split glow:true
 # Build Faster with docmd
-The zero-config documentation engine for modern software teams.
+The documentation compiler for humans and machines.
 
 ::: button title:"Quickstart Guide" url:"../getting-started/quick-start.md" color:blue
 ::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" color:gray

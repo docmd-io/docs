@@ -1,6 +1,6 @@
 ---
-title: "docmd 文档：一键将 Markdown 部署为生产文档"
-description: "几秒钟内从 Markdown 构建生产就绪的文档站点。零配置，默认高速，SEO 友好，天然支持 AI。"
+title: "docmd 文档：为人类和机器构建的文档"
+description: "开源文档编译器。一份 Markdown 源文件，一条命令 — 同时生成网站、搜索、AI 上下文、Agent 协议和知识格式。"
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-一条命令，将 Markdown 变成生产文档。静态 HTML 保障 SEO，SPA 提升速度，开箱即用支持 AI 工具。
+为人类和机器构建的文档。一条命令将 Markdown 编译为网站、搜索索引、AI 上下文和知识格式 — 零配置。
 
 ::: button "快速开始" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ titleAppend: false
 
 ## 概览
 
-docmd 是一个零配置的文档生成器，可直接从 Markdown 文件生成高性能静态网站。
+docmd 是一个开源文档编译器。它将你的 Markdown 文件编译为完整的文档体系 — 网站、搜索、AI 上下文等 — 一次构建，全部生成。
 
 ::: tabs
 == tab "npm" icon:box
