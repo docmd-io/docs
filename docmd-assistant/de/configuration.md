@@ -23,6 +23,7 @@ interface AssistantOptions {
   maxTokens?: number;
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
+  contextWindow?: number;
 }
 ```
 
@@ -44,6 +45,7 @@ interface AssistantOptions {
 | `maxTokens` | `number` | Maximale Token pro Antwort | Anbieter-Standard |
 | `reasoning` | `boolean \| string` | Umschalten des erweiterten Reasoning-Modus (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | Benutzerdefinierte HTTP-Header für Relay-Anfragen | `{}` |
+| `contextWindow` | `number` | Maximale Zeichenanzahl des an das Modell übergebenen Dokumentationskontexts pro Turn. `0` = unbegrenzt (vollständiger Inhalt für höchste Wiedergabetreue). | `0` (unbegrenzt) |
 
 ::: callout tip "Standard-System-Prompt"
 Wenn kein `systemPrompt` angegeben ist, wendet die Engine einen Standard-Prompt an, der Regeln für die Assistentenidentität, bevorzugte Werkzeugaufrufe und klickbare Zitationslinks durchsetzt.

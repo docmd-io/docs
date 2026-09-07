@@ -100,7 +100,7 @@ npx @docmd/core add threads
   </div>
 </div>
 
-在底角会展示包含未解决线程计数的浮动讨论触发器 <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span>。
+右侧贴边停靠的标签触发器 <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> 贴紧视口右边缘，显示未解决的主题计数。将鼠标悬停在任何高亮文本上时，会直接在内容中呈现内联评论预览卡片，而点击标签则会滑出讨论侧边栏抽屉。在打开和关闭抽屉时，页面主题会无缝持久保存，无需重新加载整个页面。
 
 ## Markdown 存储格式
 

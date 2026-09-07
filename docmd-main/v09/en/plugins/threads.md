@@ -100,7 +100,7 @@ Resolved discussions display in a dimmed state:
   </div>
 </div>
 
-A floating discussion trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> displays unresolved thread counts in the bottom corner.
+A right-docked tab trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> hugs the right edge of the viewport, displaying unresolved thread counts. Hovering over any highlighted text reveals an inline comment preview card directly within the content, while clicking the tab opens the discussion drawer. Threads persist seamlessly across drawer open and close states without reloading the page.
 
 ## Markdown Storage Format
 

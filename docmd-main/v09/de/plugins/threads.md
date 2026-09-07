@@ -100,7 +100,7 @@ Gelöste Diskussionen werden im abgedunkelten Zustand angezeigt:
   </div>
 </div>
 
-Ein schwebender Diskussionstrigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> zeigt in der unteren Ecke die Anzahl ungelöster Threads an.
+Ein rechts verankertes Registerkarten-Element <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> schmiegt sich an den rechten Bildschirmrand und zeigt die Anzahl ungelöster Threads an. Das Überfahren von markiertem Text öffnet direkt eine Inline-Vorschaukarte im Dokumentinhalt, während ein Klick auf die Registerkarte die Seitenleiste öffnet. Threads bleiben beim Öffnen und Schließen der Leiste nahtlos erhalten, ohne die Seite neu zu laden.
 
 ## Markdown-Speicherformat
 

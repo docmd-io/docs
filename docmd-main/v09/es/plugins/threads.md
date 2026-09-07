@@ -100,7 +100,7 @@ Resolved discussions display in a dimmed state:
   </div>
 </div>
 
-A floating discussion trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> displays unresolved thread counts in the bottom corner.
+Un activador anclado en el lateral derecho <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> se ajusta al borde de la pantalla, mostrando el recuento de hilos sin resolver. Al pasar el cursor sobre texto resaltado se muestra una tarjeta de vista previa directamente en el contenido, mientras que al hacer clic se abre el panel lateral de debates. Los hilos se conservan perfectamente al abrir y cerrar el panel sin necesidad de recargar la página.
 
 ## Markdown Storage Format
 

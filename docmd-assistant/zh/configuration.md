@@ -23,6 +23,7 @@ interface AssistantOptions {
   maxTokens?: number;
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
+  contextWindow?: number;
 }
 ```
 
@@ -44,6 +45,7 @@ interface AssistantOptions {
 | `maxTokens` | `number` | 每轮响应返回的最大 Token 数 | Provider 默认值 |
 | `reasoning` | `boolean \| string` | 切换深度推理模式 (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | 与中继请求一起发送的自定义 HTTP 报头 | `{}` |
+| `contextWindow` | `number` | 每轮传递给模型的检索文档上下文最大字符数。`0` = 不设上限（传递完整文档内容以保证最高回答质量）。 | `0` (不设上限) |
 
 ::: callout tip "默认系统提示词"
 如果没有提供 `systemPrompt`，引擎将应用默认提示词，强制执行 docmd 助手身份规则、优先搜索的工具调用、简明 Markdown 输出和可点击的引用链接。

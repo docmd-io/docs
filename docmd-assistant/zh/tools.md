@@ -119,5 +119,6 @@ const assistant = new DocmdAssistantEngine({
 当搜索结果片段不足以解答时，助手会自动调用 `read_documentation_page({ path })`：
 
 1. **自定义读取回调 (`customReader`)**: 如果提供了该回调，引擎会将页面获取委托给你的自定义加载器。
-2. **DOM 解析器降级**: 如果未提供回调，该工具使用 `fetch()` 获取 `window.location.origin + path`，并使用 `DOMParser()` 从 `<main>`、`<article>` 或 `[role="main"]` 元素中提取文本。
-3. **超链接引用**: 返回的页面内容被纳入上下文，允许模型在其最终回答中生成可点击的 Markdown 链接 `[页面标题](path)`。
+2. **结构化 DOM 解析降级**: 如果未提供自定义回调，该工具通过 `fetch()` 获取 `window.location.origin + path`，并将 `<main>`、`<article>` 或 `[role="main"]` 容器解析为结构化 Markdown。带有语法高亮标签的代码块（`pre/code`）、标题（`#`）以及列表（`-`）均得到完整保留，同时自动过滤非正文组件（`nav`、`aside`、`.toc`、`.sidebar`、`.docmd-ai-drawer`）。
+3. **无上限上下文传递**: 页面全文完整交付给模型，不再有原先的 3,500 字符硬性截断，确保模型能够完整分析大型配置表格和代码样例。
+4. **超链接引用**: 返回的页面内容被纳入上下文，允许模型在其最终回答中生成可点击的 Markdown 链接 `[页面标题](path)`。
