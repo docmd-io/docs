@@ -38,7 +38,6 @@
     "ai": {
       "assistant": true,
       "projectId": "docmd_aiv77jc8ms8qtpvd"
-    },
-    "threads": true
+    }
   }
 }
