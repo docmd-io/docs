@@ -1,21 +1,21 @@
 ---
-title: "Search Plugin"
-description: "Enable high-speed, offline-first full-text keyword search and local semantic embeddings in docmd."
+title: "Plugin de búsqueda"
+description: "Habilite búsqueda de texto completo rápida y sin conexión junto con incrustaciones semánticas locales en docmd."
 ---
 
-The `@docmd/plugin-search` plugin provides a client-side search experience for your documentation site. It uses [MiniSearch](external:https://github.com/lucaong/minisearch) to build a compressed index during compilation, enabling readers to search technical documentation instantly without requiring server-side databases or third-party crawling services.
+El plugin `@docmd/plugin-search` proporciona un buscador del lado del cliente para su sitio de documentación. Utiliza [MiniSearch](external:https://github.com/lucaong/minisearch) para generar un índice comprimido durante la compilación, permitiendo a los lectores realizar búsquedas instantáneas sin necesidad de bases de datos en servidor ni servicios externos de indexación.
 
-## Configuration Options
+## Opciones de configuración
 
-Search is enabled by default across standard `docmd` templates. Configure indexer parameters and header placement in `docmd.config.json`:
+La búsqueda está activa por defecto en todas las plantillas estándar de `docmd`. Configure los parámetros de indexación y la ubicación en el encabezado dentro de `docmd.config.json`:
 
-| Option | Type | Default | Description |
+| Opción | Tipo | Por defecto | Descripción |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable full-text search index generation. |
-| `placeholder` | `string` | `'Search...'` | Input placeholder text in search dialogs. |
-| `maxResults` | `number` | `10` | Maximum number of search results returned in the modal window. |
+| `enabled` | `boolean` | `true` | Habilita o deshabilita la generación del índice de búsqueda. |
+| `placeholder` | `string` | `'Buscar...'` | Texto de marcador de posición en el cuadro de búsqueda. |
+| `maxResults` | `number` | `10` | Cantidad máxima de resultados mostrados en la ventana modal. |
 
-### Header Integration Example
+### Ejemplo de integración en encabezado
 
 ```json "docmd.config.json"
 {
@@ -30,45 +30,45 @@ Search is enabled by default across standard `docmd` templates. Configure indexe
 }
 ```
 
-## How Keyword Search Works
+## Cómo funciona la búsqueda por palabras clave
 
-### 1. Build-Time Indexing
-During site compilation (`npx @docmd/core build`), `@docmd/plugin-search` traverses every page on your site. It extracts headings, titles, and body prose to generate a compressed `search-index.json` bundle:
+### 1. Indexación en tiempo de compilación
+Durante la compilación (`npx @docmd/core build`), `@docmd/plugin-search` recorre todas las páginas del sitio, extrayendo encabezados, títulos y párrafos para producir el archivo `search-index.json`:
 
-* **Deep Linking**: Registers heading anchors (`#`, `##`) as direct search jump targets.
-* **Relevance Weighting**: Page titles receive highest weighting, followed by section headings, then prose paragraphs.
+* **Enlaces profundos**: Registra anclas de encabezados (`#`, `##`) como destinos directos de salto.
+* **Ponderación de relevancia**: Los títulos de página tienen la máxima prioridad, seguidos por encabezados de sección y párrafos de texto.
 
-### 2. Client-Side Retrieval
-When a user opens the search modal (press `Ctrl+K` or `/`), the browser fetches `search-index.json`. Queries execute locally with prefix matching and fuzzy string distance matching to accommodate minor typos.
+### 2. Recuperación en el cliente
+Al abrir el cuadro de búsqueda (`Ctrl+K` o `/`), el navegador descarga `search-index.json`. Las consultas se ejecutan localmente con coincidencias de prefijo y distancia difusa (fuzzy matching) para tolerar errores tipográficos menores.
 
-## Customising Search Scope
+## Personalización del alcance de búsqueda
 
-To exclude specific pages from the search index, add `noindex: true` to [Page Frontmatter](../content/frontmatter.md):
+Para excluir documentos específicos del índice de búsqueda, agregue `noindex: true` en el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Internal Draft Specification"
+title: "Borrador de especificación interna"
 noindex: true
 ---
 ```
 
-::: callout tip title:"Privacy & Compliance" icon:shield-check
-Because search queries execute entirely within client memory, zero search input or keystroke telemetry leaves the user's browser.
+::: callout tip title:"Privacidad y cumplimiento" icon:shield-check
+Dado que las consultas de búsqueda se procesan íntegramente en la memoria del navegador del cliente, ninguna entrada de búsqueda ni pulsación de teclado sale del dispositivo del usuario.
 ::: /callout
 
-## Offline Local Semantic Search
+## Búsqueda semántica local sin conexión
 
-`@docmd/plugin-search` includes support for local semantic search powered by `docmd-search`. Semantic search uses client-side embedding models to process queries conceptually rather than matching literal keywords.
+`@docmd/plugin-search` incluye compatibilidad con búsqueda semántica local mediante `docmd-search`. La búsqueda semántica utiliza modelos de incrustaciones vectoriales ejecutados en el cliente para comprender las consultas a nivel conceptual, más allá de la simple coincidencia literal de palabras.
 
-### Enabling Semantic Search
+### Habilitación de la búsqueda semántica
 
-1. Install `docmd-search` in your documentation workspace:
+1. Instale `docmd-search` en su proyecto:
 
 ```bash
 npm install docmd-search
 ```
 
-2. Enable semantic indexing in `docmd.config.json`:
+2. Active la indexación semántica en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -80,24 +80,24 @@ npm install docmd-search
 }
 ```
 
-### Semantic Search Options
+### Opciones de búsqueda semántica
 
-| Option | Type | Default | Technical Purpose |
+| Opción | Tipo | Por defecto | Propósito técnico |
 | :--- | :--- | :--- | :--- |
-| `semantic` | `boolean` | `false` | Enable vector embedding search. |
-| `showConfidence` | `boolean` | `false` | Display similarity percentage badges on search results. |
-| `showFilters` | `boolean` | `true` | Display version filter controls in search dialogs. |
-| `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | HuggingFace embedding model ID. |
-| `chunkSize` | `number` | `512` | Token chunking limit per document section. |
+| `semantic` | `boolean` | `false` | Activa la búsqueda basada en vectores e incrustaciones. |
+| `showConfidence` | `boolean` | `false` | Muestra el porcentaje de similitud en los resultados de búsqueda. |
+| `showFilters` | `boolean` | `true` | Muestra controles de filtro de versión en el modal de búsqueda. |
+| `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | Identificador del modelo de HuggingFace. |
+| `chunkSize` | `number` | `512` | Límite de fragmentación por sección de documento. |
 
-### Supported Embedding Models
+### Modelos de incrustaciones compatibles
 
-| Model ID | Download Size | Best For |
+| Identificador de modelo | Tamaño de descarga | Uso recomendado |
 | :--- | :--- | :--- |
-| `Xenova/all-MiniLM-L6-v2` *(Default)* | ~23 MB | English technical documentation |
-| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | ~118 MB | Multilingual sites (German, Chinese, French) |
-| `Xenova/multilingual-e5-small` | ~118 MB | Broad international language coverage |
+| `Xenova/all-MiniLM-L6-v2` *(Por defecto)* | ~23 MB | Documentación técnica en inglés |
+| `Xenova/paraphrase-multilingual-MiniLM-L12-v2` | ~118 MB | Sitios multilingües (alemán, español, chino, francés) |
+| `Xenova/multilingual-e5-small` | ~118 MB | Amplia cobertura internacional |
 
-::: callout info "Automatic Fallback" icon:info
-If `docmd-search` is enabled but vector embedding dependencies cannot be loaded, the search plugin falls back gracefully to standard MiniSearch keyword indexing.
+::: callout info "Retirada elegante automática" icon:info
+Si la opción semántica está habilitada pero las dependencias de modelos vectoriales no pueden cargarse, el buscador recurre automáticamente a la indexación estándar por palabras clave de MiniSearch.
 :::

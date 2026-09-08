@@ -1,58 +1,58 @@
 ---
-title: "Engines Overview"
-description: "Understand the pluggable build engine architecture and select the best processing backend."
+title: "Visión general de motores"
+description: "Comprenda la arquitectura conectable de motores de compilación y seleccione el backend de procesamiento idóneo."
 ---
 
-The compiler features a highly modular, multi-threaded **Pluggable Engine Architecture**. It decouples orchestration from computational tasks to execute heavy workloads efficiently.
+El compilador cuenta con una **Arquitectura de motores conectables** multi-hilo y altamente modular. Desacopla la orquestación general de las tareas computacionales intensivas para procesar grandes cargas de trabajo con máxima eficiencia.
 
-Choose between the zero-configuration **JavaScript Engine** and the accelerated **Rust Engine**. Select the engine based on your repository size, platform, and performance needs.
+Elija entre el **Motor JavaScript** (con cero configuración) y el **Motor Rust** acelerado, según el tamaño de su repositorio, la plataforma de destino y sus requisitos de rendimiento.
 
-## Available Engines
+## Motores disponibles
 
-| Engine | Identifier | Default | Target Use Case | Key Strength |
+| Motor | Identificador | Por defecto | Caso de uso recomendado | Fortaleza principal |
 | :--- | :--- | :---: | :--- | :--- |
-| **JavaScript Engine** | `"js"` | ✅ Yes | Standard websites, rapid local prototyping, portability. | Runs universally on any device supporting Node.js. |
-| **Rust Engine (Preview)** | `"rust"` | ❌ No | Massive repositories (1,000+ files), enterprise CI/CD builds. | Maximises parallel file I/O via Tokio. |
+| **Motor JavaScript** | `"js"` | ✅ Sí | Sitios estándar, desarrollo local ágil, máxima portabilidad. | Ejecución universal en cualquier entorno compatible con Node.js. |
+| **Motor Rust (Vista previa)** | `"rust"` | ❌ No | Repositorios masivos (más de 1.000 archivos), compilaciones de CI/CD empresariales. | Maximiza la E/S de archivos en paralelo mediante Tokio. |
 
-## Configuration Options
+## Opciones de configuración
 
-Configure your build engine in the `docmd.config.json` file. Set the `engine` parameter directly.
+Configure el motor deseado en su archivo `docmd.config.json` mediante la propiedad `engine`.
 
 ```json "docmd.config.json"
 {
-  "title": "Enterprise Reference",
+  "title": "Referencia empresarial",
   "engine": "js",
   "src": "docs",
   "out": "site"
 }
 ```
 
-### Complete Options Reference
+### Referencia completa de opciones
 
-| Key | Supported Values | Default | Description |
+| Clave | Valores admitidos | Por defecto | Descripción |
 | :--- | :--- | :--- | :--- |
-| `engine` | `"js"`, `"rust"` | `"js"` | The execution layer processing file discovery and batch reads. |
+| `engine` | `"js"`, `"rust"` | `"js"` | Capa de ejecución encargada del descubrimiento y lectura masiva de archivos. |
 
-## High-Level Capabilities & Limitations
+## Capacidades compartidas y limitaciones
 
-Both engines share a rigorous execution boundary. The core API layer enforces uniform security and deterministic output.
+Ambos motores operan bajo un estricto límite de ejecución. La capa central de la API garantiza una seguridad uniforme y una salida determinista.
 
-### Shared Capabilities
-- **Thread Isolation**: Engines execute asynchronous tasks securely inside isolated worker threads. This prevents blocking the primary server loop.
-- **Task Verification**: Strict allowlists prevent unauthorised disk access or unverified execution patterns.
-- **Seamless Interoperability**: Plugins request data via standardised interfaces (`runWorkerTask`). They remain unaware of the underlying backend.
+### Capacidades compartidas
+- **Aislamiento en subprocesos**: Los motores ejecutan tareas asíncronas dentro de subprocesos de trabajo aislados (worker threads), evitando bloqueos en el ciclo de eventos principal.
+- **Verificación de tareas**: Listas blancas estrictas impiden el acceso no autorizado al disco o patrones de ejecución no validados.
+- **Interoperabilidad transparente**: Los plugins solicitan datos mediante interfaces normalizadas (`runWorkerTask`) sin necesidad de conocer qué backend subyace.
 
-### Architectural Limitations
-- **Serialisation Overhead**: Data crosses native runtime boundaries (N-API). Highly iterative tasks passing large JSON objects incur a small serialisation penalty.
-- **Binary Compatibility**: The JavaScript engine runs natively everywhere. The Rust engine relies on OS-specific platform binaries distributed via npm.
+### Limitaciones arquitectónicas
+- **Sobrecarga de serialización**: Los datos cruzan los límites de tiempo de ejecución nativos (N-API). Tareas con ciclos muy repetitivos que pasen objetos JSON grandes incurren en un pequeño coste de serialización.
+- **Compatibilidad binaria**: El motor JavaScript funciona de manera idéntica en cualquier plataforma. El motor Rust depende de binarios específicos por sistema operativo distribuidos a través de npm.
 
-## How the Engine Loader Works
+## Cómo funciona el cargador de motores
 
-When `@docmd/core` boots, the internal loader inspects your active configuration:
+Al iniciarse `@docmd/core`, el cargador interno examina la configuración activa:
 
-1. **Resolution**: If configured for `"rust"`, the engine lazy-loads the architecture-specific native package (e.g., `@docmd/engine-rust-darwin-arm64`).
-2. **Graceful Fallback**: If the binary is missing or unsupported, the engine logs an advisory notice. It then transparently falls back to the JavaScript engine. Your build always succeeds.
+1. **Resolución**: Si está configurado como `"rust"`, el motor carga perezosamente el paquete nativo correspondiente a su arquitectura (ej., `@docmd/engine-rust-darwin-arm64`).
+2. **Retirada elegante (Fallback)**: Si el binario nativo no está disponible o no es compatible, el motor registra un aviso informativo y pasa automáticamente al motor JavaScript. La compilación nunca se detiene.
 
-Explore the deep-dive documentation for each engine:
-- [JavaScript Engine Reference](js.md)
-- [Rust Engine Reference](rust.md)
+Explore la documentación detallada de cada motor:
+- [Referencia del motor JavaScript](js.md)
+- [Referencia del motor Rust](rust.md)

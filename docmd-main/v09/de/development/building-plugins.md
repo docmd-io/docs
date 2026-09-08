@@ -13,7 +13,8 @@ Jedes Plugin muss einen `plugin`-Deskriptor exportieren, der seine Identität un
   "plugin": {
     "name": "my-analytics",
     "version": "1.0.0",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false // optional, true wenn Plugin Live-Dev-Server benötigt
   },
 
   "generateScripts": (config, opts) => { ... },
@@ -35,7 +36,8 @@ Zusätzlich zum Laufzeit-`plugin`-Deskriptor **muss** jedes offizielle Plugin ei
     "kind": "plugin",
     "displayName": "Foo",
     "tagline": "Was dieses Plugin tut (eine Zeile)",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false
   }
 }
 ```
@@ -48,6 +50,13 @@ Zusätzlich zum Laufzeit-`plugin`-Deskriptor **muss** jedes offizielle Plugin ei
 | `tagline` | Empfohlen | Einzeilige Beschreibung; fällt auf die npm-Beschreibung zurück. |
 | `capabilities` | Erforderlich für Plugins und Templates | Dieselben Hook-Fähigkeiten, die der JS-Deskriptor deklariert. Die Build-Zeit-Prüfung warnt bei Abweichung. |
 | `preview` | Optional | Pfad zu einer Vorschau-Asset (nur Template); wird in Katalogen angezeigt. |
+| `requiresLiveServer` | Optional | Wenn `true`, werden Client-Assets (`getAssets`, `generateScripts`, `generateMetaTags`) bei statischen Builds (`docmd build`) automatisch weggelassen. Standard ist `false`. |
+
+### Live-Server-Anforderung (`requiresLiveServer`)
+
+Wenn Sie interaktive Plugins entwickeln, die einen laufenden Entwicklungs-Server oder eine WebSocket-RPC-Bridge erfordern (wie Inline-Bearbeitung oder kollaborative Kommentare in `@docmd/plugin-threads`), deklarieren Sie `"requiresLiveServer": true` im Plugin-Deskriptor und in `package.json#docmd`.
+
+Bei statischen Produktions-Builds (`docmd build`) überspringt docmd automatisch die Injektion von Client-Assets, lässt jedoch Markdown-Parsing-Hooks (`markdownSetup`) aktiv. Dadurch bleiben Produktions-Websites schlank, schnell und fehlerfrei, während Markdown-Container sauber gerendert werden. Benutzer können dies pro Website in ihrer Konfiguration mit `devOnly: false` (oder `liveOnly: false`) überschreiben.
 
 Engines haben denselben `docmd`-Namespace, aber **keine `capabilities`** — sie nehmen nicht am Hook-System teil, sondern nur am Engine-Loader.
 

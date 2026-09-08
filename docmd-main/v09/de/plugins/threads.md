@@ -24,6 +24,16 @@ Aktivieren Sie die Thread-Konfiguration in `docmd.config.json`:
 | Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | Bei `true` werden Threads in einem dedizierten Panel angezeigt; bei `false` werden Threads inline an Texthervorhebungen angehängt. |
+| `devOnly` | `boolean` | `true` | Beschränkt Client-UI-Assets auf Live-Dev-Server-Builds (`docmd dev`). Werden in statischen Produktions-Builds (`docmd build`) weggelassen. |
+
+### Live-Entwicklungs-Server-Anforderung
+
+Die interaktive Kommentaroberfläche, Texthervorhebungs-Werkzeuge und Markdown-Persistenzaktionen erfordern einen aktiven lokalen Entwicklungs-Server (`docmd dev`) mit einer funktionierenden WebSocket-RPC-Verbindung.
+
+Da Threads `requiresLiveServer: true` deklariert:
+- **Entwicklung (`docmd dev`)**: Der Ausklapp-Tab, die Inline-Vorschaukarten, das Auswahl-Popover und die Thread-Seitenleiste sind vollständig geladen und funktionsfähig.
+- **Statische Produktions-Builds (`docmd build`)**: Client-Skripte und CSS werden automatisch weggelassen, damit öffentliche Websites ultraschnell, schlank und frei von inaktiven UI-Elementen oder fehlerhaften WebSocket-Verbindungsversuchen bleiben. Vorhandene Markdown-Syntax (`::: threads` und `==Text=={t-...}`) wird weiterhin fehlerfrei geparst.
+- **Manuelle Überschreibung**: Wenn Sie die Threads-Client-Assets ausdrücklich auch in statische Builds bündeln möchten, konfigurieren Sie `"devOnly": false` unter `plugins.threads`.
 
 ### Globales Konfigurationsbeispiel
 
@@ -31,7 +41,8 @@ Aktivieren Sie die Thread-Konfiguration in `docmd.config.json`:
 {
   "plugins": {
     "threads": {
-      "sidebar": true
+      "sidebar": true,
+      "devOnly": true
     }
   }
 }
@@ -100,7 +111,7 @@ Gelöste Diskussionen werden im abgedunkelten Zustand angezeigt:
   </div>
 </div>
 
-Ein schwebender Diskussionstrigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> zeigt in der unteren Ecke die Anzahl ungelöster Threads an.
+Ein rechts verankertes Registerkarten-Element <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> schmiegt sich an den rechten Bildschirmrand und zeigt die Anzahl ungelöster Threads an. Das Überfahren von markiertem Text öffnet direkt eine Inline-Vorschaukarte im Dokumentinhalt, während ein Klick auf die Registerkarte die Seitenleiste öffnet. Threads bleiben beim Öffnen und Schließen der Leiste nahtlos erhalten, ohne die Seite neu zu laden.
 
 ## Markdown-Speicherformat
 

@@ -50,7 +50,7 @@ The SEO plugin evaluates `robots.txt` in top-down priority order:
 2. **Source Assets Folder** (`assets/robots.txt`) - If present in your source assets directory, it is automatically copied to the site output root (`site/robots.txt`).
 3. **Auto-Generated Default** - If no custom file is found, `docmd` generates `robots.txt` dynamically based on your plugin configuration.
 
-Recommended file organization:
+Recommended file organisation:
 
 ```text
 my-docs/

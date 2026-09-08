@@ -1,64 +1,64 @@
 ---
-title: "Designing Custom Landing Pages"
-description: "Build custom landing pages using hero headers, grid containers, and noStyle mode in docmd."
+title: "Diseño de páginas de inicio personalizadas"
+description: "Cree páginas de aterrizaje llamativas utilizando encabezados hero, contenedores de cuadrícula y el modo noStyle en docmd."
 ---
 
-Documentation homepages serve as the primary entry point for developers exploring your project. `docmd` provides built-in visual containers and layout modes for building landing pages without requiring external web frameworks.
+La página principal de su documentación actúa como el punto de bienvenida fundamental para los desarrolladores. `docmd` proporciona contenedores visuales nativos y modos de diseño para estructurar portadas atractivas sin necesidad de frameworks externos.
 
-## Design Approaches
+## Enfoques de diseño
 
-`docmd` offers two primary methods for constructing landing pages:
+`docmd` ofrece dos vías principales para construir páginas de inicio:
 
-1. **Standard Layout with Hero & Grids**: Retains site navigation, sidebars, and top menubar while adding dynamic hero headers and feature cards.
-2. **Blank Canvas (`noStyle: true`)**: Bypasses default documentation chrome for total creative control over custom HTML and CSS layouts.
+1. **Diseño estándar con Hero y Cuadrículas**: Conserva la navegación, barras laterales y menús superiores habituales mientras incorpora cabeceras hero dinámicas y tarjetas de funcionalidades.
+2. **Lienzo en blanco (`noStyle: true`)**: Prescinde de la interfaz de documentación para ofrecer control total sobre estilos HTML y CSS personalizados.
 
-## Implementation Examples
+## Ejemplos de implementación
 
-### 1. Hero Header Container
+### 1. Contenedor de cabecera Hero
 
-The [Hero](../content/containers/hero.md) container supports split media layouts (`layout:split`) and background radial glow effects (`glow:true`):
+El contenedor [Hero](../content/containers/hero.md) admite disposiciones divididas (`layout:split`) y efectos de resplandor de fondo (`glow:true`):
 
 ```markdown
 ::: hero layout:split glow:true
-# Build Faster with docmd
-The zero-config documentation engine for modern software teams.
+# Desarrolle más rápido con docmd
+El compilador de documentación diseñado para humanos y máquinas.
 
-::: button title:"Quickstart Guide" url:"../getting-started/quick-start.md" color:blue
-::: button title:"GitHub Repository" url:"external:https://github.com/docmd-io/docmd" color:gray
+::: button title:"Guía de inicio rápido" url:"../getting-started/quick-start.md" color:blue
+::: button title:"Repositorio en GitHub" url:"external:https://github.com/docmd-io/docmd" color:gray
 
 == side
 ::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ::: /hero
 ```
 
-### 2. Feature Navigation with Grids
+### 2. Navegación por características con cuadrículas
 
-Combine [Grids and Cards](../content/containers/grids.md) to showcase core product capabilities side-by-side:
+Combine [Cuadrículas y Tarjetas](../content/containers/grids.md) para presentar las cualidades principales de su producto:
 
 ```markdown
 ::: grids
   ::: grid
-    ::: card title:"Quickstart" icon:rocket
-    Get up and running in under five minutes.
-    ::: button title:"Learn More" url:"../getting-started/quick-start.md"
+    ::: card title:"Inicio rápido" icon:rocket
+    Póngase en marcha en menos de cinco minutos.
+    ::: button title:"Comenzar" url:"../getting-started/quick-start.md"
     ::: /card
   ::: /grid
   ::: grid
-    ::: card title:"API Reference" icon:code
-    Comprehensive documentation for all core functions.
-    ::: button title:"Explore API" url:"../api/index.md"
+    ::: card title:"Referencia de API" icon:code
+    Documentación exhaustiva para todas las funciones principales.
+    ::: button title:"Explorar API" url:"../api/index.md"
     ::: /card
   ::: /grid
 ::: /grids
 ```
 
-### 3. Blank Canvas with `noStyle`
+### 3. Lienzo en blanco con `noStyle`
 
-For complete layout freedom that bypasses sidebars and headers, specify `noStyle: true` in [Page Frontmatter](../content/frontmatter.md):
+Para disfrutar de total libertad estética prescindiendo de barras y menús estándar, configure `noStyle: true` en el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Product Showcase"
+title: "Presentación del producto"
 noStyle: true
 components:
   meta: true
@@ -67,8 +67,8 @@ components:
 ---
 ```
 
-When `noStyle: true` is active, `docmd` renders only the content provided on the page, allowing you to combine raw HTML utility classes with `docmd` containers freely.
+Cuando `noStyle: true` está habilitado, `docmd` renderiza únicamente el contenido aportado en el archivo, permitiéndole emplear clases de utilidad HTML combinadas con contenedores de `docmd`.
 
-::: callout tip "Selecting the Right Landing Mode" icon:lightbulb
-For most documentation sites, combining `::: hero` and `::: grids` within standard layout pages delivers optimal brand impact while retaining instant search navigation and theme toggles.
+::: callout tip "Elegir el formato adecuado" icon:lightbulb
+Para la inmensa mayoría de proyectos, combinar `::: hero` y `::: grids` en páginas de diseño estándar ofrece un impacto visual sobresaliente manteniendo al alcance el buscador instantáneo y los controles de tema.
 :::

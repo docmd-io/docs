@@ -23,6 +23,7 @@ interface AssistantOptions {
   maxTokens?: number;
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
+  contextWindow?: number;
 }
 ```
 
@@ -44,6 +45,7 @@ interface AssistantOptions {
 | `maxTokens` | `number` | Tokens máximos devueltos por respuesta | Predeterminado |
 | `reasoning` | `boolean \| string` | Alternar modo de razonamiento extendido (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | Encabezados HTTP personalizados para solicitudes relay | `{}` |
+| `contextWindow` | `number` | Caracteres máximos del contexto de documentación entregados al modelo por turno. `0` = sin límite (contenido íntegro para máxima fidelidad). | `0` (sin límite) |
 
 ::: callout tip "Prompt del Sistema Predeterminado"
 Si no se proporciona un `systemPrompt`, el motor aplica un prompt predeterminado que hace cumplir las reglas de identidad de docmd, llamadas a herramientas orientadas a búsqueda y enlaces de cita.

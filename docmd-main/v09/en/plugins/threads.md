@@ -24,6 +24,16 @@ Enable thread configuration in `docmd.config.json`:
 | Option | Type | Default | Technical Description |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | When `true`, threads display in a dedicated panel; when `false`, threads attach inline to text highlights. |
+| `devOnly` | `boolean` | `true` | Restricts client UI assets to live dev server builds (`docmd dev`). Omitted in static production builds (`docmd build`). |
+
+### Live Development Server Requirement
+
+The Threads commenting interface, highlighting tools, and Markdown persistence actions require an active live development server (`docmd dev`) with an active WebSocket RPC connection.
+
+Because Threads declares `requiresLiveServer: true`:
+- **Development (`docmd dev`)**: The slide-out handle, inline preview cards, selection popovers, and thread sidebar are fully loaded and operational.
+- **Static Production Builds (`docmd build`)**: Client scripts and CSS are automatically omitted to ensure that public production sites remain ultra-fast, zero-overhead, and free of broken WebSocket attempts or inactive UI widgets. Any existing Markdown threads syntax (`::: threads` and `==text=={t-...}`) continues to parse cleanly without warnings.
+- **Manual Override**: If you explicitly wish to bundle Threads client assets into static builds, configure `"devOnly": false` in `plugins.threads`.
 
 ### Global Configuration Example
 
@@ -31,7 +41,8 @@ Enable thread configuration in `docmd.config.json`:
 {
   "plugins": {
     "threads": {
-      "sidebar": true
+      "sidebar": true,
+      "devOnly": true
     }
   }
 }
@@ -47,7 +58,7 @@ Enable thread configuration in `docmd.config.json`:
 
 ## Interactive Preview
 
-Text with attached discussions receives <span class="threads-preview-highlight">inline color highlights</span>. Thread cards render below:
+Text with attached discussions receives <span class="threads-preview-highlight">inline colour highlights</span>. Thread cards render below:
 
 <div class="threads-preview-card">
   <div class="threads-preview-comment">
@@ -74,7 +85,7 @@ Text with attached discussions receives <span class="threads-preview-highlight">
   </div>
 </div>
 
-Additional highlights cycle through <span class="threads-preview-highlight-blue">distinct color palettes</span> automatically:
+Additional highlights cycle through <span class="threads-preview-highlight-blue">distinct colour palettes</span> automatically:
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">
@@ -100,7 +111,7 @@ Resolved discussions display in a dimmed state:
   </div>
 </div>
 
-A floating discussion trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> displays unresolved thread counts in the bottom corner.
+A right-docked tab trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> hugs the right edge of the viewport, displaying unresolved thread counts. Hovering over any highlighted text reveals an inline comment preview card directly within the content, while clicking the tab opens the discussion drawer. Threads persist seamlessly across drawer open and close states without reloading the page.
 
 ## Markdown Storage Format
 

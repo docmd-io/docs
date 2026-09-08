@@ -28,7 +28,7 @@
   },
   "layout": {
     "banner": {
-      "content": "**v0.9.4 is live!** — Read the latest technical documentation and migration guides.",
+      "content": "**v0.9.5 is live!** — Read the latest technical documentation and migration guides.",
       "type": "info",
       "dismissible": true,
       "icon": "sparkles"
@@ -38,6 +38,7 @@
     "ai": {
       "assistant": true,
       "projectId": "docmd_aiv77jc8ms8qtpvd"
-    }
+    },
+    "threads": true
   }
 }

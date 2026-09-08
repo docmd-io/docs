@@ -1,13 +1,13 @@
 ---
-title: "Custom Styles & Scripts"
-description: "Inject custom CSS and JavaScript files into your docmd site to extend layout styles, brand identity, and client behavior."
+title: "Estilos y scripts personalizados"
+description: "Inyecte archivos CSS y JavaScript personalizados en su sitio docmd para ampliar estilos, identidad corporativa y comportamiento del cliente."
 ---
 
-While `docmd` themes provide flexible visual defaults, you can inject custom stylesheets and interactive scripts via the `theme.customCss` and `customJs` array options in `docmd.config.json`.
+Aunque los temas de `docmd` ofrecen una estética cuidada por defecto, puede inyectar hojas de estilo y scripts personalizados a través de las opciones `theme.customCss` y `customJs` en `docmd.config.json`.
 
-## Custom CSS Overrides
+## Anulaciones mediante CSS personalizado
 
-Use `theme.customCss` to override default theme variables or introduce new layout rules:
+Utilice `theme.customCss` para redefinir variables del tema o agregar reglas de diseño:
 
 ```json "docmd.config.json"
 {
@@ -19,15 +19,15 @@ Use `theme.customCss` to override default theme variables or introduce new layou
 }
 ```
 
-### Execution Steps
+### Pasos de ejecución
 
-1. Place your CSS file inside your project's assets directory (e.g. `docs/assets/css/branding.css`).
-2. `docmd` copies assets to the compiled output directory during build and injects `<link>` tags into page headers automatically.
-3. Custom CSS files load **after** theme styles, ensuring your custom rules override default theme declarations cleanly.
+1. Guarde su archivo CSS en la carpeta de recursos de su proyecto (por ejemplo, `docs/assets/css/branding.css`).
+2. `docmd` transferirá los recursos al directorio compilado durante la generación e inyectará las etiquetas `<link>` automáticamente en el encabezado.
+3. Las hojas de estilo personalizadas se cargan **después** de los temas, asegurando que sus declaraciones prevalezcan limpiamente sobre los estilos base.
 
-## Custom JavaScript Integration
+## Integración de JavaScript personalizado
 
-Use the top-level `customJs` array for scripts that add interactive capabilities or integrate third-party analytics:
+Utilice el arreglo de nivel superior `customJs` para scripts que introduzcan interactividad o integren analíticas de terceros:
 
 ```json "docmd.config.json"
 {
@@ -37,29 +37,29 @@ Use the top-level `customJs` array for scripts that add interactive capabilities
 }
 ```
 
-### SPA Router Lifecycle Awareness
+### Compatibilidad con el enrutador SPA
 
-Custom scripts load at the bottom of the `<body>` element. Because `docmd` operates as a **Single Page Application (SPA)** during client navigation:
+Los scripts personalizados se cargan al final de la etiqueta `<body>`. Puesto que `docmd` opera como una **Single Page Application (SPA)** durante la navegación del usuario:
 
-* Full page reloads do not occur when clicking internal links.
-* Scripts that inspect or attach event listeners to DOM elements should subscribe to SPA router lifecycle events.
+* No se producen recargas completas de página al hacer clic en enlaces internos.
+* Los scripts que interactúen con elementos del DOM deben suscribirse a los eventos del ciclo de vida del enrutador SPA.
 
-For complete event signatures and code examples, see [Client-Side Events](../reference/client-side-events.md).
+Consulte [Eventos del lado del cliente](../reference/client-side-events.md) para conocer los detalles de los eventos disponibles.
 
-## Asset Priority Order
+## Orden de prioridad de recursos
 
-Every CSS and JS asset registered in a `docmd` build is assigned a **priority weight** that dictates cascade load order (lower numbers load earlier):
+A cada recurso CSS o JS registrado en `docmd` se le asigna un **peso de prioridad** que determina el orden de carga en la cascada (los números menores cargan primero):
 
-| Priority Weight | Layer | Technical Description |
+| Peso de prioridad | Capa | Descripción técnica |
 | :--- | :--- | :--- |
-| `0` | Base Core (`docmd-main.css`, `docmd-main.js`) | Always present in all builds. |
-| `5` | Theme Palette Overlay (`docmd-theme-sky.css`, etc.) | Loaded via `theme.name`. |
-| `10` | Structural Template Styles | Injected by active template plugins. |
-| `15` | User `customCss` / `customJs` | **Highest priority for user overrides**. |
-| `20` | Plugin Assets | Lightbox, search, and analytics assets. |
+| `0` | Núcleo base (`docmd-main.css`, `docmd-main.js`) | Siempre presentes en todas las compilaciones. |
+| `5` | Esquema de color del tema (`docmd-theme-sky.css`, etc.) | Cargado mediante `theme.name`. |
+| `10` | Estilos de estructura de plantilla | Inyectados por los plugins de plantilla activos. |
+| `15` | `customCss` / `customJs` del usuario | **Prioridad máxima para personalizaciones del usuario**. |
+| `20` | Recursos de plugins | Estilos de ampliación visual, búsqueda y analíticas. |
 
-Within each priority bucket, files load in the order they were registered. To learn more about structural layout overrides, explore [Templates](templates.md).
+Dentro de un mismo rango de prioridad, los archivos se cargan en el orden en que fueron declarados. Para conocer cómo personalizar estructuras completas, explore [Plantillas](templates.md).
 
-::: callout tip "Scoped Custom Styles" icon:lightbulb
-Maintain clean asset organization by separating `/css` and `/js` subdirectories under `assets/`. Using explicit class names in `branding.css` prevents style conflicts with core `docmd` container rules.
+::: callout tip "Estilos personalizados organizados" icon:lightbulb
+Mantenga sus recursos organizados separando los directorios `/css` y `/js` dentro de `assets/`. Emplear selectores con nombres específicos en `branding.css` evitará colisiones con las reglas predeterminadas de los contenedores de `docmd`.
 :::

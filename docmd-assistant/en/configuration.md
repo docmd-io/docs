@@ -23,6 +23,7 @@ interface AssistantOptions {
   maxTokens?: number;
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
+  contextWindow?: number;
 }
 ```
 
@@ -44,6 +45,7 @@ interface AssistantOptions {
 | `maxTokens` | `number` | Maximum tokens returned per response turn | Provider default |
 | `reasoning` | `boolean \| string` | Toggle extended reasoning mode (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | Custom HTTP headers sent with relay requests | `{}` |
+| `contextWindow` | `number` | Maximum characters of retrieved documentation context passed to the model per turn. `0` = uncapped (full content delivered for highest response fidelity). | `0` (uncapped) |
 
 ::: callout tip "Default System Prompt"
 If no `systemPrompt` is provided, the engine applies a default prompt that enforces docmd assistant identity rules, search-first tool calling, concise Markdown output, and clickable citation links.

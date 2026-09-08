@@ -7,13 +7,13 @@ description: "Discover docmd's zero-config heuristics engine that automatically 
 
 ## How Heuristic Discovery Works
 
-When executed in a directory without a `docmd.config.json` manifest, the engine initializes **Zero-Config Mode**. It scans the workspace for documentation content and applies automated heuristics:
+When executed in a directory without a `docmd.config.json` manifest, the engine initialises **Zero-Config Mode**. It scans the workspace for documentation content and applies automated heuristics:
 
 ::: steps
 
 1. **Source Directory Discovery**: Scans candidate directories in priority order: `docs/`, `src/docs/`, `documentation/`, `content/`, and `.` (root directory fallback).
 2. **Version & Locale Extraction**: Automatically parses version folders matching `v[0-9]+` (e.g. `v1.0`, `v09`) and two-letter locale codes (e.g. `en`, `de`, `zh`).
-3. **Automated Sidebar Routing**: Generates a clean navigation tree by analyzing file hierarchies and converting hyphenated basenames (`getting-started.md` → `Getting Started`).
+3. **Automated Sidebar Routing**: Generates a clean navigation tree by analysing file hierarchies and converting hyphenated basenames (`getting-started.md` → `Getting Started`).
 
 :::
 
@@ -78,6 +78,6 @@ To disable a default behaviour, set its key to `false` or an empty value. For in
 
 | Property | Default | Description |
 | :--- | :--- | :--- |
-| `cookie` | `null` | Opt-in cookie consent dialog. See [Cookie Consent](./cookie-consent.md). |
+| `cookie` | `null` | Opt-in cookie consent dialogue. See [Cookie Consent](./cookie-consent.md). |
 | `layout.banner` | `null` | Opt-in site announcement banner. See [Site Banner](./site-banner.md). |
 | `theme.template` | `null` | Opt-in custom site template selection. See [Templates](../theming/templates.md). |

@@ -1,41 +1,40 @@
 ---
-title: "Node API Reference"
-description: "Low-level Node API for plugin authors — URL utilities, action dispatchers, source tools, the engine loader, and TypeScript types."
+title: "Referencia de la API de Node"
+description: "API de bajo nivel de Node para desarrolladores de plugins: utilidades de URL, despachadores de acciones, herramientas de origen, cargador de motores y tipos de TypeScript."
 ---
 
 ::: callout info
-**For plugin authors.** If you just want to *call* docmd from a Node script, see [Build API](../reference/build-api.md) instead. This page covers the lower-level utilities exposed by `@docmd/api` for writing plugins.
+**Para desarrolladores de plugins.** Si solo desea *invocar* docmd desde un script de Node, consulte la [API de compilación](../reference/build-api.md). Esta página describe las utilidades de bajo nivel expuestas por `@docmd/api` para escribir extensiones.
 :::
 
-The `@docmd/api` package is the dedicated home for the plugin system. It provides hook registration, WebSocket RPC dispatch, source editing tools, and centralised URL utilities.
+El paquete `@docmd/api` es el núcleo del sistema de plugins. Proporciona registro de hooks, despacho WebSocket RPC, herramientas de edición de Markdown y utilidades centralizadas de URL.
 
 ```bash
 npm install @docmd/api
 ```
 
 ::: callout tip
-**Note:** All exports from `@docmd/api` are also available from `@docmd/core`. New projects should import directly from `@docmd/api`.
+**Nota:** Todas las exportaciones de `@docmd/api` también están disponibles desde `@docmd/core`. En proyectos nuevos se recomienda importar directamente desde `@docmd/api`.
 :::
 
-## URL Utilities
+## Utilidades de URL
 
-Plugins should use these centralised utilities instead of rolling their own URL logic.
+Los plugins deben usar estas funciones centralizadas en lugar de implementar lógica propia de URLs.
 
 ### `outputPathToSlug(outputPath)`
 
-Convert a build engine output path to a clean directory-style slug.
+Convierte una ruta de salida generada por el compilador en un slug de directorio limpio.
 
 ```javascript
 import { outputPathToSlug } from '@docmd/api';
 
-outputPathToSlug('guide/index.html');   // → 'guide/'
-outputPathToSlug('index.html');         // → '/'
-outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
+outputPathToSlug('guide/intro.html'); // → 'guide/intro/'
+outputPathToSlug('index.html');       // → '/'
 ```
 
 ### `outputPathToPathname(outputPath)`
 
-Convert to a root-relative pathname.
+Convierte una ruta de salida en un pathname relativo a la raíz con barra final.
 
 ```javascript
 import { outputPathToPathname } from '@docmd/api';
@@ -46,7 +45,7 @@ outputPathToPathname('index.html');       // → '/'
 
 ### `outputPathToCanonical(outputPath, siteUrl)`
 
-Build a full canonical URL.
+Construye una URL canónica completa.
 
 ```javascript
 import { outputPathToCanonical } from "@docmd/api";
@@ -56,7 +55,7 @@ outputPathToCanonical("guide/index.html", "https://docs.example.com");
 
 ### `sanitizeUrl(url)`
 
-Collapse double slashes (except after protocol).
+Elimina dobles barras inclinadas sucesivas (excepto después del protocolo).
 
 ```javascript
 import { sanitizeUrl } from "@docmd/api";
@@ -67,17 +66,17 @@ sanitizeUrl("/foo//bar"); // → "/foo/bar"
 
 ### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
 
-Build an absolute URL with locale and version prefixes.
+Construye una URL absoluta incorporando prefijos de idioma y versión.
 
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
+buildAbsoluteUrl('/', 'es/', 'v1/', 'guide/'); // → '/es/v1/guide/'
 ```
 
 ### `resolveHref(href)`
 
-Normalise user-written hrefs to clean URLs. Handles `.md` stripping, trailing slashes, `external:` and `raw:` prefixes.
+Normaliza los enlaces escritos por el usuario en URLs limpias. Gestiona la eliminación de `.md`, barras finales y prefijos especiales como `external:` y `raw:`.
 
 ```javascript
 import { resolveHref } from "@docmd/api";
@@ -87,9 +86,9 @@ resolveHref("external:https://github.com"); // → "https://github.com"
 resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
 ```
 
-## Pre-computed Page URLs
+## URLs de página precalculadas
 
-Every page object includes pre-computed URL data. Plugins can read these directly with zero computation needed.
+Cada objeto de página incluye datos de URL calculados con anterioridad. Los plugins pueden leerlos directamente sin cómputos adicionales.
 
 ```javascript
 export async function onPostBuild({ pages, config }) {
@@ -101,17 +100,17 @@ export async function onPostBuild({ pages, config }) {
 }
 ```
 
-| Property | Type | Description |
+| Propiedad | Tipo | Descripción |
 |:---------|:-----|:------------|
-| `slug` | `string` | Clean directory-style slug (e.g., `guide/` or `/`) |
-| `canonical` | `string` | Full canonical URL (only if `config.url` is set) |
-| `pathname` | `string` | Root-relative path (e.g., `/guide/`) |
+| `slug` | `string` | Slug limpio en formato directorio (ej., `guide/` o `/`) |
+| `canonical` | `string` | URL canónica completa (solo si `config.url` está definido) |
+| `pathname` | `string` | Ruta relativa a la raíz (ej., `/guide/`) |
 
-## Action & Event Dispatch
+## Despacho de acciones y eventos
 
 ### `createActionDispatcher(hooks, options)`
 
-Creates a dispatcher that routes WebSocket RPC messages to plugin action/event handlers.
+Crea un despachador que enruta mensajes WebSocket RPC hacia los controladores de acciones y eventos del plugin.
 
 ```javascript
 import { createActionDispatcher } from "@docmd/api";
@@ -126,7 +125,7 @@ const { result, reload } = await dispatcher.handleCall("my-action", payload);
 
 ### `createSourceTools({ projectRoot })`
 
-Creates source editing utilities for markdown file manipulation.
+Crea utilidades de edición de código fuente para la manipulación programática de archivos Markdown.
 
 ```javascript
 import { createSourceTools } from "@docmd/api";
@@ -139,23 +138,46 @@ await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 
 ### `loadPlugins(config, options)`
 
-Loads, validates, and registers all plugins declared in the config. Returns the populated hooks registry.
+Carga, valida y registra todos los plugins declarados en la configuración. Devuelve el registro de hooks completo. Acepta `isDev` (booleano) para indicar si la compilación se ejecuta en modo desarrollo (controlando la inclusión de activos para plugins que requieren servidor en vivo).
 
 ```javascript
 import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  "resolvePaths": [__dirname]
+  "resolvePaths": [__dirname],
+  "isDev": true // opcional, por defecto false
 });
 ```
 
-## Engine Loader API
+## API de Entorno del Cliente (`window.docmd`)
 
-The pluggable engine architecture allows programmatic resolution and instantiation of acceleration layers directly via `@docmd/api`.
+Durante el desarrollo local (`docmd dev`), el navegador carga el puente RPC en `/__dev/docmd-api.js`, exponiendo `window.docmd` para comunicación en tiempo real y detección del estado del servidor.
+
+### `docmd.isLive()`
+
+Devuelve `true` de forma síncrona si la conexión WebSocket con el servidor de desarrollo activo está abierta y lista.
+
+```javascript
+if (window.docmd && window.docmd.isLive()) {
+  // Servidor dev en vivo conectado
+}
+```
+
+### `docmd.ping(timeoutMs = 2000)`
+
+Envía una solicitud asíncrona de comprobación al servidor dev mediante la acción RPC integrada `system:ping`. Resuelve a `true` si responde, o a `false` en caso de desconexión o tiempo de espera agotado.
+
+```javascript
+const ok = await window.docmd.ping();
+```
+
+## API del cargador de motores
+
+La arquitectura conectable permite la resolución y creación programática de capas de aceleración directamente mediante `@docmd/api`.
 
 ### `loadEngine(engineName)`
 
-Resolves and initialises the requested build engine backend. If native architecture binaries are unavailable, it gracefully falls back to the high-performance JavaScript engine.
+Resuelve e inicializa el motor de compilación solicitado. Si los binarios nativos no están disponibles en la plataforma actual, realiza una retirada elegante hacia el motor de JavaScript de alto rendimiento.
 
 ```javascript
 import { loadEngine } from "@docmd/api";
@@ -166,7 +188,7 @@ const gitLogResult = await engine.runWorkerTask("git:log", { "paths": ["docs/gui
 
 ### `registerEngine(engineName, engineInstance)`
 
-Allows custom tools or third-party integrators to register custom execution engines programmatically.
+Permite a herramientas personalizadas o integradores registrar motores de ejecución de manera programática.
 
 ```javascript
 import { registerEngine } from "@docmd/api";
@@ -174,9 +196,9 @@ import { registerEngine } from "@docmd/api";
 registerEngine("custom", myCustomEngineImpl);
 ```
 
-## Type Exports
+## Exportación de tipos
 
-For TypeScript plugin authors, the following types are available:
+Para desarrolladores que empleen TypeScript, se exportan los siguientes tipos:
 
 ```typescript
 import type {
@@ -197,8 +219,8 @@ import type {
 } from '@docmd/api';
 ```
 
-## What's Next
+## Siguientes pasos
 
-- [Building Plugins](./building-plugins.md) — start here.
-- [Plugin Examples](./plugin-examples.md) — see a full plugin walkthrough.
-- [Engines & Architecture](./engines/overview.md) — Rust engine, N-API, and engine loader internals.
+- [Creación de plugins](./building-plugins.md) — empiece aquí.
+- [Ejemplos de plugins](./plugin-examples.md) — recorrido práctico por un plugin completo.
+- [Motores y arquitectura](./engines/overview.md) — motor Rust, N-API e interiores del cargador.

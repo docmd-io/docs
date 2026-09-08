@@ -57,5 +57,5 @@ Each version can maintain an independent `navigation.json` manifest. Refer to [N
 ## Versioning Guidelines
 
 1. **URL-Friendly IDs**: Use concise, alphanumeric identifiers such as `v1`, `v2`, or `beta`.
-2. **Consistent File Hierarchies**: Maintain parallel directory structures across versions to maximize sticky path switching accuracy.
+2. **Consistent File Hierarchies**: Maintain parallel directory structures across versions to maximise sticky path switching accuracy.
 3. **Single Configuration File**: Do not create separate configuration manifests for each version; `docmd` processes all versions in a single unified build pass.

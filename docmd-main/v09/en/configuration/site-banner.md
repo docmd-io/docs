@@ -85,7 +85,7 @@ The banner renders at the top of every page. When dismissed by a reader, the clo
 
 ## Custom Banner Styling
 
-The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colors and typography via custom CSS rules:
+The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colours and typography via custom CSS rules:
 
 ```css
 .docmd-banner--info {

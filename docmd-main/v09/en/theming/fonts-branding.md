@@ -3,7 +3,7 @@ title: "Custom Fonts & Branding"
 description: "Match your documentation site appearance to corporate identity guidelines using CSS variables and web fonts in docmd."
 ---
 
-Documentation serves as a critical brand touchpoint. `docmd` uses a CSS variable token system, allowing you to override default font stacks and brand color palettes without modifying core engine stylesheets.
+Documentation serves as a critical brand touchpoint. `docmd` uses a CSS variable token system, allowing you to override default font stacks and brand colour palettes without modifying core engine stylesheets.
 
 ## Customising Visual Tokens
 
@@ -47,5 +47,5 @@ Register your stylesheet in `docmd.config.json` under `theme.customCss`:
 ```
 
 ::: callout tip "Performance & Font Loading" icon:lightbulb
-Host custom font files locally within `assets/fonts/` whenever possible to minimize network latency. Specify `font-display: swap` in `@font-face` declarations to prevent Flash of Unstyled Text (FOUT).
+Host custom font files locally within `assets/fonts/` whenever possible to minimise network latency. Specify `font-display: swap` in `@font-face` declarations to prevent Flash of Unstyled Text (FOUT).
 :::

@@ -3,7 +3,7 @@ title: "Translated Content & i18n Routing"
 description: "Organise multi-language documentation directories, fallback mechanics, and localised navigation structures in docmd."
 ---
 
-`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localized content, fall back seamlessly to default languages, and provide localised navigation sidebars.
+`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localised content, fall back seamlessly to default languages, and provide localised navigation sidebars.
 
 ## Directory Structure
 
@@ -66,7 +66,7 @@ Provide a `navigation.json` file inside a locale directory only when translating
 
 ## Combining Versioning with Localisation
 
-When combining versioning and multi-language routing, organize directories hierarchically with locales nested inside version folders:
+When combining versioning and multi-language routing, organise directories hierarchically with locales nested inside version folders:
 
 ```text
 docs/                    ← current release

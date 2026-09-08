@@ -1,72 +1,70 @@
 ---
-title: "Rust Engine"
-description: "Explore the optional native Rust engine: use cases, file I/O capabilities, supported packages, and limitations."
+title: "Motor Rust"
+description: "Conozca el motor nativo opcional en Rust: casos de uso, capacidades de E/S de archivos, paquetes compatibles y limitaciones."
 ---
 
-The **Rust Engine** is an optional, high-performance execution engine. It accelerates heavy I/O workloads in massive documentation projects. By using native binaries through N-API, it bypasses standard event-loop constraints to deliver multi-threaded file reading and subprocess orchestration.
+El **Motor Rust** es un backend de ejecución opcional de alto rendimiento diseñado para acelerar cargas de trabajo pesadas de E/S en proyectos de documentación de gran envergadura. Al apoyarse en binarios nativos compilados mediante N-API, evita las limitaciones habituales del bucle de eventos para ofrecer lectura concurrente de archivos y orquestación de subprocesos en paralelo.
 
-Available as an **experimental preview**, the Rust engine targets enterprise scale. It shines where thousands of markdown files and exhaustive Git logs introduce compilation bottlenecks.
+Disponible como **vista previa experimental**, el motor Rust está orientado a entornos de escala corporativa con miles de documentos Markdown e historiales extensos de Git.
 
-## Configuration
+## Configuración
 
-To activate native Rust acceleration, configure the `engine` directive to `"rust"` within your `docmd.config.json` file.
+Para activar la aceleración nativa con Rust, establezca la directiva `engine` en `"rust"` dentro de su archivo `docmd.config.json`.
 
 ```json "docmd.config.json"
 {
-  "title": "Global API Registry",
+  "title": "Registro Global de APIs",
   "engine": "rust",
   "src": "docs",
   "out": "site"
 }
 ```
 
-## Ideal Use Cases & Where It Shines
+## Casos de uso ideales y puntos fuertes
 
-The Rust engine solves specific compilation bottlenecks. It provides excellent efficiency gains under the following scenarios:
+El motor Rust resuelve cuellos de botella específicos de compilación, destacando en los siguientes escenarios:
 
-- **Massive Repositories (1,000+ Files)**: Monolithic projects benefit immensely from asynchronous, parallel file system access orchestrated via Tokio.
-- **Intensive Git Metadata Harvesting**: Extracting deep commit logs across hundreds of pages requires heavy subprocess spawning. The Rust engine processes `git:log` tasks up to **1.24× faster** than JavaScript.
-- **Cold Build Acceleration in CI/CD**: In environments where warm disk caches are unavailable, raw file read throughput reduces total processing time. Real-world benchmarks demonstrate a **~25% speedup during cold builds** and a **~17% improvement on warm builds**.
+- **Repositorios masivos (+1.000 archivos)**: Los proyectos monolíticos aprovechan notablemente el acceso paralelo al sistema de archivos coordinado a través de Tokio.
+- **Recolección intensiva de metadatos de Git**: La extracción de registros de commits profundos en cientos de páginas requiere múltiples subprocesos. El motor Rust procesa las tareas `git:log` hasta **1.24 veces más rápido** que JavaScript.
+- **Aceleración de compilaciones en frío en CI/CD**: En entornos donde las cachés de disco no están calientes, el rendimiento bruto de lectura reduce sustancialmente el tiempo total. Las mediciones muestran una **mejora de aproximadamente el 25% en compilaciones en frío** y del **17% en compilaciones en caliente**.
 
-## Supported Devices & Platform Packages
+## Paquetes por plataforma y compatibilidad
 
-The engine executes pre-compiled machine code. It requires dedicated native binaries tailored to your target host architecture. The foundational `@docmd/engine-rust` package automatically lazy-loads the correct platform binary during startup.
+El motor ejecuta código máquina precompilado y requiere binarios nativos ajustados a la arquitectura de su equipo. El paquete base `@docmd/engine-rust` carga automáticamente el binario adecuado durante el arranque.
 
-The following platform packages are currently distributed:
+Actualmente se distribuyen los siguientes paquetes según la plataforma:
 
-| Platform Package | Target Architecture | Host Operating System |
+| Paquete de plataforma | Arquitectura | Sistema operativo |
 | :--- | :--- | :--- |
 | `@docmd/engine-rust-darwin-arm64` | ARM64 (Apple Silicon) | macOS |
 | `@docmd/engine-rust-darwin-x64` | x64 (Intel) | macOS |
-| `@docmd/engine-rust-linux-x64-gnu` | x64 | Linux (glibc environments) |
-| `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (glibc environments) |
+| `@docmd/engine-rust-linux-x64-gnu` | x64 | Linux (entornos glibc) |
+| `@docmd/engine-rust-linux-arm64-gnu` | ARM64 | Linux (entornos glibc) |
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
-::: callout info title:"Transparent Graceful Fallback" icon:info
-If your environment lacks an available pre-built binary, the engine logs a non-fatal notification and **automatically falls back** to the high-performance JavaScript engine. Your builds remain fully deterministic.
+::: callout info title:"Retirada elegante automática" icon:info
+Si su entorno no dispone de un binario precompilado, el motor emitirá un aviso informativo y **volverá automáticamente** al motor JavaScript de alto rendimiento. Sus compilaciones permanecen siempre garantizadas y deterministas.
 ::: /callout
 
-## Capabilities & Strategic Limitations
+## Capacidades y consideraciones estratégicas
 
-To achieve maximum utility, you must understand its architectural trade-offs. The engine excels at I/O-bound operations but incurs overhead during cross-boundary serialisation.
+Para obtener el máximo provecho, es fundamental comprender sus características arquitectónicas: destaca en operaciones limitadas por E/S pero presenta sobrecarga al serializar datos entre fronteras de ejecución.
 
-| Capability / Task | Rust Engine Performance Profile | Architectural Verdict |
+| Capacidad / Tarea | Perfil de rendimiento en Rust | Veredicto arquitectónico |
 | :--- | :--- | :--- |
-| **Batch File Discovery & Reads** | Accelerated via parallel Tokio workers. | ✅ Highly Effective for massive directories. |
-| **Git Commit Log Harvest** | Fast subprocess orchestration bypassing Node event loops. | ✅ Excellent for cold-start Git metadata extraction. |
-| **Persistent Disk Caching** | Native support for anchored disk caches to eliminate redundant reads. | ✅ Highly Effective for warm builds. |
-| **CPU-Bound Search Indexing** | **Slower than native JavaScript JIT**. | ❌ Inefficient due to double serialisation overhead. |
+| **Descubrimiento y lectura por lotes** | Acelerado mediante Tokio en paralelo. | ✅ Muy eficaz en directorios extensos. |
+| **Extracción de commits de Git** | Orquestación rápida sin saturar el bucle de eventos. | ✅ Excelente para metadatos de Git en frío. |
+| **Caché en disco persistente** | Soporte nativo para eliminar lecturas redundantes. | ✅ Muy eficaz en compilaciones repetidas. |
+| **Indexación de búsqueda en CPU** | **Más lento que el compilador JIT de JavaScript**. | ❌ Ineficiente por la doble serialización. |
 
-### The Double-Serialisation Tax Explained
+### La tasa de doble serialización
 
-Communication between docmd's core orchestrator and the native Rust engine relies on stringified JSON passing across the N-API runtime boundary:
+La comunicación entre el orquestador central de docmd y el motor nativo de Rust transfiere cadenas JSON a través de la frontera N-API:
 
 ```text
-JS Worker → JSON.stringify() → NAPI Boundary → Serde Deserialisation → [Rust Task] → Serde Serialisation → NAPI Boundary → JSON.parse()
+Worker JS → JSON.stringify() → Límite NAPI → Deserialización Serde → [Tarea Rust] → Serialización Serde → Límite NAPI → JSON.parse()
 ```
 
-For I/O-heavy operations like querying Git histories or reading disk buffers, the processing time saved vastly outweighs the string conversion cost. 
+Para operaciones dominadas por E/S (como consultar Git o leer archivos de disco), el tiempo ganado compensa con creces el coste de la conversión de texto.
 
-However, for highly iterative, CPU-bound tasks like full-text search indexing (`search:index`), **the serialisation round-trip consumes more CPU resources than the underlying task itself**. Serialising large arrays of content back and forth causes the Rust implementation to run slower than Node's native JIT string manipulation. 
-
-As a result, **the JavaScript engine remains the recommended runtime for semantic search pipelines**. Enable the Rust engine selectively for large-scale Git and file management workloads.
+Sin embargo, para tareas intensivas de CPU como la indexación de búsqueda de texto completo (`search:index`), **el ciclo de serialización consume más tiempo que la tarea misma**. Por esta razón, **el motor JavaScript sigue siendo la opción recomendada para las tareas de búsqueda semántica**, reservando el motor Rust para repositorios masivos con gran volumen de archivos e historiales de Git.

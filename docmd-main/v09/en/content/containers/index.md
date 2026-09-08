@@ -15,7 +15,7 @@ Starting in **v0.9.1**, `docmd` introduces explicit opening and closing containe
 
 ## Unified Block Syntax Reference
 
-All containers utilize a consistent, depth-aware block syntax with explicit opening and closing tags, inline comments, and universal key-value attributes:
+All containers utilise a consistent, depth-aware block syntax with explicit opening and closing tags, inline comments, and universal key-value attributes:
 
 ```markdown
 ::: containerType title:"Header Title" icon:rocket # Container header with comment
@@ -60,7 +60,7 @@ All container opening headers support positional parameters, named key-value att
 
 Containers facilitate more than visual polish; they provide high-fidelity **Semantic Signals** to the `docmd` compiler and downstream AI agents:
 
-1. **AI Context Mapping**: Marking a block as a `callout warning` explicitly instructs LLMs to prioritize that warning during reasoning and response generation.
+1. **AI Context Mapping**: Marking a block as a `callout warning` explicitly instructs LLMs to prioritise that warning during reasoning and response generation.
 2. **Structural Integrity**: Combining `cards` and `grids` enables the authoring of complex landing pages directly in Markdown without inline HTML bloat.
 3. **Source Maintainability**: Eliminates raw HTML markup, keeping your `.md` files clean, readable, and machine-parsable.
 

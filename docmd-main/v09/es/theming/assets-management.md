@@ -1,39 +1,39 @@
 ---
-title: "Assets Management"
-description: "Learn how docmd mirrors CSS, JavaScript, and image assets from source directories to output builds."
+title: "Gestión de recursos"
+description: "Descubra cómo docmd replica archivos CSS, JavaScript e imágenes desde sus directorios de origen hacia el sitio compilado."
 ---
 
-`docmd` uses a "Mirror & Map" architecture for static assets. This ensures local development file paths match compiled production build outputs seamlessly.
+`docmd` emplea una arquitectura de replicación directa para los recursos estáticos. Esto asegura que las rutas de archivos utilizadas durante el desarrollo local coincidan fielmente con las del sitio compilado final.
 
-## Directory Structure
+## Estructura de directorios
 
-By default, `docmd` processes an `assets/` directory located at your project root:
+Por defecto, `docmd` procesa un directorio `assets/` ubicado en la raíz de su proyecto:
 
 ```bash
-my-docs/
-  ├── assets/          # Source Assets (Images, Fonts, CSS, JS)
+mi-documentacion/
+  ├── assets/          # Recursos fuente (Imágenes, Tipografías, CSS, JS)
   │   ├── css/
   │   ├── js/
   │   └── images/
-  ├── docs/            # Markdown Content Files
+  ├── docs/            # Archivos de contenido en Markdown
   ├── docmd.config.json
-  └── site/            # Compiled Production Output (Auto-Mirrored)
+  └── site/            # Salida compilada de producción (Replicada automáticamente)
 ```
 
-## Automatic Asset Mirroring
+## Replicación automática de recursos
 
-When executing `npx @docmd/core build` or `npx @docmd/core dev`:
+Al ejecutar `npx @docmd/core build` o `npx @docmd/core dev`:
 
-1. **Mirroring Logic**: The entire contents of `assets/` are copied recursively to `site/assets/`.
-2. **Build Stability**: Asset copying uses a hardened, asynchronous copy engine with exponential retries to prevent filesystem locking errors on macOS and SSD volumes.
-3. **Path References**: Reference assets in Markdown and configuration files using **root-relative** paths:
+1. **Lógica de replicación**: Todo el contenido de `assets/` se copia recursivamente en `site/assets/`.
+2. **Estabilidad en compilación**: La copia de recursos se apoya en un motor asíncrono con reintentos progresivos para evitar bloqueos del sistema de archivos en macOS y discos SSD.
+3. **Referencias en enlaces**: Vincule sus recursos en Markdown y en la configuración mediante rutas **relativas a la raíz**:
     ```markdown
-    ![Architecture Diagram](/assets/images/architecture.png)
+    ![Diagrama de arquitectura](/assets/images/architecture.png)
     ```
 
-## Custom CSS & JS Integration
+## Integración de CSS y JS personalizados
 
-Link custom stylesheet or script assets across all pages via theme configuration in `docmd.config.json`:
+Enlace hojas de estilo o scripts adicionales en todas las páginas mediante la configuración del tema en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -44,7 +44,7 @@ Link custom stylesheet or script assets across all pages via theme configuration
 }
 ```
 
-::: callout tip "Asset Organisation for AI Indexers" icon:lightbulb
-* **Structured Subdirectories**: Keep `/css`, `/js`, and `/images` isolated. Clean directory separation allows AI agents to locate relevant styling assets instantly.
-* **Descriptive Filenames**: Naming images `authentication-flow-diagram.png` provides rich context to search indexers and `llms.txt` crawlers compared to generic names like `image1.png`.
+::: callout tip "Organización para indexadores de IA" icon:lightbulb
+* **Subdirectorios dedicados**: Separe `/css`, `/js` e `/images`. Una jerarquía limpia permite a los agentes de IA localizar activos específicos sin confusión.
+* **Nombres descriptivos**: Asignar nombres como `authentication-flow-diagram.png` aporta valioso contexto a los indexadores y rastreadores de `llms.txt` en comparación con nombres genéricos como `image1.png`.
 :::

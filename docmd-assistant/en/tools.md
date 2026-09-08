@@ -119,5 +119,6 @@ If no custom search callback is provided, `search_documentation` falls back to a
 When search result snippets are insufficient, the assistant automatically calls `read_documentation_page({ path })`:
 
 1. **Custom Reader Callback (`customReader`)**: If provided, the engine delegates page fetching to your custom loader.
-2. **DOM Parser Fallback**: If no callback is provided, the tool fetches `window.location.origin + path` using `fetch()` and extracts text from `<main>`, `<article>`, or `[role="main"]` elements using `DOMParser()`.
-3. **Hyperlinked Citations**: Returned page content is incorporated into context, allowing the model to generate clickable Markdown links `[Page Title](path)` in its final answer.
+2. **Structured DOM Parser Fallback**: If no custom callback is provided, the tool fetches `window.location.origin + path` using `fetch()` and parses the `<main>`, `<article>`, or `[role="main"]` container into structured Markdown. Fenced code blocks with language tags (`pre/code`), headings (`#`), and lists (`-`) are preserved while chrome elements (`nav`, `aside`, `.toc`, `.sidebar`, `.docmd-ai-drawer`) are stripped.
+3. **Uncapped Context Delivery**: Pages are delivered in full without legacy truncation, ensuring complete configuration schemas and code samples reach the model.
+4. **Hyperlinked Citations**: Returned page content is incorporated into context, allowing the model to generate clickable Markdown links `[Page Title](path)` in its final answer.

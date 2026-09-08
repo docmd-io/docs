@@ -55,7 +55,7 @@ pnpm verify
 
 ## Translations Workflow
 
-Workflow for adding or updating localized content in `de/` and `zh/`:
+Workflow for adding or updating localised content in `de/` and `zh/`:
 
 1. Update the canonical English source files in `docmd-main/v09/en/...`.
 2. Mirror edits in `de/` and `zh/` under matching paths while preserving frontmatter keys, container markers, and code snippet file titles.

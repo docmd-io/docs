@@ -149,5 +149,6 @@ pnpm-lock.yaml
 .docmd/
 .docmd-search/
 _docmd-search/
+.threads/
 .vscode/
 local-tars/

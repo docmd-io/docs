@@ -1,55 +1,55 @@
 ---
-title: "OKF Bundle Plugin"
-description: "Generate Open Knowledge Format (OKF) knowledge bundles and interactive concept graphs for AI agents."
+title: "Plugin de paquetes OKF"
+description: "Genere paquetes de conocimiento en formato Open Knowledge Format (OKF) y grafos conceptuales interactivos para agentes de IA."
 ---
 
-The `@docmd/plugin-okf` plugin builds an **[Open Knowledge Format][okf-spec]** (OKF) knowledge bundle during static compilation. OKF is an open, vendor-neutral specification for structuring documentation metadata, concept graphs, and domain context for AI agents and LLM tool chains.
+El plugin `@docmd/plugin-okf` compila un paquete de conocimiento estructurado en **[Open Knowledge Format][okf-spec]** (OKF) durante la generación estática. OKF es una especificación abierta e independiente de proveedores diseñada para estructurar metadatos, grafos de conceptos y contextos temáticos para agentes de IA y flujos de trabajo con modelos de lenguaje.
 
-The plugin is **enabled by default**. OKF bundles are placed in `site/okf/` during every site compilation.
+El plugin está **activo por defecto**. Los paquetes OKF se generan en `site/okf/` en cada compilación del sitio.
 
 [okf-spec]: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 
-## Architectural Overview
+## Visión arquitectónica
 
-OKF formalises knowledge architecture into a portable directory structure containing YAML manifests, Markdown concept files, and visual force-directed graph assets.
+OKF organiza el conocimiento en una estructura de directorios portátil con manifiestos YAML, conceptos en Markdown y visualizaciones de grafos dirigidos por fuerzas.
 
-### Design Principles
+### Principios de diseño
 
-1. **Minimal Structural Requirements**: Every concept entry requires only a `type` field.
-2. **Producer/Consumer Independence**: Human-authored Markdown files compile into standard schemas queryable by arbitrary LLM frameworks.
-3. **Vendor Neutrality**: Independent of specific cloud providers, model hosts, or vector database engines.
+1. **Requisitos estructurales mínimos**: Cada entrada de concepto solo necesita el campo `type`.
+2. **Independencia de productores y consumidores**: Archivos Markdown escritos por humanos se transforman en esquemas estándar consultables por cualquier framework de IA.
+3. **Neutralidad respecto a proveedores**: Independiente de proveedores de nube, plataformas de modelos o motores vectoriales específicos.
 
-## Generated Output Assets
+## Estructura generada
 
-Compilation produces the following directory tree:
+La compilación produce el siguiente árbol de directorios:
 
 ```text
 site/okf/
-├── okf.yaml              ← Manifest summary file
-├── index.md              ← Concept catalog grouped by type
-├── graph/                ← Interactive graph assets (when graph: true)
-│   ├── index.html        ← Force-directed graph visualiser
-│   ├── graph.json        ← Graph nodes and edges
-│   ├── graph.js          ← Standalone graph runtime
-│   └── graph.css         ← Theme-aware styling
+├── okf.yaml              ← Archivo de resumen del manifiesto
+├── index.md              ← Catálogo de conceptos agrupados por tipo
+├── graph/                ← Visualizador de grafos (cuando graph: true)
+│   ├── index.html        ← Aplicación interactiva del grafo
+│   ├── graph.json        ← Nodos y aristas del grafo
+│   ├── graph.js          ← Runtime independiente del grafo
+│   └── graph.css         ← Estilos acordes al tema
 ├── concepts/
-│   └── <slug>.md         ← Individual concept Markdown files
+│   └── <slug>.md         ← Archivos individuales de concepto en Markdown
 └── _meta/
-    ├── bundle.json       ← JSON mirror of okf.yaml
-    └── lint-report.txt   ← Build linting reports
+    ├── bundle.json       ← Espejo JSON de okf.yaml
+    └── lint-report.txt   ← Informes de validación de compilación
 ```
 
-## Default Build Behaviour
+## Comportamiento por defecto
 
-The OKF plugin is loaded automatically during compilation:
+El plugin OKF se ejecuta automáticamente en cada compilación:
 
-* **Default-Locale Scope**: Emits concepts for the primary language at the bundle root.
-* **Automatic Type Inference**: Classifies paths under `/api/`, `/guides/`, `/reference/`, `/concepts/`, `/runbooks/`, `/datasets/`, `/metrics/`, and `/tables/` into typed concepts.
-* **Verbatim Markdown**: Copies page content and frontmatter into concept files.
+* **Ámbito del idioma predeterminado**: Genera conceptos para el idioma principal en la raíz del paquete.
+* **Inferencia automática de tipos**: Clasifica rutas como `/api/`, `/guides/`, `/reference/`, `/concepts/`, `/runbooks/`, `/datasets/`, `/metrics/` y `/tables/` en conceptos tipados.
+* **Markdown íntegro**: Copia el contenido y frontmatter de cada página a los archivos de concepto.
 
-### Opting Out
+### Desactivación del plugin
 
-Disable OKF bundle generation in `docmd.config.json`:
+Desactive la generación de OKF en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -59,7 +59,7 @@ Disable OKF bundle generation in `docmd.config.json`:
 }
 ```
 
-Alternatively, set `enabled: false`:
+O bien establezca `enabled: false`:
 
 ```json "docmd.config.json"
 {
@@ -71,23 +71,23 @@ Alternatively, set `enabled: false`:
 }
 ```
 
-## Configuration Options
+## Opciones de configuración
 
-Configure OKF bundle parameters in `docmd.config.json`:
+Configure los parámetros de OKF en `docmd.config.json`:
 
-| Option | Type | Default | Technical Description |
+| Opción | Tipo | Por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable OKF bundle compilation. |
-| `outputDir` | `string` | `'okf'` | Destination output directory relative to site root. |
-| `bundleName` | `string` | `config.title` | Bundle identifier used inside `okf.yaml` and graph headers. |
-| `defaultType` | `string` | `'concept'` | Fallback concept type for untagged pages. |
-| `typeField` | `string` | `'type'` | Frontmatter key used for type classification. |
-| `warnOnMissingType` | `boolean` | `true` | Emit CLI warnings for pages using `defaultType`. |
-| `includeFullMarkdown` | `boolean` | `true` | Copy full Markdown body into concept files. |
-| `graph` | `boolean` | `false` | Generate interactive force-directed graph visualiser under `graph/`. |
-| `localeStrategy` | `'default-only' \| 'folders'` | `'default-only'` | Strategy for multi-language bundle compilation. |
+| `enabled` | `boolean` | `true` | Habilita o deshabilita la generación del paquete OKF. |
+| `outputDir` | `string` | `'okf'` | Directorio de salida relativo a la raíz del sitio. |
+| `bundleName` | `string` | `config.title` | Nombre del paquete en `okf.yaml` y cabeceras del grafo. |
+| `defaultType` | `string` | `'concept'` | Tipo de concepto predeterminado para páginas sin etiquetar. |
+| `typeField` | `string` | `'type'` | Clave de frontmatter utilizada para clasificar el tipo. |
+| `warnOnMissingType` | `boolean` | `true` | Emite avisos en la terminal para páginas que recurran a `defaultType`. |
+| `includeFullMarkdown` | `boolean` | `true` | Incluye el cuerpo Markdown completo en los conceptos. |
+| `graph` | `boolean` | `false` | Genera el visualizador de grafos interactivo en `graph/`. |
+| `localeStrategy` | `'default-only' \| 'folders'` | `'default-only'` | Estrategia para sitios con varios idiomas. |
 
-### Global Configuration Example
+### Ejemplo de configuración global
 
 ```json "docmd.config.json"
 {
@@ -101,7 +101,7 @@ Configure OKF bundle parameters in `docmd.config.json`:
 }
 ```
 
-### Multi-Locale Folder Strategy
+### Estrategia de carpetas para varios idiomas
 
 ```json "docmd.config.json"
 {
@@ -113,42 +113,32 @@ Configure OKF bundle parameters in `docmd.config.json`:
 }
 ```
 
-Output directory structure:
+Estructura resultante:
 
 ```text
-site/okf/                    ← Default locale (root)
+site/okf/                    ← Idioma predeterminado (raíz)
 ├── okf.yaml
 ├── index.md
 └── concepts/
 
-site/okf/de/                 ← German locale (nested)
+site/okf/es/                 ← Idioma español (subcarpeta)
 ├── okf.yaml
 └── concepts/
 ```
 
-## Excluding Pages from OKF
+## Exclusión de páginas
 
-Exclude specific pages using frontmatter flags:
+Excluya páginas individuales mediante el frontmatter:
 
 ```yaml
 ---
-title: "Internal Operations Note"
-okf: false # Excludes page exclusively from OKF bundles
+title: "Nota operativa interna"
+okf: false # Excluye la página únicamente de los paquetes OKF
 ---
 ```
 
-To exclude a page globally across sitemaps, search, LLM files, and OKF, set `noindex: true`.
+Para excluir una página de forma global en mapas de sitio, búsqueda, archivos de LLM y OKF, utilice `noindex: true`.
 
-## Concept Type Resolution
-
-The plugin determines concept types using top-down precedence:
-
-1. `frontmatter.okf.type` — Nested explicit declaration.
-2. `frontmatter.type` — Top-level explicit declaration.
-3. `frontmatter.okfType` — Legacy alias.
-4. **Path-prefix inference**: Automatic mapping for `/guides/`, `/api/`, `/reference/`, `/concepts/`, etc.
-5. `defaultType` fallback (`'concept'`).
-
-::: callout tip "Knowledge Graph Visualisation" icon:git-fork
-Enable `graph: true` in your OKF plugin configuration to produce interactive force-directed graph visualisations (`site/okf/graph/index.html`) mapping cross-references and concept relationships.
+::: callout tip "Visualización del grafo de conocimiento" icon:git-fork
+Active `graph: true` en la configuración del plugin OKF para generar un mapa interactivo (`site/okf/graph/index.html`) con las relaciones conceptuales y referencias cruzadas de su documentación.
 :::

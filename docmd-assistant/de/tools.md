@@ -119,5 +119,6 @@ Wenn kein benutzerdefinierter Callback angegeben ist, greift `search_documentati
 Wenn Suchergebnis-Snippets nicht ausreichen, ruft der Assistent automatisch `read_documentation_page({ path })` auf:
 
 1. **Benutzerdefinierter Reader-Callback (`customReader`)**: Falls vorhanden, delegiert die Engine das Abrufen der Seite an Ihren benutzerdefinierten Loader.
-2. **DOM-Parser-Fallback**: Falls kein Callback vorhanden ist, lädt das Werkzeug `window.location.origin + path` via `fetch()` und extrahiert Text aus `<main>`, `<article>` oder `[role="main"]` via `DOMParser()`.
-3. **Zitations-Links**: Der zurückgegebene Seiteninhalt wird in den Kontext integriert, sodass das Modell klickbare Markdown-Links `[Seitentitel](path)` in seiner Antwort generieren kann.
+2. **Strukturierter DOM-Parser-Fallback**: Falls kein benutzerdefinierter Callback angegeben ist, lädt das Werkzeug `window.location.origin + path` via `fetch()` und wandelt den `<main>`, `<article>` oder `[role="main"]` Container in strukturiertes Markdown um. Codeblöcke mit Sprachauszeichnung (`pre/code`), Überschriften (`#`) und Listen (`-`) bleiben erhalten, während Chrome- und Navigationselemente (`nav`, `aside`, `.toc`, `.sidebar`, `.docmd-ai-drawer`) gefiltert werden.
+3. **Unbegrenzte Kontextübergabe**: Seiten werden vollständig ohne Zeichenbegrenzung übergeben, sodass umfangreiche Konfigurationstabellen und Codebeispiele das Modell intakt erreichen.
+4. **Zitations-Links**: Der zurückgegebene Seiteninhalt wird in den Kontext integriert, sodass das Modell klickbare Markdown-Links `[Seitentitel](path)` in seiner Antwort generieren kann.

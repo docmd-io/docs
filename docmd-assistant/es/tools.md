@@ -119,5 +119,6 @@ Si no se proporciona un callback personalizado, `search_documentation` recurre a
 Cuando los fragmentos de búsqueda resultan insuficientes, el asistente llama automáticamente a `read_documentation_page({ path })`:
 
 1. **Callback de Lectura Personalizado (`customReader`)**: Si se proporciona, el motor delega la obtención de la página a su cargador personalizado.
-2. **Alternativa DOM Parser**: Si no se proporciona un callback, la herramienta obtiene `window.location.origin + path` mediante `fetch()` y extrae texto de elementos `<main>`, `<article>` o `[role="main"]` usando `DOMParser()`.
-3. **Citas Hipervinculadas**: El contenido devuelto se incorpora al contexto, permitiendo al modelo generar enlaces Markdown con clic `[Título de Página](path)` en su respuesta final.
+2. **Alternativa DOM Estructurada**: Si no se proporciona un callback personalizado, la herramienta obtiene `window.location.origin + path` mediante `fetch()` y procesa el contenedor `<main>`, `<article>` o `[role="main"]` en Markdown estructurado. Los bloques de código con lenguaje (`pre/code`), encabezados (`#`) y listas (`-`) se conservan intactos, mientras que los elementos de navegación y cajones (`nav`, `aside`, `.toc`, `.sidebar`, `.docmd-ai-drawer`) se descartan.
+3. **Entrega de Contexto Ilimitado**: Las páginas se entregan íntegramente sin truncamiento de caracteres, garantizando que esquemas y ejemplos extensos lleguen al modelo.
+4. **Citas Hipervinculadas**: El contenido devuelto se incorpora al contexto, permitiendo al modelo generar enlaces Markdown con clic `[Título de Página](path)` en su respuesta final.

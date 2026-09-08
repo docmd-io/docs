@@ -1,15 +1,15 @@
 ---
-title: "Migrating from MkDocs"
-description: "A comprehensive guide on moving your MkDocs (or Material for MkDocs) project to docmd."
+title: "Migrar desde MkDocs"
+description: "Una guía completa sobre cómo trasladar tu proyecto de MkDocs (o Material for MkDocs) a docmd."
 ---
 
-MkDocs is a Python-based static site generator. `docmd` provides a fast, Markdown-first experience built on Node.js/Bun without complex Python virtual environments or extra pip dependencies.
+MkDocs es un generador de sitios estáticos basado en Python. `docmd` ofrece una experiencia orientada primero a Markdown creada sobre Node.js/Bun sin complejos entornos virtuales de Python ni dependencias adicionales de pip.
 
 ::: steps
 
-### 1. Run the Migration Engine
+### 1. Ejecutar el motor de migración
 
-Run the following command at the root of your existing MkDocs project:
+Ejecuta el siguiente comando en la raíz de tu proyecto existente de MkDocs:
 
 ::: tabs
 == tab "npm" icon:box
@@ -30,20 +30,20 @@ bunx @docmd/core migrate --mkdocs
 ```
 :::
 
-#### What Happens Automatically
+#### Qué sucede automáticamente
 
 ::: steps
 
-1. **Backup**: Your entire project directory (excluding `node_modules`, `.git`, `package.json`, and lockfiles) is backed up safely into a new `mkdocs-backup/` directory.
-2. **Content Migration**: Your `docs/` folder is restored to the root directory for `docmd` to use.
-3. **Config Generation**: A `docmd.config.json` is generated, extracting your `site_name` and `site_dir` from `mkdocs.yml`.
-4. **Navigation Auto-Translation**: The top-level `nav:` block in `mkdocs.yml` is parsed and translated into `docmd`'s `navigation` array format (including nested `children`).
+1. **Copia de seguridad**: Todo el directorio de tu proyecto (excluyendo `node_modules`, `.git`, `package.json` y archivos de bloqueo) se respalda de forma segura en un nuevo directorio `mkdocs-backup/`.
+2. **Migración de contenido**: Tu carpeta `docs/` se restaura en el directorio raíz para que la use `docmd`.
+3. **Generación de configuración**: Se genera un `docmd.config.json`, extrayendo tu `site_name` y `site_dir` de `mkdocs.yml`.
+4. **Autotraducción de navegación**: El bloque superior `nav:` en `mkdocs.yml` se analiza y traduce al formato del array `navigation` de `docmd` (incluyendo `children` anidados).
 
 :::
 
-### 2. Preview the Migration Output
+### 2. Previsualizar la salida de la migración
 
-Preview your content in `docmd` immediately:
+Previsualiza tu contenido en `docmd` de inmediato:
 
 ::: tabs
 == tab "npm" icon:box
@@ -64,13 +64,13 @@ bunx @docmd/core dev
 ```
 :::
 
-### 3. Manual Configuration & Extension Mapping
+### 3. Configuración manual y mapeo de extensiones
 
-MkDocs uses `mkdocs.yml` to define navigation structure and PyMdown extensions. Translate any custom setup to `docmd` containers.
+MkDocs utiliza `mkdocs.yml` para definir la estructura de navegación y extensiones de PyMdown. Traduce cualquier configuración personalizada a contenedores de `docmd`.
 
-#### Navigation Setup
+#### Configuración de navegación
 
-Top-level `nav:` blocks in `mkdocs.yml` are translated to `docmd`'s `navigation` array automatically. If you require advanced navigation features (such as custom icons or external URLs), create a `navigation.json` in your `docs/` folder:
+Los bloques superiores `nav:` en `mkdocs.yml` se traducen automáticamente al array `navigation` de `docmd`. Si requieres funciones avanzadas de navegación (como iconos personalizados o URLs externas), crea un archivo `navigation.json` en tu carpeta `docs/`:
 
 ```yaml "mkdocs.yml"
 nav:
@@ -97,52 +97,52 @@ nav:
 ]
 ```
 
-#### Replacing Python Markdown Extensions
+#### Reemplazar extensiones de Python Markdown
 
-Convert MkDocs PyMdown extension syntax to `docmd`'s native [Containers](../content/containers/callouts.md).
+Convierte la sintaxis de las extensiones de PyMdown de MkDocs a los [Contenedores](../content/containers/callouts.md) nativos de `docmd`.
 
-##### Converting Admonitions
+##### Convertir avisos
 
-MkDocs uses `!!!` block syntax, which requires conversion to `:::` format.
+MkDocs utiliza la sintaxis de bloques `!!!`, la cual requiere conversión al formato `:::`.
 
 **MkDocs (PyMdown):**
 ```markdown
-!!! note "Optional Title"
-    This is an admonition content block.
+!!! note "Título opcional"
+    Este es un bloque de contenido de aviso.
 ```
 
 **docmd:**
 ```markdown
-::: callout info "Optional Title"
-This is an admonition content block.
+::: callout info "Título opcional"
+Este es un bloque de contenido de aviso.
 :::
 ```
 
-##### Converting Tabs
+##### Convertir pestañas
 
 **MkDocs (SuperFences):**
 ```markdown
-=== "Tab 1"
-    Content for tab 1.
+=== "Pestaña 1"
+    Contenido para la pestaña 1.
 
-=== "Tab 2"
-    Content for tab 2.
+=== "Pestaña 2"
+    Contenido para la pestaña 2.
 ```
 
 **docmd:**
 ```markdown
 ::: tabs
-== tab "Tab 1"
-Content for tab 1.
+== tab "Pestaña 1"
+Contenido para la pestaña 1.
 
-== tab "Tab 2"
-Content for tab 2.
+== tab "Pestaña 2"
+Contenido para la pestaña 2.
 :::
 ```
 
 :::
 
-## Next Steps
+## Siguientes pasos
 
-- `docmd` features built-in search. No extra search plugins or external indexers are required.
-- Explore the [Theming options](../theming/customisation.md) to customise colours and branding to match your previous theme.
+- `docmd` cuenta con búsqueda integrada. No se requieren plugins de búsqueda adicionales ni indexadores externos.
+- Explora las [Opciones de temas](../theming/customisation.md) para personalizar colores y marca y adaptarlos a tu tema anterior.

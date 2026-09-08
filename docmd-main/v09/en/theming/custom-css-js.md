@@ -61,5 +61,5 @@ Every CSS and JS asset registered in a `docmd` build is assigned a **priority we
 Within each priority bucket, files load in the order they were registered. To learn more about structural layout overrides, explore [Templates](templates.md).
 
 ::: callout tip "Scoped Custom Styles" icon:lightbulb
-Maintain clean asset organization by separating `/css` and `/js` subdirectories under `assets/`. Using explicit class names in `branding.css` prevents style conflicts with core `docmd` container rules.
+Maintain clean asset organisation by separating `/css` and `/js` subdirectories under `assets/`. Using explicit class names in `branding.css` prevents style conflicts with core `docmd` container rules.
 :::

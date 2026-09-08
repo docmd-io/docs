@@ -1,29 +1,29 @@
 ---
-title: "Cloudflare Pages Deployment"
-description: "Deploy docmd static documentation sites to Cloudflare Pages edge hosting."
+title: "Despliegue en Cloudflare Pages"
+description: "Despliega sitios de documentación estática de docmd en el alojamiento edge de Cloudflare Pages."
 ---
 
-[Cloudflare Pages](https://pages.cloudflare.com/) hosts static docmd documentation sites across Cloudflare's global edge network with built-in Git CI/CD integration.
+[Cloudflare Pages](https://pages.cloudflare.com/) aloja sitios de documentación estática de docmd en toda la red edge global de Cloudflare con integración CI/CD de Git incorporada.
 
-## Dashboard Setup Steps
+## Pasos de configuración en el panel de control
 
-1. Navigate to **Workers & Pages → Create → Pages** in the Cloudflare Dashboard.
-2. Link your Git provider account and select the target repository.
-3. Configure build variables:
+1. Navega a **Workers & Pages → Create → Pages** en el panel de control de Cloudflare.
+2. Vincula la cuenta de tu proveedor de Git y selecciona el repositorio de destino.
+3. Configura las variables de compilación:
 
-| Setting Parameter | Configuration Value |
+| Parámetro de ajuste | Valor de configuración |
 | :--- | :--- |
-| **Framework Preset** | `None` |
-| **Build Command** | `npx @docmd/core build` |
-| **Build Output Directory** | `site` |
+| **Ajuste preestablecido de framework** | `None` |
+| **Comando de compilación** | `npx @docmd/core build` |
+| **Directorio de salida de compilación** | `site` |
 
-4. Save and deploy.
+4. Guarda y despliega.
 
-## Custom Domain Configuration
+## Configuración de dominios personalizados
 
-Add custom domains in **Pages → Project → Custom domains**. TLS certificates are provisioned automatically.
+Añade dominios personalizados en **Pages → Project → Custom domains**. Los certificados TLS se aprovisionan automáticamente.
 
-Set the `url` property in `docmd.config.json` to match your domain:
+Establece la propiedad `url` en `docmd.config.json` para que coincida con tu dominio:
 
 ```json "docmd.config.json"
 {
@@ -31,6 +31,6 @@ Set the `url` property in `docmd.config.json` to match your domain:
 }
 ```
 
-::: callout info "Build Execution in CI/CD" icon:info
-Running `npx @docmd/core build` in Cloudflare build environments fetches `@docmd/core` on demand. If `@docmd/core` is listed in your `package.json` `devDependencies`, Cloudflare uses the installed version automatically.
+::: callout info "Ejecución de la compilación en CI/CD" icon:info
+Al ejecutar `npx @docmd/core build` en entornos de compilación de Cloudflare se descarga `@docmd/core` bajo demanda. Si `@docmd/core` figura en las `devDependencies` de tu `package.json`, Cloudflare utiliza la versión instalada automáticamente.
 :::

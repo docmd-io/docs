@@ -1,111 +1,111 @@
 ---
 title: "Deployer"
-description: "Generate production deployment configurations for Docker, NGINX, Caddy, Vercel, and Netlify directly from docmd.config.json."
+description: "Genera configuraciones de despliegue para producción para Docker, NGINX, Caddy, Vercel y Netlify directamente desde docmd.config.json."
 ---
 
-The `npx @docmd/core deploy` command parses your `docmd.config.json` project configuration and emits provider-specific deployment manifests. Output paths, hostnames, and SPA fallback rules are injected automatically.
+El comando `npx @docmd/core deploy` analiza la configuración de tu proyecto en `docmd.config.json` y genera manifiestos de despliegue específicos para cada proveedor. Las rutas de salida, nombres de host y reglas de reserva de SPA se inyectan automáticamente.
 
-## Supported Deploy Target Flags
+## Indicadores de destino de despliegue compatibles
 
-| Target Platform | Command Flag | Generated Output Files |
+| Plataforma de destino | Indicador del comando | Archivos de salida generados |
 | :--- | :--- | :--- |
-| **Docker Container** | `--docker` | `Dockerfile`, `.dockerignore` |
-| **NGINX Web Server** | `--nginx` | `nginx.conf` |
-| **Caddy Web Server** | `--caddy` | `Caddyfile` |
-| **GitHub Pages CI** | `--github-pages` | `.github/workflows/deploy.yml` |
+| **Contenedor Docker** | `--docker` | `Dockerfile`, `.dockerignore` |
+| **Servidor web NGINX** | `--nginx` | `nginx.conf` |
+| **Servidor web Caddy** | `--caddy` | `Caddyfile` |
+| **CI de GitHub Pages** | `--github-pages` | `.github/workflows/deploy.yml` |
 | **Vercel** | `--vercel` | `vercel.json` |
 | **Netlify** | `--netlify` | `netlify.toml` |
 
-## Usage Examples
+## Ejemplos de uso
 
-Execute the deployer command from your project root:
+Ejecuta el comando del deployer desde la raíz de tu proyecto:
 
 ```bash
-# Single provider generation
+# Generación para un único proveedor
 npx @docmd/core deploy --github-pages
 
-# Generate Docker and NGINX configs in tandem
+# Generar configuraciones de Docker y NGINX simultáneamente
 npx @docmd/core deploy --docker --nginx
 
-# Overwrite pre-existing config files
+# Sobrescribir archivos de configuración preexistentes
 npx @docmd/core deploy --vercel --force
 ```
 
-## Configuration Injections
+## Inyecciones de configuración
 
-The deployer reads your configuration parameters and personalises output templates:
+El deployer lee tus parámetros de configuración y personaliza las plantillas generadas:
 
-| Configuration Property | Target Output Usage |
+| Propiedad de configuración | Uso en la salida generada |
 | :--- | :--- |
-| `title` | Header commentary in generated manifests. |
-| `out` | `COPY` directives in Dockerfile; `root` paths in NGINX and Caddy. |
-| `url` | `server_name` in NGINX; site blocks in Caddy. |
-| `layout.spa` | Controls conditional SPA fallback rewrite rules. |
+| `title` | Comentarios de cabecera en los manifiestos generados. |
+| `out` | Directivas `COPY` en el Dockerfile; rutas `root` en NGINX y Caddy. |
+| `url` | `server_name` en NGINX; bloques de sitio en Caddy. |
+| `layout.spa` | Controla reglas condicionales de reescritura de reserva para SPA. |
 
-If no `docmd.config.json` is present, the deployer evaluates standard zero-config defaults.
+Si no se encuentra un `docmd.config.json`, el deployer evalúa los valores predeterminados sin configuración estándar.
 
-## Overwrite Protection
+## Protección contra sobrescritura
 
-By default, existing deployment files are preserved and skipped with a notice. Pass the `--force` flag to overwrite existing configuration files.
+Por defecto, los archivos de despliegue existentes se conservan y se omiten mostrando un aviso. Pasa el indicador `--force` para sobrescribir los archivos de configuración existentes.
 
-## Target Platform Details
+## Detalles de plataformas de destino
 
-### GitHub Pages CI Workflow
+### Flujo de trabajo CI para GitHub Pages
 
 ```bash
 npx @docmd/core deploy --github-pages
 ```
 
-Generates `.github/workflows/deploy.yml` containing a GitHub Actions workflow that checks out the repository, installs Node.js, runs `npx @docmd/core build`, and uploads static output to GitHub Pages.
+Genera `.github/workflows/deploy.yml` que contiene un flujo de trabajo de GitHub Actions que descarga el repositorio, instala Node.js, ejecuta `npx @docmd/core build` y sube la salida estática a GitHub Pages.
 
-::: callout tip "GitHub Action Alternative" icon:github
-If you prefer a pre-packaged action without maintaining local workflow files, use the official [`docmd-io/deploy`](./github-action) action.
+::: callout tip "Alternativa con GitHub Action" icon:github
+Si prefieres una acción preempaquetada sin necesidad de mantener archivos de flujo de trabajo locales, utiliza la acción oficial [`docmd-io/deploy`](./github-action).
 :::
 
-### Docker Containerization
+### Contenedorización con Docker
 
 ```bash
 npx @docmd/core deploy --docker
 ```
 
-Generates a multi-stage `Dockerfile`:
-1. **Build Stage**: Installs the pinned `@docmd/core` version and compiles static assets.
-2. **Serve Stage**: Copies output assets into a minimal `nginx:alpine` image.
+Genera un `Dockerfile` multietapa:
+1. **Etapa de compilación**: Instala la versión fijada de `@docmd/core` y compila los recursos estáticos.
+2. **Etapa de servicio**: Copia los recursos de salida en una imagen mínima de `nginx:alpine`.
 
-If an `nginx.conf` exists in the project root, the Dockerfile automatically includes a `COPY nginx.conf /etc/nginx/conf.d/default.conf` directive.
+Si existe un archivo `nginx.conf` en la raíz del proyecto, el Dockerfile incluye automáticamente la directiva `COPY nginx.conf /etc/nginx/conf.d/default.conf`.
 
-::: callout tip "Official Container Image" icon:container
-To run docmd directly in containerised pipelines without building custom images, refer to the [Docker Image Guide](./docker).
+::: callout tip "Imagen de contenedor oficial" icon:container
+Para ejecutar docmd directamente en canalizaciones en contenedores sin compilar imágenes personalizadas, consulta la [Guía de la imagen Docker](./docker).
 :::
 
-### NGINX Configuration
+### Configuración de NGINX
 
 ```bash
 npx @docmd/core deploy --nginx
 ```
 
-Generates `nginx.conf` configured with Security headers, GZIP compression, immutable asset caching, and SPA fallback rules.
+Genera `nginx.conf` configurado con cabeceras de seguridad, compresión GZIP, almacenamiento en caché inmutable para recursos estáticos y reglas de reserva para SPA.
 
-### Caddy Server
+### Servidor Caddy
 
 ```bash
 npx @docmd/core deploy --caddy
 ```
 
-Generates a `Caddyfile` with automatic HTTPS certificate management and static file serving.
+Genera un `Caddyfile` con gestión automática de certificados HTTPS y entrega de archivos estáticos.
 
-### Vercel Deployment
+### Despliegue en Vercel
 
 ```bash
 npx @docmd/core deploy --vercel
 ```
 
-Generates `vercel.json` with static build commands, output routing, and asset caching headers.
+Genera `vercel.json` con comandos de compilación estática, enrutamiento de salida y cabeceras de almacenamiento en caché para recursos.
 
-### Netlify Deployment
+### Despliegue en Netlify
 
 ```bash
 npx @docmd/core deploy --netlify
 ```
 
-Generates `netlify.toml` with build commands, publish directories, and SPA redirect rules.
+Genera `netlify.toml` con comandos de compilación, directorios de publicación y reglas de redirección para SPA.

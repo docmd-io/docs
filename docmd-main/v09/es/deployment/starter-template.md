@@ -1,22 +1,22 @@
 ---
-title: "Starter Template"
-description: "Initialise new documentation repositories using the official docmd starter template with GitHub Pages deployment."
+title: "Plantilla inicial"
+description: "Inicializa nuevos repositorios de documentación utilizando la plantilla inicial oficial de docmd con despliegue en GitHub Pages."
 ---
 
-The `docmd-template` repository provides a turn-key starting point for docmd projects. It ships with a pre-configured `docmd.config.json`, sample Markdown pages, local development scripts, and an automated GitHub Actions deployment workflow.
+El repositorio `docmd-template` proporciona un punto de partida listo para usar para proyectos de docmd. Incluye un archivo `docmd.config.json` preconfigurado, páginas Markdown de muestra, scripts de desarrollo local y un flujo de trabajo automatizado de despliegue con GitHub Actions.
 
-::: button "Use this Template" external:https://github.com/docmd-io/docmd-template/generate icon:github color:#2ea44f
-::: button "View Repository" external:https://github.com/docmd-io/docmd-template icon:external-link
+::: button "Usar esta plantilla" external:https://github.com/docmd-io/docmd-template/generate icon:github color:#2ea44f
+::: button "Ver repositorio" external:https://github.com/docmd-io/docmd-template icon:external-link
 
-## Quick Start Setup
+## Configuración de inicio rápido
 
-### 1. Generate Repository
+### 1. Generar el repositorio
 
-Click **[Use this template](https://github.com/docmd-io/docmd-template/generate)** on GitHub to create a fresh, un-forked copy of the repository under your account.
+Haz clic en **[Use this template](https://github.com/docmd-io/docmd-template/generate)** en GitHub para crear una copia limpia y no bifurcada del repositorio en tu cuenta.
 
-### 2. Configure Parameters
+### 2. Configurar parámetros
 
-Update `docmd.config.json` with your project title and target URL:
+Actualiza `docmd.config.json` con el título de tu proyecto y la URL de destino:
 
 ```json "docmd.config.json"
 {
@@ -25,56 +25,56 @@ Update `docmd.config.json` with your project title and target URL:
 }
 ```
 
-### 3. Enable GitHub Pages
+### 3. Habilitar GitHub Pages
 
-Configure Pages publishing settings in GitHub:
+Configura los ajustes de publicación de Pages en GitHub:
 
-1. Navigate to **Settings → Pages**.
-2. Under **Source**, select **GitHub Actions**.
-3. Save choices.
+1. Navega a **Settings → Pages**.
+2. En **Source**, selecciona **GitHub Actions**.
+3. Guarda la selección.
 
-### 4. Commit & Publish
+### 4. Confirmar y publicar
 
-Push commits to `main`. The included workflow compiles your site and publishes to:
+Envía los cambios a `main`. El flujo de trabajo incluido compila tu sitio y lo publica en:
 
 ```text
 https://<username>.github.io/<repository>/
 ```
 
-## Repository Structure
+## Estructura del repositorio
 
 ```text
 .github/
   workflows/
-    docs.yml          # Automated CI/CD build and publish workflow
-docmd.config.json     # Configuration file
+    docs.yml          # Flujo de trabajo automatizado de CI/CD para compilación y publicación
+docmd.config.json     # Archivo de configuración
 docs/
-  index.md            # Default landing page
-package.json          # Development scripts
+  index.md            # Página de inicio predeterminada
+package.json          # Scripts de desarrollo
 ```
 
-## Local Development Workflow
+## Flujo de trabajo de desarrollo local
 
-Clone your repository locally and start the dev server:
+Clona tu repositorio localmente e inicia el servidor de desarrollo:
 
 ```bash
 npm install
 npm run dev
 ```
 
-The site serves locally at `http://localhost:3000` with hot-reloading.
+El sitio se sirve localmente en `http://localhost:3000` con recarga rápida.
 
-To verify a production compilation locally:
+Para verificar una compilación de producción localmente:
 
 ```bash
 npm run build
 ```
 
-The output directory builds to `site/` by default.
+El directorio de salida se compila en `site/` por defecto.
 
-## CI/CD Deployment Workflow
+## Flujo de trabajo de despliegue CI/CD
 
-The template includes `.github/workflows/docs.yml`:
+La plantilla incluye `.github/workflows/docs.yml`:
 
 ```yaml ".github/workflows/docs.yml"
 name: Docs
@@ -123,17 +123,17 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-## Custom Domains
+## Dominios personalizados
 
-To bind a custom domain (e.g. `docs.example.com`):
+Para vincular un dominio personalizado (por ejemplo, `docs.ejemplo.com`):
 
-1. Set `url` in `docmd.config.json`:
+1. Configura `url` en `docmd.config.json`:
    ```json
-   { "url": "https://docs.example.com" }
+   { "url": "https://docs.ejemplo.com" }
    ```
-2. Commit a `CNAME` file containing your domain inside `docs/`.
-3. Set domain routing in **Settings → Pages → Custom domain**.
+2. Añade y confirma un archivo `CNAME` que contenga tu dominio dentro de `docs/`.
+3. Configura el enrutamiento del dominio en **Settings → Pages → Custom domain**.
 
-::: callout tip "Template vs GitHub Action" icon:git-branch
-The starter template provides a ready-made repository layout for new projects. If you are adding documentation to an existing codebase, use the [GitHub Action](./github-action) directly.
+::: callout tip "Plantilla vs GitHub Action" icon:git-branch
+La plantilla inicial proporciona una estructura de repositorio lista para usar en proyectos nuevos. Si vas a añadir documentación a un proyecto o código base existente, utiliza directamente la [GitHub Action](./github-action).
 :::

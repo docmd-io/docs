@@ -12,7 +12,7 @@ Search is enabled by default across standard `docmd` templates. Configure indexe
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `enabled` | `boolean` | `true` | Enable or disable full-text search index generation. |
-| `placeholder` | `string` | `'Search...'` | Input placeholder text in search dialogs. |
+| `placeholder` | `string` | `'Search...'` | Input placeholder text in search dialogues. |
 | `maxResults` | `number` | `10` | Maximum number of search results returned in the modal window. |
 
 ### Header Integration Example
@@ -86,7 +86,7 @@ npm install docmd-search
 | :--- | :--- | :--- | :--- |
 | `semantic` | `boolean` | `false` | Enable vector embedding search. |
 | `showConfidence` | `boolean` | `false` | Display similarity percentage badges on search results. |
-| `showFilters` | `boolean` | `true` | Display version filter controls in search dialogs. |
+| `showFilters` | `boolean` | `true` | Display version filter controls in search dialogues. |
 | `model` | `string` | `'Xenova/all-MiniLM-L6-v2'` | HuggingFace embedding model ID. |
 | `chunkSize` | `number` | `512` | Token chunking limit per document section. |
 

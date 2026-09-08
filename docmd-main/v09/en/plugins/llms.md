@@ -81,7 +81,7 @@ The default locale retains unsuffixed paths so external integrations continue fu
 All user-controlled strings (titles and descriptions) undergo strict sanitisation prior to bundle output:
 
 * **Link Integrity**: Markdown control characters (`` ` ``, `[`, `]`, newlines) in page titles are escaped to prevent broken `[title]\(target-path\)` syntax.
-* **CSV/Spreadsheet Injection Defense**: Strings starting with `=`, `+`, `-`, or `@` are prepended with a single quote (`'`) to neutralize cell formula execution.
+* **CSV/Spreadsheet Injection Defence**: Strings starting with `=`, `+`, `-`, or `@` are prepended with a single quote (`'`) to neutralise cell formula execution.
 
 ## Excluding Content Pages
 

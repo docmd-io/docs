@@ -1,22 +1,22 @@
 ---
-title: "Netlify Deployment"
-description: "Deploy docmd documentation to Netlify using generated netlify.toml configurations."
+title: "Despliegue en Netlify"
+description: "Despliega documentación de docmd en Netlify utilizando configuraciones netlify.toml generadas."
 ---
 
-Generate Netlify build manifests matching your project configuration:
+Genera manifiestos de compilación para Netlify que coincidan con la configuración de tu proyecto:
 
 ```bash
 npx @docmd/core deploy --netlify
 ```
 
-## Generated Configuration
+## Configuración generada
 
-The emitted `netlify.toml` file configures build environments, output directories, and header controls:
+El archivo `netlify.toml` emitido configura entornos de compilación, directorios de salida y controles de cabeceras:
 
-* **Build Command**: Runs `npm install @docmd/core && npx @docmd/core build`.
-* **Publish Directory**: Synchronised with `config.out` (`site`).
-* **Header Policies**: Enforces immutable caching for static assets and no-cache rules for HTML entries.
-* **Redirect Rules**: Configures `/*` → `/index.html` rewrites when `layout.spa: true`.
+* **Comando de compilación**: Ejecuta `npm install @docmd/core && npx @docmd/core build`.
+* **Directorio de publicación**: Sincronizado con `config.out` (`site`).
+* **Políticas de cabeceras**: Aplica almacenamiento en caché inmutable para recursos estáticos y reglas de no almacenamiento para entradas HTML.
+* **Reglas de redirección**: Configura reescrituras de `/*` → `/index.html` cuando `layout.spa: true`.
 
 ```toml "netlify.toml"
 [build]
@@ -29,15 +29,15 @@ The emitted `netlify.toml` file configures build environments, output directorie
     Cache-Control = "public, max-age=31536000, immutable"
 ```
 
-## Deployment Execution
+## Ejecución del despliegue
 
-Connect your Git repository in Netlify for automated builds on push, or deploy via Netlify CLI:
+Conecta tu repositorio de Git en Netlify para compilaciones automáticas con cada push, o despliega a través de la CLI de Netlify:
 
 ```bash
 npm install -g netlify-cli
 netlify deploy --prod
 ```
 
-::: callout tip "Re-generation" icon:refresh-cw
-Re-run `npx @docmd/core deploy --netlify --force` whenever modifying `out` or `url` values in `docmd.config.json`.
+::: callout tip "Regeneración" icon:refresh-cw
+Vuelve a ejecutar `npx @docmd/core deploy --netlify --force` siempre que modifiques los valores de `out` o `url` en `docmd.config.json`.
 :::

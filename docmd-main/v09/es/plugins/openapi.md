@@ -1,22 +1,22 @@
 ---
-title: "OpenAPI Plugin"
-description: "Static API reference documentation rendered directly from OpenAPI 3.x specifications at build-time."
+title: "Plugin de OpenAPI"
+description: "Documentación de referencia de API estática renderizada directamente a partir de especificaciones OpenAPI 3.x en tiempo de compilación."
 ---
 
-The `@docmd/plugin-openapi` plugin converts OpenAPI 3.x specification files (JSON or YAML) into structured, searchable API reference pages. Following Docmd's zero-JS runtime philosophy, every endpoint, parameter table, and schema model is compiled into static HTML during build processing.
+El plugin `@docmd/plugin-openapi` convierte archivos de especificación OpenAPI 3.x (JSON o YAML) en páginas de referencia de API estructuradas y con capacidad de búsqueda. Siguiendo la filosofía de tiempo de ejecución sin JavaScript de Docmd, cada endpoint, tabla de parámetros y modelo de esquema se compila en HTML estático durante el procesamiento de compilación.
 
-## Configuration Options
+## Opciones de configuración
 
-Configure global OpenAPI rendering parameters in `docmd.config.json`:
+Configura los parámetros globales de renderizado de OpenAPI en `docmd.config.json`:
 
-| Option | Type | Default | Technical Description |
+| Opción | Tipo | Valor por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
-| `info` | `boolean` | `true` | Display API title, version, and description from the specification `info` block. |
-| `download` | `boolean` | `false` | Add a direct download link for the raw JSON/YAML specification file. |
-| `summaryOnly` | `boolean` | `false` | Render high-level method and path summaries without full parameter schemas. |
-| `allowRawHtml` | `boolean` | `false` | Permit unescaped raw HTML within specification description strings. |
+| `info` | `boolean` | `true` | Muestra el título de la API, versión y descripción del bloque `info` de la especificación. |
+| `download` | `boolean` | `false` | Añade un enlace de descarga directa para el archivo de especificación JSON/YAML en bruto. |
+| `summaryOnly` | `boolean` | `false` | Renderiza resúmenes de métodos y rutas de alto nivel sin esquemas completos de parámetros. |
+| `allowRawHtml` | `boolean` | `false` | Permite HTML en bruto sin escapar dentro de las cadenas de descripción de la especificación. |
 
-### Global Configuration Example
+### Ejemplo de configuración global
 
 ```json "docmd.config.json"
 {
@@ -30,9 +30,9 @@ Configure global OpenAPI rendering parameters in `docmd.config.json`:
 }
 ```
 
-## Usage & Syntax
+## Uso y sintaxis
 
-Embed OpenAPI specs using fenced code blocks tagged with `openapi`. Specify relative file paths originating from your documentation source root:
+Incrusta especificaciones OpenAPI mediante bloques de código delimitados etiquetados con `openapi`. Especifica rutas de archivo relativas partiendo de la raíz de fuentes de tu documentación:
 
 ````markdown
 ```openapi
@@ -40,7 +40,7 @@ assets/openapi.json
 ```
 ````
 
-### Salida Renderizada en Vivo
+### Salida interactiva renderizada
 
 A continuación se muestra una representación interactiva en vivo de `assets/docmd-api.json`:
 
@@ -48,30 +48,30 @@ A continuación se muestra una representación interactiva en vivo de `assets/do
 assets/docmd-api.json
 ```
 
-### Salida de la Especificación
+### Elementos procesados de la especificación
 
 El plugin analiza y renderiza:
 
-* **Insignias de Método HTTP**: Insignias codificadas por colores (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
-* **Rutas de Endpoints**: Cadenas de rutas parametrizadas.
-* **Tablas de Parámetros**: Nombre, posición (`path`, `query`, `header`, `cookie`), tipo de datos, indicador de obligatoriedad y descripciones.
-* **Modelos de Petición y Respuesta**: Tablas de esquemas estructuradas con tipos de campo, formatos, restricciones y valores por defecto.
-* **Ejemplos y Cargas Útiles**: Ejemplos multiformato para cuerpos de solicitud y respuesta (`application/json`, `application/xml`, etc.).
-* **Desplazamiento Aislado de Esquemas**: Los modelos de esquemas anidados se desplazan limpiamente dentro de su contenedor `.oa-table-wrap` sin desbordar la página horizontalmente.
-* **Banners de Obsolescencia**: Advertencias en línea para endpoints marcados con `deprecated: true`.
+* **Insignias de métodos HTTP**: Insignias codificadas por colores (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
+* **Rutas de endpoints**: Cadenas de rutas parametrizadas.
+* **Tablas de parámetros**: Nombre, ubicación (`path`, `query`, `header`, `cookie`), tipo de dato, indicador de obligatoriedad y descripciones.
+* **Modelos de petición y respuesta**: Tablas de esquemas estructuradas con tipos de campos, formatos, restricciones y valores predeterminados.
+* **Ejemplos y cargas útiles**: Ejemplos de cuerpos de petición y cargas útiles de respuesta en múltiples formatos (`application/json`, `application/xml`, etc.).
+* **Desplazamiento de esquema contenido**: Los modelos de esquemas anidados con profundidad se desplazan limpiamente dentro de su contenedor `.oa-table-wrap` sin provocar desbordamientos horizontales de la ventana gráfica.
+* **Avisos de obsolescencia**: Advertencias integradas para endpoints marcados con `deprecated: true`.
 
-::: callout tip "Ejecución en Tiempo de Compilación Zero-JS" icon:zap
-Todas las especificaciones OpenAPI se analizan a HTML estático durante la compilación. No se cargan bibliotecas de JavaScript pesadas en el cliente en tiempo de ejecución, manteniendo los tiempos de carga mínimos e indexables.
+::: callout tip "Ejecución en tiempo de compilación sin JS" icon:zap
+Todas las especificaciones OpenAPI se analizan y generan como HTML estático durante la compilación. No se cargan librerías pesadas de JavaScript en el cliente durante el tiempo de ejecución, lo que mantiene mínimos los tiempos de carga de la página y garantiza la indexación completa en motores de búsqueda.
 :::
 
-## Compatibilidad Técnica
+## Compatibilidad técnica
 
-| Característica de Especificación | Nivel de Compatibilidad |
+| Característica de especificación | Nivel de compatibilidad |
 | :--- | :--- |
 | OpenAPI 3.x (JSON) | Soporte nativo |
-| OpenAPI 3.x (YAML) | Soportado (dependencia `js-yaml`) |
+| OpenAPI 3.x (YAML) | Compatible (dependencia `js-yaml`) |
 | Swagger 2.0 | Heredado (Convertir a OpenAPI 3.x antes de compilar) |
-| Ejemplos de Petición y Respuesta | Soporte completo (mapas de ejemplo único y múltiple) |
-| Esquemas `$ref` Internos | Resolución completa |
-| Polimorfismo `oneOf` / `anyOf` | Renderizado como tipos de unión |
-| Operaciones Obsoletas | Soportado en línea |
+| Ejemplos de petición y respuesta | Soporte completo (mapas de ejemplo único y múltiple) |
+| Esquemas `$ref` internos | Resolución completa |
+| Polimorfismo `oneOf` / `anyOf` | Renderizado como tipos unión |
+| Operaciones obsoletas | Soportadas en línea |

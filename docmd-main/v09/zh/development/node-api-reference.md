@@ -139,14 +139,37 @@ await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 
 ### `loadPlugins(config, options)`
 
-加载、校验并注册所有在配置中声明的插件，返回填充好的 hook 注册表。
+加载、校验并注册所有在配置中声明的插件，返回填充好的 hook 注册表。支持接收 `isDev`（布尔值）以声明当前是否处于开发模式（用于控制需要实时服务器的插件是否引入前端资源）。
 
 ```javascript
 import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  "resolvePaths": [__dirname]
+  "resolvePaths": [__dirname],
+  "isDev": true // 可选，默认为 false
 });
+```
+
+## 客户端运行时 API (`window.docmd`)
+
+在本地开发运行期间（`docmd dev`），浏览器会在 `/__dev/docmd-api.js` 加载客户端 RPC 桥接脚本，向全局注入 `window.docmd`，用于 WebSocket 通信及开发服务器在线状态检测。
+
+### `docmd.isLive()`
+
+同步返回布尔值。当与本地开发服务器的 WebSocket 连接处于建立且可用状态时返回 `true`。
+
+```javascript
+if (window.docmd && window.docmd.isLive()) {
+  // 本地实时开发服务器已连接
+}
+```
+
+### `docmd.ping(timeoutMs = 2000)`
+
+通过内置的 `system:ping` RPC 动作向开发服务器发送异步心跳检测。在超时时间内响应成功返回 `true`，若断开或超时则返回 `false`。
+
+```javascript
+const ok = await window.docmd.ping();
 ```
 
 ## 引擎加载器 API

@@ -1,22 +1,22 @@
 ---
-title: "Analytics Plugin"
-description: "Integrate Google Analytics 4 (GA4) or legacy Universal Analytics with automated event tracking."
+title: "Plugin de analíticas"
+description: "Integre Google Analytics 4 (GA4) o Universal Analytics clásico con seguimiento automático de eventos."
 ---
 
-The `@docmd/plugin-analytics` plugin integrates Google Analytics tracking scripts into your documentation pages. It supports Google Analytics 4 (GA4) and legacy Universal Analytics (UA), providing automatic interaction tracking for technical documentation portals.
+El plugin `@docmd/plugin-analytics` incorpora scripts de seguimiento de Google Analytics en sus páginas de documentación. Es compatible con Google Analytics 4 (GA4) y Universal Analytics (UA), ofreciendo métricas de interacción automáticas pensadas para sitios de documentación técnica.
 
-## Configuration Options
+## Opciones de configuración
 
-Configure analytics tracking IDs in `docmd.config.json`:
+Configure los identificadores de seguimiento en `docmd.config.json`:
 
-| Option | Type | Default | Description |
+| Opción | Tipo | Por defecto | Descripción |
 | :--- | :--- | :--- | :--- |
-| `googleV4` | `object` | `null` | Google Analytics 4 configuration object (requires `measurementId`). |
-| `googleUA` | `object` | `null` | Universal Analytics configuration object (requires `trackingId`). |
-| `autoEvents` | `boolean` | `true` | Automatically track outbound links, downloads, anchor clicks, and TOC navigation. |
-| `trackSearch` | `boolean` | `true` | Automatically capture search query terms typed into search modals. |
+| `googleV4` | `object` | `null` | Objeto de configuración para Google Analytics 4 (requiere `measurementId`). |
+| `googleUA` | `object` | `null` | Objeto de configuración para Universal Analytics clásico (requiere `trackingId`). |
+| `autoEvents` | `boolean` | `true` | Registra automáticamente enlaces salientes, descargas, clics en anclas y navegación por la tabla de contenidos. |
+| `trackSearch` | `boolean` | `true` | Captura automáticamente los términos introducidos en el modal de búsqueda. |
 
-### Global Analytics Example
+### Ejemplo de configuración global
 
 ```json "docmd.config.json"
 {
@@ -32,16 +32,16 @@ Configure analytics tracking IDs in `docmd.config.json`:
 }
 ```
 
-## Automatically Tracked Events
+## Eventos registrados automáticamente
 
-When `autoEvents` is set to `true`, the analytics plugin captures user interactions without custom scripts:
+Cuando `autoEvents` es `true`, el plugin captura las siguientes interacciones sin requerir scripts adicionales:
 
-* **External Outbound Links**: Clicks on links navigating to external domain targets.
-* **File Downloads**: Clicks on assets containing `download` attributes or common binary extensions (`.zip`, `.pdf`, `.gz`).
-* **Table of Contents Engagement**: Navigation jumps made using the right-hand TOC panel.
-* **Section Heading Anchors**: Clicks on heading permalink anchors.
-* **Search Terms**: Search keywords entered into the search modal (debounced at 1 second).
+* **Enlaces salientes externos**: Clics dirigidos a dominios externos.
+* **Descargas de archivos**: Clics en enlaces con el atributo `download` o extensiones binarias habituales (`.zip`, `.pdf`, `.gz`).
+* **Interacción con la tabla de contenidos**: Clics de navegación en el panel de navegación derecho.
+* **Anclas de encabezados**: Clics sobre los enlaces de encabezado.
+* **Términos de búsqueda**: Palabras clave consultadas en el buscador modal (con intervalo de espera de 1 segundo).
 
-::: callout info "Privacy & Data Protection" icon:shield-check
-Google Analytics 4 handles IP anonymisation natively. If your organisation requires explicit cookie consent banners or GDPR opt-in controls, inject custom scripts via custom plugin hooks.
+::: callout info "Privacidad y protección de datos" icon:shield-check
+Google Analytics 4 anonimiza las direcciones IP de manera predeterminada. Si su organización exige avisos de consentimiento de cookies conforme al RGPD, puede inyectar scripts personalizados mediante hooks de plugins.
 :::

@@ -1,28 +1,28 @@
 ---
-title: "Templates & Themes"
-description: "Configure site layout templates and built-in CSS color schemes in docmd. Layer HTML structures, EJS partials, and visual palettes."
+title: "Plantillas y temas"
+description: "Configure plantillas de diseño y esquemas de color CSS integrados en docmd. Combine estructuras HTML, parciales EJS y paletas visuales."
 ---
 
-In `docmd`, **Templates** define the foundational HTML structure, layout architecture, EJS partials, and component slots of your documentation site. 
+En `docmd`, las **Plantillas** definen la estructura HTML fundamental, la disposición de la interfaz, los parciales EJS y las ranuras (slots) de componentes para su documentación.
 
-::: callout info "Structural Layouts vs. Colour Schemes" icon:info
-* **Templates**: Control structural HTML architecture (header, sidebar, TOC, footer, banner, EJS partials).
-* **Color Schemes**: Provide CSS visual themes (`default`, `sky`, `ruby`, `retro`) that layer directly on top of templates.
+::: callout info "Estructuras de diseño frente a esquemas de color" icon:info
+* **Plantillas**: Controlan la arquitectura estructural en HTML (encabezado, barra lateral, tabla de contenidos, pie de página, anuncios, parciales EJS).
+* **Esquemas de color**: Aportan temas visuales mediante CSS (`default`, `sky`, `ruby`, `retro`) que se superponen directamente sobre las plantillas.
 :::
 
-A **template** is an npm package declaring `capabilities: ['template']` that ships custom `.ejs` layout files and asset bundles. The `@docmd/ui` resolver uses a fallback priority chain, ensuring missing slots fall back to default layouts seamlessly.
+Una **plantilla** es un paquete npm que declara `capabilities: ['template']` y distribuye archivos de diseño `.ejs` y paquetes de recursos personalizados. El solucionador de `@docmd/ui` utiliza una cadena de prioridades con retroceso ordenado, asegurando que cualquier ranura no especificada recurra sin fisuras al diseño por defecto.
 
-## Quickstart Guide
+## Guía de inicio rápido
 
-### 1. Install a Template Package
+### 1. Instalar un paquete de plantilla
 
 ```bash
 npx @docmd/core add summer
 ```
 
-### 2. Enable Template in Config
+### 2. Habilitar la plantilla en la configuración
 
-Set `theme.name` in `docmd.config.json`. `docmd` automatically detects whether the name corresponds to a built-in CSS color scheme (`default`, `sky`, `ruby`, `retro`) or a structural template package (`summer`, etc.):
+Defina `theme.name` en `docmd.config.json`. `docmd` detecta automáticamente si el nombre corresponde a un esquema de color integrado (`default`, `sky`, `ruby`, `retro`) o a un paquete estructural de plantilla (`summer`, etc.):
 
 ```json "docmd.config.json"
 {
@@ -32,21 +32,21 @@ Set `theme.name` in `docmd.config.json`. `docmd` automatically detects whether t
 }
 ```
 
-Every page now renders using the `summer` structural layout. Unspecified slots fall back automatically to standard `@docmd/ui` partials.
+Cada página se procesará a partir de ese momento con la estructura de `summer`. Las ranuras no especificadas recurrirán automáticamente a los parciales estándar de `@docmd/ui`.
 
-## Built-in Colour Schemes (Default Template)
+## Esquemas de color integrados (Plantilla por defecto)
 
-The default built-in template includes four curated CSS color palettes that can be activated by setting `theme.name`:
+La plantilla predeterminada incluye cuatro paletas de color CSS seleccionadas que pueden activarse asignando `theme.name`:
 
-| Color Scheme | Best For | Visual Aesthetic |
+| Esquema de color | Recomendado para | Estética visual |
 | :--- | :--- | :--- |
-| `default` | Low-profile documentation | Clean, lightweight, neutral palette |
-| `sky` | Product Documentation | Modern, high-contrast, corporate standard |
-| `ruby` | Brand Identity | Sophisticated, serif headers, vibrant accents |
-| `retro` | Developer Tools | Monospace typography, green phosphor accents |
+| `default` | Documentación minimalista | Paleta neutra, limpia y ligera |
+| `sky` | Documentación de producto | Estándar corporativo moderno de alto contraste |
+| `ruby` | Identidad de marca | Tipografías con serifa en títulos y acentos vivos |
+| `retro` | Herramientas para desarrolladores | Tipografía monoespaciada con tonos verdes fósforo |
 
-::: callout info title:"Layering Color Schemes on External Templates" icon:info
-To apply a specific CSS color scheme (`sky`, `ruby`, `retro`) onto a custom structural template, set `theme.template` alongside `theme.name`:
+::: callout info title:"Superposición de esquemas de color en plantillas externas" icon:info
+Para aplicar un esquema de color CSS específico (`sky`, `ruby`, `retro`) sobre una plantilla estructural personalizada, defina `theme.template` junto a `theme.name`:
 ```json "docmd.config.json"
 {
   "theme": {
@@ -55,80 +55,80 @@ To apply a specific CSS color scheme (`sky`, `ruby`, `retro`) onto a custom stru
   }
 }
 ```
-This renders the **summer** structural layout styled with the **sky** color palette.
+Esto genera la estructura de **summer** vestida con la paleta de color de **sky**.
 :::
 
-### 3. Page-Level Template Overrides
+### 3. Anulaciones de plantilla por página
 
-Switch templates for individual pages using page frontmatter:
+Cambie de plantilla para páginas individuales utilizando el frontmatter:
 
 ```markdown
 ---
-title: "Release History"
+title: "Historial de versiones"
 template: "template-changelog"
 ---
 
-# Release History
+# Historial de versiones
 ```
 
-## Resolution Priority Chain
+## Cadena de prioridades de resolución
 
-When rendering a page, `docmd` evaluates template paths in top-down order:
+Al compilar cada página, `docmd` evalúa las rutas de plantillas en este orden descendente:
 
-| Priority | Source | Syntax Example |
+| Prioridad | Origen | Ejemplo de sintaxis |
 | :--- | :--- | :--- |
 | **1** | `frontmatter.template` | `template: "template-changelog"` |
-| **2** | `config.templates[glob]` | `"blog/*": "template-blog"` |
-| **3** | `config.theme.template` *(Explicit)* | `"template": "summer"` |
-| **4** | `config.theme.name` *(Auto-Promoted)* | `"name": "summer"` |
-| **5** | Built-in Fallback | Default `.ejs` templates shipped with `@docmd/ui` |
+| **2** | `config.templates[patrón]` | `"blog/*": "template-blog"` |
+| **3** | `config.theme.template` *(Explícito)* | `"template": "summer"` |
+| **4** | `config.theme.name` *(Autopromovido)* | `"name": "summer"` |
+| **5** | Retirada por defecto | Plantillas `.ejs` incluidas en `@docmd/ui` |
 
-The CSS theme names `default`, `sky`, `ruby`, and `retro` are reserved color schemes. Any other identifier in `theme.name` is treated as a template package name.
+Los nombres `default`, `sky`, `ruby` y `retro` están reservados para los temas de color CSS. Cualquier otro valor en `theme.name` se interpreta como el nombre de un paquete de plantilla.
 
-## Supported Layout Slots
+## Ranuras de diseño admitidas
 
-Templates can override any of the 12 UI layout slots:
+Las plantillas pueden anular cualquiera de las 12 ranuras de interfaz:
 
-| Slot | Default Partial Path | Technical Purpose |
+| Ranura | Parcial por defecto | Propósito técnico |
 | :--- | :--- | :--- |
-| `layout` | `templates/layout.ejs` | Main HTML document shell |
-| `404` | `templates/404.ejs` | Not-Found error page |
-| `toc` | `templates/toc.ejs` | Table of contents sidebar navigation |
-| `navigation` | `templates/navigation.ejs` | Main sidebar navigation tree |
-| `footer` | `templates/partials/footer.ejs` | Site footer partial |
-| `menubar` | `templates/partials/menubar.ejs` | Top navigation menubar |
-| `options-menu` | `templates/partials/options-menu.ejs` | Search, theme, and profile control menu |
-| `project-switcher` | `templates/partials/project-switcher.ejs` | Multi-project monorepo switcher |
-| `version-dropdown` | `templates/partials/version-dropdown.ejs` | Version selector dropdown |
-| `language-switcher` | `templates/partials/language-switcher.ejs` | Locale language selector |
-| `banner` | `templates/partials/banner.ejs` | Site-wide announcement banner |
-| `cookie-consent` | `templates/partials/cookie-consent.ejs` | Cookie consent privacy dialog |
+| `layout` | `templates/layout.ejs` | Estructura principal del documento HTML |
+| `404` | `templates/404.ejs` | Página de error no encontrado |
+| `toc` | `templates/toc.ejs` | Tabla de contenidos de navegación derecha |
+| `navigation` | `templates/navigation.ejs` | Árbol de navegación lateral principal |
+| `footer` | `templates/partials/footer.ejs` | Pie de página del sitio |
+| `menubar` | `templates/partials/menubar.ejs` | Barra superior de navegación |
+| `options-menu` | `templates/partials/options-menu.ejs` | Menú de controles de búsqueda, tema y perfil |
+| `project-switcher` | `templates/partials/project-switcher.ejs` | Conmutador multiproyecto para monorrepositorios |
+| `version-dropdown` | `templates/partials/version-dropdown.ejs` | Selector desplegable de versiones |
+| `language-switcher` | `templates/partials/language-switcher.ejs` | Selector desplegable de idioma |
+| `banner` | `templates/partials/banner.ejs` | Barra global de anuncios del sitio |
+| `cookie-consent` | `templates/partials/cookie-consent.ejs` | Modal de consentimiento de cookies |
 
-::: callout alert "No-Style Page Isolation" icon:alert-circle
-Pages configured with `noStyle: true` bypass active templates completely and render using the default `templates/no-style.ejs` layout.
+::: callout alert "Aislamiento en páginas sin estilo" icon:alert-circle
+Las páginas configuradas con `noStyle: true` omiten por completo las plantillas activas y se renderizan exclusivamente con `templates/no-style.ejs`.
 :::
 
-## Asset Priority Order
+## Orden de prioridad de recursos
 
-When multiple templates and user stylesheets inject CSS or JS assets, the engine orders them by priority weight:
+Cuando intervienen múltiples plantillas y estilos de usuario, el motor los ordena según su peso de prioridad:
 
-| Priority Weight | Layer | Behaviour |
+| Peso de prioridad | Capa | Comportamiento |
 | :--- | :--- | :--- |
-| `0` | Base Core (`docmd-main.css`, `docmd-main.js`) | Foundational styles |
-| `5` | Theme Palette (`docmd-theme-sky.css`, etc.) | Visual color scheme |
-| `10` | Template Structural Styles | Structural layout rules |
-| `15` | User `customCss` / `customJs` | **Always takes priority** over templates |
-| `20` | Plugin Assets | Lightbox, search, and analytics assets |
-| `25+` | Specialized Template Overrides | Custom template extensions |
+| `0` | Núcleo base (`docmd-main.css`, `docmd-main.js`) | Estilos fundacionales |
+| `5` | Paleta de tema (`docmd-theme-sky.css`, etc.) | Esquema visual de color |
+| `10` | Estilos de estructura de plantilla | Reglas de disposición espacial |
+| `15` | `customCss` / `customJs` del usuario | **Prioridad máxima** sobre las plantillas |
+| `20` | Recursos de plugins | Estilos de búsqueda, analíticas o ampliaciones |
+| `25+` | Anulaciones de plantilla especializadas | Extensiones de plantillas específicas |
 
-To override a template's default CSS rules, add custom declarations to `theme.customCss` (Priority `15`).
+Para anular las reglas por defecto de una plantilla, añada sus declaraciones en `theme.customCss` (Prioridad `15`).
 
-## Template Localisation
+## Localización de plantillas
 
-Templates receive the active locale string during rendering. Localised text strings are resolved via the `t(key)` helper function using existing `assets/i18n/<locale>.json` translation maps.
+Las plantillas reciben el código del idioma activo durante el renderizado. Las cadenas de texto localizadas se resuelven mediante el asistente `t(key)` apoyándose en los archivos `assets/i18n/<idioma>.json`.
 
-## Related Resources
+## Recursos relacionados
 
-- [Custom Styles & Scripts](custom-css-js.md)—Layer custom CSS over active templates.
-- [Designing Custom Landing Pages](landing-pages.md)—Customize home page layouts using Markdown containers.
-- [Configuration Reference](../configuration/overview.md)—Overview of global site options.
+- [Estilos y scripts personalizados](custom-css-js.md) — Superponga reglas CSS sobre las plantillas activas.
+- [Diseño de páginas de inicio](landing-pages.md) — Personalice la página principal mediante contenedores Markdown.
+- [Referencia de configuración](../configuration/overview.md) — Opciones generales del sitio.
