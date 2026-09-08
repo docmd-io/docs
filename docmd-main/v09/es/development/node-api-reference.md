@@ -139,14 +139,37 @@ await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 
 ### `loadPlugins(config, options)`
 
-Loads, validates, and registers all plugins declared in the config. Returns the populated hooks registry.
+Carga, valida y registra todos los plugins declarados en la configuración. Devuelve el registro de hooks completo. Acepta `isDev` (booleano) para indicar si la compilación se ejecuta en modo desarrollo (controlando la inclusión de activos para plugins que requieren servidor en vivo).
 
 ```javascript
 import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  "resolvePaths": [__dirname]
+  "resolvePaths": [__dirname],
+  "isDev": true // opcional, por defecto false
 });
+```
+
+## API de Entorno del Cliente (`window.docmd`)
+
+Durante el desarrollo local (`docmd dev`), el navegador carga el puente RPC en `/__dev/docmd-api.js`, exponiendo `window.docmd` para comunicación en tiempo real y detección del estado del servidor.
+
+### `docmd.isLive()`
+
+Devuelve `true` de forma síncrona si la conexión WebSocket con el servidor de desarrollo activo está abierta y lista.
+
+```javascript
+if (window.docmd && window.docmd.isLive()) {
+  // Servidor dev en vivo conectado
+}
+```
+
+### `docmd.ping(timeoutMs = 2000)`
+
+Envía una solicitud asíncrona de comprobación al servidor dev mediante la acción RPC integrada `system:ping`. Resuelve a `true` si responde, o a `false` en caso de desconexión o tiempo de espera agotado.
+
+```javascript
+const ok = await window.docmd.ping();
 ```
 
 ## Engine Loader API

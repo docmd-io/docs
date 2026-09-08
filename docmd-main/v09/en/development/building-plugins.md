@@ -13,7 +13,8 @@ Every plugin must export a `plugin` descriptor declaring its identity and capabi
   "plugin": {
     "name": "my-analytics",
     "version": "1.0.0",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false // optional, true if plugin requires live dev server
   },
 
   "generateScripts": (config, opts) => { ... },
@@ -35,7 +36,8 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
     "kind": "plugin",
     "displayName": "Foo",
     "tagline": "What this plugin does in one line",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false
   }
 }
 ```
@@ -48,6 +50,13 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
 | `tagline` | Recommended | One-line description; used as a fallback for the npm description. |
 | `capabilities` | Required for plugins and templates | The same hook capabilities the JS descriptor declares. The build-time cross-check warns if the two diverge. |
 | `preview` | Optional | Path to a preview asset (template only); shown in catalogs. |
+| `requiresLiveServer` | Optional | When `true`, client assets (`getAssets`, `generateScripts`, `generateMetaTags`) are automatically omitted during static builds (`docmd build`). Defaults to `false`. |
+
+### Live Server Requirement (`requiresLiveServer`)
+
+When creating interactive plugins that rely on a live development server or WebSocket RPC bridge (such as inline editing or collaborative commenting like `@docmd/plugin-threads`), declare `"requiresLiveServer": true` in the plugin descriptor and `package.json#docmd`.
+
+During static production builds (`docmd build`), docmd automatically skips client asset injection while keeping markdown parsing hooks (`markdownSetup`) active. This guarantees static production sites remain lightweight, fast, and free of missing-backend errors, while markdown containers continue to render cleanly. Users can override this per-site in their configuration with `devOnly: false` (or `liveOnly: false`).
 
 Engines have the same `docmd` namespace but **no `capabilities`** — they don't participate in the hook system, only in the engine loader.
 

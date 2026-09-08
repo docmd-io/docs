@@ -139,14 +139,37 @@ await source.wrapText("docs/page.md", [10, 12], "important", 0, "**", "**");
 
 ### `loadPlugins(config, options)`
 
-Lädt, validiert und registriert alle in der Konfiguration deklarierten Plugins. Gibt die befüllte Hook-Registry zurück.
+Lädt, validiert und registriert alle in der Konfiguration deklarierten Plugins. Gibt die befüllte Hook-Registry zurück. Akzeptiert `isDev` (boolean), um anzugeben, ob der Build im Entwicklungsmodus läuft (steuert die Einbindung von Client-Assets für Live-Server-Plugins).
 
 ```javascript
 import { loadPlugins, hooks } from "@docmd/api";
 
 const registeredHooks = await loadPlugins(config, {
-  "resolvePaths": [__dirname]
+  "resolvePaths": [__dirname],
+  "isDev": true // optional, Standard: false
 });
+```
+
+## Client-Laufzeit-API (`window.docmd`)
+
+Während der lokalen Entwicklung (`docmd dev`) lädt der Browser die Client-RPC-Bridge unter `/__dev/docmd-api.js`, wodurch `window.docmd` für Live-Kommunikation und Serverstatus-Erkennung bereitsteht.
+
+### `docmd.isLive()`
+
+Gibt synchron `true` zurück, wenn die WebSocket-Verbindung zum aktiven Entwicklungs-Server geöffnet und bereit ist.
+
+```javascript
+if (window.docmd && window.docmd.isLive()) {
+  // Live-Dev-Server verbunden
+}
+```
+
+### `docmd.ping(timeoutMs = 2000)`
+
+Sendet eine asynchrone Heartbeat-Anfrage über die integrierte RPC-Aktion `system:ping` an den Live-Server. Löst zu `true` auf, wenn der Server antwortet, oder `false` bei Verbindungsabbruch bzw. Timeout.
+
+```javascript
+const ok = await window.docmd.ping();
 ```
 
 ## Engine-Loader-API

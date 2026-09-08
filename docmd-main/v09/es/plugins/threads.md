@@ -24,6 +24,16 @@ Enable thread configuration in `docmd.config.json`:
 | Option | Type | Default | Technical Description |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | When `true`, threads display in a dedicated panel; when `false`, threads attach inline to text highlights. |
+| `devOnly` | `boolean` | `true` | Restringe los recursos de interfaz al servidor de desarrollo (`docmd dev`). Se omiten en compilaciones estáticas de producción (`docmd build`). |
+
+### Requisito de Servidor de Desarrollo en Vivo
+
+La interfaz de comentarios, las herramientas de resaltado y la persistencia de cambios en Markdown requieren un servidor de desarrollo activo (`docmd dev`) con conexión WebSocket RPC funcional.
+
+Debido a que Threads declara `requiresLiveServer: true`:
+- **En desarrollo (`docmd dev`)**: La pestaña deslizante, las tarjetas de vista previa en línea, los modales de selección y la barra lateral de hilos están completamente activos y operativos.
+- **Compilaciones estáticas de producción (`docmd build`)**: Los scripts y hojas de estilo del cliente se omiten automáticamente para garantizar que los sitios públicos se mantengan ultrarrápidos, sin sobrecarga y libres de intentos fallidos de conexión WebSocket. Cualquier sintaxis de hilos en Markdown (`::: threads` y `==texto=={t-...}`) sigue procesándose correctamente sin advertencias.
+- **Anulación manual**: Si desea expresamente empaquetar los activos de Threads en compilaciones estáticas, configure `"devOnly": false` en `plugins.threads`.
 
 ### Global Configuration Example
 
@@ -31,7 +41,8 @@ Enable thread configuration in `docmd.config.json`:
 {
   "plugins": {
     "threads": {
-      "sidebar": true
+      "sidebar": true,
+      "devOnly": true
     }
   }
 }

@@ -24,6 +24,16 @@ Enable thread configuration in `docmd.config.json`:
 | Option | Type | Default | Technical Description |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | When `true`, threads display in a dedicated panel; when `false`, threads attach inline to text highlights. |
+| `devOnly` | `boolean` | `true` | Restricts client UI assets to live dev server builds (`docmd dev`). Omitted in static production builds (`docmd build`). |
+
+### Live Development Server Requirement
+
+The Threads commenting interface, highlighting tools, and Markdown persistence actions require an active live development server (`docmd dev`) with an active WebSocket RPC connection.
+
+Because Threads declares `requiresLiveServer: true`:
+- **Development (`docmd dev`)**: The slide-out handle, inline preview cards, selection popovers, and thread sidebar are fully loaded and operational.
+- **Static Production Builds (`docmd build`)**: Client scripts and CSS are automatically omitted to ensure that public production sites remain ultra-fast, zero-overhead, and free of broken WebSocket attempts or inactive UI widgets. Any existing Markdown threads syntax (`::: threads` and `==text=={t-...}`) continues to parse cleanly without warnings.
+- **Manual Override**: If you explicitly wish to bundle Threads client assets into static builds, configure `"devOnly": false` in `plugins.threads`.
 
 ### Global Configuration Example
 
@@ -31,7 +41,8 @@ Enable thread configuration in `docmd.config.json`:
 {
   "plugins": {
     "threads": {
-      "sidebar": true
+      "sidebar": true,
+      "devOnly": true
     }
   }
 }

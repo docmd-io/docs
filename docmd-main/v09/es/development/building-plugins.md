@@ -13,7 +13,8 @@ Every plugin must export a `plugin` descriptor declaring its identity and capabi
   "plugin": {
     "name": "my-analytics",
     "version": "1.0.0",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false // opcional, true si el plugin requiere servidor de desarrollo activo
   },
 
   "generateScripts": (config, opts) => { ... },
@@ -35,7 +36,8 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
     "kind": "plugin",
     "displayName": "Foo",
     "tagline": "What this plugin does in one line",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false
   }
 }
 ```
@@ -48,6 +50,13 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
 | `tagline` | Recommended | One-line description; used as a fallback for the npm description. |
 | `capabilities` | Required for plugins and templates | The same hook capabilities the JS descriptor declares. The build-time cross-check warns if the two diverge. |
 | `preview` | Optional | Path to a preview asset (template only); shown in catalogs. |
+| `requiresLiveServer` | Optional | Cuando es `true`, los activos del cliente (`getAssets`, `generateScripts`, `generateMetaTags`) se omiten automáticamente en compilaciones estáticas (`docmd build`). Por defecto es `false`. |
+
+### Requisito de Servidor en Vivo (`requiresLiveServer`)
+
+Al desarrollar plugins interactivos que dependen de un servidor de desarrollo en vivo o puente RPC WebSocket (como edición en línea o comentarios colaborativos en `@docmd/plugin-threads`), declare `"requiresLiveServer": true` en el descriptor del plugin y en `package.json#docmd`.
+
+Durante compilaciones estáticas de producción (`docmd build`), docmd omite automáticamente la inyección de recursos cliente mientras mantiene activos los analizadores Markdown (`markdownSetup`). Esto garantiza que los sitios estáticos sigan siendo livianos, rápidos y sin errores de backend ausente, mientras que los bloques de Markdown continúan mostrándose correctamente. Los usuarios pueden anular esto en su configuración mediante `devOnly: false` (o `liveOnly: false`).
 
 Engines have the same `docmd` namespace but **no `capabilities`** — they don't participate in the hook system, only in the engine loader.
 

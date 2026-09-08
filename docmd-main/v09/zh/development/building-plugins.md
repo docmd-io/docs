@@ -13,7 +13,8 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
   "plugin": {
     "name": "my-analytics",
     "version": "1.0.0",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false // 可选，如果插件依赖运行中的实时开发服务器则设为 true
   },
 
   "generateScripts": (config, opts) => { ... },
@@ -35,7 +36,8 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
     "kind": "plugin",
     "displayName": "Foo",
     "tagline": "用一句话说明这个插件的用途",
-    "capabilities": ["head", "body", "post-build"]
+    "capabilities": ["head", "body", "post-build"],
+    "requiresLiveServer": false
   }
 }
 ```
@@ -48,6 +50,13 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
 | `tagline` | 建议 | 一行说明；作为 npm description 的回退。 |
 | `capabilities` | 对插件和模板必需 | 与 JS 描述符中声明的钩子能力相同。构建时的交叉检查会在两者不一致时发出警告。 |
 | `preview` | 可选 | 预览资源路径（仅模板）；在目录中显示。 |
+| `requiresLiveServer` | 可选 | 设为 `true` 时，在静态生产构建（`docmd build`）期间会自动省略客户端资源（`getAssets`、`generateScripts`、`generateMetaTags`）。默认为 `false`。 |
+
+### Live 开发服务器依赖 (`requiresLiveServer`)
+
+当开发需要实时 WebSocket 交互或开发服务器本地文件持久化的插件时（例如行内编辑或 `@docmd/plugin-threads` 协作讨论），在插件描述符与 `package.json#docmd` 中声明 `"requiresLiveServer": true`。
+
+在静态生产构建（`docmd build`）期间，docmd 会自动跳过前端脚本与样式的注入，但继续运行 Markdown 解析扩展钩子（`markdownSetup`）。这样既保证最终生产静态站点极度轻量且无缺失后端的控制台报错，又保证 Markdown 容器语法能够正常解析。用户也可以在站点配置中通过 `devOnly: false`（或 `liveOnly: false`）灵活覆盖此行为。
 
 引擎具有相同的 `docmd` 命名空间，但**没有 `capabilities`** —— 它们 不参与钩子系统，只参与引擎加载器。
 
