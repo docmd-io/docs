@@ -16,7 +16,7 @@ The `tag` container is a self-closing component that inserts compact, pill-shape
 | Parameter / Property | Type | Description |
 | :--- | :--- | :--- |
 | **Badge Label** | `"String"` \| `title:"..."` | Text string displayed inside the pill badge (1st positional arg or `title:"..."`). |
-| **Background Colour** | `color:VALUE` | Applies background color (CSS names or Hex). Text contrast is auto-calculated. |
+| **Background Colour** | `color:VALUE` | Applies background colour (CSS names or Hex). Text contrast is auto-calculated. |
 | **Iconography** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
 | **Hyperlink URL** | `url:URL` | Converts badge into a link. Prefix with `external:` to open in a new browser tab. |
 
@@ -39,7 +39,7 @@ This capability was introduced in ::: tag "v0.9.0" color:blue and is fully suppo
 
 ### Status Indicators
 
-Insert status labels across your documentation pages with custom color accents:
+Insert status labels across your documentation pages with custom colour accents:
 
 ```markdown
 ::: tag title:"Deprecated" color:#ef4444

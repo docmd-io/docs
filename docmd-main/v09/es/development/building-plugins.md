@@ -1,31 +1,31 @@
 ---
-title: "Building Plugins"
-description: "A comprehensive guide to extending docmd with custom logic, data injection, and interactive features."
+title: "Creación de plugins"
+description: "Guía completa para extender docmd con lógica personalizada, inyección de datos y funciones interactivas."
 ---
 
-Plugins are the primary extension mechanism for docmd. They allow you to inject HTML, modify Markdown parsing, inject build-time data, and automate post-build tasks. This guide outlines the plugin API.
+Los plugins son el mecanismo de extensión principal de docmd. Le permiten inyectar HTML, modificar el análisis de Markdown, incorporar datos en tiempo de compilación y automatizar tareas posteriores a la generación. Esta guía detalla la API de plugins.
 
-## Plugin Descriptor
+## Descriptor del plugin
 
-Every plugin must export a `plugin` descriptor declaring its identity and capabilities. This enables the engine to validate and isolate boundaries at load time.
+Cada plugin debe exportar un descriptor `plugin` declarando su identidad y capacidades. Esto permite al motor validar y aislar los límites de ejecución en el momento de la carga.
 
 ```javascript
   "plugin": {
     "name": "my-analytics",
     "version": "1.0.0",
     "capabilities": ["head", "body", "post-build"],
-    "requiresLiveServer": false // opcional, true si el plugin requiere servidor de desarrollo activo
+    "requiresLiveServer": false // opcional, true si el plugin requiere servidor dev en vivo
   },
 
   "generateScripts": (config, opts) => { ... },
   "onPostBuild": async (ctx) => { ... }
 ```
 
-> **Note:** The descriptor is strictly required. Plugins without it will fail to load.
+> **Nota:** El descriptor es estrictamente obligatorio. Los plugins que no lo incluyan no se cargarán.
 
-## The `docmd` Namespace (new in 0.8.9)
+## El espacio de nombres `docmd` (nuevo en 0.8.9)
 
-In addition to the runtime `plugin` descriptor, every official plugin **must** declare a `docmd` namespace in its `package.json`. This namespace is the build-time contract that the registry generator reads to build the single source of truth that the runtime loader consumes.
+Además del descriptor `plugin` en tiempo de ejecución, todo plugin oficial **debe** declarar un espacio de nombres `docmd` en su `package.json`. Este espacio de nombres representa el contrato en tiempo de compilación que lee el generador de registros para construir la fuente única de verdad utilizada por el cargador en tiempo de ejecución.
 
 ```json "package.json"
 {
@@ -35,78 +35,78 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
     "key": "foo",
     "kind": "plugin",
     "displayName": "Foo",
-    "tagline": "What this plugin does in one line",
+    "tagline": "Descripción breve de la función del plugin",
     "capabilities": ["head", "body", "post-build"],
     "requiresLiveServer": false
   }
 }
 ```
 
-| Field | Required | Description |
+| Campo | Obligatorio | Descripción |
 | :--- | :--- | :--- |
-| `key` | Recommended | The user-facing identifier (`config.plugins.<key>`). Derived from the package name if omitted. |
-| `kind` | Recommended | One of `plugin`, `template`, `engine`. Derived from the directory layout if omitted. |
-| `displayName` | Recommended | Human-readable name shown in catalogs and `docmd doctor` output. |
-| `tagline` | Recommended | One-line description; used as a fallback for the npm description. |
-| `capabilities` | Required for plugins and templates | The same hook capabilities the JS descriptor declares. The build-time cross-check warns if the two diverge. |
-| `preview` | Optional | Path to a preview asset (template only); shown in catalogs. |
-| `requiresLiveServer` | Optional | Cuando es `true`, los activos del cliente (`getAssets`, `generateScripts`, `generateMetaTags`) se omiten automáticamente en compilaciones estáticas (`docmd build`). Por defecto es `false`. |
+| `key` | Recomendado | Identificador accesible para el usuario (`config.plugins.<key>`). Si se omite, se deriva del nombre del paquete. |
+| `kind` | Recomendado | Uno de los valores: `plugin`, `template`, `engine`. Si se omite, se deriva de la estructura de directorios. |
+| `displayName` | Recomendado | Nombre legible mostrado en catálogos y en la salida de `docmd doctor`. |
+| `tagline` | Recomendado | Descripción breve en una línea; se utiliza como alternativa a la descripción de npm. |
+| `capabilities` | Obligatorio para plugins y plantillas | Mismas capacidades de hooks declaradas en el descriptor JS. La validación en compilación advierte si difieren. |
+| `preview` | Opcional | Ruta a un recurso de vista previa (solo plantillas); mostrado en catálogos. |
+| `requiresLiveServer` | Opcional | Cuando es `true`, los activos del cliente (`getAssets`, `generateScripts`, `generateMetaTags`) se omiten automáticamente en compilaciones estáticas (`docmd build`). Por defecto es `false`. |
 
-### Requisito de Servidor en Vivo (`requiresLiveServer`)
+### Requisito de servidor en vivo (`requiresLiveServer`)
 
 Al desarrollar plugins interactivos que dependen de un servidor de desarrollo en vivo o puente RPC WebSocket (como edición en línea o comentarios colaborativos en `@docmd/plugin-threads`), declare `"requiresLiveServer": true` en el descriptor del plugin y en `package.json#docmd`.
 
 Durante compilaciones estáticas de producción (`docmd build`), docmd omite automáticamente la inyección de recursos cliente mientras mantiene activos los analizadores Markdown (`markdownSetup`). Esto garantiza que los sitios estáticos sigan siendo livianos, rápidos y sin errores de backend ausente, mientras que los bloques de Markdown continúan mostrándose correctamente. Los usuarios pueden anular esto en su configuración mediante `devOnly: false` (o `liveOnly: false`).
 
-Engines have the same `docmd` namespace but **no `capabilities`** — they don't participate in the hook system, only in the engine loader.
+Los motores comparten el mismo espacio de nombres `docmd` pero **sin `capabilities`**, ya que no participan en el sistema de hooks, sino únicamente en el cargador de motores.
 
-The build-time cross-check (also new in 0.8.9) surfaces drift between the JS descriptor and the manifest, including the "implemented hook without declared capability" silent-drop bug that was previously invisible.
+La verificación cruzada en tiempo de compilación detecta desajustes entre el descriptor JS y el manifiesto, incluyendo errores silenciosos donde un hook se implementaba sin haber sido declarado.
 
-::: callout warning title:"Bundled registry removal in 0.9.0"
-The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalog of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
+::: callout warning title:"Eliminación del registro empaquetado en 0.9.0"
+El archivo `packages/plugins/installer/registry/plugins.json`, mantenido manualmente como catálogo de plugins oficiales, está **obsoleto desde 0.8.9** y se **eliminará en 0.9.0**. El generador de registro en compilación es ahora la única fuente de verdad: basta con declarar el espacio de nombres `docmd` en `package.json` para que el generador lo procese en la siguiente compilación `pnpm build` de `@docmd/api`.
 ::: /callout
 
-## Core Capabilities
+## Capacidades principales
 
-The `capabilities` array dictates which hooks your plugin is allowed to use.
+La matriz `capabilities` determina qué hooks tiene autorización de usar su plugin.
 
-| Capability | Allowed Hooks | Phase |
+| Capacidad | Hooks autorizados | Fase |
 | :--- | :--- | :--- |
-| `init` | `onConfigResolved` | Init |
-| `markdown` | `markdownSetup` | Setup |
-| `head` | `generateMetaTags`, `generateScripts` (head) | Render |
-| `body` | `generateScripts` (body) | Render |
-| `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | Build |
-| `post-build`| `onPostBuild` | Post-Build |
-| `dev` | `onDevServerReady` | Dev Server |
-| `assets` | `getAssets` | Output |
-| `actions` | `actions` | Interactive |
-| `events` | `events` | Interactive |
+| `init` | `onConfigResolved` | Inicialización |
+| `markdown` | `markdownSetup` | Configuración |
+| `head` | `generateMetaTags`, `generateScripts` (head) | Renderizado |
+| `body` | `generateScripts` (body) | Renderizado |
+| `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | Compilación |
+| `post-build`| `onPostBuild` | Post-compilación |
+| `dev` | `onDevServerReady` | Servidor de desarrollo |
+| `assets` | `getAssets` | Salida |
+| `actions` | `actions` | Interactivo |
+| `events` | `events` | Interactivo |
 | `translations`| `translations` | i18n |
-| `template` *(new in 0.8.7)* | `templates`, `templateAssets` | Render |
+| `template` *(nuevo en 0.8.7)* | `templates`, `templateAssets` | Renderizado |
 
-> **Note:** the `template` capability is exclusive — if a plugin declares it, it cannot also declare `head`, `build`, `post-build`, etc. Templates ship slots and assets only; they do not run lifecycle hooks. If you need both, ship two separate packages.
+> **Nota:** La capacidad `template` es exclusiva: si un plugin la declara, no puede declarar simultáneamente `head`, `build`, `post-build`, etc. Las plantillas proporcionan ranuras (slots) y recursos visuales; no ejecutan hooks de ciclo de vida. Si necesita ambas funcionalidades, distribuya dos paquetes independientes.
 
-## Plugin API Reference
+## Referencia de la API de plugins
 
-A docmd plugin is a standard JavaScript object that implements one or more of the following hooks.
+Un plugin de docmd es un objeto estándar de JavaScript que implementa uno o varios de los siguientes hooks.
 
-| Hook | Description |
+| Hook | Descripción |
 | :--- | :--- |
-| `markdownSetup(md, opts)` | Extend the `markdown-it` instance. Synchronous. |
-| `generateMetaTags(config, page, root)` | Inject `<meta>` or `<link>` tags into the `<head>`. |
-| `generateScripts(config, opts)` | Return an object containing `headScriptsHtml` and `bodyScriptsHtml`. |
-| `getAssets(opts)` | Define external files or CDN scripts to be injected. |
-| `onPostBuild(ctx)` | Run logic after the generation of all HTML files. |
-| `translations(localeId)` | Return an object of translated strings for the given locale. |
-| `actions` | An object of named action handlers for WebSocket RPC calls. |
-| `events` | An object of named event handlers for browser messages. |
-| `templates[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateHook` entries — each `{ type, templatePath }` overrides one EJS slot. |
-| `templateAssets[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateAssetHook` entries — each `{ type, path, priority?, position? }` ships the template's CSS/JS bundle. |
+| `markdownSetup(md, opts)` | Extiende la instancia de `markdown-it`. Función síncrona. |
+| `generateMetaTags(config, page, root)` | Inyecta etiquetas `<meta>` o `<link>` en `<head>`. |
+| `generateScripts(config, opts)` | Devuelve un objeto con `headScriptsHtml` y `bodyScriptsHtml`. |
+| `getAssets(opts)` | Define archivos externos o scripts de CDN para su inyección. |
+| `onPostBuild(ctx)` | Ejecuta lógica tras la generación de todos los archivos HTML. |
+| `translations(localeId)` | Devuelve un objeto con cadenas traducidas para el idioma dado. |
+| `actions` | Objeto con controladores de acciones para llamadas RPC sobre WebSocket. |
+| `events` | Objeto con controladores de eventos para mensajes entrantes del navegador. |
+| `templates[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de ranuras `TemplateHook` — cada `{ type, templatePath }` anula una ranura EJS. |
+| `templateAssets[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de `TemplateAssetHook` — cada entrada `{ type, path, priority?, position? }` suministra el paquete CSS/JS de la plantilla. |
 
-### Building a template plugin
+### Creación de un plugin de plantilla
 
-A template is a plugin with `capabilities: ['template']`. It ships a `templates[]` array (slot overrides) and a `templateAssets[]` array (CSS/JS bundle). See the dedicated [Templates guide](../theming/templates.md) for the full authoring walkthrough, slot table, and resolution chain. The minimum viable template looks like:
+Una plantilla es un plugin con `capabilities: ['template']`. Suministra matrices `templates[]` y `templateAssets[]`. Consulte la [Guía de plantillas](../theming/templates.md) para el recorrido completo. Una plantilla mínima se estructura de la siguiente forma:
 
 ```javascript
 export default {
@@ -125,9 +125,9 @@ export default {
 };
 ```
 
-## Creating a Local Plugin
+## Creación de un plugin local
 
-Creating a plugin is as simple as defining a JavaScript file. For example, `my-plugin.js`:
+Crear un plugin consiste simplemente en definir un archivo JavaScript. Por ejemplo, `my-plugin.js`:
 
 ```javascript
 import path from "path";
@@ -140,7 +140,7 @@ export default {
   },
 
   markdownSetup: (md, options) => {
-    // Add custom parser rules
+    // Agregar reglas de análisis personalizadas
   },
 
   generateMetaTags: async (config, page, relativePathToRoot) => {
@@ -148,12 +148,12 @@ export default {
   },
 
   onPostBuild: async ({ config, pages, outputDir, log, options }) => {
-    log(`Custom Plugin: Verified ${pages.length} pages.`);
+    log(`Plugin personalizado: se verificaron ${pages.length} páginas.`);
   }
 };
 ```
 
-To enable your plugin, reference its **full package name** in your `docmd.config.json`:
+Para habilitar su plugin, referencie su **nombre de paquete completo** en su archivo `docmd.config.json`:
 
 ```json "docmd.config.json"
   "plugins": {
@@ -161,21 +161,21 @@ To enable your plugin, reference its **full package name** in your `docmd.config
   }
 ```
 
-> **Note:** Shorthand names (e.g. `math`, `search`) are reserved for official `@docmd/plugin-*` packages. Third-party plugins must always use their full npm package name.
+> **Nota:** Los nombres abreviados (por ejemplo, `math`, `search`) están reservados para los paquetes oficiales `@docmd/plugin-*`. Los plugins de terceros siempre deben especificar su nombre de paquete npm completo.
 
-### Plugin Resolution
+### Resolución de plugins
 
-The docmd engine resolves plugin names as follows:
-- **Official shorthands** (`math`, `search`) expand to `@docmd/plugin-<name>`. Only official packages can exist under the `@docmd` scope.
-- **Third-party plugins** must use their full package name (e.g. `my-awesome-plugin`, `@myorg/docmd-extras`). There is no alias system for external plugins. This eliminates supply-chain attack vectors.
+El motor de docmd resuelve los nombres de plugins de la siguiente manera:
+- **Abreviaturas oficiales** (`math`, `search`) se expanden a `@docmd/plugin-<name>`. Solo los paquetes oficiales pueden usar el ámbito `@docmd`.
+- **Plugins de terceros** deben utilizar su nombre completo (por ejemplo, `my-awesome-plugin`, `@myorg/docmd-extras`). No existe un sistema de alias para plugins externos, eliminando riesgos en la cadena de suministro.
 
-### Plugin Isolation
+### Aislamiento de plugins
 
-Every hook invocation is wrapped in a try/catch block. A broken plugin cannot crash the build or interfere with other plugins. Errors are logged and collected into a summary.
+Cada invocación de un hook está encapsulada en un bloque try/catch. Un error en un plugin no interrumpe la compilación ni perjudica a otros plugins; los errores se registran y consolidan en el informe final.
 
-### Scoping Plugins (`noStyle`)
+### Ámbito de plugins (`noStyle`)
 
-Plugins inject their CSS/JS universally by default. Developers can explicitly prevent their plugin from rendering on `noStyle` pages by exporting a `noStyle` boolean:
+Por defecto, los plugins inyectan su CSS/JS globalmente. Los desarrolladores pueden evitar que su plugin actúe sobre páginas `noStyle` exportando una propiedad booleana `noStyle`:
 
 ```javascript
 export default {
@@ -185,48 +185,48 @@ export default {
 }
 ```
 
-Users can override this via configuration (`plugins: { math: { noStyle: false } }`) or dynamically via Markdown frontmatter (`plugins: { math: true }`).
+Los usuarios pueden anular esto mediante la configuración (`plugins: { math: { noStyle: false } }`) o dinámicamente en el frontmatter de Markdown (`plugins: { math: true }`).
 
-## Lifecycle Hooks
+## Hooks del ciclo de vida
 
-Docmd provides deep integration hooks. They allow plugins to manipulate configuration, raw sources, and page data.
+Docmd proporciona hooks de integración profunda para interactuar con la configuración, las fuentes originales y los datos procesados de cada página.
 
-| Hook | Description | Expected Return |
+| Hook | Descripción | Valor devuelto esperado |
 | :--- | :--- | :--- |
-| **`onConfigResolved(config)`** | Reads or modifies the active config right after initialisation. | `void` or `Promise<void>` |
-| **`onDevServerReady(server, wss)`** | Exposes the raw Node.js server during `npx @docmd/core dev`. | `void` or `Promise<void>` |
-| **`onBeforeParse(src, frontmatter, filePath?)`** | Pre-processes raw markdown string data immediately before parsing. | `string` or `Promise<string>` |
-| **`onAfterParse(html, frontmatter, filePath?)`** | Post-processes generated HTML representing the markdown body. | `string` or `Promise<string>` |
-| **`onBeforeBuild(ctx)`** | Called after all markdown is parsed but before HTML generation. Used for heavy pre-computation. | `void` or `Promise<void>` |
-| **`onBeforeRender(page)`** | Called before template rendering. Mutations to `frontmatter` and `html` are reflected in output. | `void` or `Promise<void>` |
-| **`onPageReady(page)`** | Accesses fully assembled page metadata just before it is written to the destination file. | `void` or `Promise<void>` |
+| **`onConfigResolved(config)`** | Lee o modifica la configuración activa inmediatamente tras su inicialización. | `void` o `Promise<void>` |
+| **`onDevServerReady(server, wss)`** | Expone el servidor Node.js subyacente durante `npx @docmd/core dev`. | `void` o `Promise<void>` |
+| **`onBeforeParse(src, frontmatter, filePath?)`** | Preprocesa la cadena Markdown original antes de su análisis sintáctico. | `string` o `Promise<string>` |
+| **`onAfterParse(html, frontmatter, filePath?)`** | Postprocesa el HTML generado a partir del cuerpo Markdown. | `string` o `Promise<string>` |
+| **`onBeforeBuild(ctx)`** | Se ejecuta tras analizar todo el Markdown y antes de renderizar el HTML. Ideal para precálculos pesados. | `void` o `Promise<void>` |
+| **`onBeforeRender(page)`** | Se ejecuta antes del renderizado de plantillas. Las mutaciones a `frontmatter` y `html` se reflejan en la salida. | `void` o `Promise<void>` |
+| **`onPageReady(page)`** | Accede a los metadatos ensamblados de la página justo antes de escribirlos en disco. | `void` o `Promise<void>` |
 
-### Engine Acceleration & Background Tasks (`runWorkerTask`)
+### Aceleración de motor y tareas en segundo plano (`runWorkerTask`)
 
-docmd executes intensive operations via a **Pluggable Engine Architecture**. Plugins can easily offload custom heavy I/O or CPU-bound subroutines through the configured build engine (e.g., JavaScript or native Rust workers).
+docmd ejecuta operaciones intensivas a través de una **Arquitectura de motores conectables**. Los plugins pueden delegar rutinas de cálculo pesado o E/S intensiva al motor configurado (por ejemplo, subprocesos JavaScript o subprocesos nativos en Rust).
 
-The `runWorkerTask` method is injected transparently into `PageContext`, `PostBuildContext`, and `ActionContext`.
+El método `runWorkerTask` se inyecta de forma transparente en `PageContext`, `PostBuildContext` y `ActionContext`.
 
 ```javascript
 {
   "plugin": { "name": "my-plugin", "version": "1.0.0", "capabilities": ["post-build"] },
 
   "onPostBuild": async (ctx) => {
-    // Pass a registered engine action name or absolute script path
+    // Indicar el nombre de una acción registrada o ruta absoluta a un script
     const result = await ctx.runWorkerTask('/path/to/worker.js', 'parseData', [ctx.outputDir]);
   }
 }
 ```
 
-### Data Fetching and Indexing (`onBeforeBuild`)
+### Obtención de datos e indexación (`onBeforeBuild`)
 
-The `onBeforeBuild` hook runs *after* markdown parsing but *before* the HTML rendering loop begins. It is optimal for heavy data indexing or API calls.
+El hook `onBeforeBuild` se ejecuta *después* del análisis de Markdown y *antes* del ciclo de renderizado HTML. Es la fase idónea para indexación de datos o llamadas a APIs externas.
 
-It receives the `BeforeBuildContext`, containing all `pages` and the `tui` instance. This allows plugins to show isolated progress bars.
+Recibe `BeforeBuildContext`, que incluye todas las `pages` y la instancia de `tui` para mostrar barras de progreso dedicadas.
 
 ```typescript
 export async function onBeforeBuild({ pages, tui }) {
-  tui.step('Fetching remote plugin data', 'WAIT');
+  tui.step('Obteniendo datos remotos para el plugin', 'WAIT');
 
   let processed = 0;
   for (const page of pages) {
@@ -235,17 +235,17 @@ export async function onBeforeBuild({ pages, tui }) {
     }
     processed++;
     if (processed % 10 === 0 || processed === pages.length) {
-      tui.progress('Fetching remote plugin data', processed, pages.length);
+      tui.progress('Obteniendo datos remotos para el plugin', processed, pages.length);
     }
   }
 
-  tui.step('Fetching remote plugin data', 'DONE');
+  tui.step('Obteniendo datos remotos para el plugin', 'DONE');
 }
 ```
 
-### `onBeforeRender` and `PageContext`
+### `onBeforeRender` y `PageContext`
 
-Use `onBeforeRender` to inject build-time data derived from the source file.
+Utilice `onBeforeRender` para inyectar datos derivados del archivo de origen en tiempo de compilación.
 
 ```typescript
 interface PageContext {
@@ -275,9 +275,9 @@ export default {
 }
 ```
 
-## Deep Dive: Asset Injection
+## Inyección de recursos (Assets)
 
-The `getAssets()` hook allows your plugin to bundle client-side logic securely.
+El hook `getAssets()` permite que su plugin suministre recursos del lado del cliente de forma estructurada.
 
 ```javascript
 export default {
@@ -299,11 +299,11 @@ export default {
 }
 ```
 
-## Translating Plugins (i18n)
+## Traducción de plugins (i18n)
 
-Plugins rendering client-side UI should expose strings via the `translations(localeId)` hook. The engine merges these with core strings automatically.
+Los plugins que muestran interfaces en el cliente deben proporcionar sus cadenas a través del hook `translations(localeId)`. El motor las fusiona automáticamente con las cadenas del sistema.
 
-The standard pattern stores a JSON file for each language in an `i18n/` directory:
+El patrón recomendado almacena un archivo JSON por cada idioma en un directorio `i18n/`:
 
 ```javascript
 import fs from "fs";
@@ -327,9 +327,9 @@ export default {
 }
 ```
 
-## WebSocket RPC Actions
+## Acciones WebSocket RPC
 
-Plugins can register **action handlers** and **event handlers** that run on the dev server. They are callable from the browser via the `window.docmd` API.
+Los plugins pueden registrar **controladores de acciones** y **controladores de eventos** ejecutados en el servidor de desarrollo, accesibles desde el navegador mediante la API `window.docmd`.
 
 ```javascript
 export default {
@@ -350,50 +350,49 @@ export default {
 
   events: {
     "my-plugin:page-viewed": (data, ctx) => {
-      console.log(`Page viewed: ${data.path}`);
+      console.log(`Página visitada: ${data.path}`);
     }
   }
 };
 ```
 
-The `ctx` (ActionContext) provides:
+El objeto `ctx` (ActionContext) proporciona:
 
-| Method | Description |
+| Método | Descripción |
 | :--- | :--- |
-| `ctx.readFile(path)` | Read a file relative to the project root. |
-| `ctx.writeFile(path, content)` | Write a file (triggers rebuild + reload). |
-| `ctx.readFileLines(path)` | Read a file as an array of lines. |
-| `ctx.broadcast(event, data)` | Push an event to all connected browsers. |
-| `ctx.runWorkerTask(module, fn, args)` | Offload heavy CPU tasks to the worker pool. |
-| `ctx.source` | Source editing tools for block-level markdown manipulation. |
-| `ctx.projectRoot` | Absolute path to the project root. |
-| `ctx.config` | Current docmd site configuration. |
+| `ctx.readFile(path)` | Lee un archivo relativo a la raíz del proyecto. |
+| `ctx.writeFile(path, content)` | Escribe un archivo (activa recompilación y recarga). |
+| `ctx.readFileLines(path)` | Lee un archivo como una matriz de líneas. |
+| `ctx.broadcast(event, data)` | Emite un evento a todos los navegadores conectados. |
+| `ctx.runWorkerTask(module, fn, args)` | Delega tareas pesadas de CPU al grupo de subprocesos. |
+| `ctx.source` | Utilidades de edición en bloque para archivos Markdown. |
+| `ctx.projectRoot` | Ruta absoluta a la raíz del proyecto. |
+| `ctx.config` | Configuración activa del sitio docmd. |
 
-All file operations are sandboxed to the project root.
+Todas las operaciones sobre archivos están confinadas a la raíz del proyecto.
 
-::: callout info title:"Dev Mode Only 🛡️"
-The WebSocket RPC system is only active during `npx @docmd/core dev`. Production builds do not include the API client or server-side action handling.
+::: callout info title:"Solo en modo desarrollo 🛡️"
+El sistema WebSocket RPC únicamente está activo durante `npx @docmd/core dev`. Las compilaciones de producción no incluyen el cliente de API ni controladores en el servidor.
 ::: /callout
 
-## Best Practices
+## Buenas prácticas
 
-1.  **Declare Capabilities**: Always export a `plugin` descriptor with declared capabilities.
-2.  **Use `onBeforeRender` for data injection**: If your plugin computes frontmatter fields, use `onBeforeRender`.
-3.  **Async/Await**: Always use `async` functions for `onPostBuild`, `onBeforeRender`, and action handlers.
-4.  **Statelessness**: Avoid maintaining state within the plugin object. The engine may re-initialise plugins dynamically.
-5.  **Naming Convention**: Prefix community package names with `docmd-plugin-`.
-6.  **Action Namespacing**: Prefix action names with your plugin name (e.g., `my-plugin:save-note`).
-7.  **Action Validation**: Define and require an explicit payload schema in your actions.
-8.  **Logging**: Use the provided `log()` helper in `onPostBuild` to respect user verbosity settings.
+1. **Declarar capacidades**: Exporte siempre un descriptor `plugin` con las capacidades explícitas.
+2. **Usar `onBeforeRender` para inyectar datos**: Si su plugin computa campos de frontmatter, use `onBeforeRender`.
+3. **Funciones asíncronas**: Use siempre `async/await` en `onPostBuild`, `onBeforeRender` y controladores de acción.
+4. **Sin estado global mutable**: Evite almacenar estado volátil en el objeto del plugin; el motor puede reinicializarlo dinámicamente.
+5. **Convención de nombres**: Añada el prefijo `docmd-plugin-` a los paquetes comunitarios.
+6. **Espacios de nombres en acciones**: Prefije los nombres de acción con el nombre de su plugin (por ejemplo, `my-plugin:save-note`).
+7. **Validación de acciones**: Valide y requiera un esquema de carga útil estricto en sus acciones.
+8. **Registro con `log`**: Utilice el asistente `log()` suministrado en `onPostBuild` para respetar las preferencias de verbosidad del usuario.
 
-::: callout tip title:"AI-Ready Design 🤖"
-The docmd plugin API is **LLM-Optimal**. Because the hooks use standard JavaScript objects, AI agents can generate bug-free plugins with minimal instruction.
+::: callout tip title:"Diseñado para Inteligencia Artificial 🤖"
+La API de plugins de docmd es óptima para modelos de lenguaje (LLM). Al estructurarse en objetos de JavaScript convencionales, los agentes de IA pueden generar extensiones fiables con instrucciones mínimas.
 ::: /callout
 
-## ESM Exports — the `default` Condition
+## Exportaciones ESM — la condición `default`
 
-Your plugin's `package.json` **must** include a `"default"` condition in
-`exports["."]`, alongside the `import` condition:
+El archivo `package.json` de su plugin **debe** incluir una condición `"default"` en `exports["."]`, junto con la condición `import`:
 
 ```json
 "exports": {
@@ -405,12 +404,4 @@ Your plugin's `package.json` **must** include a `"default"` condition in
 }
 ```
 
-If you declare only `import`, the auto-installer's first attempt throws
-`ERR_PACKAGE_PATH_NOT_EXPORTED` because Node's CommonJS resolver cannot
-match any condition. The retry path will still succeed (it uses dynamic
-`import()` directly), but the build will print a redundant "Plugin
-installed" TUI line every time.
-
-This convention matches what `@docmd/plugin-git`, `@docmd/plugin-openapi`,
-and `@docmd/plugin-threads` already ship with. Templates (`@docmd/template-*`)
-have the same requirement.
+Si declara únicamente `import`, el primer intento del instalador automático arrojará `ERR_PACKAGE_PATH_NOT_EXPORTED` porque el sistema de resolución CommonJS de Node no coincidirá con ninguna condición. La ruta de reintento funcionará, pero imprimirá avisos redundantes en la consola.

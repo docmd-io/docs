@@ -1,25 +1,25 @@
 ---
-title: "Git Integration Plugin"
-description: "Inject Git repository intelligence, last-updated timestamps, commit history tooltips, and automated source edit links."
+title: "Plugin de integración con Git"
+description: "Incorpore información de repositorios Git: fechas de última modificación, historial de commits y enlaces para editar el contenido."
 ---
 
-The `@docmd/plugin-git` plugin adds repository intelligence to your documentation site. It queries local Git history during compilation to display page modification timestamps, author contributions, and automated "Edit this page" links.
+El plugin `@docmd/plugin-git` añade información del repositorio a su documentación. Consulta el historial local de Git durante la compilación para mostrar fechas de última actualización, autores y enlaces automatizados para editar las páginas.
 
-## Configuration Options
+## Opciones de configuración
 
-Configure repository parameters in `docmd.config.json`:
+Configure los parámetros del repositorio en `docmd.config.json`:
 
-| Option | Type | Default | Description |
+| Opción | Tipo | Por defecto | Descripción |
 | :--- | :--- | :--- | :--- |
-| `repo` | `string` | `null` | Public repository URL (e.g. `https://github.com/org/repo`). Required for edit links. |
-| `branch` | `string` | `'main'` | Target branch for source edit links. |
-| `editLink` | `boolean` | `true` | Display "Edit this page" button in page footers. |
-| `lastUpdated` | `boolean` | `true` | Display last updated timestamp in page footers. |
-| `commitHistory` | `boolean` | `true` | Display commit history hover tooltip on timestamp hover. |
-| `maxCommits` | `number` | `5` | Maximum number of commits shown in the hover tooltip. |
-| `dateFormat` | `string` | `'relative'` | Date format mode: `relative` (default), `iso`, or `locale-aware`. |
+| `repo` | `string` | `null` | URL pública del repositorio (ej., `https://github.com/org/repo`). Requerida para los enlaces de edición. |
+| `branch` | `string` | `'main'` | Rama de destino para los enlaces de edición. |
+| `editLink` | `boolean` | `true` | Muestra el botón "Editar esta página" en el pie de página. |
+| `lastUpdated` | `boolean` | `true` | Muestra la fecha de última actualización en el pie de página. |
+| `commitHistory` | `boolean` | `true` | Muestra un globo emergente con el historial reciente al pasar el cursor sobre la fecha. |
+| `maxCommits` | `number` | `5` | Número máximo de commits mostrados en el globo emergente. |
+| `dateFormat` | `string` | `'relative'` | Formato de fecha: `relative` (por defecto), `iso` o adaptado al idioma (`locale-aware`). |
 
-### Example Configuration
+### Ejemplo de configuración
 
 ```json "docmd.config.json"
 {
@@ -36,39 +36,39 @@ Configure repository parameters in `docmd.config.json`:
 }
 ```
 
-## Key Capabilities
+## Capacidades principales
 
-* **Last-Updated Timestamps**: Automatically calculated per file and displayed in page footers.
-* **Commit History Tooltips**: Hovering over timestamps renders recent commit hashes, commit messages, and author avatars.
-* **Automated Edit Links**: Generates direct edit URLs pointing to GitHub, GitLab, or Bitbucket.
-* **Build-Time Caching**: Git queries execute during compilation and cache results locally, ensuring zero runtime impact.
+* **Marcas de tiempo de última actualización**: Calculadas por archivo y mostradas en el pie de página.
+* **Historial de commits interactivo**: Al pasar el cursor sobre la fecha, se muestran los hashes de commits recientes, mensajes y avatares de los autores.
+* **Enlaces automáticos de edición**: Genera enlaces directos hacia GitHub, GitLab o Bitbucket.
+* **Caché en compilación**: Las consultas de Git se ejecutan en tiempo de compilación y se guardan en caché local para no impactar en el rendimiento del navegador.
 
-## Page-Level Controls
+## Controles a nivel de página
 
-Disable Git features for specific documents using [Page Frontmatter](../content/frontmatter.md):
+Desactive las funciones de Git en páginas específicas mediante el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Internal Notes"
+title: "Notas internas"
 plugins:
   git: false
 ---
 ```
 
-## CI/CD Pipeline Integration
+## Integración en pipelines de CI/CD
 
-The Git plugin executes local `git` CLI commands during site compilation. Many CI/CD runners (such as GitHub Actions or GitLab CI) perform shallow clones (`fetch-depth: 1`), which truncates commit history and causes all pages to show identical timestamp dates.
+El plugin de Git ejecuta comandos locales de la CLI `git` durante la compilación. Muchos servicios de CI/CD (como GitHub Actions o GitLab CI) realizan clonaciones superficiales (`fetch-depth: 1`), lo que trunca el historial y provoca que todas las páginas muestren la misma fecha de actualización.
 
-Ensure your build workflow fetches full Git history:
+Asegúrese de que su flujo de trabajo descargue el historial completo:
 
 ::: tabs
 
 == tab "GitHub Actions"
 
-Add `fetch-depth: 0` to your checkout step:
+Agregue `fetch-depth: 0` en el paso de checkout:
 
 ```yaml ".github/workflows/docs.yml"
-- name: Checkout Repository
+- name: Checkout del repositorio
   uses: actions/checkout@v4
   with:
     fetch-depth: 0
@@ -76,7 +76,7 @@ Add `fetch-depth: 0` to your checkout step:
 
 == tab "GitLab CI"
 
-Set the `GIT_DEPTH` environment variable to `0`:
+Establezca la variable de entorno `GIT_DEPTH` en `0`:
 
 ```yaml ".gitlab-ci.yml"
 variables:
@@ -85,14 +85,14 @@ variables:
 
 == tab "Netlify"
 
-Netlify fetches full history by default. If using custom build scripts, ensure the `.git` directory is preserved in the build workspace.
+Netlify descarga el historial completo por defecto. Si utiliza scripts de compilación personalizados, verifique que el directorio `.git` se conserve en el entorno de trabajo.
 
 :::
 
-::: callout warning "Git CLI Availability" icon:alert-triangle
-The `.git` directory and the `git` binary must be accessible within your compilation container or build environment.
+::: callout warning "Disponibilidad de la CLI de Git" icon:alert-triangle
+El directorio `.git` y el ejecutable binario de `git` deben ser accesibles dentro de su contenedor de compilación o entorno de CI.
 :::
 
-## Localisation Support
+## Soporte de localización
 
-The Git plugin supports multi-locale translation maps for footer strings and timestamp formats. Custom strings can be provided through the [UI Localisation](../configuration/localisation/ui-strings.md) configuration.
+El plugin de Git admite traducción de cadenas de texto y formatos de fecha según el idioma activo mediante la [configuración de localización de interfaz](../configuration/localisation/ui-strings.md).

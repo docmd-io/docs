@@ -1,33 +1,33 @@
 ---
-title: "Using Plugins"
-description: "Install, configure, and manage docmd plugins, from core built-ins to optional third-party extensions."
+title: "Uso de plugins"
+description: "Instale, configure y gestione plugins de docmd, desde extensiones integradas en el núcleo hasta complementos de terceros."
 ---
 
-`docmd` features a modular plugin architecture. Built-in plugins ship directly with the core engine and require no separate installation. Optional and third-party plugins can be installed via the CLI or package managers.
+`docmd` cuenta con una arquitectura de plugins modular. Los plugins integrados se distribuyen directamente con el motor principal y no requieren instalación adicional. Los plugins opcionales y de terceros pueden instalarse mediante la CLI o gestores de paquetes.
 
-## Installing Plugins
+## Instalación de plugins
 
-Use the `docmd` CLI to manage plugin packages:
-
-```bash
-# Install an official plugin
-npx @docmd/core add <plugin-name>
-
-# Remove an installed plugin
-npx @docmd/core remove <plugin-name>
-```
-
-The installer detects your active package manager (npm, pnpm, yarn, or bun), resolves short names to full `@docmd/plugin-*` package names, and updates your `docmd.config.json` automatically.
-
-Use `--verbose` (or `-V`) to view complete installer logs:
+Utilice la CLI de `docmd` para gestionar paquetes de plugins:
 
 ```bash
-npx @docmd/core add <plugin-name> -V
+# Instalar un plugin oficial
+npx @docmd/core add <nombre-del-plugin>
+
+# Desinstalar un plugin
+npx @docmd/core remove <nombre-del-plugin>
 ```
 
-## Core Built-in Plugins
+El instalador detecta el gestor de paquetes activo (npm, pnpm, yarn o bun), expande el nombre corto al paquete oficial `@docmd/plugin-*` y actualiza automáticamente su archivo `docmd.config.json`.
 
-These plugins ship bundled with `@docmd/core` and require no installation. Enable or configure them in `docmd.config.json`:
+Use `--verbose` (o `-V`) para ver registros detallados de la instalación:
+
+```bash
+npx @docmd/core add <nombre-del-plugin> -V
+```
+
+## Plugins centrales integrados
+
+Estos plugins vienen incorporados con `@docmd/core` y no requieren instalación por separado. Habilítelos o configúrelos en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -46,27 +46,27 @@ These plugins ship bundled with `@docmd/core` and require no installation. Enabl
 }
 ```
 
-::: callout tip title:"Git Repository Detection" icon:git-branch
-The Git plugin detects whether your project root is a valid Git repository. If Git history is unavailable, it disables footer timestamp generation automatically.
+::: callout tip title:"Detección de repositorios Git" icon:git-branch
+El plugin de Git detecta si la raíz del proyecto es un repositorio Git válido. Si no se dispone de historial Git, desactiva automáticamente la marca de tiempo en el pie de página.
 ::: /callout
 
-::: callout info title:"OKF Bundle Support" icon:info
-The `@docmd/plugin-okf` plugin generates an Open Knowledge Format bundle (`site/okf/`) containing typed manifests and concept files for AI agents. It is enabled by default; set `"plugins": { "okf": false }` to opt out. See [OKF Bundle Plugin](okf.md) for details.
+::: callout info title:"Soporte de paquetes OKF" icon:info
+El plugin `@docmd/plugin-okf` genera un paquete en formato Open Knowledge Format (`site/okf/`) con manifiestos tipados y archivos de conceptos para agentes de IA. Está activo por defecto; configure `"plugins": { "okf": false }` para desactivarlo. Consulte [Plugin de paquetes OKF](okf.md) para más detalles.
 ::: /callout
 
-## Optional Plugins
+## Plugins opcionales
 
-Optional plugins require explicit installation before activation:
+Los plugins opcionales requieren instalación previa antes de poder activarse:
 
-| Plugin | Install Command | Purpose |
+| Plugin | Comando de instalación | Propósito |
 | :--- | :--- | :--- |
-| [PWA Support](pwa.md) | `npx @docmd/core add pwa` | Progressive Web App manifest and offline service worker caching |
-| [Threads](threads.md) | `npx @docmd/core add threads` | Markdown-native inline comment discussions |
-| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | Server-side LaTeX and KaTeX mathematical equation rendering |
+| [Soporte PWA](pwa.md) | `npx @docmd/core add pwa` | Manifiesto de Aplicación Web Progresiva y caché sin conexión con service worker |
+| [Threads](threads.md) | `npx @docmd/core add threads` | Hilos de discusión colaborativos y comentarios nativos en Markdown |
+| [Matemáticas (KaTeX)](math.md) | `npx @docmd/core add math` | Renderizado de ecuaciones matemáticas LaTeX y KaTeX del lado del servidor |
 
-## Auto-Installation Mechanics
+## Mecanismo de autoinstalación
 
-If an official plugin is declared in `docmd.config.json` without being installed in `node_modules`, `docmd` automatically downloads and installs it during the next build execution:
+Si se declara un plugin oficial en `docmd.config.json` sin estar presente en `node_modules`, `docmd` lo descarga e instala automáticamente durante la siguiente compilación:
 
 ```json "docmd.config.json"
 {
@@ -76,44 +76,44 @@ If an official plugin is declared in `docmd.config.json` without being installed
 }
 ```
 
-The auto-installer:
-* Restricts targets strictly to official `@docmd/plugin-*` packages.
-* Matches dependency version tags to the installed `@docmd/core` version.
-* Auto-detects project package managers (npm, pnpm, yarn, bun).
-* Emits installation progress directly in the terminal interface.
+El autoinstalador:
+* Se limita estrictamente a paquetes oficiales con el ámbito `@docmd/plugin-*`.
+* Hace coincidir las versiones con la versión instalada de `@docmd/core`.
+* Autodetecta el gestor de paquetes del proyecto (npm, pnpm, yarn, bun).
+* Muestra el progreso de instalación directamente en la terminal.
 
-::: callout tip title:"Resilient Module Resolution" icon:shield-check
-The auto-installer uses dynamic ES module imports with fallback resolution paths, allowing seamless loading of ESM packages declaring explicit `exports` maps.
+::: callout tip title:"Resolución robusta de módulos" icon:shield-check
+El autoinstalador utiliza importaciones dinámicas de módulos ES con rutas de resolución alternativas, permitiendo cargar paquetes ESM que declaren mapas `exports` explícitos.
 ::: /callout
 
-## Third-Party & Custom Plugins
+## Plugins personalizados y de terceros
 
-For security, the automated installer enforces an official registry allowlist. Install third-party plugins directly using your package manager:
+Por seguridad, el instalador automático solo procesa el registro oficial. Instale plugins de terceros directamente con su gestor de paquetes preferido:
 
 ```bash
-npm install my-custom-plugin
-# or pnpm add / yarn add / bun add
+npm install mi-plugin-personalizado
+# o pnpm add / yarn add / bun add
 ```
 
-Add the custom plugin to `docmd.config.json` using its full package identifier:
+Añada el plugin a `docmd.config.json` usando su identificador de paquete completo:
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "my-custom-plugin": {
-      "someOption": true
+    "mi-plugin-personalizado": {
+      "opcionEjemplo": true
     }
   }
 }
 ```
 
-## Page-Level & `noStyle` Plugin Scopes
+## Ámbito de plugins a nivel de página y `noStyle`
 
-Plugins inject styles and behaviour globally by default. You can disable plugins on unstyled landing pages (`noStyle: true`) or per-page via frontmatter.
+Por defecto, los plugins inyectan estilos y funcionalidad globalmente. Puede deshabilitar plugins en páginas de aterrizaje sin estilos (`noStyle: true`) o documento por documento en el frontmatter.
 
-### Global Configuration Scope
+### Ámbito en configuración global
 
-Configure plugins to skip `noStyle` landing pages in `docmd.config.json`:
+Configure qué plugins omiten las páginas `noStyle` en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -125,9 +125,9 @@ Configure plugins to skip `noStyle` landing pages in `docmd.config.json`:
 }
 ```
 
-### Page-Level Frontmatter Scope
+### Ámbito en frontmatter de página
 
-Selectively enable or disable specific plugins per document using [Page Frontmatter](../content/frontmatter.md):
+Active o desactive plugins selectivamente por documento usando el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
@@ -138,25 +138,25 @@ plugins:
 ---
 ```
 
-## Plugin Architecture Lifecycle
+## Ciclo de vida de la arquitectura de plugins
 
-Plugins hook into core build and development cycles:
+Los plugins se acoplan a distintas etapas de compilación y desarrollo:
 
-| Lifecycle Hook | Technical Function |
+| Hook de ciclo de vida | Función técnica |
 | :--- | :--- |
-| `markdownSetup(md, opts)` | Register custom Markdown-it parser rules |
-| `generateMetaTags(config, page, root)` | Inject `<meta>` and `<link>` elements into `<head>` |
-| `generateScripts(config, opts)` | Inject client scripts into `<head>` or `</body>` |
-| `getAssets(opts)` | Register static assets or external CDN bundles |
-| `onPostBuild(ctx)` | Execute post-processing tasks after HTML output finishes |
-| `translations(localeId)` | Register localised UI string maps |
-| `actions` | Register server-side RPC handlers for dev server WebSocket calls |
-| `events` | Register client event listeners |
+| `markdownSetup(md, opts)` | Registra reglas personalizadas para Markdown-it |
+| `generateMetaTags(config, page, root)` | Inyecta elementos `<meta>` y `<link>` en `<head>` |
+| `generateScripts(config, opts)` | Inyecta scripts de cliente en `<head>` o `</body>` |
+| `getAssets(opts)` | Registra archivos estáticos o paquetes CDN externos |
+| `onPostBuild(ctx)` | Ejecuta tareas tras finalizar la generación de HTML |
+| `translations(localeId)` | Registra mapas de cadenas traducidas para la interfaz |
+| `actions` | Registra controladores RPC para llamadas WebSocket en modo desarrollo |
+| `events` | Registra escuchadores de eventos del lado del cliente |
 
-## Safety & Security Guarantees
+## Garantías de seguridad y aislamiento
 
-* **Descriptor Validation**: Malformed plugin descriptors are rejected at startup.
-* **Fault Isolation**: Every hook invocation is guarded by try/catch wrappers; a plugin error cannot crash the documentation build.
-* **Capability Enforcement**: Plugins are granted execution rights solely for hooks explicitly declared in their manifest capabilities.
+* **Validación de descriptores**: Los descriptores con estructura incorrecta se rechazan en el arranque.
+* **Aislamiento de fallos**: Toda llamada a un hook está protegida por bloques try/catch; un error en un plugin no interrumpe la compilación.
+* **Control de capacidades**: Solo se permite ejecutar hooks expresamente declarados en las capacidades del plugin.
 
-See [Building Plugins](../development/building-plugins.md) for full plugin development guidelines.
+Consulte [Creación de plugins](../development/building-plugins.md) para conocer las pautas de desarrollo completas.

@@ -56,7 +56,7 @@ Supply a double-quoted filename string after the language tag to render a styled
 
 When writing code snippets for human readers and AI agents:
 
-1. **Explicit Language Tags**: Use explicit language identifiers (`typescript`, `bash`, `json`) rather than relying on auto-detection to ensure accurate tokenization for `llms.txt`.
+1. **Explicit Language Tags**: Use explicit language identifiers (`typescript`, `bash`, `json`) rather than relying on auto-detection to ensure accurate tokenisation for `llms.txt`.
 2. **Explanatory Inline Comments**: Use inline comments to explain architectural decisions and non-obvious logic.
 
 ::: callout tip "One-Click Copy Utilities" icon:copy

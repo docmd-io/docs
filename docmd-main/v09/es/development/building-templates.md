@@ -1,30 +1,30 @@
 ---
-title: "Building Templates"
-description: "Author a docmd template package — directory layout, descriptor, EJS context, asset priorities, and API reference."
+title: "Creación de plantillas"
+description: "Cree un paquete de plantilla para docmd: estructura de directorios, descriptor, contexto EJS, prioridades de recursos y referencia de API."
 ---
 
-# Building Templates
+# Creación de plantillas
 
-::: callout info "Template Usage" icon:palette
-**For template authors.** If you want to *use* a template in your docs site, see [Templates](../theming/templates.md) instead.
+::: callout info "Uso de plantillas" icon:palette
+**Para creadores de plantillas.** Si lo que desea es *usar* una plantilla en su documentación, consulte [Plantillas](../theming/templates.md).
 :::
 
-A template is a regular npm package that declares `capabilities: ['template']` and ships a `templates[]` array of `.ejs` file overrides. The template resolver in `@docmd/ui` handles the per-page lookup, honours frontmatter / config overrides, and falls back to the default if anything goes wrong.
+Una plantilla es un paquete npm regular que declara `capabilities: ['template']` y proporciona una matriz `templates[]` con anulaciones de archivos `.ejs`. El solucionador de plantillas en `@docmd/ui` gestiona la resolución página por página, respeta el frontmatter y la configuración global, y recurre a la plantilla por defecto ante cualquier imprevisto.
 
-## Package layout
+## Estructura del paquete
 
 ```
 @docmd/template-summer/
 ├── package.json
-├── index.js                # Plugin entry — exports templates[] + templateAssets[]
+├── index.js                # Punto de entrada — exporta templates[] y templateAssets[]
 ├── templates/
 │   ├── layout.ejs
 │   ├── partials/
-│   │   ├── menubar.ejs     # Only the partials you need to override
+│   │   ├── menubar.ejs     # Solo los parciales que necesite anular
 │   │   └── footer.ejs
 └── assets/
     ├── css/
-    │   └── summer.css      # Layers on top of docmd-main.css; does not replace it.
+    │   └── summer.css      # Se superpone sobre docmd-main.css sin reemplazarlo.
     └── js/
         └── summer.js
 ```
@@ -43,15 +43,14 @@ A template is a regular npm package that declares `capabilities: ['template']` a
   "docmd": {
     "kind": "template",
     "displayName": "Summer",
-    "description": "A bright summer-inspired layout for the 0.8.7+ template system."
+    "description": "Diseño luminoso inspirado en el verano para el sistema de plantillas 0.8.7+."
   }
 }
 ```
 
-## ESM Exports — the `default` Condition
+## Exportaciones ESM — la condición `default`
 
-Your template's `package.json` **must** include a `"default"` condition in
-`exports["."]`, alongside the `import` condition:
+El archivo `package.json` de su plantilla **debe** incluir una condición `"default"` en `exports["."]`, junto con la condición `import`:
 
 ```json
 "exports": {
@@ -63,13 +62,7 @@ Your template's `package.json` **must** include a `"default"` condition in
 }
 ```
 
-If you declare only `import`, the auto-installer's first attempt throws
-`ERR_PACKAGE_PATH_NOT_EXPORTED` because Node's CommonJS resolver cannot
-match any condition. The retry path will still succeed (it uses dynamic
-`import()` directly), but the build will print a redundant "Plugin
-installed" TUI line every time. Plugins (`@docmd/plugin-*`) have the same
-requirement — see the [plugin development guide](building-plugins.md#esm-exports--the-default-condition)
-for the full context.
+Si declara únicamente `import`, el instalador automático fallará en su primer intento con `ERR_PACKAGE_PATH_NOT_EXPORTED`. Consulte la [guía de desarrollo de plugins](building-plugins.md#exportaciones-esm--la-condicion-default) para conocer los detalles.
 
 ## `index.js`
 
@@ -87,7 +80,7 @@ export default {
   },
 
   templates: [
-    // Only the slots you actually want to override.
+    // Solo las ranuras que realmente desee anular.
     { type: 'layout',   templatePath: path.join(__dirname, 'templates/layout.ejs') },
     { type: 'menubar',  templatePath: path.join(__dirname, 'templates/partials/menubar.ejs') },
     { type: 'footer',   templatePath: path.join(__dirname, 'templates/partials/footer.ejs') },
@@ -97,7 +90,7 @@ export default {
     {
       type: 'css',
       path: path.join(__dirname, 'assets/css/summer.css'),
-      priority: 10,           // higher than theme (5), lower than customCss (15)
+      priority: 10,           // mayor que theme (5), menor que customCss (15)
       position: 'head',
     },
     {
@@ -110,106 +103,86 @@ export default {
 };
 ```
 
-## `layout.ejs` context
+## Contexto de `layout.ejs`
 
-Templates receive the same EJS context as the default layout. The most common locals:
+Las plantillas reciben el mismo contexto EJS que el diseño por defecto. Las variables locales más frecuentes son:
 
-| Local | Description |
+| Variable local | Descripción |
 |---|---|
-| `config` | The normalised site config. |
-| `frontmatter` | Per-page frontmatter. |
-| `relativePathToRoot` | E.g. `./` or `../` — use this to build relative URLs. |
-| `renderIcon(name, opts)` | Render a Lucide icon. |
-| `t(key, params?)` | Translation function. |
-| `buildRelativeUrl(url)` | Resolve a URL relative to the current page. |
-| `pageTitle`, `siteTitle`, `appearance` | Common strings. |
-| `_template` | Metadata about the resolved template (new in 0.8.7). |
+| `config` | La configuración normalizada del sitio. |
+| `frontmatter` | Frontmatter específico de la página. |
+| `relativePathToRoot` | Ej., `./` o `../` — útil para construir URLs relativas. |
+| `renderIcon(name, opts)` | Renderiza un icono de Lucide. |
+| `t(key, params?)` | Función de traducción. |
+| `buildRelativeUrl(url)` | Resuelve una URL relativa a la página actual. |
+| `pageTitle`, `siteTitle`, `appearance` | Cadenas y estados habituales. |
+| `_template` | Metadatos de la plantilla resuelta (nuevo en 0.8.7). |
 
-You can include default partials from `@docmd/ui` by reading them at build time. The simplest pattern is to keep a copy of the partials you reuse; templates do not inherit partial paths automatically.
+Puede incluir parciales por defecto de `@docmd/ui` leyéndolos durante la compilación. El patrón más simple es conservar una copia de los parciales que reutilice; las plantillas no heredan rutas parciales automáticamente.
 
-## Asset priority chain
+## Cadena de prioridades de recursos (Assets)
 
-CSS and JS load in this order (lower loads first, higher wins cascade ties):
+Los estilos CSS y scripts JS se cargan en este orden estricto (valores menores cargan primero, valores mayores prevalecen en empates de cascada):
 
-| Priority | Layer | Notes |
+| Prioridad | Capa | Notas |
 |---|---|---|
-| 0  | Base (`docmd-main.css`, `docmd-main.js`) | Always present. |
-| 5  | Theme colour overlay (`docmd-theme-sky.css`, etc.) | From `theme.name`. Skipped when the name auto-promoted to a template (see `_noCssOverlay`). |
-| 10 | **Template structure** (default) | Your template's CSS — this is the default if you omit `priority`. |
-| 15 | User `customCss` / `customJs` | Always wins — that's the contract. |
-| 20 | Plugin CSS/JS | lightbox, search, analytics, etc. |
-| 25+ | Higher template priority | **Use only when you must override plugins.** The official Summer template declares `priority: 25` so it loads after plugin CSS. Higher values cascade later. |
+| 0  | Base (`docmd-main.css`, `docmd-main.js`) | Siempre presentes. |
+| 5  | Capa de color de tema (`docmd-theme-sky.css`, etc.) | Proviene de `theme.name`. Se omite si el nombre se convirtió en plantilla. |
+| 10 | **Estructura de la plantilla** (por defecto) | CSS de su plantilla — valor por defecto si omite `priority`. |
+| 15 | `customCss` / `customJs` del usuario | Siempre prevalecen sobre la plantilla. |
+| 20 | CSS/JS de plugins | lightbox, búsqueda, analíticas, etc. |
+| 25+ | Mayor prioridad de plantilla | **Utilizar solo cuando deba prevalecer sobre plugins.** La plantilla Summer oficial declara `priority: 25` para cargar tras el CSS de plugins. |
 
-Templates may declare a higher priority than 10 — Summer itself uses **25** so it overrides plugin styles. The recommended band is **10–20** for "user-overridable" templates and **20+** for "opinionated layout" templates.
-
-::: callout warning title:"Do not use !important"
-Templates should write CSS that can be overridden by `customCss` at priority 15. Using `!important` breaks the contract and means users can't restyle your template without forking it. (Summer's CSS file header enforces this — `!important` is removed during 0.8.7 cleanup so users can finally override Summer without resorting to `!important` themselves.)
+::: callout warning title:"No utilice !important"
+Las plantillas deben escribir reglas CSS que puedan ser anuladas por `customCss` con prioridad 15. Usar `!important` rompe el contrato y fuerza al usuario a usar `!important` en sus propias hojas de estilo.
 ::: /callout
 
-## Auto-promotion of `theme.name`
+## Autopromoción de `theme.name`
 
-The `theme.name` → `theme.template` promotion happens inside `normalizeConfig()`, not the resolver:
+La promoción de `theme.name` a `theme.template` se realiza dentro de `normalizeConfig()`:
+- Cuando `theme.name` no es un valor reservado y `theme.template` no está definido, la configuración se reescribe a `theme.template = theme.name` y `theme._noCssOverlay = true`.
+- En el momento de la resolución, el solucionador solo interactúa con `theme.template`.
 
-- When `theme.name` is a non-reserved value and `theme.template` is unset, the config is rewritten to `theme.template = theme.name` and `theme._noCssOverlay = true` (so the generator skips the `docmd-theme-${name}.css` lookup that would 404).
-- At resolve time the resolver only ever sees `theme.template`.
+## Localización de plantillas
 
-This is why a non-reserved `theme.name` automatically loads your template — no need to also list it in `config.plugins`.
+La configuración `i18n` sigue siendo válida: el idioma activo se transmite a su plantilla como una variable local ordinaria y las cadenas se consultan con el asistente `t(key)`.
 
-## Template localisation
+## Referencia de API
 
-The `i18n` config still applies — the active locale is passed to your template as a normal local. Translations are looked up via the `t(key)` helper as in the default templates.
-
-## API reference
-
-### `resolveTemplate(ctx)` from `@docmd/ui`
+### `resolveTemplate(ctx)` desde `@docmd/ui`
 
 ```ts
 import { resolveTemplate } from '@docmd/ui';
 
 const resolved = resolveTemplate({
-  type: 'layout',                       // any TemplateSlot
+  type: 'layout',                       // cualquier TemplateSlot
   pagePath: '/guide/intro.html',
-  frontmatter: page.frontmatter,        // may carry `template: "..."`
-  config,                                 // normalised site config
-  localeId: 'en',                         // optional
-  versionId: '0.8',                       // optional
+  frontmatter: page.frontmatter,        // puede incluir `template: "..."`
+  config,                                 // configuración normalizada
+  localeId: 'es',                         // opcional
+  versionId: '0.8',                       // opcional
 });
-
-// resolved.templatePath → absolute path to the .ejs file
-// resolved.source       → 'default' | 'frontmatter' | 'config' | 'plugin'
-// resolved.pluginName   → plugin name (when source === 'plugin')
-// resolved.type         → the resolved slot
 ```
 
-### Types from `@docmd/api`
+### Tipos desde `@docmd/api`
 
 ```ts
 import type {
-  TemplateSlot,         // union of 12 slot names
+  TemplateSlot,         // unión de 12 nombres de ranuras
   TemplateHook,         // { type, templatePath, priority?, pages?, exclude? }
   TemplateAssetHook,    // { type: 'css'|'js', path, priority?, position? }
   ResolvedTemplate,
   TemplateResolutionContext,
-  Capability,           // now includes 'template'
+  Capability,           // incluye 'template'
 } from '@docmd/api';
 ```
 
-## Troubleshooting
+## Solución de problemas
 
-### "Template declared slot X but file not found"
+### "La plantilla declaró la ranura X pero el archivo no existe"
 
-The template's `index.js` listed a `templatePath` that does not exist on disk. The resolver fell back to the default. Check the path is absolute (use `fileURLToPath(import.meta.url)`) and the file is included in the published package's `files` field.
+El archivo `index.js` especificó una ruta `templatePath` inexistente en disco. Compruebe que la ruta sea absoluta (mediante `fileURLToPath(import.meta.url)`) y que el archivo esté incluido en el campo `files` de su paquete publicado.
 
-### My template's CSS is being overridden by something else
+### El CSS de mi plantilla es anulado por otras reglas
 
-CSS priority is final. User `customCss` (priority 15) always wins. If you want users to be able to override specific selectors without overriding the whole template, document the public CSS class names and let users target them with `customCss`.
-
-### Per-page template override not working
-
-Make sure the frontmatter `template` value matches a registered plugin. The resolver matches against the plugin's `descriptor.name`, stripping `@docmd/` and `template-` prefixes. So all of these are equivalent:
-
-- `template: "summer"`
-- `template: "template-summer"`
-- `template: "@docmd/template-summer"`
-
-If none of those match, the resolver falls through to `config.theme.template` and then the default.
+La prioridad CSS es definitiva: el archivo `customCss` del usuario (prioridad 15) siempre gana. Documente las clases públicas para facilitar la personalización.

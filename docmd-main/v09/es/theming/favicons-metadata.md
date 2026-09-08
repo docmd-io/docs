@@ -1,33 +1,33 @@
 ---
-title: "Customising Favicons & Metadata"
-description: "Configure site favicons, OpenGraph cards, and Twitter metadata in docmd for social sharing and search engines."
+title: "Personalización de favicons y metadatos"
+description: "Configure favicons, tarjetas OpenGraph y metadatos de Twitter en docmd para redes sociales y motores de búsqueda."
 ---
 
-Custom favicons and OpenGraph metadata ensure your documentation appears professional when bookmarked in browser tabs or shared across social networks and communication channels.
+Los favicons y metadatos OpenGraph garantizan que su documentación ofrezca una apariencia profesional al guardarse en favoritos o compartirse en redes sociales y canales de comunicación.
 
-## Favicon Configuration
+## Configuración del favicon
 
-Place your favicon file (e.g. `favicon.svg` or `favicon.ico`) in your `assets/` directory and configure the `favicon` property in `docmd.config.json`:
+Ubique su archivo de favicon (por ejemplo, `favicon.svg` o `favicon.ico`) en el directorio `assets/` e indíquelo mediante la propiedad `favicon` en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
-  "title": "Documentation Core",
+  "title": "Documentación central",
   "favicon": "/assets/favicon.svg"
 }
 ```
 
-`docmd` handles path resolution and cache-busting headers automatically during compilation.
+`docmd` resolverá las rutas y gestionará automáticamente los encabezados de invalidación de caché durante la compilación.
 
-## Global SEO & Social Metadata
+## Metadatos globales para SEO y redes sociales
 
-Configure the built-in [SEO Plugin](../plugins/seo.md) in `docmd.config.json` to generate site-wide meta tags and social card previews:
+Configure el [Plugin de SEO](../plugins/seo.md) integrado en `docmd.config.json` para generar etiquetas sociales de manera global:
 
 ```json "docmd.config.json"
 {
   "url": "https://docs.docmd.io",
   "plugins": {
     "seo": {
-      "defaultDescription": "Technical documentation for docmd.",
+      "defaultDescription": "Documentación técnica para docmd.",
       "openGraph": {
         "defaultImage": "/assets/og-banner.png"
       },
@@ -40,20 +40,20 @@ Configure the built-in [SEO Plugin](../plugins/seo.md) in `docmd.config.json` to
 }
 ```
 
-## Page-Level Metadata Overrides
+## Anulaciones de metadatos por página
 
-Override site-wide SEO defaults for specific pages using the `seo` property in [Page Frontmatter](../content/frontmatter.md):
+Personalice los valores de SEO para documentos concretos a través de la propiedad `seo` en el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Major Release Announcement"
-description: "Overview of new features introduced in docmd."
+title: "Anuncio de lanzamiento principal"
+description: "Resumen de las nuevas funcionalidades introducidas en docmd."
 seo:
   image: "/assets/v09-banner.png"
-  keywords: ["release", "v09", "documentation", "performance"]
+  keywords: ["lanzamiento", "v09", "documentacion", "rendimiento"]
 ---
 ```
 
-::: callout tip "Multi-Resolution Favicons" icon:lightbulb
-The top-level `favicon` configuration setting covers primary browser requirements. For multi-resolution favicon sets (such as Apple Touch Icons or Android web manifests), inject additional `<link>` headers via custom plugins or template head slots.
+::: callout tip "Favicons multirresolución" icon:lightbulb
+La propiedad `favicon` de nivel superior satisface las necesidades estándar del navegador. Si requiere juegos de iconos para distintos dispositivos (como Apple Touch Icons o manifiestos para Android), inserte las etiquetas `<link>` pertinentes mediante plugins personalizados o ranuras de encabezado de plantillas.
 :::

@@ -81,7 +81,7 @@ Most documentation generators fail when a user switches to a language where spec
 | Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
 
 ::: callout warning "404 Errors in VitePress and Docusaurus" icon:info
-If a reader switches to a locale where a specific page has not been translated, VitePress and Docusaurus trigger a **404 error**. Preventing this requires custom server redirects or custom framework components. `docmd` handles missing translations at build time — untranslated pages fall back seamlessly with a localized notification callout.
+If a reader switches to a locale where a specific page has not been translated, VitePress and Docusaurus trigger a **404 error**. Preventing this requires custom server redirects or custom framework components. `docmd` handles missing translations at build time — untranslated pages fall back seamlessly with a localised notification callout.
 :::
 
 ## Multi-project workspace support

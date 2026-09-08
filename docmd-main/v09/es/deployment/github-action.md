@@ -1,20 +1,20 @@
 ---
 title: "GitHub Action"
-description: "Build and deploy docmd documentation to GitHub Pages using the official docmd-io/deploy GitHub Action."
+description: "Compila y despliega documentación de docmd en GitHub Pages utilizando la GitHub Action oficial docmd-io/deploy."
 ---
 
-The `docmd-io/deploy` GitHub Action compiles your documentation site and exposes the generated build artifact path for downstream publishing steps.
+La GitHub Action `docmd-io/deploy` compila tu sitio de documentación y expone la ruta del artefacto de compilación generado para pasos de publicación posteriores.
 
-::: button "View on GitHub Marketplace" external:https://github.com/marketplace/actions/build-and-deploy-documentation-with-docmd icon:github
-::: button "Source Code" external:https://github.com/docmd-io/deploy icon:code
+::: button "Ver en GitHub Marketplace" external:https://github.com/marketplace/actions/build-and-deploy-documentation-with-docmd icon:github
+::: button "Código fuente" external:https://github.com/docmd-io/deploy icon:code
 
-::: callout tip "Starting a New Project?" icon:rocket
-Use the [Starter Template](./starter-template) for new repositories. The standalone GitHub Action is designed for integrating docmd compilation into **existing** repositories.
+::: callout tip "¿Iniciando un nuevo proyecto?" icon:rocket
+Usa la [Plantilla inicial](./starter-template) para nuevos repositorios. La GitHub Action independiente está diseñada para integrar la compilación de docmd en repositorios **existentes**.
 :::
 
-## Workflow Configuration
+## Configuración del flujo de trabajo
 
-Add the action to `.github/workflows/docs.yml`:
+Añade la acción a `.github/workflows/docs.yml`:
 
 ```yaml ".github/workflows/docs.yml"
 name: Deploy Docs
@@ -48,9 +48,9 @@ jobs:
         id: deploy
 ```
 
-## Reusable Workflow Pattern
+## Patrón de flujo de trabajo reutilizable
 
-For zero-boilerplate setups, reference the hosted reusable workflow:
+Para configuraciones sin código repetitivo, haz referencia al flujo de trabajo reutilizable alojado:
 
 ```yaml ".github/workflows/docs.yml"
 on:
@@ -62,43 +62,43 @@ jobs:
     uses: docmd-io/deploy/.github/workflows/deploy.yml@v1
 ```
 
-## Action Inputs & Outputs
+## Entradas y salidas de la acción
 
-### Inputs
+### Entradas
 
-| Parameter | Type | Default | Technical Description |
+| Parámetro | Tipo | Valor por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
-| `node` | `string` | `"20"` | Target Node.js engine version for build execution. |
+| `node` | `string` | `"20"` | Versión del motor de Node.js de destino para la ejecución de la compilación. |
 
-### Outputs
+### Salidas
 
-| Parameter | Technical Description |
+| Parámetro | Descripción técnica |
 | :--- | :--- |
-| `site-dir` | Relative path to the compiled static site output directory (e.g. `site/`). |
+| `site-dir` | Ruta relativa al directorio de salida del sitio estático compilado (por ejemplo, `site/`). |
 
-## Build Execution Steps
+## Pasos de ejecución de la compilación
 
-The action executes the following internal workflow:
+La acción ejecuta internamente el siguiente flujo de trabajo:
 
-1. **Environment Setup**: Configures the specified Node.js runtime version.
-2. **Config Auto-Detection**: Searches up to 2 directory levels deep for `docmd.config.json`, `docmd.config.js`, or `docmd.config.ts`.
-3. **Automatic Initialisation**: If no configuration is discovered, triggers `npx @docmd/core init` automatically.
-4. **Dependency Resolution**: Runs `npm ci` if `package.json` exists; otherwise installs `@docmd/core` directly.
-5. **Static Site Build**: Triggers `npx @docmd/core build` and captures output directory locations.
+1. **Configuración del entorno**: Configura la versión del entorno de ejecución de Node.js especificada.
+2. **Detección automática de configuración**: Busca hasta 2 niveles de directorios de profundidad archivos `docmd.config.json`, `docmd.config.js` o `docmd.config.ts`.
+3. **Inicialización automática**: Si no se detecta ninguna configuración, ejecuta automáticamente `npx @docmd/core init`.
+4. **Resolución de dependencias**: Ejecuta `npm ci` si existe `package.json`; de lo contrario, instala `@docmd/core` directamente.
+5. **Compilación del sitio estático**: Ejecuta `npx @docmd/core build` y captura la ubicación del directorio de salida.
 
-## GitHub Pages Repository Setup
+## Configuración del repositorio en GitHub Pages
 
-Configure GitHub Pages to deploy from **GitHub Actions**:
+Configura GitHub Pages para desplegar desde **GitHub Actions**:
 
-1. Open your repository on GitHub.
-2. Navigate to **Settings → Pages**.
-3. Under **Build and deployment → Source**, select **GitHub Actions**.
+1. Abre tu repositorio en GitHub.
+2. Navega a **Settings → Pages**.
+3. En **Build and deployment → Source**, selecciona **GitHub Actions**.
 
-## Subpath & Custom Domain Configuration
+## Configuración de subrutas y dominios personalizados
 
-### Subpath Deployment
+### Despliegue en subrutas
 
-GitHub Pages serves project sites under subpaths (`https://<username>.github.io/<repository>/`). Specify your complete site URL in `docmd.config.json`:
+GitHub Pages sirve sitios de proyectos bajo subrutas (`https://<username>.github.io/<repository>/`). Especifica la URL completa de tu sitio en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -106,16 +106,16 @@ GitHub Pages serves project sites under subpaths (`https://<username>.github.io/
 }
 ```
 
-docmd extracts the `/my-repo/` path prefix automatically and applies it to internal asset references and navigation links.
+docmd extrae automáticamente el prefijo de ruta `/my-repo/` y lo aplica a las referencias internas de recursos y enlaces de navegación.
 
-### Custom Domains
+### Dominios personalizados
 
-To configure a custom domain:
+Para configurar un dominio personalizado:
 
-1. Add a `CNAME` file containing your hostname (e.g. `docs.example.com`) inside `docs/`.
-2. Update the `url` property in `docmd.config.json` to match your domain.
-3. Configure the custom domain under **Settings → Pages → Custom domain**.
+1. Añade un archivo `CNAME` que contenga tu nombre de host (por ejemplo, `docs.ejemplo.com`) dentro de `docs/`.
+2. Actualiza la propiedad `url` en `docmd.config.json` para que coincida con tu dominio.
+3. Configura el dominio personalizado en **Settings → Pages → Custom domain**.
 
-::: callout tip "Pinning Action Releases" icon:shield-check
-For production environments, pin your workflow steps to explicit version tags (e.g. `uses: docmd-io/deploy@v1.0.0`) to guard against unintended breaking changes.
+::: callout tip "Fijar versiones de la acción" icon:shield-check
+Para entornos de producción, fija los pasos de tu flujo de trabajo a etiquetas de versión explícitas (por ejemplo, `uses: docmd-io/deploy@v1.0.0`) para protegerte contra cambios incompatibles inesperados.
 :::

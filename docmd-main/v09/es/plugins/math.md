@@ -1,19 +1,19 @@
 ---
-title: "Math Plugin"
-description: "Native KaTeX and LaTeX mathematical expression rendering with conditional asset loading."
+title: "Plugin de matemáticas"
+description: "Renderizado nativo de expresiones matemáticas KaTeX y LaTeX con carga condicional de hojas de estilo."
 ---
 
-The `@docmd/plugin-math` plugin provides native LaTeX and KaTeX mathematical equation rendering for docmd. Powered by `markdown-it-texmath` and KaTeX, equations compile into static HTML elements with optional CSS asset injection.
+El plugin `@docmd/plugin-math` proporciona renderizado de ecuaciones matemáticas LaTeX y KaTeX en docmd. Con la tecnología de `markdown-it-texmath` y KaTeX, las fórmulas se compilan en elementos HTML estáticos con inyección condicional de CSS.
 
-## Installation & Setup
+## Instalación y configuración
 
-Install the plugin via CLI:
+Instale el plugin mediante la CLI:
 
 ```bash
 npx @docmd/core add math
 ```
 
-Enable the plugin in `docmd.config.json`:
+Habilite el plugin en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -23,27 +23,27 @@ Enable the plugin in `docmd.config.json`:
 }
 ```
 
-## Key Capabilities
+## Capacidades principales
 
-* **Inline & Block Parsing**: Parse equations bounded by `$` (inline) or `$$` (block) delimiters.
-* **Conditional Asset Injection**: The KaTeX stylesheet (~30 KB) is injected only on pages containing equation elements (`class="katex"` or `class="katex-display"`). Pages without equations incur zero asset overhead.
-* **Fast Initialisation**: Math markup is evaluated during build time to ensure zero layout shift upon page load.
+* **Sintaxis en línea y en bloque**: Analiza ecuaciones delimitadas por `$` (en línea) o `$$` (en bloque).
+* **Inyección condicional de hojas de estilo**: El archivo CSS de KaTeX (~30 KB) se inyecta exclusivamente en las páginas que contengan fórmulas matemáticas (`class="katex"` o `class="katex-display"`). Las páginas sin ecuaciones no reciben ninguna carga innecesaria.
+* **Inicialización ultraveloz**: El marcado matemático se resuelve durante la compilación, garantizando ausencia de cambios de diseño visual (layout shift) al cargar la página.
 
-## Usage & Syntax
+## Sintaxis y uso
 
-### Inline Mathematics
+### Matemáticas en línea
 
-Embed expressions within prose using single dollar signs (`$`):
+Incruste expresiones en el flujo de texto utilizando signos de dólar simples (`$`):
 
 ```markdown
-The energy-mass equivalence equation is $E = mc^2$.
+La ecuación de equivalencia entre masa y energía es $E = mc^2$.
 ```
 
-The energy-mass equivalence equation is $E = mc^2$.
+La ecuación de equivalencia entre masa y energía es $E = mc^2$.
 
-### Block Mathematics
+### Matemáticas en bloque
 
-Render multiline proofs and centred equations using double dollar signs (`$$`):
+Renderice demostraciones y ecuaciones centradas en múltiples líneas con doble signo de dólar (`$$`):
 
 ```markdown
 $$
@@ -55,6 +55,6 @@ $$
 \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}
 $$
 
-::: callout tip "Performance Optimisation" icon:zap
-Because KaTeX assets load conditionally per-page, adding mathematical formulas to a subset of pages will not degrade load times across the rest of your documentation site.
+::: callout tip "Optimización de rendimiento" icon:zap
+Dado que los recursos de KaTeX se cargan de forma condicional por página, incluir fórmulas en algunas secciones no afectará la velocidad de carga del resto de su documentación.
 :::

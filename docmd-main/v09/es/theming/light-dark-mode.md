@@ -1,13 +1,13 @@
 ---
-title: "Light & Dark Appearance"
-description: "Configure light and dark mode appearance modes, custom CSS variable overrides, and theme toggle controls in docmd."
+title: "Apariencia clara y oscura"
+description: "Configure los modos de visualización claro y oscuro, variables CSS personalizadas y controles de cambio de tema en docmd."
 ---
 
-`docmd` ships natively with responsive light and dark colour schemes. The engine automatically adapts to user operating system preferences and provides a UI toggle for manual overrides.
+`docmd` incorpora esquemas de color claro y oscuro adaptables de forma nativa. El motor responde automáticamente a las preferencias del sistema operativo del visitante y proporciona un botón para alternar el modo manualmente.
 
-## Default Viewing Mode
+## Modo de visualización predeterminado
 
-Define the initial visual mode in `docmd.config.json`:
+Establezca el modo inicial en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -18,15 +18,15 @@ Define the initial visual mode in `docmd.config.json`:
 }
 ```
 
-| Appearance Setting | Behaviour |
+| Configuración de apariencia | Comportamiento |
 | :--- | :--- |
-| **`system`** *(Default)* | Automatically matches user OS light/dark mode preference (Recommended). |
-| **`light`** | Forces light mode on initial page load. |
-| **`dark`** | Forces dark mode on initial page load. |
+| **`system`** *(Por defecto)* | Sigue automáticamente la preferencia clara u oscura del sistema operativo (Recomendado). |
+| **`light`** | Fuerza el modo claro al cargar la página por primera vez. |
+| **`dark`** | Fuerza el modo oscuro al cargar la página por primera vez. |
 
-## Configuring the Theme Toggle
+## Configuración del conmutador de tema
 
-The theme toggle button lives within the **Options Menu**. Control its visibility and position in `docmd.config.json`:
+El botón para alternar el tema reside dentro del **Menú de opciones**. Puede controlar su visibilidad y ubicación en `docmd.config.json`:
 
 ```json "docmd.config.json"
 {
@@ -41,31 +41,31 @@ The theme toggle button lives within the **Options Menu**. Control its visibilit
 }
 ```
 
-## Attribute Mechanics & CSS Variables
+## Mecanismo de atributos y variables CSS
 
-The engine applies a `data-theme` attribute to the `<body>` element at render time:
+El motor aplica el atributo `data-theme` a la etiqueta `<body>` en el renderizado:
 
-* Standard default theme: `<body data-theme="light">` or `<body data-theme="dark">`
-* Custom themed palette (e.g. `sky`): `<body data-theme="sky-light">` or `<body data-theme="sky-dark">`
+* Tema estándar por defecto: `<body data-theme="light">` o `<body data-theme="dark">`
+* Tema con paleta personalizada (ej., `sky`): `<body data-theme="sky-light">` o `<body data-theme="sky-dark">`
 
-### CSS Variable Overrides
+### Anulación de variables CSS
 
-Themes use CSS variables for all UI colours. Override these variables in your custom stylesheet to customise specific modes:
+Los temas emplean variables CSS para toda la colorimetría de la interfaz. Puede anular estas variables en su hoja de estilo para ajustar aspectos específicos de cada modo:
 
 ```css
 :root {
-  --docmd-primary: #4f46e5; /* Primary accent for light mode */
+  --docmd-primary: #4f46e5; /* Color de acento para modo claro */
 }
 
 html[data-theme="dark"] {
-  --docmd-primary: #818cf8; /* Primary accent for dark mode */
+  --docmd-primary: #818cf8; /* Color de acento para modo oscuro */
 }
 ```
 
-## State Persistence
+## Persistencia del estado
 
-When users manually toggle theme modes in the UI, their selection persists in `localStorage`. `docmd` evaluates this preference immediately on every page load, preventing visual flashing (FOUC) during SPA navigation.
+Cuando el usuario conmuta el modo en la interfaz, su preferencia queda guardada en `localStorage`. `docmd` lee este valor al inicio de cada carga de página, evitando parpadeos visuales (FOUC) durante la navegación.
 
-::: callout tip "High-Contrast AI Parsing" icon:lightbulb
-Structure-aware AI parsers benefit from clear semantic boundaries. `docmd` maintains high-contrast background and text variables across both light and dark modes, ensuring code snippets and callout blocks compile cleanly into `llms.txt` context streams.
+::: callout tip "Legibilidad para herramientas de IA" icon:lightbulb
+Los analizadores de IA se benefician de contrastes nítidos. `docmd` preserva relaciones de alto contraste entre texto y fondo en ambos modos, garantizando que los bloques de código y llamadas se extraigan con total claridad en los flujos de contexto de `llms.txt`.
 :::

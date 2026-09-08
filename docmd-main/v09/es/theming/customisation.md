@@ -1,50 +1,50 @@
 ---
-title: "Customisation & CSS Variables"
-description: "Reference guide for docmd CSS variables, visual tokens, and component classes for advanced styling."
+title: "Personalización y variables CSS"
+description: "Guía de referencia de variables CSS, tokens de diseño y clases de componentes de docmd para estilos avanzados."
 ---
 
-`docmd` uses a CSS variable-first design token architecture. Restyle core site themes and components by overriding `:root` custom properties in a custom stylesheet.
+`docmd` está fundamentado en un sistema de tokens de diseño estructurado mediante variables CSS. Puede redefinir los estilos de los temas y componentes sobreescribiendo las propiedades personalizadas en `:root` dentro de una hoja de estilo propia.
 
-## CSS Variable Reference
+## Referencia de variables CSS
 
-| CSS Variable | Default (Light Mode) | Default (Dark Mode) | Visual Token Target |
+| Variable CSS | Por defecto (Modo claro) | Por defecto (Modo oscuro) | Elemento de interfaz objetivo |
 | :--- | :--- | :--- | :--- |
-| `--bg-color` | `#ffffff` | `#0d0d0f` | Primary page background |
-| `--text-color` | `#27272a` | `#d4d4d8` | Standard body typography |
-| `--text-heading` | `#09090b` | `#fafafa` | Title and heading elements (`h1`–`h6`) |
-| `--link-color` | `#068ad5` | `#38bdf8` | Primary accent and hyperlink color |
-| `--border-color` | `#e4e4e7` | `#27272a` | Rule dividers and card borders |
-| `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation sidebar background |
-| `--ui-border-radius` | `6px` | `6px` | UI corner rounding for buttons, cards, and tags |
-| `--sidebar-width` | `260px` | `260px` | Navigation sidebar column width |
+| `--bg-color` | `#ffffff` | `#0d0d0f` | Fondo principal de la página |
+| `--text-color` | `#27272a` | `#d4d4d8` | Tipografía principal del cuerpo |
+| `--text-heading` | `#09090b` | `#fafafa` | Títulos y encabezados (`h1`–`h6`) |
+| `--link-color` | `#068ad5` | `#38bdf8` | Color de enlaces y acentos primarios |
+| `--border-color` | `#e4e4e7` | `#27272a` | Líneas divisorias y bordes de tarjetas |
+| `--sidebar-bg` | `#fafafa` | `#09090b` | Fondo de la barra lateral de navegación |
+| `--ui-border-radius` | `6px` | `6px` | Radio de esquinas para botones, tarjetas y etiquetas |
+| `--sidebar-width` | `260px` | `260px` | Ancho de la columna de navegación lateral |
 
-## CSS Override Examples
+## Ejemplos de personalización CSS
 
-To change your site's primary accent color in light and dark modes, define custom rules in `assets/css/branding.css`:
+Para cambiar el color de acento principal del sitio en los modos claro y oscuro, añada reglas personalizadas en `assets/css/branding.css`:
 
 ```css
 :root {
-  --link-color: #f43f5e; /* Rose accent (Light Mode) */
+  --link-color: #f43f5e; /* Acento rosa (Modo claro) */
 }
 
 body[data-theme="dark"] {
-  --link-color: #fb7185; /* Rose accent (Dark Mode) */
+  --link-color: #fb7185; /* Acento rosa (Modo oscuro) */
 }
 ```
 
-## Core Component Classes
+## Clases principales de componentes
 
-Target specific UI components using core layout classes:
+Aplique estilos sobre elementos específicos mediante las clases de diseño centrales:
 
-* `.main-content`: Container for parsed Markdown body content.
-* `.sidebar-nav`: Navigation tree list inside the sidebar.
-* `.page-header`: Top navigation menubar.
-* `.docmd-search-modal`: Full-text search modal overlay.
-* `.docmd-tabs`: Interactive tabbed container blocks.
-* `.callout`: Callout alert and tip containers.
+* `.main-content`: Contenedor del contenido Markdown renderizado.
+* `.sidebar-nav`: Lista del árbol de navegación dentro de la barra lateral.
+* `.page-header`: Barra superior de menús.
+* `.docmd-search-modal`: Ventana modal de búsqueda de texto completo.
+* `.docmd-tabs`: Bloques contenedores con pestañas interactivas.
+* `.callout`: Contenedores de notas, consejos y alertas.
 
-## Layout Structural Overrides
+## Modificaciones estructurales del diseño
 
-If CSS variable overrides are insufficient and you need to alter the HTML layout structure itself (e.g. custom sidebars or footers), author a **template plugin**. Templates ship custom `.ejs` partials and are layered directly on top of CSS themes.
+Si redefinir variables CSS no resulta suficiente y necesita modificar la estructura HTML (por ejemplo, barras laterales o pies de página personalizados), cree un **plugin de plantilla**. Las plantillas aportan parciales `.ejs` personalizados que se combinan directamente con los temas visuales.
 
-See [Templates](templates.md) for complete template development guidelines.
+Consulte [Plantillas](templates.md) para acceder a la guía de creación de plantillas.

@@ -3,7 +3,7 @@ title: "Buttons"
 description: "Inject prominent call-to-action buttons for internal SPA navigation and external links in docmd."
 ---
 
-Buttons are interactive components designed for navigation and explicit call-to-actions. They support internal SPA routing, external links, custom color overrides, and Lucide icons.
+Buttons are interactive components designed for navigation and explicit call-to-actions. They support internal SPA routing, external links, custom colour overrides, and Lucide icons.
 
 ## Container Syntax
 
@@ -25,7 +25,7 @@ Click ::: button title:"Label Text" url:"target_url" icon:icon_name ::: /button 
 | **Title / Label** | `"String"` \| `title:"..."` | Text label displayed inside the button (positional 1st parameter or `title:"..."`). |
 | **Target URL** | `"URL"` \| `url:URL` | Navigation target (positional 2nd parameter or `url:"..."`). Supports relative SPA paths, mailto, tel, or external links. |
 | **External Link** | `external:URL` | Opens the target link in a new browser tab (`target="_blank"` with `rel="noopener noreferrer"`). |
-| **Background Color** | `color:VALUE` | Custom background and border color (supports CSS color names or Hex codes). |
+| **Background Colour** | `color:VALUE` | Custom background and border colour (supports CSS colour names or Hex codes). |
 | **Iconography** | `icon:NAME` | Injects a [Lucide](external:https://lucide.dev/icons) icon before the text label. |
 | **Self-Closing & Inline** | `::: /button` \| `:::` | Self-closing by default, or optionally closed with `::: /button` when used inline inside text. |
 

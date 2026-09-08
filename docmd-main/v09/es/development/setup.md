@@ -1,22 +1,22 @@
 ---
-title: "Development Setup"
-description: "How to set up local development, link local framework builds, and run verification pipelines for docmd documentation."
+title: "Configuración del entorno de desarrollo"
+description: "Cómo configurar el entorno de desarrollo local, enlazar compilaciones locales del framework y ejecutar pipelines de verificación para la documentación de docmd."
 ---
 
-# Development Setup
+# Configuración del entorno de desarrollo
 
-::: callout info "Contributing to docmd Core" icon:git-pull-request
-Want to contribute to the core docmd framework? See the [GitHub Contributing Guide](external:https://github.com/docmd-io/docmd?tab=contributing-ov-file) for repository setup instructions.
+::: callout info "Contribuir al núcleo de docmd" icon:git-pull-request
+¿Desea contribuir al framework central de docmd? Consulte la [Guía de contribución en GitHub](external:https://github.com/docmd-io/docmd?tab=contributing-ov-file) para obtener instrucciones sobre la configuración del repositorio.
 :::
 
-This guide covers building and updating this documentation repository (`docmd-io/docs`).
+Esta guía explica cómo compilar y actualizar este repositorio de documentación (`docmd-io/docs`).
 
-## Prerequisites
+## Requisitos previos
 
-* **Node.js**: v22.x or later (LTS recommended)
-* **pnpm**: v10.x or later
+* **Node.js**: v22.x o posterior (se recomienda la versión LTS)
+* **pnpm**: v10.x o posterior
 
-## Local Development
+## Desarrollo local
 
 ```bash
 git clone https://github.com/docmd-io/docs.git
@@ -25,59 +25,60 @@ pnpm install
 npx @docmd/core dev
 ```
 
-The local development server launches at `http://localhost:3000` with instant Hot Module Replacement (HMR).
+El servidor de desarrollo local se inicia en `http://localhost:3000` con recarga rápida en caliente (HMR).
 
-### Linking Local Framework Code
+### Enlazar código del framework local
 
-To test local changes made within `docmd-io/docmd` against this documentation site:
+Para probar cambios locales realizados dentro de `docmd-io/docmd` en este sitio de documentación:
 
 ```bash
-# Inside the docmd framework repository
+# Dentro del repositorio del framework docmd
 pnpm build
 
-# Inside this docs site repository, link the local build
+# Dentro de este repositorio de documentación, enlace la compilación local
 npx @docmd/core link ../docmd/packages/core
 ```
 
-Restart `npx @docmd/core dev` to apply local framework build updates.
+Reinicie `npx @docmd/core dev` para aplicar las actualizaciones de la compilación local del framework.
 
-## Quality Gates
+## Controles de calidad
 
-Run the verification pipeline prior to submitting Pull Requests:
+Ejecute la canalización de verificación antes de enviar Pull Requests:
 
 ```bash
-# Lint Markdown files and check link integrity
+# Analizar archivos Markdown y verificar la integridad de enlaces
 pnpm lint
 
-# Run complete verification pipeline (lint + build + dead-link check)
+# Ejecutar canalización de verificación completa (lint + compilación + enlaces rotos)
 pnpm verify
 ```
 
-## Translations Workflow
+## Flujo de trabajo de traducciones
 
-Workflow for adding or updating localized content in `de/` and `zh/`:
+Procedimiento para agregar o actualizar contenido localizado en `de/`, `es/` y `zh/`:
 
-1. Update the canonical English source files in `docmd-main/v09/en/...`.
-2. Mirror edits in `de/` and `zh/` under matching paths while preserving frontmatter keys, container markers, and code snippet file titles.
-3. Run `pnpm verify` to confirm link integrity.
+1. Actualice los archivos de origen canónicos en inglés dentro de `docmd-main/v09/en/...`.
+2. Replique las modificaciones en `de/`, `es/` y `zh/` bajo las rutas correspondientes, conservando las claves de frontmatter, marcadores de contenedores y títulos de fragmentos de código.
+3. Ejecute `pnpm verify` para confirmar la integridad de los enlaces.
 
-## Project Directory Layout
+## Estructura de directorios del proyecto
 
 ```text
 docs/
 ├── docmd-main/v09/
-│   ├── en/                  # Canonical English source
-│   ├── de/                  # German translations (mirrors en/)
-│   ├── zh/                  # Chinese translations (mirrors en/)
-│   └── navigation.json      # Shared navigation hierarchy
-├── docmd-search/            # Search engine assets
-├── docs/                    # Sub-project targets
+│   ├── en/                  # Fuente canónica en inglés
+│   ├── de/                  # Traducciones al alemán (espejo de en/)
+│   ├── es/                  # Traducciones al español (espejo de en/)
+│   ├── zh/                  # Traducciones al chino (espejo de en/)
+│   └── navigation.json      # Jerarquía de navegación compartida
+├── docmd-search/            # Recursos del motor de búsqueda
+├── docs/                    # Objetivos de subproyectos
 └── package.json
 ```
 
-## What's Next
+## Siguientes pasos
 
-- [Building Plugins](./building-plugins.md) — write a custom docmd plugin.
-- [Plugin Examples](./plugin-examples.md) — see a complete plugin walkthrough.
-- [Building Templates](./building-templates.md) — author a docmd template.
-- [Node API Reference](./node-api-reference.md) — programmatic build API.
+- [Creación de plugins](./building-plugins.md) — desarrolle un plugin personalizado para docmd.
+- [Ejemplos de plugins](./plugin-examples.md) — vea un recorrido completo por un plugin.
+- [Creación de plantillas](./building-templates.md) — cree una plantilla personalizada para docmd.
+- [Referencia de la API de Node](./node-api-reference.md) — API programática de compilación.

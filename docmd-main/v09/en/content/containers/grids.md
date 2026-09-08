@@ -99,7 +99,7 @@ Add a third `grid` block to create a three-column row:
     :::
     ::: grid
         ::: card "Localisation" icon:globe
-        Multi-language directory routing and localized search indexes.
+        Multi-language directory routing and localised search indexes.
         :::
     :::
     ::: grid

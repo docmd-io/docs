@@ -3,7 +3,7 @@ title: "Live Editor"
 description: "Architecture and execution reference for the docmd browser-based Live Editor environment."
 ---
 
-The docmd Live Editor provides a browser-native authoring environment. Utilizing the isomorphic compilation core, it presents instant, side-by-side Markdown previews without requiring local disk compilation steps.
+The docmd Live Editor provides a browser-native authoring environment. Utilising the isomorphic compilation core, it presents instant, side-by-side Markdown previews without requiring local disk compilation steps.
 
 ## Launch Commands
 

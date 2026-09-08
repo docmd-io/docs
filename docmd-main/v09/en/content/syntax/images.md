@@ -66,6 +66,6 @@ When client scripts are active, `docmd` automatically attaches full-screen light
 ![System schematic preview](/assets/sample.png){ .lightbox }
 ```
 
-::: callout tip "Accessibility & Search Optimization" icon:sparkles
+::: callout tip "Accessibility & Search Optimisation" icon:sparkles
 Always supply descriptive **alt text** for every image. High-quality alt text provides semantic context for screen readers and AI agents parsing the `llms.txt` context stream.
 :::

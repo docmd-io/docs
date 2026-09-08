@@ -1,32 +1,32 @@
 ---
-title: "Docker Containerization"
-description: "Run docmd within containerised environments using official images or generated Dockerfiles."
+title: "Contenedorización con Docker"
+description: "Ejecuta docmd dentro de entornos en contenedores utilizando imágenes oficiales o Dockerfiles generados."
 ---
 
-docmd outputs static assets, making it ideal for containerised deployments. You can pull the official pre-built image or compile a custom `Dockerfile` via the Deployer CLI.
+docmd genera recursos estáticos, lo que lo hace ideal para despliegues en contenedores. Puedes descargar la imagen oficial precompilada o generar un `Dockerfile` personalizado a través de la CLI del Deployer.
 
-## Official Container Image
+## Imagen de contenedor oficial
 
-The pre-built container image allows site builds and local preview serving without requiring a local Node.js environment. Images are published for `linux/amd64` and `linux/arm64` architectures.
+La imagen de contenedor precompilada permite compilar sitios y previsualizarlos localmente sin necesidad de instalar Node.js en el sistema anfitrión. Las imágenes se publican para arquitecturas `linux/amd64` y `linux/arm64`.
 
-### Quick Start Commands
+### Comandos de inicio rápido
 
 ```bash
-# Pull pinned release image
+# Descargar imagen de versión fija
 docker pull ghcr.io/docmd-io/docmd:0.9.0
 
-# Compile static output (mounts local docs directory)
+# Compilar salida estática (monta el directorio local docs)
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# Launch local preview server
+# Iniciar servidor de previsualización local
 docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
 ```
 
-::: callout tip "Pinning Releases" icon:pin
-Pin specific version tags (e.g. `0.9.0`) in production CI pipelines to ensure build reproducibility.
+::: callout tip "Fijar versiones" icon:pin
+Fija etiquetas de versión específicas (por ejemplo, `0.9.0`) en las canalizaciones de CI en producción para garantizar la reproducibilidad de las compilaciones.
 :::
 
-### Docker Compose Workflow
+### Flujo de trabajo con Docker Compose
 
 ```yaml "docker-compose.yml"
 version: '3.8'
@@ -49,46 +49,46 @@ services:
       - docs
 ```
 
-### Image Specifications
+### Especificaciones de la imagen
 
-| Property | Specifications |
+| Propiedad | Especificaciones |
 | :--- | :--- |
-| **Base Operating System** | Alpine Linux |
-| **User Identity Mapping** | Remaps container root identity to host UID/GID via `su-exec` automatically. |
-| **Default Working Dir** | `/docs` (override via `-w` flag). |
-| **Architectures** | `linux/amd64`, `linux/arm64` |
+| **Sistema operativo base** | Alpine Linux |
+| **Mapeo de identidad de usuario** | Remapea la identidad root del contenedor al UID/GID del anfitrión mediante `su-exec` automáticamente. |
+| **Directorio de trabajo predeterminado** | `/docs` (personalizable mediante la opción `-w`). |
+| **Arquitecturas** | `linux/amd64`, `linux/arm64` |
 
-### Custom Working Directory & Permissions
+### Directorio de trabajo y permisos personalizados
 
-The entrypoint automatically detects owner UID and GID for mounted volumes and steps down privileges prior to executing `init`, `build`, or `dev` commands. Files written to host mounts retain host user ownership.
+El punto de entrada detecta automáticamente el UID y GID del propietario para los volúmenes montados y reduce los privilegios antes de ejecutar los comandos `init`, `build` o `dev`. Los archivos escritos en los montajes del anfitrión conservan la propiedad del usuario anfitrión.
 
 ```bash
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init
 ```
 
-## Generated Multi-Stage Dockerfile
+## Dockerfile multietapa generado
 
-Generate a custom `Dockerfile` using the [Deployer CLI](./deployer):
+Genera un `Dockerfile` personalizado utilizando la [CLI del Deployer](./deployer):
 
 ```bash
 npx @docmd/core deploy --docker
 ```
 
-The generated multi-stage `Dockerfile`:
-1. **Build Stage**: Installs the pinned `@docmd/core` version and compiles static HTML/CSS/JS assets.
-2. **Serve Stage**: Copies compiled output into a lightweight `nginx:alpine` image.
+El `Dockerfile` multietapa generado realiza:
+1. **Etapa de compilación**: Instala la versión fijada de `@docmd/core` y compila los recursos estáticos HTML/CSS/JS.
+2. **Etapa de servicio**: Copia la salida compilada en una imagen ligera de `nginx:alpine`.
 
-To generate Docker and NGINX configurations together:
+Para generar las configuraciones de Docker y NGINX conjuntamente:
 
 ```bash
 npx @docmd/core deploy --docker --nginx
 ```
 
-### Build & Container Execution
+### Compilación y ejecución del contenedor
 
 ```bash
 docker build -t my-docs .
 docker run -p 8080:80 my-docs
 ```
 
-Access the served site at `http://localhost:8080`.
+Accede al sitio servido en `http://localhost:8080`.

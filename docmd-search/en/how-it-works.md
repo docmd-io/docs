@@ -87,7 +87,7 @@ ONNX Runtime processes models locally without cloud APIs or CUDA requirements. M
 
 Models run in **Int8-quantised form** (`q8`). Quantised models take ~75% less disk space than 32-bit float models with minimal retrieval impact.
 
-The ONNX execution environment configures CPU threading based on physical core counts to maximize SIMD throughput.
+The ONNX execution environment configures CPU threading based on physical core counts to maximise SIMD throughput.
 
 ### 4. Vector Quantisation
 

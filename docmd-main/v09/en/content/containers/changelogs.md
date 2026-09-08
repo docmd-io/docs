@@ -89,7 +89,7 @@ Initial public release.
 ::: /changelog
 
 ::: callout tip "Legacy == Entry Marker Syntax" icon:archive
-Existing documentation utilizing `==` entry markers continues to parse seamlessly:
+Existing documentation utilising `==` entry markers continues to parse seamlessly:
 
 ```markdown
 ::: changelog

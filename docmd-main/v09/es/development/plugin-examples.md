@@ -1,25 +1,25 @@
 ---
-title: "Extending docmd with Custom Plugins"
-description: "How to use docmd's lifecycle hooks to build custom functionality and extend the documentation engine."
+title: "Extender docmd con plugins personalizados"
+description: "Cómo utilizar los hooks del ciclo de vida de docmd para crear funciones personalizadas y extender el motor de documentación."
 ---
 
-## Problem
+## Problema
 
-Sometimes you have specific requirements not covered by built-in features. For example, you might need to fetch data from an internal API during the build process or perform complex transformations on the generated HTML.
+En ocasiones surgen requisitos específicos no cubiertos por las funciones integradas. Por ejemplo, es posible que necesite obtener datos de una API interna durante el proceso de compilación o realizar transformaciones complejas en el HTML generado.
 
-## Why it matters
+## Por qué es importante
 
-Extensibility separates a static tool from a professional documentation framework. Without a clean way to inject custom logic, teams maintain fragile shell scripts or post-processing wrappers. This makes the build process difficult to manage and debug.
+La extensibilidad distingue una herramienta estática de un framework de documentación profesional. Sin una forma limpia de inyectar lógica personalizada, los equipos recurren a frágiles scripts de shell o envoltorios de postprocesamiento, lo que dificulta el mantenimiento y la depuración del proceso de compilación.
 
-## Approach
+## Enfoque
 
-docmd features a reliable, hook-based [Plugin API](./building-plugins.md). Write simple Node.js modules that intercept the documentation lifecycle at various stages. This allows you to arbitrarily modify content and behaviour from initial configuration to final HTML generation.
+docmd cuenta con una sólida [API de plugins](./building-plugins.md) basada en hooks. Desarrolle módulos estándar de Node.js que intercepten el ciclo de vida de la documentación en distintas fases. Esto le permite modificar libremente el contenido y el comportamiento, desde la configuración inicial hasta la generación final del HTML.
 
-## Implementation
+## Implementación
 
-### 1. Create a Local Plugin
+### 1. Crear un plugin local
 
-A plugin is a standard JavaScript module that exports a descriptor and lifecycle hooks.
+Un plugin es un módulo estándar de JavaScript que exporta un descriptor y hooks de ciclo de vida.
 
 ```javascript
 // plugins/version-injector.js
@@ -27,22 +27,22 @@ A plugin is a standard JavaScript module that exports a descriptor and lifecycle
 let latestVersion = "0.0.0";
 
 export default {
-  // Plugin Descriptor
+  // Descriptor del plugin
   plugin: {
     "name": "version-injector",
     "version": "1.0.0",
     "capabilities": ["init", "build"]
   },
 
-  // Lifecycle Hooks
+  // Hooks de ciclo de vida
   async onConfigResolved(config) {
-    // Fetch external data once during initialisation
+    // Obtener datos externos una vez durante la inicialización
     const response = await fetch("https://api.example.com/version");
     latestVersion = await response.text();
-    console.log(`[Plugin] Fetched version: ${latestVersion}`);
+    console.log(`[Plugin] Versión obtenida: ${latestVersion}`);
   },
 
-  // Modify HTML before writing
+  // Modificar HTML antes de escribirlo en disco
   async onBeforeRender(page) {
     if (!page.html) return;
 
@@ -52,22 +52,22 @@ export default {
 };
 ```
 
-### 2. Register the Plugin
+### 2. Registrar el plugin
 
-Register your local plugin by importing it into your `docmd.config.js` (or `docmd.config.ts`). JSON config files cannot use imports - use the `.js` or `.ts` format for plugin registration.
+Registre su plugin local importándolo en su archivo `docmd.config.js` (o `docmd.config.ts`). Los archivos de configuración en formato JSON no admiten sentencias `import`; utilice la variante `.js` o `.ts` para el registro de plugins con dependencias o código directo.
 
 ```javascript
 import VersionInjector from "./plugins/version-injector.js";
 
 export default {
-  "title": "My Project Docs",
+  "title": "Documentación de mi proyecto",
   "plugins": {
-    // Inject the local plugin object
+    // Inyectar el objeto del plugin local
     "version-injector": VersionInjector
   }
 };
 ```
 
-## Trade-offs
+## Consideraciones y compensaciones
 
-Custom plugins run in the Node.js environment during build time. While powerful, they can impact build performance if unoptimised. Any logic in hooks like `onAfterParse` or `onPageReady` runs for *every* page in your site. Ensure your transformations are efficient (e.g., using optimised Regex) to keep build times fast.
+Los plugins personalizados se ejecutan en el entorno de Node.js durante el tiempo de compilación. Aunque son potentes, pueden impactar en el rendimiento si no están optimizados. Cualquier lógica ubicada en hooks como `onAfterParse` o `onPageReady` se ejecuta para *cada página* de su sitio. Asegúrese de que sus transformaciones sean eficientes (por ejemplo, utilizando expresiones regulares optimizadas) para preservar la alta velocidad de compilación.

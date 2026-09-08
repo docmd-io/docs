@@ -93,7 +93,7 @@ For Node.js or Docker hosting where docmd runs as a server, configure the provid
 If you deploy your documentation as static files on GitHub Pages, Cloudflare Pages, Netlify, or Vercel, running a separate backend server just to proxy AI chat queries is unnecessary. docmd provides a free Cloud Relay service at [cloud.docmd.io](https://cloud.docmd.io):
 
 1. **Create an Account & Project**: Sign in to [cloud.docmd.io](https://cloud.docmd.io) and create a project.
-2. **Set Associated Domain**: In **Project Configuration**, specify your documentation domain (e.g. `docs.mycompany.com`). Only requests originating from this domain are authorized to use your relay.
+2. **Set Associated Domain**: In **Project Configuration**, specify your documentation domain (e.g. `docs.mycompany.com`). Only requests originating from this domain are authorised to use your relay.
 3. **Enable Localhost Testing (Development)**: When testing locally, check **Enable Localhost Testing (127.0.0.1 / localhost)**. Remember to uncheck this before public production launches if you wish to restrict queries strictly to your production domain.
 4. **Configure BYOK Model & Key**: In **Assistant Model & BYOK Key Setup**, select your AI provider (OpenAI, Anthropic, Gemini, Groq, DeepSeek, etc.), enter your model name and API key, click **Test Connection**, and then **Save Key & Configuration**. All keys are encrypted at rest using KMS hardware security.
 5. **Add Project ID to Config**: Under the **Integration** tab, copy your `projectId` snippet and paste it into `docmd.config.json`:

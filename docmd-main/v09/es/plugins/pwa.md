@@ -1,22 +1,22 @@
 ---
-title: "PWA & Offline Plugin"
-description: "Transform documentation portals into offline-first Progressive Web Applications with service worker caching."
+title: "Plugin PWA y soporte sin conexión"
+description: "Transforme sitios de documentación en Aplicaciones Web Progresivas instalables con caché sin conexión mediante service workers."
 ---
 
-The `@docmd/plugin-pwa` plugin transforms your documentation site into an installable Progressive Web Application (PWA). It generates a W3C Web Application Manifest (`manifest.webmanifest`) and registers a service worker for offline caching and mobile platform installation.
+El plugin `@docmd/plugin-pwa` convierte su sitio de documentación en una Aplicación Web Progresiva (PWA) instalable. Genera el manifiesto estándar del W3C (`manifest.webmanifest`) y registra un service worker para almacenar en caché los contenidos y posibilitar la instalación en dispositivos móviles y de escritorio.
 
-## Configuration Options
+## Opciones de configuración
 
-Configure PWA properties in `docmd.config.json`:
+Configure las propiedades de la PWA en `docmd.config.json`:
 
-| Option | Type | Default | Technical Description |
+| Opción | Tipo | Por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable PWA manifest and service worker compilation. |
-| `themeColor` | `string` | `'#1e293b'` | Browser UI chrome header colour. |
-| `bgColor` | `string` | `'#ffffff'` | Installation splash screen background colour. |
-| `logo` | `string` | `null` | Path to app icon (relative to documentation source root). |
+| `enabled` | `boolean` | `true` | Habilita o deshabilita la generación del manifiesto y el service worker. |
+| `themeColor` | `string` | `'#1e293b'` | Color del encabezado y la interfaz del navegador. |
+| `bgColor` | `string` | `'#ffffff'` | Color de fondo de la pantalla de bienvenida durante la instalación. |
+| `logo` | `string` | `null` | Ruta al icono de la aplicación (relativa a la raíz de la documentación). |
 
-### Global Configuration Example
+### Ejemplo de configuración global
 
 ```json "docmd.config.json"
 {
@@ -30,21 +30,21 @@ Configure PWA properties in `docmd.config.json`:
 }
 ```
 
-## Key Capabilities
+## Capacidades principales
 
-* **Offline Service Worker**: Implements a stale-while-revalidate caching strategy. Pages load instantly from local cache while checking network status in the background.
-* **Home Screen Installation**: Emits valid manifest metadata allowing users to pin the documentation site on iOS, Android, macOS, and Windows.
-* **Asset Resizing**: Automatically generates required PWA icon sizes (192x192, 512x512) from primary site branding.
+* **Service Worker sin conexión**: Implementa una estrategia de almacenamiento *stale-while-revalidate*. Las páginas se cargan al instante desde la caché local mientras se valida la conexión a la red en segundo plano.
+* **Instalación en pantalla de inicio**: Genera los metadatos necesarios para que los usuarios puedan anclar la documentación en iOS, Android, macOS y Windows.
+* **Redimensionamiento de iconos**: Genera automáticamente los tamaños requeridos para la PWA (192x192, 512x512) a partir de la imagen corporativa del sitio.
 
-## Icon Resolution Priority
+## Prioridad en la resolución del icono
 
-The PWA plugin evaluates icon paths in top-down order:
+El plugin busca el icono evaluando las siguientes propiedades de arriba hacia abajo:
 
-1. `plugins.pwa.icons` — Explicit icon array defined in configuration.
-2. `plugins.pwa.logo` — Plugin-specific icon path.
-3. `config.logo` — Global site logo path.
-4. `config.favicon` — Global site favicon path.
+1. `plugins.pwa.icons` — Matriz explícita de iconos definida en la configuración.
+2. `plugins.pwa.logo` — Ruta de icono específica del plugin.
+3. `config.logo` — Ruta del logotipo global del sitio.
+4. `config.favicon` — Ruta del favicon global del sitio.
 
-::: callout tip "Testing Offline Functionality" icon:smartphone
-Service worker registration is disabled during local development (`npx @docmd/core dev`) to prevent cached assets from interfering with live edits. To test PWA features, build the site (`npx @docmd/core build`) and serve the output directory (`site/`) over HTTPS or localhost.
+::: callout tip "Pruebas de funcionamiento sin conexión" icon:smartphone
+El registro del service worker se desactiva durante el desarrollo local (`npx @docmd/core dev`) para evitar que los recursos en caché interfieran con la edición en vivo. Para probar la PWA, compile el sitio (`npx @docmd/core build`) y sirva la carpeta de salida (`site/`) bajo HTTPS o en localhost.
 :::

@@ -58,7 +58,7 @@ Because Threads declares `requiresLiveServer: true`:
 
 ## Interactive Preview
 
-Text with attached discussions receives <span class="threads-preview-highlight">inline color highlights</span>. Thread cards render below:
+Text with attached discussions receives <span class="threads-preview-highlight">inline colour highlights</span>. Thread cards render below:
 
 <div class="threads-preview-card">
   <div class="threads-preview-comment">
@@ -85,7 +85,7 @@ Text with attached discussions receives <span class="threads-preview-highlight">
   </div>
 </div>
 
-Additional highlights cycle through <span class="threads-preview-highlight-blue">distinct color palettes</span> automatically:
+Additional highlights cycle through <span class="threads-preview-highlight-blue">distinct colour palettes</span> automatically:
 
 <div class="threads-preview-card threads-preview-card-blue">
   <div class="threads-preview-comment">

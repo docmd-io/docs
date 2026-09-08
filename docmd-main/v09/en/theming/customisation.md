@@ -12,7 +12,7 @@ description: "Reference guide for docmd CSS variables, visual tokens, and compon
 | `--bg-color` | `#ffffff` | `#0d0d0f` | Primary page background |
 | `--text-color` | `#27272a` | `#d4d4d8` | Standard body typography |
 | `--text-heading` | `#09090b` | `#fafafa` | Title and heading elements (`h1`–`h6`) |
-| `--link-color` | `#068ad5` | `#38bdf8` | Primary accent and hyperlink color |
+| `--link-color` | `#068ad5` | `#38bdf8` | Primary accent and hyperlink colour |
 | `--border-color` | `#e4e4e7` | `#27272a` | Rule dividers and card borders |
 | `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation sidebar background |
 | `--ui-border-radius` | `6px` | `6px` | UI corner rounding for buttons, cards, and tags |
@@ -20,7 +20,7 @@ description: "Reference guide for docmd CSS variables, visual tokens, and compon
 
 ## CSS Override Examples
 
-To change your site's primary accent color in light and dark modes, define custom rules in `assets/css/branding.css`:
+To change your site's primary accent colour in light and dark modes, define custom rules in `assets/css/branding.css`:
 
 ```css
 :root {

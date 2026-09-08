@@ -84,7 +84,7 @@ Docusaurus admonitions work **out of the box** without file modifications:
 - `:::danger` → renders as `callout danger`
 
 ::: callout tip "Native Container Syntax" icon:sparkles
-For enhanced features (such as custom icons or custom badge colors), convert Docusaurus admonitions to native `docmd` syntax:
+For enhanced features (such as custom icons or custom badge colours), convert Docusaurus admonitions to native `docmd` syntax:
 ```markdown
 ::: callout tip title:"Custom Title" icon:sparkles
 This is a tip container.

@@ -46,10 +46,10 @@ In addition to the runtime `plugin` descriptor, every official plugin **must** d
 | :--- | :--- | :--- |
 | `key` | Recommended | The user-facing identifier (`config.plugins.<key>`). Derived from the package name if omitted. |
 | `kind` | Recommended | One of `plugin`, `template`, `engine`. Derived from the directory layout if omitted. |
-| `displayName` | Recommended | Human-readable name shown in catalogs and `docmd doctor` output. |
+| `displayName` | Recommended | Human-readable name shown in catalogues and `docmd doctor` output. |
 | `tagline` | Recommended | One-line description; used as a fallback for the npm description. |
 | `capabilities` | Required for plugins and templates | The same hook capabilities the JS descriptor declares. The build-time cross-check warns if the two diverge. |
-| `preview` | Optional | Path to a preview asset (template only); shown in catalogs. |
+| `preview` | Optional | Path to a preview asset (template only); shown in catalogues. |
 | `requiresLiveServer` | Optional | When `true`, client assets (`getAssets`, `generateScripts`, `generateMetaTags`) are automatically omitted during static builds (`docmd build`). Defaults to `false`. |
 
 ### Live Server Requirement (`requiresLiveServer`)
@@ -63,7 +63,7 @@ Engines have the same `docmd` namespace but **no `capabilities`** — they don't
 The build-time cross-check (also new in 0.8.9) surfaces drift between the JS descriptor and the manifest, including the "implemented hook without declared capability" silent-drop bug that was previously invisible.
 
 ::: callout warning title:"Bundled registry removal in 0.9.0"
-The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalog of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
+The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalogue of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
 ::: /callout
 
 ## Core Capabilities

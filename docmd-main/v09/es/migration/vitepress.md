@@ -1,15 +1,15 @@
 ---
-title: "Migrating from VitePress"
-description: "A comprehensive guide on moving your VitePress project to docmd."
+title: "Migrar desde VitePress"
+description: "Una guía completa sobre cómo trasladar tu proyecto de VitePress a docmd."
 ---
 
-VitePress is a Vue-powered static site generator. `docmd` delivers matching runtime speed while shipping zero client-side JavaScript framework overhead, eliminating Vue hydration delays.
+VitePress es un generador de sitios estáticos impulsado por Vue. `docmd` ofrece una velocidad en tiempo de ejecución equivalente mientras elimina completamente la sobrecarga del framework JavaScript en el cliente, suprimiendo retrasos de hidratación de Vue.
 
 ::: steps
 
-### 1. Run the Migration Engine
+### 1. Ejecutar el motor de migración
 
-Run the following command at the root of your existing VitePress project:
+Ejecuta el siguiente comando en la raíz de tu proyecto existente de VitePress:
 
 ::: tabs
 == tab "npm" icon:box
@@ -30,19 +30,19 @@ bunx @docmd/core migrate --vitepress
 ```
 :::
 
-#### What Happens Automatically
+#### Qué sucede automáticamente
 
 ::: steps
 
-1. **Backup**: Your entire project directory (excluding `node_modules`, `.git`, `package.json`, and lockfiles) is backed up safely into a new `vitepress-backup/` directory.
-2. **Content Migration**: Your `docs/` folder (or root Markdown files) is restored to the project root directory. The hidden `.vitepress` configuration directory is stripped to prevent conflicts.
-3. **Config Generation**: A `docmd.config.json` is generated, extracting your site `title` from `.vitepress/config.js`, `ts`, or `mjs`.
+1. **Copia de seguridad**: Todo el directorio de tu proyecto (excluyendo `node_modules`, `.git`, `package.json` y archivos de bloqueo) se respalda de forma segura en un nuevo directorio `vitepress-backup/`.
+2. **Migración de contenido**: Tu carpeta `docs/` (o archivos Markdown raíz) se restaura en el directorio raíz del proyecto. El directorio de configuración oculto `.vitepress` se elimina para evitar conflictos.
+3. **Generación de configuración**: Se genera un `docmd.config.json`, extrayendo el `title` de tu sitio de `.vitepress/config.js`, `ts` o `mjs`.
 
 :::
 
-### 2. Preview the Migration Output
+### 2. Previsualizar la salida de la migración
 
-Preview your Markdown content in `docmd` immediately:
+Previsualiza tu contenido Markdown en `docmd` de inmediato:
 
 ::: tabs
 == tab "npm" icon:box
@@ -63,23 +63,23 @@ bunx @docmd/core dev
 ```
 :::
 
-### 3. Manual Configuration & Component Replacement
+### 3. Configuración manual y reemplazo de componentes
 
-VitePress configures navigation inside JavaScript config modules and allows embedding Vue components. Translate these to `docmd` containers.
+VitePress configura la navegación dentro de módulos de configuración de JavaScript y permite incrustar componentes de Vue. Traduce estos elementos a contenedores de `docmd`.
 
-#### Navigation Setup
+#### Configuración de navegación
 
-VitePress uses an array of objects in `themeConfig.sidebar`. Create a `navigation.json` inside your `docs/` directory:
+VitePress utiliza un array de objetos en `themeConfig.sidebar`. Crea un archivo `navigation.json` dentro de tu directorio `docs/`:
 
 **VitePress (`.vitepress/config.js`):**
 ```javascript
 themeConfig: {
   sidebar: [
     {
-      text: "Guide",
+      text: "Guía",
       items: [
-        { text: "Introduction", link: "/introduction" },
-        { text: "Getting Started", link: "/getting-started" }
+        { text: "Introducción", link: "/introduction" },
+        { text: "Primeros pasos", link: "/getting-started" }
       ]
     }
   ]
@@ -90,34 +90,34 @@ themeConfig: {
 ```json
 [
   {
-    "title": "Guide",
+    "title": "Guía",
     "collapsible": true,
     "children": [
-      { "title": "Introduction", "path": "/introduction" },
-      { "title": "Getting Started", "path": "/getting-started" }
+      { "title": "Introducción", "path": "/introduction" },
+      { "title": "Primeros pasos", "path": "/getting-started" }
     ]
   }
 ]
 ```
 
-#### Replacing Vue Components & Container Syntax
+#### Reemplazar componentes Vue y sintaxis de contenedores
 
-Because `docmd` does not execute client-side Vue, replace custom components with `docmd` [Containers](../content/containers/callouts.md).
+Debido a que `docmd` no ejecuta Vue en el cliente, reemplaza los componentes personalizados con [Contenedores](../content/containers/callouts.md) de `docmd`.
 
-VitePress admonition containers work **out of the box** without modification:
-- `:::tip` → renders as `callout tip`
-- `:::warning` → renders as `callout warning`
-- `:::danger` → renders as `callout danger`
-- `:::info` → renders as `callout info`
-- `:::details` → renders as `collapsible`
+Los contenedores de avisos de VitePress funcionan **de forma predeterminada** sin modificaciones:
+- `:::tip` → se renderiza como `callout tip`
+- `:::warning` → se renderiza como `callout warning`
+- `:::danger` → se renderiza como `callout danger`
+- `:::info` → se renderiza como `callout info`
+- `:::details` → se renderiza como `collapsible`
 
-::: callout success "Zero Changes Required" icon:check-circle
-VitePress container syntax is natively supported. Existing admonition blocks and collapsible details sections render correctly without editing your Markdown files.
+::: callout success "Cero cambios requeridos" icon:check-circle
+La sintaxis de contenedores de VitePress es compatible de forma nativa. Los bloques de advertencia existentes y las secciones de detalles desplegables se renderizan correctamente sin editar tus archivos Markdown.
 :::
 
 :::
 
-## Next Steps
+## Siguientes pasos
 
-- Explore `docmd`'s [Deployment Guide](../deployment/index.md) to set up GitHub Actions, Vercel, Netlify, or Docker builds.
-- Review the full set of visual [Containers](../content/containers/index.md).
+- Explora la [Guía de despliegue](../deployment/index.md) de `docmd` para configurar compilaciones en GitHub Actions, Vercel, Netlify o Docker.
+- Revisa el catálogo completo de [Contenedores](../content/containers/index.md) visuales.

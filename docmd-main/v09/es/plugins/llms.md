@@ -1,34 +1,34 @@
 ---
-title: "LLM Context Plugin"
-description: "Optimise documentation for AI agents and LLM ingestion via automated llms.txt and llms-full.txt generation."
+title: "Plugin de contexto para LLM"
+description: "Optimice su documentación para agentes de IA y modelos de lenguaje mediante la generación automática de archivos llms.txt y llms-full.txt."
 ---
 
-The `@docmd/plugin-llms` plugin implements the `llms.txt` standard to generate machine-readable context files during build compilation. AI tools, IDE extensions (such as Cursor and Copilot), and autonomous agents ingest these generated files to build high-precision context models of your site.
+El plugin `@docmd/plugin-llms` implementa el estándar `llms.txt` para producir archivos de contexto legibles por máquinas durante la compilación. Herramientas de IA, extensiones de IDE (como Cursor y Copilot) y agentes autónomos consumen estos archivos para construir representaciones de alta precisión del contenido de su documentación.
 
-The plugin is **enabled by default**. Set the [`url`](../configuration/overview.md) property in `docmd.config.json` to ensure absolute URLs are emitted.
+El plugin se encuentra **activo por defecto**. Defina la propiedad [`url`](../configuration/overview.md) en `docmd.config.json` para garantizar que las rutas emitidas sean URLs canónicas absolutas.
 
-## Generated Output Assets
+## Archivos generados
 
-During site compilation, three files are placed at the build output root:
+Durante la compilación, se crean tres archivos en la raíz del directorio de salida:
 
-* `llms.txt` — Structured overview listing page titles, descriptions, and canonical URLs.
-* `llms-full.txt` — Complete documentation context with raw Markdown bodies appended to each entry.
-* `llms.json` — Machine-readable JSON manifest containing typed metadata (title, URL, description, priority).
+* `llms.txt` — Resumen estructurado con títulos, descripciones y URLs canónicas de cada página.
+* `llms-full.txt` — Contexto integral con el contenido Markdown sin procesar de cada página añadido al final.
+* `llms.json` — Manifiesto en formato JSON con metadatos tipados (título, URL, descripción, prioridad).
 
-Discovery `<link>` tags are automatically injected into page `<head>` headers.
+Además, se insertan etiquetas `<link>` en el `<head>` de cada página para facilitar su descubrimiento por rastreadores.
 
-## Configuration Options
+## Opciones de configuración
 
-Configure LLM context parameters in `docmd.config.json`:
+Configure los parámetros de contexto LLM en `docmd.config.json`:
 
-| Option | Type | Default | Technical Description |
+| Opción | Tipo | Por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
-| `enabled` | `boolean` | `true` | Enable or disable LLM context file generation. |
-| `fullContext` | `boolean` | `true` | Generate `llms-full.txt` containing full Markdown bodies. |
-| `maxTokenLimit` | `number` | `null` | Optional character/token ceiling for context bundle outputs. |
-| `i18n` | `boolean` | `false` | Write per-locale files (`llms.<locale>.txt`) alongside the default set. |
+| `enabled` | `boolean` | `true` | Habilita o deshabilita la generación de archivos de contexto para LLM. |
+| `fullContext` | `boolean` | `true` | Genera `llms-full.txt` con el cuerpo completo en Markdown. |
+| `maxTokenLimit` | `number` | `null` | Límite máximo opcional de caracteres/tokens para la salida del paquete. |
+| `i18n` | `boolean` | `false` | Genera archivos específicos por idioma (`llms.<locale>.txt`) junto a los predeterminados. |
 
-### Global Configuration Example
+### Ejemplo de configuración global
 
 ```json "docmd.config.json"
 {
@@ -42,15 +42,15 @@ Configure LLM context parameters in `docmd.config.json`:
 }
 ```
 
-## Default Locale Behaviour
+## Comportamiento del idioma predeterminado
 
-By default, the plugin generates unsuffixed files (`llms.txt`, `llms-full.txt`, `llms.json`) for the **default locale**. This maintains compatibility with AI tools expecting standard root filenames.
+Por defecto, el plugin genera archivos sin sufijo (`llms.txt`, `llms-full.txt`, `llms.json`) para el **idioma predeterminado**, garantizando compatibilidad con las herramientas de IA que esperan nombres estándar en la raíz.
 
-For single-locale sites, a single set of root files is produced. For multi-locale sites, default-locale content is served at the unsuffixed root paths.
+En sitios monolingües se genera un único conjunto en la raíz. En sitios con varios idiomas, el idioma predeterminado se ubica en las rutas sin sufijo.
 
-## Multi-Locale Context Bundles
+## Paquetes de contexto multilingües
 
-To generate dedicated context files for secondary languages, set `i18n: true`:
+Para generar archivos de contexto dedicados para idiomas secundarios, configure `i18n: true`:
 
 ```json "docmd.config.json"
 {
@@ -62,40 +62,40 @@ To generate dedicated context files for secondary languages, set `i18n: true`:
 }
 ```
 
-When enabled, the build output includes:
+Al habilitar esta opción, la salida incluye:
 
 ```text
-site/llms.txt          ← Default locale (unsuffixed)
-site/llms-full.txt     ← Default locale (unsuffixed)
-site/llms.json         ← Default locale (unsuffixed)
-site/llms.de.txt       ← German locale (suffixed)
-site/llms-full.de.txt  ← German locale (suffixed)
-site/llms.zh.txt       ← Chinese locale (suffixed)
-site/llms-full.zh.txt  ← Chinese locale (suffixed)
+site/llms.txt          ← Idioma predeterminado (sin sufijo)
+site/llms-full.txt     ← Idioma predeterminado (sin sufijo)
+site/llms.json         ← Idioma predeterminado (sin sufijo)
+site/llms.es.txt       ← Idioma español (con sufijo)
+site/llms-full.es.txt  ← Idioma español (con sufijo)
+site/llms.de.txt       ← Idioma alemán (con sufijo)
+site/llms-full.de.txt  ← Idioma alemán (con sufijo)
+site/llms.zh.txt       ← Idioma chino (con sufijo)
+site/llms-full.zh.txt  ← Idioma chino (con sufijo)
 ```
 
-The default locale retains unsuffixed paths so external integrations continue functioning seamlessly.
+## Seguridad y saneamiento
 
-## Security & Sanitisation
+Todas las cadenas controladas por el usuario (títulos y descripciones) se someten a saneamiento estricto:
 
-All user-controlled strings (titles and descriptions) undergo strict sanitisation prior to bundle output:
+* **Integridad de enlaces**: Los caracteres de control Markdown (`` ` ``, `[`, `]`, saltos de línea) en los títulos se escapan para evitar sintaxis `[título](ruta)` corrupta.
+* **Protección contra inyección en hojas de cálculo**: A las cadenas que comienzan con `=`, `+`, `-` o `@` se les antepone una comilla simple (`'`) para evitar ejecuciones de fórmulas.
 
-* **Link Integrity**: Markdown control characters (`` ` ``, `[`, `]`, newlines) in page titles are escaped to prevent broken `[title]\(target-path\)` syntax.
-* **CSV/Spreadsheet Injection Defense**: Strings starting with `=`, `+`, `-`, or `@` are prepended with a single quote (`'`) to neutralize cell formula execution.
+## Exclusión de páginas
 
-## Excluding Content Pages
-
-To exclude internal notes, draft pages, or security-sensitive documents from AI context files, set `llms: false` in [Page Frontmatter](../content/frontmatter.md):
+Para excluir notas internas, borradores o documentos confidenciales de los archivos de contexto para IA, configure `llms: false` en el [Frontmatter de página](../content/frontmatter.md):
 
 ```yaml
 ---
-title: "Internal Release Checklist"
-llms: false # Excludes page from llms.txt and llms-full.txt
+title: "Lista de verificación interna de lanzamiento"
+llms: false # Excluye la página de llms.txt y llms-full.txt
 ---
 ```
 
-Excluded pages remain visible in standard HTML output and local site search.
+Las páginas excluidas continuarán mostrándose en el sitio web y en el buscador local.
 
-::: callout tip "Structured Knowledge Graphs" icon:cpu
-For deeply structured AI context graph bundles (including typed concept graphs and node visualisations), pair this plugin with the [OKF Bundle Plugin](./okf.md).
+::: callout tip "Grafos de conocimiento estructurados" icon:cpu
+Para paquetes de conocimiento con grafos de conceptos tipados y visualizaciones interactivas, combine este plugin con el [Plugin de paquetes OKF](./okf.md).
 :::

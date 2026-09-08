@@ -1,6 +1,6 @@
 ---
 title: "Cookie Consent"
-description: "Configure docmd's accessible GDPR cookie consent dialog with custom expiration, localisation, and CustomEvent integrations."
+description: "Configure docmd's accessible GDPR cookie consent dialogue with custom expiration, localisation, and CustomEvent integrations."
 ---
 
 `docmd` includes an accessible, zero-dependency GDPR cookie consent banner built directly into the UI engine. It stores user preferences in `localStorage` with configurable TTL and emits a custom DOM event for analytics script triggers.
@@ -39,10 +39,10 @@ The banner displays on initial visit. Choice preferences are persisted in local 
 
 | Value | Rendering Behaviour |
 | :--- | :--- |
-| `bottom` | Centered horizontally along the bottom edge of the viewport. |
+| `bottom` | Centred horizontally along the bottom edge of the viewport. |
 | `bottom-left` | Anchored to the bottom-left corner of the viewport. |
 | `bottom-right` | Anchored to the bottom-right corner of the viewport. |
-| `center` | Centered floating modal overlay. |
+| `center` | Centred floating modal overlay. |
 
 ## Localisation (i18n)
 

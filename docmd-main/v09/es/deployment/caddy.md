@@ -1,47 +1,47 @@
 ---
-title: "Caddy Server Deployment"
-description: "Deploy docmd documentation using Caddy web server with automatic TLS certificate provisioning."
+title: "Despliegue con servidor Caddy"
+description: "Despliega documentación de docmd utilizando el servidor web Caddy con aprovisionamiento automático de certificados TLS."
 ---
 
-[Caddy](https://caddyserver.com/) provides static file hosting with automated HTTPS provisioning via Let's Encrypt.
+[Caddy](https://caddyserver.com/) proporciona alojamiento de archivos estáticos con aprovisionamiento automatizado de HTTPS a través de Let's Encrypt.
 
-## Caddyfile Generation
+## Generación de Caddyfile
 
-Generate a `Caddyfile` pre-configured with project parameters:
+Genera un `Caddyfile` preconfigurado con los parámetros de tu proyecto:
 
 ```bash
 npx @docmd/core deploy --caddy
 ```
 
-The deployer configures:
-* **Host Address**: Injects the domain hostname from `config.url`.
-* **Root Directory**: Points to `config.out` (`./site`).
-* **SPA Rules**: Appends `try_files` directives conditionally when `layout.spa: true`.
+El deployer configura:
+* **Dirección del host**: Inyecta el nombre de dominio a partir de `config.url`.
+* **Directorio raíz**: Apunta a `config.out` (`./site`).
+* **Reglas SPA**: Añade directivas `try_files` condicionalmente cuando `layout.spa: true`.
 
-## Configuration Blueprint
+## Esquema de configuración
 
 ```caddy "Caddyfile"
 docs.example.com {
     root * ./site
     file_server
 
-    # SPA Fallback (conditional on layout.spa)
+    # Reserva SPA (condicional según layout.spa)
     try_files {path} {path}/ /index.html
 
-    # Security Headers
+    # Cabeceras de seguridad
     header {
         X-Content-Type-Options "nosniff"
         X-Frame-Options "SAMEORIGIN"
         -Server
     }
 
-    # Custom 404 Routing
+    # Enrutamiento de 404 personalizado
     handle_errors {
         rewrite * /404.html
         file_server
     }
 
-    # Cache Static Assets
+    # Caché de recursos estáticos
     @static {
         file
         path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.webp *.avif *.svg *.woff *.woff2 *.eot *.ttf *.otf
@@ -50,12 +50,12 @@ docs.example.com {
 }
 ```
 
-## Deployment Execution
+## Ejecución del despliegue
 
-1. Build static output: `npx @docmd/core build`
-2. Transfer compiled assets and `Caddyfile` to the target host.
-3. Start Caddy: `caddy run --config Caddyfile`
+1. Compila la salida estática: `npx @docmd/core build`
+2. Transfiere los recursos compilados y el `Caddyfile` al servidor de destino.
+3. Inicia Caddy: `caddy run --config Caddyfile`
 
-::: callout tip "Automatic TLS Certificates" icon:shield-check
-When specifying a public domain in `url`, Caddy provisions and renews TLS certificates automatically without external scripts.
+::: callout tip "Certificados TLS automáticos" icon:shield-check
+Al especificar un dominio público en `url`, Caddy aprovisiona y renueva certificados TLS automáticamente sin necesidad de scripts externos.
 :::

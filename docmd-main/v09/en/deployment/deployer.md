@@ -62,7 +62,7 @@ Generates `.github/workflows/deploy.yml` containing a GitHub Actions workflow th
 If you prefer a pre-packaged action without maintaining local workflow files, use the official [`docmd-io/deploy`](./github-action) action.
 :::
 
-### Docker Containerization
+### Docker Containerisation
 
 ```bash
 npx @docmd/core deploy --docker

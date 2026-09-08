@@ -1,52 +1,52 @@
 ---
-title: "Icons"
-description: "Integrate Lucide icons into navigation sidebars, buttons, tags, and custom components in docmd."
+title: "Iconos"
+description: "Integre iconos de Lucide en barras laterales, botones, etiquetas y componentes personalizados en docmd."
 ---
 
-`docmd` includes native support for the [Lucide](external:https://lucide.dev/) icon library. Assign icons to navigation items, buttons, tags, and tabs to enhance visual scannability across your site.
+`docmd` incorpora compatibilidad nativa con la biblioteca de iconos [Lucide](external:https://lucide.dev/). Asigne iconos a enlaces de navegación, botones, etiquetas y pestañas para mejorar la legibilidad y el atractivo visual de su documentación.
 
-## Sidebar Navigation Icons
+## Iconos en la navegación lateral
 
-Assign Lucide icon names to navigation nodes in `docmd.config.json`. Use the kebab-case identifier of any icon from the Lucide collection:
+Asigne nombres de iconos Lucide a los nodos de navegación en `docmd.config.json`. Utilice el identificador en minúsculas separado por guiones (kebab-case) de cualquier icono de la colección:
 
 ```json "docmd.config.json"
 {
   "navigation": [
-    { "title": "Home", "path": "/", "icon": "home" },
-    { "title": "Setup", "path": "/setup", "icon": "settings" }
+    { "title": "Inicio", "path": "/", "icon": "home" },
+    { "title": "Configuración", "path": "/setup", "icon": "settings" }
   ]
 }
 ```
 
-## Icons in UI Containers
+## Iconos en contenedores de interfaz
 
-Pass the `icon:` property to containers such as buttons, tags, tabs, or cards:
+Utilice la propiedad `icon:` en contenedores como botones, etiquetas, pestañas o tarjetas:
 
 ```markdown
-::: button "Download Release" /download icon:download
-::: tag "Verified" icon:check-circle color:green
+::: button "Descargar versión" /download icon:download
+::: tag "Verificado" icon:check-circle color:green
 :::
 ```
 
-## Custom CSS Styling
+## Estilos CSS personalizados
 
-All icons render as inline SVGs with the `.lucide-icon` CSS class. Adjust icon dimensions or stroke weights in `customCss`:
+Todos los iconos se renderizan como elementos SVG en línea con la clase `.lucide-icon`. Ajuste sus dimensiones o grosor de trazo en `customCss`:
 
 ```css
 .lucide-icon {
-  stroke-width: 1.5px; /* Thinner stroke weight for modern aesthetics */
+  stroke-width: 1.5px; /* Trazo estilizado más fino */
   width: 1.2rem;
   height: 1.2rem;
 }
 
-/* Target specific icon identifiers */
+/* Personalizar iconos concretos */
 .icon-rocket {
   color: #ff5733;
 }
 ```
 
-## Icon Explorer Reference
+## Directorio de iconos disponibles
 
-Browse thousands of vector icons available in the built-in Lucide library:
+Explore los miles de iconos vectoriales incluidos en la biblioteca de Lucide:
 
-::: button "Browse Lucide Icon Directory" external:https://lucide.dev/icons icon:globe
+::: button "Explorar catálogo de iconos Lucide" external:https://lucide.dev/icons icon:globe

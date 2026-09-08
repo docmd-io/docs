@@ -120,7 +120,7 @@ build('./docmd.config.json');
 ::: /tabs
 
 ::: callout tip "Legacy == tab Syntax" icon:archive
-Existing documentation utilizing `== tab` syntax continues to parse seamlessly:
+Existing documentation utilising `== tab` syntax continues to parse seamlessly:
 
 ```markdown
 ::: tabs

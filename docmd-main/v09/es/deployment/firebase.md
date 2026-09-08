@@ -1,41 +1,41 @@
 ---
-title: "Firebase Hosting Deployment"
-description: "Deploy static docmd documentation to Firebase Hosting manually or via GitHub Actions."
+title: "Despliegue en Firebase Hosting"
+description: "Despliega documentación estática de docmd en Firebase Hosting manualmente o a través de GitHub Actions."
 ---
 
-[Firebase Hosting](https://firebase.google.com/products/hosting) serves docmd static sites over Google's global CDN infrastructure with automated SSL certificate provisioning.
+[Firebase Hosting](https://firebase.google.com/products/hosting) sirve sitios estáticos de docmd a través de la infraestructura CDN global de Google con aprovisionamiento automatizado de certificados SSL.
 
-## Initial Setup & CLI Tools
+## Configuración inicial y herramientas de CLI
 
-Install Firebase CLI tools:
+Instala las herramientas de CLI de Firebase:
 
 ```bash
 npm install -g firebase-tools
 firebase login
 ```
 
-### Initialisation Steps
+### Pasos de inicialización
 
-1. Compile your site:
+1. Compila tu sitio:
    ```bash
    npx @docmd/core build
    ```
-2. Initialise Firebase Hosting configuration:
+2. Inicializa la configuración de Firebase Hosting:
    ```bash
    firebase init hosting
    ```
-   Select parameters when prompted:
-   * **Public directory**: `site`
-   * **Single-page app rewrite**: `No` (docmd compiles individual `index.html` pages).
-   * **Overwrite `site/index.html`**: `No`
-3. Deploy assets:
+   Selecciona los parámetros cuando se te solicite:
+   * **Directorio público**: `site`
+   * **Reescritura para aplicación de página única (SPA)**: `No` (docmd compila páginas individuales `index.html`).
+   * **Sobrescribir `site/index.html`**: `No`
+3. Despliega los recursos:
    ```bash
    firebase deploy --only hosting
    ```
 
-## GitHub Actions CI/CD Integration
+## Integración CI/CD con GitHub Actions
 
-To automate publishing on push to `main`, create `.github/workflows/firebase.yml`:
+Para automatizar la publicación con cada push a `main`, crea `.github/workflows/firebase.yml`:
 
 ```yaml ".github/workflows/firebase.yml"
 name: Deploy to Firebase Hosting
@@ -62,8 +62,8 @@ jobs:
           channelId: live
 ```
 
-Store `FIREBASE_SERVICE_ACCOUNT` in your repository under **Settings → Secrets and variables → Actions**.
+Guarda `FIREBASE_SERVICE_ACCOUNT` en tu repositorio bajo **Settings → Secrets and variables → Actions**.
 
-::: callout tip "Custom Domain Mapping" icon:globe
-Add custom domains in the Firebase Console under **Hosting → Custom domain**. Update the `url` property in `docmd.config.json` to match your domain so sitemaps and open graph metadata generate correctly.
+::: callout tip "Mapeo de dominios personalizados" icon:globe
+Añade dominios personalizados en la consola de Firebase en **Hosting → Custom domain**. Actualiza la propiedad `url` en `docmd.config.json` para que coincida con tu dominio de modo que los mapas del sitio y los metadatos de Open Graph se generen correctamente.
 :::

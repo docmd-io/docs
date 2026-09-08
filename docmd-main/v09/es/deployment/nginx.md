@@ -1,25 +1,25 @@
 ---
-title: "NGINX Deployment"
-description: "Deploy compiled docmd static documentation to NGINX web servers."
+title: "Despliegue con NGINX"
+description: "Despliega documentación estática compilada con docmd en servidores web NGINX."
 ---
 
-NGINX provides high-performance static file delivery for docmd compilations.
+NGINX proporciona una entrega de archivos estáticos de alto rendimiento para las compilaciones de docmd.
 
-## Manifest Generation
+## Generación del manifiesto
 
-Generate a pre-configured `nginx.conf` matching your project settings:
+Genera un archivo `nginx.conf` preconfigurado adaptado a los ajustes de tu proyecto:
 
 ```bash
 npx @docmd/core deploy --nginx
 ```
 
-The generated configuration includes:
+La configuración generada incluye:
 
-* **`server_name`**: Extracted from the `url` property in `docmd.config.json` (defaults to `localhost`).
-* **SPA Fallback**: Includes `try_files $uri $uri/ /index.html;` conditionally when `layout.spa: true`.
-* **Security & Compression**: Configures GZIP compression and security headers (`X-Content-Type-Options`, `X-Frame-Options`).
+* **`server_name`**: Extraído de la propiedad `url` en `docmd.config.json` (por defecto `localhost`).
+* **Reserva SPA**: Incluye `try_files $uri $uri/ /index.html;` condicionalmente cuando `layout.spa: true`.
+* **Seguridad y compresión**: Configura compresión GZIP y cabeceras de seguridad (`X-Content-Type-Options`, `X-Frame-Options`).
 
-## Configuration Structure
+## Estructura de la configuración
 
 ```nginx "nginx.conf"
 server {
@@ -28,12 +28,12 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
-    # Security Headers
+    # Cabeceras de seguridad
     server_tokens off;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
 
-    # GZIP Compression
+    # Compresión GZIP
     gzip on;
     gzip_vary on;
     gzip_min_length 256;
@@ -41,15 +41,15 @@ server {
                text/xml application/xml application/xml+rss text/javascript
                image/svg+xml;
 
-    # SPA Routing Fallback (conditional on layout.spa)
+    # Reserva de enrutamiento SPA (condicional según layout.spa)
     location / {
         try_files $uri $uri/ /index.html;
     }
 
-    # Custom 404 Handler
+    # Controlador de 404 personalizado
     error_page 404 /404.html;
 
-    # Static Asset Caching (6 months, immutable)
+    # Almacenamiento en caché de recursos estáticos (6 meses, inmutable)
     location ~* \.(?:ico|css|js|gif|jpe?g|png|webp|avif|woff2?|eot|ttf|otf|svg)$ {
         expires 6M;
         access_log off;
@@ -58,13 +58,13 @@ server {
 }
 ```
 
-## Deployment Steps
+## Pasos de despliegue
 
-1. Compile the site: `npx @docmd/core build`
-2. Transfer compiled assets (`site/`) to your server web root (e.g. `/var/www/html/` or `/usr/share/nginx/html/`).
-3. Copy `nginx.conf` into `/etc/nginx/conf.d/default.conf`.
-4. Reload NGINX: `sudo systemctl reload nginx`
+1. Compila el sitio: `npx @docmd/core build`
+2. Transfiere los recursos compilados (`site/`) a la raíz web de tu servidor (por ejemplo, `/var/www/html/` o `/usr/share/nginx/html/`).
+3. Copia `nginx.conf` a `/etc/nginx/conf.d/default.conf`.
+4. Recarga NGINX: `sudo systemctl reload nginx`
 
-::: callout tip "Re-generation" icon:refresh-cw
-When updating `url` or `layout.spa` in `docmd.config.json`, re-run `npx @docmd/core deploy --nginx --force` to sync configuration changes.
+::: callout tip "Regeneración" icon:refresh-cw
+Al actualizar `url` o `layout.spa` en `docmd.config.json`, vuelve a ejecutar `npx @docmd/core deploy --nginx --force` para sincronizar los cambios de configuración.
 :::
