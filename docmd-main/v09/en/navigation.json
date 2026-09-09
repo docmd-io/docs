@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.6 - Universal Container Syntax, KaTeX Math Fix & Lucide Icon Upgrades",
+        "path": "/release-notes/0-9-6"
+      },
+      {
         "title": "v0.9.5 - AI Autonomous Tools, Threads Modernization & Template Refinements",
         "path": "/release-notes/0-9-5"
       },

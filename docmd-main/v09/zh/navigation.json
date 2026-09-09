@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.6 - 通用容器语法、KaTeX 数学公式修复与 Lucide 图标库升级",
+        "path": "/release-notes/0-9-6"
+      },
+      {
         "title": "v0.9.5 - AI 自主工具、Threads 讨论重构与模板界面优化",
         "path": "/release-notes/0-9-5"
       },

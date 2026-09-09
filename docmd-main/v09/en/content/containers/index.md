@@ -73,7 +73,7 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
     ::: callout info title:"Asynchronous I/O" # Inner callout
     This module utilizes an asynchronous non-blocking I/O pipeline.
     ::: /callout # Closes inner callout
-    ::: button title:"Explore Core Engine Architecture" url:"url:"/#architecture""
+    ::: button title:"Explore Core Engine Architecture" url:"/#architecture"
 ::: /card # Closes parent card
 ```
 

@@ -510,6 +510,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.6 - Sintaxis Universal de Contenedores, Corrección KaTeX Math y Actualización de Iconos Lucide",
+        "path": "/release-notes/0-9-6"
+      },
+      {
         "title": "v0.9.5 - Herramientas de IA autónomas, modernización de Threads y mejoras de plantillas",
         "path": "/release-notes/0-9-5"
       },
