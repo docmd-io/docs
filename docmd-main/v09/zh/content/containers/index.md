@@ -38,6 +38,7 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 | **[Tags 标签](tags.md)** | `tag` | 用于版本标签或状态标识的自闭合彩色徽章。 |
 | **[Hero 区块](hero.md)** | `hero` | 支持分割布局与 `::: slide` 轮播的高冲击力落地页头部。 |
 | **[URL 嵌入](embed.md)** | `embed` | 通过 `embed-lite` 实现零延迟的视频、社交与交互式媒体嵌入。 |
+| **[Changelogs 更新日志](changelogs.md)** | `changelog` | 基于时间线的版本历史，支持显式 `::: log` 条目。 |
 | **[Mermaid 图表](mermaid.md)** | `mermaid` | 包含单图表控制的流程图、时序图与架构映射图。 |
 | **[嵌套容器](nested-containers.md)** | - | 复杂多组件布局的递归组合模式。 |
 

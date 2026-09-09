@@ -38,6 +38,7 @@ Admite **Markdown**, imágenes y anidamiento profundo de componentes.
 | **[Etiquetas / Tags](tags.md)** | `tag` | Insignias de colores de autocierre para etiquetas de versión. |
 | **[Secciones Destacadas / Hero](hero.md)** | `hero` | Encabezados de páginas de destino con soporte dividido y `::: slide`. |
 | **[Incrustaciones / Embeds](embed.md)** | `embed` | Incrustaciones para video, redes sociales y medios interactivos con `embed-lite`. |
+| **[Registros de Cambios / Changelogs](changelogs.md)** | `changelog` | Historiales de versiones basados en líneas de tiempo con elementos explícitos `::: log`. |
 | **[Diagramas Mermaid](mermaid.md)** | `mermaid` | Diagramas de flujo, secuencia y mapas de arquitectura con controles por diagrama. |
 | **[Contenedores Anidados](nested-containers.md)** | - | Patrones de composición recursiva para diseños complejos. |
 
