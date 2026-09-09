@@ -79,7 +79,6 @@ Button- (`::: button`) und Tag- (`::: tag`) Container unterstützen alle Verlink
 
 ::: tag title:"v0.9.0 Release" link:release-notes/0-9-0.md icon:tag color:#22c55e
 ::: tag title:"External Site" link:external:https://docmd.io icon:external-link
-:::
 ```
 
 ## Navigations-Konfigurations-Links

@@ -79,7 +79,6 @@ Los contenedores de botones (`::: button`) y etiquetas (`::: tag`) admiten todos
 
 ::: tag title:"Lanzamiento v0.9.0" link:release-notes/0-9-0.md icon:tag color:#22c55e
 ::: tag title:"Sitio externo" link:external:https://docmd.io icon:external-link
-:::
 ```
 
 ## Enlaces de configuración de navegación
