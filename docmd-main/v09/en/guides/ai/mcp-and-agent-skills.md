@@ -43,7 +43,7 @@ Once connected, agents can execute 6 primary tool handlers:
 5. `validate_docs()`: Lints internal link targets and reports broken anchors.
 6. `get_llms_context()`: Fetches the consolidated `llms-full.txt` context payload.
 
-## Leveraging Agent Skills (`SKILL.md`)
+## Using Agent Skills (`SKILL.md`)
 
 Running `docmd init` generates a `SKILL.md` file in your repository root. This document serves as an instruction manual for AI agents operating on your codebase.
 

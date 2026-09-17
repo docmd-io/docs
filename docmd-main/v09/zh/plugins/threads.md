@@ -1,6 +1,6 @@
 ---
 title: "Threads 插件"
-description: "为您的文档添加内联讨论线程 —— 直接存储在您的 Markdown 文件中。"
+description: "为您的文档添加内联讨论线程：直接存储在您的 Markdown 文件中。"
 ---
 
 `@docmd/plugin-threads` 插件可在文档页面上实现协作式内联评论与文本标注。高亮与讨论线程使用自定义容器块（`::: threads`）原生存储在 Markdown 源码文件中。无需外部数据库。
@@ -71,8 +71,8 @@ Threads 讨论交互界面、高亮标注工具以及 Markdown 文件持久化�
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1天前</div>
     <div class="threads-preview-body">Good idea - I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
     <div class="threads-preview-reactions">
-      <div class="threads-preview-reaction">👍 <span>2</span></div>
-      <div class="threads-preview-reaction">🚀 <span>1</span></div>
+      <div class="threads-preview-reaction">+1 <span>2</span></div>
+      <div class="threads-preview-reaction">Idea <span>1</span></div>
     </div>
   </div>
   <div class="threads-preview-comment threads-preview-reply">
@@ -103,7 +103,7 @@ Threads 讨论交互界面、高亮标注工具以及 Markdown 文件持久化�
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5天前&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ 已解决</span></div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5天前&nbsp;&nbsp;<span class="threads-preview-resolved-badge">已解决</span></div>
     <div class="threads-preview-body">Fixed the typo in the config example.</div>
   </div>
   <div class="threads-preview-footer">
@@ -111,7 +111,7 @@ Threads 讨论交互界面、高亮标注工具以及 Markdown 文件持久化�
   </div>
 </div>
 
-右侧贴边停靠的标签触发器 <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> 贴紧视口右边缘，显示未解决的主题计数。将鼠标悬停在任何高亮文本上时，会直接在内容中呈现内联评论预览卡片，而点击标签则会滑出讨论侧边栏抽屉。在打开和关闭抽屉时，页面主题会无缝持久保存，无需重新加载整个页面。
+右侧贴边停靠的标签触发器 <span class="threads-preview-fab"><span class="threads-preview-fab-badge">2</span></span> 贴紧视口右边缘，显示未解决的主题计数。将鼠标悬停在任何高亮文本上时，会直接在内容中呈现内联评论预览卡片，而点击标签则会滑出讨论侧边栏抽屉。在打开和关闭抽屉时，页面主题会无缝持久保存，无需重新加载整个页面。
 
 ## Markdown 存储格式
 

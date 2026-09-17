@@ -5,9 +5,6 @@ description: "Renderice diagramas de flujo, diagramas de secuencia y mapas de ar
 
 `docmd` incluye soporte integrado para renderizar diagramas de alta fidelidad con **Mermaid**. Los autores pueden elegir entre personalización por diagrama mediante el contenedor `::: mermaid` o compatibilidad universal utilizando bloques de código estándar.
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: mermaid` ... `::: /mermaid`), propiedades clave-valor explícitas (`title:"..."`, `align:center`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para bloques de código estándar ` ```mermaid ` y configuraciones globales de plugins.
-:::
 
 ## Visión General y Arquitectura Híbrida
 

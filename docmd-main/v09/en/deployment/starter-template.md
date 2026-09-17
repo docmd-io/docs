@@ -29,7 +29,7 @@ Update `docmd.config.json` with your project title and target URL:
 
 Configure Pages publishing settings in GitHub:
 
-1. Navigate to **Settings → Pages**.
+1. Navigate to **Settings : Pages**.
 2. Under **Source**, select **GitHub Actions**.
 3. Save choices.
 
@@ -132,7 +132,7 @@ To bind a custom domain (e.g. `docs.example.com`):
    { "url": "https://docs.example.com" }
    ```
 2. Commit a `CNAME` file containing your domain inside `docs/`.
-3. Set domain routing in **Settings → Pages → Custom domain**.
+3. Set domain routing in **Settings : Pages : Custom domain**.
 
 ::: callout tip "Template vs GitHub Action" icon:git-branch
 The starter template provides a ready-made repository layout for new projects. If you are adding documentation to an existing codebase, use the [GitHub Action](./github-action) directly.

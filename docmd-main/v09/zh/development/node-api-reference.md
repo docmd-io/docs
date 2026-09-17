@@ -1,6 +1,6 @@
 ---
 title: "Node API 参考"
-description: "面向插件作者的低层级 Node API —— URL 工具、Action 分发器、源文件工具、引擎加载器与 TypeScript 类型。"
+description: "面向插件作者的低层级 Node API：URL 工具、Action 分发器、源文件工具、引擎加载器与 TypeScript 类型。"
 ---
 
 ::: callout info
@@ -28,9 +28,9 @@ npm install @docmd/api
 ```javascript
 import { outputPathToSlug } from '@docmd/api';
 
-outputPathToSlug('guide/index.html');   // → 'guide/'
-outputPathToSlug('index.html');         // → '/'
-outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
+outputPathToSlug('guide/index.html');   // returns 'guide/'
+outputPathToSlug('index.html');         // returns '/'
+outputPathToSlug('de/v1/api/index.html'); // returns 'de/v1/api/'
 ```
 
 ### `outputPathToPathname(outputPath)`
@@ -40,8 +40,8 @@ outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
 ```javascript
 import { outputPathToPathname } from '@docmd/api';
 
-outputPathToPathname('guide/index.html'); // → '/guide/'
-outputPathToPathname('index.html');       // → '/'
+outputPathToPathname('guide/index.html'); // returns '/guide/'
+outputPathToPathname('index.html');       // returns '/'
 ```
 
 ### `outputPathToCanonical(outputPath, siteUrl)`
@@ -61,8 +61,8 @@ outputPathToCanonical("guide/index.html", "https://docs.example.com");
 ```javascript
 import { sanitizeUrl } from "@docmd/api";
 
-sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com/guide"
-sanitizeUrl("/foo//bar"); // → "/foo/bar"
+sanitizeUrl("https://docs.example.com//guide"); // returns "https://docs.example.com/guide"
+sanitizeUrl("/foo//bar"); // returns "/foo/bar"
 ```
 
 ### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
@@ -72,7 +72,7 @@ sanitizeUrl("/foo//bar"); // → "/foo/bar"
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
+buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // returns '/de/v1/guide/'
 ```
 
 ### `resolveHref(href)`
@@ -82,9 +82,9 @@ buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
 ```javascript
 import { resolveHref } from "@docmd/api";
 
-resolveHref("overview.md"); // → "overview/"
-resolveHref("external:https://github.com"); // → "https://github.com"
-resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
+resolveHref("overview.md"); // returns "overview/"
+resolveHref("external:https://github.com"); // returns "https://github.com"
+resolveHref("raw:docs/readme.md"); // returns "docs/readme.md"
 ```
 
 ## 预计算好的页面 URL
@@ -222,6 +222,6 @@ import type {
 
 ## 下一步
 
-- [开发插件](./building-plugins.md) —— 起点。
-- [插件示例](./plugin-examples.md) —— 查看完整的插件演练。
-- [引擎与架构](./engines/overview.md) —— Rust 引擎、N-API 与引擎加载器内部。
+- [开发插件](./building-plugins.md):, 起点。
+- [插件示例](./plugin-examples.md):, 查看完整的插件演练。
+- [引擎与架构](./engines/overview.md):, Rust 引擎、N-API 与引擎加载器内部。

@@ -28,8 +28,8 @@ Convierte una ruta de salida generada por el compilador en un slug de directorio
 ```javascript
 import { outputPathToSlug } from '@docmd/api';
 
-outputPathToSlug('guide/intro.html'); // → 'guide/intro/'
-outputPathToSlug('index.html');       // → '/'
+outputPathToSlug('guide/intro.html'); // returns 'guide/intro/'
+outputPathToSlug('index.html');       // returns '/'
 ```
 
 ### `outputPathToPathname(outputPath)`
@@ -39,8 +39,8 @@ Convierte una ruta de salida en un pathname relativo a la raíz con barra final.
 ```javascript
 import { outputPathToPathname } from '@docmd/api';
 
-outputPathToPathname('guide/index.html'); // → '/guide/'
-outputPathToPathname('index.html');       // → '/'
+outputPathToPathname('guide/index.html'); // returns '/guide/'
+outputPathToPathname('index.html');       // returns '/'
 ```
 
 ### `outputPathToCanonical(outputPath, siteUrl)`
@@ -60,8 +60,8 @@ Elimina dobles barras inclinadas sucesivas (excepto después del protocolo).
 ```javascript
 import { sanitizeUrl } from "@docmd/api";
 
-sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com/guide"
-sanitizeUrl("/foo//bar"); // → "/foo/bar"
+sanitizeUrl("https://docs.example.com//guide"); // returns "https://docs.example.com/guide"
+sanitizeUrl("/foo//bar"); // returns "/foo/bar"
 ```
 
 ### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
@@ -71,7 +71,7 @@ Construye una URL absoluta incorporando prefijos de idioma y versión.
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'es/', 'v1/', 'guide/'); // → '/es/v1/guide/'
+buildAbsoluteUrl('/', 'es/', 'v1/', 'guide/'); // returns '/es/v1/guide/'
 ```
 
 ### `resolveHref(href)`
@@ -81,9 +81,9 @@ Normaliza los enlaces escritos por el usuario en URLs limpias. Gestiona la elimi
 ```javascript
 import { resolveHref } from "@docmd/api";
 
-resolveHref("overview.md"); // → "overview/"
-resolveHref("external:https://github.com"); // → "https://github.com"
-resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
+resolveHref("overview.md"); // returns "overview/"
+resolveHref("external:https://github.com"); // returns "https://github.com"
+resolveHref("raw:docs/readme.md"); // returns "docs/readme.md"
 ```
 
 ## URLs de página precalculadas
@@ -221,6 +221,6 @@ import type {
 
 ## Siguientes pasos
 
-- [Creación de plugins](./building-plugins.md) — empiece aquí.
-- [Ejemplos de plugins](./plugin-examples.md) — recorrido práctico por un plugin completo.
-- [Motores y arquitectura](./engines/overview.md) — motor Rust, N-API e interiores del cargador.
+- [Creación de plugins](./building-plugins.md): empiece aquí.
+- [Ejemplos de plugins](./plugin-examples.md): recorrido práctico por un plugin completo.
+- [Motores y arquitectura](./engines/overview.md): motor Rust, N-API e interiores del cargador.

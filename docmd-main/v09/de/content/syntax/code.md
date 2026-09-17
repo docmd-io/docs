@@ -56,8 +56,8 @@ docmd unterstützt gängige technische Ökosysteme out of the box:
 
 Wenn Sie Code für KI-Agenten dokumentieren, befolgen Sie diese Praktiken:
 
-1.  **Beschriften Sie jeden Block explizit** — verwenden Sie `typescript`, `bash`, `json`, anstatt sich auf Auto-Erkennung zu verlassen. Dies stellt sicher, dass der Parser die korrekte Grammatik für den `llms.txt`-Stream anwendet.
-2.  **Betten Sie Absichten in Kommentaren ein** — Inline-Kommentare erklären komplexe Logik und liefern wichtige Begründungen direkt im Code.
+1.  **Beschriften Sie jeden Block explizit**: Verwenden Sie `typescript`, `bash`, `json`, anstatt sich auf Auto-Erkennung zu verlassen. Dies stellt sicher, dass der Parser die korrekte Grammatik für den `llms.txt`-Stream anwendet.
+2.  **Betten Sie Absichten in Kommentaren ein**: Inline-Kommentare erklären komplexe Logik und liefern wichtige Begründungen direkt im Code.
 
 ::: callout tip "Ein-Klick-Portabilität"
 Setzen Sie `copyCode: true` in Ihrer Konfiguration, um eine dezente Kopierschaltfläche zu aktivieren. Sie erscheint beim Hover oben rechts auf jedem Block und ermöglicht es Lesern, Snippets sofort zu kopieren.

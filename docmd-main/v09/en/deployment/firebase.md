@@ -62,8 +62,8 @@ jobs:
           channelId: live
 ```
 
-Store `FIREBASE_SERVICE_ACCOUNT` in your repository under **Settings → Secrets and variables → Actions**.
+Store `FIREBASE_SERVICE_ACCOUNT` in your repository under **Settings > Secrets and variables > Actions**.
 
 ::: callout tip "Custom Domain Mapping" icon:globe
-Add custom domains in the Firebase Console under **Hosting → Custom domain**. Update the `url` property in `docmd.config.json` to match your domain so sitemaps and open graph metadata generate correctly.
+Add custom domains in the Firebase Console under **Hosting > Custom domain**. Update the `url` property in `docmd.config.json` to match your domain so sitemaps and open graph metadata generate correctly.
 :::

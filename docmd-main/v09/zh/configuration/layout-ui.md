@@ -28,29 +28,65 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 *   **控制**：通过 `layout.header` 全局启用或禁用页头。通过 `layout.breadcrumbs` 切换面包屑。
 *   **局部覆盖**：在 [页面 Frontmatter](../content/frontmatter.md) 中使用 `hideTitle: true` 可在局部隐藏标题区。
 
-### 复制小部件
-面包屑栏包含两个复制按钮。一个复制页面的原始 Markdown，另一个复制包含 URL、标题与描述的结构化上下文块。便于粘贴到 AI 对话窗口或支持工单中。
+### 标题格式与分隔符
 
-在 `docmd.config.json` 的 `theme.copyWidgets` 下配置这些按钮：
+配置文档模板中如何组合页面标题与站点标题：
 
 ```json "docmd.config.json"
 {
-  "theme": {
-    "copyWidgets": {
-      "enabled": true,
-      "raw": true,
-      "context": true
-    }
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
   }
 }
 ```
 
-*   `enabled`：设为 `false` 完全禁用该栏。
-*   `raw`：设为 `false` 隐藏"复制 Markdown"按钮。
-*   `context`：设为 `false` 隐藏"复制上下文"按钮。
+- `titleSeparator`: 浏览器标签页 `<title>` 与社交卡片预览中页面标题与站点标题之间的分隔符。默认为标准短划线 (`"-"`)。编译器会自动在非空分隔符两侧填充单空格 (`" - "`)，因此您只需输入 `"-"` 或 `"|"` 等简单字符。
+- `titleAppend`: 决定是否在页面标题后追加站点标题（默认为 `true`）。设为 `false` 则仅输出页面标题。亦可在页面 Frontmatter 中按页覆盖 (`titleAppend: false`)。
+
+### 复制与打印小部件
+在正文内容正上方，`docmd` 提供上下文阅读实用小部件：一键复制原始 Markdown 源码、结构化 AI 提示词上下文，以及页面打印功能：
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
+    },
+    "print": false
+  }
+}
+```
+
+*   `copyWidgets.enabled`：设为 `false` 完全禁用该小部件栏。
+*   `copyWidgets.raw`：设为 `false` 隐藏"复制 Markdown"按钮。
+*   `copyWidgets.context`：设为 `false` 隐藏"复制上下文"按钮。
+*   `print`：默认禁用（`false`）。启用（`true`）后，将在复制小部件旁显示打印按钮（并在专注模式工具栏中显示）。打印按钮绝不会出现在页眉或菜单栏中。
+
+### 专注模式（无干扰阅读）
+
+专注模式收起侧边栏、页眉、目录树及浮动控件，提供专门针对技术长文优化的纯净阅读界面：
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "focusMode": false
+  }
+}
+```
+
+*   **默认状态**：默认禁用（`false`）。
+*   **启用后**：在选项菜单中显示专注模式切换按钮，并启用快捷键 <kbd>Alt</kbd>+<kbd>F</kbd>。
+*   **专注模式中的控件**：右上角仅保留三个核心控制项：打印（若 `layout.print` 已启用）、亮暗主题切换，以及退出专注模式（<kbd>Esc</kbd> 或 <kbd>Alt</kbd>+<kbd>F</kbd>）。
+
+::: callout info title:"向后兼容性" icon:sparkles
+对于现有项目，docmd 会自动解析早期配置（包括根级别的 `print`、`focusMode`、`customJs` 以及 `theme.copyWidgets`），实现完全向后兼容。
+:::
 
 ### 实用菜单（选项菜单）
-`optionsMenu` 将核心实用工具（**全局搜索**、**主题切换**、**赞助链接**）归为一组。
+`optionsMenu` 将核心实用工具（**全局搜索**、**主题切换**、**专注模式**、**赞助链接**）归为一组。
 
 ```json "docmd.config.json"
 {
@@ -59,7 +95,8 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
       "position": "header", 
       "components": {
         "search": true,      
-        "themeSwitch": true, 
+        "themeSwitch": true,
+        "focusMode": true,
         "sponsor": "https://github.com/sponsors/mgks"
       }
     }
@@ -69,7 +106,7 @@ description: "通过管理页头、侧边栏与功能界面插槽来控制界面
 
 ::: callout info title:"自动回退" icon:sparkles
 若所选位置对应的容器被禁用，引擎会将选项菜单移至 `sidebar-top`。这能保证实用工具始终可访问。
-::: /callout
+:::
 
 ### 侧边栏与导航
 侧边栏是主导航树。其结构可在配置或外部 JSON 文件中定义。

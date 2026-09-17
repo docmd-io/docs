@@ -13,7 +13,7 @@ Habilite el banner de anuncios en su manifiesto `docmd.config.json`:
 {
   "layout": {
     "banner": {
-      "content": "**¡v0.9.0 ya está disponible!** — lea el anuncio completo del lanzamiento.",
+      "content": "**¡v0.9.0 ya está disponible!** Lea el anuncio completo del lanzamiento.",
       "type": "info",
       "dismissible": true,
       "link": { "text": "Leer anuncio", "url": "/blog/v0-9" }
@@ -68,7 +68,7 @@ El banner se renderiza en la parte superior de cada página. Al ser descartado p
 {
   "layout": {
     "banner": {
-      "html": "<strong>Nuevo:</strong> El motor del compilador de Rust ya está disponible en vista previa. <a href=\"/blog/rust-engine\">Más información →</a>",
+      "html": "<strong>Nuevo:</strong> El motor del compilador de Rust ya está disponible en vista previa. <a href=\"/blog/rust-engine\">Más información</a>",
       "type": "info",
       "dismissible": false
     }

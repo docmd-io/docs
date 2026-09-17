@@ -27,7 +27,7 @@ components:
 
 ::: callout info title:"Infinite Nesting Support" icon:info
 Even with `noStyle: true`, all standard docmd containers (such as `::: card`, `::: tabs`, and `::: hero`) are fully supported and can be composed freely.
-::: /callout
+:::
 ```
 
 ## Component Opt-In Controls
@@ -70,7 +70,6 @@ The zero-config documentation engine for modern engineering teams.
 == side
 ::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ::: /hero
-:::
 
 ::: grids
   ::: card title:"Zero Configuration"
@@ -120,7 +119,7 @@ assets/
 
 ```json "assets/i18n/en.json"
 {
-  "hero.title": "Markdown → Production Docs",
+  "hero.title": "Markdown to Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
   "nav.docs": "Documentation",
   "nav.editor": "Live Editor",
@@ -132,7 +131,7 @@ assets/
 3. Attach `data-i18n` attributes to your HTML elements:
 
 ```html
-<h1 data-i18n="hero.title">Markdown → Production Docs</h1>
+<h1 data-i18n="hero.title">Markdown to Production Docs</h1>
 <p data-i18n="hero.subtitle">The zero-config documentation engine.</p>
 <a data-i18n="nav.docs" href="/docs">Documentation</a>
 ```
@@ -143,7 +142,7 @@ To translate attributes such as `placeholder`, `title`, or `aria-label`, use `da
 
 ```html
 <input data-i18n-placeholder="search.placeholder" placeholder="Search...">
-<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">☰</button>
+<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">Menu</button>
 <a data-i18n-title="nav.tooltip" title="Go to docs">Docs</a>
 ```
 
@@ -193,7 +192,7 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 
 ::: callout info title:"Automatic Locale Detection" icon:info
 The client script detects active locales from the URL path prefix. For the default locale, it inspects `localStorage` for saved preferences. The `switchLocale()` function handles URL navigation automatically.
-::: /callout
+:::
 
 ### In-Place Mode Configuration
 

@@ -1,6 +1,6 @@
 ---
 title: "CLI 命令"
-description: "docmd 命令行参考 —— 所有可用命令与选项。"
+description: "docmd 命令行参考：所有可用命令与选项。"
 ---
 
 ## 命令一览
@@ -39,8 +39,8 @@ npx @docmd/core init
 ```
 
 将创建：
-- `docs/index.md` —— 模板首页
-- `docmd.config.json` —— 推荐默认值
+- `docs/index.md`：模板首页
+- `docmd.config.json`：推荐默认值
 - 更新 `package.json`，加入构建脚本
 
 ## `npx @docmd/core dev`
@@ -120,7 +120,7 @@ npx @docmd/core deploy [options]
 npx @docmd/core migrate
 ```
 
-自动重新映射已废弃的键（例如 `siteTitle` → `title`），并重组配置对象。
+自动重新映射已废弃的键（例如 `siteTitle` : `title`），并重组配置对象。
 
 ## `npx @docmd/core validate`
 
@@ -138,7 +138,7 @@ npx @docmd/core validate [options]
 
 ## `npx @docmd/core doctor`
 
-预检命令，报告缺失的插件、损坏的配置以及不匹配的引擎。不写文件、没有构建副作用 —— 纯粹用于诊断。
+预检命令，报告缺失的插件、损坏的配置以及不匹配的引擎。不写文件、没有构建副作用：纯粹用于诊断。
 
 ```bash
 npx @docmd/core doctor [选项]
@@ -150,7 +150,7 @@ npx @docmd/core doctor [选项]
 | `--fix` | 自动安装 `doctor` 标记为缺失的官方插件或模板。 |
 | `--json` | 将完整报告以机器可读的 JSON 形式输出（用于 CI 和工具）。 |
 
-默认情况下，`doctor` 会打印一份人类可读的摘要，涵盖：已安装的 `@docmd/core` 版本、每个已配置的插件（附带版本和 `✓ installed` / `⚠ missing` 状态）、当前激活的模板、请求的引擎（`js` 始终启用，`rust` 可选），以及一份自动安装候选清单。带上 `--fix`，它会调用项目所用的包管理器（`pnpm add`、`npm install --save`、`yarn add` 或 `bun add`）来安装这些候选，并在全部解决后以退出码 0 结束。带上 `--json`，同样的数据会作为一个 JSON 对象输出 —— 适合接入 pre-commit 钩子和 CI 闸门。退出码 0 表示项目处于健康状态；非 0 表示即使经过 `--fix` 仍有未解决的问题。
+默认情况下，`doctor` 会打印一份人类可读的摘要，涵盖：已安装的 `@docmd/core` 版本、每个已配置的插件（附带版本和 `installed` / `missing` 状态）、当前激活的模板、请求的引擎（`js` 始终启用，`rust` 可选），以及一份自动安装候选清单。带上 `--fix`，它会调用项目所用的包管理器（`pnpm add`、`npm install --save`、`yarn add` 或 `bun add`）来安装这些候选，并在全部解决后以退出码 0 结束。带上 `--json`，同样的数据会作为一个 JSON 对象输出：适合接入 pre-commit 钩子和 CI 闸门。退出码 0 表示项目处于健康状态；非 0 表示即使经过 `--fix` 仍有未解决的问题。
 
 ## `npx @docmd/core mcp`
 

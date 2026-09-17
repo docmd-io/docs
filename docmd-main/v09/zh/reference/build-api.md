@@ -1,6 +1,6 @@
 ---
 title: "Build API"
-description: "程序化的构建 API —— 在 Node.js 中调用 docmd 来构建站点、Live Editor bundle 与 workspace 项目。"
+description: "程序化的构建 API：在 Node.js 中调用 docmd 来构建站点、Live Editor bundle 与 workspace 项目。"
 ---
 
 您可以直接在 Node.js 应用中导入并使用 docmd 的构建引擎。这非常适合自定义 CI/CD 流水线、自动化的文档生成，以及在 monorepo 中预渲染文档。
@@ -99,6 +99,6 @@ async function deploy() {
 
 ## 下一步
 
-- [插件](../plugins/usage.md) —— 扩展 docmd 而无需改动引擎。
-- [CLI 命令](./cli-commands.md) —— 大多数 CI/CD 场景下的推荐路径。
-- [Workspaces](../configuration/workspaces.md) —— 多项目场景下的配置参考。
+- [插件](../plugins/usage.md):, 扩展 docmd 而无需改动引擎。
+- [CLI 命令](./cli-commands.md):, 大多数 CI/CD 场景下的推荐路径。
+- [Workspaces](../configuration/workspaces.md):, 多项目场景下的配置参考。

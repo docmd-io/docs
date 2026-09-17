@@ -25,18 +25,18 @@ La compilación produce el siguiente árbol de directorios:
 
 ```text
 site/okf/
-├── okf.yaml              ← Archivo de resumen del manifiesto
-├── index.md              ← Catálogo de conceptos agrupados por tipo
-├── graph/                ← Visualizador de grafos (cuando graph: true)
-│   ├── index.html        ← Aplicación interactiva del grafo
-│   ├── graph.json        ← Nodos y aristas del grafo
-│   ├── graph.js          ← Runtime independiente del grafo
-│   └── graph.css         ← Estilos acordes al tema
+├── okf.yaml  # Archivo de resumen del manifiesto
+├── index.md  # Catálogo de conceptos agrupados por tipo
+├── graph/  # Visualizador de grafos (cuando graph: true)
+│   ├── index.html  # Aplicación interactiva del grafo
+│   ├── graph.json  # Nodos y aristas del grafo
+│   ├── graph.js  # Runtime independiente del grafo
+│   └── graph.css  # Estilos acordes al tema
 ├── concepts/
-│   └── <slug>.md         ← Archivos individuales de concepto en Markdown
+│   └── <slug>.md  # Archivos individuales de concepto en Markdown
 └── _meta/
-    ├── bundle.json       ← Espejo JSON de okf.yaml
-    └── lint-report.txt   ← Informes de validación de compilación
+    ├── bundle.json  # Espejo JSON de okf.yaml
+    └── lint-report.txt  # Informes de validación de compilación
 ```
 
 ## Comportamiento por defecto
@@ -116,12 +116,12 @@ Configure los parámetros de OKF en `docmd.config.json`:
 Estructura resultante:
 
 ```text
-site/okf/                    ← Idioma predeterminado (raíz)
+site/okf/  # Idioma predeterminado (raíz)
 ├── okf.yaml
 ├── index.md
 └── concepts/
 
-site/okf/es/                 ← Idioma español (subcarpeta)
+site/okf/es/  # Idioma español (subcarpeta)
 ├── okf.yaml
 └── concepts/
 ```
@@ -138,6 +138,13 @@ okf: false # Excluye la página únicamente de los paquetes OKF
 ```
 
 Para excluir una página de forma global en mapas de sitio, búsqueda, archivos de LLM y OKF, utilice `noindex: true`.
+
+## Metadatos de conceptos y resolución de etiquetas
+
+El plugin OKF extrae metadatos directamente del frontmatter de cada página hacia `site/okf/okf.yaml` y `site/okf/_meta/bundle.json`:
+
+* **Descripciones de conceptos**: La propiedad `description` del frontmatter se incluye en cada concepto de `okf.yaml` y `bundle.json`, permitiendo a los agentes de IA evaluar resúmenes sin necesidad de abrir cada archivo Markdown individual.
+* **Extracción de etiquetas desde `tags` y `keywords`**: Las etiquetas se obtienen de ambas propiedades de frontmatter (`tags` y `keywords`). Se admiten matrices de cadenas (`["api", "auth"]`) y cadenas separadas por comas (`"api, auth"`), con deduplicación automática insensible a mayúsculas.
 
 ::: callout tip "Visualización del grafo de conocimiento" icon:git-fork
 Active `graph: true` en la configuración del plugin OKF para generar un mapa interactivo (`site/okf/graph/index.html`) con las relaciones conceptuales y referencias cruzadas de su documentación.

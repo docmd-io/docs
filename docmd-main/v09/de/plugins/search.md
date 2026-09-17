@@ -54,7 +54,7 @@ noindex: true
 
 ::: callout tip title:"Datenschutz & Compliance" icon:shield-check
 Da Suchabfragen vollständig im Arbeitsspeicher des Clients ausgeführt werden, verlässt kein einziger Sucheingabe- oder Tastaturanschlag-Telemetriedatenwert den Browser des Benutzers.
-::: /callout
+:::
 
 ## Lokale semantische Offline-Suche
 

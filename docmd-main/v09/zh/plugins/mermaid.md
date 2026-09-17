@@ -5,9 +5,6 @@ description: "Mermaid.js 图表的零配置集成，支持自动主题同步与�
 
 `@docmd/plugin-mermaid` 插件将 [Mermaid.js](external:https://mermaid.js.org/) 无缝集成到 `docmd` 中。它同时注册了标准 Markdown 代码块解析器（` ```mermaid `）与显式的 `::: mermaid` 容器渲染器，为网页提供具备平移与缩放功能的交互式 SVG 图表。
 
-::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
-自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: mermaid` ... `::: /mermaid`）、显式的键值对属性（`title:"..."`、`align:center`）以及末尾的 `# 注释`。单图表的个性化定制通过容器语法处理，而全局默认值则在 `docmd.config.json` 中统一配置。
-:::
 
 ::: callout success "v0.9.3+ 完全离线与隔离环境打包" icon:zap
 自 **v0.9.3** 起，`@docmd/plugin-mermaid` 使用 `esbuild` 将完整运行时本地打包为自包含的经典 IIFE 脚本。图表渲染 100% 离线，完全去除外部 CDN（`jsdelivr.net`）依赖，完美支持隔离环境与直接 `file://` 本地浏览。

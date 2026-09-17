@@ -90,6 +90,6 @@ customHead: |
       Das Layout dieser Seite wird mit Standard-HTML-Wrappern und scoped CSS verfasst, das im <code>customHead</code>-Frontmatter-Feld definiert ist. Dies stellt null CSS-Leakage zum Rest der Dokumentations-Site sicher.
     </p>
 
-    <a href="/content/no-style-pages/" class="demo-button">Implementierungs-Leitfaden analysieren →</a>
+    <a href="/content/no-style-pages/" class="demo-button">Implementierungs-Leitfaden analysieren :</a>
   </div>
 </div>

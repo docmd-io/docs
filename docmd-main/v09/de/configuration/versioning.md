@@ -42,8 +42,8 @@ Die `current`-Version wird direkt in Ihren Site-Stamm gebaut (z. B. `example.com
 
 ### 2. Isolierte Versions-Unterverzeichnisse
 Nicht-aktuelle Releases werden in dedizierte Unterordner gebaut, die nach ihrer `id` benannt sind:
-- `v2` (Aktives Release) → `example.com/`
-- `v1` (Legacy-Release) → `example.com/v1/`
+- `v2` (Aktives Release) : `example.com/`
+- `v1` (Legacy-Release) : `example.com/v1/`
 
 ### 3. Verfolgechte Pfaderhaltung (Sticky Route Preservation)
 Wenn Leser mithilfe des Dropdown-Selektors zwischen Versionen umschalten, behält `docmd` relative Pfadpositionen bei. Liest ein Benutzer `example.com/getting-started` und wechselt zu **v1**, wird er automatisch zu `example.com/v1/getting-started` weitergeleitet (sofern das Zieldokument existiert).

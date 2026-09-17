@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "在 Docker 容器中运行 docmd — 使用官方预构建镜像，或从您的项目配置生成自定义 Dockerfile。"
+description: "在 Docker 容器中运行 docmd, 使用官方预构建镜像，或从您的项目配置生成自定义 Dockerfile。"
 ---
 
 docmd 会生成静态 HTML，因此非常适合轻量、可复现的 Docker 容器。根据您的使用场景，有两种不同的方式。
@@ -12,7 +12,7 @@ docmd 会生成静态 HTML，因此非常适合轻量、可复现的 Docker 容�
 ### 快速开始
 
 ```bash
-# 拉取指定版本（推荐做法 —— 替换为所需的版本号）
+# 拉取指定版本（推荐做法，替换为所需的版本号）
 docker pull ghcr.io/docmd-io/docmd:0.9.0
 
 # 构建文档（挂载本地 docs 并将产物输出到 ./site）
@@ -75,7 +75,7 @@ docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init
 
 ::: callout warning title:"只读挂载"
 当以 `:ro` 只读挂载配置文件时，请确保工作目录与其他挂载点仍可写，否则 `docmd` 会因权限错误而失败。
-::: /callout
+:::
 
 ## 自定义 Dockerfile（通过 Deployer）
 
@@ -86,8 +86,8 @@ npx @docmd/core deploy --docker
 ```
 
 它会生成一个采用多阶段构建的 `Dockerfile`：
-1. **构建阶段 (Build stage)** — 安装您精确锁定的 `@docmd/core` 版本并执行构建。
-2. **服务阶段 (Serve stage)** — 将产物复制到一个精简的 `nginx:alpine` 镜像中。
+1. **构建阶段 (Build stage)**: 安装您精确锁定的 `@docmd/core` 版本并执行构建。
+2. **服务阶段 (Serve stage)**: 将产物复制到一个精简的 `nginx:alpine` 镜像中。
 
 同时生成 Docker 与 Nginx 配置，以获得完整的自托管方案：
 

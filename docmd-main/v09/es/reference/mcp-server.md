@@ -61,7 +61,7 @@ docmd admite la especificación MCP estándar:
 
 * **Mecanismo de transporte**: `stdio` (mensajes JSON-RPC 2.0 a través de E/S estándar).
 * **Registro**: Registros de diagnóstico fuera de banda emitidos a través de `stderr`.
-* **Flujo del ciclo de vida**: `initialize` → `notifications/initialized` → Invocaciones de herramientas.
+* **Flujo del ciclo de vida**: `initialize` : `notifications/initialized` : Invocaciones de herramientas.
 * **Capacidades**: Expone `tools`, `resources` y `prompts`.
 
 ## Controles de seguridad

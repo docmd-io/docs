@@ -81,7 +81,7 @@ Most documentation generators fail when a user switches to a language where spec
 | Zero-config (no custom React/Vue) | ✅ | Partial | ❌ | ✅ |
 
 ::: callout warning "404 Errors in VitePress and Docusaurus" icon:info
-If a reader switches to a locale where a specific page has not been translated, VitePress and Docusaurus trigger a **404 error**. Preventing this requires custom server redirects or custom framework components. `docmd` handles missing translations at build time — untranslated pages fall back seamlessly with a localised notification callout.
+If a reader switches to a locale where a specific page has not been translated, VitePress and Docusaurus trigger a **404 error**. Preventing this requires custom server redirects or custom framework components. `docmd` handles missing translations at build time, untranslated pages fall back smoothly with a localised notification callout.
 :::
 
 ## Multi-project workspace support
@@ -131,7 +131,7 @@ Unlike legacy documentation tools that rely on expensive proprietary SaaS extens
 
 ::: callout tip title:"Why BYOK Matters for Documentation Teams" icon:shield
 Cloud documentation SaaS providers lock teams into per-query subscription fees and proprietary AI models. `docmd` gives teams complete freedom with **BYOK (Bring Your Own Key)**: connect to OpenAI, Anthropic, Gemini, DeepSeek, Groq, or self-hosted Ollama models while retaining total control over API budgets and data privacy.
-::: /callout
+:::
 
 ## Comprehensive feature matrix
 
@@ -169,7 +169,7 @@ Lines of configuration required for a site with versioning, i18n, search, and si
 
 ## Automated quality assurance
 
-`docmd` ships with a comprehensive integration test suite validating **25 distinct scenarios** across **85 assertions** — covering every core feature and plugin in isolation and combination. Every release must pass all 85 assertions and 13 internal failsafe checks prior to publication.
+`docmd` ships with a comprehensive integration test suite validating **25 distinct scenarios** across **85 assertions**: covering every core feature and plugin in isolation and combination. Every release must pass all 85 assertions and 13 internal failsafe checks prior to publication.
 
 ::: callout tip title:"Run the test suite locally" icon:lightbulb
 ```bash

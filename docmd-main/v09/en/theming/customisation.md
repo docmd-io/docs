@@ -11,7 +11,7 @@ description: "Reference guide for docmd CSS variables, visual tokens, and compon
 | :--- | :--- | :--- | :--- |
 | `--bg-color` | `#ffffff` | `#0d0d0f` | Primary page background |
 | `--text-color` | `#27272a` | `#d4d4d8` | Standard body typography |
-| `--text-heading` | `#09090b` | `#fafafa` | Title and heading elements (`h1`–`h6`) |
+| `--text-heading` | `#09090b` | `#fafafa` | Title and heading elements (`h1`-`h6`) |
 | `--link-color` | `#068ad5` | `#38bdf8` | Primary accent and hyperlink colour |
 | `--border-color` | `#e4e4e7` | `#27272a` | Rule dividers and card borders |
 | `--sidebar-bg` | `#fafafa` | `#09090b` | Navigation sidebar background |

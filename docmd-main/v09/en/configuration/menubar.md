@@ -79,7 +79,7 @@ Utilities align to the **right region** automatically, rendering after any custo
 
 ::: callout info title:"Relocation Fallback" icon:sparkles
 If the `menubar` is disabled while `optionsMenu.position` is set to `'menubar'`, utilities fall back automatically to the `sidebar-top` position.
-::: /callout
+:::
 
 ## Custom Styling
 

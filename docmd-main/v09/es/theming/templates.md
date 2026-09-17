@@ -108,20 +108,15 @@ Las plantillas pueden anular cualquiera de las 12 ranuras de interfaz:
 Las páginas configuradas con `noStyle: true` omiten por completo las plantillas activas y se renderizan exclusivamente con `templates/no-style.ejs`.
 :::
 
-## Orden de prioridad de recursos
+## Orden de la cascada
 
-Cuando intervienen múltiples plantillas y estilos de usuario, el motor los ordena según su peso de prioridad:
+Cuando se combinan plantillas y hojas de estilo, los estilos se cargan en un orden predecible de tres etapas:
 
-| Peso de prioridad | Capa | Comportamiento |
-| :--- | :--- | :--- |
-| `0` | Núcleo base (`docmd-main.css`, `docmd-main.js`) | Estilos fundacionales |
-| `5` | Paleta de tema (`docmd-theme-sky.css`, etc.) | Esquema visual de color |
-| `10` | Estilos de estructura de plantilla | Reglas de disposición espacial |
-| `15` | `customCss` / `customJs` del usuario | **Prioridad máxima** sobre las plantillas |
-| `20` | Recursos de plugins | Estilos de búsqueda, analíticas o ampliaciones |
-| `25+` | Anulaciones de plantilla especializadas | Extensiones de plantillas específicas |
+1. **Núcleo y Tema**: Los estilos fundacionales y esquemas de color cargan primero.
+2. **Plantillas y Plugins**: Las reglas de disposición estructural y los recursos de plugins cargan a continuación.
+3. **CSS y JS Personalizados**: Sus archivos `customCss` y `customJs` cargan al final, teniendo siempre prioridad sobre las plantillas.
 
-Para anular las reglas por defecto de una plantilla, añada sus declaraciones en `theme.customCss` (Prioridad `15`).
+Para anular las reglas por defecto de una plantilla, añada sus declaraciones en `theme.customCss`.
 
 ## Localización de plantillas
 
@@ -129,6 +124,6 @@ Las plantillas reciben el código del idioma activo durante el renderizado. Las 
 
 ## Recursos relacionados
 
-- [Estilos y scripts personalizados](custom-css-js.md) — Superponga reglas CSS sobre las plantillas activas.
-- [Diseño de páginas de inicio](landing-pages.md) — Personalice la página principal mediante contenedores Markdown.
-- [Referencia de configuración](../configuration/overview.md) — Opciones generales del sitio.
+- [Estilos y scripts personalizados](custom-css-js.md): Superponga reglas CSS sobre las plantillas activas.
+- [Diseño de páginas de inicio](landing-pages.md): Personalice la página principal mediante contenedores Markdown.
+- [Referencia de configuración](../configuration/overview.md): Opciones generales del sitio.

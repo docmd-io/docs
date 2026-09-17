@@ -27,7 +27,7 @@ components:
 
 ::: callout info title:"支持无限嵌套" icon:info
 即使启用了 `noStyle: true`，所有标准的 docmd 容器（如 `::: card`、`::: tabs`、`::: hero`）仍完全受支持，并且可以无限嵌套。
-::: /callout
+:::
 ```
 
 ## 组件选择启用
@@ -72,7 +72,6 @@ components:
 == side
 ::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ::: /hero
-:::
 
 ::: grids
   ::: card title:"零配置"
@@ -108,7 +107,7 @@ components:
 
 两种模式使用相同的 `data-i18n` 属性语法和 JSON 文件格式。
 
-1. 将 JSON 翻译文件放在 `assets/i18n/` 中 —— 每个语言一个文件：
+1. 将 JSON 翻译文件放在 `assets/i18n/` 中：每个语言一个文件：
 
 ```text
 assets/
@@ -122,7 +121,7 @@ assets/
 
 ```json "assets/i18n/en.json"
 {
-  "hero.title": "Markdown → Production Docs",
+  "hero.title": "Markdown to Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
   "nav.docs": "Documentation",
   "nav.editor": "Live Editor",
@@ -134,7 +133,7 @@ assets/
 3. 在您的 HTML 元素上使用 `data-i18n` 属性：
 
 ```html
-<h1 data-i18n="hero.title">Markdown → Production Docs</h1>
+<h1 data-i18n="hero.title">Markdown to Production Docs</h1>
 <p data-i18n="hero.subtitle">The zero-config documentation engine.</p>
 <a data-i18n="nav.docs" href="/docs">Documentation</a>
 ```
@@ -147,7 +146,7 @@ assets/
 
 ```html
 <input data-i18n-placeholder="search.placeholder" placeholder="Search...">
-<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">☰</button>
+<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">Menu</button>
 <a data-i18n-title="nav.tooltip" title="Go to docs">Docs</a>
 ```
 
@@ -196,7 +195,7 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 
 ::: callout info title:"自动检测" icon:info
 该脚本从 URL 路径前缀检测当前语言。对于默认语言，它会检查 `localStorage` 中保存的偏好设置。`switchLocale()` 函数会自动处理 URL 导航。
-::: /callout
+:::
 
 ### 原地模式
 

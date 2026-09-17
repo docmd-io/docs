@@ -1,6 +1,6 @@
 ---
 title: "Build API"
-description: "Programmatic Node.js API reference for docmd — build sites, live editor bundles, and multi-project workspaces."
+description: "Programmatic Node.js API reference for docmd, build sites, live editor bundles, and multi-project workspaces."
 ---
 
 You can import and execute the docmd build engine programmatically from Node.js applications. This enables custom build pipelines, automated documentation generation, and monorepo integrations.

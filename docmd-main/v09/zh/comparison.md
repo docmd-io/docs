@@ -1,6 +1,6 @@
 ---
 title: "横向对比"
-description: "docmd 与 Docusaurus、VitePress、MkDocs、Starlight 及 Mintlify 的详细对比 —— 真实数据，真实功能。"
+description: "docmd 与 Docusaurus、VitePress、MkDocs、Starlight 及 Mintlify 的详细对比：真实数据，真实功能。"
 ---
 
 以下是 `docmd` 与同类工具的对比，测量数据取自基于相同硬件构建的 50 页文档站点。
@@ -81,7 +81,7 @@ Python 生态依赖。在渲染第一页前需要 `pip`、虚拟环境和 `mkdoc
 | 零配置（无需自定义 React/Vue） | ✅ | 部分 | ❌ | ✅ |
 
 ::: callout warning "VitePress 和 Docusaurus 中的 404 错误" icon:info
-如果读者切换到特定页面尚未翻译的语言，VitePress 和 Docusaurus 会触发 **404 错误**。防止这种情况需要自定义服务器重定向或自定义框架组件。`docmd` 在构建时处理缺失的翻译 —— 未翻译的页面会平滑回退并带有本地化通知提示框。
+如果读者切换到特定页面尚未翻译的语言，VitePress 和 Docusaurus 会触发 **404 错误**。防止这种情况需要自定义服务器重定向或自定义框架组件。`docmd` 在构建时处理缺失的翻译：未翻译的页面会平滑回退并带有本地化通知提示框。
 :::
 
 ## 多项目工作区支持
@@ -131,7 +131,7 @@ Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。
 
 ::: callout tip title:"为什么 BYOK 对文档团队至关重要" icon:shield
 云端文档 SaaS 供应商会将团队绑定在按查询付费的订阅模式和专有 AI 模型上。`docmd` 通过 **BYOK (自带 API 密钥)** 赋予团队完全的自由度：可连接 OpenAI、Anthropic、Gemini、DeepSeek、Groq 或本地私有化部署的 Ollama 模型，同时保持对 API 预算与数据隐私的绝对掌控。
-::: /callout
+:::
 
 ## 综合功能矩阵
 
@@ -169,7 +169,7 @@ Docusaurus 需要具有重复配置文件的高复杂度多实例插件设置。
 
 ## 自动化质量保证
 
-`docmd` 随附全面的集成测试套件，在 **85 个断言** 中验证 **25 个不同场景** —— 孤立和组合地覆盖每个核心功能和插件。每个版本在发布前必须通过所有 85 个断言和 13 个内部安全检查。
+`docmd` 随附全面的集成测试套件，在 **85 个断言** 中验证 **25 个不同场景**:, 孤立和组合地覆盖每个核心功能和插件。每个版本在发布前必须通过所有 85 个断言和 13 个内部安全检查。
 
 ::: callout tip title:"在本地运行测试套件" icon:lightbulb
 ```bash

@@ -79,7 +79,7 @@ Utilities richten sich automatisch am **rechten Bereich** aus und werden nach al
 
 ::: callout info title:"Neupositionierungs-Fallback" icon:sparkles
 Wenn die `menubar` deaktiviert ist, während `optionsMenu.position` auf `'menubar'` gesetzt ist, fallen Utilities automatisch auf die Position `sidebar-top` zurück.
-::: /callout
+:::
 
 ## Benutzerdefinierte Stile
 

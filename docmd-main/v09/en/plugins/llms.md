@@ -11,9 +11,9 @@ The plugin is **enabled by default**. Set the [`url`](../configuration/overview.
 
 During site compilation, three files are placed at the build output root:
 
-* `llms.txt` — Structured overview listing page titles, descriptions, and canonical URLs.
-* `llms-full.txt` — Complete documentation context with raw Markdown bodies appended to each entry.
-* `llms.json` — Machine-readable JSON manifest containing typed metadata (title, URL, description, priority).
+* `llms.txt`, Structured overview listing page titles, descriptions, and canonical URLs.
+* `llms-full.txt`, Complete documentation context with raw Markdown bodies appended to each entry.
+* `llms.json`, Machine-readable JSON manifest containing typed metadata (title, URL, description, priority).
 
 Discovery `<link>` tags are automatically injected into page `<head>` headers.
 
@@ -65,16 +65,16 @@ To generate dedicated context files for secondary languages, set `i18n: true`:
 When enabled, the build output includes:
 
 ```text
-site/llms.txt          ← Default locale (unsuffixed)
-site/llms-full.txt     ← Default locale (unsuffixed)
-site/llms.json         ← Default locale (unsuffixed)
-site/llms.de.txt       ← German locale (suffixed)
-site/llms-full.de.txt  ← German locale (suffixed)
-site/llms.zh.txt       ← Chinese locale (suffixed)
-site/llms-full.zh.txt  ← Chinese locale (suffixed)
+site/llms.txt  # Default locale (unsuffixed)
+site/llms-full.txt  # Default locale (unsuffixed)
+site/llms.json  # Default locale (unsuffixed)
+site/llms.de.txt  # German locale (suffixed)
+site/llms-full.de.txt  # German locale (suffixed)
+site/llms.zh.txt  # Chinese locale (suffixed)
+site/llms-full.zh.txt  # Chinese locale (suffixed)
 ```
 
-The default locale retains unsuffixed paths so external integrations continue functioning seamlessly.
+The default locale retains unsuffixed paths so external integrations continue functioning smoothly.
 
 ## Security & Sanitisation
 

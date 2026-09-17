@@ -16,7 +16,7 @@ Una plantilla es un paquete npm regular que declara `capabilities: ['template']`
 ```
 @docmd/template-summer/
 ├── package.json
-├── index.js                # Punto de entrada — exporta templates[] y templateAssets[]
+├── index.js                # Punto de entrada: exporta templates[] y templateAssets[]
 ├── templates/
 │   ├── layout.ejs
 │   ├── partials/
@@ -48,7 +48,7 @@ Una plantilla es un paquete npm regular que declara `capabilities: ['template']`
 }
 ```
 
-## Exportaciones ESM — la condición `default`
+## Exportaciones ESM: la condición `default`
 
 El archivo `package.json` de su plantilla **debe** incluir una condición `"default"` en `exports["."]`, junto con la condición `import`:
 
@@ -111,7 +111,7 @@ Las plantillas reciben el mismo contexto EJS que el diseño por defecto. Las var
 |---|---|
 | `config` | La configuración normalizada del sitio. |
 | `frontmatter` | Frontmatter específico de la página. |
-| `relativePathToRoot` | Ej., `./` o `../` — útil para construir URLs relativas. |
+| `relativePathToRoot` | Ej., `./` o `../`, útil para construir URLs relativas. |
 | `renderIcon(name, opts)` | Renderiza un icono de Lucide. |
 | `t(key, params?)` | Función de traducción. |
 | `buildRelativeUrl(url)` | Resuelve una URL relativa a la página actual. |
@@ -128,14 +128,14 @@ Los estilos CSS y scripts JS se cargan en este orden estricto (valores menores c
 |---|---|---|
 | 0  | Base (`docmd-main.css`, `docmd-main.js`) | Siempre presentes. |
 | 5  | Capa de color de tema (`docmd-theme-sky.css`, etc.) | Proviene de `theme.name`. Se omite si el nombre se convirtió en plantilla. |
-| 10 | **Estructura de la plantilla** (por defecto) | CSS de su plantilla — valor por defecto si omite `priority`. |
+| 10 | **Estructura de la plantilla** (por defecto) | CSS de su plantilla, valor por defecto si omite `priority`. |
 | 15 | `customCss` / `customJs` del usuario | Siempre prevalecen sobre la plantilla. |
 | 20 | CSS/JS de plugins | lightbox, búsqueda, analíticas, etc. |
 | 25+ | Mayor prioridad de plantilla | **Utilizar solo cuando deba prevalecer sobre plugins.** La plantilla Summer oficial declara `priority: 25` para cargar tras el CSS de plugins. |
 
 ::: callout warning title:"No utilice !important"
 Las plantillas deben escribir reglas CSS que puedan ser anuladas por `customCss` con prioridad 15. Usar `!important` rompe el contrato y fuerza al usuario a usar `!important` en sus propias hojas de estilo.
-::: /callout
+:::
 
 ## Autopromoción de `theme.name`
 

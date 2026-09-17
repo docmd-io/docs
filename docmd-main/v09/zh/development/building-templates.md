@@ -1,6 +1,6 @@
 ---
 title: "开发模板 (Building Templates)"
-description: "编写 docmd 模板包 —— 目录结构、描述符、EJS 上下文、资源优先级与 API 参考。"
+description: "编写 docmd 模板包：目录结构、描述符、EJS 上下文、资源优先级与 API 参考。"
 ---
 
 # 开发模板
@@ -14,7 +14,7 @@ description: "编写 docmd 模板包 —— 目录结构、描述符、EJS 上�
 ```
 @docmd/template-summer/
 ├── package.json
-├── index.js                # 插件入口 —— 导出 templates[] 与 templateAssets[]
+├── index.js                # 插件入口：导出 templates[] 与 templateAssets[]
 ├── templates/
 │   ├── layout.ejs
 │   ├── partials/
@@ -46,7 +46,7 @@ description: "编写 docmd 模板包 —— 目录结构、描述符、EJS 上�
 }
 ```
 
-## ESM exports — `default` 条件
+## ESM exports: `default` 条件
 
 您的 `package.json` **必须**在 `exports["."]` 中同时包含 `import` 条
 件和 `"default"` 条件:
@@ -65,7 +65,7 @@ description: "编写 docmd 模板包 —— 目录结构、描述符、EJS 上�
 `ERR_PACKAGE_PATH_NOT_EXPORTED`,因为 Node 的 CommonJS 解析器找不到
 任何匹配条件。重试路径仍会成功(它直接使用动态 `import()`),但构
 建每次都会打印一行多余的 "Plugin installed" 提示。插件
-(`@docmd/plugin-*`) 的要求相同 —— 完整说明请参阅
+(`@docmd/plugin-*`) 的要求相同：完整说明请参阅
 [插件开发指南](building-plugins.md#esm-exports--default-条件)。
 
 ## `index.js`
@@ -115,7 +115,7 @@ export default {
 |---|---|
 | `config` | 规范化后的站点配置。 |
 | `frontmatter` | 当前页面的 frontmatter。 |
-| `relativePathToRoot` | 如 `./` 或 `../` —— 用它构建相对 URL。 |
+| `relativePathToRoot` | 如 `./` 或 `../`：用它构建相对 URL。 |
 | `renderIcon(name, opts)` | 渲染一个 Lucide 图标。 |
 | `t(key, params?)` | 翻译函数。 |
 | `buildRelativeUrl(url)` | 将 URL 解析为相对于当前页面的路径。 |
@@ -132,29 +132,29 @@ CSS 与 JS 按下表顺序加载（数值小的先加载，数值大的在级联
 |---|---|---|
 | 0  | 基础 (`docmd-main.css`、`docmd-main.js`) | 始终存在。 |
 | 5  | 主题配色层（如 `docmd-theme-sky.css`） | 来自 `theme.name`。当名字已被自动提升为模板时跳过（见 `_noCssOverlay`）。 |
-| 10 | **模板结构**（默认） | 您模板的 CSS —— 省略 `priority` 时的默认值。 |
-| 15 | 用户 `customCss` / `customJs` | 始终胜出 —— 这是契约。 |
+| 10 | **模板结构**（默认） | 您模板的 CSS：省略 `priority` 时的默认值。 |
+| 15 | 用户 `customCss` / `customJs` | 始终胜出：这是契约。 |
 | 20 | 插件 CSS/JS | lightbox、search、analytics 等。 |
 | 25+ | 更高优先级模板 | **仅在必须覆盖插件时使用。** 官方 Summer 模板声明 `priority: 25`，使其在插件 CSS 之后加载。更高的值会在更晚的位置级联。 |
 
-模板可以将 priority 声明为高于 10 —— Summer 自身使用 **25**，以覆盖插件样式。推荐的区间是 **10–20**（"用户可覆盖"的模板）与 **20+**（"主张强烈"的布局模板）。
+模板可以将 priority 声明为高于 10：Summer 自身使用 **25**，以覆盖插件样式。推荐的区间是 **10, 20**（"用户可覆盖"的模板）与 **20+**（"主张强烈"的布局模板）。
 
 ::: callout warning title:"请勿使用 !important"
-模板编写的 CSS 应当能被优先级 15 的 `customCss` 覆盖。使用 `!important` 会破坏这一契约，迫使用户只能 fork 您的模板才能调整。（Summer 的 CSS 文件头会强制这一点 —— `!important` 已在 0.8.7 清理中移除，让用户最终不再需要靠自己的 `!important` 才能覆盖 Summer。）
-::: /callout
+模板编写的 CSS 应当能被优先级 15 的 `customCss` 覆盖。使用 `!important` 会破坏这一契约，迫使用户只能 fork 您的模板才能调整。（Summer 的 CSS 文件头会强制这一点：`!important` 已在 0.8.7 清理中移除，让用户最终不再需要靠自己的 `!important` 才能覆盖 Summer。）
+:::
 
 ## `theme.name` 的自动提升
 
-`theme.name` → `theme.template` 的提升发生在 `normalizeConfig()` 中，而非解析器里：
+`theme.name` : `theme.template` 的提升发生在 `normalizeConfig()` 中，而非解析器里：
 
-- 当 `theme.name` 是非保留值且 `theme.template` 未设置时，配置会被改写为 `theme.template = theme.name`，并设置 `theme._noCssOverlay = true`（这样生成器会跳过对 `docmd-theme-${name}.css` 的查找 —— 否则会 404）。
+- 当 `theme.name` 是非保留值且 `theme.template` 未设置时，配置会被改写为 `theme.template = theme.name`，并设置 `theme._noCssOverlay = true`（这样生成器会跳过对 `docmd-theme-${name}.css` 的查找：否则会 404）。
 - 在解析阶段，解析器看到的永远只有 `theme.template`。
 
-这正是为什么一个非保留的 `theme.name` 能自动加载您的模板 —— 您无需把它也写到 `config.plugins` 里。
+这正是为什么一个非保留的 `theme.name` 能自动加载您的模板：您无需把它也写到 `config.plugins` 里。
 
 ## 模板本地化
 
-`i18n` 配置仍然生效 —— 当前 locale 会作为普通 local 传入您的模板。翻译仍通过 `t(key)` 助手查找，就像在默认模板中一样。
+`i18n` 配置仍然生效：当前 locale 会作为普通 local 传入您的模板。翻译仍通过 `t(key)` 助手查找，就像在默认模板中一样。
 
 ## API 参考
 
@@ -172,10 +172,10 @@ const resolved = resolveTemplate({
   versionId: '0.8',                       // 可选
 });
 
-// resolved.templatePath → .ejs 文件的绝对路径
-// resolved.source       → 'default' | 'frontmatter' | 'config' | 'plugin'
-// resolved.pluginName   → 插件名（当 source === 'plugin' 时）
-// resolved.type         → 已解析的 slot
+// resolved.templatePath: .ejs 文件的绝对路径
+// resolved.source: 'default' | 'frontmatter' | 'config' | 'plugin'
+// resolved.pluginName: 插件名（当 source === 'plugin' 时）
+// resolved.type: 已解析的 slot
 ```
 
 ### `@docmd/api` 中的类型

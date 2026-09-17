@@ -77,7 +77,7 @@ docs/
 
 ## What's Next
 
-- [Building Plugins](./building-plugins.md) — write a custom docmd plugin.
-- [Plugin Examples](./plugin-examples.md) — see a complete plugin walkthrough.
-- [Building Templates](./building-templates.md) — author a docmd template.
-- [Node API Reference](./node-api-reference.md) — programmatic build API.
+- [Building Plugins](./building-plugins.md): write a custom docmd plugin.
+- [Plugin Examples](./plugin-examples.md): see a complete plugin walkthrough.
+- [Building Templates](./building-templates.md): author a docmd template.
+- [Node API Reference](./node-api-reference.md): programmatic build API.

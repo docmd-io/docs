@@ -38,7 +38,7 @@ Defina etiquetas personalizadas en el objeto `translations` de cualquier configu
 }
 ```
 
-La resolución de la traducción sigue un orden de prioridad estricto: **valores predeterminados del sistema → cadenas de plugins → anulaciones de configuración**. La configuración del usuario siempre tiene la mayor prioridad.
+La resolución de la traducción sigue un orden de prioridad estricto: **valores predeterminados del sistema : cadenas de plugins : anulaciones de configuración**. La configuración del usuario siempre tiene la mayor prioridad.
 
 ## Claves de traducción disponibles
 

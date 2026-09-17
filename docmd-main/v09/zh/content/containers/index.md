@@ -5,9 +5,7 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 
 标准 Markdown 在基础文本格式化方面表现出色，但技术文档需要结构化组件来表达复杂的逻辑。`docmd` 扩展了 Markdown，提供了一整套**同构容器**。
 
-::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
-自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
-:::
+::: callout info "容器语法标准" icon:sparkles
 
 ::: callout tip "从其他文档引擎迁移？" icon:sparkles
 `docmd` 开箱即用支持来自 **VitePress** 和 **Docusaurus** 的语法别名。像 `:::tip`、`:::warning`、`:::note`、`:::details` 和 `:::caution` 这样的容器无需修改即可直接使用。
@@ -66,7 +64,6 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 
 ## 递归组合与显式闭合标签 (Recursive Composition & Explicit Closers)
 
-`docmd` 支持**无限嵌套深度**以及使用命名闭合标签（`::: /card`、`::: /tabs`）的确定性闭合解析：
 
 ```markdown
 ::: card title:"架构概览" # 父级卡片

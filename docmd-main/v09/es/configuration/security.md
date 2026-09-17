@@ -12,7 +12,7 @@ Las reglas de seguridad se pueden configurar en el manifiesto `docmd.config.json
 ```json "docmd.config.json"
 {
   "security": {
-    "htmlPolicy": "escape",
+    "html": "allow",
     "strictLinkSanitizing": true,
     "allowedIframeHosts": [
       "youtube.com",
@@ -24,19 +24,23 @@ Las reglas de seguridad se pueden configurar en el manifiesto `docmd.config.json
 }
 ```
 
-## Políticas de Procesamiento HTML (`htmlPolicy`)
+::: callout info title:"Compatibilidad con versiones anteriores" icon:history
+Las versiones anteriores de docmd utilizaban `"htmlPolicy"` dentro de `"security"` o en el nivel raíz. Tanto `"security.htmlPolicy"` como la clave raíz `"htmlPolicy"` se asignan automáticamente a `"security.html"` para una total compatibilidad hacia atrás.
+:::
 
-La opción `htmlPolicy` controla cómo `docmd` procesa los elementos HTML declarados dentro de los archivos Markdown:
+## Política de Procesamiento HTML (`security.html`)
+
+La opción `security.html` controla cómo `docmd` procesa los elementos HTML declarados dentro de los archivos Markdown:
 
 | Modo | Comportamiento | Mejor Caso de Uso |
 | :--- | :--- | :--- |
-| `"escape"` *(Predeterminado)* | Convierte todas las etiquetas HTML sin formato en entidades HTML seguras (`&lt;div&gt;`). Previene inyecciones accidentales de código. | Sitios de documentación pública y repositorios de código abierto que aceptan solicitudes de extracción de colaboradores no verificados. |
+| `"allow"` *(Predeterminado)* | Renderiza los elementos HTML sin formato como nodos DOM ejecutables. | Documentación técnica autorizada que incorpora componentes web personalizados o HTML sin formato (`noStyle: true`). |
+| `"escape"` | Convierte todas las etiquetas HTML sin formato en entidades HTML seguras (`&lt;div&gt;`). Previene inyecciones accidentales de código. | Sitios de documentación pública y repositorios de código abierto que aceptan solicitudes de extracción de colaboradores no verificados. |
 | `"strip"` | Elimina por completo las etiquetas HTML sin formato de la salida compilada. | Sitios corporativos estrictos que requieren pureza absoluta de Markdown sin etiquetas secundarias. |
-| `"allow"` | Renderiza los elementos HTML sin formato como nodos DOM ejecutables. | Documentación técnica autorizada que incorpora componentes web personalizados o HTML sin formato (`noStyle: true`). |
 
-::: callout warning title:"Precaución XSS con htmlPolicy: 'allow'" icon:alert-triangle
-Establecer `htmlPolicy` en `"allow"` permite la ejecución de código arbitrario si los archivos Markdown contienen etiquetas `<script>`. Utiliza `"allow"` únicamente cuando el contenido Markdown provenga de repositorios de código de confianza.
-::: /callout
+::: callout warning title:"Precaución XSS con html: 'allow'" icon:alert-triangle
+Establecer `html` en `"allow"` permite la ejecución de código arbitrario si los archivos Markdown contienen etiquetas `<script>`. Utiliza `"allow"` únicamente cuando el contenido Markdown provenga de repositorios de código de confianza.
+:::
 
 ## Procesamiento de Bloques HTML Multilínea
 

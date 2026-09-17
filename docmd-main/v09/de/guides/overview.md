@@ -1,6 +1,6 @@
 ---
 title: "Leitfäden Übersicht"
-description: "Erkunden Sie technische Leitfäden für docmd – KI-Assistent, MCP-Agenten-Integration, OKF-Wissenspakete, hybride semantische Suche und OpenAPI-Generierung."
+description: "Erkunden Sie technische Leitfäden für docmd, KI-Assistent, MCP-Agenten-Integration, OKF-Wissenspakete, hybride semantische Suche und OpenAPI-Generierung."
 ---
 
 # Leitfäden Übersicht
@@ -11,19 +11,19 @@ docmd-Leitfäden bieten fundierte technische Anleitungen zur Implementierung for
 ::: grid
 ::: card "KI & Automatisierung" icon:bot
 Konfigurieren Sie den interaktiven KI-Assistenten, richten Sie Model Context Protocol (MCP) Server für KI-Agenten ein und erstellen Sie Open Knowledge Format (OKF) Bundles.
-[KI-Leitfäden erkunden →](./ai/ai-assistant.md)
+[KI-Leitfäden erkunden :](./ai/ai-assistant.md)
 :::
 :::
 ::: grid
 ::: card "Suchoptimierung" icon:search
 Stellen Sie browsernative hybride semantische Suche mit ONNX-Embedding-Modellen und lokalen Vektorindizes bereit.
-[Semantische Suche konfigurieren →](./search/semantic-search.md)
+[Semantische Suche konfigurieren :](./search/semantic-search.md)
 :::
 :::
 ::: grid
 ::: card "Integrationen" icon:plug
 Automatisieren Sie die Generierung von REST-API-Referenzen direkt aus OpenAPI / Swagger-Spezifikationen in docmd-Seitenlayouts.
-[OpenAPI-Integration →](./integrations/openapi-generation.md)
+[OpenAPI-Integration :](./integrations/openapi-generation.md)
 :::
 :::
 :::

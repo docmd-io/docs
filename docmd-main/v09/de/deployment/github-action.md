@@ -91,8 +91,8 @@ Die Action führt den folgenden internen Workflow aus:
 Konfigurieren Sie GitHub Pages für die Bereitstellung aus **GitHub Actions**:
 
 1. Öffnen Sie Ihr Repository auf GitHub.
-2. Navigieren Sie zu **Settings → Pages**.
-3. Wählen Sie unter **Build and deployment → Source** die Option **GitHub Actions**.
+2. Navigieren Sie zu **Settings : Pages**.
+3. Wählen Sie unter **Build and deployment : Source** die Option **GitHub Actions**.
 
 ## Unterpfad- & benutzerdefinierte Domain-Konfiguration
 
@@ -114,7 +114,7 @@ So konfigurieren Sie eine benutzerdefinierte Domain:
 
 1. Fügen Sie eine `CNAME`-Datei mit Ihrem Hostnamen (z. B. `docs.example.com`) in `docs/` ein.
 2. Aktualisieren Sie die Eigenschaft `url` in `docmd.config.json` passend zu Ihrer Domain.
-3. Konfigurieren Sie die benutzerdefinierte Domain unter **Settings → Pages → Custom domain**.
+3. Konfigurieren Sie die benutzerdefinierte Domain unter **Settings : Pages : Custom domain**.
 
 ::: callout tip "Action-Releases pinnen" icon:shield-check
 Für Produktionsumgebungen pinnen Sie Ihre Workflow-Schritte auf explizite Versions-Tags (z. B. `uses: docmd-io/deploy@v1.0.0`), um sich vor unerwarteten Breaking Changes zu schützen.

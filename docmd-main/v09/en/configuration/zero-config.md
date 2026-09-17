@@ -13,7 +13,7 @@ When executed in a directory without a `docmd.config.json` manifest, the engine 
 
 1. **Source Directory Discovery**: Scans candidate directories in priority order: `docs/`, `src/docs/`, `documentation/`, `content/`, and `.` (root directory fallback).
 2. **Version & Locale Extraction**: Automatically parses version folders matching `v[0-9]+` (e.g. `v1.0`, `v09`) and two-letter locale codes (e.g. `en`, `de`, `zh`).
-3. **Automated Sidebar Routing**: Generates a clean navigation tree by analysing file hierarchies and converting hyphenated basenames (`getting-started.md` → `Getting Started`).
+3. **Automated Sidebar Routing**: Generates a clean navigation tree by analysing file hierarchies and converting hyphenated basenames (`getting-started.md` : `Getting Started`).
 
 :::
 

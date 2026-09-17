@@ -23,15 +23,24 @@
     ]
   },
   "cookie": {
-    "enabled": true,
+    "enabled": false,
     "position": "bottom-right"
   },
   "layout": {
-    "banner": {
-      "content": "**v0.9.5 is live!** — Read the latest technical documentation and migration guides.",
-      "type": "info",
-      "dismissible": true,
-      "icon": "sparkles"
+    "banners": {
+      "top": {
+        "content": "**v0.9.6 is live!** — Read the latest technical documentation and migration guides.",
+        "type": "info",
+        "dismissible": true,
+        "icon": "sparkles"
+      },
+      "toc-top": {
+        "content": "⚡ **Free Cloud Relay** — Connect your documentation with serverless AI search & real-time telemetry in 1 click.",
+        "link": "https://cloud.docmd.io",
+        "type": "tip",
+        "icon": "cloud",
+        "dismissible": true
+      }
     }
   },
   "plugins": {

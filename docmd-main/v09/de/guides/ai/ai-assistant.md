@@ -17,7 +17,7 @@ Der docmd KI-Assistent unterstützt zwei primäre Bereitstellungsmodelle:
 
 | Architektur | Geeignet für | Backend-Infrastruktur | API-Schlüsselsicherheit |
 | :--- | :--- | :--- | :--- |
-| **Kostenloses docmd Cloud-Relay** | Statische Websites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Null Server — betrieben über das verwaltete serverlose Relay von docmd | Im Ruhezustand via Hardware-KMS verschlüsselt |
+| **Kostenloses docmd Cloud-Relay** | Statische Websites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Null Server, betrieben über das verwaltete serverlose Relay von docmd | Im Ruhezustand via Hardware-KMS verschlüsselt |
 | **Selbst gehosteter Server** | Dynamische Node.js-Apps, Docker-Container, Firmenintranets | Eigener Node.js-Server (`docmd dev` / `docmd serve`) | Umgebungsvariablen auf dem Server |
 | **Lokales LLM (Ollama)** | Isolierte Netzwerke, lokale Entwicklung, null Cloud-Abhängigkeiten | Lokale Workstation mit `ollama` | Lokaler Localhost-Endpunkt |
 
@@ -100,7 +100,7 @@ Fügen Sie den `ai`-Plugin-Block zu Ihrer `docmd.config.json` hinzu:
 
 ::: callout tip title:"Empfohlene Modelle" icon:sparkles
 Für das optimale Verhältnis von Antwortgeschwindigkeit zu Kosten empfehlen wir schnelle Reasoning-Modelle wie `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic) oder `gemini-1.5-flash` (Google).
-::: /callout
+:::
 
 ### 2. Anbieter-Zugangsdaten festlegen
 

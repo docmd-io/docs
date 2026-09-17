@@ -37,9 +37,9 @@ my-docs/
 ```json "docmd.config.json"
 {
   "theme": {
-    "customCss": ["/assets/css/branding.css"]
-  },
-  "customJs": ["/assets/js/utils.js"]
+    "customCss": ["/assets/css/branding.css"],
+    "customJs": ["/assets/js/analytics.js"]
+  }
 }
 ```
 

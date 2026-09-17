@@ -11,15 +11,15 @@ Run `npx @docmd/core init` to establish a minimal workspace layout. This structu
 
 ```text
 my-docs/
-├── docs/                 ← Source directory containing your Markdown (.md) pages
-│   └── index.md          ← The landing page (resolves to /)
-├── assets/               ← Static web assets loaded directly by the engine
-│   ├── css/              ← Custom stylesheets for customising page layout
-│   ├── js/               ← Custom scripts to extend browser-side logic
-│   └── images/           ← Brand logos, icons, and inline illustrations
-├── docmd.config.json     ← Central configuration schema
-├── package.json          ← Node dependency manifest and scripts
-└── site/                 ← Optimised production build output directory
+├── docs/  # Source directory containing your Markdown (.md) pages
+│   └── index.md  # The landing page (resolves to /)
+├── assets/  # Static web assets loaded directly by the engine
+│   ├── css/  # Custom stylesheets for customising page layout
+│   ├── js/  # Custom scripts to extend browser-side logic
+│   └── images/  # Brand logos, icons, and inline illustrations
+├── docmd.config.json  # Central configuration schema
+├── package.json  # Node dependency manifest and scripts
+└── site/  # Optimised production build output directory
 ```
 
 ::: callout info "Configuration File Resolution" icon:settings
@@ -47,18 +47,18 @@ For complex layouts or large projects with multiple distinct products (such as a
 
 ```text
 my-docs-monorepo/
-├── docmd.config.json         ← Root configuration (defines global settings)
-├── assets/                   ← Shared global assets (inherited by all projects)
-│   ├── css/                  ← Shared global stylesheets
-│   └── images/               ← Shared logos and icons
-├── package.json              ← Root dependency manifest
-├── main-site/                ← Root project directory
-│   ├── docmd.config.json     ← Project-specific config overrides
-│   └── docs/                 ← Content for main-site (resolves to /)
+├── docmd.config.json  # Root configuration (defines global settings)
+├── assets/  # Shared global assets (inherited by all projects)
+│   ├── css/  # Shared global stylesheets
+│   └── images/  # Shared logos and icons
+├── package.json  # Root dependency manifest
+├── main-site/  # Root project directory
+│   ├── docmd.config.json  # Project-specific config overrides
+│   └── docs/  # Content for main-site (resolves to /)
 │       └── index.md
-└── sdk-reference/            ← Secondary project directory
-    ├── docmd.config.json     ← Project-specific config overrides
-    └── docs/                 ← Content for sdk-reference (resolves to /sdk)
+└── sdk-reference/  # Secondary project directory
+    ├── docmd.config.json  # Project-specific config overrides
+    └── docs/  # Content for sdk-reference (resolves to /sdk)
         └── index.md
 ```
 

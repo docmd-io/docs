@@ -3,7 +3,7 @@ title: "Translated Content & i18n Routing"
 description: "Organise multi-language documentation directories, fallback mechanics, and localised navigation structures in docmd."
 ---
 
-`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localised content, fall back seamlessly to default languages, and provide localised navigation sidebars.
+`docmd` provides multi-language support (i18n) by organising content into dedicated locale subdirectories. You can manage localised content, fall back smoothly to default languages, and provide localised navigation sidebars.
 
 ## Directory Structure
 
@@ -11,18 +11,18 @@ Every locale resides in its own subdirectory inside the source root (`src`). Fol
 
 ```text
 docs/
-├── en/                     ← default locale content
+├── en/  # default locale content
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← secondary locale (Hindi)
-│   ├── index.md            ← translated homepage
-│   ├── navigation.json     ← translated navigation labels
+├── hi/  # secondary locale (Hindi)
+│   ├── index.md  # translated homepage
+│   ├── navigation.json  # translated navigation labels
 │   └── getting-started/
-│       └── installation.md ← translated installation guide
-└── zh/                     ← tertiary locale (Chinese)
-    └── index.md            ← translated homepage
+│       └── installation.md  # translated installation guide
+└── zh/  # tertiary locale (Chinese)
+    └── index.md  # translated homepage
 ```
 
 When i18n is enabled, all Markdown source content lives inside locale directories. No content files sit at the root level.
@@ -35,8 +35,8 @@ Subdirectory names correspond directly to `id` values in your configuration. If 
 
 `docmd` does not require translating every document upfront. The engine treats the **default locale directory** as the canonical content tree. When a requested page is missing in a secondary locale:
 
-1. If `docs/hi/getting-started/installation.md` exists → serves the Hindi translation.
-2. If `docs/hi/getting-started/installation.md` is missing → falls back to `docs/en/getting-started/installation.md`.
+1. If `docs/hi/getting-started/installation.md` exists : serves the Hindi translation.
+2. If `docs/hi/getting-started/installation.md` is missing : falls back to `docs/en/getting-started/installation.md`.
 
 When falling back to the default locale, `docmd` displays an informative callout banner to readers. Customise this message via your [UI Strings Configuration](./ui-strings.md).
 
@@ -62,26 +62,26 @@ Each locale directory can include an independent `navigation.json` manifest. `do
 
 ::: callout tip title:"Partial Navigation Overrides" icon:lightbulb
 Provide a `navigation.json` file inside a locale directory only when translating menu labels. If omitted, the default locale's navigation tree applies automatically.
-::: /callout
+:::
 
 ## Combining Versioning with Localisation
 
 When combining versioning and multi-language routing, organise directories hierarchically with locales nested inside version folders:
 
 ```text
-docs/                    ← current release
-  en/                    ← default locale
-  hi/                    ← translated locale
-docs-v1/                 ← legacy release
-  en/                    ← default locale
-  hi/                    ← translated locale
+docs/  # current release
+  en/  # default locale
+  hi/  # translated locale
+docs-v1/  # legacy release
+  en/  # default locale
+  hi/  # translated locale
 ```
 
 The output URL hierarchy prioritises locale prefixes, followed by version routes:
 
 ```text
-/                        ← default locale, current version
-/hi/                     ← translated locale, current version
-/v1/                     ← default locale, legacy version
-/hi/v1/                  ← translated locale, legacy version
+/  # default locale, current version
+/hi/  # translated locale, current version
+/v1/  # default locale, legacy version
+/hi/v1/  # translated locale, legacy version
 ```

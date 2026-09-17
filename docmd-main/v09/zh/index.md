@@ -1,6 +1,6 @@
 ---
-title: "docmd 文档：为人类和机器构建的文档"
-description: "开源文档编译器。一份 Markdown 源文件，一条命令 — 同时生成网站、搜索、AI 上下文、Agent 协议和知识格式。"
+title: "docmd Docs — 官方文档、指南与 API 参考"
+description: "开源文档编译器。一份 Markdown 源文件，一条命令, 同时生成网站、搜索、AI 上下文、Agent 协议和知识格式。"
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-为人类和机器构建的文档。一条命令将 Markdown 编译为网站、搜索索引、AI 上下文和知识格式 — 零配置。
+为人类和机器构建的文档。一条命令将 Markdown 编译为网站、搜索索引、AI 上下文和知识格式, 零配置。
 
 ::: button "快速开始" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ titleAppend: false
 
 ## 概览
 
-docmd 是一个开源文档编译器。它将你的 Markdown 文件编译为完整的文档体系 — 网站、搜索、AI 上下文等 — 一次构建，全部生成。
+docmd 是一个开源文档编译器。它将你的 Markdown 文件编译为完整的文档体系, 网站、搜索、AI 上下文等, 一次构建，全部生成。
 
 ::: tabs
 == tab "npm" icon:box
@@ -61,12 +61,12 @@ bunx @docmd/core dev
     :::
     ::: grid
         ::: card "原生 MCP 服务" icon:terminal
-        内置 Model Context Protocol 服务及原生工具。AI 智能体可通过本地 stdio 连接查询与校验文档 —— 无需联网，无需远程服务。
+        内置 Model Context Protocol 服务及原生工具。AI 智能体可通过本地 stdio 连接查询与校验文档：无需联网，无需远程服务。
         :::
     :::
     ::: grid
         ::: card "OKF 知识包" icon:database
-        自动生成 Open Knowledge Format bundle —— 面向 AI 智能体的类型化概念图谱。阅读[更多](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)。
+        自动生成 Open Knowledge Format bundle：面向 AI 智能体的类型化概念图谱。阅读[更多](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing)。
         :::
     :::
     ::: grid

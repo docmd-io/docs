@@ -7,7 +7,7 @@ description: "Deploy docmd static documentation sites to Cloudflare Pages edge h
 
 ## Dashboard Setup Steps
 
-1. Navigate to **Workers & Pages → Create → Pages** in the Cloudflare Dashboard.
+1. Navigate to **Workers & Pages : Create : Pages** in the Cloudflare Dashboard.
 2. Link your Git provider account and select the target repository.
 3. Configure build variables:
 
@@ -21,7 +21,7 @@ description: "Deploy docmd static documentation sites to Cloudflare Pages edge h
 
 ## Custom Domain Configuration
 
-Add custom domains in **Pages → Project → Custom domains**. TLS certificates are provisioned automatically.
+Add custom domains in **Pages : Project : Custom domains**. TLS certificates are provisioned automatically.
 
 Set the `url` property in `docmd.config.json` to match your domain:
 

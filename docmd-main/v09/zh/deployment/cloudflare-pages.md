@@ -7,7 +7,7 @@ description: "使用 Cloudflare 的全球边缘网络部署您的 docmd 文档�
 
 ## 控制台设置
 
-1.  转到 [Cloudflare 控制台](https://dash.cloudflare.com/) 并导航至 **Workers & Pages → Create → Pages**。
+1.  转到 [Cloudflare 控制台](https://dash.cloudflare.com/) 并导航至 **Workers & Pages : Create : Pages**。
 2.  连接您的 git 提供商（GitHub 或 GitLab）并选择您的仓库。
 3.  配置构建设置：
 
@@ -23,7 +23,7 @@ Cloudflare Pages 检测静态输出并自动将其分发到其边缘网络。
 
 ## 自定义域名
 
-在 **Pages → your project → Custom domains** 下添加自定义域名。Cloudflare 自动配置 SSL 证书。
+在 **Pages : your project : Custom domains** 下添加自定义域名。Cloudflare 自动配置 SSL 证书。
 
 将 `docmd.config.json` 中的 `url` 字段设置为与您的域名匹配。这确保规范标签、sitemap 和 LLMs 插件生成正确的绝对 URL。
 

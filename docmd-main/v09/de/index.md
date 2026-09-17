@@ -1,6 +1,6 @@
 ---
-title: "docmd Dokumentation: Dokumentation für Menschen und Maschinen"
-description: "Open-Source Dokumentations-Compiler. Eine Markdown-Quelle, ein Befehl — generiert Website, Suche, KI-Kontext, Agent-Protokolle und Wissensformate. Alles zusammen."
+title: "docmd Docs — Offizielle Dokumentation, Anleitungen & API-Referenz"
+description: "Open-Source Dokumentations-Compiler. Eine Markdown-Quelle, ein Befehl, generiert Website, Suche, KI-Kontext, Agent-Protokolle und Wissensformate. Alles zusammen."
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-Dokumentation für Menschen und Maschinen. Ein Befehl kompiliert Markdown zu Website, Suchindex, KI-Kontext und Wissensformaten — keine Konfiguration nötig.
+Dokumentation für Menschen und Maschinen. Ein Befehl kompiliert Markdown zu Website, Suchindex, KI-Kontext und Wissensformaten, keine Konfiguration nötig.
 
 ::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ Dokumentation für Menschen und Maschinen. Ein Befehl kompiliert Markdown zu Web
 
 ## Übersicht
 
-docmd ist ein Open-Source Dokumentations-Compiler. Er nimmt Ihre Markdown-Dateien und generiert einen vollständigen Dokumentations-Stack — Website, Suche, KI-Kontext und mehr — in einem einzigen Build.
+docmd ist ein Open-Source Dokumentations-Compiler. Er nimmt Ihre Markdown-Dateien und generiert einen vollständigen Dokumentations-Stack, Website, Suche, KI-Kontext und mehr, in einem einzigen Build.
 
 ::: tabs
 == tab "npm" icon:box
@@ -61,7 +61,7 @@ Alles, was für eine solide Dokumentation benötigt wird, ist bereits integriert
     :::
     ::: grid
         ::: card "Nativer MCP-Server" icon:terminal
-        Integrierter Model Context Protocol Server mit nativen Tools. KI-Agenten abfragen und validieren Ihre Docs über eine lokale stdio-Verbindung — kein Netzwerk, kein externer Dienst.
+        Integrierter Model Context Protocol Server mit nativen Tools. KI-Agenten abfragen und validieren Ihre Docs über eine lokale stdio-Verbindung, kein Netzwerk, kein externer Dienst.
         :::
     :::
     ::: grid

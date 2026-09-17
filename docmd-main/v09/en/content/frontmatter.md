@@ -10,8 +10,9 @@ Frontmatter enables page-level configuration overrides. Declare YAML metadata at
 | Key | Type | Description |
 | :--- | :--- | :--- |
 | `title` | `String` | **Recommended.** Sets the HTML `<title>` tag and primary page header. |
-| `description` | `String` | Sets the meta description for SEO and search engine previews. |
-| `keywords` | `Array` | List of search keywords injected into `<meta name="keywords">`. |
+| `description` | `String` | Sets the meta description for SEO, search engines, `llms.txt`, and OKF manifests. |
+| `keywords` | `Array \| String` | Search keywords injected into `<meta name="keywords">` and extracted as tags for OKF bundles. |
+| `tags` | `Array \| String` | Concept tags for Open Knowledge Format (`/okf/`) manifests and knowledge graphs. |
 
 ::: callout tip "Metadata Best Practices" icon:sparkles
 Providing an explicit `title` and `description` in frontmatter ensures search engines and AI context generators index your documentation accurately.
@@ -21,8 +22,10 @@ Providing an explicit `title` and `description` in frontmatter ensures search en
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `noindex` | `Boolean` | When `true`, excludes the page from search indexing and sitemap generation. |
+| `noindex` | `Boolean` | When `true`, excludes the page from search indexing, sitemap generation, and AI bundles. |
+| `okf` | `Boolean` | Set to `false` to exclude the document exclusively from OKF bundle generation (`/okf/`). |
 | `llms` | `Boolean` | Set to `false` to exclude the document from compiled AI context files (`llms.txt`). |
+| `type` | `String` | Explicit concept type classification for OKF bundles (e.g. `guide`, `api`, `concept`). |
 | `hideTitle` | `Boolean` | When `true`, hides the main title from the page header area. |
 | `bodyClass` | `String` | Appends custom CSS classes to the top-level `<body>` element. |
 
@@ -33,7 +36,8 @@ Providing an explicit `title` and `description` in frontmatter ensures search en
 | `layout` | `String` | Set to `"full"` to expand content width and disable the Table of Contents (TOC). |
 | `toc` | `Boolean` | Set to `false` to disable the right-hand Table of Contents sidebar. |
 | `noStyle` | `Boolean` | Disables standard UI chrome (Sidebar, Header, Footer) for bespoke HTML pages. |
-| `titleAppend` | `Boolean` | Set to `false` to prevent appending the global site title to metadata tags. |
+| `titleSeparator` | `String` | Custom title delimiter for this page (e.g. `"-"`, `"|"`). Single spaces are added automatically. |
+| `titleAppend` | `Boolean` | Set to `false` to prevent appending the global site title to the HTML `<title>` and social cards. |
 
 ### Component Fine-Grained Controls (`noStyle`)
 
@@ -60,4 +64,6 @@ components:
 | :--- | :--- | :--- |
 | `image` | `String` | URL for social sharing preview cards (`og:image`). |
 | `aiBots` | `Boolean` | Set to `false` to prevent AI crawlers from scraping the page. |
-| `canonicalUrl` | `String` | Custom canonical URL for SEO indexing. |
+| `canonicalUrl` | `String \| Boolean` | Custom canonical URL for SEO indexing, or `false` to suppress the canonical tag. |
+| `ldJson` | `Object \| Array` | Custom Schema.org JSON-LD structured data payload injected into the page `<head>`. |
+| `seo` | `Object` | Nested SEO configuration overrides (`titleSeparator`, `titleAppend`, `breadcrumbs`, `ldJson`, etc.). |

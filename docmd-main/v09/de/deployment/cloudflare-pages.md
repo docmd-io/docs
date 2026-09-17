@@ -7,7 +7,7 @@ description: "Stellen Sie statische docmd-Dokumentations-Websites auf dem Cloudf
 
 ## Dashboard-Einrichtungsschritte
 
-1. Navigieren Sie im Cloudflare Dashboard zu **Workers & Pages → Create → Pages**.
+1. Navigieren Sie im Cloudflare Dashboard zu **Workers & Pages : Create : Pages**.
 2. Verknüpfen Sie Ihr Git-Anbieterkonto und wählen Sie das Ziel-Repository aus.
 3. Konfigurieren Sie die Build-Variablen:
 
@@ -21,7 +21,7 @@ description: "Stellen Sie statische docmd-Dokumentations-Websites auf dem Cloudf
 
 ## Konfiguration benutzerdefinierter Domains
 
-Fügen Sie benutzerdefinierte Domains in **Pages → Projekt → Benutzerdefinierte Domains** hinzu. TLS-Zertifikate werden automatisch bereitgestellt.
+Fügen Sie benutzerdefinierte Domains in **Pages : Projekt : Benutzerdefinierte Domains** hinzu. TLS-Zertifikate werden automatisch bereitgestellt.
 
 Setzen Sie die Eigenschaft `url` in `docmd.config.json` so, dass sie mit Ihrer Domain übereinstimmt:
 

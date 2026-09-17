@@ -105,11 +105,11 @@ themeConfig: {
 Da `docmd` Vue nicht clientseitig ausführt, ersetzen Sie benutzerdefinierte Komponenten durch `docmd`- [Container](../content/containers/callouts.md).
 
 VitePress-Admonition-Container funktionieren **direkt nach der Installation** ohne Modifikation:
-- `:::tip` → rendert als `callout tip`
-- `:::warning` → rendert als `callout warning`
-- `:::danger` → rendert als `callout danger`
-- `:::info` → rendert als `callout info`
-- `:::details` → rendert als `collapsible`
+- `:::tip` : rendert als `callout tip`
+- `:::warning` : rendert als `callout warning`
+- `:::danger` : rendert als `callout danger`
+- `:::info` : rendert als `callout info`
+- `:::details` : rendert als `collapsible`
 
 ::: callout success "Null Änderungen erforderlich" icon:check-circle
 Die Container-Syntax von VitePress wird nativ unterstützt. Bestehende Admonition-Blöcke und ausklappbare Details-Bereiche werden ohne Bearbeitung Ihrer Markdown-Dateien korrekt gerendert.

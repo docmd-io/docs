@@ -1,9 +1,9 @@
 ---
 title: "Vergleich"
-description: "Wie sich docmd gegen Docusaurus, VitePress, MkDocs, Starlight und Mintlify schlägt — echte Zahlen, echte Features."
+description: "Wie sich docmd gegen Docusaurus, VitePress, MkDocs, Starlight und Mintlify schlägt, echte Zahlen, echte Features."
 ---
 
-So schlägt sich `docmd` im Vergleich zu den Alternativen — gemessen an einer 50-Seiten-Dokumentationsseite auf identischer Hardware.
+So schlägt sich `docmd` im Vergleich zu den Alternativen, gemessen an einer 50-Seiten-Dokumentationsseite auf identischer Hardware.
 
 ## In 3 Sekunden schreiben statt in 30 Minuten
 
@@ -81,7 +81,7 @@ Die meisten Dokumentationsgeneratoren schlagen fehl, wenn ein Benutzer zu einer 
 | Zero-Config (kein benutzerdefiniertes React/Vue) | ✅ | Teilweise | ❌ | ✅ |
 
 ::: callout warning "404-Fehler in VitePress und Docusaurus" icon:info
-Wechselt ein Leser zu einer Locale, in der eine bestimmte Seite nicht übersetzt wurde, lösen VitePress und Docusaurus einen **404-Fehler** aus. Dies zu verhindern erfordert benutzerdefinierte Server-Redirects oder eigene Framework-Komponenten. `docmd` handhabt fehlende Übersetzungen zur Build-Zeit — unübersetzte Seiten fallen nahtlos mit einem lokalisierten Benachrichtigungs-Callout zurück.
+Wechselt ein Leser zu einer Locale, in der eine bestimmte Seite nicht übersetzt wurde, lösen VitePress und Docusaurus einen **404-Fehler** aus. Dies zu verhindern erfordert benutzerdefinierte Server-Redirects oder eigene Framework-Komponenten. `docmd` handhabt fehlende Übersetzungen zur Build-Zeit, unübersetzte Seiten fallen nahtlos mit einem lokalisierten Benachrichtigungs-Callout zurück.
 :::
 
 ## Multi-Projekt-Workspace-Unterstützung
@@ -131,7 +131,7 @@ Im Gegensatz zu älteren Dokumentationswerkzeugen, die auf teure proprietäre Sa
 
 ::: callout tip title:"Warum BYOK für Dokumentationsteams wichtig ist" icon:shield
 Cloud-Dokumentations-SaaS-Anbieter binden Teams an Gebühren pro Anfrage und proprietäre KI-Modelle. `docmd` bietet Teams vollständige Freiheit mit **BYOK (Bring Your Own Key)**: Verbinden Sie OpenAI, Anthropic, Gemini, DeepSeek, Groq oder lokal gehostete Ollama-Modelle bei voller Kontrolle über API-Budgets und Datenschutz.
-::: /callout
+:::
 
 ## Umfassende Feature-Matrix
 
@@ -169,7 +169,7 @@ Anzahl der Konfigurationszeilen für eine Seite mit Versionierung, i18n, Suche u
 
 ## Automatische Qualitätssicherung
 
-`docmd` wird mit einer umfassenden Integrationstest-Suite ausgeliefert, die **25 verschiedene Szenarien** über **85 Assertions** validiert — und jedes Kernfeature sowie Plugin isoliert und in Kombination abdeckt. Jedes Release muss alle 85 Assertions und 13 interne Failsafe-Prüfungen vor der Veröffentlichung bestehen.
+`docmd` wird mit einer umfassenden Integrationstest-Suite ausgeliefert, die **25 verschiedene Szenarien** über **85 Assertions** validiert, und jedes Kernfeature sowie Plugin isoliert und in Kombination abdeckt. Jedes Release muss alle 85 Assertions und 13 interne Failsafe-Prüfungen vor der Veröffentlichung bestehen.
 
 ::: callout tip title:"Test-Suite lokal ausführen" icon:lightbulb
 ```bash

@@ -6,7 +6,7 @@ description: "本地运行本站、链接到全局 docmd 安装并执行完整�
 # Setup
 
 ::: callout info
-**面向本站点的贡献者。** 想为 docmd 框架本身做贡献？请参阅 [GitHub 贡献指南](https://github.com/docmd-io/docmd?tab=contributing-ov-file) —— 框架的开发流程在那里维护。
+**面向本站点的贡献者。** 想为 docmd 框架本身做贡献？请参阅 [GitHub 贡献指南](https://github.com/docmd-io/docmd?tab=contributing-ov-file):, 框架的开发流程在那里维护。
 :::
 
 本页介绍如何参与 **这个文档站点**（`docmd-io/docs`）的开发，而不是 docmd 框架（`docmd-io/docmd`）。
@@ -82,7 +82,7 @@ docs/
 
 ## 下一步
 
-- [开发插件](./building-plugins.md) —— 编写自定义 docmd 插件。
-- [插件示例](./plugin-examples.md) —— 查看完整的插件演练。
-- [开发模板](./building-templates.md) —— 编写 docmd 模板。
-- [Node API 参考](./node-api-reference.md) —— 程序化构建 API。
+- [开发插件](./building-plugins.md):, 编写自定义 docmd 插件。
+- [插件示例](./plugin-examples.md):, 查看完整的插件演练。
+- [开发模板](./building-templates.md):, 编写 docmd 模板。
+- [Node API 参考](./node-api-reference.md):, 程序化构建 API。

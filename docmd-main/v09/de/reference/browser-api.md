@@ -1,6 +1,6 @@
 ---
 title: "Browser API"
-description: "Clientseitige APIs für docmd – isomorphe Rendering-Engine und Dev-Modus-WebSocket-Plugin-Kommunikation."
+description: "Clientseitige APIs für docmd, isomorphe Rendering-Engine und Dev-Modus-WebSocket-Plugin-Kommunikation."
 ---
 
 docmd bietet zwei clientseitige APIs: die **Isomorphe Kompilierungs-Engine** zum Rendern von Markdown in Browserkontexten und die **Dev-Modus Plugin API** zur Kommunikation mit dem lokalen Entwicklungsserver.

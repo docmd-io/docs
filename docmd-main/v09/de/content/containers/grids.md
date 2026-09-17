@@ -28,10 +28,6 @@ Grids bieten ein natives, Markdown-gesteuertes Layout-System. Verwenden Sie den 
 | **Flex-Verteilung** | Responsiv | Spalten richten sich auf dem Desktop horizontal aus und stapeln sich mobil vertikal. |
 | **Schließ-Tags** | `::: /grids`, `::: /grid`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
 
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
-
 
 ## Anwendungsbeispiele
 

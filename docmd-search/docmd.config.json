@@ -16,6 +16,7 @@
   },
 
   "layout": {
+    "titleSeparator": "-",
     "footer": {
       "copyright": "© 2026 docmd.io"
     }
@@ -36,6 +37,27 @@
     "search": {
       "semantic": true,
       "showConfidence": true
+    },
+    "seo": {
+      "defaultDescription": "Offline semantic search engine for documentation. Local vector embeddings, in-browser execution, zero telemetry.",
+      "aiBots": true,
+      "breadcrumbs": true,
+      "organization": {
+        "name": "docmd",
+        "url": "https://docmd.io",
+        "logo": "assets/images/docmd-logo-dark.png",
+        "sameAs": [
+          "https://github.com/docmd-io/docmd",
+          "https://x.com/docmd_io"
+        ]
+      },
+      "openGraph": {
+        "siteName": "docmd",
+        "type": "website"
+      },
+      "twitter": {
+        "cardType": "summary_large_image"
+      }
     }
   }
 }

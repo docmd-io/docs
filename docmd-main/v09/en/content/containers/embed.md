@@ -19,10 +19,6 @@ description: "Safely embed dynamic video, social media, and interactive content 
 | **Supported Networks** | Built-in | Auto-detects YouTube, Vimeo, TikTok, X, Figma, Gists, CodePen, Spotify, etc. |
 | **Fallback Button** | Automatic | Unrecognised URLs render safely as formatted hyperlink buttons without throwing errors. |
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 
 ## Usage Examples
 

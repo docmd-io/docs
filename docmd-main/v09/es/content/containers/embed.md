@@ -19,10 +19,6 @@ description: "Incruste de forma segura video dinámico, redes sociales y conteni
 | **Redes Soportadas** | Integrado | Detecta YouTube, Vimeo, TikTok, X, Figma, Gists, CodePen, Spotify, etc. |
 | **Botón de Respaldo** | Automático | URLs no reconocidas se renderizan como botones de hipervínculo sin errores. |
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
-
 
 ## Ejemplos de uso
 

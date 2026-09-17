@@ -30,29 +30,67 @@ Der Header zeigt aktive Seitentitel, Brotkrumen und Optionsmenüs an:
 - **Globaler Umschalter**: Aktivieren oder deaktivieren Sie den Header global über `layout.header.enabled`. Schalten Sie Brotkrumen über `layout.breadcrumbs` um.
 - **Überschreibung pro Seite**: Fügen Sie `hideTitle: true` zum [Frontmatter](../content/frontmatter.md) eines Dokuments hinzu, um dessen Header-Titel lokal auszublenden.
 
-### Kontextuelle Kopier-Widgets
+### Titelformat & Trennzeichen
 
-Der Header-Bereich enthält kontextuelle Kopierwerkzeuge: Ein-Klick-Kopieren des rohen Markdown-Quellcodes und strukturierter KI-Kontext-Prompts (enthält Seiten-URL, Titel, Beschreibung und Fließtext):
+Konfigurieren Sie, wie Dokumenttitel und Site-Titel in Ihren Dokumentationsvorlagen zusammengesetzt werden:
 
 ```json "docmd.config.json"
 {
-  "theme": {
-    "copyWidgets": {
-      "enabled": true,
-      "raw": true,
-      "context": true
-    }
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
   }
 }
 ```
 
-- `enabled`: Auf `false` setzen, um die Kopier-Widget-Leiste vollständig zu deaktivieren.
-- `raw`: Auf `false` setzen, um die Schaltfläche „Markdown kopieren" auszublenden.
-- `context`: Auf `false` setzen, um die Schaltfläche „Kontext kopieren" auszublenden.
+- `titleSeparator`: Das Trennzeichen zwischen Seitentitel und Site-Titel im Browser-Tab `<title>` und in Social-Media-Vorschauen. Der Standardwert ist ein mittelgroßer Bindestrich (`"-"`). Der Compiler fügt automatisch einzelne Leerzeichen um nicht-leere Trennzeichen ein (`" - "`), sodass einfache Zeichen wie `"-"` oder `"|"` genügen.
+- `titleAppend`: Bestimmt, ob der Site-Titel an Seitentitel angehängt wird (standardmäßig `true`). Auf `false` setzen, um nur den Seitentitel auszugeben. Kann im Frontmatter pro Seite überschrieben werden (`titleAppend: false`).
+
+### Kontextuelle Kopier- & Druck-Widgets
+
+Direkt über dem Artikelinhalt bietet `docmd` kontextbezogene Lese-Utilities: Ein-Klick-Kopieren des rohen Markdown-Quellcodes, strukturierte KI-Kontext-Prompts (enthält Seiten-URL, Titel, Beschreibung und Fließtext) sowie das Drucken von Seiten:
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
+    },
+    "print": false
+  }
+}
+```
+
+- `copyWidgets.enabled`: Auf `false` setzen, um die Kopier-Widget-Leiste vollständig zu deaktivieren.
+- `copyWidgets.raw`: Auf `false` setzen, um die Schaltfläche „Markdown kopieren" auszublenden.
+- `copyWidgets.context`: Auf `false` setzen, um die Schaltfläche „Kontext kopieren" auszublenden.
+- `print`: Standardmäßig deaktiviert (`false`). Wenn aktiviert (`true`), wird eine Drucken-Schaltfläche in der Aktionszeile neben den Kopier-Widgets (und in der Fokusmodus-Symbolleiste) gerendert. Die Druckschaltfläche befindet sich niemals im Header oder der Menüleiste.
+
+### Fokusmodus (Ablenkungsfreies Lesen)
+
+Der Fokusmodus blendet Seitenleisten, Header, Inhaltsverzeichnisse und schwebende Elemente aus und bietet eine saubere Leseoberfläche für lange technische Dokumentationen:
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "focusMode": false
+  }
+}
+```
+
+- **Standardstatus**: Standardmäßig deaktiviert (`false`).
+- **Wenn aktiviert**: Zeigt einen Fokus-Umschalter im Optionsmenü an und aktiviert das Tastenkürzel <kbd>Alt</kbd>+<kbd>F</kbd>.
+- **Bedienelemente im Fokusmodus**: Nur drei essenzielle Steuerelemente erscheinen oben rechts: Drucken (wenn `layout.print` aktiviert ist), Hell/Dunkel-Umschalter und Fokusmodus verlassen (<kbd>Esc</kbd> oder <kbd>Alt</kbd>+<kbd>F</kbd>).
+
+::: callout info title:"Rückwärtskompatibilität" icon:sparkles
+Für bestehende Projekte löst docmd frühere Konfigurationen, wie `print`, `focusMode`, `customJs` auf Root-Ebene und `theme.copyWidgets`, automatisch mit vollständiger Rückwärtskompatibilität auf.
+:::
 
 ### Optionsmenü (Dienstprogramme)
 
-Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus-Umschalter** und **Sponsoring-Links**:
+Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus-Umschalter**, **Fokusmodus** und **Sponsoring-Links**:
 
 ```json "docmd.config.json"
 {
@@ -61,7 +99,8 @@ Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus
       "position": "header", 
       "components": {
         "search": true,      
-        "themeSwitch": true, 
+        "themeSwitch": true,
+        "focusMode": true,
         "sponsor": "https://github.com/sponsors/mgks"
       }
     }
@@ -69,9 +108,9 @@ Das `optionsMenu` gruppiert globale Dienstprogramme wie **Suche**, **Theme-Modus
 }
 ```
 
-::: callout info title:"Automatischer Neupositionierungs-Fallback" icon:sparkles
-Wenn `optionsMenu` einem Container zugewiesen ist, der deaktiviert ist, verschiebt der Kompiler das Optionsmenü automatisch nach `sidebar-top`, um die Barrierefreiheit zu gewährleisten.
-::: /callout
+::: callout info title:"Automatische Verlagerung als Fallback" icon:sparkles
+Wenn `optionsMenu` einem Container zugewiesen ist, der deaktiviert ist, verschiebt der Compiler das Optionsmenü automatisch nach `sidebar-top`, um die Barrierefreiheit zu gewährleisten.
+:::
 
 ### Sidebar & Navigation
 

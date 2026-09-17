@@ -48,11 +48,11 @@ Diese Plugins werden gebündelt mit `@docmd/core` ausgeliefert und erfordern kei
 
 ::: callout tip title:"Git-Repository-Erkennung" icon:git-branch
 Das Git-Plugin erkennt, ob Ihr Projektstammverzeichnis ein gültiges Git-Repository ist. Wenn die Git-Historie nicht verfügbar ist, deaktiviert es die Generierung von Fußzeilen-Zeitstempeln automatisch.
-::: /callout
+:::
 
 ::: callout info title:"OKF-Bundle-Unterstützung" icon:info
 Das `@docmd/plugin-okf`-Plugin generiert ein Open Knowledge Format Bundle (`site/okf/`), das typisierte Manifeste und Konzeptdateien für KI-Agenten enthält. Es ist standardmäßig aktiviert; setzen Sie `"plugins": { "okf": false }`, um es zu deaktivieren. Siehe [OKF-Bundle-Plugin](okf.md) für Details.
-::: /callout
+:::
 
 ## Optionale Plugins
 
@@ -84,7 +84,7 @@ Der Auto-Installer:
 
 ::: callout tip title:"Belastbare Modulauflösung" icon:shield-check
 Der Auto-Installer verwendet dynamische ES-Modul-Importe mit Fallback-Auflösungspfaden, die das nahtlose Laden von ESM-Paketen ermöglichen, die explizite `exports`-Zuordnungen deklarieren.
-::: /callout
+:::
 
 ## Drittanbieter- & Benutzerdefinierte Plugins
 

@@ -5,12 +5,8 @@ description: "Combine cards, tabs, callouts, and steps recursively into high-fid
 
 `docmd` uses a depth-tracking recursive container parser. You can nest components within each other to build complex, interactive UI structures purely in Markdown without custom HTML.
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 ::: callout warning "Self-Closing Button Syntax" icon:alert-triangle
-The `::: button` component is self-closing (single-line). Never add a terminal `:::` immediately after a button—doing so terminates the **parent container**, resulting in broken page layouts.
+The `::: button` component is self-closing (single-line). Never add a terminal `:::` immediately after a button, doing so terminates the **parent container**, resulting in broken page layouts.
 :::
 
 ## Composition Examples
@@ -30,7 +26,7 @@ Choose your preferred initialisation path:
       ```
       ::: callout success
       This script handles package installation and workspace linking automatically.
-      ::: /callout
+      :::
 
    == tab "Manual"
       Manually fetch and link the core engine packages.

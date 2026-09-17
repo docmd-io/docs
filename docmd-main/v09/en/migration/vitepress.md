@@ -105,11 +105,11 @@ themeConfig: {
 Because `docmd` does not execute client-side Vue, replace custom components with `docmd` [Containers](../content/containers/callouts.md).
 
 VitePress admonition containers work **out of the box** without modification:
-- `:::tip` → renders as `callout tip`
-- `:::warning` → renders as `callout warning`
-- `:::danger` → renders as `callout danger`
-- `:::info` → renders as `callout info`
-- `:::details` → renders as `collapsible`
+- `:::tip` : renders as `callout tip`
+- `:::warning` : renders as `callout warning`
+- `:::danger` : renders as `callout danger`
+- `:::info` : renders as `callout info`
+- `:::details` : renders as `collapsible`
 
 ::: callout success "Zero Changes Required" icon:check-circle
 VitePress container syntax is natively supported. Existing admonition blocks and collapsible details sections render correctly without editing your Markdown files.

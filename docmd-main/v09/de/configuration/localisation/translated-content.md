@@ -11,18 +11,18 @@ Jede Locale lebt in einem eigenen Unterverzeichnis innerhalb des Quellverzeichni
 
 ```text
 docs/
-├── en/                     ← Standard-Locale-Inhalte
+├── en/  # Standard-Locale-Inhalte
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← zweite Locale (Hindi)
-│   ├── index.md            ← übersetzte Startseite
-│   ├── navigation.json     ← übersetzte Navigationsbeschriftungen
+├── hi/  # zweite Locale (Hindi)
+│   ├── index.md  # übersetzte Startseite
+│   ├── navigation.json  # übersetzte Navigationsbeschriftungen
 │   └── getting-started/
-│       └── installation.md ← übersetzte Installationsanleitung
-└── zh/                     ← dritte Locale (Chinesisch)
-    └── index.md            ← übersetzte Startseite
+│       └── installation.md  # übersetzte Installationsanleitung
+└── zh/  # dritte Locale (Chinesisch)
+    └── index.md  # übersetzte Startseite
 ```
 
 Wenn i18n aktiviert ist, liegen alle Markdown-Quellinhalte innerhalb von Locale-Verzeichnissen. Auf der Stamm-Ebene befinden sich keine Inhaltsdateien.
@@ -35,8 +35,8 @@ Unterverzeichnisnamen entsprechen direkt den `id`-Werten in Ihrer Konfiguration.
 
 `docmd` erfordert nicht, jedes Dokument im Voraus zu übersetzen. Die Engine behandelt das **Standard-Locale-Verzeichnis** als kanonischen Inhaltsbaum. Wenn eine angeforderte Seite in einer sekundären Locale fehlt:
 
-1. Wenn `docs/hi/getting-started/installation.md` existiert → wird die Hindi-Übersetzung ausgeliefert.
-2. Wenn `docs/hi/getting-started/installation.md` fehlt → wird auf `docs/en/getting-started/installation.md` zurückgegriffen.
+1. Wenn `docs/hi/getting-started/installation.md` existiert : wird die Hindi-Übersetzung ausgeliefert.
+2. Wenn `docs/hi/getting-started/installation.md` fehlt : wird auf `docs/en/getting-started/installation.md` zurückgegriffen.
 
 Beim Fallback auf die Standard-Locale zeigt `docmd` Lesern ein informatives Callout-Banner an. Passen Sie diese Nachricht über Ihre [UI-Strings-Konfiguration](./ui-strings.md) an.
 
@@ -62,26 +62,26 @@ Jedes Locale-Verzeichnis kann ein unabhängiges `navigation.json`-Manifest entha
 
 ::: callout tip title:"Teilweise Navigations-Überschreibungen" icon:lightbulb
 Stellen Sie eine `navigation.json`-Datei innerhalb eines Locale-Verzeichnisses nur dann bereit, wenn Sie Menübeschriftungen übersetzen. Wenn sie weggelassen wird, wird der Navigationsbaum der Standard-Locale automatisch angewendet.
-::: /callout
+:::
 
 ## Kombination von Versionierung mit Lokalisierung
 
 Bei der Kombination von Versionierung und mehrsprachigem Routing organisieren Sie Verzeichnisse hierarchisch mit in Versionsordnern verschachtelten Locales:
 
 ```text
-docs/                    ← aktuelle Version
-  en/                    ← Standard-Locale
-  hi/                    ← übersetzte Locale
-docs-v1/                 ← alte Version
-  en/                    ← Standard-Locale
-  hi/                    ← übersetzte Locale
+docs/  # aktuelle Version
+  en/  # Standard-Locale
+  hi/  # übersetzte Locale
+docs-v1/  # alte Version
+  en/  # Standard-Locale
+  hi/  # übersetzte Locale
 ```
 
 Die Ausgabe-URL-Hierarchie priorisiert Locale-Präfixe, gefolgt von Versionsrouten:
 
 ```text
-/                        ← Standard-Locale, aktuelle Version
-/hi/                     ← übersetzte Locale, aktuelle Version
-/v1/                     ← Standard-Locale, alte Version
-/hi/v1/                  ← übersetzte Locale, alte Version
+/  # Standard-Locale, aktuelle Version
+/hi/  # übersetzte Locale, aktuelle Version
+/v1/  # Standard-Locale, alte Version
+/hi/v1/  # übersetzte Locale, alte Version
 ```

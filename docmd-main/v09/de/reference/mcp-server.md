@@ -7,7 +7,7 @@ docmd enthält einen nativen Model Context Protocol (MCP)-Server, der es KI-Entw
 
 ## Technische Übersicht
 
-Das [Model Context Protocol](external:https://modelcontextprotocol.io/) ist ein offener Standard zur Anbindung von KI-Modellen an lokale Workspace-Tools. docmd implementiert die `stdio`-Transportschicht — Clients starten `docmd mcp` als Unterprozess und tauschen JSON-RPC 2.0-Nachrichten über Standard-Ein-/Ausgabe-Streams aus.
+Das [Model Context Protocol](external:https://modelcontextprotocol.io/) ist ein offener Standard zur Anbindung von KI-Modellen an lokale Workspace-Tools. docmd implementiert die `stdio`-Transportschicht, Clients starten `docmd mcp` als Unterprozess und tauschen JSON-RPC 2.0-Nachrichten über Standard-Ein-/Ausgabe-Streams aus.
 
 ## Start & Konfiguration
 
@@ -61,7 +61,7 @@ docmd unterstützt die Standard-MCP-Spezifikation:
 
 * **Transportmechanismus**: `stdio` (JSON-RPC 2.0-Nachrichten über Standard I/O).
 * **Logging**: Out-of-Band-Diagnoseprotokolle über `stderr`.
-* **Lebenszyklus-Ablauf**: `initialize` → `notifications/initialized` → Tool-Aufrufe.
+* **Lebenszyklus-Ablauf**: `initialize` : `notifications/initialized` : Tool-Aufrufe.
 * **Funktionen**: Stellt `tools`, `resources` und `prompts` bereit.
 
 ## Sicherheitskontrollen

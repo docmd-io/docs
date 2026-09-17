@@ -71,8 +71,8 @@ Text with attached discussions receives <span class="threads-preview-highlight">
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;1d ago</div>
     <div class="threads-preview-body">Good idea - I'll add a Mermaid flowchart. Does <code>sequenceDiagram</code> work here?</div>
     <div class="threads-preview-reactions">
-      <div class="threads-preview-reaction">👍 <span>2</span></div>
-      <div class="threads-preview-reaction">🚀 <span>1</span></div>
+      <div class="threads-preview-reaction">+1 <span>2</span></div>
+      <div class="threads-preview-reaction">Idea <span>1</span></div>
     </div>
   </div>
   <div class="threads-preview-comment threads-preview-reply">
@@ -103,7 +103,7 @@ Resolved discussions display in a dimmed state:
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5d ago&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Resolved</span></div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;5d ago&nbsp;&nbsp;<span class="threads-preview-resolved-badge">Resolved</span></div>
     <div class="threads-preview-body">Fixed the typo in the config example.</div>
   </div>
   <div class="threads-preview-footer">
@@ -111,7 +111,7 @@ Resolved discussions display in a dimmed state:
   </div>
 </div>
 
-A right-docked tab trigger <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> hugs the right edge of the viewport, displaying unresolved thread counts. Hovering over any highlighted text reveals an inline comment preview card directly within the content, while clicking the tab opens the discussion drawer. Threads persist seamlessly across drawer open and close states without reloading the page.
+A right-docked tab trigger <span class="threads-preview-fab"><span class="threads-preview-fab-badge">2</span></span> hugs the right edge of the viewport, displaying unresolved thread counts. Hovering over any highlighted text reveals an inline comment preview card directly within the content, while clicking the tab opens the discussion drawer. Threads persist smoothly across drawer open and close states without reloading the page.
 
 ## Markdown Storage Format
 

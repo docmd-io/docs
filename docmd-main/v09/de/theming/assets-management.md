@@ -38,9 +38,9 @@ Verknüpfen Sie benutzerdefinierte Stylesheet- oder Skript-Assets über die Them
 ```json "docmd.config.json"
 {
   "theme": {
-    "customCss": ["/assets/css/branding.css"]
-  },
-  "customJs": ["/assets/js/analytics.js"]
+    "customCss": ["/assets/css/branding.css"],
+    "customJs": ["/assets/js/analytics.js"]
+  }
 }
 ```
 

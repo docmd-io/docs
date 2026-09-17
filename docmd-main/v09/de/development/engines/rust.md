@@ -44,7 +44,7 @@ Die folgenden Plattform-Pakete werden derzeit verteilt:
 
 ::: callout info title:"Transparenter Graceful Fallback"
 Fehlt in Ihrer Umgebung ein passendes vorgebautes Binary, loggt die Engine eine nicht-fatale Benachrichtigung und **fällt automatisch** auf die hochperformante JavaScript-Engine zurück. Ihre Builds bleiben vollständig deterministisch.
-::: /callout
+:::
 
 ## Fähigkeiten & Strategische Einschränkungen
 
@@ -62,7 +62,7 @@ Um maximalen Nutzen zu erzielen, müssen Sie die architektonischen Trade-offs ve
 Die Kommunikation zwischen docmds Core-Orchestrator und der nativen Rust-Engine beruht auf stringifiziertem JSON, das die N-API-Runtime-Grenze überquert:
 
 ```text
-JS Worker → JSON.stringify() → NAPI Boundary → Serde Deserialisation → [Rust Task] → Serde Serialisation → NAPI Boundary → JSON.parse()
+JS Worker -> JSON.stringify() -> NAPI Boundary -> Serde Deserialisation -> [Rust Task] -> Serde Serialisation -> NAPI Boundary -> JSON.parse()
 ```
 
 Bei I/O-lastigen Operationen wie dem Abfragen von Git-Historien oder dem Lesen von Disk-Buffern überwiegt die eingesparte Verarbeitungszeit die Kosten der String-Konversion bei Weitem.

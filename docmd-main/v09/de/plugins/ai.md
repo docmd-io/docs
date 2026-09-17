@@ -7,7 +7,7 @@ Das `@docmd/plugin-ai`-Plugin fügt Ihrer Dokumentationsseite ein interaktives K
 
 ## Hauptfunktionen
 
-* **Schwebender Trigger & Glassmorphism-Drawer**: Sauberer Pill-Trigger (`⌘K`-Tastenkürzel), der sich in ein themenbewusstes Chat-Panel ausklappt.
+* **Schwebender Trigger & Glassmorphism-Drawer**: Sauberer Pill-Trigger (`Ctrl+K`-Tastenkürzel), der sich in ein themenbewusstes Chat-Panel ausklappt.
 * **Suchbasiertes RAG**: Fragt vorgebaute `search-index.json`-Daten ab, um LLM-Antworten direkt in der Dokumentation Ihrer Website zu verankern.
 * **Kostenloses docmd Cloud-Relay**: Bereitstellung auf statischen Hosts (GitHub Pages, Cloudflare Pages, Netlify, Vercel) ohne Backend-Server-Infrastruktur.
 * **BYOK Server- & KMS-Sicherheit**: API-Schlüssel werden im Ruhezustand via KMS in docmd Cloud verschlüsselt oder serverseitig aufgelöst (`AI_API_KEY`, `OPENAI_API_KEY`), was eine Null-Credential-Offenlegung in Client-Web-Bundles garantiert.
@@ -112,7 +112,7 @@ Wenn Sie Ihre Dokumentation als statische Dateien auf GitHub Pages, Cloudflare P
 
 ::: callout warning title:"Kein Verlust von Anmeldeinformationen" icon:alert-triangle
 `@docmd/plugin-ai` verarbeitet API-Anmeldeinformationen strikt serverseitig oder über das KMS-verschlüsselte Relay von docmd Cloud. Provider-API-Schlüssel werden niemals im Client-HTML oder in statischen JavaScript-Bundles gerendert.
-::: /callout
+:::
 
 Beim Betrieb als Node.js-Server setzen Sie die Umgebungsschlüssel des Anbieters vor dem Serverstart:
 

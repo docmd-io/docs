@@ -23,13 +23,13 @@ Select a deployment pattern based on infrastructure needs:
 
 The fastest path for standalone documentation projects. Clone the official template repository containing a default `docmd.config.json`, sample pages, and a pre-configured GitHub Actions workflow for automated deployments on push.
 
-→ [Starter Template Guide](./starter-template)
+: [Starter Template Guide](./starter-template)
 
 ## GitHub Action
 
 The `docmd-io/deploy` GitHub Action compiles your documentation and exposes the output directory path for downstream publishing steps. Use this to integrate docmd into existing CI/CD pipelines without modifying project file structures.
 
-→ [GitHub Action Guide](./github-action)
+: [GitHub Action Guide](./github-action)
 
 ## Deployer Tool
 
@@ -47,17 +47,17 @@ npx @docmd/core deploy --vercel          # vercel.json configuration
 npx @docmd/core deploy --netlify         # netlify.toml configuration
 ```
 
-→ [Deployer CLI Reference](./deployer)
+: [Deployer CLI Reference](./deployer)
 
 ## Supported Hosting Platforms
 
-* **[Docker Image](./docker)** — Official multi-architecture image for containerised environments.
-* **[NGINX](./nginx)** — Self-hosted reverse proxy configuration.
-* **[Caddy](./caddy)** — Self-hosted web server with automatic TLS certificate management.
-* **[Vercel](./vercel)** — Cloud deployment configuration with static asset optimisation.
-* **[Netlify](./netlify)** — Git-backed continuous deployment.
-* **[Cloudflare Pages](./cloudflare-pages)** — Edge-native static site hosting with integrated CI/CD.
-* **[Firebase Hosting](./firebase)** — Google CDN deployment with GitHub Actions integration.
+* **[Docker Image](./docker)**: Official multi-architecture image for containerised environments.
+* **[NGINX](./nginx)**: Self-hosted reverse proxy configuration.
+* **[Caddy](./caddy)**: Self-hosted web server with automatic TLS certificate management.
+* **[Vercel](./vercel)**: Cloud deployment configuration with static asset optimisation.
+* **[Netlify](./netlify)**: Git-backed continuous deployment.
+* **[Cloudflare Pages](./cloudflare-pages)**: Edge-native static site hosting with integrated CI/CD.
+* **[Firebase Hosting](./firebase)**: Google CDN deployment with GitHub Actions integration.
 
 ## Production Checklist
 

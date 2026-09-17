@@ -5,9 +5,6 @@ description: "使用显式 ::: mermaid 容器或标准 Markdown 代码块渲染�
 
 `docmd` 内置支持通过 **Mermaid** 渲染高保真图表。文档作者既可选择使用 `::: mermaid` 容器实现单图表的高级定制，也可使用标准 Markdown 代码块保持通用兼容性。
 
-::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
-自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: mermaid` ... `::: /mermaid`）、显式的键值对属性（`title:"..."`、`align:center`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对标准 ` ```mermaid ` 代码块及全局插件配置的向下兼容将被严格保留。
-:::
 
 ## 概述与混合架构设计
 

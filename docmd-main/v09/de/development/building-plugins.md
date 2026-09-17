@@ -58,13 +58,13 @@ Wenn Sie interaktive Plugins entwickeln, die einen laufenden Entwicklungs-Server
 
 Bei statischen Produktions-Builds (`docmd build`) überspringt docmd automatisch die Injektion von Client-Assets, lässt jedoch Markdown-Parsing-Hooks (`markdownSetup`) aktiv. Dadurch bleiben Produktions-Websites schlank, schnell und fehlerfrei, während Markdown-Container sauber gerendert werden. Benutzer können dies pro Website in ihrer Konfiguration mit `devOnly: false` (oder `liveOnly: false`) überschreiben.
 
-Engines haben denselben `docmd`-Namespace, aber **keine `capabilities`** — sie nehmen nicht am Hook-System teil, sondern nur am Engine-Loader.
+Engines haben denselben `docmd`-Namespace, aber **keine `capabilities`**, sie nehmen nicht am Hook-System teil, sondern nur am Engine-Loader.
 
 Die Build-Zeit-Prüfung (ebenfalls neu in 0.8.9) erkennt Drift zwischen JS-Deskriptor und Manifest, einschließlich des Bugs "implementierter Hook ohne deklarierte Fähigkeit", der zuvor unsichtbar war.
 
 ::: callout warning title:"Entfernung des gebündelten Registers in 0.9.0"
-Die handgepflegte `packages/plugins/installer/registry/plugins.json`, die früher der Katalog offizieller Plugins war, ist **seit 0.8.9 veraltet** und wird **in 0.9.0 entfernt**. Der Build-Zeit-Registry-Generator ist jetzt die einzige Quelle der Wahrheit — Ihr Plugin benötigt lediglich einen korrekten `docmd`-Namespace in seiner `package.json`, und der Generator nimmt es beim nächsten `pnpm build` von `@docmd/api` auf. Für bestehende offizielle Plugins sind keine Code-Änderungen erforderlich.
-::: /callout
+Die handgepflegte `packages/plugins/installer/registry/plugins.json`, die früher der Katalog offizieller Plugins war, ist **seit 0.8.9 veraltet** und wird **in 0.9.0 entfernt**. Der Build-Zeit-Registry-Generator ist jetzt die einzige Quelle der Wahrheit, Ihr Plugin benötigt lediglich einen korrekten `docmd`-Namespace in seiner `package.json`, und der Generator nimmt es beim nächsten `pnpm build` von `@docmd/api` auf. Für bestehende offizielle Plugins sind keine Code-Änderungen erforderlich.
+:::
 
 ## Kernfähigkeiten
 
@@ -85,7 +85,7 @@ Das `capabilities`-Array bestimmt, welche Hooks Ihr Plugin verwenden darf.
 | `translations`| `translations` | i18n |
 | `template` *(neu in 0.8.7)* | `templates`, `templateAssets` | Render |
 
-> **Hinweis:** Die `template`-Fähigkeit ist exklusiv — wenn ein Plugin sie deklariert, kann es nicht auch `head`, `build`, `post-build` usw. deklarieren. Templates liefern nur Slots und Assets; sie führen keine Lebenszyklus-Hooks aus. Wenn Sie beides benötigen, liefern Sie zwei separate Pakete.
+> **Hinweis:** Die `template`-Fähigkeit ist exklusiv, wenn ein Plugin sie deklariert, kann es nicht auch `head`, `build`, `post-build` usw. deklarieren. Templates liefern nur Slots und Assets; sie führen keine Lebenszyklus-Hooks aus. Wenn Sie beides benötigen, liefern Sie zwei separate Pakete.
 
 ## Plugin-API-Referenz
 
@@ -101,12 +101,12 @@ Ein docmd-Plugin ist ein Standard-JavaScript-Objekt, das einen oder mehrere der 
 | `translations(localeId)` | Geben Sie ein Objekt mit übersetzten Strings für die angegebene Locale zurück. |
 | `actions` | Ein Objekt benannter Action-Handler für WebSocket-RPC-Aufrufe. |
 | `events` | Ein Objekt benannter Event-Handler für Browser-Nachrichten. |
-| `templates[]` *(neu in 0.8.7, Fähigkeit: `template`)* | Array von `TemplateHook`-Einträgen — jeder `{ type, templatePath }` überschreibt einen EJS-Slot. |
-| `templateAssets[]` *(neu in 0.8.7, Fähigkeit: `template`)* | Array von `TemplateAssetHook`-Einträgen — jeder `{ type, path, priority?, position? }` liefert das CSS/JS-Bundle des Templates. |
+| `templates[]` *(neu in 0.8.7, Fähigkeit: `template`)* | Array von `TemplateHook`-Einträgen, jeder `{ type, templatePath }` überschreibt einen EJS-Slot. |
+| `templateAssets[]` *(neu in 0.8.7, Fähigkeit: `template`)* | Array von `TemplateAssetHook`-Einträgen, jeder `{ type, path, priority?, position? }` liefert das CSS/JS-Bundle des Templates. |
 
 ### Ein Template-Plugin entwickeln (neu in 0.8.7)
 
-Ein Template ist ein Plugin mit `capabilities: ['template']`. Es liefert ein `templates[]`-Array (Slot-Überschreibungen) und ein `templateAssets[]`-Array (CSS/JS-Bundle). Siehe den dedizierten [Templates-Leitfaden](../theming/templates.md) und [Theming → Templates](../theming/templates.md) für die vollständige Authoring-Anleitung, Slot-Tabelle und Auflösungskette. Das minimal lebensfähige Template sieht so aus:
+Ein Template ist ein Plugin mit `capabilities: ['template']`. Es liefert ein `templates[]`-Array (Slot-Überschreibungen) und ein `templateAssets[]`-Array (CSS/JS-Bundle). Siehe den dedizierten [Templates-Leitfaden](../theming/templates.md) und [Theming : Templates](../theming/templates.md) für die vollständige Authoring-Anleitung, Slot-Tabelle und Auflösungskette. Das minimal lebensfähige Template sieht so aus:
 
 ```javascript "index.js"
 export default {
@@ -371,9 +371,9 @@ Das `ctx` (ActionContext) bietet:
 
 Alle Dateioperationen sind auf den Projektstamm sandboxed.
 
-::: callout info title:"Nur Dev-Modus 🛡️"
+::: callout info title:"Nur Dev-Modus "
 Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktions-Builds enthalten weder den API-Client noch das serverseitige Action-Handling.
-::: /callout
+:::
 
 ## Best Practices
 
@@ -386,11 +386,11 @@ Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktio
 7.  **Action-Validierung**: Definieren und verlangen Sie ein explizites Payload-Schema in Ihren Actions.
 8.  **Logging**: Verwenden Sie den bereitgestellten `log()`-Helper in `onPostBuild`, um die Ausführlichkeitseinstellungen des Benutzers zu respektieren.
 
-::: callout tip title:"KI-bereites Design 🤖"
+::: callout tip title:"KI-bereites Design "
 Die docmd-Plugin-API ist **LLM-optimal**. Da die Hooks Standard-JavaScript-Objekte verwenden, können KI-Agenten mit minimaler Anleitung fehlerfreie Plugins generieren.
-::: /callout
+:::
 
-## ESM-Exports – die `default`-Bedingung
+## ESM-Exports: die `default`-Bedingung
 
 Ihre `package.json` **muss** in `exports["."]` zusätzlich zur
 `import`-Bedingung eine `"default"`-Bedingung deklarieren:

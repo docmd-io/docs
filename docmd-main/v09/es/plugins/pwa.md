@@ -40,10 +40,10 @@ Configure las propiedades de la PWA en `docmd.config.json`:
 
 El plugin busca el icono evaluando las siguientes propiedades de arriba hacia abajo:
 
-1. `plugins.pwa.icons` — Matriz explícita de iconos definida en la configuración.
-2. `plugins.pwa.logo` — Ruta de icono específica del plugin.
-3. `config.logo` — Ruta del logotipo global del sitio.
-4. `config.favicon` — Ruta del favicon global del sitio.
+1. `plugins.pwa.icons`, Matriz explícita de iconos definida en la configuración.
+2. `plugins.pwa.logo`, Ruta de icono específica del plugin.
+3. `config.logo`, Ruta del logotipo global del sitio.
+4. `config.favicon`, Ruta del favicon global del sitio.
 
 ::: callout tip "Pruebas de funcionamiento sin conexión" icon:smartphone
 El registro del service worker se desactiva durante el desarrollo local (`npx @docmd/core dev`) para evitar que los recursos en caché interfieran con la edición en vivo. Para probar la PWA, compile el sitio (`npx @docmd/core build`) y sirva la carpeta de salida (`site/`) bajo HTTPS o en localhost.

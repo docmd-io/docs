@@ -12,6 +12,11 @@ Configure los valores predeterminados de SEO en `docmd.config.json`. Las opcione
 | Opción | Tipo | Por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
 | `defaultDescription` | `string` | `null` | Descripción alternativa para páginas que carezcan de descripción explícita. |
+| `titleSeparator` | `string` | `"-"` | Separador colocado entre el título de la página y el del sitio en `<title>` y tarjetas sociales. Se añaden espacios automáticamente (`" - "`). También configurable en `layout.titleSeparator`. |
+| `titleAppend` | `boolean` | `true` | Añade el título del sitio al de la página. Establezca en `false` para mostrar solo el título de la página. También configurable en `layout.titleAppend`. |
+| `breadcrumbs` | `boolean` | `true` | Inyecta automáticamente datos estructurados Schema.org `BreadcrumbList` JSON-LD en todas las páginas no raíz. |
+| `organization` | `object` | `null` | Datos estructurados Schema.org `Organization` (name, url, logo, sameAs), inyectados en la página de inicio. |
+| `webSite` | `object \| boolean` | `true` | Datos estructurados Schema.org `WebSite` con `SearchAction` de enlaces de búsqueda en la página de inicio. |
 | `aiBots` | `boolean` | `true` | Permite (`true`) o bloquea (`false`) rastreadores de entrenamiento de IA (GPTBot, ChatGPT-User, Google-Extended, CCBot). |
 | `openGraph` | `object` | `null` | Metadatos de Open Graph para redes sociales (Facebook, LinkedIn). |
 | `twitter` | `object` | `null` | Configuración de tarjetas de Twitter (X), incluyendo usuario y tipo de tarjeta. |
@@ -20,9 +25,23 @@ Configure los valores predeterminados de SEO en `docmd.config.json`. Las opcione
 
 ```json "docmd.config.json"
 {
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
+  },
   "plugins": {
     "seo": {
       "defaultDescription": "Documentación técnica integral sobre la plataforma docmd.",
+      "breadcrumbs": true,
+      "organization": {
+        "name": "docmd",
+        "url": "https://docmd.io",
+        "logo": "https://docmd.io/assets/images/docmd-logo.png",
+        "sameAs": [
+          "https://github.com/docmd-io/docmd",
+          "https://x.com/docmd_io"
+        ]
+      },
       "aiBots": false,
       "twitter": {
         "siteUsername": "@docmd_io",
@@ -38,9 +57,9 @@ Configure los valores predeterminados de SEO en `docmd.config.json`. Las opcione
 * **Generación automática de `robots.txt`**: Crea un archivo `robots.txt` en la raíz de salida incluyendo ubicaciones de mapas del sitio y directivas de rastreadores de IA.
 * **Extractos inteligentes**: Extrae automáticamente los primeros 150 caracteres del texto si no se ha definido una descripción manual.
 * **Control de rastreadores de IA**: Establezca `aiBots: false` para impedir el scraping de entrenamiento de IA sin afectar la indexación de motores de búsqueda habituales.
-* **Emisión de URL canónica**: Inyecta elementos `<link rel="canonical">` para prevenir problemas de contenido duplicado.
-* **Tarjetas sociales**: Genera etiquetas de Open Graph y Twitter Cards.
-* **Datos estructurados (JSON-LD)**: Incluye bloques Schema JSON-LD de tipo Article para fragmentos enriquecidos en los resultados de búsqueda.
+* **Emisión de URL canónica**: Inyecta elementos `<link rel="canonical">` para prevenir problemas de contenido duplicado. Establezca `canonicalUrl: false` en el frontmatter para suprimir la etiqueta.
+* **Tarjetas sociales**: Genera etiquetas de Open Graph y Twitter Cards con títulos y separadores unificados.
+* **Datos estructurados (JSON-LD)**: Inyecta esquemas `BreadcrumbList`, `Organization` y `WebSite` (Sitelinks SearchAction), con compatibilidad para payloads personalizados `ldJson` en frontmatter.
 
 ## Orden de resolución de `robots.txt`
 
@@ -55,7 +74,7 @@ Estructura de archivos recomendada:
 ```text
 mi-documentacion/
 ├── assets/
-│   └── robots.txt    ← Redacte sus reglas personalizadas aquí
+│   └── robots.txt  # Redacte sus reglas personalizadas aquí
 ├── index.md
 └── docmd.config.json
 ```

@@ -13,7 +13,7 @@ Cuando se ejecuta en un directorio sin un manifiesto `docmd.config.json`, el mot
 
 1. **Descubrimiento del directorio fuente**: Escanea los directorios candidatos en orden de prioridad: `docs/`, `src/docs/`, `documentation/`, `content/` y `.` (alternativa de directorio raíz).
 2. **Extracción de versión y ubicación**: Analiza automáticamente carpetas de versión que coinciden con `v[0-9]+` (por ejemplo, `v1.0`, `v09`) y códigos de ubicación de dos letras (por ejemplo, `en`, `de`, `zh`).
-3. **Enrutamiento automatizado de la barra lateral**: Genera un árbol de navegación limpio analizando las jerarquías de archivos y convirtiendo nombres de base con guiones (`getting-started.md` → `Getting Started`).
+3. **Enrutamiento automatizado de la barra lateral**: Genera un árbol de navegación limpio analizando las jerarquías de archivos y convirtiendo nombres de base con guiones (`getting-started.md` : `Getting Started`).
 
 :::
 

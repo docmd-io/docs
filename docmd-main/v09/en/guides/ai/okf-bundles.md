@@ -1,6 +1,6 @@
 ---
-title: "OKF Bundles — Deep Dive"
-description: "How to organise your docmd content for the best OKF bundle — typed concepts, cross-links, and the discipline that makes an AI-agent-friendly knowledge base."
+title: "OKF Bundles, Deep Dive"
+description: "How to organise your docmd content for the best OKF bundle, typed concepts, cross-links, and the discipline that makes an AI-agent-friendly knowledge base."
 ---
 
 The [`@docmd/plugin-okf`](../../plugins/okf.md) generates an [Open Knowledge Format][okf-spec] bundle from your docmd site. This guide explains what the bundle looks like, how to organise your content for the best AI-agent consumption, and how OKF differs from the [`llms.txt`](../../plugins/llms.md) flat-list format.
@@ -9,9 +9,9 @@ The [`@docmd/plugin-okf`](../../plugins/okf.md) generates an [Open Knowledge For
 
 ## The mental model: a wiki, not a sitemap
 
-A traditional docs site is a tree — sections and subsections, with pages hanging off each one. A user navigates the tree top-down to find what they need.
+A traditional docs site is a tree, sections and subsections, with pages hanging off each one. A user navigates the tree top-down to find what they need.
 
-An OKF bundle is a **wiki** — a flat directory of typed concept files with cross-links between them. An AI agent navigates the graph horizontally, following links from one concept to its neighbours.
+An OKF bundle is a **wiki**: a flat directory of typed concept files with cross-links between them. An AI agent navigates the graph horizontally, following links from one concept to its neighbours.
 
 The two structures look the same on disk (markdown files in directories), but the navigation model is different. The OKF spec's [three design principles][okf-principles] are worth quoting in full:
 
@@ -25,13 +25,13 @@ The two structures look the same on disk (markdown files in directories), but th
 
 ```text
 site/okf/
-├── okf.yaml              ← typed manifest
-├── index.md              ← Karpathy-style catalog
-├── graph/                ← opt-in: only when plugins.okf.graph: true
-│   ├── index.html        ← interactive force-directed viewer
-│   ├── graph.json        ← graph data
-│   ├── graph.js          ← viewer runtime
-│   └── graph.css         ← viewer styles
+├── okf.yaml  # typed manifest
+├── index.md  # Karpathy-style catalog
+├── graph/  # opt-in: only when plugins.okf.graph: true
+│   ├── index.html  # interactive force-directed viewer
+│   ├── graph.json  # graph data
+│   ├── graph.js  # viewer runtime
+│   └── graph.css  # viewer styles
 ├── concepts/
 │   ├── weekly-active-users.md
 │   ├── orders-table.md
@@ -41,7 +41,7 @@ site/okf/
     └── lint-report.txt
 ```
 
-Each `concepts/<slug>.md` file carries a `type` field in frontmatter plus the full markdown body of the page. The `okf.yaml` manifest lists every concept with its type, path, locale, version, and tags — the catalogue that an AI agent uses to decide which concepts to read.
+Each `concepts/<slug>.md` file carries a `type` field in frontmatter plus the full markdown body of the page. The `okf.yaml` manifest lists every concept with its type, path, locale, version, and tags, the catalogue that an AI agent uses to decide which concepts to read.
 
 ## What goes in a `type`
 
@@ -66,6 +66,12 @@ You can override the inferred type with explicit frontmatter:
 type: api
 title: "Authentication API"
 description: "OAuth 2.0 + JWT auth flow for the user API."
+tags:
+  - auth
+  - security
+keywords:
+  - oauth2
+  - tokens
 ---
 
 # Authentication API
@@ -79,10 +85,12 @@ Or use the nested `okf.type` form:
 okf:
   type: api
 title: "Authentication API"
+description: "OAuth 2.0 + JWT auth flow for the user API."
+tags: ["auth", "security"]
 ---
 ```
 
-The agent reads the `type` field first. A concept with `type: runbook` is treated as a step-by-step playbook (e.g. "how to recover from a partial outage"); a concept with `type: api` is treated as API reference; a concept with `type: dataset` is treated as a data dictionary.
+The agent reads the `type` and `description` fields first. The compiler automatically places `description` into `okf.yaml` and extracts tags from both `tags` and `keywords` frontmatter properties. A concept with `type: runbook` is treated as a step-by-step playbook (e.g. "how to recover from a partial outage"); a concept with `type: api` is treated as API reference; a concept with `type: dataset` is treated as a data dictionary.
 
 ## Cross-links make the graph
 
@@ -92,13 +100,13 @@ The `okf-bundle` (read: "graph of concepts") is more useful than a tree because 
 
 Best practices for cross-links:
 
-- **Link forward** — when introducing a concept, link to the concepts it depends on (e.g. `[MCP Setup](./mcp-and-agent-skills.md)`).
-- **Link backward** — in the concept that depends on this one, link back (e.g. `[AI Assistant](./ai-assistant.md)`).
-- **Don't over-link** — every link should add information. Linking every word dilutes the graph and confuses the agent.
+- **Link forward**: when introducing a concept, link to the concepts it depends on (e.g. `[MCP Setup](./mcp-and-agent-skills.md)`).
+- **Link backward**: in the concept that depends on this one, link back (e.g. `[AI Assistant](./ai-assistant.md)`).
+- **Don't over-link**: every link should add information. Linking every word dilutes the graph and confuses the agent.
 
 ## Per-page opt-out
 
-Some pages aren't useful to AI agents — legal boilerplate, internal "about the team" pages, marketing copy. Use `frontmatter.okf: false` to exclude a single page from the OKF bundle:
+Some pages aren't useful to AI agents, legal boilerplate, internal "about the team" pages, marketing copy. Use `frontmatter.okf: false` to exclude a single page from the OKF bundle:
 
 ```markdown
 ---
@@ -111,8 +119,8 @@ okf: false
 
 Or use `noindex: true` to exclude a page from every downstream consumer (sitemap, search, llms.txt, OKF). The two flags differ:
 
-- `okf: false` — excluded from OKF only; still in search and llms.txt
-- `noindex: true` — excluded from every downstream consumer
+- `okf: false`, excluded from OKF only; still in search and llms.txt
+- `noindex: true`, excluded from every downstream consumer
 
 ## How OKF differs from `llms.txt`
 
@@ -144,10 +152,10 @@ concepts:
 
 The two complement each other:
 
-- **llms.txt** is for **flat consumption** — "give me everything". An agent reads the file and has the full text in its context window.
-- **OKF** is for **typed consumption** — "give me the schema for table X". An agent reads the manifest, picks the concepts it needs, and loads them selectively.
+- **llms.txt** is for **flat consumption**: "give me everything". An agent reads the file and has the full text in its context window.
+- **OKF** is for **typed consumption**: "give me the schema for table X". An agent reads the manifest, picks the concepts it needs, and loads them selectively.
 
-For projects with under 50 pages, llms.txt alone is often enough. For projects with 50+ pages, OKF is the more efficient format — the agent doesn't have to load every page just to find the one it needs.
+For projects with under 50 pages, llms.txt alone is often enough. For projects with 50+ pages, OKF is the more efficient format, the agent doesn't have to load every page just to find the one it needs.
 
 ## Common mistakes
 
@@ -193,7 +201,7 @@ open site/okf/graph.html
 cat site/okf/_meta/lint-report.txt
 ```
 
-The lint report is the first thing to check — it lists pages without a `type` field, pages with broken internal links, and orphaned concepts (no inbound links). Fix any of those for a cleaner agent experience.
+The lint report is the first thing to check, it lists pages without a `type` field, pages with broken internal links, and orphaned concepts (no inbound links). Fix any of those for a cleaner agent experience.
 
-- [AI Assistant Setup](./ai-assistant.md) — RAG-powered interactive assistant configuration.
-- [MCP & Agent Skills](./mcp-and-agent-skills.md) — Model Context Protocol setup and agent workspace tools.
+- [AI Assistant Setup](./ai-assistant.md): RAG-powered interactive assistant configuration.
+- [MCP & Agent Skills](./mcp-and-agent-skills.md): Model Context Protocol setup and agent workspace tools.

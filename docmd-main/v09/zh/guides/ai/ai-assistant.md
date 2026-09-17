@@ -17,7 +17,7 @@ docmd AI 助手支持两种主要的部署架构模式：
 
 | 架构模式 | 适用场景 | 后端基础设施 | API 密钥安全性 |
 | :--- | :--- | :--- | :--- |
-| **免费 docmd Cloud 中继** | 静态文档站点（GitHub Pages、Cloudflare Pages、Netlify、Vercel、S3） | 零服务器 — 由 docmd 托管的 Serverless 中继驱动 | 云端硬件 KMS 加密存储 |
+| **免费 docmd Cloud 中继** | 静态文档站点（GitHub Pages、Cloudflare Pages、Netlify、Vercel、S3） | 零服务器, 由 docmd 托管的 Serverless 中继驱动 | 云端硬件 KMS 加密存储 |
 | **自托管服务器** | 动态 Node.js 应用、Docker 容器、企业内部专网环境 | 开发者自建 Node.js 服务 (`docmd dev` / `docmd serve`) | 服务器系统环境变量 |
 | **本地 LLM (Ollama)** | 离线网络、本地研发测试、零云端依赖 | 本地工作站运行 `ollama` | 本地 localhost 端口通信 |
 
@@ -100,7 +100,7 @@ docmd AI 助手支持两种主要的部署架构模式：
 
 ::: callout tip title:"推荐模型" icon:sparkles
 为了在响应速度和成本之间取得最佳平衡，我们推荐使用快速推理模型，如 `gpt-4o-mini` (OpenAI)、`claude-3-5-haiku-20241022` (Anthropic) 或 `gemini-1.5-flash` (Google)。
-::: /callout
+:::
 
 ### 2. 设置提供商凭据
 

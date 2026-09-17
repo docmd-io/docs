@@ -77,18 +77,18 @@ Convert custom `<MyReactComponent />` tags into standard Markdown or use `docmd`
 ##### Admonition Container Aliases
 
 Docusaurus admonitions work **out of the box** without file modifications:
-- `:::note` → renders as `callout info`
-- `:::tip` → renders as `callout tip`
-- `:::info` → renders as `callout info`
-- `:::caution` → renders as `callout warning`
-- `:::danger` → renders as `callout danger`
+- `:::note` : renders as `callout info`
+- `:::tip` : renders as `callout tip`
+- `:::info` : renders as `callout info`
+- `:::caution` : renders as `callout warning`
+- `:::danger` : renders as `callout danger`
 
 ::: callout tip "Native Container Syntax" icon:sparkles
 For enhanced features (such as custom icons or custom badge colours), convert Docusaurus admonitions to native `docmd` syntax:
 ```markdown
 ::: callout tip title:"Custom Title" icon:sparkles
 This is a tip container.
-::: /callout
+:::
 ```
 :::
 

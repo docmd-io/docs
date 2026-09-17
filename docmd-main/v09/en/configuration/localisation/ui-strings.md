@@ -3,7 +3,7 @@ title: "UI Strings & SEO Localisation"
 description: "Customise system UI strings per locale and understand automated hreflang SEO meta tags in docmd."
 ---
 
-`docmd` ships with built-in translations for common system strings across major languages. When configuring a supported locale, system labels—such as search placeholders, navigation buttons, and theme mode toggles—translate automatically.
+`docmd` ships with built-in translations for common system strings across major languages. When configuring a supported locale, system labels, such as search placeholders, navigation buttons, and theme mode toggles, translate automatically.
 
 For unsupported languages or custom phrasing, the system falls back to English while allowing custom string overrides per locale.
 
@@ -38,7 +38,7 @@ Define custom labels in the `translations` object of any locale configuration:
 }
 ```
 
-Translation resolution follows a strict priority order: **system defaults → plugin strings → configuration overrides**. User configuration always takes highest precedence.
+Translation resolution follows a strict priority order: **system defaults : plugin strings : configuration overrides**. User configuration always takes highest precedence.
 
 ## Available Translation Keys
 

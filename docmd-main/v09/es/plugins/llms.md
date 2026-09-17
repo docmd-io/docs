@@ -11,9 +11,9 @@ El plugin se encuentra **activo por defecto**. Defina la propiedad [`url`](../co
 
 Durante la compilación, se crean tres archivos en la raíz del directorio de salida:
 
-* `llms.txt` — Resumen estructurado con títulos, descripciones y URLs canónicas de cada página.
-* `llms-full.txt` — Contexto integral con el contenido Markdown sin procesar de cada página añadido al final.
-* `llms.json` — Manifiesto en formato JSON con metadatos tipados (título, URL, descripción, prioridad).
+* `llms.txt`, Resumen estructurado con títulos, descripciones y URLs canónicas de cada página.
+* `llms-full.txt`, Contexto integral con el contenido Markdown sin procesar de cada página añadido al final.
+* `llms.json`, Manifiesto en formato JSON con metadatos tipados (título, URL, descripción, prioridad).
 
 Además, se insertan etiquetas `<link>` en el `<head>` de cada página para facilitar su descubrimiento por rastreadores.
 
@@ -65,15 +65,15 @@ Para generar archivos de contexto dedicados para idiomas secundarios, configure 
 Al habilitar esta opción, la salida incluye:
 
 ```text
-site/llms.txt          ← Idioma predeterminado (sin sufijo)
-site/llms-full.txt     ← Idioma predeterminado (sin sufijo)
-site/llms.json         ← Idioma predeterminado (sin sufijo)
-site/llms.es.txt       ← Idioma español (con sufijo)
-site/llms-full.es.txt  ← Idioma español (con sufijo)
-site/llms.de.txt       ← Idioma alemán (con sufijo)
-site/llms-full.de.txt  ← Idioma alemán (con sufijo)
-site/llms.zh.txt       ← Idioma chino (con sufijo)
-site/llms-full.zh.txt  ← Idioma chino (con sufijo)
+site/llms.txt  # Idioma predeterminado (sin sufijo)
+site/llms-full.txt  # Idioma predeterminado (sin sufijo)
+site/llms.json  # Idioma predeterminado (sin sufijo)
+site/llms.es.txt  # Idioma español (con sufijo)
+site/llms-full.es.txt  # Idioma español (con sufijo)
+site/llms.de.txt  # Idioma alemán (con sufijo)
+site/llms-full.de.txt  # Idioma alemán (con sufijo)
+site/llms.zh.txt  # Idioma chino (con sufijo)
+site/llms-full.zh.txt  # Idioma chino (con sufijo)
 ```
 
 ## Seguridad y saneamiento

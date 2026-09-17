@@ -112,7 +112,7 @@ Si despliega su documentación como archivos estáticos en GitHub Pages, Cloudfl
 
 ::: callout warning title:"Cero filtraciones de credenciales" icon:alert-triangle
 `@docmd/plugin-ai` procesa estrictamente las credenciales de API en el lado del servidor o a través de la retransmisión cifrada por KMS de docmd Cloud. Las claves de API del proveedor nunca se renderizan en el HTML del cliente ni en los paquetes de JavaScript estáticos.
-::: /callout
+:::
 
 Al ejecutar docmd como servidor Node.js, defina las claves de entorno del proveedor antes de iniciar el servidor de documentación:
 

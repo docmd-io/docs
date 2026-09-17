@@ -72,6 +72,6 @@ Format tabular data using GFM pipe syntax:
 
 ```html
 <div style="padding: 2rem; border: 1px solid var(--border-color); border-radius: 12px; text-align: center;">
-  Bespoke HTML elements render inline seamlessly.
+  Custom HTML elements render inline directly.
 </div>
 ```

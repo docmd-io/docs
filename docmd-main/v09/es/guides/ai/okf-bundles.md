@@ -1,5 +1,5 @@
 ---
-title: "Paquetes OKF — Análisis detallado"
+title: "Paquetes OKF, Análisis detallado"
 description: "Cómo organizar su contenido en docmd para obtener el mejor paquete OKF: conceptos tipificados, enlaces cruzados y la disciplina que hace que una base de conocimientos sea amigable con los agentes de IA."
 ---
 
@@ -25,13 +25,13 @@ Las dos estructuras se ven iguales en el disco (archivos Markdown en directorios
 
 ```text
 site/okf/
-├── okf.yaml              ← manifiesto tipificado
-├── index.md              ← catálogo estilo Karpathy
-├── graph/                ← opcional: solo cuando plugins.okf.graph: true
-│   ├── index.html        ← visualizador interactivo dirigido por fuerza
-│   ├── graph.json        ← datos del gráfico
-│   ├── graph.js          ← tiempo de ejecución del visualizador
-│   └── graph.css         ← estilos del visualizador
+├── okf.yaml  # manifiesto tipificado
+├── index.md  # catálogo estilo Karpathy
+├── graph/  # opcional: solo cuando plugins.okf.graph: true
+│   ├── index.html  # visualizador interactivo dirigido por fuerza
+│   ├── graph.json  # datos del gráfico
+│   ├── graph.js  # tiempo de ejecución del visualizador
+│   └── graph.css  # estilos del visualizador
 ├── concepts/
 │   ├── weekly-active-users.md
 │   ├── orders-table.md
@@ -66,6 +66,12 @@ Puede anular el tipo inferido con frontmatter explícito:
 type: api
 title: "API de autenticación"
 description: "Flujo de autenticación OAuth 2.0 + JWT para la API de usuario."
+tags:
+  - auth
+  - security
+keywords:
+  - oauth2
+  - tokens
 ---
 
 # API de autenticación
@@ -79,10 +85,12 @@ O utilice la forma anidada `okf.type`:
 okf:
   type: api
 title: "API de autenticación"
+description: "Flujo de autenticación OAuth 2.0 + JWT para la API de usuario."
+tags: ["auth", "security"]
 ---
 ```
 
-El agente lee primero el campo `type`. Un concepto con `type: runbook` se trata como una guía paso a paso (por ejemplo, "cómo recuperarse de una interrupción parcial"); un concepto con `type: api` se trata como referencia de API; un concepto con `type: dataset` se trata como un diccionario de datos.
+El agente lee primero los campos `type` y `description`. El compilador traslada automáticamente `description` a `okf.yaml` y extrae etiquetas de las propiedades de frontmatter `tags` y `keywords`. Un concepto con `type: runbook` se trata como una guía paso a paso (por ejemplo, "cómo recuperarse de una interrupción parcial"); un concepto con `type: api` se trata como referencia de API; un concepto con `type: dataset` se trata como un diccionario de datos.
 
 ## Los enlaces cruzados hacen el gráfico
 
@@ -195,5 +203,5 @@ cat site/okf/_meta/lint-report.txt
 
 El informe de análisis es lo primero que se debe verificar: enumera páginas sin un campo `type`, páginas con enlaces internos rotos y conceptos huérfanos (sin enlaces entrantes). Corrija cualquiera de ellos para una experiencia de agente más limpia.
 
-- [Configuración del Asistente de IA](./ai-assistant.md) — Configuración del asistente interactivo impulsado por RAG.
-- [MCP y habilidades de agente](./mcp-and-agent-skills.md) — Configuración del Protocolo de Contexto de Modelo y herramientas del espacio de trabajo del agente.
+- [Configuración del Asistente de IA](./ai-assistant.md): Configuración del asistente interactivo impulsado por RAG.
+- [MCP y habilidades de agente](./mcp-and-agent-skills.md): Configuración del Protocolo de Contexto de Modelo y herramientas del espacio de trabajo del agente.

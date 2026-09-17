@@ -1,6 +1,6 @@
 ---
-title: "docmd docs: documentación para humanos y máquinas"
-description: "Compilador de documentación open source. Una fuente Markdown, un comando — genera sitio web, búsqueda, contexto IA, protocolos de agentes y formatos de conocimiento. Todo junto."
+title: "docmd Docs — Documentación Oficial, Guías y Referencia de API"
+description: "Compilador de documentación open source. Una fuente Markdown, un comando, genera sitio web, búsqueda, contexto IA, protocolos de agentes y formatos de conocimiento. Todo junto."
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-Documentación para humanos y máquinas. Un comando compila Markdown en sitio web, índice de búsqueda, contexto IA y formatos de conocimiento — cero configuración.
+Documentación para humanos y máquinas. Un comando compila Markdown en sitio web, índice de búsqueda, contexto IA y formatos de conocimiento, cero configuración.
 
 ::: button "Primeros pasos" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ Documentación para humanos y máquinas. Un comando compila Markdown en sitio we
 
 ## Descripción general
 
-docmd es un compilador de documentación open source. Toma sus archivos Markdown y genera un stack de documentación completo — sitio web, búsqueda, contexto IA y más — en una sola compilación.
+docmd es un compilador de documentación open source. Toma sus archivos Markdown y genera un stack de documentación completo, sitio web, búsqueda, contexto IA y más, en una sola compilación.
 
 ::: tabs
 == tab "npm" icon:box

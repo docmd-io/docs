@@ -134,7 +134,7 @@ Some note content.
 ```markdown
 ::: callout info title:"Optional Title"
 Some note content.
-::: /callout
+:::
 ```
 
 #### Frontmatter-Zuordnung

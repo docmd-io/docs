@@ -42,8 +42,8 @@ La versión `current` se compila directamente en la raíz de su sitio (por ejemp
 
 ### 2. Subdirectorios de versión aislados
 Los lanzamientos que no son actuales se compilan en subcarpetas dedicadas nombradas según su `id`:
-- `v2` (Lanzamiento activo) → `ejemplo.com/`
-- `v1` (Lanzamiento heredado) → `ejemplo.com/v1/`
+- `v2` (Lanzamiento activo) : `ejemplo.com/`
+- `v1` (Lanzamiento heredado) : `ejemplo.com/v1/`
 
 ### 3. Preservación de ruta fija
 Cuando los lectores cambian entre versiones usando el selector desplegable, `docmd` conserva las ubicaciones de rutas relativas. Si un usuario está leyendo `ejemplo.com/getting-started` y cambia a **v1**, es redirigido automáticamente a `ejemplo.com/v1/getting-started` (si existe el documento de destino).

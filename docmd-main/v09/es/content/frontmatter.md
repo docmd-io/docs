@@ -10,8 +10,9 @@ El Frontmatter permite realizar anulaciones de configuración a nivel de página
 | Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
 | `title` | `String` | **Recomendado.** Establece la etiqueta HTML `<title>` y el encabezado principal de la página. |
-| `description` | `String` | Establece la metadescripción para SEO y vistas previas de motores de búsqueda. |
-| `keywords` | `Array` | Lista de palabras clave de búsqueda inyectadas en `<meta name="keywords">`. |
+| `description` | `String` | Establece la metadescripción para SEO, motores de búsqueda, `llms.txt` y manifiestos OKF. |
+| `keywords` | `Array \| String` | Palabras clave de búsqueda para `<meta name="keywords">`, extraídas también como etiquetas para paquetes OKF. |
+| `tags` | `Array \| String` | Etiquetas de concepto para manifiestos de Open Knowledge Format (`/okf/`) y gráficos de conocimiento. |
 
 ::: callout tip "Mejores prácticas de metadatos" icon:sparkles
 Proporcionar un `title` y una `description` explícitos en el frontmatter garantiza que los motores de búsqueda y los generadores de contexto de IA indexen su documentación con precisión.
@@ -21,8 +22,10 @@ Proporcionar un `title` y una `description` explícitos en el frontmatter garant
 
 | Clave | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `noindex` | `Boolean` | Cuando es `true`, excluye la página de la indexación de búsqueda y la generación del mapa del sitio. |
+| `noindex` | `Boolean` | Cuando es `true`, excluye la página de índices de búsqueda, mapas del sitio y paquetes de IA. |
+| `okf` | `Boolean` | Establezca en `false` para excluir el documento exclusivamente de los paquetes OKF (`/okf/`). |
 | `llms` | `Boolean` | Establezca en `false` para excluir el documento de los archivos de contexto de IA compilados (`llms.txt`). |
+| `type` | `String` | Clasificación de tipo de concepto explícita para paquetes OKF (por ejemplo, `guide`, `api`, `concept`). |
 | `hideTitle` | `Boolean` | Cuando es `true`, oculta el título principal del área del encabezado de la página. |
 | `bodyClass` | `String` | Añade clases CSS personalizadas al elemento `<body>` de nivel superior. |
 
@@ -33,7 +36,8 @@ Proporcionar un `title` y una `description` explícitos en el frontmatter garant
 | `layout` | `String` | Establezca en `"full"` para expandir el ancho del contenido y desactivar la tabla de contenidos (TOC). |
 | `toc` | `Boolean` | Establezca en `false` para desactivar la barra lateral de la tabla de contenidos de la derecha. |
 | `noStyle` | `Boolean` | Desactiva los elementos de la interfaz estándar (Barra lateral, Encabezado, Pie de página) para páginas HTML a medida. |
-| `titleAppend` | `Boolean` | Establezca en `false` para evitar añadir el título global del sitio a las etiquetas de metadatos. |
+| `titleSeparator` | `String` | Delimitador de título personalizado para esta página (p. ej. `"-"`, `"|"`). Los espacios se añaden automáticamente. |
+| `titleAppend` | `Boolean` | Establezca en `false` para evitar añadir el título global del sitio al `<title>` HTML y tarjetas sociales. |
 
 ### Controles detallados de componentes (`noStyle`)
 
@@ -60,4 +64,6 @@ components:
 | :--- | :--- | :--- |
 | `image` | `String` | URL para tarjetas de vista previa en redes sociales (`og:image`). |
 | `aiBots` | `Boolean` | Establezca en `false` para evitar que los rastreadores de IA raspen la página. |
-| `canonicalUrl` | `String` | URL canónica personalizada para indexación SEO. |
+| `canonicalUrl` | `String \| Boolean` | URL canónica personalizada para indexación SEO o `false` para suprimir la etiqueta canónica. |
+| `ldJson` | `Object \| Array` | Datos estructurados Schema.org JSON-LD personalizados inyectados en el `<head>` de la página. |
+| `seo` | `Object` | Anulaciones de configuración SEO anidadas (`titleSeparator`, `titleAppend`, `breadcrumbs`, `ldJson`, etc.). |

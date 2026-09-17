@@ -13,7 +13,7 @@ Aktivieren Sie den Ankündigungsbanner in Ihrem `docmd.config.json`-Manifest:
 {
   "layout": {
     "banner": {
-      "content": "**v0.9.0 ist da!** — lesen Sie die vollständige Release-Ankündigung.",
+      "content": "**v0.9.0 ist da!** Lesen Sie die vollständige Release-Ankündigung.",
       "type": "info",
       "dismissible": true,
       "link": { "text": "Ankündigung lesen", "url": "/blog/v0-9" }
@@ -68,7 +68,7 @@ Der Banner wird oben auf jeder Seite gerendert. Wenn er von einem Leser geschlos
 {
   "layout": {
     "banner": {
-      "html": "<strong>Neu:</strong> Die Rust-Compiler-Engine ist jetzt als Vorschau verfügbar. <a href=\"/blog/rust-engine\">Mehr erfahren →</a>",
+      "html": "<strong>Neu:</strong> Die Rust-Compiler-Engine ist jetzt als Vorschau verfügbar. <a href=\"/blog/rust-engine\">Mehr erfahren</a>",
       "type": "info",
       "dismissible": false
     }

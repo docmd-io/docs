@@ -7,15 +7,18 @@ El archivo `docmd.config.json` sirve como manifiesto central de configuración p
 
 ## Formatos del esquema de configuración
 
-JSON es el formato de configuración primario, lo que permite una serialización de alto rendimiento entre hilos de trabajo durante compilaciones paralelas:
+`docmd` admite `docmd.config.jsonc` y `docmd.config.json`. Ambos formatos admiten comentarios de una sola línea (`//`), comentarios multilínea (`/* */`) y comas finales (trailing commas):
 
-```json "docmd.config.json"
+```jsonc "docmd.config.jsonc"
 {
+  // Marca del sitio y dirección canónica
   "title": "Mi Documentación Técnica",
   "url": "https://docs.ejemplo.com",
+
+  /* Directorios de origen y salida de compilación */
   "src": "docs",
   "out": "site",
-  "base": "/"
+  "base": "/",
 }
 ```
 
@@ -56,13 +59,21 @@ Estas propiedades de nivel superior configuran las rutas base y las opciones glo
 | `out` | `String` | `"site"` | Ruta relativa donde el compilador genera el paquete estático de producción. |
 | `base` | `String` | `"/"` | Prefijo de ruta URL raíz (por ejemplo, `/docs/` cuando se aloja en una subcarpeta). |
 | `tmp` | `String` | `null` | Directorio temporal de caché de compilación. Por defecto es una carpeta temporal aislada del sistema. |
+| `engine` | `String` | `"js"` | Motor de procesamiento: `"js"` (motor predeterminado en JavaScript puro) o `"rust"` (acelerador nativo mediante `@docmd/engine-rust`). |
 | `i18n` | `Object` | `null` | Parámetros multilingües. Consulte la [Guía de localización](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Mapa de configuración de plugins estándar y de terceros. Consulte la [Guía de plugins](../plugins/usage.md). |
-| `engine` | `String` | `"js"` | Motor de procesamiento: `"js"` o `"rust"` (vista previa alpha). |
+
+::: callout info title:"Compatibilidad con versiones anteriores" icon:history
+`docmd` conserva el 100% de compatibilidad con versiones anteriores para manifiestos de configuración más antiguos:
+- Las claves raíz heredadas (`siteTitle`, `siteUrl`, `srcDir`, `outputDir`) se asignan sin problemas a las modernas (`title`, `url`, `src`, `out`).
+- `customJs` y `customCss` se asignan a `theme.customJs` y `theme.customCss`.
+- `htmlPolicy` se asigna a `security.html`.
+- `focusMode` y `print` en la raíz se asignan a `layout.focusMode` y `layout.print`.
+:::
 
 ## Marca e identidad
 
-Configure logotipos de marca y favicons de navegador en `docmd.config.json`:
+Configure logotipos de marca, favicons del navegador y hojas de estilo o scripts de cliente:
 
 ```json "docmd.config.json"
 {
@@ -73,13 +84,23 @@ Configure logotipos de marca y favicons de navegador en `docmd.config.json`:
     "alt": "Logotipo de la Empresa",
     "height": "32px"
   },
-  "favicon": "assets/favicon.ico"
+  "favicon": "assets/favicon.ico",
+  "theme": {
+    "name": "default",
+    "appearance": "system",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback.js"
+    ]
+  }
 }
 ```
 
 ## Diseño y comportamiento de la interfaz
 
-Configure encabezados, barras laterales, ubicación de búsqueda y conmutadores de tema:
+Configure encabezados, barras laterales, ubicación de búsqueda, conmutadores de tema y herramientas de lectura:
 
 ```json "docmd.config.json"
 {
@@ -98,6 +119,15 @@ Configure encabezados, barras laterales, ubicación de búsqueda y conmutadores 
         "search": true,
         "themeSwitch": true
       }
+    },
+    "focusMode": false,
+    "print": false,
+    "copyCode": true,
+    "pageNavigation": true,
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
     }
   }
 }
@@ -105,18 +135,19 @@ Configure encabezados, barras laterales, ubicación de búsqueda y conmutadores 
 
 Consulte la guía de [Diseño y zonas de la interfaz](./layout-ui.md) para conocer las opciones completas de personalización visual.
 
-## Opciones del compilador principal
+## Contenido y políticas de seguridad
 
-Ajuste cómo `docmd` analiza y transforma su contenido Markdown:
+Ajuste cómo `docmd` analiza Markdown y aplica las políticas de seguridad HTML:
 
 ```json "docmd.config.json"
 {
   "minify": true,
   "autoTitleFromH1": true,
-  "copyCode": true,
-  "pageNavigation": true,
   "markdown": {
     "breaks": true
+  },
+  "security": {
+    "html": "allow"
   }
 }
 ```
@@ -125,9 +156,12 @@ Ajuste cómo `docmd` analiza y transforma su contenido Markdown:
 | :--- | :--- | :--- | :--- |
 | `minify` | `Boolean` | `true` | Minimiza recursos HTML, CSS y JS compilados para un rendimiento de carga máximo. |
 | `autoTitleFromH1` | `Boolean` | `true` | Utiliza el primer encabezado `# H1` del documento como título cuando se omite el `title` en el frontmatter. |
-| `copyCode` | `Boolean` | `true` | Renderiza un botón "Copiar código" en los bloques de código con resaltado de sintaxis. |
-| `pageNavigation` | `Boolean` | `true` | Renderiza enlaces de navegación de página "Anterior" y "Siguiente" en la parte inferior de los artículos. |
 | `markdown.breaks` | `Boolean` | `true` | Convierte saltos de línea suaves en saltos de línea. Establezca en `false` si ajusta el texto manualmente a 80 columnas. |
+| `security.html` | `String` | `"allow"` | Modo de saneamiento HTML: `"allow"`, `"escape"` o `"strip"`. Consulte la [Guía de seguridad](./security.md). |
+| `layout.copyCode` | `Boolean` | `true` | Renderiza un botón "Copiar código" en los bloques de código con resaltado de sintaxis. |
+| `layout.pageNavigation` | `Boolean` | `true` | Renderiza enlaces de navegación de página "Anterior" y "Siguiente" en la parte inferior de los artículos. |
+| `layout.focusMode` | `Boolean` | `false` | Habilita el modo de lectura sin distracciones con atajos de teclado (`Alt+F`). |
+| `layout.print` | `Boolean` | `false` | Habilita el botón de impresión en la fila de acciones del artículo y en la barra de herramientas de enfoque. |
 
 ::: callout info "La integración con Git reemplaza a editLink" icon:git-branch
 La configuración independiente de `editLink` se ha unificado en el [plugin de Git](../plugins/git.md) nativo. Muestra enlaces de edición, marcas de tiempo de confirmación y metadatos de colaboradores.

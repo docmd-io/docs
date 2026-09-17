@@ -7,7 +7,7 @@ description: "基于 aiplug 多提供者集成的交互式、感知搜索的 AI 
 
 ## 核心功能
 
-* **悬浮触发器与玻璃拟物抽屉**: 极简胶囊触发器（`⌘K` 快捷键），可展开为感知主题的聊天面板。
+* **悬浮触发器与玻璃拟物抽屉**: 极简胶囊触发器（`Ctrl+K` 快捷键），可展开为感知主题的聊天面板。
 * **搜索感知 RAG**: 查询预构建的 `search-index.json` 数据，将 LLM 响应直接基于您站点的文档内容进行锚定。
 * **免费 docmd Cloud 中继**: 零后端服务器开销，可直接部署在静态托管平台（GitHub Pages、Cloudflare Pages、Netlify、Vercel 等）。
 * **BYOK 服务端与 KMS 安全**: API 密钥在 docmd Cloud 中通过硬件安全模块 (KMS) 加密存储，或仅在服务端环境变量中解析，确保客户端 Web 包中零凭证暴露。
@@ -112,7 +112,7 @@ description: "基于 aiplug 多提供者集成的交互式、感知搜索的 AI 
 
 ::: callout warning title:"零凭证泄漏" icon:alert-triangle
 `@docmd/plugin-ai` 严格在服务端或通过 docmd Cloud 的 KMS 加密中继处理 API 凭证。提供商 API 密钥绝不会渲染在客户端 HTML 或静态 JavaScript 包中。
-::: /callout
+:::
 
 以 Node.js 服务器模式运行时，在启动文档服务器前设置提供商环境变量：
 

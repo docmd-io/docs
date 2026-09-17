@@ -1,6 +1,6 @@
 ---
-title: "docmd docs: documentation for humans and machines"
-description: "Open-source documentation compiler. One Markdown source, one command — generates website, search, AI context, agent protocols, and knowledge formats together."
+title: "docmd Docs — Official Documentation, Guides & API Reference"
+description: "Open-source documentation compiler. One Markdown source, one command, generates website, search, AI context, agent protocols, and knowledge formats together."
 titleAppend: false
 ---
 
@@ -8,7 +8,7 @@ titleAppend: false
 
 # docmd
 
-Documentation for humans and machines. One command compiles Markdown into a website, search index, AI context, and knowledge formats — zero configuration.
+Documentation for humans and machines. One command compiles Markdown into a website, search index, AI context, and knowledge formats, zero configuration.
 
 ::: button "Get Started" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
 
@@ -16,7 +16,7 @@ Documentation for humans and machines. One command compiles Markdown into a webs
 
 ## Overview
 
-docmd is an open-source documentation compiler. It takes your Markdown files and generates a complete documentation stack — website, search, AI context, and more — in a single build.
+docmd is an open-source documentation compiler. It takes your Markdown files and generates a complete documentation stack, website, search, AI context, and more, in a single build.
 
 ::: tabs
 == tab "npm" icon:box
@@ -61,7 +61,7 @@ Everything needed for solid documentation ships built in. No extra plugins requi
     :::
     ::: grid
         ::: card "Native MCP Server" icon:terminal
-        Built-in Model Context Protocol server with native tools. AI agents query and validate your docs over a local stdio connection — no network, no remote service.
+        Built-in Model Context Protocol server with native tools. AI agents query and validate your docs over a local stdio connection, no network, no remote service.
         :::
     :::
     ::: grid

@@ -5,9 +5,6 @@ description: "Integración zero-config para diagramas Mermaid.js con sincronizac
 
 El plugin `@docmd/plugin-mermaid` integra [Mermaid.js](external:https://mermaid.js.org/) en `docmd`. Registra tanto el análisis de bloques de código estándar (` ```mermaid `) como el renderizador de contenedor explícito `::: mermaid` para diagramas SVG interactivos.
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: mermaid` ... `::: /mermaid`), propiedades clave-valor explícitas (`title:"..."`, `align:center`) y comentarios al final `# comentario`. Las personalizaciones por diagrama se gestionan mediante la sintaxis de contenedor, mientras que los valores por defecto globales se especifican en `docmd.config.json`.
-:::
 
 ::: callout success "Empaquetado sin Conexión y para Entornos Aislados v0.9.3+" icon:zap
 A partir de **v0.9.3**, `@docmd/plugin-mermaid` empaqueta el entorno de ejecución de Mermaid localmente como un script IIFE clásico autónomo. Los diagramas se renderizan 100% sin conexión y sin dependencias de CDN (`jsdelivr.net`), ideal para entornos aislados y navegación local `file://`.

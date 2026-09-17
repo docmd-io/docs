@@ -3,7 +3,7 @@ title: "Deployer"
 description: "通过一条命令，从您的 docmd 项目配置生成各平台专属的部署配置文件。"
 ---
 
-`deploy` 命令会读取您的 `docmd.config.json`，并生成与您的项目精确匹配的部署配置文件 — 输出目录、站点 URL、SPA 路由以及 Node.js 版本都会自动反映出来。没有任何通用模板。
+`deploy` 命令会读取您的 `docmd.config.json`，并生成与您的项目精确匹配的部署配置文件, 输出目录、站点 URL、SPA 路由以及 Node.js 版本都会自动反映出来。没有任何通用模板。
 
 ## 支持的平台
 
@@ -60,7 +60,7 @@ npx @docmd/core deploy --github-pages
 会生成 `.github/workflows/deploy.yml`，其中包含完整的 build-and-deploy 流水线。该工作流会检出您的仓库、安装 Node.js、运行 `npx @docmd/core build`，并将输出上传到 GitHub Pages。
 
 ::: callout tip "改用 GitHub Action？"
-如果您希望在无需自行生成工作流文件的情况下部署到 GitHub Pages，可以直接使用 [GitHub Action](./github-action) — 它在一个可组合的步骤中完成所有事情。
+如果您希望在无需自行生成工作流文件的情况下部署到 GitHub Pages，可以直接使用 [GitHub Action](./github-action): 它在一个可组合的步骤中完成所有事情。
 :::
 
 ### Docker
@@ -70,8 +70,8 @@ npx @docmd/core deploy --docker
 ```
 
 会生成一个采用多阶段构建的 `Dockerfile`：
-1. **Build 阶段** — 安装您精确锁定的 `@docmd/core` 版本并执行构建。
-2. **Serve 阶段** — 将产物复制到一个精简的 `nginx:alpine` 镜像中。
+1. **Build 阶段**: 安装您精确锁定的 `@docmd/core` 版本并执行构建。
+2. **Serve 阶段**: 将产物复制到一个精简的 `nginx:alpine` 镜像中。
 
 如果项目根目录中已存在 `nginx.conf`，Dockerfile 会自动将其复制进容器。
 

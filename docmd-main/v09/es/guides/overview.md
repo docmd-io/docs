@@ -11,19 +11,19 @@ Las guías de Docmd proporcionan recorridos técnicos detallados para implementa
 ::: grid
 ::: card "IA y automatización" icon:bot
 Configure el Asistente de IA interactivo, configure servidores del Protocolo de Contexto de Modelo (MCP) para agentes de IA y cree paquetes de Formato de Conocimiento Abierto (OKF).
-[Explorar guías de IA →](./ai/ai-assistant)
+[Explorar guías de IA :](./ai/ai-assistant)
 :::
 :::
 ::: grid
 ::: card "Optimización de búsqueda" icon:search
 Despliegue búsqueda semántica híbrida nativa del navegador utilizando modelos de incrustación ONNX e índices de vectores locales.
-[Configurar búsqueda semántica →](./search/semantic-search)
+[Configurar búsqueda semántica :](./search/semantic-search)
 :::
 :::
 ::: grid
 ::: card "Integraciones" icon:plug
 Automatice la generación de referencias de API REST directamente desde especificaciones OpenAPI / Swagger en diseños de página de docmd.
-[Integración con OpenAPI →](./integrations/openapi-generation)
+[Integración con OpenAPI :](./integrations/openapi-generation)
 :::
 :::
 :::

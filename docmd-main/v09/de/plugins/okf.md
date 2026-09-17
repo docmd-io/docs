@@ -25,18 +25,18 @@ Die Kompilierung erzeugt den folgenden Verzeichnisbaum:
 
 ```text
 site/okf/
-├── okf.yaml              ← Manifest-Zusammenfassungsdatei
-├── index.md              ← Nach Typ gruppierter Konzeptkatalog
-├── graph/                ← Interaktive Graph-Assets (wenn graph: true)
-│   ├── index.html        ← Kraftgesteuerter Graph-Visualisierer
-│   ├── graph.json        ← Graphknoten und Kanten
-│   ├── graph.js          ← Eigenständige Graph-Laufzeit
-│   └── graph.css         ← Themenbewusstes Styling
+├── okf.yaml  # Manifest-Zusammenfassungsdatei
+├── index.md  # Nach Typ gruppierter Konzeptkatalog
+├── graph/  # Interaktive Graph-Assets (wenn graph: true)
+│   ├── index.html  # Kraftgesteuerter Graph-Visualisierer
+│   ├── graph.json  # Graphknoten und Kanten
+│   ├── graph.js  # Eigenständige Graph-Laufzeit
+│   └── graph.css  # Themenbewusstes Styling
 ├── concepts/
-│   └── <slug>.md         ← Einzelne Konzept-Markdown-Dateien
+│   └── <slug>.md  # Einzelne Konzept-Markdown-Dateien
 └── _meta/
-    ├── bundle.json       ← JSON-Spiegel von okf.yaml
-    └── lint-report.txt   ← Build-Linting-Berichte
+    ├── bundle.json  # JSON-Spiegel von okf.yaml
+    └── lint-report.txt  # Build-Linting-Berichte
 ```
 
 ## Standard-Build-Verhalten
@@ -116,12 +116,12 @@ Konfigurieren Sie OKF-Bundle-Parameter in `docmd.config.json`:
 Ausgabeverzeichnisstruktur:
 
 ```text
-site/okf/                    ← Standard-Locale (Stammverzeichnis)
+site/okf/  # Standard-Locale (Stammverzeichnis)
 ├── okf.yaml
 ├── index.md
 └── concepts/
 
-site/okf/de/                 ← Deutsche Locale (verschachtelt)
+site/okf/de/  # Deutsche Locale (verschachtelt)
 ├── okf.yaml
 └── concepts/
 ```
@@ -143,11 +143,18 @@ Um eine Seite global über Sitemaps, Suche, LLM-Dateien und OKF hinweg auszuschl
 
 Das Plugin bestimmt Konzepttypen in folgender Reihenfolge:
 
-1. `frontmatter.okf.type` — Verschachtelte explizite Deklaration.
-2. `frontmatter.type` — Explizite Deklaration auf oberster Ebene.
-3. `frontmatter.okfType` — Älterer Alias.
+1. `frontmatter.okf.type`, Verschachtelte explizite Deklaration.
+2. `frontmatter.type`, Explizite Deklaration auf oberster Ebene.
+3. `frontmatter.okfType`, Älterer Alias.
 4. **Pfad-Präfix-Inferenz**: Automatische Zuordnung für `/guides/`, `/api/`, `/reference/`, `/concepts/` usw.
 5. `defaultType`-Fallback (`'concept'`).
+
+## Konzept-Metadaten & Tag-Auflösung
+
+Das OKF-Plugin extrahiert Metadaten direkt aus dem Frontmatter jeder Seite in `site/okf/okf.yaml` und `site/okf/_meta/bundle.json`:
+
+* **Konzept-Beschreibungen**: Das `description`-Frontmatter wird in jeden Konzepteintrag in `okf.yaml` und `bundle.json` übernommen, sodass KI-Agenten Zusammenfassungen prüfen können, ohne jede einzelne Markdown-Datei zu öffnen.
+* **Tag-Extraktion aus `tags` und `keywords`**: Tags werden aus beiden Frontmatter-Eigenschaften (`tags` und `keywords`) bezogen. Es werden sowohl String-Arrays (`["api", "auth"]`) als auch kommagetrennte Strings (`"api, auth"`) unterstützt, inklusive automatischer Deduplizierung (ohne Beachtung von Groß-/Kleinschreibung).
 
 ::: callout tip "Wissensgraph-Visualisierung" icon:git-fork
 Aktivieren Sie `graph: true` in Ihrer OKF-Plugin-Konfiguration, um interaktive kraftgesteuerte Graph-Visualisierungen (`site/okf/graph/index.html`) zu erstellen, die Querverweise und Konzeptbeziehungen abbilden.

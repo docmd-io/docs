@@ -90,6 +90,6 @@ customHead: |
       此页面的布局使用标准 HTML 包装器和 <code>customHead</code> frontmatter 字段内定义的作用域 CSS 编写。这确保了零 CSS 泄漏到文档站点的其他部分。
     </p>
 
-    <a href="/content/no-style-pages/" class="demo-button">查看实现指南 →</a>
+    <a href="/content/no-style-pages/" class="demo-button">查看实现指南 :</a>
   </div>
 </div>

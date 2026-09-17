@@ -29,10 +29,6 @@ Haz clic en ::: button title:"Texto" url:"URL_destino" icon:nombre_icono ::: /bu
 | **Iconografía** | `icon:NOMBRE` | Inyecta un icono de [Lucide](external:https://lucide.dev/icons) antes del texto. |
 | **Autocierre y En Línea** | `::: /button` \| `:::` | Autocierre por defecto, u opcionalmente cerrado con `::: /button` al usarse en línea. |
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
-
 ## Ejemplos de uso
 
 ### Navegación SPA interna

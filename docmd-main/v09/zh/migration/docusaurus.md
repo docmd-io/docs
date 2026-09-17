@@ -77,18 +77,18 @@ Docusaurus 侧边栏通常是自动生成或在 `sidebars.js` 中声明的。请
 ##### 提示框容器别名
 
 Docusaurus 提示框语法 **开箱即用**，无需修改文件：
-- `:::note` → 渲染为 `callout info`
-- `:::tip` → 渲染为 `callout tip`
-- `:::info` → 渲染为 `callout info`
-- `:::caution` → 渲染为 `callout warning`
-- `:::danger` → 渲染为 `callout danger`
+- `:::note` : 渲染为 `callout info`
+- `:::tip` : 渲染为 `callout tip`
+- `:::info` : 渲染为 `callout info`
+- `:::caution` : 渲染为 `callout warning`
+- `:::danger` : 渲染为 `callout danger`
 
 ::: callout tip "原生容器语法" icon:sparkles
 如需增强特性（例如自定义图标或自定义徽章颜色），可将 Docusaurus 提示框转换为原生 `docmd` 语法：
 ```markdown
 ::: callout tip title:"自定义标题" icon:sparkles
 这是一个提示框容器。
-::: /callout
+:::
 ```
 :::
 

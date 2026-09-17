@@ -7,7 +7,7 @@ docmd 内置了原生的 Model Context Protocol (MCP) 服务端，允许 AI 开�
 
 ## 技术概述
 
-[Model Context Protocol](external:https://modelcontextprotocol.io/) 是一个用于将 AI 模型连接到本地工作区工具的开放规范。docmd 实现层为 `stdio` 传输层 —— 客户端将 `docmd mcp` 作为子进程启动，并通过标准输入/输出流交换 JSON-RPC 2.0 消息。
+[Model Context Protocol](external:https://modelcontextprotocol.io/) 是一个用于将 AI 模型连接到本地工作区工具的开放规范。docmd 实现层为 `stdio` 传输层：客户端将 `docmd mcp` 作为子进程启动，并通过标准输入/输出流交换 JSON-RPC 2.0 消息。
 
 ## 启动与配置
 
@@ -61,7 +61,7 @@ docmd 支持标准 MCP 规范：
 
 * **传输机制**: `stdio`（通过标准 I/O 传递 JSON-RPC 2.0 消息）。
 * **日志**: 通过 `stderr` 发送带外诊断日志。
-* **生命周期流程**: `initialize` → `notifications/initialized` → Tool 调用。
+* **生命周期流程**: `initialize` : `notifications/initialized` : Tool 调用。
 * **能力**: 暴露 `tools`、`resources` 和 `prompts`。
 
 ## 安全控制

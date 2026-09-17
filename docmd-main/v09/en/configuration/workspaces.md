@@ -6,9 +6,9 @@ description: "Build and deploy multi-project documentation sites from a single r
 Workspaces allow you to build and deploy multiple independent documentation projects from a single repository. Each sub-project maintains its own configuration options while inheriting global defaults defined at the workspace root.
 
 ```text
-docs.example.com/           → Main Product Documentation
-docs.example.com/sdk/       → SDK API Reference
-docs.example.com/cli/       → CLI Tooling Guide
+docs.example.com/  # Main Product Documentation
+docs.example.com/sdk/  # SDK API Reference
+docs.example.com/cli/  # CLI Tooling Guide
 ```
 
 ## Directory Setup
@@ -17,14 +17,14 @@ Organise your repository into separate project subdirectories. Shared static ass
 
 ```text
 my-docs/
-├── assets/                   ← shared static assets (inherited by all projects)
+├── assets/  # shared static assets (inherited by all projects)
 ├── main-docs/
-│   ├── docmd.config.json     ← project-level config (overrides root defaults)
-│   └── docs/                 ← main project Markdown content
+│   ├── docmd.config.json  # project-level config (overrides root defaults)
+│   └── docs/  # main project Markdown content
 ├── sdk-docs/
-│   ├── docmd.config.json     ← SDK project config
-│   └── docs/                 ← SDK project Markdown content
-├── docmd.config.json         ← workspace root configuration
+│   ├── docmd.config.json  # SDK project config
+│   └── docs/  # SDK project Markdown content
+├── docmd.config.json  # workspace root configuration
 └── package.json
 ```
 
@@ -99,7 +99,7 @@ Configuration options cascade through a 3-layer precedence model:
 
 ::: callout info title:"Navigation Precedence" icon:info
 A project-level `navigation.json` manifest **always takes precedence** over any global `navigation` array defined in the root workspace config.
-::: /callout
+:::
 
 ## The Project Switcher UI
 

@@ -17,7 +17,7 @@ The docmd AI Assistant supports two primary deployment models:
 
 | Architecture | Best For | Backend Infrastructure | API Key Security |
 | :--- | :--- | :--- | :--- |
-| **Free docmd Cloud Relay** | Static sites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Zero servers — powered by docmd's managed serverless relay | Hardware KMS encrypted at rest |
+| **Free docmd Cloud Relay** | Static sites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Zero servers, powered by docmd's managed serverless relay | Hardware KMS encrypted at rest |
 | **Self-Hosted Server** | Dynamic Node.js apps, Docker containers, private enterprise intranets | Your own Node.js server (`docmd dev` / `docmd serve`) | Environment variables on server |
 | **Local LLM (Ollama)** | Air-gapped networks, local development, zero cloud dependencies | Local workstation running `ollama` | Local localhost endpoint |
 
@@ -100,7 +100,7 @@ Add the `ai` plugin block to `docmd.config.json`:
 
 ::: callout tip title:"Recommended Models" icon:sparkles
 For optimal balance between response speed and cost, we recommend using fast reasoning models such as `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic), or `gemini-1.5-flash` (Google).
-::: /callout
+:::
 
 ### 2. Setting Provider Credentials
 

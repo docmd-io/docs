@@ -5,9 +5,6 @@ description: "Render flowcharts, sequence diagrams, and architecture maps using 
 
 `docmd` provides built-in support for rendering high-fidelity diagrams via **Mermaid**. Authors can choose between per-diagram customisation using the `::: mermaid` container or universal compatibility using standard Markdown code blocks.
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: mermaid` ... `::: /mermaid`), explicit key-value properties (`title:"..."`, `align:center`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for standard ` ```mermaid ` code blocks and global plugin configuration is strictly preserved.
-:::
 
 ## Overview & Hybrid Architecture
 

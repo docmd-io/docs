@@ -52,6 +52,6 @@ body[data-theme="dark"] {
 
 ## 需要完全不同的布局？
 
-如果 CSS 覆盖还不够，您可以编写一个 **模板插件** —— 一个附带自己的 `layout.ejs`（以及您想要覆盖的任何 partials）外加 CSS/JS bundle 的包。模板是具有 `capabilities: ['template']` 的一等公民插件，叠在现有 theme + customCss 系统之上。
+如果 CSS 覆盖还不够，您可以编写一个 **模板插件**:, 一个附带自己的 `layout.ejs`（以及您想要覆盖的任何 partials）外加 CSS/JS bundle 的包。模板是具有 `capabilities: ['template']` 的一等公民插件，叠在现有 theme + customCss 系统之上。
 
 完整指南和示例模板包结构请参阅 [模板](templates.md)。

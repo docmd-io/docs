@@ -20,11 +20,6 @@ Content block supporting Markdown, code snippets, buttons, and callouts...
 | **Title** | `"String"` \| `title:"..."` | Optional header title displayed at the top of the card frame (positional 1st parameter or `title:"..."`). |
 | **Iconography** | `icon:NAME` | Optional. Injects a [Lucide](external:https://lucide.dev/icons) icon next to the header title text. |
 | **Markdown Content** | Free Text | Supports arbitrary Markdown elements, code blocks, lists, buttons, and nested containers. |
-| **Closing Tags** | `::: /card`, `:::` | Supports explicit named closing tag `::: /card` or generic `:::`. |
-
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
 
 
 ## Usage Examples

@@ -6,7 +6,7 @@ description: "通过 npm 安装替代的站点布局。每个模板都在默认�
 # 模板 (Templates)
 
 ::: callout info
-**0.8.7 新增。** 模板让您可以把一套完整的替代布局（HTML 结构、partials、CSS、JS）作为独立插件发布。它构建于现有的 `theme` + `customCss` 体系之上 —— 并非取而代之。
+**0.8.7 新增。** 模板让您可以把一套完整的替代布局（HTML 结构、partials、CSS、JS）作为独立插件发布。它构建于现有的 `theme` + `customCss` 体系之上：并非取而代之。
 :::
 
 **模板 (Template)** 是一个 npm 包，它声明 `capabilities: ['template']`，并提供一组 `.ejs` partial 覆盖以及自己的 CSS / JS bundle。`@docmd/ui` 中的解析器会沿着固定的优先级链查找每个 slot 对应的 partial，遇到任何问题都会回退到默认实现。**任何模板问题都不会导致构建失败。**
@@ -16,13 +16,13 @@ description: "通过 npm 安装替代的站点布局。每个模板都在默认�
 ### 1. 安装模板
 
 ```bash
-# 0.8.7 随第一个官方模板一起发布 —— 通过 docmd add 流程安装：
+# 安装官方模板包：
 npx @docmd/core add summer
 ```
 
 ### 2. 在配置中启用
 
-只需设置 **一个键** —— `theme.name`。docmd 会自动判断这个名字指向的是保留的 CSS 主题（`default`、`sky`、`ruby`、`retro`）还是一个模板包（`summer` 等）。
+只需设置 **一个键**:, `theme.name`。docmd 会自动判断这个名字指向的是保留的 CSS 主题（`default`、`sky`、`ruby`、`retro`）还是一个模板包（`summer` 等）。
 
 ```json "docmd.config.json"
 {
@@ -44,7 +44,7 @@ npx @docmd/core add summer
   }
 }
 ```
-↑ **summer** 的结构 + **sky** 的配色。
+这会使用 **summer** 的结构布局，并应用 **sky** 的配色方案。
 :::
 
 ### 3. 按页面覆盖
@@ -73,7 +73,7 @@ template: "template-changelog"
 | 4 | `config.theme.name` *(若不是已知 CSS 主题则自动提升为模板)* | `"name": "summer"` |
 | 5 | 内置默认 | 由 `@docmd/ui` 自带的 `.ejs` 文件 |
 
-CSS 主题 `default`、`sky`、`ruby`、`retro` 属于保留名 —— 若 `theme.name` 命中其中之一，就仍是 CSS 主题。其他任何值都会被视作模板名，对应的 `@docmd/template-*` 包会自动加载。
+CSS 主题 `default`、`sky`、`ruby`、`retro` 属于保留名：若 `theme.name` 命中其中之一，就仍是 CSS 主题。其他任何值都会被视作模板名，对应的 `@docmd/template-*` 包会自动加载。
 
 若解析到的文件在磁盘上不存在，解析器会打印一条 TUI 警告并回退到默认实现。
 
@@ -100,27 +100,22 @@ CSS 主题 `default`、`sky`、`ruby`、`retro` 属于保留名 —— 若 `them
 `no-style` 页面没有模板专属副本。无论激活的是哪个模板，它们始终使用默认的 `templates/no-style.ejs`。
 :::
 
-## 资源优先级
+## 层叠顺序
 
-当多个模板与您的 `customCss` 都提供了 CSS / JS 时，它们按下表顺序加载（数值小的先加载，数值大的在级联冲突中胜出）：
+当模板与样式表结合使用时，样式按可预测的三阶段顺序加载：
 
-| 优先级 | 层级 |
-|---|---|
-| 0 | 基础 (`docmd-main.css`、`docmd-main.js`) |
-| 5 | 主题配色层（如 `docmd-theme-sky.css`） |
-| 10 | **模板结构**（模板的默认优先级） |
-| 15 | 用户 `customCss` / `customJs` —— 始终胜出 |
-| 20 | 插件 CSS/JS |
-| 25+ | 高优先级模板（Summer 即使用 25） |
+1. **核心与主题**：基础样式和主题配色优先加载。
+2. **模板与插件**：结构布局规则和插件资源随后加载。
+3. **自定义 CSS 与 JS**：您的 `customCss` 和 `customJs` 文件最后加载，始终优先于模板生效。
 
-若想覆盖某个模板的样式，请将规则放入项目级 `customCss`（优先级 15）。请避免在模板 CSS 中使用 `!important`，这样用户无需 fork 就能调整。
+若想覆盖某个模板的样式，请将规则放入项目级 `theme.customCss`。
 
 ## 模板本地化
 
-当前 locale 会作为普通 local 传入您的模板。翻译仍通过 `t(key)` helper 查找 —— 您既有的 `assets/i18n/<locale>.json` 文件继续有效。
+当前 locale 会作为普通变量传入您的模板。翻译仍通过 `t(key)` 辅助函数查找，您既有的 `assets/i18n/<locale>.json` 文件继续有效。
 
-## 接下来
+## 相关资源
 
-- [开发模板](../development/building-templates.md) —— 编写您自己的模板包。
-- [主题定制](./custom-css-js.md) —— 在任意模板上叠加 `customCss`。
-- [自定义登录页](./landing-pages.md) —— 把模板首页改成您自己的样子。
+- [开发模板](../development/building-templates.md)：编写您自己的模板包。
+- [主题定制](./custom-css-js.md)：在任意模板上叠加 `customCss`。
+- [自定义落地页](./landing-pages.md)：将模板首页定制为您自己的外观。

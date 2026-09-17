@@ -5,9 +5,7 @@ description: "Ein umfassendes Verzeichnis struktureller UI-Container und interak
 
 Standard-Markdown eignet sich hervorragend für grundlegende Textformatierung, aber technische Dokumentation benötigt strukturelle Komponenten. `docmd` erweitert Markdown um eine Reihe **isomorpher Container**.
 
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
+::: callout info "Standard für Container-Syntax" icon:sparkles
 
 ::: callout tip "Migration von anderen Dokumentations-Engines?" icon:sparkles
 `docmd` unterstützt Syntax-Aliase von **VitePress** und **Docusaurus** direkt ab Werk. Container wie `:::tip`, `:::warning`, `:::note`, `:::details` und `:::caution` funktionieren ohne Anpassung.
@@ -66,7 +64,6 @@ Container bieten mehr als nur visuellen Feinschliff; sie liefern hochpräzise **
 
 ## Rekursive Verschachtelung & Explizite Schließer
 
-`docmd` unterstützt **unbegrenzte Verschachtelungstiefe** und deterministisches Auflösen von Schließungs-Tags über benannte Schließer (`::: /card`, `::: /tabs`):
 
 ```markdown
 ::: card title:"Architektur-Übersicht" # Übergeordnete Karte

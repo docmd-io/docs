@@ -28,10 +28,6 @@ Tab 2 content...
 | **Sub-Containers** | `::: tab` ... `::: /tab` | Explicit tab item wrappers. Legacy `== tab` syntax is also fully supported. |
 | **Closing Tags** | `::: /tabs`, `::: /tab`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 
 ## Usage Examples
 
@@ -120,7 +116,7 @@ build('./docmd.config.json');
 ::: /tabs
 
 ::: callout tip "Legacy == tab Syntax" icon:archive
-Existing documentation utilising `== tab` syntax continues to parse seamlessly:
+Existing documentation utilising `== tab` syntax continues to parse smoothly:
 
 ```markdown
 ::: tabs

@@ -17,7 +17,7 @@ El Asistente de IA de docmd admite dos modelos de despliegue principales:
 
 | Arquitectura | Ideal para | Infraestructura backend | Seguridad de la clave API |
 | :--- | :--- | :--- | :--- |
-| **Retransmisión gratuita docmd Cloud** | Sitios estáticos (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Cero servidores — impulsado por el relay serverless administrado de docmd | Cifrado en reposo con hardware KMS |
+| **Retransmisión gratuita docmd Cloud** | Sitios estáticos (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) | Cero servidores, impulsado por el relay serverless administrado de docmd | Cifrado en reposo con hardware KMS |
 | **Servidor autohospedado** | Aplicaciones dinámicas Node.js, contenedores Docker, intranets privadas | Servidor propio Node.js (`docmd dev` / `docmd serve`) | Variables de entorno en el servidor |
 | **LLM local (Ollama)** | Redes aisladas, desarrollo local, cero dependencias en la nube | Estación de trabajo local con `ollama` | Endpoint local en localhost |
 
@@ -100,7 +100,7 @@ Agregue el bloque de plugin `ai` a `docmd.config.json`:
 
 ::: callout tip title:"Modelos recomendados" icon:sparkles
 Para un equilibrio óptimo entre la velocidad de respuesta y el costo, recomendamos utilizar modelos de razonamiento rápido como `gpt-4o-mini` (OpenAI), `claude-3-5-haiku-20241022` (Anthropic) o `gemini-1.5-flash` (Google).
-::: /callout
+:::
 
 ### 2. Estructuración de credenciales de proveedor
 

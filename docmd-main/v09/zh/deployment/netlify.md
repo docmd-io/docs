@@ -17,7 +17,7 @@ npx @docmd/core deploy --netlify
 - **发布目录** - 设置为您配置的 `out` 目录。
 - **Node 版本** - 固定为 Node 20。
 - **缓存头** - 资源使用不可变缓存，HTML 页面不使用缓存。
-- **SPA 重定向** - 当启用 `layout.spa` 时，进行 `/*` → `/index.html` 的重写。
+- **SPA 重定向** - 当启用 `layout.spa` 时，进行 `/*` : `/index.html` 的重写。
 
 ## 部署
 

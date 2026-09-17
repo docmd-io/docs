@@ -11,18 +11,18 @@ Cada idioma reside en su propio subdirectorio dentro de la raíz fuente (`src`).
 
 ```text
 docs/
-├── en/                     ← contenido del idioma predeterminado
+├── en/  # contenido del idioma predeterminado
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← idioma secundario (Hindi)
-│   ├── index.md            ← página de inicio traducida
-│   ├── navigation.json     ← etiquetas de navegación traducidas
+├── hi/  # idioma secundario (Hindi)
+│   ├── index.md  # página de inicio traducida
+│   ├── navigation.json  # etiquetas de navegación traducidas
 │   └── getting-started/
-│       └── installation.md ← guía de instalación traducida
-└── zh/                     ← idioma terciario (Chino)
-    └── index.md            ← página de inicio traducida
+│       └── installation.md  # guía de instalación traducida
+└── zh/  # idioma terciario (Chino)
+    └── index.md  # página de inicio traducida
 ```
 
 Cuando i18n está habilitado, todo el contenido de origen Markdown vive dentro de los directorios de idioma. Ningún archivo de contenido se ubica en el nivel raíz.
@@ -35,8 +35,8 @@ Los nombres de los subdirectorios corresponden directamente a los valores `id` e
 
 `docmd` no requiere traducir cada documento por adelantado. El motor trata el **directorio de idioma predeterminado** como el árbol de contenido canónico. Cuando falta una página solicitada en un idioma secundario:
 
-1. Si existe `docs/hi/getting-started/installation.md` → sirve la traducción al hindi.
-2. Si falta `docs/hi/getting-started/installation.md` → recurre a `docs/en/getting-started/installation.md`.
+1. Si existe `docs/hi/getting-started/installation.md` : sirve la traducción al hindi.
+2. Si falta `docs/hi/getting-started/installation.md` : recurre a `docs/en/getting-started/installation.md`.
 
 Al recurrir al idioma predeterminado, `docmd` muestra un banner aviso informativo a los lectores. Personalice este mensaje a través de su [Configuración de cadenas de interfaz de usuario](./ui-strings.md).
 
@@ -62,26 +62,26 @@ Cada directorio de idioma puede incluir un manifiesto `navigation.json` independ
 
 ::: callout tip title:"Anulaciones parciales de navegación" icon:lightbulb
 Proporcione un archivo `navigation.json` dentro de un directorio de idioma solo cuando traduzca etiquetas de menú. Si se omite, el árbol de navegación del idioma predeterminado se aplica automáticamente.
-::: /callout
+:::
 
 ## Combinación del control de versiones con la localización
 
 Al combinar el control de versiones y el enrutamiento multilingüe, organice los directorios jerárquicamente con los idiomas anidados dentro de las carpetas de versión:
 
 ```text
-docs/                    ← versión actual
-  en/                    ← idioma predeterminado
-  hi/                    ← idioma traducido
-docs-v1/                 ← versión heredada
-  en/                    ← idioma predeterminado
-  hi/                    ← idioma traducido
+docs/  # versión actual
+  en/  # idioma predeterminado
+  hi/  # idioma traducido
+docs-v1/  # versión heredada
+  en/  # idioma predeterminado
+  hi/  # idioma traducido
 ```
 
 La jerarquía de URL de salida prioriza los prefijos de idioma, seguidos de las rutas de versión:
 
 ```text
-/                        ← idioma predeterminado, versión actual
-/hi/                     ← idioma traducido, versión actual
-/v1/                     ← idioma predeterminado, versión heredada
-/hi/v1/                  ← idioma traducido, versión heredada
+/  # idioma predeterminado, versión actual
+/hi/  # idioma traducido, versión actual
+/v1/  # idioma predeterminado, versión heredada
+/hi/v1/  # idioma traducido, versión heredada
 ```

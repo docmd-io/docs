@@ -12,7 +12,7 @@ Sicherheitsregeln können im `docmd.config.json`-Manifest konfiguriert werden:
 ```json "docmd.config.json"
 {
   "security": {
-    "htmlPolicy": "escape",
+    "html": "allow",
     "strictLinkSanitizing": true,
     "allowedIframeHosts": [
       "youtube.com",
@@ -24,19 +24,23 @@ Sicherheitsregeln können im `docmd.config.json`-Manifest konfiguriert werden:
 }
 ```
 
-## HTML-Verarbeitungsrichtlinien (`htmlPolicy`)
+::: callout info title:"Abwärtskompatibilität" icon:history
+Frühere Versionen von docmd verwendeten `"htmlPolicy"` innerhalb von `"security"` oder auf Stammebene. Sowohl `"security.htmlPolicy"` als auch das Root-Level `"htmlPolicy"` werden für vollständige Abwärtskompatibilität automatisch auf `"security.html"` abgebildet.
+:::
 
-Die Einstellung `htmlPolicy` steuert, wie `docmd` rohe HTML-Elemente verarbeitet, die in Markdown-Dateien deklariert sind:
+## HTML-Verarbeitungsrichtlinie (`security.html`)
+
+Die Einstellung `security.html` steuert, wie `docmd` rohe HTML-Elemente verarbeitet, die in Markdown-Dateien deklariert sind:
 
 | Modus | Verhalten | Bester Anwendungsfall |
 | :--- | :--- | :--- |
-| `"escape"` *(Standard)* | Konvertiert alle rohen HTML-Tags in sichere HTML-Entities (`&lt;div&gt;`). Verhindert versehentliche Skriptinjektionen. | Öffentliche Dokumentationsseiten und Open-Source-Repositories, die Pull-Requests von nicht vertrauenswürdigen Mitwirkenden akzeptieren. |
+| `"allow"` *(Standard)* | Rendert rohe HTML-Elemente als ausführbare DOM-Knoten. | Autoritative technische Dokumente mit benutzerdefinierten Web-Komponenten oder ungestyltem Roh-HTML (`noStyle: true`). |
+| `"escape"` | Konvertiert alle rohen HTML-Tags in sichere HTML-Entities (`&lt;div&gt;`). Verhindert versehentliche Skriptinjektionen. | Öffentliche Dokumentationsseiten und Open-Source-Repositories, die Pull-Requests von nicht vertrauenswürdigen Mitwirkenden akzeptieren. |
 | `"strip"` | Entfernt rohe HTML-Tags vollständig aus der kompilierten Ausgabe. | Strikte Unternehmensseiten, die reine Markdown-Reinheit ohne rohe Tags erfordern. |
-| `"allow"` | Rendert rohe HTML-Elemente als ausführbare DOM-Knoten. | Autoritative technische Dokumente mit benutzerdefinierten Web-Komponenten oder ungestyltem Roh-HTML (`noStyle: true`). |
 
-::: callout warning title:"XSS-Warnung bei htmlPolicy: 'allow'" icon:alert-triangle
-Das Setzen von `htmlPolicy` auf `"allow"` ermöglicht die Ausführung beliebiger Skripte, wenn Markdown-Dateien `<script>`-Tags enthalten. Verwenden Sie `"allow"` nur, wenn die Markdown-Inhalte aus vertrauenswürdigen Quellcode-Repositories stammen.
-::: /callout
+::: callout warning title:"XSS-Warnung bei html: 'allow'" icon:alert-triangle
+Das Setzen von `html` auf `"allow"` ermöglicht die Ausführung beliebiger Skripte, wenn Markdown-Dateien `<script>`-Tags enthalten. Verwenden Sie `"allow"` nur, wenn die Markdown-Inhalte aus vertrauenswürdigen Quellcode-Repositories stammen.
+:::
 
 ## Mehrzeilige HTML-Blockverarbeitung
 

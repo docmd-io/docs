@@ -131,7 +131,7 @@ A diferencia de las herramientas de documentación heredadas que dependen de cos
 
 ::: callout tip title:"Por qué BYOK es importante para los equipos de documentación" icon:shield
 Los proveedores de SaaS de documentación en la nube bloquean a los equipos con tarifas de suscripción por consulta y modelos de IA propietarios. `docmd` otorga a los equipos libertad completa con **BYOK (Trae tu propia clave)**: conecta modelos OpenAI, Anthropic, Gemini, DeepSeek, Groq u Ollama autohospedados manteniendo un control total sobre los presupuestos de API y la privacidad de los datos.
-::: /callout
+:::
 
 ## Matriz de características completa
 

@@ -28,10 +28,6 @@ Step 2 content...
 | **Sub-Containers** | `::: step` ... `::: /step` | Explicit step wrappers. Legacy ordered list (`1.`, `2.`) syntax is also fully supported. |
 | **Closing Tags** | `::: /steps`, `::: /step`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 
 ## Usage Examples
 
@@ -80,7 +76,7 @@ Define project options in `docmd.config.json`.
 
 ::: callout info title:"IDE Hint"
 Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
-::: /callout
+:::
 ::: /step
 
 ::: step "Generate Production Build"
@@ -103,7 +99,7 @@ Define project options in `docmd.config.json`.
 
 ::: callout info "IDE Hint"
 Use `defineConfig` to enable IDE autocompletion for configuration schema keys.
-::: /callout
+:::
 ::: /step
 
 ::: step "Generate Production Build"
@@ -120,7 +116,7 @@ Publish the compiled `site/` directory to S3, Cloudflare Pages, or Vercel.
 ::: /steps
 
 ::: callout tip "Legacy List Syntax" icon:archive
-Existing documentation utilising `1.` ordered lists continues to parse seamlessly:
+Existing documentation utilising `1.` ordered lists continues to parse smoothly:
 
 ```markdown
 ::: steps

@@ -44,12 +44,12 @@ Each locale object accepts:
 The default locale has no URL prefix. Non-default locales are nested under `/{id}/`. When combined with [versioning](../versioning.md), the URL is `/{locale}/{version}/page`.
 
 ```
-/                       ← default locale, current version
-/getting-started        ← default locale page
-/05/                    ← default locale, old version
-/hi/                    ← non-default locale, current version
-/hi/getting-started     ← non-default locale page
-/hi/05/                 ← non-default locale, old version
+/  # default locale, current version
+/getting-started  # default locale page
+/05/  # default locale, old version
+/hi/  # non-default locale, current version
+/hi/getting-started  # non-default locale page
+/hi/05/  # non-default locale, old version
 ```
 
 The language switcher preserves your current page and version when you switch locales. The version switcher preserves your current locale.
@@ -108,8 +108,8 @@ For full details on the `data-i18n` attribute syntax and JSON file format, see [
 ::: callout warning "String Mode does not translate markdown content" icon:info
 String replacement works by finding `data-i18n` attributes in the rendered HTML. Standard markdown content (`## Heading`, paragraphs, lists) renders to plain HTML tags without these attributes - so there is nothing for the replacer to find.
 
-- **Documentation sites** → use directory mode (the default). Each locale has its own markdown files with fully translated prose.
-- **Landing pages, marketing sites, dashboards** → use string mode. These are noStyle pages with custom HTML where you control every tag and can add `data-i18n` attributes.
+- **Documentation sites** : use directory mode (the default). Each locale has its own markdown files with fully translated prose.
+- **Landing pages, marketing sites, dashboards** : use string mode. These are noStyle pages with custom HTML where you control every tag and can add `data-i18n` attributes.
 
 If your site has both - for example, a noStyle landing page plus documentation - use directory mode for the docs and add `data-i18n` attributes to your noStyle page. String mode will translate the noStyle HTML while directory mode handles the documentation content.
 :::

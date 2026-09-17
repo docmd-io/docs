@@ -27,7 +27,7 @@ components:
 
 ::: callout info title:"Unterstützung für unendliche Verschachtelung" icon:info
 Auch mit `noStyle: true` werden alle standardmäßigen docmd-Container (wie `::: card`, `::: tabs` und `::: hero`) vollständig unterstützt und können frei komponiert werden.
-::: /callout
+:::
 ```
 
 ## Komponenten-Opt-in-Steuerungen
@@ -70,7 +70,6 @@ The zero-config documentation engine for modern engineering teams.
 == side
 ::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ::: /hero
-:::
 
 ::: grids
   ::: card title:"Zero Configuration"
@@ -120,7 +119,7 @@ assets/
 
 ```json "assets/i18n/en.json"
 {
-  "hero.title": "Markdown → Production Docs",
+  "hero.title": "Markdown to Production Docs",
   "hero.subtitle": "The zero-config documentation engine.",
   "nav.docs": "Documentation",
   "nav.editor": "Live Editor",
@@ -132,7 +131,7 @@ assets/
 3. Füge `data-i18n`-Attribute an Ihre HTML-Elemente an:
 
 ```html
-<h1 data-i18n="hero.title">Markdown → Production Docs</h1>
+<h1 data-i18n="hero.title">Markdown to Production Docs</h1>
 <p data-i18n="hero.subtitle">The zero-config documentation engine.</p>
 <a data-i18n="nav.docs" href="/docs">Documentation</a>
 ```
@@ -143,7 +142,7 @@ Um Attribute wie `placeholder`, `title` oder `aria-label` zu übersetzen, verwen
 
 ```html
 <input data-i18n-placeholder="search.placeholder" placeholder="Search...">
-<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">☰</button>
+<button data-i18n-aria-label="nav.menuLabel" aria-label="Open menu">Menu</button>
 <a data-i18n-title="nav.tooltip" title="Go to docs">Docs</a>
 ```
 
@@ -193,7 +192,7 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 
 ::: callout info title:"Automatische Spracherkennung" icon:info
 Das Client-Skript erkennt aktive Locales anhand des URL-Pfadpräfixes. Für die Standard-Locale prüft es `localStorage` auf gespeicherte Einstellungen. Die Funktion `switchLocale()` verarbeitet die URL-Navigation automatisch.
-::: /callout
+:::
 
 ### Konfiguration des In-Place-Modus
 

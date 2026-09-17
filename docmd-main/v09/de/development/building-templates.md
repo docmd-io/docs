@@ -1,6 +1,6 @@
 ---
 title: "Templates entwickeln"
-description: "Erstellen Sie ein docmd-Template-Paket — Verzeichnislayout, Deskriptor, EJS-Kontext, Asset-Prioritäten und API-Referenz."
+description: "Erstellen Sie ein docmd-Template-Paket, Verzeichnislayout, Deskriptor, EJS-Kontext, Asset-Prioritäten und API-Referenz."
 ---
 
 # Templates entwickeln
@@ -16,7 +16,7 @@ Ein Template ist ein reguläres npm-Paket, das `capabilities: ['template']` dekl
 ```
 @docmd/template-summer/
 ├── package.json
-├── index.js                # Plugin-Einstieg — exportiert templates[] + templateAssets[]
+├── index.js                # Plugin-Einstieg: exportiert templates[] + templateAssets[]
 ├── templates/
 │   ├── layout.ejs
 │   ├── partials/
@@ -48,7 +48,7 @@ Ein Template ist ein reguläres npm-Paket, das `capabilities: ['template']` dekl
 }
 ```
 
-## ESM-Exports – die `default`-Bedingung
+## ESM-Exports: die `default`-Bedingung
 
 Ihre `package.json` **muss** in `exports["."]` zusätzlich zur
 `import`-Bedingung eine `"default"`-Bedingung deklarieren:
@@ -68,7 +68,7 @@ Auto-Installers `ERR_PACKAGE_PATH_NOT_EXPORTED`, weil der
 CommonJS-Resolver von Node keine Bedingung finden kann. Der Retry-Pfad
 gelingt zwar (er verwendet dynamisches `import()` direkt), aber der
 Build gibt bei jedem Lauf eine überflüssige Meldung „Plugin installed"
-aus. Plugins (`@docmd/plugin-*`) haben die gleiche Anforderung – siehe
+aus. Plugins (`@docmd/plugin-*`) haben die gleiche Anforderung, siehe
 den [Plugin-Entwicklungs-Leitfaden](building-plugins.md#esm-exports--die-default-bedingung)
 für den vollständigen Kontext.
 
@@ -119,7 +119,7 @@ Templates erhalten denselben EJS-Kontext wie das Standard-Layout. Die häufigste
 |---|---|
 | `config` | Die normalisierte Site-Konfiguration. |
 | `frontmatter` | Pro-Seite-Frontmatter. |
-| `relativePathToRoot` | Z. B. `./` oder `../` — nutzen Sie dies zum Bauen relativer URLs. |
+| `relativePathToRoot` | Z. B. `./` oder `../`, nutzen Sie dies zum Bauen relativer URLs. |
 | `renderIcon(name, opts)` | Rendert ein Lucide-Icon. |
 | `t(key, params?)` | Übersetzungs-Funktion. |
 | `buildRelativeUrl(url)` | Löst eine URL relativ zur aktuellen Seite auf. |
@@ -136,29 +136,29 @@ CSS und JS laden in dieser Reihenfolge (niedriger lädt zuerst, höher gewinnt K
 |---|---|---|
 | 0  | Basis (`docmd-main.css`, `docmd-main.js`) | Immer vorhanden. |
 | 5  | Theme-Farb-Overlay (`docmd-theme-sky.css` usw.) | Aus `theme.name`. Übersprungen, wenn der Name zu einem Template befördert wurde (siehe `_noCssOverlay`). |
-| 10 | **Template-Struktur** (Standard) | Das CSS Ihres Templates — Standard, wenn Sie `priority` weglassen. |
-| 15 | Benutzer-`customCss` / `customJs` | Gewinnt immer — das ist der Vertrag. |
+| 10 | **Template-Struktur** (Standard) | Das CSS Ihres Templates, Standard, wenn Sie `priority` weglassen. |
+| 15 | Benutzer-`customCss` / `customJs` | Gewinnt immer, das ist der Vertrag. |
 | 20 | Plugin-CSS/JS | lightbox, search, analytics usw. |
 | 25+ | Höhere Template-Priorität | **Nur wenn Sie Plugins überschreiben müssen.** Das offizielle Summer-Template deklariert `priority: 25`, sodass es nach Plugin-CSS lädt. Höhere Werte kaskadieren später. |
 
-Templates dürfen eine höhere Priorität als 10 deklarieren — Summer selbst nutzt **25**, um Plugin-Stile zu überschreiben. Der empfohlene Bereich ist **10–20** für "vom Benutzer überschreibbare" Templates und **20+** für "opinionated Layout"-Templates.
+Templates dürfen eine höhere Priorität als 10 deklarieren, Summer selbst nutzt **25**, um Plugin-Stile zu überschreiben. Der empfohlene Bereich ist **10, 20** für "vom Benutzer überschreibbare" Templates und **20+** für "opinionated Layout"-Templates.
 
 ::: callout warning title:"Verwenden Sie kein !important"
-Templates sollten CSS schreiben, das von `customCss` mit Priorität 15 überschrieben werden kann. `!important` bricht diesen Vertrag und zwingt Benutzer, Ihr Template zu forken, um es anzupassen. (Sommers CSS-Datei-Header erzwingt dies — `!important` wird beim 0.8.7-Cleanup entfernt, damit Benutzer Summer endlich ohne eigenen `!important` überschreiben können.)
-::: /callout
+Templates sollten CSS schreiben, das von `customCss` mit Priorität 15 überschrieben werden kann. `!important` bricht diesen Vertrag und zwingt Benutzer, Ihr Template zu forken, um es anzupassen. (Sommers CSS-Datei-Header erzwingt dies, `!important` wird beim 0.8.7-Cleanup entfernt, damit Benutzer Summer endlich ohne eigenen `!important` überschreiben können.)
+:::
 
 ## Auto-Promotion von `theme.name`
 
-Die Beförderung `theme.name` → `theme.template` findet innerhalb von `normalizeConfig()` statt, nicht im Resolver:
+Die Beförderung `theme.name` : `theme.template` findet innerhalb von `normalizeConfig()` statt, nicht im Resolver:
 
 - Wenn `theme.name` ein nicht reservierter Wert ist und `theme.template` nicht gesetzt ist, wird die Config zu `theme.template = theme.name` umgeschrieben und `theme._noCssOverlay = true` gesetzt (sodass der Generator den Lookup `docmd-theme-${name}.css` überspringt, der sonst 404en würde).
 - Zur Resolve-Zeit sieht der Resolver ausschließlich `theme.template`.
 
-Deshalb lädt ein nicht reservierter `theme.name` automatisch Ihr Template — Sie müssen es nicht zusätzlich in `config.plugins` auflisten.
+Deshalb lädt ein nicht reservierter `theme.name` automatisch Ihr Template, Sie müssen es nicht zusätzlich in `config.plugins` auflisten.
 
 ## Template-Lokalisierung
 
-Die `i18n`-Konfiguration gilt weiterhin — die aktive Locale wird Ihrem Template als normaler Local übergeben. Übersetzungen werden wie in den Standard-Templates über den `t(key)`-Helper nachgeschlagen.
+Die `i18n`-Konfiguration gilt weiterhin, die aktive Locale wird Ihrem Template als normaler Local übergeben. Übersetzungen werden wie in den Standard-Templates über den `t(key)`-Helper nachgeschlagen.
 
 ## API-Referenz
 
@@ -176,10 +176,10 @@ const resolved = resolveTemplate({
   versionId: '0.8',                       // optional
 });
 
-// resolved.templatePath → absoluter Pfad zur .ejs-Datei
-// resolved.source       → 'default' | 'frontmatter' | 'config' | 'plugin'
-// resolved.pluginName   → Plugin-Name (wenn source === 'plugin')
-// resolved.type         → der aufgelöste Slot
+// resolved.templatePath: absoluter Pfad zur .ejs-Datei
+// resolved.source: 'default' | 'frontmatter' | 'config' | 'plugin'
+// resolved.pluginName: Plugin-Name (wenn source === 'plugin')
+// resolved.type: der aufgelöste Slot
 ```
 
 ### Typen aus `@docmd/api`

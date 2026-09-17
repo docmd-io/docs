@@ -13,7 +13,7 @@ Enable the announcement banner in your `docmd.config.json` manifest:
 {
   "layout": {
     "banner": {
-      "content": "**v0.9.0 is out!** — read the full release announcement.",
+      "content": "**v0.9.0 is out!** Read the full release announcement.",
       "type": "info",
       "dismissible": true,
       "link": { "text": "Read announcement", "url": "/blog/v0-9" }
@@ -43,7 +43,7 @@ The banner renders at the top of every page. When dismissed by a reader, the clo
 {
   "layout": {
     "banner": {
-      "content": "Scheduled system maintenance on Sunday 02:00–04:00 UTC.",
+      "content": "Scheduled system maintenance on Sunday 02:00-04:00 UTC.",
       "type": "warning",
       "icon": "alert-triangle"
     }
@@ -68,7 +68,7 @@ The banner renders at the top of every page. When dismissed by a reader, the clo
 {
   "layout": {
     "banner": {
-      "html": "<strong>New:</strong> Rust compiler engine is now available in preview. <a href=\"/blog/rust-engine\">Learn more →</a>",
+      "html": "<strong>New:</strong> Rust compiler engine is now available in preview. <a href=\"/blog/rust-engine\">Learn more</a>",
       "type": "info",
       "dismissible": false
     }

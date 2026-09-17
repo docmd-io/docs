@@ -30,6 +30,7 @@
   },
 
   "layout": {
+    "titleSeparator": "-",
     "spa": true,
     "breadcrumbs": true,
     "menubar": {
@@ -91,7 +92,16 @@
       "defaultDescription": "Open-source documentation compiler. One Markdown source, one command — generates website, search, AI context, agent protocols, and knowledge formats together.",
       "aiBots": true,
       "openGraph": { "defaultImage": "assets/images/docmd-preview-en.webp" },
-      "twitter": { "cardType": "summary_large_image" }
+      "twitter": { "cardType": "summary_large_image" },
+      "breadcrumbs": true,
+      "organization": {
+        "name": "docmd",
+        "url": "https://docmd.io",
+        "logo": "assets/images/docmd-logo-dark.png",
+        "sameAs": [
+          "https://github.com/docmd-io/docmd"
+        ]
+      }
     },
     "analytics": { "googleV4": { "measurementId": "G-YGLJ5HPMM3" } },
     "math": {},
@@ -165,12 +175,12 @@
     "current": "09",
     "position": "sidebar-top",
     "all": [
-      { "id": "09", "dir": "v09", "label": "v0.9.5" },
-      { "id": "08", "dir": "v08", "label": "v0.8.0" },
-      { "id": "07", "dir": "v07", "label": "v0.7.0" },
-      { "id": "06", "dir": "v06", "label": "v0.6.0" },
-      { "id": "05", "dir": "v05", "label": "v0.5.0" },
-      { "id": "04", "dir": "v04", "label": "v0.4.0" }
+      { "id": "09", "dir": "v09", "label": "v0.9.x" },
+      { "id": "08", "dir": "v08", "label": "v0.8.x" },
+      { "id": "07", "dir": "v07", "label": "v0.7.x" },
+      { "id": "06", "dir": "v06", "label": "v0.6.x" },
+      { "id": "05", "dir": "v05", "label": "v0.5.x" },
+      { "id": "04", "dir": "v04", "label": "v0.4.x" }
     ]
   }
 }

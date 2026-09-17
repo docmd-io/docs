@@ -54,7 +54,7 @@ noindex: true
 
 ::: callout tip title:"Privacidad y cumplimiento" icon:shield-check
 Dado que las consultas de búsqueda se procesan íntegramente en la memoria del navegador del cliente, ninguna entrada de búsqueda ni pulsación de teclado sale del dispositivo del usuario.
-::: /callout
+:::
 
 ## Búsqueda semántica local sin conexión
 

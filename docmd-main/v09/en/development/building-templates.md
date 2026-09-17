@@ -1,6 +1,6 @@
 ---
 title: "Building Templates"
-description: "Author a docmd template package — directory layout, descriptor, EJS context, asset priorities, and API reference."
+description: "Author a docmd template package, directory layout, descriptor, EJS context, asset priorities, and API reference."
 ---
 
 # Building Templates
@@ -16,7 +16,7 @@ A template is a regular npm package that declares `capabilities: ['template']` a
 ```
 @docmd/template-summer/
 ├── package.json
-├── index.js                # Plugin entry — exports templates[] + templateAssets[]
+├── index.js                # Plugin entry: exports templates[] + templateAssets[]
 ├── templates/
 │   ├── layout.ejs
 │   ├── partials/
@@ -48,7 +48,7 @@ A template is a regular npm package that declares `capabilities: ['template']` a
 }
 ```
 
-## ESM Exports — the `default` Condition
+## ESM Exports: the `default` Condition
 
 Your template's `package.json` **must** include a `"default"` condition in
 `exports["."]`, alongside the `import` condition:
@@ -68,7 +68,7 @@ If you declare only `import`, the auto-installer's first attempt throws
 match any condition. The retry path will still succeed (it uses dynamic
 `import()` directly), but the build will print a redundant "Plugin
 installed" TUI line every time. Plugins (`@docmd/plugin-*`) have the same
-requirement — see the [plugin development guide](building-plugins.md#esm-exports--the-default-condition)
+requirement, see the [plugin development guide](building-plugins.md#esm-exports--the-default-condition)
 for the full context.
 
 ## `index.js`
@@ -118,7 +118,7 @@ Templates receive the same EJS context as the default layout. The most common lo
 |---|---|
 | `config` | The normalised site config. |
 | `frontmatter` | Per-page frontmatter. |
-| `relativePathToRoot` | E.g. `./` or `../` — use this to build relative URLs. |
+| `relativePathToRoot` | E.g. `./` or `../`, use this to build relative URLs. |
 | `renderIcon(name, opts)` | Render a Lucide icon. |
 | `t(key, params?)` | Translation function. |
 | `buildRelativeUrl(url)` | Resolve a URL relative to the current page. |
@@ -135,29 +135,29 @@ CSS and JS load in this order (lower loads first, higher wins cascade ties):
 |---|---|---|
 | 0  | Base (`docmd-main.css`, `docmd-main.js`) | Always present. |
 | 5  | Theme colour overlay (`docmd-theme-sky.css`, etc.) | From `theme.name`. Skipped when the name auto-promoted to a template (see `_noCssOverlay`). |
-| 10 | **Template structure** (default) | Your template's CSS — this is the default if you omit `priority`. |
-| 15 | User `customCss` / `customJs` | Always wins — that's the contract. |
+| 10 | **Template structure** (default) | Your template's CSS, this is the default if you omit `priority`. |
+| 15 | User `customCss` / `customJs` | Always wins, that's the contract. |
 | 20 | Plugin CSS/JS | lightbox, search, analytics, etc. |
 | 25+ | Higher template priority | **Use only when you must override plugins.** The official Summer template declares `priority: 25` so it loads after plugin CSS. Higher values cascade later. |
 
-Templates may declare a higher priority than 10 — Summer itself uses **25** so it overrides plugin styles. The recommended band is **10–20** for "user-overridable" templates and **20+** for "opinionated layout" templates.
+Templates may declare a higher priority than 10, Summer itself uses **25** so it overrides plugin styles. The recommended band is **10, 20** for "user-overridable" templates and **20+** for "opinionated layout" templates.
 
 ::: callout warning title:"Do not use !important"
-Templates should write CSS that can be overridden by `customCss` at priority 15. Using `!important` breaks the contract and means users can't restyle your template without forking it. (Summer's CSS file header enforces this — `!important` is removed during 0.8.7 cleanup so users can finally override Summer without resorting to `!important` themselves.)
-::: /callout
+Templates should write CSS that can be overridden by `customCss` at priority 15. Using `!important` breaks the contract and means users can't restyle your template without forking it. (Summer's CSS file header enforces this, `!important` is removed during 0.8.7 cleanup so users can finally override Summer without resorting to `!important` themselves.)
+:::
 
 ## Auto-promotion of `theme.name`
 
-The `theme.name` → `theme.template` promotion happens inside `normalizeConfig()`, not the resolver:
+The `theme.name` : `theme.template` promotion happens inside `normalizeConfig()`, not the resolver:
 
 - When `theme.name` is a non-reserved value and `theme.template` is unset, the config is rewritten to `theme.template = theme.name` and `theme._noCssOverlay = true` (so the generator skips the `docmd-theme-${name}.css` lookup that would 404).
 - At resolve time the resolver only ever sees `theme.template`.
 
-This is why a non-reserved `theme.name` automatically loads your template — no need to also list it in `config.plugins`.
+This is why a non-reserved `theme.name` automatically loads your template, no need to also list it in `config.plugins`.
 
 ## Template localisation
 
-The `i18n` config still applies — the active locale is passed to your template as a normal local. Translations are looked up via the `t(key)` helper as in the default templates.
+The `i18n` config still applies, the active locale is passed to your template as a normal local. Translations are looked up via the `t(key)` helper as in the default templates.
 
 ## API reference
 
@@ -175,10 +175,10 @@ const resolved = resolveTemplate({
   versionId: '0.8',                       // optional
 });
 
-// resolved.templatePath → absolute path to the .ejs file
-// resolved.source       → 'default' | 'frontmatter' | 'config' | 'plugin'
-// resolved.pluginName   → plugin name (when source === 'plugin')
-// resolved.type         → the resolved slot
+// resolved.templatePath: absolute path to the .ejs file
+// resolved.source: 'default' | 'frontmatter' | 'config' | 'plugin'
+// resolved.pluginName: plugin name (when source === 'plugin')
+// resolved.type: the resolved slot
 ```
 
 ### Types from `@docmd/api`

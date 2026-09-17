@@ -29,7 +29,7 @@ Actualiza `docmd.config.json` con el título de tu proyecto y la URL de destino:
 
 Configura los ajustes de publicación de Pages en GitHub:
 
-1. Navega a **Settings → Pages**.
+1. Navega a **Settings : Pages**.
 2. En **Source**, selecciona **GitHub Actions**.
 3. Guarda la selección.
 
@@ -132,7 +132,7 @@ Para vincular un dominio personalizado (por ejemplo, `docs.ejemplo.com`):
    { "url": "https://docs.ejemplo.com" }
    ```
 2. Añade y confirma un archivo `CNAME` que contenga tu dominio dentro de `docs/`.
-3. Configura el enrutamiento del dominio en **Settings → Pages → Custom domain**.
+3. Configura el enrutamiento del dominio en **Settings : Pages : Custom domain**.
 
 ::: callout tip "Plantilla vs GitHub Action" icon:git-branch
 La plantilla inicial proporciona una estructura de repositorio lista para usar en proyectos nuevos. Si vas a añadir documentación a un proyecto o código base existente, utiliza directamente la [GitHub Action](./github-action).

@@ -6,9 +6,9 @@ description: "Cree y despliegue sitios de documentación multiproyecto desde un 
 Los espacios de trabajo le permiten crear y desplegar múltiples proyectos de documentación independientes desde un solo repositorio. Cada subproyecto mantiene sus propias opciones de configuración mientras hereda los valores predeterminados globales definidos en la raíz del espacio de trabajo.
 
 ```text
-docs.ejemplo.com/           → Documentación principal del producto
-docs.ejemplo.com/sdk/       → Referencia de API del SDK
-docs.ejemplo.com/cli/       → Guía de herramientas CLI
+docs.ejemplo.com/           # Documentación principal del producto
+docs.ejemplo.com/sdk/       # Referencia de API del SDK
+docs.ejemplo.com/cli/       # Guía de herramientas CLI
 ```
 
 ## Configuración de directorios
@@ -17,14 +17,14 @@ Organice su repositorio en subdirectorios de proyectos separados. Los recursos e
 
 ```text
 mis-docs/
-├── assets/                   ← recursos estáticos compartidos (heredados por todos los proyectos)
+├── assets/  # recursos estáticos compartidos (heredados por todos los proyectos)
 ├── main-docs/
-│   ├── docmd.config.json     ← config. a nivel de proyecto (anula los valores predeterminados raíz)
-│   └── docs/                 ← contenido Markdown del proyecto principal
+│   ├── docmd.config.json  # config. a nivel de proyecto (anula los valores predeterminados raíz)
+│   └── docs/  # contenido Markdown del proyecto principal
 ├── sdk-docs/
-│   ├── docmd.config.json     ← config. del proyecto SDK
-│   └── docs/                 ← contenido Markdown del proyecto SDK
-├── docmd.config.json         ← configuración raíz del espacio de trabajo
+│   ├── docmd.config.json  # config. del proyecto SDK
+│   └── docs/  # contenido Markdown del proyecto SDK
+├── docmd.config.json  # configuración raíz del espacio de trabajo
 └── package.json
 ```
 
@@ -99,7 +99,7 @@ Las opciones de configuración se aplican en cascada a través de un modelo de p
 
 ::: callout info title:"Prioridad de navegación" icon:info
 Un manifiesto `navigation.json` a nivel de proyecto **siempre tiene prioridad** sobre cualquier array global `navigation` definido en la configuración de la raíz del espacio de trabajo.
-::: /callout
+:::
 
 ## El selector de proyectos en la interfaz
 

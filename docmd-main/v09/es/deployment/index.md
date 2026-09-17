@@ -23,13 +23,13 @@ Selecciona un patrón de despliegue según tus necesidades de infraestructura:
 
 El camino más rápido para proyectos de documentación independientes. Clona el repositorio de plantilla oficial que contiene un `docmd.config.json` predeterminado, páginas de muestra y un flujo de trabajo de GitHub Actions preconfigurado para despliegues automatizados con cada push.
 
-→ [Guía de la plantilla inicial](./starter-template)
+: [Guía de la plantilla inicial](./starter-template)
 
 ## GitHub Action
 
 La GitHub Action `docmd-io/deploy` compila tu documentación y expone la ruta del directorio de salida para pasos de publicación posteriores. Úsala para integrar docmd en canalizaciones CI/CD existentes sin alterar la estructura de archivos del proyecto.
 
-→ [Guía de GitHub Action](./github-action)
+: [Guía de GitHub Action](./github-action)
 
 ## Herramienta Deployer
 
@@ -47,17 +47,17 @@ npx @docmd/core deploy --vercel          # Configuración vercel.json
 npx @docmd/core deploy --netlify         # Configuración netlify.toml
 ```
 
-→ [Referencia de la CLI Deployer](./deployer)
+: [Referencia de la CLI Deployer](./deployer)
 
 ## Plataformas de alojamiento compatibles
 
-* **[Imagen Docker](./docker)** — Imagen multiaquitectura oficial para entornos en contenedores.
-* **[NGINX](./nginx)** — Configuración de proxy inverso autohospedado.
-* **[Caddy](./caddy)** — Servidor web autohospedado con gestión automática de certificados TLS.
-* **[Vercel](./vercel)** — Configuración de despliegue en la nube con optimización de recursos estáticos.
-* **[Netlify](./netlify)** — Despliegue continuo respaldado por Git.
-* **[Cloudflare Pages](./cloudflare-pages)** — Alojamiento de sitios estáticos en el edge con CI/CD integrado.
-* **[Firebase Hosting](./firebase)** — Despliegue en la CDN global de Google con integración de GitHub Actions.
+* **[Imagen Docker](./docker)**: Imagen multiaquitectura oficial para entornos en contenedores.
+* **[NGINX](./nginx)**: Configuración de proxy inverso autohospedado.
+* **[Caddy](./caddy)**: Servidor web autohospedado con gestión automática de certificados TLS.
+* **[Vercel](./vercel)**: Configuración de despliegue en la nube con optimización de recursos estáticos.
+* **[Netlify](./netlify)**: Despliegue continuo respaldado por Git.
+* **[Cloudflare Pages](./cloudflare-pages)**: Alojamiento de sitios estáticos en el edge con CI/CD integrado.
+* **[Firebase Hosting](./firebase)**: Despliegue en la CDN global de Google con integración de GitHub Actions.
 
 ## Lista de verificación para producción
 

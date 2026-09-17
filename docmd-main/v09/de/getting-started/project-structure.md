@@ -11,15 +11,15 @@ Führen Sie `npx @docmd/core init` aus, um ein minimales Workspace-Layout zu ers
 
 ```text
 my-docs/
-├── docs/                 ← Quellverzeichnis mit Ihren Markdown (.md)-Seiten
-│   └── index.md          ← Die Startseite (wird zu / aufgelöst)
-├── assets/               ← Statische Web-Assets, die direkt von der Engine geladen werden
-│   ├── css/              ← Eigene Stylesheets zur Anpassung des Seitenlayouts
-│   ├── js/               ← Eigene Skripte zur Erweiterung browserseitiger Logik
-│   └── images/           ← Markenlogos, Icons und Inline-Illustrationen
-├── docmd.config.json     ← Zentrale Konfigurationsdatei
-├── package.json          ← Node-Abhängigkeitsmanifest und Skripte
-└── site/                 ← Optimiertes Verzeichnis für Produktions-Build-Ausgabe
+├── docs/  # Quellverzeichnis mit Ihren Markdown (.md)-Seiten
+│   └── index.md  # Die Startseite (wird zu / aufgelöst)
+├── assets/  # Statische Web-Assets, die direkt von der Engine geladen werden
+│   ├── css/  # Eigene Stylesheets zur Anpassung des Seitenlayouts
+│   ├── js/  # Eigene Skripte zur Erweiterung browserseitiger Logik
+│   └── images/  # Markenlogos, Icons und Inline-Illustrationen
+├── docmd.config.json  # Zentrale Konfigurationsdatei
+├── package.json  # Node-Abhängigkeitsmanifest und Skripte
+└── site/  # Optimiertes Verzeichnis für Produktions-Build-Ausgabe
 ```
 
 ::: callout info "Auflösung von Konfigurationsdateien" icon:settings
@@ -47,18 +47,18 @@ Für komplexe Layouts oder große Projekte mit mehreren verschiedenen Produkten 
 
 ```text
 my-docs-monorepo/
-├── docmd.config.json         ← Root-Konfiguration (definiert globale Einstellungen)
-├── assets/                   ← Geteilte globale Assets (von allen Projekten vererbt)
-│   ├── css/                  ← Geteilte globale Stylesheets
-│   └── images/               ← Geteilte Logos und Icons
-├── package.json              ← Root-Abhängigkeitsmanifest
-├── main-site/                ← Hauptprojekt-Verzeichnis
-│   ├── docmd.config.json     ← Projektspezifische Konfigurations-Overrides
-│   └── docs/                 ← Inhalt für main-site (wird zu / aufgelöst)
+├── docmd.config.json  # Root-Konfiguration (definiert globale Einstellungen)
+├── assets/  # Geteilte globale Assets (von allen Projekten vererbt)
+│   ├── css/  # Geteilte globale Stylesheets
+│   └── images/  # Geteilte Logos und Icons
+├── package.json  # Root-Abhängigkeitsmanifest
+├── main-site/  # Hauptprojekt-Verzeichnis
+│   ├── docmd.config.json  # Projektspezifische Konfigurations-Overrides
+│   └── docs/  # Inhalt für main-site (wird zu / aufgelöst)
 │       └── index.md
-└── sdk-reference/            ← Sekundäres Projekt-Verzeichnis
-    ├── docmd.config.json     ← Projektspezifische Konfigurations-Overrides
-    └── docs/                 ← Inhalt für sdk-reference (wird zu /sdk aufgelöst)
+└── sdk-reference/  # Sekundäres Projekt-Verzeichnis
+    ├── docmd.config.json  # Projektspezifische Konfigurations-Overrides
+    └── docs/  # Inhalt für sdk-reference (wird zu /sdk aufgelöst)
         └── index.md
 ```
 

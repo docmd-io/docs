@@ -3,11 +3,11 @@ title: "AI Assistant Plugin"
 description: "Enable interactive, search-aware AI documentation assistance powered by aiplug multi-provider integration."
 ---
 
-The `@docmd/plugin-ai` plugin introduces an interactive AI Assistant overlay to your documentation site. It leverages pre-compiled `@docmd/plugin-search` indices to perform Retrieval-Augmented Generation (RAG), querying targeted documentation sections to deliver contextual answers with direct source links.
+The `@docmd/plugin-ai` plugin introduces an interactive AI Assistant overlay to your documentation site. It uses pre-compiled `@docmd/plugin-search` indices to perform Retrieval-Augmented Generation (RAG), querying targeted documentation sections to deliver contextual answers with direct source links.
 
 ## Key Capabilities
 
-* **Floating Trigger & Glassmorphic Drawer**: Clean pill trigger (`⌘K` shortcut) that expands into a theme-aware chat panel.
+* **Floating Trigger & Glassmorphic Drawer**: Clean pill trigger (`Ctrl+K` shortcut) that expands into a theme-aware chat panel.
 * **Search-Aware RAG**: Queries pre-built `search-index.json` data to ground LLM responses directly in your site's documentation.
 * **Free docmd Cloud Relay**: Deploy on static hosts (GitHub Pages, Cloudflare Pages, Netlify, Vercel) without any backend server infrastructure.
 * **BYOK Server & KMS Security**: API keys are encrypted at rest via KMS in docmd Cloud or resolved server-side (`AI_API_KEY`, `OPENAI_API_KEY`), guaranteeing zero credential exposure in client web bundles.
@@ -112,7 +112,7 @@ If you deploy your documentation as static files on GitHub Pages, Cloudflare Pag
 
 ::: callout warning title:"Zero Credential Leakage" icon:alert-triangle
 `@docmd/plugin-ai` strictly processes API credentials on the server side or through docmd Cloud's KMS encrypted relay. Provider API keys are never rendered in client HTML or static JavaScript bundles.
-::: /callout
+:::
 
 When running docmd as a Node.js server, set provider environment keys prior to launching your documentation server:
 

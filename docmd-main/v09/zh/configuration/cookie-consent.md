@@ -5,7 +5,7 @@ description: "默认 UI 自带的 Opt-in Cookie 同意对话框。选择会保�
 
 # Cookie 同意
 
-> **0.8.7 新增。** Cookie 同意对话框是默认 `@docmd/ui` 包内置的功能。无需安装插件。**Opt-in（按需启用）** —— 只有设置了 `config.cookie` 才会渲染。
+> **0.8.7 新增。** Cookie 同意对话框是默认 `@docmd/ui` 包内置的功能。无需安装插件。**Opt-in（按需启用）**:, 只有设置了 `config.cookie` 才会渲染。
 
 一个轻量、无障碍的 GDPR 风格同意对话框。用户的选择会持久化到 `localStorage`，TTL 可配置。用户作出选择后，`window` 上会触发 `docmd:cookie-consent` `CustomEvent`，便于插件和模板作出响应（例如开启 analytics、加载第三方脚本）。
 

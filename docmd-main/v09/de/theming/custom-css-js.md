@@ -3,7 +3,29 @@ title: "Eigene Styles & Skripte"
 description: "Injizieren Sie benutzerdefinierte CSS- und JavaScript-Dateien in Ihre docmd-Website, um Layoutstile, Markenidentität und Client-Verhalten zu erweitern."
 ---
 
-Während `docmd`-Themes flexible visuelle Standards bieten, können Sie benutzerdefinierte Stylesheets und interaktive Skripte über die Array-Optionen `theme.customCss` und `customJs` in `docmd.config.json` injizieren.
+Während `docmd`-Themes flexible visuelle Standards bieten, können Sie benutzerdefinierte Stylesheets und interaktive Skripte über die Array-Optionen `theme.customCss` und `theme.customJs` in `docmd.config.json` injizieren.
+
+## Konfiguration für eigene Styles & Skripte
+
+Eigene Stylesheets und clientseitige Skripte werden symmetrisch unter dem `theme`-Block konfiguriert:
+
+```json "docmd.config.json"
+{
+  "theme": {
+    "name": "default",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
+}
+```
+
+::: callout info title:"Abwärtskompatibilität" icon:history
+In früheren Versionen von docmd wurde benutzerdefiniertes JavaScript über ein Top-Level-Array `"customJs"` und eigenes CSS über `"customCss"` konfiguriert. Beide Top-Level-Schlüssel werden weiterhin vollständig als Fallbacks unterstützt, die Verschachtelung unter `"theme"` ist jedoch der empfohlene moderne Standard.
+:::
 
 ## Benutzerdefinierte CSS-Überschreibungen
 
@@ -27,13 +49,15 @@ Verwenden Sie `theme.customCss`, um Standard-Theme-Variablen zu überschreiben o
 
 ## Integration von eigenem JavaScript
 
-Verwenden Sie das `customJs`-Array der obersten Ebene für Skripte, die interaktive Funktionen hinzufügen oder Analytics von Drittanbietern integrieren:
+Verwenden Sie `theme.customJs` für Skripte, die interaktive Funktionen hinzufügen oder Analytics von Drittanbietern integrieren:
 
 ```json "docmd.config.json"
 {
-  "customJs": [
-    "/assets/js/feedback-widget.js"
-  ]
+  "theme": {
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
 }
 ```
 
@@ -46,19 +70,15 @@ Benutzerdefinierte Skripte werden am Ende des `<body>`-Elements geladen. Da `doc
 
 Vollständige Ereignissignaturen und Codebeispiele finden Sie unter [Clientseitige Ereignisse](../reference/client-side-events.md).
 
-## Asset-Prioritätsreihenfolge
+## Kaskaden-Reihenfolge
 
-Jedes in einem `docmd`-Build registrierte CSS- und JS-Asset erhält ein **Prioritätsgewicht**, das die Kaskaden-Ladereihenfolge bestimmt (niedrigere Zahlen laden früher):
+Stylesheets und Skripte werden in einer vorhersehbaren dreistufigen Reihenfolge geladen, sodass Ihre benutzerdefinierten Regeln immer Vorrang haben:
 
-| Prioritätsgewicht | Schicht | Technische Beschreibung |
-| :--- | :--- | :--- |
-| `0` | Basis-Kern (`docmd-main.css`, `docmd-main.js`) | Immer in allen Builds vorhanden. |
-| `5` | Theme-Paletten-Overlay (`docmd-theme-sky.css` usw.) | Über `theme.name` geladen. |
-| `10` | Strukturelle Template-Stile | Von aktiven Template-Plugins injiziert. |
-| `15` | Benutzer-`customCss` / `customJs` | **Höchste Priorität für Benutzerüberschreibungen**. |
-| `20` | Plugin-Assets | Lightbox-, Such- und Analytics-Assets. |
+1. **Kern und Theme**: Basisstile und Farbpaletten laden zuerst.
+2. **Templates und Plugins**: Strukturelle Layout-Templates und Plugin-Assets laden als Nächstes.
+3. **Benutzerdefiniertes CSS und JS**: Ihre `customCss`- und `customJs`-Dateien laden zuletzt, sodass Ihre Deklarationen die Standardwerte sicher überschreiben.
 
-Innerhalb jedes Prioritäts-Buckets werden Dateien in der Reihenfolge geladen, in der sie registriert wurden. Um mehr über strukturelle Layout-Überschreibungen zu erfahren, erkunden Sie [Templates](templates.md).
+Um mehr über strukturelle Layout-Überschreibungen zu erfahren, erkunden Sie [Templates](templates.md).
 
 ::: callout tip "Bereichsbezogene benutzerdefinierte Stile" icon:lightbulb
 Bewahren Sie eine saubere Asset-Organisation durch die Trennung von `/css`- und `/js`-Unterverzeichnissen unter `assets/` wahren. Die Verwendung expliziter Klassennamen in `branding.css` verhindert Stilkonflikte mit den Kern-`docmd`-Containerregeln.

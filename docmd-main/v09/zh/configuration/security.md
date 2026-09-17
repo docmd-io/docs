@@ -12,7 +12,7 @@ description: "配置 HTML 安全策略、过滤原生 HTML、管理 iframe 嵌�
 ```json "docmd.config.json"
 {
   "security": {
-    "htmlPolicy": "escape",
+    "html": "allow",
     "strictLinkSanitizing": true,
     "allowedIframeHosts": [
       "youtube.com",
@@ -24,19 +24,23 @@ description: "配置 HTML 安全策略、过滤原生 HTML、管理 iframe 嵌�
 }
 ```
 
-## HTML 处理策略 (`htmlPolicy`)
+::: callout info title:"向后兼容性" icon:history
+早期 docmd 版本在 `"security"` 内部或根级别使用 `"htmlPolicy"`。为了实现完全的向后兼容，`"security.htmlPolicy"` 和根级别的 `"htmlPolicy"` 都会自动映射到 `"security.html"`。
+:::
 
-`htmlPolicy` 设置控制 `docmd` 如何处理 Markdown 文件中声明的原生 HTML 元素：
+## HTML 处理策略 (`security.html`)
+
+`security.html` 设置控制 `docmd` 如何处理 Markdown 文件中声明的原生 HTML 元素：
 
 | 模式 | 行为 | 最佳应用场景 |
 | :--- | :--- | :--- |
-| `"escape"` *(默认)* | 将所有原生 HTML 标签转换为安全的 HTML 实体（如 `&lt;div&gt;`）。防止意外的脚本注入。 | 公开文档站点以及接受不受信任贡献者 Pull Request 的开源仓库。 |
+| `"allow"` *(默认)* | 将原生 HTML 元素渲染为可执行的 DOM 节点。 | 包含自定义 Web Component 组件或未设样式的原生 HTML (`noStyle: true`) 的权威技术文档。 |
+| `"escape"` | 将所有原生 HTML 标签转换为安全的 HTML 实体（如 `&lt;div&gt;`）。防止意外的脚本注入。 | 公开文档站点以及接受不受信任贡献者 Pull Request 的开源仓库。 |
 | `"strip"` | 从编译输出中完全剥离原生 HTML 标签。 | 要求的严格企业站点，保持纯粹的 Markdown 内容，不允许任何原生标签。 |
-| `"allow"` | 将原生 HTML 元素渲染为可执行的 DOM 节点。 | 包含自定义 Web Component 组件或未设样式的原生 HTML (`noStyle: true`) 的权威技术文档。 |
 
-::: callout warning title:"htmlPolicy: 'allow' 时的 XSS 风险警告" icon:alert-triangle
-如果 Markdown 文件包含 `<script>` 标签，将 `htmlPolicy` 设置为 `"allow"` 将会允许任意脚本执行。请仅在 Markdown 内容来源于可信代码仓库时使用 `"allow"`。
-::: /callout
+::: callout warning title:"html: 'allow' 时的 XSS 风险警告" icon:alert-triangle
+如果 Markdown 文件包含 `<script>` 标签，将 `html` 设置为 `"allow"` 将会允许任意脚本执行。请仅在 Markdown 内容来源于可信代码仓库时使用 `"allow"`。
+:::
 
 ## 多行 HTML 块处理
 

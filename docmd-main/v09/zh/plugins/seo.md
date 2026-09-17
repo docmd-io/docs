@@ -12,6 +12,11 @@ description: "通过原生 meta 标签生成优化您的文档，以适应搜索
 | 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
 | `defaultDescription` | `string` | `null` | 缺乏显式 Frontmatter 描述的页面的后备描述。 |
+| `titleSeparator` | `string` | `"-"` | `<title>` 与社交分享卡片中页面标题与站点标题之间的分隔符。单空格会自动填充（`" - "`）。亦可在 `layout.titleSeparator` 中配置。 |
+| `titleAppend` | `boolean` | `true` | 是否将站点标题附加在页面标题后。设为 `false` 则仅输出页面标题。亦可在 `layout.titleAppend` 中配置。 |
+| `breadcrumbs` | `boolean` | `true` | 在所有非根页面自动注入 Schema.org `BreadcrumbList` JSON-LD 结构化数据。 |
+| `organization` | `object` | `null` | 站点主页上注入的 Schema.org `Organization` 结构化数据（name, url, logo, sameAs）。 |
+| `webSite` | `object \| boolean` | `true` | 站点主页上注入的带有 Sitelinks `SearchAction` 的 Schema.org `WebSite` 结构化数据。 |
 | `aiBots` | `boolean` | `true` | 允许 (`true`) 或阻止 (`false`) AI 训练抓取爬虫 (GPTBot, ChatGPT-User, Google-Extended, CCBot)。 |
 | `openGraph` | `object` | `null` | Open Graph 社交媒体元数据 (Facebook, LinkedIn)。 |
 | `twitter` | `object` | `null` | Twitter (X) Card 设置，包括用户名和卡片类型。 |
@@ -20,9 +25,23 @@ description: "通过原生 meta 标签生成优化您的文档，以适应搜索
 
 ```json "docmd.config.json"
 {
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
+  },
   "plugins": {
     "seo": {
       "defaultDescription": "docmd 平台的完整技术文档。",
+      "breadcrumbs": true,
+      "organization": {
+        "name": "docmd",
+        "url": "https://docmd.io",
+        "logo": "https://docmd.io/assets/images/docmd-logo.png",
+        "sameAs": [
+          "https://github.com/docmd-io/docmd",
+          "https://x.com/docmd_io"
+        ]
+      },
       "aiBots": false,
       "twitter": {
         "siteUsername": "@docmd_io",
@@ -38,9 +57,9 @@ description: "通过原生 meta 标签生成优化您的文档，以适应搜索
 * **自动化 `robots.txt`**: 在输出根目录生成标准 `robots.txt`，包含 Sitemap 位置与 AI 机器人规则。
 * **智能摘要提取**: 若未定义页面描述，则自动提取正文的前 150 个字符。
 * **AI 机器人治理**: 设置 `aiBots: false` 可阻止 AI 训练抓取程序，同时仍允许搜索引擎爬虫索引。
-* **规范 URL 发射**: 注入 `<link rel="canonical">` 元素以防止重复索引问题。
-* **社交预览卡片**: 生成 Open Graph 与 Twitter Card 标签。
-* **结构化数据 (JSON-LD)**: 注入文章 Schema JSON-LD 块，用于丰富搜索引擎摘要。
+* **规范 URL 发射**: 注入 `<link rel="canonical">` 元素以防止重复索引问题。在 Frontmatter 中设置 `canonicalUrl: false` 可抑制标签。
+* **社交预览卡片**: 生成具有统一页面标题和分隔符的 Open Graph 与 Twitter Card 标签。
+* **结构化数据 (JSON-LD)**: 注入 `BreadcrumbList`、`Organization` 与 `WebSite`（Sitelinks 搜索框）Schema，并支持 Frontmatter 自定义 `ldJson` 数据载荷。
 
 ## `robots.txt` 解析顺序
 
@@ -55,7 +74,7 @@ SEO 插件按自顶向下的优先级顺序评估 `robots.txt`：
 ```text
 my-docs/
 ├── assets/
-│   └── robots.txt    ← 在此编写自定义规则
+│   └── robots.txt  # 在此编写自定义规则
 ├── index.md
 └── docmd.config.json
 ```

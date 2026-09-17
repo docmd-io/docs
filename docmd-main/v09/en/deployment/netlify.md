@@ -16,7 +16,7 @@ The emitted `netlify.toml` file configures build environments, output directorie
 * **Build Command**: Runs `npm install @docmd/core && npx @docmd/core build`.
 * **Publish Directory**: Synchronised with `config.out` (`site`).
 * **Header Policies**: Enforces immutable caching for static assets and no-cache rules for HTML entries.
-* **Redirect Rules**: Configures `/*` → `/index.html` rewrites when `layout.spa: true`.
+* **Redirect Rules**: Configures `/*` : `/index.html` rewrites when `layout.spa: true`.
 
 ```toml "netlify.toml"
 [build]

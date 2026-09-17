@@ -6,9 +6,9 @@ description: "Bauen und deployen Sie Multi-Projekt-Dokumentations-Websites aus e
 Workspaces ermöglichen es Ihnen, mehrere unabhängige Dokumentationsprojekte aus einem einzigen Repository zu bauen und zu deployen. Jedes Unterprojekt behält seine eigenen Konfigurationsoptionen und erbt gleichzeitig globale Standards, die im Workspace-Root definiert sind.
 
 ```text
-docs.example.com/           → Haupt-Produktdokumentation
-docs.example.com/sdk/       → SDK-API-Referenz
-docs.example.com/cli/       → CLI-Tooling-Leitfaden
+docs.example.com/  # Haupt-Produktdokumentation
+docs.example.com/sdk/  # SDK-API-Referenz
+docs.example.com/cli/  # CLI-Tooling-Leitfaden
 ```
 
 ## Verzeichnis-Einrichtung
@@ -17,14 +17,14 @@ Organisieren Sie Ihr Repository in separate Projekt-Unterverzeichnisse. Geteilte
 
 ```text
 my-docs/
-├── assets/                   ← Geteilte statische Assets (von allen Projekten vererbt)
+├── assets/  # Geteilte statische Assets (von allen Projekten vererbt)
 ├── main-docs/
-│   ├── docmd.config.json     ← Projektkonfiguration (überschreibt Root-Standards)
-│   └── docs/                 ← Hauptprojekt Markdown-Inhalte
+│   ├── docmd.config.json  # Projektkonfiguration (überschreibt Root-Standards)
+│   └── docs/  # Hauptprojekt Markdown-Inhalte
 ├── sdk-docs/
-│   ├── docmd.config.json     ← SDK-Projektkonfiguration
-│   └── docs/                 ← SDK-Projekt Markdown-Inhalte
-├── docmd.config.json         ← Workspace-Root-Konfiguration
+│   ├── docmd.config.json  # SDK-Projektkonfiguration
+│   └── docs/  # SDK-Projekt Markdown-Inhalte
+├── docmd.config.json  # Workspace-Root-Konfiguration
 └── package.json
 ```
 
@@ -99,7 +99,7 @@ Konfigurationsoptionen kaskadieren über ein 3-stufiges Rangfolgemodell:
 
 ::: callout info title:"Navigations-Vorrang" icon:info
 Ein `navigation.json`-Manifest auf Projektebene **hat immer Vorrang** vor jedem globalen `navigation`-Array, das in der Root-Workspace-Konfiguration definiert ist.
-::: /callout
+:::
 
 ## Das Projekt-Umschaltmenü UI
 

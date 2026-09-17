@@ -13,7 +13,7 @@ Erweiterbarkeit unterscheidet ein statisches Tool von einem professionellen Doku
 
 ## Ansatz
 
-docmd bietet eine zuverlässige, hook-basierte [Plugin-API](../../plugins/building-plugins.md). Schreiben Sie einfache Node.js-Module, die den Dokumentations-Lebenszyklus in verschiedenen Stadien abfangen. Damit können Sie Inhalte und Verhalten beliebig modifizieren — von der initialen Konfiguration bis zur finalen HTML-Generierung.
+docmd bietet eine zuverlässige, hook-basierte [Plugin-API](../../plugins/building-plugins.md). Schreiben Sie einfache Node.js-Module, die den Dokumentations-Lebenszyklus in verschiedenen Stadien abfangen. Damit können Sie Inhalte und Verhalten beliebig modifizieren, von der initialen Konfiguration bis zur finalen HTML-Generierung.
 
 ## Implementierung
 
@@ -53,7 +53,7 @@ export default {
 
 ### 2. Registrieren Sie das Plugin
 
-Registrieren Sie Ihr lokales Plugin, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Imports verwenden — verwenden Sie das `.js`- oder `.ts`-Format für die Plugin-Registrierung.
+Registrieren Sie Ihr lokales Plugin, indem Sie es in Ihre `docmd.config.js` (oder `docmd.config.ts`) importieren. JSON-Konfigurationsdateien können keine Imports verwenden, verwenden Sie das `.js`- oder `.ts`-Format für die Plugin-Registrierung.
 
 ```javascript "plugins/version-injector.js"
 import VersionInjector from "./plugins/version-injector.js";

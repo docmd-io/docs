@@ -3,7 +3,7 @@ title: "Linking & Referencing"
 description: "Master internal cross-linking, URL normalisation, external new-tab triggers, and static asset references in docmd."
 ---
 
-`docmd` provides a filesystem-aware linking system. Write links referencing source `.md` files naturally—the compiler normalises target paths into clean, canonical URLs automatically.
+`docmd` provides a filesystem-aware linking system. Write links referencing source `.md` files naturally, the compiler normalises target paths into clean, canonical URLs automatically.
 
 ::: callout info "Automatic Path Normalisation" icon:info
 Write target paths using `.md` extensions, trailing slashes, or direct filenames (`overview.md`, `overview/`, or `overview`). The build compiler resolves them to identical canonical URLs.

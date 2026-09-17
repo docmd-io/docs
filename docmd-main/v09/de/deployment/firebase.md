@@ -62,8 +62,8 @@ jobs:
           channelId: live
 ```
 
-Speichern Sie `FIREBASE_SERVICE_ACCOUNT` in Ihrem Repository unter **Settings → Secrets and variables → Actions**.
+Speichern Sie `FIREBASE_SERVICE_ACCOUNT` in Ihrem Repository unter **Settings > Secrets and variables > Actions**.
 
 ::: callout tip "Zuordnung benutzerdefinierter Domains" icon:globe
-Fügen Sie benutzerdefinierte Domains in der Firebase Console unter **Hosting → Custom domain** hinzu. Aktualisieren Sie die Eigenschaft `url` in `docmd.config.json` so, dass sie mit Ihrer Domain übereinstimmt, damit Sitemaps und Open-Graph-Metadaten korrekt generiert werden.
+Fügen Sie benutzerdefinierte Domains in der Firebase Console unter **Hosting > Custom domain** hinzu. Aktualisieren Sie die Eigenschaft `url` in `docmd.config.json` so, dass sie mit Ihrer Domain übereinstimmt, damit Sitemaps und Open-Graph-Metadaten korrekt generiert werden.
 :::

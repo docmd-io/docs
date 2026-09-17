@@ -44,12 +44,12 @@ Cada objeto de idioma acepta:
 El idioma predeterminado no tiene prefijo de URL. Los idiomas no predeterminados se anidan en `/{id}/`. Cuando se combina con el [control de versiones](../versioning.md), la URL es `/{locale}/{version}/page`.
 
 ```
-/                       ← idioma predeterminado, versión actual
-/getting-started        ← página del idioma predeterminado
-/05/                    ← idioma predeterminado, versión anterior
-/hi/                    ← idioma no predeterminado, versión actual
-/hi/getting-started     ← página del idioma no predeterminado
-/hi/05/                 ← idioma no predeterminado, versión anterior
+/  # idioma predeterminado, versión actual
+/getting-started  # página del idioma predeterminado
+/05/  # idioma predeterminado, versión anterior
+/hi/  # idioma no predeterminado, versión actual
+/hi/getting-started  # página del idioma no predeterminado
+/hi/05/  # idioma no predeterminado, versión anterior
 ```
 
 El selector de idiomas conserva su página y versión actuales cuando cambia de idioma. El selector de versiones conserva su idioma actual.
@@ -108,8 +108,8 @@ Para conocer todos los detalles sobre la sintaxis del atributo `data-i18n` y el 
 ::: callout warning "El Modo cadena no traduce el contenido Markdown" icon:info
 El reemplazo de cadenas funciona buscando atributos `data-i18n` en el HTML renderizado. El contenido Markdown estándar (`## Encabezado`, párrafos, listas) se renderiza en etiquetas HTML simples sin estos atributos, por lo que no hay nada que el reemplazador pueda encontrar.
 
-- **Sitios de documentación** → utilice el modo directorio (el predeterminado). Cada idioma tiene sus propios archivos Markdown con prosa totalmente traducida.
-- **Páginas de inicio, sitios de marketing, paneles de control** → utilice el modo cadena. Estas son páginas noStyle con HTML personalizado donde usted controla cada etiqueta y puede agregar atributos `data-i18n`.
+- **Sitios de documentación** : utilice el modo directorio (el predeterminado). Cada idioma tiene sus propios archivos Markdown con prosa totalmente traducida.
+- **Páginas de inicio, sitios de marketing, paneles de control** : utilice el modo cadena. Estas son páginas noStyle con HTML personalizado donde usted controla cada etiqueta y puede agregar atributos `data-i18n`.
 
 Si su sitio tiene ambos (por ejemplo, una página de inicio noStyle más documentación), utilice el modo directorio para la documentación y agregue atributos `data-i18n` a su página noStyle. El modo cadena traducirá el HTML noStyle mientras que el modo directorio gestionará el contenido de la documentación.
 :::

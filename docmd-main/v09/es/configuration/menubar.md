@@ -79,7 +79,7 @@ Las utilidades se alinean en la **región derecha** automáticamente, renderizá
 
 ::: callout info title:"Respaldo de reubicación" icon:sparkles
 Si la `menubar` está desactivada mientras `optionsMenu.position` está establecido en `'menubar'`, las utilidades recurren automáticamente a la posición `sidebar-top`.
-::: /callout
+:::
 
 ## Estilos personalizados
 

@@ -40,10 +40,10 @@ Configure PWA properties in `docmd.config.json`:
 
 The PWA plugin evaluates icon paths in top-down order:
 
-1. `plugins.pwa.icons` — Explicit icon array defined in configuration.
-2. `plugins.pwa.logo` — Plugin-specific icon path.
-3. `config.logo` — Global site logo path.
-4. `config.favicon` — Global site favicon path.
+1. `plugins.pwa.icons`, Explicit icon array defined in configuration.
+2. `plugins.pwa.logo`, Plugin-specific icon path.
+3. `config.logo`, Global site logo path.
+4. `config.favicon`, Global site favicon path.
 
 ::: callout tip "Testing Offline Functionality" icon:smartphone
 Service worker registration is disabled during local development (`npx @docmd/core dev`) to prevent cached assets from interfering with live edits. To test PWA features, build the site (`npx @docmd/core build`) and serve the output directory (`site/`) over HTTPS or localhost.

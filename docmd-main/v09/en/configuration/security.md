@@ -3,7 +3,7 @@ title: "Security & HTML Policy"
 description: "Configure HTML security policies, sanitise raw HTML, control iframe embeds, and implement security best practices in docmd."
 ---
 
-`docmd` provides a robust, multi-layered security model to protect static sites against Cross-Site Scripting (XSS), malicious third-party embeds, and unintended raw HTML injection.
+`docmd` provides a multi-layered security model to protect static sites against Cross-Site Scripting (XSS), malicious third-party embeds, and unintended raw HTML injection.
 
 ## Security Configuration Schema
 
@@ -12,7 +12,7 @@ Security rules can be configured in your `docmd.config.json` manifest:
 ```json "docmd.config.json"
 {
   "security": {
-    "htmlPolicy": "escape",
+    "html": "allow",
     "strictLinkSanitizing": true,
     "allowedIframeHosts": [
       "youtube.com",
@@ -24,19 +24,23 @@ Security rules can be configured in your `docmd.config.json` manifest:
 }
 ```
 
-## HTML Processing Policies (`htmlPolicy`)
+::: callout info title:"Backwards Compatibility" icon:history
+Earlier docmd releases configured HTML processing policies using `"htmlPolicy"` inside `"security"` or at the root level. Both `"security.htmlPolicy"` and root `"htmlPolicy"` continue to be automatically mapped to `"security.html"` for full backward compatibility.
+:::
 
-The `htmlPolicy` setting controls how `docmd` processes raw HTML elements declared inside Markdown files:
+## HTML Processing Policy (`security.html`)
+
+The `security.html` setting controls how `docmd` processes raw HTML elements declared inside Markdown files:
 
 | Mode | Behaviour | Best Use Case |
 | :--- | :--- | :--- |
-| `"escape"` *(Default)* | Converts all raw HTML tags into safe HTML entities (`&lt;div&gt;`). Prevents accidental script injection. | Public documentation sites and open open-source repositories accepting pull requests from untrusted contributors. |
+| `"allow"` *(Default)* | Renders raw HTML elements as executable DOM nodes. | Authoritative technical docs incorporating custom web components or unstyled raw HTML (`noStyle: true`). |
+| `"escape"` | Converts all raw HTML tags into safe HTML entities (`&lt;div&gt;`). Prevents accidental script injection. | Public documentation sites and open open-source repositories accepting pull requests from untrusted contributors. |
 | `"strip"` | Completely strips raw HTML tags from the compiled output. | Strict corporate sites requiring plain text markdown purity without raw tags. |
-| `"allow"` | Renders raw HTML elements as executable DOM nodes. | Authoritative technical docs incorporating custom web components or unstyled raw HTML (`noStyle: true`). |
 
-::: callout warning title:"XSS Caution with htmlPolicy: 'allow'" icon:alert-triangle
-Setting `htmlPolicy` to `"allow"` enables arbitrary script execution if Markdown files contain `<script>` tags. Use `"allow"` only when Markdown content originates from trusted source code repositories.
-::: /callout
+::: callout warning title:"XSS Caution with html: 'allow'" icon:alert-triangle
+Setting `html` to `"allow"` enables arbitrary script execution if Markdown files contain `<script>` tags. Use `"allow"` only when Markdown content originates from trusted source code repositories.
+:::
 
 ## Multi-Line HTML Block Handling
 

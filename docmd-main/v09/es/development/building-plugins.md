@@ -64,7 +64,7 @@ La verificación cruzada en tiempo de compilación detecta desajustes entre el d
 
 ::: callout warning title:"Eliminación del registro empaquetado en 0.9.0"
 El archivo `packages/plugins/installer/registry/plugins.json`, mantenido manualmente como catálogo de plugins oficiales, está **obsoleto desde 0.8.9** y se **eliminará en 0.9.0**. El generador de registro en compilación es ahora la única fuente de verdad: basta con declarar el espacio de nombres `docmd` en `package.json` para que el generador lo procese en la siguiente compilación `pnpm build` de `@docmd/api`.
-::: /callout
+:::
 
 ## Capacidades principales
 
@@ -101,8 +101,8 @@ Un plugin de docmd es un objeto estándar de JavaScript que implementa uno o var
 | `translations(localeId)` | Devuelve un objeto con cadenas traducidas para el idioma dado. |
 | `actions` | Objeto con controladores de acciones para llamadas RPC sobre WebSocket. |
 | `events` | Objeto con controladores de eventos para mensajes entrantes del navegador. |
-| `templates[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de ranuras `TemplateHook` — cada `{ type, templatePath }` anula una ranura EJS. |
-| `templateAssets[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de `TemplateAssetHook` — cada entrada `{ type, path, priority?, position? }` suministra el paquete CSS/JS de la plantilla. |
+| `templates[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de ranuras `TemplateHook`, cada `{ type, templatePath }` anula una ranura EJS. |
+| `templateAssets[]` *(nuevo en 0.8.7, capacidad: `template`)* | Matriz de `TemplateAssetHook`, cada entrada `{ type, path, priority?, position? }` suministra el paquete CSS/JS de la plantilla. |
 
 ### Creación de un plugin de plantilla
 
@@ -371,9 +371,9 @@ El objeto `ctx` (ActionContext) proporciona:
 
 Todas las operaciones sobre archivos están confinadas a la raíz del proyecto.
 
-::: callout info title:"Solo en modo desarrollo 🛡️"
+::: callout info title:"Solo en modo desarrollo "
 El sistema WebSocket RPC únicamente está activo durante `npx @docmd/core dev`. Las compilaciones de producción no incluyen el cliente de API ni controladores en el servidor.
-::: /callout
+:::
 
 ## Buenas prácticas
 
@@ -386,11 +386,11 @@ El sistema WebSocket RPC únicamente está activo durante `npx @docmd/core dev`.
 7. **Validación de acciones**: Valide y requiera un esquema de carga útil estricto en sus acciones.
 8. **Registro con `log`**: Utilice el asistente `log()` suministrado en `onPostBuild` para respetar las preferencias de verbosidad del usuario.
 
-::: callout tip title:"Diseñado para Inteligencia Artificial 🤖"
+::: callout tip title:"Diseñado para Inteligencia Artificial "
 La API de plugins de docmd es óptima para modelos de lenguaje (LLM). Al estructurarse en objetos de JavaScript convencionales, los agentes de IA pueden generar extensiones fiables con instrucciones mínimas.
-::: /callout
+:::
 
-## Exportaciones ESM — la condición `default`
+## Exportaciones ESM: la condición `default`
 
 El archivo `package.json` de su plugin **debe** incluir una condición `"default"` en `exports["."]`, junto con la condición `import`:
 

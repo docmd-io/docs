@@ -108,20 +108,15 @@ Templates können jeden der 12 UI-Layout-Slots überschreiben:
 Seiten, die mit `noStyle: true` konfiguriert sind, umgehen aktive Templates vollständig und werden unter Verwendung des Standard-Layouts `templates/no-style.ejs` gerendert.
 :::
 
-## Asset-Prioritätsreihenfolge
+## Kaskaden-Reihenfolge
 
-Wenn mehrere Templates und Benutzer-Stylesheets CSS- oder JS-Assets injizieren, ordnet die Engine diese nach Prioritätsgewicht an:
+Wenn Templates und Stylesheets kombiniert werden, laden Stile in einer vorhersehbaren dreistufigen Reihenfolge:
 
-| Prioritätsgewicht | Schicht | Verhalten |
-| :--- | :--- | :--- |
-| `0` | Basis-Kern (`docmd-main.css`, `docmd-main.js`) | Grundlegende Stile |
-| `5` | Theme-Palette (`docmd-theme-sky.css` usw.) | Visuelles Farbschema |
-| `10` | Strukturelle Template-Stile | Strukturelle Layout-Regeln |
-| `15` | Benutzer-`customCss` / `customJs` | **Hat immer Vorrang** vor Templates |
-| `20` | Plugin-Assets | Lightbox-, Such- und Analytics-Assets |
-| `25+` | Spezialisierte Template-Überschreibungen | Benutzerdefinierte Template-Erweiterungen |
+1. **Kern und Theme**: Grundlegende Stile und Farbpaletten laden zuerst.
+2. **Templates und Plugins**: Strukturelle Layout-Regeln und Plugin-Assets laden als Nächstes.
+3. **Benutzerdefiniertes CSS und JS**: Ihre `customCss`- und `customJs`-Dateien laden zuletzt und haben immer Vorrang vor Templates.
 
-Um Standard-CSS-Regeln eines Templates zu überschreiben, fügen Sie benutzerdefinierte Deklarationen zu `theme.customCss` hinzu (Priorität `15`).
+Um Standard-CSS-Regeln eines Templates zu überschreiben, fügen Sie benutzerdefinierte Deklarationen zu `theme.customCss` hinzu.
 
 ## Template-Lokalisierung
 
@@ -129,6 +124,6 @@ Templates erhalten während des Renders den aktiven Locale-String. Lokalisierte 
 
 ## Verwandte Ressourcen
 
-- [Eigene Styles & Skripte](custom-css-js.md) — Schichten Sie benutzerdefiniertes CSS über aktive Templates.
-- [Gestaltung benutzerdefinierter Landing-Pages](landing-pages.md) — Passen Sie Homepage-Layouts mit Markdown-Containern an.
-- [Konfigurationsreferenz](../configuration/overview.md) — Übersicht über globale Website-Optionen.
+- [Eigene Styles & Skripte](custom-css-js.md): Schichten Sie benutzerdefiniertes CSS über aktive Templates.
+- [Gestaltung benutzerdefinierter Landing-Pages](landing-pages.md): Passen Sie Homepage-Layouts mit Markdown-Containern an.
+- [Konfigurationsreferenz](../configuration/overview.md): Übersicht über globale Website-Optionen.

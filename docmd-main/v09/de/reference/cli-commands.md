@@ -1,6 +1,6 @@
 ---
 title: "CLI-Befehle"
-description: "Befehlszeilenschnittstellen-Referenz für docmd — Befehle, Flags und Optionen zum Erstellen und Verwalten von Dokumentationen."
+description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags und Optionen zum Erstellen und Verwalten von Dokumentationen."
 ---
 
 ## Befehle im Überblick
@@ -39,8 +39,8 @@ npx @docmd/core init
 ```
 
 Generiert:
-* `docs/index.md` — Standard-Landingpage.
-* `docmd.config.json` — Standardmäßige Konfigurationsoptionen.
+* `docs/index.md`, Standard-Landingpage.
+* `docmd.config.json`, Standardmäßige Konfigurationsoptionen.
 * Aktualisierte Build-Skripte in `package.json`.
 
 ## `npx @docmd/core dev`

@@ -27,7 +27,7 @@ components:
 
 ::: callout info title:"Soporte de anidamiento infinito" icon:info
 Incluso con `noStyle: true`, todos los contenedores estándar de docmd (como `::: card`, `::: tabs` y `::: hero`) son totalmente compatibles y se pueden componer libremente.
-::: /callout
+:::
 ```
 
 ## Controles de inclusión de componentes
@@ -70,7 +70,6 @@ El motor de documentación de cero configuración para equipos de ingeniería mo
 == side
 ::: embed url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ::: /hero
-:::
 
 ::: grids
   ::: card title:"Cero configuración"
@@ -120,7 +119,7 @@ assets/
 
 ```json "assets/i18n/en.json"
 {
-  "hero.title": "Markdown → Documentación en producción",
+  "hero.title": "Markdown a Documentación en producción",
   "hero.subtitle": "El motor de documentación de cero configuración.",
   "nav.docs": "Documentación",
   "nav.editor": "Editor en vivo",
@@ -132,7 +131,7 @@ assets/
 3. Adjunte atributos `data-i18n` a sus elementos HTML:
 
 ```html
-<h1 data-i18n="hero.title">Markdown → Documentación en producción</h1>
+<h1 data-i18n="hero.title">Markdown a Documentación en producción</h1>
 <p data-i18n="hero.subtitle">El motor de documentación de cero configuración.</p>
 <a data-i18n="nav.docs" href="/docs">Documentación</a>
 ```
@@ -143,7 +142,7 @@ Para traducir atributos como `placeholder`, `title` o `aria-label`, utilice la n
 
 ```html
 <input data-i18n-placeholder="search.placeholder" placeholder="Buscar...">
-<button data-i18n-aria-label="nav.menuLabel" aria-label="Abrir menú">☰</button>
+<button data-i18n-aria-label="nav.menuLabel" aria-label="Abrir menú">Menu</button>
 <a data-i18n-title="nav.tooltip" title="Ir a docs">Docs</a>
 ```
 
@@ -193,7 +192,7 @@ document.addEventListener("docmd:i18n-applied", function(e) {
 
 ::: callout info title:"Detección automática de idioma" icon:info
 El script del cliente detecta los idiomas activos a partir del prefijo de la ruta URL. Para el idioma predeterminado, inspecciona `localStorage` en busca de preferencias guardadas. La función `switchLocale()` gestiona la navegación de URL automáticamente.
-::: /callout
+:::
 
 ### Configuración del modo en el lugar
 

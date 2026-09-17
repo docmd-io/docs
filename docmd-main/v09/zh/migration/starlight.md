@@ -134,7 +134,7 @@ Io, Europa, Ganymede
 ```markdown
 ::: callout info title:"可选标题"
 一段注释内容。
-::: /callout
+:::
 ```
 
 #### Frontmatter 映射

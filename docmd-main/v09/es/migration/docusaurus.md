@@ -77,18 +77,18 @@ Convierte las etiquetas personalizadas `<MyReactComponent />` en Markdown están
 ##### Alias de contenedores de avisos
 
 Los avisos de Docusaurus funcionan **de forma predeterminada** sin modificaciones de archivos:
-- `:::note` → se renderiza como `callout info`
-- `:::tip` → se renderiza como `callout tip`
-- `:::info` → se renderiza como `callout info`
-- `:::caution` → se renderiza como `callout warning`
-- `:::danger` → se renderiza como `callout danger`
+- `:::note` : se renderiza como `callout info`
+- `:::tip` : se renderiza como `callout tip`
+- `:::info` : se renderiza como `callout info`
+- `:::caution` : se renderiza como `callout warning`
+- `:::danger` : se renderiza como `callout danger`
 
 ::: callout tip "Sintaxis de contenedores nativos" icon:sparkles
 Para disfrutar de funciones avanzadas (como iconos personalizados o colores de insignia personalizados), convierte los avisos de Docusaurus a la sintaxis nativa de `docmd`:
 ```markdown
 ::: callout tip title:"Título personalizado" icon:sparkles
 Este es un contenedor de tipo tip.
-::: /callout
+:::
 ```
 :::
 

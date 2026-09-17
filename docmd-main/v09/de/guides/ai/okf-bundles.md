@@ -1,6 +1,6 @@
 ---
-title: "OKF-Bundles — Deep Dive"
-description: "So organisieren Sie Ihre docmd-Inhalte für das beste OKF-Bundle — typisierte Konzepte, Querverweise und die Disziplin für eine KI-agentenfreundliche Wissensbasis."
+title: "OKF-Bundles, Deep Dive"
+description: "So organisieren Sie Ihre docmd-Inhalte für das beste OKF-Bundle, typisierte Konzepte, Querverweise und die Disziplin für eine KI-agentenfreundliche Wissensbasis."
 ---
 
 Das Plugin [`@docmd/plugin-okf`](../../plugins/okf.md) generiert ein [Open Knowledge Format][okf-spec]-Bundle aus Ihrer docmd-Website. Dieser Leitfaden erklärt, wie das Bundle aufgebaut ist, wie Sie Ihre Inhalte für die optimale Nutzung durch KI-Agenten strukturieren und wie sich OKF vom flachen [`llms.txt`](../../plugins/llms.md)-Format unterscheidet.
@@ -9,9 +9,9 @@ Das Plugin [`@docmd/plugin-okf`](../../plugins/okf.md) generiert ein [Open Knowl
 
 ## Das mentale Modell: ein Wiki, kein Sitemap
 
-Eine traditionelle Dokumentationsseite ist ein Baum — Abschnitte und Unterabschnitte mit darin hängenden Seiten. Ein Benutzer navigiert den Baum von oben nach unten, um Gesuchtes zu finden.
+Eine traditionelle Dokumentationsseite ist ein Baum, Abschnitte und Unterabschnitte mit darin hängenden Seiten. Ein Benutzer navigiert den Baum von oben nach unten, um Gesuchtes zu finden.
 
-Ein OKF-Bundle ist ein **Wiki** — ein flaches Verzeichnis typisierter Konzeptdateien mit Querverweisen untereinander. Ein KI-Agent navigiert horizontal durch den Graphen und folgt Links von einem Konzept zu dessen Nachbarn.
+Ein OKF-Bundle ist ein **Wiki**: ein flaches Verzeichnis typisierter Konzeptdateien mit Querverweisen untereinander. Ein KI-Agent navigiert horizontal durch den Graphen und folgt Links von einem Konzept zu dessen Nachbarn.
 
 Die beiden Strukturen sehen auf der Festplatte identisch aus (Markdown-Dateien in Verzeichnissen), aber das Navigationsmodell unterscheidet sich. Die [drei Designprinzipien][okf-principles] der OKF-Spezifikation sind es wert, vollständig zitiert zu werden:
 
@@ -25,13 +25,13 @@ Die beiden Strukturen sehen auf der Festplatte identisch aus (Markdown-Dateien i
 
 ```text
 site/okf/
-├── okf.yaml              ← Typisiertes Manifest
-├── index.md              ← Katalog im Karpathy-Stil
-├── graph/                ← Opt-in: nur wenn plugins.okf.graph: true
-│   ├── index.html        ← Interaktiver Force-Directed-Viewer
-│   ├── graph.json        ← Graphendaten
-│   ├── graph.js          ← Viewer-Laufzeit
-│   └── graph.css         ← Viewer-Styles
+├── okf.yaml  # Typisiertes Manifest
+├── index.md  # Katalog im Karpathy-Stil
+├── graph/  # Opt-in: nur wenn plugins.okf.graph: true
+│   ├── index.html  # Interaktiver Force-Directed-Viewer
+│   ├── graph.json  # Graphendaten
+│   ├── graph.js  # Viewer-Laufzeit
+│   └── graph.css  # Viewer-Styles
 ├── concepts/
 │   ├── weekly-active-users.md
 │   ├── orders-table.md
@@ -41,7 +41,7 @@ site/okf/
     └── lint-report.txt
 ```
 
-Jede `concepts/<slug>.md`-Datei enthält ein `type`-Feld im Frontmatter sowie den vollständigen Markdown-Body der Seite. Das `okf.yaml`-Manifest listet jedes Konzept mit Typ, Pfad, Sprach-Locale, Version und Tags auf — der Katalog, den ein KI-Agent nutzt, um zu entscheiden, welche Konzepte gelesen werden sollen.
+Jede `concepts/<slug>.md`-Datei enthält ein `type`-Feld im Frontmatter sowie den vollständigen Markdown-Body der Seite. Das `okf.yaml`-Manifest listet jedes Konzept mit Typ, Pfad, Sprach-Locale, Version und Tags auf, der Katalog, den ein KI-Agent nutzt, um zu entscheiden, welche Konzepte gelesen werden sollen.
 
 ## Was in ein `type`-Feld gehört
 
@@ -66,6 +66,12 @@ Sie können den erkannten Typ mit explizitem Frontmatter überschreiben:
 type: api
 title: "Authentifizierungs-API"
 description: "OAuth 2.0 + JWT Auth-Flow für die Benutzer-API."
+tags:
+  - auth
+  - security
+keywords:
+  - oauth2
+  - tokens
 ---
 
 # Authentifizierungs-API
@@ -79,10 +85,12 @@ Oder nutzen Sie die geschachtelte `okf.type`-Form:
 okf:
   type: api
 title: "Authentifizierungs-API"
+description: "OAuth 2.0 + JWT Auth-Flow für die Benutzer-API."
+tags: ["auth", "security"]
 ---
 ```
 
-Der Agent liest zuerst das `type`-Feld. Ein Konzept mit `type: runbook` wird als Schritt-für-Schritt-Anleitung behandelt (z. B. "wie man sich von einem teileweisen Ausfall erholt"); ein Konzept mit `type: api` wird als API-Referenz behandelt; ein Konzept mit `type: dataset` wird als Daten-Wörterbuch behandelt.
+Der Agent liest zuerst die Felder `type` und `description`. Der Compiler übernimmt `description` automatisch in `okf.yaml` und extrahiert Tags aus den Frontmatter-Eigenschaften `tags` und `keywords`. Ein Konzept mit `type: runbook` wird als Schritt-für-Schritt-Anleitung behandelt (z. B. "wie man sich von einem teilweisen Ausfall erholt"); ein Konzept mit `type: api` wird als API-Referenz behandelt; ein Konzept mit `type: dataset` wird als Daten-Wörterbuch behandelt.
 
 ## Querverweise bilden den Graphen
 
@@ -92,13 +100,13 @@ Das `okf-bundle` (sprich: "Graph von Konzepten") ist nützlicher als ein Baum, w
 
 Best Practices für Querverweise:
 
-- **Vorwärts verlinken** — beim Einführen eines Konzepts auf die Konzepte verlinken, von denen es abhängt (z. B. `[MCP-Einrichtung](./mcp-and-agent-skills.md)`).
-- **Rückwärts verlinken** — in dem Konzept, das von diesem abhängt, zurückverlinken (z. B. `[KI-Assistent](./ai-assistant.md)`).
-- **Nicht überverlinken** — jeder Link sollte Informationen hinzufügen. Das Verlinken jedes Wortes verwässert den Graphen und verwirrt den Agenten.
+- **Vorwärts verlinken**: beim Einführen eines Konzepts auf die Konzepte verlinken, von denen es abhängt (z. B. `[MCP-Einrichtung](./mcp-and-agent-skills.md)`).
+- **Rückwärts verlinken**: in dem Konzept, das von diesem abhängt, zurückverlinken (z. B. `[KI-Assistent](./ai-assistant.md)`).
+- **Nicht überverlinken**: jeder Link sollte Informationen hinzufügen. Das Verlinken jedes Wortes verwässert den Graphen und verwirrt den Agenten.
 
 ## Seitenweise Abmeldung (Opt-out)
 
-Manche Seiten sind für KI-Agenten nicht nützlich — rechtliche Vorlagen, interne Teamseiten, Marketingtexte. Verwenden Sie `frontmatter.okf: false`, um eine einzelne Seite aus dem OKF-Bundle auszuschließen:
+Manche Seiten sind für KI-Agenten nicht nützlich, rechtliche Vorlagen, interne Teamseiten, Marketingtexte. Verwenden Sie `frontmatter.okf: false`, um eine einzelne Seite aus dem OKF-Bundle auszuschließen:
 
 ```markdown
 ---
@@ -111,8 +119,8 @@ okf: false
 
 Oder nutzen Sie `noindex: true`, um eine Seite von allen nachgelagerten Konsumenten (Sitemap, Suche, llms.txt, OKF) auszuschließen. Die beiden Flags unterscheiden sich:
 
-- `okf: false` — nur aus OKF ausgeschlossen; weiterhin in Suche und llms.txt enthalten
-- `noindex: true` — von jedem nachgelagerten Konsumenten ausgeschlossen
+- `okf: false`, nur aus OKF ausgeschlossen; weiterhin in Suche und llms.txt enthalten
+- `noindex: true`, von jedem nachgelagerten Konsumenten ausgeschlossen
 
 ## Unterschied zwischen OKF und `llms.txt`
 
@@ -144,10 +152,10 @@ concepts:
 
 Beide ergänzen sich:
 
-- **llms.txt** ist für **flachen Konsum** — "gib mir alles". Ein Agent liest die Datei und hat den vollständigen Text in seinem Kontextfenster.
-- **OKF** ist für **typisierten Konsum** — "gib mir das Schema für Tabelle X". Ein Agent liest das Manifest, wählt die benötigten Konzepte aus und lädt sie selektiv.
+- **llms.txt** ist für **flachen Konsum**: "gib mir alles". Ein Agent liest die Datei und hat den vollständigen Text in seinem Kontextfenster.
+- **OKF** ist für **typisierten Konsum**: "gib mir das Schema für Tabelle X". Ein Agent liest das Manifest, wählt die benötigten Konzepte aus und lädt sie selektiv.
 
-Für Projekte mit unter 50 Seiten reicht llms.txt allein oft aus. Für Projekte mit 50+ Seiten ist OKF das effizientere Format — der Agent muss nicht jede Seite laden, nur um die eine zu finden, die er benötigt.
+Für Projekte mit unter 50 Seiten reicht llms.txt allein oft aus. Für Projekte mit 50+ Seiten ist OKF das effizientere Format, der Agent muss nicht jede Seite laden, nur um die eine zu finden, die er benötigt.
 
 ## Häufige Fehler
 
@@ -193,7 +201,7 @@ open site/okf/graph.html
 cat site/okf/_meta/lint-report.txt
 ```
 
-Der Lint-Bericht ist das Erste, was zu prüfen ist — er listet Seiten ohne `type`-Feld, Seiten mit defekten internen Links und verwaiste Konzepte (keine eingehenden Links). Beheben Sie diese für ein saubereres Agenten-Erlebnis.
+Der Lint-Bericht ist das Erste, was zu prüfen ist, er listet Seiten ohne `type`-Feld, Seiten mit defekten internen Links und verwaiste Konzepte (keine eingehenden Links). Beheben Sie diese für ein saubereres Agenten-Erlebnis.
 
-- [KI-Assistent Einrichtung](./ai-assistant.md) — RAG-gestützte interaktive Assistenten-Konfiguration.
-- [MCP & Agent Skills](./mcp-and-agent-skills.md) — Model Context Protocol Einrichtung und Agenten-Tools.
+- [KI-Assistent Einrichtung](./ai-assistant.md): RAG-gestützte interaktive Assistenten-Konfiguration.
+- [MCP & Agent Skills](./mcp-and-agent-skills.md): Model Context Protocol Einrichtung und Agenten-Tools.

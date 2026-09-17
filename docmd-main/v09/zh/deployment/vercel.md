@@ -13,11 +13,11 @@ npx @docmd/core deploy --vercel
 
 `vercel.json` 配置以下内容：
 
-- **构建命令 (Build command)** — 运行 `npx @docmd/core build`。
-- **输出目录 (Output directory)** — 设置为您配置中的 `out` 属性。
-- **安装命令 (Install command)** — 安装所使用的确切 `@docmd/core` 版本。
-- **缓存头 (Cache headers)** — 资源使用 immutable 缓存，HTML 使用 no-cache。
-- **SPA 路由 (SPA routing)** — 当 `layout.spa` 启用时，将所有路由兜底到 `index.html`。
+- **构建命令 (Build command)**: 运行 `npx @docmd/core build`。
+- **输出目录 (Output directory)**: 设置为您配置中的 `out` 属性。
+- **安装命令 (Install command)**: 安装所使用的确切 `@docmd/core` 版本。
+- **缓存头 (Cache headers)**: 资源使用 immutable 缓存，HTML 使用 no-cache。
+- **SPA 路由 (SPA routing)**: 当 `layout.spa` 启用时，将所有路由兜底到 `index.html`。
 
 ## 部署
 

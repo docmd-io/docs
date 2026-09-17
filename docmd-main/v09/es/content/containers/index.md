@@ -5,9 +5,7 @@ description: "Directorio completo de contenedores estructurales de UI y componen
 
 Standard Markdown es excelente para el formato básico de texto, pero la documentación técnica requiere componentes estructurales. `docmd` extiende Markdown con una suite de **contenedores isomórficos**.
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
+::: callout info "Estándar de Sintaxis de Contenedores" icon:sparkles
 
 ::: callout tip "¿Migrando desde otros motores de documentación?" icon:sparkles
 `docmd` admite alias de sintaxis de **VitePress** y **Docusaurus** directamente. Contenedores como `:::tip`, `:::warning`, `:::note`, `:::details` y `:::caution` funcionan sin modificaciones.
@@ -66,7 +64,6 @@ Los contenedores proporcionan algo más que un acabado visual; entregan **Señal
 
 ## Composición Recursiva y Cierres Explícitos (Recursive Composition & Explicit Closers)
 
-`docmd` admite **Profundidad de Anidamiento Infinita** y resolución determinista de etiquetas de cierre mediante etiquetas nombradas (`::: /card`, `::: /tabs`):
 
 ```markdown
 ::: card title:"Visión General de Arquitectura" # Tarjeta principal

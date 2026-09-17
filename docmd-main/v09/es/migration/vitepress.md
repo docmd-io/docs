@@ -105,11 +105,11 @@ themeConfig: {
 Debido a que `docmd` no ejecuta Vue en el cliente, reemplaza los componentes personalizados con [Contenedores](../content/containers/callouts.md) de `docmd`.
 
 Los contenedores de avisos de VitePress funcionan **de forma predeterminada** sin modificaciones:
-- `:::tip` → se renderiza como `callout tip`
-- `:::warning` → se renderiza como `callout warning`
-- `:::danger` → se renderiza como `callout danger`
-- `:::info` → se renderiza como `callout info`
-- `:::details` → se renderiza como `collapsible`
+- `:::tip` : se renderiza como `callout tip`
+- `:::warning` : se renderiza como `callout warning`
+- `:::danger` : se renderiza como `callout danger`
+- `:::info` : se renderiza como `callout info`
+- `:::details` : se renderiza como `collapsible`
 
 ::: callout success "Cero cambios requeridos" icon:check-circle
 La sintaxis de contenedores de VitePress es compatible de forma nativa. Los bloques de advertencia existentes y las secciones de detalles desplegables se renderizan correctamente sin editar tus archivos Markdown.

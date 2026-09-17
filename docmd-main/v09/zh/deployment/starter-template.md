@@ -14,7 +14,7 @@ description: "使用官方 docmd 入门模板，在不到一分钟内创建一�
 
 ### 1. 创建仓库
 
-在 GitHub 上点击 **[使用此模板 (Use this template)](https://github.com/docmd-io/docmd-template/generate)**。为您的仓库命名并点击 **Create repository**。您无需 fork —— 模板会生成一个干净的、独立的副本。
+在 GitHub 上点击 **[使用此模板 (Use this template)](https://github.com/docmd-io/docmd-template/generate)**。为您的仓库命名并点击 **Create repository**。您无需 fork：模板会生成一个干净的、独立的副本。
 
 ### 2. 配置站点
 
@@ -33,7 +33,7 @@ description: "使用官方 docmd 入门模板，在不到一分钟内创建一�
 
 每个仓库只需执行一次：
 
-1. 进入 **Settings → Pages**。
+1. 进入 **Settings : Pages**。
 2. 在 **Source** 下选择 **GitHub Actions**。
 3. 保存。
 
@@ -127,7 +127,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-工作流直接安装 `@docmd/core` 而不使用锁文件 —— 这是有意的：模板没有提交 `package-lock.json`，因此不使用 `actions/setup-node` 缓存。这让模板保持无依赖，同时仍能稳定部署。
+工作流直接安装 `@docmd/core` 而不使用锁文件：这是有意的：模板没有提交 `package-lock.json`，因此不使用 `actions/setup-node` 缓存。这让模板保持无依赖，同时仍能稳定部署。
 
 ## 添加您的第一个页面
 
@@ -161,7 +161,7 @@ docs/
    { "url": "https://docs.example.com" }
    ```
 2. 在 `docs/` 目录下添加一个包含您域名的 `CNAME` 文件。
-3. 在 **Settings → Pages → Custom domain** 中配置域名。
+3. 在 **Settings : Pages : Custom domain** 中配置域名。
 
 ## 入门模板 vs. GitHub Action
 

@@ -78,7 +78,7 @@ docs/
 
 ## Siguientes pasos
 
-- [Creación de plugins](./building-plugins.md) — desarrolle un plugin personalizado para docmd.
-- [Ejemplos de plugins](./plugin-examples.md) — vea un recorrido completo por un plugin.
-- [Creación de plantillas](./building-templates.md) — cree una plantilla personalizada para docmd.
-- [Referencia de la API de Node](./node-api-reference.md) — API programática de compilación.
+- [Creación de plugins](./building-plugins.md): desarrolle un plugin personalizado para docmd.
+- [Ejemplos de plugins](./plugin-examples.md): vea un recorrido completo por un plugin.
+- [Creación de plantillas](./building-templates.md): cree una plantilla personalizada para docmd.
+- [Referencia de la API de Node](./node-api-reference.md): API programática de compilación.

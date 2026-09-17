@@ -21,7 +21,7 @@ Unlike the `dev` server process which monitors file changes on disk, the Live Ed
 
 1. **Instant Feedback**: Content re-renders in real-time during user typing.
 2. **Standalone Playgrounds**: The editor can be exported as a static Web bundle for hosting on GitHub Pages or static host providers.
-3. **Parity**: Previews leverage the identical rendering pipeline as production `build` outputs.
+3. **Parity**: Previews use the identical rendering pipeline as production `build` outputs.
 
 ## Standalone Static Builds
 

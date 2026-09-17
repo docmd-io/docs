@@ -11,7 +11,7 @@ Los avisos (callouts) aíslan la información que requiere la atención inmediat
 # Contenedor de Aviso Estándar
 ::: callout tipo ["Título de encabezado"] [icon:nombre_icono] # Apertura de contenedor
 Contenido que admite análisis completo de Markdown, bloques de código y botones...
-::: /callout # Etiqueta de cierre explícita
+::: # Etiqueta de cierre explícita
 
 # Alias de Migración (VitePress / Docusaurus)
 ::: tipo ["Título de encabezado"] [icon:nombre_icono]
@@ -27,11 +27,7 @@ Contenido...
 | **Título de Encabezado** | `"String"` \| `title:"..."` | Título opcional (2do parámetro posicional o `title:"..."`). Anula el título semántico. |
 | **Iconografía** | `icon:NOMBRE` | Opcional. Anula el icono predeterminado con un icono de [Lucide](external:https://lucide.dev/icons). |
 | **Alias de Migración** | `::: tip`, `::: warning`, `::: danger`, `::: info`, `::: note`, `::: caution` | Compatibilidad nativa sin configuración adicional para VitePress y Docusaurus. |
-| **Etiquetas de Cierre** | `::: /callout`, `::: /tip`, `:::` | Soporta etiquetas de cierre con nombre o marcadores `:::` genéricos. |
-
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
+| **Etiquetas de Cierre** | `:::`, `::: /tip`, `:::` | Soporta etiquetas de cierre con nombre o marcadores `:::` genéricos. |
 
 ::: callout info "Alias compatibles con la migración" icon:info
 Al migrar desde VitePress o Docusaurus, los alias de contenedores nativos funcionan sin modificaciones:
@@ -61,7 +57,7 @@ Un aviso mínimo sin un título explícito utiliza la clave de tipo como su etiq
 ```markdown
 ::: callout info
 Los esquemas de configuración heredados siguen siendo compatibles, pero ya no se recomiendan.
-::: /callout
+:::
 ```
 
 ::: callout info
@@ -75,7 +71,7 @@ Anule la etiqueta e icono predeterminados con un título personalizado y cualqui
 ```markdown
 ::: callout warning title:"Aviso de cambios importantes" icon:alert-triangle
 El sistema RPC de WebSocket interno está oficialmente en desuso.
-::: /callout
+:::
 ```
 
 ::: callout warning "Aviso de cambios importantes" icon:alert-triangle

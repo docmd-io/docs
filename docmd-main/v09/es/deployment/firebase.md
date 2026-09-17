@@ -62,8 +62,8 @@ jobs:
           channelId: live
 ```
 
-Guarda `FIREBASE_SERVICE_ACCOUNT` en tu repositorio bajo **Settings → Secrets and variables → Actions**.
+Guarda `FIREBASE_SERVICE_ACCOUNT` en tu repositorio bajo **Settings > Secrets and variables > Actions**.
 
 ::: callout tip "Mapeo de dominios personalizados" icon:globe
-Añade dominios personalizados en la consola de Firebase en **Hosting → Custom domain**. Actualiza la propiedad `url` en `docmd.config.json` para que coincida con tu dominio de modo que los mapas del sitio y los metadatos de Open Graph se generen correctamente.
+Añade dominios personalizados en la consola de Firebase en **Hosting > Custom domain**. Actualiza la propiedad `url` en `docmd.config.json` para que coincida con tu dominio de modo que los mapas del sitio y los metadatos de Open Graph se generen correctamente.
 :::

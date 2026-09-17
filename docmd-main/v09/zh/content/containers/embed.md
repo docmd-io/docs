@@ -19,10 +19,6 @@ docmd 原生集成了经过高度优化的 **[embed-lite](external:https://githu
 | **支持的网络** | 内置集成 | 自动识别 YouTube、Vimeo、TikTok、X、Figma、Gists、CodePen、Spotify 等。 |
 | **回退按钮** | 自动触发 | 未识别的 URL 将安全地渲染为格式化的超链接按钮，不会引发错误。 |
 
-::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
-自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
-:::
-
 
 ## 示例
 

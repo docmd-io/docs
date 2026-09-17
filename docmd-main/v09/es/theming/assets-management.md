@@ -38,9 +38,9 @@ Enlace hojas de estilo o scripts adicionales en todas las páginas mediante la c
 ```json "docmd.config.json"
 {
   "theme": {
-    "customCss": ["/assets/css/branding.css"]
-  },
-  "customJs": ["/assets/js/analytics.js"]
+    "customCss": ["/assets/css/branding.css"],
+    "customJs": ["/assets/js/analytics.js"]
+  }
 }
 ```
 

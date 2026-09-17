@@ -11,15 +11,15 @@ Ejecute `npx @docmd/core init` para establecer un diseño de espacio de trabajo 
 
 ```text
 mis-docs/
-├── docs/                 ← Directorio fuente que contiene sus páginas Markdown (.md)
-│   └── index.md          ← La página de inicio (se resuelve en /)
-├── assets/               ← Recursos web estáticos cargados directamente por el motor
-│   ├── css/              ← Hojas de estilo personalizadas para personalizar el diseño
-│   ├── js/               ← Scripts personalizados para extender la lógica del navegador
-│   └── images/           ← Logotipos de marca, iconos e ilustraciones integradas
-├── docmd.config.json     ← Esquema de configuración central
-├── package.json          ← Manifiesto de dependencias de Node y scripts
-└── site/                 ← Directorio de salida de compilación de producción optimizado
+├── docs/  # Directorio fuente que contiene sus páginas Markdown (.md)
+│   └── index.md  # La página de inicio (se resuelve en /)
+├── assets/  # Recursos web estáticos cargados directamente por el motor
+│   ├── css/  # Hojas de estilo personalizadas para personalizar el diseño
+│   ├── js/  # Scripts personalizados para extender la lógica del navegador
+│   └── images/  # Logotipos de marca, iconos e ilustraciones integradas
+├── docmd.config.json  # Esquema de configuración central
+├── package.json  # Manifiesto de dependencias de Node y scripts
+└── site/  # Directorio de salida de compilación de producción optimizado
 ```
 
 ::: callout info "Resolución del archivo de configuración" icon:settings
@@ -47,18 +47,18 @@ Para diseños complejos o proyectos grandes con múltiples productos distintos (
 
 ```text
 mi-monorrepo-docs/
-├── docmd.config.json         ← Configuración raíz (define ajustes globales)
-├── assets/                   ← Recursos globales compartidos (heredados por todos)
-│   ├── css/                  ← Hojas de estilo globales compartidas
-│   └── images/               ← Logotipos e iconos compartidos
-├── package.json              ← Manifiesto de dependencias raíz
-├── main-site/                ← Directorio del proyecto principal
-│   ├── docmd.config.json     ← Anulaciones de config. específicas del proyecto
-│   └── docs/                 ← Contenido para el sitio principal (se resuelve en /)
+├── docmd.config.json  # Configuración raíz (define ajustes globales)
+├── assets/  # Recursos globales compartidos (heredados por todos)
+│   ├── css/  # Hojas de estilo globales compartidas
+│   └── images/  # Logotipos e iconos compartidos
+├── package.json  # Manifiesto de dependencias raíz
+├── main-site/  # Directorio del proyecto principal
+│   ├── docmd.config.json  # Anulaciones de config. específicas del proyecto
+│   └── docs/  # Contenido para el sitio principal (se resuelve en /)
 │       └── index.md
-└── sdk-reference/            ← Directorio del proyecto secundario
-    ├── docmd.config.json     ← Anulaciones de config. específicas del proyecto
-    └── docs/                 ← Contenido para sdk-reference (se resuelve en /sdk)
+└── sdk-reference/  # Directorio del proyecto secundario
+    ├── docmd.config.json  # Anulaciones de config. específicas del proyecto
+    └── docs/  # Contenido para sdk-reference (se resuelve en /sdk)
         └── index.md
 ```
 

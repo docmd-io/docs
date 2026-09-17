@@ -5,9 +5,6 @@ description: "Zero-config integration for Mermaid.js diagrams with automatic the
 
 The `@docmd/plugin-mermaid` plugin integrates [Mermaid.js](external:https://mermaid.js.org/) into `docmd`. It registers both standard Markdown code block parsing (` ```mermaid `) and the explicit `::: mermaid` container renderer, providing interactive SVG diagrams with automatic theme matching, panning, and zooming capabilities.
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: mermaid` ... `::: /mermaid`), explicit key-value properties (`title:"..."`, `align:center`), and trailing `# comments`. Per-diagram customisation is handled via the container syntax, while global defaults are specified in `docmd.config.json`.
-:::
 
 ::: callout success "v0.9.3+ Offline & Air-Gapped Bundling" icon:zap
 Starting in **v0.9.3**, `@docmd/plugin-mermaid` bundles the full Mermaid runtime locally as a self-contained classic IIFE script. Diagrams render 100% offline with zero CDN dependencies (`jsdelivr.net`), supporting air-gapped deployments and direct local `file://` browsing.

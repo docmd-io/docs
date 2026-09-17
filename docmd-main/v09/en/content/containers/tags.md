@@ -3,7 +3,7 @@ title: "Tags"
 description: "Use tag containers to label versions, statuses, or highlight short text snippets inline in docmd."
 ---
 
-The `tag` container is a self-closing component that inserts compact, pill-shaped badges inline. Tags retain their compact proportions across all contexts—they do not inherit surrounding heading font sizes or text weights.
+The `tag` container is a self-closing component that inserts compact, pill-shaped badges inline. Tags retain their compact proportions across all contexts, they do not inherit surrounding heading font sizes or text weights.
 
 ## Container Syntax
 
@@ -19,10 +19,6 @@ The `tag` container is a self-closing component that inserts compact, pill-shape
 | **Background Colour** | `color:VALUE` | Applies background colour (CSS names or Hex). Text contrast is auto-calculated. |
 | **Iconography** | `icon:NAME` | Adds a [Lucide](external:https://lucide.dev/icons) icon inside the badge. |
 | **Hyperlink URL** | `url:URL` | Converts badge into a link. Prefix with `external:` to open in a new browser tab. |
-
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
 
 
 ## Usage Examples

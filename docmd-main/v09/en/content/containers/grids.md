@@ -28,10 +28,6 @@ Grids provide a native, Markdown-driven layout system. Use the `grids` container
 | **Flex Distribution** | Responsive | Columns balance horizontally on desktop and stack vertically on mobile. |
 | **Closing Tags** | `::: /grids`, `::: /grid`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 
 ## Usage Examples
 

@@ -1,13 +1,13 @@
 ---
 title: "Browser API"
-description: "Client-side APIs for docmd — isomorphic rendering engine and dev-mode WebSocket plugin communication."
+description: "Client-side APIs for docmd, isomorphic rendering engine and dev-mode WebSocket plugin communication."
 ---
 
 docmd exposes two client-side APIs: the **Isomorphic Compilation Engine** for rendering Markdown in browser contexts, and the **Dev-Mode Plugin API** for communicating with the local dev server.
 
 ## Isomorphic Compilation Engine
 
-The Markdown rendering engine runs seamlessly inside browser environments. Use this to construct live editor previews, interactive playgrounds, or embedded documentation widgets.
+The Markdown rendering engine runs smoothly inside browser environments. Use this to construct live editor previews, interactive playgrounds, or embedded documentation widgets.
 
 ### CDN Integration
 

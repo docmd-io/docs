@@ -10,7 +10,7 @@ In `docmd`, **Templates** define the foundational HTML structure, layout archite
 * **Colour Schemes**: Provide CSS visual themes (`default`, `sky`, `ruby`, `retro`) that layer directly on top of templates.
 :::
 
-A **template** is an npm package declaring `capabilities: ['template']` that ships custom `.ejs` layout files and asset bundles. The `@docmd/ui` resolver uses a fallback priority chain, ensuring missing slots fall back to default layouts seamlessly.
+A **template** is an npm package declaring `capabilities: ['template']` that ships custom `.ejs` layout files and asset bundles. The `@docmd/ui` resolver uses a fallback priority chain, ensuring missing slots fall back to default layouts smoothly.
 
 ## Quickstart Guide
 
@@ -42,7 +42,7 @@ The default built-in template includes four curated CSS colour palettes that can
 | :--- | :--- | :--- |
 | `default` | Low-profile documentation | Clean, lightweight, neutral palette |
 | `sky` | Product Documentation | Modern, high-contrast, corporate standard |
-| `ruby` | Brand Identity | Sophisticated, serif headers, vibrant accents |
+| `ruby` | Brand Identity | Sophisticated, serif headers, rich accents |
 | `retro` | Developer Tools | Monospace typography, green phosphor accents |
 
 ::: callout info title:"Layering Colour Schemes on External Templates" icon:info
@@ -108,20 +108,15 @@ Templates can override any of the 12 UI layout slots:
 Pages configured with `noStyle: true` bypass active templates completely and render using the default `templates/no-style.ejs` layout.
 :::
 
-## Asset Priority Order
+## Cascade Order
 
-When multiple templates and user stylesheets inject CSS or JS assets, the engine orders them by priority weight:
+When templates and stylesheets are combined, styles load in a predictable three-stage order:
 
-| Priority Weight | Layer | Behaviour |
-| :--- | :--- | :--- |
-| `0` | Base Core (`docmd-main.css`, `docmd-main.js`) | Foundational styles |
-| `5` | Theme Palette (`docmd-theme-sky.css`, etc.) | Visual colour scheme |
-| `10` | Template Structural Styles | Structural layout rules |
-| `15` | User `customCss` / `customJs` | **Always takes priority** over templates |
-| `20` | Plugin Assets | Lightbox, search, and analytics assets |
-| `25+` | Specialised Template Overrides | Custom template extensions |
+1. **Core and Theme**: Foundational styles and colour palettes load first.
+2. **Templates and Plugins**: Structural layout rules and plugin assets load next.
+3. **Custom CSS and JS**: Your `customCss` and `customJs` files load last, always taking precedence over templates.
 
-To override a template's default CSS rules, add custom declarations to `theme.customCss` (Priority `15`).
+To override a template's default CSS rules, add custom declarations to `theme.customCss`.
 
 ## Template Localisation
 
@@ -129,6 +124,6 @@ Templates receive the active locale string during rendering. Localised text stri
 
 ## Related Resources
 
-- [Custom Styles & Scripts](custom-css-js.md)—Layer custom CSS over active templates.
-- [Designing Custom Landing Pages](landing-pages.md)—Customise home page layouts using Markdown containers.
-- [Configuration Reference](../configuration/overview.md)—Overview of global site options.
+- [Custom Styles & Scripts](custom-css-js.md): Layer custom CSS over active templates.
+- [Designing Custom Landing Pages](landing-pages.md): Customise home page layouts using Markdown containers.
+- [Configuration Reference](../configuration/overview.md): Overview of global site options.

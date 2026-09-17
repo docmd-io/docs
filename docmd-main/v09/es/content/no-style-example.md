@@ -90,6 +90,6 @@ customHead: |
       El diseño de esta página está escrito utilizando contenedores HTML estándar y CSS de ámbito definido en el campo de frontmatter <code>customHead</code>. Esto garantiza que no haya filtración de CSS al resto del sitio de documentación.
     </p>
     
-    <a href="./no-style-pages.md" class="demo-button">Analizar la guía de implementación →</a>
+    <a href="./no-style-pages.md" class="demo-button">Analizar la guía de implementación :</a>
   </div>
 </div>

@@ -3,7 +3,29 @@ title: "Estilos y scripts personalizados"
 description: "Inyecte archivos CSS y JavaScript personalizados en su sitio docmd para ampliar estilos, identidad corporativa y comportamiento del cliente."
 ---
 
-Aunque los temas de `docmd` ofrecen una estética cuidada por defecto, puede inyectar hojas de estilo y scripts personalizados a través de las opciones `theme.customCss` y `customJs` en `docmd.config.json`.
+Aunque los temas de `docmd` ofrecen una estética cuidada por defecto, puede inyectar hojas de estilo y scripts personalizados a través de las opciones `theme.customCss` y `theme.customJs` en `docmd.config.json`.
+
+## Configuración de estilos y scripts personalizados
+
+Las hojas de estilo y los scripts del cliente se configuran de forma simétrica bajo el bloque `theme`:
+
+```json "docmd.config.json"
+{
+  "theme": {
+    "name": "default",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
+}
+```
+
+::: callout info title:"Compatibilidad con versiones anteriores" icon:history
+En versiones anteriores de docmd, el JavaScript personalizado se configuraba mediante un arreglo de nivel superior `"customJs"` y el CSS mediante `"customCss"`. Ambas claves raíz continúan siendo totalmente compatibles como opciones alternativas, pero anidarlas bajo `"theme"` es el estándar moderno recomendado.
+:::
 
 ## Anulaciones mediante CSS personalizado
 
@@ -27,13 +49,15 @@ Utilice `theme.customCss` para redefinir variables del tema o agregar reglas de 
 
 ## Integración de JavaScript personalizado
 
-Utilice el arreglo de nivel superior `customJs` para scripts que introduzcan interactividad o integren analíticas de terceros:
+Utilice `theme.customJs` para scripts que introduzcan interactividad o integren analíticas de terceros:
 
 ```json "docmd.config.json"
 {
-  "customJs": [
-    "/assets/js/feedback-widget.js"
-  ]
+  "theme": {
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
 }
 ```
 
@@ -46,19 +70,15 @@ Los scripts personalizados se cargan al final de la etiqueta `<body>`. Puesto qu
 
 Consulte [Eventos del lado del cliente](../reference/client-side-events.md) para conocer los detalles de los eventos disponibles.
 
-## Orden de prioridad de recursos
+## Orden de la cascada
 
-A cada recurso CSS o JS registrado en `docmd` se le asigna un **peso de prioridad** que determina el orden de carga en la cascada (los números menores cargan primero):
+Las hojas de estilo y los scripts se cargan en un orden predecible de tres etapas para que sus reglas personalizadas siempre tengan prioridad:
 
-| Peso de prioridad | Capa | Descripción técnica |
-| :--- | :--- | :--- |
-| `0` | Núcleo base (`docmd-main.css`, `docmd-main.js`) | Siempre presentes en todas las compilaciones. |
-| `5` | Esquema de color del tema (`docmd-theme-sky.css`, etc.) | Cargado mediante `theme.name`. |
-| `10` | Estilos de estructura de plantilla | Inyectados por los plugins de plantilla activos. |
-| `15` | `customCss` / `customJs` del usuario | **Prioridad máxima para personalizaciones del usuario**. |
-| `20` | Recursos de plugins | Estilos de ampliación visual, búsqueda y analíticas. |
+1. **Núcleo y Tema**: Los estilos base y esquemas de color cargan primero.
+2. **Plantillas y Plugins**: Las plantillas estructurales y los recursos de plugins cargan a continuación.
+3. **CSS y JS Personalizados**: Sus archivos `customCss` y `customJs` cargan al final, garantizando que sus declaraciones anulen los valores predeterminados.
 
-Dentro de un mismo rango de prioridad, los archivos se cargan en el orden en que fueron declarados. Para conocer cómo personalizar estructuras completas, explore [Plantillas](templates.md).
+Para conocer cómo personalizar estructuras completas, explore [Plantillas](templates.md).
 
 ::: callout tip "Estilos personalizados organizados" icon:lightbulb
 Mantenga sus recursos organizados separando los directorios `/css` y `/js` dentro de `assets/`. Emplear selectores con nombres específicos en `branding.css` evitará colisiones con las reglas predeterminadas de los contenedores de `docmd`.

@@ -69,10 +69,6 @@
         "path": "/configuration/zero-config"
       },
       {
-        "title": "Navegación",
-        "path": "/configuration/navigation"
-      },
-      {
         "title": "Diseño y UI",
         "path": "/configuration/layout-ui"
       },
@@ -81,12 +77,12 @@
         "path": "/configuration/menubar"
       },
       {
-        "title": "Consentimiento de Cookies",
-        "path": "/configuration/cookie-consent"
-      },
-      {
         "title": "Banner del Sitio",
         "path": "/configuration/site-banner"
+      },
+      {
+        "title": "Navegación",
+        "path": "/configuration/navigation"
       },
       {
         "title": "Localización",
@@ -110,6 +106,14 @@
       {
         "title": "Espacios de Trabajo",
         "path": "/configuration/workspaces"
+      },
+      {
+        "title": "Consentimiento de Cookies",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "Seguridad",
+        "path": "/configuration/security"
       },
       {
         "title": "Redirecciones",

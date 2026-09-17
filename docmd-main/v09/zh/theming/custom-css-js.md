@@ -3,7 +3,29 @@ title: "自定义样式与脚本"
 description: "注入您自己的 CSS 与 JS 文件以扩展 docmd 的功能与品牌。"
 ---
 
-虽然 `docmd` 主题已经非常灵活，但您可能希望注入自己的样式表或交互式脚本。这可以通过配置中的 `theme.customCss` 和 `customJs` 数组来完成。
+虽然 `docmd` 主题已经非常灵活，但您可能希望注入自己的样式表或交互式脚本。这可以通过配置中的 `theme.customCss` 和 `theme.customJs` 数组来完成。
+
+## 自定义样式与脚本配置
+
+自定义样式表与客户端脚本均对称组织在 `theme` 配置块下：
+
+```json "docmd.config.json"
+{
+  "theme": {
+    "name": "default",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
+}
+```
+
+::: callout info title:"向后兼容性" icon:history
+在 docmd 的早期版本中，自定义 JavaScript 通过顶层 `"customJs"` 数组配置，自定义 CSS 通过 `"customCss"` 配置。这两个顶层键作为回退依然完全受支持，但推荐采用嵌套在 `"theme"` 下的现代标准。
+:::
 
 ## 自定义 CSS
 
@@ -26,13 +48,15 @@ description: "注入您自己的 CSS 与 JS 文件以扩展 docmd 的功能与�
 
 ## 自定义 JavaScript
 
-使用顶层的 `customJs` 数组来添加行为或集成第三方服务。
+使用 `theme.customJs` 数组来注入客户端脚本，添加交互功能或集成第三方分析服务：
 
 ```json "docmd.config.json"
 {
-  "customJs": [
-    "/assets/js/feedback-widget.js"
-  ]
+  "theme": {
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
 }
 ```
 
@@ -47,18 +71,12 @@ description: "注入您自己的 CSS 与 JS 文件以扩展 docmd 的功能与�
 添加自定义 CSS 和 JS 让 AI 模型（例如 ChatGPT）能够建议更具针对性的 UI 改进。如果您提到"我有一个自定义的 `branding.css` 文件"，模型可以提供不会与核心 `docmd` 引擎冲突的特定选择器。
 :::
 
-## 资源优先级链（0.8.7 新增）
+## 层叠顺序
 
-docmd 构建中的每个 CSS 和 JS 文件都被分配一个**优先级**，用于决定其加载顺序。优先级较低的先加载。
+样式表与脚本按可预测的三阶段顺序加载，以确保您的自定义规则始终拥有最高优先级：
 
-| 优先级 | 层级 | 说明 |
-|---|---|---|
-| 0  | 基础层（`docmd-main.css`、`docmd-main.js`） | 始终存在。 |
-| 5  | 主题配色层（`docmd-theme-sky.css` 等） | 来自 `theme.name`。 |
-| 10 | **模板结构**（新增） | 由模板插件加载。 |
-| 15 | 用户的 `customCss` / `customJs` | **始终胜出** —— 这是约定。 |
-| 20 | 插件 CSS/JS | lightbox、search、analytics 等。 |
+1. **核心与主题**：基础样式和主题配色优先加载。
+2. **模板与插件**：结构布局模板和插件资源随后加载。
+3. **自定义 CSS 与 JS**：您的 `customCss` 和 `customJs` 文件最后加载，确保您的自定义声明覆盖默认样式。
 
-在同一优先级桶内，文件按注册顺序加载。如果您需要更细的控制，可以编写一个返回带有显式 `priority` 值的 `Asset[]` 条目的小插件。
-
-完整的模板插件编写指南请参阅 [模板](templates.md)。
+了解更多关于结构布局自定义的内容，请参阅 [模板](templates.md)。

@@ -11,15 +11,15 @@ description: "了解 `@docmd/core` 如何将物理文件夹和 Markdown 文件�
 
 ```text
 my-docs/
-├── docs/                 ← 包含 Markdown (.md) 页面的源目录
-│   └── index.md          ← 落地页（解析为 /）
-├── assets/               ← 由引擎直接加载的静态 Web 资源
-│   ├── css/              ← 用于自定义页面布局的自定义样式表
-│   ├── js/               ← 用于扩展浏览器端逻辑的自定义脚本
-│   └── images/           ← 品牌 Logo、图标与内联插图
-├── docmd.config.json     ← 核心配置文件
-├── package.json          ← Node 依赖清单与脚本
-└── site/                 ← 优化的生产构建输出目录
+├── docs/  # 包含 Markdown (.md) 页面的源目录
+│   └── index.md  # 落地页（解析为 /）
+├── assets/  # 由引擎直接加载的静态 Web 资源
+│   ├── css/  # 用于自定义页面布局的自定义样式表
+│   ├── js/  # 用于扩展浏览器端逻辑的自定义脚本
+│   └── images/  # 品牌 Logo、图标与内联插图
+├── docmd.config.json  # 核心配置文件
+├── package.json  # Node 依赖清单与脚本
+└── site/  # 优化的生产构建输出目录
 ```
 
 ::: callout info "配置文件解析" icon:settings
@@ -47,18 +47,18 @@ my-docs/
 
 ```text
 my-docs-monorepo/
-├── docmd.config.json         ← 根配置（定义全局设置）
-├── assets/                   ← 全局共享资源（被所有项目继承）
-│   ├── css/                  ← 全局共享样式表
-│   └── images/               ← 全局共享 Logo 与图标
-├── package.json              ← 根依赖清单
-├── main-site/                ← 主项目目录
-│   ├── docmd.config.json     ← 项目特定配置覆盖
-│   └── docs/                 ← main-site 内容（解析为 /）
+├── docmd.config.json  # 根配置（定义全局设置）
+├── assets/  # 全局共享资源（被所有项目继承）
+│   ├── css/  # 全局共享样式表
+│   └── images/  # 全局共享 Logo 与图标
+├── package.json  # 根依赖清单
+├── main-site/  # 主项目目录
+│   ├── docmd.config.json  # 项目特定配置覆盖
+│   └── docs/  # main-site 内容（解析为 /）
 │       └── index.md
-└── sdk-reference/            ← 次要项目目录
-    ├── docmd.config.json     ← 项目特定配置覆盖
-    └── docs/                 ← sdk-reference 内容（解析为 /sdk）
+└── sdk-reference/  # 次要项目目录
+    ├── docmd.config.json  # 项目特定配置覆盖
+    └── docs/  # sdk-reference 内容（解析为 /sdk）
         └── index.md
 ```
 

@@ -5,9 +5,6 @@ description: "Rendern Sie Flussdiagramme, Sequenzdiagramme und Architekturkarten
 
 `docmd` bietet integrierte Unterstützung zum Rendern hochauflösender Diagramme über **Mermaid**. Autoren können zwischen individuellen Anpassungen pro Diagramm mit dem `::: mermaid` Container oder universeller Kompatibilität mit Standard-Markdown-Codeblöcken wählen.
 
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: mermaid` ... `::: /mermaid`), explizite Key-Value-Eigenschaften (`title:"..."`, `align:center`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für Standard-` ```mermaid ` Codeblöcke und globale Plugin-Konfigurationen bleibt strikt erhalten.
-:::
 
 ## Übersicht & Hybride Architektur
 

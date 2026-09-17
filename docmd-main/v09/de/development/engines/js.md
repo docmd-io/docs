@@ -50,4 +50,4 @@ Da sie vollständig in nativen Runtime-Umgebungen läuft, unterstützt die JavaS
 
 Die JavaScript-Engine ist **exklusiv in ihrer universellen Feature-Unterstützung**. Jedes Kern-Feature, jede fortgeschrittene Syntax, jede Template-Zone und jedes offizielle Plugin ist darauf ausgelegt, hier reibungslos zu laufen.
 
-Ob beim Kompilieren mathematischer Formeln, beim Rendern von Live-Suchindizes oder beim Generieren statischer Sitemaps — die JavaScript-Engine garantiert deterministische Builds.
+Ob beim Kompilieren mathematischer Formeln, beim Rendern von Live-Suchindizes oder beim Generieren statischer Sitemaps, die JavaScript-Engine garantiert deterministische Builds.

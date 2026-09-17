@@ -3,7 +3,7 @@ title: "UI-Strings & SEO-Lokalisierung"
 description: "Passen Sie System-UI-Texte pro Locale an und verstehen Sie automatisierte hreflang-SEO-Meta-Tags in docmd."
 ---
 
-`docmd` wird mit eingebauten Übersetzungen für gängige System-Strings in wichtigen Sprachen ausgeliefert. Bei der Konfiguration einer unterstützten Locale werden Systembeschriftungen — wie Suchplatzhalter, Navigationsschaltflächen und Theme-Modus-Umschalter — automatisch übersetzt.
+`docmd` wird mit eingebauten Übersetzungen für gängige System-Strings in wichtigen Sprachen ausgeliefert. Bei der Konfiguration einer unterstützten Locale werden Systembeschriftungen, wie Suchplatzhalter, Navigationsschaltflächen und Theme-Modus-Umschalter, automatisch übersetzt.
 
 Für nicht unterstützte Sprachen oder benutzerdefinierte Formulierungen fällt das System auf Englisch zurück, ermöglicht jedoch benutzerdefinierte String-Überschreibungen pro Locale.
 
@@ -38,7 +38,7 @@ Definieren Sie benutzerdefinierte Beschriftungen im `translations`-Objekt einer 
 }
 ```
 
-Die Auflösung von Übersetzungen folgt einer strikten Prioritätsreihenfolge: **Systemstandards → Plugin-Strings → Konfigurationsüberschreibungen**. Die Benutzerkonfiguration hat immer die höchste Priorität.
+Die Auflösung von Übersetzungen folgt einer strikten Prioritätsreihenfolge: **Systemstandards : Plugin-Strings : Konfigurationsüberschreibungen**. Die Benutzerkonfiguration hat immer die höchste Priorität.
 
 ## Verfügbare Übersetzungsschlüssel
 

@@ -1,6 +1,6 @@
 ---
 title: "CLI Commands"
-description: "Command-line interface reference for docmd — commands, flags, and options for building and managing documentation."
+description: "Command-line interface reference for docmd, commands, flags, and options for building and managing documentation."
 ---
 
 ## Commands Overview
@@ -39,8 +39,8 @@ npx @docmd/core init
 ```
 
 Generates:
-* `docs/index.md` — Default landing page.
-* `docmd.config.json` — Standard configuration options.
+* `docs/index.md`, Default landing page.
+* `docmd.config.json`, Standard configuration options.
 * Updated `package.json` build scripts.
 
 ## `npx @docmd/core dev`

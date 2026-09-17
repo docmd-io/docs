@@ -58,13 +58,13 @@ When creating interactive plugins that rely on a live development server or WebS
 
 During static production builds (`docmd build`), docmd automatically skips client asset injection while keeping markdown parsing hooks (`markdownSetup`) active. This guarantees static production sites remain lightweight, fast, and free of missing-backend errors, while markdown containers continue to render cleanly. Users can override this per-site in their configuration with `devOnly: false` (or `liveOnly: false`).
 
-Engines have the same `docmd` namespace but **no `capabilities`** — they don't participate in the hook system, only in the engine loader.
+Engines have the same `docmd` namespace but **no `capabilities`**, they don't participate in the hook system, only in the engine loader.
 
 The build-time cross-check (also new in 0.8.9) surfaces drift between the JS descriptor and the manifest, including the "implemented hook without declared capability" silent-drop bug that was previously invisible.
 
 ::: callout warning title:"Bundled registry removal in 0.9.0"
-The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalogue of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth — your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
-::: /callout
+The hand-maintained `packages/plugins/installer/registry/plugins.json` that used to be the catalogue of official plugins is **deprecated** as of 0.8.9 and will be **removed in 0.9.0**. The build-time registry generator is now the single source of truth, your plugin only needs a correct `docmd` namespace in its `package.json`, and the generator picks it up on the next `pnpm build` of `@docmd/api`. No code changes required for existing official plugins.
+:::
 
 ## Core Capabilities
 
@@ -85,7 +85,7 @@ The `capabilities` array dictates which hooks your plugin is allowed to use.
 | `translations`| `translations` | i18n |
 | `template` *(new in 0.8.7)* | `templates`, `templateAssets` | Render |
 
-> **Note:** the `template` capability is exclusive — if a plugin declares it, it cannot also declare `head`, `build`, `post-build`, etc. Templates ship slots and assets only; they do not run lifecycle hooks. If you need both, ship two separate packages.
+> **Note:** the `template` capability is exclusive, if a plugin declares it, it cannot also declare `head`, `build`, `post-build`, etc. Templates ship slots and assets only; they do not run lifecycle hooks. If you need both, ship two separate packages.
 
 ## Plugin API Reference
 
@@ -101,8 +101,8 @@ A docmd plugin is a standard JavaScript object that implements one or more of th
 | `translations(localeId)` | Return an object of translated strings for the given locale. |
 | `actions` | An object of named action handlers for WebSocket RPC calls. |
 | `events` | An object of named event handlers for browser messages. |
-| `templates[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateHook` entries — each `{ type, templatePath }` overrides one EJS slot. |
-| `templateAssets[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateAssetHook` entries — each `{ type, path, priority?, position? }` ships the template's CSS/JS bundle. |
+| `templates[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateHook` entries, each `{ type, templatePath }` overrides one EJS slot. |
+| `templateAssets[]` *(new in 0.8.7, capability: `template`)* | Array of `TemplateAssetHook` entries, each `{ type, path, priority?, position? }` ships the template's CSS/JS bundle. |
 
 ### Building a template plugin
 
@@ -371,9 +371,9 @@ The `ctx` (ActionContext) provides:
 
 All file operations are sandboxed to the project root.
 
-::: callout info title:"Dev Mode Only 🛡️"
+::: callout info title:"Dev Mode Only "
 The WebSocket RPC system is only active during `npx @docmd/core dev`. Production builds do not include the API client or server-side action handling.
-::: /callout
+:::
 
 ## Best Practices
 
@@ -386,11 +386,11 @@ The WebSocket RPC system is only active during `npx @docmd/core dev`. Production
 7.  **Action Validation**: Define and require an explicit payload schema in your actions.
 8.  **Logging**: Use the provided `log()` helper in `onPostBuild` to respect user verbosity settings.
 
-::: callout tip title:"AI-Ready Design 🤖"
+::: callout tip title:"AI-Ready Design "
 The docmd plugin API is **LLM-Optimal**. Because the hooks use standard JavaScript objects, AI agents can generate bug-free plugins with minimal instruction.
-::: /callout
+:::
 
-## ESM Exports — the `default` Condition
+## ESM Exports: the `default` Condition
 
 Your plugin's `package.json` **must** include a `"default"` condition in
 `exports["."]`, alongside the `import` condition:

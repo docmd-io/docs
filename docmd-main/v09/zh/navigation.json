@@ -69,10 +69,6 @@
         "path": "/configuration/zero-config"
       },
       {
-        "title": "导航",
-        "path": "/configuration/navigation"
-      },
-      {
         "title": "布局与界面",
         "path": "/configuration/layout-ui"
       },
@@ -81,12 +77,12 @@
         "path": "/configuration/menubar"
       },
       {
-        "title": "Cookie 同意",
-        "path": "/configuration/cookie-consent"
-      },
-      {
         "title": "站点横幅",
         "path": "/configuration/site-banner"
+      },
+      {
+        "title": "导航",
+        "path": "/configuration/navigation"
       },
       {
         "title": "国际化",
@@ -110,6 +106,14 @@
       {
         "title": "工作区",
         "path": "/configuration/workspaces"
+      },
+      {
+        "title": "Cookie 同意",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "安全",
+        "path": "/configuration/security"
       },
       {
         "title": "重定向",

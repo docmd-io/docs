@@ -12,6 +12,11 @@ Konfigurieren Sie website-weite SEO-Standardwerte in `docmd.config.json`. Frontm
 | Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
 | `defaultDescription` | `string` | `null` | Fallback-Beschreibung für Seiten, denen explizite Frontmatter-Beschreibungen fehlen. |
+| `titleSeparator` | `string` | `"-"` | Trennzeichen zwischen Seitentitel und Site-Titel in `<title>` und Social Cards. Leerzeichen werden automatisch hinzugefügt (`" - "`). Kann auch in `layout.titleSeparator` konfiguriert werden. |
+| `titleAppend` | `boolean` | `true` | Hängt den Site-Titel an den Seitentitel an. Auf `false` setzen, um nur den Seitentitel auszugeben. Kann auch in `layout.titleAppend` definiert werden. |
+| `breadcrumbs` | `boolean` | `true` | Injiziert automatisch strukturierte Schema.org `BreadcrumbList`-JSON-LD-Daten auf allen Unterseiten. |
+| `organization` | `object` | `null` | Schema.org `Organization`-Daten (name, url, logo, sameAs), injiziert auf der Startseite. |
+| `webSite` | `object \| boolean` | `true` | Schema.org `WebSite`-Strukturierte Daten mit Sitelinks `SearchAction` auf der Startseite. |
 | `aiBots` | `boolean` | `true` | Erlauben (`true`) oder blockieren (`false`) von KI-Trainings-Web-Crawlern (GPTBot, ChatGPT-User, Google-Extended, CCBot). |
 | `openGraph` | `object` | `null` | Open Graph-Social-Media-Metadaten (Facebook, LinkedIn). |
 | `twitter` | `object` | `null` | Twitter (X) Card-Einstellungen einschließlich Handle und Card-Typ. |
@@ -20,9 +25,23 @@ Konfigurieren Sie website-weite SEO-Standardwerte in `docmd.config.json`. Frontm
 
 ```json "docmd.config.json"
 {
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
+  },
   "plugins": {
     "seo": {
       "defaultDescription": "Umfassende technische Dokumentation für die docmd-Plattform.",
+      "breadcrumbs": true,
+      "organization": {
+        "name": "docmd",
+        "url": "https://docmd.io",
+        "logo": "https://docmd.io/assets/images/docmd-logo.png",
+        "sameAs": [
+          "https://github.com/docmd-io/docmd",
+          "https://x.com/docmd_io"
+        ]
+      },
       "aiBots": false,
       "twitter": {
         "siteUsername": "@docmd_io",
@@ -38,9 +57,9 @@ Konfigurieren Sie website-weite SEO-Standardwerte in `docmd.config.json`. Frontm
 * **Automatisierte `robots.txt`**: Generiert eine Standard-`robots.txt` im Ausgabestammverzeichnis, einschließlich Sitemap-Speicherorten und KI-Bot-Regeln.
 * **Intelligente Auszug-Generierung**: Extrahiert automatisch die ersten 150 Zeichen des Fließtextes, wenn keine Seitenbeschreibung definiert ist.
 * **KI-Bot-Governance**: Setzen Sie `aiBots: false`, um KI-Trainings-Scraper zu blockieren, während Suchmaschinen-Crawler weiterhin zugelassen werden.
-* **Ausgabe kanonischer URLs**: Injiziert `<link rel="canonical">`-Elemente, um Probleme mit doppelter Indizierung zu verhindern.
-* **Social-Preview-Cards**: Generiert Open Graph- und Twitter Card-Tags.
-* **Strukturierte Daten (JSON-LD)**: Injiziert Article-Schema-JSON-LD-Blöcke für umfangreiche Suchmaschinen-Snippets.
+* **Ausgabe kanonischer URLs**: Injiziert `<link rel="canonical">`-Elemente, um Probleme mit doppelter Indizierung zu verhindern. Setzen Sie `canonicalUrl: false` im Frontmatter, um das Tag zu unterdrücken.
+* **Social-Preview-Cards**: Generiert Open Graph- und Twitter Card-Tags mit einheitlichen Titeln und Trennzeichen.
+* **Strukturierte Daten (JSON-LD)**: Injiziert `BreadcrumbList`, `Organization` und `WebSite` (Sitelinks SearchAction) Schemata sowie Unterstützung für benutzerdefiniertes Frontmatter-`ldJson`.
 
 ## `robots.txt`-Auflösungsreihenfolge
 
@@ -55,7 +74,7 @@ Empfohlene Dateiorganisation:
 ```text
 my-docs/
 ├── assets/
-│   └── robots.txt    ← Schreiben Sie hier benutzerdefinierte Regeln
+│   └── robots.txt  # Schreiben Sie hier benutzerdefinierte Regeln
 ├── index.md
 └── docmd.config.json
 ```

@@ -5,7 +5,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 # 站点横幅
 
-> **0.8.7 新增。** 默认 UI 内置的可关闭公告横幅。位于 menubar 之上、页头之下。**Opt-in（按需启用）** —— 只有设置了 `config.layout.banner` 才会渲染。
+> **0.8.7 新增。** 默认 UI 内置的可关闭公告横幅。位于 menubar 之上、页头之下。**Opt-in（按需启用）**:, 只有设置了 `config.layout.banner` 才会渲染。
 
 可用于发布公告、维护窗口、Beta 召唤行动（calls-to-action）或任何其他全站消息。
 
@@ -15,7 +15,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 {
   "layout": {
     "banner": {
-      "content": "**v0.9 周五发布** —— 阅读公告。",
+      "content": "**v0.9 已发布**，阅读完整公告。",
       "type": "info",
       "dismissible": true,
       "link": { "text": "了解更多", "url": "/blog/v0-9" }
@@ -32,7 +32,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 |---|---|---|
 | `content` | `""` | 内联 Markdown 文本（`**加粗**`、`` `代码` ``）。与 `html` 互斥。 |
 | `html` | `""` | 原始 HTML。优先级高于 `content`。用于更复杂的布局。 |
-| `type` | `"info"` | `"info"` \| `"success"` \| `"warning"` \| `"danger"` —— 影响背景色。 |
+| `type` | `"info"` | `"info"` \| `"success"` \| `"warning"` \| `"danger"`，影响背景色。 |
 | `dismissible` | `true` | 显示关闭 (X) 按钮。为 `false` 时横幅常驻。 |
 | `link` | `null` | `{ text, url }`，可选 CTA 链接，渲染在内容之后。 |
 | `icon` | `null` | 左侧显示的 Lucide 图标名。常用：`megaphone`、`info`、`bell`。 |
@@ -45,7 +45,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 {
   "layout": {
     "banner": {
-      "content": "站点维护定于 UTC 时间 周日 02:00–04:00 进行。",
+      "content": "站点维护定于 UTC 时间 周日 02:00-04:00 进行。",
       "type": "warning"
     }
   }
@@ -73,7 +73,7 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 {
   "layout": {
     "banner": {
-      "html": "<strong>新功能：</strong> AI 搜索已上线。<a href=\"/blog/ai-search\">了解更多 →</a>",
+      "html": "<strong>新功能：</strong> AI 搜索已上线。<a href=\"/blog/ai-search\">了解更多</a>",
       "type": "info",
       "dismissible": false
     }
@@ -83,9 +83,9 @@ description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown
 
 ## 行为
 
-- **位置** —— 位于页面最顶部，menubar 与侧栏 logo bar 之上。纯 CSS 定位，关闭时不会引起布局抖动。
-- **关闭状态持久化** —— "已关闭" 状态保存在 `sessionStorage`。新的浏览器会话会重新显示。如需更长期记忆，可由您自己的客户端脚本写入 `localStorage`（横幅的 `data-docmd-banner` 属性便于定位）。
-- **按页覆盖** —— 0.8.7 暂不支持。如需在单个页面隐藏横幅，可在 `config.templates[page]` 条目中设置 `layout.banner: null`（计划在下个版本提供）。
+- **位置**:, 位于页面最顶部，menubar 与侧栏 logo bar 之上。纯 CSS 定位，关闭时不会引起布局抖动。
+- **关闭状态持久化**:, "已关闭" 状态保存在 `sessionStorage`。新的浏览器会话会重新显示。如需更长期记忆，可由您自己的客户端脚本写入 `localStorage`（横幅的 `data-docmd-banner` 属性便于定位）。
+- **按页覆盖**:, 0.8.7 暂不支持。如需在单个页面隐藏横幅，可在 `config.templates[page]` 条目中设置 `layout.banner: null`（计划在下个版本提供）。
 
 ## 重新定义样式
 

@@ -23,13 +23,13 @@ Wählen Sie ein Bereitstellungsmuster basierend auf den Infrastrukturanforderung
 
 Der schnellste Weg für eigenständige Dokumentationsprojekte. Klonen Sie das offizielle Template-Repository, das eine Standard-`docmd.config.json`, Beispielseiten und einen vorkonfigurierten GitHub Actions-Workflow für automatisierte Bereitstellungen beim Push enthält.
 
-→ [Starter-Template-Leitfaden](./starter-template)
+: [Starter-Template-Leitfaden](./starter-template)
 
 ## GitHub Action
 
 Die GitHub Action `docmd-io/deploy` kompiliert Ihre Dokumentation und stellt den Ausgabeverzeichnispfad für nachgelagerte Veröffentlichungsschritte bereit. Verwenden Sie dies, um docmd in bestehende CI/CD-Pipelines zu integrieren, ohne Projektdateistrukturen zu ändern.
 
-→ [GitHub Action-Leitfaden](./github-action)
+: [GitHub Action-Leitfaden](./github-action)
 
 ## Deployer-Tool
 
@@ -47,17 +47,17 @@ npx @docmd/core deploy --vercel          # vercel.json-Konfiguration
 npx @docmd/core deploy --netlify         # netlify.toml-Konfiguration
 ```
 
-→ [Deployer CLI-Referenz](./deployer)
+: [Deployer CLI-Referenz](./deployer)
 
 ## Unterstützte Hosting-Plattformen
 
-* **[Docker-Image](./docker)** — Offizielles Multi-Architektur-Image für containerisierte Umgebungen.
-* **[NGINX](./nginx)** — Selbstgehostete Reverse-Proxy-Konfiguration.
-* **[Caddy](./caddy)** — Selbstgehosteter Webserver mit automatischer TLS-Zertifikatsverwaltung.
-* **[Vercel](./vercel)** — Cloud-Bereitstellungskonfiguration mit Optimierung statischer Assets.
-* **[Netlify](./netlify)** — Git-gestütztes Continuous Deployment.
-* **[Cloudflare Pages](./cloudflare-pages)** — Edge-natives statisches Site-Hosting mit integrierter CI/CD.
-* **[Firebase Hosting](./firebase)** — Google-CDN-Bereitstellung mit GitHub Actions-Integration.
+* **[Docker-Image](./docker)**: Offizielles Multi-Architektur-Image für containerisierte Umgebungen.
+* **[NGINX](./nginx)**: Selbstgehostete Reverse-Proxy-Konfiguration.
+* **[Caddy](./caddy)**: Selbstgehosteter Webserver mit automatischer TLS-Zertifikatsverwaltung.
+* **[Vercel](./vercel)**: Cloud-Bereitstellungskonfiguration mit Optimierung statischer Assets.
+* **[Netlify](./netlify)**: Git-gestütztes Continuous Deployment.
+* **[Cloudflare Pages](./cloudflare-pages)**: Edge-natives statisches Site-Hosting mit integrierter CI/CD.
+* **[Firebase Hosting](./firebase)**: Google-CDN-Bereitstellung mit GitHub Actions-Integration.
 
 ## Produktions-Checkliste
 

@@ -11,7 +11,7 @@ description: "Referenzhandbuch für docmd CSS-Variablen, visuelle Tokens und Kom
 | :--- | :--- | :--- | :--- |
 | `--bg-color` | `#ffffff` | `#0d0d0f` | Primärer Seitenhintergrund |
 | `--text-color` | `#27272a` | `#d4d4d8` | Standard-Fließtext-Typografie |
-| `--text-heading` | `#09090b` | `#fafafa` | Titel- und Überschriften-Elemente (`h1`–`h6`) |
+| `--text-heading` | `#09090b` | `#fafafa` | Titel- und Überschriften-Elemente (`h1`-`h6`) |
 | `--link-color` | `#068ad5` | `#38bdf8` | Primäre Akzent- und Hyperlink-Farbe |
 | `--border-color` | `#e4e4e7` | `#27272a` | Linientrenner und Kartenränder |
 | `--sidebar-bg` | `#fafafa` | `#09090b` | Navigations-Seitenleisten-Hintergrund |

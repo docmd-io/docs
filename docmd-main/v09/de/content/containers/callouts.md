@@ -11,7 +11,7 @@ Callouts isolieren Informationen, die die sofortige Aufmerksamkeit des Lesers er
 # Standard-Callout-Container
 ::: callout typ ["Header-Titel"] [icon:Icon-Name] # Container-Öffner
 Inhalt mit voller Markdown-Unterstützung, Codeblöcken und Buttons...
-::: /callout # Explizites Schließ-Tag
+::: # Explizites Schließ-Tag
 
 # Migrations-Alias (VitePress / Docusaurus)
 ::: typ ["Header-Titel"] [icon:Icon-Name]
@@ -27,11 +27,7 @@ Inhalt...
 | **Header-Titel** | `"String"` \| `title:"..."` | Optionaler Header-Titel (2. positionaler Parameter oder `title:"..."`). Überschreibt den Standardtitel. |
 | **Symbolik** | `icon:NAME` | Optional. Überschreibt das Standard-Icon mit einem [Lucide](external:https://lucide.dev/icons)-Symbol. |
 | **Migrations-Aliase** | `::: tip`, `::: warning`, `::: danger`, `::: info`, `::: note`, `::: caution` | Direkt unterstützt für Kompatibilität mit VitePress und Docusaurus. |
-| **Schließ-Tags** | `::: /callout`, `::: /tip`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
-
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
+| **Schließ-Tags** | `:::`, `::: /tip`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
 
 ::: callout info "Migrationsfreundliche Aliase" icon:info
 Beim Migrieren von VitePress oder Docusaurus funktionieren native Container-Aliase direkt nach der Installation:
@@ -61,7 +57,7 @@ Ein minimaler Callout ohne expliziten Titel verwendet den Typschlüssel als Head
 ```markdown
 ::: callout info
 Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr empfohlen.
-::: /callout
+:::
 ```
 
 ::: callout info
@@ -75,7 +71,7 @@ Legacy-Konfigurationsschemata werden weiterhin unterstützt, jedoch nicht mehr e
 ```markdown
 ::: callout warning title:"Hinweis zu Breaking Changes" icon:alert-triangle
 Das interne WebSocket-RPC-System ist offiziell veraltet.
-::: /callout
+:::
 ```
 
 ::: callout warning "Hinweis zu Breaking Changes" icon:alert-triangle
@@ -109,5 +105,5 @@ npx @docmd/core dev --preserve
 :::
 
 ::: callout tip "Priorisierter Kontext für KI" icon:sparkles
-Callout-Container fungieren als **Anker mit hoher Priorität** im kompilierten `llms.txt`-Kontextstrom. Verwenden Sie `::: callout danger` für Breaking Changes — dies signalisiert KI-Modellen, dass die enthaltene Anweisung Standardannahmen überschreibt.
+Callout-Container fungieren als **Anker mit hoher Priorität** im kompilierten `llms.txt`-Kontextstrom. Verwenden Sie `::: callout danger` für Breaking Changes, dies signalisiert KI-Modellen, dass die enthaltene Anweisung Standardannahmen überschreibt.
 :::

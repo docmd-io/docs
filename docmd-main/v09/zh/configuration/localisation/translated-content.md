@@ -9,18 +9,18 @@ description: "通过按文件回退与按本地化的导航，在本地化子目
 
 ```text
 docs/
-├── en/                     ← 默认本地化内容
+├── en/  # 默认本地化内容
 │   ├── index.md
 │   ├── navigation.json
 │   └── getting-started/
 │       └── installation.md
-├── hi/                     ← 第二种本地化版本
-│   ├── index.md            ← 已翻译的首页
-│   ├── navigation.json     ← 已翻译的导航标签
+├── hi/  # 第二种本地化版本
+│   ├── index.md  # 已翻译的首页
+│   ├── navigation.json  # 已翻译的导航标签
 │   └── getting-started/
-│       └── installation.md ← 已翻译的页面
-└── zh/                     ← 第三种本地化版本
-    └── index.md            ← 仅翻译了首页
+│       └── installation.md  # 已翻译的页面
+└── zh/  # 第三种本地化版本
+    └── index.md  # 仅翻译了首页
 ```
 
 源目录只包含本地化文件夹。启用 i18n 时，根目录下不放置任何内容文件。
@@ -33,8 +33,8 @@ docs/
 
 您无需翻译每个页面。docmd 扫描**默认本地化目录**作为规范结构。对于其他每种本地化版本，它会检查是否存在翻译页面：
 
-- 如果 `docs/hi/getting-started/installation.md` 存在 → 提供印地语翻译版本。
-- 如果不存在 → 提供默认本地化版本。
+- 如果 `docs/hi/getting-started/installation.md` 存在 : 提供印地语翻译版本。
+- 如果不存在 : 提供默认本地化版本。
 
 当页面回退时，docmd 会显示一个翻译后的标注，以告知查看者该页面以默认语言显示。通过您的 [UI 字符串](ui-strings.md) 配置自定义此消息。
 
@@ -64,26 +64,26 @@ docs/
 
 ::: callout tip title:"部分导航" icon:info
 仅在需要翻译后的标签时才创建本地化的 `navigation.json`。如果缺失，则使用默认导航。
-::: /callout
+:::
 
 ## 版本管理与 i18n
 
 结合版本管理与 i18n 时，按层次结构组织源目录：
 
 ```text
-docs/                    ← 当前版本
-  en/                    ← 当前版本，默认本地化
-  hi/                    ← 当前版本，已翻译的本地化
-docs-v1/                 ← 旧版本
-  en/                    ← v1，默认本地化
-  hi/                    ← v1，已翻译的本地化
+docs/  # 当前版本
+  en/  # 当前版本，默认本地化
+  hi/  # 当前版本，已翻译的本地化
+docs-v1/  # 旧版本
+  en/  # v1，默认本地化
+  hi/  # v1，已翻译的本地化
 ```
 
 输出 URL 首先嵌套本地化版本，然后是版本：
 
 ```text
-/                        ← 默认本地化，当前版本
-/hi/                     ← 已翻译的本地化，当前版本
-/v1/                     ← 默认本地化，旧版本
-/hi/v1/                  ← 已翻译的本地化，旧版本
+/  # 默认本地化，当前版本
+/hi/  # 已翻译的本地化，当前版本
+/v1/  # 默认本地化，旧版本
+/hi/v1/  # 已翻译的本地化，旧版本
 ```

@@ -13,7 +13,7 @@ Wird `docmd` in einem Verzeichnis ohne `docmd.config.json`-Manifest ausgeführt,
 
 1. **Quellverzeichnis-Erkennung**: Scannt Kandidatenverzeichnisse in Prioritätsreihenfolge: `docs/`, `src/docs/`, `documentation/`, `content/` und `.` (Root-Verzeichnis-Fallback).
 2. **Versions- & Locale-Extraktion**: Parst automatisch Versionsordner, die `v[0-9]+` entsprechen (z. B. `v1.0`, `v09`), und zweistellige Sprachcodes (z. B. `en`, `de`, `zh`).
-3. **Automatisierte Sidebar-Routierung**: Generiert einen sauberen Navigationsbaum durch Analyse von Dateihierarchien und Konvertierung von mit Bindestrich versehenen Dateinamen (`getting-started.md` → `Getting Started`).
+3. **Automatisierte Sidebar-Routierung**: Generiert einen sauberen Navigationsbaum durch Analyse von Dateihierarchien und Konvertierung von mit Bindestrich versehenen Dateinamen (`getting-started.md` : `Getting Started`).
 
 :::
 

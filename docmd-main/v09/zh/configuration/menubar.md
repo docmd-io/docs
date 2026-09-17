@@ -79,7 +79,7 @@ description: "构建并定位您的菜单栏，管理导航链接，配置下拉
 
 ::: callout info title:"自动回退"
 如果 `menubar` 被禁用，分配给它的实用工具会自动回退到 `sidebar-top` 位置。
-::: /callout
+:::
 
 ## 自定义样式
 

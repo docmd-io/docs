@@ -16,7 +16,7 @@ Die ausgegebene Datei `netlify.toml` konfiguriert Build-Umgebungen, Ausgabeverze
 * **Build-Befehl**: Führt `npm install @docmd/core && npx @docmd/core build` aus.
 * **Veröffentlichungsverzeichnis**: Synchronisiert mit `config.out` (`site`).
 * **Header-Richtlinien**: Erzwingt unveränderliches Caching für statische Assets und No-Cache-Regeln für HTML-Einträge.
-* **Weiterleitungsregeln**: Konfiguriert `/*` → `/index.html`-Rewrites, wenn `layout.spa: true` ist.
+* **Weiterleitungsregeln**: Konfiguriert `/*` : `/index.html`-Rewrites, wenn `layout.spa: true` ist.
 
 ```toml "netlify.toml"
 [build]

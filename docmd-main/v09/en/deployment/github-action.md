@@ -91,8 +91,8 @@ The action executes the following internal workflow:
 Configure GitHub Pages to deploy from **GitHub Actions**:
 
 1. Open your repository on GitHub.
-2. Navigate to **Settings → Pages**.
-3. Under **Build and deployment → Source**, select **GitHub Actions**.
+2. Navigate to **Settings : Pages**.
+3. Under **Build and deployment : Source**, select **GitHub Actions**.
 
 ## Subpath & Custom Domain Configuration
 
@@ -114,7 +114,7 @@ To configure a custom domain:
 
 1. Add a `CNAME` file containing your hostname (e.g. `docs.example.com`) inside `docs/`.
 2. Update the `url` property in `docmd.config.json` to match your domain.
-3. Configure the custom domain under **Settings → Pages → Custom domain**.
+3. Configure the custom domain under **Settings : Pages : Custom domain**.
 
 ::: callout tip "Pinning Action Releases" icon:shield-check
 For production environments, pin your workflow steps to explicit version tags (e.g. `uses: docmd-io/deploy@v1.0.0`) to guard against unintended breaking changes.

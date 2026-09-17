@@ -40,10 +40,10 @@ description: "通过离线缓存与移动优先特性，将您的文档转变为
 
 PWA 插件按自顶向下的顺序评估图标路径：
 
-1. `plugins.pwa.icons` — 在配置中定义的显式图标数组。
-2. `plugins.pwa.logo` — 插件专用的图标路径。
-3. `config.logo` — 全局站点 Logo 路径。
-4. `config.favicon` — 全局站点 Favicon 路径。
+1. `plugins.pwa.icons`, 在配置中定义的显式图标数组。
+2. `plugins.pwa.logo`, 插件专用的图标路径。
+3. `config.logo`, 全局站点 Logo 路径。
+4. `config.favicon`, 全局站点 Favicon 路径。
 
 ::: callout tip "测试离线功能" icon:smartphone
 在本地开发期间（`npx @docmd/core dev`），Service Worker 注册会被绕过，以防止缓存资源干扰实时编辑。若要测试 PWA 特性，请构建站点（`npx @docmd/core build`）并通过 HTTPS 或 localhost 托管输出目录（`site/`）。

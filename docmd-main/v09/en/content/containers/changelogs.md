@@ -27,10 +27,6 @@ Release notes...
 | **Sub-Containers** | `::: log` ... `::: /log` | Explicit version entry wrappers. Legacy `== Version` header markers are also supported. |
 | **Closing Tags** | `::: /changelog`, `::: /log`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
-
 
 ## Usage Examples
 
@@ -49,7 +45,7 @@ The core engine has been rearchitected for isomorphic execution.
 
 ::: callout success
 This release delivers a 40% improvement in initial build compilation speed.
-::: /callout
+:::
 ::: /log
 
 ::: log "v1.5.1 (2025-12-10)" # Patch update
@@ -89,7 +85,7 @@ Initial public release.
 ::: /changelog
 
 ::: callout tip "Legacy == Entry Marker Syntax" icon:archive
-Existing documentation utilising `==` entry markers continues to parse seamlessly:
+Existing documentation utilising `==` entry markers continues to parse smoothly:
 
 ```markdown
 ::: changelog

@@ -1,6 +1,6 @@
 ---
 title: "Build-API"
-description: "Programmatische Node.js-API-Referenz für docmd — Websites, Live-Editor-Bundles und Multi-Projekt-Workspaces bauen."
+description: "Programmatische Node.js-API-Referenz für docmd, Websites, Live-Editor-Bundles und Multi-Projekt-Workspaces bauen."
 ---
 
 Sie können die docmd Build-Engine programmatisch aus Node.js-Anwendungen importieren und ausführen. Dies ermöglicht benutzerdefinierte Build-Pipelines, automatisierte Dokumentationsgenerierung und Monorepo-Integrationen.

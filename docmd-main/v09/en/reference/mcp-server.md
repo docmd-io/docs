@@ -7,7 +7,7 @@ docmd incorporates a native Model Context Protocol (MCP) server, enabling AI dev
 
 ## Technical Overview
 
-The [Model Context Protocol](external:https://modelcontextprotocol.io/) is an open specification for interfacing AI models with local workspace tools. docmd implements the `stdio` transport layer — clients launch `docmd mcp` as a subprocess and exchange JSON-RPC 2.0 messages over standard input/output streams.
+The [Model Context Protocol](external:https://modelcontextprotocol.io/) is an open specification for interfacing AI models with local workspace tools. docmd implements the `stdio` transport layer, clients launch `docmd mcp` as a subprocess and exchange JSON-RPC 2.0 messages over standard input/output streams.
 
 ## Launch & Configuration
 
@@ -61,7 +61,7 @@ docmd supports the standard MCP specification:
 
 * **Transport Mechanism**: `stdio` (JSON-RPC 2.0 messages over standard I/O).
 * **Logging**: Out-of-band diagnostic logs emitted via `stderr`.
-* **Lifecycle Flow**: `initialize` → `notifications/initialized` → Tool invocations.
+* **Lifecycle Flow**: `initialize` : `notifications/initialized` : Tool invocations.
 * **Capabilities**: Exposes `tools`, `resources`, and `prompts`.
 
 ## Security Controls

@@ -134,7 +134,7 @@ Algún contenido de nota.
 ```markdown
 ::: callout info title:"Título opcional"
 Algún contenido de nota.
-::: /callout
+:::
 ```
 
 #### Mapeo de frontmatter

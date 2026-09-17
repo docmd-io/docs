@@ -1,6 +1,6 @@
 ---
 title: "Node API Reference"
-description: "Low-level Node API for plugin authors — URL utilities, action dispatchers, source tools, the engine loader, and TypeScript types."
+description: "Low-level Node API for plugin authors, URL utilities, action dispatchers, source tools, the engine loader, and TypeScript types."
 ---
 
 ::: callout info
@@ -28,9 +28,9 @@ Convert a build engine output path to a clean directory-style slug.
 ```javascript
 import { outputPathToSlug } from '@docmd/api';
 
-outputPathToSlug('guide/index.html');   // → 'guide/'
-outputPathToSlug('index.html');         // → '/'
-outputPathToSlug('de/v1/api/index.html'); // → 'de/v1/api/'
+outputPathToSlug('guide/index.html');   // returns 'guide/'
+outputPathToSlug('index.html');         // returns '/'
+outputPathToSlug('de/v1/api/index.html'); // returns 'de/v1/api/'
 ```
 
 ### `outputPathToPathname(outputPath)`
@@ -40,8 +40,8 @@ Convert to a root-relative pathname.
 ```javascript
 import { outputPathToPathname } from '@docmd/api';
 
-outputPathToPathname('guide/index.html'); // → '/guide/'
-outputPathToPathname('index.html');       // → '/'
+outputPathToPathname('guide/index.html'); // returns '/guide/'
+outputPathToPathname('index.html');       // returns '/'
 ```
 
 ### `outputPathToCanonical(outputPath, siteUrl)`
@@ -61,8 +61,8 @@ Collapse double slashes (except after protocol).
 ```javascript
 import { sanitizeUrl } from "@docmd/api";
 
-sanitizeUrl("https://docs.example.com//guide"); // → "https://docs.example.com/guide"
-sanitizeUrl("/foo//bar"); // → "/foo/bar"
+sanitizeUrl("https://docs.example.com//guide"); // returns "https://docs.example.com/guide"
+sanitizeUrl("/foo//bar"); // returns "/foo/bar"
 ```
 
 ### `buildAbsoluteUrl(base, localePrefix, versionPrefix, pagePath)`
@@ -72,7 +72,7 @@ Build an absolute URL with locale and version prefixes.
 ```javascript
 import { buildAbsoluteUrl } from '@docmd/api';
 
-buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // → '/de/v1/guide/'
+buildAbsoluteUrl('/', 'de/', 'v1/', 'guide/'); // returns '/de/v1/guide/'
 ```
 
 ### `resolveHref(href)`
@@ -82,9 +82,9 @@ Normalise user-written hrefs to clean URLs. Handles `.md` stripping, trailing sl
 ```javascript
 import { resolveHref } from "@docmd/api";
 
-resolveHref("overview.md"); // → "overview/"
-resolveHref("external:https://github.com"); // → "https://github.com"
-resolveHref("raw:docs/readme.md"); // → "docs/readme.md"
+resolveHref("overview.md"); // returns "overview/"
+resolveHref("external:https://github.com"); // returns "https://github.com"
+resolveHref("raw:docs/readme.md"); // returns "docs/readme.md"
 ```
 
 ## Pre-computed Page URLs
@@ -222,6 +222,6 @@ import type {
 
 ## What's Next
 
-- [Building Plugins](./building-plugins.md) — start here.
-- [Plugin Examples](./plugin-examples.md) — see a full plugin walkthrough.
-- [Engines & Architecture](./engines/overview.md) — Rust engine, N-API, and engine loader internals.
+- [Building Plugins](./building-plugins.md): start here.
+- [Plugin Examples](./plugin-examples.md): see a full plugin walkthrough.
+- [Engines & Architecture](./engines/overview.md): Rust engine, N-API, and engine loader internals.

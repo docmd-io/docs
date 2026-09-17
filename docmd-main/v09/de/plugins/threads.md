@@ -71,8 +71,8 @@ Text mit angehängten Diskussionen erhält <span class="threads-preview-highligh
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;vor 1 Tag</div>
     <div class="threads-preview-body">Gute Idee - ich füge ein Mermaid-Ablaufdiagramm hinzu. Passt <code>sequenceDiagram</code> hier?</div>
     <div class="threads-preview-reactions">
-      <div class="threads-preview-reaction">👍 <span>2</span></div>
-      <div class="threads-preview-reaction">🚀 <span>1</span></div>
+      <div class="threads-preview-reaction">+1 <span>2</span></div>
+      <div class="threads-preview-reaction">Idea <span>1</span></div>
     </div>
   </div>
   <div class="threads-preview-comment threads-preview-reply">
@@ -103,7 +103,7 @@ Gelöste Diskussionen werden im abgedunkelten Zustand angezeigt:
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;vor 5 Tagen&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Gelöst</span></div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;vor 5 Tagen&nbsp;&nbsp;<span class="threads-preview-resolved-badge">Gelöst</span></div>
     <div class="threads-preview-body">Tippfehler im Konfigurationsbeispiel behoben.</div>
   </div>
   <div class="threads-preview-footer">
@@ -111,7 +111,7 @@ Gelöste Diskussionen werden im abgedunkelten Zustand angezeigt:
   </div>
 </div>
 
-Ein rechts verankertes Registerkarten-Element <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> schmiegt sich an den rechten Bildschirmrand und zeigt die Anzahl ungelöster Threads an. Das Überfahren von markiertem Text öffnet direkt eine Inline-Vorschaukarte im Dokumentinhalt, während ein Klick auf die Registerkarte die Seitenleiste öffnet. Threads bleiben beim Öffnen und Schließen der Leiste nahtlos erhalten, ohne die Seite neu zu laden.
+Ein rechts verankertes Registerkarten-Element <span class="threads-preview-fab"><span class="threads-preview-fab-badge">2</span></span> schmiegt sich an den rechten Bildschirmrand und zeigt die Anzahl ungelöster Threads an. Das Überfahren von markiertem Text öffnet direkt eine Inline-Vorschaukarte im Dokumentinhalt, während ein Klick auf die Registerkarte die Seitenleiste öffnet. Threads bleiben beim Öffnen und Schließen der Leiste nahtlos erhalten, ohne die Seite neu zu laden.
 
 ## Markdown-Speicherformat
 

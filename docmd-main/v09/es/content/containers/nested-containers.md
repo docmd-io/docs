@@ -5,10 +5,6 @@ description: "Combine tarjetas, pestañas, avisos y pasos de forma recursiva en 
 
 `docmd` utiliza un analizador sintáctico de contenedores recursivo con seguimiento de profundidad. Puede anidar componentes unos dentro de otros para crear estructuras de interfaz de usuario complejas e interactivas puramente en Markdown sin HTML personalizado.
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
-
 ::: callout warning "Sintaxis de botón de autocierre" icon:alert-triangle
 El componente `::: button` es de autocierre (una sola línea). Nunca agregue una línea final `:::` inmediatamente después de un botón; al hacerlo, finaliza el **contenedor primario**, lo que resulta en diseños de página rotos.
 :::
@@ -30,7 +26,7 @@ Elija su ruta de inicialización preferida:
       ```
       ::: callout success
       Este script gestiona la instalación de paquetes y el enlace de espacios de trabajo automáticamente.
-      ::: /callout
+      :::
 
    == tab "Manual"
       Obtenga y enlace manualmente los paquetes del motor principal.

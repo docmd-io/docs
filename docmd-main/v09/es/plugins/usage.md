@@ -48,11 +48,11 @@ Estos plugins vienen incorporados con `@docmd/core` y no requieren instalación 
 
 ::: callout tip title:"Detección de repositorios Git" icon:git-branch
 El plugin de Git detecta si la raíz del proyecto es un repositorio Git válido. Si no se dispone de historial Git, desactiva automáticamente la marca de tiempo en el pie de página.
-::: /callout
+:::
 
 ::: callout info title:"Soporte de paquetes OKF" icon:info
 El plugin `@docmd/plugin-okf` genera un paquete en formato Open Knowledge Format (`site/okf/`) con manifiestos tipados y archivos de conceptos para agentes de IA. Está activo por defecto; configure `"plugins": { "okf": false }` para desactivarlo. Consulte [Plugin de paquetes OKF](okf.md) para más detalles.
-::: /callout
+:::
 
 ## Plugins opcionales
 
@@ -84,7 +84,7 @@ El autoinstalador:
 
 ::: callout tip title:"Resolución robusta de módulos" icon:shield-check
 El autoinstalador utiliza importaciones dinámicas de módulos ES con rutas de resolución alternativas, permitiendo cargar paquetes ESM que declaren mapas `exports` explícitos.
-::: /callout
+:::
 
 ## Plugins personalizados y de terceros
 

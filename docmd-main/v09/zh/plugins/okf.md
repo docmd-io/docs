@@ -25,18 +25,18 @@ OKF 将知识架构规范化为一个包含 YAML 清单、Markdown 概念文件�
 
 ```text
 site/okf/
-├── okf.yaml              ← 清单摘要文件
-├── index.md              ← 按类型分组的概念目录
-├── graph/                ← 交互式图谱资源（仅当 graph: true 时生成）
-│   ├── index.html        ← 力导向图谱可视化器
-│   ├── graph.json        ← 图形节点与边数据
-│   ├── graph.js          ← 独立图形运行时
-│   └── graph.css         ← 主题感知的样式文件
+├── okf.yaml  # 清单摘要文件
+├── index.md  # 按类型分组的概念目录
+├── graph/  # 交互式图谱资源（仅当 graph: true 时生成）
+│   ├── index.html  # 力导向图谱可视化器
+│   ├── graph.json  # 图形节点与边数据
+│   ├── graph.js  # 独立图形运行时
+│   └── graph.css  # 主题感知的样式文件
 ├── concepts/
-│   └── <slug>.md         ← 独立概念 Markdown 文件
+│   └── <slug>.md  # 独立概念 Markdown 文件
 └── _meta/
-    ├── bundle.json       ← okf.yaml 的 JSON 镜像
-    └── lint-report.txt   ← 构建 Linting 报告
+    ├── bundle.json  # okf.yaml 的 JSON 镜像
+    └── lint-report.txt  # 构建 Linting 报告
 ```
 
 ## 默认构建行为
@@ -116,12 +116,12 @@ OKF 插件会在编译期间自动加载：
 输出目录结构：
 
 ```text
-site/okf/                    ← 默认语言（根目录）
+site/okf/  # 默认语言（根目录）
 ├── okf.yaml
 ├── index.md
 └── concepts/
 
-site/okf/de/                 ← 德语（嵌套）
+site/okf/de/  # 德语（嵌套）
 ├── okf.yaml
 └── concepts/
 ```
@@ -143,11 +143,18 @@ okf: false # 仅从 OKF 知识包中排除该页面
 
 插件使用自顶向下的优先级确定概念类型：
 
-1. `frontmatter.okf.type` — 嵌套显式声明。
-2. `frontmatter.type` — 顶层显式声明。
-3. `frontmatter.okfType` — 旧版别名。
+1. `frontmatter.okf.type`, 嵌套显式声明。
+2. `frontmatter.type`, 顶层显式声明。
+3. `frontmatter.okfType`, 旧版别名。
 4. **路径前缀推断**: 针对 `/guides/`、`/api/`、`/reference/`、`/concepts/` 等路径自动映射。
 5. `defaultType` 回退 (`'concept'`)。
+
+## 概念元数据与标签解析
+
+OKF 插件直接从每个页面的 Frontmatter 提取丰富的元数据并写入 `site/okf/okf.yaml` 与 `site/okf/_meta/bundle.json`：
+
+* **概念描述**: 页面的 `description` 属性会直接包含在 `okf.yaml` 和 `bundle.json` 的每个概念条目中，方便 AI 智能体直接基于摘要定位内容，无需逐一解析各个 Markdown 文件。
+* **从 `tags` 与 `keywords` 提取标签**: 插件会自动整合 Frontmatter 中的 `tags` 与 `keywords` 属性。同时支持字符串数组（如 `["api", "auth"]`）与逗号分隔的字符串（如 `"api, auth"`），并自动完成不区分大小写的去重处理。
 
 ::: callout tip "知识图谱可视化" icon:git-fork
 在 OKF 插件配置中启用 `graph: true`，以生成可交互的力导向图谱可视化页面 (`site/okf/graph/index.html`)，映射交叉引用和概念关联。

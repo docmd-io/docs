@@ -20,10 +20,6 @@ El contenedor `tag` es un componente de autocierre que inyecta insignias compact
 | **Iconografía** | `icon:NOMBRE` | Agrega un icono de [Lucide](external:https://lucide.dev/icons) dentro de la insignia. |
 | **URL de Hipervínculo** | `url:URL` | Convierte la insignia en un enlace. Anteponga `external:` para nueva pestaña. |
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
-
 
 ## Ejemplos de uso
 

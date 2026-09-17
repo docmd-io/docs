@@ -44,7 +44,7 @@ Actualmente se distribuyen los siguientes paquetes según la plataforma:
 
 ::: callout info title:"Retirada elegante automática" icon:info
 Si su entorno no dispone de un binario precompilado, el motor emitirá un aviso informativo y **volverá automáticamente** al motor JavaScript de alto rendimiento. Sus compilaciones permanecen siempre garantizadas y deterministas.
-::: /callout
+:::
 
 ## Capacidades y consideraciones estratégicas
 
@@ -62,7 +62,7 @@ Para obtener el máximo provecho, es fundamental comprender sus características
 La comunicación entre el orquestador central de docmd y el motor nativo de Rust transfiere cadenas JSON a través de la frontera N-API:
 
 ```text
-Worker JS → JSON.stringify() → Límite NAPI → Deserialización Serde → [Tarea Rust] → Serialización Serde → Límite NAPI → JSON.parse()
+Worker JS -> JSON.stringify() -> Límite NAPI -> Deserialización Serde -> [Tarea Rust] -> Serialización Serde -> Límite NAPI -> JSON.parse()
 ```
 
 Para operaciones dominadas por E/S (como consultar Git o leer archivos de disco), el tiempo ganado compensa con creces el coste de la conversión de texto.

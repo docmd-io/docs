@@ -28,10 +28,6 @@ description: "在 docmd 中将有序列表和编号步骤转换为高视觉冲�
 | **子容器包装** | `::: step` ... `::: /step` | 显式步骤子容器。传统有序列表（`1.`、`2.`）语法亦获完全支持。 |
 | **闭合标签** | `::: /steps`, `::: /step`, `:::` | 支持显式命名闭合标签或通用 `:::` 闭合标记。 |
 
-::: callout info "v0.9.1+ 容器语法标准化" icon:sparkles
-自 **v0.9.1** 起，`docmd` 引入了显式的容器开启与闭合标签（例如 `::: card` ... `::: /card`、`::: tab` ... `::: /tab`）、显式的键值对属性（`title:"..."`、`url:"..."`）以及末尾的 `# 注释`。推荐在编写新文档时采用此现代语法。同时，对传统子块标记（`== tab`、`1.`）和位置参数退避逻辑的向下兼容将被严格保留。
-:::
-
 
 ## 使用示例
 
@@ -76,7 +72,7 @@ description: "在 docmd 中将有序列表和编号步骤转换为高视觉冲�
 
 ::: callout info title:"IDE 提示"
 使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
-::: /callout
+:::
 ::: /step
 
 ::: step "生成生产构建"
@@ -99,7 +95,7 @@ npx @docmd/core build
 
 ::: callout info "IDE 提示"
 使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
-::: /callout
+:::
 ::: /step
 
 ::: step "生成生产构建"

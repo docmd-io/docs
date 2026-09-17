@@ -7,7 +7,7 @@ description: "Despliega sitios de documentación estática de docmd en el alojam
 
 ## Pasos de configuración en el panel de control
 
-1. Navega a **Workers & Pages → Create → Pages** en el panel de control de Cloudflare.
+1. Navega a **Workers & Pages : Create : Pages** en el panel de control de Cloudflare.
 2. Vincula la cuenta de tu proveedor de Git y selecciona el repositorio de destino.
 3. Configura las variables de compilación:
 
@@ -21,7 +21,7 @@ description: "Despliega sitios de documentación estática de docmd en el alojam
 
 ## Configuración de dominios personalizados
 
-Añade dominios personalizados en **Pages → Project → Custom domains**. Los certificados TLS se aprovisionan automáticamente.
+Añade dominios personalizados en **Pages : Project : Custom domains**. Los certificados TLS se aprovisionan automáticamente.
 
 Establece la propiedad `url` en `docmd.config.json` para que coincida con tu dominio:
 

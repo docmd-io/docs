@@ -24,7 +24,7 @@ To explicitly instruct docmd to utilise the JavaScript backend, define the `engi
 
 The JavaScript engine is exceptionally versatile. It shines under the following conditions:
 
-- **Standard Repositories**: Sites containing up to several hundred pages build extremely fast. It leverages optimised JIT compilation and native JSON parsing.
+- **Standard Repositories**: Sites containing up to several hundred pages build extremely fast. It uses optimised JIT compilation and native JSON parsing.
 - **Maximum Portability**: If your team uses diverse operating systems or restricted enterprise networks, the JavaScript engine guarantees flawless builds everywhere.
 - **Rapid Prototyping**: Local development builds benefit from instantaneous hot-reloading (`npx @docmd/core dev`) with low initialisation latency.
 - **Custom Scripting**: Configuration fallbacks and plugin integrations execute naturally within JavaScript. Standard string parsing avoids cross-boundary serialisation costs.

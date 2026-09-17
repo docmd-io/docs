@@ -20,11 +20,6 @@ Inhaltsblock mit Unterstützung für Markdown, Code-Snippets, Buttons und Callou
 | **Titel** | `"String"` \| `title:"..."` | Optionaler Header-Titel oben im Kartenrahmen (1. positionaler Parameter oder `title:"..."`). |
 | **Symbolik** | `icon:NAME` | Optional. Fügt ein [Lucide](external:https://lucide.dev/icons)-Symbol neben dem Titeltext ein. |
 | **Markdown-Inhalt** | Freitext | Unterstützt beliebige Markdown-Elemente, Codeblöcke, Listen, Buttons und verschachtelte Container. |
-| **Schließ-Tags** | `::: /card`, `:::` | Unterstützt explizit benanntes Schließ-Tag `::: /card` oder generisches `:::`. |
-
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
 
 
 ## Anwendungsbeispiele

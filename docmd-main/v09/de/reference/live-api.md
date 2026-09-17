@@ -3,7 +3,7 @@ title: "Live-Editor"
 description: "Verstehen Sie den docmd Live-Editor und seinen browserbasierten Authoring-Workflow."
 ---
 
-Der docmd Live-Editor ist eine dedizierte Umgebung für das Echtzeit-Authoring von Dokumentation. Er verwendet den isomorphen Core, um eine sofortige, nebeneinander liegende Vorschau Ihrer Markdown-Inhalte zu bieten — ohne Backend-Build-Prozess.
+Der docmd Live-Editor ist eine dedizierte Umgebung für das Echtzeit-Authoring von Dokumentation. Er verwendet den isomorphen Core, um eine sofortige, nebeneinander liegende Vorschau Ihrer Markdown-Inhalte zu bieten, ohne Backend-Build-Prozess.
 
 ## Editor starten
 

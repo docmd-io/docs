@@ -44,7 +44,7 @@ The following platform packages are currently distributed:
 
 ::: callout info title:"Transparent Graceful Fallback" icon:info
 If your environment lacks an available pre-built binary, the engine logs a non-fatal notification and **automatically falls back** to the high-performance JavaScript engine. Your builds remain fully deterministic.
-::: /callout
+:::
 
 ## Capabilities & Strategic Limitations
 
@@ -62,7 +62,7 @@ To achieve maximum utility, you must understand its architectural trade-offs. Th
 Communication between docmd's core orchestrator and the native Rust engine relies on stringified JSON passing across the N-API runtime boundary:
 
 ```text
-JS Worker → JSON.stringify() → NAPI Boundary → Serde Deserialisation → [Rust Task] → Serde Serialisation → NAPI Boundary → JSON.parse()
+JS Worker -> JSON.stringify() -> NAPI Boundary -> Serde Deserialisation -> [Rust Task] -> Serde Serialisation -> NAPI Boundary -> JSON.parse()
 ```
 
 For I/O-heavy operations like querying Git histories or reading disk buffers, the processing time saved vastly outweighs the string conversion cost. 

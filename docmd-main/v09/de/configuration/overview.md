@@ -6,16 +6,19 @@ description: "Meistern Sie docmd.config.json zur Verwaltung von Branding, Websit
 Die Datei `docmd.config.json` dient als zentrales Konfigurationsmanifest für Ihren Dokumentations-Workspace. Sie verwaltet Website-Branding, Navigations-Sidebars, Lokalisierungsparameter und Optionen des statischen Website-Compilers.
 
 ## Konfigurations-Schema-Formate
+ 
+`docmd` unterstützt `docmd.config.jsonc` und `docmd.config.json`. Beide Formate unterstützen einzeilige (`//`) Kommentare, mehrzeilige (`/* */`) Kommentare und nachgestellte Kommas (trailing commas):
 
-JSON ist das primäre Konfigurationsformat, das eine hochperformante Serialisierung über Worker-Threads hinweg bei parallelen Builds ermöglicht:
-
-```json "docmd.config.json"
+```jsonc "docmd.config.jsonc"
 {
+  // Website-Branding und kanonische Adresse
   "title": "Meine Technische Dokumentation",
   "url": "https://docs.example.com",
+
+  /* Quell- und Build-Ausgabeverzeichnisse */
   "src": "docs",
   "out": "site",
-  "base": "/"
+  "base": "/",
 }
 ```
 
@@ -56,13 +59,21 @@ Diese Top-Level-Eigenschaften konfigurieren Basispfade und globale Compiler-Opti
 | `out` | `String` | `"site"` | Relativer Pfad, in dem der Compiler das statische Produktionspaket generiert. |
 | `base` | `String` | `"/"` | Root-URL-Pfadpräfix (z. B. `/docs/` bei Hosting in einem Unterordner). |
 | `tmp` | `String` | `null` | Temporäres Build-Cache-Verzeichnis. Standardmäßig ein isolierter System-Temp-Ordner. |
+| `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` (Standard-JavaScript-Engine) oder `"rust"` (nativer Beschleuniger via `@docmd/engine-rust`). |
 | `i18n` | `Object` | `null` | Mehrsprachigkeitsparameter. Siehe den [Lokalisierungs-Leitfaden](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Konfigurationsmap für Standard- und Drittanbieter-Plugins. Siehe [Plugins-Leitfaden](../plugins/usage.md). |
-| `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` oder `"rust"` (Alpha-Vorschau). |
+
+::: callout info title:"Abwärtskompatibilität" icon:history
+`docmd` bewahrt 100%ige Abwärtskompatibilität für ältere Konfigurationsmanifeste:
+- Ältere Root-Schlüssel (`siteTitle`, `siteUrl`, `srcDir`, `outputDir`) werden nahtlos auf moderne Schlüssel (`title`, `url`, `src`, `out`) abgebildet.
+- `customJs` und `customCss` werden in `theme.customJs` und `theme.customCss` überführt.
+- `htmlPolicy` wird auf `security.html` abgebildet.
+- `focusMode` und `print` auf Root-Ebene werden auf `layout.focusMode` und `layout.print` abgebildet.
+:::
 
 ## Branding & Identität
 
-Konfigurieren Sie Marken-Logos und Browser-Favicons in `docmd.config.json`:
+Konfigurieren Sie Marken-Logos, Browser-Favicons sowie benutzerdefinierte Stylesheets oder Skripte:
 
 ```json "docmd.config.json"
 {
@@ -73,13 +84,23 @@ Konfigurieren Sie Marken-Logos und Browser-Favicons in `docmd.config.json`:
     "alt": "Unternehmens-Logo",
     "height": "32px"
   },
-  "favicon": "assets/favicon.ico"
+  "favicon": "assets/favicon.ico",
+  "theme": {
+    "name": "default",
+    "appearance": "system",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback.js"
+    ]
+  }
 }
 ```
 
 ## UI-Layout und Verhalten
 
-Konfigurieren Sie Header, Sidebars, Suchplatzierung und Theme-Umschalter:
+Konfigurieren Sie Header, Sidebars, Suchplatzierung, Theme-Umschalter und Lese-Werkzeuge:
 
 ```json "docmd.config.json"
 {
@@ -98,6 +119,15 @@ Konfigurieren Sie Header, Sidebars, Suchplatzierung und Theme-Umschalter:
         "search": true,
         "themeSwitch": true
       }
+    },
+    "focusMode": false,
+    "print": false,
+    "copyCode": true,
+    "pageNavigation": true,
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
     }
   }
 }
@@ -105,18 +135,19 @@ Konfigurieren Sie Header, Sidebars, Suchplatzierung und Theme-Umschalter:
 
 Weitere Informationen finden Sie im Leitfaden für [Layout & UI-Zonen](./layout-ui.md).
 
-## Kern-Compiler-Optionen
+## Content- & Sicherheitsrichtlinien
 
-Feinabstimmung der Analyse und Transformation Ihrer Markdown-Inhalte durch `docmd`:
+Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
 
 ```json "docmd.config.json"
 {
   "minify": true,
   "autoTitleFromH1": true,
-  "copyCode": true,
-  "pageNavigation": true,
   "markdown": {
     "breaks": true
+  },
+  "security": {
+    "html": "allow"
   }
 }
 ```
@@ -125,9 +156,12 @@ Feinabstimmung der Analyse und Transformation Ihrer Markdown-Inhalte durch `docm
 | :--- | :--- | :--- | :--- |
 | `minify` | `Boolean` | `true` | Minimiert kompilierte HTML-, CSS- und JS-Assets für maximale Ladeleistung. |
 | `autoTitleFromH1` | `Boolean` | `true` | Verwendet die erste `# H1`-Überschrift des Dokuments als Titel, wenn `title` im Frontmatter fehlt. |
-| `copyCode` | `Boolean` | `true` | Rendert eine "Code kopieren"-Schaltfläche auf syntax-hervorgehobenen Codeblöcken. |
-| `pageNavigation` | `Boolean` | `true` | Rendert "Vorherige" und "Nächste" Navigationslinks am Ende von Artikeln. |
 | `markdown.breaks` | `Boolean` | `true` | Wandelt weiche Zeilenumbrüche in Umbrüche um. Auf `false` setzen, wenn Text manuell bei 80 Spalten umgebrochen wird. |
+| `security.html` | `String` | `"allow"` | HTML-Bereinigungsmodus: `"allow"`, `"escape"` oder `"strip"`. Siehe [Sicherheitsleitfaden](./security.md). |
+| `layout.copyCode` | `Boolean` | `true` | Rendert eine "Code kopieren"-Schaltfläche auf syntax-hervorgehobenen Codeblöcken. |
+| `layout.pageNavigation` | `Boolean` | `true` | Rendert "Vorherige" und "Nächste" Navigationslinks am Ende von Artikeln. |
+| `layout.focusMode` | `Boolean` | `false` | Aktiviert den ablenkungsfreien Fokus-Modus mit Tastenkombinationen (`Alt+F`). |
+| `layout.print` | `Boolean` | `false` | Aktiviert die Druckschaltfläche in der Artikel-Aktionsleiste und in der Fokus-Toolbar. |
 
 ::: callout info "Git-Integration ersetzt editLink" icon:git-branch
 Die eigenständige `editLink`-Konfiguration wurde im nativen [Git-Plugin](../plugins/git.md) vereinheitlicht. Es zeigt Bearbeitungs-Links, Commit-Zeitstempel und Mitwirkenden-Metadaten an.

@@ -25,18 +25,18 @@ Compilation produces the following directory tree:
 
 ```text
 site/okf/
-├── okf.yaml              ← Manifest summary file
-├── index.md              ← Concept catalog grouped by type
-├── graph/                ← Interactive graph assets (when graph: true)
-│   ├── index.html        ← Force-directed graph visualiser
-│   ├── graph.json        ← Graph nodes and edges
-│   ├── graph.js          ← Standalone graph runtime
-│   └── graph.css         ← Theme-aware styling
+├── okf.yaml  # Manifest summary file
+├── index.md  # Concept catalog grouped by type
+├── graph/  # Interactive graph assets (when graph: true)
+│   ├── index.html  # Force-directed graph visualiser
+│   ├── graph.json  # Graph nodes and edges
+│   ├── graph.js  # Standalone graph runtime
+│   └── graph.css  # Theme-aware styling
 ├── concepts/
-│   └── <slug>.md         ← Individual concept Markdown files
+│   └── <slug>.md  # Individual concept Markdown files
 └── _meta/
-    ├── bundle.json       ← JSON mirror of okf.yaml
-    └── lint-report.txt   ← Build linting reports
+    ├── bundle.json  # JSON mirror of okf.yaml
+    └── lint-report.txt  # Build linting reports
 ```
 
 ## Default Build Behaviour
@@ -116,12 +116,12 @@ Configure OKF bundle parameters in `docmd.config.json`:
 Output directory structure:
 
 ```text
-site/okf/                    ← Default locale (root)
+site/okf/  # Default locale (root)
 ├── okf.yaml
 ├── index.md
 └── concepts/
 
-site/okf/de/                 ← German locale (nested)
+site/okf/de/  # German locale (nested)
 ├── okf.yaml
 └── concepts/
 ```
@@ -143,11 +143,18 @@ To exclude a page globally across sitemaps, search, LLM files, and OKF, set `noi
 
 The plugin determines concept types using top-down precedence:
 
-1. `frontmatter.okf.type` — Nested explicit declaration.
-2. `frontmatter.type` — Top-level explicit declaration.
-3. `frontmatter.okfType` — Legacy alias.
+1. `frontmatter.okf.type`, Nested explicit declaration.
+2. `frontmatter.type`, Top-level explicit declaration.
+3. `frontmatter.okfType`, Legacy alias.
 4. **Path-prefix inference**: Automatic mapping for `/guides/`, `/api/`, `/reference/`, `/concepts/`, etc.
 5. `defaultType` fallback (`'concept'`).
+
+## Concept Metadata & Tag Resolution
+
+The OKF plugin extracts rich metadata directly from each page's frontmatter into `site/okf/okf.yaml` and `site/okf/_meta/bundle.json`:
+
+* **Concept Descriptions**: Page `description` frontmatter is included on each concept entry in `okf.yaml` and `bundle.json`, enabling AI agents to scan summaries without opening every individual Markdown file.
+* **Tag Extraction from `tags` and `keywords`**: Tags are extracted from both `tags` and `keywords` frontmatter properties. Both string arrays (`["api", "auth"]`) and comma-separated strings (`"api, auth"`) are supported, with automatic case-insensitive deduplication.
 
 ::: callout tip "Knowledge Graph Visualisation" icon:git-fork
 Enable `graph: true` in your OKF plugin configuration to produce interactive force-directed graph visualisations (`site/okf/graph/index.html`) mapping cross-references and concept relationships.

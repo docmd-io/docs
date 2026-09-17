@@ -42,8 +42,8 @@ my-project/
 
 ### 2. 隔离的子目录
 非当前版本会自动构建到与其 `id` 匹配的子文件夹中。
-*   `v2 (Current)` → `mysite.com/`
-*   `v1` → `mysite.com/v1/`
+*   `v2 (Current)` : `mysite.com/`
+*   `v1` : `mysite.com/v1/`
 
 ### 3. 粘性切换（路径保留）
 

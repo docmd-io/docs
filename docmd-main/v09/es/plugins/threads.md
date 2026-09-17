@@ -71,8 +71,8 @@ El texto con discusiones asociadas recibe <span class="threads-preview-highlight
     <div class="threads-preview-meta"><strong>Bob</strong>&nbsp;·&nbsp;hace 1d</div>
     <div class="threads-preview-body">Buena idea. Agregaré un diagrama de flujo con Mermaid. ¿Sirve <code>sequenceDiagram</code> aquí?</div>
     <div class="threads-preview-reactions">
-      <div class="threads-preview-reaction">👍 <span>2</span></div>
-      <div class="threads-preview-reaction">🚀 <span>1</span></div>
+      <div class="threads-preview-reaction">+1 <span>2</span></div>
+      <div class="threads-preview-reaction">Idea <span>1</span></div>
     </div>
   </div>
   <div class="threads-preview-comment threads-preview-reply">
@@ -103,7 +103,7 @@ Las discusiones resueltas se muestran atenuadas:
 <div class="threads-preview-card threads-preview-card-resolved">
   <div class="threads-preview-comment">
     <div class="threads-preview-avatar">A</div>
-    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;hace 5d&nbsp;&nbsp;<span class="threads-preview-resolved-badge">✓ Resuelto</span></div>
+    <div class="threads-preview-meta"><strong>Alice</strong>&nbsp;·&nbsp;hace 5d&nbsp;&nbsp;<span class="threads-preview-resolved-badge">Resuelto</span></div>
     <div class="threads-preview-body">Se corrigió el error tipográfico en el ejemplo de configuración.</div>
   </div>
   <div class="threads-preview-footer">
@@ -111,7 +111,7 @@ Las discusiones resueltas se muestran atenuadas:
   </div>
 </div>
 
-Una pestaña deslizante anclada a la derecha <span class="threads-preview-fab">💬<span class="threads-preview-fab-badge">2</span></span> reposa en el borde de la pantalla mostrando el número de hilos pendientes. Al pasar el cursor sobre cualquier texto resaltado, aparece una tarjeta de vista previa integrada directamente en el contenido, mientras que al pulsar la pestaña se despliega el panel lateral de discusión. Los hilos se conservan permanentemente entre aperturas y cierres del panel sin necesidad de recargar la página.
+Una pestaña deslizante anclada a la derecha <span class="threads-preview-fab"><span class="threads-preview-fab-badge">2</span></span> reposa en el borde de la pantalla mostrando el número de hilos pendientes. Al pasar el cursor sobre cualquier texto resaltado, aparece una tarjeta de vista previa integrada directamente en el contenido, mientras que al pulsar la pestaña se despliega el panel lateral de discusión. Los hilos se conservan permanentemente entre aperturas y cierres del panel sin necesidad de recargar la página.
 
 ## Formato de almacenamiento en Markdown
 

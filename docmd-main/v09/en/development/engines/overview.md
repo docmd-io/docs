@@ -40,7 +40,7 @@ Both engines share a rigorous execution boundary. The core API layer enforces un
 ### Shared Capabilities
 - **Thread Isolation**: Engines execute asynchronous tasks securely inside isolated worker threads. This prevents blocking the primary server loop.
 - **Task Verification**: Strict allowlists prevent unauthorised disk access or unverified execution patterns.
-- **Seamless Interoperability**: Plugins request data via standardised interfaces (`runWorkerTask`). They remain unaware of the underlying backend.
+- **Direct Interoperability**: Plugins request data via standardised interfaces (`runWorkerTask`). They remain unaware of the underlying backend.
 
 ### Architectural Limitations
 - **Serialisation Overhead**: Data crosses native runtime boundaries (N-API). Highly iterative tasks passing large JSON objects incur a small serialisation penalty.

@@ -16,7 +16,7 @@ El archivo `netlify.toml` emitido configura entornos de compilación, directorio
 * **Comando de compilación**: Ejecuta `npm install @docmd/core && npx @docmd/core build`.
 * **Directorio de publicación**: Sincronizado con `config.out` (`site`).
 * **Políticas de cabeceras**: Aplica almacenamiento en caché inmutable para recursos estáticos y reglas de no almacenamiento para entradas HTML.
-* **Reglas de redirección**: Configura reescrituras de `/*` → `/index.html` cuando `layout.spa: true`.
+* **Reglas de redirección**: Configura reescrituras de `/*` : `/index.html` cuando `layout.spa: true`.
 
 ```toml "netlify.toml"
 [build]

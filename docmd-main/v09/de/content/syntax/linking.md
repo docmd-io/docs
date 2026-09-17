@@ -3,7 +3,7 @@ title: "Verlinken & Referenzieren"
 description: "Meistern Sie interne Querverweise, URL-Normalisierung, externe Neue-Tab-Auslöser und statische Asset-Referenzen in docmd."
 ---
 
-`docmd` bietet ein dateisystembewusstes Verlinkungssystem. Schreiben Sie Links mit Referenzen auf `.md`-Quelldateien ganz natürlich — der Compiler normalisiert Zielpfade automatisch in saubere, kanonische URLs.
+`docmd` bietet ein dateisystembewusstes Verlinkungssystem. Schreiben Sie Links mit Referenzen auf `.md`-Quelldateien ganz natürlich, der Compiler normalisiert Zielpfade automatisch in saubere, kanonische URLs.
 
 ::: callout info "Automatische Pfadnormalisierung" icon:info
 Schreiben Sie Zielpfade mit `.md`-Erweiterungen, nachgestellten Schrägstrichen oder direkten Dateinamen (`overview.md`, `overview/` oder `overview`). Der Build-Compiler löst sie in identische kanonische URLs auf.

@@ -3,7 +3,7 @@ title: "Assets Management"
 description: "Learn how docmd mirrors CSS, JavaScript, and image assets from source directories to output builds."
 ---
 
-`docmd` uses a "Mirror & Map" architecture for static assets. This ensures local development file paths match compiled production build outputs seamlessly.
+`docmd` uses a "Mirror & Map" architecture for static assets. This ensures local development file paths match compiled production build outputs smoothly.
 
 ## Directory Structure
 
@@ -38,9 +38,9 @@ Link custom stylesheet or script assets across all pages via theme configuration
 ```json "docmd.config.json"
 {
   "theme": {
-    "customCss": ["/assets/css/branding.css"]
-  },
-  "customJs": ["/assets/js/analytics.js"]
+    "customCss": ["/assets/css/branding.css"],
+    "customJs": ["/assets/js/analytics.js"]
+  }
 }
 ```
 

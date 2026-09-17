@@ -20,7 +20,7 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 }
 ```
 
-`default` 本地化版本渲染在站点根路径（`/`）。所有其他本地化版本渲染在 `/{id}/` 下。您可以选择 ID、标签以及哪种语言是默认 —— 这里没有硬编码的假设。如果您希望将印地语设为默认，只需设置 `default: 'hi'`，印地语就会渲染在 `/`，而英语渲染在 `/en/`。
+`default` 本地化版本渲染在站点根路径（`/`）。所有其他本地化版本渲染在 `/{id}/` 下。您可以选择 ID、标签以及哪种语言是默认：这里没有硬编码的假设。如果您希望将印地语设为默认，只需设置 `default: 'hi'`，印地语就会渲染在 `/`，而英语渲染在 `/en/`。
 
 | 键 | 类型 | 说明 |
 |:----|:-----|:------------|
@@ -44,19 +44,19 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 默认本地化版本没有 URL 前缀。非默认本地化版本嵌套在 `/{id}/` 下。与 [版本管理](../versioning.md) 结合使用时，URL 为 `/{locale}/{version}/page`。
 
 ```
-/                       ← 默认本地化版本，当前版本
-/getting-started        ← 默认本地化版本页面
-/05/                    ← 默认本地化版本，旧版本
-/hi/                    ← 非默认本地化版本，当前版本
-/hi/getting-started     ← 非默认本地化版本页面
-/hi/05/                 ← 非默认本地化版本，旧版本
+/  # 默认本地化版本，当前版本
+/getting-started  # 默认本地化版本页面
+/05/  # 默认本地化版本，旧版本
+/hi/  # 非默认本地化版本，当前版本
+/hi/getting-started  # 非默认本地化版本页面
+/hi/05/  # 非默认本地化版本，旧版本
 ```
 
 切换语言时会保留您当前的页面与版本。切换版本时会保留您当前的本地化版本。
 
 ## 缺失的本地化目录
 
-如果在 `locales` 中声明了某个本地化版本，但其源目录不存在（例如没有 `docs/hi/` 文件夹），docmd 会自动在语言切换器中**禁用**该本地化版本。该本地化版本仍会出现在下拉列表中 —— 带有 "N/A" 徽标和灰色样式 —— 但点击不会生效。
+如果在 `locales` 中声明了某个本地化版本，但其源目录不存在（例如没有 `docs/hi/` 文件夹），docmd 会自动在语言切换器中**禁用**该本地化版本。该本地化版本仍会出现在下拉列表中：带有 "N/A" 徽标和灰色样式：但点击不会生效。
 
 这可以避免在内容就绪之前列出已规划语言时出现 404 错误。
 
@@ -82,7 +82,7 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 
 ## 字符串模式（仅适用于 noStyle 页面）
 
-标准 i18n 使用每个本地化版本一个目录（`docs/en/`、`docs/hi/`），每个目录有自己的 Markdown 文件。**字符串模式** 是一种更简单的替代方案，专为 [noStyle 页面](../../content/no-style-pages.md) 设计 —— 即使用原始 HTML 而非 Markdown 的页面。
+标准 i18n 使用每个本地化版本一个目录（`docs/en/`、`docs/hi/`），每个目录有自己的 Markdown 文件。**字符串模式** 是一种更简单的替代方案，专为 [noStyle 页面](../../content/no-style-pages.md) 设计：即使用原始 HTML 而非 Markdown 的页面。
 
 ```json "docmd.config.json"
   "i18n": {
@@ -100,22 +100,22 @@ description: "以本地化优先的路由、翻译后的导航与自动回退，
 1. 源文件保持在根 `docs/` 目录中（无本地化子目录）
 2. 默认本地化版本照常构建在 `/`
 3. 对于每个非默认本地化版本，docmd 克隆渲染后的 HTML，并使用 `assets/i18n/{locale}.json` 中的 JSON 文件进行**服务端字符串替换**
-4. 输出进入 `/{locale}/` —— 例如 `/zh/index.html` —— 并附带完整的 SEO（hreflang 标签、正确的 `lang` 属性）
+4. 输出进入 `/{locale}/`：例如 `/zh/index.html`：并附带完整的 SEO（hreflang 标签、正确的 `lang` 属性）
 5. 若翻译文件缺失，页面会使用默认语言文本渲染
 
 关于 `data-i18n` 属性语法与 JSON 文件格式的完整细节，请参阅 [noStyle 字符串替换](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle)。
 
 ::: callout warning "字符串模式不会翻译 Markdown 内容" icon:info
-字符串替换的工作原理是在渲染后的 HTML 中查找 `data-i18n` 属性。标准 Markdown 内容（`## Heading`、段落、列表）会渲染为不带这些属性的纯 HTML 标签 —— 因此替换器无内容可查找。
+字符串替换的工作原理是在渲染后的 HTML 中查找 `data-i18n` 属性。标准 Markdown 内容（`## Heading`、段落、列表）会渲染为不带这些属性的纯 HTML 标签：因此替换器无内容可查找。
 
-- **文档站点** → 使用目录模式（默认）。每个本地化版本拥有自己的 Markdown 文件，包含完整翻译的正文。
-- **落地页、营销站点、Dashboard** → 使用字符串模式。这些是 noStyle 页面，具有自定义 HTML，您可以控制每个标签并添加 `data-i18n` 属性。
+- **文档站点** : 使用目录模式（默认）。每个本地化版本拥有自己的 Markdown 文件，包含完整翻译的正文。
+- **落地页、营销站点、Dashboard** : 使用字符串模式。这些是 noStyle 页面，具有自定义 HTML，您可以控制每个标签并添加 `data-i18n` 属性。
 
-如果您的站点同时包含两者 —— 例如，noStyle 落地页加文档 —— 请对文档使用目录模式，并对您的 noStyle 页面添加 `data-i18n` 属性。字符串模式会翻译 noStyle HTML，而目录模式处理文档内容。
+如果您的站点同时包含两者：例如，noStyle 落地页加文档：请对文档使用目录模式，并对您的 noStyle 页面添加 `data-i18n` 属性。字符串模式会翻译 noStyle HTML，而目录模式处理文档内容。
 :::
 
 ## 后续步骤
 
-- [翻译后的内容](translated-content.md) —— 目录结构、撰写翻译、导航
-- [UI 字符串与 SEO](ui-strings.md) —— 自定义系统文本、hreflang 标签
-- [noStyle 字符串替换](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle) —— noStyle 页面的 `data-i18n` 属性语法与 JSON 格式
+- [翻译后的内容](translated-content.md):, 目录结构、撰写翻译、导航
+- [UI 字符串与 SEO](ui-strings.md):, 自定义系统文本、hreflang 标签
+- [noStyle 字符串替换](../../content/no-style-pages.md#string-replacement-i18n-for-nostyle):, noStyle 页面的 `data-i18n` 属性语法与 JSON 格式

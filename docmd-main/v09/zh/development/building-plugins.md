@@ -58,13 +58,13 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
 
 在静态生产构建（`docmd build`）期间，docmd 会自动跳过前端脚本与样式的注入，但继续运行 Markdown 解析扩展钩子（`markdownSetup`）。这样既保证最终生产静态站点极度轻量且无缺失后端的控制台报错，又保证 Markdown 容器语法能够正常解析。用户也可以在站点配置中通过 `devOnly: false`（或 `liveOnly: false`）灵活覆盖此行为。
 
-引擎具有相同的 `docmd` 命名空间，但**没有 `capabilities`** —— 它们 不参与钩子系统，只参与引擎加载器。
+引擎具有相同的 `docmd` 命名空间，但**没有 `capabilities`**：它们 不参与钩子系统，只参与引擎加载器。
 
 构建时交叉检查（同样在 0.8.9 中新增）会发现 JS 描述符与清单之间的 漂移，包括以前不可见的"实现了钩子但未声明能力"的静默丢弃问题。
 
 ::: callout warning title:"0.9.0 中将移除打包的注册表"
-过去作为官方插件目录的手动维护的 `packages/plugins/installer/registry/plugins.json` 从 0.8.9 起已**弃用**，将在 **0.9.0 中移除**。构建时注册表生成器现在是唯一的真相来源 —— 您的插件只需在 `package.json` 中具有正确的 `docmd` 命名空间，生成器就会在下一次 `pnpm build` `@docmd/api` 时拾取它。现有官方插件无需任何代码更改。
-::: /callout
+过去作为官方插件目录的手动维护的 `packages/plugins/installer/registry/plugins.json` 从 0.8.9 起已**弃用**，将在 **0.9.0 中移除**。构建时注册表生成器现在是唯一的真相来源：您的插件只需在 `package.json` 中具有正确的 `docmd` 命名空间，生成器就会在下一次 `pnpm build` `@docmd/api` 时拾取它。现有官方插件无需任何代码更改。
+:::
 
 ## 核心能力
 
@@ -85,7 +85,7 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
 | `translations`| `translations` | i18n |
 | `template` *(0.8.7 新增)* | `templates`, `templateAssets` | 渲染 |
 
-> **注意：** `template` 能力是独占的 —— 如果一个插件声明了它，就不能再声明 `head`、`build`、`post-build` 等。模板仅提供插槽和资源；它们不运行生命周期钩子。如果您需要两者，请发布两个独立的包。
+> **注意：** `template` 能力是独占的：如果一个插件声明了它，就不能再声明 `head`、`build`、`post-build` 等。模板仅提供插槽和资源；它们不运行生命周期钩子。如果您需要两者，请发布两个独立的包。
 
 ## 插件 API 参考
 
@@ -101,12 +101,12 @@ docmd 插件是一个标准的 JavaScript 对象，实现以下一个或多个�
 | `translations(localeId)` | 返回给定本地化的翻译字符串对象。 |
 | `actions` | 命名的 action 处理器对象，可通过 WebSocket RPC 调用。 |
 | `events` | 命名的 event 处理器对象，用于浏览器消息。 |
-| `templates[]` *(0.8.7 新增，能力：`template`)* | `TemplateHook` 条目数组 —— 每个 `{ type, templatePath }` 覆盖一个 EJS 插槽。 |
-| `templateAssets[]` *(0.8.7 新增，能力：`template`)* | `TemplateAssetHook` 条目数组 —— 每个 `{ type, path, priority?, position? }` 提供模板的 CSS/JS bundle。 |
+| `templates[]` *(0.8.7 新增，能力：`template`)* | `TemplateHook` 条目数组：每个 `{ type, templatePath }` 覆盖一个 EJS 插槽。 |
+| `templateAssets[]` *(0.8.7 新增，能力：`template`)* | `TemplateAssetHook` 条目数组：每个 `{ type, path, priority?, position? }` 提供模板的 CSS/JS bundle。 |
 
 ### 构建模板插件（0.8.7 新增）
 
-模板是具有 `capabilities: ['template']` 的插件。它提供 `templates[]` 数组（插槽覆盖）和 `templateAssets[]` 数组（CSS/JS bundle）。请参阅专门的 [模板指南](../theming/templates.md) 和 [主题 → 模板](../theming/templates.md) 以获取完整的编写步骤、插槽表和解析链。最小的可行模板如下：
+模板是具有 `capabilities: ['template']` 的插件。它提供 `templates[]` 数组（插槽覆盖）和 `templateAssets[]` 数组（CSS/JS bundle）。请参阅专门的 [模板指南](../theming/templates.md) 和 [主题 : 模板](../theming/templates.md) 以获取完整的编写步骤、插槽表和解析链。最小的可行模板如下：
 
 ```javascript "index.js"
 export default {
@@ -371,9 +371,9 @@ export default {
 
 所有文件操作都沙箱化到项目根目录。
 
-::: callout info title:"仅限开发模式 🛡️"
+::: callout info title:"仅限开发模式 "
 WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间处于活动状态。生产构建不包括 API 客户端或服务端 action 处理。
-::: /callout
+:::
 
 ## 最佳实践
 
@@ -386,11 +386,11 @@ WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间处于活动状态。生�
 7.  **Action 验证**：在您的 actions 中定义并要求显式的 payload schema。
 8.  **日志记录**：在 `onPostBuild` 中使用提供的 `log()` helper 以遵守用户的详细程度设置。
 
-::: callout tip title:"AI 就绪的设计 🤖"
+::: callout tip title:"AI 就绪的设计 "
 docmd 插件 API 是 **LLM 优化的**。由于钩子使用标准 JavaScript 对象，AI 智能体可以以最少的指令生成无错误的插件。
-::: /callout
+:::
 
-## ESM exports — `default` 条件
+## ESM exports: `default` 条件
 
 您的 `package.json` **必须**在 `exports["."]` 中同时包含 `import` 条
 件和 `"default"` 条件:

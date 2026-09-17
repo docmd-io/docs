@@ -3,7 +3,7 @@ title: "Tags"
 description: "Verwenden Sie den Tag-Container, um Versionen, Status zu kennzeichnen oder kurze Textausschnitte inline hervorzuheben."
 ---
 
-Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenförmige Badges inline einfügt. Tags behalten überall ihre kompakten Proportionen — sie übernehmen keine Überschriftengrößen oder umgebenden Textstile.
+Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenförmige Badges inline einfügt. Tags behalten überall ihre kompakten Proportionen, sie übernehmen keine Überschriftengrößen oder umgebenden Textstile.
 
 ## Container-Syntax
 
@@ -19,10 +19,6 @@ Der `tag`-Container ist eine selbstschließende Komponente, die kleine, pillenf�
 | **Hintergrundfarbe** | `color:VALUE` | Wendet Hintergrundfarbe an (CSS-Namen oder Hex). Textkontrast wird berechnet. |
 | **Iconografie** | `icon:NAME` | Fügt ein [Lucide](external:https://lucide.dev/icons)-Icon im Badge hinzu. |
 | **Hyperlink-URL** | `url:URL` | Wandelt Tag in einen Link um. Präfix `external:` öffnet neuen Tab. |
-
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
 
 
 ## Beispiele
@@ -55,7 +51,7 @@ Verwenden Sie Tags für Statusindikatoren über eine Seite hinweg. Farben sind v
 
 ### Verlinkter Tag
 
-Fügen Sie `url:` hinzu, damit ein Tag als Hyperlink fungiert — nützlich für Querverweise auf Release Notes oder externe Ressourcen. Der Wert steht ohne Anführungszeichen, passend zur Konvention der [Buttons](buttons.md).
+Fügen Sie `url:` hinzu, damit ein Tag als Hyperlink fungiert, nützlich für Querverweise auf Release Notes oder externe Ressourcen. Der Wert steht ohne Anführungszeichen, passend zur Konvention der [Buttons](buttons.md).
 
 ```markdown
 Check out the latest ::: tag "Release Notes" icon:external-link url:/de/release-notes/0-8-2.md

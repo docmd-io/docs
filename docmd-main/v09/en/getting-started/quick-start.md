@@ -1,6 +1,7 @@
 ---
 title: "Quick Start"
 description: "Go from an empty directory to a running documentation site in under a minute."
+keywords: ["quickstart", "setup", "cli"]
 ---
 
 Run `docmd` inside any directory containing Markdown files. No configuration file, setup overhead, or framework experience required.

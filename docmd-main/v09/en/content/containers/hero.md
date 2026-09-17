@@ -11,7 +11,7 @@ The `hero` container creates visually striking landing page headers. It handles 
 ::: hero [layout:split|slider] [glow:true|false] # Hero container opener
 ::: slide # Individual carousel slide opener
 # Isomorphic Core Engine
-Renders statically and executes client-side seamlessly.
+Renders statically and runs client-side without full page reloads.
 ::: /slide # Explicit slide closer
 
 ::: slide # Second slide opener
@@ -29,10 +29,6 @@ Structure-aware parsing for LLM agents.
 | **Glow Effect** | `glow:true` \| `glow:false` | Injects a subtle radial gradient glow behind the hero section. |
 | **Sub-Containers** | `::: slide` ... `::: /slide` | Defines individual slides inside a slider layout. Legacy `== slide` is also supported. |
 | **Closing Tags** | `::: /hero`, `::: /slide`, `:::` | Supports explicit named closing tags or generic `:::` closers. |
-
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
 
 
 ## Usage Examples
@@ -71,7 +67,7 @@ Use explicit `::: slide` sub-containers to build an interactive carousel of hero
 ::: hero layout:slider # Interactive slider container
 ::: slide # Panel 1
 # Isomorphic Core Engine
-Renders statically and executes client-side seamlessly.
+Renders statically and runs client-side without full page reloads.
 ::: /slide
 
 ::: slide # Panel 2
@@ -84,7 +80,7 @@ Structure-aware parsing for LLM agents.
 ::: hero layout:slider
 ::: slide
 # Isomorphic Core Engine
-Renders statically and executes client-side seamlessly.
+Renders statically and executes client-side smoothly.
 ::: /slide
 
 ::: slide

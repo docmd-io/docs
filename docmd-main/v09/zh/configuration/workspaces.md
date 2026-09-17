@@ -6,9 +6,9 @@ description: "在 docmd 中从单个仓库构建并部署多项目文档站点�
 工作区允许你从单个仓库构建并部署多个独立的文档项目。每个子项目维护其自己的配置选项，同时继承工作区根目录定义的全局默认值。
 
 ```text
-docs.example.com/           → 主产品文档
-docs.example.com/sdk/       → SDK API 参考
-docs.example.com/cli/       → CLI 工具指南
+docs.example.com/  # 主产品文档
+docs.example.com/sdk/  # SDK API 参考
+docs.example.com/cli/  # CLI 工具指南
 ```
 
 ## 目录搭建
@@ -17,14 +17,14 @@ docs.example.com/cli/       → CLI 工具指南
 
 ```text
 my-docs/
-├── assets/                   ← 共享静态资源（被所有项目继承）
+├── assets/  # 共享静态资源（被所有项目继承）
 ├── main-docs/
-│   ├── docmd.config.json     ← 项目级配置（覆盖根默认值）
-│   └── docs/                 ← 主项目 Markdown 内容
+│   ├── docmd.config.json  # 项目级配置（覆盖根默认值）
+│   └── docs/  # 主项目 Markdown 内容
 ├── sdk-docs/
-│   ├── docmd.config.json     ← SDK 项目配置
-│   └── docs/                 ← SDK 项目 Markdown 内容
-├── docmd.config.json         ← 工作区根配置
+│   ├── docmd.config.json  # SDK 项目配置
+│   └── docs/  # SDK 项目 Markdown 内容
+├── docmd.config.json  # 工作区根配置
 └── package.json
 ```
 
@@ -99,7 +99,7 @@ my-docs/
 
 ::: callout info title:"导航优先级" icon:info
 项目级 `navigation.json` 清单 **始终优先** 于根工作区配置中定义的任何全局 `navigation` 数组。
-::: /callout
+:::
 
 ## 项目切换器 UI
 

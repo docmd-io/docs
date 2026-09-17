@@ -91,8 +91,8 @@ La acción ejecuta internamente el siguiente flujo de trabajo:
 Configura GitHub Pages para desplegar desde **GitHub Actions**:
 
 1. Abre tu repositorio en GitHub.
-2. Navega a **Settings → Pages**.
-3. En **Build and deployment → Source**, selecciona **GitHub Actions**.
+2. Navega a **Settings : Pages**.
+3. En **Build and deployment : Source**, selecciona **GitHub Actions**.
 
 ## Configuración de subrutas y dominios personalizados
 
@@ -114,7 +114,7 @@ Para configurar un dominio personalizado:
 
 1. Añade un archivo `CNAME` que contenga tu nombre de host (por ejemplo, `docs.ejemplo.com`) dentro de `docs/`.
 2. Actualiza la propiedad `url` en `docmd.config.json` para que coincida con tu dominio.
-3. Configura el dominio personalizado en **Settings → Pages → Custom domain**.
+3. Configura el dominio personalizado en **Settings : Pages : Custom domain**.
 
 ::: callout tip "Fijar versiones de la acción" icon:shield-check
 Para entornos de producción, fija los pasos de tu flujo de trabajo a etiquetas de versión explícitas (por ejemplo, `uses: docmd-io/deploy@v1.0.0`) para protegerte contra cambios incompatibles inesperados.

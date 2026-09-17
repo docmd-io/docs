@@ -28,10 +28,6 @@ Contenido del paso 2...
 | **Subcontenedores** | `::: step` ... `::: /step` | Envoltorios de pasos explícitos. La sintaxis de lista ordenada (`1.`, `2.`) es compatible. |
 | **Etiquetas de Cierre** | `::: /steps`, `::: /step`, `:::` | Soporta etiquetas de cierre explícitas o marcadores genéricos `:::`. |
 
-::: callout info "Estandarización de Sintaxis de Contenedores v0.9.1+" icon:sparkles
-A partir de **v0.9.1**, `docmd` introduce etiquetas de apertura y cierre explícitas (ej. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), propiedades clave-valor explícitas (`title:"..."`, `url:"..."`) y comentarios al final `# comentario`. Esta sintaxis modernizada se recomienda para toda nueva documentación. Se mantiene la compatibilidad hacia atrás completa para marcadores heredados (`== tab`, `1.`) y valores posicionales.
-:::
-
 
 ## Ejemplos de Uso
 
@@ -76,7 +72,7 @@ Define opciones de proyecto en `docmd.config.json`.
 
 ::: callout info title:"Pista IDE"
 Usa `defineConfig` para habilitar el autocompletado de IDE para las claves de esquema.
-::: /callout
+:::
 ::: /step
 
 ::: step "Generar Compilación de Producción"
@@ -99,7 +95,7 @@ Define opciones de proyecto en `docmd.config.json`.
 
 ::: callout info "Pista IDE"
 Usa `defineConfig` para habilitar el autocompletado de IDE para las claves de esquema.
-::: /callout
+:::
 ::: /step
 
 ::: step "Generar Compilación de Producción"

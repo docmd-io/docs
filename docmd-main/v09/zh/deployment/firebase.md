@@ -69,7 +69,7 @@ jobs:
           channelId: live
 ```
 
-在您仓库的 **Settings → Secrets** 中使用 Firebase 服务账号 JSON 密钥设置 `FIREBASE_SERVICE_ACCOUNT`。
+在您仓库的 **Settings > Secrets** 中使用 Firebase 服务账号 JSON 密钥设置 `FIREBASE_SERVICE_ACCOUNT`。
 
 ::: callout info "为什么使用 `npx @docmd/core`？"
 在未全局安装 docmd 的 CI/CD 环境中，`npx @docmd/core` 会直接获取并运行该软件包。如果您的项目将 `@docmd/core` 列为 `devDependency`，则在 `npm install` 后运行 `npx @docmd/core build` 即可完美工作。
@@ -77,6 +77,6 @@ jobs:
 
 ## 自定义域名
 
-在 Firebase 控制台中的 **Hosting → Add custom domain** 下添加自定义域名。Firebase 自动配置 SSL。
+在 Firebase 控制台中的 **Hosting > Add custom domain** 下添加自定义域名。Firebase 自动配置 SSL。
 
 将 `docmd.config.json` 中的 `url` 字段设置为与您的域名匹配。这确保规范标签和 sitemap 生成正确的绝对 URL。

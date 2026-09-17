@@ -102,7 +102,7 @@ my-project/
 
 1. **Level 1 (Language Specific)**: `navigation.json` inside a locale folder overrides navigation for that language and version.
 2. **Level 2 (Version Specific)**: `navigation.json` inside a version folder overrides global navigation for that specific release.
-3. **Level 3 (Global Base)**: `navigation` array in `docmd.config.json` serves as the base fallback.
+3. **Level 3 (Global Base)**: `navigation` array in `docmd.config.json` is the base fallback.
 
 ### Broken-Link Failsafe
 

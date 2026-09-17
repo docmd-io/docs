@@ -40,10 +40,10 @@ Konfigurieren Sie PWA-Eigenschaften in `docmd.config.json`:
 
 Das PWA-Plugin wertet Icon-Pfade in folgender Reihenfolge von oben nach unten aus:
 
-1. `plugins.pwa.icons` — Explizites Icon-Array, das in der Konfiguration definiert ist.
-2. `plugins.pwa.logo` — Plugin-spezifischer Icon-Pfad.
-3. `config.logo` — Globaler Site-Logo-Pfad.
-4. `config.favicon` — Globaler Site-Favicon-Pfad.
+1. `plugins.pwa.icons`, Explizites Icon-Array, das in der Konfiguration definiert ist.
+2. `plugins.pwa.logo`, Plugin-spezifischer Icon-Pfad.
+3. `config.logo`, Globaler Site-Logo-Pfad.
+4. `config.favicon`, Globaler Site-Favicon-Pfad.
 
 ::: callout tip "Testen der Offline-Funktionalität" icon:smartphone
 Die Service-Worker-Registrierung ist während der lokalen Entwicklung (`npx @docmd/core dev`) deaktiviert, um zu verhindern, dass zwischengespeicherte Assets Live-Bearbeitungen beeinträchtigen. Um PWA-Funktionen zu testen, bauen Sie die Seite (`npx @docmd/core build`) und stellen Sie das Ausgabeverzeichnis (`site/`) über HTTPS oder localhost bereit.

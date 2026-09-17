@@ -105,11 +105,11 @@ themeConfig: {
 由于 `docmd` 不在客户端执行 Vue，请将自定义组件替换为 `docmd` [容器](../content/containers/callouts.md)。
 
 VitePress 提示框容器 **开箱即用**，无需修改：
-- `:::tip` → 渲染为 `callout tip`
-- `:::warning` → 渲染为 `callout warning`
-- `:::danger` → 渲染为 `callout danger`
-- `:::info` → 渲染为 `callout info`
-- `:::details` → 渲染为 `collapsible`
+- `:::tip` : 渲染为 `callout tip`
+- `:::warning` : 渲染为 `callout warning`
+- `:::danger` : 渲染为 `callout danger`
+- `:::info` : 渲染为 `callout info`
+- `:::details` : 渲染为 `collapsible`
 
 ::: callout success "零修改要求" icon:check-circle
 VitePress 容器语法受原生支持。已有的提示框块和可折叠 details 章节无需编辑 Markdown 文件即可正确渲染。

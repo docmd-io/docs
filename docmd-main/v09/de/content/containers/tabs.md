@@ -28,10 +28,6 @@ Inhalt für Tab 2...
 | **Sub-Container** | `::: tab` ... `::: /tab` | Explizite Tab-Element-Wrapper. Legacy `== tab` Syntax wird ebenfalls unterstützt. |
 | **Schließ-Tags** | `::: /tabs`, `::: /tab`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
 
-::: callout info "v0.9.1+ Standardisierung der Container-Syntax" icon:sparkles
-Ab **v0.9.1** führt `docmd` explizite Öffnungs- und Schließungs-Container-Tags (z.B. `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explizite Key-Value-Eigenschaften (`title:"..."`, `url:"..."`) und nachfolgende `# Kommentare` ein. Diese modernisierte Syntax wird für alle neuen Dokumentationen empfohlen. Die vollständige Abwärtskompatibilität für alte Sub-Block-Marker (`== tab`, `1.`) und Positionsparameter bleibt strikt erhalten.
-:::
-
 
 ## Anwendungsbeispiele
 

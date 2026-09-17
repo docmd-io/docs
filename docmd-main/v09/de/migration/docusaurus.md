@@ -77,18 +77,18 @@ Konvertieren Sie benutzerdefinierte `<MyReactComponent />`-Tags in Standard-Mark
 ##### Admonition-Container-Aliase
 
 Docusaurus-Admonitions funktionieren **direkt nach der Installation** ohne Dateimodifikationen:
-- `:::note` → rendert als `callout info`
-- `:::tip` → rendert als `callout tip`
-- `:::info` → rendert als `callout info`
-- `:::caution` → rendert als `callout warning`
-- `:::danger` → rendert als `callout danger`
+- `:::note` : rendert als `callout info`
+- `:::tip` : rendert als `callout tip`
+- `:::info` : rendert als `callout info`
+- `:::caution` : rendert als `callout warning`
+- `:::danger` : rendert als `callout danger`
 
 ::: callout tip "Native Container-Syntax" icon:sparkles
 Für erweiterte Funktionen (z. B. benutzerdefinierte Icons oder benutzerdefinierte Badge-Farben) konvertieren Sie Docusaurus-Admonitions in die native `docmd`-Syntax:
 ```markdown
 ::: callout tip title:"Benutzerdefinierter Titel" icon:sparkles
 Dies ist ein Tipp-Container.
-::: /callout
+:::
 ```
 :::
 

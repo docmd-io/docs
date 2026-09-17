@@ -11,9 +11,9 @@ description: "通过自动生成 llms.txt、llms-full.txt 和 llms.json 来优�
 
 在站点编译期间，构建输出根目录会生成三个文件：
 
-* `llms.txt` — 包含页面标题、描述与规范 URL 的结构化概述。
-* `llms-full.txt` — 完整的文档上下文，每个条目下方均附有原始 Markdown 正文。
-* `llms.json` — 包含类型化元数据（标题、URL、描述、优先级）的机器可读 JSON 清单。
+* `llms.txt`, 包含页面标题、描述与规范 URL 的结构化概述。
+* `llms-full.txt`, 完整的文档上下文，每个条目下方均附有原始 Markdown 正文。
+* `llms.json`, 包含类型化元数据（标题、URL、描述、优先级）的机器可读 JSON 清单。
 
 自动发现 `<link>` 标签会自动注入至页面的 `<head>` 标头中。
 
@@ -65,13 +65,13 @@ description: "通过自动生成 llms.txt、llms-full.txt 和 llms.json 来优�
 启用后，构建输出包含：
 
 ```text
-site/llms.txt          ← 默认语言（无后缀）
-site/llms-full.txt     ← 默认语言（无后缀）
-site/llms.json         ← 默认语言（无后缀）
-site/llms.de.txt       ← 德语（带后缀）
-site/llms-full.de.txt  ← 德语（带后缀）
-site/llms.zh.txt       ← 中文（带后缀）
-site/llms-full.zh.txt  ← 中文（带后缀）
+site/llms.txt  # 默认语言（无后缀）
+site/llms-full.txt  # 默认语言（无后缀）
+site/llms.json  # 默认语言（无后缀）
+site/llms.de.txt  # 德语（带后缀）
+site/llms-full.de.txt  # 德语（带后缀）
+site/llms.zh.txt  # 中文（带后缀）
+site/llms-full.zh.txt  # 中文（带后缀）
 ```
 
 默认语言保留无后缀路径，从而使外部集成能够无缝继续运行。

@@ -30,29 +30,67 @@ El encabezado muestra los títulos de las páginas activas, las migas de pan y l
 - **Interruptor global**: Habilite o deshabilite el encabezado globalmente a través de `layout.header.enabled`. Active o desactive las migas de pan a través de `layout.breadcrumbs`.
 - **Anulación por página**: Agregue `hideTitle: true` al [Frontmatter](../content/frontmatter.md) de un documento para ocultar el título de su encabezado localmente.
 
-### Widgets de copia de contexto
+### Formato de título y delimitadores
 
-La región del encabezado incluye utilidades de copia contextual: copia en un solo clic del código fuente Markdown no procesado y avisos de contexto de IA estructurados (que contienen la URL de la página, título, descripción y prosa):
+Configure cómo se componen los títulos de los documentos y del sitio en sus plantillas de documentación:
 
 ```json "docmd.config.json"
 {
-  "theme": {
-    "copyWidgets": {
-      "enabled": true,
-      "raw": true,
-      "context": true
-    }
+  "layout": {
+    "titleSeparator": "-",
+    "titleAppend": true
   }
 }
 ```
 
-- `enabled`: Establezca en `false` para desactivar la barra de widgets de copia por completo.
-- `raw`: Establezca en `false` para ocultar el botón "Copiar Markdown".
-- `context`: Establezca en `false` para ocultar el botón "Copiar contexto".
+- `titleSeparator`: El delimitador entre el título de la página y el título del sitio en el `<title>` de la pestaña del navegador y en las vistas previas de tarjetas sociales. El valor predeterminado es un guion medio estándar (`"-"`). El compilador formatea automáticamente los separadores no vacíos con espacios individuales alrededor (`" - "`), por lo que puede proporcionar caracteres simples como `"-"` o `"|"`.
+- `titleAppend`: Determina si el título del sitio se añade a los títulos de las páginas (`true` por defecto). Establezca en `false` para mostrar solo el título de la página. También se puede anular por página en el frontmatter (`titleAppend: false`).
+
+### Widgets de copia de contexto y de impresión
+
+Directamente encima del contenido del artículo, `docmd` proporciona utilidades de lectura contextual: copia con un solo clic del código fuente Markdown no procesado, indicaciones de contexto de IA estructuradas (que contienen la URL de la página, título, descripción y prosa) e impresión de páginas:
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "copyWidgets": {
+      "enabled": true,
+      "raw": true,
+      "context": true
+    },
+    "print": false
+  }
+}
+```
+
+- `copyWidgets.enabled`: Establezca en `false` para desactivar la barra de widgets de copia por completo.
+- `copyWidgets.raw`: Establezca en `false` para ocultar el botón "Copiar Markdown".
+- `copyWidgets.context`: Establezca en `false` para ocultar el botón "Copiar contexto".
+- `print`: Deshabilitado (`false`) por defecto. Cuando se habilita (`true`), muestra un botón de impresión en la fila de acciones junto a los widgets de copia (y en la barra de herramientas de Modo de enfoque). El botón de impresión nunca se coloca en el encabezado o la barra de menús.
+
+### Modo de Enfoque (Lectura sin distracciones)
+
+El Modo de Enfoque colapsa las barras laterales, los encabezados, la tabla de contenidos y los elementos flotantes, presentando un lienzo limpio optimizado para leer documentación técnica:
+
+```json "docmd.config.json"
+{
+  "layout": {
+    "focusMode": false
+  }
+}
+```
+
+- **Estado predeterminado**: Deshabilitado (`false`) por defecto.
+- **Cuando está habilitado**: Muestra un conmutador de enfoque en el menú de opciones y habilita el atajo <kbd>Alt</kbd>+<kbd>F</kbd>.
+- **Controles en el Modo de Enfoque**: Solo tres controles esenciales aparecen en la esquina superior derecha: Imprimir (si `layout.print` está habilitado), conmutador de tema claro/oscuro y Salir del Modo de Enfoque (<kbd>Esc</kbd> o <kbd>Alt</kbd>+<kbd>F</kbd>).
+
+::: callout info title:"Compatibilidad con versiones anteriores" icon:sparkles
+Para proyectos existentes, docmd resuelve automáticamente las configuraciones anteriores, como `print`, `focusMode`, `customJs` a nivel raíz y `theme.copyWidgets`, con total compatibilidad hacia atrás.
+:::
 
 ### Menú de opciones (Utilidades)
 
-El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de modo de tema** y **Enlaces de patrocinio**:
+El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de modo de tema**, **Modo de Enfoque** y **Enlaces de patrocinio**:
 
 ```json "docmd.config.json"
 {
@@ -61,7 +99,8 @@ El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de 
       "position": "header", 
       "components": {
         "search": true,      
-        "themeSwitch": true, 
+        "themeSwitch": true,
+        "focusMode": true,
         "sponsor": "https://github.com/sponsors/mgks"
       }
     }
@@ -71,7 +110,7 @@ El `optionsMenu` agrupa utilidades globales como **Búsqueda**, **Conmutador de 
 
 ::: callout info title:"Respaldo de reubicación automática" icon:sparkles
 Si `optionsMenu` se asigna a un contenedor que está desactivado, el compilador mueve automáticamente el menú de opciones a `sidebar-top` para preservar la accesibilidad.
-::: /callout
+:::
 
 ### Barra lateral y navegación
 

@@ -11,9 +11,9 @@ Das Plugin ist **standardmäßig aktiviert**. Setzen Sie die Eigenschaft [`url`]
 
 Während der Website-Kompilierung werden drei Dateien im Stammverzeichnis der Build-Ausgabe platziert:
 
-* `llms.txt` — Strukturierte Übersicht mit Seitentiteln, Beschreibungen und kanonischen URLs.
-* `llms-full.txt` — Vollständiger Dokumentationskontext mit an jeden Eintrag angehängtem rohen Markdown-Text.
-* `llms.json` — Maschinenlesbares JSON-Manifest mit typisierten Metadaten (Titel, URL, Beschreibung, Priorität).
+* `llms.txt`, Strukturierte Übersicht mit Seitentiteln, Beschreibungen und kanonischen URLs.
+* `llms-full.txt`, Vollständiger Dokumentationskontext mit an jeden Eintrag angehängtem rohen Markdown-Text.
+* `llms.json`, Maschinenlesbares JSON-Manifest mit typisierten Metadaten (Titel, URL, Beschreibung, Priorität).
 
 Erkennungs-`<link>`-Tags werden automatisch in die `<head>`-Header der Seiten injiziert.
 
@@ -65,13 +65,13 @@ Um dedizierte Kontextdateien für Sekundärsprachen zu generieren, setzen Sie `i
 Wenn dies aktiviert ist, enthält die Build-Ausgabe:
 
 ```text
-site/llms.txt          ← Standard-Locale (ohne Suffix)
-site/llms-full.txt     ← Standard-Locale (ohne Suffix)
-site/llms.json         ← Standard-Locale (ohne Suffix)
-site/llms.de.txt       ← Deutsche Locale (mit Suffix)
-site/llms-full.de.txt  ← Deutsche Locale (mit Suffix)
-site/llms.zh.txt       ← Chinesische Locale (mit Suffix)
-site/llms-full.zh.txt  ← Chinesische Locale (mit Suffix)
+site/llms.txt  # Standard-Locale (ohne Suffix)
+site/llms-full.txt  # Standard-Locale (ohne Suffix)
+site/llms.json  # Standard-Locale (ohne Suffix)
+site/llms.de.txt  # Deutsche Locale (mit Suffix)
+site/llms-full.de.txt  # Deutsche Locale (mit Suffix)
+site/llms.zh.txt  # Chinesische Locale (mit Suffix)
+site/llms-full.zh.txt  # Chinesische Locale (mit Suffix)
 ```
 
 Die Standard-Locale behält Pfade ohne Suffix bei, sodass externe Integrationen weiterhin nahtlos funktionieren.

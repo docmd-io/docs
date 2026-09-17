@@ -43,8 +43,8 @@ Rust 引擎针对特定的编译瓶颈而生。在以下场景中能带来显著
 | `@docmd/engine-rust-win32-x64-msvc` | x64 | Windows |
 
 ::: callout info title:"透明的优雅回退"
-若当前环境找不到可用的预编译二进制，引擎会打印一条非致命通知，并**自动回退**到高性能 JavaScript 引擎 —— 您的构建依旧完全确定性。
-::: /callout
+若当前环境找不到可用的预编译二进制，引擎会打印一条非致命通知，并**自动回退**到高性能 JavaScript 引擎：您的构建依旧完全确定性。
+:::
 
 ## 能力与战略性限制
 
@@ -62,7 +62,7 @@ Rust 引擎针对特定的编译瓶颈而生。在以下场景中能带来显著
 docmd 核心调度器与原生 Rust 引擎之间的通信，依赖字符串化的 JSON 跨越 N-API 运行时边界：
 
 ```text
-JS Worker → JSON.stringify() → NAPI 边界 → Serde 反序列化 → [Rust 任务] → Serde 序列化 → NAPI 边界 → JSON.parse()
+JS Worker -> JSON.stringify() -> NAPI 边界 -> Serde 反序列化 -> [Rust 任务] -> Serde 序列化 -> NAPI 边界 -> JSON.parse()
 ```
 
 对 I/O 密集型操作（如查询 Git 历史、读取磁盘缓冲）来说，处理时间节省的部分远超字符串转换的代价。

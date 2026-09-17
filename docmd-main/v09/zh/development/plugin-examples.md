@@ -53,7 +53,7 @@ export default {
 
 ### 2. 注册插件
 
-将本地插件 import 到您的 `docmd.config.js`（或 `docmd.config.ts`）中进行注册。JSON 配置文件无法使用 import —— 若要注册插件，请使用 `.js` 或 `.ts` 格式。
+将本地插件 import 到您的 `docmd.config.js`（或 `docmd.config.ts`）中进行注册。JSON 配置文件无法使用 import：若要注册插件，请使用 `.js` 或 `.ts` 格式。
 
 ```javascript "plugins/version-injector.js"
 import VersionInjector from "./plugins/version-injector.js";

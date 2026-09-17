@@ -1,6 +1,6 @@
 ---
 title: "Versioning Engine"
-description: "Serve multi-version documentation with seamless version switching, sticky URL path preservation, and isolated build outputs in docmd."
+description: "Serve multi-version documentation with instant version switching, sticky URL path preservation, and isolated build outputs in docmd."
 ---
 
 `docmd` features a native Versioning Engine that allows you to manage and serve multiple release versions simultaneously. The compiler automatically handles URL routing, version switcher menus, and sticky navigation state preservation.
@@ -42,8 +42,8 @@ The `current` version builds directly into your site root (e.g. `example.com/`).
 
 ### 2. Isolated Version Subdirectories
 Non-current releases build into dedicated subfolders named after their `id`:
-- `v2` (Active Release) → `example.com/`
-- `v1` (Legacy Release) → `example.com/v1/`
+- `v2` (Active Release) : `example.com/`
+- `v1` (Legacy Release) : `example.com/v1/`
 
 ### 3. Sticky Route Preservation
 When readers toggle between versions using the dropdown selector, `docmd` preserves relative path locations. If a user is reading `example.com/getting-started` and switches to **v1**, they are redirected automatically to `example.com/v1/getting-started` (if the target document exists).

@@ -5,9 +5,7 @@ description: "A comprehensive directory of structural UI containers and interact
 
 Standard Markdown excels at basic text formatting, but technical documentation requires structural components to communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
 
-::: callout info "v0.9.1+ Container Syntax Standardisation" icon:sparkles
-Starting in **v0.9.1**, `docmd` introduces explicit opening and closing container tags (e.g., `::: card` ... `::: /card`, `::: tab` ... `::: /tab`), explicit key-value properties (`title:"..."`, `url:"..."`), and trailing `# comments`. This modernised syntax is recommended for all new documentation. Full backward compatibility for legacy sub-block markers (`== tab`, `1.`) and positional argument fallbacks is strictly preserved.
-:::
+::: callout info "Container Syntax Standard" icon:sparkles
 
 ::: callout tip "Migrating from Other Documentation Engines?" icon:sparkles
 `docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g. `:::tabs` instead of `::: tabs`) is also supported across all containers.
@@ -66,7 +64,6 @@ Containers facilitate more than visual polish; they provide high-fidelity **Sema
 
 ## Recursive Composition & Explicit Closers
 
-`docmd` supports **Infinite Nesting Depth** and deterministic closing tag resolution using named closing tags (`::: /card`, `::: /tabs`):
 
 ```markdown
 ::: card title:"Architecture Overview" # Parent card

@@ -3,7 +3,29 @@ title: "Custom Styles & Scripts"
 description: "Inject custom CSS and JavaScript files into your docmd site to extend layout styles, brand identity, and client behaviour."
 ---
 
-While `docmd` themes provide flexible visual defaults, you can inject custom stylesheets and interactive scripts via the `theme.customCss` and `customJs` array options in `docmd.config.json`.
+While `docmd` themes provide flexible visual defaults, you can inject custom stylesheets and interactive scripts via the `theme.customCss` and `theme.customJs` array options in `docmd.config.json`.
+
+## Custom Styles & Scripts Configuration
+
+Custom stylesheets and client-side scripts are symmetrically configured under the `theme` block:
+
+```json "docmd.config.json"
+{
+  "theme": {
+    "name": "default",
+    "customCss": [
+      "/assets/css/branding.css"
+    ],
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
+}
+```
+
+::: callout info title:"Backwards Compatibility" icon:history
+In earlier versions of docmd, custom JavaScript was configured via a top-level `"customJs"` array and custom CSS via `"customCss"`. Both top-level keys remain fully supported as fallbacks, but nesting under `"theme"` is the recommended modern standard.
+:::
 
 ## Custom CSS Overrides
 
@@ -27,13 +49,15 @@ Use `theme.customCss` to override default theme variables or introduce new layou
 
 ## Custom JavaScript Integration
 
-Use the top-level `customJs` array for scripts that add interactive capabilities or integrate third-party analytics:
+Use `theme.customJs` to inject client scripts that add interactive capabilities or integrate third-party analytics:
 
 ```json "docmd.config.json"
 {
-  "customJs": [
-    "/assets/js/feedback-widget.js"
-  ]
+  "theme": {
+    "customJs": [
+      "/assets/js/feedback-widget.js"
+    ]
+  }
 }
 ```
 
@@ -46,19 +70,15 @@ Custom scripts load at the bottom of the `<body>` element. Because `docmd` opera
 
 For complete event signatures and code examples, see [Client-Side Events](../reference/client-side-events.md).
 
-## Asset Priority Order
+## Cascade Order
 
-Every CSS and JS asset registered in a `docmd` build is assigned a **priority weight** that dictates cascade load order (lower numbers load earlier):
+Stylesheets and scripts load in a predictable three-stage order so your custom rules always take precedence:
 
-| Priority Weight | Layer | Technical Description |
-| :--- | :--- | :--- |
-| `0` | Base Core (`docmd-main.css`, `docmd-main.js`) | Always present in all builds. |
-| `5` | Theme Palette Overlay (`docmd-theme-sky.css`, etc.) | Loaded via `theme.name`. |
-| `10` | Structural Template Styles | Injected by active template plugins. |
-| `15` | User `customCss` / `customJs` | **Highest priority for user overrides**. |
-| `20` | Plugin Assets | Lightbox, search, and analytics assets. |
+1. **Core and Theme**: Base styles and colour palettes load first.
+2. **Templates and Plugins**: Structural layout templates and plugin assets load next.
+3. **Custom CSS and JS**: Your `customCss` and `customJs` files load last, ensuring your custom declarations override defaults.
 
-Within each priority bucket, files load in the order they were registered. To learn more about structural layout overrides, explore [Templates](templates.md).
+To learn more about structural layout overrides, explore [Templates](templates.md).
 
 ::: callout tip "Scoped Custom Styles" icon:lightbulb
 Maintain clean asset organisation by separating `/css` and `/js` subdirectories under `assets/`. Using explicit class names in `branding.css` prevents style conflicts with core `docmd` container rules.
