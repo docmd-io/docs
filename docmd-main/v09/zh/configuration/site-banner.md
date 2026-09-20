@@ -1,111 +1,183 @@
 ---
 title: "站点横幅"
-description: "全站公告横幅。位于 menubar 之上，支持内联 Markdown、可选图标、CTA 链接、按会话记忆的关闭状态。"
+description: "在 docmd 中配置支持多位置（顶部、侧边栏、目录栏）、内联 Markdown、图片、行动号召按钮及会话持久化的公告与推广横幅。"
 ---
 
-# 站点横幅
+`docmd` 提供了灵活的多位置横幅系统，既支持全宽顶部公告条，也支持紧凑的侧边栏和目录栏（TOC）卡片横幅。您可以使用横幅展示版本发布公告、维护通知、赞助商信息或推广活动。
 
-> **0.8.7 新增。** 默认 UI 内置的可关闭公告横幅。位于 menubar 之上、页头之下。**Opt-in（按需启用）**:, 只有设置了 `config.layout.banner` 才会渲染。
+## 快速启用
 
-可用于发布公告、维护窗口、Beta 召唤行动（calls-to-action）或任何其他全站消息。
+您可以在 `docmd.config.json` 中通过 `layout.banner` 配置单个顶部公告横幅，或通过 `layout.banners` 配置多位置横幅：
 
-## 30 秒启用
-
+::: tabs
+== tab "单个顶部横幅" icon:bell
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9 已发布**，阅读完整公告。",
+      "content": "**v0.9.6 已发布！** 体验专注模式与全新横幅系统。",
       "type": "info",
       "dismissible": true,
-      "link": { "text": "了解更多", "url": "/blog/v0-9" }
+      "link": { "text": "发布说明", "url": "/release-notes/0-9-6" }
     }
   }
 }
 ```
+== tab "多位置横幅" icon:layout
+```json "docmd.config.json"
+{
+  "layout": {
+    "banners": {
+      "top": {
+        "content": "**v0.9.6 正式发布！** 探索最新文档改进与功能特性。",
+        "type": "announcement",
+        "dismissible": true,
+        "link": { "text": "查看更新", "url": "/release-notes/0-9-6" }
+      },
+      "toc-top": {
+        "image": "/assets/sponsor-badge.png",
+        "alt": "赞助 Docmd",
+        "content": "**支持开源文档引擎**",
+        "link": { "text": "成为赞助者", "url": "https://github.com/sponsors" }
+      },
+      "sidebar-bottom": {
+        "icon": "book-open",
+        "content": "需要企业级支持或定制主题？",
+        "link": { "text": "联系我们", "url": "https://docmd.io/contact" }
+      }
+    }
+  }
+}
+```
+:::
 
-横幅会出现在每一页。用户关闭一次后，下一个浏览器会话之前不会再显示。
+---
+
+## 支持的横幅位置
+
+`docmd` 支持 7 个专有横幅渲染位置：
+
+| 位置 | 展示形态 | 默认持久性 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `top` | 横条 (Bar) | 可关闭 (`dismissible: true`) | 视口最顶部的全宽公告横条。 |
+| `header` | 横条 (Bar) | 可关闭 (`dismissible: true`) | 位于顶部标题栏下方或内部的公告条。 |
+| `sidebar-top` | 卡片 (Card) | 常驻 (`dismissible: false`) | 固定在左侧导航栏顶部的卡片横幅。 |
+| `sidebar-bottom` | 卡片 (Card) | 常驻 (`dismissible: false`) | 固定在左侧导航栏底部的卡片横幅。 |
+| `toc-top` | 卡片 (Card) | 常驻 (`dismissible: false`) | 固定在右侧文章目录栏（TOC）顶部的卡片横幅。 |
+| `toc-bottom` | 卡片 (Card) | 常驻 (`dismissible: false`) | 固定在右侧文章目录栏（TOC）底部的卡片横幅。 |
+| `footer` | 横条 (Bar) | 常驻 (`dismissible: false`) | 位于页面页脚正上方的全宽横幅。 |
+
+---
 
 ## 配置参考
 
+每个横幅对象支持以下属性配置：
+
 | 字段 | 默认值 | 说明 |
-|---|---|---|
+| :--- | :--- | :--- |
 | `content` | `""` | 内联 Markdown 文本（`**加粗**`、`` `代码` ``）。与 `html` 互斥。 |
-| `html` | `""` | 原始 HTML。优先级高于 `content`。用于更复杂的布局。 |
-| `type` | `"info"` | `"info"` \| `"success"` \| `"warning"` \| `"danger"`，影响背景色。 |
-| `dismissible` | `true` | 显示关闭 (X) 按钮。为 `false` 时横幅常驻。 |
-| `link` | `null` | `{ text, url }`，可选 CTA 链接，渲染在内容之后。 |
-| `icon` | `null` | 左侧显示的 Lucide 图标名。常用：`megaphone`、`info`、`bell`。 |
+| `html` | `""` | 原始 HTML 字符串。优先级高于 `content`。 |
+| `image` | `null` | 卡片图片或图标路径（支持在 `sidebar-*` 和 `toc-*` 卡片中使用；`top` 顶部横条会自动忽略）。 |
+| `alt` | `""` | 图片的无障碍替换文本（Alt text）。 |
+| `type` | `"info"` | 视觉色彩风格：`"info"`、`"success"`、`"warning"`、`"danger"` 或 `"announcement"`。 |
+| `dismissible` | *依位置而定* | 是否显示关闭 (X) 按钮。在 `top`/`header` 上默认为 `true`，在卡片位置上默认为 `false`（常驻）。别名支持：`dismissable`、`closable`。 |
+| `link` | `null` | 行动号召链接。支持 `{ text, url }` 对象或直接填写 URL 字符串。 |
+| `icon` | `null` | 显示在内容旁的 [Lucide 图标](external:https://lucide.dev/icons)名称（例如 `sparkles`、`bell`、`heart`）。 |
 
-### 示例
+---
 
-普通公告：
+## 卡片横幅（侧边栏与目录栏）
+
+卡片横幅（`sidebar-top`、`sidebar-bottom`、`toc-top`、`toc-bottom`）采用紧凑卡片排版，专为赞助商插图、开发者生态推荐或重要资源导流设计。
+
+### 卡片默认常驻行为
+
+与顶部通知栏不同，**卡片横幅默认常驻**（`dismissible: false`），不会在用户浏览或切换页面时消失。
+
+如果您希望让读者能够手动关闭卡片横幅，请显式声明 `dismissible: true`（或 `dismissable: true`）：
 
 ```json "docmd.config.json"
 {
   "layout": {
-    "banner": {
-      "content": "站点维护定于 UTC 时间 周日 02:00-04:00 进行。",
-      "type": "warning"
+    "banners": {
+      "toc-top": {
+        "image": "/assets/survey-banner.png",
+        "content": "参与 2 分钟开发者问卷调查！",
+        "dismissible": true,
+        "link": { "text": "开始答卷", "url": "https://example.com/survey" }
+      }
     }
   }
 }
 ```
 
-发布成功：
+关闭状态将自动保存在浏览器的 `sessionStorage` 中，仅对当前会话有效。
+
+---
+
+## 版本继承与覆盖
+
+在多版本文档（`versions.all`）中，各个版本会自动继承根项目的横幅配置。特定版本可针对性覆盖指定位置，而无需重复配置其他位置：
 
 ```json "docmd.config.json"
 {
   "layout": {
-    "banner": {
-      "content": "**v1.0 正式发布！** 阅读发布说明。",
-      "type": "success",
-      "icon": "party-popper",
-      "link": { "text": "发布说明", "url": "/blog/v1-0" }
+    "banners": {
+      "top": { "content": "欢迎查阅官方文档！" },
+      "toc-top": { "image": "/assets/sponsor.png", "link": "https://docmd.io" }
     }
+  },
+  "versions": {
+    "current": "v2",
+    "all": [
+      {
+        "id": "v1",
+        "dir": "docs-v1",
+        "label": "v1.0",
+        "banners": {
+          "top": {
+            "content": "⚠️ 您正在查看旧版 v1 文档。建议切换至 v2 获取最新功能。",
+            "type": "warning",
+            "dismissible": false
+          }
+        }
+      },
+      {
+        "id": "v2",
+        "dir": "docs-v2",
+        "label": "v2.0"
+      }
+    ]
   }
 }
 ```
 
-富 HTML（请谨慎转义）：
+---
 
-```json "docmd.config.json"
-{
-  "layout": {
-    "banner": {
-      "html": "<strong>新功能：</strong> AI 搜索已上线。<a href=\"/blog/ai-search\">了解更多</a>",
-      "type": "info",
-      "dismissible": false
-    }
-  }
+## 自定义样式
+
+横幅采用标准 BEM 类名渲染：
+- 横幅根元素：`.docmd-banner`（或 Summer 主题下的 `.summer-banner`）
+- 位置修饰类：`.docmd-banner--pos-top`、`.docmd-banner--pos-sidebar-top`、`.docmd-banner--pos-toc-top` 等
+- 卡片修饰类：`.docmd-banner--card`
+- 色彩类型类：`.docmd-banner--info`、`.docmd-banner--warning`、`.docmd-banner--success`、`.docmd-banner--danger`
+
+```css "custom.css"
+.docmd-banner--pos-toc-top {
+  border-radius: 8px;
+  border: 1px solid var(--docmd-color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.docmd-banner--announcement {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
 }
 ```
 
-## 行为
+## 禁用横幅
 
-- **位置**:, 位于页面最顶部，menubar 与侧栏 logo bar 之上。纯 CSS 定位，关闭时不会引起布局抖动。
-- **关闭状态持久化**:, "已关闭" 状态保存在 `sessionStorage`。新的浏览器会话会重新显示。如需更长期记忆，可由您自己的客户端脚本写入 `localStorage`（横幅的 `data-docmd-banner` 属性便于定位）。
-- **按页覆盖**:, 0.8.7 暂不支持。如需在单个页面隐藏横幅，可在 `config.templates[page]` 条目中设置 `layout.banner: null`（计划在下个版本提供）。
-
-## 重新定义样式
-
-横幅以 BEM 风格的类构建在 `.docmd-banner` 根节点上。可通过 `customCss` 重新设置皮肤：
-
-```css
-.docmd-banner--info {
-  background: linear-gradient(90deg, #fef3c7 0%, #fff 100%);
-  border-bottom: 2px solid #f59e0b;
-}
-.docmd-banner__link {
-  font-weight: 600;
-}
-```
-
-
-## 禁用
-
-如需全站移除横幅，将 `layout.banner` 设为 `null`（或删除该字段）。如需在单个页面隐藏，可使用计划中的按页覆盖功能，或在前置元数据（post-0.8.7）中渲染为 `null`。
-
-::: callout tip "与 changelog 模板配合"
-将横幅与 `template-changelog` 包搭配使用，为您的用户提供您发布的每个版本的永久记录。
-:::
+如需关闭横幅：
+- 将 `layout.banner` 设置为 `null` 或直接删除。
+- 在 `layout.banners` 中删除对应位置的属性，或将其设为 `null`。
+- 在特定页面的 Frontmatter 中设置 `banner: null` 可针对单页隐藏。

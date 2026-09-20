@@ -1,106 +1,181 @@
 ---
-title: "Site Banner"
-description: "Configure dismissible site-wide announcement banners with inline Markdown, call-to-action buttons, and session persistence in docmd."
+title: "Site Banners"
+description: "Configure multi-position announcement and promotional banners with Markdown, images, call-to-action buttons, and session persistence in docmd."
 ---
 
-`docmd` provides a built-in, dismissible site banner positioned at the top of the layout. Use it to display release announcements, maintenance windows, or promotional calls-to-action across all documentation pages.
+`docmd` provides a flexible, multi-position banner system supporting both full-width announcement bars and dedicated sidebar/TOC cards. Use banners to display release announcements, maintenance alerts, sponsor callouts, or promotional campaigns across your documentation.
 
 ## Quick Setup
 
-Enable the announcement banner in your `docmd.config.json` manifest:
+You can configure a single top announcement banner using `layout.banner`, or configure multi-position banners using `layout.banners` in your `docmd.config.json`:
 
+::: tabs
+== tab "Single Top Banner" icon:bell
 ```json "docmd.config.json"
 {
   "layout": {
     "banner": {
-      "content": "**v0.9.0 is out!** Read the full release announcement.",
+      "content": "**v0.9.6 is live!** Explore new Focus Mode and banner features.",
       "type": "info",
       "dismissible": true,
-      "link": { "text": "Read announcement", "url": "/blog/v0-9" }
+      "link": { "text": "Release notes", "url": "/release-notes/0-9-6" }
     }
   }
 }
 ```
+== tab "Multi-Position Banners" icon:layout
+```json "docmd.config.json"
+{
+  "layout": {
+    "banners": {
+      "top": {
+        "content": "**v0.9.6 is live!** Check out the latest documentation improvements.",
+        "type": "announcement",
+        "dismissible": true,
+        "link": { "text": "What's new", "url": "/release-notes/0-9-6" }
+      },
+      "toc-top": {
+        "image": "/assets/sponsor-badge.png",
+        "alt": "Sponsor Docmd",
+        "content": "**Support open source docs**",
+        "link": { "text": "Become a Sponsor", "url": "https://github.com/sponsors" }
+      },
+      "sidebar-bottom": {
+        "icon": "book-open",
+        "content": "Need enterprise support or custom themes?",
+        "link": { "text": "Contact Us", "url": "https://docmd.io/contact" }
+      }
+    }
+  }
+}
+```
+:::
 
-The banner renders at the top of every page. When dismissed by a reader, the closed state is stored in `sessionStorage` for the duration of their browser session.
+## Supported Banner Positions
+
+`docmd` supports 7 distinct banner positions:
+
+| Position | Display Type | Default Persistence | Description |
+| :--- | :--- | :--- | :--- |
+| `top` | Bar | Dismissible (`dismissible: true`) | Full-width announcement bar rendered at the very top of the viewport. |
+| `header` | Bar | Dismissible (`dismissible: true`) | Announcement banner rendered directly under or inside the header bar. |
+| `sidebar-top` | Card | Persistent (`dismissible: false`) | Card banner pinned to the top of the left navigation sidebar. |
+| `sidebar-bottom` | Card | Persistent (`dismissible: false`) | Card banner pinned to the bottom of the left navigation sidebar. |
+| `toc-top` | Card | Persistent (`dismissible: false`) | Card banner pinned to the top of the right-hand Table of Contents rail. |
+| `toc-bottom` | Card | Persistent (`dismissible: false`) | Card banner pinned to the bottom of the right-hand Table of Contents rail. |
+| `footer` | Bar | Persistent (`dismissible: false`) | Wide banner rendered directly above the page footer. |
 
 ## Configuration Reference
+
+Each banner object inside `layout.banners[position]` (or `layout.banner` for the top bar) accepts the following options:
 
 | Field | Default | Description |
 | :--- | :--- | :--- |
 | `content` | `""` | Inline Markdown string (`**bold**`, `` `code` ``). Mutually exclusive with `html`. |
 | `html` | `""` | Raw HTML string. Takes precedence over `content` for custom rich layouts. |
-| `type` | `"info"` | Visual background tint (`"info"`, `"success"`, `"warning"`, `"danger"`). |
-| `dismissible` | `true` | When `true`, renders a close (X) button. When `false`, the banner remains persistent. |
-| `link` | `null` | Optional `{ text, url }` object rendering a Call-To-Action (CTA) link. |
-| `icon` | `null` | Name of any [Lucide Icon](external:https://lucide.dev/icons) rendered on the left (e.g. `megaphone`, `bell`). |
+| `image` | `null` | URL or relative path to a card graphic/logo (allowed on card positions like `sidebar-*` and `toc-*`; ignored on `top`). |
+| `alt` | `""` | Accessible alternative text for the `image`. |
+| `type` | `"info"` | Visual style variant: `"info"`, `"success"`, `"warning"`, `"danger"`, or `"announcement"`. |
+| `dismissible` | *Varies by position* | Whether the banner renders a close (X) button. Defaults to `true` on `top`/`header`, and `false` (persistent) on card positions. Aliases: `dismissable`, `closable`. |
+| `link` | `null` | Call-To-Action link. Accepts `{ text, url }` or a direct URL string. |
+| `icon` | `null` | Name of any [Lucide Icon](external:https://lucide.dev/icons) rendered alongside the banner content (e.g. `sparkles`, `bell`, `heart`). |
 
-### Configuration Examples
+## Card Banners (Sidebar & Table of Contents)
 
-::: tabs
-== tab "Standard Announcement" icon:bell
+Card banners (`sidebar-top`, `sidebar-bottom`, `toc-top`, `toc-bottom`) are specifically styled as compact, non-intrusive widgets tailored for complementary content, sponsorship notices, or developer resources.
+
+### Card Defaults & Persistence
+
+Unlike the top announcement bar, **card banners default to persistent** (`dismissible: false`). They stay visible across pages and will not disappear when navigating.
+
+If you want a card banner to be dismissible by the user, explicitly set `dismissible: true` (or `dismissable: true`):
+
 ```json "docmd.config.json"
 {
   "layout": {
-    "banner": {
-      "content": "Scheduled system maintenance on Sunday 02:00-04:00 UTC.",
-      "type": "warning",
-      "icon": "alert-triangle"
+    "banners": {
+      "toc-top": {
+        "image": "/assets/survey-banner.png",
+        "content": "Take our 2-minute developer survey!",
+        "dismissible": true,
+        "link": { "text": "Start Survey", "url": "https://example.com/survey" }
+      }
     }
   }
 }
 ```
-== tab "Release Release CTA" icon:sparkles
+
+When dismissed, the dismissed state is stored in `sessionStorage` for the duration of the reader's browser session.
+
+## Version Inheritance & Overrides
+
+When using multi-version documentation (`versions.all`), version configurations automatically inherit project-level banners. A version can override a specific position without losing banners configured at the project root:
+
 ```json "docmd.config.json"
 {
   "layout": {
-    "banner": {
-      "content": "**v0.9.0 is live!** Explore new search features and UI components.",
-      "type": "success",
-      "icon": "party-popper",
-      "link": { "text": "Release notes", "url": "/blog/v0-9-0" }
+    "banners": {
+      "top": { "content": "Welcome to our documentation!" },
+      "toc-top": { "image": "/assets/sponsor.png", "link": "https://docmd.io" }
     }
+  },
+  "versions": {
+    "current": "v2",
+    "all": [
+      {
+        "id": "v1",
+        "dir": "docs-v1",
+        "label": "v1.0",
+        "banners": {
+          "top": {
+            "content": "⚠️ You are viewing legacy v1 documentation. Switch to v2 for latest features.",
+            "type": "warning",
+            "dismissible": false
+          }
+        }
+      },
+      {
+        "id": "v2",
+        "dir": "docs-v2",
+        "label": "v2.0"
+      }
+    ]
   }
 }
 ```
-== tab "Custom HTML" icon:code
-```json "docmd.config.json"
-{
-  "layout": {
-    "banner": {
-      "html": "<strong>New:</strong> Rust compiler engine is now available in preview. <a href=\"/blog/rust-engine\">Learn more</a>",
-      "type": "info",
-      "dismissible": false
-    }
-  }
+
+In this example:
+- `v1` overrides `top` with a legacy warning banner, but still inherits the `toc-top` sponsor card.
+- `v2` uses the default `top` announcement and the `toc-top` sponsor card.
+
+## Custom Styling
+
+Banners are rendered with standard BEM classes:
+- Banners: `.docmd-banner` (or `.summer-banner` in the Summer template)
+- Position variants: `.docmd-banner--pos-top`, `.docmd-banner--pos-sidebar-top`, `.docmd-banner--pos-toc-top`, etc.
+- Card styling: `.docmd-banner--card`
+- Type variants: `.docmd-banner--info`, `.docmd-banner--warning`, `.docmd-banner--success`, `.docmd-banner--danger`
+
+You can customize their appearance in your custom CSS:
+
+```css "custom.css"
+/* Subtle elevation and custom border for TOC card banner */
+.docmd-banner--pos-toc-top {
+  border-radius: 8px;
+  border: 1px solid var(--docmd-color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-```
-:::
 
-## Layout Behaviour
-
-- **Positioning**: Sits at the top of the viewport above the menubar and sidebar header. Built with zero-layout-shift CSS rules so dismissing the banner does not shift page content jarringly.
-- **Session Persistence**: Dismissal state is saved in `sessionStorage`. Opening a new browser session restores the banner.
-- **Per-Page Customisation**: To hide the banner on specific landing pages, set `layout.banner` to `null` in page frontmatter.
-
-## Custom Banner Styling
-
-The banner uses BEM class naming prefixed with `.docmd-banner`. Customise colours and typography via custom CSS rules:
-
-```css
-.docmd-banner--info {
-  background: linear-gradient(90deg, #fef3c7 0%, #ffffff 100%);
-  border-bottom: 2px solid #f59e0b;
-}
-.docmd-banner__link {
-  font-weight: 600;
+/* Custom banner accent */
+.docmd-banner--announcement {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
 }
 ```
 
-## Disabling the Site Banner
+## Disabling Banners
 
-To disable the site banner globally, set `layout.banner` to `null` or remove the `banner` key from `docmd.config.json`.
-
-::: callout tip "Changelog Integration" icon:history
-Pair site banners with changelog pages or template packages to maintain a permanent record of all announced product updates.
-:::
+To disable banners:
+- Set `layout.banner` to `null` or omit it.
+- In `layout.banners`, remove the specific position key, or set that position to `null`.
+- On a specific page, set `banner: null` in page frontmatter to suppress banners on that page.
