@@ -29,17 +29,15 @@
   "layout": {
     "banners": {
       "top": {
-        "content": "**v0.9.6 is live!** — Read the latest technical documentation and migration guides.",
+        "content": "**docmd v0.9.6 is live!** — Read the latest technical documentation and migration guides.",
         "type": "info",
         "dismissible": true,
         "icon": "sparkles"
       },
       "toc-top": {
-        "content": "⚡ **Free Cloud Relay** — Connect your documentation with serverless AI search & real-time telemetry in 1 click.",
+        "content": "⚡ **Setup Free AI Assistant for your documentation** — Connect your docs with docmd cloud relay.",
         "link": "https://cloud.docmd.io",
-        "type": "tip",
-        "icon": "cloud",
-        "dismissible": true
+        "type": "tip"
       }
     }
   },
