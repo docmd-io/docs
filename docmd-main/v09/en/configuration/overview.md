@@ -146,7 +146,8 @@ Fine-tune how `docmd` parses Markdown and enforces HTML security:
   "markdown": {
     "breaks": true,
     "linkify": true,
-    "typographer": true
+    "typographer": true,
+    "linkifyDefaultScheme": "https"
   },
   "security": {
     "html": "allow"
@@ -159,8 +160,9 @@ Fine-tune how `docmd` parses Markdown and enforces HTML security:
 | `minify` | `Boolean` | `true` | Minifies compiled HTML, CSS, and JS assets for maximum load performance. |
 | `autoTitleFromH1` | `Boolean` | `true` | Uses the document's first `# H1` heading as the title when frontmatter `title` is omitted. |
 | `markdown.breaks` | `Boolean` | `true` | Converts soft line breaks into line breaks. Set `false` if wrapping text manually at 80 columns. |
-| `markdown.linkify` | `Boolean` | `true` | Automatically converts URL text and bare domains into clickable links (`https://` by default). Set `false` to disable autolinking. |
+| `markdown.linkify` | `Boolean` | `true` | Automatically converts URL text and bare domains into clickable links. Set `false` to disable autolinking. |
 | `markdown.typographer` | `Boolean` | `true` | Enables language-neutral replacement of typographic quotes, dashes, and symbols. Set `false` to leave verbatim. |
+| `markdown.linkifyDefaultScheme` | `String` | `"https"` | URL scheme prepended to bare-domain autolinks (e.g. `github.com` → `https://github.com`). Use `"http"` only for internal or legacy environments without HTTPS. |
 | `security.html` | `String` | `"allow"` | HTML sanitisation mode: `"allow"`, `"escape"`, or `"strip"`. See [Security Guide](./security.md). |
 | `layout.copyCode` | `Boolean` | `true` | Renders a "Copy Code" button on syntax-highlighted code blocks. |
 | `layout.pageNavigation` | `Boolean` | `true` | Renders "Previous" and "Next" page navigation links at the bottom of articles. |

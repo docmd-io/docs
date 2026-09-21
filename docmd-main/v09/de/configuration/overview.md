@@ -146,7 +146,8 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
   "markdown": {
     "breaks": true,
     "linkify": true,
-    "typographer": true
+    "typographer": true,
+    "linkifyDefaultScheme": "https"
   },
   "security": {
     "html": "allow"
@@ -159,8 +160,9 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
 | `minify` | `Boolean` | `true` | Minimiert kompilierte HTML-, CSS- und JS-Assets für maximale Ladeleistung. |
 | `autoTitleFromH1` | `Boolean` | `true` | Verwendet die erste `# H1`-Überschrift des Dokuments als Titel, wenn `title` im Frontmatter fehlt. |
 | `markdown.breaks` | `Boolean` | `true` | Wandelt weiche Zeilenumbrüche in Umbrüche um. Auf `false` setzen, wenn Text manuell bei 80 Spalten umgebrochen wird. |
-| `markdown.linkify` | `Boolean` | `true` | Konvertiert URL-Text und einfache Domains automatisch in klickbare Links (`https://` als Standard). Auf `false` setzen zum Deaktivieren. |
+| `markdown.linkify` | `Boolean` | `true` | Konvertiert URL-Text und einfache Domains automatisch in klickbare Links. Auf `false` setzen zum Deaktivieren. |
 | `markdown.typographer` | `Boolean` | `true` | Aktiviert typografischen Ersatz für Anführungszeichen, Gedankenstriche und Symbole. Auf `false` setzen für wörtliche Ausgabe. |
+| `markdown.linkifyDefaultScheme` | `String` | `"https"` | URL-Schema für automatisch verlinkte Bare-Domains (z.B. `github.com` → `https://github.com`). Verwenden Sie `"http"` nur für interne oder Legacy-Umgebungen ohne HTTPS. |
 | `security.html` | `String` | `"allow"` | HTML-Bereinigungsmodus: `"allow"`, `"escape"` oder `"strip"`. Siehe [Sicherheitsleitfaden](./security.md). |
 | `layout.copyCode` | `Boolean` | `true` | Rendert eine "Code kopieren"-Schaltfläche auf syntax-hervorgehobenen Codeblöcken. |
 | `layout.pageNavigation` | `Boolean` | `true` | Rendert "Vorherige" und "Nächste" Navigationslinks am Ende von Artikeln. |
