@@ -144,7 +144,9 @@ Ajuste cómo `docmd` analiza Markdown y aplica las políticas de seguridad HTML:
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
-    "breaks": true
+    "breaks": true,
+    "linkify": true,
+    "typographer": true
   },
   "security": {
     "html": "allow"
@@ -157,6 +159,8 @@ Ajuste cómo `docmd` analiza Markdown y aplica las políticas de seguridad HTML:
 | `minify` | `Boolean` | `true` | Minimiza recursos HTML, CSS y JS compilados para un rendimiento de carga máximo. |
 | `autoTitleFromH1` | `Boolean` | `true` | Utiliza el primer encabezado `# H1` del documento como título cuando se omite el `title` en el frontmatter. |
 | `markdown.breaks` | `Boolean` | `true` | Convierte saltos de línea suaves en saltos de línea. Establezca en `false` si ajusta el texto manualmente a 80 columnas. |
+| `markdown.linkify` | `Boolean` | `true` | Convierte automáticamente texto URL y dominios simples en enlaces interactivos (`https://` por defecto). Establezca en `false` para desactivar. |
+| `markdown.typographer` | `Boolean` | `true` | Habilita el reemplazo tipográfico de comillas, guiones y símbolos. Establezca en `false` para mantener el texto exacto. |
 | `security.html` | `String` | `"allow"` | Modo de saneamiento HTML: `"allow"`, `"escape"` o `"strip"`. Consulte la [Guía de seguridad](./security.md). |
 | `layout.copyCode` | `Boolean` | `true` | Renderiza un botón "Copiar código" en los bloques de código con resaltado de sintaxis. |
 | `layout.pageNavigation` | `Boolean` | `true` | Renderiza enlaces de navegación de página "Anterior" y "Siguiente" en la parte inferior de los artículos. |

@@ -144,7 +144,9 @@ module.exports = {
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
-    "breaks": true
+    "breaks": true,
+    "linkify": true,
+    "typographer": true
   },
   "security": {
     "html": "allow"
@@ -157,6 +159,8 @@ module.exports = {
 | `minify` | `Boolean` | `true` | 压缩编译后的 HTML、CSS 和 JS 资源，以获得最大加载性能。 |
 | `autoTitleFromH1` | `Boolean` | `true` | 当省略 frontmatter `title` 时，将文档的第一个 `# H1` 标题用作标题。 |
 | `markdown.breaks` | `Boolean` | `true` | 将软换行转换为换行符。如果手动在 80 列处换行，请设置为 `false`。 |
+| `markdown.linkify` | `Boolean` | `true` | 自动将 URL 文本和裸域名转换为可点击链接（默认使用 `https://`）。设置为 `false` 禁用自动链接。 |
+| `markdown.typographer` | `Boolean` | `true` | 启用语言通用的排版替换（引号、破折号和符号）。设置为 `false` 保持原样。 |
 | `security.html` | `String` | `"allow"` | HTML 净化模式：`"allow"`、`"escape"` 或 `"strip"`。参阅 [安全指南](./security.md)。 |
 | `layout.copyCode` | `Boolean` | `true` | 在语法高亮的代码块上渲染“复制代码”按钮。 |
 | `layout.pageNavigation` | `Boolean` | `true` | 在文章底部渲染“上一页”和“下一页”导航链接。 |

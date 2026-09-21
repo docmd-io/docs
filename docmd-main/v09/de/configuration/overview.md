@@ -144,7 +144,9 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
-    "breaks": true
+    "breaks": true,
+    "linkify": true,
+    "typographer": true
   },
   "security": {
     "html": "allow"
@@ -157,6 +159,8 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
 | `minify` | `Boolean` | `true` | Minimiert kompilierte HTML-, CSS- und JS-Assets für maximale Ladeleistung. |
 | `autoTitleFromH1` | `Boolean` | `true` | Verwendet die erste `# H1`-Überschrift des Dokuments als Titel, wenn `title` im Frontmatter fehlt. |
 | `markdown.breaks` | `Boolean` | `true` | Wandelt weiche Zeilenumbrüche in Umbrüche um. Auf `false` setzen, wenn Text manuell bei 80 Spalten umgebrochen wird. |
+| `markdown.linkify` | `Boolean` | `true` | Konvertiert URL-Text und einfache Domains automatisch in klickbare Links (`https://` als Standard). Auf `false` setzen zum Deaktivieren. |
+| `markdown.typographer` | `Boolean` | `true` | Aktiviert typografischen Ersatz für Anführungszeichen, Gedankenstriche und Symbole. Auf `false` setzen für wörtliche Ausgabe. |
 | `security.html` | `String` | `"allow"` | HTML-Bereinigungsmodus: `"allow"`, `"escape"` oder `"strip"`. Siehe [Sicherheitsleitfaden](./security.md). |
 | `layout.copyCode` | `Boolean` | `true` | Rendert eine "Code kopieren"-Schaltfläche auf syntax-hervorgehobenen Codeblöcken. |
 | `layout.pageNavigation` | `Boolean` | `true` | Rendert "Vorherige" und "Nächste" Navigationslinks am Ende von Artikeln. |
