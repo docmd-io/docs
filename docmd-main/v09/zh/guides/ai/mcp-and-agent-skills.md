@@ -34,13 +34,13 @@ Model Context Protocol 通过 `stdio` 将 LLM 环境直接连接到你的本地�
 
 ## 可用的 MCP 工具
 
-连接成功后，智能体可以执行 6 个核心工具处理程序：
+连接成功后，智能体可以使用以下工具处理程序：
 
-1. `search_docs(query)`: 在工作区文件之间执行全文搜索。
-2. `list_docs(subdir?)`: 列出相对 Markdown 文件路径，支持按语言版本或语言筛选。
+1. `search_docs(query)`: 在工作区文件之间执行全文搜索。遵守 `config.exclude` — 被排除的文件不会被返回。
+2. `list_docs(subdir?)`: 列出相对 Markdown 文件路径，支持按语言版本或语言筛选。遵守 `config.exclude`。
 3. `read_doc(route)`: 读取沙箱文件路由的原始 Markdown 内容。
 4. `get_config()`: 审查已解析的 `docmd.config.json` 选项（敏感值已打码）。
-5. `validate_docs()`: 校验内部链接目标并报告失效锚点。
+5. `validate_docs()`: 校验内部链接目标并报告失效锚点。遵守 `config.exclude`。
 6. `get_llms_context()`: 获取整合后的 `llms-full.txt` 上下文载荷。
 
 ## 利用 Agent Skills (`SKILL.md`)

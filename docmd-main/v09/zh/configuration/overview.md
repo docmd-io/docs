@@ -59,7 +59,8 @@ module.exports = {
 | `out` | `String` | `"site"` | 编译器生成生产静态包的相对路径。 |
 | `base` | `String` | `"/"` | 根 URL 路径前缀（例如托管在子文件夹中时为 `/docs/`）。 |
 | `tmp` | `String` | `null` | 临时构建缓存目录。默认为隔离的系统临时文件夹。 |
-| `engine` | `String` | `"js"` | 处理引擎：`"js"`（默认纯 JavaScript 引擎）或 `"rust"`（通过 `@docmd/engine-rust` 的原生加速器）。 |
+| `exclude` | `String[]` | `[]` | 用于从构建、MCP 工具和链接校验中排除文件及目录的 gitignore 风格 glob 模式。例如 `["archive/**", "drafts/*.md"]`。 |
+| `engine` | `String` | `"js"` | 处理引擎：`"js"`（默认纯 JavaScript 引擎）、`"rust"`（通过 `@docmd/engine-rust` 的原生加速器）或 `"python"`（通过 `@docmd/engine-python` 的 Python 3 运行时加速器）。 |
 | `i18n` | `Object` | `null` | 多语言参数。参阅 [多语言指南](./localisation/translated-content.md)。 |
 | `plugins` | `Object` | `{}` | 标准及第三方插件配置映射。参阅 [插件指南](../plugins/usage.md)。 |
 

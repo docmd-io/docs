@@ -70,3 +70,23 @@ Bei I/O-lastigen Operationen wie dem Abfragen von Git-Historien oder dem Lesen v
 Für hochiterative, CPU-gebundene Tasks wie die Volltext-Suchindizierung (`search:index`) **verbraucht der Serialisierungs-Roundtrip jedoch mehr CPU-Ressourcen als die zugrundeliegende Aufgabe selbst**. Die Serialisierung großer Content-Arrays hin und her führt dazu, dass die Rust-Implementierung langsamer läuft als Nodes native JIT-String-Manipulation.
 
 Infolgedessen **bleibt die JavaScript-Engine der empfohlene Runtime für semantische Such-Pipelines**. Aktivieren Sie die Rust-Engine gezielt für große Git- und File-Management-Workloads.
+
+## Plugin- & API-Integration
+
+Plugins und Build-Lifecycle-Hooks können direkt über `@docmd/api` mit der Rust-Engine interagieren. Die API-Schicht fungiert als Sicherheitsgrenze, setzt strikte Task-Allowlists durch und orchestriert hochdurchsatzstarkes natives I/O:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// Konfigurierte Engine oder beste verfügbare auflösen (versucht Rust, fällt auf JS zurück)
+const engine = await resolveEngine(['rust', 'js']);
+
+// Dateien über massive Verzeichnisbäume hinweg stapelweise entdecken
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Paralleles Multithreading-Batch-Lesen unter Umgehung von Node-Event-Loops
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Schnelle Multithread-Extraktion von Git-Commit-Logs
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 10);
+```

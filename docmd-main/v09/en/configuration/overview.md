@@ -58,8 +58,9 @@ These top-level properties configure base paths and global compiler options:
 | `src` | `String` | `"docs"` | Relative directory containing source Markdown (`.md`) files. |
 | `out` | `String` | `"site"` | Relative path where the compiler generates the production static bundle. |
 | `base` | `String` | `"/"` | Root URL path prefix (e.g. `/docs/` when hosted in a subfolder). |
+| `exclude` | `String[]` | `[]` | Gitignore-style glob patterns for files and directories to exclude from the build, MCP tools, and link validation. E.g. `["archive/**", "drafts/*.md"]`. |
 | `tmp` | `String` | `null` | Temporary build cache directory. Defaults to an isolated system temp folder. |
-| `engine` | `String` | `"js"` | Processing engine: `"js"` (default pure JavaScript engine) or `"rust"` (native binary accelerator via `@docmd/engine-rust`). |
+| `engine` | `String` | `"js"` | Processing engine: `"js"` (default pure JavaScript engine), `"rust"` (native binary accelerator via `@docmd/engine-rust`), or `"python"` (Python 3 runtime accelerator via `@docmd/engine-python`). |
 | `i18n` | `Object` | `null` | Multi-language parameters. See the [Localisation Guide](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Standard and third-party plugin configuration map. See [Plugins Guide](../plugins/usage.md). |
 

@@ -70,3 +70,23 @@ JS Worker -> JSON.stringify() -> NAPI 边界 -> Serde 反序列化 -> [Rust 任�
 但对高度迭代、CPU 密集型的任务（如 `search:index` 这种全文搜索索引）来说，**序列化往返所消耗的 CPU 比任务本身还要多**。一来一回序列化大数组内容会让 Rust 实现比 Node 原生 JIT 的字符串处理更慢。
 
 因此，**对于语义搜索流水线，JavaScript 引擎仍然是推荐的运行时**。请在大型 Git 与文件管理负载上有选择地启用 Rust 引擎。
+
+## 插件与 API 集成
+
+插件与构建生命周期钩子可以通过 `@docmd/api` 直接与 Rust 引擎交互。API 层充当安全边界，在强制执行严格任务白名单的同时编排高吞吐的原生 I/O：
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// 解析已配置引擎或最佳可用引擎（优先尝试 Rust，回退到 JS）
+const engine = await resolveEngine(['rust', 'js']);
+
+// 在庞大的目录树中批量发现文件
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// 绕过 Node 事件循环的高性能并行多线程批量读取
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// 快速多线程提取 Git 提交日志历史
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 10);
+```

@@ -59,7 +59,8 @@ Estas propiedades de nivel superior configuran las rutas base y las opciones glo
 | `out` | `String` | `"site"` | Ruta relativa donde el compilador genera el paquete estático de producción. |
 | `base` | `String` | `"/"` | Prefijo de ruta URL raíz (por ejemplo, `/docs/` cuando se aloja en una subcarpeta). |
 | `tmp` | `String` | `null` | Directorio temporal de caché de compilación. Por defecto es una carpeta temporal aislada del sistema. |
-| `engine` | `String` | `"js"` | Motor de procesamiento: `"js"` (motor predeterminado en JavaScript puro) o `"rust"` (acelerador nativo mediante `@docmd/engine-rust`). |
+| `exclude` | `String[]` | `[]` | Patrones glob de estilo gitignore para excluir archivos y directorios del build, las herramientas MCP y la validación de enlaces. Ej.: `["archive/**", "drafts/*.md"]`. |
+| `engine` | `String` | `"js"` | Motor de procesamiento: `"js"` (motor predeterminado en JavaScript puro), `"rust"` (acelerador nativo mediante `@docmd/engine-rust`) o `"python"` (acelerador de tiempo de ejecución Python 3 mediante `@docmd/engine-python`). |
 | `i18n` | `Object` | `null` | Parámetros multilingües. Consulte la [Guía de localización](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Mapa de configuración de plugins estándar y de terceros. Consulte la [Guía de plugins](../plugins/usage.md). |
 

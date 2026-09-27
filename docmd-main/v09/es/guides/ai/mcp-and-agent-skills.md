@@ -34,13 +34,13 @@ En el panel de configuración de MCP de su editor, agregue un nuevo servidor uti
 
 ## Herramientas MCP disponibles
 
-Una vez conectados, los agentes pueden ejecutar 6 controladores de herramientas principales:
+Una vez conectados, los agentes pueden utilizar los siguientes controladores de herramientas:
 
-1. `search_docs(query)`: Realiza búsquedas de texto completo en los archivos del espacio de trabajo.
-2. `list_docs(subdir?)`: Enumera las rutas relativas de los archivos Markdown, opcionalmente delimitadas a un idioma o versión.
+1. `search_docs(query)`: Realiza búsquedas de texto completo en los archivos del espacio de trabajo. Respeta `config.exclude` — los archivos excluidos nunca se devuelven.
+2. `list_docs(subdir?)`: Enumera las rutas relativas de los archivos Markdown, opcionalmente delimitadas a un idioma o versión. Respeta `config.exclude`.
 3. `read_doc(route)`: Lee el contenido Markdown sin procesar para una ruta de archivo aislada.
 4. `get_config()`: Inspecciona las opciones resueltas de `docmd.config.json` con los valores secretos redactados.
-5. `validate_docs()`: Analiza los destinos de enlaces internos e informa de anclas rotas.
+5. `validate_docs()`: Analiza los destinos de enlaces internos e informa de anclas rotas. Respeta `config.exclude`.
 6. `get_llms_context()`: Obtiene la carga útil de contexto consolidada `llms-full.txt`.
 
 ## Aprovechamiento de las habilidades de agente (`SKILL.md`)

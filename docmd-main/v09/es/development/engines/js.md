@@ -49,3 +49,23 @@ Al operar de forma íntegra en entornos de ejecución estándar, el motor JavaSc
 ## Soporte completo de funciones
 
 El motor JavaScript **ofrece compatibilidad universal con todas las funciones**. Cada característica central, sintaxis avanzada, ranura de plantilla y plugin oficial está diseñado para funcionar fluidamente en este motor.
+
+## Integración de plugins y API
+
+Los plugins y extensiones personalizadas interactúan directamente con el motor JavaScript a través de `@docmd/api`. Al ejecutarse dentro del mismo proceso de Node.js, no requiere serialización entre procesos y ofrece ejecución inmediata en memoria:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// Resuelve el motor JavaScript (siempre disponible en todas las plataformas)
+const engine = await resolveEngine('js');
+
+// Descubre archivos Markdown mediante operaciones nativas asíncronas del sistema de archivos
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Lee archivos de forma asíncrona dentro del bucle de eventos de Node.js
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Obtiene metadatos de commits de Git para seguimiento de cambios
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 5);
+```

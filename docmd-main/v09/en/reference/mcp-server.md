@@ -44,15 +44,15 @@ Configure in editor MCP settings:
 
 ## Available Tool Handlers
 
-The MCP server exposes 6 primary tool handlers:
+The MCP server exposes the following primary tool handlers:
 
 | Tool | Technical Purpose |
 | :--- | :--- |
-| **`search_docs`** | Execute full-text search queries across Markdown source files. Returns file locations and matching line numbers. |
-| **`list_docs`** | List relative Markdown file paths within the workspace (optionally scoped by subdirectories). |
+| **`search_docs`** | Execute full-text search queries across Markdown source files. Returns file locations and matching line numbers. Respects `config.exclude` — excluded files are never surfaced in results. |
+| **`list_docs`** | List relative Markdown file paths within the workspace (optionally scoped by subdirectories). Respects `config.exclude`. |
 | **`read_doc`** | Read raw Markdown source contents for specified file paths. Access is strictly sandboxed to project roots. |
 | **`get_config`** | Inspect resolved configuration parameters (`docmd.config.json`). Sensitive keys (API tokens, secret IDs) are redacted automatically. |
-| **`validate_docs`** | Execute link validation checks across Markdown sources. Returns broken link reports with target locations. |
+| **`validate_docs`** | Execute link validation checks across Markdown sources. Returns broken link reports with target locations. Respects `config.exclude`. |
 | **`get_llms_context`** | Retrieve unified `llms-full.txt` context payloads optimised for LLM prompt ingestion. |
 
 ## Protocol Compliance Details
@@ -68,6 +68,7 @@ docmd supports the standard MCP specification:
 
 * **Local Process Sandbox**: Operates strictly as a child process without opening external network ports.
 * **Path Boundary Verification**: File I/O operations are restricted within the project root directory.
+* **`config.exclude` Enforcement**: `search_docs`, `list_docs`, and `validate_docs` honour the `config.exclude` glob patterns defined in your configuration — files and directories excluded from the site build are equally excluded from MCP tool results. This ensures AI agents only see documentation that is intentionally published.
 
 ::: callout tip "MCP vs llms.txt Usage" icon:zap
 Use **MCP** when AI agents need interactive tool access to search files or validate links during code editing. Use **`llms-full.txt`** when delivering complete site context payloads in single prompt operations.

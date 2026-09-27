@@ -44,15 +44,15 @@ Configure en el panel de ajustes de MCP del editor:
 
 ## Herramientas disponibles
 
-El servidor MCP expone 6 controladores de herramientas principales:
+El servidor MCP expone los siguientes controladores de herramientas principales:
 
 | Herramienta | Propósito técnico |
 | :--- | :--- |
-| **`search_docs`** | Ejecutar consultas de búsqueda de texto completo en archivos fuente Markdown. Devuelve ubicaciones de archivos y números de línea coincidentes. |
-| **`list_docs`** | Enumerar rutas relativas de archivos Markdown dentro del espacio de trabajo (opcionalmente delimitadas por subdirectorios). |
+| **`search_docs`** | Ejecutar consultas de búsqueda de texto completo en archivos fuente Markdown. Devuelve ubicaciones de archivos y números de línea coincidentes. Respeta `config.exclude` — los archivos excluidos nunca aparecen en los resultados. |
+| **`list_docs`** | Enumerar rutas relativas de archivos Markdown dentro del espacio de trabajo (opcionalmente delimitadas por subdirectorios). Respeta `config.exclude`. |
 | **`read_doc`** | Leer el contenido fuente Markdown sin procesar para las rutas de archivo especificadas. El acceso está estrictamente aislado a las raíces del proyecto. |
 | **`get_config`** | Inspeccionar los parámetros de configuración resueltos (`docmd.config.json`). Las claves sensibles (tokens de API, ID secretos) se redactan automáticamente. |
-| **`validate_docs`** | Ejecutar comprobaciones de validación de enlaces en las fuentes Markdown. Devuelve informes de enlaces rotos con ubicaciones de destino. |
+| **`validate_docs`** | Ejecutar comprobaciones de validación de enlaces en las fuentes Markdown. Devuelve informes de enlaces rotos. Respeta `config.exclude`. |
 | **`get_llms_context`** | Obtener cargas útiles de contexto `llms-full.txt` unificadas y optimizadas para la ingestión de indicaciones de LLM. |
 
 ## Detalles de cumplimiento del protocolo
@@ -68,6 +68,7 @@ docmd admite la especificación MCP estándar:
 
 * **Aislamiento de procesos locales**: Opera estrictamente como un proceso secundario sin abrir puertos de red externos.
 * **Verificación de límites de ruta**: Las operaciones de E/S de archivos están restringidas dentro del directorio raíz del proyecto.
+* **Cumplimiento de `config.exclude`**: `search_docs`, `list_docs` y `validate_docs` respetan los patrones glob definidos en `config.exclude` — los archivos y directorios excluidos del build del sitio también se excluyen de los resultados de las herramientas MCP. Esto garantiza que los agentes de IA solo vean la documentación publicada intencionalmente.
 
 ::: callout tip "Uso de MCP frente a llms.txt" icon:zap
 Utilice **MCP** cuando los agentes de IA necesiten acceso interactivo a herramientas para buscar archivos o validar enlaces durante la edición de código. Utilice **`llms-full.txt`** al entregar cargas útiles completas de contexto del sitio en operaciones de una sola indicación.
