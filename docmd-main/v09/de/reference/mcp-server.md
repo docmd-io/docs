@@ -44,16 +44,16 @@ In den MCP-Einstellungen des Editors konfigurieren:
 
 ## Verfügbare Tool-Handler
 
-Der MCP-Server stellt 6 primäre Tool-Handler bereit:
+Der MCP-Server stellt folgende primäre Tool-Handler bereit:
 
 | Tool | Technischer Zweck |
 | :--- | :--- |
-| **`search_docs`** | Volltextsuche über Markdown-Quelldateien ausführen. Gibt Dateipfade und passende Zeilennummern zurück. |
-| **`list_docs`** | Relative Markdown-Dateipfade im Workspace auflisten (optional auf Unterverzeichnisse beschränkt). |
+| **`search_docs`** | Volltextsuche über Markdown-Quelldateien ausführen. Gibt Dateipfade und passende Zeilennummern zurück. Respektiert `config.exclude` — ausgeschlossene Dateien erscheinen nie in den Ergebnissen. |
+| **`list_docs`** | Relative Markdown-Dateipfade im Workspace auflisten (optional auf Unterverzeichnisse beschränkt). Respektiert `config.exclude`. |
 | **`read_doc`** | Rohe Markdown-Quellinhalte für angegebene Dateipfade lesen. Zugriff ist strikt auf das Projekt-Root beschränkt. |
 | **`get_config`** | Aufgelöste Konfigurationsparameter (`docmd.config.json`) inspizieren. Sensible Schlüssel (API-Tokens, Secret IDs) werden automatisch geschwärzt. |
-| **`validate_docs`** | Link-Validierungsprüfungen über Markdown-Quellen ausführen. Gibt Berichte über defekte Links mit Zielorten zurück. |
-| **`get_llms_context`** | Konsolidierte `llms-full.txt`-Kontextinhalte abrufen, die für die Prompt-Ingestion von LLMs optimiert sind. |
+| **`validate_docs`** | Link-Validierungsprüfungen über Markdown-Quellen ausführen. Gibt Berichte über defekte Links zurück. Respektiert `config.exclude`. |
+| **`get_llms_context`** | Konsolidierte `llms-full.txt`-Kontextinhalte abrufen, die für LLM-Prompt-Ingestion optimiert sind. |
 
 ## Details zur Protokollkonformität
 
@@ -68,6 +68,7 @@ docmd unterstützt die Standard-MCP-Spezifikation:
 
 * **Lokale Prozess-Sandbox**: Läuft strikt als Unterprozess, ohne externe Netzwerk-Ports zu öffnen.
 * **Pfadgrenzen-Verifizierung**: Datei-I/O-Operationen sind auf das Projekt-Root-Verzeichnis beschränkt.
+* **`config.exclude`-Durchsetzung**: `search_docs`, `list_docs` und `validate_docs` respektieren die in der Konfiguration definierten `config.exclude`-Glob-Muster — Dateien und Verzeichnisse, die vom Site-Build ausgeschlossen sind, werden gleichermaßen aus MCP-Tool-Ergebnissen ausgeschlossen. Dies stellt sicher, dass KI-Agenten nur absichtlich veröffentlichte Dokumentation sehen.
 
 ::: callout tip "MCP vs llms.txt Nutzung" icon:zap
 Verwenden Sie **MCP**, wenn KI-Agenten während der Codebearbeitung interaktiven Tool-Zugriff zum Suchen von Dateien oder Validieren von Links benötigen. Verwenden Sie **`llms-full.txt`**, wenn vollständige Website-Kontextinhalte in einzelnen Prompt-Operationen geliefert werden.

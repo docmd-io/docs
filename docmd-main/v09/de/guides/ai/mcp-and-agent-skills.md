@@ -34,13 +34,13 @@ Fügen Sie im MCP-Einstellungsbereich Ihres Editors einen neuen Server mit dem `
 
 ## Verfügbare MCP-Tools
 
-Sobald verbunden, können Agenten 6 primäre Tool-Handler ausführen:
+Sobald verbunden, können Agenten folgende Tool-Handler verwenden:
 
-1. `search_docs(query)`: Führt Volltextsuchen über Workspace-Dateien hinweg aus.
-2. `list_docs(subdir?)`: Listet relative Markdown-Dateipfade auf, optional auf Sprachversion oder Sprache beschränkt.
+1. `search_docs(query)`: Führt Volltextsuchen über Workspace-Dateien hinweg aus. Respektiert `config.exclude` — ausgeschlossene Dateien werden nie zurückgegeben.
+2. `list_docs(subdir?)`: Listet relative Markdown-Dateipfade auf, optional auf Sprachversion oder Sprache beschränkt. Respektiert `config.exclude`.
 3. `read_doc(route)`: Liest rohe Markdown-Inhalte für eine geschützte Datei-Route.
 4. `get_config()`: Inspeziert aufgelöste `docmd.config.json`-Optionen mit geschwärzten Geheimwerten.
-5. `validate_docs()`: Prüft interne Link-Ziele und meldet defekte Anker.
+5. `validate_docs()`: Prüft interne Link-Ziele und meldet defekte Anker. Respektiert `config.exclude`.
 6. `get_llms_context()`: Ruft den konsolidierten `llms-full.txt`-Kontext ab.
 
 ## Agent Skills nutzen (`SKILL.md`)

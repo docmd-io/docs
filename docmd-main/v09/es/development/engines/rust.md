@@ -68,3 +68,23 @@ Worker JS -> JSON.stringify() -> Límite NAPI -> Deserialización Serde -> [Tare
 Para operaciones dominadas por E/S (como consultar Git o leer archivos de disco), el tiempo ganado compensa con creces el coste de la conversión de texto.
 
 Sin embargo, para tareas intensivas de CPU como la indexación de búsqueda de texto completo (`search:index`), **el ciclo de serialización consume más tiempo que la tarea misma**. Por esta razón, **el motor JavaScript sigue siendo la opción recomendada para las tareas de búsqueda semántica**, reservando el motor Rust para repositorios masivos con gran volumen de archivos e historiales de Git.
+
+## Integración de plugins y API
+
+Los plugins y ganchos de compilación pueden comunicarse directamente con el motor Rust a través de `@docmd/api`. Esta capa actúa como límite de seguridad, asegurando las listas de tareas permitidas y coordinando la E/S nativa de alto rendimiento:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// Resuelve el motor configurado o el mejor disponible (prueba Rust, recurre a JS)
+const engine = await resolveEngine(['rust', 'js']);
+
+// Descubre archivos en árboles masivos de directorios
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Lectura por lotes paralela multihilo eludiendo el bucle de eventos de Node
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Extracción rápida multihilo de historiales de Git
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 10);
+```

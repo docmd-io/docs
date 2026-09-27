@@ -59,7 +59,8 @@ Diese Top-Level-Eigenschaften konfigurieren Basispfade und globale Compiler-Opti
 | `out` | `String` | `"site"` | Relativer Pfad, in dem der Compiler das statische Produktionspaket generiert. |
 | `base` | `String` | `"/"` | Root-URL-Pfadpräfix (z. B. `/docs/` bei Hosting in einem Unterordner). |
 | `tmp` | `String` | `null` | Temporäres Build-Cache-Verzeichnis. Standardmäßig ein isolierter System-Temp-Ordner. |
-| `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` (Standard-JavaScript-Engine) oder `"rust"` (nativer Beschleuniger via `@docmd/engine-rust`). |
+| `exclude` | `String[]` | `[]` | Gitignore-Glob-Muster für Dateien und Verzeichnisse, die vom Build, MCP-Tools und Link-Validierung ausgeschlossen werden. Z.B. `["archive/**", "drafts/*.md"]`. |
+| `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` (Standard-JavaScript-Engine), `"rust"` (nativer Beschleuniger via `@docmd/engine-rust`) oder `"python"` (Python 3-Laufzeitbeschleuniger via `@docmd/engine-python`). |
 | `i18n` | `Object` | `null` | Mehrsprachigkeitsparameter. Siehe den [Lokalisierungs-Leitfaden](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Konfigurationsmap für Standard- und Drittanbieter-Plugins. Siehe [Plugins-Leitfaden](../plugins/usage.md). |
 

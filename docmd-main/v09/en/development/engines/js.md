@@ -51,3 +51,23 @@ Because it operates entirely within native runtime environments, the JavaScript 
 The JavaScript engine is **exclusive in its universal feature support**. Every core feature, advanced syntax, templating zone, and official plugin is engineered to run easily here. 
 
 Whether compiling mathematical formulas, rendering live search indices, or generating static site maps, the JavaScript engine guarantees deterministic builds.
+
+## Plugin & API Integration
+
+Plugins and custom extensions interact directly with the JavaScript engine via `@docmd/api`. Because it operates within the same Node.js runtime process, it requires zero inter-process serialisation and delivers instant in-memory execution:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// Resolve the JavaScript engine (always available on every platform)
+const engine = await resolveEngine('js');
+
+// Discover markdown files using native asynchronous fs operations
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Read files asynchronously within the Node.js event loop
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Retrieve Git commit metadata for change tracking
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 5);
+```

@@ -70,3 +70,23 @@ For I/O-heavy operations like querying Git histories or reading disk buffers, th
 However, for highly iterative, CPU-bound tasks like full-text search indexing (`search:index`), **the serialisation round-trip consumes more CPU resources than the underlying task itself**. Serialising large arrays of content back and forth causes the Rust implementation to run slower than Node's native JIT string manipulation. 
 
 As a result, **the JavaScript engine remains the recommended runtime for semantic search pipelines**. Enable the Rust engine selectively for large-scale Git and file management workloads.
+
+## Plugin & API Integration
+
+Plugins and build lifecycle hooks can interact directly with the Rust engine via `@docmd/api`. The API layer acts as a security boundary, enforcing strict task allowlists whilst orchestrating high-throughput native I/O:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// Resolve configured engine or best available (tries Rust, falls back to JS)
+const engine = await resolveEngine(['rust', 'js']);
+
+// Batch discover files across massive directory trees
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Parallel multi-threaded batch reading bypassing Node event loops
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Fast multi-threaded Git history harvesting
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 10);
+```

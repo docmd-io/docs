@@ -1,44 +1,56 @@
 [
   {
-    "title": "概览",
+    "title": "Overview",
     "path": "/",
     "icon": "home"
   },
   {
-    "title": "快速开始",
+    "title": "Getting Started",
     "path": "/getting-started",
     "icon": "rocket"
   },
   {
-    "title": "配置说明",
+    "title": "Configuration",
     "path": "/configuration",
     "icon": "settings"
   },
   {
-    "title": "工作原理",
+    "title": "How It Works",
     "path": "/how-it-works",
     "icon": "cpu"
   },
   {
-    "title": "CLI 命令行参考",
+    "title": "CLI Reference",
     "path": "/cli",
     "icon": "terminal"
   },
   {
-    "title": "程序化 API",
+    "title": "Programmatic API",
     "path": "/api",
     "icon": "braces"
   },
   {
-    "title": "浏览器客户端",
+    "title": "Browser Client",
     "path": "/browser-client",
     "icon": "globe"
   },
   {
-    "title": "发布日志",
+    "title": "Release Notes",
     "icon": "scroll",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.1.6",
+        "path": "/release-notes/0-1-6"
+      },
+      {
+        "title": "v0.1.5",
+        "path": "/release-notes/0-1-5"
+      },
+      {
+        "title": "v0.1.4",
+        "path": "/release-notes/0-1-4"
+      },
       {
         "title": "v0.1.3",
         "path": "/release-notes/0-1-3"

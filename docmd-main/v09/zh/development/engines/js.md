@@ -51,3 +51,23 @@ JavaScript 引擎极其全能，在以下场景尤为出色：
 JavaScript 引擎 **独占"通用功能全支持"的位置**。每一项核心特性、进阶语法、模板区域与官方插件都被设计为可在此顺畅运行。
 
 无论是编译数学公式、渲染实时搜索索引，还是生成静态站点地图，JavaScript 引擎都能保证确定的构建结果。
+
+## 插件与 API 集成
+
+插件与自定义扩展可以通过 `@docmd/api` 直接与 JavaScript 引擎交互。由于它在相同的 Node.js 运行时进程中执行，因此无需任何跨进程序列化，并能提供即时的内存中运算：
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// 解析 JavaScript 引擎（在任何平台上均始终可用）
+const engine = await resolveEngine('js');
+
+// 使用原生异步文件系统操作发现 Markdown 文件
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// 在 Node.js 事件循环内异步读取文件
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// 检索 Git 提交元数据以进行变更跟踪
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 5);
+```

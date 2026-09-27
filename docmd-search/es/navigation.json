@@ -1,44 +1,56 @@
 [
   {
-    "title": "Visión General",
+    "title": "Overview",
     "path": "/",
     "icon": "home"
   },
   {
-    "title": "Primeros Pasos",
+    "title": "Getting Started",
     "path": "/getting-started",
     "icon": "rocket"
   },
   {
-    "title": "Configuración",
+    "title": "Configuration",
     "path": "/configuration",
     "icon": "settings"
   },
   {
-    "title": "Cómo Funciona",
+    "title": "How It Works",
     "path": "/how-it-works",
     "icon": "cpu"
   },
   {
-    "title": "Referencia CLI",
+    "title": "CLI Reference",
     "path": "/cli",
     "icon": "terminal"
   },
   {
-    "title": "API Programable",
+    "title": "Programmatic API",
     "path": "/api",
     "icon": "braces"
   },
   {
-    "title": "Cliente del Navegador",
+    "title": "Browser Client",
     "path": "/browser-client",
     "icon": "globe"
   },
   {
-    "title": "Notas de Versión",
+    "title": "Release Notes",
     "icon": "scroll",
     "collapsible": false,
     "children": [
+      {
+        "title": "v0.1.6",
+        "path": "/release-notes/0-1-6"
+      },
+      {
+        "title": "v0.1.5",
+        "path": "/release-notes/0-1-5"
+      },
+      {
+        "title": "v0.1.4",
+        "path": "/release-notes/0-1-4"
+      },
       {
         "title": "v0.1.3",
         "path": "/release-notes/0-1-3"

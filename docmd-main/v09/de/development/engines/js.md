@@ -51,3 +51,23 @@ Da sie vollständig in nativen Runtime-Umgebungen läuft, unterstützt die JavaS
 Die JavaScript-Engine ist **exklusiv in ihrer universellen Feature-Unterstützung**. Jedes Kern-Feature, jede fortgeschrittene Syntax, jede Template-Zone und jedes offizielle Plugin ist darauf ausgelegt, hier reibungslos zu laufen.
 
 Ob beim Kompilieren mathematischer Formeln, beim Rendern von Live-Suchindizes oder beim Generieren statischer Sitemaps, die JavaScript-Engine garantiert deterministische Builds.
+
+## Plugin- & API-Integration
+
+Plugins und benutzerdefinierte Erweiterungen interagieren direkt über `@docmd/api` mit der JavaScript-Engine. Da sie innerhalb desselben Node.js-Laufzeitprozesses operiert, erfordert sie keinerlei prozessübergreifende Serialisierung und liefert sofortige In-Memory-Ausführung:
+
+```typescript
+import { resolveEngine, discoverFiles, readFilesBatch, getGitLog } from '@docmd/api';
+
+// JavaScript-Engine auflösen (immer auf jeder Plattform verfügbar)
+const engine = await resolveEngine('js');
+
+// Markdown-Dateien über asynchrone Filesystem-Operationen entdecken
+const files = await discoverFiles(engine, './docs', ['.md', '.mdx']);
+
+// Dateien asynchron im Node.js-Event-Loop lesen
+const fileContents = await readFilesBatch(engine, files.map(f => f.path));
+
+// Git-Commit-Metadaten für Änderungsprotokolle abrufen
+const gitLogs = await getGitLog(engine, files.map(f => f.path), 5);
+```
