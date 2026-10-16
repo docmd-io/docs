@@ -29,7 +29,7 @@
   "layout": {
     "banners": {
       "top": {
-        "content": "**docmd v0.9.6 is live!** — Read the latest technical documentation and migration guides.",
+        "content": "**docmd v0.9.8 is live!** — Read the latest technical documentation and migration guides.",
         "type": "info",
         "dismissible": true,
         "icon": "sparkles"
