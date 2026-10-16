@@ -514,6 +514,14 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.8 - OpenAPI Collapsible Operations & Schema Constraints, LLMs Prompt & Grouping, Link Validation & Turkish i18n",
+        "path": "/release-notes/0-9-8"
+      },
+      {
+        "title": "v0.9.7 - Python Engine, Gitignore Anchor Fix, Engine Lifecycle & Security Hardening",
+        "path": "/release-notes/0-9-7"
+      },
+      {
         "title": "v0.9.6 - Universal Container Syntax, KaTeX Math Fix & Lucide Icon Upgrades",
         "path": "/release-notes/0-9-6"
       },

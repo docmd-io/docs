@@ -514,6 +514,14 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.9.8 - OpenAPI 可折叠操作与模式约束、LLMs 提示词与分组、链接验证优化及土耳其语国际化",
+        "path": "/release-notes/0-9-8"
+      },
+      {
+        "title": "v0.9.7 - Python 引擎、Gitignore 锚定修复、引擎生命周期与安全加固",
+        "path": "/release-notes/0-9-7"
+      },
+      {
         "title": "v0.9.6 - 通用容器语法、KaTeX 数学公式修复与 Lucide 图标库升级",
         "path": "/release-notes/0-9-6"
       },
