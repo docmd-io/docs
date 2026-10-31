@@ -1,9 +1,9 @@
 ---
-title: "API Programable"
+title: "API Programática"
 description: "Referencia completa de clases, métodos y tipos para DocmdAssistantEngine."
 ---
 
-El paquete `docmd-assistant` exporta la clase principal `DocmdAssistantEngine`, funciones auxiliares y definiciones de tipos TypeScript.
+El paquete `docmd-assistant` exporta la clase principal `DocmdAssistantEngine`, funciones auxiliares estándar, constantes de versión y definiciones de tipos de TypeScript.
 
 ```typescript
 import {
@@ -22,22 +22,22 @@ import {
 new DocmdAssistantEngine(options?: AssistantOptions)
 ```
 
-Inicializa una nueva instancia del motor con la configuración especificada.
+Inicializa una nueva instancia con la configuración especificada.
 
 ```typescript
 const assistant = new DocmdAssistantEngine({
   provider: 'openai',
   model: 'gpt-4o-mini',
   apiKey: process.env.OPENAI_API_KEY,
-  systemPrompt: 'Usted es un guía asistente de IA para la documentación.'
+  systemPrompt: 'Eres un asistente técnico de documentación.'
 });
 ```
 
-## Métodos Principales de Mensajería
+## Métodos de Mensajería
 
 ### sendMessage(content, overrideOptions?)
 
-Añade un mensaje de usuario al historial, procesa la interacción conversacional y devuelve una promesa `ChatResponse`.
+Agrega un mensaje de usuario al historial, despacha la ronda de conversación y devuelve una promesa `ChatResponse`.
 
 ```typescript
 public async sendMessage(
@@ -50,10 +50,10 @@ public async sendMessage(
 
 | Parámetro | Tipo | Descripción |
 | :-------- | :--- | :---------- |
-| `content` | `string` | Cadena de texto con el mensaje del usuario |
-| `overrideOptions` | `Partial<AssistantOptions>` | Sobrescritura opcional de configuración para esta interacción |
+| `content` | `string` | Mensaje de texto del usuario |
+| `overrideOptions` | `Partial<AssistantOptions>` | Anulaciones de configuración para la ronda actual |
 
-**Valor de Retorno:** `Promise<ChatResponse>`
+**Valor de retorno:** `Promise<ChatResponse>`
 
 ```typescript
 interface ChatResponse {
@@ -70,6 +70,55 @@ interface ChatResponse {
 }
 ```
 
+### sendMessageStream(content, callbacks, overrideOptions?)
+
+Ejecuta una ronda de conversación con transmisión de tokens en tiempo real, notificaciones de llamadas a herramientas y actualizaciones intermedias de síntesis.
+
+```typescript
+public async sendMessageStream(
+  content: string,
+  callbacks: StreamCallbacks,
+  overrideOptions?: Partial<AssistantOptions>
+): Promise<ChatResponse>
+```
+
+**Interfaz StreamCallbacks:**
+
+```typescript
+interface StreamCallbacks {
+  onChunk: (chunk: string, meta?: { replace?: boolean; turn?: number }) => void;
+  onToolCall?: (toolCall: any) => void;
+  onToolResult?: (toolResult: any) => void;
+  onComplete?: (fullText: string) => void;
+  onError?: (error: any) => void;
+}
+```
+
+### Reversión Atómica ante Errores
+
+Si una ronda falla debido a problemas de red, indisponibilidad del relay o errores del proveedor, el motor elimina automáticamente el mensaje del usuario de `engine.getHistory()`. Esto garantiza que el historial interno permanezca sin corromperse.
+
+## Ganchos de Ciclo de Vida Extendidos
+
+`docmd-assistant` ofrece ganchos de ciclo de vida no invasivos para paquetes descendentes (como `@docmd/plugin-ai`) o integraciones personalizadas:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  formatToolResult: (toolName, rawResult) => {
+    return rawResult;
+  },
+  compactHistory: async (history) => {
+    return history.length > 8 ? history.slice(-6) : history;
+  },
+  transformContext: (context) => {
+    return context;
+  },
+  onPayload: (payload) => {
+    console.debug('Carga útil despachada:', payload);
+  }
+});
+```
+
 ## Métodos de Gestión de Herramientas
 
 ### registerTool(tool)
@@ -82,7 +131,7 @@ public registerTool(tool: AssistantTool): this
 
 ### unregisterTool(name)
 
-Desregistra una herramienta por su nombre. Devuelve `true` si la herramienta fue encontrada y eliminada.
+Elimina una herramienta por nombre.
 
 ```typescript
 public unregisterTool(name: string): boolean
@@ -90,7 +139,7 @@ public unregisterTool(name: string): boolean
 
 ### getTools()
 
-Devuelve un arreglo con todas las herramientas registradas.
+Devuelve un array con todas las herramientas registradas.
 
 ```typescript
 public getTools(): AssistantTool[]
@@ -98,7 +147,7 @@ public getTools(): AssistantTool[]
 
 ### getTool(name)
 
-Devuelve una definición de herramienta específica por su nombre, o `undefined` si no está registrada.
+Devuelve una herramienta específica por nombre.
 
 ```typescript
 public getTool(name: string): AssistantTool | undefined
@@ -106,7 +155,7 @@ public getTool(name: string): AssistantTool | undefined
 
 ### executeTool(name, args)
 
-Ejecuta manualmente una herramienta registrada especificando su nombre y argumentos.
+Ejecuta manualmente una herramienta registrada.
 
 ```typescript
 public async executeTool(name: string, args: any): Promise<any>
@@ -116,7 +165,7 @@ public async executeTool(name: string, args: any): Promise<any>
 
 ### updateOptions(newOptions)
 
-Actualiza las opciones del motor dinámicamente.
+Actualiza opciones dinámicamente en tiempo de ejecución.
 
 ```typescript
 public updateOptions(newOptions: Partial<AssistantOptions>): this
@@ -132,7 +181,7 @@ public setSystemPrompt(prompt: string): this
 
 ### appendSystemPrompt(additionalPrompt)
 
-Añade texto adicional al prompt del sistema existente.
+Añade texto al prompt del sistema existente.
 
 ```typescript
 public appendSystemPrompt(additionalPrompt: string): this
@@ -140,17 +189,17 @@ public appendSystemPrompt(additionalPrompt: string): this
 
 ### getSystemPrompt()
 
-Devuelve la cadena del prompt del sistema activo actual.
+Devuelve el prompt del sistema activo.
 
 ```typescript
 public getSystemPrompt(): string
 ```
 
-## Métodos de Gestión del Historial
+## Métodos de Gestión de Historial
 
 ### getHistory()
 
-Devuelve una copia del arreglo del historial de conversación actual.
+Devuelve una copia del historial de mensajes.
 
 ```typescript
 public getHistory(): ChatMessage[]
@@ -158,7 +207,7 @@ public getHistory(): ChatMessage[]
 
 ### setHistory(history)
 
-Reemplaza el historial de conversación actual.
+Reemplaza el historial de mensajes.
 
 ```typescript
 public setHistory(history: ChatMessage[]): this
@@ -166,7 +215,7 @@ public setHistory(history: ChatMessage[]): this
 
 ### clearHistory()
 
-Borra todos los mensajes del historial y emite un evento `'clear'`.
+Limpia todos los mensajes y emite un evento `'clear'`.
 
 ```typescript
 public clearHistory(): this
@@ -174,17 +223,17 @@ public clearHistory(): this
 
 ### addMessage(message)
 
-Añade un objeto de mensaje directamente al historial.
+Añade un mensaje directamente al historial.
 
 ```typescript
 public addMessage(message: ChatMessage): this
 ```
 
-## Métodos de Suscripción a Eventos
+## Suscripción a Eventos
 
 ### on(event, listener)
 
-Asigna un oyente de eventos para el motor (`'message'`, `'tool_call'`, `'tool_result'`, `'error'`, `'clear'`).
+Registra un escuchador para eventos del motor (`'message'`, `'tool_call'`, `'tool_result'`, `'error'`, `'clear'`).
 
 ```typescript
 public on(event: AssistantEventType, listener: AssistantEventListener): this
@@ -192,15 +241,19 @@ public on(event: AssistantEventType, listener: AssistantEventListener): this
 
 ### off(event, listener)
 
-Elimina un oyente de eventos registrado.
+Elimina un escuchador registrado.
 
 ```typescript
 public off(event: AssistantEventType, listener: AssistantEventListener): this
 ```
 
-## Definiciones de Tipos Exportadas
+## Constantes y Definiciones de Tipos
 
-Todas las interfaces TypeScript se exportan directamente desde `docmd-assistant`:
+```typescript
+import { ENGINE_VERSION } from 'docmd-assistant';
+```
+
+Definiciones de tipos:
 
 ```typescript
 import type {
@@ -211,6 +264,7 @@ import type {
   ChatMessage,
   ChatResponse,
   SearchResultItem,
+  StreamCallbacks,
   AssistantEventType,
   AssistantEvent,
   AssistantEventListener

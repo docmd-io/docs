@@ -68,7 +68,7 @@ assistant.registerTool({
 | Tool Name | Parameters | Description |
 | :-------- | :--------- | :---------- |
 | `search_documentation` | `{ query: string }` | Searches document indices or active DOM heading sections |
-| `read_documentation_page` | `{ path: string }` | Fetches and extracts full page text and code blocks |
+| `read_documentation_page` | `{ path: string }` | Fetches and extracts full page text, code blocks, or external HTTP documentation |
 | `navigate_to_page` | `{ path: string }` | Navigates the browser to a URL or scroll anchor (`#section`) |
 | `copy_code_snippet` | `{ code: string }` | Copies code snippets directly to the user's system clipboard |
 
@@ -84,9 +84,12 @@ const assistant = new DocmdAssistantEngine({
       const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
       return await res.json();
     },
-    // 2. Custom page reader callback (CMS API, raw Markdown endpoint, or backend DB)
+    // 2. Custom page reader callback (CMS API, local Markdown endpoint, or remote URL)
     async (path) => {
       const res = await fetch(`/api/page?path=${encodeURIComponent(path)}`);
+      if (!res.ok) {
+        return { exists: false, error: `Document not found (status ${res.status})`, content: 'Document not found.' };
+      }
       const data = await res.json();
       return { title: data.title, content: data.markdown };
     }
@@ -116,9 +119,10 @@ If no custom search callback is provided, `search_documentation` falls back to a
 
 ## Full Page Reader Mechanics (`read_documentation_page`)
 
-When search result snippets are insufficient, the assistant automatically calls `read_documentation_page({ path })`:
+The assistant executes `read_documentation_page({ path })` to inspect the full contents of relevant documents:
 
-1. **Custom Reader Callback (`customReader`)**: If provided, the engine delegates page fetching to your custom loader.
-2. **Structured DOM Parser Fallback**: If no custom callback is provided, the tool fetches `window.location.origin + path` using `fetch()` and parses the `<main>`, `<article>`, or `[role="main"]` container into structured Markdown. Fenced code blocks with language tags (`pre/code`), headings (`#`), and lists (`-`) are preserved while chrome elements (`nav`, `aside`, `.toc`, `.sidebar`, `.docmd-ai-drawer`) are stripped.
-3. **Uncapped Context Delivery**: Pages are delivered in full without legacy truncation, ensuring complete configuration schemas and code samples reach the model.
-4. **Hyperlinked Citations**: Returned page content is incorporated into context, allowing the model to generate clickable Markdown links `[Page Title](path)` in its final answer.
+1. **Custom Reader Callback (`customReader`)**: If provided, the engine delegates page fetching to your custom loader. The loader can handle relative documentation paths as well as external HTTP/HTTPS reference URLs (subject to cloud relay permissions).
+2. **Grounded Verification**: If the document or URL cannot be located (404 status or fetch failure), the reader returns an explicit error payload, preventing the model from hallucinating non-existent pages.
+3. **Structured DOM Parser Fallback**: When no custom callback is supplied, the tool fetches `window.location.origin + path` using `fetch()` and parses the `<main>`, `<article>`, or `[role="main"]` container into structured Markdown. Fenced code blocks with language tags (`pre/code`), headings (`#`), and lists (`-`) are preserved while chrome elements (`nav`, `aside`, `.toc`, `.sidebar`, `.docmd-ai-drawer`) are stripped.
+4. **Uncapped Content Delivery**: Pages are delivered in full without legacy character truncation, ensuring complete configuration schemas and code samples reach the model for accurate synthesis.
+5. **Hyperlinked Citations**: Returned page content is incorporated into context, allowing the model to generate clickable Markdown links `[Page Title](path)` in its final answer.

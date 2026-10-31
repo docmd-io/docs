@@ -227,6 +227,33 @@
     ]
   },
   {
+    "title": "Variables y Tiempo de Ejecución",
+    "icon": "variable",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Resumen y Sintaxis",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "Variables Integradas",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "Variables de Configuración y Personalizadas",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "Variables de Entorno",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "Tiempo de Ejecución y Personalización",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
     "title": "Personalización y Temas",
     "icon": "palette",
     "collapsible": true,

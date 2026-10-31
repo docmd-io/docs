@@ -1,6 +1,6 @@
 ---
 title: "Configuration"
-description: "Complete options reference for docmd-assistant engine initialisation and dynamic runtime updates."
+description: "Complete options reference for docmd-assistant engine initialisation, lifecycle hooks, and dynamic runtime updates."
 ---
 
 `docmd-assistant` accepts a flexible `AssistantOptions` configuration object upon initialisation. All settings can also be updated dynamically at runtime.
@@ -24,6 +24,10 @@ interface AssistantOptions {
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
   contextWindow?: number;
+  formatToolResult?: (toolName: string, rawResult: any) => any;
+  compactHistory?: (history: ChatMessage[]) => ChatMessage[] | Promise<ChatMessage[]>;
+  transformContext?: (context: { systemPrompt: string; history: ChatMessage[]; tools?: any[]; payload?: any }) => any;
+  onPayload?: (payload: any) => void;
 }
 ```
 
@@ -46,10 +50,39 @@ interface AssistantOptions {
 | `reasoning` | `boolean \| string` | Toggle extended reasoning mode (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | Custom HTTP headers sent with relay requests | `{}` |
 | `contextWindow` | `number` | Maximum characters of retrieved documentation context passed to the model per turn. `0` = uncapped (full content delivered for highest response fidelity). | `0` (uncapped) |
+| `formatToolResult` | `function` | Optional post-processing hook to condense or filter tool execution outputs before injection into turns. | `undefined` |
+| `compactHistory` | `function` | Optional conversation history compaction hook called before payload dispatch to compress older turns. | `undefined` |
+| `transformContext` | `function` | Optional context mutation hook called immediately before final request execution. | `undefined` |
+| `onPayload` | `function` | Read-only observability hook exposing the prepared outbound payload structure. | `undefined` |
 
 ::: callout tip "Default System Prompt"
 If no `systemPrompt` is provided, the engine applies a default prompt that enforces docmd assistant identity rules, search-first tool calling, concise Markdown output, and clickable citation links.
 :::
+
+## Lifecycle Hooks Configuration
+
+Downstream plugins (such as `@docmd/plugin-ai`) and enterprise applications can register lifecycle hooks to optimise performance or enforce payload constraints without touching core engine internals:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  formatToolResult: (toolName, rawResult) => {
+    // Condense tool outputs if desired
+    return rawResult;
+  },
+  compactHistory: async (history) => {
+    // Compact conversation turns older than 6 turns
+    return history.length > 8 ? history.slice(-6) : history;
+  },
+  transformContext: (context) => {
+    // Inspect or mutate context prior to transmission
+    return context;
+  },
+  onPayload: (payload) => {
+    // Log outbound payload for monitoring
+    console.debug('Dispatching payload:', payload);
+  }
+});
+```
 
 ## Updating Options at Runtime
 

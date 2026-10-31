@@ -227,6 +227,33 @@
     ]
   },
   {
+    "title": "变量与运行时",
+    "icon": "variable",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览与语法",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "内置变量",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "配置与自定义变量",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "环境变量",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "客户端运行时与个性化",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
     "title": "主题",
     "icon": "palette",
     "collapsible": true,

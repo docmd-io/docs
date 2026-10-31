@@ -227,6 +227,33 @@
     ]
   },
   {
+    "title": "Variables & Runtime",
+    "icon": "variable",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Overview & Syntax",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "Built-in Variables",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "Config & Custom Variables",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "Environment Variables",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "Client Runtime & Personalisation",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
     "title": "Theming",
     "icon": "palette",
     "collapsible": true,

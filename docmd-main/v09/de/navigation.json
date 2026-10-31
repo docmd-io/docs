@@ -227,6 +227,33 @@
     ]
   },
   {
+    "title": "Variablen & Laufzeit",
+    "icon": "variable",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht & Syntax",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "Integrierte Variablen",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "Konfigurations- & benutzerdefinierte Variablen",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "Umgebungsvariablen",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "Client-Laufzeit & Personalisierung",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
     "title": "Theming",
     "icon": "palette",
     "collapsible": true,

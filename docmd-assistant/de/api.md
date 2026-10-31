@@ -3,7 +3,7 @@ title: "Programmierbare API"
 description: "Vollständige Klassen-, Methoden- und Typenreferenz für DocmdAssistantEngine."
 ---
 
-Das Paket `docmd-assistant` exportiert die Hauptklasse `DocmdAssistantEngine`, Hilfsfunktionen und TypeScript-Typdefinitionen.
+Das Paket `docmd-assistant` exportiert die Hauptklasse `DocmdAssistantEngine`, Standard-Hilfsfunktionen, Versionskonstanten und TypeScript-Typdefinitionen.
 
 ```typescript
 import {
@@ -33,7 +33,7 @@ const assistant = new DocmdAssistantEngine({
 });
 ```
 
-## Nachrichteneigenschaften & Methoden
+## Nachrichten-Methoden
 
 ### sendMessage(content, overrideOptions?)
 
@@ -70,11 +70,67 @@ interface ChatResponse {
 }
 ```
 
-## Werkzeug-Verwaltungsmethoden
+### sendMessageStream(content, callbacks, overrideOptions?)
+
+Führt eine Konversationsrunde mit Live-Token-Streaming, Tool-Aufruf-Benachrichtigungen und Zwischenergebnissen durch.
+
+```typescript
+public async sendMessageStream(
+  content: string,
+  callbacks: StreamCallbacks,
+  overrideOptions?: Partial<AssistantOptions>
+): Promise<ChatResponse>
+```
+
+**Stream Callbacks Schnittstelle:**
+
+```typescript
+interface StreamCallbacks {
+  onChunk: (chunk: string, meta?: { replace?: boolean; turn?: number }) => void;
+  onToolCall?: (toolCall: any) => void;
+  onToolResult?: (toolResult: any) => void;
+  onComplete?: (fullText: string) => void;
+  onError?: (error: any) => void;
+}
+```
+
+### Atomares Rollback bei Fehlern
+
+Schlägt eine Runde aufgrund eines Netzwerkfehlers oder einer Unerreichbarkeit des Relays fehl, entfernt die Engine die ausstehende Benutzernachricht atomar aus `engine.getHistory()`. Dadurch bleibt der Konversationsverlauf intakt und unverfälscht.
+
+## Erweiterte Lifecycle-Hooks
+
+`docmd-assistant` bietet nicht-invasive Lifecycle-Hooks für Plugins (wie `@docmd/plugin-ai`) und benutzerdefinierte Integrationen:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  // Tool-Ergebnisse vor Injektion in den Prompt aufbereiten
+  formatToolResult: (toolName, rawResult) => {
+    return rawResult;
+  },
+
+  // Konversationsverlauf vor dem Senden komprimieren
+  compactHistory: async (history) => {
+    return history.length > 8 ? history.slice(-6) : history;
+  },
+
+  // Kontext vor der Ausführung transformieren
+  transformContext: (context) => {
+    return context;
+  },
+
+  // Ausgehende Payload zur Überwachung einsehen
+  onPayload: (payload) => {
+    console.debug('Payload gesendet:', payload);
+  }
+});
+```
+
+## Tool-Verwaltungsmethoden
 
 ### registerTool(tool)
 
-Registriert einen Werkzeug-Handler auf der Engine-Instanz.
+Registriert einen Tool-Handler auf der Engine-Instanz.
 
 ```typescript
 public registerTool(tool: AssistantTool): this
@@ -82,7 +138,7 @@ public registerTool(tool: AssistantTool): this
 
 ### unregisterTool(name)
 
-Enfernt ein Werkzeug nach Namen. Gibt `true` zurück, wenn das Werkzeug gefunden und gelöscht wurde.
+Entfernt ein Tool nach Name.
 
 ```typescript
 public unregisterTool(name: string): boolean
@@ -90,7 +146,7 @@ public unregisterTool(name: string): boolean
 
 ### getTools()
 
-Gibt ein Array aller registrierten Werkzeuge zurück.
+Gibt ein Array aller registrierten Tools zurück.
 
 ```typescript
 public getTools(): AssistantTool[]
@@ -98,7 +154,7 @@ public getTools(): AssistantTool[]
 
 ### getTool(name)
 
-Gibt eine spezifische Werkzeugdefinition nach Namen zurück oder `undefined`, falls nicht registriert.
+Gibt die Definition eines spezifischen Tools zurück.
 
 ```typescript
 public getTool(name: string): AssistantTool | undefined
@@ -106,7 +162,7 @@ public getTool(name: string): AssistantTool | undefined
 
 ### executeTool(name, args)
 
-Führt ein registriertes Werkzeug manuell mit Argumenten aus.
+Führt ein registriertes Tool manuell mit Argumenten aus.
 
 ```typescript
 public async executeTool(name: string, args: any): Promise<any>
@@ -116,7 +172,7 @@ public async executeTool(name: string, args: any): Promise<any>
 
 ### updateOptions(newOptions)
 
-Aktualisiert Engine-Optionen dynamisch.
+Aktualisiert Optionen dynamisch zur Laufzeit.
 
 ```typescript
 public updateOptions(newOptions: Partial<AssistantOptions>): this
@@ -132,7 +188,7 @@ public setSystemPrompt(prompt: string): this
 
 ### appendSystemPrompt(additionalPrompt)
 
-Hängt zusätzlichen Text an den bestehenden System-Prompt an.
+Hängt Text an den bestehenden System-Prompt an.
 
 ```typescript
 public appendSystemPrompt(additionalPrompt: string): this
@@ -140,7 +196,7 @@ public appendSystemPrompt(additionalPrompt: string): this
 
 ### getSystemPrompt()
 
-Gibt den aktuell aktiven System-Prompt als String zurück.
+Gibt den aktiven System-Prompt zurück.
 
 ```typescript
 public getSystemPrompt(): string
@@ -166,7 +222,7 @@ public setHistory(history: ChatMessage[]): this
 
 ### clearHistory()
 
-Löscht alle Nachrichten im Verlauf und löst das Event `'clear'` aus.
+Löscht alle Nachrichten und emittiert ein `'clear'`-Event.
 
 ```typescript
 public clearHistory(): this
@@ -180,11 +236,11 @@ Fügt ein Nachrichtenobjekt direkt zum Verlauf hinzu.
 public addMessage(message: ChatMessage): this
 ```
 
-## Event-Subskriptionsmethoden
+## Event-Abonnements
 
 ### on(event, listener)
 
-Registriert einen Event-Listener für Engine-Events (`'message'`, `'tool_call'`, `'tool_result'`, `'error'`, `'clear'`).
+Registriert einen Listener für Engine-Events (`'message'`, `'tool_call'`, `'tool_result'`, `'error'`, `'clear'`).
 
 ```typescript
 public on(event: AssistantEventType, listener: AssistantEventListener): this
@@ -192,15 +248,19 @@ public on(event: AssistantEventType, listener: AssistantEventListener): this
 
 ### off(event, listener)
 
-Entfernt einen registrierten Event-Listener.
+Entfernt einen Event-Listener.
 
 ```typescript
 public off(event: AssistantEventType, listener: AssistantEventListener): this
 ```
 
-## Exportierte Typdefinitionen
+## Exportierte Typen & Konstanten
 
-Alle TypeScript-Schnittstellen werden direkt aus `docmd-assistant` exportiert:
+```typescript
+import { ENGINE_VERSION } from 'docmd-assistant';
+```
+
+Typdefinitionen:
 
 ```typescript
 import type {
@@ -211,6 +271,7 @@ import type {
   ChatMessage,
   ChatResponse,
   SearchResultItem,
+  StreamCallbacks,
   AssistantEventType,
   AssistantEvent,
   AssistantEventListener

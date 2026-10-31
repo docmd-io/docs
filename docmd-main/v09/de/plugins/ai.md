@@ -8,7 +8,9 @@ Das `@docmd/plugin-ai`-Plugin fügt Ihrer Dokumentationsseite ein interaktives K
 ## Hauptfunktionen
 
 * **Schwebender Trigger & Glassmorphism-Drawer**: Sauberer Pill-Trigger (`Ctrl+K`-Tastenkürzel), der sich in ein themenbewusstes Chat-Panel ausklappt.
-* **Suchbasiertes RAG**: Fragt vorgebaute `search-index.json`-Daten ab, um LLM-Antworten direkt in der Dokumentation Ihrer Website zu verankern.
+* **Deterministische Suche & Faktenprüfung**: Erzwingt einen zweistufigen Abruf (gezielte Suche, gefolgt vom vollständigen Lesen der maßgeblichen Seite) mit Live-Verfügbarkeitsprüfung für interne Pfade und externe URLs.
+* **Externe URL-Abfrage & Cloud-Portal-Governance**: Ruft externe HTTP/HTTPS-Ressourcen ab, wenn in `docmd.config.json` aktiviert und durch die Richtlinien des docmd Cloud Relays freigegeben.
+* **Unsichtbare Konversations-Kompaktierung**: Reduziert historische Dialogrunden im Hintergrund, sodass Nachrichtenlimits des Relays bei langen Sitzungen zuverlässig eingehalten werden.
 * **Kostenloses docmd Cloud-Relay**: Bereitstellung auf statischen Hosts (GitHub Pages, Cloudflare Pages, Netlify, Vercel) ohne Backend-Server-Infrastruktur.
 * **BYOK Server- & KMS-Sicherheit**: API-Schlüssel werden im Ruhezustand via KMS in docmd Cloud verschlüsselt oder serverseitig aufgelöst (`AI_API_KEY`, `OPENAI_API_KEY`), was eine Null-Credential-Offenlegung in Client-Web-Bundles garantiert.
 * **Multi-Provider-Integration**: Angetrieben von `aiplug` mit nativer Unterstützung für OpenAI, Anthropic, Gemini, DeepSeek, Groq und lokale Ollama-Instanzen.
@@ -29,6 +31,7 @@ Für statische Websites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3) nu
       "assistant": true,
       "projectId": "docmd_aiv77jc8ms8qtpvd",
       "position": "bottom-center",
+      "allowExternalUrls": false,
       "greeting": "Wie kann ich heute bei dieser Dokumentation helfen?",
       "placeholder": "Frage an die KI stellen...",
       "suggestions": [
@@ -53,6 +56,7 @@ Wenn docmd als Node.js-Server oder Docker-Container betrieben wird:
       "provider": "openai",
       "model": "gpt-4o-mini",
       "position": "bottom-center",
+      "allowExternalUrls": false,
       "greeting": "Wie kann ich heute bei dieser Dokumentation helfen?",
       "placeholder": "Frage an die KI stellen...",
       "suggestions": [
@@ -70,7 +74,7 @@ Wenn docmd als Node.js-Server oder Docker-Container betrieben wird:
 }
 ```
 
-## Optionenreferenz
+## Optionsreferenz
 
 | Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
@@ -78,6 +82,7 @@ Wenn docmd als Node.js-Server oder Docker-Container betrieben wird:
 | `projectId` | `string` | `undefined` | Projekt-ID von [docmd Cloud](https://cloud.docmd.io) für das kostenlose serverlose Relay auf statischen Websites. |
 | `cloud` | `object` | `undefined` | Cloud-Relay-Optionsobjekt (z. B. `{ "projectId": "docmd_ai..." }`). |
 | `endpoint` | `string` | `'https://api.docmd.io/v1/ai/chat'` (wenn `projectId` gesetzt) | Benutzerdefinierte AI-Chat-Relay-Endpunkt-URL. |
+| `allowExternalUrls` | `boolean` | `false` | Erlaubt dem Assistenten-Tool, externe HTTP/HTTPS-URLs abzurufen. |
 | `captcha` | `boolean` | `false` | Aktiviert Open-Source Proof-of-Work Anti-Bot-CAPTCHA-Herausforderungen vor der Ausführung von Anfragen. |
 | `provider` | `string` | `'openai'` | LLM-Anbieter für selbst gehostete Server (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'ollama'`). |
 | `model` | `string` | Anbieter-Standard | Spezifische Modell-ID (z. B. `gpt-4o-mini`, `claude-3-5-haiku-20241022`). |
@@ -87,6 +92,51 @@ Wenn docmd als Node.js-Server oder Docker-Container betrieben wird:
 | `suggestions` | `string[]` | Standardfragen | Empfohlene Schnelleingabe-Schaltflächen. |
 | `contextLimit` | `number` | `5` | Maximale Anzahl an RAG-Dokumentations-Blocks, die in das LLM-Kontextfenster übergeben werden. |
 | `rateLimit` | `object` | `{ maxRequests: 10, windowMs: 60000 }` | Sliding-Window-Ratenbegrenzung zum Schutz von LLM-Modellen vor API-Überlastung. |
+
+## Externe URL-Abfragen & Cloud-Portal-Governance
+
+Wenn Ihre Dokumentation auf externe Standards, Spezifikationen oder Partnersysteme verweist, aktivieren Sie das Abrufen externer URLs in Ihrer `docmd.config.json`:
+
+```json
+{
+  "plugins": {
+    "ai": {
+      "allowExternalUrls": true
+    }
+  }
+}
+```
+
+### Vorrangregel des Cloud-Relays
+
+::: callout important title:"Vorrang der Cloud-Relay-Sicherheitsrichtlinien" icon:shield
+Sicherheitsrichtlinien, die im docmd Cloud-Portal festgelegt wurden, haben stets Vorrang vor lokalen `docmd.config.json`-Einstellungen.
+:::
+
+Wenn Ihre Dokumentation über das docmd Cloud-Relay geroutet wird, bestimmt die Projektrichtlinie in der Cloud verbindlich, ob ausgehende HTTP-Abfragen erlaubt sind:
+
+1. Melden Sie sich in Ihrem Dashboard auf [cloud.docmd.io](https://cloud.docmd.io) an.
+2. Öffnen Sie **Projekteinstellungen (Project Configuration)** &rarr; **Berechtigungen & Funktionen (Permissions & Capabilities)**.
+3. Schalten Sie **Externe URL-Abfragen erlauben (Allow External URL Fetching)** ein.
+4. Ist diese Option im Cloud-Portal deaktiviert, blockiert das Relay externe Anfragen selbst dann, wenn `allowExternalUrls: true` lokal gesetzt ist.
+
+### Fundierte Dokumentenüberprüfung
+
+Der Assistent prüft vor jeder Zitation, ob eine Seite tatsächlich existiert. Wenn das Tool `read_documentation_page` aufgerufen wird:
+* Wird geprüft, ob die Zieldatei oder die externe URL erreichbar ist.
+* Wird ein 404-Fehler oder eine fehlende Ressource festgestellt, meldet der Assistent transparent, dass die Seite nicht existiert, anstatt Inhalte zu erfinden.
+
+## Deterministische Retrieval-Pipeline & Konversations-Kompaktierung
+
+Um sofortige Reaktionszeiten zu sichern und endlose Tool-Aufrufschleifen zu verhindern, folgt `@docmd/plugin-ai` einem deterministischen Ablauf:
+
+1. **Gezielte Suche**: Der Assistent führt eine einzelne, präzise Suche via `search_documentation` durch.
+2. **Autoritative Seitenlesung**: Er liest die am besten passende Seite vollständig via `read_documentation_page`.
+3. **Direkte Synthese**: Er formuliert unmittelbar eine fundierte Antwort mit geprüften Code-Beispielen und Verweisen.
+
+### Unsichtbare Konversations-Kompaktierung
+
+Bei Unterhaltungen mit mehr als sechs Runden komprimiert der Assistent ältere Dialogteile automatisch im Hintergrund. Dies verhindert das Überschreiten von Zeichengrenzen (wie 50.000-Zeichen-Limits bei Relays), ohne dass der Kontext der Konversation verloren geht.
 
 ## Kostenlose docmd Cloud-Relay-Einrichtung
 
@@ -114,21 +164,18 @@ Wenn Sie Ihre Dokumentation als statische Dateien auf GitHub Pages, Cloudflare P
 `@docmd/plugin-ai` verarbeitet API-Anmeldeinformationen strikt serverseitig oder über das KMS-verschlüsselte Relay von docmd Cloud. Provider-API-Schlüssel werden niemals im Client-HTML oder in statischen JavaScript-Bundles gerendert.
 :::
 
-Beim Betrieb als Node.js-Server setzen Sie die Umgebungsschlüssel des Anbieters vor dem Serverstart:
+Wenn docmd als Node.js-Server ausgeführt wird, definieren Sie Umgebungsvariablen vor dem Start:
 
 ```bash
 export OPENAI_API_KEY="sk-..."
 # oder
 export ANTHROPIC_API_KEY="sk-ant-..."
 # oder generischer Fallback
-export AI_API_KEY="ihr-api-schlüssel"
+export AI_API_KEY="your-api-key"
 ```
 
-## Architektur-Ausführungsfluss
+## Architektur und Ausführungsablauf
 
-1. **Registrierung von Aktionen zur Build-Zeit**: Während der Website-Kompilierung registriert `@docmd/plugin-ai` serverseitige RPC-Aktionshandler (`ai:chat`) oder injiziert den Cloud-Relay-Client mit Ihrer `projectId`.
-2. **Retrieval-Augmented Generation (RAG)**: Wenn ein Leser eine Frage sendet:
-   - Der Client fragt den von `@docmd/plugin-search` kompilierten Suchindex oder MCP-Tools ab.
-   - Passende Dokumentenüberschriften und Textabschnitte werden basierend auf Vektor-/Schlüsselwortdistanz ausgewählt.
-   - Relevante Abschnitte und Tool-Ergebnisse werden an das Relay oder den Server-Endpunkt übertragen.
-3. **Provider-Verarbeitung & Zitate**: Die Anfrage wird sicher an den festgelegten Modellanbieter weitergeleitet. Antworten werden in Echtzeit gestreamt, inklusive Links auf Quellanker.
+1. **Aktionsregistrierung zur Build-Zeit**: Während der Site-Kompilierung registriert `@docmd/plugin-ai` RPC-Handler (`ai:chat`) oder bindet den Cloud-Relay-Client mit Ihrer `projectId` ein.
+2. **Retrieval-Augmented Generation (RAG)**: Bei Benutzeranfragen wird der Suchindex abgefragt, relevante Abschnitte selektiert und dem Modell übergeben.
+3. **Antwort-Streaming**: Die Antwort wird in Echtzeit mit klickbaren Markdown-Links zu den zitierten Abschnitten übertragen.

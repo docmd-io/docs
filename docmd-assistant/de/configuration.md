@@ -1,11 +1,11 @@
 ---
 title: "Konfiguration"
-description: "Vollständige Referenz der Optionen für die Initialisierung und dynamische Runtime-Updates von docmd-assistant."
+description: "Vollständige Optionsreferenz für die Initialisierung, Lifecycle-Hooks und dynamische Laufzeit-Updates von docmd-assistant."
 ---
 
-`docmd-assistant` akzeptiert bei der Initialisierung ein flexibles `AssistantOptions`-Konfigurationsobjekt. Alle Einstellungen können auch dynamisch zur Laufzeit aktualisiert werden.
+`docmd-assistant` akzeptiert bei der Initialisierung ein flexibles `AssistantOptions`-Objekt. Alle Einstellungen können auch zur Laufzeit dynamisch aktualisiert werden.
 
-## Optionenschema-Referenz
+## Options-Schema-Referenz
 
 ```typescript
 interface AssistantOptions {
@@ -24,36 +24,65 @@ interface AssistantOptions {
   reasoning?: boolean | 'none' | 'low' | 'medium' | 'high';
   headers?: Record<string, string>;
   contextWindow?: number;
+  formatToolResult?: (toolName: string, rawResult: any) => any;
+  compactHistory?: (history: ChatMessage[]) => ChatMessage[] | Promise<ChatMessage[]>;
+  transformContext?: (context: { systemPrompt: string; history: ChatMessage[]; tools?: any[]; payload?: any }) => any;
+  onPayload?: (payload: any) => void;
 }
 ```
 
-## Parameter-Details
+## Parameterdetails
 
 | Feld | Typ | Beschreibung | Standard |
-| :---- | :--- | :---------- | :------ |
+| :--- | :--- | :----------- | :------- |
 | `provider` | `string` | Ziel-KI-Anbieter (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'minimax'`, `'ollama'`) | Dynamisch |
-| `model` | `string` | Modell-Bezeichner (z. B. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | Dynamisch |
-| `apiKey` | `string` | Anbieter-API-Schlüssel für direkte Verbindung via `aiplug` | `undefined` |
-| `baseURL` | `string` | Benutzerdefinierte Basis-API-Gateway-URL | `undefined` |
-| `relayUrl` | `string` | Cloud-Relay-Endpunkt-URL für schlüsselloses Routing | `undefined` |
+| `model` | `string` | Zielmodell-ID (z. B. `'gpt-4o-mini'`, `'claude-3-5-haiku-20241022'`) | Dynamisch |
+| `apiKey` | `string` | Provider-API-Schlüssel für direkte Anbindung via `aiplug` | `undefined` |
+| `baseURL` | `string` | Benutzerdefinierte API-Gateway-Basis-URL | `undefined` |
+| `relayUrl` | `string` | Cloud-Relay-Endpunkt für schlüsselloses Routing | `undefined` |
 | `endpoint` | `string` | Alias für `relayUrl` | `'https://api.docmd.io/v1/ai/chat'` |
-| `projectId` | `string` | Projekt-Bezeichner, der mit Relay-Anfragen gesendet wird | `undefined` |
-| `systemPrompt` | `string` | Anweisungen zur Identität und zum Verhalten des Assistenten | System-Standard |
+| `projectId` | `string` | Projekt- oder Website-ID für Relay-Anfragen | `undefined` |
+| `systemPrompt` | `string` | Basis-Anweisungen zur Steuerung von Identität und Verhalten | System-Standard |
 | `history` | `ChatMessage[]` | Vorbefüllter Konversationsverlauf | `[]` |
-| `tools` | `AssistantTool[]` | Initiales Array registrierter Werkzeuge | `[]` |
-| `temperature` | `number` | Sampling-Temperatur (0.0 bis 1.0) | Anbieter-Standard |
-| `maxTokens` | `number` | Maximale Token pro Antwort | Anbieter-Standard |
-| `reasoning` | `boolean \| string` | Umschalten des erweiterten Reasoning-Modus (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
+| `tools` | `AssistantTool[]` | Initial registrierte Tools | `[]` |
+| `temperature` | `number` | Sampling-Temperatur (0.0 bis 1.0) | Provider-Standard |
+| `maxTokens` | `number` | Maximale Tokens pro Antwort | Provider-Standard |
+| `reasoning` | `boolean \| string` | Erweiterter Reasoning-Modus (`false`, `'low'`, `'medium'`, `'high'`) | `false` |
 | `headers` | `Record<string, string>` | Benutzerdefinierte HTTP-Header für Relay-Anfragen | `{}` |
-| `contextWindow` | `number` | Maximale Zeichenanzahl des an das Modell übergebenen Dokumentationskontexts pro Turn. `0` = unbegrenzt (vollständiger Inhalt für höchste Wiedergabetreue). | `0` (unbegrenzt) |
+| `contextWindow` | `number` | Zeichenlimit für Dokumentationskontext pro Runde. `0` = unbegrenzt. | `0` (unbegrenzt) |
+| `formatToolResult` | `function` | Hook zum Formatieren oder Filtern von Tool-Ausgaben. | `undefined` |
+| `compactHistory` | `function` | Hook zum Komprimieren von Verlaufsnachrichten vor dem Senden. | `undefined` |
+| `transformContext` | `function` | Hook zur Kontext-Transformation vor der Anfrageausführung. | `undefined` |
+| `onPayload` | `function` | Lese-Hook zur Inspektion der vorbereiteten ausgehenden Payload. | `undefined` |
 
 ::: callout tip "Standard-System-Prompt"
-Wenn kein `systemPrompt` angegeben ist, wendet die Engine einen Standard-Prompt an, der Regeln für die Assistentenidentität, bevorzugte Werkzeugaufrufe und klickbare Zitationslinks durchsetzt.
+Wird kein `systemPrompt` angegeben, verwendet die Engine einen Standard-Prompt, der docmd-Regeln, Such-Priorisierung und präzise Markdown-Zitate durchsetzt.
 :::
 
-## Aktualisieren von Optionen zur Laufzeit
+## Lifecycle-Hooks-Konfiguration
 
-Ändern Sie Konfigurationsoptionen dynamisch während einer aktiven Sitzung mit `updateOptions()`:
+Downstream-Pakete (wie `@docmd/plugin-ai`) oder eigene Integrationen können Lifecycle-Hooks registrieren:
+
+```typescript
+const assistant = new DocmdAssistantEngine({
+  formatToolResult: (toolName, rawResult) => {
+    return rawResult;
+  },
+  compactHistory: async (history) => {
+    return history.length > 8 ? history.slice(-6) : history;
+  },
+  transformContext: (context) => {
+    return context;
+  },
+  onPayload: (payload) => {
+    console.debug('Ausgehende Payload:', payload);
+  }
+});
+```
+
+## Optionen zur Laufzeit aktualisieren
+
+Passen Sie Einstellungen während einer aktiven Sitzung dynamisch an:
 
 ```typescript
 assistant.updateOptions({
@@ -63,24 +92,22 @@ assistant.updateOptions({
 });
 ```
 
-## System-Prompt-Verwaltung
-
-`docmd-assistant` bietet dedizierte Methoden zum Aktualisieren oder Anhängen von Systemanweisungen:
+## System-Prompt verwalten
 
 ```typescript
 // System-Prompt vollständig ersetzen
-assistant.setSystemPrompt('Sie sind ein technischer Support-Spezialist für eine Entwicklerplattform.');
+assistant.setSystemPrompt('Sie sind technischer Support-Spezialist.');
 
-// Zusätzlichen Kontext anhängen
-assistant.appendSystemPrompt('Antworten Sie immer auf Deutsch und stellen Sie Schritt-für-Schritt-Codebeispiele bereit.');
+// Zusätzliche Anweisungen anhängen
+assistant.appendSystemPrompt('Antworten Sie immer präzise mit Codebeispielen.');
 
-// Aktuellen System-Prompt abrufen
+// Aktiven System-Prompt abfragen
 const currentPrompt = assistant.getSystemPrompt();
 ```
 
-## Unterstützung für den Reasoning-Modus
+## Reasoning-Modus
 
-Für Modelle, die erweitertes Reasoning unterstützen (wie DeepSeek-R1 oder OpenAI o3-mini), stellen Sie die Option `reasoning` ein:
+Für Modelle mit erweiterter Argumentation (wie DeepSeek-R1 oder OpenAI o3-mini):
 
 ```typescript
 const assistant = new DocmdAssistantEngine({
@@ -92,8 +119,6 @@ const assistant = new DocmdAssistantEngine({
 ```
 
 ## Benutzerdefinierte Relay-Header
-
-Übergeben Sie benutzerdefinierte Header beim Routing durch Unternehmens-API-Gateways:
 
 ```typescript
 const assistant = new DocmdAssistantEngine({

@@ -8,7 +8,9 @@ The `@docmd/plugin-ai` plugin introduces an interactive AI Assistant overlay to 
 ## Key Capabilities
 
 * **Floating Trigger & Glassmorphic Drawer**: Clean pill trigger (`Ctrl+K` shortcut) that expands into a theme-aware chat panel.
-* **Search-Aware RAG**: Queries pre-built `search-index.json` data to ground LLM responses directly in your site's documentation.
+* **Deterministic Search & Grounded Verification**: Enforces a strict two-step retrieval workflow (single targeted search followed by reading the authoritative page) with live existence validation for internal paths and external URLs.
+* **External URL Fetching & Cloud Portal Governance**: Fetches remote HTTP/HTTPS reference resources when enabled in `docmd.config.json` and permitted by docmd Cloud Relay governance policies.
+* **Conversation History Summarisation**: Invisible background compaction bounds context payloads within relay thresholds across extended dialogues, preventing payload truncation.
 * **Free docmd Cloud Relay**: Deploy on static hosts (GitHub Pages, Cloudflare Pages, Netlify, Vercel) without any backend server infrastructure.
 * **BYOK Server & KMS Security**: API keys are encrypted at rest via KMS in docmd Cloud or resolved server-side (`AI_API_KEY`, `OPENAI_API_KEY`), guaranteeing zero credential exposure in client web bundles.
 * **Multi-Provider Integration**: Powered by `aiplug` with native support for OpenAI, Anthropic, Gemini, DeepSeek, Groq, and local Ollama instances.
@@ -29,6 +31,7 @@ For static sites (GitHub Pages, Cloudflare Pages, Netlify, Vercel, S3), connect 
       "assistant": true,
       "projectId": "docmd_aiv77jc8ms8qtpvd",
       "position": "bottom-center",
+      "allowExternalUrls": false,
       "greeting": "How can I help with these docs today?",
       "placeholder": "Ask AI a question...",
       "suggestions": [
@@ -53,6 +56,7 @@ For Node.js or Docker hosting where docmd runs as a server, configure the provid
       "provider": "openai",
       "model": "gpt-4o-mini",
       "position": "bottom-center",
+      "allowExternalUrls": false,
       "greeting": "How can I help with these docs today?",
       "placeholder": "Ask AI a question...",
       "suggestions": [
@@ -78,6 +82,7 @@ For Node.js or Docker hosting where docmd runs as a server, configure the provid
 | `projectId` | `string` | `undefined` | Project ID from [docmd Cloud](https://cloud.docmd.io) for free serverless relay on static sites. |
 | `cloud` | `object` | `undefined` | Cloud relay options object (e.g. `{ "projectId": "docmd_ai..." }`). |
 | `endpoint` | `string` | `'https://api.docmd.io/v1/ai/chat'` (when `projectId` set) | Custom AI chat relay endpoint URL. |
+| `allowExternalUrls` | `boolean` | `false` | Permit the assistant tool executor to fetch external HTTP/HTTPS documentation URLs. |
 | `captcha` | `boolean` | `false` | Enable open-source Proof-of-Work anti-bot CAPTCHA challenges before query execution. |
 | `provider` | `string` | `'openai'` | LLM provider for self-hosted servers (`'openai'`, `'anthropic'`, `'gemini'`, `'deepseek'`, `'groq'`, `'ollama'`). |
 | `model` | `string` | Provider default | Specific model ID (e.g. `gpt-4o-mini`, `claude-3-5-haiku-20241022`). |
@@ -87,6 +92,51 @@ For Node.js or Docker hosting where docmd runs as a server, configure the provid
 | `suggestions` | `string[]` | Default questions | Recommended quick-prompt buttons. |
 | `contextLimit` | `number` | `5` | Maximum RAG documentation chunks passed into the LLM context window. |
 | `rateLimit` | `object` | `{ maxRequests: 10, windowMs: 60000 }` | Sliding window rate limiting to protect LLM models from API overuse. |
+
+## External URL Fetching & Cloud Portal Governance
+
+When your project references external standards, specification sheets, or sister documentation repositories, enable external URL reading in `docmd.config.json`:
+
+```json
+{
+  "plugins": {
+    "ai": {
+      "allowExternalUrls": true
+    }
+  }
+}
+```
+
+### Cloud Relay Priority Rule
+
+::: callout important title:"Cloud Relay Governance Precedence" icon:shield
+Security policies configured in the docmd Cloud portal take precedence over client-side `docmd.config.json` options.
+:::
+
+If your documentation is routed through docmd Cloud Relay, the cloud project policy strictly governs whether external outbound fetches are executed:
+
+1. Sign in to your project dashboard on [cloud.docmd.io](https://cloud.docmd.io).
+2. Navigate to **Project Configuration** &rarr; **Permissions & Capabilities**.
+3. Toggle **Allow External URL Fetching**.
+4. If disabled at the Cloud Relay level, outbound URL requests will be rejected by the relay policy even if `allowExternalUrls: true` is configured in your local `docmd.config.json`.
+
+### Grounded Document Verification
+
+The assistant strictly verifies document existence prior to generating citations. When the `read_documentation_page` tool executes:
+* It tests whether the target markdown file or external HTTP URL is reachable.
+* If a 404 or missing file is encountered, the assistant explicitly reports that the resource is unavailable rather than fabricating contents.
+
+## Deterministic Retrieval Pipeline & Conversation Compaction
+
+To ensure immediate response speeds and eliminate tool-calling loops, `@docmd/plugin-ai` implements a deterministic two-step retrieval pipeline:
+
+1. **Targeted Search**: The assistant executes a single, precise `search_documentation` query to identify the top matching page.
+2. **Authoritative Page Read**: It invokes `read_documentation_page` on that single highest-ranked document.
+3. **Immediate Synthesis**: It synthesises an answer immediately from the retrieved document text, providing verified code blocks and grounded Markdown citations. It only initiates a secondary lookup if the initial page fails to address the user's specific query.
+
+### Invisible History Compaction
+
+For long dialogues extending beyond six conversation turns, the assistant automatically compacts earlier dialogue turns into concise factual context summaries. This keeps overall payload sizes well within relay boundaries (avoiding 50,000-character payload limits) without decapitating the assistant or causing memory loss.
 
 ## Free docmd Cloud Relay Setup
 
