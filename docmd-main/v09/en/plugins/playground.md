@@ -27,6 +27,12 @@ Renders live HTML/CSS widgets inside an isolated preview panel with tab toggling
 ::: card title="docmd-runtime Integration" icon:braces
 Direct, native access to the client-side `window.docmd` runtime and reactive page variables via `docmd.var.get()` and `docmd.var.set()`.
 :::
+::: card title="Live & Code View Toggle" icon:columns
+Interactive header tabs allow instant switching between running component previews and underlying source code when `tabs` is enabled.
+:::
+::: card title="Graceful Warning & Error Handling" icon:shield-alert
+Missing scripts render non-breaking warning banners with clean fallback code; runtime exceptions display structured execution notices.
+:::
 ::: card title="Ultra-Lightweight & Fast" icon:feather
 Pure vanilla JavaScript and CSS (< 10 KB total bundle) with keyboard shortcuts (`Cmd+Enter` / `Ctrl+Enter` to run, `Tab` for indentation).
 :::

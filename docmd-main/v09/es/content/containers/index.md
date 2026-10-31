@@ -38,6 +38,7 @@ Admite **Markdown**, imágenes y anidamiento profundo de componentes.
 | **[Incrustaciones / Embeds](embed.md)** | `embed` | Incrustaciones para video, redes sociales y medios interactivos con `embed-lite`. |
 | **[Registros de Cambios / Changelogs](changelogs.md)** | `changelog` | Historiales de versiones basados en líneas de tiempo con elementos explícitos `::: log`. |
 | **[Diagramas Mermaid](mermaid.md)** | `mermaid` | Diagramas de flujo, secuencia y mapas de arquitectura con controles por diagrama. |
+| **[Playground / Entorno Interactivo](playground.md)** | `playground` | Ejecutor de código en vivo, vista previa de componentes y scripts vinculados. |
 | **[Contenedores Anidados](nested-containers.md)** | - | Patrones de composición recursiva para diseños complejos. |
 
 ## Análisis Universal de Atributos y Clave-Valor (Universal Attribute & Key-Value Parsing)

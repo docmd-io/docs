@@ -38,6 +38,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[URL Embeds](embed.md)** | `embed` | Zero-latency embeds for video, social, and interactive media via `embed-lite`. |
 | **[Changelogs](changelogs.md)** | `changelog` | Timeline-based version histories with explicit `::: log` items. |
 | **[Mermaid Diagrams](mermaid.md)** | `mermaid` | Flowcharts, sequence diagrams, and architecture maps with per-diagram controls. |
+| **[Playground](playground.md)** | `playground` | Interactive live code runner, component preview sandbox, and script sourcing. |
 | **[Nested Containers](nested-containers.md)** | - | Recursive composition patterns for multi-component layouts. |
 
 ## Universal Attribute & Key-Value Parsing

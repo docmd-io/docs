@@ -211,6 +211,10 @@
             "path": "/content/containers/changelogs"
           },
           {
+            "title": "Playground 演练场",
+            "path": "/content/containers/playground"
+          },
+          {
             "title": "嵌套容器",
             "path": "/content/containers/nested-containers"
           }
@@ -352,6 +356,10 @@
       {
         "title": "数学公式 (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "Playground 演练场",
+        "path": "/plugins/playground"
       },
       {
         "title": "OKF Bundles",

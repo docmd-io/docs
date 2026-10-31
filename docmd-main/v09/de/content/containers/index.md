@@ -38,6 +38,7 @@ Er unterstützt **Markdown**, Bilder und verschachtelte Komponenten.
 | **[URL Embeds](embed.md)** | `embed` | Einbettungen für Videos, soziale Netzwerke und interaktive Medien über `embed-lite`. |
 | **[Changelogs](changelogs.md)** | `changelog` | Zeitleistenbasierte Versionshistorien mit expliziten `::: log`-Elementen. |
 | **[Mermaid Diagramme](mermaid.md)** | `mermaid` | Flussdiagramme, Sequenzdiagramme und Architekturkarten mit Steuerung pro Diagramm. |
+| **[Playground](playground.md)** | `playground` | Interaktiver Live-Code-Runner, Komponentenvorschau und Skripteinbindung. |
 | **[Verschachtelte Container](nested-containers.md)** | - | Rekursive Muster für komplexe Komponenten-Layouts. |
 
 ## Universelles Attribut- & Key-Value-Parsing

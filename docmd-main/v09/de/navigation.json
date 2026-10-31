@@ -211,6 +211,10 @@
             "path": "/content/containers/changelogs"
           },
           {
+            "title": "Playground",
+            "path": "/content/containers/playground"
+          },
+          {
             "title": "Verschachtelte Container",
             "path": "/content/containers/nested-containers"
           }
@@ -352,6 +356,10 @@
       {
         "title": "Math (KaTeX)",
         "path": "/plugins/math"
+      },
+      {
+        "title": "Playground",
+        "path": "/plugins/playground"
       },
       {
         "title": "OKF-Bundles",

@@ -27,6 +27,12 @@ Rendert interaktive UI-Komponenten in einem isolierten Vorschaufenster mit einfa
 ::: card title="docmd-runtime-Integration" icon:braces
 Direkter Zugriff auf die `window.docmd`-Laufzeitumgebung und reaktive Variablen über `docmd.var.get()` und `docmd.var.set()`.
 :::
+::: card title="Live- & Code-Umschalter" icon:columns
+Interaktive Reiter in der Symbolleiste erlauben nahtloses Wechseln zwischen Live-Komponentenvorschau und Quellcode (`tabs`).
+:::
+::: card title="Fehlertoleranz & Warnungen" icon:shield-alert
+Fehlende Skripte erzeugen ein unaufdringliches Warnbanner mit Fallback-Code; Laufzeitfehler werden strukturiert in der Konsole gemeldet.
+:::
 ::: card title="Ultra-Leichtgewicht & Schnell" icon:feather
 Reines Standard-JavaScript und CSS (< 10 KB Gesamtgröße) mit Tastaturkürzeln (`Cmd+Enter` / `Ctrl+Enter` zum Ausführen, `Tab` für Einrückung).
 :::
@@ -48,6 +54,24 @@ Da `@docmd/plugin-playground` ein Kern-Plugin ist, ist keine Konfiguration erfor
 }
 ```
 
+### Konfigurationsoptionen
+
+| Option | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `enabled` | `boolean` | `true` | Aktiviert oder deaktiviert das Playground-Rendering global. |
+| `theme` | `string` | `"default"` | Farbschema passend zum aktiven `docmd`-Layout (`default`, `dark`, `light`). |
+| `defaultLayout` | `string` | `"split"` | Standardanordnung (`split` für nebeneinander oder `stacked` für untereinander). |
+
 ::: callout tip "Plugin deaktivieren" icon:slash
-Um die clientseitige Codeausführung auf der gesamten Website zu deaktivieren, setzen Sie `"playground": false` unter `"plugins"` in `docmd.config.json`.
+Um die clientseitige Codeausführung auf der gesamten Website zu deaktivieren, setzen Sie `"playground": false` unter `"plugins"` in `docmd.config.json`. Alle Playground-Blöcke werden dann als standardmäßige Syntax-Codeblöcke dargestellt.
 :::
+
+## Nutzungsoptionen
+
+`docmd` bietet mehrere Möglichkeiten zum Verfassen von Playgrounds:
+
+1. **[Container-Syntax-Anleitung](../content/containers/playground.md)**: Empfohlen für flexible Konfigurationen mit `title`, `icon`, `live`, `tabs`, `readonly` und Skripteinbindung via `src="..."`.
+2. **Standard-Code-Fences**: Verwenden Sie ` ```js playground ` oder ` ```html playground ` für schnelle Inline-Beispiele.
+3. **Selbstschließende Container**: Nutzen Sie `::: playground src="..." /:::`, um Dateien direkt aus dem Codebase einzubinden.
+
+Vollständige Syntaxreferenzen und Live-Beispiele finden Sie in der **[Playground-Container-Referenz](../content/containers/playground.md)**.
