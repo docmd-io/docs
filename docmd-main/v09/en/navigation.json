@@ -213,6 +213,10 @@
           {
             "title": "Nested Containers",
             "path": "/content/containers/nested-containers"
+          },
+          {
+            "title": "Playground",
+            "path": "/content/containers/playground"
           }
         ]
       },
@@ -356,6 +360,10 @@
       {
         "title": "OKF Bundle Plugin",
         "path": "/plugins/okf"
+      },
+      {
+        "title": "Playground",
+        "path": "/plugins/playground"
       }
     ]
   },
