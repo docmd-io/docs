@@ -228,7 +228,7 @@
   },
   {
     "title": "Variablen & Laufzeit",
-    "icon": "variable",
+    "icon": "braces",
     "collapsible": true,
     "children": [
       {
@@ -540,6 +540,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.9 - Variablen- & Personalisierungs-Engine, Versionierte Suchpfade, Template-Resolver & SPA-Routing",
+        "path": "/release-notes/0-9-9"
+      },
       {
         "title": "v0.9.8 - OpenAPI ausklappbare Operationen & Schema-Einschränkungen, LLMs-Prompt & Gruppierung, Link-Validierung & Türkische Lokalisierung",
         "path": "/release-notes/0-9-8"

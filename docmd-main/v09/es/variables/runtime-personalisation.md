@@ -1,17 +1,17 @@
 ---
-title: Tiempo de Ejecución y Personalización
-description: Utilice el SDK de cliente docmd-runtime.js y window.docmd para habilitar sesiones de usuario interactivas, bloques de código dinámicos y personalización sin recargas.
+title: Tiempo de Ejecución en Cliente y Personalización
+description: Utilice el SDK docmd-runtime.js y window.docmd para crear sesiones interactivas, bloques de código reactivos y personalización sin recargar la página.
 ---
 
-# Tiempo de Ejecución y Personalización
+# Tiempo de Ejecución en Cliente y Personalización
 
-docmd incluye un script de ejecución en el cliente sin interfaz, `docmd-runtime.js`, incorporado automáticamente en todas las plantillas (incluyendo la plantilla predeterminada y temas como `summer`).
+docmd incluye un script de ejecución en cliente ligero y headless, `docmd-runtime.js`, que se incorpora automáticamente en todas las plantillas (incluyendo el diseño por defecto y temas como `summer`).
 
-Este motor expone la API de navegador `window.docmd`, lo que permite actualizar variables de forma interactiva en función de la autenticación de usuarios, los entornos seleccionados o entradas de formulario sin necesidad de recargar la página.
+Este entorno expone la API de navegador `window.docmd`, permitiendo actualizar variables dinámicamente según la autenticación del usuario, el entorno seleccionado o entradas de formularios sin necesidad de recargar la página.
 
-## Declaración de Variables Dinámicas
+## Declarar Variables como Dinámicas
 
-Indique en su `docmd.config.json` qué variables deben gestionarse de forma dinámica:
+En su `docmd.config.json`, especifique qué claves son dinámicas:
 
 ```json
 {
@@ -26,62 +26,64 @@ Indique en su `docmd.config.json` qué variables deben gestionarse de forma din�
 }
 ```
 
-Al compilar las páginas, cualquier variable definida como dinámica (o que empiece por `user.`) se envuelve en un marcador DOM:
+Al compilar, docmd envuelve cada variable dinámica (o que empiece por `user.`) con un elemento marcador reactivo:
 
 ```html
 <span data-docmd-var="user.apiKey" class="docmd-var">pk_test_sample</span>
 ```
 
-## API de JavaScript en el Navegador: `window.docmd`
+## API JavaScript de Navegador: `window.docmd`
 
-El entorno de ejecución proporciona una API ergonómica:
+La API del cliente ofrece funciones claras y directas:
 
-### Asignar Variables: `docmd.var.set()`
+::: grids
+    ::: grid
+        ::: card "Definir Variables" icon:sliders
+        `window.docmd.var.set(key, val)`
+        Actualiza variables en todo el DOM y en los bloques de código en tiempo real.
+        :::
+    :::
+    ::: grid
+        ::: card "Obtener Variable" icon:search
+        `window.docmd.var.get(key)`
+        Devuelve el valor activo de una variable registrada.
+        :::
+    :::
+::: /grids
 
-Actualice una variable en tiempo real en toda la página y en los bloques de código:
+::: grids
+    ::: grid
+        ::: card "Listar Todas" icon:list
+        `window.docmd.var.list()`
+        Devuelve un objeto con todas las variables dinámicas registradas.
+        :::
+    :::
+    ::: grid
+        ::: card "Sincronizar DOM" icon:refresh-cw
+        `window.docmd.var.sync()`
+        Vuelve a examinar el HTML inyectado para rehidratar los marcadores.
+        :::
+    :::
+::: /grids
+
+### Ejemplo: Actualizar Variables
 
 ```javascript
-// Asignar una sola variable
+// Establecer una variable individual
 window.docmd.var.set('user.apiKey', 'sk_live_99882244');
 
-// Asignar varias variables simultáneamente
+// Establecer múltiples variables a la vez
 window.docmd.var.set({
   'user.name': 'Sarah Connor',
-  'activeRegion': 'eu-west-1'
+  'activeRegion': 'eu-central-1'
 });
 ```
 
-Todos los elementos `<span data-docmd-var="...">` y tokens en bloques de código se actualizan en el DOM al instante.
+Todos los elementos `<span data-docmd-var="...">` y fragmentos de código se actualizan en el acto.
 
-### Obtener Variables: `docmd.var.get()`
+## Demostración Interactiva con Bloques de Código
 
-Consulte el valor activo de una variable:
-
-```javascript
-const key = window.docmd.var.get('user.apiKey');
-console.log('Clave API activa:', key);
-```
-
-### Listar Variables: `docmd.var.list()`
-
-Inspeccione todas las variables de ejecución registradas:
-
-```javascript
-const allVars = window.docmd.var.list();
-console.table(allVars);
-```
-
-### Sincronizar el DOM: `docmd.var.sync()`
-
-Si inserta contenido HTML dinámicamente o navega mediante un enrutador en el cliente, invoque `docmd.sync()` para rehidratar los marcadores:
-
-```javascript
-window.docmd.var.sync();
-```
-
-## Ejemplo: Bloques de Código Interactivos
-
-Un caso de uso destacado es permitir a los lectores probar comandos con sus propias credenciales:
+Un caso de uso destacado es permitir a los desarrolladores probar comandos API con su propia clave:
 
 ```markdown
 ### Autenticación con la API
@@ -90,40 +92,100 @@ Ejecute el siguiente comando en su terminal:
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
+  -H "Authorization: Bearer \{{ user.apiKey || 'SU_CLAVE_API' }}"
+```
+```
+
+::: card "Demostración Interactiva en Vivo" icon:play
+Escriba una clave de API de prueba en el siguiente campo para comprobar la actualización reactiva:
+
+<div style="margin: 12px 0;">
+  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">SU CLAVE DE PRUEBA:</label>
+  <input 
+    type="text" 
+    id="apiKeyInputDemoEs" 
+    placeholder="ej. sk_test_mi_token_seguro_88" 
+    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
+    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'SU_CLAVE_API'); }"
+  />
+</div>
+
+```bash
+curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'SU_CLAVE_API' }}"
 ```
+:::
+
+## Integración con Frameworks
+
+::: tabs
+::: tab "Vanilla JavaScript" icon:code
+```javascript
+function onUserLogin(session) {
+  window.docmd.var.set({
+    'user.name': session.fullName,
+    'user.apiKey': session.activeToken,
+    'user.orgId': session.organisationId
+  });
+}
 ```
+::: /tab
 
-Puede incrustar un campo de entrada en su portal:
+::: tab "React / Next.js" icon:atom
+```tsx
+import { useEffect } from 'react';
 
-```html
-<input 
-  type="text" 
-  id="apiKeyInput" 
-  placeholder="Pegue aquí su clave API..."
-  oninput="window.docmd.var.set('user.apiKey', this.value || 'SU_CLAVE_API')"
-/>
+export function DocsPersonaliser({ user }: { user: any }) {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).docmd) {
+      (window as any).docmd.var.set({
+        'user.name': user.name,
+        'user.apiKey': user.apiKey
+      });
+    }
+  }, [user]);
+
+  return null;
+}
 ```
+::: /tab
 
-A medida que el lector escribe en el campo de texto, el comando curl se actualiza en tiempo real.
+::: tab "Vue / Nuxt" icon:feather
+```vue
+<script setup>
+import { watchEffect } from 'vue';
 
-## Detección de Cambios en Variables
+const props = defineProps(['currentUser']);
 
-Puede suscribirse a los eventos emitidos por el bus de ejecución:
+watchEffect(() => {
+  if (typeof window !== 'undefined' && window.docmd) {
+    window.docmd.var.set({
+      'user.name': props.currentUser?.name,
+      'user.apiKey': props.currentUser?.token
+    });
+  }
+});
+</script>
+```
+::: /tab
+::: /tabs
+
+## Escuchar Cambios de Variables
+
+Puede reaccionar a los eventos emitidos por el bus del cliente:
 
 ```javascript
 window.addEventListener('docmd:variable-change', (event) => {
   const { key, value } = event.detail;
-  console.log(`La variable ${key} cambió a:`, value);
+  console.log(`Variable ${key} modificada a:`, value);
 });
 ```
 
 ## Sincronización entre Marcos (iFrames y Portales)
 
-Si su documentación está incrustada en un iframe dentro de su aplicación, la ventana principal puede actualizar las variables mediante `postMessage`:
+Si la documentación se aloja en un iframe dentro de su aplicación, el portal puede enviar variables mediante `postMessage`:
 
 ```javascript
-// Desde la aplicación principal:
 const docIframe = document.getElementById('docs-frame');
 docIframe.contentWindow.postMessage({
   type: 'docmd:set-variables',
@@ -134,10 +196,6 @@ docIframe.contentWindow.postMessage({
 }, '*');
 ```
 
-El listener en `docmd-runtime.js` procesa el mensaje y actualiza las variables de toda la página automáticamente.
-
-## Arquitectura: Por qué `docmd-runtime.js` es Universal
-
-`docmd-runtime.js` está desacoplado de estilos, temas y animaciones de la interfaz. Su implementación se enfoca exclusivamente en la máquina de estados, el registro de variables, el bus de eventos y la hidratación del DOM.
-
-Al ser headless, resulta seguro incluirlo en cualquier diseño o plantilla sin interferir con otros scripts.
+::: callout tip "Arquitectura Headless Independiente" icon:cpu
+`docmd-runtime.js` opera exclusivamente mediante marcadores de datos (`data-docmd-var`), por lo que no interfiere con estilos CSS, transiciones SPA o plugins de terceros.
+:::

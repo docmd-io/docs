@@ -1,101 +1,156 @@
 ---
-title: Resumen de Variables y Tiempo de Ejecución Dinámico
-description: Descubra cómo el motor de variables y personalización de docmd permite crear documentación dinámica, mantenible e interactiva tanto en compilación como en tiempo de ejecución.
+title: Visión General de Variables y Tiempo de Ejecución Dinámico
+description: Aprenda cómo el motor de variables y personalización de docmd permite crear documentación dinámica, mantenible e interactiva durante la compilación y en el navegador.
 ---
 
-# Variables y Tiempo de Ejecución Dinámico
+# Visión General de Variables y Tiempo de Ejecución Dinámico
 
-docmd cuenta con un **Motor de Variables y Personalización** que unifica la interpolación estática en tiempo de compilación con la personalización reactiva en el cliente.
+docmd incorpora un potente **Motor de Variables y Personalización** que combina la interpolación estática en tiempo de compilación con la personalización reactiva en el cliente.
 
-En lugar de escribir manualmente nombres de empresas, URLs de APIs, años de lanzamiento o versiones en decenas de archivos Markdown, puede hacer referencia a variables dinámicas mediante expresiones limpias de plantilla.
+En lugar de definir nombres de empresas, claves de API, años de copyright o versiones manualmente en decenas de archivos Markdown, puede emplear variables dinámicas mediante expresiones limpias de plantilla.
 
 ```markdown
-¡Bienvenido a la documentación de **{{ site.title }}** v{{ docmd.version }}!
-Copyright actual: © {{ docmd.buildYear }}.
+¡Bienvenido a la documentación de **\{{ site.title }}** v\{{ docmd.version }}!
+Copyright actual: © \{{ docmd.buildYear }}.
 ```
+
+::: callout info "Variables evaluadas en vivo en esta compilación" icon:sparkles
+Los siguientes valores han sido resueltos en tiempo real por el compilador docmd durante esta compilación:
+- **Título del sitio:** {{ site.title }}
+- **Versión del compilador:** v{{ docmd.version }}
+- **Año de compilación:** © {{ docmd.buildYear }}
+- **Rama Git actual:** {{ docmd.gitBranch || "main" }}
+- **Commit Git actual:** {{ docmd.gitCommit || "HEAD" }}
+- **Slug de página actual:** `{{ page.slug }}`
+:::
 
 ## Sintaxis de Plantillas
 
-El motor de variables utiliza la sintaxis de llaves dobles:
+El motor utiliza una sintaxis estándar basada en llaves:
 
 ```markdown
-{{ variableName }}
+\{{ variableName }}
 ```
 
 ### Valores Predeterminados (Fallbacks)
 
-Si una variable no siempre está definida, puede especificar un valor alternativo utilizando el operador `||`:
+Si una variable no siempre está definida (como en entornos de desarrollo local o configuraciones opcionales), proporcione un valor predeterminado usando el operador `||`:
 
 ```markdown
-Conéctese a nuestro servidor en `{{ server.endpoint || "https://api.example.com" }}`.
-¡Bienvenido de nuevo, {{ user.name || 'Invitado' }}!
-Creado para la versión {{ targetVersion || 2.0 }}.
+Conéctese a nuestro servidor en `\{{ server.endpoint || "https://api.example.com" }}`.
+¡Bienvenido de nuevo, \{{ user.name || 'Invitado' }}!
+Compilado para la versión \{{ targetVersion || 2.0 }}.
 ```
 
-El valor predeterminado puede ser:
-* Cadena entre comillas simples: `'ejemplo'`
-* Cadena entre comillas dobles: `"ejemplo"`
-* Número: `42` o `2.0`
-* Identificador: `default`
+Los fallbacks pueden ser:
+* Cadenas entre comillas simples: `'ejemplo'`
+* Cadenas entre comillas dobles: `"ejemplo"`
+* Números: `42` o `2.0`
+* Identificadores: `default`
 
-### Tolerante a Espacios en Blanco
+### Tolerancia a Espacios en Blanco
 
-Las expresiones admiten espacios alrededor de los nombres de variables y operadores:
+Las expresiones toleran espacios alrededor de los nombres y operadores:
 
 ```markdown
-{{   myVar   }}
-{{ env.PORT || "8080" }}
+\{{   myVar   }}
+\{{ env.PORT || "8080" }}
 ```
 
-## Ciclo de Vida: Tiempo de Compilación vs. Tiempo de Ejecución
+## Ciclo de Vida: Compilación vs. Tiempo de Ejecución
 
-docmd divide con claridad el ciclo de vida de las variables en dos etapas:
+docmd divide de forma limpia el ciclo de vida de las variables en dos etapas complementarias:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   RESOLUCIÓN EN TIEMPO DE COMPILACIÓN                  │
-│  - Variables integradas dinámicas (docmd.version, docmd.buildYear)     │
-│  - Variables de entorno del sistema (env.NAME, DOCMD_VAR_*)            │
-│  - Variables de docmd.config.json (cadenas estáticas, configuración)   │
-│  - Renderizado directo en HTML estático durante docmd build            │
-└──────────────────────────────────┬─────────────────────────────────────┘
-                                   │
-                                   ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   TIEMPO DE EJECUCIÓN EN EL CLIENTE                    │
-│  - Impulsado por docmd-runtime.js (window.docmd)                       │
-│  - Rehidrata marcadores dinámicos (<span data-docmd-var="...">)        │
-│  - Personalización interactiva: claves API en vivo, sesiones           │
-│  - Mensajería postMessage entre marcos y despacho de eventos           │
-└────────────────────────────────────────────────────────────────────────┘
-```
+::: mermaid title:"Canal de Resolución de Variables" icon:workflow align:center zoom:true
+graph TD
+    subgraph Origen["1. Entradas y Definiciones"]
+        B1["docmd.config.json<br/>Bloque <code>variables</code>"]
+        B2["Git y Entorno<br/><code>env.*</code>, <code>DOCMD_VAR_*</code>, Git Root"]
+        B3["Metadatos Integrados<br/><code>version</code>, <code>buildYear</code>, <code>page.slug</code>"]
+    end
 
-### Variables Estáticas de Compilación
+    subgraph Compilador["2. Resolución Estática en Compilación"]
+        Origen --> VReg["VariableRegistry (@docmd/parser)"]
+        VReg --> Interp["Interpolador Markdown y Config"]
+        Interp --> HTML["HTML Estático (Cero JS Overhead)"]
+        Interp --> Markers["Marcadores Dinámicos &lt;span data-docmd-var&gt;"]
+    end
 
-Las variables resueltas durante `docmd build` se compilan directamente en el código HTML estático, sin generar sobrecarga de JavaScript ni cambios en el diseño de la página.
+    subgraph Runtime["3. Tiempo de Ejecución Reactivo en Cliente"]
+        Markers --> DRuntime["docmd-runtime.js (window.docmd)"]
+        DRuntime --> DOM["Rehidratación en Vivo y Fragmentos"]
+        DRuntime --> Events["Eventos y postMessage entre Marcos"]
+    end
+::: /mermaid
+
+::: grids
+    ::: grid
+        ::: card "Variables Estáticas de Compilación" icon:cpu
+        Se compilan directamente en el HTML final durante `docmd build`. Tienen cero impacto en la ejecución de JavaScript en el navegador y evitan saltos de diseño (CLS).
+        :::
+    :::
+    ::: grid
+        ::: card "Variables Reactivas de Cliente" icon:sparkles
+        Los datos de sesión de usuario (como claves de API o nombres de usuario) son sincronizados en vivo por `docmd-runtime.js`. Al escribir o cambiar de sesión, los bloques de código se actualizan al instante.
+        :::
+    :::
+::: /grids
+
+### Variables Estáticas en Compilación
+
+Los valores determinados al compilar se insertan directamente en el código estático, sin requerir procesamiento adicional para el lector.
 
 ### Variables Dinámicas Reactivas
 
-Las variables marcadas como dinámicas o que contienen atributos de sesión de usuario (como `user.name` o `user.apiKey`) se envuelven en marcadores DOM reactivos:
+Las variables declaradas como dinámicas o que contienen datos de sesión (como `user.name` o `user.apiKey`) se encapsulan en marcadores DOM reactivos:
 
 ```html
 <span data-docmd-var="user.name" class="docmd-var">Invitado</span>
 ```
 
-En tiempo de ejecución, `docmd-runtime.js` rellena y sincroniza automáticamente estos valores en la página, en los bloques de código y durante las transiciones de navegación SPA sin recargar.
+En el navegador, `docmd-runtime.js` puebla y sincroniza estos valores en toda la página y en transiciones SPA sin recargas.
 
 ## Arquitectura: Separación entre Motor e Interfaz
 
-Para garantizar la máxima velocidad y estabilidad, docmd mantiene una estricta separación entre la interfaz de usuario y el motor de ejecución en segundo plano:
+Para garantizar la máxima velocidad y estabilidad, docmd separa limpiamente la interfaz visual del motor dinámico:
 
-* **`docmd-runtime.js`**: Motor de ejecución sin interfaz (headless) incluido en todas las plantillas (`default`, `summer`, etc.). Gestiona registros de variables, suscripciones, almacenamiento y eventos entre ventanas sin interferir en los estilos visuales ni en las animaciones.
-* **`docmd-main.js`**: El script de presentación visual responsable de cambios de tema, menús móviles, navegación SPA e interacción con el DOM. En cada cambio de página SPA, invoca `window.docmd.sync()` para rehidratar las variables dinámicas de forma inmediata.
+* **`docmd-runtime.js`**: El motor dinámico headless incluido en todas las plantillas (`default`, `summer`, etc.). Gestiona registros, suscripciones y eventos sin interferir con estilos ni animaciones.
+* **`docmd-main.js`**: El script de interfaz responsable del cambio de tema, menús y transiciones SPA. Tras cada cambio de página ejecuta `window.docmd.sync()`.
 
-## Siguientes Pasos
+::: callout tip "Compatibilidad Universal con Plantillas" icon:check-circle
+Al incluirse `docmd-runtime.js` en todas las plantillas, cualquier tema personalizado o plugin de diseño hereda soporte dinámico automáticamente.
+:::
 
-Explore la guía completa sobre el sistema de variables:
+## Próximos Pasos
 
-* [Variables Integradas](./built-in-variables.md) — Variables del sistema disponibles sin configuración previa para fechas, años, versiones y metadatos Git.
-* [Variables de Configuración y Personalizadas](./config-variables.md) — Cómo declarar variables en `docmd.config.json` y utilizarlas en pie de página, banners y documentos.
-* [Variables de Entorno](./environment-variables.md) — Variables de entornos CI/CD y promoción mediante `DOCMD_VAR_*`.
-* [Tiempo de Ejecución y Personalización](./runtime-personalisation.md) — SDK de cliente (`window.docmd`), sesiones reactivas y bloques de código interactivos.
+Consulte las guías completas para cada tema:
+
+::: grids
+    ::: grid
+        ::: card "Variables Integradas" icon:terminal
+        Variables de sistema para años, fechas, versiones y metadatos de Git.
+        [Ver Guía](./built-in-variables.md)
+        :::
+    :::
+    ::: grid
+        ::: card "Variables de Configuración" icon:settings
+        Definición en `docmd.config.json` y uso en pies de página, banners y Markdown.
+        [Ver Guía](./config-variables.md)
+        :::
+    :::
+::: /grids
+
+::: grids
+    ::: grid
+        ::: card "Variables de Entorno" icon:server
+        Integración con pipelines CI/CD y promoción zero-prefix vía `DOCMD_VAR_*`.
+        [Ver Guía](./environment-variables.md)
+        :::
+    :::
+    ::: grid
+        ::: card "Personalización en Cliente" icon:sparkles
+        SDK de cliente (`window.docmd`), sesiones reactivas y ejemplos de código interactivos.
+        [Ver Guía](./runtime-personalisation.md)
+        :::
+    :::
+::: /grids

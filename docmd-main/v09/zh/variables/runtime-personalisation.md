@@ -1,17 +1,17 @@
 ---
 title: 客户端运行时与个性化
-description: 使用 docmd-runtime.js 客户端 SDK 与 window.docmd 实现无刷新实时用户会话、交互式代码块及动态个性化。
+description: 使用轻量级 docmd-runtime.js SDK 与 window.docmd 实现无刷新用户会话、响应式交互代码块与动态个性化。
 ---
 
 # 客户端运行时与个性化
 
-docmd 内置了轻量级无头（Headless）客户端运行时脚本 `docmd-runtime.js`，该脚本会自动注入到所有布局模板中（包括默认模板以及 `summer` 等自定义主题）。
+docmd 包含一个轻量级的通用客户端无头运行时脚本 `docmd-runtime.js`，该脚本已被自动整合至全部页面布局模板中（包括默认模板以及 `summer` 等扩展主题）。
 
-运行时在全局暴露了 `window.docmd` 浏览器 API，允许您根据用户登录状态、选中的开发环境或表单输入实时更新变量，且无需重新加载页面。
+运行时会在浏览器全局暴露 `window.docmd` 对象，使您能够在不刷新页面的情况下，根据登录状态、用户选择的地区或表单输入实时更新整站变量。
 
 ## 声明动态变量
 
-在 `docmd.config.json` 中声明哪些变量键属于动态响应式变量：
+在 `docmd.config.json` 中配置动态变量列表：
 
 ```json
 {
@@ -26,19 +26,47 @@ docmd 内置了轻量级无头（Headless）客户端运行时脚本 `docmd-runt
 }
 ```
 
-当 docmd 构建页面时，任何标记为动态的变量（或以 `user.` 开头的变量）均会被包裹在响应式 DOM 标记中：
+在执行构建时，所有声明为 dynamic（或以 `user.` 开头）的变量，均会被标记为响应式元素：
 
 ```html
 <span data-docmd-var="user.apiKey" class="docmd-var">pk_test_sample</span>
 ```
 
-## 浏览器 JavaScript API：`window.docmd`
+## 浏览器端 JavaScript API: `window.docmd`
 
 客户端运行时提供了直观友好的 API：
 
-### 设置变量：`docmd.var.set()`
+::: grids
+    ::: grid
+        ::: card "设置变量" icon:sliders
+        `window.docmd.var.set(key, val)`
+        实时更新 DOM 节点、文本内容与代码块中的变量值。
+        :::
+    :::
+    ::: grid
+        ::: card "读取变量" icon:search
+        `window.docmd.var.get(key)`
+        获取指定运行时变量的当前活跃值。
+        :::
+    :::
+::: /grids
 
-在当前页面和所有代码块中实时更新变量：
+::: grids
+    ::: grid
+        ::: card "列出所有变量" icon:list
+        `window.docmd.var.list()`
+        返回一个包含全部已注册动态变量及其当前值的对象。
+        :::
+    :::
+    ::: grid
+        ::: card "同步 DOM 节点" icon:refresh-cw
+        `window.docmd.var.sync()`
+        重新扫描新注入的 HTML 片段并完成变量水合。
+        :::
+    :::
+::: /grids
+
+### 代码示例：动态更新变量
 
 ```javascript
 // 设置单个变量
@@ -51,79 +79,113 @@ window.docmd.var.set({
 });
 ```
 
-DOM 中所有的 `<span data-docmd-var="...">` 元素以及代码块中的对应占位符会立即更新。
+页面中所有对应的 `<span data-docmd-var="...">` 节点与代码块高亮标记即刻完成更新。
 
-### 获取变量：`docmd.var.get()`
+## 交互式代码块实例
 
-读取指定变量的当前有效值：
-
-```javascript
-const key = window.docmd.var.get('user.apiKey');
-console.log('当前激活的 API 密钥:', key);
-```
-
-### 查看变量列表：`docmd.var.list()`
-
-检查当前注册的所有运行时变量：
-
-```javascript
-const allVars = window.docmd.var.list();
-console.table(allVars);
-```
-
-### 重新水合 DOM：`docmd.var.sync()`
-
-如果您动态插入了 HTML 或通过单页客户端路由进行了页面跳转，可直接调用 `docmd.sync()` 重新挂载变量标记：
-
-```javascript
-window.docmd.var.sync();
-```
-
-## 交互式代码块示例
-
-个性化最实用的场景之一是允许读者使用自己的 API 密钥快速测试接口：
+运行时个性化最直观的应用之一，是让开发者直接在文档中调试包含个人密钥的 API 指令：
 
 ```markdown
-### 接口鉴权调用
+### 调用认证接口
 
 在终端中执行以下命令：
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
+  -H "Authorization: Bearer \{{ user.apiKey || 'YOUR_API_KEY' }}"
+```
+```
+
+::: card "交互式代码块在线演示" icon:play
+在下方输入框中输入自定义 API 密钥，观察 Curl 代码片段的实时变化：
+
+<div style="margin: 12px 0;">
+  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">输入测试 API 密钥：</label>
+  <input 
+    type="text" 
+    id="apiKeyInputDemoZh" 
+    placeholder="例如 sk_test_my_secure_token_999" 
+    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
+    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'YOUR_API_KEY'); }"
+  />
+</div>
+
+```bash
+curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
+:::
+
+## 现代前端框架集成
+
+::: tabs
+::: tab "原生 JavaScript" icon:code
+```javascript
+function onUserLogin(session) {
+  window.docmd.var.set({
+    'user.name': session.fullName,
+    'user.apiKey': session.activeToken,
+    'user.orgId': session.organisationId
+  });
+}
 ```
+::: /tab
 
-您可以在文档门户中嵌入一个简单的输入框：
+::: tab "React / Next.js" icon:atom
+```tsx
+import { useEffect } from 'react';
 
-```html
-<input 
-  type="text" 
-  id="apiKeyInput" 
-  placeholder="在此粘贴您的 API Key..."
-  oninput="window.docmd.var.set('user.apiKey', this.value || 'YOUR_API_KEY')"
-/>
+export function DocsPersonaliser({ user }: { user: any }) {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).docmd) {
+      (window as any).docmd.var.set({
+        'user.name': user.name,
+        'user.apiKey': user.apiKey
+      });
+    }
+  }, [user]);
+
+  return null;
+}
 ```
+::: /tab
 
-当读者在输入框中键入密钥时，curl 命令代码块中的参数会实时联动改变！
+::: tab "Vue / Nuxt" icon:feather
+```vue
+<script setup>
+import { watchEffect } from 'vue';
 
-## 监听变量变化
+const props = defineProps(['currentUser']);
 
-您可以监听运行时事件总线派发的变更通知：
+watchEffect(() => {
+  if (typeof window !== 'undefined' && window.docmd) {
+    window.docmd.var.set({
+      'user.name': props.currentUser?.name,
+      'user.apiKey': props.currentUser?.token
+    });
+  }
+});
+</script>
+```
+::: /tab
+::: /tabs
+
+## 监听变量变化事件
+
+可通过系统事件总线监听变量修改：
 
 ```javascript
 window.addEventListener('docmd:variable-change', (event) => {
   const { key, value } = event.detail;
-  console.log(`变量 ${key} 已变更为:`, value);
+  console.log(`变量 ${key} 已变更为：`, value);
 });
 ```
 
-## 跨窗口同步（iFrame 与门户系统）
+## 跨窗口同步 (iFrame 与宿主门户)
 
-若您的文档嵌入在主应用的 iframe 中，外层宿主系统可以通过 `postMessage` 批量同步变量：
+若文档以 iFrame 形式嵌入在业务系统中，父级页面可通过 `postMessage` 向文档传递变量：
 
 ```javascript
-// 来自宿主应用窗口：
 const docIframe = document.getElementById('docs-frame');
 docIframe.contentWindow.postMessage({
   type: 'docmd:set-variables',
@@ -134,10 +196,6 @@ docIframe.contentWindow.postMessage({
 }, '*');
 ```
 
-`docmd-runtime.js` 中的消息监听器将自动接收并完成整页变量的即时更新。
-
-## 架构：为什么 `docmd-runtime.js` 具备普适性
-
-`docmd-runtime.js` 在设计上严格剥离了布局样式、视觉主题和界面动画。它仅包含状态机、变量注册表、事件总线以及 DOM 注水逻辑。
-
-因此，它可以安全地引入到任何自定义主题或第三方模板中，不会与页面既有脚本冲突，也不会引发不必要的性能抖动。
+::: callout tip "轻量级无头解耦设计" icon:cpu
+`docmd-runtime.js` 仅依赖数据属性选择器（`data-docmd-var`），不依赖任何特定的 CSS 类或特定 DOM 层次结构，因此在复杂的 SPA 单页路由和多样化的深浅色主题下均能稳定运行。
+:::

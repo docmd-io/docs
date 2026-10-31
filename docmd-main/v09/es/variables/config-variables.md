@@ -1,19 +1,19 @@
 ---
 title: Variables de Configuración y Personalizadas
-description: Cómo definir variables personalizadas en docmd.config.json, cargar archivos externos y utilizar variables en cadenas de configuración y contenido Markdown.
+description: Cómo definir variables en docmd.config.json, cargar archivos externos e interpolar variables en cadenas de configuración y Markdown.
 ---
 
 # Variables de Configuración y Personalizadas
 
-Puede definir variables personalizadas directamente en `docmd.config.json`, cargarlas desde archivos JSON o módulos JavaScript externos y utilizarlas en toda su documentación.
+Puede definir variables personalizadas directamente en `docmd.config.json`, cargarlas desde archivos JSON externos o módulos de JavaScript, y utilizarlas en toda su documentación.
 
-## Definir Variables en `docmd.config.json`
+## Definición en `docmd.config.json`
 
-Añada un bloque `variables` a su archivo `docmd.config.json`:
+Añada un bloque `variables` a su `docmd.config.json`:
 
 ```json
 {
-  "title": "Documentación de Acme Cloud",
+  "title": "Documentación Acme Cloud",
   "variables": {
     "companyName": "Acme Technologies",
     "supportEmail": "support@acme.com",
@@ -28,30 +28,30 @@ Añada un bloque `variables` a su archivo `docmd.config.json`:
 
 ### Acceso en Markdown
 
-Puede acceder a objetos anidados mediante la notación de punto estándar:
+Las propiedades anidadas se leen mediante notación de puntos:
 
 ```markdown
-Para ponerse en contacto con nuestro equipo, escriba a [{{ supportEmail }}](mailto:{{ supportEmail }}).
+Para contactar con soporte técnico, escriba a [\{{ supportEmail }}](mailto:\{{ supportEmail }}).
 
-Todas las peticiones deben dirigirse a nuestro punto de conexión de producción:
+Envíe sus peticiones a nuestro punto de conexión:
 ```bash
-curl -X GET {{ cloud.apiEndpoint }}/status \
-  -H "X-Region: {{ cloud.region }}"
+curl -X GET \{{ cloud.apiEndpoint }}/status \
+  -H "X-Region: \{{ cloud.region }}"
 ```
 ```
 
-Durante la compilación, esto genera:
+Al compilar, esto se traduce a:
 
 ```bash
 curl -X GET https://api.acme.cloud/v2/status \
   -H "X-Region: eu-west-1"
 ```
 
-## Uso de Variables en Campos de Configuración
+## Uso en Campos de Configuración
 
-docmd ejecuta una fase de registro de variables **antes** de procesar las plantillas del sitio, el pie de página y los banners.
+docmd ejecuta una fase unificada de registro de variables **antes** de renderizar plantillas, barras de navegación y pies de página.
 
-Esto le permite utilizar tanto variables integradas (como `{{ docmd.buildYear }}`) como sus propias variables personalizadas dentro de las opciones de configuración:
+Esto le permite utilizar variables integradas como `\{{ docmd.buildYear }}` o sus propios valores directamente en los campos de configuración:
 
 ```json
 {
@@ -60,30 +60,32 @@ Esto le permite utilizar tanto variables integradas (como `{{ docmd.buildYear }}
     "companyName": "Acme Cloud Systems"
   },
   "footer": {
-    "copyright": "Copyright © {{ docmd.buildYear }} {{ companyName }}. Todos los derechos reservados."
+    "copyright": "Copyright © \{{ docmd.buildYear }} \{{ companyName }}. Todos los derechos reservados."
   },
   "layout": {
     "banners": {
       "top": {
-        "content": "Ejecutando {{ title }} v{{ docmd.version }} en la región {{ env.DEPLOY_REGION || 'global' }}."
+        "content": "**¡docmd v\{{ docmd.version }} está disponible!** — Región: \{{ env.DEPLOY_REGION || 'global' }}."
       }
     }
   }
 }
 ```
 
-### Funcionamiento del Ciclo de Resolución
-
-1. **Registro**: Al iniciar `docmd build`, `VariableRegistry` registra las variables integradas (`docmd.buildYear`, `docmd.version`, etc.), las variables de entorno y las definidas en `variables`.
-2. **Interpolación de Configuración**: docmd recorre de forma recursiva `docmd.config.json` (como `footer.copyright`, `layout.banners`, `title`) y sustituye cualquier expresión `{{ variable }}`.
-3. **Procesamiento de Markdown**: El compilador de Markdown emplea estas mismas variables registradas para generar el contenido de las páginas.
-4. **Resultado**: Tanto el pie de página como las páginas de documentación reflejan exactamente los mismos valores sin necesidad de duplicación manual.
+::: callout tip "El Ciclo de Resolución Unificado" icon:refresh-cw
+1. **Registro**: Al iniciar `docmd build`, `VariableRegistry` registra las variables integradas, las variables de entorno y los valores de `variables` del archivo de configuración.
+2. **Interpolación de Configuración**: docmd recorre recursivamente `docmd.config.json` y sustituye los tokens `{{ variable }}`.
+3. **Renderizado de Markdown**: El compilador procesa los documentos Markdown utilizando el mismo registro de variables resuelto.
+4. **Resultado**: El pie de página y las páginas Markdown reflejan siempre los mismos valores exactos sin duplicación manual.
+:::
 
 ## Archivos de Variables Externos
 
-Para proyectos grandes o datos compartidos entre equipos, puede apuntar la opción `"variables"` hacia un archivo JSON o JavaScript externo:
+En proyectos grandes o con equipos distribuidos, puede apuntar `"variables"` a archivos externos JSON o JavaScript:
 
-### Archivo JSON Externo
+::: tabs
+::: tab "Archivo JSON Externo" icon:file-json
+Apunte `variables` a un archivo JSON en su proyecto:
 
 ```json
 {
@@ -91,19 +93,23 @@ Para proyectos grandes o datos compartidos entre equipos, puede apuntar la opci�
 }
 ```
 
-Donde `./data/variables.json` contiene:
+Contenido de `./data/variables.json`:
 
 ```json
 {
   "auth": {
-    "oauthUrl": "https://auth.acme.com/oauth2/token"
+    "oauthUrl": "https://auth.acme.com/oauth2/token",
+    "clientId": "acme-portal-production"
+  },
+  "limits": {
+    "rateLimitPerMin": 1200
   }
 }
 ```
+::: /tab
 
-### Módulo JavaScript Dinámico
-
-También puede utilizar un archivo JavaScript para calcular variables de manera dinámica:
+::: tab "Módulo JavaScript Dinámico" icon:file-code
+Apunte `variables` a un módulo JavaScript para calcular valores de forma dinámica:
 
 ```json
 {
@@ -111,11 +117,18 @@ También puede utilizar un archivo JavaScript para calcular variables de manera 
 }
 ```
 
-Donde `./data/variables.js` exporta un objeto o función:
+Contenido de `./data/variables.js`:
 
 ```javascript
 module.exports = {
-  dynamicTimestamp: new Date().toLocaleDateString(),
-  sdkVersion: require('./package.json').version
+  dynamicTimestamp: new Date().toLocaleDateString('es-ES'),
+  sdkVersion: require('./package.json').version,
+  activeServices: ['auth', 'billing', 'analytics']
 };
 ```
+::: /tab
+::: /tabs
+
+::: card "Buenas Prácticas: Fuente Única de Verdad" icon:check-circle
+Usar un módulo JavaScript permite importar números de versión directamente desde su `package.json`, asegurando que la documentación se mantenga siempre alineada con sus entregas de software.
+:::

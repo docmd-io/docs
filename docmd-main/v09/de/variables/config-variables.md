@@ -1,11 +1,11 @@
 ---
 title: Konfigurations- & Benutzerdefinierte Variablen
-description: So definieren Sie benutzerdefinierte Variablen in docmd.config.json, binden externe Dateien ein und verwenden Variablen in Konfigurationsstrings und Dokumenten.
+description: Variablen in docmd.config.json definieren, externe Dateien laden und Platzhalter in Konfigurationen und Markdown einsetzen.
 ---
 
 # Konfigurations- & Benutzerdefinierte Variablen
 
-Sie können benutzerdefinierte Variablen direkt in der `docmd.config.json` definieren, sie aus externen JSON-Dateien oder JavaScript-Modulen laden und überall in Ihrer Dokumentation verwenden.
+Sie können benutzerdefinierte Variablen direkt in `docmd.config.json` definieren, aus externen JSON-Dateien oder JavaScript-Modulen laden und in Ihrer gesamten Dokumentation verwenden.
 
 ## Variablen in `docmd.config.json` definieren
 
@@ -28,30 +28,30 @@ Fügen Sie Ihrer `docmd.config.json` einen `variables`-Block hinzu:
 
 ### Zugriff in Markdown
 
-Auf verschachtelte Objekte kann mit der Standard-Punktnotation zugegriffen werden:
+Verschachtelte Eigenschaften werden mit gewohnter Punktnotation angesprochen:
 
 ```markdown
-Wenden Sie sich an unser Team unter [{{ supportEmail }}](mailto:{{ supportEmail }}).
+Unser Support-Team erreichen Sie unter [\{{ supportEmail }}](mailto:\{{ supportEmail }}).
 
-Alle Anfragen sollten an unseren Produktionsendpunkt gerichtet werden:
+Alle Anfragen richten Sie an unseren Endpunkt:
 ```bash
-curl -X GET {{ cloud.apiEndpoint }}/status \
-  -H "X-Region: {{ cloud.region }}"
+curl -X GET \{{ cloud.apiEndpoint }}/status \
+  -H "X-Region: \{{ cloud.region }}"
 ```
 ```
 
-Während des Builds wird dies wie folgt ausgegeben:
+Während des Builds wird dies aufgelöst zu:
 
 ```bash
 curl -X GET https://api.acme.cloud/v2/status \
   -H "X-Region: eu-central-1"
 ```
 
-## Variablen in Konfigurationsfeldern verwenden
+## Variablen in Konfigurationsfeldern nutzen
 
-docmd führt **vor** dem Rendern von Layouts, Fußzeilen und Bannern einen Registrierungsdurchlauf für Variablen durch.
+docmd führt einen einheitlichen Variablen-Pass durch, **bevor** Layouts, Menüs und Fußzeilen gerendert werden.
 
-Dadurch können Sie integrierte Variablen (wie `{{ docmd.buildYear }}`) sowie Ihre eigenen benutzerdefinierten Variablen direkt in Konfigurationsfeldern referenzieren:
+Sie können integrierte Variablen wie `\{{ docmd.buildYear }}` oder `\{{ docmd.version }}` sowie eigene Werte direkt in Konfigurationsfeldern einsetzen:
 
 ```json
 {
@@ -60,30 +60,32 @@ Dadurch können Sie integrierte Variablen (wie `{{ docmd.buildYear }}`) sowie Ih
     "companyName": "Acme Cloud Systems"
   },
   "footer": {
-    "copyright": "Copyright © {{ docmd.buildYear }} {{ companyName }}. Alle Rechte vorbehalten."
+    "copyright": "Copyright © \{{ docmd.buildYear }} \{{ companyName }}. Alle Rechte vorbehalten."
   },
   "layout": {
     "banners": {
       "top": {
-        "content": "Läuft auf {{ title }} v{{ docmd.version }} in Region {{ env.DEPLOY_REGION || 'global' }}."
+        "content": "**docmd v\{{ docmd.version }} ist live!** — Region: \{{ env.DEPLOY_REGION || 'global' }}."
       }
     }
   }
 }
 ```
 
-### So funktioniert der Auflösungszyklus
+::: callout tip "Der einheitliche Auflösungs-Zyklus" icon:refresh-cw
+1. **Registrierung**: Beim Start von `docmd build` registriert die `VariableRegistry` alle integrierten Variablen, Umgebungsvariablen und Konfigurationswerte.
+2. **Konfigurations-Interpolation**: docmd durchläuft rekursiv `docmd.config.json` und ersetzt alle `{{ variable }}`-Ausdrücke.
+3. **Markdown-Rendering**: Markdown-Prozessoren nutzen exakt denselben Registry-Bestand für die Seitengenerierung.
+4. **Ergebnis**: Sowohl Fußzeile als auch Markdown-Inhalte sind stets synchron ohne manuelle Dopplung.
+:::
 
-1. **Registrierung**: Zu Beginn von `docmd build` registriert die `VariableRegistry` alle integrierten Variablen (`docmd.buildYear`, `docmd.version` usw.), Umgebungsvariablen und in der Konfiguration deklarierte `variables`.
-2. **Konfigurations-Interpolation**: docmd durchläuft rekursiv die `docmd.config.json` (wie `footer.copyright`, `layout.banners`, `title`) und ersetzt alle `{{ variable }}`-Tokens.
-3. **Markdown-Rendering**: Markdown-Prozessoren nutzen dieselben registrierten Variablen, um Seiteninhalte zu rendern.
-4. **Ergebnis**: Sowohl Ihre Fußzeile als auch Ihre Markdown-Seiten spiegeln exakt dieselben aufgelösten Werte wider – ohne manuelle Duplizierung.
+## Externe Variablen-Dateien
 
-## Externe Variablendateien
+Für größere Projekte oder geteilte Teamspezifikationen können Sie `"variables"` auf externe JSON- oder JavaScript-Dateien verweisen:
 
-Für größere Projekte oder gemeinsame Teamdaten können Sie unter `"variables"` auf eine externe JSON- oder JavaScript-Datei verweisen:
-
-### Externe JSON-Datei
+::: tabs
+::: tab "Externe JSON-Datei" icon:file-json
+Verweisen Sie auf eine JSON-Datei in Ihrem Repository:
 
 ```json
 {
@@ -91,19 +93,23 @@ Für größere Projekte oder gemeinsame Teamdaten können Sie unter `"variables"
 }
 ```
 
-Wobei `./data/variables.json` Folgendes enthält:
+Inhalt von `./data/variables.json`:
 
 ```json
 {
   "auth": {
-    "oauthUrl": "https://auth.acme.com/oauth2/token"
+    "oauthUrl": "https://auth.acme.com/oauth2/token",
+    "clientId": "acme-portal-production"
+  },
+  "limits": {
+    "rateLimitPerMin": 1200
   }
 }
 ```
+::: /tab
 
-### Dynamische JavaScript-Datei
-
-Sie können auch ein JavaScript-Modul verwenden, um Variablen dynamisch zu berechnen:
+::: tab "Dynamisches JavaScript-Modul" icon:file-code
+Verweisen Sie auf eine JavaScript-Datei für dynamische Berechnungen:
 
 ```json
 {
@@ -111,11 +117,18 @@ Sie können auch ein JavaScript-Modul verwenden, um Variablen dynamisch zu berec
 }
 ```
 
-Wobei `./data/variables.js` ein Objekt oder eine Funktion exportiert:
+Inhalt von `./data/variables.js`:
 
 ```javascript
 module.exports = {
-  dynamicTimestamp: new Date().toLocaleDateString(),
-  sdkVersion: require('./package.json').version
+  dynamicTimestamp: new Date().toLocaleDateString('de-DE'),
+  sdkVersion: require('./package.json').version,
+  activeServices: ['auth', 'billing', 'analytics']
 };
 ```
+::: /tab
+::: /tabs
+
+::: card "Best Practice: Zentrale Datenquelle" icon:check-circle
+Über ein JavaScript-Modul können Sie Versionsnummern direkt aus der `package.json` importieren, sodass die Dokumentation stets mit Code-Releases übereinstimmt.
+:::

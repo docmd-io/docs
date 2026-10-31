@@ -5,21 +5,31 @@ description: Learn how the docmd Variables & Personalisation Engine enables dyna
 
 # Variables & Dynamic Runtime
 
-docmd features a **Variables and Personalisation Engine** that unifies static build-time interpolation with client-side reactive personalisation.
+docmd features a high-performance **Variables and Personalisation Engine** that unifies static build-time interpolation with client-side reactive personalisation.
 
 Instead of hardcoding company names, API URLs, release years, or versions across dozens of markdown files, you can reference dynamic variables using clean template expressions.
 
 ```markdown
-Welcome to the documentation for **{{ site.title }}** v{{ docmd.version }}!
-Current copyright: © {{ docmd.buildYear }}.
+Welcome to the documentation for **\{{ site.title }}** v\{{ docmd.version }}!
+Current copyright: © \{{ docmd.buildYear }}.
 ```
+
+::: callout info "Live Evaluated Variables in This Build" icon:sparkles
+The following values are resolved live by the docmd compiler during this documentation build:
+- **Site Title:** {{ site.title }}
+- **Compiler Version:** v{{ docmd.version }}
+- **Build Year:** © {{ docmd.buildYear }}
+- **Current Git Branch:** {{ docmd.gitBranch || "main" }}
+- **Current Git Commit:** {{ docmd.gitCommit || "HEAD" }}
+- **Current Page Slug:** `{{ page.slug }}`
+:::
 
 ## Template Syntax
 
 The Variables Engine uses curly-brace syntax:
 
 ```markdown
-{{ variableName }}
+\{{ variableName }}
 ```
 
 ### Fallback Defaults
@@ -27,9 +37,9 @@ The Variables Engine uses curly-brace syntax:
 If a variable might not always be defined (such as in local preview environments or optional configurations), provide a fallback default using the `||` operator:
 
 ```markdown
-Connect to our server at `{{ server.endpoint || "https://api.example.com" }}`.
-Welcome back, {{ user.name || 'Guest' }}!
-Built for version {{ targetVersion || 2.0 }}.
+Connect to our server at `\{{ server.endpoint || "https://api.example.com" }}`.
+Welcome back, \{{ user.name || 'Guest' }}!
+Built for version \{{ targetVersion || 2.0 }}.
 ```
 
 The fallback can be:
@@ -43,32 +53,48 @@ The fallback can be:
 Expressions tolerate spaces around variable names and fallback operators:
 
 ```markdown
-{{   myVar   }}
-{{ env.PORT || "8080" }}
+\{{   myVar   }}
+\{{ env.PORT || "8080" }}
 ```
 
 ## Variable Lifecycles: Build-time vs. Runtime
 
 docmd cleanly separates the variable lifecycle into two distinct stages:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        BUILD-TIME RESOLUTION                           │
-│  - Built-in dynamic variables (docmd.version, docmd.buildYear, git)    │
-│  - System environment variables (env.NAME, DOCMD_VAR_*)               │
-│  - docmd.config.json variables (static strings, config fields)         │
-│  - Rendered directly into final HTML during docmd build                │
-└──────────────────────────────────┬─────────────────────────────────────┘
-                                   │
-                                   ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                        CLIENT-SIDE RUNTIME                             │
-│  - Powered by docmd-runtime.js (window.docmd)                         │
-│  - Rehydrates dynamic markers (<span data-docmd-var="...">)            │
-│  - Interactive personalisation: live API keys, username sessions       │
-│  - Cross-frame postMessage & event dispatching                         │
-└────────────────────────────────────────────────────────────────────────┘
-```
+::: mermaid title:"Variable Resolution Pipeline" icon:workflow align:center zoom:true
+graph TD
+    subgraph Source["1. Inputs & Definitions"]
+        B1["docmd.config.json<br/><code>variables</code> block"]
+        B2["Git & Environment<br/><code>env.*</code>, <code>DOCMD_VAR_*</code>, Git root"]
+        B3["Built-in Metadata<br/><code>version</code>, <code>buildYear</code>, <code>page.slug</code>"]
+    end
+
+    subgraph Compiler["2. Build-Time Static Resolution"]
+        Source --> VReg["VariableRegistry (@docmd/parser)"]
+        VReg --> Interp["Markdown & Config Interpolator"]
+        Interp --> HTML["Static HTML (Zero-JS overhead)"]
+        Interp --> Markers["Dynamic Markers &lt;span data-docmd-var&gt;"]
+    end
+
+    subgraph Runtime["3. Client-Side Reactive Runtime"]
+        Markers --> DRuntime["docmd-runtime.js (window.docmd)"]
+        DRuntime --> DOM["Live Rehydration & Code Snippets"]
+        DRuntime --> Events["Cross-Frame postMessage & Events"]
+    end
+::: /mermaid
+
+::: grids
+    ::: grid
+        ::: card "Build-Time Static Variables" icon:cpu
+        Static variables are compiled directly into HTML during `docmd build`. They incur zero client-side JavaScript execution, zero network requests, and zero Cumulative Layout Shift (CLS).
+        :::
+    :::
+    ::: grid
+        ::: card "Client-Side Reactive Variables" icon:sparkles
+        Dynamic session variables (such as API keys and usernames) are hydrated live by `docmd-runtime.js`. When updated via JavaScript or user input, all matching tokens on the page react instantly.
+        :::
+    :::
+::: /grids
 
 ### Static Build-Time Variables
 
@@ -91,11 +117,40 @@ To guarantee maximum speed and stability, docmd maintains a strict boundary betw
 * **`docmd-runtime.js`**: Headless dynamic engine loaded across all templates (`default`, `summer`, etc.). It manages variable registries, subscriptions, client storage, and cross-window events. It never interferes with DOM animations or styling.
 * **`docmd-main.js`**: The UI presentation script responsible for theme switches, mobile menus, SPA navigation, and DOM interactions. Upon each SPA page transition, it triggers `window.docmd.sync()` to ensure dynamic variables remain fully hydrated.
 
+::: callout tip "Universal Compatibility" icon:check-circle
+Because `docmd-runtime.js` is bundled in every template, any custom theme or third-party layout plugin automatically inherits variable support and dynamic personalisation out of the box.
+:::
+
 ## Next Steps
 
 Explore the complete guide across all variable topics:
 
-* [Built-in Variables](./built-in-variables.md) — Built-in system variables for build years, dates, versions, and Git metadata.
-* [Config & Custom Variables](./config-variables.md) — Declaring variables in `docmd.config.json` and using variables inside footer, banners, and docs.
-* [Environment Variables](./environment-variables.md) — CI/CD environment variables and `DOCMD_VAR_*` promotion.
-* [Client Runtime & Personalisation](./runtime-personalisation.md) — Client-side runtime SDK (`window.docmd`), reactive sessions, and interactive code blocks.
+::: grids
+    ::: grid
+        ::: card "Built-in Variables" icon:terminal
+        Built-in system variables for build years, dates, versions, and Git metadata.
+        [Read Guide](./built-in-variables.md)
+        :::
+    :::
+    ::: grid
+        ::: card "Config & Custom Variables" icon:settings
+        Declaring variables in `docmd.config.json` and using variables inside footer, banners, and docs.
+        [Read Guide](./config-variables.md)
+        :::
+    :::
+::: /grids
+
+::: grids
+    ::: grid
+        ::: card "Environment Variables" icon:server
+        CI/CD environment variables and `DOCMD_VAR_*` zero-prefix promotion.
+        [Read Guide](./environment-variables.md)
+        :::
+    :::
+    ::: grid
+        ::: card "Client Runtime & Personalisation" icon:sparkles
+        Client-side runtime SDK (`window.docmd`), reactive sessions, and interactive code blocks.
+        [Read Guide](./runtime-personalisation.md)
+        :::
+    :::
+::: /grids

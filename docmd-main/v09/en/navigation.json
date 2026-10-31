@@ -228,7 +228,7 @@
   },
   {
     "title": "Variables & Runtime",
-    "icon": "variable",
+    "icon": "braces",
     "collapsible": true,
     "children": [
       {
@@ -540,6 +540,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.9 - Variables & Personalisation Engine, Versioned Search Paths, Template Resolvers & SPA Routing",
+        "path": "/release-notes/0-9-9"
+      },
       {
         "title": "v0.9.8 - OpenAPI Collapsible Operations & Schema Constraints, LLMs Prompt & Grouping, Link Validation & Turkish i18n",
         "path": "/release-notes/0-9-8"

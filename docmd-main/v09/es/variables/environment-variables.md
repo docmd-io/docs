@@ -1,56 +1,80 @@
 ---
 title: Referencia de Variables de Entorno
-description: Cómo transmitir variables de entorno de CI/CD y del sistema a la documentación y configuración de docmd mediante env.* y DOCMD_VAR_*.
+description: Cómo inyectar variables de entorno de CI/CD y del sistema en la documentación y configuración de docmd mediante env.* y DOCMD_VAR_*.
 ---
 
 # Referencia de Variables de Entorno
 
-docmd le permite inyectar variables de entorno del sistema directamente en su documentación, facilitando la integración con flujos de trabajo de CI/CD (como GitHub Actions, GitLab CI, Vercel o Netlify).
+docmd permite inyectar variables de entorno del sistema directamente en su documentación, facilitando la integración fluida con pipelines de CI/CD como GitHub Actions, GitLab CI, Vercel o Netlify.
 
-## Acceso a Variables de Entorno mediante `env.*`
+## Acceso mediante `env.*`
 
-Cualquier variable de entorno disponible durante el proceso de compilación puede ser referenciada utilizando el prefijo `env.`:
-
-```markdown
-Desplegado en el entorno: **{{ env.ENVIRONMENT || 'desarrollo' }}**.
-Identificador de Build: `{{ env.GITHUB_RUN_ID || 'local' }}`
-Rama: `{{ env.GITHUB_REF_NAME || 'main' }}`
-```
-
-### Valores Alternativos (Fallbacks)
-
-Es posible que las variables de entorno no existan durante el desarrollo en local. Especifique siempre un valor predeterminado con `||`:
+Cualquier variable de entorno disponible durante la compilación puede consultarse utilizando el prefijo `env.`:
 
 ```markdown
-Conexión con el entorno de pruebas:
-`{{ env.STAGING_GATEWAY_URL || "https://sandbox.gateway.io" }}`
+Desplegado en entorno: **\{{ env.ENVIRONMENT || 'development' }}**.
+ID de Compilación: `\{{ env.GITHUB_RUN_ID || 'local' }}`
+Rama: `\{{ env.GITHUB_REF_NAME || 'main' }}`
 ```
 
-## Promoción Directa mediante `DOCMD_VAR_*`
+### Valores por Defecto (Fallbacks)
 
-Para no tener que escribir el prefijo `env.` en los documentos Markdown, cualquier variable de entorno con el prefijo `DOCMD_VAR_` se promueve automáticamente al nivel principal:
+Dado que las variables de entorno pueden no estar presentes localmente, especifique siempre un fallback mediante `||`:
+
+```markdown
+Punto de conexión de pruebas:
+`\{{ env.STAGING_GATEWAY_URL || "https://sandbox.gateway.io" }}`
+```
+
+## Promoción Zero-Prefix vía `DOCMD_VAR_*`
+
+Para evitar escribir el prefijo `env.` en documentos Markdown, las variables con prefijo `DOCMD_VAR_` se promueven automáticamente al nivel superior:
 
 ```bash
-# En su flujo de CI/CD o archivo .env:
-export DOCMD_VAR_API_HOST="https://api.produccion.internal"
+# En su pipeline o archivo .env:
+export DOCMD_VAR_API_HOST="https://api.production.internal"
 export DOCMD_VAR_RELEASE_CHANNEL="beta"
 ```
 
 En sus documentos Markdown:
 
 ```markdown
-El punto de acceso a nuestra API es `{{ API_HOST }}`.
-Canal de publicación: **{{ RELEASE_CHANNEL }}**.
+El servidor es `\{{ API_HOST }}`.
+Canal de publicación: **\{{ RELEASE_CHANNEL }}**.
 ```
 
-Ambas variables también pueden ser referenciadas mediante su nombre completo original (`{{ DOCMD_VAR_API_HOST }}`).
+::: callout info "Acceso Dual" icon:layers
+Ambas variables también pueden seguir referenciándose mediante su nombre completo (`\{{ DOCMD_VAR_API_HOST }}`).
+:::
 
-## Ejemplo: Flujo de Trabajo en GitHub Actions
+::: callout warning "Credenciales y Secretos Confidenciales" icon:shield-alert
+¡Nunca exponga claves secretas o contraseñas en variables de compilación! Todo lo resuelto durante `docmd build` queda visible en el código HTML generado. Para credenciales privadas de usuario, utilice la personalización en cliente (`window.docmd.var.set`).
+:::
 
-Ejemplo de configuración en `.github/workflows/deploy.yml`:
+## Integración con Pipelines CI/CD
 
+Siga estos pasos para suministrar metadatos dinámicos a su documentación:
+
+::: steps
+::: step "Declarar Variables en la Pipeline" icon:settings
+Configure su pipeline para exportar las variables necesarias (por ejemplo, con prefijo `DOCMD_VAR_`).
+:::
+
+::: step "Ejecutar el Compilador" icon:terminal
+Ejecute `docmd build`. El compilador lee automáticamente `process.env`.
+:::
+
+::: step "Publicar la Documentación" icon:cloud
+El directorio de salida contiene HTML estático con todos los valores integrados.
+:::
+::: /steps
+
+### Ejemplos de Pipeline
+
+::: tabs
+::: tab "GitHub Actions" icon:github
 ```yaml
-name: Desplegar Documentación
+name: Deploy Documentation
 
 on:
   push:
@@ -68,7 +92,27 @@ jobs:
       - name: Compilar Documentación
         run: npx @docmd/core build
         env:
-          DOCMD_VAR_DEPLOYED_AT: ${{ steps.date.outputs.date }}
-          DOCMD_VAR_PR_NUMBER: ${{ github.event.number }}
-          DEPLOY_ENV: production
+          DOCMD_VAR_DEPLOYED_AT: ${{ github.event.head_commit.timestamp }}
+          DOCMD_VAR_BUILD_ID: ${{ github.run_id }}
+          DOCMD_VAR_COMMIT_SHA: ${{ github.sha }}
+          ENVIRONMENT: production
 ```
+::: /tab
+
+::: tab "GitLab CI" icon:gitlab
+```yaml
+deploy_docs:
+  image: node:22
+  stage: deploy
+  script:
+    - npx @docmd/core build
+  variables:
+    DOCMD_VAR_DEPLOYED_AT: $CI_PIPELINE_CREATED_AT
+    DOCMD_VAR_BUILD_ID: $CI_PIPELINE_ID
+    ENVIRONMENT: production
+  artifacts:
+    paths:
+      - site/
+```
+::: /tab
+::: /tabs

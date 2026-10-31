@@ -1,37 +1,37 @@
 ---
-title: Referenz der Umgebungsvariablen
-description: So übergeben Sie CI/CD- und System-Umgebungsvariablen an docmd mithilfe von env.* und DOCMD_VAR_*.
+title: Referenz für Umgebungsvariablen
+description: Umgebungsvariablen aus CI/CD-Pipelines über env.* und DOCMD_VAR_* in docmd-Dokumentation einbinden.
 ---
 
-# Referenz der Umgebungsvariablen
+# Referenz für Umgebungsvariablen
 
-docmd ermöglicht es Ihnen, System-Umgebungsvariablen direkt in Ihre Dokumentation einzubinden, um eine nahtlose Integration mit CI/CD-Pipelines (wie GitHub Actions, GitLab CI, Vercel oder Netlify) zu gewährleisten.
+docmd ermöglicht es Ihnen, System-Umgebungsvariablen direkt in Dokumentationsinhalte und Konfigurationen einzuspeisen — ideal für die nahtlose Integration in CI/CD-Pipelines (z. B. GitHub Actions, GitLab CI, Vercel oder Netlify).
 
 ## Zugriff auf Umgebungsvariablen über `env.*`
 
-Jede während des Builds verfügbare Umgebungsvariable kann mit dem Präfix `env.` aufgerufen werden:
+Jede während des Builds verfügbare System-Umgebungsvariable kann mit dem Präfix `env.` angesprochen werden:
 
 ```markdown
-Bereitgestellt in der Umgebung: **{{ env.ENVIRONMENT || 'development' }}**.
-Build-ID: `{{ env.GITHUB_RUN_ID || 'local' }}`
-Branch: `{{ env.GITHUB_REF_NAME || 'main' }}`
+Bereitgestellt in Umgebung: **\{{ env.ENVIRONMENT || 'development' }}**.
+Build-ID: `\{{ env.GITHUB_RUN_ID || 'local' }}`
+Branch: `\{{ env.GITHUB_REF_NAME || 'main' }}`
 ```
 
-### Fallback-Werte
+### Fallback-Werte angeben
 
-Umgebungsvariablen sind bei der lokalen Entwicklung möglicherweise nicht gesetzt. Geben Sie stets einen sinnvollen Fallback mit `||` an:
+Da Umgebungsvariablen lokal oft nicht gesetzt sind, empfiehlt sich immer ein aussagekräftiger Fallback mit `||`:
 
 ```markdown
-Verbinden Sie sich mit unserem Staging-Gateway:
-`{{ env.STAGING_GATEWAY_URL || "https://sandbox.gateway.io" }}`
+Staging-Endpunkt:
+`\{{ env.STAGING_GATEWAY_URL || "https://sandbox.gateway.io" }}`
 ```
 
-## Präfixlose Bereitstellung über `DOCMD_VAR_*`
+## Zero-Prefix-Promotion über `DOCMD_VAR_*`
 
-Damit Sie in Dokumenten nicht zwingend `env.` voranstellen müssen, wird jede Umgebungsvariable mit dem Präfix `DOCMD_VAR_` automatisch an die oberste Ebene befördert:
+Um das `env.`-Präfix in Markdown-Dateien zu vermeiden, werden alle mit `DOCMD_VAR_` beginnenden Umgebungsvariablen automatisch auf die oberste Ebene befördert:
 
 ```bash
-# In Ihrer CI/CD-Pipeline oder .env:
+# In Ihrer Pipeline oder .env:
 export DOCMD_VAR_API_HOST="https://api.production.internal"
 export DOCMD_VAR_RELEASE_CHANNEL="beta"
 ```
@@ -39,16 +39,40 @@ export DOCMD_VAR_RELEASE_CHANNEL="beta"
 In Ihren Markdown-Dokumenten:
 
 ```markdown
-Unser Server-Endpunkt lautet `{{ API_HOST }}`.
-Aktueller Release-Kanal: **{{ RELEASE_CHANNEL }}**.
+Unser Server-Endpunkt: `\{{ API_HOST }}`.
+Aktueller Release-Kanal: **\{{ RELEASE_CHANNEL }}**.
 ```
 
-Beide Variablen können alternativ weiterhin über ihren vollständigen Namen aufgerufen werden (`{{ DOCMD_VAR_API_HOST }}`).
+::: callout info "Duale Zugriffssyntax" icon:layers
+Beide Variablen können weiterhin auch über ihren vollen Namen angesprochen werden (`\{{ DOCMD_VAR_API_HOST }}`).
+:::
 
-## Beispiel: GitHub Actions Pipeline
+::: callout warning "Vertrauliche Zugangsdaten & Geheimnisse" icon:shield-alert
+Veröffentlichen Sie niemals private API-Schlüssel oder Datenbank-Passwörter über Build-Variablen! Alles, was zur Build-Zeit aufgelöst wird, landet im statischen Quelltext der Website. Für vertrauliche Werte nutzen Sie die Client-Laufzeit (`window.docmd.var.set`).
+:::
 
-Hier ist ein Beispiel für eine `.github/workflows/deploy.yml`:
+## CI/CD-Pipeline-Integration
 
+So binden Sie dynamische Metadaten in Ihren automatisierten Deployment-Ablauf ein:
+
+::: steps
+::: step "Pipeline-Umgebungsvariablen deklarieren" icon:settings
+Konfigurieren Sie Ihre Pipeline so, dass Umgebungsvariablen exportiert werden (z. B. mit `DOCMD_VAR_`-Präfix).
+:::
+
+::: step "Compiler ausführen" icon:terminal
+Führen Sie `docmd build` aus. Der Compiler liest `process.env` automatisch aus.
+:::
+
+::: step "Kompilierte Dokumentation bereitstellen" icon:cloud
+Das Ausgabeverzeichnis enthält fertiges statisches HTML mit allen aufgelösten Werten.
+:::
+::: /steps
+
+### Pipeline-Beispiele
+
+::: tabs
+::: tab "GitHub Actions" icon:github
 ```yaml
 name: Deploy Documentation
 
@@ -65,10 +89,30 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build Documentation
+      - name: Dokumentation bauen
         run: npx @docmd/core build
         env:
-          DOCMD_VAR_DEPLOYED_AT: ${{ steps.date.outputs.date }}
-          DOCMD_VAR_PR_NUMBER: ${{ github.event.number }}
-          DEPLOY_ENV: production
+          DOCMD_VAR_DEPLOYED_AT: ${{ github.event.head_commit.timestamp }}
+          DOCMD_VAR_BUILD_ID: ${{ github.run_id }}
+          DOCMD_VAR_COMMIT_SHA: ${{ github.sha }}
+          ENVIRONMENT: production
 ```
+::: /tab
+
+::: tab "GitLab CI" icon:gitlab
+```yaml
+deploy_docs:
+  image: node:22
+  stage: deploy
+  script:
+    - npx @docmd/core build
+  variables:
+    DOCMD_VAR_DEPLOYED_AT: $CI_PIPELINE_CREATED_AT
+    DOCMD_VAR_BUILD_ID: $CI_PIPELINE_ID
+    ENVIRONMENT: production
+  artifacts:
+    paths:
+      - site/
+```
+::: /tab
+::: /tabs

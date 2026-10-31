@@ -5,7 +5,7 @@ description: Use the client-side docmd-runtime.js SDK and window.docmd to power 
 
 # Client Runtime & Personalisation
 
-docmd includes a headless client runtime script, `docmd-runtime.js`, bundled automatically into every layout template (including the default template and custom themes like `summer`).
+docmd includes a lightweight, headless client runtime script, `docmd-runtime.js`, bundled automatically into every layout template (including the default template and custom themes like `summer`).
 
 The runtime exposes the `window.docmd` browser API, allowing you to update variables dynamically based on user authentication, selected environments, or input forms without reloading the page.
 
@@ -26,7 +26,7 @@ In your `docmd.config.json`, declare which variable keys are dynamic:
 }
 ```
 
-When docmd builds your pages, any variable marked as dynamic (or prefixed with `user.`) is wrapped in a reactive marker:
+When docmd compiles your pages, any variable marked as dynamic (or prefixed with `user.`) is wrapped in a reactive marker:
 
 ```html
 <span data-docmd-var="user.apiKey" class="docmd-var">pk_test_sample</span>
@@ -36,9 +36,37 @@ When docmd builds your pages, any variable marked as dynamic (or prefixed with `
 
 The client runtime provides a clean, ergonomic API:
 
-### Setting Variables: `docmd.var.set()`
+::: grids
+    ::: grid
+        ::: card "Set Variables" icon:sliders
+        `window.docmd.var.set(key, val)`
+        Updates variable values across the DOM, text nodes, and code snippets in real time.
+        :::
+    :::
+    ::: grid
+        ::: card "Get Variables" icon:search
+        `window.docmd.var.get(key)`
+        Retrieves the active value of any registered runtime variable.
+        :::
+    :::
+::: /grids
 
-Update a variable in real-time across the current page and all code snippets:
+::: grids
+    ::: grid
+        ::: card "List Variables" icon:list
+        `window.docmd.var.list()`
+        Returns an object containing all currently registered dynamic variables and values.
+        :::
+    :::
+    ::: grid
+        ::: card "Synchronise DOM" icon:refresh-cw
+        `window.docmd.var.sync()`
+        Re-scans and rehydrates newly injected HTML or dynamically loaded components.
+        :::
+    :::
+::: /grids
+
+### Code Example: Updating Variables
 
 ```javascript
 // Set a single variable
@@ -53,32 +81,6 @@ window.docmd.var.set({
 
 All `<span data-docmd-var="...">` elements and code block tokens immediately update in the DOM.
 
-### Getting Variables: `docmd.var.get()`
-
-Retrieve the current active value of a variable:
-
-```javascript
-const key = window.docmd.var.get('user.apiKey');
-console.log('Active API key:', key);
-```
-
-### Listing Variables: `docmd.var.list()`
-
-Inspect all registered runtime variables:
-
-```javascript
-const allVars = window.docmd.var.list();
-console.table(allVars);
-```
-
-### Synchronising DOM: `docmd.var.sync()`
-
-If you dynamically inject HTML content or navigate via client-side routing, call `docmd.sync()` to rehydrate variable markers:
-
-```javascript
-window.docmd.var.sync();
-```
-
 ## Interactive Code Snippets Example
 
 One of the most powerful uses of runtime personalisation is allowing readers to test API endpoints with their own keys:
@@ -90,22 +92,84 @@ Run the following command in your terminal:
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
+  -H "Authorization: Bearer \{{ user.apiKey || 'YOUR_API_KEY' }}"
+```
+```
+
+::: card "Live Interactive Code Block Demo" icon:play
+Try typing a custom API key into the input field below to observe the curl command updating live:
+
+<div style="margin: 12px 0;">
+  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">YOUR TEST API KEY:</label>
+  <input 
+    type="text" 
+    id="apiKeyInputDemo" 
+    placeholder="e.g. sk_test_my_secure_token_123" 
+    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
+    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'YOUR_API_KEY'); }"
+  />
+</div>
+
+```bash
+curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
+:::
+
+## Framework Integration
+
+::: tabs
+::: tab "Vanilla JavaScript" icon:code
+```javascript
+// Listen for user login and update documentation variables
+function onUserLogin(session) {
+  window.docmd.var.set({
+    'user.name': session.fullName,
+    'user.apiKey': session.activeToken,
+    'user.orgId': session.organisationId
+  });
+}
 ```
+::: /tab
 
-You can embed a simple input on your documentation portal:
+::: tab "React / Next.js" icon:atom
+```tsx
+import { useEffect } from 'react';
 
-```html
-<input 
-  type="text" 
-  id="apiKeyInput" 
-  placeholder="Paste your API key here..."
-  oninput="window.docmd.var.set('user.apiKey', this.value || 'YOUR_API_KEY')"
-/>
+export function DocsPersonaliser({ user }: { user: any }) {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).docmd) {
+      (window as any).docmd.var.set({
+        'user.name': user.name,
+        'user.apiKey': user.apiKey
+      });
+    }
+  }, [user]);
+
+  return null;
+}
 ```
+::: /tab
 
-As the user types their API key into the input field, the curl snippet updates in real time!
+::: tab "Vue / Nuxt" icon:feather
+```vue
+<script setup>
+import { watchEffect } from 'vue';
+
+const props = defineProps(['currentUser']);
+
+watchEffect(() => {
+  if (typeof window !== 'undefined' && window.docmd) {
+    window.docmd.var.set({
+      'user.name': props.currentUser?.name,
+      'user.apiKey': props.currentUser?.token
+    });
+  }
+});
+</script>
+```
+::: /tab
+::: /tabs
 
 ## Listening for Variable Changes
 
@@ -136,8 +200,6 @@ docIframe.contentWindow.postMessage({
 
 The `docmd-runtime.js` listener receives the message and updates all page variables automatically.
 
-## Architecture: Why `docmd-runtime.js` is Universal
-
-`docmd-runtime.js` is intentionally decoupled from layout styling, themes, and UI animations. It contains only the state machine, variable registry, event bus, and DOM hydration logic.
-
-Because it is headless, it is safe to include in any theme or template layout without conflicting with existing scripts or triggering unnecessary re-renders.
+::: callout tip "Universal Headless Architecture" icon:cpu
+`docmd-runtime.js` has zero UI dependencies. It operates entirely on data markers (`data-docmd-var`), making it safe to use alongside complex SPA routers, light/dark themes, and interactive plugins without causing DOM regressions.
+:::

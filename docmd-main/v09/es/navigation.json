@@ -228,7 +228,7 @@
   },
   {
     "title": "Variables y Tiempo de Ejecución",
-    "icon": "variable",
+    "icon": "braces",
     "collapsible": true,
     "children": [
       {
@@ -540,6 +540,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.9 - Motor de variables y personalización, rutas de búsqueda versionadas, resolución de plantillas y enrutamiento SPA",
+        "path": "/release-notes/0-9-9"
+      },
       {
         "title": "v0.9.8 - Operaciones colapsables y restricciones de esquema OpenAPI, Prompt y agrupación LLMs, validación de enlaces e i18n en turco",
         "path": "/release-notes/0-9-8"

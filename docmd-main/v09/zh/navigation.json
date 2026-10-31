@@ -228,7 +228,7 @@
   },
   {
     "title": "变量与运行时",
-    "icon": "variable",
+    "icon": "braces",
     "collapsible": true,
     "children": [
       {
@@ -540,6 +540,10 @@
     "icon": "package-check",
     "collapsible": true,
     "children": [
+      {
+        "title": "v0.9.9 - 变量与个性化运行时引擎、版本化搜索路径、模板解析器与 SPA 路由增强",
+        "path": "/release-notes/0-9-9"
+      },
       {
         "title": "v0.9.8 - OpenAPI 可折叠操作与模式约束、LLMs 提示词与分组、链接验证优化及土耳其语国际化",
         "path": "/release-notes/0-9-8"

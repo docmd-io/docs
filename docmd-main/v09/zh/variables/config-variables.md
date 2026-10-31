@@ -1,15 +1,15 @@
 ---
 title: 配置与自定义变量
-description: 如何在 docmd.config.json 中定义自定义变量、加载外部变量文件并在配置字符串与正文中引用变量。
+description: 如何在 docmd.config.json 中定义变量、引入外部变量文件并在配置字符串与 Markdown 文档中进行插值。
 ---
 
 # 配置与自定义变量
 
-您可以直接在 `docmd.config.json` 中定义自定义变量，或从外部 JSON 文件及 JavaScript 模块中导入，并在整套文档中随处使用。
+您可以在 `docmd.config.json` 中直接定义自定义变量，也可以引用外部 JSON 文件或 JavaScript 模块，并在全站文档中灵活调用。
 
-## 在 `docmd.config.json` 中声明变量
+## 在 `docmd.config.json` 中定义
 
-在 `docmd.config.json` 中添加 `variables` 字段：
+在 `docmd.config.json` 中添加 `variables` 配置项：
 
 ```json
 {
@@ -26,32 +26,32 @@ description: 如何在 docmd.config.json 中定义自定义变量、加载外部
 }
 ```
 
-### 在 Markdown 中引用
+### 在 Markdown 中使用
 
-嵌套对象可以通过标准点号语法访问：
+嵌套层级可通过标准点符号访问：
 
 ```markdown
-如需联系技术支持团队，请发送邮件至 [{{ supportEmail }}](mailto:{{ supportEmail }})。
+如需技术支持，请发送邮件至 [\{{ supportEmail }}](mailto:\{{ supportEmail }})。
 
-所有生产接口请求均应路由至我们的接入端点：
+向生产集群发起请求：
 ```bash
-curl -X GET {{ cloud.apiEndpoint }}/status \
-  -H "X-Region: {{ cloud.region }}"
+curl -X GET \{{ cloud.apiEndpoint }}/status \
+  -H "X-Region: \{{ cloud.region }}"
 ```
 ```
 
-在构建完成后，上述内容将直接编译输出为：
+在执行构建后，将直接编译为：
 
 ```bash
 curl -X GET https://api.acme.cloud/v2/status \
   -H "X-Region: cn-north-1"
 ```
 
-## 在配置字段中直接引用变量
+## 在配置项字段中直接使用变量
 
-docmd 会在渲染站点布局、页脚及横幅**之前**执行变量注册流程。
+docmd 在渲染整站母版布局、导航和页脚**之前**，会统一执行变量注册与配置插值阶段。
 
-这意味着您可以在配置选项本身中直接引用内置变量（如 `{{ docmd.buildYear }}`）及自定义变量：
+这意味着您可以在配置文件的任意文本字段中直接引用内置变量（如 `\{{ docmd.buildYear }}`）或自定义变量：
 
 ```json
 {
@@ -60,30 +60,32 @@ docmd 会在渲染站点布局、页脚及横幅**之前**执行变量注册流�
     "companyName": "Acme Cloud Systems"
   },
   "footer": {
-    "copyright": "版权所有 © {{ docmd.buildYear }} {{ companyName }}。保留所有权利。"
+    "copyright": "Copyright © \{{ docmd.buildYear }} \{{ companyName }}。保留所有权利。"
   },
   "layout": {
     "banners": {
       "top": {
-        "content": "正在运行 {{ title }} v{{ docmd.version }}，部署区域：{{ env.DEPLOY_REGION || 'global' }}。"
+        "content": "**docmd v\{{ docmd.version }} 已发布！** — 节点区域：\{{ env.DEPLOY_REGION || 'global' }}。"
       }
     }
   }
 }
 ```
 
-### 解析周期运作原理
+::: callout tip "统一解析执行闭环" icon:refresh-cw
+1. **统一注册**：在 `docmd build` 启动时，`VariableRegistry` 会预先收集所有内置变量、系统环境变量以及用户定义的 `variables`。
+2. **配置递归插值**：docmd 递归遍历 `docmd.config.json` 并替换所有 `{{ variable }}` 模板。
+3. **正文渲染插值**：Markdown 解析器基于相同的变量池统一处理页面正文。
+4. **效果**：无论页脚还是正文，所有动态内容保持完全一致，无需任何手动重复。
+:::
 
-1. **注册阶段**：`docmd build` 启动时，`VariableRegistry` 会预先登记所有内置变量（`docmd.buildYear`、`docmd.version` 等）、环境变量以及在配置中声明的 `variables`。
-2. **配置插值**：docmd 递归遍历 `docmd.config.json`（如 `footer.copyright`、`layout.banners`、`title`）并解析所有的 `{{ variable }}` 占位符。
-3. **正文渲染**：Markdown 渲染器使用相同的变量注册表来替换页面文档中的占位符。
-4. **最终效果**：无论是全局页脚还是具体的正文段落，都将呈现完全一致的解析结果，无需人工重复维护。
+## 引用外部变量文件
 
-## 外部变量文件
+针对大型项目或跨团队维护，可将 `"variables"` 指向外部 JSON 或 JavaScript 脚本：
 
-针对大型项目或团队共享的数据集，您可以将 `"variables"` 指向外部 JSON 或 JavaScript 文件：
-
-### 外部 JSON 文件
+::: tabs
+::: tab "外部 JSON 数据文件" icon:file-json
+在配置中指定 JSON 相对路径：
 
 ```json
 {
@@ -91,19 +93,23 @@ docmd 会在渲染站点布局、页脚及横幅**之前**执行变量注册流�
 }
 ```
 
-其中 `./data/variables.json` 内容为：
+`./data/variables.json` 文件内容示例：
 
 ```json
 {
   "auth": {
-    "oauthUrl": "https://auth.acme.com/oauth2/token"
+    "oauthUrl": "https://auth.acme.com/oauth2/token",
+    "clientId": "acme-portal-production"
+  },
+  "limits": {
+    "rateLimitPerMin": 1200
   }
 }
 ```
+::: /tab
 
-### 动态 JavaScript 模块
-
-您也可以使用 JavaScript 模块来动态计算变量（例如读取版本号或调用系统计算）：
+::: tab "动态 JavaScript 模块" icon:file-code
+指向 JavaScript 脚本以实现动态计算：
 
 ```json
 {
@@ -111,11 +117,18 @@ docmd 会在渲染站点布局、页脚及横幅**之前**执行变量注册流�
 }
 ```
 
-其中 `./data/variables.js` 导出一个对象或函数：
+`./data/variables.js` 导出对象或函数：
 
 ```javascript
 module.exports = {
-  dynamicTimestamp: new Date().toLocaleDateString(),
-  sdkVersion: require('./package.json').version
+  dynamicTimestamp: new Date().toLocaleDateString('zh-CN'),
+  sdkVersion: require('./package.json').version,
+  activeServices: ['auth', 'billing', 'analytics']
 };
 ```
+::: /tab
+::: /tabs
+
+::: card "最佳实践：单一真实事实源" icon:check-circle
+通过 JavaScript 模块，可以直接读取 `package.json` 中的当前发布版本，确保开发文档与代码库版本发布严格同步。
+:::
