@@ -105,9 +105,21 @@ Try typing a custom API key into the input field below to observe the curl comma
     type="text" 
     id="apiKeyInputDemo" 
     placeholder="e.g. sk_test_my_secure_token_123" 
-    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
-    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'YOUR_API_KEY'); }"
+    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'YOUR_API_KEY')"
   />
+  <script>
+    (function() {
+      var inp = document.getElementById('apiKeyInputDemo');
+      if (inp && !inp.__bound) {
+        inp.__bound = true;
+        inp.addEventListener('input', function(e) {
+          if (window.docmd && window.docmd.var) {
+            window.docmd.var.set('user.apiKey', e.target.value || 'YOUR_API_KEY');
+          }
+        });
+      }
+    })();
+  </script>
 </div>
 
 ```bash

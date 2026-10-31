@@ -105,9 +105,21 @@ Geben Sie unten einen benutzerdefinierten Test-API-Schlüssel ein, um den Curl-B
     type="text" 
     id="apiKeyInputDemoDe" 
     placeholder="z. B. sk_test_mein_schluessel_99" 
-    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
-    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'IHR_API_SCHLUESSEL'); }"
+    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'IHR_API_SCHLUESSEL')"
   />
+  <script>
+    (function() {
+      var inp = document.getElementById('apiKeyInputDemoDe');
+      if (inp && !inp.__bound) {
+        inp.__bound = true;
+        inp.addEventListener('input', function(e) {
+          if (window.docmd && window.docmd.var) {
+            window.docmd.var.set('user.apiKey', e.target.value || 'IHR_API_SCHLUESSEL');
+          }
+        });
+      }
+    })();
+  </script>
 </div>
 
 ```bash

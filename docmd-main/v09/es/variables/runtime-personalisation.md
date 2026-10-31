@@ -105,9 +105,21 @@ Escriba una clave de API de prueba en el siguiente campo para comprobar la actua
     type="text" 
     id="apiKeyInputDemoEs" 
     placeholder="ej. sk_test_mi_token_seguro_88" 
-    style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--docmd-border-color, #e2e8f0); border-radius: 6px; background: var(--docmd-bg-secondary, #f8fafc); font-family: monospace;"
-    oninput="if(window.docmd && window.docmd.var) { window.docmd.var.set('user.apiKey', this.value || 'SU_CLAVE_API'); }"
+    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'SU_CLAVE_API')"
   />
+  <script>
+    (function() {
+      var inp = document.getElementById('apiKeyInputDemoEs');
+      if (inp && !inp.__bound) {
+        inp.__bound = true;
+        inp.addEventListener('input', function(e) {
+          if (window.docmd && window.docmd.var) {
+            window.docmd.var.set('user.apiKey', e.target.value || 'SU_CLAVE_API');
+          }
+        });
+      }
+    })();
+  </script>
 </div>
 
 ```bash
