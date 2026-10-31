@@ -156,7 +156,7 @@ Banners are rendered with standard BEM classes:
 - Card styling: `.docmd-banner--card`
 - Type variants: `.docmd-banner--info`, `.docmd-banner--warning`, `.docmd-banner--success`, `.docmd-banner--danger`
 
-You can customize their appearance in your custom CSS:
+You can customise their appearance in your custom CSS:
 
 ```css "custom.css"
 /* Subtle elevation and custom border for TOC card banner */
