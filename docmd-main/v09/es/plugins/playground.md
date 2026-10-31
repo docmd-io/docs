@@ -66,12 +66,74 @@ Al ser un plugin principal, no se requiere configuración para comenzar a utiliz
 Para desactivar la ejecución de código en el cliente en todo el sitio, configure `"playground": false` bajo `"plugins"` en `docmd.config.json`. Todos los bloques de playground se representarán como bloques de código resaltados estándar.
 :::
 
-## Opciones de Uso
+## Arquitectura Técnica e Información Interna
 
-`docmd` admite múltiples modalidades para redactar playgrounds:
+El plugin Playground está diseñado con una arquitectura ligera sin dependencias externas:
 
-1. **[Guía de Sintaxis de Contenedores](../content/containers/playground.md)**: Recomendada para configuraciones flexibles con `title`, `icon`, `live`, `tabs`, `readonly` e incrustación de scripts vía `src="..."`.
-2. **Bloques Delimitados Estándar**: Utilice ` ```js playground ` o ` ```html playground ` para ejemplos rápidos en línea.
-3. **Contenedores de Autocierre**: Utilice `::: playground src="..." /:::` para vincular archivos directamente desde su código fuente.
+```mermaid
+flowchart TD
+    MD[Fuente Markdown] --> AST[Analizador AST Markdown-It]
+    AST --> Check{¿Contiene Playground?}
+    Check -->|No| Clean[0 KB de recursos adicionales]
+    Check -->|Sí| Assets[Cargar docmd-playground.css & js]
+    AST --> SourceCheck{¿Tiene atributo src?}
+    SourceCheck -->|Sí| ReadFile[Resolver e incorporar script local]
+    SourceCheck -->|No| ParseFence[Analizar bloque de código inline]
+    ReadFile -->|Archivo no encontrado| WarnBlock[Emitir banner de advertencia]
+    ReadFile -->|Éxito| Container[Generar HTML del contenedor]
+    ParseFence --> Container
+    Container --> Browser[Navegador del cliente]
+    Browser --> Exec[Sandbox de ejecución y proxy de consola]
+    Browser --> RT[Reactividad docmd-runtime docmd.var]
+```
 
-Para consultar la referencia completa de sintaxis y ejemplos interactivos en vivo, visite la **[Referencia del Contenedor Playground](../content/containers/playground.md)**.
+### 1. Intercepción AST en Tiempo de Compilación
+- **Ganchos de Contenedor y Bloques**: Registra reglas de procesamiento para `playground` en `markdown-it`.
+- **Carga Condicional de Recursos**: Solo las páginas que contienen bloques de playground inyectan los estilos y scripts correspondientes.
+
+### 2. Motor de Resolución de Scripts con `src`
+- Resuelve rutas relativas al documento activo o a la raíz del proyecto.
+- Si un archivo no se encuentra, genera una alerta estructurada (`.docmd-playground-missing-alert`) sin detener el proceso de compilación.
+
+### 3. Entorno de Ejecución Sandbox
+- Intercepta llamadas a `console.log`, `info`, `warn` y `error`, mostrándolas con formato en el panel de resultados.
+- Totalmente integrado con `docmd-runtime` (`docmd.var.get()`, `docmd.var.set()`).
+
+## Ejemplos Basados en Scripts y Flujos de Trabajo
+
+### Ejemplo de Script 1: Enlace a Scripts Locales con `src`
+
+```markdown
+::: playground src="./snippets/counter.js" title="Script Vinculado" icon:cpu live /:::
+```
+
+::: playground src="./snippets/counter.js" title="Script Vinculado" icon:cpu live /:::
+
+### Ejemplo de Script 2: Variables Reactivas en Scripts
+
+```js playground title="Inspector de Variables" icon:braces live
+const version = docmd.var.get("docmd.version");
+console.log("Versión de docmd:", version);
+docmd.var.set("user.plan", "Pro");
+console.info("Plan actualizado:", docmd.var.get("user.plan"));
+return `Versión activa: ${version}`;
+```
+
+### Ejemplo de Script 3: Componente con Pestañas (`tabs`)
+
+::: playground tabs title="Componente Interactivo" icon:layout live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
+  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Componente en Vivo</p>
+  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Clic a las: ' + new Date().toLocaleTimeString())">
+    Registrar Hora en Consola
+  </button>
+</div>
+```
+:::
+
+## Documentación Relacionada
+
+* **[Documentación del Contenedor Playground](../content/containers/playground.md)**: Sintaxis completa de contenedores, pestañas, opciones de diseño y ejemplos.
+* **[Variables y Personalización](../variables/overview.md)**: Integración con `docmd-runtime` para reactividad en cliente.
+* **[Resumen de Contenedores](../content/containers/index.md)**: Catálogo de todos los contenedores nativos en `docmd`.

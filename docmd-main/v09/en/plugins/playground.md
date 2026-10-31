@@ -66,12 +66,101 @@ Because `@docmd/plugin-playground` is a core plugin, no configuration is require
 To disable client-side code evaluation across your entire documentation site, set `"playground": false` under `"plugins"` in `docmd.config.json`. All playground code blocks will gracefully fallback to standard syntax-highlighted code blocks, and no playground scripts or stylesheets will be emitted.
 :::
 
-## Usage Options
+## Technical Architecture & Internals
 
-`docmd` supports multiple ways to author playgrounds:
+The Playground plugin is engineered around a zero-dependency architecture that keeps documentation pages fast, secure, and light.
 
-1. **[Container Syntax Guide](../content/containers/playground.md)**: Recommended for flexible configuration with `title`, `icon`, `live`, `readonly`, and active script embedding via `src="..."`.
-2. **Standard Code Fences**: Use ` ```js playground ` or ` ```html playground ` for quick inline examples.
-3. **Self-Closing Containers**: Use `::: playground src="..." /:::` to embed scripts from your codebase.
+```mermaid
+flowchart TD
+    MD[Markdown Source] --> AST[Markdown-It AST Parser]
+    AST --> Check{Contains Playground?}
+    Check -->|No| Clean[0 KB Extra Assets Emitted]
+    Check -->|Yes| Assets[Inject docmd-playground.css & js]
+    AST --> SourceCheck{Has src attribute?}
+    SourceCheck -->|Yes| ReadFile[Resolve & Inline Local Script]
+    SourceCheck -->|No| ParseFence[Parse Inner Code Fence]
+    ReadFile -->|Missing File| WarnBlock[Emit Non-Breaking Warning Box]
+    ReadFile -->|Success| Container[Generate Playground Container HTML]
+    ParseFence --> Container
+    Container --> Browser[Client Browser Runtime]
+    Browser --> Exec[Sandbox Execution & Console Proxy]
+    Browser --> RT[docmd-runtime Reactivity docmd.var]
+```
 
-For full syntax references, custom icon configuration, and live reactive examples, refer to the **[Playground Container Reference](../content/containers/playground.md)**.
+### 1. Build-Time AST Interception
+
+During the static site build:
+- **Container Hook**: Registers a custom rule on `markdown-it-container` targeting the `playground` keyword.
+- **Code Fence Hook**: Inspects code block language identifiers for `playground` or `live` flags (e.g. ```` ```js playground ````).
+- **Asset Flagging**: When any playground container or fence is detected on a page, `docmd` flags the document metadata. Only pages with this flag include the `<link>` and `<script>` tags for the playground runtime. Static pages remain 100% clean with **0 KB asset overhead**.
+
+### 2. Script Resolution Engine
+
+When a container specifies an external script path using `src="./..."` or `file="./..."`:
+- `docmd` resolves the file path relative to the active Markdown document's directory.
+- If not found relative to the document, it falls back to resolving against the project root.
+- The script content is read and safely escaped into the code editor DOM element at build time.
+- **Graceful Warning Handling**: If the specified script cannot be found (e.g. relocated or deleted during refactoring), the builder does **not** abort. Instead, it generates a structured warning callout (`.docmd-playground-missing-alert`) detailing the missing path and renders empty fallback code, ensuring continuous deployment pipelines never fail due to missing doc snippets.
+
+### 3. Client Runtime & Execution Sandbox
+
+When a user clicks **Run** or executes via keyboard shortcut (<kbd class="docmd-kbd">Cmd</kbd>+<kbd class="docmd-kbd">Enter</kbd> / <kbd class="docmd-kbd">Ctrl</kbd>+<kbd class="docmd-kbd">Enter</kbd>):
+- **Console Hijacking**: The runtime instantiates a sandboxed proxy around `console.log`, `console.info`, `console.warn`, and `console.error`. Messages are intercepted, formatted with syntax styling, and appended to the playground's output pane in real time while still mirroring to DevTools if open.
+- **Isolated Function Context**: JavaScript is evaluated inside an asynchronous function wrapper with access to `window.docmd` and global browser APIs.
+- **HTML/CSS Component Previews**: For HTML snippets, content is rendered into an isolated sandbox panel, enabling full interactive testing of buttons, forms, and custom widgets.
+
+
+## Script-Based Examples & Workflows
+
+### Script Example 1: Active Codebase Sourcing with `src`
+
+Link directly to real scripts in your repository to eliminate out-of-sync copy-pasting:
+
+```markdown
+::: playground src="./snippets/counter.js" title="Active Sourced Script" icon:cpu live /:::
+```
+
+When built, `docmd` automatically reads `snippets/counter.js` and embeds it directly into the sandbox:
+
+::: playground src="./snippets/counter.js" title="Active Sourced Script" icon:cpu live /:::
+
+### Script Example 2: Interactive `docmd-runtime` Variable Script
+
+Run JavaScript scripts that dynamically read and update client-side documentation variables:
+
+```js playground title="Dynamic Variable Inspector" icon:braces live
+// Query build-time and client-side runtime variables
+const version = docmd.var.get("docmd.version");
+const branch = docmd.var.get("docmd.gitBranch") || "main";
+
+console.log("Active docmd version:", version);
+console.log("Current git branch:", branch);
+
+// Update reactive client variables
+docmd.var.set("user.plan", "Enterprise");
+console.info("Updated reactive variable 'user.plan' to:", docmd.var.get("user.plan"));
+
+return `docmd v${version} running on branch ${branch}`;
+```
+
+### Script Example 3: Tabbed Live Component with Source Switching
+
+Provide both an interactive UI preview and direct inspection of the underlying script using the `tabs` mode:
+
+::: playground tabs title="Tabbed Component Script" icon:layout live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
+  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Live Script Component</p>
+  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Button clicked at: ' + new Date().toLocaleTimeString())">
+    Log Timestamp to Console
+  </button>
+</div>
+```
+:::
+
+
+## Container & Plugin Cross-Reference
+
+* **[Playground Container Documentation](../content/containers/playground.md)**: Explore complete container syntax options, header tabs, layout configurations (`split` vs `stacked`), and Markdown container examples.
+* **[Variables & Personalisation Engine](../variables/overview.md)**: Learn how `docmd-runtime` integrates with playground scripts for client-side reactivity.
+* **[Containers Overview](../content/containers/index.md)**: Overview of all native containers supported in `docmd`.

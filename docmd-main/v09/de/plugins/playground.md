@@ -66,12 +66,74 @@ Da `@docmd/plugin-playground` ein Kern-Plugin ist, ist keine Konfiguration erfor
 Um die clientseitige Codeausführung auf der gesamten Website zu deaktivieren, setzen Sie `"playground": false` unter `"plugins"` in `docmd.config.json`. Alle Playground-Blöcke werden dann als standardmäßige Syntax-Codeblöcke dargestellt.
 :::
 
-## Nutzungsoptionen
+## Technische Architektur & Interna
 
-`docmd` bietet mehrere Möglichkeiten zum Verfassen von Playgrounds:
+Das Playground-Plugin basiert auf einer schlanken, abhängigkeitsfreien Architektur:
 
-1. **[Container-Syntax-Anleitung](../content/containers/playground.md)**: Empfohlen für flexible Konfigurationen mit `title`, `icon`, `live`, `tabs`, `readonly` und Skripteinbindung via `src="..."`.
-2. **Standard-Code-Fences**: Verwenden Sie ` ```js playground ` oder ` ```html playground ` für schnelle Inline-Beispiele.
-3. **Selbstschließende Container**: Nutzen Sie `::: playground src="..." /:::`, um Dateien direkt aus dem Codebase einzubinden.
+```mermaid
+flowchart TD
+    MD[Markdown-Quelle] --> AST[Markdown-It AST-Parser]
+    AST --> Check{Enthält Playground?}
+    Check -->|Nein| Clean[0 KB zusätzliche Assets]
+    Check -->|Ja| Assets[docmd-playground.css & js laden]
+    AST --> SourceCheck{Hat src-Attribut?}
+    SourceCheck -->|Ja| ReadFile[Lokales Skript einlesen & inlinen]
+    SourceCheck -->|Nein| ParseFence[Inline-Codeblock parsen]
+    ReadFile -->|Datei fehlt| WarnBlock[Warnhinweis ausgeben]
+    ReadFile -->|Erfolg| Container[Playground-Container generieren]
+    ParseFence --> Container
+    Container --> Browser[Client-Laufzeitumgebung]
+    Browser --> Exec[Sandbox-Ausführung & Konsolen-Proxy]
+    Browser --> RT[docmd-runtime docmd.var-Reaktivität]
+```
 
-Vollständige Syntaxreferenzen und Live-Beispiele finden Sie in der **[Playground-Container-Referenz](../content/containers/playground.md)**.
+### 1. Build-Zeit-AST-Verarbeitung
+- **Container- & Fence-Hooks**: Registriert Verarbeitungsregeln für `playground` in `markdown-it`.
+- **Bedingte Asset-Einbindung**: Nur Seiten mit Playground-Elementen binden die zugehörigen Skripte und Stylesheets ein.
+
+### 2. Skriptauflösung mit `src`
+- Löst Pfade relativ zum aktuellen Dokument oder Projektverzeichnis auf.
+- Fehlende Dateien führen nicht zum Build-Abbruch, sondern erzeugen strukturierte Warnhinweise (`.docmd-playground-missing-alert`).
+
+### 3. Ausführungssandbox
+- Fängt Konsolenaufrufe (`log`, `info`, `warn`, `error`) ab und leitet sie formatiert in das Ausgabefenster weiter.
+- Direkte Integration mit der `docmd-runtime` (`docmd.var.get()`, `docmd.var.set()`).
+
+## Skriptbasierte Beispiele & Workflows
+
+### Skript-Beispiel 1: Lokale Skripte einbinden mit `src`
+
+```markdown
+::: playground src="./snippets/counter.js" title="Eingebundenes Skript" icon:cpu live /:::
+```
+
+::: playground src="./snippets/counter.js" title="Eingebundenes Skript" icon:cpu live /:::
+
+### Skript-Beispiel 2: Reaktive Variablen im Skript
+
+```js playground title="Variablen-Inspektor" icon:braces live
+const version = docmd.var.get("docmd.version");
+console.log("docmd Version:", version);
+docmd.var.set("user.plan", "Pro");
+console.info("Plan aktualisiert:", docmd.var.get("user.plan"));
+return `Aktive Version: ${version}`;
+```
+
+### Skript-Beispiel 3: Komponente mit Reiter-Umschaltung (`tabs`)
+
+::: playground tabs title="Interaktive Komponente" icon:layout live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
+  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Live-Komponente</p>
+  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Klick um: ' + new Date().toLocaleTimeString())">
+    Zeitstempel in Konsole schreiben
+  </button>
+</div>
+```
+:::
+
+## Verwandte Dokumentation
+
+* **[Playground-Container-Dokumentation](../content/containers/playground.md)**: Vollständige Container-Syntax, Reiter, Layout-Optionen und interaktive Beispiele.
+* **[Variablen & Personalisierung](../variables/overview.md)**: Integration mit der `docmd-runtime` für clientseitige Reaktivität.
+* **[Container-Übersicht](../content/containers/index.md)**: Übersicht aller nativen Container in `docmd`.

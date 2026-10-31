@@ -253,3 +253,7 @@ return "SDK 调用正常";
 * <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> (macOS) 或 <kbd class="docmd-kbd">Ctrl</kbd> + <kbd class="docmd-kbd">Enter</kbd> (Windows/Linux): 即刻执行当前代码块
 * <kbd class="docmd-kbd">Tab</kbd>: 插入 2 个空格缩进，避免浏览器焦点失焦
 * <kbd class="docmd-kbd">Shift</kbd> + <kbd class="docmd-kbd">Tab</kbd>: 消除当前行或选区的缩进
+
+## 关联插件技术文档
+
+有关 AST 解析钩子、构建期脚本安全解析、异常容错机制以及全局插件配置选项的深入技术说明，请参阅 **[Playground 插件技术架构与参考指南](../../plugins/playground.md)**。

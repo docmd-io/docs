@@ -253,3 +253,7 @@ Der Playground-Editor bietet vertraute Tastenkürzel für schnelles Arbeiten:
 * <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> (macOS) oder <kbd class="docmd-kbd">Strg</kbd> + <kbd class="docmd-kbd">Enter</kbd> (Windows/Linux): Codeblock sofort ausführen
 * <kbd class="docmd-kbd">Tab</kbd>: Fügt 2 Leerzeichen Einrückung ein
 * <kbd class="docmd-kbd">Umschalt</kbd> + <kbd class="docmd-kbd">Tab</kbd>: Hebt die Einrückung der aktuellen Zeile oder Auswahl auf
+
+## Verwandte Plugin-Dokumentation
+
+Ausführliche technische Details zu AST-Parsing-Hooks, Skriptauflösung zur Build-Zeit, Fehlertoleranz und globalen Plugin-Optionen finden Sie in der **[Playground-Plugin-Architektur & Referenz](../../plugins/playground.md)**.

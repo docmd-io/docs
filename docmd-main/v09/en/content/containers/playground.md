@@ -253,3 +253,7 @@ The playground editor provides standard IDE keyboard shortcuts for rapid iterati
 * <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> (macOS) or <kbd class="docmd-kbd">Ctrl</kbd> + <kbd class="docmd-kbd">Enter</kbd> (Windows/Linux): Run the current code block
 * <kbd class="docmd-kbd">Tab</kbd>: Inserts a 2-space indentation instead of shifting browser focus
 * <kbd class="docmd-kbd">Shift</kbd> + <kbd class="docmd-kbd">Tab</kbd>: Un-indents current line or selection
+
+## Related Plugin Documentation
+
+For deep technical details on AST parsing hooks, build-time script resolution, graceful error handling mechanics, and global plugin configuration options, see the **[Playground Plugin Architecture & Technical Reference](../../plugins/playground.md)**.

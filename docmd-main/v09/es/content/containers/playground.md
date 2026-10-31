@@ -253,3 +253,7 @@ El editor de playground ofrece atajos de teclado estándar para máxima producti
 * <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> (macOS) o <kbd class="docmd-kbd">Ctrl</kbd> + <kbd class="docmd-kbd">Enter</kbd> (Windows/Linux): Ejecutar el código actual
 * <kbd class="docmd-kbd">Tab</kbd>: Inserta sangría de 2 espacios sin perder el foco del navegador
 * <kbd class="docmd-kbd">Shift</kbd> + <kbd class="docmd-kbd">Tab</kbd>: Elimina la sangría de la línea o selección
+
+## Documentación Relacionada del Plugin
+
+Para conocer detalles técnicos avanzados sobre ganchos de análisis AST, resolución de scripts en tiempo de compilación, gestión de fallos y opciones de configuración global, consulte la **[Referencia y Arquitectura Técnica del Plugin Playground](../../plugins/playground.md)**.
