@@ -195,15 +195,17 @@ The `::: playground` container supports rich metadata attributes:
 | `src` / `file` | `string` | None | Relative path to a local code file to inline into the playground editor. |
 | `icon` | `string` | `"play"` | Lucide icon name rendered next to the title (e.g. `icon:code`, `icon:cpu`, `icon:layout`). Defaults to the play icon. |
 | `live` | `boolean` | `false` | When present, executes the code automatically when the page loads. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Enables header view switching between "Live" and "Code". Supports `tabs:code` to start in code view. |
+| `tabs` / `mode` | `string` \| `boolean` | `false` | Enables header view switching between "Live" and "Code" in a full-width single panel view. Supports `tabs:code` to start in code view. |
+| `tab` | `string` | `"console"` or `"preview"` | Default output tab to display (`"preview"` or `"console"`). Also supports the bare `preview` attribute flag. |
+| `nocode` | `boolean` | `false` | When present (or `code:false`), hides the "Code" button from the header tabs, presenting only the Live preview. |
 | `readonly` | `boolean` | `false` | Locks the code editor against user editing while allowing code execution. |
-| `layout` | `string` | `"split"` | Sets the layout presentation: `"split"` (side-by-side) or `"stacked"` (vertical). |
+| `layout` | `string` | `"split"` | Sets the layout presentation: `"split"` (side-by-side) or `"stacked"` (vertical). In `tabs` mode, single full-width panel is used. |
 | `lang` | `string` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
 
 ## Interactive Features
 
 ::: tabs
-::: tab title="JavaScript Runner" icon:code
+::: tab "JavaScript Runner" icon:code
 Playgrounds execute JavaScript in an isolated evaluation context. The runner intercepts:
 
 * `console.log(...)` — Standard log formatting with syntax colour highlighting
@@ -218,9 +220,9 @@ console.info("Information payload:", { status: "active", version: "0.9.9" });
 console.warn("Notice: demo warning");
 return "Execution completed successfully";
 ```
-:::
+::: /tab
 
-::: tab title="HTML Component Preview" icon:layout
+::: tab "HTML Component Preview" icon:layout
 When the playground language is set to `html` (either via ```` ```html playground ```` or `::: playground lang:html`), the playground automatically selects the **Preview** panel and renders the HTML/CSS inside a sandboxed frame:
 
 ```html playground title="Live Button Component" live
@@ -228,9 +230,9 @@ When the playground language is set to `html` (either via ```` ```html playgroun
   Interactive Button
 </button>
 ```
-:::
+::: /tab
 
-::: tab title="docmd-runtime Integration" icon:braces
+::: tab "docmd-runtime Integration" icon:braces
 Playgrounds have access to the global `window.docmd` runtime object and reactive variables:
 
 * `docmd.var.get('docmd.version')` — Read build-time or client-side variables
@@ -243,8 +245,8 @@ console.log("Docmd Engine Version:", window.docmd?.var?.get("docmd.version") || 
 console.log("Git Branch:", window.docmd?.var?.get("docmd.gitBranch") || "main");
 return "SDK accessible";
 ```
-:::
-:::
+::: /tab
+::: /tabs
 
 ## Keyboard Shortcuts
 

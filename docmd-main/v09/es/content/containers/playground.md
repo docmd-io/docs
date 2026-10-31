@@ -195,7 +195,9 @@ El contenedor `::: playground` admite completos atributos de metadatos:
 | `src` / `file` | `string` | Ninguno | Ruta relativa a un archivo de código local para cargar en el editor. |
 | `icon` | `string` | `"play"` | Nombre de icono Lucide (p. ej. `icon:code`, `icon:cpu`, `icon:layout`). |
 | `live` | `boolean` | `false` | Ejecuta el código automáticamente cuando la página se carga. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Habilita pestañas en la cabecera para alternar entre "Live" y "Code". Admite `tabs:code` para iniciar en código. |
+| `tabs` / `mode` | `string` \| `boolean` | `false` | Habilita pestañas en la cabecera para alternar entre "Live" y "Code" en panel único de ancho completo. Admite `tabs:code` para iniciar en código. |
+| `tab` | `string` | `"console"` o `"preview"` | Pestaña de salida predeterminada (`"preview"` o `"console"`). También admite el atributo `preview`. |
+| `nocode` | `boolean` | `false` | Oculta la pestaña de código mostrando directamente la vista previa en vivo (también `code:false`). |
 | `readonly` | `boolean` | `false` | Bloquea el editor contra modificaciones permitiendo la ejecución. |
 | `layout` | `string` | `"split"` | Disposición visual: `"split"` (lado a lado) o `"stacked"` (vertical). |
 | `lang` | `string` | Derivado (`"js"`) | Lenguaje explícito (`js`, `html`, `css`). Deducido de extensiones o bloques de código. |
@@ -203,7 +205,7 @@ El contenedor `::: playground` admite completos atributos de metadatos:
 ## Características Interactivas
 
 ::: tabs
-::: tab title="Ejecutor de JavaScript" icon:code
+::: tab "Ejecutor de JavaScript" icon:code
 Los playgrounds ejecutan JavaScript en un contexto de evaluación aislado. La consola captura:
 
 * `console.log(...)` — Salidas estándar con resaltado de sintaxis
@@ -218,9 +220,9 @@ console.info("Carga útil:", { estado: "activo", versión: "0.9.9" });
 console.warn("Aviso: advertencia de prueba");
 return "Ejecución completada con éxito";
 ```
-:::
+::: /tab
 
-::: tab title="Vista Previa de Componentes HTML" icon:layout
+::: tab "Vista Previa de Componentes HTML" icon:layout
 Cuando el lenguaje se establece en `html` (mediante ```` ```html playground ```` o `::: playground lang:html`), el playground selecciona automáticamente el panel de **Vista Previa** y renderiza el contenido dentro de un marco aislado:
 
 ```html playground title="Botón Interactivo en Vivo" live
@@ -228,9 +230,9 @@ Cuando el lenguaje se establece en `html` (mediante ```` ```html playground ````
   Botón Interactivo
 </button>
 ```
-:::
+::: /tab
 
-::: tab title="Integración con docmd-runtime" icon:braces
+::: tab "Integración con docmd-runtime" icon:braces
 Los playgrounds tienen acceso total al objeto global `window.docmd` y a las variables reactivas:
 
 * `docmd.var.get('docmd.version')` — Leer variables de compilación o del cliente
@@ -243,8 +245,8 @@ console.log("Versión de docmd:", window.docmd?.var?.get("docmd.version") || "0.
 console.log("Rama Git:", window.docmd?.var?.get("docmd.gitBranch") || "main");
 return "SDK disponible";
 ```
-:::
-:::
+::: /tab
+::: /tabs
 
 ## Atajos de Teclado
 

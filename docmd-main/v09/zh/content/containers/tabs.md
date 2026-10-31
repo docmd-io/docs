@@ -31,7 +31,7 @@ description: "在 docmd 中将备选代码片段、平台指令和多语言内�
 
 ## 使用示例
 
-```markdown
+````markdown
 ::: tabs # 包管理器选项
 ::: tab "pnpm" icon:box # 推荐的包管理器
 ```bash
@@ -51,7 +51,7 @@ yarn add @docmd/core
 ```
 ::: /tab
 ::: /tabs
-```
+````
 
 ::: tabs # 包管理器选项
 ::: tab "pnpm" icon:box # 推荐的包管理器

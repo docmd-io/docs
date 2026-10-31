@@ -11,29 +11,29 @@ Ab **v0.9.9** wird `@docmd/plugin-playground` standardmäßig mit `@docmd/core` 
 
 ## Hauptmerkmale
 
-::: cards
-::: card title="Zero-Config-Aktivierung" icon:play
-Verwenden Sie ` ```js playground ` oder `::: playground`, um sofort eine interaktive Sandbox bereitzustellen.
+::: grids
+::: card "Zero-Config-Aktivierung" icon:play
+Verwenden Sie ```` ```js playground ```` oder `::: playground`, um sofort eine interaktive Sandbox bereitzustellen.
 :::
-::: card title="Aktive Skript-Einbindung" icon:file-code
-Verlinken Sie Quellskripte direkt über `::: playground src="./counter.js" /:::`, um Dokumentationsbeispiele synchron mit dem Projektcode zu halten.
+::: card "Aktive Skript-Einbindung" icon:file-code
+Verlinken Sie Quellskripte direkt über `::: playground src="./snippets/demo.js" /:::`, um Dokumentationsbeispiele synchron mit dem Projektcode zu halten.
 :::
-::: card title="Echtzeit-Konsolenerfassung" icon:terminal
+::: card "Echtzeit-Konsolenerfassung" icon:terminal
 Fängt `console.log()`, `console.info()`, `console.warn()` und `console.error()` in Echtzeit ab und formatiert Rückgabewerte übersichtlich.
 :::
-::: card title="Live-HTML- & CSS-Sandbox" icon:layout
+::: card "Live-HTML- & CSS-Sandbox" icon:layout
 Rendert interaktive UI-Komponenten in einem isolierten Vorschaufenster mit einfacher Umschaltung zwischen Konsole und Vorschau.
 :::
-::: card title="docmd-runtime-Integration" icon:braces
+::: card "docmd-runtime-Integration" icon:braces
 Direkter Zugriff auf die `window.docmd`-Laufzeitumgebung und reaktive Variablen über `docmd.var.get()` und `docmd.var.set()`.
 :::
-::: card title="Live- & Code-Umschalter" icon:columns
-Interaktive Reiter in der Symbolleiste erlauben nahtloses Wechseln zwischen Live-Komponentenvorschau und Quellcode (`tabs`).
+::: card "Live- & Code-Umschalter" icon:columns
+Interaktive Reiter in der Symbolleiste erlauben nahtloses Wechseln zwischen Live-Komponentenvorschau und Quellcode in einer sauberen Einzelfeld-Ansicht (`tabs`).
 :::
-::: card title="Fehlertoleranz & Warnungen" icon:shield-alert
+::: card "Fehlertoleranz & Warnungen" icon:shield-alert
 Fehlende Skripte erzeugen ein unaufdringliches Warnbanner mit Fallback-Code; Laufzeitfehler werden strukturiert in der Konsole gemeldet.
 :::
-::: card title="Ultra-Leichtgewicht & Schnell" icon:feather
+::: card "Ultra-Leichtgewicht & Schnell" icon:feather
 Reines Standard-JavaScript und CSS (< 10 KB Gesamtgröße) mit Tastaturkürzeln (`Cmd+Enter` / `Ctrl+Enter` zum Ausführen, `Tab` für Einrückung).
 :::
 :::
@@ -104,27 +104,47 @@ flowchart TD
 ### Skript-Beispiel 1: Lokale Skripte einbinden mit `src`
 
 ```markdown
-::: playground src="./snippets/counter.js" title="Eingebundenes Skript" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="Eingebundenes Skript" icon:cpu live /:::
 ```
 
-::: playground src="./snippets/counter.js" title="Eingebundenes Skript" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="Eingebundenes Skript" icon:cpu live /:::
 
-### Skript-Beispiel 2: Reaktive Variablen im Skript
+### Skript-Beispiel 2: Headless Live-Vorschau mit `nocode`
 
-```js playground title="Variablen-Inspektor" icon:braces live
-const version = docmd.var.get("docmd.version");
-console.log("docmd Version:", version);
-docmd.var.set("user.plan", "Pro");
-console.info("Plan aktualisiert:", docmd.var.get("user.plan"));
-return `Aktive Version: ${version}`;
+````markdown
+::: playground tabs nocode preview title="Live-Komponente ohne Code" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS VORSCHAU</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Dieser Playground nutzt <code>nocode</code>, um eine saubere Vorschau ohne Code-Umschalter darzustellen.</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Interaktion erfolgreich!')">
+    Komponente testen
+  </button>
+</div>
 ```
+:::
+````
+
+Live gerendertes Widget:
+
+::: playground tabs nocode preview title="Live-Komponente ohne Code" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS VORSCHAU</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Dieser Playground nutzt <code>nocode</code>, um eine saubere Vorschau ohne Code-Umschalter darzustellen.</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Interaktion erfolgreich!')">
+    Komponente testen
+  </button>
+</div>
+```
+:::
 
 ### Skript-Beispiel 3: Komponente mit Reiter-Umschaltung (`tabs`)
 
-::: playground tabs title="Interaktive Komponente" icon:layout live
+::: playground tabs preview title="Interaktive Komponente" icon:layout live
 ```html
 <div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Live-Komponente</p>
+  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Interaktive Sandbox</p>
   <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Klick um: ' + new Date().toLocaleTimeString())">
     Zeitstempel in Konsole schreiben
   </button>

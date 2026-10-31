@@ -195,7 +195,9 @@ return fib(10);
 | `src` / `file` | `string` | 无 | 要内联载入演练场编辑器的本地代码文件的相对路径。 |
 | `icon` | `string` | `"play"` | 标题前渲染的 Lucide 图标名称（如 `icon:code`, `icon:cpu`, `icon:layout`）。 |
 | `live` | `boolean` | `false` | 声明后在页面加载时自动运行代码。 |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | 启用在“Live”与“Code”之间切换的选项卡。支持 `tabs:code` 默认显示代码。 |
+| `tabs` / `mode` | `string` \| `boolean` | `false` | 启用在“Live”与“Code”之间切换的全宽单面板视图。支持 `tabs:code` 默认显示代码。 |
+| `tab` | `string` | `"console"` 或 `"preview"` | 默认激活的输出选项卡（`"preview"` 或 `"console"`）。也支持独立的 `preview` 标志。 |
+| `nocode` | `boolean` | `false` | 隐藏代码切换按钮，直接呈现全宽实时预览效果（也可写作 `code:false`）。 |
 | `readonly` | `boolean` | `false` | 锁定代码编辑器禁止修改，但允许点击运行。 |
 | `layout` | `string` | `"split"` | 布局形式：`"split"`（左右分栏）或 `"stacked"`（上下堆叠）。 |
 | `lang` | `string` | 自动推导 (`"js"`) | 明确指定代码语言（`js`, `html`, `css`）。从文件扩展名或内部代码围栏推导。 |
@@ -203,7 +205,7 @@ return fib(10);
 ## 交互能力
 
 ::: tabs
-::: tab title="JavaScript 运行器" icon:code
+::: tab "JavaScript 运行器" icon:code
 演练场在隔离的沙盒上下文中执行 JavaScript。控制台实时捕获：
 
 * `console.log(...)` — 带有高亮语法色彩的标准日志
@@ -218,9 +220,9 @@ console.info("状态数据:", { status: "active", version: "0.9.9" });
 console.warn("注意: 测试警告提示");
 return "执行圆满完成";
 ```
-:::
+::: /tab
 
-::: tab title="HTML 组件预览" icon:layout
+::: tab "HTML 组件预览" icon:layout
 当演练场语言设为 `html`（通过 ```` ```html playground ```` 或 `::: playground lang:html`）时，演练场会自动激活**预览**选项卡，并在隔离的沙箱框架中渲染 HTML/CSS：
 
 ```html playground title="实时可交互按钮" live
@@ -228,9 +230,9 @@ return "执行圆满完成";
   交互式组件按钮
 </button>
 ```
-:::
+::: /tab
 
-::: tab title="docmd-runtime 深度集成" icon:braces
+::: tab "docmd-runtime 深度集成" icon:braces
 演练场可直接访问全局 `window.docmd` 运行时对象以及响应式页面变量：
 
 * `docmd.var.get('docmd.version')` — 读取构建期或客户端动态变量
@@ -243,8 +245,8 @@ console.log("Docmd 引擎版本:", window.docmd?.var?.get("docmd.version") || "0
 console.log("Git 分支:", window.docmd?.var?.get("docmd.gitBranch") || "main");
 return "SDK 调用正常";
 ```
-:::
-:::
+::: /tab
+::: /tabs
 
 ## 键盘快捷键
 

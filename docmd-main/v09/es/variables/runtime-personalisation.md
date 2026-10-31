@@ -85,7 +85,7 @@ Todos los elementos `<span data-docmd-var="...">` y fragmentos de código se act
 
 Un caso de uso destacado es permitir a los desarrolladores probar comandos API con su propia clave:
 
-```markdown
+````markdown
 ### Autenticación con la API
 
 Ejecute el siguiente comando en su terminal:
@@ -94,7 +94,7 @@ Ejecute el siguiente comando en su terminal:
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer \{{ user.apiKey || 'SU_CLAVE_API' }}"
 ```
-```
+````
 
 ::: card "Demostración Interactiva en Vivo" icon:play
 Escriba una clave de API de prueba en el siguiente campo para comprobar la actualización reactiva:

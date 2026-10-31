@@ -30,7 +30,7 @@ Add a `variables` block to your `docmd.config.json`:
 
 Nested objects can be accessed using standard dot notation:
 
-```markdown
+````markdown
 To contact our operations team, email [\{{ supportEmail }}](mailto:\{{ supportEmail }}).
 
 All requests should be routed to our production endpoint:
@@ -38,7 +38,7 @@ All requests should be routed to our production endpoint:
 curl -X GET \{{ cloud.apiEndpoint }}/status \
   -H "X-Region: \{{ cloud.region }}"
 ```
-```
+````
 
 During build, this resolves directly to:
 

@@ -42,7 +42,7 @@ El motor principal utiliza una canalización de E/S no bloqueante, compilando mi
 
 Las tarjetas aceptan cualquier contenido Markdown, incluidos fragmentos de código y contenedores de botones:
 
-```markdown
+````markdown
 ::: card title:"Localización instantánea"
 Prepare su documentación para una audiencia global utilizando el soporte i18n integrado.
 
@@ -52,7 +52,7 @@ npx @docmd/core build
 
 ::: button title:"Guía de estrategia de localización" url:"../localisation/translated-content.md"
 :::
-```
+````
 
 ::: card "Localización instantánea"
 Prepare su documentación para una audiencia global utilizando el soporte i18n integrado.

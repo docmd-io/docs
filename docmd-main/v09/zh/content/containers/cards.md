@@ -42,7 +42,7 @@ description: "在 docmd 中将信息组织到带边框、视觉独特的容器�
 
 卡片接受任何 Markdown 内容，包括代码片段和按钮容器：
 
-```markdown
+````markdown
 ::: card title:"即时本地化"
 使用内置的 i18n 支持为全球受众准备文档。
 

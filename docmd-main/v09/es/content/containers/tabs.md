@@ -31,7 +31,7 @@ Contenido de la pestaña 2...
 
 ## Ejemplos de Uso
 
-```markdown
+````markdown
 ::: tabs # Opciones de gestor de paquetes
 ::: tab "pnpm" icon:box # Recomendado
 ```bash
@@ -51,7 +51,7 @@ yarn add @docmd/core
 ```
 ::: /tab
 ::: /tabs
-```
+````
 
 ::: tabs # Opciones de gestor de paquetes
 ::: tab "pnpm" icon:box # Recomendado

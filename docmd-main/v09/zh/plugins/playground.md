@@ -11,29 +11,29 @@ description: "轻量交互式代码运行器与组件演练场插件，提供实
 
 ## 核心特性
 
-::: cards
-::: card title="Zero-Config 零配置激活" icon:play
-在文档中编写 ` ```js playground ` 或 `::: playground`，即可立即实例化一个交互式沙箱。
+::: grids
+::: card "Zero-Config 零配置激活" icon:play
+在文档中编写 ```` ```js playground ```` 或 `::: playground`，即可立即实例化一个交互式沙箱。
 :::
-::: card title="代码库文件动态嵌入" icon:file-code
-通过 `::: playground src="./counter.js" /:::` 直接引用代码库中的源脚本，确保文档示例随实际项目代码自动保持同步。
+::: card "代码库文件动态嵌入" icon:file-code
+通过 `::: playground src="./snippets/demo.js" /:::` 直接引用代码库中的源脚本，确保文档示例随实际项目代码自动保持同步。
 :::
-::: card title="控制台日志实时捕获" icon:terminal
+::: card "控制台日志实时捕获" icon:terminal
 实时拦截并格式化 `console.log()`、`console.info()`、`console.warn()` 和 `console.error()` 输出，并直观展示返回值。
 :::
-::: card title="实时 HTML & CSS 组件沙箱" icon:layout
+::: card "实时 HTML & CSS 组件沙箱" icon:layout
 在隔离的预览框架内渲染动态 UI 组件，并支持在控制台日志与渲染视图之间便捷切换。
 :::
-::: card title="docmd-runtime 深度集成" icon:braces
+::: card "docmd-runtime 深度集成" icon:braces
 原生访问客户端 `window.docmd` 运行时与响应式页面变量，支持 `docmd.var.get()` 和 `docmd.var.set()`。
 :::
-::: card title="Live 与 Code 视图切换" icon:columns
-在顶栏提供交互式选项卡，可在组件实时渲染输出与底层源代码之间即刻切换（`tabs`）。
+::: card "Live 与 Code 视图切换" icon:columns
+在顶栏提供交互式选项卡，可在组件实时渲染输出与底层源代码之间即刻在全宽单面板视图中切换（`tabs`）。
 :::
-::: card title="优雅错误降级与提示" icon:shield-alert
+::: card "优雅错误降级与提示" icon:shield-alert
 引用的脚本缺失时显示不影响构建的友好警告横幅；代码运行抛出异常时在控制台清晰呈现错误信息。
 :::
-::: card title="超轻量与极致速度" icon:feather
+::: card "超轻量与极致速度" icon:feather
 纯原生 JavaScript 与 CSS 构建（整体体积 < 10 KB），支持常用键盘快捷键（`Cmd+Enter` / `Ctrl+Enter` 运行，`Tab` 缩进）。
 :::
 :::
@@ -104,24 +104,46 @@ flowchart TD
 ### 脚本示例 1：引用本地脚本源码 (`src`)
 
 ```markdown
-::: playground src="./snippets/counter.js" title="本地脚本文件" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="本地脚本文件" icon:cpu live /:::
 ```
 
-::: playground src="./snippets/counter.js" title="本地脚本文件" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="本地脚本文件" icon:cpu live /:::
 
-### 脚本示例 2：动态交互脚本与变量联动
+### 脚本示例 2：无代码纯预览模式 (`nocode`)
 
-```js playground title="变量检查器" icon:braces live
-const version = docmd.var.get("docmd.version");
-console.log("docmd 引擎版本:", version);
-docmd.var.set("user.plan", "Pro");
-console.info("更新后套餐:", docmd.var.get("user.plan"));
-return `当前引擎版本: ${version}`;
+当展示交互式设计组件或小部件且无需用户查看代码时，结合使用 `tabs` 与 `nocode`（或 `code:false`）可隐藏代码查看按钮：
+
+````markdown
+::: playground tabs nocode preview title="实时无代码组件" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">无代码预览</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">该 Playground 使用 <code>nocode</code> 渲染整洁的交互组件，无代码按钮干扰。</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('组件点击触发成功！')">
+    测试组件交互
+  </button>
+</div>
 ```
+:::
+````
+
+实时渲染的组件预览：
+
+::: playground tabs nocode preview title="实时无代码组件" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">无代码预览</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">该 Playground 使用 <code>nocode</code> 渲染整洁的交互组件，无代码按钮干扰。</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('组件点击触发成功！')">
+    测试组件交互
+  </button>
+</div>
+```
+:::
 
 ### 脚本示例 3：双模视图切换组件 (`tabs`)
 
-::: playground tabs title="可切换组件预览" icon:layout live
+::: playground tabs preview title="可切换组件预览" icon:layout live
 ```html
 <div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
   <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">交互式组件</p>

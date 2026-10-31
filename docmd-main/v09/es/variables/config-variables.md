@@ -30,7 +30,7 @@ Añada un bloque `variables` a su `docmd.config.json`:
 
 Las propiedades anidadas se leen mediante notación de puntos:
 
-```markdown
+````markdown
 Para contactar con soporte técnico, escriba a [\{{ supportEmail }}](mailto:\{{ supportEmail }}).
 
 Envíe sus peticiones a nuestro punto de conexión:
@@ -38,7 +38,7 @@ Envíe sus peticiones a nuestro punto de conexión:
 curl -X GET \{{ cloud.apiEndpoint }}/status \
   -H "X-Region: \{{ cloud.region }}"
 ```
-```
+````
 
 Al compilar, esto se traduce a:
 

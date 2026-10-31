@@ -85,7 +85,7 @@ All `<span data-docmd-var="...">` elements and code block tokens immediately upd
 
 One of the most powerful uses of runtime personalisation is allowing readers to test API endpoints with their own keys:
 
-```markdown
+````markdown
 ### Authenticating with the API
 
 Run the following command in your terminal:
@@ -94,7 +94,7 @@ Run the following command in your terminal:
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer \{{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
-```
+````
 
 ::: card "Live Interactive Code Block Demo" icon:play
 Try typing a custom API key into the input field below to observe the curl command updating live:

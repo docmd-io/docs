@@ -42,7 +42,7 @@ Die Core-Engine nutzt eine nicht-blockierende I/O-Pipeline und kompiliert Tausen
 
 Karten akzeptieren jegliche Markdown-Inhalte, einschließlich Code-Snippets und Button-Container:
 
-```markdown
+````markdown
 ::: card title:"Sofortige Lokalisierung"
 Bereiten Sie Ihre Dokumentation für ein globales Publikum mit integrierter i18n-Unterstützung vor.
 

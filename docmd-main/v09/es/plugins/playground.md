@@ -11,29 +11,29 @@ A partir de **v0.9.9**, `@docmd/plugin-playground` se incluye directamente con `
 
 ## Características Principales
 
-::: cards
-::: card title="Activación Zero-Config" icon:play
-Utilice ` ```js playground ` o `::: playground` para desplegar inmediatamente un entorno interactivo sin configuración previa.
+::: grids
+::: card "Activación Zero-Config" icon:play
+Utilice ```` ```js playground ```` o `::: playground` para desplegar inmediatamente un entorno interactivo sin configuración previa.
 :::
-::: card title="Incrustación de Archivos Activos" icon:file-code
-Vincule scripts reales de su repositorio mediante `::: playground src="./counter.js" /:::` para mantener la documentación sincronizada automáticamente con el proyecto.
+::: card "Incrustación de Archivos Activos" icon:file-code
+Vincule scripts reales de su repositorio mediante `::: playground src="./snippets/demo.js" /:::` para mantener la documentación sincronizada automáticamente con el proyecto.
 :::
-::: card title="Captura de Consola en Tiempo Real" icon:terminal
+::: card "Captura de Consola en Tiempo Real" icon:terminal
 Intercepta `console.log()`, `console.info()`, `console.warn()` y `console.error()` en tiempo real y muestra los valores devueltos de forma clara.
 :::
-::: card title="Sandbox de HTML y CSS en Vivo" icon:layout
+::: card "Sandbox de HTML y CSS en Vivo" icon:layout
 Renderiza componentes visuales en un panel de vista previa aislado con alternancia sencilla entre consola y vista previa.
 :::
-::: card title="Integración con docmd-runtime" icon:braces
+::: card "Integración con docmd-runtime" icon:braces
 Acceso directo al entorno de ejecución `window.docmd` y a las variables reactivas mediante `docmd.var.get()` y `docmd.var.set()`.
 :::
-::: card title="Selector de Vista Live y Code" icon:columns
-Pestañas interactivas en la barra de herramientas superior para alternar fluidamente entre la salida visual y el código fuente (`tabs`).
+::: card "Selector de Vista Live y Code" icon:columns
+Pestañas interactivas en la barra de herramientas superior para alternar fluidamente entre la salida visual y el código fuente en un panel único limpio (`tabs`).
 :::
-::: card title="Tolerancia a Fallos y Avisos" icon:shield-alert
+::: card "Tolerancia a Fallos y Avisos" icon:shield-alert
 Los scripts faltantes muestran un banner de aviso sin interrumpir la compilación; las excepciones de ejecución se reportan con claridad en la consola.
 :::
-::: card title="Ultra Ligero y Rápido" icon:feather
+::: card "Ultra Ligero y Rápido" icon:feather
 Construido exclusivamente con JavaScript y CSS estándar (< 10 KB en total) con atajos de teclado (`Cmd+Enter` / `Ctrl+Enter` para ejecutar, `Tab` para sangría).
 :::
 :::
@@ -104,27 +104,47 @@ flowchart TD
 ### Ejemplo de Script 1: Enlace a Scripts Locales con `src`
 
 ```markdown
-::: playground src="./snippets/counter.js" title="Script Vinculado" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="Script Vinculado" icon:cpu live /:::
 ```
 
-::: playground src="./snippets/counter.js" title="Script Vinculado" icon:cpu live /:::
+::: playground src="./snippets/demo.js" title="Script Vinculado" icon:cpu live /:::
 
-### Ejemplo de Script 2: Variables Reactivas en Scripts
+### Ejemplo de Script 2: Vista Previa Headless con `nocode`
 
-```js playground title="Inspector de Variables" icon:braces live
-const version = docmd.var.get("docmd.version");
-console.log("Versión de docmd:", version);
-docmd.var.set("user.plan", "Pro");
-console.info("Plan actualizado:", docmd.var.get("user.plan"));
-return `Versión activa: ${version}`;
+````markdown
+::: playground tabs nocode preview title="Widget en Vivo sin Código" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">VISTA PREVIA HEADLESS</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Este playground utiliza <code>nocode</code> para renderizar una vista interactiva limpia sin selector de código.</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Componente interactivo accionado!')">
+    Probar Componente
+  </button>
+</div>
 ```
+:::
+````
+
+Widget renderizado en vivo:
+
+::: playground tabs nocode preview title="Widget en Vivo sin Código" icon:sparkles live
+```html
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
+  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">VISTA PREVIA HEADLESS</span>
+  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Este playground utiliza <code>nocode</code> para renderizar una vista interactiva limpia sin selector de código.</p>
+  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Componente interactivo accionado!')">
+    Probar Componente
+  </button>
+</div>
+```
+:::
 
 ### Ejemplo de Script 3: Componente con Pestañas (`tabs`)
 
-::: playground tabs title="Componente Interactivo" icon:layout live
+::: playground tabs preview title="Componente Interactivo" icon:layout live
 ```html
 <div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Componente en Vivo</p>
+  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Sandbox Interactivo</p>
   <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Clic a las: ' + new Date().toLocaleTimeString())">
     Registrar Hora en Consola
   </button>

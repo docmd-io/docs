@@ -30,7 +30,7 @@ description: 如何在 docmd.config.json 中定义变量、引入外部变量文
 
 嵌套层级可通过标准点符号访问：
 
-```markdown
+````markdown
 如需技术支持，请发送邮件至 [\{{ supportEmail }}](mailto:\{{ supportEmail }})。
 
 向生产集群发起请求：
@@ -38,7 +38,7 @@ description: 如何在 docmd.config.json 中定义变量、引入外部变量文
 curl -X GET \{{ cloud.apiEndpoint }}/status \
   -H "X-Region: \{{ cloud.region }}"
 ```
-```
+````
 
 在执行构建后，将直接编译为：
 

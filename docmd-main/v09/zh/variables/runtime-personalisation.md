@@ -85,7 +85,7 @@ window.docmd.var.set({
 
 运行时个性化最直观的应用之一，是让开发者直接在文档中调试包含个人密钥的 API 指令：
 
-```markdown
+````markdown
 ### 调用认证接口
 
 在终端中执行以下命令：
@@ -94,7 +94,7 @@ window.docmd.var.set({
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer \{{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
-```
+````
 
 ::: card "交互式代码块在线演示" icon:play
 在下方输入框中输入自定义 API 密钥，观察 Curl 代码片段的实时变化：

@@ -195,7 +195,9 @@ Der `::: playground`-Container unterstützt umfangreiche Metadaten-Attribute:
 | `src` / `file` | `string` | Keine | Relativer Pfad zu einer lokalen Codedatei, die in den Editor geladen wird. |
 | `icon` | `string` | `"play"` | Lucide-Icon-Name neben dem Titel (z. B. `icon:code`, `icon:cpu`, `icon:layout`). |
 | `live` | `boolean` | `false` | Führt den Code beim Laden der Seite automatisch aus. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Aktiviert Reiter zum Umschalten zwischen „Live“ und „Code“. Unterstützt `tabs:code` für anfängliche Code-Ansicht. |
+| `tabs` / `mode` | `string` \| `boolean` | `false` | Aktiviert Reiter zum Umschalten zwischen „Live“ und „Code“ in voller Breite. Unterstützt `tabs:code` für anfängliche Code-Ansicht. |
+| `tab` | `string` | `"console"` oder `"preview"` | Standard-Ausgabereiter (`"preview"` oder `"console"`). Unterstützt auch das `preview`-Attribut. |
+| `nocode` | `boolean` | `false` | Versteckt den „Code“-Reiter und zeigt direkt die Live-Ausgabe in voller Breite (auch `code:false`). |
 | `readonly` | `boolean` | `false` | Sperrt den Editor gegen Bearbeitung, erlaubt aber die Ausführung. |
 | `layout` | `string` | `"split"` | Bestimmt die Anordnung: `"split"` (nebeneinander) oder `"stacked"` (untereinander). |
 | `lang` | `string` | Abgeleitet (`"js"`) | Explizite Sprachangabe (`js`, `html`, `css`). Automatisch aus Dateiendung oder Codefence ermittelt. |
@@ -203,7 +205,7 @@ Der `::: playground`-Container unterstützt umfangreiche Metadaten-Attribute:
 ## Interaktive Funktionen
 
 ::: tabs
-::: tab title="JavaScript-Runner" icon:code
+::: tab "JavaScript-Runner" icon:code
 Playgrounds führen JavaScript in einem isolierten Ausführungskontext aus. Die Konsole erfasst:
 
 * `console.log(...)` — Standardausgaben mit Syntaxhervorhebung
@@ -218,9 +220,9 @@ console.info("Statusbericht:", { status: "aktiv", version: "0.9.9" });
 console.warn("Hinweis: Test-Warnung");
 return "Ausführung erfolgreich beendet";
 ```
-:::
+::: /tab
 
-::: tab title="HTML-Komponenten-Vorschau" icon:layout
+::: tab "HTML-Komponenten-Vorschau" icon:layout
 Wenn die Sprache auf `html` gesetzt ist (über ```` ```html playground ```` oder `::: playground lang:html`), öffnet der Playground automatisch den **Vorschau**-Reiter und rendert das Markup in einem isolierten Frame:
 
 ```html playground title="Live-Schaltfläche" live
@@ -228,9 +230,9 @@ Wenn die Sprache auf `html` gesetzt ist (über ```` ```html playground ```` oder
   Interaktiver Button
 </button>
 ```
-:::
+::: /tab
 
-::: tab title="docmd-runtime-Integration" icon:braces
+::: tab "docmd-runtime-Integration" icon:braces
 Playgrounds haben vollen Zugriff auf das globale `window.docmd`-Laufzeitobjekt und reaktive Variablen:
 
 * `docmd.var.get('docmd.version')` — Build- oder clientseitige Variablen auslesen
@@ -243,8 +245,8 @@ console.log("Docmd-Engine-Version:", window.docmd?.var?.get("docmd.version") || 
 console.log("Git-Branch:", window.docmd?.var?.get("docmd.gitBranch") || "main");
 return "SDK erreichbar";
 ```
-:::
-:::
+::: /tab
+::: /tabs
 
 ## Tastaturkürzel
 

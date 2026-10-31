@@ -85,7 +85,7 @@ Alle `<span data-docmd-var="...">`-Elemente und Codeblock-Token im Dokument aktu
 
 Ein überzeugender Anwendungsfall ist das Testen von API-Endpunkten mit benutzerdefinierten Schlüsseln:
 
-```markdown
+````markdown
 ### API-Authentifizierung
 
 Führen Sie folgenden Befehl im Terminal aus:
@@ -94,7 +94,7 @@ Führen Sie folgenden Befehl im Terminal aus:
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer \{{ user.apiKey || 'IHR_API_SCHLUESSEL' }}"
 ```
-```
+````
 
 ::: card "Interaktive Live-Demo" icon:play
 Geben Sie unten einen benutzerdefinierten Test-API-Schlüssel ein, um den Curl-Befehl live zu aktualisieren:

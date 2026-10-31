@@ -30,7 +30,7 @@ Fügen Sie Ihrer `docmd.config.json` einen `variables`-Block hinzu:
 
 Verschachtelte Eigenschaften werden mit gewohnter Punktnotation angesprochen:
 
-```markdown
+````markdown
 Unser Support-Team erreichen Sie unter [\{{ supportEmail }}](mailto:\{{ supportEmail }}).
 
 Alle Anfragen richten Sie an unseren Endpunkt:
@@ -38,7 +38,7 @@ Alle Anfragen richten Sie an unseren Endpunkt:
 curl -X GET \{{ cloud.apiEndpoint }}/status \
   -H "X-Region: \{{ cloud.region }}"
 ```
-```
+````
 
 Während des Builds wird dies aufgelöst zu:
 
