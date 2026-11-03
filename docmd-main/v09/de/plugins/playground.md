@@ -164,8 +164,8 @@ Führen Sie JavaScript-Skripte in einer geschützten Sandbox aus mit vollständi
 
 ::: playground title="Client-Metriken-Aggregator" icon:cpu live
 ```js
-const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
-const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+const buildYear = window.docmd?.var?.get("docmd.buildYear");
+const version = window.docmd?.var?.get("docmd.version");
 
 console.log("Compiler-Version:", version);
 console.info("Deployment-Jahr:", buildYear);

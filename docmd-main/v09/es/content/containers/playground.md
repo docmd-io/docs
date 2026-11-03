@@ -263,8 +263,8 @@ Los playgrounds tienen acceso total al objeto global `window.docmd` y a las vari
 
 ```js playground title="API de Tema y Variables" live
 console.log("Tema Actual:", window.docmd?.theme?.get() || "light");
-console.log("Versión de docmd:", window.docmd?.var?.get("docmd.version") || "0.9.9");
-console.log("Rama Git:", window.docmd?.var?.get("docmd.gitBranch") || "main");
+console.log("Versión de docmd:", window.docmd?.var?.get("docmd.version"));
+console.log("Rama Git:", window.docmd?.var?.get("docmd.gitBranch"));
 return "SDK disponible";
 ```
 ::: /tab

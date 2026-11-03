@@ -164,8 +164,8 @@ Ejecute scripts de JavaScript en un sandbox del cliente con captura de `console.
 
 ::: playground title="Agregador de Métricas del Cliente" icon:cpu live
 ```js
-const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
-const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+const buildYear = window.docmd?.var?.get("docmd.buildYear");
+const version = window.docmd?.var?.get("docmd.version");
 
 console.log("Versión del motor Docmd:", version);
 console.info("Año de compilación:", buildYear);

@@ -263,8 +263,8 @@ return "执行圆满完成";
 
 ```js playground title="主题与变量 API" live
 console.log("当前主题:", window.docmd?.theme?.get() || "light");
-console.log("Docmd 引擎版本:", window.docmd?.var?.get("docmd.version") || "0.9.9");
-console.log("Git 分支:", window.docmd?.var?.get("docmd.gitBranch") || "main");
+console.log("Docmd 引擎版本:", window.docmd?.var?.get("docmd.version"));
+console.log("Git 分支:", window.docmd?.var?.get("docmd.gitBranch"));
 return "SDK 调用正常";
 ```
 ::: /tab

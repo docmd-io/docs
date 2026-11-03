@@ -178,8 +178,8 @@ Execute JavaScript scripts in a client sandbox with full interception of `consol
 
 ::: playground title="Client Metrics Aggregator" icon:cpu live
 ```js
-const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
-const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+const buildYear = window.docmd?.var?.get("docmd.buildYear");
+const version = window.docmd?.var?.get("docmd.version");
 
 console.log("Docmd Engine Version:", version);
 console.info("Deployment Build Year:", buildYear);

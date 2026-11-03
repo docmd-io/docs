@@ -164,8 +164,8 @@ Playground 支持在浏览器沙箱中直接呈现丰富的前端 HTML 与 CSS �
 
 ::: playground title="客户端指标监控器" icon:cpu live
 ```js
-const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
-const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+const buildYear = window.docmd?.var?.get("docmd.buildYear");
+const version = window.docmd?.var?.get("docmd.version");
 
 console.log("docmd 编译器版本:", version);
 console.info("构建部署年份:", buildYear);

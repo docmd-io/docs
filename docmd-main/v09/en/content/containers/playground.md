@@ -262,8 +262,8 @@ Playgrounds have access to the global `window.docmd` runtime object and reactive
 
 ```js playground title="Theme & Variables API" live
 console.log("Current Theme:", window.docmd?.theme?.get() || "light");
-console.log("Docmd Engine Version:", window.docmd?.var?.get("docmd.version") || "0.9.9");
-console.log("Git Branch:", window.docmd?.var?.get("docmd.gitBranch") || "main");
+console.log("Docmd Engine Version:", window.docmd?.var?.get("docmd.version"));
+console.log("Git Branch:", window.docmd?.var?.get("docmd.gitBranch"));
 return "SDK accessible";
 ```
 ::: /tab
