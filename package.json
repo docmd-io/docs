@@ -14,8 +14,7 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.9.8",
-    "@docmd/template-summer": "^0.9.8"
+    "@docmd/core": "^0.9.9"
   },
   "allowScripts": {
     "@docmd/engine-rust": true
