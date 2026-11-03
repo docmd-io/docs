@@ -5,8 +5,6 @@ description: "Ein umfassendes Verzeichnis struktureller UI-Container und interak
 
 Standard-Markdown eignet sich hervorragend für grundlegende Textformatierung, aber technische Dokumentation benötigt strukturelle Komponenten. `docmd` erweitert Markdown um eine Reihe **isomorpher Container**.
 
-::: callout info "Standard für Container-Syntax" icon:sparkles
-
 ::: callout tip "Migration von anderen Dokumentations-Engines?" icon:sparkles
 `docmd` unterstützt Syntax-Aliase von **VitePress** und **Docusaurus** direkt ab Werk. Container wie `:::tip`, `:::warning`, `:::note`, `:::details` und `:::caution` funktionieren ohne Anpassung.
 :::

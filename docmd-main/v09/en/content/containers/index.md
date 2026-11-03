@@ -5,8 +5,6 @@ description: "A comprehensive directory of structural UI containers and interact
 
 Standard Markdown excels at basic text formatting, but technical documentation requires structural components to communicate complex logic. `docmd` extends Markdown with a suite of **isomorphic containers** that render into responsive, high-fidelity UI elements.
 
-::: callout info "Container Syntax Standard" icon:sparkles
-
 ::: callout tip "Migrating from Other Documentation Engines?" icon:sparkles
 `docmd` supports syntax aliases from **VitePress** and **Docusaurus** out of the box. Containers like `:::tip`, `:::warning`, `:::note`, `:::details`, and `:::caution` work without modification. Spaceless syntax (e.g. `:::tabs` instead of `::: tabs`) is also supported across all containers.
 :::

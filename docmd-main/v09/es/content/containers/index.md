@@ -5,8 +5,6 @@ description: "Directorio completo de contenedores estructurales de UI y componen
 
 Standard Markdown es excelente para el formato básico de texto, pero la documentación técnica requiere componentes estructurales. `docmd` extiende Markdown con una suite de **contenedores isomórficos**.
 
-::: callout info "Estándar de Sintaxis de Contenedores" icon:sparkles
-
 ::: callout tip "¿Migrando desde otros motores de documentación?" icon:sparkles
 `docmd` admite alias de sintaxis de **VitePress** y **Docusaurus** directamente. Contenedores como `:::tip`, `:::warning`, `:::note`, `:::details` y `:::caution` funcionan sin modificaciones.
 :::

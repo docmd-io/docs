@@ -1,5 +1,5 @@
 ---
-title: "Playground Container"
+title: "Playground"
 description: "Embed runnable JavaScript environments, live HTML component previews, tabbed Live/Code toggles, and active codebase scripts using the ::: playground container."
 ---
 
@@ -11,52 +11,113 @@ The playground runtime is built using pure vanilla JavaScript and CSS, requiring
 
 ## Container Syntax
 
-```markdown
-# Block Container (Enclosed Code & Output)
-::: playground [title:"Title"] [icon:NAME] [live] [view:"code"] [tab:"preview"|"console"] [nocode] [readonly]
-```js
-// JavaScript or HTML/CSS code
-```
-::: /playground
+````markdown
+# Standard Block Container
+::: playground [title:"Toolbar Title"] [icon:icon_name] [live] [view:"code"|"live"] [tab:"preview"|"console"]
+// JavaScript or HTML/CSS code snippet
+::: /playground # Explicit container closer
 
-# Self-Closing Container (Active Sourced Script)
-::: playground src="./snippets/counter.js" [title:"Title"] [icon:NAME] [live] /:::
+# Self-Closing Sourced Script
+::: playground src="./path/to/script.js" [title:"Toolbar Title"] [icon:icon_name] [live] /:::
 
-# Quick Fenced Code Block
-```js playground [title:"Title"] [icon:NAME] [live]
-// Code here
+# Shorthand Fenced Code Block
+```js playground [title:"Toolbar Title"] [icon:icon_name] [live]
+// JavaScript code snippet
 ```
-```
+````
 
 ## Features & Supported Attributes
 
 | Parameter / Attribute | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| **Title** | `string` \| `title:"..."` | Derived or `"Playground"` | The heading displayed in the playground toolbar. Supports `title:"My Title"` or quoted strings. |
-| **Source File** | `src:PATH` \| `file:PATH` | None | Relative path to a local code file in your repository to inline into the editor. |
+| **Title** | `"String"` \| `title:"..."` | Derived or `"Playground"` | Toolbar heading label (positional 1st parameter or `title:"..."`). |
+| **Source File** | `src:PATH` \| `file:PATH` | None | Relative path to an external script file to inline into the playground editor. |
 | **Iconography** | `icon:NAME` | `"play"` | Optional. [Lucide](external:https://lucide.dev/icons) icon name rendered next to the title (e.g. `icon:code`, `icon:cpu`, `icon:layout`). |
+| **Language** | `lang:LANG` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
 | **Auto-Execution** | `live` | `false` | When present, executes the code automatically when the page loads. |
 | **Initial View** | `view:"code"` \| `view:"live"` | `"live"` | Active initial view mode (`"live"` for output/preview or `"code"` to open directly in the editor). |
 | **Output Sub-Tab** | `tab:"preview"` \| `tab:"console"` | `"console"` or `"preview"` | Active output sub-tab to display (`"preview"` or `"console"`). Bare `preview` flag is also supported. |
 | **No-Code Mode** | `nocode` | `false` | When present (or `code:false`), hides the "Code" button from the header switcher, presenting only the Live preview. |
 | **Read-Only** | `readonly` | `false` | Locks the code editor against user editing while allowing code execution. |
 | **Layout** | `layout:"stacked"` \| `"split"` | `"stacked"` | Sets the layout presentation: unified single-panel view with Play/Code switcher by default, or `"split"` for side-by-side. |
-| **Language** | `lang:LANG` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
 | **Closing Tags** | `::: /playground`, `/:::`, `:::` | Standard closing | Supports explicit closing tag `::: /playground`, self-closing `/:::`, or generic `:::`. |
 
 ::: callout warning "Security Notice & Script Execution" icon:shield-alert
 All playground code runs entirely client-side inside the reader's browser session. HTML previews execute inside a sandboxed iframe with an opaque origin (`null`), preventing access to parent DOM or cookies. When using `live` auto-execution, ensure code snippets originate from trusted documentation sources.
 :::
 
-
 ## Usage Examples
 
-### 1. Block Container with Enclosed Code
+### Interactive JavaScript Runner
 
-Wrap standard code inside a `::: playground` block:
+Standard block playground demonstrating `console.log`, `console.info`, `console.warn`, and expression returns:
 
 ````markdown
-::: playground title="Reactive Variable Explorer" icon:code live
+::: playground title="JavaScript Console & Return Demo" icon:code live
+```js
+console.log("Hello from docmd!");
+console.info("Status payload:", { status: "active", version: "0.9.9" });
+console.warn("Notice: demo warning");
+return "Execution completed successfully";
+```
+::: /playground
+````
+
+::: playground title="JavaScript Console & Return Demo" icon:code live
+```js
+console.log("Hello from docmd!");
+console.info("Status payload:", { status: "active", version: "0.9.9" });
+console.warn("Notice: demo warning");
+return "Execution completed successfully";
+```
+::: /playground
+
+### Live HTML Component Preview
+
+When the playground language is set to `html` (or `lang:html`), the playground automatically selects the **Preview** panel and renders the HTML/CSS inside a sandboxed frame:
+
+````markdown
+::: playground title="Interactive Component Preview" icon:layout live
+```html
+<div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
+  </div>
+  <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
+    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the toolbar switcher.
+  </p>
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
+    Trigger Console Log
+  </button>
+</div>
+```
+::: /playground
+````
+
+::: playground title="Interactive Component Preview" icon:layout live
+```html
+<div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
+  </div>
+  <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
+    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the toolbar switcher.
+  </p>
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
+    Trigger Console Log
+  </button>
+</div>
+```
+::: /playground
+
+### Reactive Variables & docmd Runtime Integration
+
+Playgrounds have access to the global `window.docmd` runtime object and reactive variables:
+
+````markdown
+::: playground title="Reactive Variable Explorer" icon:sparkles live
 ```js
 const buildYear = docmd.var.get("docmd.buildYear");
 const siteTitle = docmd.var.get("site.title");
@@ -69,12 +130,10 @@ docmd.var.set("user.plan", "Enterprise");
 console.info("Updated user plan to:", docmd.var.get("user.plan"));
 return `Current Year: ${buildYear}`;
 ```
-:::
+::: /playground
 ````
 
-Here is the live working example rendered directly by `docmd`:
-
-::: playground title="Reactive Variable Explorer" icon:code live
+::: playground title="Reactive Variable Explorer" icon:sparkles live
 ```js
 const buildYear = docmd.var.get("docmd.buildYear");
 const siteTitle = docmd.var.get("site.title");
@@ -87,56 +146,14 @@ docmd.var.set("user.plan", "Enterprise");
 console.info("Updated user plan to:", docmd.var.get("user.plan"));
 return `Current Year: ${buildYear}`;
 ```
-:::
+::: /playground
 
-### 2. Play and Code View Switching
+### Code-First Initial View (`view:"code"`)
 
-Every playground includes an integrated two-in-one **Play** and **Code** view switcher in the header toolbar. The playground body is rendered full-width as a unified single panel:
-
-````markdown
-::: playground title="Interactive Component (Play & Code Switcher)" icon:layout live
-```html
-<div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
-  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
-  </div>
-  <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the buttons in the top-right toolbar.
-  </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
-    Trigger Console Log
-  </button>
-</div>
-```
-:::
-````
-
-Here is the live working container with view switching enabled:
-
-::: playground title="Interactive Component (Play & Code Switcher)" icon:layout live
-```html
-<div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
-  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
-  </div>
-  <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the buttons in the top-right toolbar.
-  </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
-    Trigger Console Log
-  </button>
-</div>
-```
-:::
-
-### 3. Container Starting on Code View (`view="code"`)
-
-You can configure the container to present the code editor by default while retaining the instant "Play" switcher by specifying `view="code"`:
+Configure the playground to open directly in the code editor on page load while keeping the instant "Play" toggle accessible:
 
 ````markdown
-::: playground view="code" title="Factorial Algorithm (Code First)" icon:code live
+::: playground view:"code" title="Factorial Algorithm (Code First)" icon:code live
 ```js
 // Compute factorial recursively
 function factorial(n) {
@@ -149,12 +166,10 @@ const result = factorial(num);
 console.log(`Factorial of ${num} is:`, result);
 return result;
 ```
-:::
+::: /playground
 ````
 
-Live working example starting in code view:
-
-::: playground view="code" title="Factorial Algorithm (Code First)" icon:code live
+::: playground view:"code" title="Factorial Algorithm (Code First)" icon:code live
 ```js
 // Compute factorial recursively
 function factorial(n) {
@@ -167,39 +182,25 @@ const result = factorial(num);
 console.log(`Factorial of ${num} is:`, result);
 return result;
 ```
-:::
+::: /playground
 
-### 4. Self-Closing Container with Active File Source
+### Active Sourced Script (`src`)
 
-Rather than copying and pasting code from your source files into documentation, you can link directly to an active script or component file in your codebase using the `src` attribute:
+Link directly to an active script in your repository using the `src` attribute:
 
-```markdown
+````markdown
 ::: playground src="./snippets/counter.js" title="Active Sourced Script" icon:cpu live /:::
-```
-
-Here is the live working example sourcing [./snippets/counter.js](file:///Users/mac/Workspace/GitHub/docmd-io/docs/docmd-main/v09/en/content/containers/snippets/counter.js):
+````
 
 ::: playground src="./snippets/counter.js" title="Active Sourced Script" icon:cpu live /:::
 
 ::: callout tip "Continuous Code Synchronisation" icon:refresh-cw
-When using `src="./path/to/file"`, `docmd` resolves the file at build time relative to your documentation page or workspace root. When your codebase updates, your documentation examples update automatically on the next build without manual edits.
+When using `src="./path/to/file"`, `docmd` resolves the file at build time relative to your documentation page or workspace root. When your codebase updates, your documentation examples update automatically on the next build without manual edits. If a source file is missing or relocated, `docmd` displays a graceful warning banner without failing the build.
 :::
 
-### 5. Graceful Warning on Missing Script Source
+### Shorthand Fenced Code Block
 
-If a source script path is invalid or has been relocated, `docmd` displays a clear warning banner and prints clean fallback code in the editor without failing the build:
-
-```markdown
-::: playground src="./snippets/missing-script.js" title="Missing Script Graceful Warning" icon:alert-triangle /:::
-```
-
-Live working demonstration of graceful warning handling:
-
-::: playground src="./snippets/missing-script.js" title="Missing Script Graceful Warning" icon:alert-triangle /:::
-
-### 6. Fenced Code Block Syntax
-
-For quick examples without container nesting, add `playground` to any Markdown code fence:
+For quick snippets without container block nesting, append `playground` directly to any standard Markdown code fence:
 
 ````markdown
 ```js playground title="Quick Fibonacci Runner" icon:zap
@@ -212,8 +213,6 @@ return fib(10);
 ```
 ````
 
-Live working fenced code block:
-
 ```js playground title="Quick Fibonacci Runner" icon:zap
 function fib(n) {
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
@@ -222,61 +221,17 @@ function fib(n) {
 console.log("Fib(10) =", fib(10));
 return fib(10);
 ```
-
-## Interactive Features
-
-::: tabs
-::: tab "JavaScript Runner" icon:code
-Playgrounds execute JavaScript in an isolated evaluation context. The runner intercepts:
-
-* `console.log(...)` — Standard log formatting with syntax colour highlighting
-* `console.info(...)` — Informational messages with blue indicator
-* `console.warn(...)` — Warning logs with amber indicator
-* `console.error(...)` — Error traces with red indicator and stack details
-* Expression Returns — Any final return expression (e.g. `10 + 20`) is displayed as a return value: `=> 30`
-
-```js playground title="Console Demonstration"
-console.log("Hello from docmd!");
-console.info("Information payload:", { status: "active", version: "0.9.9" });
-console.warn("Notice: demo warning");
-return "Execution completed successfully";
-```
-::: /tab
-
-::: tab "HTML Component Preview" icon:layout
-When the playground language is set to `html` (either via ```` ```html playground ```` or `::: playground lang:html`), the playground automatically selects the **Preview** panel and renders the HTML/CSS inside a sandboxed frame:
-
-```html playground title="Live Button Component" live
-<button style="padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="alert('Component clicked!')">
-  Interactive Button
-</button>
-```
-::: /tab
-
-::: tab "docmd-runtime Integration" icon:braces
-Playgrounds have access to the global `window.docmd` runtime object and reactive variables:
-
-* `docmd.var.get('docmd.version')` — Read build-time or client-side variables
-* `docmd.var.set('key', 'value')` — Mutate client-side variables and trigger DOM re-renders
-* `docmd.theme.get()` / `docmd.theme.toggle()` — Inspect or switch between dark and light modes
-
-```js playground title="Theme & Variables API" live
-console.log("Current Theme:", window.docmd?.theme?.get() || "light");
-console.log("Docmd Engine Version:", window.docmd?.var?.get("docmd.version"));
-console.log("Git Branch:", window.docmd?.var?.get("docmd.gitBranch"));
-return "SDK accessible";
-```
-::: /tab
-::: /tabs
 
 ## Keyboard Shortcuts
 
 The playground editor provides standard IDE keyboard shortcuts for rapid iteration:
 
-* <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> (macOS) or <kbd class="docmd-kbd">Ctrl</kbd> + <kbd class="docmd-kbd">Enter</kbd> (Windows/Linux): Run the current code block
-* <kbd class="docmd-kbd">Tab</kbd>: Inserts a 2-space indentation instead of shifting browser focus
-* <kbd class="docmd-kbd">Shift</kbd> + <kbd class="docmd-kbd">Tab</kbd>: Un-indents current line or selection
+| Shortcut | Description |
+| :--- | :--- |
+| <kbd class="docmd-kbd">Cmd</kbd> + <kbd class="docmd-kbd">Enter</kbd> / <kbd class="docmd-kbd">Ctrl</kbd> + <kbd class="docmd-kbd">Enter</kbd> | Run the active code block. |
+| <kbd class="docmd-kbd">Tab</kbd> | Inserts a 2-space indentation instead of shifting browser focus. |
+| <kbd class="docmd-kbd">Shift</kbd> + <kbd class="docmd-kbd">Tab</kbd> | Un-indents the current line or selection. |
 
-## Related Plugin Documentation
+## Related Documentation
 
 For deep technical details on AST parsing hooks, build-time script resolution, graceful error handling mechanics, and global plugin configuration options, see the **[Playground Plugin Architecture & Technical Reference](../../plugins/playground.md)**.

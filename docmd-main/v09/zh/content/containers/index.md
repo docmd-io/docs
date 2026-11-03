@@ -5,8 +5,6 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 
 标准 Markdown 在基础文本格式化方面表现出色，但技术文档需要结构化组件来表达复杂的逻辑。`docmd` 扩展了 Markdown，提供了一整套**同构容器**。
 
-::: callout info "容器语法标准" icon:sparkles
-
 ::: callout tip "从其他文档引擎迁移？" icon:sparkles
 `docmd` 开箱即用支持来自 **VitePress** 和 **Docusaurus** 的语法别名。像 `:::tip`、`:::warning`、`:::note`、`:::details` 和 `:::caution` 这样的容器无需修改即可直接使用。
 :::
