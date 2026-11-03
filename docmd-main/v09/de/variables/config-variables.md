@@ -47,6 +47,21 @@ curl -X GET https://api.acme.cloud/v2/status \
   -H "X-Region: eu-central-1"
 ```
 
+### Zugriff auf Konfigurationsvariablen in Client-JavaScript & Playgrounds
+
+Alle in `docmd.config.json` deklarierten Variablen werden automatisch in die Client-Laufzeit (`window.__DOCMD_VARIABLES__`) übertragen und stehen in Browser-Skripten, benutzerdefinierten Erweiterungen und interaktiven Playgrounds über `window.docmd.var.get()` zur Verfügung:
+
+```javascript
+// In docmd.config.json definierte Variablen abfragen
+const endpoint = window.docmd?.var?.get("cloud.apiEndpoint");
+const region = window.docmd?.var?.get("cloud.region");
+console.log(`Verbindung zu ${endpoint} in ${region}`);
+```
+
+::: callout tip "1:1 Namenszuordnung" icon:check-circle
+Variablenschlüssel stimmen exakt mit den Markdown-Namen überein. Wenn Sie `{{ cloud.apiEndpoint }}` in Markdown schreiben, verwenden Sie `window.docmd.var.get("cloud.apiEndpoint")` in JavaScript. Stellen Sie Benutzervariablen kein `docmd.` voran.
+:::
+
 ## Variablen in Konfigurationsfeldern nutzen
 
 docmd führt einen einheitlichen Variablen-Pass durch, **bevor** Layouts, Menüs und Fußzeilen gerendert werden.

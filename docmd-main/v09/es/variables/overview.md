@@ -57,6 +57,25 @@ Las expresiones toleran espacios alrededor de los nombres y operadores:
 \{{ env.PORT || "8080" }}
 ```
 
+## Sintaxis Markdown vs. Mapeo con la API JavaScript
+
+Cada variable disponible en sus plantillas Markdown se corresponde 1:1 con el SDK de JavaScript en el navegador (`window.docmd.var.get()`):
+
+| Tipo de Variable | Plantilla Markdown | API JavaScript Cliente | Regla de Espacio de Nombres |
+| :--- | :--- | :--- | :--- |
+| **Variable de Usuario / Proyecto** | `\{{ apiEndpoint }}` | `window.docmd.var.get("apiEndpoint")` | Definida en `docmd.config.json` o frontmatter. Sin prefijo `docmd.`. |
+| **Variable de Usuario Anidada** | `\{{ cloud.apiEndpoint }}` | `window.docmd.var.get("cloud.apiEndpoint")` | Objeto JSON anidado en la configuración. Notación de punto. |
+| **Versión del Compilador** | `\{{ docmd.version }}` | `window.docmd.var.get("docmd.version")` | Espacio de nombres reservado `docmd.` para metadatos del motor. |
+| **Año de Compilación** | `\{{ docmd.buildYear }}` | `window.docmd.var.get("docmd.buildYear")` | Espacio de nombres reservado `docmd.`. |
+| **Metadatos Git** | `\{{ docmd.gitCommit }}` | `window.docmd.var.get("docmd.gitCommit")` | Espacio de nombres reservado `docmd.` o `git.`. |
+| **Metadatos del Sitio** | `\{{ site.title }}` | `window.docmd.var.get("site.title")` | Espacio de nombres reservado `site.` de la configuración. |
+| **Sesión de Usuario Dinámica** | `\{{ user.apiKey }}` | `window.docmd.var.get("user.apiKey")` | Con prefijo `user.` o declarada en `dynamic`. Reactiva en el DOM. |
+
+::: callout info "Estándar de Nombres: ¿Por qué no `{{ docmd.apiEndpoint }}`?" icon:shield-alert
+* El espacio de nombres `docmd.` (`docmd.version`, `docmd.buildYear`, `docmd.gitCommit`, etc.) está **estrictamente reservado para los metadatos internos del compilador docmd**.
+* Las variables definidas por el usuario (de `docmd.config.json` o frontmatter) **nunca** deben llevar el prefijo `docmd.`. Si define `"apiEndpoint": "https://api.example.com"`, use `{{ apiEndpoint }}` en Markdown y obténgala con `window.docmd.var.get("apiEndpoint")` en JavaScript.
+:::
+
 ## Ciclo de Vida: Compilación vs. Tiempo de Ejecución
 
 docmd divide de forma limpia el ciclo de vida de las variables en dos etapas complementarias:

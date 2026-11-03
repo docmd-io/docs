@@ -57,6 +57,25 @@ Ausdrücke tolerieren beliebige Leerzeichen um Variablennamen und Operatoren:
 \{{ env.PORT || "8080" }}
 ```
 
+## Markdown-Syntax vs. JavaScript-API-Zuordnung
+
+Jede in Ihren Markdown-Vorlagen verfügbare Variable ist 1:1 über das clientseitige JavaScript-SDK abrufbar (`window.docmd.var.get()`):
+
+| Variablentyp | Markdown-Vorlage | Client-JavaScript-API | Namensraum-Regel |
+| :--- | :--- | :--- | :--- |
+| **Benutzer- / Projektvariable** | `\{{ apiEndpoint }}` | `window.docmd.var.get("apiEndpoint")` | Definiert in `docmd.config.json` oder Frontmatter. Kein `docmd.`-Präfix. |
+| **Verschachtelte Benutzervariable** | `\{{ cloud.apiEndpoint }}` | `window.docmd.var.get("cloud.apiEndpoint")` | Verschachteltes JSON-Objekt in der Konfiguration. Punktnotation. |
+| **Compiler-Version** | `\{{ docmd.version }}` | `window.docmd.var.get("docmd.version")` | Reservierter `docmd.`-Namensraum für Engine-Metadaten. |
+| **Build-Jahr** | `\{{ docmd.buildYear }}` | `window.docmd.var.get("docmd.buildYear")` | Reservierter `docmd.`-Namensraum. |
+| **Git-Metadaten** | `\{{ docmd.gitCommit }}` | `window.docmd.var.get("docmd.gitCommit")` | Reservierter `docmd.`- oder `git.`-Namensraum. |
+| **Site-Metadaten** | `\{{ site.title }}` | `window.docmd.var.get("site.title")` | Reservierter `site.`-Namensraum aus der Projektkonfiguration. |
+| **Dynamische Benutzersitzung** | `\{{ user.apiKey }}` | `window.docmd.var.get("user.apiKey")` | Präfix `user.` oder deklariert unter `dynamic`. Reaktiv im DOM. |
+
+::: callout info "Namensraum-Standard: Warum nicht `{{ docmd.apiEndpoint }}`?" icon:shield-alert
+* Der Namensraum `docmd.` (`docmd.version`, `docmd.buildYear`, `docmd.gitCommit` usw.) ist **ausschließlich für interne Compiler-Metadaten von docmd reserviert**.
+* Benutzerdefinierte Variablen (aus `docmd.config.json` oder Frontmatter) sollten **niemals** das Präfix `docmd.` tragen. Wenn Sie `"apiEndpoint": "https://api.example.com"` definieren, schreiben Sie `{{ apiEndpoint }}` in Markdown und rufen es mit `window.docmd.var.get("apiEndpoint")` in JavaScript ab.
+:::
+
 ## Variablen-Lebenszyklus: Build-Zeit vs. Laufzeit
 
 docmd trennt den Variablen-Lebenszyklus sauber in zwei aufeinander aufbauende Phasen:

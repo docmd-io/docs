@@ -57,6 +57,25 @@ docmd 拥有高效的**变量与个性化运行时引擎**，将静态构建期�
 \{{ env.PORT || "8080" }}
 ```
 
+## Markdown 语法与 JavaScript API 映射对照
+
+所有在 Markdown 模板中可用的变量均与客户端 JavaScript SDK (`window.docmd.var.get()`) 保持 1:1 严格映射：
+
+| 变量类别 | Markdown 模板占位符 | 客户端 JavaScript API | 命名空间规范 |
+| :--- | :--- | :--- | :--- |
+| **用户 / 项目自定义变量** | `\{{ apiEndpoint }}` | `window.docmd.var.get("apiEndpoint")` | 在 `docmd.config.json` 或前言中定义。绝无 `docmd.` 前缀。 |
+| **嵌套自定义变量** | `\{{ cloud.apiEndpoint }}` | `window.docmd.var.get("cloud.apiEndpoint")` | 配置中的嵌套 JSON 对象。使用点号访问。 |
+| **编译器引擎版本** | `\{{ docmd.version }}` | `window.docmd.var.get("docmd.version")` | 专用 `docmd.` 命名空间，代表编译器内置元数据。 |
+| **构建发布年份** | `\{{ docmd.buildYear }}` | `window.docmd.var.get("docmd.buildYear")` | 专用 `docmd.` 命名空间。 |
+| **Git 仓库元数据** | `\{{ docmd.gitCommit }}` | `window.docmd.var.get("docmd.gitCommit")` | 专用 `docmd.` 或 `git.` 命名空间。 |
+| **站点全局元数据** | `\{{ site.title }}` | `window.docmd.var.get("site.title")` | 专用 `site.` 命名空间，取自配置文件。 |
+| **动态用户会话变量** | `\{{ user.apiKey }}` | `window.docmd.var.get("user.apiKey")` | 以 `user.` 开头或在 `dynamic` 中声明。DOM 实时响应。 |
+
+::: callout info "命名空间规范：为什么不是 `{{ docmd.apiEndpoint }}`？" icon:shield-alert
+* `docmd.` 命名空间（如 `docmd.version`、`docmd.buildYear`、`docmd.gitCommit` 等）**严格为 docmd 内部编译器引擎元数据保留**。
+* 任何由用户自定义的变量（来自 `docmd.config.json` 或 Markdown 前言）**切勿添加** `docmd.` 前缀。如果您配置了 `"apiEndpoint": "https://api.example.com"`，请在 Markdown 中书写 `{{ apiEndpoint }}`，在 JavaScript 中通过 `window.docmd.var.get("apiEndpoint")` 读取。
+:::
+
 ## 变量生命周期：构建期 vs 运行时
 
 docmd 将变量生命周期清晰解耦为两个高效阶段：

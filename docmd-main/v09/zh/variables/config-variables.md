@@ -47,6 +47,21 @@ curl -X GET https://api.acme.cloud/v2/status \
   -H "X-Region: cn-north-1"
 ```
 
+### 在客户端 JavaScript 与交互式 Playground 中读取配置变量
+
+所有在 `docmd.config.json` 中定义的用户变量均会自动序列化并注入客户端运行时（`window.__DOCMD_VARIABLES__`）。您可以在前端自定义脚本、浏览器扩展以及交互式 Playground 中通过 `window.docmd.var.get()` 实时检索它们：
+
+```javascript
+// 读取 docmd.config.json 中定义的用户配置变量
+const endpoint = window.docmd?.var?.get("cloud.apiEndpoint");
+const region = window.docmd?.var?.get("cloud.region");
+console.log(`正在连接位于 ${region} 的 API 端点：${endpoint}`);
+```
+
+::: callout tip "1:1 键名完全对称映射" icon:check-circle
+客户端变量键名与 Markdown 语法完全一致。如果在 Markdown 中书写 `{{ cloud.apiEndpoint }}`，在 JavaScript 中直接通过 `window.docmd.var.get("cloud.apiEndpoint")` 获取。切勿为用户自定义变量添加 `docmd.` 前缀。
+:::
+
 ## 在配置项字段中直接使用变量
 
 docmd 在渲染整站母版布局、导航和页脚**之前**，会统一执行变量注册与配置插值阶段。

@@ -57,6 +57,25 @@ Expressions tolerate spaces around variable names and fallback operators:
 \{{ env.PORT || "8080" }}
 ```
 
+## Markdown Syntax vs. JavaScript API Mapping
+
+Every variable available in your Markdown templates maps directly to the client-side JavaScript SDK (`window.docmd.var.get()`):
+
+| Variable Type | Markdown Template | Client JavaScript API | Namespace Rule |
+| :--- | :--- | :--- | :--- |
+| **User / Project Variable** | `\{{ apiEndpoint }}` | `window.docmd.var.get("apiEndpoint")` | Defined in `docmd.config.json` or frontmatter. No `docmd.` prefix. |
+| **Nested User Variable** | `\{{ cloud.apiEndpoint }}` | `window.docmd.var.get("cloud.apiEndpoint")` | Nested JSON object in config. Traversed with dot notation. |
+| **Engine Compiler Version** | `\{{ docmd.version }}` | `window.docmd.var.get("docmd.version")` | Reserved `docmd.` namespace for compiler metadata. |
+| **Engine Build Year** | `\{{ docmd.buildYear }}` | `window.docmd.var.get("docmd.buildYear")` | Reserved `docmd.` namespace. |
+| **Git Metadata** | `\{{ docmd.gitCommit }}` | `window.docmd.var.get("docmd.gitCommit")` | Reserved `docmd.` or `git.` namespace. |
+| **Site Metadata** | `\{{ site.title }}` | `window.docmd.var.get("site.title")` | Reserved `site.` namespace from project configuration. |
+| **Dynamic User Session** | `\{{ user.apiKey }}` | `window.docmd.var.get("user.apiKey")` | Prefixed with `user.` or declared under `dynamic`. Reactive in DOM. |
+
+::: callout info "Namespace Standard: Why Not `{{ docmd.apiEndpoint }}`?" icon:shield-alert
+* The `docmd.` namespace (`docmd.version`, `docmd.buildYear`, `docmd.gitCommit`, etc.) is **strictly reserved for docmd's internal compiler metadata**.
+* User-defined variables (from `docmd.config.json` or page frontmatter) should **never** be prefixed with `docmd.`. If you define `"apiEndpoint": "https://api.example.com"`, write `{{ apiEndpoint }}` in Markdown and retrieve it with `window.docmd.var.get("apiEndpoint")` in JavaScript.
+:::
+
 ## Variable Lifecycles: Build-time vs. Runtime
 
 docmd cleanly separates the variable lifecycle into two distinct stages:
