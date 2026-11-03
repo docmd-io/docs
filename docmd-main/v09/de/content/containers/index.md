@@ -30,6 +30,7 @@ Er unterstützt **Markdown**, Bilder und verschachtelte Komponenten.
 | **[Cards](cards.md)** | `card` | Gerahmte Struktur-Container für Funktionsraster und Landing-Layouts. |
 | **[Grids](grids.md)** | `grids` | Sich automatisch anpassende mehrspaltige Flexbox-Gruppen. |
 | **[Tabs](tabs.md)** | `tabs` | Interaktive umschaltbare Bereiche mit expliziten `::: tab`-Elementen. |
+| **[Playground](playground.md)** | `playground` | Interaktiver Live-Code-Runner, Komponentenvorschau und Skripteinbindung. |
 | **[Steps](steps.md)** | `steps` | Visuelle nummerierte Zeitleisten mit expliziten `::: step`-Elementen. |
 | **[Collapsibles](collapsible.md)** | `collapsible` | Interaktive Akkordeon-Schalter für FAQs und detaillierte Daten. |
 | **[Buttons](buttons.md)** | `button` | Selbstschließende Handlungsaufforderungs-Links. |
@@ -38,7 +39,6 @@ Er unterstützt **Markdown**, Bilder und verschachtelte Komponenten.
 | **[URL Embeds](embed.md)** | `embed` | Einbettungen für Videos, soziale Netzwerke und interaktive Medien über `embed-lite`. |
 | **[Changelogs](changelogs.md)** | `changelog` | Zeitleistenbasierte Versionshistorien mit expliziten `::: log`-Elementen. |
 | **[Mermaid Diagramme](mermaid.md)** | `mermaid` | Flussdiagramme, Sequenzdiagramme und Architekturkarten mit Steuerung pro Diagramm. |
-| **[Playground](playground.md)** | `playground` | Interaktiver Live-Code-Runner, Komponentenvorschau und Skripteinbindung. |
 | **[Verschachtelte Container](nested-containers.md)** | - | Rekursive Muster für komplexe Komponenten-Layouts. |
 
 ## Universelles Attribut- & Key-Value-Parsing

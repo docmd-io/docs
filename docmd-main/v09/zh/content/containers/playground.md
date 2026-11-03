@@ -11,7 +11,41 @@ description: "通过 ::: playground 容器嵌入可运行的 JavaScript 环境�
 
 ## 容器语法
 
-演练场容器支持包含代码块的普通容器、直接引用代码库外部脚本文件的自闭合容器，以及标准代码围栏语法。
+```markdown
+# 代码块普通容器（包含代码与输出）
+::: playground [title:"标题"] [icon:NAME] [live] [view:"code"] [tab:"preview"|"console"] [nocode] [readonly]
+```js
+// JavaScript 或 HTML/CSS 代码
+```
+::: /playground
+
+# 自闭合容器（动态引用代码库脚本）
+::: playground src="./snippets/counter.js" [title:"标题"] [icon:NAME] [live] /:::
+
+# 快速代码围栏语法
+```js playground [title:"标题"] [icon:NAME] [live]
+// 代码内容
+```
+```
+
+## 功能与支持属性
+
+| 参数 / 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| **标题** | `string` \| `title:"..."` | 自动推导或 `"Playground"` | 工具栏显示的标题。支持 `title:"标题文本"` 或引号包裹。 |
+| **源码文件** | `src:路径` \| `file:路径` | 无 | 要内联载入演练场编辑器的本地代码文件的相对路径。 |
+| **图标** | `icon:NAME` | `"play"` | 可选。[Lucide](external:https://lucide.dev/icons) 图标名称（如 `icon:code`, `icon:cpu`, `icon:layout`）。 |
+| **自动运行** | `live` | `false` | 声明后在页面加载时自动运行代码。 |
+| **初始视图** | `view:"code"` \| `view:"live"` | `"live"` | 初始激活的视图模式（`"live"` 为运行效果/控制台，`"code"` 则直接展开源码编辑器）。 |
+| **输出选项卡** | `tab:"preview"` \| `tab:"console"` | `"console"` 或 `"preview"` | 默认激活的输出子选项卡（`"preview"` 或 `"console"`）。也支持独立的 `preview` 标志。 |
+| **隐藏源码** | `nocode` | `false` | 隐藏代码切换按钮，仅呈现全宽实时预览效果（也可写作 `code:false`）。 |
+| **只读模式** | `readonly` | `false` | 锁定代码编辑器禁止修改，但允许点击运行。 |
+| **布局模式** | `layout:"stacked"` \| `"split"` | `"stacked"` | 布局展示：默认采用整合 Play/Code 切换器的全宽单面板视图，或使用 `"split"` 左右分栏。 |
+| **语言声明** | `lang:LANG` | 自动推导 (`"js"`) | 明确指定代码语言（`js`, `html`, `css`）。从文件扩展名或内部代码围栏推导。 |
+| **闭合标签** | `::: /playground`, `/:::`, `:::` | 标准闭合 | 支持显式闭合 `::: /playground`、自闭合 `/:::` 或通用闭合 `:::`。 |
+
+
+## 使用示例
 
 ### 1. 包含代码块的普通容器
 
@@ -51,22 +85,22 @@ return `当前年份: ${buildYear}`;
 ```
 :::
 
-### 2. Live 与 Code 选项卡切换 (`tabs`)
+### 2. Play 与 Code 视图切换
 
-当在容器配置中启用 `tabs`（或 `mode="tabs"`）时，顶栏会渲染交互式的 **Live**（实时）与 **Code**（代码）选项卡，允许读者在运行效果与底层源码之间即时切换：
+每个演练场都在顶部工具栏内置了二合一的 **Play** 与 **Code** 视图切换器。主体区域默认以全宽单面板形式呈现：
 
 ````markdown
-::: playground tabs title="交互式组件（Live 与 Code 切换）" icon:layout live
+::: playground title="交互式组件（Play 与 Code 切换）" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">选项卡预览模式已激活</strong>
+    <strong style="color:#f8fafc; font-size:14px;">即时组件预览</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    通过顶部工具栏的选项卡在 <strong>Live</strong> 实时渲染与 <strong>Code</strong> 源代码视图之间自由切换。
+    通过右上角工具栏的按钮在 <strong>Play</strong> 实时渲染与 <strong>Code</strong> 源码视图之间自由切换。
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('在选项卡预览中触发了操作！')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('在组件预览中触发了操作！')">
     触发控制台日志
   </button>
 </div>
@@ -74,31 +108,31 @@ return `当前年份: ${buildYear}`;
 :::
 ````
 
-支持选项卡切换的实时运行演练场：
+支持视图切换的实时运行演练场：
 
-::: playground tabs title="交互式组件（Live 与 Code 切换）" icon:layout live
+::: playground title="交互式组件（Play 与 Code 切换）" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">选项卡预览模式已激活</strong>
+    <strong style="color:#f8fafc; font-size:14px;">即时组件预览</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    通过顶部工具栏的选项卡在 <strong>Live</strong> 实时渲染与 <strong>Code</strong> 源代码视图之间自由切换。
+    通过右上角工具栏的按钮在 <strong>Play</strong> 实时渲染与 <strong>Code</strong> 源码视图之间自由切换。
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('在选项卡预览中触发了操作！')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('在组件预览中触发了操作！')">
     触发控制台日志
   </button>
 </div>
 ```
 :::
 
-### 3. 初始展示代码的选项卡容器 (`tabs:code`)
+### 3. 初始展示代码视图的容器 (`view="code"`)
 
-如果希望默认向读者展示代码，同时提供即刻切换到实时输出的选项，可指定 `tabs:code` 或 `tabs view="code"`：
+如果希望默认向读者展示代码编辑器，同时保留随时切换到实时效果的“Play”切换按钮，可指定 `view="code"`：
 
 ````markdown
-::: playground tabs:code title="选项卡容器（代码优先）" icon:code live
+::: playground view="code" title="阶乘算法（代码优先）" icon:code live
 ```js
 // 递归计算阶乘
 function factorial(n) {
@@ -116,7 +150,7 @@ return result;
 
 代码优先的实时工作演练场：
 
-::: playground tabs:code title="选项卡容器（代码优先）" icon:code live
+::: playground view="code" title="阶乘算法（代码优先）" icon:code live
 ```js
 // 递归计算阶乘
 function factorial(n) {
@@ -185,22 +219,6 @@ console.log("Fib(10) =", fib(10));
 return fib(10);
 ```
 
-## 容器属性说明
-
-`::: playground` 容器支持丰富的元数据配置属性：
-
-| 属性 | 类型 | 默认值 | 描述 |
-| :--- | :--- | :--- | :--- |
-| `title` | `string` | 自动推导或 `"Playground"` | 工具栏显示的标题。支持 `title:"标题文本"` 或引号包裹。 |
-| `src` / `file` | `string` | 无 | 要内联载入演练场编辑器的本地代码文件的相对路径。 |
-| `icon` | `string` | `"play"` | 标题前渲染的 Lucide 图标名称（如 `icon:code`, `icon:cpu`, `icon:layout`）。 |
-| `live` | `boolean` | `false` | 声明后在页面加载时自动运行代码。 |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | 启用在“Live”与“Code”之间切换的全宽单面板视图。支持 `tabs:code` 默认显示代码。 |
-| `tab` | `string` | `"console"` 或 `"preview"` | 默认激活的输出选项卡（`"preview"` 或 `"console"`）。也支持独立的 `preview` 标志。 |
-| `nocode` | `boolean` | `false` | 隐藏代码切换按钮，直接呈现全宽实时预览效果（也可写作 `code:false`）。 |
-| `readonly` | `boolean` | `false` | 锁定代码编辑器禁止修改，但允许点击运行。 |
-| `layout` | `string` | `"split"` | 布局形式：`"split"`（左右分栏）或 `"stacked"`（上下堆叠）。 |
-| `lang` | `string` | 自动推导 (`"js"`) | 明确指定代码语言（`js`, `html`, `css`）。从文件扩展名或内部代码围栏推导。 |
 
 ## 交互能力
 

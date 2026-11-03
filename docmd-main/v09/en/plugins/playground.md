@@ -124,50 +124,62 @@ When built, `docmd` automatically reads `snippets/demo.js` and embeds it directl
 
 ::: playground src="./snippets/demo.js" title="Active Sourced Script" icon:cpu live /:::
 
-### Script Example 2: Headless Live Preview with `nocode`
+### Script Example 2: Interactive HTML & CSS Component Preview
 
-When presenting interactive design components or widgets where source code inspection is not required, use `tabs` combined with `nocode` (or `code:false`) to hide the code editor button:
+Playgrounds render rich HTML and CSS components directly in the browser sandbox. Readers view the rendered interface in the **Play** view and can toggle to the **Code** view to inspect or tweak markup:
 
 ````markdown
-::: playground tabs nocode preview title="Live Headless Widget" icon:sparkles live
+::: playground title="Interactive Notification Card" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS PREVIEW</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">This playground uses <code>nocode</code> to render a clean, distraction-free interactive component without code editing controls.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Headless component triggered successfully!')">
-    Interact with Component
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Real-Time Notification</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">Online</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Toggle between <strong>Play</strong> and <strong>Code</strong> views in the header toolbar to inspect or modify the underlying markup.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Notification action triggered!')">
+    Trigger Action
   </button>
 </div>
 ```
 :::
 ````
 
-Live rendered headless preview widget:
+Live rendered component:
 
-::: playground tabs nocode preview title="Live Headless Widget" icon:sparkles live
+::: playground title="Interactive Notification Card" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS PREVIEW</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">This playground uses <code>nocode</code> to render a clean, distraction-free interactive component without code editing controls.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Headless component triggered successfully!')">
-    Interact with Component
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Real-Time Notification</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">Online</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Toggle between <strong>Play</strong> and <strong>Code</strong> views in the header toolbar to inspect or modify the underlying markup.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Notification action triggered!')">
+    Trigger Action
   </button>
 </div>
 ```
 :::
 
-### Script Example 3: Tabbed Live Component with Source Switching
+### Script Example 3: Dynamic Script Execution with Console Logs
 
-Provide both an interactive UI preview and direct inspection of the underlying script using the `tabs` mode in a sleek, full-width single panel switcher:
+Execute JavaScript scripts in a client sandbox with full interception of `console.log`, `console.info`, and return values:
 
-::: playground tabs preview title="Tabbed Component Script" icon:layout live
-```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Interactive Script Sandbox</p>
-  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Button clicked at: ' + new Date().toLocaleTimeString())">
-    Log Timestamp to Console
-  </button>
-</div>
+::: playground title="Client Metrics Aggregator" icon:cpu live
+```js
+const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
+const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+
+console.log("Docmd Engine Version:", version);
+console.info("Deployment Build Year:", buildYear);
+console.info("Active Runtime Environment: Browser Client Sandbox");
+
+return `System Status: Operational (v${version})`;
 ```
 :::
 

@@ -30,6 +30,7 @@ Admite **Markdown**, imágenes y anidamiento profundo de componentes.
 | **[Tarjetas / Cards](cards.md)** | `card` | Contenedores estructurales enmarcados para rejillas de funciones. |
 | **[Rejillas / Grids](grids.md)** | `grids` | Grupos flexbox multicolumna de ajuste automático. |
 | **[Pestañas / Tabs](tabs.md)** | `tabs` | Paneles intercambiables interactivos con elementos explícitos `::: tab`. |
+| **[Playground / Entorno Interactivo](playground.md)** | `playground` | Ejecutor de código en vivo, vista previa de componentes y scripts vinculados. |
 | **[Pasos / Steps](steps.md)** | `steps` | Líneas de tiempo numeradas visuales con elementos explícitos `::: step`. |
 | **[Plegables / Collapsibles](collapsible.md)** | `collapsible` | Desplegables de acordeón interactivos para preguntas frecuentes. |
 | **[Botones / Buttons](buttons.md)** | `button` | Enlaces de navegación con llamadas a la acción destacadas de autocierre. |
@@ -38,7 +39,6 @@ Admite **Markdown**, imágenes y anidamiento profundo de componentes.
 | **[Incrustaciones / Embeds](embed.md)** | `embed` | Incrustaciones para video, redes sociales y medios interactivos con `embed-lite`. |
 | **[Registros de Cambios / Changelogs](changelogs.md)** | `changelog` | Historiales de versiones basados en líneas de tiempo con elementos explícitos `::: log`. |
 | **[Diagramas Mermaid](mermaid.md)** | `mermaid` | Diagramas de flujo, secuencia y mapas de arquitectura con controles por diagrama. |
-| **[Playground / Entorno Interactivo](playground.md)** | `playground` | Ejecutor de código en vivo, vista previa de componentes y scripts vinculados. |
 | **[Contenedores Anidados](nested-containers.md)** | - | Patrones de composición recursiva para diseños complejos. |
 
 ## Análisis Universal de Atributos y Clave-Valor (Universal Attribute & Key-Value Parsing)

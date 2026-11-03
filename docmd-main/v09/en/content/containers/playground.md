@@ -11,7 +11,41 @@ The playground runtime is built using pure vanilla JavaScript and CSS, requiring
 
 ## Container Syntax
 
-The container supports block containers with enclosed code, self-closing containers that load external script files directly from your repository, and quick fenced code blocks.
+```markdown
+# Block Container (Enclosed Code & Output)
+::: playground [title:"Title"] [icon:NAME] [live] [view:"code"] [tab:"preview"|"console"] [nocode] [readonly]
+```js
+// JavaScript or HTML/CSS code
+```
+::: /playground
+
+# Self-Closing Container (Active Sourced Script)
+::: playground src="./snippets/counter.js" [title:"Title"] [icon:NAME] [live] /:::
+
+# Quick Fenced Code Block
+```js playground [title:"Title"] [icon:NAME] [live]
+// Code here
+```
+```
+
+## Features & Supported Attributes
+
+| Parameter / Attribute | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| **Title** | `string` \| `title:"..."` | Derived or `"Playground"` | The heading displayed in the playground toolbar. Supports `title:"My Title"` or quoted strings. |
+| **Source File** | `src:PATH` \| `file:PATH` | None | Relative path to a local code file in your repository to inline into the editor. |
+| **Iconography** | `icon:NAME` | `"play"` | Optional. [Lucide](external:https://lucide.dev/icons) icon name rendered next to the title (e.g. `icon:code`, `icon:cpu`, `icon:layout`). |
+| **Auto-Execution** | `live` | `false` | When present, executes the code automatically when the page loads. |
+| **Initial View** | `view:"code"` \| `view:"live"` | `"live"` | Active initial view mode (`"live"` for output/preview or `"code"` to open directly in the editor). |
+| **Output Sub-Tab** | `tab:"preview"` \| `tab:"console"` | `"console"` or `"preview"` | Active output sub-tab to display (`"preview"` or `"console"`). Bare `preview` flag is also supported. |
+| **No-Code Mode** | `nocode` | `false` | When present (or `code:false`), hides the "Code" button from the header switcher, presenting only the Live preview. |
+| **Read-Only** | `readonly` | `false` | Locks the code editor against user editing while allowing code execution. |
+| **Layout** | `layout:"stacked"` \| `"split"` | `"stacked"` | Sets the layout presentation: unified single-panel view with Play/Code switcher by default, or `"split"` for side-by-side. |
+| **Language** | `lang:LANG` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
+| **Closing Tags** | `::: /playground`, `/:::`, `:::` | Standard closing | Supports explicit closing tag `::: /playground`, self-closing `/:::`, or generic `:::`. |
+
+
+## Usage Examples
 
 ### 1. Block Container with Enclosed Code
 
@@ -51,22 +85,22 @@ return `Current Year: ${buildYear}`;
 ```
 :::
 
-### 2. Live and Code Tab Switching (`tabs`)
+### 2. Play and Code View Switching
 
-When `tabs` (or `mode="tabs"`) is enabled in the container settings, the header renders interactive **Live** and **Code** tabs, allowing readers to toggle seamlessly between the running component output and the underlying source code:
+Every playground includes an integrated two-in-one **Play** and **Code** view switcher in the header toolbar. The playground body is rendered full-width as a unified single panel:
 
 ````markdown
-::: playground tabs title="Interactive Component (Live & Code Switcher)" icon:layout live
+::: playground title="Interactive Component (Play & Code Switcher)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Tabbed Preview Mode Active</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Switch between the <strong>Live</strong> rendering and <strong>Code</strong> view using the tabs in the top-right toolbar.
+    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the buttons in the top-right toolbar.
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from tabbed component preview!')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
     Trigger Console Log
   </button>
 </div>
@@ -74,31 +108,31 @@ When `tabs` (or `mode="tabs"`) is enabled in the container settings, the header 
 :::
 ````
 
-Here is the live working container with tab switching enabled:
+Here is the live working container with view switching enabled:
 
-::: playground tabs title="Interactive Component (Live & Code Switcher)" icon:layout live
+::: playground title="Interactive Component (Play & Code Switcher)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Tabbed Preview Mode Active</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Instant Component Preview</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Switch between the <strong>Live</strong> rendering and <strong>Code</strong> view using the tabs in the top-right toolbar.
+    Switch between the <strong>Play</strong> live rendering and <strong>Code</strong> view using the buttons in the top-right toolbar.
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from tabbed component preview!')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Action triggered from component preview!')">
     Trigger Console Log
   </button>
 </div>
 ```
 :::
 
-### 3. Tabbed Container Starting on Code View (`tabs:code`)
+### 3. Container Starting on Code View (`view="code"`)
 
-You can configure the container to present the code by default while retaining the instant "Live" switcher by specifying `tabs:code` or `tabs view="code"`:
+You can configure the container to present the code editor by default while retaining the instant "Play" switcher by specifying `view="code"`:
 
 ````markdown
-::: playground tabs:code title="Tabbed Container (Code First)" icon:code live
+::: playground view="code" title="Factorial Algorithm (Code First)" icon:code live
 ```js
 // Compute factorial recursively
 function factorial(n) {
@@ -116,7 +150,7 @@ return result;
 
 Live working example starting in code view:
 
-::: playground tabs:code title="Tabbed Container (Code First)" icon:code live
+::: playground view="code" title="Factorial Algorithm (Code First)" icon:code live
 ```js
 // Compute factorial recursively
 function factorial(n) {
@@ -184,23 +218,6 @@ function fib(n) {
 console.log("Fib(10) =", fib(10));
 return fib(10);
 ```
-
-## Container Attributes
-
-The `::: playground` container supports rich metadata attributes:
-
-| Attribute | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `title` | `string` | Derived or `"Playground"` | The heading displayed in the playground toolbar. Supports `title:"My Title"` or quoted strings. |
-| `src` / `file` | `string` | None | Relative path to a local code file to inline into the playground editor. |
-| `icon` | `string` | `"play"` | Lucide icon name rendered next to the title (e.g. `icon:code`, `icon:cpu`, `icon:layout`). Defaults to the play icon. |
-| `live` | `boolean` | `false` | When present, executes the code automatically when the page loads. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Enables header view switching between "Live" and "Code" in a full-width single panel view. Supports `tabs:code` to start in code view. |
-| `tab` | `string` | `"console"` or `"preview"` | Default output tab to display (`"preview"` or `"console"`). Also supports the bare `preview` attribute flag. |
-| `nocode` | `boolean` | `false` | When present (or `code:false`), hides the "Code" button from the header tabs, presenting only the Live preview. |
-| `readonly` | `boolean` | `false` | Locks the code editor against user editing while allowing code execution. |
-| `layout` | `string` | `"split"` | Sets the layout presentation: `"split"` (side-by-side) or `"stacked"` (vertical). In `tabs` mode, single full-width panel is used. |
-| `lang` | `string` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
 
 ## Interactive Features
 

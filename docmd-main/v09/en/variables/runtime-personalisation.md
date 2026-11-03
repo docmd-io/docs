@@ -96,37 +96,27 @@ curl -X GET https://api.acme.com/v1/profile \
 ```
 ````
 
-::: card "Live Interactive Code Block Demo" icon:play
-Try typing a custom API key into the input field below to observe the curl command updating live:
+### Live Interactive Variable Demonstration
 
-<div style="margin: 12px 0;">
-  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">YOUR TEST API KEY:</label>
-  <input 
-    type="text" 
-    id="apiKeyInputDemo" 
-    placeholder="e.g. sk_test_my_secure_token_123" 
-    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'YOUR_API_KEY')"
-  />
-  <script>
-    (function() {
-      var inp = document.getElementById('apiKeyInputDemo');
-      if (inp && !inp.__bound) {
-        inp.__bound = true;
-        inp.addEventListener('input', function(e) {
-          if (window.docmd && window.docmd.var) {
-            window.docmd.var.set('user.apiKey', e.target.value || 'YOUR_API_KEY');
-          }
-        });
-      }
-    })();
-  </script>
-</div>
+Use the playground below to mutate `user.apiKey` in the browser runtime. When you run the code or modify the key, `docmd-runtime` immediately updates all variable references across the page:
+
+::: playground title="Interactive Variable Tester" icon:braces live
+```js
+// Mutate the reactive user.apiKey variable in browser runtime
+const demoKey = "sk_live_" + Math.random().toString(36).substring(2, 10);
+docmd.var.set("user.apiKey", demoKey);
+
+console.log("Updated user.apiKey to:", docmd.var.get("user.apiKey"));
+return `Active API Key: ${demoKey}`;
+```
+:::
+
+The code block below dynamically re-renders in real time as variables update:
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
-:::
 
 ## Framework Integration
 

@@ -30,6 +30,7 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 | **[Cards 卡片](cards.md)** | `card` | 特性网格和落地页布局的带框结构容器。 |
 | **[Grids 网格](grids.md)** | `grids` | 自动自适应的多列 Flexbox 布局组。 |
 | **[Tabs 选项卡](tabs.md)** | `tabs` | 包含显式 `::: tab` 条目的交互式可切换面板。 |
+| **[Playground 演练场](playground.md)** | `playground` | 交互式实时代码运行器、组件预览沙箱与代码库脚本引用。 |
 | **[Steps 步骤](steps.md)** | `steps` | 包含显式 `::: step` 条目的可视化编号时间线。 |
 | **[Collapsibles 手风琴](collapsible.md)** | `collapsible` | 用于 FAQ 和深层技术数据的交互式折叠面板。 |
 | **[Buttons 按钮](buttons.md)** | `button` | 自闭合的显著行动号召导航链接。 |
@@ -38,7 +39,6 @@ description: "docmd 结构化 UI 容器和交互组件的完整指南与目录�
 | **[URL 嵌入](embed.md)** | `embed` | 通过 `embed-lite` 实现零延迟的视频、社交与交互式媒体嵌入。 |
 | **[Changelogs 更新日志](changelogs.md)** | `changelog` | 基于时间线的版本历史，支持显式 `::: log` 条目。 |
 | **[Mermaid 图表](mermaid.md)** | `mermaid` | 包含单图表控制的流程图、时序图与架构映射图。 |
-| **[Playground 演练场](playground.md)** | `playground` | 交互式实时代码运行器、组件预览沙箱与代码库脚本引用。 |
 | **[嵌套容器](nested-containers.md)** | - | 复杂多组件布局的递归组合模式。 |
 
 ## 通用属性与键值对解析 (Universal Attribute & Key-Value Parsing)

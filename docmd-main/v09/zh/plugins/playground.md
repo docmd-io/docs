@@ -109,48 +109,62 @@ flowchart TD
 
 ::: playground src="./snippets/demo.js" title="本地脚本文件" icon:cpu live /:::
 
-### 脚本示例 2：无代码纯预览模式 (`nocode`)
+### 脚本示例 2：交互式 HTML 与 CSS 组件预览
 
-当展示交互式设计组件或小部件且无需用户查看代码时，结合使用 `tabs` 与 `nocode`（或 `code:false`）可隐藏代码查看按钮：
+Playground 支持在浏览器沙箱中直接呈现丰富的前端 HTML 与 CSS 组件。读者可在 **Play** 视图中直接体验组件效果，并随时切换至 **Code** 视图查看和修改源码：
 
 ````markdown
-::: playground tabs nocode preview title="实时无代码组件" icon:sparkles live
+::: playground title="实时通知交互卡片" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">无代码预览</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">该 Playground 使用 <code>nocode</code> 渲染整洁的交互组件，无代码按钮干扰。</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('组件点击触发成功！')">
-    测试组件交互
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">实时消息通知</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">在线</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    在顶部工具栏切换 <strong>Play</strong> 与 <strong>Code</strong> 视图，即可直接调试和修改底层标记代码。
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('通知操作触发成功！')">
+    确认操作
   </button>
 </div>
 ```
 :::
 ````
 
-实时渲染的组件预览：
+实时渲染的交互组件：
 
-::: playground tabs nocode preview title="实时无代码组件" icon:sparkles live
+::: playground title="实时通知交互卡片" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">无代码预览</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">该 Playground 使用 <code>nocode</code> 渲染整洁的交互组件，无代码按钮干扰。</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('组件点击触发成功！')">
-    测试组件交互
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">实时消息通知</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">在线</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    在顶部工具栏切换 <strong>Play</strong> 与 <strong>Code</strong> 视图，即可直接调试和修改底层标记代码。
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('通知操作触发成功！')">
+    确认操作
   </button>
 </div>
 ```
 :::
 
-### 脚本示例 3：双模视图切换组件 (`tabs`)
+### 脚本示例 3：JavaScript 脚本执行与控制台交互
 
-::: playground tabs preview title="可切换组件预览" icon:layout live
-```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">交互式组件</p>
-  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('点击时间: ' + new Date().toLocaleTimeString())">
-    输出时间戳到控制台
-  </button>
-</div>
+在客户端沙箱中运行 JavaScript 脚本，完整支持 `console.log`、`console.info` 拦截与函数返回值显示：
+
+::: playground title="客户端指标监控器" icon:cpu live
+```js
+const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
+const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+
+console.log("docmd 编译器版本:", version);
+console.info("构建部署年份:", buildYear);
+console.info("活跃运行环境: 浏览器客户端沙箱");
+
+return `系统状态: 正常运行 (v${version})`;
 ```
 :::
 

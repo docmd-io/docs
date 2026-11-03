@@ -109,46 +109,62 @@ flowchart TD
 
 ::: playground src="./snippets/demo.js" title="Eingebundenes Skript" icon:cpu live /:::
 
-### Skript-Beispiel 2: Headless Live-Vorschau mit `nocode`
+### Skript-Beispiel 2: Interaktive HTML- & CSS-Komponentenvorschau
+
+Playgrounds rendern HTML- und CSS-Komponenten direkt in der Browser-Sandbox. Leser sehen die gerenderte Oberfläche in der **Play**-Ansicht und können jederzeit in die **Code**-Ansicht wechseln:
 
 ````markdown
-::: playground tabs nocode preview title="Live-Komponente ohne Code" icon:sparkles live
+::: playground title="Interaktive Benachrichtigungskarte" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS VORSCHAU</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Dieser Playground nutzt <code>nocode</code>, um eine saubere Vorschau ohne Code-Umschalter darzustellen.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Interaktion erfolgreich!')">
-    Komponente testen
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Echtzeit-Benachrichtigung</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">Online</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Wechseln Sie in der oberen Symbolleiste zwischen <strong>Play</strong> und <strong>Code</strong>, um den Quellcode zu prüfen oder anzupassen.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Aktion erfolgreich ausgelöst!')">
+    Aktion ausführen
   </button>
 </div>
 ```
 :::
 ````
 
-Live gerendertes Widget:
+Live gerenderte Komponente:
 
-::: playground tabs nocode preview title="Live-Komponente ohne Code" icon:sparkles live
+::: playground title="Interaktive Benachrichtigungskarte" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">HEADLESS VORSCHAU</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Dieser Playground nutzt <code>nocode</code>, um eine saubere Vorschau ohne Code-Umschalter darzustellen.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Interaktion erfolgreich!')">
-    Komponente testen
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Echtzeit-Benachrichtigung</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">Online</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Wechseln Sie in der oberen Symbolleiste zwischen <strong>Play</strong> und <strong>Code</strong>, um den Quellcode zu prüfen oder anzupassen.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('Aktion erfolgreich ausgelöst!')">
+    Aktion ausführen
   </button>
 </div>
 ```
 :::
 
-### Skript-Beispiel 3: Komponente mit Reiter-Umschaltung (`tabs`)
+### Skript-Beispiel 3: JavaScript-Ausführung mit Konsolenausgabe
 
-::: playground tabs preview title="Interaktive Komponente" icon:layout live
-```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Interaktive Sandbox</p>
-  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Klick um: ' + new Date().toLocaleTimeString())">
-    Zeitstempel in Konsole schreiben
-  </button>
-</div>
+Führen Sie JavaScript-Skripte in einer geschützten Sandbox aus mit vollständiger Erfassung von `console.log`, `info` und Rückgabewerten:
+
+::: playground title="Client-Metriken-Aggregator" icon:cpu live
+```js
+const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
+const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+
+console.log("Compiler-Version:", version);
+console.info("Deployment-Jahr:", buildYear);
+console.info("Aktive Laufzeitumgebung: Browser-Client-Sandbox");
+
+return `Systemstatus: Betriebsbereit (v${version})`;
 ```
 :::
 

@@ -30,6 +30,7 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[Cards](cards.md)** | `card` | Framed structural containers for feature grids and landing layouts. |
 | **[Grids](grids.md)** | `grids` | Auto-adjusting multi-column flexbox groups. |
 | **[Tabs](tabs.md)** | `tabs` | Interactive switchable panes with explicit `::: tab` items. |
+| **[Playground](playground.md)** | `playground` | Interactive live code runner, component preview sandbox, and script sourcing. |
 | **[Steps](steps.md)** | `steps` | Visual numbered timelines with explicit `::: step` items. |
 | **[Collapsibles](collapsible.md)** | `collapsible` | Interactive accordion toggles for FAQs and deep-dive technical data. |
 | **[Buttons](buttons.md)** | `button` | Self-closing, prominent call-to-action navigation links. |
@@ -38,7 +39,6 @@ It supports **Markdown**, imagery, and deep component nesting.
 | **[URL Embeds](embed.md)** | `embed` | Zero-latency embeds for video, social, and interactive media via `embed-lite`. |
 | **[Changelogs](changelogs.md)** | `changelog` | Timeline-based version histories with explicit `::: log` items. |
 | **[Mermaid Diagrams](mermaid.md)** | `mermaid` | Flowcharts, sequence diagrams, and architecture maps with per-diagram controls. |
-| **[Playground](playground.md)** | `playground` | Interactive live code runner, component preview sandbox, and script sourcing. |
 | **[Nested Containers](nested-containers.md)** | - | Recursive composition patterns for multi-component layouts. |
 
 ## Universal Attribute & Key-Value Parsing

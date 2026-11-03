@@ -96,37 +96,27 @@ curl -X GET https://api.acme.com/v1/profile \
 ```
 ````
 
-::: card "Interaktive Live-Demo" icon:play
-Geben Sie unten einen benutzerdefinierten Test-API-Schlüssel ein, um den Curl-Befehl live zu aktualisieren:
+### Interaktive Variablen-Live-Demonstration
 
-<div style="margin: 12px 0;">
-  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">TEST-API-SCHLÜSSEL:</label>
-  <input 
-    type="text" 
-    id="apiKeyInputDemoDe" 
-    placeholder="z. B. sk_test_mein_schluessel_99" 
-    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'IHR_API_SCHLUESSEL')"
-  />
-  <script>
-    (function() {
-      var inp = document.getElementById('apiKeyInputDemoDe');
-      if (inp && !inp.__bound) {
-        inp.__bound = true;
-        inp.addEventListener('input', function(e) {
-          if (window.docmd && window.docmd.var) {
-            window.docmd.var.set('user.apiKey', e.target.value || 'IHR_API_SCHLUESSEL');
-          }
-        });
-      }
-    })();
-  </script>
-</div>
+Nutzen Sie den folgenden Playground, um `user.apiKey` direkt in der Browser-Laufzeitumgebung anzupassen. Beim Ausführen oder Ändern des Codes aktualisiert `docmd-runtime` alle Variablen im Dokument in Echtzeit:
+
+::: playground title="Interaktiver Variablen-Tester" icon:braces live
+```js
+// Reaktive Variable user.apiKey in der Browser-Laufzeitumgebung anpassen
+const demoKey = "sk_live_" + Math.random().toString(36).substring(2, 10);
+docmd.var.set("user.apiKey", demoKey);
+
+console.log("Aktualisierter user.apiKey:", docmd.var.get("user.apiKey"));
+return `Aktiver API-Schlüssel: ${demoKey}`;
+```
+:::
+
+Der folgende Codeblock rendert dynamisch und reagiert sofort auf Variablenänderungen:
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'IHR_API_SCHLUESSEL' }}"
 ```
-:::
 
 ## Framework-Integration
 

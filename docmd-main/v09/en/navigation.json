@@ -175,6 +175,10 @@
             "path": "/content/containers/tabs"
           },
           {
+            "title": "Playground",
+            "path": "/content/containers/playground"
+          },
+          {
             "title": "Steps",
             "path": "/content/containers/steps"
           },
@@ -213,10 +217,6 @@
           {
             "title": "Nested Containers",
             "path": "/content/containers/nested-containers"
-          },
-          {
-            "title": "Playground",
-            "path": "/content/containers/playground"
           }
         ]
       },
@@ -318,6 +318,10 @@
         "path": "/plugins/ai"
       },
       {
+        "title": "Playground",
+        "path": "/plugins/playground"
+      },
+      {
         "title": "Git Integration",
         "path": "/plugins/git"
       },
@@ -360,10 +364,6 @@
       {
         "title": "OKF Bundle Plugin",
         "path": "/plugins/okf"
-      },
-      {
-        "title": "Playground",
-        "path": "/plugins/playground"
       }
     ]
   },

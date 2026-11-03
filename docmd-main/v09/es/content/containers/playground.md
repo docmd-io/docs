@@ -11,7 +11,41 @@ El entorno de ejecución de playground está construido con JavaScript estándar
 
 ## Sintaxis del Contenedor
 
-El contenedor admite bloques con código encerrado, contenedores de autocierre que cargan scripts externos desde su repositorio y bloques de código delimitados estándar.
+```markdown
+# Contenedor de Bloque (Código Encapsulado y Salida)
+::: playground [title:"Título"] [icon:NAME] [live] [view:"code"] [tab:"preview"|"console"] [nocode] [readonly]
+```js
+// Código JavaScript o HTML/CSS
+```
+::: /playground
+
+# Contenedor de Autocierre (Script Activo del Repositorio)
+::: playground src="./snippets/counter.js" [title:"Título"] [icon:NAME] [live] /:::
+
+# Bloque de Código Delimitado Rápido
+```js playground [title:"Título"] [icon:NAME] [live]
+// Código aquí
+```
+```
+
+## Características y Atributos Admitidos
+
+| Parámetro / Atributo | Tipo | Valor Predeterminado | Descripción |
+| :--- | :--- | :--- | :--- |
+| **Título** | `string` \| `title:"..."` | Derivado o `"Playground"` | Título mostrado en la barra de herramientas. Admite `title:"Mi Título"` o cadenas entre comillas. |
+| **Archivo Fuente** | `src:RUTA` \| `file:RUTA` | Ninguno | Ruta relativa a un archivo de código local en el repositorio para cargar en el editor. |
+| **Iconografía** | `icon:NAME` | `"play"` | Opcional. Nombre de icono [Lucide](external:https://lucide.dev/icons) junto al título (p. ej. `icon:code`, `icon:cpu`, `icon:layout`). |
+| **Ejecución Automática** | `live` | `false` | Ejecuta el código automáticamente cuando la página se carga. |
+| **Vista Inicial** | `view:"code"` \| `view:"live"` | `"live"` | Modo de visualización inicial activo (`"live"` para salida/vista previa o `"code"` para abrir directamente en el editor). |
+| **Pestaña de Salida** | `tab:"preview"` \| `tab:"console"` | `"console"` o `"preview"` | Subpestaña de salida activa (`"preview"` o `"console"`). También admite la etiqueta `preview`. |
+| **Modo Sin Código** | `nocode` | `false` | Oculta el botón de código mostrando directamente la vista previa en vivo (también `code:false`). |
+| **Solo Lectura** | `readonly` | `false` | Bloquea el editor contra modificaciones permitiendo la ejecución. |
+| **Disposición** | `layout:"stacked"` \| `"split"` | `"stacked"` | Disposición visual: panel único con selector Play/Code por defecto o `"split"` para lado a lado. |
+| **Lenguaje** | `lang:LENG` | Derivado (`"js"`) | Lenguaje explícito (`js`, `html`, `css`). Deducido de extensiones o bloques de código. |
+| **Etiquetas de Cierre** | `::: /playground`, `/:::`, `:::` | Cierre estándar | Admite cierre explícito `::: /playground`, autocierre `/:::`, o cierre genérico `:::`. |
+
+
+## Ejemplos de Uso
 
 ### 1. Contenedor de Bloque con Código
 
@@ -51,20 +85,20 @@ return `Año actual: ${buildYear}`;
 ```
 :::
 
-### 2. Alternancia de Pestañas Live y Code (`tabs`)
+### 2. Alternancia de Vistas Play y Code
 
-Al habilitar `tabs` (o `mode="tabs"`) en los ajustes del contenedor, la barra de herramientas añade pestañas interactivas **Live** y **Code**, permitiendo a los lectores alternar fluidamente entre la salida del componente y el código fuente:
+Cada playground incorpora un selector dos-en-uno de **Play** y **Code** en la barra superior. El cuerpo del playground se visualiza en ancho completo como un panel unificado:
 
 ````markdown
-::: playground tabs title="Componente Interactivo (Selector Live & Code)" icon:layout live
+::: playground title="Componente Interactivo (Selector Play & Code)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Modo de Vista Previa por Pestañas Activo</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Vista Previa Instantánea del Componente</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Alterne entre la vista <strong>Live</strong> en vivo y la vista <strong>Code</strong> mediante las pestañas de la barra de herramientas superior.
+    Alterne entre la vista <strong>Play</strong> en vivo y la vista <strong>Code</strong> mediante los botones de la barra de herramientas superior.
   </p>
   <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('¡Acción activada en vista previa!')">
     Activar Registro en Consola
@@ -74,17 +108,17 @@ Al habilitar `tabs` (o `mode="tabs"`) en los ajustes del contenedor, la barra de
 :::
 ````
 
-Ejemplo funcional en vivo con alternancia de pestañas:
+Ejemplo funcional en vivo con alternancia de vistas:
 
-::: playground tabs title="Componente Interactivo (Selector Live & Code)" icon:layout live
+::: playground title="Componente Interactivo (Selector Play & Code)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Modo de Vista Previa por Pestañas Activo</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Vista Previa Instantánea del Componente</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Alterne entre la vista <strong>Live</strong> en vivo y la vista <strong>Code</strong> mediante las pestañas de la barra de herramientas superior.
+    Alterne entre la vista <strong>Play</strong> en vivo y la vista <strong>Code</strong> mediante los botones de la barra de herramientas superior.
   </p>
   <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('¡Acción activada en vista previa!')">
     Activar Registro en Consola
@@ -93,12 +127,12 @@ Ejemplo funcional en vivo con alternancia de pestañas:
 ```
 :::
 
-### 3. Contenedor por Pestañas con Inicio en Código (`tabs:code`)
+### 3. Contenedor con Inicio en Código (`view="code"`)
 
-Puede configurar el contenedor para mostrar el código de forma predeterminada mientras mantiene el acceso instantáneo a la pestaña en vivo mediante `tabs:code` o `tabs view="code"`:
+Puede configurar el contenedor para mostrar el editor de código de forma predeterminada mediante `view="code"`, manteniendo el acceso directo a la vista Play:
 
 ````markdown
-::: playground tabs:code title="Contenedor con Pestañas (Código Primero)" icon:code live
+::: playground view="code" title="Algoritmo de Factorial (Código Primero)" icon:code live
 ```js
 // Calcular factorial de forma recursiva
 function factorial(n) {
@@ -116,7 +150,7 @@ return resultado;
 
 Demostración funcional en vivo con vista inicial en código:
 
-::: playground tabs:code title="Contenedor con Pestañas (Código Primero)" icon:code live
+::: playground view="code" title="Algoritmo de Factorial (Código Primero)" icon:code live
 ```js
 // Calcular factorial de forma recursiva
 function factorial(n) {
@@ -185,22 +219,6 @@ console.log("Fib(10) =", fib(10));
 return fib(10);
 ```
 
-## Atributos del Contenedor
-
-El contenedor `::: playground` admite completos atributos de metadatos:
-
-| Atributo | Tipo | Valor Predeterminado | Descripción |
-| :--- | :--- | :--- | :--- |
-| `title` | `string` | Derivado o `"Playground"` | Título mostrado en la barra de herramientas. Admite `title:"Mi Título"` o cadenas entre comillas. |
-| `src` / `file` | `string` | Ninguno | Ruta relativa a un archivo de código local para cargar en el editor. |
-| `icon` | `string` | `"play"` | Nombre de icono Lucide (p. ej. `icon:code`, `icon:cpu`, `icon:layout`). |
-| `live` | `boolean` | `false` | Ejecuta el código automáticamente cuando la página se carga. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Habilita pestañas en la cabecera para alternar entre "Live" y "Code" en panel único de ancho completo. Admite `tabs:code` para iniciar en código. |
-| `tab` | `string` | `"console"` o `"preview"` | Pestaña de salida predeterminada (`"preview"` o `"console"`). También admite el atributo `preview`. |
-| `nocode` | `boolean` | `false` | Oculta la pestaña de código mostrando directamente la vista previa en vivo (también `code:false`). |
-| `readonly` | `boolean` | `false` | Bloquea el editor contra modificaciones permitiendo la ejecución. |
-| `layout` | `string` | `"split"` | Disposición visual: `"split"` (lado a lado) o `"stacked"` (vertical). |
-| `lang` | `string` | Derivado (`"js"`) | Lenguaje explícito (`js`, `html`, `css`). Deducido de extensiones o bloques de código. |
 
 ## Características Interactivas
 

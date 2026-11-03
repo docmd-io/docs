@@ -175,6 +175,10 @@
             "path": "/content/containers/tabs"
           },
           {
+            "title": "Playground",
+            "path": "/content/containers/playground"
+          },
+          {
             "title": "Pasos",
             "path": "/content/containers/steps"
           },
@@ -209,10 +213,6 @@
           {
             "title": "Registros de Cambios",
             "path": "/content/containers/changelogs"
-          },
-          {
-            "title": "Playground",
-            "path": "/content/containers/playground"
           },
           {
             "title": "Contenedores Anidados",
@@ -318,6 +318,10 @@
         "path": "/plugins/ai"
       },
       {
+        "title": "Playground",
+        "path": "/plugins/playground"
+      },
+      {
         "title": "Integración con Git",
         "path": "/plugins/git"
       },
@@ -356,10 +360,6 @@
       {
         "title": "Matemáticas (KaTeX)",
         "path": "/plugins/math"
-      },
-      {
-        "title": "Playground",
-        "path": "/plugins/playground"
       },
       {
         "title": "Plugin Paquetes OKF",

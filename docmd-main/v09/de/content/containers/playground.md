@@ -11,7 +11,41 @@ Die Playground-Laufzeitumgebung basiert auf reinem Standard-JavaScript und CSS o
 
 ## Container-Syntax
 
-Der Container unterstützt Block-Container mit umschlossenem Code, selbstschließende Container für externe Skripte aus dem Repository sowie standardmäßige Fenced-Codeblöcke.
+```markdown
+# Block-Container (Eingebetteter Code & Ausgabe)
+::: playground [title:"Titel"] [icon:NAME] [live] [view:"code"] [tab:"preview"|"console"] [nocode] [readonly]
+```js
+// JavaScript- oder HTML/CSS-Code
+```
+::: /playground
+
+# Selbstschließender Container (Aktives Repository-Skript)
+::: playground src="./snippets/counter.js" [title:"Titel"] [icon:NAME] [live] /:::
+
+# Schneller Fenced-Codeblock
+```js playground [title:"Titel"] [icon:NAME] [live]
+// Code hier
+```
+```
+
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| **Titel** | `string` \| `title:"..."` | Abgeleitet oder `"Playground"` | In der Toolbar angezeigte Überschrift. Unterstützt `title:"Mein Titel"` oder Anführungszeichen. |
+| **Quelldatei** | `src:PFAD` \| `file:PFAD` | Keine | Relativer Pfad zu einer lokalen Codedatei im Repository, die in den Editor geladen wird. |
+| **Iconografie** | `icon:NAME` | `"play"` | Optional. [Lucide](external:https://lucide.dev/icons)-Icon-Name neben dem Titel (z. B. `icon:code`, `icon:cpu`, `icon:layout`). |
+| **Automatische Ausführung** | `live` | `false` | Führt den Code beim Laden der Seite automatisch aus. |
+| **Standardansicht** | `view:"code"` \| `view:"live"` | `"live"` | Aktiver Anfangsmodus (`"live"` für Vorschau/Konsole oder `"code"` zum direkten Öffnen des Code-Editors). |
+| **Ausgabereiter** | `tab:"preview"` \| `tab:"console"` | `"console"` oder `"preview"` | Standard-Ausgabereiter (`"preview"` oder `"console"`). Unterstützt auch das `preview`-Attribut. |
+| **No-Code-Modus** | `nocode` | `false` | Versteckt den „Code“-Reiter und zeigt direkt die Live-Ausgabe in voller Breite (auch `code:false`). |
+| **Schreibgeschützt** | `readonly` | `false` | Sperrt den Editor gegen Bearbeitung, erlaubt aber die Ausführung. |
+| **Layout** | `layout:"stacked"` \| `"split"` | `"stacked"` | Bestimmt die Darstellung: standardmäßig Einzelbereichsansicht mit Play/Code-Umschalter oder `"split"` für Nebeneinander. |
+| **Sprache** | `lang:SPRACHE` | Abgeleitet (`"js"`) | Explizite Sprachangabe (`js`, `html`, `css`). Automatisch aus Dateiendung oder Codefence ermittelt. |
+| **Schließende Tags** | `::: /playground`, `/:::`, `:::` | Standardschließung | Unterstützt explizites Schließen `::: /playground`, selbstschließendes `/:::`, oder allgemeines `:::`. |
+
+
+## Anwendungsbeispiele
 
 ### 1. Block-Container mit umschlossenem Code
 
@@ -51,22 +85,22 @@ return `Aktuelles Jahr: ${buildYear}`;
 ```
 :::
 
-### 2. Umschalten zwischen Live- und Code-Ansicht (`tabs`)
+### 2. Umschalten zwischen Play- und Code-Ansicht
 
-Wenn `tabs` (oder `mode="tabs"`) in den Containereinstellungen aktiviert ist, stellt die Symbolleiste interaktive **Live**- und **Code**-Reiter bereit, sodass Leser nahtlos zwischen der Live-Komponente und dem Quellcode umschalten können:
+Jeder Playground verfügt über einen integrierten Zwei-in-Eins-Umschalter für **Play** und **Code** in der oberen Symbolleiste. Der Hauptbereich wird standardmäßig in voller Breite als einheitlicher Bereich dargestellt:
 
 ````markdown
-::: playground tabs title="Interaktive Komponente (Live & Code Umschalter)" icon:layout live
+::: playground title="Interaktive Komponente (Play & Code Umschalter)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Tab-Vorschaumodus aktiv</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Sofortige Komponentenvorschau</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Wechseln Sie über die Reiter in der oberen Symbolleiste zwischen <strong>Live</strong>-Ausgabe und <strong>Code</strong>-Ansicht.
+    Wechseln Sie über die Schaltflächen in der Symbolleiste nahtlos zwischen der <strong>Play</strong>-Live-Ausgabe und der <strong>Code</strong>-Ansicht.
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Aktion in Tab-Vorschau ausgelöst!')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Aktion in Vorschau ausgelöst!')">
     Konsolenprotokoll auslösen
   </button>
 </div>
@@ -74,31 +108,31 @@ Wenn `tabs` (oder `mode="tabs"`) in den Containereinstellungen aktiviert ist, st
 :::
 ````
 
-Hier ist der aktive Live-Container mit Tab-Umschaltung:
+Hier ist der aktive Live-Container mit Umschaltung:
 
-::: playground tabs title="Interaktive Komponente (Live & Code Umschalter)" icon:layout live
+::: playground title="Interaktive Komponente (Play & Code Umschalter)" icon:layout live
 ```html
 <div style="padding: 18px; border-radius: 10px; background: #0f172a; color: #38bdf8; font-family: system-ui, sans-serif; border: 1px solid #1e293b;">
   <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-    <strong style="color:#f8fafc; font-size:14px;">Tab-Vorschaumodus aktiv</strong>
+    <strong style="color:#f8fafc; font-size:14px;">Sofortige Komponentenvorschau</strong>
   </div>
   <p style="margin:0 0 12px 0; font-size:13px; color:#94a3b8; line-height:1.5;">
-    Wechseln Sie über die Reiter in der oberen Symbolleiste zwischen <strong>Live</strong>-Ausgabe und <strong>Code</strong>-Ansicht.
+    Wechseln Sie über die Schaltflächen in der Symbolleiste nahtlos zwischen der <strong>Play</strong>-Live-Ausgabe und der <strong>Code</strong>-Ansicht.
   </p>
-  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Aktion in Tab-Vorschau ausgelöst!')">
+  <button style="padding:6px 14px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;" onclick="console.log('Aktion in Vorschau ausgelöst!')">
     Konsolenprotokoll auslösen
   </button>
 </div>
 ```
 :::
 
-### 3. Tab-Container mit Fokus auf Code (`tabs:code`)
+### 3. Container mit anfänglicher Code-Ansicht (`view="code"`)
 
-Mit `tabs:code` oder `tabs view="code"` startet der Container standardmäßig in der Codeansicht und bietet weiterhin einen sofortigen Umschalter zur Live-Ansicht:
+Mit `view="code"` startet der Container standardmäßig in der Codeansicht und bietet weiterhin einen sofortigen Umschalter zur Play-Ansicht:
 
 ````markdown
-::: playground tabs:code title="Tab-Container (Code zuerst)" icon:code live
+::: playground view="code" title="Fakultät-Algorithmus (Code zuerst)" icon:code live
 ```js
 // Fakultät rekursiv berechnen
 function fakultaet(n) {
@@ -116,7 +150,7 @@ return ergebnis;
 
 Live-Beispiel mit anfänglicher Code-Ansicht:
 
-::: playground tabs:code title="Tab-Container (Code zuerst)" icon:code live
+::: playground view="code" title="Fakultät-Algorithmus (Code zuerst)" icon:code live
 ```js
 // Fakultät rekursiv berechnen
 function fakultaet(n) {
@@ -185,22 +219,6 @@ console.log("Fib(10) =", fib(10));
 return fib(10);
 ```
 
-## Container-Attribute
-
-Der `::: playground`-Container unterstützt umfangreiche Metadaten-Attribute:
-
-| Attribut | Typ | Standard | Beschreibung |
-| :--- | :--- | :--- | :--- |
-| `title` | `string` | Abgeleitet oder `"Playground"` | In der Toolbar angezeigte Überschrift. Unterstützt `title:"Mein Titel"` oder Anführungszeichen. |
-| `src` / `file` | `string` | Keine | Relativer Pfad zu einer lokalen Codedatei, die in den Editor geladen wird. |
-| `icon` | `string` | `"play"` | Lucide-Icon-Name neben dem Titel (z. B. `icon:code`, `icon:cpu`, `icon:layout`). |
-| `live` | `boolean` | `false` | Führt den Code beim Laden der Seite automatisch aus. |
-| `tabs` / `mode` | `string` \| `boolean` | `false` | Aktiviert Reiter zum Umschalten zwischen „Live“ und „Code“ in voller Breite. Unterstützt `tabs:code` für anfängliche Code-Ansicht. |
-| `tab` | `string` | `"console"` oder `"preview"` | Standard-Ausgabereiter (`"preview"` oder `"console"`). Unterstützt auch das `preview`-Attribut. |
-| `nocode` | `boolean` | `false` | Versteckt den „Code“-Reiter und zeigt direkt die Live-Ausgabe in voller Breite (auch `code:false`). |
-| `readonly` | `boolean` | `false` | Sperrt den Editor gegen Bearbeitung, erlaubt aber die Ausführung. |
-| `layout` | `string` | `"split"` | Bestimmt die Anordnung: `"split"` (nebeneinander) oder `"stacked"` (untereinander). |
-| `lang` | `string` | Abgeleitet (`"js"`) | Explizite Sprachangabe (`js`, `html`, `css`). Automatisch aus Dateiendung oder Codefence ermittelt. |
 
 ## Interaktive Funktionen
 

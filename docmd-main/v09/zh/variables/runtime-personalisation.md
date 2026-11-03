@@ -96,37 +96,27 @@ curl -X GET https://api.acme.com/v1/profile \
 ```
 ````
 
-::: card "交互式代码块在线演示" icon:play
-在下方输入框中输入自定义 API 密钥，观察 Curl 代码片段的实时变化：
+### 交互式变量在线实时演示
 
-<div style="margin: 12px 0;">
-  <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px; opacity:0.8;">输入测试 API 密钥：</label>
-  <input 
-    type="text" 
-    id="apiKeyInputDemoZh" 
-    placeholder="例如 sk_test_my_secure_token_999" 
-    oninput="window.docmd?.var?.set('user.apiKey', this.value || 'YOUR_API_KEY')"
-  />
-  <script>
-    (function() {
-      var inp = document.getElementById('apiKeyInputDemoZh');
-      if (inp && !inp.__bound) {
-        inp.__bound = true;
-        inp.addEventListener('input', function(e) {
-          if (window.docmd && window.docmd.var) {
-            window.docmd.var.set('user.apiKey', e.target.value || 'YOUR_API_KEY');
-          }
-        });
-      }
-    })();
-  </script>
-</div>
+使用下方 Playground 沙箱直接在浏览器运行时中变更 `user.apiKey`。点击“运行”或调整代码，`docmd-runtime` 将实时同步更新页面中引用的变量：
+
+::: playground title="变量交互测试沙箱" icon:braces live
+```js
+// 在浏览器运行时中动态更新响应式变量 user.apiKey
+const demoKey = "sk_live_" + Math.random().toString(36).substring(2, 10);
+docmd.var.set("user.apiKey", demoKey);
+
+console.log("已更新 user.apiKey 为:", docmd.var.get("user.apiKey"));
+return `当前生效密钥: ${demoKey}`;
+```
+:::
+
+下方的代码块将根据变量变化实时重渲染：
 
 ```bash
 curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
-:::
 
 ## 现代前端框架集成
 

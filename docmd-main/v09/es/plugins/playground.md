@@ -109,46 +109,62 @@ flowchart TD
 
 ::: playground src="./snippets/demo.js" title="Script Vinculado" icon:cpu live /:::
 
-### Ejemplo de Script 2: Vista Previa Headless con `nocode`
+### Ejemplo de Script 2: Vista Previa de Componentes HTML y CSS
+
+Los playgrounds renderizan componentes interactivos directamente en el sandbox del navegador. Los lectores visualizan la interfaz en la pestaña **Play** y pueden alternar a **Code** para examinar el código:
 
 ````markdown
-::: playground tabs nocode preview title="Widget en Vivo sin Código" icon:sparkles live
+::: playground title="Tarjeta Interactiva de Notificación" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">VISTA PREVIA HEADLESS</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Este playground utiliza <code>nocode</code> para renderizar una vista interactiva limpia sin selector de código.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Componente interactivo accionado!')">
-    Probar Componente
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Notificación en Tiempo Real</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">En línea</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Alterne entre las vistas <strong>Play</strong> y <strong>Code</strong> en la barra superior para explorar o modificar el código fuente.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Acción de notificación ejecutada!')">
+    Confirmar Acción
   </button>
 </div>
 ```
 :::
 ````
 
-Widget renderizado en vivo:
+Componente renderizado en vivo:
 
-::: playground tabs nocode preview title="Widget en Vivo sin Código" icon:sparkles live
+::: playground title="Tarjeta Interactiva de Notificación" icon:bell live
 ```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; text-align: center;">
-  <span style="display:inline-block; padding: 4px 10px; border-radius: 12px; background: #0284c7; color: white; font-size: 11px; font-weight: 700; margin-bottom: 8px;">VISTA PREVIA HEADLESS</span>
-  <p style="margin: 0 0 10px 0; font-size: 13px; color: #94a3b8;">Este playground utiliza <code>nocode</code> para renderizar una vista interactiva limpia sin selector de código.</p>
-  <button style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Componente interactivo accionado!')">
-    Probar Componente
+<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; font-family: system-ui, sans-serif;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+    <strong style="color: #38bdf8; font-size: 14px;">Notificación en Tiempo Real</strong>
+    <span style="font-size: 11px; background: #0369a1; padding: 2px 8px; border-radius: 10px; color: white;">En línea</span>
+  </div>
+  <p style="margin: 0 0 12px 0; font-size: 13px; color: #94a3b8; line-height: 1.4;">
+    Alterne entre las vistas <strong>Play</strong> y <strong>Code</strong> en la barra superior para explorar o modificar el código fuente.
+  </p>
+  <button style="padding: 6px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="alert('¡Acción de notificación ejecutada!')">
+    Confirmar Acción
   </button>
 </div>
 ```
 :::
 
-### Ejemplo de Script 3: Componente con Pestañas (`tabs`)
+### Ejemplo de Script 3: Ejecución de Scripts con Salida por Consola
 
-::: playground tabs preview title="Componente Interactivo" icon:layout live
-```html
-<div style="padding: 16px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc;">
-  <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: 600;">Sandbox Interactivo</p>
-  <button style="padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;" onclick="console.log('Clic a las: ' + new Date().toLocaleTimeString())">
-    Registrar Hora en Consola
-  </button>
-</div>
+Ejecute scripts de JavaScript en un sandbox del cliente con captura de `console.log`, `info` y valores devueltos:
+
+::: playground title="Agregador de Métricas del Cliente" icon:cpu live
+```js
+const buildYear = window.docmd?.var?.get("docmd.buildYear") || 2026;
+const version = window.docmd?.var?.get("docmd.version") || "0.9.9";
+
+console.log("Versión del motor Docmd:", version);
+console.info("Año de compilación:", buildYear);
+console.info("Entorno activo: Sandbox del cliente en navegador");
+
+return `Estado del sistema: Operativo (v${version})`;
 ```
 :::
 
