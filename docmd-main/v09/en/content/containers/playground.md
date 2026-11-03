@@ -44,6 +44,10 @@ The playground runtime is built using pure vanilla JavaScript and CSS, requiring
 | **Language** | `lang:LANG` | Derived (`"js"`) | Explicit language override (`js`, `html`, `css`). Inferred from file extensions or inner code fences. |
 | **Closing Tags** | `::: /playground`, `/:::`, `:::` | Standard closing | Supports explicit closing tag `::: /playground`, self-closing `/:::`, or generic `:::`. |
 
+::: callout warning "Security Notice & Script Execution" icon:shield-alert
+All playground code runs entirely client-side inside the reader's browser session. HTML previews execute inside a sandboxed iframe with an opaque origin (`null`), preventing access to parent DOM or cookies. When using `live` auto-execution, ensure code snippets originate from trusted documentation sources.
+:::
+
 
 ## Usage Examples
 

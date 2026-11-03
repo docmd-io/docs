@@ -118,6 +118,10 @@ curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
 
+::: callout tip "DOM XSS Immunity" icon:shield-check
+The `docmd-runtime.js` engine updates reactive DOM elements strictly via `.textContent`. Variable values are never interpreted as raw HTML or script, preventing DOM-based injection attacks even when variable values are sourced from dynamic user inputs.
+:::
+
 ## Framework Integration
 
 ::: tabs

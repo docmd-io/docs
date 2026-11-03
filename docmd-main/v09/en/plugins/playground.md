@@ -109,6 +109,12 @@ When a user clicks **Run** or executes via keyboard shortcut (<kbd class="docmd-
 - **Isolated Function Context**: JavaScript is evaluated inside an asynchronous function wrapper with access to `window.docmd` and global browser APIs.
 - **HTML/CSS Component Previews**: For HTML snippets, content is rendered into an isolated sandbox panel, enabling full interactive testing of buttons, forms, and custom widgets.
 
+::: callout info "Security Isolation Model" icon:shield-check
+- **Pure Client-Side**: No server execution or backend attack surface exists; all code runs entirely in the visitor's browser.
+- **Iframe Sandboxing**: HTML previews run inside an isolated iframe with `sandbox="allow-scripts allow-modals allow-forms"` without `allow-same-origin`, blocking access to parent page cookies, LocalStorage, and parent DOM.
+- **Domain Isolation Best Practice**: For production deployments, host documentation on a dedicated documentation subdomain (e.g. `docs.example.com`).
+:::
+
 
 ## Script-Based Examples & Workflows
 

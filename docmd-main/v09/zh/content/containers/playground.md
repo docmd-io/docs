@@ -44,6 +44,10 @@ description: "通过 ::: playground 容器嵌入可运行的 JavaScript 环境�
 | **语言声明** | `lang:LANG` | 自动推导 (`"js"`) | 明确指定代码语言（`js`, `html`, `css`）。从文件扩展名或内部代码围栏推导。 |
 | **闭合标签** | `::: /playground`, `/:::`, `:::` | 标准闭合 | 支持显式闭合 `::: /playground`、自闭合 `/:::` 或通用闭合 `:::`。 |
 
+::: callout warning "安全须知与脚本执行" icon:shield-alert
+所有 Playground 代码均完全在访客浏览器的客户端环境中运行，不存在服务端执行。HTML 预览在具备不透明源（`null`）的沙箱 iframe 中运行，严格禁止访问父级 DOM 或 Cookie。使用 `live` 自动运行特性时，请确保代码片段来自可信的文档源。
+:::
+
 
 ## 使用示例
 

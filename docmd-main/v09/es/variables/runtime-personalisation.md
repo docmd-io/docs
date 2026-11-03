@@ -118,6 +118,10 @@ curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'SU_CLAVE_API' }}"
 ```
 
+::: callout tip "Inmunidad a XSS en el DOM" icon:shield-check
+El motor `docmd-runtime.js` actualiza los elementos reactivos del DOM estrictamente mediante `.textContent`. Los valores de variables nunca se analizan como HTML sin procesar o scripts ejecutables, previniendo ataques de inyección basados en el DOM incluso con entradas dinámicas del usuario.
+:::
+
 ## Integración con Frameworks
 
 ::: tabs

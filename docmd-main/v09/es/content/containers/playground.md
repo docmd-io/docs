@@ -44,6 +44,10 @@ El entorno de ejecución de playground está construido con JavaScript estándar
 | **Lenguaje** | `lang:LENG` | Derivado (`"js"`) | Lenguaje explícito (`js`, `html`, `css`). Deducido de extensiones o bloques de código. |
 | **Etiquetas de Cierre** | `::: /playground`, `/:::`, `:::` | Cierre estándar | Admite cierre explícito `::: /playground`, autocierre `/:::`, o cierre genérico `:::`. |
 
+::: callout warning "Aviso de Seguridad y Ejecución de Scripts" icon:shield-alert
+Todo el código del playground se ejecuta completamente en el lado del cliente dentro de la sesión del navegador del lector. Las vistas previas de HTML se ejecutan en un iframe aislado con origen opaco (`null`), impidiendo el acceso al DOM o cookies superiores. Al utilizar ejecución automática (`live`), asegúrese de que los fragmentos de código provengan de fuentes de documentación confiables.
+:::
+
 
 ## Ejemplos de Uso
 

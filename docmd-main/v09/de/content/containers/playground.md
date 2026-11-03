@@ -44,6 +44,10 @@ Die Playground-Laufzeitumgebung basiert auf reinem Standard-JavaScript und CSS o
 | **Sprache** | `lang:SPRACHE` | Abgeleitet (`"js"`) | Explizite Sprachangabe (`js`, `html`, `css`). Automatisch aus Dateiendung oder Codefence ermittelt. |
 | **Schließende Tags** | `::: /playground`, `/:::`, `:::` | Standardschließung | Unterstützt explizites Schließen `::: /playground`, selbstschließendes `/:::`, oder allgemeines `:::`. |
 
+::: callout warning "Sicherheitshinweis & Skriptausführung" icon:shield-alert
+Der gesamte Playground-Code wird vollständig clientseitig im Browser des Lesers ausgeführt. HTML-Vorschauen laufen in einem isolierten Sandbox-Iframe mit opaker Origin (`null`), wodurch der Zugriff auf übergeordnete DOM-Strukturen oder Cookies unterbunden wird. Stellen Sie bei automatischer Ausführung (`live`) sicher, dass Code-Snippets aus vertrauenswürdigen Quellen stammen.
+:::
+
 
 ## Anwendungsbeispiele
 

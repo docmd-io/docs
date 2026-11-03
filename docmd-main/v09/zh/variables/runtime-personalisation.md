@@ -118,6 +118,10 @@ curl -X GET https://api.acme.com/v1/profile \
   -H "Authorization: Bearer {{ user.apiKey || 'YOUR_API_KEY' }}"
 ```
 
+::: callout tip "DOM XSS 免疫特性" icon:shield-check
+`docmd-runtime.js` 引擎严格通过 DOM `.textContent` 更新响应式元素。变量值绝不会被当作 HTML 或可执行脚本解析，即使变量值来源于动态用户输入，也能杜绝基于 DOM 的代码注入攻击。
+:::
+
 ## 现代前端框架集成
 
 ::: tabs

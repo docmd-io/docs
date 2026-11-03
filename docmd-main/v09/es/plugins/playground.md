@@ -99,6 +99,13 @@ flowchart TD
 - Intercepta llamadas a `console.log`, `info`, `warn` y `error`, mostrándolas con formato en el panel de resultados.
 - Totalmente integrado con `docmd-runtime` (`docmd.var.get()`, `docmd.var.set()`).
 
+::: callout info "Modelo de Aislamiento y Seguridad" icon:shield-check
+- **Ejecución Exclusiva en el Cliente**: No existe ejecución en el servidor ni superficie de ataque en el backend; todo el código se ejecuta en el navegador del lector.
+- **Aislamiento por Iframe**: Las vistas previas de HTML se ejecutan en un iframe aislado con `sandbox="allow-scripts allow-modals allow-forms"` sin `allow-same-origin`, bloqueando el acceso a cookies, LocalStorage y DOM de la página principal.
+- **Aislamiento de Dominio**: Como práctica recomendada para producción, aloje la documentación en un subdominio dedicado (por ejemplo, `docs.ejemplo.com`).
+:::
+
+
 ## Ejemplos Basados en Scripts y Flujos de Trabajo
 
 ### Ejemplo de Script 1: Enlace a Scripts Locales con `src`

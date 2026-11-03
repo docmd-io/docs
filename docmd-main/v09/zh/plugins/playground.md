@@ -99,6 +99,13 @@ flowchart TD
 - 代理拦截 `console.log`、`console.info`、`console.warn`、`console.error`，实时格式化输出到控制台面板。
 - 原生集成 `docmd-runtime`（`docmd.var.get()`、`docmd.var.set()`）。
 
+::: callout info "安全隔离模型" icon:shield-check
+- **纯客户端执行**：代码仅在访客本地浏览器环境中运行，完全不存在服务端攻击面。
+- **Iframe 沙箱隔离**：HTML 预览在具备 `sandbox="allow-scripts allow-modals allow-forms"` 且未开启 `allow-same-origin` 的隔离 iframe 中呈现，彻底阻断对主页面 Cookie、LocalStorage 及 DOM 的读取。
+- **域名隔离最佳实践**：生产环境中推荐将文档站点部署在独立的文档专属子域名上（例如 `docs.example.com`）。
+:::
+
+
 ## 脚本驱动示例与工作流
 
 ### 脚本示例 1：引用本地脚本源码 (`src`)

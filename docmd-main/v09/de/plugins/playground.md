@@ -99,6 +99,13 @@ flowchart TD
 - Fängt Konsolenaufrufe (`log`, `info`, `warn`, `error`) ab und leitet sie formatiert in das Ausgabefenster weiter.
 - Direkte Integration mit der `docmd-runtime` (`docmd.var.get()`, `docmd.var.set()`).
 
+::: callout info "Sicherheits- & Isolationsmodell" icon:shield-check
+- **Reine Client-Ausführung**: Keine Server-Ausführung oder Backend-Angriffsfläche; jeglicher Code läuft im Browser des Besuchers.
+- **Iframe-Sandboxing**: HTML-Vorschauen laufen in einem isolierten Iframe mit `sandbox="allow-scripts allow-modals allow-forms"` ohne `allow-same-origin`, wodurch der Zugriff auf Cookies, LocalStorage und DOM der Dokumentationsseite blockiert wird.
+- **Domain-Isolation**: Für den Produktivbetrieb wird empfohlen, Dokumentationen auf einer eigenständigen Subdomain (z. B. `docs.example.com`) bereitzustellen.
+:::
+
+
 ## Skriptbasierte Beispiele & Workflows
 
 ### Skript-Beispiel 1: Lokale Skripte einbinden mit `src`
