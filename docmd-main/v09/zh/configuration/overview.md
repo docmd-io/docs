@@ -63,6 +63,7 @@ module.exports = {
 | `engine` | `String` | `"js"` | 处理引擎：`"js"`（默认纯 JavaScript 引擎）、`"rust"`（通过 `@docmd/engine-rust` 的原生加速器）或 `"python"`（通过 `@docmd/engine-python` 的 Python 3 运行时加速器）。 |
 | `i18n` | `Object` | `null` | 多语言参数。参阅 [多语言指南](./localisation/translated-content.md)。 |
 | `plugins` | `Object` | `{}` | 标准及第三方插件配置映射。参阅 [插件指南](../plugins/usage.md)。 |
+| `static` | `String \| String[] \| Boolean` | `undefined` | 原样复制到构建输出根目录的静态资源。默认自动检测 `public/` 目录。设为 `false` 可禁用。 |
 
 ::: callout info title:"向后兼容性" icon:history
 `docmd` 对早期配置清单保持 100% 向后兼容：

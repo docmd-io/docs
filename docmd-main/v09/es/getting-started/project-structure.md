@@ -13,6 +13,7 @@ Ejecute `npx @docmd/core init` para establecer un diseño de espacio de trabajo 
 mis-docs/
 ├── docs/  # Directorio fuente que contiene sus páginas Markdown (.md)
 │   └── index.md  # La página de inicio (se resuelve en /)
+├── public/  # Recursos estáticos de raíz para el sitio (CNAME, robots.txt, funding.json)
 ├── assets/  # Recursos web estáticos cargados directamente por el motor
 │   ├── css/  # Hojas de estilo personalizadas para personalizar el diseño
 │   ├── js/  # Scripts personalizados para extender la lógica del navegador

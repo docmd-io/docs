@@ -54,6 +54,7 @@ npx @docmd/core dev [options]
 | Parameter Flag | Alias | Technical Description |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Specify web server port (default: `3000`). |
+| `--host <address>` | - | Specify network interface to bind (default: `127.0.0.1`; `0.0.0.0` for all/LAN). |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
 ## `npx @docmd/core build`

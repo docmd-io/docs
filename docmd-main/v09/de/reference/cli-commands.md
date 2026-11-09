@@ -54,6 +54,7 @@ npx @docmd/core dev [options]
 | Parameter-Flag | Alias | Technische Beschreibung |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000`). |
+| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN). |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
 ## `npx @docmd/core build`

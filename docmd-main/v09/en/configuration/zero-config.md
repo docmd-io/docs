@@ -14,6 +14,7 @@ When executed in a directory without a `docmd.config.json` manifest, the engine 
 1. **Source Directory Discovery**: Scans candidate directories in priority order: `docs/`, `src/docs/`, `documentation/`, `content/`, and `.` (root directory fallback).
 2. **Version & Locale Extraction**: Automatically parses version folders matching `v[0-9]+` (e.g. `v1.0`, `v09`) and two-letter locale codes (e.g. `en`, `de`, `zh`).
 3. **Automated Sidebar Routing**: Generates a clean navigation tree by analysing file hierarchies and converting hyphenated basenames (`getting-started.md` : `Getting Started`).
+4. **Static Root Assets Discovery**: Automatically detects `public/` (or `static/`) at the project root or source folder, mirroring all files and nested subdirectories directly to the site output root (`site/`).
 
 :::
 
@@ -27,6 +28,7 @@ To maximise the effectiveness of Zero-Config mode, adopt these directory convent
 - **Directory Grouping**: Group related Markdown documents inside subfolders to automatically build collapsible sidebar categories.
 - **Index Fallback**: Place an `index.md` or `README.md` at the root of each content folder to serve as its default landing page.
 - **Clean Output Path**: When using root `.` as your source folder, built static assets output to `./site/`, which is ignored automatically by source controls and compilers.
+- **Static Root Assets**: Place domain-root files like `CNAME`, `robots.txt`, `funding.json`, or verification manifests in `public/` to automatically copy them to the website root.
 
 ## Built-in Default Behaviours
 
@@ -43,6 +45,7 @@ To disable a default behaviour, set its key to `false` or an empty value. For in
 | `pageNavigation` | `true` | Renders previous/next article links at the bottom of pages. |
 | `copyCode` | `true` | Appends copy buttons to code blocks. |
 | `autoTitleFromH1` | `true` | Resolves missing page titles using the first `# H1` heading in the file. |
+| `static` | `undefined` | Static root assets to copy directly to site root. Auto-detects `public/` folder by default. Set to `false` to disable. |
 
 ### Layout & UI Defaults
 

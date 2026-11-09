@@ -54,6 +54,7 @@ npx @docmd/core dev [opciones]
 | Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000`). |
+| `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN). |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ## `npx @docmd/core build`

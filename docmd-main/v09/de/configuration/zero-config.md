@@ -14,6 +14,7 @@ Wird `docmd` in einem Verzeichnis ohne `docmd.config.json`-Manifest ausgeführt,
 1. **Quellverzeichnis-Erkennung**: Scannt Kandidatenverzeichnisse in Prioritätsreihenfolge: `docs/`, `src/docs/`, `documentation/`, `content/` und `.` (Root-Verzeichnis-Fallback).
 2. **Versions- & Locale-Extraktion**: Parst automatisch Versionsordner, die `v[0-9]+` entsprechen (z. B. `v1.0`, `v09`), und zweistellige Sprachcodes (z. B. `en`, `de`, `zh`).
 3. **Automatisierte Sidebar-Routierung**: Generiert einen sauberen Navigationsbaum durch Analyse von Dateihierarchien und Konvertierung von mit Bindestrich versehenen Dateinamen (`getting-started.md` : `Getting Started`).
+4. **Erkennung statischer Root-Assets**: Erkennt automatisch `public/` (oder `static/`) im Projekt-Root oder Quellordner und spiegelt alle Dateien sowie verschachtelten Unterverzeichnisse direkt in das Website-Ausgabeverzeichnis (`site/`).
 
 :::
 
@@ -27,6 +28,7 @@ Um die Effektivität des Zero-Config-Modus zu maximieren, übernehmen Sie diese 
 - **Verzeichnisgruppierung**: Gruppieren Sie zusammengehörige Markdown-Dokumente in Unterordnern, um automatisch einklappbare Sidebar-Kategorien aufzubauen.
 - **Index-Fallback**: Platzieren Sie eine `index.md` oder `README.md` im Root jedes Inhaltsordners, damit diese als Standard-Startseite dient.
 - **Sauberer Ausgabepfad**: Wenn Sie das Root-Verzeichnis `.` als Quellordner nutzen, werden erstellte statische Assets nach `./site/` ausgegeben, was von Versionskontrollen und Compilern automatisch ignoriert wird.
+- **Statische Root-Assets**: Legen Sie Domain-Root-Dateien wie `CNAME`, `robots.txt`, `funding.json` oder Verifizierungs-Manifeste in `public/` ab, um sie automatisch in das Website-Root zu kopieren.
 
 ## Integrierte Standard-Verhaltensweisen
 
@@ -43,6 +45,7 @@ Um ein Standardverhalten zu deaktivieren, setzen Sie seinen Schlüssel auf `fals
 | `pageNavigation` | `true` | Rendert Links zum vorherigen/nächsten Artikel am Ende von Seiten. |
 | `copyCode` | `true` | Fügt Schaltflächen zum Kopieren an Codeblöcke an. |
 | `autoTitleFromH1` | `true` | Löst fehlende Seitentitel mit der ersten `# H1`-Überschrift der Datei auf. |
+| `static` | `undefined` | Statische Root-Assets, die direkt in das Website-Root kopiert werden. Erkennt standardmäßig den `public/`-Ordner automatisch. Auf `false` setzen, um zu deaktivieren. |
 
 ### Layout- & UI-Standards
 

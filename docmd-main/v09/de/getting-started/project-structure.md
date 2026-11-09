@@ -13,6 +13,7 @@ Führen Sie `npx @docmd/core init` aus, um ein minimales Workspace-Layout zu ers
 my-docs/
 ├── docs/  # Quellverzeichnis mit Ihren Markdown (.md)-Seiten
 │   └── index.md  # Die Startseite (wird zu / aufgelöst)
+├── public/  # Root-Assets direkt für die Website-Wurzel (CNAME, robots.txt, funding.json)
 ├── assets/  # Statische Web-Assets, die direkt von der Engine geladen werden
 │   ├── css/  # Eigene Stylesheets zur Anpassung des Seitenlayouts
 │   ├── js/  # Eigene Skripte zur Erweiterung browserseitiger Logik
