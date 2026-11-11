@@ -10,8 +10,9 @@ description: "Command-line interface reference for docmd, commands, flags, and o
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Initialise a new documentation workspace. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Launch local development server with hot-reloading. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Compile production-ready static site. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Run production static web server with compression and health probes. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Launch browser-based Live Editor environment. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active development servers. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active development or production servers. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment manifests and container files. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configurations or migrate from third-party tools. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Run link validation and check Markdown document integrity. |
@@ -70,6 +71,22 @@ npx @docmd/core build [options]
 | `--offline` | - | Rewrite asset and link paths to `.html` relative files for local file system browsing. |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
+## `npx @docmd/core serve`
+
+Build once and launch a production-grade HTTP web server for the compiled documentation (`site/`).
+
+Unlike `dev`, `serve` is designed for production hosting (e.g. Docker, Kubernetes, VPS). It performs no file watching or background recompilation, serves static assets with Gzip and Deflate compression, enforces strict production security headers (CSP, HSTS), handles clean URLs, and exposes a container health probe (`/healthz`).
+
+```bash
+npx @docmd/core serve [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--port <number>` | `-p` | Specify web server port (default: `3000` or `serve.port`). |
+| `--host <address>` | - | Specify network interface to bind (default: `127.0.0.1`; `0.0.0.0` for all/LAN/Docker). |
+| `--config <path>` | `-c` | Custom path to configuration file. |
+
 ## `npx @docmd/core live`
 
 Launch browser-based Live Editor environment.
@@ -84,7 +101,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-Terminate running development servers.
+Terminate running development or production servers.
 
 ```bash
 npx @docmd/core stop [options]

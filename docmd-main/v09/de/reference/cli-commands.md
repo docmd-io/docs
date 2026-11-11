@@ -10,8 +10,9 @@ description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags un
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Einen neuen Dokumentations-Workspace initialisieren. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Lokalen Entwicklungsserver mit Hot-Reloading starten. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Produktionsbereite statische Website kompilieren. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Produktionsbereiten statischen Webserver mit Komprimierung und Health-Checks starten. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Browserbasierte Live-Editor-Umgebung starten. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive Entwicklungsserver beenden. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive Entwicklungs- oder Produktionsserver beenden. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Deployment-Manifeste und Containerdateien generieren. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Legacy-Konfigurationen upgraden oder von Drittanbieter-Tools migrieren. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Link-Validierung ausführen und Dokumentenintegrität prüfen. |
@@ -70,6 +71,22 @@ npx @docmd/core build [options]
 | `--offline` | - | Asset- und Link-Pfade in relative `.html`-Dateien für lokales Dateisystem-Browsing umschreiben. |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
+## `npx @docmd/core serve`
+
+Einmal kompilieren und einen produktionsreifen HTTP-Webserver für die erstellte Dokumentation (`site/`) starten.
+
+Im Gegensatz zu `dev` ist `serve` für Produktivumgebungen konzipiert (z. B. Docker, Kubernetes, VPS). Es führt kein Dateiwatching oder Hintergrund-Neukompilieren durch, liefert statische Assets mit Gzip- und Deflate-Komprimierung aus, erzwingt strenge Sicherheits-Header (CSP, HSTS), unterstützt Clean URLs und stellt einen Container-Health-Check (`/healthz`) bereit.
+
+```bash
+npx @docmd/core serve [options]
+```
+
+| Parameter-Flag | Alias | Technische Beschreibung |
+| :--- | :--- | :--- |
+| `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000` oder `serve.port`). |
+| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN/Docker). |
+| `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
+
 ## `npx @docmd/core live`
 
 Starten Sie die browserbasierte Live-Editor-Umgebung.
@@ -84,7 +101,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-Beenden Sie laufende Entwicklungsserver.
+Beenden Sie laufende Entwicklungs- oder Produktionsserver.
 
 ```bash
 npx @docmd/core stop [options]

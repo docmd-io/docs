@@ -10,8 +10,9 @@ description: "docmd 命令行参考：所有可用命令与选项。"
 | [`npx @docmd/core init`](#npx-docmdcore-init) | 初始化一个新的文档项目 |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | 启动带热刷新的开发服务器 |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | 生成可用于生产的静态站点 |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | 启动带压缩与健康检查的生产级静态 Web 服务器 |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | 启动浏览器版 Live Editor |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 dev 服务器 |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 dev 或 serve 服务器 |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | 生成部署配置 |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | 升级旧版配置或从其他工具迁移 |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | 校验链接并检查文档文件 |
@@ -70,6 +71,22 @@ npx @docmd/core build [options]
 | `--offline` | - | 将链接改写为 `.html`，便于 `file://` 浏览 |
 | `--config <path>` | `-c` | 配置文件路径 |
 
+## `npx @docmd/core serve`
+
+一次性构建并启动用于生产环境的 HTTP Web 服务器，托管已编译的文档（`site/`）。
+
+与 `dev` 不同，`serve` 专为生产部署设计（如 Docker、Kubernetes、VPS）。它不进行文件监控和后台重构，通过 Gzip 与 Deflate 进行静态资源压缩，强制实施严格的生产安全标头（CSP、HSTS），支持干净 URL（Clean URLs），并提供容器健康检查探针（`/healthz`）。
+
+```bash
+npx @docmd/core serve [options]
+```
+
+| 选项 | 别名 | 说明 |
+|:-------|:------|:------------|
+| `--port <number>` | `-p` | 指定服务器端口（默认：`3000` 或 `serve.port`） |
+| `--host <address>` | - | 绑定的网络接口（默认：`127.0.0.1`；`0.0.0.0` 适用于局域网或 Docker） |
+| `--config <path>` | `-c` | 配置文件路径 |
+
 ## `npx @docmd/core live`
 
 启动浏览器版 Live Editor。
@@ -84,7 +101,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-停止运行中的 dev 服务器。
+停止运行中的开发或生产服务器。
 
 ```bash
 npx @docmd/core stop [options]

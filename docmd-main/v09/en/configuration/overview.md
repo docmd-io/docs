@@ -64,6 +64,7 @@ These top-level properties configure base paths and global compiler options:
 | `i18n` | `Object` | `null` | Multi-language parameters. See the [Localisation Guide](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Standard and third-party plugin configuration map. See [Plugins Guide](../plugins/usage.md). |
 | `static` | `String \| String[] \| Boolean` | `undefined` | Static root assets to copy directly to the output root as-is. Auto-detects `public/` folder by default. Set to `false` to disable. |
+| `serve` | `Object` | `{ "host": "127.0.0.1", "port": 3000 }` | Host and port configuration for the `docmd serve` production server command. |
 
 ::: callout info title:"Backwards Compatibility" icon:history
 `docmd` preserves 100% backward compatibility for older configuration manifests:
