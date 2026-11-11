@@ -87,6 +87,10 @@ npx @docmd/core serve [opciones]
 | `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN/Docker). |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
+::: callout info "Sondas de estado del contenedor (/healthz)" icon:activity
+`docmd serve` expone un punto final automático `GET /healthz` que devuelve `{"status":"ok","version":"..."}` con HTTP 200 y `Cache-Control: no-store`. Utilice este punto final para Docker `HEALTHCHECK`, sondeos de actividad y disponibilidad de Kubernetes y balanceadores de carga en la nube.
+:::
+
 ## `npx @docmd/core live`
 
 Inicia el entorno del Editor en vivo basado en el navegador.

@@ -87,6 +87,10 @@ npx @docmd/core serve [options]
 | `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN/Docker). |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
+::: callout info "Container-Health-Checks (/healthz)" icon:activity
+`docmd serve` stellt einen automatischen `GET /healthz`-Endpunkt bereit, der `{"status":"ok","version":"..."}` mit HTTP 200 und `Cache-Control: no-store` zurückgibt. Verwenden Sie diesen Endpunkt für Docker `HEALTHCHECK`, Kubernetes Liveness- und Readiness-Probes sowie Cloud-Load-Balancer.
+:::
+
 ## `npx @docmd/core live`
 
 Starten Sie die browserbasierte Live-Editor-Umgebung.

@@ -87,6 +87,10 @@ npx @docmd/core serve [options]
 | `--host <address>` | - | 绑定的网络接口（默认：`127.0.0.1`；`0.0.0.0` 适用于局域网或 Docker） |
 | `--config <path>` | `-c` | 配置文件路径 |
 
+::: callout info "容器健康检查探针 (/healthz)" icon:activity
+`docmd serve` 自动提供 `GET /healthz` 端点，返回 `{"status":"ok","version":"..."}`，响应码为 200 并附带 `Cache-Control: no-store`。可直接用于 Docker 的 `HEALTHCHECK` 指令、Kubernetes 存活/就绪探针以及云负载均衡器的健康检查。
+:::
+
 ## `npx @docmd/core live`
 
 启动浏览器版 Live Editor。
