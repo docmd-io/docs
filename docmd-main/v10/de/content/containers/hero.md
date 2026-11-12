@@ -1,0 +1,94 @@
+---
+title: "Hero-Bereiche"
+description: "Erstellen Sie wirkungsvolle Landing-Page-Header und Marketing-Highlights in Markdown in docmd."
+---
+
+Der `hero`-Container erstellt visuell ansprechende Landing-Page-Header mit Unterstützung für geteilte Medien-Layouts, Hintergrund-Glow-Effekte und interaktive Karussells.
+
+## Container-Syntax
+
+```markdown
+::: hero [layout:split|slider] [glow:true|false] # Hero-Container Öffner
+::: slide # Einzelnes Karussell-Slide Öffner
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide # Expliziter Slide-Schließer
+
+::: slide # Zweites Slide Öffner
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero # Expliziter Hero-Schließer
+```
+
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Eigenschaft | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Layout-Variante** | `layout:split` \| `layout:slider` | `split` unterteilt in Text- und Medienbereich; `slider` erstellt ein Karussell. |
+| **Glow-Effekt** | `glow:true` \| `glow:false` | Fügt einen subtilen radialen Farbverlauf hinter den Header ein. |
+| **Sub-Container** | `::: slide` ... `::: /slide` | Definiert ein einzelnes Karussell-Panel. Legacy `== slide` wird unterstützt. |
+| **Schließ-Tags** | `::: /hero`, `::: /slide`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+
+## Anwendungsbeispiele
+
+### Geteiltes Layout (Split Layout)
+
+Verwenden Sie den Trenner `== side`, um Inhalte in einen Haupttextbereich und einen sekundären Medienbereich aufzuteilen:
+
+```markdown
+::: hero layout:split glow:true # Geteiltes Header-Layout
+# docmd
+Isomorphe Ausführungs-Engine. KI-optimierte Dokumentation.
+
+::: button title:"Schnellstart-Leitfaden" url:"../../getting-started/quick-start.md" color:blue
+
+== side
+::: embed url:"https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+```
+
+::: hero layout:split glow:true
+# docmd
+Isomorphe Ausführungs-Engine. KI-optimierte Dokumentation.
+
+::: button "Schnellstart-Leitfaden" ../../getting-started/quick-start.md color:blue
+
+== side
+::: embed "https://www.youtube.com/watch?v=0CSyIBHQy9g"
+::: /hero
+
+### Slider-Layout
+
+Verwenden Sie explizite `::: slide` Sub-Container, um ein interaktives Karussell aus Hero-Inhaltspanels zu erstellen:
+
+```markdown
+::: hero layout:slider # Interaktiver Slider-Container
+::: slide # Panel 1
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide
+
+::: slide # Panel 2
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero
+```
+
+::: hero layout:slider
+::: slide
+# Isomorphe Kern-Engine
+Rendert statisch und führt nahtlos auf Client-Seite aus.
+::: /slide
+
+::: slide
+# KI-Kontext-Optimierung
+Strukturbewusstes Parsing für LLM-Agenten.
+::: /slide
+::: /hero
+
+::: callout tip "Hero Design Best Practices" icon:lightbulb
+Verwenden Sie `glow:true` auf Seiten mit dunklem Theme für einen erstklassigen visuellen Effekt. Platzieren Sie `::: button` Elemente im Haupttextbereich vor `== side`, um eine korrekte Stapelreihenfolge auf Mobilgeräten zu gewährleisten.
+:::

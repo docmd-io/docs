@@ -150,10 +150,6 @@
           {
             "title": "Formato Avanzado",
             "path": "/content/syntax/advanced"
-          },
-          {
-            "title": "Sintaxis MDX",
-            "path": "/content/syntax/mdx"
           }
         ]
       },
@@ -223,10 +219,6 @@
             "path": "/content/containers/nested-containers"
           }
         ]
-      },
-      {
-        "title": "Componentes MDX",
-        "path": "/content/mdx"
       },
       {
         "title": "Páginas Sin Estilo",
@@ -395,10 +387,6 @@
       {
         "title": "GitHub Action",
         "path": "/deployment/github-action"
-      },
-      {
-        "title": "Servidor de Producción",
-        "path": "/deployment/docmd-serve"
       },
       {
         "title": "Imagen Docker",

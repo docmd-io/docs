@@ -1,0 +1,127 @@
+---
+title: "Schritte (Steps)"
+description: "Wandeln Sie nummerierte Schritte und geordnete Listen in ansprechende visuelle Zeitleisten und Tutorials in docmd um."
+---
+
+Der `steps`-Container verwandelt aufeinanderfolgende Anweisungen in nummerierte vertikale Zeitleisten mit Hover-Permalinks. Er ist für technische Tutorials und Schritt-für-Schritt-Anleitungen konzipiert.
+
+## Container-Syntax
+
+```markdown
+::: steps # Äußerer sequentieller Zeitleisten-Container Öffner
+::: step [title:"Schritt-Überschrift"] # Einzelner Schritt Öffner
+Inhalt für Schritt 1 (Markdown-Text, Code-Blöcke, Hinweisfelder, Bilder)...
+::: /step # Expliziter Schritt-Schließer
+
+::: step [title:"Schritt 2 Überschrift"] # Zweiter Schritt Öffner
+Inhalt für Schritt 2...
+::: /step
+::: /steps # Expliziter Zeitleisten-Schließer
+```
+
+## Funktionen & Unterstützte Attribute
+
+| Parameter / Element | Typ | Beschreibung |
+| :--- | :--- | :--- |
+| **Schritt-Titel** | `"String"` \| `title:"..."` | Überschriftentext am Kopf jedes Zeitleistenknotens (1. Parameter oder `title:"..."`). |
+| **Zeitleistenknoten** | Automatisch | Jeder `::: step`-Block inkrementiert den Schrittindex automatisch (1, 2, 3...). |
+| **Sub-Container** | `::: step` ... `::: /step` | Explizite Schritt-Wrapper. Alte Listen-Syntax (`1.`, `2.`) wird ebenfalls unterstützt. |
+| **Schließ-Tags** | `::: /steps`, `::: /step`, `:::` | Unterstützt benannte Schließ-Tags oder generische `:::`-Schließer. |
+
+
+## Anwendungsbeispiele
+
+### Grundlegende Workflow-Sequenz
+
+Eine einfache Sequenz für Developer-Onboarding-Aufgaben mit expliziten `::: step`-Containern:
+
+```markdown
+::: steps # Onboarding-Workflow
+::: step "Projekt initialisieren" # Schritt 1
+Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur zu erstellen.
+::: /step
+
+::: step "Inhalte verfassen" # Schritt 2
+Schreiben Sie Dokumentationen in Standard-Markdown-Dateien.
+::: /step
+
+::: step "Bauen & Bereitstellen" # Schritt 3
+Führen Sie `npx @docmd/core build` aus, um die Produktionsausgabe zu kompilieren.
+::: /step
+::: /steps
+```
+
+::: steps # Onboarding-Workflow
+::: step "Projekt initialisieren" # Schritt 1
+Führen Sie `npx @docmd/core init` aus, um Ihre Verzeichnisstruktur zu erstellen.
+::: /step
+
+::: step "Inhalte verfassen" # Schritt 2
+Schreiben Sie Dokumentationen in Standard-Markdown-Dateien.
+::: /step
+
+::: step "Bauen & Bereitstellen" # Schritt 3
+Führen Sie `npx @docmd/core build` aus, um die Produktionsausgabe zu kompilieren.
+::: /step
+::: /steps
+
+### Schritte mit eingebettetem Content
+
+Schritte unterstützen eingebettete Code-Blöcke, Hinweisfelder (Callouts) und verschachtelte Container:
+
+````markdown
+::: steps # Komplexer Bereitstellungsleitfaden
+::: step "Umgebung konfigurieren"
+Definieren Sie Optionen in `docmd.config.json`.
+
+::: callout info title:"IDE-Hinweis"
+Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschlüssel zu aktivieren.
+:::
+::: /step
+
+::: step "Produktions-Build generieren"
+Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Auf Infrastruktur bereitstellen"
+Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
+::: /step
+::: /steps
+````
+
+::: steps # Komplexer Bereitstellungsleitfaden
+::: step "Umgebung konfigurieren"
+Definieren Sie Optionen in `docmd.config.json`.
+
+::: callout info "IDE-Hinweis"
+Verwenden Sie `defineConfig`, um die IDE-Autovervollständigung für Konfigurationsschlüssel zu aktivieren.
+:::
+::: /step
+
+::: step "Produktions-Build generieren"
+Führen Sie den Build-Befehl aus, um eine optimierte statische Website zu generieren.
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "Auf Infrastruktur bereitstellen"
+Veröffentlichen Sie das kompilierte `site/`-Verzeichnis auf S3, Cloudflare Pages oder Vercel.
+::: /step
+::: /steps
+
+::: callout note "Legacy-Listen-Syntax" icon:archive
+Bestehende Dokumentationen mit geordneten Listen (`1.`, `2.`) werden weiterhin nahtlos verarbeitet:
+
+```markdown
+::: steps
+1.  **Umgebung konfigurieren**
+    Definieren Sie Optionen in `docmd.config.json`.
+::: /steps
+```
+:::

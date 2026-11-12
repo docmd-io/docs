@@ -150,10 +150,6 @@
           {
             "title": "Advanced Formatting",
             "path": "/content/syntax/advanced"
-          },
-          {
-            "title": "MDX Syntax",
-            "path": "/content/syntax/mdx"
           }
         ]
       },
@@ -223,10 +219,6 @@
             "path": "/content/containers/nested-containers"
           }
         ]
-      },
-      {
-        "title": "MDX Components",
-        "path": "/content/mdx"
       },
       {
         "title": "No-Style Pages",

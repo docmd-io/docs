@@ -1,0 +1,123 @@
+---
+title: "步骤 (Steps)"
+description: "在 docmd 中将有序列表和编号步骤转换为高视觉冲击力的垂直时间线和教程。"
+---
+
+`steps` 容器将顺序说明转换为带有悬停永久链接的带编号垂直时间线。
+
+## 容器语法 (Container Syntax)
+
+```markdown
+::: steps # 外层顺序时间线包装容器开启
+::: step [title:"步骤标题"] # 单个步骤项目开启
+步骤 1 内容（Markdown 文本、代码块、提示框、图像）...
+::: /step # 显式步骤项目闭合
+
+::: step [title:"步骤 2 标题"] # 第二个步骤开启
+步骤 2 内容...
+::: /step
+::: /steps # 显式时间线闭合
+```
+
+## 功能特性与支持属性 (Features & Attributes)
+
+| 参数 / 元素 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| **步骤标题** | `"String"` \| `title:"..."` | 显示在每个时间线节点顶部的标题文本（第 1 位置参数或 `title:"..."`）。 |
+| **时间线节点** | 自动索引 | 每个 `::: step` 块会自动递增步骤索引（1, 2, 3...）。 |
+| **子容器包装** | `::: step` ... `::: /step` | 显式步骤子容器。传统有序列表（`1.`、`2.`）语法亦获完全支持。 |
+| **闭合标签** | `::: /steps`, `::: /step`, `:::` | 支持显式命名闭合标签或通用 `:::` 闭合标记。 |
+
+
+## 使用示例
+
+```markdown
+::: steps # 入门工作流
+::: step "初始化项目" # 步骤 1
+运行 `npx @docmd/core init` 以构建目录结构。
+::: /step
+
+::: step "编写内容" # 步骤 2
+使用标准 Markdown 文件编写文档。
+::: /step
+
+::: step "构建与部署" # 步骤 3
+运行 `npx @docmd/core build` 以编译生产静态输出。
+::: /step
+::: /steps
+```
+
+::: steps # 入门工作流
+::: step "初始化项目" # 步骤 1
+运行 `npx @docmd/core init` 以构建目录结构。
+::: /step
+
+::: step "编写内容" # 步骤 2
+使用标准 Markdown 文件编写文档。
+::: /step
+
+::: step "构建与部署" # 步骤 3
+运行 `npx @docmd/core build` 以编译生产静态输出。
+::: /step
+::: /steps
+
+### 包含丰富嵌套内容的步骤
+
+步骤支持嵌入代码块、提示框警告以及嵌套容器：
+
+````markdown
+::: steps # 复杂部署指南
+::: step "配置环境"
+在 `docmd.config.json` 中定义项目选项。
+
+::: callout info title:"IDE 提示"
+使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
+:::
+::: /step
+
+::: step "生成生产构建"
+执行构建命令以生成优化后的静态站点。
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "部署至基础设施"
+将编译后的 `site/` 目录发布至 S3、Cloudflare Pages 或 Vercel。
+::: /step
+::: /steps
+````
+
+::: steps # 复杂部署指南
+::: step "配置环境"
+在 `docmd.config.json` 中定义项目选项。
+
+::: callout info "IDE 提示"
+使用 `defineConfig` 开启配置 Schema 键的 IDE 自动补全。
+:::
+::: /step
+
+::: step "生成生产构建"
+执行构建命令以生成优化后的静态站点。
+
+```bash
+npx @docmd/core build
+```
+::: /step
+
+::: step "部署至基础设施"
+将编译后的 `site/` 目录发布至 S3、Cloudflare Pages 或 Vercel。
+::: /step
+::: /steps
+
+::: callout note "传统列表语法" icon:archive
+现有使用 `1.` 有序列表的文档仍将无缝解析：
+
+```markdown
+::: steps
+1.  **配置环境**
+    在 `docmd.config.json` 中定义选项。
+::: /steps
+```
+:::

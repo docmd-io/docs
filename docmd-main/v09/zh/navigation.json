@@ -150,10 +150,6 @@
           {
             "title": "高级格式",
             "path": "/content/syntax/advanced"
-          },
-          {
-            "title": "MDX 语法",
-            "path": "/content/syntax/mdx"
           }
         ]
       },
@@ -223,10 +219,6 @@
             "path": "/content/containers/nested-containers"
           }
         ]
-      },
-      {
-        "title": "MDX 组件",
-        "path": "/content/mdx"
       },
       {
         "title": "无样式页面",
@@ -395,10 +387,6 @@
       {
         "title": "GitHub Action",
         "path": "/deployment/github-action"
-      },
-      {
-        "title": "生产服务器",
-        "path": "/deployment/docmd-serve"
       },
       {
         "title": "Docker 镜像",

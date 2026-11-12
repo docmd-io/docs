@@ -1,0 +1,92 @@
+---
+title: "docmd Docs — Offizielle Dokumentation, Anleitungen & API-Referenz"
+description: "Open-Source Dokumentations-Compiler. Eine Markdown-Quelle, ein Befehl, generiert Website, Suche, KI-Kontext, Agent-Protokolle und Wissensformate. Alles zusammen."
+titleAppend: false
+---
+
+::: hero
+
+# docmd
+
+Dokumentation für Menschen und Maschinen. Ein Befehl kompiliert Markdown zu Website, Suchindex, KI-Kontext und Wissensformaten, keine Konfiguration nötig.
+
+::: button "Erste Schritte" ./getting-started/quick-start.md icon:rocket ::: /button ::: button "GitHub" external:https://github.com/docmd-io/docmd color:#24292e icon:github ::: /button
+
+:::
+
+## Übersicht
+
+docmd ist ein Open-Source Dokumentations-Compiler. Er nimmt Ihre Markdown-Dateien und generiert einen vollständigen Dokumentations-Stack, Website, Suche, KI-Kontext und mehr, in einem einzigen Build.
+
+::: tabs
+== tab "npm" icon:box
+```bash
+npx @docmd/core dev
+```
+== tab "pnpm" icon:boxes
+```bash
+pnpm dlx @docmd/core dev
+```
+== tab "yarn" icon:scroll
+```bash
+yarn dlx @docmd/core dev
+```
+== tab "Bun" icon:zap
+```bash
+bunx @docmd/core dev
+```
+:::
+
+Führen Sie diesen einzelnen Befehl aus. Die Engine erstellt Ihre Website, generiert die Navigation und aktiviert die Suche automatisch.
+
+## Kernfunktionen
+
+Alles, was für eine solide Dokumentation benötigt wird, ist bereits integriert. Keine zusätzlichen Plugins für die Basisfunktionen erforderlich.
+
+::: grids
+    ::: grid
+        ::: card "Sofortiges Setup" icon:rocket
+        Beginnen Sie sofort ohne Boilerplate. Die Engine erkennt Dateien automatisch und strukturiert die Navigation in Sekundenschnelle.
+        :::
+    :::
+    ::: grid
+        ::: card "KI-Assistent" icon:sparkles
+        Integrierter RAG-gestützter Chat-Assistent. Liefert sofortige, kontextbezogene Antworten direkt auf Ihrer Dokumentationsseite.
+        :::
+    :::
+    ::: grid
+        ::: card "KI-Kontext" icon:brain-circuit
+        Generiert `llms.txt` und `llms-full.txt` automatisch. Ihre Dokumentation bleibt für KI-Assistenten lesbar.
+        :::
+    :::
+    ::: grid
+        ::: card "Nativer MCP-Server" icon:terminal
+        Integrierter Model Context Protocol Server mit nativen Tools. KI-Agenten abfragen und validieren Ihre Docs über eine lokale stdio-Verbindung, kein Netzwerk, kein externer Dienst.
+        :::
+    :::
+    ::: grid
+        ::: card "OKF-Bundles" icon:database
+        Generiert ein Open Knowledge Format Bundle und einen typisierten Konzeptgraphen für KI-Agenten. Lesen Sie [mehr](external:https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing).
+        :::
+    :::
+    ::: grid
+        ::: card "Lokale Suche" icon:search
+        Schnelle, clientseitige Volltextsuche betrieben von MiniSearch. Funktioniert direkt nach der Installation über Versionen und Sprachen hinweg.
+        :::
+    :::
+    ::: grid
+        ::: card "Live-Vorschau" icon:monitor
+        Rendern Sie Markdown sofort im Browser mit der `docmd.compile` API. Nutzen Sie Live-Editoren, CMS-Vorschauen und In-App-Dokumentation.
+        :::
+    :::
+    ::: grid
+        ::: card "Native Übersetzung" icon:globe
+        Erstklassige i18n-Unterstützung. Bietet sprachenbezogenes Routing, individuelle Suchindizes und übersetzte UI-Strings.
+        :::
+    :::
+:::
+
+::: callout info "Umfangreiche Content-Container" icon:info
+Gehen Sie über Standard-Markdown hinaus. Verwenden Sie strukturierte visuelle Muster wie Schritte, Tabs, Karten, Raster und Callouts direkt in Ihrem Text.
+::: button "Container erkunden" ./content/containers/index.md icon:blocks
+:::

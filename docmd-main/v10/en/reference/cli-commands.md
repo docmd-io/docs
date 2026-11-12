@@ -1,0 +1,222 @@
+---
+title: "CLI Commands"
+description: "Command-line interface reference for docmd, commands, flags, and options for building and managing documentation."
+---
+
+## Commands Overview
+
+| Command | Technical Function |
+| :--- | :--- |
+| [`npx @docmd/core init`](#npx-docmdcore-init) | Initialise a new documentation workspace. |
+| [`npx @docmd/core dev`](#npx-docmdcore-dev) | Launch local development server with hot-reloading. |
+| [`npx @docmd/core build`](#npx-docmdcore-build) | Compile production-ready static site. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Build once and serve the site in production with compression and health probes. |
+| [`npx @docmd/core live`](#npx-docmdcore-live) | Launch browser-based Live Editor environment. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active `dev` and `serve` servers. |
+| [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment manifests and container files. |
+| [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configurations or migrate from third-party tools. |
+| [`npx @docmd/core validate`](#npx-docmdcore-validate) | Run link validation and check Markdown document integrity. |
+| [`npx @docmd/core doctor`](#npx-docmdcore-doctor) | Run pre-flight environment diagnostics and inspect dependencies. |
+| [`npx @docmd/core mcp`](#npx-docmdcore-mcp) | Execute Model Context Protocol (MCP) server over `stdio`. |
+| [`npx @docmd/core add <plugin>`](#npx-docmdcore-add-plugin) | Install and configure docmd plugins. |
+| [`npx @docmd/core remove <plugin>`](#npx-docmdcore-remove-plugin) | Uninstall plugins and remove configuration entries. |
+
+## Global Options
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--config <path>` | `-c` | Specify custom path to configuration file (default: `docmd.config.json`). |
+| `--verbose` | `-V` | Output detailed execution logs. |
+| `--version` | `-v` | Output installed package version. |
+| `--help` | `-h` | Output command CLI help instructions. |
+| `--cwd <path>` | - | Override target working directory path. |
+
+## `npx @docmd/core init`
+
+Initialise a documentation repository layout inside the working directory.
+
+```bash
+npx @docmd/core init
+```
+
+Generates:
+* `docs/index.md`, Default landing page.
+* `docmd.config.json`, Standard configuration options.
+* Updated `package.json` build scripts.
+
+## `npx @docmd/core dev`
+
+Launch local development server with real-time hot-reloading.
+
+```bash
+npx @docmd/core dev [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--port <number>` | `-p` | Specify web server port (default: `3000`). |
+| `--host <address>` | - | Specify network interface to bind (default: `127.0.0.1`; `0.0.0.0` for all/LAN). |
+| `--config <path>` | `-c` | Custom path to configuration file. |
+
+## `npx @docmd/core build`
+
+Compile a production static site into your configured output directory (`site/`).
+
+```bash
+npx @docmd/core build [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--offline` | - | Rewrite asset and link paths to `.html` relative files for local file system browsing. |
+| `--config <path>` | `-c` | Custom path to configuration file. |
+
+## `npx @docmd/core serve`
+
+Build the site once and serve it in production mode: fixed port, Gzip compression, no file watcher, no live reload, and container health probes. See [Production Server](../deployment/docmd-serve) for the `serve` config block, plugin actions and MCP over HTTP.
+
+```bash
+npx @docmd/core serve [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--host <address>` | - | Interface to bind (default: `serve.host`, `DOCMD_HOST`, then `127.0.0.1`; `0.0.0.0` for container / LAN). |
+| `--port <number>` | `-p` | Port to listen on (default: `serve.port`, `PORT`, then `3000`). Exits with code 1 if it is in use. |
+| `--config <path>` | `-c` | Custom path to configuration file. |
+
+::: callout info "Container Health Probes (/healthz)" icon:activity
+`docmd serve` exposes an automatic `GET /healthz` endpoint returning `{"status":"ok","version":"..."}` with HTTP 200 and `Cache-Control: no-store`. Use this endpoint for Docker `HEALTHCHECK`, Kubernetes liveness and readiness probes, and cloud load balancers.
+:::
+## `npx @docmd/core live`
+
+Launch browser-based Live Editor environment.
+
+```bash
+npx @docmd/core live [options]
+```
+
+| Parameter Flag | Technical Description |
+| :--- | :--- |
+| `--build-only` | Compile standalone Live Editor bundle without starting preview web server. |
+
+## `npx @docmd/core stop`
+
+Terminate running development or production servers.
+
+```bash
+npx @docmd/core stop [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--port <number>` | `-p` | Terminate process running on specified port. |
+| `--force` | `-f` | Kill processes running on standard ports (3000, 3001, 8080, 8081). |
+
+## `npx @docmd/core deploy`
+
+Generate deployment manifests and configuration files.
+
+```bash
+npx @docmd/core deploy [options]
+```
+
+| Parameter Flag | Technical Description |
+| :--- | :--- |
+| `--docker` | Emit multi-stage `Dockerfile` and `.dockerignore`. |
+| `--nginx` | Emit production `nginx.conf`. |
+| `--caddy` | Emit `Caddyfile`. |
+| `--github-pages` | Emit `.github/workflows/deploy.yml`. |
+| `--vercel` | Emit `vercel.json`. |
+| `--netlify` | Emit `netlify.toml`. |
+| `--force` | Overwrite existing deployment manifests. |
+
+## `npx @docmd/core migrate`
+
+Migrate configurations from legacy versions or third-party engines.
+
+```bash
+npx @docmd/core migrate [options]
+```
+
+Option flags:
+* `--upgrade`: Translate legacy pre-0.7.x configuration keys in place.
+* `--dry-run`: Preview migration changes without modifying disk contents.
+
+## `npx @docmd/core validate`
+
+Validate internal link targets and document structure across Markdown sources.
+
+```bash
+npx @docmd/core validate [options]
+```
+
+| Parameter Flag | Technical Description |
+| :--- | :--- |
+| `--json` | Output validation errors as machine-readable JSON for CI integration. |
+
+## `npx @docmd/core doctor`
+
+Run pre-flight environment diagnostics, validate navigation routes and assets, and inspect plugin/template states. Automatically discovers configuration files without requiring `--config`.
+
+```bash
+npx @docmd/core doctor [options]
+```
+
+| Parameter Flag | Technical Description |
+| :--- | :--- |
+| `--config <path>` | Path to non-default configuration file. |
+| `--fix` | Auto-install missing official plugins or templates using detected package manager. |
+| `--json` | Output diagnostic report in machine-readable JSON format for CI and automation. |
+
+`doctor` runs non-destructive diagnostic audits without build side effects:
+* **Environment Verification**: Audits Node.js runtime (v18+, recommends v20+), operating system, system architecture, and package manager (`pnpm`, `npm`, `yarn`, `bun`).
+* **Source & Asset Integrity**: Verifies documentation source directory, checks configured logos and favicons exist on disk, and validates banner images.
+* **Navigation Route Checking**: Validates all route targets declared in `navigation.json` against actual Markdown/MDX files on disk.
+* **Plugin & Template Auditing**: Identifies installed vs missing plugins and templates, and executes custom plugin diagnostic hooks (`onDoctorCheck`).
+* **Automated Remediation**: Passing `--fix` automatically runs your package manager to install missing official dependencies and resolves issues with exit code 0.
+
+
+## `npx @docmd/core mcp`
+
+Execute Model Context Protocol (MCP) server over `stdio` for agentic integrations.
+
+```bash
+npx @docmd/core mcp
+```
+
+```json "claude_desktop_config.json"
+{
+  "mcpServers": {
+    "docmd": {
+      "command": "npx",
+      "args": ["-y", "@docmd/core", "mcp"]
+    }
+  }
+}
+```
+
+## `npx @docmd/core add <plugin>`
+
+Install and configure official or third-party plugins.
+
+```bash
+npx @docmd/core add <plugin-name>
+```
+
+| Command Example | Technical Function |
+| :--- | :--- |
+| `npx @docmd/core add analytics` | Install `@docmd/plugin-analytics`. |
+| `npx @docmd/core add search` | Install `@docmd/plugin-search`. |
+
+## `npx @docmd/core remove <plugin>`
+
+Uninstall plugins and clean up corresponding `docmd.config.json` configuration blocks.
+
+```bash
+npx @docmd/core remove <plugin-name>
+```
+
+::: callout tip "Agentic Terminal Logging" icon:sparkles
+docmd formats CLI output using structured terminal logging to simplify parsing by automated CI jobs and AI dev agents.
+:::

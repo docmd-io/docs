@@ -10,9 +10,9 @@ description: "docmd 命令行参考：所有可用命令与选项。"
 | [`npx @docmd/core init`](#npx-docmdcore-init) | 初始化一个新的文档项目 |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | 启动带热刷新的开发服务器 |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | 生成可用于生产的静态站点 |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | 一次性构建并在生产环境中运行站点，支持压缩与健康检查探针 |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | 启动带压缩与健康检查的生产级静态 Web 服务器 |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | 启动浏览器版 Live Editor |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 `dev` 与 `serve` 服务器 |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 dev 或 serve 服务器 |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | 生成部署配置 |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | 升级旧版配置或从其他工具迁移 |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | 校验链接并检查文档文件 |
@@ -73,7 +73,9 @@ npx @docmd/core build [options]
 
 ## `npx @docmd/core serve`
 
-一次性构建站点并在生产模式下提供服务：固定端口、Gzip 压缩、无文件监听器、无实时热重载以及容器健康检查探针。关于 `serve` 配置块、插件操作以及通过 HTTP 运行 MCP，请参阅[生产服务器](../deployment/docmd-serve)。
+一次性构建并启动用于生产环境的 HTTP Web 服务器，托管已编译的文档（`site/`）。
+
+与 `dev` 不同，`serve` 专为生产部署设计（如 Docker、Kubernetes、VPS）。它不进行文件监控和后台重构，通过 Gzip 与 Deflate 进行静态资源压缩，强制实施严格的生产安全标头（CSP、HSTS），支持干净 URL（Clean URLs），并提供容器健康检查探针（`/healthz`）。
 
 ```bash
 npx @docmd/core serve [options]
@@ -81,8 +83,8 @@ npx @docmd/core serve [options]
 
 | 选项 | 别名 | 说明 |
 |:-------|:------|:------------|
-| `--host <address>` | - | 绑定的网络接口（默认：`serve.host`，`DOCMD_HOST`，然后 `127.0.0.1`；`0.0.0.0` 适用于容器 / 局域网） |
-| `--port <number>` | `-p` | 监听端口（默认：`serve.port`，`PORT`，然后 `3000`）。若端口被占用则以退出码 1 退出。 |
+| `--port <number>` | `-p` | 指定服务器端口（默认：`3000` 或 `serve.port`） |
+| `--host <address>` | - | 绑定的网络接口（默认：`127.0.0.1`；`0.0.0.0` 适用于局域网或 Docker） |
 | `--config <path>` | `-c` | 配置文件路径 |
 
 ::: callout info "容器健康检查探针 (/healthz)" icon:activity
@@ -158,7 +160,7 @@ npx @docmd/core validate [options]
 
 ## `npx @docmd/core doctor`
 
-运行环境预检诊断、校验导航路由与静态资源，并检查插件与模板状态。自动发现配置文件，无需强制指定 `--config`。
+预检命令，报告缺失的插件、损坏的配置以及不匹配的引擎。不写文件、没有构建副作用：纯粹用于诊断。
 
 ```bash
 npx @docmd/core doctor [选项]
@@ -166,16 +168,11 @@ npx @docmd/core doctor [选项]
 
 | 选项 | 说明 |
 |:-------|:------------|
-| `--config <路径>` | 指向非默认配置文件的路径。 |
-| `--fix` | 通过检测到的包管理器自动安装检查中发现缺失的官方插件或模板。 |
-| `--json` | 将完整诊断报告以机器可读的 JSON 格式输出（用于 CI/CD 与自动化运维）。 |
+| `--config <路径>` | 指向非默认 `docmd.config.json`（或 `.ts`/`.js`/`.mjs`）的路径。 |
+| `--fix` | 自动安装 `doctor` 标记为缺失的官方插件或模板。 |
+| `--json` | 将完整报告以机器可读的 JSON 形式输出（用于 CI 和工具）。 |
 
-`doctor` 执行无破坏性的诊断审查，不会产生构建副作用：
-* **环境运行时审计**：检查 Node.js 版本（要求 v18+，推荐 v20+）、操作系统、系统架构以及当前项目的包管理器（`pnpm`、`npm`、`yarn`、`bun`）。
-* **源码与资源完整性**：验证文档源目录存在性，检查配置的 Logo、Favicon 是否真实存在于磁盘上，校验横幅 Banner 图片。
-* **导航路由目标校验**：将 `navigation.json` 中声明的所有路由目标与磁盘上的实际 Markdown/MDX 文件逐一对比验证。
-* **插件与模板健康度**：识别已安装与缺失的插件和模板，并调用插件自定义诊断钩子（`onDoctorCheck`）。
-* **自动化修复**：附带 `--fix` 参数时，自动调用底层包管理器安装缺失的官方依赖，并在全部问题解决后以退出码 0 结束。
+默认情况下，`doctor` 会打印一份人类可读的摘要，涵盖：已安装的 `@docmd/core` 版本、每个已配置的插件（附带版本和 `installed` / `missing` 状态）、当前激活的模板、请求的引擎（`js` 始终启用，`rust` 可选），以及一份自动安装候选清单。带上 `--fix`，它会调用项目所用的包管理器（`pnpm add`、`npm install --save`、`yarn add` 或 `bun add`）来安装这些候选，并在全部解决后以退出码 0 结束。带上 `--json`，同样的数据会作为一个 JSON 对象输出：适合接入 pre-commit 钩子和 CI 闸门。退出码 0 表示项目处于健康状态；非 0 表示即使经过 `--fix` 仍有未解决的问题。
 
 ## `npx @docmd/core mcp`
 

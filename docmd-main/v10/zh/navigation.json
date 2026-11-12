@@ -1,0 +1,660 @@
+[
+  {
+    "title": "概览",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "入门指南",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "快速开始",
+        "path": "/getting-started/quick-start"
+      },
+      {
+        "title": "安装",
+        "path": "/getting-started/installation"
+      },
+      {
+        "title": "项目结构",
+        "path": "/getting-started/project-structure"
+      }
+    ]
+  },
+  {
+    "title": "对比",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "迁移",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
+    "title": "配置",
+    "icon": "settings",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/configuration/overview"
+      },
+      {
+        "title": "零配置",
+        "path": "/configuration/zero-config"
+      },
+      {
+        "title": "布局与界面",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "菜单栏",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "站点横幅",
+        "path": "/configuration/site-banner"
+      },
+      {
+        "title": "导航",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "国际化",
+        "path": "/configuration/localisation",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "翻译后的内容",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI 字符串与 SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "版本管理",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "工作区",
+        "path": "/configuration/workspaces"
+      },
+      {
+        "title": "Cookie 同意",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "安全",
+        "path": "/configuration/security"
+      },
+      {
+        "title": "重定向",
+        "path": "/configuration/redirects"
+      }
+    ]
+  },
+  {
+    "title": "内容编写",
+    "icon": "pencil-line",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Frontmatter",
+        "path": "/content/frontmatter"
+      },
+      {
+        "title": "语法",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "代码块",
+            "path": "/content/syntax/code"
+          },
+          {
+            "title": "图片",
+            "path": "/content/syntax/images"
+          },
+          {
+            "title": "链接",
+            "path": "/content/syntax/linking"
+          },
+          {
+            "title": "高级格式",
+            "path": "/content/syntax/advanced"
+          },
+          {
+            "title": "MDX 语法",
+            "path": "/content/syntax/mdx"
+          }
+        ]
+      },
+      {
+        "title": "容器",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "标注",
+            "path": "/content/containers/callouts"
+          },
+          {
+            "title": "卡片",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "网格",
+            "path": "/content/containers/grids"
+          },
+          {
+            "title": "选项卡",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "Playground 演练场",
+            "path": "/content/containers/playground"
+          },
+          {
+            "title": "步骤",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "可折叠",
+            "path": "/content/containers/collapsible"
+          },
+          {
+            "title": "按钮",
+            "path": "/content/containers/buttons"
+          },
+          {
+            "title": "标签",
+            "path": "/content/containers/tags"
+          },
+          {
+            "title": "提示工具",
+            "path": "/content/containers/tooltip"
+          },
+          {
+            "title": "Mermaid 图表",
+            "path": "/content/containers/mermaid"
+          },
+          {
+            "title": "Hero 区块",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL 嵌入",
+            "path": "/content/containers/embed"
+          },
+          {
+            "title": "更新日志",
+            "path": "/content/containers/changelogs"
+          },
+          {
+            "title": "嵌套容器",
+            "path": "/content/containers/nested-containers"
+          }
+        ]
+      },
+      {
+        "title": "MDX 组件",
+        "path": "/content/mdx"
+      },
+      {
+        "title": "无样式页面",
+        "path": "/content/no-style-pages"
+      },
+      {
+        "title": "实时预览",
+        "path": "/content/live-preview"
+      }
+    ]
+  },
+  {
+    "title": "变量与运行时",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览与语法",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "内置变量",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "配置与自定义变量",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "环境变量",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "客户端运行时与个性化",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
+    "title": "主题",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "模板",
+        "path": "/theming/templates"
+      },
+      {
+        "title": "浅色与深色模式",
+        "path": "/theming/light-dark-mode"
+      },
+      {
+        "title": "自定义 CSS 与 JS",
+        "path": "/theming/custom-css-js"
+      },
+      {
+        "title": "图标",
+        "path": "/theming/icons"
+      },
+      {
+        "title": "资源管理",
+        "path": "/theming/assets-management"
+      },
+      {
+        "title": "登录页",
+        "path": "/theming/landing-pages"
+      },
+      {
+        "title": "字体与品牌",
+        "path": "/theming/fonts-branding"
+      },
+      {
+        "title": "Favicon 与元数据",
+        "path": "/theming/favicons-metadata"
+      },
+      {
+        "title": "自定义与变量",
+        "path": "/theming/customisation"
+      }
+    ]
+  },
+  {
+    "title": "插件",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/plugins/usage"
+      },
+      {
+        "title": "搜索",
+        "path": "/plugins/search"
+      },
+      {
+        "title": "AI 助手",
+        "path": "/plugins/ai"
+      },
+      {
+        "title": "Playground 演练场",
+        "path": "/plugins/playground"
+      },
+      {
+        "title": "Git 集成",
+        "path": "/plugins/git"
+      },
+      {
+        "title": "SEO",
+        "path": "/plugins/seo"
+      },
+      {
+        "title": "站点地图",
+        "path": "/plugins/sitemap"
+      },
+      {
+        "title": "分析",
+        "path": "/plugins/analytics"
+      },
+      {
+        "title": "LLMs",
+        "path": "/plugins/llms"
+      },
+      {
+        "title": "OpenAPI",
+        "path": "/plugins/openapi"
+      },
+      {
+        "title": "Mermaid",
+        "path": "/plugins/mermaid"
+      },
+      {
+        "title": "PWA 支持",
+        "path": "/plugins/pwa"
+      },
+      {
+        "title": "Threads",
+        "path": "/plugins/threads"
+      },
+      {
+        "title": "数学公式 (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
+        "title": "OKF Bundles",
+        "path": "/plugins/okf"
+      }
+    ]
+  },
+  {
+    "title": "支撑底层库",
+    "icon": "boxes",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/supporting-libraries/"
+      },
+      {
+        "title": "lite-matter",
+        "path": "/supporting-libraries/lite-matter"
+      },
+      {
+        "title": "lite-mdx",
+        "path": "/supporting-libraries/lite-mdx"
+      },
+      {
+        "title": "lite-template",
+        "path": "/supporting-libraries/lite-template"
+      },
+      {
+        "title": "lite-hl",
+        "path": "/supporting-libraries/lite-hl"
+      },
+      {
+        "title": "embed-lite",
+        "path": "/supporting-libraries/embed-lite"
+      }
+    ]
+  },
+  {
+    "title": "部署",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/deployment"
+      },
+      {
+        "title": "Deployer",
+        "path": "/deployment/deployer"
+      },
+      {
+        "title": "入门模板",
+        "path": "/deployment/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/deployment/github-action"
+      },
+      {
+        "title": "生产服务器",
+        "path": "/deployment/docmd-serve"
+      },
+      {
+        "title": "Docker 镜像",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
+        "title": "Vercel",
+        "path": "/deployment/vercel"
+      },
+      {
+        "title": "Netlify",
+        "path": "/deployment/netlify"
+      },
+      {
+        "title": "Cloudflare Pages",
+        "path": "/deployment/cloudflare-pages"
+      },
+      {
+        "title": "Firebase",
+        "path": "/deployment/firebase"
+      }
+    ]
+  },
+  {
+    "title": "参考",
+    "icon": "code-2",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "CLI 命令",
+        "path": "/reference/cli-commands"
+      },
+      {
+        "title": "浏览器 API",
+        "path": "/reference/browser-api"
+      },
+      {
+        "title": "客户端事件",
+        "path": "/reference/client-side-events"
+      },
+      {
+        "title": "实时编辑器",
+        "path": "/reference/live-api"
+      },
+      {
+        "title": "MCP 服务器",
+        "path": "/reference/mcp-server"
+      },
+      {
+        "title": "Build API",
+        "path": "/reference/build-api"
+      }
+    ]
+  },
+  {
+    "title": "指南",
+    "icon": "book-open",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "概览",
+        "path": "/guides/overview"
+      },
+      {
+        "title": "AI 与自动化",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "AI 助手配置",
+            "path": "/guides/ai/ai-assistant"
+          },
+          {
+            "title": "MCP 与 Agent Skills",
+            "path": "/guides/ai/mcp-and-agent-skills"
+          },
+          {
+            "title": "OKF 知识包",
+            "path": "/guides/ai/okf-bundles"
+          }
+        ]
+      },
+      {
+        "title": "搜索",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "语义搜索",
+            "path": "/guides/search/semantic-search"
+          }
+        ]
+      },
+      {
+        "title": "集成",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "OpenAPI 生成",
+            "path": "/guides/integrations/openapi-generation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "开发",
+    "icon": "hammer",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "环境设置",
+        "path": "/development/setup"
+      },
+      {
+        "title": "引擎与架构",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "引擎概览",
+            "path": "/development/engines/overview"
+          },
+          {
+            "title": "JavaScript 引擎",
+            "path": "/development/engines/js"
+          },
+          {
+            "title": "Rust 引擎",
+            "path": "/development/engines/rust"
+          }
+        ]
+      },
+      {
+        "title": "开发插件",
+        "path": "/development/building-plugins"
+      },
+      {
+        "title": "插件示例",
+        "path": "/development/plugin-examples"
+      },
+      {
+        "title": "开发模板",
+        "path": "/development/building-templates"
+      },
+      {
+        "title": "Node API 参考",
+        "path": "/development/node-api-reference"
+      }
+    ]
+  },
+  {
+    "title": "发布说明",
+    "icon": "package-check",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "v0.9.9 - 变量与个性化运行时引擎、版本化搜索路径、模板解析器与 SPA 路由增强",
+        "path": "/release-notes/0-9-9"
+      },
+      {
+        "title": "v0.9.8 - OpenAPI 可折叠操作与模式约束、LLMs 提示词与分组、链接验证优化及土耳其语国际化",
+        "path": "/release-notes/0-9-8"
+      },
+      {
+        "title": "v0.9.7 - Python 引擎、Gitignore 锚定修复、引擎生命周期与安全加固",
+        "path": "/release-notes/0-9-7"
+      },
+      {
+        "title": "v0.9.6 - 通用容器语法、KaTeX 数学公式修复与 Lucide 图标库升级",
+        "path": "/release-notes/0-9-6"
+      },
+      {
+        "title": "v0.9.5 - AI 自主工具、Threads 讨论重构与模板界面优化",
+        "path": "/release-notes/0-9-5"
+      },
+      {
+        "title": "v0.9.4 - OpenAPI 暗黑模式、AI 配置禁用与测试加速",
+        "path": "/release-notes/0-9-4"
+      },
+      {
+        "title": "v0.9.3 - 离线 Mermaid、OpenAPI 示例与 AI 工具解析器",
+        "path": "/release-notes/0-9-3"
+      },
+      {
+        "title": "v0.9.2 - AI 助手多轮稳定性提升与代码块 UI",
+        "path": "/release-notes/0-9-2"
+      },
+      {
+        "title": "v0.9.1 - 标准化容器引擎与 Mermaid",
+        "path": "/release-notes/0-9-1"
+      },
+      {
+        "title": "v0.9.0 - AI 助手、无头引擎与架构",
+        "path": "/release-notes/0-9-0"
+      }
+    ]
+  },
+  {
+    "title": "贡献",
+    "path": "https://github.com/docmd-io/docmd?tab=contributing-ov-file",
+    "icon": "git-pull-request",
+    "external": true
+  },
+  {
+    "title": "Agent Skills",
+    "path": "https://github.com/docmd-io/docmd-skills",
+    "icon": "bot",
+    "external": true
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd",
+    "icon": "github",
+    "external": true
+  },
+  {
+    "title": "Discussions",
+    "path": "https://github.com/orgs/docmd-io/discussions",
+    "icon": "message-circle",
+    "external": true
+  }
+]

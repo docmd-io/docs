@@ -10,9 +10,9 @@ description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags un
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Einen neuen Dokumentations-Workspace initialisieren. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Lokalen Entwicklungsserver mit Hot-Reloading starten. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Produktionsbereite statische Website kompilieren. |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Einmal kompilieren und die Website im Produktionsmodus mit Komprimierung und Health-Checks bereitstellen. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Produktionsbereiten statischen Webserver mit Komprimierung und Health-Checks starten. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Browserbasierte Live-Editor-Umgebung starten. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive `dev`- und `serve`-Server beenden. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive Entwicklungs- oder Produktionsserver beenden. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Deployment-Manifeste und Containerdateien generieren. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Legacy-Konfigurationen upgraden oder von Drittanbieter-Tools migrieren. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Link-Validierung ausführen und Dokumentenintegrität prüfen. |
@@ -73,7 +73,9 @@ npx @docmd/core build [options]
 
 ## `npx @docmd/core serve`
 
-Kompilieren Sie die Website einmal und stellen Sie sie im Produktionsmodus bereit: fester Port, Gzip-Komprimierung, kein Datei-Watcher, kein Live-Reload und Container-Health-Checks. Siehe [Produktionsserver](../deployment/docmd-serve) für den `serve`-Konfigurationsblock, Plugin-Aktionen und MCP über HTTP.
+Einmal kompilieren und einen produktionsreifen HTTP-Webserver für die erstellte Dokumentation (`site/`) starten.
+
+Im Gegensatz zu `dev` ist `serve` für Produktivumgebungen konzipiert (z. B. Docker, Kubernetes, VPS). Es führt kein Dateiwatching oder Hintergrund-Neukompilieren durch, liefert statische Assets mit Gzip- und Deflate-Komprimierung aus, erzwingt strenge Sicherheits-Header (CSP, HSTS), unterstützt Clean URLs und stellt einen Container-Health-Check (`/healthz`) bereit.
 
 ```bash
 npx @docmd/core serve [options]
@@ -81,8 +83,8 @@ npx @docmd/core serve [options]
 
 | Parameter-Flag | Alias | Technische Beschreibung |
 | :--- | :--- | :--- |
-| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `serve.host`, `DOCMD_HOST`, dann `127.0.0.1`; `0.0.0.0` für Container / LAN). |
-| `--port <number>` | `-p` | Port zum Lauschen (Standard: `serve.port`, `PORT`, dann `3000`). Beendet mit Code 1, falls belegt. |
+| `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000` oder `serve.port`). |
+| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN/Docker). |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
 ::: callout info "Container-Health-Checks (/healthz)" icon:activity
@@ -158,7 +160,7 @@ npx @docmd/core validate [options]
 
 ## `npx @docmd/core doctor`
 
-Pre-Flight-Umgebungsdiagnose ausführen, Navigationspfade und Assets validieren sowie Plugin-/Template-Zustände prüfen. Findet Konfigurationsdateien automatisch auch ohne `--config`.
+Führen Sie Pre-Flight-Umgebungsdiagnosen aus und prüfen Sie Installationszustände von Plugins/Templates.
 
 ```bash
 npx @docmd/core doctor [options]
@@ -167,16 +169,8 @@ npx @docmd/core doctor [options]
 | Parameter-Flag | Technische Beschreibung |
 | :--- | :--- |
 | `--config <path>` | Pfad zu einer nicht standardmäßigen Konfigurationsdatei. |
-| `--fix` | Fehlende offizielle Plugins oder Templates über den erkannten Paketmanager automatisch installieren. |
-| `--json` | Diagnosebericht im maschinenlesbaren JSON-Format für CI und Automatisierung ausgeben. |
-
-`doctor` führt nicht-destruktive Diagnose-Audits ohne Build-Nebeneffekte durch:
-* **Umgebungsprüfung**: Überprüft die Node.js-Laufzeit (v18+, empfiehlt v20+), Betriebssystem, Systemarchitektur und Paketmanager (`pnpm`, `npm`, `yarn`, `bun`).
-* **Quell- und Asset-Integrität**: Prüft das Vorhandensein des Quellverzeichnisses, stellt sicher, dass konfigurierte Logos und Favicons existieren, und validiert Banner-Bilder.
-* **Prüfung von Navigationsrouten**: Gleicht alle in `navigation.json` deklarierten Linkziele mit realen Markdown/MDX-Dateien auf der Festplatte ab.
-* **Plugin- und Template-Audit**: Identifiziert installierte gegenüber fehlenden Komponenten und führt benutzerdefinierte Diagnose-Hooks von Plugins aus (`onDoctorCheck`).
-* **Automatische Behebung**: Bei Übergabe von `--fix` wird automatisch der passende Paketmanager aufgerufen, um fehlende offizielle Abhängigkeiten zu installieren und die Prüfung mit Exit-Code 0 abzuschließen.
-
+| `--fix` | Fehlende offizielle Plugins oder Templates, die bei der Prüfung identifiziert wurden, automatisch installieren. |
+| `--json` | Diagnosebericht im maschinenlesbaren JSON-Format ausgeben. |
 
 ## `npx @docmd/core mcp`
 

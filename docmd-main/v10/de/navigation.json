@@ -1,0 +1,660 @@
+[
+  {
+    "title": "Übersicht",
+    "path": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Erste Schritte",
+    "icon": "rocket",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "Schnellstart",
+        "path": "/getting-started/quick-start"
+      },
+      {
+        "title": "Installation",
+        "path": "/getting-started/installation"
+      },
+      {
+        "title": "Projektstruktur",
+        "path": "/getting-started/project-structure"
+      }
+    ]
+  },
+  {
+    "title": "Vergleich",
+    "path": "/comparison",
+    "icon": "scale"
+  },
+  {
+    "title": "Migration",
+    "icon": "arrow-right-left",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/migration/overview"
+      },
+      {
+        "title": "Docusaurus",
+        "path": "/migration/docusaurus"
+      },
+      {
+        "title": "MkDocs",
+        "path": "/migration/mkdocs"
+      },
+      {
+        "title": "VitePress",
+        "path": "/migration/vitepress"
+      },
+      {
+        "title": "Astro Starlight",
+        "path": "/migration/starlight"
+      }
+    ]
+  },
+  {
+    "title": "Konfiguration",
+    "icon": "settings",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/configuration/overview"
+      },
+      {
+        "title": "Zero-Config",
+        "path": "/configuration/zero-config"
+      },
+      {
+        "title": "Layout & UI",
+        "path": "/configuration/layout-ui"
+      },
+      {
+        "title": "Menüleiste",
+        "path": "/configuration/menubar"
+      },
+      {
+        "title": "Site-Banner",
+        "path": "/configuration/site-banner"
+      },
+      {
+        "title": "Navigation",
+        "path": "/configuration/navigation"
+      },
+      {
+        "title": "Lokalisierung",
+        "path": "/configuration/localisation",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Übersetzte Inhalte",
+            "path": "/configuration/localisation/translated-content"
+          },
+          {
+            "title": "UI-Strings & SEO",
+            "path": "/configuration/localisation/ui-strings"
+          }
+        ]
+      },
+      {
+        "title": "Versionierung",
+        "path": "/configuration/versioning"
+      },
+      {
+        "title": "Workspaces",
+        "path": "/configuration/workspaces"
+      },
+      {
+        "title": "Cookie-Zustimmung",
+        "path": "/configuration/cookie-consent"
+      },
+      {
+        "title": "Sicherheit",
+        "path": "/configuration/security"
+      },
+      {
+        "title": "Weiterleitungen",
+        "path": "/configuration/redirects"
+      }
+    ]
+  },
+  {
+    "title": "Inhalte schreiben",
+    "icon": "pencil-line",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Frontmatter",
+        "path": "/content/frontmatter"
+      },
+      {
+        "title": "Syntax",
+        "path": "/content/syntax/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Code-Blöcke",
+            "path": "/content/syntax/code"
+          },
+          {
+            "title": "Bilder",
+            "path": "/content/syntax/images"
+          },
+          {
+            "title": "Verlinken",
+            "path": "/content/syntax/linking"
+          },
+          {
+            "title": "Erweiterte Formatierung",
+            "path": "/content/syntax/advanced"
+          },
+          {
+            "title": "MDX-Syntax",
+            "path": "/content/syntax/mdx"
+          }
+        ]
+      },
+      {
+        "title": "Container",
+        "path": "/content/containers/",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Hinweise",
+            "path": "/content/containers/callouts"
+          },
+          {
+            "title": "Karten",
+            "path": "/content/containers/cards"
+          },
+          {
+            "title": "Raster",
+            "path": "/content/containers/grids"
+          },
+          {
+            "title": "Tabs",
+            "path": "/content/containers/tabs"
+          },
+          {
+            "title": "Playground",
+            "path": "/content/containers/playground"
+          },
+          {
+            "title": "Schritte",
+            "path": "/content/containers/steps"
+          },
+          {
+            "title": "Einklappbar",
+            "path": "/content/containers/collapsible"
+          },
+          {
+            "title": "Schaltflächen",
+            "path": "/content/containers/buttons"
+          },
+          {
+            "title": "Tags",
+            "path": "/content/containers/tags"
+          },
+          {
+            "title": "Tooltips",
+            "path": "/content/containers/tooltip"
+          },
+          {
+            "title": "Mermaid-Diagramme",
+            "path": "/content/containers/mermaid"
+          },
+          {
+            "title": "Hero-Bereiche",
+            "path": "/content/containers/hero"
+          },
+          {
+            "title": "URL-Einbettungen",
+            "path": "/content/containers/embed"
+          },
+          {
+            "title": "Changelogs",
+            "path": "/content/containers/changelogs"
+          },
+          {
+            "title": "Verschachtelte Container",
+            "path": "/content/containers/nested-containers"
+          }
+        ]
+      },
+      {
+        "title": "MDX-Komponenten",
+        "path": "/content/mdx"
+      },
+      {
+        "title": "Seiten ohne Stil",
+        "path": "/content/no-style-pages"
+      },
+      {
+        "title": "Live-Vorschau",
+        "path": "/content/live-preview"
+      }
+    ]
+  },
+  {
+    "title": "Variablen & Laufzeit",
+    "icon": "braces",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht & Syntax",
+        "path": "/variables/overview"
+      },
+      {
+        "title": "Integrierte Variablen",
+        "path": "/variables/built-in-variables"
+      },
+      {
+        "title": "Konfigurations- & benutzerdefinierte Variablen",
+        "path": "/variables/config-variables"
+      },
+      {
+        "title": "Umgebungsvariablen",
+        "path": "/variables/environment-variables"
+      },
+      {
+        "title": "Client-Laufzeit & Personalisierung",
+        "path": "/variables/runtime-personalisation"
+      }
+    ]
+  },
+  {
+    "title": "Theming",
+    "icon": "palette",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Templates",
+        "path": "/theming/templates"
+      },
+      {
+        "title": "Light & Dark Mode",
+        "path": "/theming/light-dark-mode"
+      },
+      {
+        "title": "Custom CSS & JS",
+        "path": "/theming/custom-css-js"
+      },
+      {
+        "title": "Icons",
+        "path": "/theming/icons"
+      },
+      {
+        "title": "Assets Management",
+        "path": "/theming/assets-management"
+      },
+      {
+        "title": "Landing-Pages",
+        "path": "/theming/landing-pages"
+      },
+      {
+        "title": "Fonts & Branding",
+        "path": "/theming/fonts-branding"
+      },
+      {
+        "title": "Favicons & Meta",
+        "path": "/theming/favicons-metadata"
+      },
+      {
+        "title": "Anpassung & Variablen",
+        "path": "/theming/customisation"
+      }
+    ]
+  },
+  {
+    "title": "Plugins",
+    "icon": "puzzle",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/plugins/usage"
+      },
+      {
+        "title": "Suche",
+        "path": "/plugins/search"
+      },
+      {
+        "title": "KI-Assistent",
+        "path": "/plugins/ai"
+      },
+      {
+        "title": "Playground",
+        "path": "/plugins/playground"
+      },
+      {
+        "title": "Git-Integration",
+        "path": "/plugins/git"
+      },
+      {
+        "title": "SEO",
+        "path": "/plugins/seo"
+      },
+      {
+        "title": "Sitemap",
+        "path": "/plugins/sitemap"
+      },
+      {
+        "title": "Analyse",
+        "path": "/plugins/analytics"
+      },
+      {
+        "title": "LLMs",
+        "path": "/plugins/llms"
+      },
+      {
+        "title": "OpenAPI",
+        "path": "/plugins/openapi"
+      },
+      {
+        "title": "Mermaid",
+        "path": "/plugins/mermaid"
+      },
+      {
+        "title": "PWA-Unterstützung",
+        "path": "/plugins/pwa"
+      },
+      {
+        "title": "Threads",
+        "path": "/plugins/threads"
+      },
+      {
+        "title": "Math (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
+        "title": "OKF-Bundles",
+        "path": "/plugins/okf"
+      }
+    ]
+  },
+  {
+    "title": "Unterstützende Bibliotheken",
+    "icon": "boxes",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/supporting-libraries/"
+      },
+      {
+        "title": "lite-matter",
+        "path": "/supporting-libraries/lite-matter"
+      },
+      {
+        "title": "lite-mdx",
+        "path": "/supporting-libraries/lite-mdx"
+      },
+      {
+        "title": "lite-template",
+        "path": "/supporting-libraries/lite-template"
+      },
+      {
+        "title": "lite-hl",
+        "path": "/supporting-libraries/lite-hl"
+      },
+      {
+        "title": "embed-lite",
+        "path": "/supporting-libraries/embed-lite"
+      }
+    ]
+  },
+  {
+    "title": "Bereitstellung",
+    "icon": "upload-cloud",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/deployment"
+      },
+      {
+        "title": "Deployer",
+        "path": "/deployment/deployer"
+      },
+      {
+        "title": "Starter-Template",
+        "path": "/deployment/starter-template"
+      },
+      {
+        "title": "GitHub Action",
+        "path": "/deployment/github-action"
+      },
+      {
+        "title": "Produktionsserver",
+        "path": "/deployment/docmd-serve"
+      },
+      {
+        "title": "Docker-Image",
+        "path": "/deployment/docker"
+      },
+      {
+        "title": "NGINX",
+        "path": "/deployment/nginx"
+      },
+      {
+        "title": "Caddy",
+        "path": "/deployment/caddy"
+      },
+      {
+        "title": "Vercel",
+        "path": "/deployment/vercel"
+      },
+      {
+        "title": "Netlify",
+        "path": "/deployment/netlify"
+      },
+      {
+        "title": "Cloudflare Pages",
+        "path": "/deployment/cloudflare-pages"
+      },
+      {
+        "title": "Firebase",
+        "path": "/deployment/firebase"
+      }
+    ]
+  },
+  {
+    "title": "Referenz",
+    "icon": "code-2",
+    "collapsible": false,
+    "children": [
+      {
+        "title": "CLI-Befehle",
+        "path": "/reference/cli-commands"
+      },
+      {
+        "title": "Browser-API",
+        "path": "/reference/browser-api"
+      },
+      {
+        "title": "Client-seitige Events",
+        "path": "/reference/client-side-events"
+      },
+      {
+        "title": "Live-Editor",
+        "path": "/reference/live-api"
+      },
+      {
+        "title": "MCP-Server",
+        "path": "/reference/mcp-server"
+      },
+      {
+        "title": "Build-API",
+        "path": "/reference/build-api"
+      }
+    ]
+  },
+  {
+    "title": "Leitfäden",
+    "icon": "book-open",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Übersicht",
+        "path": "/guides/overview"
+      },
+      {
+        "title": "KI & Automatisierung",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Einrichtung des KI-Assistenten",
+            "path": "/guides/ai/ai-assistant"
+          },
+          {
+            "title": "MCP & Agent Skills",
+            "path": "/guides/ai/mcp-and-agent-skills"
+          },
+          {
+            "title": "OKF-Wissenspakete",
+            "path": "/guides/ai/okf-bundles"
+          }
+        ]
+      },
+      {
+        "title": "Suche",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Semantische Suche",
+            "path": "/guides/search/semantic-search"
+          }
+        ]
+      },
+      {
+        "title": "Integrationen",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "OpenAPI-Generierung",
+            "path": "/guides/integrations/openapi-generation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Entwicklung",
+    "icon": "hammer",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "Setup",
+        "path": "/development/setup"
+      },
+      {
+        "title": "Engines & Architektur",
+        "collapsible": true,
+        "children": [
+          {
+            "title": "Engines-Übersicht",
+            "path": "/development/engines/overview"
+          },
+          {
+            "title": "JavaScript-Engine",
+            "path": "/development/engines/js"
+          },
+          {
+            "title": "Rust-Engine",
+            "path": "/development/engines/rust"
+          }
+        ]
+      },
+      {
+        "title": "Plugins entwickeln",
+        "path": "/development/building-plugins"
+      },
+      {
+        "title": "Plugin-Beispiele",
+        "path": "/development/plugin-examples"
+      },
+      {
+        "title": "Templates entwickeln",
+        "path": "/development/building-templates"
+      },
+      {
+        "title": "Node-API-Referenz",
+        "path": "/development/node-api-reference"
+      }
+    ]
+  },
+  {
+    "title": "Release Notes",
+    "icon": "package-check",
+    "collapsible": true,
+    "children": [
+      {
+        "title": "v0.9.9 - Variablen- & Personalisierungs-Engine, Versionierte Suchpfade, Template-Resolver & SPA-Routing",
+        "path": "/release-notes/0-9-9"
+      },
+      {
+        "title": "v0.9.8 - OpenAPI ausklappbare Operationen & Schema-Einschränkungen, LLMs-Prompt & Gruppierung, Link-Validierung & Türkische Lokalisierung",
+        "path": "/release-notes/0-9-8"
+      },
+      {
+        "title": "v0.9.7 - Python-Engine, Gitignore-Anker-Fix, Engine-Lebenszyklus & Sicherheitshärtung",
+        "path": "/release-notes/0-9-7"
+      },
+      {
+        "title": "v0.9.6 - Universelle Container-Syntax, KaTeX-Math-Fix & Lucide-Icon-Aktualisierung",
+        "path": "/release-notes/0-9-6"
+      },
+      {
+        "title": "v0.9.5 - Autonome KI-Tools, Threads-Modernisierung & Template-Verfeinerungen",
+        "path": "/release-notes/0-9-5"
+      },
+      {
+        "title": "v0.9.4 - OpenAPI Dark Mode, KI-Deaktivierung & Test-Beschleunigung",
+        "path": "/release-notes/0-9-4"
+      },
+      {
+        "title": "v0.9.3 - Offline Mermaid, OpenAPI-Beispiele & KI-Tool-Parser",
+        "path": "/release-notes/0-9-3"
+      },
+      {
+        "title": "v0.9.2 - KI-Assistent Multi-Turn-Stabilisierung & Code-Block-UI",
+        "path": "/release-notes/0-9-2"
+      },
+      {
+        "title": "v0.9.1 - Standardisierte Container-Engine & Mermaid",
+        "path": "/release-notes/0-9-1"
+      },
+      {
+        "title": "v0.9.0 - KI-Assistent, Headless Engine & Architektur",
+        "path": "/release-notes/0-9-0"
+      }
+    ]
+  },
+  {
+    "title": "Mitwirken",
+    "path": "https://github.com/docmd-io/docmd?tab=contributing-ov-file",
+    "icon": "git-pull-request",
+    "external": true
+  },
+  {
+    "title": "Agent Skills",
+    "path": "https://github.com/docmd-io/docmd-skills",
+    "icon": "bot",
+    "external": true
+  },
+  {
+    "title": "GitHub",
+    "path": "https://github.com/docmd-io/docmd",
+    "icon": "github",
+    "external": true
+  },
+  {
+    "title": "Discussions",
+    "path": "https://github.com/orgs/docmd-io/discussions",
+    "icon": "message-circle",
+    "external": true
+  }
+]
