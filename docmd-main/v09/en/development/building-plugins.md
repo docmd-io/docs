@@ -79,6 +79,7 @@ The `capabilities` array dictates which hooks your plugin is allowed to use.
 | `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | Build |
 | `post-build`| `onPostBuild` | Post-Build |
 | `dev` | `onDevServerReady` | Dev Server |
+| `server` | `onServerReady` | Dev Server and `docmd serve` |
 | `assets` | `getAssets` | Output |
 | `actions` | `actions` | Interactive |
 | `events` | `events` | Interactive |
@@ -195,6 +196,7 @@ Docmd provides deep integration hooks. They allow plugins to manipulate configur
 | :--- | :--- | :--- |
 | **`onConfigResolved(config)`** | Reads or modifies the active config right after initialisation. | `void` or `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | Exposes the raw Node.js server during `npx @docmd/core dev`. | `void` or `Promise<void>` |
+| **`onServerReady(handle)`** | Called once the server hosting actions is ready, under `dev` and under [`serve`](../deployment/docmd-serve#plugin-actions). Requires the `server` capability. See [Server handle](#server-handle-onserverready). | `void` or `Promise<void>` |
 | **`onBeforeParse(src, frontmatter, filePath?)`** | Pre-processes raw markdown string data immediately before parsing. | `string` or `Promise<string>` |
 | **`onAfterParse(html, frontmatter, filePath?)`** | Post-processes generated HTML representing the markdown body. | `string` or `Promise<string>` |
 | **`onBeforeBuild(ctx)`** | Called after all markdown is parsed but before HTML generation. Used for heavy pre-computation. | `void` or `Promise<void>` |
@@ -329,7 +331,7 @@ export default {
 
 ## WebSocket RPC Actions
 
-Plugins can register **action handlers** and **event handlers** that run on the dev server. They are callable from the browser via the `window.docmd` API.
+Plugins can register **action handlers** and **event handlers** that run on the server: always under `dev`, and under [`docmd serve`](../deployment/docmd-serve#plugin-actions) when `serve.actions` is enabled. They are callable from the browser via the `window.docmd` API.
 
 ```javascript
 export default {
@@ -361,19 +363,72 @@ The `ctx` (ActionContext) provides:
 | Method | Description |
 | :--- | :--- |
 | `ctx.readFile(path)` | Read a file relative to the project root. |
-| `ctx.writeFile(path, content)` | Write a file (triggers rebuild + reload). |
+| `ctx.writeFile(path, content)` | Write a file. Under `dev` this triggers a rebuild and reload; under `serve` the file is rebuilt and clients get a `system:rebuilt` event. |
 | `ctx.readFileLines(path)` | Read a file as an array of lines. |
 | `ctx.broadcast(event, data)` | Push an event to all connected browsers. |
 | `ctx.runWorkerTask(module, fn, args)` | Offload heavy CPU tasks to the worker pool. |
 | `ctx.source` | Source editing tools for block-level markdown manipulation. |
 | `ctx.projectRoot` | Absolute path to the project root. |
 | `ctx.config` | Current docmd site configuration. |
+| `ctx.mode` | `'dev'` or `'serve'`: which command hosts this call. |
+| `ctx.caller` | Who is calling: see [The caller](#the-caller-ctxcaller). |
+| `ctx.requestRebuild(files?)` | Rebuild the given source files (all of them without an argument). Resolves when that build finishes. Use it for files you changed outside `ctx.writeFile`; those writes are rebuilt for you. |
 
 All file operations are sandboxed to the project root.
 
-::: callout info title:"Dev Mode Only "
-The WebSocket RPC system is only active during `npx @docmd/core dev`. Production builds do not include the API client or server-side action handling.
+::: callout info title:"Live server only "
+Actions run only while a server hosts them: `npx @docmd/core dev`, or `npx @docmd/core serve` with `serve.actions.enabled`. A static `docmd build` includes neither the API client nor any action handling.
 :::
+
+### The caller (`ctx.caller`)
+
+Every action and event handler receives `ctx.caller`, built once per WebSocket connection from its upgrade request:
+
+| Field | Description |
+| :--- | :--- |
+| `transport` | `'websocket'`, or `'local'` when a host called the dispatcher directly. |
+| `headers` | Request headers, lower-cased. `cookie` and `set-cookie` are removed. |
+| `origin` | The `Origin` the server accepted; can be `null` under `dev`, never under `serve`. |
+| `remoteAddress` | The peer address. Behind a proxy this is the proxy. |
+| `connectionId` | Opaque id, stable for one browser connection. |
+| `connectedAt` | When the connection was accepted (epoch ms). |
+| `identity` | Value of the server's trusted identity header (`serve.actions.identityHeader`), or `null`. Always `null` under `dev`. |
+
+docmd passes `headers` through without checking them: any client can send any header. Only `identity` comes from a header the site owner declared trusted. Under `serve`, `ctx.writeFile` and the `ctx.source` edits refuse to run when `identity` is `null`, so a plugin cannot write anonymously by mistake. If your plugin reads its own identity header instead, check `ctx.mode === 'serve'` and document that only a trusted reverse proxy may set it.
+
+```javascript
+actions: {
+  "my-plugin:save-note": async (payload, ctx) => {
+    const author = ctx.caller.identity || (ctx.mode === 'dev' ? 'local' : null);
+    if (!author) throw new Error('Sign in to add notes');
+    // ...
+  }
+}
+```
+
+### Server handle (`onServerReady`)
+
+A plugin with the `server` capability can implement `onServerReady(handle)`. The host calls it once, before it accepts any WebSocket connection, under `dev` and under `serve` with actions on. Under `serve`, a hook that throws stops the server from starting.
+
+| Member | Description |
+| :--- | :--- |
+| `handle.mode` | `'dev'` or `'serve'`. |
+| `handle.projectRoot` | Absolute path to the project root. |
+| `handle.config` | Current docmd site configuration. |
+| `handle.rebuild(files?)` | Rebuild the given source files, or everything. Overlapping requests are merged into one build. Rejects if the build fails. |
+| `handle.broadcast(event, data)` | Push an event to every connected client. |
+| `handle.onShutdown(fn)` | Register a callback the server awaits during graceful shutdown (stop timers, flush data). |
+
+```javascript
+export default {
+  plugin: { name: "my-sync", version: "1.0.0", capabilities: ["server"] },
+
+  onServerReady(handle) {
+    const timer = setInterval(() => handle.rebuild(), 60_000);
+    handle.onShutdown(() => clearInterval(timer));
+  }
+};
+```
 
 ## Best Practices
 
