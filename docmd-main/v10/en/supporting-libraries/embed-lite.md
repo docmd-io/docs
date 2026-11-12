@@ -63,7 +63,3 @@ Converts a supported URL into responsive iframe markup.
 ### `isEmbeddable(url)`
 
 Returns `true` if the URL matches a supported provider pattern.
-
-## License
-
-[MIT](https://github.com/mgks/embed-lite/blob/main/LICENSE) © [docmd.io](https://docmd.io)

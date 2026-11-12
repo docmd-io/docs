@@ -33,7 +33,7 @@ Esto abre `http://localhost:3000`. Su documentación ahora está en vivo.
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "Conmutación por error automática de puerto" icon:info
-Si el puerto `3000` está actualmente en uso, `docmd` detecta y se vincula automáticamente al siguiente puerto disponible (por ejemplo, `3001`).
+Si el puerto `3000` está actualmente en uso, `docmd` detecta y se vincula automáticamente al siguiente puerto disponible (por ejemplo, `3001`). Pase `--no-open` para ejecutar el servidor de desarrollo sin abrir el navegador predeterminado.
 :::
 
 ### 2. Resolución automática de características

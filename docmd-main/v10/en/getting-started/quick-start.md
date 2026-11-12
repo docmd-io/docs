@@ -34,7 +34,7 @@ This opens `http://localhost:3000`. Your documentation is now live.
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "Automatic Port Failover" icon:info
-If port `3000` is currently in use, `docmd` automatically detects and binds to the next available port (e.g. `3001`).
+If port `3000` is currently in use, `docmd` automatically detects and binds to the next available port (e.g. `3001`). Pass `--no-open` to run the development server without launching your default browser.
 :::
 
 ### 2. Automatic feature resolution

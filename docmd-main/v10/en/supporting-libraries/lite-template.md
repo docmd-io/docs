@@ -73,7 +73,3 @@ Asynchronously compiles and evaluates a template string with the provided data c
 ### `compile(templateString, options?)`
 
 Compiles a template string into a reusable rendering function: `(data) => Promise<string>`.
-
-## License
-
-[MIT](https://github.com/docmd-io/lite-template/blob/main/LICENSE) © [docmd.io](https://docmd.io)

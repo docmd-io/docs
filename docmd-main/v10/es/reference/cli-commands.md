@@ -26,6 +26,7 @@ description: "Referencia de la interfaz de línea de comandos para docmd: comand
 | Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Especificar ruta personalizada al archivo de configuración (predeterminado: `docmd.config.json`). |
+| `--no-open` | - | Desactivar la apertura automática del navegador al iniciar el servidor (comando `dev`). |
 | `--verbose` | `-V` | Emitir registros de ejecución detallados. |
 | `--version` | `-v` | Emitir la versión del paquete instalado. |
 | `--help` | `-h` | Emitir instrucciones de ayuda de la CLI de comandos. |
@@ -56,6 +57,7 @@ npx @docmd/core dev [opciones]
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000`). |
 | `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN). |
+| `--no-open` | - | Evita abrir automáticamente el navegador web predeterminado al iniciar el servidor. |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ## `npx @docmd/core build`

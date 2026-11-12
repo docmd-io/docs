@@ -26,6 +26,7 @@ description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags un
 | Parameter-Flag | Alias | Technische Beschreibung |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Benutzerdefinierten Pfad zur Konfigurationsdatei angeben (Standard: `docmd.config.json`). |
+| `--no-open` | - | Automatisches Öffnen des Browsers beim Serverstart deaktivieren (`dev`-Befehl). |
 | `--verbose` | `-V` | Detaillierte Ausführungsprotokolle ausgeben. |
 | `--version` | `-v` | Installierte Paketversion ausgeben. |
 | `--help` | `-h` | CLI-Hilfeanweisungen für Befehle ausgeben. |
@@ -56,6 +57,7 @@ npx @docmd/core dev [options]
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000`). |
 | `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN). |
+| `--no-open` | - | Automatisches Öffnen des Standard-Webbrowsers beim Serverstart verhindern. |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
 ## `npx @docmd/core build`

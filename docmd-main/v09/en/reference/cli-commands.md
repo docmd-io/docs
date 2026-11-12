@@ -26,6 +26,7 @@ description: "Command-line interface reference for docmd, commands, flags, and o
 | Parameter Flag | Alias | Technical Description |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Specify custom path to configuration file (default: `docmd.config.json`). |
+| `--no-open` | - | Disable auto-opening browser on server startup (`dev` command). |
 | `--verbose` | `-V` | Output detailed execution logs. |
 | `--version` | `-v` | Output installed package version. |
 | `--help` | `-h` | Output command CLI help instructions. |
@@ -56,6 +57,7 @@ npx @docmd/core dev [options]
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Specify web server port (default: `3000`). |
 | `--host <address>` | - | Specify network interface to bind (default: `127.0.0.1`; `0.0.0.0` for all/LAN). |
+| `--no-open` | - | Prevent automatic launching of the default web browser upon server startup. |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
 ## `npx @docmd/core build`

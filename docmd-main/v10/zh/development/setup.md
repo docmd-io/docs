@@ -25,7 +25,17 @@ pnpm install
 npx @docmd/core dev
 ```
 
-站点会在 `http://localhost:3000` 提供服务，并支持热刷新。
+站点会在 `http://localhost:3000` 提供服务，并支持热刷新。默认情况下，docmd 在启动时会自动在系统默认浏览器中打开该页面。
+
+::: callout tip "无头环境（Headless）与终端工作流" icon:terminal
+在无头服务器、CI 流程、Docker 容器或远程 SSH 终端中进行开发时，如果不希望自动弹出浏览器窗口，可传入 `--no-open` 选项：
+
+```bash
+npx @docmd/core dev --no-open
+```
+
+你也可以在当前环境中设置环境变量 `DOCMD_NO_OPEN=true`，实现全会话禁用自动打开浏览器。
+:::
 
 ### 关联本地框架
 

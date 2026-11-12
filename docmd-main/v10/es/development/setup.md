@@ -25,7 +25,17 @@ pnpm install
 npx @docmd/core dev
 ```
 
-El servidor de desarrollo local se inicia en `http://localhost:3000` con recarga rápida en caliente (HMR).
+El servidor de desarrollo local se inicia en `http://localhost:3000` con recarga rápida en caliente (HMR). De forma predeterminada, docmd abre automáticamente el sitio local en su navegador web predeterminado al iniciarse.
+
+::: callout tip "Flujos de trabajo sin interfaz (Headless) y opciones de CLI" icon:terminal
+Al desarrollar en entornos sin interfaz gráfica, canalizaciones de CI, contenedores Docker o sesiones de terminal remotas donde no se desean ventanas emergentes del navegador, agregue el parámetro `--no-open`:
+
+```bash
+npx @docmd/core dev --no-open
+```
+
+También puede configurar la variable de entorno `DOCMD_NO_OPEN=true` para deshabilitar la apertura del navegador en todas las sesiones.
+:::
 
 ### Enlazar código del framework local
 

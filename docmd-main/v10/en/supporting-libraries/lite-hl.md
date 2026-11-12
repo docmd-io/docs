@@ -76,7 +76,3 @@ Tokenises the source code and returns an HTML string wrapped in syntax token spa
 ### `tokenize(code, language)`
 
 Returns an array of token objects containing token types and textual values for custom renderer pipelines.
-
-## License
-
-[MIT](https://github.com/docmd-io/lite-hl/blob/main/LICENSE) © [docmd.io](https://docmd.io)

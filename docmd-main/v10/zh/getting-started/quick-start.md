@@ -33,7 +33,7 @@ bunx @docmd/core dev
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "自动端口切换" icon:info
-如果端口 `3000` 当前已被占用，`docmd` 会自动检测并绑定到下一个可用端口（例如 `3001`）。
+如果端口 `3000` 当前已被占用，`docmd` 会自动检测并绑定到下一个可用端口（例如 `3001`）。传入 `--no-open` 选项可在启动开发服务器时不自动打开浏览器。
 :::
 
 ### 2. 自动功能解析

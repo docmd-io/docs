@@ -84,7 +84,3 @@ Returns:
 ### `evaluate(mdxString, scope)`
 
 Evaluates inline expressions within a template string directly.
-
-## License
-
-[MIT](https://github.com/docmd-io/lite-mdx/blob/main/LICENSE) © [docmd.io](https://docmd.io)

@@ -33,7 +33,7 @@ Dies öffnet `http://localhost:3000`. Ihre Dokumentation ist jetzt live.
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 
 ::: callout tip "Automatische Port-Umschaltung" icon:info
-Wenn Port `3000` derzeit belegt ist, erkennt `docmd` dies automatisch und bindet sich an den nächsten verfügbaren Port (z. B. `3001`).
+Wenn Port `3000` derzeit belegt ist, erkennt `docmd` dies automatisch und bindet sich an den nächsten verfügbaren Port (z. B. `3001`). Übergeben Sie `--no-open`, um den Entwicklungsserver ohne automatisches Öffnen Ihres Standardbrowsers zu starten.
 :::
 
 ### 2. Automatische Funktionsauflösung

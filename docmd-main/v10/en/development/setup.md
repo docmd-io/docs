@@ -25,7 +25,17 @@ pnpm install
 npx @docmd/core dev
 ```
 
-The local development server launches at `http://localhost:3000` with instant Hot Module Replacement (HMR).
+The local development server launches at `http://127.0.0.1:3000` with instant Hot Module Replacement (HMR). By default, docmd automatically opens the local site in your system's default browser.
+
+::: callout tip "Headless Workflows & CLI Flags" icon:terminal
+When developing in headless environments, CI pipelines, Docker containers, or remote terminal sessions where browser popups are undesirable, pass the `--no-open` flag:
+
+```bash
+npx @docmd/core dev --no-open
+```
+
+You can also set the `DOCMD_NO_OPEN=true` environment variable to disable browser launching across all sessions.
+:::
 
 ### Linking Local Framework Code
 

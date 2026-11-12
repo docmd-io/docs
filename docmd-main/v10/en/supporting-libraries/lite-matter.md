@@ -78,7 +78,3 @@ interface MatterResult<T = Record<string, any>> {
 | :--- | :--- | :--- |
 | `input` | `string` | The raw document string containing frontmatter delimiters. |
 | `options` | `object` | Optional parser configuration settings. |
-
-## License
-
-[MIT](https://github.com/docmd-io/lite-matter/blob/main/LICENSE) © [docmd.io](https://docmd.io)
