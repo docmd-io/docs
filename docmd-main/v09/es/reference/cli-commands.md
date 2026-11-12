@@ -10,9 +10,9 @@ description: "Referencia de la interfaz de línea de comandos para docmd: comand
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Inicializar un nuevo espacio de trabajo de documentación. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Iniciar el servidor de desarrollo local con recarga rápida. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Compilar un sitio estático listo para producción. |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Ejecutar el servidor web estático de producción con compresión y comprobaciones de estado. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Compilar una vez y servir el sitio en producción con compresión y sondas de estado. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Iniciar el entorno del Editor en vivo basado en el navegador. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Finalizar los servidores de desarrollo o de producción activos. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Finalizar los servidores `dev` y `serve` activos. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generar manifiestos de despliegue y archivos de contenedor. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Actualizar configuraciones heredadas o migrar desde herramientas de terceros. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Ejecutar la validación de enlaces y comprobar la integridad del documento Markdown. |
@@ -73,9 +73,7 @@ npx @docmd/core build [opciones]
 
 ## `npx @docmd/core serve`
 
-Compila una vez e inicia un servidor web HTTP de producción para la documentación generada (`site/`).
-
-A diferencia de `dev`, `serve` está diseñado para entornos de producción (p. ej. Docker, Kubernetes, VPS). No realiza supervisión de archivos ni recompilaciones en segundo plano, sirve recursos estáticos con compresión Gzip y Deflate, aplica encabezados de seguridad de producción estrictos (CSP, HSTS), admite URL limpias y expone una sonda de estado de contenedor (`/healthz`).
+Compila el sitio una vez y lo sirve en modo de producción: puerto fijo, compresión Gzip, sin monitor de archivos, sin recarga en vivo y con sondas de estado de contenedor. Consulte [Servidor de producción](../deployment/docmd-serve) para conocer el bloque de configuración de `serve`, las acciones de plugins y MCP sobre HTTP.
 
 ```bash
 npx @docmd/core serve [opciones]
@@ -83,8 +81,8 @@ npx @docmd/core serve [opciones]
 
 | Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
-| `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000` o `serve.port`). |
-| `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN/Docker). |
+| `--host <address>` | - | Interfaz de red para vincular (predeterminado: `serve.host`, `DOCMD_HOST`, luego `127.0.0.1`; `0.0.0.0` para contenedor / LAN). |
+| `--port <number>` | `-p` | Puerto de escucha (predeterminado: `serve.port`, `PORT`, luego `3000`). Sale con código 1 si está en uso. |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ::: callout info "Sondas de estado del contenedor (/healthz)" icon:activity
@@ -160,7 +158,7 @@ npx @docmd/core validate [opciones]
 
 ## `npx @docmd/core doctor`
 
-Ejecuta diagnósticos de entorno previos al vuelo e inspecciona los estados de instalación de plugins/plantillas.
+Ejecuta diagnósticos de entorno previos al vuelo, valida rutas de navegación y recursos, e inspecciona el estado de plugins y plantillas. Detección automática de archivos de configuración sin requerir `--config`.
 
 ```bash
 npx @docmd/core doctor [opciones]
@@ -169,8 +167,16 @@ npx @docmd/core doctor [opciones]
 | Marcador de parámetro | Descripción técnica |
 | :--- | :--- |
 | `--config <path>` | Ruta a un archivo de configuración que no sea el predeterminado. |
-| `--fix` | Autoinstalar plugins o plantillas oficiales que falten e identificados durante la comprobación. |
-| `--json` | Emitir el informe de diagnóstico en formato JSON legible por máquina. |
+| `--fix` | Autoinstalar plugins o plantillas oficiales que falten utilizando el gestor de paquetes detectado. |
+| `--json` | Emitir el informe de diagnóstico en formato JSON legible por máquina para CI y automatizaciones. |
+
+`doctor` realiza auditorías de diagnóstico no destructivas sin efectos secundarios de compilación:
+* **Verificación del entorno**: Audita el entorno de ejecución de Node.js (v18+, recomienda v20+), sistema operativo, arquitectura del sistema y gestor de paquetes (`pnpm`, `npm`, `yarn`, `bun`).
+* **Integridad de fuentes y recursos**: Comprueba la presencia del directorio fuente de documentación, valida que los logotipos y favicons configurados existan en disco y verifica las imágenes de banner.
+* **Validación de rutas de navegación**: Valida todos los destinos declarados en `navigation.json` contra archivos reales Markdown/MDX en disco.
+* **Auditoría de plugins y plantillas**: Identifica dependencias instaladas frente a faltantes y ejecuta enlaces de diagnóstico personalizados de plugins (`onDoctorCheck`).
+* **Corrección automática**: Al pasar `--fix`, invoca automáticamente su gestor de paquetes para instalar dependencias oficiales faltantes y resuelve los problemas con código de salida 0.
+
 
 ## `npx @docmd/core mcp`
 

@@ -79,6 +79,7 @@ Das `capabilities`-Array bestimmt, welche Hooks Ihr Plugin verwenden darf.
 | `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | Build |
 | `post-build`| `onPostBuild` | Post-Build |
 | `dev` | `onDevServerReady` | Dev-Server |
+| `server` | `onServerReady` | Dev-Server und `docmd serve` |
 | `assets` | `getAssets` | Output |
 | `actions` | `actions` | Interactive |
 | `events` | `events` | Interactive |
@@ -195,6 +196,7 @@ Docmd bietet Deep-Integration-Hooks. Sie ermöglichen Plugins die Manipulation v
 | :--- | :--- | :--- |
 | **`onConfigResolved(config)`** | Liest oder modifiziert die aktive Konfiguration direkt nach der Initialisierung. | `void` oder `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | Stellt den rohen Node.js-Server während `npx @docmd/core dev` bereit. | `void` oder `Promise<void>` |
+| **`onServerReady(handle)`** | Wird aufgerufen, sobald der actions-hostende Server bereit ist, unter `dev` und unter [`serve`](../deployment/docmd-serve#plugin-aktionen). Erfordert die `server`-Fähigkeit. Siehe [Server-Handle](#server-handle-onserverready). | `void` oder `Promise<void>` |
 | **`onBeforeParse(src, frontmatter, filePath?)`** | Verarbeitet Markdown-Roh-String-Daten direkt vor dem Parsing vor. | `string` oder `Promise<string>` |
 | **`onAfterParse(html, frontmatter, filePath?)`** | Verarbeitet generiertes HTML, das den Markdown-Body darstellt, nach. | `string` oder `Promise<string>` |
 | **`onBeforeBuild(ctx)`** | Wird aufgerufen, nachdem alles Markdown geparst wurde, aber bevor HTML generiert wird. Für schwere Vorabberechnungen verwendet. | `void` oder `Promise<void>` |
@@ -329,7 +331,7 @@ export default {
 
 ## WebSocket-RPC-Actions
 
-Plugins können **Action-Handler** und **Event-Handler** auf dem Dev-Server registrieren. Sie sind über die `window.docmd`-API vom Browser aus aufrufbar.
+Plugins können **Action-Handler** und **Event-Handler** registrieren, die auf dem Server laufen: immer unter `dev` sowie unter [`docmd serve`](../deployment/docmd-serve#plugin-aktionen), wenn `serve.actions` aktiviert ist. Sie sind über die `window.docmd`-API vom Browser aus aufrufbar.
 
 ```javascript "index.js"
 export default {
@@ -361,19 +363,70 @@ Das `ctx` (ActionContext) bietet:
 | Methode | Beschreibung |
 | :--- | :--- |
 | `ctx.readFile(path)` | Liest eine Datei relativ zum Projektstamm. |
-| `ctx.writeFile(path, content)` | Schreibt eine Datei (löst Rebuild + Reload aus). |
+| `ctx.writeFile(path, content)` | Schreibt eine Datei. Unter `dev` löst dies Rebuild und Reload aus; unter `serve` wird die Datei neu erstellt und Clients erhalten ein `system:rebuilt`-Event. |
 | `ctx.readFileLines(path)` | Liest eine Datei als Array von Zeilen. |
 | `ctx.broadcast(event, data)` | Pusht ein Event an alle verbundenen Browser. |
 | `ctx.runWorkerTask(module, fn, args)` | Lagert schwere CPU-Aufgaben in den Worker-Pool aus. |
 | `ctx.source` | Quelltext-Bearbeitungswerkzeuge für block-level Markdown-Manipulation. |
 | `ctx.projectRoot` | Absoluter Pfad zum Projektstamm. |
 | `ctx.config` | Aktuelle docmd-Site-Konfiguration. |
+| `ctx.mode` | `'dev'` oder `'serve'`: welcher Befehl diesen Aufruf hostet. |
+| `ctx.caller` | Wer aufruft: siehe [Der Aufrufer](#der-aufrufer-ctxcaller). |
+| `ctx.requestRebuild(files?)` | Erstellt die angegebenen Quelldateien neu (ohne Argumente alle). |
 
 Alle Dateioperationen sind auf den Projektstamm sandboxed.
 
-::: callout info title:"Nur Dev-Modus "
-Das WebSocket-RPC-System ist nur während `npx @docmd/core dev` aktiv. Produktions-Builds enthalten weder den API-Client noch das serverseitige Action-Handling.
+::: callout info title:"Nur mit aktivem Server "
+Actions laufen nur, solange ein Server sie hostet: `npx @docmd/core dev` oder `npx @docmd/core serve` mit `serve.actions.enabled`. Ein statischer `docmd build` enthält weder den API-Client noch ein Action-Handling.
 :::
+
+### Der Aufrufer (`ctx.caller`)
+
+Jeder Action- und Event-Handler erhält `ctx.caller`, einmal pro WebSocket-Verbindung aus dem Upgrade-Request erstellt:
+
+| Feld | Beschreibung |
+| :--- | :--- |
+| `transport` | `'websocket'`, oder `'local'`, wenn ein Host den Dispatcher direkt aufgerufen hat. |
+| `headers` | Request-Header in Kleinbuchstaben. `cookie` und `set-cookie` werden entfernt. |
+| `origin` | Der vom Server akzeptierte `Origin`; kann unter `dev` `null` sein, nie unter `serve`. |
+| `remoteAddress` | Peer-Adresse (hinter einem Proxy der Proxy). |
+| `connectionId` | Opaque ID, stabil für eine Browserverbindung. |
+| `connectedAt` | Zeitpunkt der Verbindungsannahme (Epoch ms). |
+| `identity` | Wert des vertrauenswürdigen Identitäts-Headers (`serve.actions.identityHeader`) oder `null`. Immer `null` unter `dev`. |
+
+```javascript
+actions: {
+  "my-plugin:save-note": async (payload, ctx) => {
+    const author = ctx.caller.identity || (ctx.mode === 'dev' ? 'local' : null);
+    if (!author) throw new Error('Anmelden erforderlich');
+    // ...
+  }
+}
+```
+
+### Server-Handle (`onServerReady`)
+
+Ein Plugin mit der `server`-Fähigkeit kann `onServerReady(handle)` implementieren. Der Server ruft es einmal vor Annahme von WebSocket-Verbindungen auf, unter `dev` und unter `serve` mit aktivierten Actions. Unter `serve` verhindert ein Hook, der einen Fehler wirft, den Start des Servers.
+
+| Element | Beschreibung |
+| :--- | :--- |
+| `handle.mode` | `'dev'` oder `'serve'`. |
+| `handle.projectRoot` | Absoluter Pfad zum Projektstamm. |
+| `handle.config` | Aktuelle docmd-Site-Konfiguration. |
+| `handle.rebuild(files?)` | Quelldateien oder gesamte Website neu kompilieren. |
+| `handle.broadcast(event, data)` | Event an alle verbundenen Clients senden. |
+| `handle.onShutdown(fn)` | Callback registrieren, den der Server beim sauberen Herunterfahren abwartet. |
+
+```javascript
+export default {
+  plugin: { name: "my-sync", version: "1.0.0", capabilities: ["server"] },
+
+  onServerReady(handle) {
+    const timer = setInterval(() => handle.rebuild(), 60_000);
+    handle.onShutdown(() => clearInterval(timer));
+  }
+};
+```
 
 ## Best Practices
 

@@ -55,19 +55,37 @@ MCP 服务端暴露以下核心 Tool Handler：
 | **`validate_docs`** | 在 Markdown 源码之间执行链接校验检查。返回死链报告。遵守 `config.exclude`。 |
 | **`get_llms_context`** | 获取针对 LLM prompt 摄取优化的统一 `llms-full.txt` 上下文载荷。 |
 
+## HTTP MCP 服务
+
+[`docmd serve`](../deployment/docmd-serve#http-mcp-服务) 可在生产服务器的 `POST /mcp` 端点开放这些工具。该功能默认处于关闭状态：
+
+```json "docmd.config.json"
+{
+  "serve": {
+    "mcp": { "enabled": true, "origins": [] }
+  }
+}
+```
+
+通过 HTTP 访问时，所有工具均为纯只读模式：`get_llms_context` 直接返回正在服务的站点的 `llms-full.txt`，而无需重新构建。带有 `Origin` 标头的请求必须与 `serve.mcp.origins` 匹配；不带该标头的请求（非浏览器 MCP 客户端）将被接受。端点是无状态的：每次请求返回一个 JSON 响应，无会话保持。
+
+```bash
+claude mcp add --transport http docmd https://docs.example.com/mcp
+```
+
 ## 协议合规细节
 
 docmd 支持标准 MCP 规范：
 
-* **传输机制**: `stdio`（通过标准 I/O 传递 JSON-RPC 2.0 消息）。
+* **传输机制**: `stdio`（通过标准 I/O 传递 JSON-RPC 2.0 消息）；在 `docmd serve` 下支持无状态 HTTP。
 * **日志**: 通过 `stderr` 发送带外诊断日志。
 * **生命周期流程**: `initialize` : `notifications/initialized` : Tool 调用。
 * **能力**: 暴露 `tools`、`resources` 和 `prompts`。
 
 ## 安全控制
 
-* **本地进程沙箱**: 严格作为子进程运行，不打开任何外部网络端口。
-* **路径边界校验**: 文件 I/O 操作被限制在项目根目录内。
+* **本地进程沙箱**: `docmd mcp` 严格作为子进程运行，不打开任何外部网络端口。在 HTTP 下，该端点为自选开启（opt-in）且只读，本身不包含内置鉴权机制：若文档私有，请通过反向代理保护。
+* **路径边界校验**: 文件 I/O 操作被限制在项目根目录内，且 `read_doc` 仅返回源文档目录内的 Markdown。
 * **`config.exclude` 执行**: `search_docs`、`list_docs` 和 `validate_docs` 遵守配置中定义的 `config.exclude` glob 模式 — 从站点构建中排除的文件和目录同样会从 MCP 工具结果中排除。这确保 AI 智能体只能看到有意发布的文档。
 
 ::: callout tip "MCP 与 llms.txt 的使用场景" icon:zap

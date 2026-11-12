@@ -157,7 +157,7 @@ npx @docmd/core validate [options]
 
 ## `npx @docmd/core doctor`
 
-Run pre-flight environment diagnostics and inspect plugin/template installation states.
+Run pre-flight environment diagnostics, validate navigation routes and assets, and inspect plugin/template states. Automatically discovers configuration files without requiring `--config`.
 
 ```bash
 npx @docmd/core doctor [options]
@@ -166,8 +166,16 @@ npx @docmd/core doctor [options]
 | Parameter Flag | Technical Description |
 | :--- | :--- |
 | `--config <path>` | Path to non-default configuration file. |
-| `--fix` | Auto-install missing official plugins or templates identified during check. |
-| `--json` | Output diagnostic report in machine-readable JSON format. |
+| `--fix` | Auto-install missing official plugins or templates using detected package manager. |
+| `--json` | Output diagnostic report in machine-readable JSON format for CI and automation. |
+
+`doctor` runs non-destructive diagnostic audits without build side effects:
+* **Environment Verification**: Audits Node.js runtime (v18+, recommends v20+), operating system, system architecture, and package manager (`pnpm`, `npm`, `yarn`, `bun`).
+* **Source & Asset Integrity**: Verifies documentation source directory, checks configured logos and favicons exist on disk, and validates banner images.
+* **Navigation Route Checking**: Validates all route targets declared in `navigation.json` against actual Markdown/MDX files on disk.
+* **Plugin & Template Auditing**: Identifies installed vs missing plugins and templates, and executes custom plugin diagnostic hooks (`onDoctorCheck`).
+* **Automated Remediation**: Passing `--fix` automatically runs your package manager to install missing official dependencies and resolves issues with exit code 0.
+
 
 ## `npx @docmd/core mcp`
 

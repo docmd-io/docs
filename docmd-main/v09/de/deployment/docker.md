@@ -7,7 +7,7 @@ description: "Führen Sie docmd in containerisierten Umgebungen unter Verwendung
 
 ## Offizielles Container-Image
 
-Das vorgefertigte Container-Image ermöglicht Site-Builds und lokale Vorschau-Auslieferung ohne lokale Node.js-Umgebung. Images werden für die Architekturen `linux/amd64` und `linux/arm64` veröffentlicht.
+Das vorgefertigte Container-Image erstellt und serviert Ihre Website ohne lokale Node.js-Umgebung. Der Standardbefehl ist [`docmd serve --host 0.0.0.0`](./docmd-serve): ein Produktions-Build, ausgeliefert auf Port 3000, mit einem Health-Check unter `/healthz`. Images werden für die Architekturen `linux/amd64` und `linux/arm64` veröffentlicht.
 
 ### Schnellstart-Befehle
 
@@ -18,9 +18,16 @@ docker pull ghcr.io/docmd-io/docmd:0.9.0
 # Statische Ausgabe kompilieren (mountet lokales Docs-Verzeichnis)
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# Lokalen Vorschau-Server starten
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+# Dokumentation im Produktionsmodus bereitstellen (Standardbefehl)
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+
+# Entwicklungsserver mit Live-Reload beim Schreiben
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0 dev --host 0.0.0.0
 ```
+
+::: callout info "Standardbefehl" icon:info
+Container-Images vor Einführung von `docmd serve` führten standardmäßig `dev --host 0.0.0.0` aus. Falls Sie sich ohne expliziten Befehl auf Live-Reload verlassen haben, übergeben Sie bitte `dev --host 0.0.0.0` explizit.
+:::
 
 ::: callout tip "Releases pinnen" icon:pin
 Pinnen Sie spezifische Versions-Tags (z. B. `0.9.0`) in Produktions-CI-Pipelines, um die Reproduzierbarkeit von Builds zu gewährleisten.
@@ -49,6 +56,16 @@ services:
       - docs
 ```
 
+### Health-Check und Port
+
+Der `HEALTHCHECK` des Images fragt `GET /healthz` auf `${PORT:-3000}` ab. `docmd serve` antwortet mit `200`, sobald die Website erstellt ist, und mit `503`, während der erste Build läuft. Setzen Sie `PORT`, um Server und Health-Check gemeinsam umzukonfigurieren:
+
+```bash
+docker run -e PORT=8080 -p 8080:8080 ghcr.io/docmd-io/docmd:0.9.0
+```
+
+In Kubernetes richten Sie die Startup- und Readiness-Probes auf `/healthz`. Da `serve` die Website unter `/docs` kompiliert, mounten Sie dieses Verzeichnis von einem beschreibbaren Volume und nicht direkt aus einer ConfigMap.
+
 ### Image-Spezifikationen
 
 | Eigenschaft | Spezifikationen |
@@ -60,7 +77,7 @@ services:
 
 ### Benutzerdefiniertes Arbeitsverzeichnis & Berechtigungen
 
-Der Einstiegspunkt erkennt automatisch die Eigentümer-UID und -GID für eingehängte Volumes und reduziert die Berechtigungen vor der Ausführung von `init`-, `build`- oder `dev`-Befehlen. Dateien, die auf Host-Mounts geschrieben werden, behalten den Host-Benutzerbesitz.
+Der Einstiegspunkt erkennt automatisch die Eigentümer-UID und -GID für eingehängte Volumes und reduziert die Berechtigungen vor der Ausführung von `init`-, `build`-, `serve`- oder `dev`-Befehlen. Dateien, die auf Host-Mounts geschrieben werden, behalten den Host-Benutzerbesitz.
 
 ```bash
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init

@@ -221,6 +221,10 @@
         ]
       },
       {
+        "title": "MDX Components",
+        "path": "/content/mdx"
+      },
+      {
         "title": "No-Style Pages",
         "path": "/content/no-style-pages"
       },

@@ -79,6 +79,7 @@ La matriz `capabilities` determina qué hooks tiene autorización de usar su plu
 | `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | Compilación |
 | `post-build`| `onPostBuild` | Post-compilación |
 | `dev` | `onDevServerReady` | Servidor de desarrollo |
+| `server` | `onServerReady` | Servidor de desarrollo y `docmd serve` |
 | `assets` | `getAssets` | Salida |
 | `actions` | `actions` | Interactivo |
 | `events` | `events` | Interactivo |
@@ -195,6 +196,7 @@ Docmd proporciona hooks de integración profunda para interactuar con la configu
 | :--- | :--- | :--- |
 | **`onConfigResolved(config)`** | Lee o modifica la configuración activa inmediatamente tras su inicialización. | `void` o `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | Expone el servidor Node.js subyacente durante `npx @docmd/core dev`. | `void` o `Promise<void>` |
+| **`onServerReady(handle)`** | Se ejecuta una vez que el servidor que aloja las acciones está listo, tanto en `dev` como en [`serve`](../deployment/docmd-serve#acciones-de-plugins). Requiere la capacidad `server`. Consulte [Identificador del servidor](#identificador-del-servidor-onserverready). | `void` o `Promise<void>` |
 | **`onBeforeParse(src, frontmatter, filePath?)`** | Preprocesa la cadena Markdown original antes de su análisis sintáctico. | `string` o `Promise<string>` |
 | **`onAfterParse(html, frontmatter, filePath?)`** | Postprocesa el HTML generado a partir del cuerpo Markdown. | `string` o `Promise<string>` |
 | **`onBeforeBuild(ctx)`** | Se ejecuta tras analizar todo el Markdown y antes de renderizar el HTML. Ideal para precálculos pesados. | `void` o `Promise<void>` |
@@ -329,7 +331,7 @@ export default {
 
 ## Acciones WebSocket RPC
 
-Los plugins pueden registrar **controladores de acciones** y **controladores de eventos** ejecutados en el servidor de desarrollo, accesibles desde el navegador mediante la API `window.docmd`.
+Los plugins pueden registrar **controladores de acciones** y **controladores de eventos** que se ejecutan en el servidor: siempre bajo `dev`, y bajo [`docmd serve`](../deployment/docmd-serve#acciones-de-plugins) cuando `serve.actions` está habilitado. Se pueden invocar desde el navegador mediante la API `window.docmd`.
 
 ```javascript
 export default {
@@ -361,19 +363,70 @@ El objeto `ctx` (ActionContext) proporciona:
 | Método | Descripción |
 | :--- | :--- |
 | `ctx.readFile(path)` | Lee un archivo relativo a la raíz del proyecto. |
-| `ctx.writeFile(path, content)` | Escribe un archivo (activa recompilación y recarga). |
+| `ctx.writeFile(path, content)` | Escribe un archivo. Bajo `dev`, esto activa una recompilación y recarga; bajo `serve`, el archivo se recompila y los clientes reciben un evento `system:rebuilt`. |
 | `ctx.readFileLines(path)` | Lee un archivo como una matriz de líneas. |
 | `ctx.broadcast(event, data)` | Emite un evento a todos los navegadores conectados. |
 | `ctx.runWorkerTask(module, fn, args)` | Delega tareas pesadas de CPU al grupo de subprocesos. |
 | `ctx.source` | Utilidades de edición en bloque para archivos Markdown. |
 | `ctx.projectRoot` | Ruta absoluta a la raíz del proyecto. |
 | `ctx.config` | Configuración activa del sitio docmd. |
+| `ctx.mode` | `'dev'` o `'serve'`: qué comando hospeda esta llamada. |
+| `ctx.caller` | Quién llama: consulte [El llamador](#el-llamador-ctxcaller). |
+| `ctx.requestRebuild(files?)` | Recompila los archivos de origen especificados (o todos si no se pasan argumentos). |
 
 Todas las operaciones sobre archivos están confinadas a la raíz del proyecto.
 
-::: callout info title:"Solo en modo desarrollo "
-El sistema WebSocket RPC únicamente está activo durante `npx @docmd/core dev`. Las compilaciones de producción no incluyen el cliente de API ni controladores en el servidor.
+::: callout info title:"Solo con servidor activo "
+Las acciones solo se ejecutan mientras un servidor las aloja: `npx @docmd/core dev`, o `npx @docmd/core serve` con `serve.actions.enabled`. Una compilación estática `docmd build` no incluye el cliente de API ni gestión de acciones.
 :::
+
+### El llamador (`ctx.caller`)
+
+Cada controlador de acción y de eventos recibe `ctx.caller`, creado una vez por conexión WebSocket a partir de su solicitud de actualización:
+
+| Campo | Descripción |
+| :--- | :--- |
+| `transport` | `'websocket'`, o `'local'` cuando un anfitrión llamó directamente al despachador. |
+| `headers` | Encabezados de solicitud, en minúsculas. Se eliminan `cookie` y `set-cookie`. |
+| `origin` | El `Origin` que el servidor aceptó; puede ser `null` bajo `dev`, nunca bajo `serve`. |
+| `remoteAddress` | Dirección del cliente. Detrás de un proxy, es la del proxy. |
+| `connectionId` | ID opaco, estable para una conexión de navegador. |
+| `connectedAt` | Momento en que se aceptó la conexión (milisegundos epoch). |
+| `identity` | Valor del encabezado de identidad confiable (`serve.actions.identityHeader`), o `null`. Siempre `null` bajo `dev`. |
+
+```javascript
+actions: {
+  "my-plugin:save-note": async (payload, ctx) => {
+    const author = ctx.caller.identity || (ctx.mode === 'dev' ? 'local' : null);
+    if (!author) throw new Error('Inicie sesión para añadir notas');
+    // ...
+  }
+}
+```
+
+### Identificador del servidor (`onServerReady`)
+
+Un plugin con la capacidad `server` puede implementar `onServerReady(handle)`. El servidor lo llama una vez antes de aceptar conexiones WebSocket, bajo `dev` y bajo `serve` con acciones activas. Bajo `serve`, si este hook lanza una excepción, impide que el servidor se inicie.
+
+| Miembro | Descripción |
+| :--- | :--- |
+| `handle.mode` | `'dev'` o `'serve'`. |
+| `handle.projectRoot` | Ruta absoluta a la raíz del proyecto. |
+| `handle.config` | Configuración activa del sitio docmd. |
+| `handle.rebuild(files?)` | Recompila los archivos fuente especificados o todo el sitio. |
+| `handle.broadcast(event, data)` | Envía un evento a todos los clientes conectados. |
+| `handle.onShutdown(fn)` | Registra una retrollamada que el servidor espera durante el apagado limpio. |
+
+```javascript
+export default {
+  plugin: { name: "my-sync", version: "1.0.0", capabilities: ["server"] },
+
+  onServerReady(handle) {
+    const timer = setInterval(() => handle.rebuild(), 60_000);
+    handle.onShutdown(() => clearInterval(timer));
+  }
+};
+```
 
 ## Buenas prácticas
 

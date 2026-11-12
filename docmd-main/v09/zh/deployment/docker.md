@@ -7,7 +7,7 @@ docmd 会生成静态 HTML，因此非常适合轻量、可复现的 Docker 容�
 
 ## 官方 Docker 镜像
 
-借助官方镜像，您可以在本地零安装的情况下构建并提供文档服务。它支持多种架构（`linux/amd64` 和 `linux/arm64`）。
+借助官方预构建镜像，您无需在本地安装 Node.js 即可构建并提供文档服务。其默认启动命令为 [`docmd serve --host 0.0.0.0`](./docmd-serve)：生产模式构建、在 3000 端口提供服务，并在 `/healthz` 提供健康检查。镜像已面向 `linux/amd64` 和 `linux/arm64` 架构发布。
 
 ### 快速开始
 
@@ -18,13 +18,30 @@ docker pull ghcr.io/docmd-io/docmd:0.9.0
 # 构建文档（挂载本地 docs 并将产物输出到 ./site）
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# 运行内置的演示站点
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+# 以生产模式托管文档（默认命令）
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+
+# 编写时的热重载开发服务器
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0 dev --host 0.0.0.0
 ```
+
+::: callout info "默认启动命令" icon:info
+在引入 `docmd serve` 之前，镜像默认执行 `dev --host 0.0.0.0`。如果您此前依赖不带参数的默认热重载，请显式传入 `dev --host 0.0.0.0`。
+:::
 
 ::: callout tip "锁定版本"
 建议在生产构建中始终锁定具体版本（例如 `0.9.0`）以获得可复现的构建结果。`:latest` 标签从 0.9.0 起会自动发布，但在生产流水线中仍应固定到具体的发行版本。
 :::
+
+### 健康检查与端口配置
+
+镜像的 `HEALTHCHECK` 会在 `${PORT:-3000}` 上请求 `GET /healthz`。`docmd serve` 在站点构建完成后返回 `200`，并在初次构建过程中返回 `503`。通过设置 `PORT` 环境变量可同时更改服务器端口与健康检查端口：
+
+```bash
+docker run -e PORT=8080 -p 8080:8080 ghcr.io/docmd-io/docmd:0.9.0
+```
+
+在 Kubernetes 中，可将存活探针（Liveness）与就绪探针（Readiness）直接指向 `/healthz`。`serve` 会在 `/docs` 下写入编译产物，因此请挂载可读写卷，而非直接挂载只读 ConfigMap。
 
 ### Docker Compose
 

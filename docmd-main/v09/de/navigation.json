@@ -221,6 +221,10 @@
         ]
       },
       {
+        "title": "MDX-Komponenten",
+        "path": "/content/mdx"
+      },
+      {
         "title": "Seiten ohne Stil",
         "path": "/content/no-style-pages"
       },
@@ -387,6 +391,10 @@
       {
         "title": "GitHub Action",
         "path": "/deployment/github-action"
+      },
+      {
+        "title": "Produktionsserver",
+        "path": "/deployment/docmd-serve"
       },
       {
         "title": "Docker-Image",

@@ -79,6 +79,7 @@ description: "通过自定义逻辑、数据注入和交互功能扩展 docmd �
 | `build` | `onBeforeParse`, `onAfterParse`, `onBeforeBuild`, `onBeforeRender`, `onPageReady` | 构建 |
 | `post-build`| `onPostBuild` | 构建后 |
 | `dev` | `onDevServerReady` | 开发服务器 |
+| `server` | `onServerReady` | 开发服务器与 `docmd serve` |
 | `assets` | `getAssets` | 输出 |
 | `actions` | `actions` | 交互 |
 | `events` | `events` | 交互 |
@@ -195,6 +196,7 @@ Docmd 提供深度集成钩子。它们允许插件操作配置、原始源码�
 | :--- | :--- | :--- |
 | **`onConfigResolved(config)`** | 在初始化后立即读取或修改活动配置。 | `void` 或 `Promise<void>` |
 | **`onDevServerReady(server, wss)`** | 在 `npx @docmd/core dev` 期间暴露原始 Node.js 服务器。 | `void` 或 `Promise<void>` |
+| **`onServerReady(handle)`** | 一旦托管操作的服务器准备就绪即被调用，适用于 `dev` 以及 [`serve`](../deployment/docmd-serve#插件操作)。需要 `server` 能力。参见[服务器句柄](#服务器句柄-onserverready)。 | `void` 或 `Promise<void>` |
 | **`onBeforeParse(src, frontmatter, filePath?)`** | 在解析之前立即预处理原始 markdown 字符串数据。 | `string` 或 `Promise<string>` |
 | **`onAfterParse(html, frontmatter, filePath?)`** | 对表示 markdown 主体生成的 HTML 进行后处理。 | `string` 或 `Promise<string>` |
 | **`onBeforeBuild(ctx)`** | 在所有 markdown 解析完成后但在 HTML 生成之前调用。用于繁重的预计算。 | `void` 或 `Promise<void>` |
@@ -329,7 +331,7 @@ export default {
 
 ## WebSocket RPC Actions
 
-插件可以在开发服务器上注册 **action 处理器**和 **event 处理器**。它们可通过 `window.docmd` API 从浏览器调用。
+插件可以注册在服务器上运行的 **action 处理器**和 **event 处理器**：在 `dev` 模式下始终运行，在启用 `serve.actions` 的 [`docmd serve`](../deployment/docmd-serve#插件操作) 下同样可用。它们可通过 `window.docmd` API 从浏览器端调用。
 
 ```javascript "index.js"
 export default {
@@ -361,19 +363,70 @@ export default {
 | 方法 | 说明 |
 | :--- | :--- |
 | `ctx.readFile(path)` | 读取相对于项目根的文件。 |
-| `ctx.writeFile(path, content)` | 写入文件（触发重建 + 重新加载）。 |
+| `ctx.writeFile(path, content)` | 写入文件。在 `dev` 下触发重新构建和页面刷新；在 `serve` 下文件被重新构建且客户端接收到 `system:rebuilt` 事件。 |
 | `ctx.readFileLines(path)` | 将文件读取为行数组。 |
 | `ctx.broadcast(event, data)` | 将事件推送给所有连接的浏览器。 |
 | `ctx.runWorkerTask(module, fn, args)` | 将繁重 CPU 任务卸载到 worker 池。 |
 | `ctx.source` | 用于块级 markdown 操作的源码编辑工具。 |
 | `ctx.projectRoot` | 项目根的绝对路径。 |
 | `ctx.config` | 当前 docmd 站点配置。 |
+| `ctx.mode` | `'dev'` 或 `'serve'`：当前由哪个命令托管此调用。 |
+| `ctx.caller` | 调用方信息：参见[调用方](#调用方-ctxcaller)。 |
+| `ctx.requestRebuild(files?)` | 重建指定的源文件（未传参则重建所有文件）。 |
 
 所有文件操作都沙箱化到项目根目录。
 
-::: callout info title:"仅限开发模式 "
-WebSocket RPC 系统仅在 `npx @docmd/core dev` 期间处于活动状态。生产构建不包括 API 客户端或服务端 action 处理。
+::: callout info title:"仅限活动服务器 "
+操作仅在有服务器托管时运行：`npx @docmd/core dev`，或启用了 `serve.actions.enabled` 的 `npx @docmd/core serve`。静态 `docmd build` 既不包含 API 客户端，也不包含任何操作处理。
 :::
+
+### 调用方 (`ctx.caller`)
+
+每个 action 和 event 处理器都会接收 `ctx.caller`，该对象在每个 WebSocket 连接建立时从其升级请求中生成：
+
+| 字段 | 说明 |
+| :--- | :--- |
+| `transport` | `'websocket'`，或当宿主直接调用调度程序时为 `'local'`。 |
+| `headers` | 请求标头，全部转换为小写。已自动移除 `cookie` 和 `set-cookie`。 |
+| `origin` | 服务器接受的 `Origin`；在 `dev` 下可为 `null`，在 `serve` 下永不为 `null`。 |
+| `remoteAddress` | 对端网络地址。在反向代理之后为代理地址。 |
+| `connectionId` | 不透明 ID，在单次浏览器连接生命周期内保持稳定。 |
+| `connectedAt` | 连接接受时间戳（Epoch 毫秒）。 |
+| `identity` | 服务器受信任身份标头（`serve.actions.identityHeader`）的值，或 `null`。在 `dev` 下始终为 `null`。 |
+
+```javascript
+actions: {
+  "my-plugin:save-note": async (payload, ctx) => {
+    const author = ctx.caller.identity || (ctx.mode === 'dev' ? 'local' : null);
+    if (!author) throw new Error('需登录方可添加注释');
+    // ...
+  }
+}
+```
+
+### 服务器句柄 (`onServerReady`)
+
+声明了 `server` 能力的插件可以实现 `onServerReady(handle)`。宿主在接受任何 WebSocket 连接之前会调用它一次：包括 `dev` 模式以及启用了操作的 `serve` 模式。在 `serve` 下，如果此钩子抛出异常，服务器将终止启动。
+
+| 成员 | 说明 |
+| :--- | :--- |
+| `handle.mode` | `'dev'` 或 `'serve'`。 |
+| `handle.projectRoot` | 项目根目录的绝对路径。 |
+| `handle.config` | 当前 docmd 站点配置。 |
+| `handle.rebuild(files?)` | 重建指定的源文件或整个站点。 |
+| `handle.broadcast(event, data)` | 向所有连接的客户端推送事件。 |
+| `handle.onShutdown(fn)` | 注册服务器在平滑停机期间等待的回调（停止计时器、持久化数据等）。 |
+
+```javascript
+export default {
+  plugin: { name: "my-sync", version: "1.0.0", capabilities: ["server"] },
+
+  onServerReady(handle) {
+    const timer = setInterval(() => handle.rebuild(), 60_000);
+    handle.onShutdown(() => clearInterval(timer));
+  }
+};
+```
 
 ## 最佳实践
 
