@@ -7,7 +7,7 @@ docmd outputs static assets, making it ideal for containerised deployments. You 
 
 ## Official Container Image
 
-The pre-built container image allows site builds and local preview serving without requiring a local Node.js environment. Images are published for `linux/amd64` and `linux/arm64` architectures.
+The pre-built container image builds and serves your site without a local Node.js environment. Its default command is [`docmd serve --host 0.0.0.0`](./docmd-serve): a production build, served on port 3000, with a health check on `/healthz`. Images are published for `linux/amd64` and `linux/arm64` architectures.
 
 ### Quick Start Commands
 
@@ -18,9 +18,16 @@ docker pull ghcr.io/docmd-io/docmd:0.9.0
 # Compile static output (mounts local docs directory)
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# Launch local preview server
-docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+# Serve your docs in production mode (default command)
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
+
+# Development server with live reload, while writing
+docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0 dev --host 0.0.0.0
 ```
+
+::: callout info "Default command" icon:info
+Images before `docmd serve` ran `dev --host 0.0.0.0` by default. If you relied on live reload without passing a command, pass `dev --host 0.0.0.0` explicitly.
+:::
 
 ::: callout tip "Pinning Releases" icon:pin
 Pin specific version tags (e.g. `0.9.0`) in production CI pipelines to ensure build reproducibility.
@@ -49,6 +56,16 @@ services:
       - docs
 ```
 
+### Health Check and Port
+
+The image's `HEALTHCHECK` requests `GET /healthz` on `${PORT:-3000}`. `docmd serve` answers `200` once the site is built and `503` while the first build runs. Set `PORT` to move the server and the health check together:
+
+```bash
+docker run -e PORT=8080 -p 8080:8080 ghcr.io/docmd-io/docmd:0.9.0
+```
+
+In Kubernetes, point the startup and readiness probes at `/healthz`. `serve` writes the built site under `/docs`, so mount it from a writable volume, not straight from a ConfigMap.
+
 ### Image Specifications
 
 | Property | Specifications |
@@ -60,7 +77,7 @@ services:
 
 ### Custom Working Directory & Permissions
 
-The entrypoint automatically detects owner UID and GID for mounted volumes and steps down privileges prior to executing `init`, `build`, or `dev` commands. Files written to host mounts retain host user ownership.
+The entrypoint automatically detects owner UID and GID for mounted volumes and steps down privileges prior to executing `init`, `build`, `serve` or `dev` commands. Files written to host mounts retain host user ownership.
 
 ```bash
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init

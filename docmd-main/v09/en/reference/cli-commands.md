@@ -10,8 +10,9 @@ description: "Command-line interface reference for docmd, commands, flags, and o
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Initialise a new documentation workspace. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Launch local development server with hot-reloading. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Compile production-ready static site. |
+| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Build once and serve the site in production. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Launch browser-based Live Editor environment. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active development servers. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active `dev` and `serve` servers. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment manifests and container files. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configurations or migrate from third-party tools. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Run link validation and check Markdown document integrity. |
@@ -67,6 +68,21 @@ npx @docmd/core build [options]
 | Parameter Flag | Alias | Technical Description |
 | :--- | :--- | :--- |
 | `--offline` | - | Rewrite asset and link paths to `.html` relative files for local file system browsing. |
+| `--config <path>` | `-c` | Custom path to configuration file. |
+
+
+## `npx @docmd/core serve`
+
+Build the site once and serve it in production mode: fixed port, no file watcher, no live reload, and a `/healthz` endpoint. See [Production Server](../deployment/docmd-serve) for the `serve` config block, plugin actions and MCP over HTTP.
+
+```bash
+npx @docmd/core serve [options]
+```
+
+| Parameter Flag | Alias | Technical Description |
+| :--- | :--- | :--- |
+| `--host <address>` | - | Interface to bind (default: `serve.host`, `DOCMD_HOST`, then `127.0.0.1`). |
+| `--port <number>` | `-p` | Port to listen on (default: `serve.port`, `PORT`, then `3000`). Exits with code 1 if it is in use. |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
 ## `npx @docmd/core live`

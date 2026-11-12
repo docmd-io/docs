@@ -389,6 +389,10 @@
         "path": "/deployment/github-action"
       },
       {
+        "title": "Production Server",
+        "path": "/deployment/docmd-serve"
+      },
+      {
         "title": "Docker Image",
         "path": "/deployment/docker"
       },
