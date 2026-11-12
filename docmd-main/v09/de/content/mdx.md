@@ -1,112 +1,103 @@
 ---
 title: "MDX-Komponenten"
-description: "Erstellen Sie interaktive Dokumentationen mit MDX, JSX-Komponentensyntax, dynamischen Ausdrücken und zusammengesetzten Komponenten in docmd."
+description: "Verfassen Sie Dokumentationen mit MDX- und JSX-Komponenten über das offizielle mdx-Plugin und lite-mdx."
 ---
 
-docmd unterstützt **MDX** nativ, sodass Sie JSX-/React-ähnliche Komponenten und dynamische Ausdrücke nahtlos direkt in Ihre Markdown-Inhalte einbetten können. Angetrieben von docmds abhängigkeitsfreiem Hochleistungs-Compiler wird MDX in schlankes, barrierefreies statisches HTML kompiliert – ganz ohne schwere Bundler oder clientseitigen Laufzeit-Overhead.
+`docmd` bietet integrierte Unterstützung für MDX- und JSX-Komponenten über das Plugin `@docmd/plugin-mdx`. Angetrieben von `lite-mdx` kompiliert es JSX-Tags während des Builds in barrierefreies HTML und native `docmd`-Container – ganz ohne clientseitigen JavaScript-Overhead.
 
-Sie können sowohl `.md`- als auch `.mdx`-Dateiendungen austauschbar verwenden.
+Sowohl `.md`- als auch `.mdx`-Dateierweiterungen können gleichwertig verwendet werden.
 
-## Warum MDX in docmd?
+::: callout tip "Warum MDX in docmd?" icon:sparkles
+MDX bietet eine vertraute Syntax für Teams, die von Frameworks wie Nextra, Docusaurus oder Mintlify migrieren. So können bestehende Komponenten-Markups gerendert werden, ohne Markdown-Dateien umschreiben zu müssen.
+:::
 
-* **Abhängigkeitsfreie Kompilierung**: Schnelle statische Erstellung ohne Webpack, Babel oder externe React-Build-Chains.
-* **Vertraute JSX-Syntax**: Nahtloser Umstieg für Entwickler, die von Nextra, Docusaurus, Astro Starlight oder Mintlify kommen.
-* **Koexistenz von Komponenten**: Nutzen Sie JSX-Tags (`<Callout>`, `<Card>`, `<Tabs>`) Seite an Seite mit der nativen Container-Syntax von docmd (`::: callout`).
-* **Sichere dynamische Ausdrücke**: Binden Sie Frontmatter-Werte, Konfigurationsvariablen und JavaScript-Ausdrücke in einer sicheren Sandbox-Umgebung ein.
-* **Zusammengesetzte Komponenten mit Punktnotation**: Vollständige Unterstützung für hierarchische Strukturen wie `<Tabs.Tab>` und `<Steps.Step>`.
+## Installation
 
----
+Installieren Sie das offizielle MDX-Plugin:
 
-## Grundlegende Komponentensyntax
-
-### Selbstschließende Tags
-
-Selbstschließende Tags eignen sich hervorragend für Inline-Hinweise, Badges und eigenständige UI-Elemente:
-
-```jsx
-<Badge text="Stabil" type="success" />
-<Badge text="v0.9.10" type="info" />
-<Badge text="Veraltet" type="danger" />
+```bash
+docmd add mdx
 ```
 
-### Block-Komponenten mit Markdown-Inhalten
+Alternativ registrieren Sie das Plugin in Ihrer `docmd.config.json`:
 
-Block-Komponenten umschließen Markdown-Inhalte, wobei Standardformatierungen, Code-Snippets, Listen und Links wie gewohnt erhalten bleiben:
+```json
+{
+  "plugins": {
+    "mdx": {}
+  }
+}
+```
+
+## Integrierte Komponentenzuordnungen
+
+Das Plugin ordnet gängige Dokumentationskomponenten direkt `docmd`-Containern zu:
+
+### Hinweisboxen (`<Callout>`)
 
 ```jsx
 <Callout type="tip" title="Profi-Tipp">
-  Sie können **fettgedruckten Text**, `Inline-Code` und sogar Code-Blöcke innerhalb von JSX-Tags verwenden:
+  Verwenden Sie Standard-JSX-Tags oder docmd-Container in derselben Datei.
+</Callout>
 
-  ```bash
-  npx @docmd/core build
-  ```
+<Callout type="warning" title="Achtung">
+  Stellen Sie sicher, dass Ihre Abhängigkeiten vor dem Build aktualisiert sind.
 </Callout>
 ```
 
----
-
-## Integrierte MDX-Komponenten
-
-docmd bietet integrierte Mappings für gängige Dokumentationskomponenten:
-
-### Hinweise (`<Callout>`)
-
-```jsx
-<Callout type="info" title="Information">
-  Liefert kontextbezogene Anleitungen oder Systemhinweise.
-</Callout>
-
-<Callout type="warning" title="Warnung">
-  Hebt wichtige Vorsichtsmaßnahmen und Breaking Changes hervor.
-</Callout>
-```
-
-| Prop | Typ | Beschreibung |
-| :--- | :--- | :--- |
-| `type` | `String` | Variantenstil: `info`, `tip`, `warning`, `danger` (Standard: `info`). |
-| `title` | `String` | Optionaler Titel der Hinweisbox. |
-| `icon` | `String` | Benutzerdefinierter Lucide-Icon-Name oder Iconify-Bezeichner. |
+| Eigenschaft | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `type` | `String` | `info` | Stilvariante (`info`, `tip`, `warning`, `danger`). |
+| `title` | `String` | `undefined` | Titel, der oben im Hinweis angezeigt wird. |
+| `icon` | `String` | `undefined` | Optionaler Lucide-Icon-Name oder Iconify-Bezeichner. |
 
 ### Karten und Raster-Layouts (`<Card>`, `<Cards>`)
 
-Gruppieren Sie Links, Funktionen oder Schnellzugriffe in strukturierten responsiven Rastern:
+Gruppieren Sie Links und Referenzelemente in responsiven Rasterlayouts:
 
 ```jsx
 <Cards cols={2}>
   <Card title="Schnellstart" href="/getting-started/quick-start" icon="rocket">
-    Erfahren Sie, wie Sie Ihre erste docmd-Dokumentationswebsite initialisieren und konfigurieren.
+    Erfahren Sie, wie Sie Ihre erste docmd-Dokumentationsseite initialisieren und konfigurieren.
   </Card>
   <Card title="CLI-Referenz" href="/reference/cli-commands" icon="terminal">
-    Umfassende Befehlszeilen-Flags, Optionen und Serverkonfigurationen.
+    Befehlszeilenbefehle, Flags und Diagnosewerkzeuge.
   </Card>
 </Cards>
 ```
 
-### Tabs (`<Tabs>`, `<Tab>`)
+| Eigenschaft | Typ | Standard | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| `cols` | `Number` | `2` | Rasterspalten (`1`, `2`, `3` oder `4`). |
+| `title` | `String` | `undefined` | Kartentitel. |
+| `href` | `String` | `undefined` | Ziel-URL des Links. |
+| `icon` | `String` | `undefined` | Icon-Bezeichner der Karte. |
 
-Präsentieren Sie mehrsprachige Code-Beispiele oder plattformspezifische Anleitungen:
+### Registerkarten (`<Tabs>`, `<Tab>`)
+
+Präsentieren Sie plattformspezifische Code-Snippets oder mehrsprachige Anleitungen:
 
 ```jsx
 <Tabs>
-  <Tab label="npm">
-    ```bash
-    npm install @docmd/core
-    ```
-  </Tab>
   <Tab label="pnpm">
     ```bash
-    pnpm add @docmd/core
+    pnpm add docmd
+    ```
+  </Tab>
+  <Tab label="npm">
+    ```bash
+    npm install docmd
     ```
   </Tab>
   <Tab label="bun">
     ```bash
-    bun add @docmd/core
+    bun add docmd
     ```
   </Tab>
 </Tabs>
 ```
 
-Auch die Punktnotation `<Tabs.Tab>` wird unterstützt:
+Auch die zusammengesetzte Tag-Notation wird unterstützt:
 
 ```jsx
 <Tabs>
@@ -121,89 +112,33 @@ Auch die Punktnotation `<Tabs.Tab>` wird unterstützt:
 
 ### Schritte (`<Steps>`)
 
-Erstellen Sie nummerierte Schritt-für-Schritt-Anleitungen für Tutorials oder Installationsprozesse:
+Erstellen Sie nummerierte Schritt-für-Schritt-Installationsanleitungen und Tutorials:
 
 ```jsx
 <Steps>
   ### Projekt initialisieren
-  Führen Sie `npx @docmd/core init` im Terminal aus.
+  Führen Sie `docmd init` in Ihrem Projektverzeichnis aus.
 
-  ### Inhalte verfassen
-  Erstellen Sie Ihre Dokumentationsseiten in `docs/` mit Markdown oder MDX.
+  ### Inhalt hinzufügen
+  Schreiben Sie Ihre Dokumentationsseiten in `docs/` mit Markdown oder MDX.
 
-  ### Bereitstellen
-  Kompilieren Sie produktionsbereite statische Website-Dateien mit `npx @docmd/core build`.
+  ### Website erstellen
+  Kompilieren Sie produktionsbereite statische Dateien mit `docmd build`.
 </Steps>
 ```
 
----
+## Syntaxvergleich
 
-## Dynamische Ausdrücke & Interpolation
+Sie können je nach persönlicher Vorliebe oder bestehenden Projektkonventionen zwischen nativer Container-Syntax und JSX-Tags wählen:
 
-Mit MDX können Sie dynamische Ausdrücke in geschweiften Klammern `{}` einbetten. Ausdrücke werden sicher in einer Sandbox ausgeführt und haben Zugriff auf das Frontmatter des aktuellen Dokuments sowie auf die Website-Konfiguration.
-
-### Zugriff auf Frontmatter
-
-```mdx
----
-title: "Authentifizierungs-Leitfaden"
-version: "2.4.0"
-author: "docmd-Team"
----
-
-# {frontmatter.title}
-
-Dokumentationsversion: **{frontmatter.version}**  
-Gepflegt von: *{frontmatter.author}*
-```
-
-### Zugriff auf die Website-Konfiguration
-
-```jsx
-Willkommen bei der Dokumentation für {config.title}.
-```
-
-### JavaScript-Ausdrücke
-
-```jsx
-Copyright © {new Date().getFullYear()} docmd.io.
-Berechnetes Build-Budget: {500 * 2}ms.
-```
-
----
-
-## Props und Attribute
-
-MDX unterstützt gängige JSX-Attribut-Syntaxen:
-
-```jsx
-{/* Zeichenketten-Attribute */}
-<Card title="Konfiguration" href="/configuration/overview" />
-
-{/* Numerische und boolesche Ausdrücke */}
-<Cards cols={3} animated={true} />
-
-{/* Boolesche Kurzschreibweise (äquivalent zu interactive={true}) */}
-<Card interactive title="Interaktive Karte" />
-
-{/* Attribut-Spread */}
-<Card {...cardProps} />
-```
-
----
-
-## Wahl zwischen Containern und MDX
-
-Sowohl native docmd-Container (`::: container`) als auch MDX-Komponenten (`<Komponente>`) werden in docmd erstklassig unterstützt:
-
-| Funktion | Native Container (`:::`) | MDX-Komponenten (`<Komponente>`) |
+| Merkmal | Native Container (`:::`) | MDX-Komponenten (`<Component>`) |
 | :--- | :--- | :--- |
-| **Syntax-Stil** | Markdown-nativ (`::: callout`) | JSX-/React-Stil (`<Callout>`) |
-| **Tooling-Abhängigkeiten** | Keine externen Abhängigkeiten | Keine externen Abhängigkeiten (via `lite-mdx`) |
-| **Hierarchie** | Verschachtelte Einrückung | Punktnotation (`<Tabs.Tab>`) |
-| **Dynamische Ausdrücke** | Variablensyntax (`$var`) | JavaScript-Ausdrücke (`{expr}`) |
-| **Portabilität im Ökosystem** | Optimale Klartext-Lesbarkeit | Direkt kompatibel mit Docusaurus / Nextra |
+| **Syntax-Stil** | Markdown-nativ (`::: callout`) | JSX/React-Stil (`<Callout>`) |
+| **Abhängigkeiten** | Keine externen Abhängigkeiten | Integriert über `@docmd/plugin-mdx` |
+| **Zusammengesetzte Tags** | Verschachtelte Container | Punktnotation (`<Tabs.Tab>`) |
+| **Ausdrücke** | Vorlagenvariablen (`$var`) | Dynamische Ausdrücke (`{expr}`) |
+| **Portabilität** | Sauberstes reines Markdown | Direkt kompatibel mit Docusaurus / Nextra |
 
-::: callout tip "Koexistenz" icon:sparkles
-Sie können native Container und MDX-Komponenten problemlos auf derselben Dokumentationsseite ohne Konflikte kombinieren.
+::: callout tip "Vollständige Syntaxreferenz" icon:book-open
+Ausführliche Details zu Ausdrücken, Attributtypen und Kommentarsyntax finden Sie im [MDX-Syntax-Leitfaden](syntax/mdx.md).
 :::

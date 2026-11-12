@@ -150,6 +150,10 @@
           {
             "title": "高级格式",
             "path": "/content/syntax/advanced"
+          },
+          {
+            "title": "MDX 语法",
+            "path": "/content/syntax/mdx"
           }
         ]
       },

@@ -1,112 +1,103 @@
 ---
 title: "Componentes MDX"
-description: "Escriba documentación interactiva con MDX, sintaxis de componentes JSX, expresiones dinámicas y componentes compuestos en docmd."
+description: "Redacte documentación con componentes MDX y JSX utilizando el plugin oficial mdx y lite-mdx."
 ---
 
-docmd admite **MDX** de forma nativa, lo que le permite integrar perfectamente componentes al estilo JSX/React y expresiones dinámicas directamente dentro de su contenido Markdown. Con la tecnología del compilador ultrarrápido y sin dependencias de docmd, MDX se compila en HTML estático ligero y accesible sin sobrecarga de empaquetadores pesados ni tiempos de ejecución en el cliente.
+`docmd` proporciona soporte integrado para componentes MDX y JSX a través del plugin `@docmd/plugin-mdx`. Impulsado por `lite-mdx`, compila etiquetas JSX en HTML accesible y contenedores nativos de `docmd` durante el tiempo de compilación sin sobrecarga de JavaScript en el cliente.
 
-Puede utilizar tanto la extensión `.md` como `.mdx` indistintamente.
+Tanto las extensiones de archivo `.md` como `.mdx` se pueden utilizar indistintamente.
 
-## ¿Por qué MDX en docmd?
+::: callout tip "¿Por qué usar MDX en docmd?" icon:sparkles
+MDX ofrece una sintaxis de autoría familiar para equipos que migran desde marcos como Nextra, Docusaurus o Mintlify, lo que permite renderizar el marcado de componentes existente sin reescribir archivos Markdown.
+:::
 
-* **Compilación sin dependencias**: Compilación estática rápida sin necesidad de Webpack, Babel ni cadenas de herramientas externas de React.
-* **Familiaridad con la sintaxis JSX**: Máxima compatibilidad para desarrolladores que migran desde Nextra, Docusaurus, Astro Starlight o Mintlify.
-* **Coexistencia de componentes**: Utilice etiquetas JSX (`<Callout>`, `<Card>`, `<Tabs>`) junto con la sintaxis de contenedores nativa de docmd (`::: callout`).
-* **Expresiones dinámicas seguras**: Interpole de forma segura valores de frontmatter, variables de configuración y expresiones JavaScript en un entorno aislado.
-* **Etiquetas compuestas y con punto**: Soporte completo para componentes jerárquicos como `<Tabs.Tab>` y `<Steps.Step>`.
+## Instalación
 
----
+Instale el plugin oficial de MDX:
 
-## Sintaxis básica de componentes
-
-### Etiquetas con autocierre
-
-Las etiquetas de cierre automático son ideales para indicadores en línea, insignias y widgets independientes:
-
-```jsx
-<Badge text="Estable" type="success" />
-<Badge text="v0.9.10" type="info" />
-<Badge text="En desuso" type="danger" />
+```bash
+docmd add mdx
 ```
 
-### Componentes de bloque con contenido Markdown
+Alternativamente, registre el plugin en su `docmd.config.json`:
 
-Los componentes de bloque envuelven contenido Markdown, que sigue admitiendo el formato estándar de Markdown, fragmentos de código, listas y enlaces:
+```json
+{
+  "plugins": {
+    "mdx": {}
+  }
+}
+```
+
+## Mapeos de Componentes Integrados
+
+El plugin asigna componentes comunes de documentación directamente a contenedores de `docmd`:
+
+### Cuadros de Información (`<Callout>`)
 
 ```jsx
-<Callout type="tip" title="Consejo profesional">
-  Puede incluir **texto en negrita**, `código en línea` e incluso bloques de código dentro de etiquetas JSX:
+<Callout type="tip" title="Consejo Profesional">
+  Utilice etiquetas JSX estándar o contenedores docmd en el mismo archivo.
+</Callout>
 
-  ```bash
-  npx @docmd/core build
-  ```
+<Callout type="warning" title="Precaución">
+  Asegúrese de actualizar sus dependencias antes de compilar.
 </Callout>
 ```
 
----
+| Propiedad | Tipo | Predeterminado | Descripción |
+| :--- | :--- | :--- | :--- |
+| `type` | `String` | `info` | Variante de estilo (`info`, `tip`, `warning`, `danger`). |
+| `title` | `String` | `undefined` | Título que se muestra en la cabecera. |
+| `icon` | `String` | `undefined` | Nombre de icono Lucide o identificador Iconify opcional. |
 
-## Componentes MDX integrados
+### Tarjetas y Cuadrículas (`<Card>`, `<Cards>`)
 
-docmd proporciona asignaciones integradas para los componentes de documentación más habituales:
-
-### Avisos (`<Callout>`)
-
-```jsx
-<Callout type="info" title="Información">
-  Proporciona orientación contextual o notas del sistema.
-</Callout>
-
-<Callout type="warning" title="Advertencia">
-  Destaca precauciones críticas y cambios importantes.
-</Callout>
-```
-
-| Prop | Tipo | Descripción |
-| :--- | :--- | :--- |
-| `type` | `String` | Estilo de variante: `info`, `tip`, `warning`, `danger` (predeterminado: `info`). |
-| `title` | `String` | Texto de encabezado opcional del aviso. |
-| `icon` | `String` | Nombre de icono de Lucide o identificador de Iconify personalizado. |
-
-### Tarjetas y diseños de cuadrícula (`<Card>`, `<Cards>`)
-
-Agrupe enlaces, características o accesos directos en cuadrículas adaptables y estructuradas:
+Agrupe enlaces y elementos de referencia en diseños de cuadrícula adaptables:
 
 ```jsx
 <Cards cols={2}>
-  <Card title="Inicio rápido" href="/getting-started/quick-start" icon="rocket">
+  <Card title="Inicio Rápido" href="/getting-started/quick-start" icon="rocket">
     Aprenda a inicializar y configurar su primer sitio de documentación con docmd.
   </Card>
-  <Card title="Referencia de la CLI" href="/reference/cli-commands" icon="terminal">
-    Marcadores de interfaz de comandos, opciones y configuraciones del servidor completos.
+  <Card title="Referencia CLI" href="/reference/cli-commands" icon="terminal">
+    Comandos de interfaz de línea de comandos, opciones y herramientas de diagnóstico.
   </Card>
 </Cards>
 ```
 
+| Propiedad | Tipo | Predeterminado | Descripción |
+| :--- | :--- | :--- | :--- |
+| `cols` | `Number` | `2` | Columnas de la cuadrícula (`1`, `2`, `3` o `4`). |
+| `title` | `String` | `undefined` | Título de la tarjeta. |
+| `href` | `String` | `undefined` | URL de destino del enlace. |
+| `icon` | `String` | `undefined` | Identificador del icono de la tarjeta. |
+
 ### Pestañas (`<Tabs>`, `<Tab>`)
 
-Presente fragmentos de código en varios lenguajes o instrucciones para diferentes plataformas:
+Presente fragmentos de código específicos de plataforma o instrucciones multilingües:
 
 ```jsx
 <Tabs>
-  <Tab label="npm">
-    ```bash
-    npm install @docmd/core
-    ```
-  </Tab>
   <Tab label="pnpm">
     ```bash
-    pnpm add @docmd/core
+    pnpm add docmd
+    ```
+  </Tab>
+  <Tab label="npm">
+    ```bash
+    npm install docmd
     ```
   </Tab>
   <Tab label="bun">
     ```bash
-    bun add @docmd/core
+    bun add docmd
     ```
   </Tab>
 </Tabs>
 ```
 
-También se admite la notación compuesta `<Tabs.Tab>`:
+También se admite la notación de etiquetas compuestas:
 
 ```jsx
 <Tabs>
@@ -121,89 +112,33 @@ También se admite la notación compuesta `<Tabs.Tab>`:
 
 ### Pasos (`<Steps>`)
 
-Cree guías paso a paso numeradas y secuenciales para tutoriales o instrucciones de instalación:
+Cree guías y tutoriales de instalación paso a paso numerados:
 
 ```jsx
 <Steps>
-  ### Inicializar el proyecto
-  Ejecute `npx @docmd/core init` en su terminal.
+  ### Inicializar Proyecto
+  Ejecute `docmd init` en el directorio de su proyecto.
 
-  ### Añadir contenido
-  Escriba sus páginas de documentación en `docs/` utilizando Markdown o MDX.
+  ### Añadir Contenido
+  Escriba sus páginas de documentación en `docs/` usando Markdown o MDX.
 
-  ### Desplegar
-  Compile recursos estáticos listos para producción con `npx @docmd/core build`.
+  ### Compilar Sitio
+  Compile archivos estáticos listos para producción con `docmd build`.
 </Steps>
 ```
 
----
+## Comparación de Sintaxis
 
-## Expresiones dinámicas e interpolación
+Puede elegir entre la sintaxis de contenedores nativos y las etiquetas JSX según sus preferencias o convenciones de proyecto:
 
-MDX permite incrustar expresiones dinámicas mediante llaves `{}`. Las expresiones se evalúan en un entorno seguro con acceso al frontmatter del documento actual y a la configuración del sitio.
-
-### Acceso al Frontmatter
-
-```mdx
----
-title: "Guía de autenticación"
-version: "2.4.0"
-author: "Equipo de docmd"
----
-
-# {frontmatter.title}
-
-Versión de la documentación: **{frontmatter.version}**  
-Mantenido por: *{frontmatter.author}*
-```
-
-### Acceso a la configuración del sitio
-
-```jsx
-Bienvenido a la documentación de {config.title}.
-```
-
-### Expresiones de JavaScript
-
-```jsx
-Copyright © {new Date().getFullYear()} docmd.io.
-Presupuesto de compilación calculado: {500 * 2}ms.
-```
-
----
-
-## Props y atributos
-
-MDX admite las sintaxis de atributos JSX estándar:
-
-```jsx
-{/* Atributos de cadena */}
-<Card title="Configuración" href="/configuration/overview" />
-
-{/* Expresiones numéricas y booleanas */}
-<Cards cols={3} animated={true} />
-
-{/* Abreviatura booleana (equivalente a interactive={true}) */}
-<Card interactive title="Tarjeta interactiva" />
-
-{/* Propagación de atributos (spread) */}
-<Card {...cardProps} />
-```
-
----
-
-## Elección entre contenedores y MDX
-
-Tanto los contenedores nativos de docmd (`::: contenedor`) como los componentes MDX (`<Componente>`) son ciudadanos de primera clase en docmd:
-
-| Característica | Contenedores nativos (`:::`) | Componentes MDX (`<Componente>`) |
+| Característica | Contenedores Nativos (`:::`) | Componentes MDX (`<Component>`) |
 | :--- | :--- | :--- |
-| **Estilo de sintaxis** | Nativo de Markdown (`::: callout`) | Estilo JSX/React (`<Callout>`) |
-| **Dependencias de herramientas** | Cero dependencias externas | Cero dependencias externas (mediante `lite-mdx`) |
-| **Jerarquía compuesta** | Sangría anidada | Etiquetas con punto (`<Tabs.Tab>`) |
-| **Expresiones dinámicas** | Sintaxis de variables (`$var`) | Expresiones JavaScript (`{expr}`) |
-| **Portabilidad del ecosistema** | Lectura óptima en texto plano | Compatibilidad directa con Docusaurus / Nextra |
+| **Estilo de Sintaxis** | Markdown nativo (`::: callout`) | Estilo JSX/React (`<Callout>`) |
+| **Dependencias** | Cero dependencias externas | Integrado mediante `@docmd/plugin-mdx` |
+| **Etiquetas Compuestas** | Contenedores anidados | Notación por puntos (`<Tabs.Tab>`) |
+| **Expresiones** | Variables de plantilla (`$var`) | Expresiones dinámicas (`{expr}`) |
+| **Portabilidad** | Markdown simple más limpio | Compatible con Docusaurus / Nextra |
 
-::: callout tip "Coexistencia" icon:sparkles
-Puede combinar libremente contenedores nativos y componentes MDX dentro de la misma página de documentación sin ningún conflicto.
+::: callout tip "Referencia de Sintaxis Completa" icon:book-open
+Para obtener detalles completos sobre expresiones, tipos de atributos y sintaxis de comentarios, consulte la [Guía de Sintaxis MDX](syntax/mdx.md).
 :::

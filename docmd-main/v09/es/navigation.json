@@ -150,6 +150,10 @@
           {
             "title": "Formato Avanzado",
             "path": "/content/syntax/advanced"
+          },
+          {
+            "title": "Sintaxis MDX",
+            "path": "/content/syntax/mdx"
           }
         ]
       },

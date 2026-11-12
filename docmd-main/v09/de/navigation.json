@@ -150,6 +150,10 @@
           {
             "title": "Erweiterte Formatierung",
             "path": "/content/syntax/advanced"
+          },
+          {
+            "title": "MDX-Syntax",
+            "path": "/content/syntax/mdx"
           }
         ]
       },

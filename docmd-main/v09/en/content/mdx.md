@@ -1,75 +1,59 @@
 ---
 title: "MDX Components"
-description: "Author interactive documentation with MDX, JSX component syntax, dynamic expressions, and compound components in docmd."
+description: "Author documentation with MDX and JSX components using the official mdx plugin and lite-mdx."
 ---
 
-docmd natively supports **MDX**, allowing you to seamlessly integrate JSX/React-style components and dynamic expressions directly within your Markdown content. Powered by docmd's zero-dependency, high-performance compiler, MDX compiles to lightweight, accessible static HTML without heavy bundlers or client-side runtime bloat.
+`docmd` provides built-in support for MDX and JSX components through the `@docmd/plugin-mdx` plugin. Powered by `lite-mdx`, it compiles JSX tags into accessible HTML and native `docmd` containers during build time with zero client JavaScript runtime overhead.
 
-You can use both `.md` and `.mdx` file extensions interchangeably.
+Both `.md` and `.mdx` file extensions can be used interchangeably.
 
-## Why MDX in docmd?
+::: callout tip "Why Use MDX in docmd?" icon:sparkles
+MDX provides a familiar authoring syntax for teams migrating from frameworks like Nextra, Docusaurus, or Mintlify, allowing existing component markup to render without rewriting Markdown files.
+:::
 
-* **Zero-Dependency Compilation**: Fast, static compilation without requiring Webpack, Babel, or external React bundler toolchains.
-* **JSX Syntax Familiarity**: Drop-in familiarity for developers transitioning from Nextra, Docusaurus, Astro Starlight, or Mintlify.
-* **Component Coexistence**: Use JSX tags (`<Callout>`, `<Card>`, `<Tabs>`) side-by-side with docmd's native container syntax (`::: callout`).
-* **Safe Dynamic Expressions**: Safely interpolate frontmatter values, configuration variables, and JavaScript expressions with sandboxed evaluation.
-* **Compound & Dotted Tags**: Full support for hierarchical components like `<Tabs.Tab>` and `<Steps.Step>`.
+## Installation
 
----
+Install the official MDX plugin:
 
-## Basic Component Syntax
-
-### Self-Closing Tags
-
-Self-closing tags are ideal for inline indicators, badges, and standalone widgets:
-
-```jsx
-<Badge text="Stable" type="success" />
-<Badge text="v0.9.10" type="info" />
-<Badge text="Deprecated" type="danger" />
+```bash
+docmd add mdx
 ```
 
-### Block Components with Markdown Children
+Alternatively, register the plugin in your `docmd.config.json`:
 
-Block components wrap Markdown content, which continues to support standard Markdown formatting, code snippets, lists, and links:
-
-```jsx
-<Callout type="tip" title="Pro Tip">
-  You can include **bold text**, `inline code`, and even code blocks inside JSX tags:
-
-  ```bash
-  npx @docmd/core build
-  ```
-</Callout>
+```json
+{
+  "plugins": {
+    "mdx": {}
+  }
+}
 ```
 
----
+## Built-in Component Mappings
 
-## Built-in MDX Components
-
-docmd provides built-in mappings for common documentation components:
+The plugin maps common documentation components directly to `docmd` containers:
 
 ### Callouts (`<Callout>`)
 
 ```jsx
-<Callout type="info" title="Information">
-  Provides contextual guidance or system notes.
+<Callout type="tip" title="Pro Tip">
+  Use standard JSX tags or docmd containers in the same file.
 </Callout>
 
-<Callout type="warning" title="Warning">
-  Highlights critical cautions and breaking changes.
+<Callout type="warning" title="Caution">
+  Ensure your dependencies are updated before building.
 </Callout>
 ```
 
-| Prop | Type | Description |
-| :--- | :--- | :--- |
-| `type` | `String` | Variant style: `info`, `tip`, `warning`, `danger` (default: `info`). |
-| `title` | `String` | Optional callout header text. |
-| `icon` | `String` | Custom Lucide icon name or Iconify identifier. |
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `type` | `String` | `info` | Callout style variant (`info`, `tip`, `warning`, `danger`). |
+| `title` | `String` | `undefined` | Header title displayed at the top of the callout. |
+| `icon` | `String` | `undefined` | Optional Lucide icon name or Iconify identifier. |
 
 ### Cards and Grid Layouts (`<Card>`, `<Cards>`)
 
-Group links, features, or quick navigations into structured responsive grids:
+Group links and reference items into responsive grid layouts:
 
 ```jsx
 <Cards cols={2}>
@@ -77,36 +61,43 @@ Group links, features, or quick navigations into structured responsive grids:
     Learn how to initialise and configure your first docmd documentation site.
   </Card>
   <Card title="CLI Reference" href="/reference/cli-commands" icon="terminal">
-    Comprehensive command-line interface flags, options, and server configurations.
+    Command-line interface commands, flags, and diagnostic tools.
   </Card>
 </Cards>
 ```
 
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `cols` | `Number` | `2` | Grid columns (`1`, `2`, `3`, or `4`). |
+| `title` | `String` | `undefined` | Card header title. |
+| `href` | `String` | `undefined` | Link target URL. |
+| `icon` | `String` | `undefined` | Card icon identifier. |
+
 ### Tabs (`<Tabs>`, `<Tab>`)
 
-Present multi-language code snippets or platform-specific instructions:
+Present platform-specific code snippets or multi-language instructions:
 
 ```jsx
 <Tabs>
-  <Tab label="npm">
-    ```bash
-    npm install @docmd/core
-    ```
-  </Tab>
   <Tab label="pnpm">
     ```bash
-    pnpm add @docmd/core
+    pnpm add docmd
+    ```
+  </Tab>
+  <Tab label="npm">
+    ```bash
+    npm install docmd
     ```
   </Tab>
   <Tab label="bun">
     ```bash
-    bun add @docmd/core
+    bun add docmd
     ```
   </Tab>
 </Tabs>
 ```
 
-Compound notation `<Tabs.Tab>` is also supported:
+Compound tag notation is also supported:
 
 ```jsx
 <Tabs>
@@ -121,89 +112,33 @@ Compound notation `<Tabs.Tab>` is also supported:
 
 ### Steps (`<Steps>`)
 
-Create numbered, sequential walkthroughs for tutorials or installation guides:
+Create numbered step-by-step installation guides and tutorials:
 
 ```jsx
 <Steps>
   ### Initialise Project
-  Run `npx @docmd/core init` in your terminal.
+  Run `docmd init` in your project directory.
 
   ### Add Content
   Write your documentation pages in `docs/` using Markdown or MDX.
 
-  ### Deploy
-  Compile production-ready static assets with `npx @docmd/core build`.
+  ### Build Site
+  Compile production-ready static files with `docmd build`.
 </Steps>
 ```
 
----
+## Syntax Comparison
 
-## Dynamic Expressions & Interpolation
-
-MDX enables embedding dynamic expressions using curly braces `{}`. Expressions are evaluated in a safe sandbox with access to current document frontmatter and site configuration.
-
-### Accessing Frontmatter
-
-```mdx
----
-title: "Authentication Guide"
-version: "2.4.0"
-author: "docmd Team"
----
-
-# {frontmatter.title}
-
-Documentation version: **{frontmatter.version}**  
-Maintained by: *{frontmatter.author}*
-```
-
-### Accessing Site Configuration
-
-```jsx
-Welcome to documentation for {config.title}.
-```
-
-### JavaScript Expressions
-
-```jsx
-Copyright © {new Date().getFullYear()} docmd.io.
-Calculated build budget: {500 * 2}ms.
-```
-
----
-
-## Props and Attributes
-
-MDX supports standard JSX attribute syntaxes:
-
-```jsx
-{/* String attributes */}
-<Card title="Configuration" href="/configuration/overview" />
-
-{/* Numeric and boolean expressions */}
-<Cards cols={3} animated={true} />
-
-{/* Boolean shorthand (equivalent to interactive={true}) */}
-<Card interactive title="Interactive Card" />
-
-{/* Attribute spread */}
-<Card {...cardProps} />
-```
-
----
-
-## Choosing Between Containers and MDX
-
-Both docmd native containers (`::: container`) and MDX components (`<Component>`) are first-class citizens in docmd:
+You can choose between native container syntax and JSX tags based on personal preference or existing project conventions:
 
 | Feature | Native Containers (`:::`) | MDX Components (`<Component>`) |
 | :--- | :--- | :--- |
 | **Syntax Style** | Markdown-native (`::: callout`) | JSX/React-style (`<Callout>`) |
-| **Tooling Dependencies** | Zero external dependencies | Zero external dependencies (via `lite-mdx`) |
-| **Compound Hierarchy** | Nested indentation | Dotted tags (`<Tabs.Tab>`) |
-| **Dynamic Expressions** | Variable syntax (`$var`) | JavaScript expressions (`{expr}`) |
-| **Ecosystem Portability** | Cleanest plain-text readability | Drop-in compatible with Docusaurus / Nextra |
+| **Dependencies** | Zero external dependencies | Built-in via `@docmd/plugin-mdx` |
+| **Compound Tags** | Nested containers | Dotted notation (`<Tabs.Tab>`) |
+| **Expressions** | Template variables (`$var`) | Dynamic expressions (`{expr}`) |
+| **Portability** | Cleanest plain Markdown | Drop-in compatible with Docusaurus / Nextra |
 
-::: callout tip "Coexistence" icon:sparkles
-You can freely mix native containers and MDX components within the same documentation page without any conflicts.
+::: callout tip "Full Syntax Reference" icon:book-open
+For complete details on expressions, attribute types, and comment syntax, see the [MDX Syntax Guide](syntax/mdx.md).
 :::
