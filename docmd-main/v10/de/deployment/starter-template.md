@@ -62,7 +62,7 @@ npm install
 npm run dev
 ```
 
-Die Website wird lokal unter `http://localhost:3000` mit Hot-Reloading bereitgestellt.
+Die Website wird lokal unter `http://127.0.0.1:3000` mit Hot-Reloading bereitgestellt.
 
 Um eine Produktions-Kompilierung lokal zu überprüfen:
 

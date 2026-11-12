@@ -62,7 +62,7 @@ npm install
 npm run dev
 ```
 
-The site serves locally at `http://localhost:3000` with hot-reloading.
+The site serves locally at `http://127.0.0.1:3000` with hot-reloading.
 
 To verify a production compilation locally:
 

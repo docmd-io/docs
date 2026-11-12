@@ -55,37 +55,19 @@ Der MCP-Server stellt folgende primäre Tool-Handler bereit:
 | **`validate_docs`** | Link-Validierungsprüfungen über Markdown-Quellen ausführen. Gibt Berichte über defekte Links zurück. Respektiert `config.exclude`. |
 | **`get_llms_context`** | Konsolidierte `llms-full.txt`-Kontextinhalte abrufen, die für LLM-Prompt-Ingestion optimiert sind. |
 
-## MCP über HTTP
-
-[`docmd serve`](../deployment/docmd-serve#mcp-uber-http) kann diese Tools unter `POST /mcp` auf dem Produktionsserver bereitstellen. Dies ist standardmäßig deaktiviert:
-
-```json "docmd.config.json"
-{
-  "serve": {
-    "mcp": { "enabled": true, "origins": [] }
-  }
-}
-```
-
-Über HTTP sind die Tools schreibgeschützt (Read-only): `get_llms_context` liefert die `llms-full.txt` der bereitgestellten Website zurück, ohne sie neu zu erstellen. Anfragen mit einem `Origin`-Header müssen `serve.mcp.origins` entsprechen; Anfragen ohne diesen Header (nicht-browserbasierte MCP-Clients) werden akzeptiert. Der Endpunkt ist zustandslos: eine JSON-Antwort pro Anfrage, keine Sessions.
-
-```bash
-claude mcp add --transport http docmd https://docs.example.com/mcp
-```
-
 ## Details zur Protokollkonformität
 
 docmd unterstützt die Standard-MCP-Spezifikation:
 
-* **Transportmechanismus**: `stdio` (JSON-RPC 2.0-Nachrichten über Standard I/O); zustandsloses HTTP unter `docmd serve`.
+* **Transportmechanismus**: `stdio` (JSON-RPC 2.0-Nachrichten über Standard I/O).
 * **Logging**: Out-of-Band-Diagnoseprotokolle über `stderr`.
 * **Lebenszyklus-Ablauf**: `initialize` : `notifications/initialized` : Tool-Aufrufe.
 * **Funktionen**: Stellt `tools`, `resources` und `prompts` bereit.
 
 ## Sicherheitskontrollen
 
-* **Lokale Prozess-Sandbox**: `docmd mcp` läuft strikt als Unterprozess, ohne externe Netzwerk-Ports zu öffnen. Über HTTP ist der Endpunkt opt-in, schreibgeschützt und besitzt keine eigene Authentifizierung: schützen Sie ihn bei privaten Dokumentationen über Ihren Reverse-Proxy.
-* **Pfadgrenzen-Verifizierung**: Datei-I/O-Operationen sind auf das Projekt-Root-Verzeichnis beschränkt, und `read_doc` liefert ausschließlich Markdown-Dateien innerhalb des Quellverzeichnisses zurück.
+* **Lokale Prozess-Sandbox**: Läuft strikt als Unterprozess, ohne externe Netzwerk-Ports zu öffnen.
+* **Pfadgrenzen-Verifizierung**: Datei-I/O-Operationen sind auf das Projekt-Root-Verzeichnis beschränkt.
 * **`config.exclude`-Durchsetzung**: `search_docs`, `list_docs` und `validate_docs` respektieren die in der Konfiguration definierten `config.exclude`-Glob-Muster — Dateien und Verzeichnisse, die vom Site-Build ausgeschlossen sind, werden gleichermaßen aus MCP-Tool-Ergebnissen ausgeschlossen. Dies stellt sicher, dass KI-Agenten nur absichtlich veröffentlichte Dokumentation sehen.
 
 ::: callout tip "MCP vs llms.txt Nutzung" icon:zap

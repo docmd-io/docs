@@ -28,7 +28,7 @@ bunx @docmd/core dev
 ```
 :::
 
-Esto abre `http://localhost:3000`. Su documentación ahora está en vivo.
+Esto abre `http://127.0.0.1:3000`. Su documentación ahora está en vivo.
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 

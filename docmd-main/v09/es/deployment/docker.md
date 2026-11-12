@@ -7,7 +7,7 @@ docmd genera recursos estáticos, lo que lo hace ideal para despliegues en conte
 
 ## Imagen de contenedor oficial
 
-La imagen de contenedor precompilada compila y sirve su sitio sin necesidad de un entorno local de Node.js. Su comando predeterminado es [`docmd serve --host 0.0.0.0`](./docmd-serve): una compilación de producción, servida en el puerto 3000, con una comprobación de estado en `/healthz`. Las imágenes se publican para arquitecturas `linux/amd64` y `linux/arm64`.
+La imagen de contenedor precompilada permite compilar sitios y previsualizarlos localmente sin necesidad de instalar Node.js en el sistema anfitrión. Las imágenes se publican para arquitecturas `linux/amd64` y `linux/arm64`.
 
 ### Comandos de inicio rápido
 
@@ -18,16 +18,9 @@ docker pull ghcr.io/docmd-io/docmd:0.9.0
 # Compilar salida estática (monta el directorio local docs)
 docker run -v $(pwd)/docs:/docs -v $(pwd)/site:/site ghcr.io/docmd-io/docmd:0.9.0 build
 
-# Servir su documentación en modo de producción (comando predeterminado)
-docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
-
-# Servidor de desarrollo con recarga en vivo, durante la redacción
-docker run -v $(pwd):/docs -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0 dev --host 0.0.0.0
+# Iniciar servidor de previsualización local
+docker run -p 3000:3000 ghcr.io/docmd-io/docmd:0.9.0
 ```
-
-::: callout info "Comando predeterminado" icon:info
-Las imágenes anteriores a `docmd serve` ejecutaban `dev --host 0.0.0.0` de forma predeterminada. Si dependía de la recarga en vivo sin pasar un comando, pase `dev --host 0.0.0.0` explícitamente.
-:::
 
 ::: callout tip "Fijar versiones" icon:pin
 Fija etiquetas de versión específicas (por ejemplo, `0.9.0`) en las canalizaciones de CI en producción para garantizar la reproducibilidad de las compilaciones.
@@ -56,16 +49,6 @@ services:
       - docs
 ```
 
-### Comprobación de estado y puerto
-
-El `HEALTHCHECK` de la imagen solicita `GET /healthz` en `${PORT:-3000}`. `docmd serve` responde `200` una vez que el sitio está compilado y `503` mientras se ejecuta la primera compilación. Configure `PORT` para mover el servidor y la comprobación de estado juntos:
-
-```bash
-docker run -e PORT=8080 -p 8080:8080 ghcr.io/docmd-io/docmd:0.9.0
-```
-
-En Kubernetes, apunte los sondeos de inicio y de disponibilidad a `/healthz`. `serve` escribe el sitio compilado en `/docs`, así que móntelo desde un volumen con permisos de escritura, no directamente desde un ConfigMap.
-
 ### Especificaciones de la imagen
 
 | Propiedad | Especificaciones |
@@ -77,7 +60,7 @@ En Kubernetes, apunte los sondeos de inicio y de disponibilidad a `/healthz`. `s
 
 ### Directorio de trabajo y permisos personalizados
 
-El punto de entrada detecta automáticamente el UID y GID del propietario para los volúmenes montados y reduce los privilegios antes de ejecutar los comandos `init`, `build`, `serve` o `dev`. Los archivos escritos en los montajes del anfitrión conservan la propiedad del usuario anfitrión.
+El punto de entrada detecta automáticamente el UID y GID del propietario para los volúmenes montados y reduce los privilegios antes de ejecutar los comandos `init`, `build` o `dev`. Los archivos escritos en los montajes del anfitrión conservan la propiedad del usuario anfitrión.
 
 ```bash
 docker run -v $(pwd):/workspace -w /workspace ghcr.io/docmd-io/docmd:0.9.0 init

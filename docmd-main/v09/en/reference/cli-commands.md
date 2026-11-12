@@ -10,9 +10,8 @@ description: "Command-line interface reference for docmd, commands, flags, and o
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Initialise a new documentation workspace. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Launch local development server with hot-reloading. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Compile production-ready static site. |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Build once and serve the site in production with compression and health probes. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Launch browser-based Live Editor environment. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active `dev` and `serve` servers. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Terminate active development servers. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generate deployment manifests and container files. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Upgrade legacy configurations or migrate from third-party tools. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Run link validation and check Markdown document integrity. |
@@ -26,7 +25,6 @@ description: "Command-line interface reference for docmd, commands, flags, and o
 | Parameter Flag | Alias | Technical Description |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Specify custom path to configuration file (default: `docmd.config.json`). |
-| `--no-open` | - | Disable auto-opening browser on server startup (`dev` command). |
 | `--verbose` | `-V` | Output detailed execution logs. |
 | `--version` | `-v` | Output installed package version. |
 | `--help` | `-h` | Output command CLI help instructions. |
@@ -56,8 +54,6 @@ npx @docmd/core dev [options]
 | Parameter Flag | Alias | Technical Description |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Specify web server port (default: `3000`). |
-| `--host <address>` | - | Specify network interface to bind (default: `127.0.0.1`; `0.0.0.0` for all/LAN). |
-| `--no-open` | - | Prevent automatic launching of the default web browser upon server startup. |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
 ## `npx @docmd/core build`
@@ -73,23 +69,6 @@ npx @docmd/core build [options]
 | `--offline` | - | Rewrite asset and link paths to `.html` relative files for local file system browsing. |
 | `--config <path>` | `-c` | Custom path to configuration file. |
 
-## `npx @docmd/core serve`
-
-Build the site once and serve it in production mode: fixed port, Gzip compression, no file watcher, no live reload, and container health probes. See [Production Server](../deployment/docmd-serve) for the `serve` config block, plugin actions and MCP over HTTP.
-
-```bash
-npx @docmd/core serve [options]
-```
-
-| Parameter Flag | Alias | Technical Description |
-| :--- | :--- | :--- |
-| `--host <address>` | - | Interface to bind (default: `serve.host`, `DOCMD_HOST`, then `127.0.0.1`; `0.0.0.0` for container / LAN). |
-| `--port <number>` | `-p` | Port to listen on (default: `serve.port`, `PORT`, then `3000`). Exits with code 1 if it is in use. |
-| `--config <path>` | `-c` | Custom path to configuration file. |
-
-::: callout info "Container Health Probes (/healthz)" icon:activity
-`docmd serve` exposes an automatic `GET /healthz` endpoint returning `{"status":"ok","version":"..."}` with HTTP 200 and `Cache-Control: no-store`. Use this endpoint for Docker `HEALTHCHECK`, Kubernetes liveness and readiness probes, and cloud load balancers.
-:::
 ## `npx @docmd/core live`
 
 Launch browser-based Live Editor environment.
@@ -104,7 +83,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-Terminate running development or production servers.
+Terminate running development servers.
 
 ```bash
 npx @docmd/core stop [options]

@@ -13,7 +13,6 @@ description: "了解 `@docmd/core` 如何将物理文件夹和 Markdown 文件�
 my-docs/
 ├── docs/  # 包含 Markdown (.md) 页面的源目录
 │   └── index.md  # 落地页（解析为 /）
-├── public/  # 网站根目录静态资源（CNAME、robots.txt、funding.json）
 ├── assets/  # 由引擎直接加载的静态 Web 资源
 │   ├── css/  # 用于自定义页面布局的自定义样式表
 │   ├── js/  # 用于扩展浏览器端逻辑的自定义脚本

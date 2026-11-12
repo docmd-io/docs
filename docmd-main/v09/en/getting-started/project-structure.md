@@ -13,7 +13,6 @@ Run `npx @docmd/core init` to establish a minimal workspace layout. This structu
 my-docs/
 ├── docs/  # Source directory containing your Markdown (.md) pages
 │   └── index.md  # The landing page (resolves to /)
-├── public/  # Root static assets copied to site root (CNAME, robots.txt, funding.json)
 ├── assets/  # Static web assets loaded directly by the engine
 │   ├── css/  # Custom stylesheets for customising page layout
 │   ├── js/  # Custom scripts to extend browser-side logic

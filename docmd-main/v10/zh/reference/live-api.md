@@ -13,7 +13,7 @@ docmd Live Editor 是一个专门用于实时撰写文档的环境。它借助�
 npx @docmd/core live
 ```
 
-编辑器通常可在 `http://localhost:3000` 访问。
+编辑器通常可在 `http://127.0.0.1:3000` 访问。
 
 ## 架构
 

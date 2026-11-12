@@ -10,9 +10,8 @@ description: "Referencia de la interfaz de línea de comandos para docmd: comand
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Inicializar un nuevo espacio de trabajo de documentación. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Iniciar el servidor de desarrollo local con recarga rápida. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Compilar un sitio estático listo para producción. |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Ejecutar el servidor web estático de producción con compresión y comprobaciones de estado. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Iniciar el entorno del Editor en vivo basado en el navegador. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Finalizar los servidores de desarrollo o de producción activos. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Finalizar los servidores de desarrollo activos. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Generar manifiestos de despliegue y archivos de contenedor. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Actualizar configuraciones heredadas o migrar desde herramientas de terceros. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Ejecutar la validación de enlaces y comprobar la integridad del documento Markdown. |
@@ -26,7 +25,6 @@ description: "Referencia de la interfaz de línea de comandos para docmd: comand
 | Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Especificar ruta personalizada al archivo de configuración (predeterminado: `docmd.config.json`). |
-| `--no-open` | - | Desactivar la apertura automática del navegador al iniciar el servidor (comando `dev`). |
 | `--verbose` | `-V` | Emitir registros de ejecución detallados. |
 | `--version` | `-v` | Emitir la versión del paquete instalado. |
 | `--help` | `-h` | Emitir instrucciones de ayuda de la CLI de comandos. |
@@ -56,8 +54,6 @@ npx @docmd/core dev [opciones]
 | Marcador de parámetro | Alias | Descripción técnica |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000`). |
-| `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN). |
-| `--no-open` | - | Evita abrir automáticamente el navegador web predeterminado al iniciar el servidor. |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
 ## `npx @docmd/core build`
@@ -73,26 +69,6 @@ npx @docmd/core build [opciones]
 | `--offline` | - | Reescribir rutas de recursos y enlaces a archivos relacionales `.html` para la navegación local en el sistema de archivos. |
 | `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
 
-## `npx @docmd/core serve`
-
-Compila una vez e inicia un servidor web HTTP de producción para la documentación generada (`site/`).
-
-A diferencia de `dev`, `serve` está diseñado para entornos de producción (p. ej. Docker, Kubernetes, VPS). No realiza supervisión de archivos ni recompilaciones en segundo plano, sirve recursos estáticos con compresión Gzip y Deflate, aplica encabezados de seguridad de producción estrictos (CSP, HSTS), admite URL limpias y expone una sonda de estado de contenedor (`/healthz`).
-
-```bash
-npx @docmd/core serve [opciones]
-```
-
-| Marcador de parámetro | Alias | Descripción técnica |
-| :--- | :--- | :--- |
-| `--port <number>` | `-p` | Especificar puerto del servidor web (predeterminado: `3000` o `serve.port`). |
-| `--host <address>` | - | Interfaz de red para vincular (predeterminado: `127.0.0.1`; `0.0.0.0` para todas/LAN/Docker). |
-| `--config <path>` | `-c` | Ruta personalizada al archivo de configuración. |
-
-::: callout info "Sondas de estado del contenedor (/healthz)" icon:activity
-`docmd serve` expone un punto final automático `GET /healthz` que devuelve `{"status":"ok","version":"..."}` con HTTP 200 y `Cache-Control: no-store`. Utilice este punto final para Docker `HEALTHCHECK`, sondeos de actividad y disponibilidad de Kubernetes y balanceadores de carga en la nube.
-:::
-
 ## `npx @docmd/core live`
 
 Inicia el entorno del Editor en vivo basado en el navegador.
@@ -107,7 +83,7 @@ npx @docmd/core live [opciones]
 
 ## `npx @docmd/core stop`
 
-Finaliza los servidores de desarrollo o de producción en ejecución.
+Finaliza los servidores de desarrollo en ejecución.
 
 ```bash
 npx @docmd/core stop [opciones]

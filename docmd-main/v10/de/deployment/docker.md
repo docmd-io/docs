@@ -108,4 +108,4 @@ docker build -t my-docs .
 docker run -p 8080:80 my-docs
 ```
 
-Greifen Sie unter `http://localhost:8080` auf die bereitgestellte Website zu.
+Greifen Sie unter `http://127.0.0.1:8080` auf die bereitgestellte Website zu.

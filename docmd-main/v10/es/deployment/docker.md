@@ -108,4 +108,4 @@ docker build -t my-docs .
 docker run -p 8080:80 my-docs
 ```
 
-Accede al sitio servido en `http://localhost:8080`.
+Accede al sitio servido en `http://127.0.0.1:8080`.

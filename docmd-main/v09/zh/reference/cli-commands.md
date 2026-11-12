@@ -10,9 +10,8 @@ description: "docmd 命令行参考：所有可用命令与选项。"
 | [`npx @docmd/core init`](#npx-docmdcore-init) | 初始化一个新的文档项目 |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | 启动带热刷新的开发服务器 |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | 生成可用于生产的静态站点 |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | 启动带压缩与健康检查的生产级静态 Web 服务器 |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | 启动浏览器版 Live Editor |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 dev 或 serve 服务器 |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | 停止运行中的 dev 服务器 |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | 生成部署配置 |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | 升级旧版配置或从其他工具迁移 |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | 校验链接并检查文档文件 |
@@ -26,7 +25,6 @@ description: "docmd 命令行参考：所有可用命令与选项。"
 | 选项 | 别名 | 说明 |
 |:-------|:------|:------------|
 | `--config <path>` | `-c` | 配置文件路径（默认：`docmd.config.json`） |
-| `--no-open` | - | 禁用服务器启动时自动打开浏览器（`dev` 命令） |
 | `--verbose` | `-V` | 显示详细的构建日志 |
 | `--version` | `-v` | 输出已安装的版本 |
 | `--help` | `-h` | 显示帮助菜单 |
@@ -56,8 +54,6 @@ npx @docmd/core dev [options]
 | 选项 | 别名 | 说明 |
 |:-------|:------|:------------|
 | `--port <number>` | `-p` | 服务器端口（默认：`3000`） |
-| `--host <address>` | - | 绑定的网络接口（默认：`127.0.0.1`；`0.0.0.0` 开放局域网所有接口） |
-| `--no-open` | - | 阻止开发服务器启动时自动打开系统默认浏览器 |
 | `--config <path>` | `-c` | 配置文件路径 |
 
 ## `npx @docmd/core build`
@@ -73,26 +69,6 @@ npx @docmd/core build [options]
 | `--offline` | - | 将链接改写为 `.html`，便于 `file://` 浏览 |
 | `--config <path>` | `-c` | 配置文件路径 |
 
-## `npx @docmd/core serve`
-
-一次性构建并启动用于生产环境的 HTTP Web 服务器，托管已编译的文档（`site/`）。
-
-与 `dev` 不同，`serve` 专为生产部署设计（如 Docker、Kubernetes、VPS）。它不进行文件监控和后台重构，通过 Gzip 与 Deflate 进行静态资源压缩，强制实施严格的生产安全标头（CSP、HSTS），支持干净 URL（Clean URLs），并提供容器健康检查探针（`/healthz`）。
-
-```bash
-npx @docmd/core serve [options]
-```
-
-| 选项 | 别名 | 说明 |
-|:-------|:------|:------------|
-| `--port <number>` | `-p` | 指定服务器端口（默认：`3000` 或 `serve.port`） |
-| `--host <address>` | - | 绑定的网络接口（默认：`127.0.0.1`；`0.0.0.0` 适用于局域网或 Docker） |
-| `--config <path>` | `-c` | 配置文件路径 |
-
-::: callout info "容器健康检查探针 (/healthz)" icon:activity
-`docmd serve` 自动提供 `GET /healthz` 端点，返回 `{"status":"ok","version":"..."}`，响应码为 200 并附带 `Cache-Control: no-store`。可直接用于 Docker 的 `HEALTHCHECK` 指令、Kubernetes 存活/就绪探针以及云负载均衡器的健康检查。
-:::
-
 ## `npx @docmd/core live`
 
 启动浏览器版 Live Editor。
@@ -107,7 +83,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-停止运行中的开发或生产服务器。
+停止运行中的 dev 服务器。
 
 ```bash
 npx @docmd/core stop [options]

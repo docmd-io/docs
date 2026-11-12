@@ -119,7 +119,7 @@ docker build -t my-docs .
 docker run -p 8080:80 my-docs
 ```
 
-您的文档将在 `http://localhost:8080` 上线。
+您的文档将在 `http://127.0.0.1:8080` 上线。
 
 ::: callout tip "重新生成"
 修改了配置？重新运行 `npx @docmd/core deploy --docker` 以重新生成。配合 `--force` 可覆盖已有文件。

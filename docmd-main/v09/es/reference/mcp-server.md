@@ -55,37 +55,19 @@ El servidor MCP expone los siguientes controladores de herramientas principales:
 | **`validate_docs`** | Ejecutar comprobaciones de validación de enlaces en las fuentes Markdown. Devuelve informes de enlaces rotos. Respeta `config.exclude`. |
 | **`get_llms_context`** | Obtener cargas útiles de contexto `llms-full.txt` unificadas y optimizadas para la ingestión de indicaciones de LLM. |
 
-## MCP sobre HTTP
-
-[`docmd serve`](../deployment/docmd-serve#mcp-sobre-http) puede exponer estas herramientas en `POST /mcp` en el servidor de producción. Está desactivado de forma predeterminada:
-
-```json "docmd.config.json"
-{
-  "serve": {
-    "mcp": { "enabled": true, "origins": [] }
-  }
-}
-```
-
-A través de HTTP, las herramientas son de solo lectura: `get_llms_context` devuelve el archivo `llms-full.txt` del sitio que se está sirviendo en lugar de reconstruirlo. Una solicitud con un encabezado `Origin` debe coincidir con `serve.mcp.origins`; las solicitudes sin él (clientes MCP que no son navegadores) son aceptadas. El punto final no tiene estado: una respuesta JSON por solicitud, sin sesiones.
-
-```bash
-claude mcp add --transport http docmd https://docs.example.com/mcp
-```
-
 ## Detalles de cumplimiento del protocolo
 
 docmd admite la especificación MCP estándar:
 
-* **Mecanismo de transporte**: `stdio` (mensajes JSON-RPC 2.0 a través de E/S estándar); HTTP sin estado bajo `docmd serve`.
+* **Mecanismo de transporte**: `stdio` (mensajes JSON-RPC 2.0 a través de E/S estándar).
 * **Registro**: Registros de diagnóstico fuera de banda emitidos a través de `stderr`.
 * **Flujo del ciclo de vida**: `initialize` : `notifications/initialized` : Invocaciones de herramientas.
 * **Capacidades**: Expone `tools`, `resources` y `prompts`.
 
 ## Controles de seguridad
 
-* **Aislamiento de procesos locales**: `docmd mcp` opera estrictamente como un subproceso sin abrir puertos de red externos. A través de HTTP, el punto final es opcional, de solo lectura y no tiene autenticación propia: protéjalo con su proxy inverso si su documentación es privada.
-* **Verificación de límites de ruta**: Las operaciones de E/S de archivos están restringidas dentro del directorio raíz del proyecto, y `read_doc` solo devuelve Markdown dentro del directorio fuente.
+* **Aislamiento de procesos locales**: Opera estrictamente como un proceso secundario sin abrir puertos de red externos.
+* **Verificación de límites de ruta**: Las operaciones de E/S de archivos están restringidas dentro del directorio raíz del proyecto.
 * **Cumplimiento de `config.exclude`**: `search_docs`, `list_docs` y `validate_docs` respetan los patrones glob definidos en `config.exclude` — los archivos y directorios excluidos del build del sitio también se excluyen de los resultados de las herramientas MCP. Esto garantiza que los agentes de IA solo vean la documentación publicada intencionalmente.
 
 ::: callout tip "Uso de MCP frente a llms.txt" icon:zap

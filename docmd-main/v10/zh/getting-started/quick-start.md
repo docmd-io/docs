@@ -28,7 +28,7 @@ bunx @docmd/core dev
 ```
 :::
 
-这会打开 `http://localhost:3000`。你的文档现已实时运行。
+这会打开 `http://127.0.0.1:3000`。你的文档现已实时运行。
 
 <img width="500" class="with-border" src="/assets/previews/terminal-npx-dev.webp">
 

@@ -25,7 +25,7 @@ pnpm install
 npx @docmd/core dev
 ```
 
-Der lokale Entwicklungsserver startet unter `http://localhost:3000` mit sofortigem Hot Module Replacement (HMR). Standardmäßig öffnet docmd beim Start automatisch die lokale Website in Ihrem Standardbrowser.
+Der lokale Entwicklungsserver startet unter `http://127.0.0.1:3000` mit sofortigem Hot Module Replacement (HMR). Standardmäßig öffnet docmd beim Start automatisch die lokale Website in Ihrem Standardbrowser.
 
 ::: callout tip "Headless-Workflows & CLI-Flags" icon:terminal
 Beim Entwickeln in Headless-Umgebungen, CI-Pipelines, Docker-Containern oder Remote-Terminalsitzungen, in denen Browser-Popups unerwünscht sind, übergeben Sie das Flag `--no-open`:

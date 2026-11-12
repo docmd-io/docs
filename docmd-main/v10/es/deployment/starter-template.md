@@ -62,7 +62,7 @@ npm install
 npm run dev
 ```
 
-El sitio se sirve localmente en `http://localhost:3000` con recarga rápida.
+El sitio se sirve localmente en `http://127.0.0.1:3000` con recarga rápida.
 
 Para verificar una compilación de producción localmente:
 

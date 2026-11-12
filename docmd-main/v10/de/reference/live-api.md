@@ -13,7 +13,7 @@ Starten Sie den lokalen Live-Editor mit:
 npx @docmd/core live
 ```
 
-Der Editor ist typischerweise unter `http://localhost:3000` verfügbar.
+Der Editor ist typischerweise unter `http://127.0.0.1:3000` verfügbar.
 
 ## Architektur
 

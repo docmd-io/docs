@@ -63,8 +63,6 @@ Diese Top-Level-Eigenschaften konfigurieren Basispfade und globale Compiler-Opti
 | `engine` | `String` | `"js"` | Verarbeitungs-Engine: `"js"` (Standard-JavaScript-Engine), `"rust"` (nativer Beschleuniger via `@docmd/engine-rust`) oder `"python"` (Python 3-Laufzeitbeschleuniger via `@docmd/engine-python`). |
 | `i18n` | `Object` | `null` | Mehrsprachigkeitsparameter. Siehe den [Lokalisierungs-Leitfaden](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Konfigurationsmap für Standard- und Drittanbieter-Plugins. Siehe [Plugins-Leitfaden](../plugins/usage.md). |
-| `static` | `String \| String[] \| Boolean` | `undefined` | Statische Root-Assets, die direkt in das Ausgabe-Root-Verzeichnis kopiert werden. Erkennt standardmäßig den `public/`-Ordner. Auf `false` setzen zum Deaktivieren. |
-| `serve` | `Object` | `{ "host": "127.0.0.1", "port": 3000 }` | Host- und Port-Konfiguration für den Produktionsserver-Befehl `docmd serve`. |
 
 ::: callout info title:"Abwärtskompatibilität" icon:history
 `docmd` bewahrt 100%ige Abwärtskompatibilität für ältere Konfigurationsmanifeste:

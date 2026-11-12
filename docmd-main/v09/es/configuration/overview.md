@@ -63,8 +63,6 @@ Estas propiedades de nivel superior configuran las rutas base y las opciones glo
 | `engine` | `String` | `"js"` | Motor de procesamiento: `"js"` (motor predeterminado en JavaScript puro), `"rust"` (acelerador nativo mediante `@docmd/engine-rust`) o `"python"` (acelerador de tiempo de ejecución Python 3 mediante `@docmd/engine-python`). |
 | `i18n` | `Object` | `null` | Parámetros multilingües. Consulte la [Guía de localización](./localisation/translated-content.md). |
 | `plugins` | `Object` | `{}` | Mapa de configuración de plugins estándar y de terceros. Consulte la [Guía de plugins](../plugins/usage.md). |
-| `static` | `String \| String[] \| Boolean` | `undefined` | Recursos estáticos de raíz para copiar directamente a la raíz de salida. Detecta automáticamente la carpeta `public/`. Use `false` para desactivar. |
-| `serve` | `Object` | `{ "host": "127.0.0.1", "port": 3000 }` | Configuración de host y puerto para el comando del servidor de producción `docmd serve`. |
 
 ::: callout info title:"Compatibilidad con versiones anteriores" icon:history
 `docmd` conserva el 100% de compatibilidad con versiones anteriores para manifiestos de configuración más antiguos:

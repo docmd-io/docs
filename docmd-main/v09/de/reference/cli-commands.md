@@ -10,9 +10,8 @@ description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags un
 | [`npx @docmd/core init`](#npx-docmdcore-init) | Einen neuen Dokumentations-Workspace initialisieren. |
 | [`npx @docmd/core dev`](#npx-docmdcore-dev) | Lokalen Entwicklungsserver mit Hot-Reloading starten. |
 | [`npx @docmd/core build`](#npx-docmdcore-build) | Produktionsbereite statische Website kompilieren. |
-| [`npx @docmd/core serve`](#npx-docmdcore-serve) | Produktionsbereiten statischen Webserver mit Komprimierung und Health-Checks starten. |
 | [`npx @docmd/core live`](#npx-docmdcore-live) | Browserbasierte Live-Editor-Umgebung starten. |
-| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive Entwicklungs- oder Produktionsserver beenden. |
+| [`npx @docmd/core stop`](#npx-docmdcore-stop) | Aktive Entwicklungsserver beenden. |
 | [`npx @docmd/core deploy`](#npx-docmdcore-deploy) | Deployment-Manifeste und Containerdateien generieren. |
 | [`npx @docmd/core migrate`](#npx-docmdcore-migrate) | Legacy-Konfigurationen upgraden oder von Drittanbieter-Tools migrieren. |
 | [`npx @docmd/core validate`](#npx-docmdcore-validate) | Link-Validierung ausführen und Dokumentenintegrität prüfen. |
@@ -26,7 +25,6 @@ description: "Befehlszeilenschnittstellen-Referenz für docmd, Befehle, Flags un
 | Parameter-Flag | Alias | Technische Beschreibung |
 | :--- | :--- | :--- |
 | `--config <path>` | `-c` | Benutzerdefinierten Pfad zur Konfigurationsdatei angeben (Standard: `docmd.config.json`). |
-| `--no-open` | - | Automatisches Öffnen des Browsers beim Serverstart deaktivieren (`dev`-Befehl). |
 | `--verbose` | `-V` | Detaillierte Ausführungsprotokolle ausgeben. |
 | `--version` | `-v` | Installierte Paketversion ausgeben. |
 | `--help` | `-h` | CLI-Hilfeanweisungen für Befehle ausgeben. |
@@ -56,8 +54,6 @@ npx @docmd/core dev [options]
 | Parameter-Flag | Alias | Technische Beschreibung |
 | :--- | :--- | :--- |
 | `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000`). |
-| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN). |
-| `--no-open` | - | Automatisches Öffnen des Standard-Webbrowsers beim Serverstart verhindern. |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
 ## `npx @docmd/core build`
@@ -73,26 +69,6 @@ npx @docmd/core build [options]
 | `--offline` | - | Asset- und Link-Pfade in relative `.html`-Dateien für lokales Dateisystem-Browsing umschreiben. |
 | `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
 
-## `npx @docmd/core serve`
-
-Einmal kompilieren und einen produktionsreifen HTTP-Webserver für die erstellte Dokumentation (`site/`) starten.
-
-Im Gegensatz zu `dev` ist `serve` für Produktivumgebungen konzipiert (z. B. Docker, Kubernetes, VPS). Es führt kein Dateiwatching oder Hintergrund-Neukompilieren durch, liefert statische Assets mit Gzip- und Deflate-Komprimierung aus, erzwingt strenge Sicherheits-Header (CSP, HSTS), unterstützt Clean URLs und stellt einen Container-Health-Check (`/healthz`) bereit.
-
-```bash
-npx @docmd/core serve [options]
-```
-
-| Parameter-Flag | Alias | Technische Beschreibung |
-| :--- | :--- | :--- |
-| `--port <number>` | `-p` | Webserver-Port angeben (Standard: `3000` oder `serve.port`). |
-| `--host <address>` | - | Netzwerk-Interface zur Bindung angeben (Standard: `127.0.0.1`; `0.0.0.0` für alle/LAN/Docker). |
-| `--config <path>` | `-c` | Benutzerdefinierter Pfad zur Konfigurationsdatei. |
-
-::: callout info "Container-Health-Checks (/healthz)" icon:activity
-`docmd serve` stellt einen automatischen `GET /healthz`-Endpunkt bereit, der `{"status":"ok","version":"..."}` mit HTTP 200 und `Cache-Control: no-store` zurückgibt. Verwenden Sie diesen Endpunkt für Docker `HEALTHCHECK`, Kubernetes Liveness- und Readiness-Probes sowie Cloud-Load-Balancer.
-:::
-
 ## `npx @docmd/core live`
 
 Starten Sie die browserbasierte Live-Editor-Umgebung.
@@ -107,7 +83,7 @@ npx @docmd/core live [options]
 
 ## `npx @docmd/core stop`
 
-Beenden Sie laufende Entwicklungs- oder Produktionsserver.
+Beenden Sie laufende Entwicklungsserver.
 
 ```bash
 npx @docmd/core stop [options]

@@ -14,7 +14,6 @@ Cuando se ejecuta en un directorio sin un manifiesto `docmd.config.json`, el mot
 1. **Descubrimiento del directorio fuente**: Escanea los directorios candidatos en orden de prioridad: `docs/`, `src/docs/`, `documentation/`, `content/` y `.` (alternativa de directorio raíz).
 2. **Extracción de versión y ubicación**: Analiza automáticamente carpetas de versión que coinciden con `v[0-9]+` (por ejemplo, `v1.0`, `v09`) y códigos de ubicación de dos letras (por ejemplo, `en`, `de`, `zh`).
 3. **Enrutamiento automatizado de la barra lateral**: Genera un árbol de navegación limpio analizando las jerarquías de archivos y convirtiendo nombres de base con guiones (`getting-started.md` : `Getting Started`).
-4. **Descubrimiento de recursos raíz estáticos**: Detecta automáticamente `public/` (o `static/`) en la raíz del proyecto o carpeta fuente, reflejando todos los archivos y subdirectorios anidados directamente en la raíz de salida del sitio (`site/`).
 
 :::
 
@@ -28,7 +27,6 @@ Para maximizar la efectividad del modo de cero configuración, adopte estas conv
 - **Agrupación de directorios**: Agrupe documentos Markdown relacionados dentro de subcarpetas para crear automáticamente categorías desplegables en la barra lateral.
 - **Página de inicio alternativa**: Coloque un `index.md` o `README.md` en la raíz de cada carpeta de contenido para que sirva como su página de inicio predeterminada.
 - **Ruta de salida limpia**: Cuando utilice la raíz `.` como su carpeta fuente, los recursos estáticos compilados se envían a `./site/`, que es ignorado automáticamente por los controles de código fuente y compiladores.
-- **Recursos raíz estáticos**: Coloque archivos raíz de dominio como `CNAME`, `robots.txt`, `funding.json` o manifiestos de verificación en `public/` para copiarlos automáticamente a la raíz del sitio web.
 
 ## Comportamientos predeterminados integrados
 
@@ -45,7 +43,6 @@ Para desactivar un comportamiento predeterminado, establezca su clave en `false`
 | `pageNavigation` | `true` | Renderiza enlaces de artículos anteriores/siguientes en la parte inferior de las páginas. |
 | `copyCode` | `true` | Añade botones de copia a los bloques de código. |
 | `autoTitleFromH1` | `true` | Resuelve los títulos de página faltantes usando el primer encabezado `# H1` del archivo. |
-| `static` | `undefined` | Recursos raíz estáticos para copiar directamente a la raíz del sitio. Detecta automáticamente la carpeta `public/` de forma predeterminada. Establézcalo en `false` para desactivarlo. |
 
 ### Valores predeterminados de diseño e interfaz
 
