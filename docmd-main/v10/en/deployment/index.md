@@ -58,6 +58,7 @@ npx @docmd/core deploy --netlify         # netlify.toml configuration
 * **[Netlify](./netlify)**: Git-backed continuous deployment.
 * **[Cloudflare Pages](./cloudflare-pages)**: Edge-native static site hosting with integrated CI/CD.
 * **[Firebase Hosting](./firebase)**: Google CDN deployment with GitHub Actions integration.
+* **[deed.page](./deed-page)**: One-request upload of the built folder to a public URL, with no account needed.
 
 ## Production Checklist
 

@@ -458,6 +458,10 @@
       {
         "title": "Firebase",
         "path": "/deployment/firebase"
+      },
+      {
+        "title": "deed.page",
+        "path": "/deployment/deed-page"
       }
     ]
   },
