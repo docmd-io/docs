@@ -14,9 +14,7 @@
     "preview": "npx serve site"
   },
   "dependencies": {
-    "@docmd/core": "^0.10.0",
-    "@docmd/plugin-iconify": "^0.10.0",
-    "lite-mdx": "^0.1.2"
+    "@docmd/core": "^0.10.1"
   },
   "allowScripts": {
     "@docmd/engine-rust": true

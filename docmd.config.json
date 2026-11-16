@@ -32,7 +32,7 @@
         "content": "**docmd v{{ docmd.version }} is live!** — Read the latest technical documentation and migration guides.",
         "type": "info",
         "dismissible": true,
-        "icon": "sparkles"
+        "icon": "iconify:solar:sparkles-bold-duotone"
       },
       "toc-top": {
         "content": "⚡ **Setup Free AI Assistant for your documentation** — Connect your docs with docmd cloud relay.",
@@ -45,6 +45,7 @@
     "ai": {
       "assistant": true,
       "projectId": "docmd_aiv77jc8ms8qtpvd"
-    }
+    },
+    "iconify": {}
   }
 }
