@@ -91,12 +91,23 @@ Ende-zu-Ende-Verschlüsselung und Überwachung sind aktiv.
 :::
 ```
 
+::: callout icon:iconify:mdi:home title:"Willkommen"
+Willkommen auf unserem Dokumentationsportal.
+:::
+
+::: callout success title:"Sicherheit bestätigt" icon:iconify-solar:shield-check-bold
+Ende-zu-Ende-Verschlüsselung und Überwachung sind aktiv.
+:::
+
 #### Buttons
 
 ```markdown
 ::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
 ::: button "Discord beitreten" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 ```
+
+::: button "GitHub Repository" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
+::: button "Discord beitreten" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 
 #### Karten (Cards)
 
@@ -110,9 +121,18 @@ Statische Assets und Serverless-Runtimes auf Cloud Storage und Cloud Run hosten.
 :::
 ```
 
+::: card title:"Docker Bereitstellung" icon:iconify:tabler:brand-docker
+Containerisierte Dokumentationsseiten mit leichtgewichtigen Alpine-Linux-Images bereitstellen.
+:::
+
+::: card title:"Google Cloud Platform" icon:iconify:simple-icons:googlecloud
+Statische Assets und Serverless-Runtimes auf Cloud Storage und Cloud Run hosten.
+:::
+
 #### Tabs
 
-```markdown
+````markdown
+::: tabs
 == tab "Docker Compose" icon:iconify:tabler:brand-docker
 ```yaml
 services:
@@ -129,7 +149,27 @@ kind: Deployment
 metadata:
   name: docmd-site
 ```
+:::
+````
+
+::: tabs
+== tab "Docker Compose" icon:iconify:tabler:brand-docker
+```yaml
+services:
+  docs:
+    image: ghcr.io/docmd-io/docmd:latest
+    ports:
+      - "3000:3000"
 ```
+
+== tab "Kubernetes" icon:iconify:simple-icons:kubernetes
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docmd-site
+```
+:::
 
 #### Tags
 
@@ -137,6 +177,9 @@ metadata:
 ::: tag "Produktionsreif" icon:iconify:solar:verified-check-bold color:green
 ::: tag "npm Paket" icon:iconify:simple-icons:npm color:red
 ```
+
+::: tag "Produktionsreif" icon:iconify:solar:verified-check-bold color:green
+::: tag "npm Paket" icon:iconify:simple-icons:npm color:red
 
 ## Beliebte Icon-Sammlungen
 

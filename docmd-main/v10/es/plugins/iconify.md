@@ -91,12 +91,23 @@ El cifrado de extremo a extremo y los registros de auditoría están activos.
 :::
 ```
 
+::: callout icon:iconify:mdi:home title:"Bienvenido"
+Bienvenido a nuestro portal de documentación.
+:::
+
+::: callout success title:"Seguridad verificada" icon:iconify-solar:shield-check-bold
+El cifrado de extremo a extremo y los registros de auditoría están activos.
+:::
+
 #### Botones
 
 ```markdown
 ::: button "Repositorio en GitHub" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
 ::: button "Comunidad en Discord" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 ```
+
+::: button "Repositorio en GitHub" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
+::: button "Comunidad en Discord" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 
 #### Tarjetas (Cards)
 
@@ -110,9 +121,18 @@ Aloje activos estáticos y entornos sin servidor en Cloud Storage y Cloud Run.
 :::
 ```
 
+::: card title:"Despliegue con Docker" icon:iconify:tabler:brand-docker
+Despliegue sitios de documentación en contenedores con imágenes ligeras de Alpine Linux.
+:::
+
+::: card title:"Google Cloud Platform" icon:iconify:simple-icons:googlecloud
+Aloje activos estáticos y entornos sin servidor en Cloud Storage y Cloud Run.
+:::
+
 #### Pestañas (Tabs)
 
-```markdown
+````markdown
+::: tabs
 == tab "Docker Compose" icon:iconify:tabler:brand-docker
 ```yaml
 services:
@@ -129,7 +149,27 @@ kind: Deployment
 metadata:
   name: docmd-site
 ```
+:::
+````
+
+::: tabs
+== tab "Docker Compose" icon:iconify:tabler:brand-docker
+```yaml
+services:
+  docs:
+    image: ghcr.io/docmd-io/docmd:latest
+    ports:
+      - "3000:3000"
 ```
+
+== tab "Kubernetes" icon:iconify:simple-icons:kubernetes
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docmd-site
+```
+:::
 
 #### Etiquetas (Tags)
 
@@ -137,6 +177,9 @@ metadata:
 ::: tag "Listo para producción" icon:iconify:solar:verified-check-bold color:green
 ::: tag "Paquete npm" icon:iconify:simple-icons:npm color:red
 ```
+
+::: tag "Listo para producción" icon:iconify:solar:verified-check-bold color:green
+::: tag "Paquete npm" icon:iconify:simple-icons:npm color:red
 
 ## Colecciones populares disponibles
 

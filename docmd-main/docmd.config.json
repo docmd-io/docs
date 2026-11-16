@@ -105,6 +105,7 @@
     },
     "analytics": { "googleV4": { "measurementId": "G-YGLJ5HPMM3" } },
     "math": {},
+    "iconify": {},
     "git": {
       "repo": "https://github.com/docmd-io/docs",
       "branch": "main",

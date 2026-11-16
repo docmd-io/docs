@@ -91,12 +91,23 @@ npx @docmd/core add iconify
 :::
 ```
 
+::: callout icon:iconify:mdi:home title:"欢迎"
+欢迎访问我们的文档门户。
+:::
+
+::: callout success title:"安全已验证" icon:iconify-solar:shield-check-bold
+端到端加密与安全审计已生效。
+:::
+
 #### 按钮 (Buttons)
 
 ```markdown
 ::: button "GitHub 仓库" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
 ::: button "加入 Discord 社区" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 ```
+
+::: button "GitHub 仓库" external:https://github.com/docmd-io/docmd icon:iconify:carbon:logo-github
+::: button "加入 Discord 社区" external:https://discord.gg/docmd icon:iconify:simple-icons:discord
 
 #### 卡片 (Cards)
 
@@ -110,9 +121,18 @@ npx @docmd/core add iconify
 :::
 ```
 
+::: card title:"Docker 部署" icon:iconify:tabler:brand-docker
+使用轻量级 Alpine Linux 镜像部署容器化文档站点。
+:::
+
+::: card title:"Google Cloud Platform" icon:iconify:simple-icons:googlecloud
+在 Cloud Storage 和 Cloud Run 上托管静态资源与无服务器运行时。
+:::
+
 #### 标签页 (Tabs)
 
-```markdown
+````markdown
+::: tabs
 == tab "Docker Compose" icon:iconify:tabler:brand-docker
 ```yaml
 services:
@@ -129,7 +149,27 @@ kind: Deployment
 metadata:
   name: docmd-site
 ```
+:::
+````
+
+::: tabs
+== tab "Docker Compose" icon:iconify:tabler:brand-docker
+```yaml
+services:
+  docs:
+    image: ghcr.io/docmd-io/docmd:latest
+    ports:
+      - "3000:3000"
 ```
+
+== tab "Kubernetes" icon:iconify:simple-icons:kubernetes
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docmd-site
+```
+:::
 
 #### 标签 (Tags)
 
@@ -137,6 +177,9 @@ metadata:
 ::: tag "生产就绪" icon:iconify:solar:verified-check-bold color:green
 ::: tag "npm 包" icon:iconify:simple-icons:npm color:red
 ```
+
+::: tag "生产就绪" icon:iconify:solar:verified-check-bold color:green
+::: tag "npm 包" icon:iconify:simple-icons:npm color:red
 
 ## 常用图标集合参考
 

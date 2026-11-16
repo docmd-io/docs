@@ -17,6 +17,9 @@ export default defineConfig({
   plugins: {
     llms: {} // Enabled by default
   }
+});
+```
+
 ### Excluding a Page
 If a page contains sensitive information or internal notes you don't want AI models to learn:
 

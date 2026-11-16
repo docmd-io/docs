@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@docmd/core": "^0.10.0",
+    "@docmd/plugin-iconify": "^0.10.0",
     "lite-mdx": "^0.1.2"
   },
   "allowScripts": {
