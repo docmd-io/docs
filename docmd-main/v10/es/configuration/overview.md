@@ -147,6 +147,7 @@ Ajuste cómo `docmd` analiza Markdown y aplica las políticas de seguridad HTML:
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
+    "headingIds": "nested",
     "breaks": true,
     "linkify": true,
     "typographer": true,
@@ -162,6 +163,7 @@ Ajuste cómo `docmd` analiza Markdown y aplica las políticas de seguridad HTML:
 | :--- | :--- | :--- | :--- |
 | `minify` | `Boolean` | `true` | Minimiza recursos HTML, CSS y JS compilados para un rendimiento de carga máximo. |
 | `autoTitleFromH1` | `Boolean` | `true` | Utiliza el primer encabezado `# H1` del documento como título cuando se omite el `title` en el frontmatter. |
+| `markdown.headingIds` | `String` | `"nested"` | Estrategia de generación de IDs de ancla de encabezados: `"nested"` (jerarquía contextual predeterminada) o `"github"` (IDs de slug planos compatibles con GitHub preservando guiones dobles en puntuación). También se puede anular por página mediante frontmatter. |
 | `markdown.breaks` | `Boolean` | `true` | Convierte saltos de línea suaves en saltos de línea. Establezca en `false` si ajusta el texto manualmente a 80 columnas. |
 | `markdown.linkify` | `Boolean` | `true` | Convierte automáticamente texto URL y dominios simples en enlaces interactivos. Establezca en `false` para desactivar. |
 | `markdown.typographer` | `Boolean` | `true` | Habilita el reemplazo tipográfico de comillas, guiones y símbolos. Establezca en `false` para mantener el texto exacto. |

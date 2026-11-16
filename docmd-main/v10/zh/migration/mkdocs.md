@@ -37,7 +37,7 @@ bunx @docmd/core migrate --mkdocs
 1. **备份**：除 `node_modules`、`.git`、`package.json` 及 lockfile 之外的整个项目目录，会被安全地备份到一个新的 `mkdocs-backup/` 目录中。
 2. **内容迁移**：您的 `docs/` 文件夹会被恢复到根目录供 `docmd` 使用。
 3. **配置生成**：生成一份 `docmd.config.json`，从 `mkdocs.yml` 中提取您的 `site_name` 和 `site_dir`。
-4. **导航自动转换**：`mkdocs.yml` 中的顶层 `nav:` 块会被自动解析并转换为 `docmd` 的 `navigation` 数组格式（包括嵌套的 `children`）。
+4. **导航自动转换**：`mkdocs.yml` 中的顶层 `nav:` 块会被自动解析并转换为 `docmd` 的 `navigation` 数组格式（包括嵌套的 `children`）。引号中的标题与路径会被自动去除引号，`index.md` 条目直接映射到目录路由，且解析严格终止于 `nav:` 块末尾，避免后续键（如 `plugins:` 或 `markdown_extensions:`）被错误加入侧边栏。
 
 :::
 

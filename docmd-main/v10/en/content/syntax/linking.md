@@ -18,10 +18,12 @@ During build compilation, `docmd` normalises internal link targets automatically
 | `overview.md` | `overview/` | Strips `.md` extension, appends trailing `/`. |
 | `overview` | `overview/` | Appends trailing `/` automatically. |
 | `overview/` | `overview/` | Retains existing canonical format. |
+| `release-1.0.md` | `release-1.0/` | Preserves dots in page filenames. |
 | `api/commands.md` | `api/commands/` | Normalises subdirectory route. |
 | `localisation/index.md` | `localisation/` | Strips `index`, resolves directory root. |
 | `../index.md` | `../` | Resolves parent directory root. |
 | `overview.md#settings` | `overview/#settings` | Preserves URL hash fragment. |
+| `api.md?tab=curl` | `api/?tab=curl` | Preserves query strings across depth shifts. |
 | `https://example.com` | `https://example.com` | Retains external URL untouched. |
 
 ## Internal Document Links
@@ -31,9 +33,11 @@ Reference internal documents using relative filesystem paths:
 | Link Target | Syntax Example |
 | :--- | :--- |
 | **Sibling Page** | `[System Overview](overview.md)` |
+| **Filenames with Dots** | `[Release 1.0 Milestone](release-1.0.md)` |
 | **Subdirectory Page** | `[API Reference](api/node-api.md)` |
 | **Directory Index** | `[Localisation](localisation/index.md)` |
 | **Parent Directory** | `[Back to Home](../index.md)` |
+| **Page with Query Strings** | `[Install Command](install.md?tab=docker)` |
 
 ## Section Anchor Links
 
@@ -48,6 +52,12 @@ Navigate to specific document headings using URL hash fragments:
 ```
 
 Hash fragments are preserved through URL normalisation. The cross-page link above compiles to `../api/cli-commands/#available-flags`.
+
+::: callout tip "Heading ID Styles: Nested vs. GitHub" icon:hash
+By default, `docmd` generates contextual (hierarchical) heading IDs that incorporate parent section names (e.g. `## Configuration` under `# Setup` becomes `#setup-configuration`).
+
+To match GitHub's flat slug style for repositories shared with GitHub or external renderers, configure `"markdown": { "headingIds": "github" }` in `docmd.config.json` or add `headingIds: github` to page frontmatter. In GitHub mode, headings produce flat un-nested anchors (e.g. `#configuration`, and `--` is preserved when punctuation like `&` is stripped).
+:::
 
 ## Opening External Links in New Tabs
 

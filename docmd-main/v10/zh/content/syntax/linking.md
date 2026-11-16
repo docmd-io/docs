@@ -18,10 +18,12 @@ docmd 提供可靠的、感知文件系统的链接系统。以任何格式自�
 | `overview.md` | `overview/` | 移除 `.md` 扩展名，添加尾部 `/`。 |
 | `overview` | `overview/` | 自动添加尾部 `/`。 |
 | `overview/` | `overview/` | 已经正确，无需更改。 |
+| `release-1.0.md` | `release-1.0/` | 保留文件名中的点号。 |
 | `api/commands.md` | `api/commands/` | 子目录链接被规范化。 |
 | `localisation/index.md` | `localisation/` | 移除 `index`，该文件夹是规范的 URL。 |
 | `../index.md` | `../` | 父目录的 index 被干净地解析。 |
 | `overview.md#settings` | `overview/#settings` | 保留哈希片段。 |
+| `api.md?tab=curl` | `api/?tab=curl` | 在相对路径深度调整时保留查询参数。 |
 | `https://example.com` | `https://example.com` | 外部链接原样通过。 |
 
 ## 内部链接
@@ -31,9 +33,11 @@ docmd 提供可靠的、感知文件系统的链接系统。以任何格式自�
 | 目标 | 示例 |
 | :--- | :--- |
 | 同级页面 | `[系统概览](overview.md)` |
+| 包含点号的文件名 | `[1.0 里程碑](release-1.0.md)` |
 | 子目录页面 | `[API 参考](api/node-api.md)` |
 | 子目录索引 | `[国际化](localisation/index.md)` |
 | 父目录 | `[返回首页](../index.md)` |
+| 包含查询参数的页面 | `[安装指令](install.md?tab=docker)` |
 
 ## 章节锚点
 
@@ -48,6 +52,12 @@ docmd 提供可靠的、感知文件系统的链接系统。以任何格式自�
 ```
 
 哈希片段会在规范化过程中保留。上面的跨页链接在生产环境中渲染为 `../api/cli-commands/#available-flags`。
+
+::: callout tip "标题 ID 样式：分层（Nested）与 GitHub 兼容" icon:hash
+默认情况下，`docmd` 会生成包含父级层级名称的上下文分层标题 ID（例如 `# Setup` 下的 `## Configuration` 会生成 `#setup-configuration`）。
+
+为了与共享至 GitHub 或外部阅读器的仓库保持一致的扁平 slug 样式，可在 `docmd.config.json` 中配置 `"markdown": { "headingIds": "github" }`，或在页面 frontmatter 中添加 `headingIds: github`。在 GitHub 模式下，标题生成不带父级前缀的扁平锚点（例如 `#configuration`，并在去除 `&` 等标点符号时保留 `--`）。
+:::
 
 ## 在新标签页中打开
 

@@ -38,6 +38,7 @@ Die Bereitstellung eines expliziten `title` und einer `description` im Frontmatt
 | `noStyle` | `Boolean` | Deaktiviert standardmäßige UI-Elemente (Sidebar, Header, Footer) für benutzerdefinierte HTML-Seiten. |
 | `titleSeparator` | `String` | Benutzerdefiniertes Trennzeichen für den Titel dieser Seite (z. B. `"-"`, `"|"`). Leerzeichen werden automatisch ergänzt. |
 | `titleAppend` | `Boolean` | Auf `false` setzen, um zu verhindern, dass der globale Site-Titel an das HTML-`<title>` und Social Cards angehängt wird. |
+| `headingIds` | `String` | Überschriften-Anker-ID-Stil pro Seite: `"github"` (flache GitHub-kompatible Slug-IDs) oder `"nested"` (kontextuelle hierarchische IDs). Überschreibt die globale `markdown.headingIds`-Konfiguration. |
 
 ### Feingranulare Komponentiensteuerung (`noStyle`)
 

@@ -147,6 +147,7 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
+    "headingIds": "nested",
     "breaks": true,
     "linkify": true,
     "typographer": true,
@@ -162,6 +163,7 @@ Feinabstimmung der Analyse von Markdown und Durchsetzung der HTML-Sicherheit:
 | :--- | :--- | :--- | :--- |
 | `minify` | `Boolean` | `true` | Minimiert kompilierte HTML-, CSS- und JS-Assets für maximale Ladeleistung. |
 | `autoTitleFromH1` | `Boolean` | `true` | Verwendet die erste `# H1`-Überschrift des Dokuments als Titel, wenn `title` im Frontmatter fehlt. |
+| `markdown.headingIds` | `String` | `"nested"` | Strategie zur Generierung von Überschriften-Anker-IDs: `"nested"` (standardmäßige kontextuelle Hierarchie) oder `"github"` (flache GitHub-kompatible Slug-IDs mit Erhaltung von Doppelbindestrichen bei Satzzeichen). Kann auch pro Seite im Frontmatter überschrieben werden. |
 | `markdown.breaks` | `Boolean` | `true` | Wandelt weiche Zeilenumbrüche in Umbrüche um. Auf `false` setzen, wenn Text manuell bei 80 Spalten umgebrochen wird. |
 | `markdown.linkify` | `Boolean` | `true` | Konvertiert URL-Text und einfache Domains automatisch in klickbare Links. Auf `false` setzen zum Deaktivieren. |
 | `markdown.typographer` | `Boolean` | `true` | Aktiviert typografischen Ersatz für Anführungszeichen, Gedankenstriche und Symbole. Auf `false` setzen für wörtliche Ausgabe. |

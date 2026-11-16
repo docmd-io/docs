@@ -37,7 +37,7 @@ bunx @docmd/core migrate --mkdocs
 1. **Backup**: Your entire project directory (excluding `node_modules`, `.git`, `package.json`, and lockfiles) is backed up safely into a new `mkdocs-backup/` directory.
 2. **Content Migration**: Your `docs/` folder is restored to the root directory for `docmd` to use.
 3. **Config Generation**: A `docmd.config.json` is generated, extracting your `site_name` and `site_dir` from `mkdocs.yml`.
-4. **Navigation Auto-Translation**: The top-level `nav:` block in `mkdocs.yml` is parsed and translated into `docmd`'s `navigation` array format (including nested `children`).
+4. **Navigation Auto-Translation**: The top-level `nav:` block in `mkdocs.yml` is parsed and translated into `docmd`'s `navigation` array format (including nested `children`). Quoted titles/paths are unquoted, `index.md` entries map directly to directory routes, and parsing strictly terminates at the end of the `nav:` block so subsequent keys (like `plugins:` or `markdown_extensions:`) are excluded from navigation.
 
 :::
 

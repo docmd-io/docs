@@ -38,6 +38,7 @@ Providing an explicit `title` and `description` in frontmatter ensures search en
 | `noStyle` | `Boolean` | Disables standard UI chrome (Sidebar, Header, Footer) for bespoke HTML pages. |
 | `titleSeparator` | `String` | Custom title delimiter for this page (e.g. `"-"`, `"|"`). Single spaces are added automatically. |
 | `titleAppend` | `Boolean` | Set to `false` to prevent appending the global site title to the HTML `<title>` and social cards. |
+| `headingIds` | `String` | Per-page heading anchor ID style: `"github"` (flat GitHub-compatible slug IDs) or `"nested"` (contextual hierarchical IDs). Overrides the global `markdown.headingIds` config. |
 
 ### Component Fine-Grained Controls (`noStyle`)
 

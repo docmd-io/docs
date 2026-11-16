@@ -18,10 +18,12 @@ Durante la compilación, `docmd` normaliza los destinos de enlaces internos auto
 | `overview.md` | `overview/` | Elimina la extensión `.md`, añade la barra `/` final. |
 | `overview` | `overview/` | Añade la barra `/` final automáticamente. |
 | `overview/` | `overview/` | Conserva el formato canónico existente. |
+| `release-1.0.md` | `release-1.0/` | Preserva puntos en los nombres de archivo de página. |
 | `api/commands.md` | `api/commands/` | Normaliza la ruta del subdirectorio. |
 | `localisation/index.md` | `localisation/` | Elimina `index`, resuelve la raíz del directorio. |
 | `../index.md` | `../` | Resuelve la raíz del directorio primario. |
 | `overview.md#settings` | `overview/#settings` | Preserva el fragmento de hash de la URL. |
+| `api.md?tab=curl` | `api/?tab=curl` | Preserva parámetros de consulta en desplazamientos relativos. |
 | `https://example.com` | `https://example.com` | Conserva la URL externa sin cambios. |
 
 ## Enlaces a documentos internos
@@ -31,9 +33,11 @@ Haga referencia a documentos internos utilizando rutas relativas del sistema de 
 | Destino del enlace | Ejemplo de sintaxis |
 | :--- | :--- |
 | **Página hermana** | `[Descripción general del sistema](overview.md)` |
+| **Nombres de archivo con puntos** | `[Hito versión 1.0](release-1.0.md)` |
 | **Página de subdirectorio** | `[Referencia de la API](api/node-api.md)` |
 | **Índice del directorio** | `[Localización](localisation/index.md)` |
 | **Directorio primario** | `[Volver a inicio](../index.md)` |
+| **Página con parámetros de consulta** | `[Comando de instalación](install.md?tab=docker)` |
 
 ## Enlaces de ancla de sección
 
@@ -48,6 +52,12 @@ Navegue a encabezados de documentos específicos utilizando fragmentos de hash d
 ```
 
 Los fragmentos de hash se conservan mediante la normalización de URL. El enlace entre páginas anterior se compila como `../api/cli-commands/#available-flags`.
+
+::: callout tip "Estilos de ID de encabezado: Anidado vs. GitHub" icon:hash
+Por defecto, `docmd` genera IDs de encabezado contextuales (jerárquicos) que incorporan los nombres de secciones superiores (p. ej. `## Configuración` bajo `# Instalación` se convierte en `#instalacion-configuracion`).
+
+Para coincidir con el estilo de slug plano de GitHub en repositorios compartidos con GitHub o renderizadores externos, configure `"markdown": { "headingIds": "github" }` en `docmd.config.json` o añada `headingIds: github` al frontmatter de la página. En el modo GitHub, los encabezados producen anclas planas no anidadas (p. ej. `#configuracion`, y se preserva `--` cuando se eliminan signos de puntuación como `&`).
+:::
 
 ## Apertura de enlaces externos en nuevas pestañas
 

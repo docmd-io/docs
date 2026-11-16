@@ -18,10 +18,12 @@ Während der Build-Kompilierung normalisiert `docmd` interne Linkziele automatis
 | `overview.md` | `overview/` | Entfernt `.md`-Erweiterung, fügt nachgestellten `/` an. |
 | `overview` | `overview/` | Fügt nachgestellten `/` automatisch an. |
 | `overview/` | `overview/` | Behält das bestehende kanonische Format bei. |
+| `release-1.0.md` | `release-1.0/` | Erhält Punkte in Seitendateinamen. |
 | `api/commands.md` | `api/commands/` | Normalisiert Unterverzeichnis-Route. |
 | `localisation/index.md` | `localisation/` | Entfernt `index`, löst Verzeichnis-Stamm auf. |
 | `../index.md` | `../` | Löst übergeordneten Verzeichnis-Stamm auf. |
 | `overview.md#settings` | `overview/#settings` | Behält URL-Hash-Fragment bei. |
+| `api.md?tab=curl` | `api/?tab=curl` | Erhält Abfrage-Parameter über relative Pfadverschiebungen. |
 | `https://example.com` | `https://example.com` | Behält externe URL unverändert bei. |
 
 ## Interne Dokumentenlinks
@@ -31,9 +33,11 @@ Referenzieren Sie interne Dokumente unter Verwendung relativer Dateisystempfade:
 | Link-Ziel | Syntax-Beispiel |
 | :--- | :--- |
 | **Gleichrangige Seite** | `[System Overview](overview.md)` |
+| **Dateinamen mit Punkten** | `[Release 1.0 Milestone](release-1.0.md)` |
 | **Unterverzeichnis-Seite** | `[API Reference](api/node-api.md)` |
 | **Verzeichnis-Index** | `[Localisation](localisation/index.md)` |
 | **Übergeordnetes Verzeichnis** | `[Back to Home](../index.md)` |
+| **Seite mit Abfrageparametern** | `[Install Command](install.md?tab=docker)` |
 
 ## Abschnitts-Anker-Links
 
@@ -48,6 +52,12 @@ Navigieren Sie zu bestimmten Dokument-Überschriften unter Verwendung von URL-Ha
 ```
 
 Hash-Fragmente bleiben durch die URL-Normalisierung erhalten. Der seitenübergreifende Link oben kompiliert zu `../api/cli-commands/#available-flags`.
+
+::: callout tip "Überschriften-ID-Stile: Verschachtelt vs. GitHub" icon:hash
+Standardmäßig generiert `docmd` kontextbezogene (hierarchische) Überschriften-IDs, die übergeordnete Abschnittsnamen enthalten (z. B. wird `## Konfiguration` unter `# Setup` zu `#setup-konfiguration`).
+
+Um den flachen Slug-Stil von GitHub für Repositories zu verwenden, die mit GitHub oder externen Renderern geteilt werden, konfigurieren Sie `"markdown": { "headingIds": "github" }` in `docmd.config.json` oder fügen Sie `headingIds: github` zum Seiten-Frontmatter hinzu. Im GitHub-Modus erzeugen Überschriften flache, unverschachtelte Anker (z. B. `#konfiguration`, und `--` bleibt erhalten, wenn Satzzeichen wie `&` entfernt werden).
+:::
 
 ## Öffnen externer Links in neuen Tabs
 

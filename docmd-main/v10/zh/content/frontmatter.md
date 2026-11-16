@@ -38,6 +38,7 @@ Frontmatter 会针对单个页面覆盖全局设置。在 Markdown 文件顶部�
 | `noStyle` | `Boolean` | 禁用整个 UI（侧边栏、页头、页脚），用于自定义页面。 |
 | `titleSeparator` | `String` | 该页面的自定义标题分隔符（例如 `"-"`，`"|"`）。空格会自动添加。 |
 | `titleAppend` | `Boolean` | 设为 `false` 以防止将站点标题附加到 HTML `<title>` 与社交卡片。默认为 `true`。 |
+| `headingIds` | `String` | 页面级标题锚点 ID 样式：`"github"`（与 GitHub 规范兼容的扁平 slug ID）或 `"nested"`（分层上下文 ID）。覆盖全局 `markdown.headingIds` 配置。 |
 
 ### `noStyle` 组件控制
 

@@ -147,6 +147,7 @@ Fine-tune how `docmd` parses Markdown and enforces HTML security:
   "minify": true,
   "autoTitleFromH1": true,
   "markdown": {
+    "headingIds": "nested",
     "breaks": true,
     "linkify": true,
     "typographer": true,
@@ -162,6 +163,7 @@ Fine-tune how `docmd` parses Markdown and enforces HTML security:
 | :--- | :--- | :--- | :--- |
 | `minify` | `Boolean` | `true` | Minifies compiled HTML, CSS, and JS assets for maximum load performance. |
 | `autoTitleFromH1` | `Boolean` | `true` | Uses the document's first `# H1` heading as the title when frontmatter `title` is omitted. |
+| `markdown.headingIds` | `String` | `"nested"` | Heading anchor ID generation strategy: `"nested"` (default contextual hierarchy) or `"github"` (flat GitHub-compatible slug IDs with double-dash punctuation preservation). Can also be overridden per-page via frontmatter. |
 | `markdown.breaks` | `Boolean` | `true` | Converts soft line breaks into line breaks. Set `false` if wrapping text manually at 80 columns. |
 | `markdown.linkify` | `Boolean` | `true` | Automatically converts URL text and bare domains into clickable links. Set `false` to disable autolinking. |
 | `markdown.typographer` | `Boolean` | `true` | Enables language-neutral replacement of typographic quotes, dashes, and symbols. Set `false` to leave verbatim. |

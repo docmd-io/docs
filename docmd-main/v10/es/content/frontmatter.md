@@ -38,6 +38,7 @@ Proporcionar un `title` y una `description` explícitos en el frontmatter garant
 | `noStyle` | `Boolean` | Desactiva los elementos de la interfaz estándar (Barra lateral, Encabezado, Pie de página) para páginas HTML a medida. |
 | `titleSeparator` | `String` | Delimitador de título personalizado para esta página (p. ej. `"-"`, `"|"`). Los espacios se añaden automáticamente. |
 | `titleAppend` | `Boolean` | Establezca en `false` para evitar añadir el título global del sitio al `<title>` HTML y tarjetas sociales. |
+| `headingIds` | `String` | Estilo de ID de ancla de encabezados por página: `"github"` (IDs de slug planos compatibles con GitHub) o `"nested"` (IDs jerárquicos contextuales). Invalida la configuración global `markdown.headingIds`. |
 
 ### Controles detallados de componentes (`noStyle`)
 
