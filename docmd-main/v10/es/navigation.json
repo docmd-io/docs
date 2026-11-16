@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.1 - Análisis de bloques de código, normalización de enlaces y correcciones de migración",
+        "path": "/release-notes/0-10-1"
+      },
+      {
         "title": "v0.10.0 - Servidor de producción, recursos estáticos y MDX",
         "path": "/release-notes/0-10-0"
       }

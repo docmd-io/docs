@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.1 - 代码块解析、链接规范化与迁移修复",
+        "path": "/release-notes/0-10-1"
+      },
+      {
         "title": "v0.10.0 - 生产服务器、静态资源与 MDX",
         "path": "/release-notes/0-10-0"
       }

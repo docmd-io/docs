@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.1 - Codeblock-Parsing, Link-Normalisierung & Migrations-Fixes",
+        "path": "/release-notes/0-10-1"
+      },
+      {
         "title": "v0.10.0 - Produktionsserver, statische Assets & MDX",
         "path": "/release-notes/0-10-0"
       }
