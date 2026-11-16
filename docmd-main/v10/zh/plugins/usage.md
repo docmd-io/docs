@@ -60,9 +60,10 @@ Git 插件会自动检测您的项目根目录是否为有效的 Git 仓库。�
 
 | 插件 | 安装命令 | 用途 |
 | :--- | :--- | :--- |
+| [Iconify (图标)](iconify.md) | `npx @docmd/core add iconify` | 支持来自 100+ 开源图标集的按需矢量图标，并在构建时内联 SVG |
+| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | 服务端 LaTeX 与 KaTeX 数学公式渲染 |
 | [PWA 支持](pwa.md) | `npx @docmd/core add pwa` | 渐进式 Web 应用清单与离线 Service Worker 缓存 |
 | [Threads 讨论](threads.md) | `npx @docmd/core add threads` | Markdown 原生的内联评论讨论 |
-| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | 服务端 LaTeX 与 KaTeX 数学公式渲染 |
 
 ## 自动安装机制
 

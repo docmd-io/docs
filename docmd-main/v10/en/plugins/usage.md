@@ -60,9 +60,10 @@ Optional plugins require explicit installation before activation:
 
 | Plugin | Install Command | Purpose |
 | :--- | :--- | :--- |
+| [Iconify (Icons)](iconify.md) | `npx @docmd/core add iconify` | On-demand vector icons from 100+ open-source icon sets with build-time SVG inlining |
+| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | Server-side LaTeX and KaTeX mathematical equation rendering |
 | [PWA Support](pwa.md) | `npx @docmd/core add pwa` | Progressive Web App manifest and offline service worker caching |
 | [Threads](threads.md) | `npx @docmd/core add threads` | Markdown-native inline comment discussions |
-| [Math (KaTeX)](math.md) | `npx @docmd/core add math` | Server-side LaTeX and KaTeX mathematical equation rendering |
 
 ## Auto-Installation Mechanics
 

@@ -358,16 +358,20 @@
         "path": "/plugins/mermaid"
       },
       {
+        "title": "Iconify (图标)",
+        "path": "/plugins/iconify"
+      },
+      {
+        "title": "数学公式 (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
         "title": "PWA 支持",
         "path": "/plugins/pwa"
       },
       {
         "title": "Threads",
         "path": "/plugins/threads"
-      },
-      {
-        "title": "数学公式 (KaTeX)",
-        "path": "/plugins/math"
       },
       {
         "title": "OKF Bundles",

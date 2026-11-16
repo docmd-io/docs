@@ -358,16 +358,20 @@
         "path": "/plugins/mermaid"
       },
       {
+        "title": "Iconify (Icons)",
+        "path": "/plugins/iconify"
+      },
+      {
+        "title": "Math (KaTeX)",
+        "path": "/plugins/math"
+      },
+      {
         "title": "PWA Support",
         "path": "/plugins/pwa"
       },
       {
         "title": "Threads",
         "path": "/plugins/threads"
-      },
-      {
-        "title": "Math (KaTeX)",
-        "path": "/plugins/math"
       },
       {
         "title": "OKF Bundle Plugin",

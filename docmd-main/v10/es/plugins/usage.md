@@ -60,9 +60,10 @@ Los plugins opcionales requieren instalación previa antes de poder activarse:
 
 | Plugin | Comando de instalación | Propósito |
 | :--- | :--- | :--- |
+| [Iconify (Iconos)](iconify.md) | `npx @docmd/core add iconify` | Iconos vectoriales bajo demanda procedentes de más de 100 colecciones de código abierto con incrustación SVG en compilación |
+| [Matemáticas (KaTeX)](math.md) | `npx @docmd/core add math` | Renderizado de ecuaciones matemáticas LaTeX y KaTeX del lado del servidor |
 | [Soporte PWA](pwa.md) | `npx @docmd/core add pwa` | Manifiesto de Aplicación Web Progresiva y caché sin conexión con service worker |
 | [Threads](threads.md) | `npx @docmd/core add threads` | Hilos de discusión colaborativos y comentarios nativos en Markdown |
-| [Matemáticas (KaTeX)](math.md) | `npx @docmd/core add math` | Renderizado de ecuaciones matemáticas LaTeX y KaTeX del lado del servidor |
 
 ## Mecanismo de autoinstalación
 
