@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.2 - Threads v2, Dev-Speicherverzögerung & Bridge-Wiederverbindung",
+        "path": "/release-notes/0-10-2"
+      },
+      {
         "title": "v0.10.1 - Codeblock-Parsing, Link-Normalisierung & Migrations-Fixes",
         "path": "/release-notes/0-10-1"
       },

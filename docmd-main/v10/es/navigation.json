@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.2 - Threads v2, aplazamiento de guardado en Dev y reconexión de Bridge",
+        "path": "/release-notes/0-10-2"
+      },
+      {
         "title": "v0.10.1 - Análisis de bloques de código, normalización de enlaces y correcciones de migración",
         "path": "/release-notes/0-10-1"
       },

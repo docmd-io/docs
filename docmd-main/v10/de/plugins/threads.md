@@ -24,16 +24,17 @@ Aktivieren Sie die Thread-Konfiguration in `docmd.config.json`:
 | Option | Typ | Standard | Technische Beschreibung |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | Bei `true` werden Threads in einem dedizierten Panel angezeigt; bei `false` werden Threads inline an Texthervorhebungen angehängt. |
-| `devOnly` | `boolean` | `true` | Beschränkt Client-UI-Assets auf Live-Dev-Server-Builds (`docmd dev`). Werden in statischen Produktions-Builds (`docmd build`) weggelassen. |
+| `autoPublish` | `false \| object` | `{ seconds: 180, startOn: true }` | Konfiguriert die automatische Veröffentlichung von Entwürfen. Auf `false` setzen für reinen manuellen Sammelmodus. |
+| `autoPublish.seconds` | `number` | `180` | Inaktivitätsfenster (in Sekunden), bevor private Entwürfe automatisch in die Markdown-Datei übertragen werden. |
+| `autoPublish.startOn` | `boolean` | `true` | Gibt an, ob der Countdown für die automatische Veröffentlichung beim Seitenladen standardmäßig aktiv ist. |
 
 ### Live-Entwicklungs-Server-Anforderung
 
 Die interaktive Kommentaroberfläche, Texthervorhebungs-Werkzeuge und Markdown-Persistenzaktionen erfordern einen aktiven lokalen Entwicklungs-Server (`docmd dev`) mit einer funktionierenden WebSocket-RPC-Verbindung.
 
 Da Threads `requiresLiveServer: true` deklariert:
-- **Entwicklung (`docmd dev`)**: Der Ausklapp-Tab, die Inline-Vorschaukarten, das Auswahl-Popover und die Thread-Seitenleiste sind vollständig geladen und funktionsfähig.
-- **Statische Produktions-Builds (`docmd build`)**: Client-Skripte und CSS werden automatisch weggelassen, damit öffentliche Websites ultraschnell, schlank und frei von inaktiven UI-Elementen oder fehlerhaften WebSocket-Verbindungsversuchen bleiben. Vorhandene Markdown-Syntax (`::: threads` und `==Text=={t-...}`) wird weiterhin fehlerfrei geparst.
-- **Manuelle Überschreibung**: Wenn Sie die Threads-Client-Assets ausdrücklich auch in statische Builds bündeln möchten, konfigurieren Sie `"devOnly": false` unter `plugins.threads`.
+- **Entwicklung (`docmd dev`)**: Der Ausklapp-Tab, die Inline-Vorschaukarten, das Auswahl-Popover, das Veröffentlichungs-Widget und die Thread-Seitenleiste sind vollständig geladen und funktionsfähig.
+- **Statische Produktions-Builds (`docmd build`)**: Client-Skripte und CSS werden automatisch weggelassen, damit öffentliche Websites ultraschnell, schlank und frei von inaktiven UI-Elementen oder fehlerhaften WebSocket-Verbindungsversuchen bleiben. Vorhandene Markdown-Syntax (`::: threads`, `::: thread`, `::: anchor`, `::: comment`, `::: reactions`) wird weiterhin fehlerfrei in statisches HTML gerendert.
 
 ### Globales Konfigurationsbeispiel
 
@@ -42,7 +43,10 @@ Da Threads `requiresLiveServer: true` deklariert:
   "plugins": {
     "threads": {
       "sidebar": true,
-      "devOnly": true
+      "autoPublish": {
+        "seconds": 180,
+        "startOn": true
+      }
     }
   }
 }
@@ -160,6 +164,9 @@ Das Threads-Plugin stellt WebSocket-RPC-Endpunkte bereit, die über `docmd.call(
 | `threads:delete-thread` | Entfernt den Thread-Container und bereinigt Text-Hervorhebungsanker. |
 | `threads:resolve-thread` | Schaltet den Status der Thread-Auflösung um. |
 | `threads:toggle-reaction` | Fügt Emoji-Reaktionen hinzu oder entfernt sie. |
+| `threads:whoami` | Profil des Aufrufers und aktiven Veröffentlichungsmodus abrufen. |
+| `threads:set-mode` | Veröffentlichungsmodus festlegen (`manual` Sammelmodus oder `auto` Zeitmodus). |
+| `threads:publish-review` | Entwürfe atomar in die Markdown-Quelldatei übertragen und veröffentlichen. |
 
 ## Speicher für Autorenprofile
 

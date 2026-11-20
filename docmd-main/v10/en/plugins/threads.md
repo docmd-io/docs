@@ -24,16 +24,17 @@ Enable thread configuration in `docmd.config.json`:
 | Option | Type | Default | Technical Description |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | When `true`, threads display in a dedicated panel; when `false`, threads attach inline to text highlights. |
-| `devOnly` | `boolean` | `true` | Restricts client UI assets to live dev server builds (`docmd dev`). Omitted in static production builds (`docmd build`). |
+| `autoPublish` | `false \| object` | `{ seconds: 180, startOn: true }` | Configures draft review auto-publishing. Set to `false` for manual collect-and-publish mode only. |
+| `autoPublish.seconds` | `number` | `180` | Inactivity quiet window (in seconds) before private drafts are automatically published to Markdown. |
+| `autoPublish.startOn` | `boolean` | `true` | Whether auto-publish countdown is active by default on page load. |
 
 ### Live Development Server Requirement
 
 The Threads commenting interface, highlighting tools, and Markdown persistence actions require an active live development server (`docmd dev`) with an active WebSocket RPC connection.
 
 Because Threads declares `requiresLiveServer: true`:
-- **Development (`docmd dev`)**: The slide-out handle, inline preview cards, selection popovers, and thread sidebar are fully loaded and operational.
-- **Static Production Builds (`docmd build`)**: Client scripts and CSS are automatically omitted to ensure that public production sites remain ultra-fast, zero-overhead, and free of broken WebSocket attempts or inactive UI widgets. Any existing Markdown threads syntax (`::: threads` and `==text=={t-...}`) continues to parse cleanly without warnings.
-- **Manual Override**: If you explicitly wish to bundle Threads client assets into static builds, configure `"devOnly": false` in `plugins.threads`.
+- **Development (`docmd dev`)**: The slide-out handle, inline preview cards, selection popovers, draft widget, and thread sidebar are fully loaded and operational.
+- **Static Production Builds (`docmd build`)**: Client scripts and CSS are automatically omitted to ensure that public production sites remain ultra-fast, zero-overhead, and free of inactive UI widgets. Any existing Markdown threads syntax (`::: threads`, `::: thread`, `::: anchor`, `::: comment`, `::: reactions`) continues to parse and render cleanly into static HTML without warnings.
 
 ### Global Configuration Example
 
@@ -42,7 +43,10 @@ Because Threads declares `requiresLiveServer: true`:
   "plugins": {
     "threads": {
       "sidebar": true,
-      "devOnly": true
+      "autoPublish": {
+        "seconds": 180,
+        "startOn": true
+      }
     }
   }
 }
@@ -160,6 +164,9 @@ The Threads plugin exposes WebSocket RPC endpoints accessible via `docmd.call()`
 | `threads:delete-thread` | Remove thread container and clean up body highlight anchors. |
 | `threads:resolve-thread` | Toggle thread resolution state. |
 | `threads:toggle-reaction` | Add or remove emoji reactions. |
+| `threads:whoami` | Retrieve the caller's profile and active publish mode. |
+| `threads:set-mode` | Set caller publish mode (`manual` collect mode or `auto` timer mode). |
+| `threads:publish-review` | Atomically commit and publish staged drafts into the source Markdown file. |
 
 ## Author Profile Storage
 
