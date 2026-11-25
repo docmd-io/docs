@@ -74,7 +74,7 @@ The startup banner shows what is on:
 ```text
 Local Access    http://127.0.0.1:3000
 Serving from    ./site
-Actions         on (origins: https://docs.example.com; writes need x-auth-request-email)
+Actions         on (origins: https://docs.example.com; writes need x-auth-request-user)
 MCP             on at POST /mcp (read-only; no browser origins)
 ```
 
@@ -97,7 +97,7 @@ Plugins that declare `requiresLiveServer` and register `actions` (for example [T
     "actions": {
       "enabled": true,
       "origins": ["https://docs.example.com"],
-      "identityHeader": "x-auth-request-email"
+      "identityHeader": "x-auth-request-user"
     }
   }
 }
@@ -115,7 +115,9 @@ If a plugin fails in its `onServerReady` hook, `serve` exits with code 1 and lis
 
 ### Identity behind a reverse proxy
 
-docmd has no login of its own. `identityHeader` names a header that an authenticating reverse proxy adds to each request, such as `X-Auth-Request-Email` from oauth2-proxy or `Cf-Access-Authenticated-User-Email` from Cloudflare Access.
+docmd has no login of its own. `identityHeader` names a header that an authenticating reverse proxy adds to each request, such as `X-Auth-Request-User` from oauth2-proxy.
+
+Use a header that carries a stable user id, not an e-mail address. Plugins can write the identity into your files: [Threads](../plugins/threads#under-docmd-serve-identity) writes it into your Markdown and into a file embedded in every page, and refuses writes from an identity that looks like an e-mail address.
 
 ::: callout warning "Only trust a header your proxy controls" icon:shield-alert
 docmd cannot tell who set the header. It is only trustworthy when:
