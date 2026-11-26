@@ -596,6 +596,10 @@
     "collapsible": true,
     "children": [
       {
+        "title": "v0.10.2 - Threads v2、开发服务器保存延迟与 Bridge 重新连接",
+        "path": "/release-notes/0-10-2"
+      },
+      {
         "title": "v0.10.1 - 代码块解析、链接规范化与迁移修复",
         "path": "/release-notes/0-10-1"
       },

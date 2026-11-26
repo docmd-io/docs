@@ -66,6 +66,14 @@ Format tabular data using GFM pipe syntax:
 | `name` | `String` | `undefined` | Key identifier. |
 | `active` | `Boolean` | `true` | Enable status toggle. |
 
+### Interactive Table Lightbox (Expand Modal)
+
+Every table automatically receives a corner-pinned expand button at the top-right border. When clicked, it opens the table in a native `<dialog>` lightbox modal powered by the [Universal Modal API](../../reference/browser-api#universal-modal-api-windowdocmdmodal):
+* **Vertical Sticky Headers**: Header rows stick seamlessly at `top: 0` inside the modal as you scroll through large datasets, with zero margin or navigation collisions.
+* **Full Horizontal Range**: Wide tables (15+ columns) scroll horizontally inside the modal while preserving sticky column alignment.
+* **Non-Obtrusive Pinning**: On the standard page, the expand icon is anchored outside the horizontal scroll container right at the corner border, ensuring it never covers column labels or drifts when scrolling.
+* **Universal Accessibility**: Dismisses cleanly via `Escape`, backdrop light-dismiss, or the close button, returning focus directly to the expand button.
+
 ## Raw HTML Integration
 
 `docmd` parses inline HTML directly. Use raw HTML elements when designing bespoke landing components or embedded widgets:

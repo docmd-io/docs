@@ -24,16 +24,17 @@ npx @docmd/core add threads
 | 选项 | 类型 | 默认值 | 技术描述 |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | 为 `true` 时，线程在专用面板中展示；为 `false` 时，线程以内联形式附着在文本高亮旁边。 |
-| `devOnly` | `boolean` | `true` | 将前端交互 UI 限制仅在本地开发服务器（`docmd dev`）运行时加载。在静态生产构建（`docmd build`）中自动省略。 |
+| `autoPublish` | `false \| object` | `{ seconds: 180, startOn: true }` | 配置草稿自动发布策略。设为 `false` 则仅启用手动收集与发布模式。 |
+| `autoPublish.seconds` | `number` | `180` | 静默等待时间（秒），在此时间段内无操作则自动将私有草稿发布至 Markdown 文件。 |
+| `autoPublish.startOn` | `boolean` | `true` | 页面初次加载时是否默认启动自动发布倒计时。 |
 
 ### Live 开发服务器依赖要求
 
 Threads 讨论交互界面、高亮标注工具以及 Markdown 文件持久化写入操作，依赖本地实时运行的开发服务器（`docmd dev`）以及 WebSocket RPC 连接。
 
 由于 Threads 声明了 `requiresLiveServer: true`：
-- **本地开发运行（`docmd dev`）**：右侧停靠滑块标签、行内评论预览卡片、选区弹出框以及侧边栏面板完全正常加载并提供全量交互。
-- **静态生产构建（`docmd build`）**：自动剔除前端脚本与样式，确保公开发布的生产站点保持极致轻量、零冗余，且不会产生无效的 WebSocket 连接重试报错。文档中原有的 Markdown 语法块（`::: threads` 与 `==文本=={t-...}`）依然保持完整解析，不会产生格式错乱。
-- **手动覆盖**：如果您明确希望在静态构建中打包 Threads 前端资源，可以在 `plugins.threads` 中显式配置 `"devOnly": false`。
+- **本地开发运行（`docmd dev`）**：右侧停靠滑块标签、行内评论预览卡片、选区弹出框、发布挂件以及侧边栏面板完全正常加载并提供全量交互。
+- **静态生产构建（`docmd build`）**：自动剔除前端脚本与样式，确保公开发布的生产站点保持极致轻量、零冗余，且不会产生无效的挂件。文档中原有的 Markdown 语法块（`::: threads`, `::: thread`, `::: anchor`, `::: comment`, `::: reactions`）依然保持完整静态 HTML 渲染，不会产生解析异常。
 
 ### 全局配置示例
 
@@ -42,7 +43,10 @@ Threads 讨论交互界面、高亮标注工具以及 Markdown 文件持久化�
   "plugins": {
     "threads": {
       "sidebar": true,
-      "devOnly": true
+      "autoPublish": {
+        "seconds": 180,
+        "startOn": true
+      }
     }
   }
 }
@@ -160,6 +164,9 @@ Threads 插件暴露可由 `docmd.call()` 调用的 WebSocket RPC 端点：
 | `threads:delete-thread` | 移除线程容器并清理正文高亮锚点。 |
 | `threads:resolve-thread` | 切换线程解决状态。 |
 | `threads:toggle-reaction` | 添加或移除 Emoji 反应。 |
+| `threads:whoami` | 获取当前用户的个人信息与当前激活的发布模式。 |
+| `threads:set-mode` | 设置用户的发布模式（`manual` 收集模式或 `auto` 定时模式）。 |
+| `threads:publish-review` | 将暂存的草稿原子化提交并发布至源 Markdown 文件中。 |
 
 ## 作者个人资料存储
 

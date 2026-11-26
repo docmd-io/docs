@@ -19,12 +19,18 @@ This plugin is currently in Alpha. Core APIs and storage schemas are stable, whi
 npx @docmd/core add threads
 ```
 
-Then enable it in `docmd.config.json`. With no options, every default applies:
+Enable thread configuration in `docmd.config.json`. With no options, every default applies:
 
 ```json "docmd.config.json"
 {
   "plugins": {
-    "threads": {}
+    "threads": {
+      "sidebar": true,
+      "autoPublish": {
+        "seconds": 180,
+        "startOn": true
+      }
+    }
   }
 }
 ```

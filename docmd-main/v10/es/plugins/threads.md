@@ -24,16 +24,17 @@ Habilite la configuración de hilos en `docmd.config.json`:
 | Opción | Tipo | Por defecto | Descripción técnica |
 | :--- | :--- | :--- | :--- |
 | `sidebar` | `boolean` | `false` | Cuando es `true`, los hilos se muestran en un panel dedicado; cuando es `false`, se adjuntan en línea junto al texto destacado. |
-| `devOnly` | `boolean` | `true` | Restringe los recursos de interfaz al servidor de desarrollo (`docmd dev`). Se omiten en compilaciones estáticas de producción (`docmd build`). |
+| `autoPublish` | `false \| object` | `{ seconds: 180, startOn: true }` | Configura la publicación automática de borradores. Establezca en `false` para modo de recopilación manual únicamente. |
+| `autoPublish.seconds` | `number` | `180` | Ventana de calma de inactividad (en segundos) antes de publicar borradores automáticamente a Markdown. |
+| `autoPublish.startOn` | `boolean` | `true` | Determina si la cuenta regresiva de auto-publicación se inicia por defecto al cargar la página. |
 
 ### Requisito de servidor de desarrollo en vivo
 
 La interfaz de comentarios, las herramientas de resaltado y la persistencia de cambios en Markdown requieren un servidor de desarrollo activo (`docmd dev`) con conexión WebSocket RPC funcional.
 
 Debido a que Threads declara `requiresLiveServer: true`:
-- **En desarrollo (`docmd dev`)**: La pestaña deslizante, las tarjetas de vista previa en línea, los modales de selección y la barra lateral de hilos están completamente activos y operativos.
-- **Compilaciones estáticas de producción (`docmd build`)**: Los scripts y hojas de estilo del cliente se omiten automáticamente para garantizar que los sitios públicos se mantengan ultrarrápidos, sin sobrecarga y libres de intentos fallidos de conexión WebSocket. Cualquier sintaxis de hilos en Markdown (`::: threads` y `==texto=={t-...}`) sigue procesándose correctamente sin advertencias.
-- **Anulación manual**: Si desea expresamente empaquetar los activos de Threads en compilaciones estáticas, configure `"devOnly": false` en `plugins.threads`.
+- **En desarrollo (`docmd dev`)**: La pestaña deslizante, las tarjetas de vista previa en línea, los modales de selección, el widget de publicación y la barra lateral de hilos están completamente activos y operativos.
+- **Compilaciones estáticas de producción (`docmd build`)**: Los scripts y hojas de estilo del cliente se omiten automáticamente para garantizar que los sitios públicos se mantengan ultrarrápidos, sin sobrecarga y libres de intentos fallidos de conexión WebSocket. Cualquier sintaxis de hilos en Markdown (`::: threads`, `::: thread`, `::: anchor`, `::: comment`, `::: reactions`) sigue procesándose y renderizándose correctamente en HTML estático sin advertencias.
 
 ### Ejemplo de configuración global
 
@@ -42,7 +43,10 @@ Debido a que Threads declara `requiresLiveServer: true`:
   "plugins": {
     "threads": {
       "sidebar": true,
-      "devOnly": true
+      "autoPublish": {
+        "seconds": 180,
+        "startOn": true
+      }
     }
   }
 }
@@ -160,6 +164,9 @@ El plugin de Threads expone puntos de enlace WebSocket RPC invocables con `docmd
 | `threads:delete-thread` | Elimina el contenedor del hilo y limpia los anclajes de texto en el cuerpo. |
 | `threads:resolve-thread` | Alterna el estado de resolución del hilo. |
 | `threads:toggle-reaction` | Agrega o elimina reacciones emoji. |
+| `threads:whoami` | Obtiene el perfil del usuario actual y el modo de publicación activo. |
+| `threads:set-mode` | Establece el modo de publicación (`manual` o `auto`). |
+| `threads:publish-review` | Confirma y publica atómicamente los borradores preparados en el archivo Markdown. |
 
 ## Almacenamiento de perfiles de autor
 

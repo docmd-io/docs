@@ -60,11 +60,13 @@ Wrap multiple `<figure>` components in a `div.image-gallery` container to render
 
 ## Lightbox Zoom Overlays
 
-When client scripts are active, `docmd` automatically attaches full-screen lightbox zoom behaviour to images tagged with `.lightbox` or nested within `.image-gallery` containers:
+When client scripts are active, `docmd` automatically attaches full-screen lightbox zoom behaviour to images tagged with `.lightbox` or nested within `.image-gallery` containers. The lightbox is powered by the [Universal Modal System](../../reference/browser-api#universal-modal-api-windowdocmdmodal), offering top-layer focus management, backdrop blur, and light-dismiss:
 
 ```markdown
 ![System schematic preview](/assets/sample.png){ .lightbox }
 ```
+
+Users can click any lightbox image to view it centered in a high-resolution modal. It closes effortlessly by pressing `Escape`, clicking the backdrop, or clicking the close button.
 
 ::: callout tip "Accessibility & Search Optimisation" icon:sparkles
 Always supply descriptive **alt text** for every image. High-quality alt text provides semantic context for screen readers and AI agents parsing the `llms.txt` context stream.

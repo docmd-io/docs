@@ -100,3 +100,37 @@ docmd.afterReload("scroll-restore", (ctx) => {
   window.scrollTo(0, ctx.scrollY);
 });
 ```
+
+## Universal Modal API (`window.docmd.modal`)
+
+`docmd` provides a unified, accessible modal dialog engine powered by the native HTML `<dialog>` element. It is available in the browser runtime across all official templates and provides top-layer isolation, scroll containment, and keyboard navigation.
+
+### `window.docmd.modal.open(options)`
+
+Opens the universal modal dialog with custom content, icon, and optional title:
+
+* **`content`** (`HTMLElement | string`): A DOM node or HTML string to mount inside the modal body.
+* **`icon`** (`string`, optional): A preset icon identifier (`'table'`, `'image'`, `'code'`) or custom inline SVG markup.
+* **`title`** (`string`, optional): Modal title string. Omit for an icon-only header without text labels.
+* **`type`** (`string`, optional): Content category identifier (`'table'`, `'image'`, `'generic'`). Sets the `data-modal-type` attribute for scoped CSS styling.
+
+```javascript
+// Example: Open custom interactive widget in the modal
+const widget = document.createElement('div');
+widget.innerHTML = '<p>Custom interactive preview mounted in the universal modal.</p>';
+
+window.docmd.modal.open({
+  content: widget,
+  icon: 'code',
+  title: 'Widget Inspector',
+  type: 'generic'
+});
+```
+
+### `window.docmd.modal.close()`
+
+Closes the active modal dialog and automatically restores keyboard focus to the triggering element.
+
+### `window.docmd.modal.isOpen()`
+
+Returns a `boolean` indicating whether the universal modal is currently open.
