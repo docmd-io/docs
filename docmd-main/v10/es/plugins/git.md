@@ -93,6 +93,83 @@ Netlify descarga el historial completo por defecto. Si utiliza scripts de compil
 El directorio `.git` y el ejecutable binario de `git` deben ser accesibles dentro de su contenedor de compilación o entorno de CI.
 :::
 
+## API programática de Git
+
+El paquete `@docmd/plugin-git` expone una capa de API programática independiente en `@docmd/plugin-git/api` (o directamente desde `@docmd/plugin-git`), utilizable por plugins del núcleo, herramientas de revisión (como Threads v2) o scripts de automatización externos.
+
+```ts
+import { 
+  createGitClient, 
+  parseRemoteUrl, 
+  resolveGitAuth, 
+  buildRemoteUrls, 
+  createCredentialHelper 
+} from '@docmd/plugin-git/api';
+```
+
+### Proveedor remoto y análisis de URL
+
+`parseRemoteUrl(rawUrl)` extrae metadatos estructurados y detecta GitHub, GitLab (incluyendo instancias autohospedadas / empresariales), Bitbucket y servidores genéricos mediante formatos HTTPS, SSH y SCP:
+
+```ts
+const remote = parseRemoteUrl('https://github.com/docmd-io/docmd.git');
+// {
+//   provider: 'github',
+//   hostname: 'github.com',
+//   owner: 'docmd-io',
+//   repo: 'docmd',
+//   fullPath: 'docmd-io/docmd',
+//   isHttps: true,
+//   isSsh: false
+// }
+```
+
+### Enlaces remotos y generadores de URL
+
+Genera automáticamente enlaces canónicos para edición, vista de archivos, historial y confirmaciones:
+
+```ts
+const urls = buildRemoteUrls(remote, 'docs/guide.md', { branch: 'main' });
+console.log(urls.editUrl);    // https://github.com/docmd-io/docmd/edit/main/docs/guide.md
+console.log(urls.blobUrl);    // https://github.com/docmd-io/docmd/blob/main/docs/guide.md
+console.log(urls.historyUrl); // https://github.com/docmd-io/docmd/commits/main/docs/guide.md
+console.log(urls.commitUrl('a1b2c3d')); // https://github.com/docmd-io/docmd/commit/a1b2c3d
+```
+
+### Autenticación y ayudantes de credenciales
+
+`resolveGitAuth(options)` resuelve automáticamente tokens de acceso personal (PAT) mediante opciones explícitas y variables de entorno (`DOCMD_GIT_TOKEN`, `DOCMD_THREADS_GIT_TOKEN`, `GITHUB_TOKEN`, `GITLAB_TOKEN`, `GIT_TOKEN`):
+
+```ts
+const auth = resolveGitAuth({ provider: 'github' });
+// Utiliza ayudantes de credenciales en subshell para no exponer credenciales en línea de comandos:
+const helper = createCredentialHelper('DOCMD_GIT_TOKEN', 'x-access-token');
+```
+
+### GitClient programático
+
+`createGitClient(options)` instancia un cliente asíncrono completo para operaciones locales y remotas:
+
+```ts
+const git = createGitClient({ cwd: process.cwd() });
+
+// Inspección del repositorio
+const isRepo = await git.isRepository();
+const branch = await git.getCurrentBranch();
+const status = await git.getStatus();
+
+// Preparación y confirmación
+await git.stage(['docs/example.md']);
+await git.commit('docs: update guide', {
+  author: { name: 'Alice Author', email: 'alice@example.com' },
+  committer: { name: 'Docmd Bot', email: 'bot@docmd.invalid' }
+});
+
+// Sincronización remota
+await git.fetch('origin', 'main');
+await git.push('origin', 'main', { maxRetries: 3 });
+```
+
 ## Soporte de localización
 
 El plugin de Git admite traducción de cadenas de texto y formatos de fecha según el idioma activo mediante la [configuración de localización de interfaz](../configuration/localisation/ui-strings.md).
